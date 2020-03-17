@@ -9,10 +9,12 @@ template <typename ___ego___>
 class expression_intimate_attribute_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_intimate_attribute_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_intimate_attribute_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		auto it = terms.extract_begin_();
@@ -27,7 +29,7 @@ public:
 		}
 		if (++it == terms.extract_end_())
 		{
-			return expression_substitute_t<over>::create(over{ expression_intimate_attribute_t<>(token, terms, fast<symbol_a<>>(member)) });
+			return expression_substitute_t<expression_intimate_attribute_t<>>::create(expression_intimate_attribute_t<>(token, terms, fast<symbol_a<>>(member)));
 		}
 		auto const kind = *it;
 		if (!check<kind_a<>>(kind) && !check<expression_a<>>(kind))
@@ -36,14 +38,14 @@ public:
 		}
 		if (++it == terms.extract_end_())
 		{
-			return expression_substitute_t<over>::create(over{ expression_intimate_attribute_t<>(token, terms, fast<symbol_a<>>(member), fast<kind_a<>>(kind)) });
+			return expression_substitute_t<expression_intimate_attribute_t<>>::create(expression_intimate_attribute_t<>(token, terms, fast<symbol_a<>>(member), fast<kind_a<>>(kind)));
 		}
 		auto const expression = *it;
 		if (!check<expression_a<>>(expression))
 		{
 			throw dis(token.report() + "strange::expression_intimate_attribute::create passed non-expression value term");
 		}
-		return expression_substitute_t<over>::create(over{ expression_intimate_attribute_t<>(token, terms, fast<symbol_a<>>(member), kind, fast<expression_a<>>(expression)) });
+		return expression_substitute_t<expression_intimate_attribute_t<>>::create(expression_intimate_attribute_t<>(token, terms, fast<symbol_a<>>(member), kind, fast<expression_a<>>(expression)));
 	}
 
 	// reflection
@@ -55,7 +57,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		// nope: shoal.update_string("strange::expression_intimate_attribute::create", native_function_create(&expression_intimate_attribute_t<>::over::create__));
+		// nope: shoal.update_string("strange::expression_intimate_attribute::create", native_function_create(&expression_intimate_attribute_t<>::create__));
 	}
 
 	// function
@@ -154,6 +156,8 @@ protected:
 	any_a<> const _kind;
 	expression_a<> const _expression;
 	bool const _assign;
+
+	friend class any_a<>;
 
 	inline expression_intimate_attribute_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& member, any_a<> const& kind = kind_t<>::create_())
 		: expression_t<___ego___>(token, is_pure_literal(token, member, expression_t<>::create(token)))

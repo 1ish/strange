@@ -9,10 +9,12 @@ template <typename ___ego___>
 class expression_invoke_attribute_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_invoke_attribute_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_invoke_attribute_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		auto it = terms.extract_begin_();
@@ -36,14 +38,14 @@ public:
 		}
 		if (++it == terms.extract_end_())
 		{
-			return expression_substitute_t<over>::create(over{ expression_invoke_attribute_t<>(token, terms, fast<expression_a<>>(thing), fast<symbol_a<>>(member)) });
+			return expression_substitute_t<expression_invoke_attribute_t<>>::create(expression_invoke_attribute_t<>(token, terms, fast<expression_a<>>(thing), fast<symbol_a<>>(member)));
 		}
 		auto value = *it;
 		if (!check<expression_a<>>(value))
 		{
 			throw dis(token.report() + "strange::expression_invoke_attribute::create passed non-expression value term");
 		}
-		return expression_substitute_t<over>::create(over{ expression_invoke_attribute_t<>(token, terms, fast<expression_a<>>(thing), fast<symbol_a<>>(member), fast<expression_a<>>(value)) });
+		return expression_substitute_t<expression_invoke_attribute_t<>>::create(expression_invoke_attribute_t<>(token, terms, fast<expression_a<>>(thing), fast<symbol_a<>>(member), fast<expression_a<>>(value)));
 	}
 
 	// reflection
@@ -55,7 +57,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		// nope: shoal.update_string("strange::expression_invoke_attribute::create", native_function_create(&expression_invoke_attribute_t<>::over::create__));
+		// nope: shoal.update_string("strange::expression_invoke_attribute::create", native_function_create(&expression_invoke_attribute_t<>::create__));
 	}
 
 	// function
@@ -132,6 +134,8 @@ protected:
 	symbol_a<> const _member;
 	expression_a<> const _value;
 	bool const _assign;
+
+	friend class any_a<>;
 
 	inline expression_invoke_attribute_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& thing, symbol_a<> const& member)
 		: expression_t<___ego___>(token, is_pure_literal(token, terms, thing, member, expression_t<>::create(token)))

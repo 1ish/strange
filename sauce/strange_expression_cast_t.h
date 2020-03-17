@@ -8,10 +8,12 @@ template <typename ___ego___ = expression_a<>>
 class expression_cast_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_cast_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_cast_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_extractor_a<> it = terms.extract_begin_();
@@ -35,14 +37,14 @@ public:
 		}
 		if (++it == terms.extract_end_())
 		{
-			return expression_a<>{ over{ expression_cast_t<>(token, terms, fast<expression_a<>>(thing), expression_kind_t<>::create_(token, flock_t<>::create_())) } };
+			return expression_a<>::create<expression_cast_t<>>(token, terms, fast<expression_a<>>(thing), expression_kind_t<>::create_(token, flock_t<>::create_()));
 		}
 		any_a<> abstraction = *it;
 		if (!check<expression_a<>>(abstraction))
 		{
 			throw dis(token.report() + "strange::expression_cast::create passed non-expression abstraction term");
 		}
-		return expression_a<>::create<over>(expression_cast_t<>(token, terms, fast<expression_a<>>(thing), fast<expression_a<>>(abstraction)));
+		return expression_a<>::create<expression_cast_t<>>(token, terms, fast<expression_a<>>(thing), fast<expression_a<>>(abstraction));
 	}
 
 	// reflection
@@ -54,8 +56,8 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_cast::create", native_function_create(&expression_cast_t<>::over::create__));
-		shoal.update_string("cast!", native_function_create(&expression_cast_t<>::over::create__));
+		shoal.update_string("strange::expression_cast::create", native_function_create(&expression_cast_t<>::create__));
+		shoal.update_string("cast!", native_function_create(&expression_cast_t<>::create__));
 	}
 
 	// function
@@ -134,6 +136,8 @@ protected:
 	flock_a<> const _terms;
 	expression_a<> const _thing;
 	expression_a<> const _abstraction;
+
+	friend class any_a<>;
 
 	inline expression_cast_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& thing, expression_a<> const& abstraction)
 		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms))

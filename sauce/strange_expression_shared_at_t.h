@@ -9,10 +9,12 @@ template <typename ___ego___>
 class expression_shared_at_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_shared_at_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_shared_at_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_extractor_a<> it = terms.extract_begin_();
@@ -25,7 +27,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_shared_at::create passed non-symbol key");
 		}
-		return expression_a<>::create<over>(expression_shared_at_t<>(token, terms, fast<symbol_a<>>(key)));
+		return expression_a<>::create<expression_shared_at_t<>>(token, terms, fast<symbol_a<>>(key));
 	}
 
 	// reflection
@@ -37,7 +39,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_shared_at::create", native_function_create(&expression_shared_at_t<>::over::create__));
+		shoal.update_string("strange::expression_shared_at::create", native_function_create(&expression_shared_at_t<>::create__));
 	}
 
 	// function
@@ -123,6 +125,8 @@ public:
 protected:
 	flock_a<> const _terms;
 	symbol_a<> const _key;
+
+	friend class any_a<>;
 
 	inline expression_shared_at_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& key)
 		: expression_t<___ego___>{ token }

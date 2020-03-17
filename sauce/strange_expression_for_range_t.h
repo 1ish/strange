@@ -8,10 +8,12 @@ template <typename ___ego___ = expression_a<>>
 class expression_for_range_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_for_range_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_for_range_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_extractor_a<> it = terms.extract_begin_();
@@ -66,7 +68,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_for_range::create passed non-expression loop");
 		}
-		return expression_a<>::create<over>(expression_for_range_t<>( token, terms, fast<symbol_a<>>(name), kind, fast<expression_a<>>(range), fast<expression_a<>>(loop)));
+		return expression_a<>::create<expression_for_range_t<>>(token, terms, fast<symbol_a<>>(name), kind, fast<expression_a<>>(range), fast<expression_a<>>(loop));
 	}
 
 	// reflection
@@ -78,8 +80,8 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_for_range::create", native_function_create(&expression_for_range_t<>::over::create__));
-		shoal.update_string("for_range!", native_function_create(&expression_for_range_t<>::over::create__));
+		shoal.update_string("strange::expression_for_range::create", native_function_create(&expression_for_range_t<>::create__));
+		shoal.update_string("for_range!", native_function_create(&expression_for_range_t<>::create__));
 	}
 
 	// function
@@ -213,6 +215,8 @@ protected:
 	any_a<> const _kind;
 	expression_a<> const _range;
 	expression_a<> const _loop;
+
+	friend class any_a<>;
 
 	inline expression_for_range_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& name, any_a<> const& kind, expression_a<> const& range, expression_a<> const& loop)
 		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms)) //TODO pure literal

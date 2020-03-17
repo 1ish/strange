@@ -9,18 +9,20 @@ template <typename ___ego___>
 class expression_flock_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_flock_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_flock_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		return expression_substitute_t<over>::create(over{ expression_flock_t<>(token, terms) });
+		return expression_substitute_t<expression_flock_t<>>::create(expression_flock_t<>(token, terms));
 	}
 
 	static inline expression_a<> create(token_a<> const& token)
 	{
-		return expression_substitute_t<over>::create(over{ expression_flock_t<>(token, flock_t<>::create_()) });
+		return expression_substitute_t<expression_flock_t<>>::create(expression_flock_t<>(token, flock_t<>::create_()));
 	}
 
 	// reflection
@@ -32,7 +34,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_flock::create", native_function_create(&expression_flock_t<>::over::create__));
+		shoal.update_string("strange::expression_flock::create", native_function_create(&expression_flock_t<>::create__));
 	}
 
 	// function
@@ -135,6 +137,8 @@ public:
 
 protected:
 	flock_a<> const _terms;
+
+	friend class any_a<>;
 
 	inline expression_flock_t(token_a<> const& token, flock_a<> const& terms)
 		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms))

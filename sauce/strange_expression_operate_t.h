@@ -9,13 +9,15 @@ template <typename ___ego___>
 class expression_operate_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_operate_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_operate_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		return expression_substitute_t<over>::create(over{ expression_operate_t<>(token, terms) });
+		return expression_substitute_t<expression_operate_t<>>::create(expression_operate_t<>(token, terms));
 	}
 
 	// reflection
@@ -27,7 +29,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_operate::create", native_function_create(&expression_operate_t<>::over::create__));
+		shoal.update_string("strange::expression_operate::create", native_function_create(&expression_operate_t<>::create__));
 	}
 
 	// function
@@ -146,6 +148,8 @@ public:
 
 protected:
 	flock_a<> const _terms;
+
+	friend class any_a<>;
 
 	inline expression_operate_t(token_a<> const& token, flock_a<> const& terms)
 		: expression_t<___ego___>(token, is_pure_literal(token, terms))

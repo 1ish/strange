@@ -9,10 +9,12 @@ template <typename ___ego___>
 class expression_nand_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_nand_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_nand_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_extractor_a<> it = terms.extract_begin_();
@@ -34,7 +36,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_nand::create passed non-expression right-hand term");
 		}
-		return expression_a<>::create<over>(expression_nand_t<>(token, terms, fast<expression_a<>>(left), fast<expression_a<>>(right)));
+		return expression_a<>::create<expression_nand_t<>>(token, terms, fast<expression_a<>>(left), fast<expression_a<>>(right));
 	}
 
 	// reflection
@@ -46,7 +48,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_nand::create", native_function_create(&expression_nand_t<>::over::create__));
+		shoal.update_string("strange::expression_nand::create", native_function_create(&expression_nand_t<>::create__));
 	}
 
 	// function
@@ -117,6 +119,8 @@ protected:
 	flock_a<> const _terms;
 	expression_a<> const _left;
 	expression_a<> const _right;
+
+	friend class any_a<>;
 
 	inline expression_nand_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& left, expression_a<> const& right)
 		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms))

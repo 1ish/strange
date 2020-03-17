@@ -9,10 +9,12 @@ template <typename ___ego___>
 class expression_invoke_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_invoke_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_invoke_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		auto it = terms.extract_begin_();
@@ -43,7 +45,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_invoke::create passed non-range");
 		}
-		return expression_substitute_t<over>::create(over{ expression_invoke_t<>(token, terms, fast<expression_a<>>(expression), fast<symbol_a<>>(member), fast<range_a<>>(range)) });
+		return expression_substitute_t<expression_invoke_t<>>::create(expression_invoke_t<>(token, terms, fast<expression_a<>>(expression), fast<symbol_a<>>(member), fast<range_a<>>(range)));
 	}
 
 	// reflection
@@ -55,7 +57,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_invoke::create", native_function_create(&expression_invoke_t<>::over::create__));
+		shoal.update_string("strange::expression_invoke::create", native_function_create(&expression_invoke_t<>::create__));
 	}
 
 	// function
@@ -168,6 +170,8 @@ protected:
 	expression_a<> const _expression;
 	symbol_a<> const _member;
 	range_a<> const _range;
+
+	friend class any_a<>;
 
 	inline expression_invoke_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& expression, symbol_a<> const& member, range_a<> const& range)
 		: expression_t<___ego___>(token, is_pure_literal(token, expression, member, range))

@@ -9,18 +9,20 @@ template <typename ___ego___>
 class expression_me_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_me_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_me_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token)
 	{
-		return expression_a<>::create<over>(expression_me_t<>{ token });
+		return expression_a<>::create<expression_me_t<>>(token);
 	}
 
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const&)
 	{
-		return expression_a<>::create<over>(expression_me_t<>{ token });
+		return expression_a<>::create<expression_me_t<>>(token);
 	}
 
 	// reflection
@@ -32,7 +34,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_me::create", native_function_create(&expression_me_t<>::over::create__));
+		shoal.update_string("strange::expression_me::create", native_function_create(&expression_me_t<>::create__));
 	}
 
 	// function
@@ -97,6 +99,8 @@ public:
 	}
 
 protected:
+	friend class any_a<>;
+
 	inline expression_me_t(token_a<> const& token)
 		: expression_t<___ego___>{ token }
 	{}

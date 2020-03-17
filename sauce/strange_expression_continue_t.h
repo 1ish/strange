@@ -8,13 +8,15 @@ template <typename ___ego___ = expression_a<>>
 class expression_continue_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_continue_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_continue_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		return expression_a<>::create<over>(expression_continue_t<>{ token });
+		return expression_a<>::create<expression_continue_t<>>(token);
 	}
 
 	// reflection
@@ -26,8 +28,8 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_continue::create", native_function_create(&expression_continue_t<>::over::create__));
-		shoal.update_string("continue!", native_function_create(&expression_continue_t<>::over::create__));
+		shoal.update_string("strange::expression_continue::create", native_function_create(&expression_continue_t<>::create__));
+		shoal.update_string("continue!", native_function_create(&expression_continue_t<>::create__));
 	}
 
 	// function
@@ -80,6 +82,8 @@ public:
 	}
 
 protected:
+	friend class any_a<>;
+
 	inline expression_continue_t(token_a<> const& token)
 		: expression_t<___ego___>(token, true, true) // pure, literal
 	{}

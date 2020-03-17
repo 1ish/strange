@@ -8,10 +8,12 @@ template <typename ___ego___ = expression_a<>>
 class expression_function_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_function_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_function_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		auto it = terms.extract_begin_();
@@ -92,7 +94,7 @@ public:
 				throw dis("strange::expression_function::create parameter default evaluation error:") + token.report_() + misunderstanding;
 			}
 		}
-		return expression_substitute_t<over>::create(over{ expression_function_t<>(token, terms, fast<symbol_a<>>(scope), names, kinds, expressions, defaults, fast<expression_a<>>(expression)) },
+		return expression_substitute_t<expression_function_t<>>::create(expression_function_t<>(token, terms, fast<symbol_a<>>(scope), names, kinds, expressions, defaults, fast<expression_a<>>(expression)),
 			function_t<>::create_(token, fast<symbol_a<>>(scope), names, kinds, defaults, fast<expression_a<>>(expression)));
 	}
 
@@ -105,8 +107,8 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_function::create", native_function_create(&expression_function_t<>::over::create__));
-		shoal.update_string("function!", native_function_create(&expression_function_t<>::over::create__));
+		shoal.update_string("strange::expression_function::create", native_function_create(&expression_function_t<>::create__));
+		shoal.update_string("function!", native_function_create(&expression_function_t<>::create__));
 	}
 
 	// expression
@@ -206,6 +208,8 @@ protected:
 	flock_a<> const _expressions;
 	flock_a<> const _defaults;
 	expression_a<> const _expression;
+
+	friend class any_a<>;
 
 	inline expression_function_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& scope, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& expressions, flock_a<> const& defaults, expression_a<> const& expression)
 		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms))

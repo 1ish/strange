@@ -8,10 +8,12 @@ template <typename ___ego___ = expression_a<>>
 class expression_do_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_do_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_do_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_extractor_a<> it = terms.extract_begin_();
@@ -42,7 +44,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_do::create passed non-expression condition");
 		}
-		return expression_a<>::create<over>(expression_do_t<>( token, terms, fast<expression_a<>>(loop), fast<expression_a<>>(condition)));
+		return expression_a<>::create<expression_do_t<>>(token, terms, fast<expression_a<>>(loop), fast<expression_a<>>(condition));
 	}
 
 	// reflection
@@ -54,8 +56,8 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_do::create", native_function_t<>::create(&expression_do_t<>::over::create__));
-		shoal.update_string("do!", native_function_t<>::create(&expression_do_t<>::over::create__));
+		shoal.update_string("strange::expression_do::create", native_function_t<>::create(&expression_do_t<>::create__));
+		shoal.update_string("do!", native_function_t<>::create(&expression_do_t<>::create__));
 	}
 
 	// function
@@ -144,6 +146,8 @@ protected:
 	flock_a<> const _terms;
 	expression_a<> const _loop;
 	expression_a<> const _condition;
+
+	friend class any_a<>;
 
 	inline expression_do_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& loop, expression_a<> const& condition)
 		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms))

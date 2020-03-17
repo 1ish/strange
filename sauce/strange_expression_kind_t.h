@@ -9,10 +9,12 @@ template <typename ___ego___>
 class expression_kind_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_kind_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_kind_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_extractor_a<> it = terms.extract_begin_();
@@ -139,32 +141,32 @@ public:
 
 	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order = number_int_64_t<>::create(1), symbol_a<> const& name = sym(""))
 	{
-		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, order, name, expression_t<>::create(token), expression_t<>::create(token), expression_t<>::create(token), expression_t<>::create(token), no(), no(), no(), expression_t<>::create(token)) });
+		return expression_substitute_t<expression_kind_t<>>::create(expression_kind_t<>(token, terms, order, name, expression_t<>::create(token), expression_t<>::create(token), expression_t<>::create(token), expression_t<>::create(token), no(), no(), no(), expression_t<>::create(token)));
 	}
 
 	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions)
 	{
-		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, order, name, dimensions, expression_t<>::create(token), expression_t<>::create(token), expression_t<>::create(token), no(), no(), no(), expression_t<>::create(token)) });
+		return expression_substitute_t<expression_kind_t<>>::create(expression_kind_t<>(token, terms, order, name, dimensions, expression_t<>::create(token), expression_t<>::create(token), expression_t<>::create(token), no(), no(), no(), expression_t<>::create(token)));
 	}
 
 	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects)
 	{
-		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, order, name, dimensions, aspects, expression_t<>::create(token), expression_t<>::create(token), no(), no(), no(), expression_t<>::create(token)) });
+		return expression_substitute_t<expression_kind_t<>>::create(expression_kind_t<>(token, terms, order, name, dimensions, aspects, expression_t<>::create(token), expression_t<>::create(token), no(), no(), no(), expression_t<>::create(token)));
 	}
 
 	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects, expression_a<> const& parameters)
 	{
-		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, order, name, dimensions, aspects, parameters, expression_t<>::create(token), no(), no(), no(), expression_t<>::create(token)) });
+		return expression_substitute_t<expression_kind_t<>>::create(expression_kind_t<>(token, terms, order, name, dimensions, aspects, parameters, expression_t<>::create(token), no(), no(), no(), expression_t<>::create(token)));
 	}
 
 	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& fixed = no(), any_a<> const& reference = no(), any_a<> const& optional = no())
 	{
-		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, order, name, dimensions, aspects, parameters, result, fixed, reference, optional, expression_t<>::create(token)) });
+		return expression_substitute_t<expression_kind_t<>>::create(expression_kind_t<>(token, terms, order, name, dimensions, aspects, parameters, result, fixed, reference, optional, expression_t<>::create(token)));
 	}
 
 	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional, expression_a<> const& expression)
 	{
-		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, order, name, dimensions, aspects, parameters, result, fixed, reference, optional, expression) });
+		return expression_substitute_t<expression_kind_t<>>::create(expression_kind_t<>(token, terms, order, name, dimensions, aspects, parameters, result, fixed, reference, optional, expression));
 	}
 
 	// reflection
@@ -176,7 +178,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_kind::create", native_function_create(&expression_kind_t<>::over::create__));
+		shoal.update_string("strange::expression_kind::create", native_function_create(&expression_kind_t<>::create__));
 	}
 
 	// function
@@ -383,6 +385,8 @@ protected:
 	any_a<> const _reference;
 	any_a<> const _optional;
 	expression_a<> const _expression;
+
+	friend class any_a<>;
 
 	inline expression_kind_t(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional, expression_a<> const& expression)
 		: expression_t<___ego___>(token, dimensions.pure() && aspects.pure() && parameters.pure() && result.pure() && expression.pure(), dimensions.literal() && aspects.literal() && parameters.literal() && result.literal() && expression.literal()) // pure, literal

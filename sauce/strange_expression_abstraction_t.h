@@ -8,10 +8,12 @@ template <typename ___ego___ = expression_a<>>
 class expression_abstraction_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_abstraction_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_abstraction_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		auto it = terms.extract_begin_();
@@ -113,7 +115,7 @@ public:
 				throw dis("strange::expression_abstraction::create parameter default evaluation error:") + token.report_() + misunderstanding;
 			}
 		}
-		return expression_substitute_t<over>::create(over{ expression_abstraction_t<>(token, terms, fast<symbol_a<>>(scope), dimension_names, dimension_kinds, dimension_expressions, dimension_defaults, parent_expressions) },
+		return expression_substitute_t<expression_abstraction_t<>>::create(expression_abstraction_t<>(token, terms, fast<symbol_a<>>(scope), dimension_names, dimension_kinds, dimension_expressions, dimension_defaults, parent_expressions),
 			abstraction_t<>::create_(token, fast<symbol_a<>>(scope), dimension_names, dimension_kinds, dimension_defaults, parent_expressions));
 	}
 
@@ -126,8 +128,8 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_abstraction::create", native_function_create(&expression_abstraction_t<>::over::create__));
-		shoal.update_string("abstraction!", native_function_create(&expression_abstraction_t<>::over::create__));
+		shoal.update_string("strange::expression_abstraction::create", native_function_create(&expression_abstraction_t<>::create__));
+		shoal.update_string("abstraction!", native_function_create(&expression_abstraction_t<>::create__));
 	}
 
 	// expression
@@ -239,6 +241,8 @@ protected:
 	flock_a<> const _dimension_expressions;
 	flock_a<> const _dimension_defaults;
 	flock_a<> const _parent_expressions;
+
+	friend class any_a<>;
 
 	inline expression_abstraction_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& scope, flock_a<> const& dimension_names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_expressions, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions)
 		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms))

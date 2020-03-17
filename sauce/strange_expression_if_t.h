@@ -8,10 +8,12 @@ template <typename ___ego___ = expression_a<>>
 class expression_if_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_if_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_if_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_extractor_a<> it = terms.extract_begin_();
@@ -44,14 +46,14 @@ public:
 		}
 		if (++it == terms.extract_end_())
 		{
-			return expression_a<>::create<over>(expression_if_t<>( token, terms, fast<expression_a<>>(condition), fast<expression_a<>>(yay), expression_t<>::create(token)));
+			return expression_a<>::create<expression_if_t<>>(token, terms, fast<expression_a<>>(condition), fast<expression_a<>>(yay), expression_t<>::create(token));
 		}
 		any_a<> nay = *it;
 		if (!check<expression_a<>>(nay))
 		{
 			throw dis(token.report() + "strange::expression_if::create passed non-expression");
 		}
-		return expression_a<>::create<over>(expression_if_t<>( token, terms, fast<expression_a<>>(condition), fast<expression_a<>>(yay), fast<expression_a<>>(nay)));
+		return expression_a<>::create<expression_if_t<>>(token, terms, fast<expression_a<>>(condition), fast<expression_a<>>(yay), fast<expression_a<>>(nay));
 	}
 
 	// reflection
@@ -63,8 +65,8 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_if::create", native_function_create(&expression_if_t<>::over::create__));
-		shoal.update_string("if!", native_function_create(&expression_if_t<>::over::create__));
+		shoal.update_string("strange::expression_if::create", native_function_create(&expression_if_t<>::create__));
+		shoal.update_string("if!", native_function_create(&expression_if_t<>::create__));
 	}
 
 	// function
@@ -146,6 +148,8 @@ protected:
 	expression_a<> const _condition;
 	expression_a<> const _yay;
 	expression_a<> const _nay;
+
+	friend class any_a<>;
 
 	inline expression_if_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& condition, expression_a<> const& yay, expression_a<> const& nay)
 		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms))

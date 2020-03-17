@@ -9,10 +9,12 @@ template <typename ___ego___>
 class expression_literal_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_literal_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_literal_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_extractor_a<> it = terms.extract_begin_();
@@ -25,7 +27,7 @@ public:
 
 	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, any_a<> const& thing)
 	{
-		return expression_a<>::create<over>(expression_literal_t<>{ token, terms, thing });
+		return expression_a<>::create<expression_literal_t<>>(token, terms, thing);
 	}
 
 	// validation
@@ -72,8 +74,8 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_literal::create", native_function_create(&expression_literal_t<>::over::create__));
-		shoal.update_string("strange::expression_literal::validate", native_function_create(&expression_literal_t<>::over::validate__));
+		shoal.update_string("strange::expression_literal::create", native_function_create(&expression_literal_t<>::create__));
+		shoal.update_string("strange::expression_literal::validate", native_function_create(&expression_literal_t<>::validate__));
 	}
 
 	// function
@@ -276,6 +278,8 @@ public:
 protected:
 	flock_a<> const _terms;
 	any_a<> const _thing;
+
+	friend class any_a<>;
 
 	inline expression_literal_t(token_a<> const& token, flock_a<> const& terms, any_a<> const& thing)
 		: expression_t<___ego___>(token, true, true) // pure, literal

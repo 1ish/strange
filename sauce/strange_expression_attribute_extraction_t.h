@@ -9,10 +9,12 @@ template <typename ___ego___>
 class expression_attribute_extraction_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_attribute_extraction_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_attribute_extraction_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_extractor_a<> it = terms.extract_begin_();
@@ -46,7 +48,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_attribute_extraction::create passed non-expression value");
 		}
-		return expression_substitute_t<over>::create(over{ expression_attribute_extraction_t<>(token, terms, fast<symbol_a<>>(name), kind, fast<expression_a<>>(expression)) });
+		return expression_substitute_t<expression_attribute_extraction_t<>>::create(expression_attribute_extraction_t<>(token, terms, fast<symbol_a<>>(name), kind, fast<expression_a<>>(expression)));
 	}
 
 	// reflection
@@ -58,7 +60,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_attribute_extraction::create", native_function_create(&expression_attribute_extraction_t<>::over::create__));
+		shoal.update_string("strange::expression_attribute_extraction::create", native_function_create(&expression_attribute_extraction_t<>::create__));
 	}
 
 	// function
@@ -139,6 +141,8 @@ protected:
 	symbol_a<> const _name;
 	any_a<> const _kind;
 	expression_a<> const _expression;
+
+	friend class any_a<>;
 
 	inline expression_attribute_extraction_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& name, any_a<> const& kind, expression_a<> const& expression)
 		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms))

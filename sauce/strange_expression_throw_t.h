@@ -8,10 +8,12 @@ template <typename ___ego___ = expression_a<>>
 class expression_throw_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_throw_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_throw_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_extractor_a<> it = terms.extract_begin_();
@@ -38,12 +40,12 @@ public:
 
 	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms)
 	{
-		return expression_a<>::create<over>(expression_throw_t<>(token, terms, expression_t<>::create(token)));
+		return expression_a<>::create<expression_throw_t<>>(token, terms, expression_t<>::create(token));
 	}
 
 	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, expression_a<> const& exception)
 	{
-		return expression_a<>::create<over>(expression_throw_t<>(token, terms, exception));
+		return expression_a<>::create<expression_throw_t<>>(token, terms, exception);
 	}
 
 	// reflection
@@ -55,8 +57,8 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_throw::create", native_function_create(&expression_throw_t<>::over::create__));
-		shoal.update_string("throw!", native_function_create(&expression_throw_t<>::over::create__));
+		shoal.update_string("strange::expression_throw::create", native_function_create(&expression_throw_t<>::create__));
+		shoal.update_string("throw!", native_function_create(&expression_throw_t<>::create__));
 	}
 
 	// function
@@ -121,6 +123,8 @@ public:
 protected:
 	flock_a<> const _terms;
 	expression_a<> const _exception;
+
+	friend class any_a<>;
 
 	inline expression_throw_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& exception)
 		: expression_t<___ego___>(token, exception.pure(), exception.literal()) // pure, literal

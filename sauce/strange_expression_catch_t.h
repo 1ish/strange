@@ -8,10 +8,12 @@ template <typename ___ego___ = expression_a<>>
 class expression_catch_t : public expression_t<___ego___>
 {
 public:
-	// override
-	using over = expression_o<expression_catch_t<>>;
-
 	// construction
+	static inline any_a<> create__(range_a<> const& range)
+	{
+		return expression_t<___ego___>::template create_expression<expression_catch_t<___ego___>>(range);
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_extractor_a<> it = terms.extract_begin_();
@@ -81,7 +83,7 @@ public:
 				expressions.push_back(expression_t<>::create(token));
 			}
 		}
-		return expression_substitute_t<over>::create(over{ expression_catch_t<>(token, terms, fast<expression_a<>>(try_expression), names, kinds, expressions) });
+		return expression_substitute_t<expression_catch_t<>>::create(expression_catch_t<>(token, terms, fast<expression_a<>>(try_expression), names, kinds, expressions));
 	}
 
 	// reflection
@@ -93,8 +95,8 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_catch::create", native_function_create(&expression_catch_t<>::over::create__));
-		shoal.update_string("catch!", native_function_create(&expression_catch_t<>::over::create__));
+		shoal.update_string("strange::expression_catch::create", native_function_create(&expression_catch_t<>::create__));
+		shoal.update_string("catch!", native_function_create(&expression_catch_t<>::create__));
 	}
 
 	// function
@@ -234,6 +236,8 @@ protected:
 	expression_a<> const _try_expression;
 	flock_a<> const _kinds;
 	flock_a<> const _expressions;
+
+	friend class any_a<>;
 
 	inline expression_catch_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& try_expression, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& expressions)
 		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms), names)
