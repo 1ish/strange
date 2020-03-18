@@ -15,10 +15,10 @@ bool const ___number_data_a_share___::share = []()
 	return shared_shoal;
 }();
 
-template <typename _1_>
-inline number_data_d<_1_> ___number_data_dynamic___(any_a<> const& thing)
+template <typename _primitive>
+inline number_data_d<_primitive> ___number_data_dynamic___(any_a<> const& thing)
 {
-	return number_data_d<_1_>{ thing };
+	return number_data_d<_primitive>{ thing };
 }
 
 } // namespace

@@ -2,15 +2,15 @@ false &&
 {	strange :
 	{	<data> :: abstraction
 		(	// dimensions
-			#_1_ :<<>>#,
+			#type :<<>>#,
 			(	// parent
 				$$<>[],
 				{	// data
-					'operator==' : "bool (data_a<_1_> const& data) const",
-					'operator!=' : "bool (data_a<_1_> const& data) const",
+					'operator==' : "bool (data_a<_type> const& data) const",
+					'operator!=' : "bool (data_a<_type> const& data) const",
 
-					extract_data : "_1_ const& () const",
-					mutate_data : "_1_& ()",
+					extract_data : "_type const& () const",
+					mutate_data : "_type& ()",
 				}
 			)
 		)

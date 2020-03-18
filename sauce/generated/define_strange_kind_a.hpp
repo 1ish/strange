@@ -2,13 +2,13 @@
 namespace strange
 {
 
-template <typename _1_ = void>
+template <typename _1 = void>
 class kind_d;
 
-template <typename _1_ = void>
-inline kind_d<_1_> ___kind_dynamic___(any_a<> const& thing); 
+template <typename _1 = void>
+inline kind_d<_1> ___kind_dynamic___(any_a<> const& thing); 
 
-template <typename _1_>
+template <typename _1>
 class kind_a : public cat_a<>
 {
 public:
@@ -235,7 +235,7 @@ public:
 		{
 			return kind_a{ thing.___handle___ };
 		}
-		return kind_a{ kind_d<_1_>{ thing } };
+		return kind_a{ kind_d<_1>{ thing } };
 	}
 
 	static inline kind_a ___cast_ref___(any_a<>& thing)
@@ -245,7 +245,7 @@ public:
 		{
 			return kind_a(thing.___handle___, ___reference_tag___{});
 		}
-		return kind_a{ kind_d<_1_>(thing, ___reference_tag___{}) };
+		return kind_a{ kind_d<_1>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -308,7 +308,7 @@ public:
 	}
 }; // class kind_a
 
-template <typename _1_>
+template <typename _1>
 class kind_d : public cat_d<>
 {
 public:

@@ -108,7 +108,7 @@ public:
 		auto const name = fast<symbol_a<>>(_key);
 		if (name.first_character() == '#')
 		{
-			river.write_string(" " + name.to_string().substr(1) + " ");
+			river.write_string(" _" + name.to_string().substr(1) + " ");
 		}
 		else
 		{

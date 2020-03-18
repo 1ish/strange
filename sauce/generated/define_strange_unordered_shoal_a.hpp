@@ -2,13 +2,13 @@
 namespace strange
 {
 
-template <typename _1_ = void>
+template <typename _1 = void>
 class unordered_shoal_d;
 
-template <typename _1_ = void>
-inline unordered_shoal_d<_1_> ___unordered_shoal_dynamic___(any_a<> const& thing); 
+template <typename _1 = void>
+inline unordered_shoal_d<_1> ___unordered_shoal_dynamic___(any_a<> const& thing); 
 
-template <typename _1_>
+template <typename _1>
 class unordered_shoal_a : public shoal_a<>
 {
 public:
@@ -234,7 +234,7 @@ public:
 		{
 			return unordered_shoal_a{ thing.___handle___ };
 		}
-		return unordered_shoal_a{ unordered_shoal_d<_1_>{ thing } };
+		return unordered_shoal_a{ unordered_shoal_d<_1>{ thing } };
 	}
 
 	static inline unordered_shoal_a ___cast_ref___(any_a<>& thing)
@@ -244,7 +244,7 @@ public:
 		{
 			return unordered_shoal_a(thing.___handle___, ___reference_tag___{});
 		}
-		return unordered_shoal_a{ unordered_shoal_d<_1_>(thing, ___reference_tag___{}) };
+		return unordered_shoal_a{ unordered_shoal_d<_1>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -303,7 +303,7 @@ public:
 	}
 }; // class unordered_shoal_a
 
-template <typename _1_>
+template <typename _1>
 class unordered_shoal_d : public shoal_d<>
 {
 public:

@@ -2,35 +2,35 @@
 namespace strange
 {
 
-template <typename _1_>
+template <typename _type>
 class bidirectional_mutator_data_d;
 
-template <typename _1_>
-inline bidirectional_mutator_data_d<_1_> ___bidirectional_mutator_data_dynamic___(any_a<> const& thing); 
+template <typename _type>
+inline bidirectional_mutator_data_d<_type> ___bidirectional_mutator_data_dynamic___(any_a<> const& thing); 
 
-template <typename _1_>
+template <typename _type>
 class bidirectional_mutator_data_a : public bidirectional_mutator_a<>
 {
 public:
-	inline bool operator==(bidirectional_mutator_data_a < _1_ > const & it ) const
+	inline bool operator==(bidirectional_mutator_data_a < _type > const & it ) const
 	{ assert(___handle___); return ___read___().operator==(it); }
 
-	inline bool operator!=(bidirectional_mutator_data_a < _1_ > const & it ) const
+	inline bool operator!=(bidirectional_mutator_data_a < _type > const & it ) const
 	{ assert(___handle___); return ___read___().operator!=(it); }
 
-	inline _1_ const & extract_it() const
+	inline _type const & extract_it() const
 	{ assert(___handle___); return ___read___().extract_it(); }
 
-	inline _1_ & mutate_it()
+	inline _type & mutate_it()
 	{ assert(___handle___); return ___write___().mutate_it(); }
 
 protected:
 	struct ___bidirectional_mutator_data_a_handle_base___ : ___bidirectional_mutator_a_handle_base___
 	{
-		virtual bool operator==(bidirectional_mutator_data_a < _1_ > const & it ) const = 0;
-		virtual bool operator!=(bidirectional_mutator_data_a < _1_ > const & it ) const = 0;
-		virtual _1_ const & extract_it() const = 0;
-		virtual _1_ & mutate_it() = 0;
+		virtual bool operator==(bidirectional_mutator_data_a < _type > const & it ) const = 0;
+		virtual bool operator!=(bidirectional_mutator_data_a < _type > const & it ) const = 0;
+		virtual _type const & extract_it() const = 0;
+		virtual _type & mutate_it() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___bidirectional_mutator_data_a_handle_base___>
@@ -51,16 +51,16 @@ protected:
 			: ___bidirectional_mutator_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bool operator==(bidirectional_mutator_data_a < _1_ > const & it ) const final
+		virtual inline bool operator==(bidirectional_mutator_data_a < _type > const & it ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(it); }
 
-		virtual inline bool operator!=(bidirectional_mutator_data_a < _1_ > const & it ) const final
+		virtual inline bool operator!=(bidirectional_mutator_data_a < _type > const & it ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(it); }
 
-		virtual inline _1_ const & extract_it() const final
+		virtual inline _type const & extract_it() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_it(); }
 
-		virtual inline _1_ & mutate_it() final
+		virtual inline _type & mutate_it() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_it(); }
 
 	};
@@ -206,7 +206,7 @@ public:
 		{
 			return bidirectional_mutator_data_a{ thing.___handle___ };
 		}
-		return bidirectional_mutator_data_a{ bidirectional_mutator_data_d<_1_>{ thing } };
+		return bidirectional_mutator_data_a{ bidirectional_mutator_data_d<_type>{ thing } };
 	}
 
 	static inline bidirectional_mutator_data_a ___cast_ref___(any_a<>& thing)
@@ -216,7 +216,7 @@ public:
 		{
 			return bidirectional_mutator_data_a(thing.___handle___, ___reference_tag___{});
 		}
-		return bidirectional_mutator_data_a{ bidirectional_mutator_data_d<_1_>(thing, ___reference_tag___{}) };
+		return bidirectional_mutator_data_a{ bidirectional_mutator_data_d<_type>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -241,7 +241,7 @@ public:
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	static inline ___kind_a___ ___kind___()
 	{
-		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>(), flock_vals(kind_of<_1_>()));
+		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>(), flock_vals(kind_of<_type>()));
 		return KIND;
 	}
 
@@ -275,20 +275,20 @@ public:
 	}
 }; // class bidirectional_mutator_data_a
 
-template <typename _1_>
+template <typename _type>
 class bidirectional_mutator_data_d : public bidirectional_mutator_d<>
 {
 public:
-	inline bool operator==(bidirectional_mutator_data_a < _1_ > const & it ) const
+	inline bool operator==(bidirectional_mutator_data_a < _type > const & it ) const
 	{ throw dis("dynamic bidirectional_mutator_data_d::operator==(it) not available"); }
 
-	inline bool operator!=(bidirectional_mutator_data_a < _1_ > const & it ) const
+	inline bool operator!=(bidirectional_mutator_data_a < _type > const & it ) const
 	{ throw dis("dynamic bidirectional_mutator_data_d::operator!=(it) not available"); }
 
-	inline _1_ const & extract_it() const
+	inline _type const & extract_it() const
 	{ throw dis("dynamic bidirectional_mutator_data_d::extract_it() not available"); }
 
-	inline _1_ & mutate_it()
+	inline _type & mutate_it()
 	{ throw dis("dynamic bidirectional_mutator_data_d::mutate_it() not available"); }
 
 	void ___weak___(bidirectional_mutator_d<>::___WEAK___ const& weak) const {}

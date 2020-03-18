@@ -15,10 +15,10 @@ bool const ___squad_a_share___::share = []()
 	return shared_shoal;
 }();
 
-template <typename _1_>
-inline squad_d<_1_> ___squad_dynamic___(any_a<> const& thing)
+template <typename _1>
+inline squad_d<_1> ___squad_dynamic___(any_a<> const& thing)
 {
-	return squad_d<_1_>{ thing };
+	return squad_d<_1>{ thing };
 }
 
 } // namespace

@@ -2,38 +2,38 @@
 namespace strange
 {
 
-template <typename _1_>
-inline any_a<> expression_a<_1_>::recreate__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> expression_a<_1>::recreate__(range_a<> const& ___arguments___) const
 {
 	return recreate_();
 }
 
-template <typename _1_>
-inline any_a<> expression_a<_1_>::literal__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> expression_a<_1>::literal__(range_a<> const& ___arguments___) const
 {
 	return literal_();
 }
 
-template <typename _1_>
-inline any_a<> expression_a<_1_>::evaluate__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> expression_a<_1>::evaluate__(range_a<> const& ___arguments___) const
 {
 	return evaluate_();
 }
 
-template <typename _1_>
-inline any_a<> expression_a<_1_>::token__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> expression_a<_1>::token__(range_a<> const& ___arguments___) const
 {
 	return token_();
 }
 
-template <typename _1_>
-inline any_a<> expression_a<_1_>::terms__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> expression_a<_1>::terms__(range_a<> const& ___arguments___) const
 {
 	return terms_();
 }
 
-template <typename _1_>
-inline any_a<> expression_a<_1_>::generate__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> expression_a<_1>::generate__(range_a<> const& ___arguments___) const
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -54,8 +54,8 @@ inline any_a<> expression_a<_1_>::generate__(range_a<> const& ___arguments___) c
 	return generate_(version, indent, river);
 }
 
-template <typename _1_>
-inline any_a<> expression_a<_1_>::generate_cpp__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> expression_a<_1>::generate_cpp__(range_a<> const& ___arguments___) const
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -104,10 +104,10 @@ bool const ___expression_a_share___::share = []()
 	return shared_shoal;
 }();
 
-template <typename _1_>
-inline expression_d<_1_> ___expression_dynamic___(any_a<> const& thing)
+template <typename _1>
+inline expression_d<_1> ___expression_dynamic___(any_a<> const& thing)
 {
-	return expression_d<_1_>{ thing };
+	return expression_d<_1>{ thing };
 }
 
 } // namespace

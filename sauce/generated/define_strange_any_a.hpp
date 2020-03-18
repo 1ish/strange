@@ -2,7 +2,7 @@
 namespace strange
 {
 
-template <typename range, typename symbol, typename cat, typename kind, typename inventory, typename unordered_herd, typename shoal, typename unordered_shoal, typename number_data_uint64>
+template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
 class any_a
 {
 protected:
@@ -20,12 +20,12 @@ public:
 	using ___SHARED___ = std::shared_ptr<___any_a_handle_base___>;
 
 	// operator overloads
-	inline any_a<> operator[](range const& arguments)
+	inline any_a<> operator[](_range const& arguments)
 	{
 		return invoke(*this, arguments);
 	}
 
-	inline any_a<> operator()(range const& arguments)
+	inline any_a<> operator()(_range const& arguments)
 	{
 		return operate(*this, arguments);
 	}
@@ -49,56 +49,56 @@ public:
 	inline one_t & mutate_thing()
 	{ assert(___handle___); return ___write___().mutate_thing(); }
 
-	inline any_a<> type__(range const& ___arguments___) const;
+	inline any_a<> type__(_range const& ___arguments___) const;
 
-	inline symbol type_() const
+	inline _symbol type_() const
 	{ assert(___handle___); return ___read___().type_(); }
 
-	inline any_a<> cat__(range const& ___arguments___) const;
+	inline any_a<> cat__(_range const& ___arguments___) const;
 
-	inline cat cat_() const
+	inline _cat cat_() const
 	{ assert(___handle___); return ___read___().cat_(); }
 
-	inline any_a<> cats__(range const& ___arguments___) const;
+	inline any_a<> cats__(_range const& ___arguments___) const;
 
-	inline unordered_herd cats_() const
+	inline _unordered_herd cats_() const
 	{ assert(___handle___); return ___read___().cats_(); }
 
-	inline any_a<> kind__(range const& ___arguments___) const;
+	inline any_a<> kind__(_range const& ___arguments___) const;
 
-	inline kind kind_() const
+	inline _kind kind_() const
 	{ assert(___handle___); return ___read___().kind_(); }
 
-	inline any_a<> kinds__(range const& ___arguments___) const;
+	inline any_a<> kinds__(_range const& ___arguments___) const;
 
-	inline unordered_herd kinds_() const
+	inline _unordered_herd kinds_() const
 	{ assert(___handle___); return ___read___().kinds_(); }
 
-	inline any_a<> operations__(range const& ___arguments___) const;
+	inline any_a<> operations__(_range const& ___arguments___) const;
 
-	inline unordered_shoal operations_() const
+	inline _unordered_shoal operations_() const
 	{ assert(___handle___); return ___read___().operations_(); }
 
-	inline any_a<> visit__(range const& ___arguments___) const;
+	inline any_a<> visit__(_range const& ___arguments___) const;
 
-	inline any_a<> visit_(inventory & arguments) const
+	inline any_a<> visit_(_inventory & arguments) const
 	{ assert(___handle___); return ___read___().visit_(arguments); }
 
-	inline any_a < > invoke(any_a < > & thing , range const & arguments ) const
+	inline any_a < > invoke(any_a < > & thing , _range const & arguments ) const
 	{ assert(___handle___); return ___read___().invoke(thing, arguments); }
 
-	inline any_a < > operate(any_a < > & thing , range const & arguments ) const
+	inline any_a < > operate(any_a < > & thing , _range const & arguments ) const
 	{ assert(___handle___); return ___read___().operate(thing, arguments); }
 
-	inline any_a<> identity__(range const& ___arguments___) const;
+	inline any_a<> identity__(_range const& ___arguments___) const;
 
-	inline number_data_uint64 identity_() const
+	inline _number_data_uint64 identity_() const
 	{ assert(___handle___); return ___read___().identity_(); }
 
 	inline void const * identity() const
 	{ assert(___handle___); return ___read___().identity(); }
 
-	inline any_a<> identical__(range const& ___arguments___) const;
+	inline any_a<> identical__(_range const& ___arguments___) const;
 
 	inline any_a<> identical_(any_a<> const& thing) const
 	{ assert(___handle___); return ___read___().identical_(thing); }
@@ -106,7 +106,7 @@ public:
 	inline bool identical(any_a < > const & thing ) const
 	{ assert(___handle___); return ___read___().identical(thing); }
 
-	inline any_a<> nothing__(range const& ___arguments___) const;
+	inline any_a<> nothing__(_range const& ___arguments___) const;
 
 	inline any_a<> nothing_() const
 	{ assert(___handle___); return ___read___().nothing_(); }
@@ -114,7 +114,7 @@ public:
 	inline bool nothing() const
 	{ assert(___handle___); return ___read___().nothing(); }
 
-	inline any_a<> something__(range const& ___arguments___) const;
+	inline any_a<> something__(_range const& ___arguments___) const;
 
 	inline any_a<> something_() const
 	{ assert(___handle___); return ___read___().something_(); }
@@ -122,7 +122,7 @@ public:
 	inline bool something() const
 	{ assert(___handle___); return ___read___().something(); }
 
-	inline any_a<> same__(range const& ___arguments___) const;
+	inline any_a<> same__(_range const& ___arguments___) const;
 
 	inline any_a<> same_(any_a<> const& thing) const
 	{ assert(___handle___); return boole(___read___().same_(thing)); }
@@ -130,7 +130,7 @@ public:
 	inline bool operator==(any_a<> const& thing) const
 	{ assert(___handle___); return ___read___().same_(thing); }
 
-	inline any_a<> different__(range const& ___arguments___) const;
+	inline any_a<> different__(_range const& ___arguments___) const;
 
 	inline any_a<> different_(any_a<> const& thing) const
 	{ assert(___handle___); return boole(!___read___().same_(thing)); }
@@ -138,7 +138,7 @@ public:
 	inline bool operator!=(any_a<> const& thing) const
 	{ assert(___handle___); return !___read___().same_(thing); }
 
-	inline any_a<> less_than__(range const& ___arguments___) const;
+	inline any_a<> less_than__(_range const& ___arguments___) const;
 
 	inline any_a<> less_than_(any_a<> const& thing) const
 	{ assert(___handle___); return boole(___read___().less_than_(thing)); }
@@ -146,7 +146,7 @@ public:
 	inline bool operator<(any_a<> const& thing) const
 	{ assert(___handle___); return ___read___().less_than_(thing); }
 
-	inline any_a<> greater_than__(range const& ___arguments___) const;
+	inline any_a<> greater_than__(_range const& ___arguments___) const;
 
 	inline any_a<> greater_than_(any_a<> const& thing) const
 	{ assert(___handle___); return boole(___read___().greater_than_(thing)); }
@@ -154,7 +154,7 @@ public:
 	inline bool operator>(any_a<> const& thing) const
 	{ assert(___handle___); return ___read___().greater_than_(thing); }
 
-	inline any_a<> less_or_equal__(range const& ___arguments___) const;
+	inline any_a<> less_or_equal__(_range const& ___arguments___) const;
 
 	inline any_a<> less_or_equal_(any_a<> const& thing) const
 	{ assert(___handle___); return boole(___read___().less_or_equal_(thing)); }
@@ -162,7 +162,7 @@ public:
 	inline bool operator<=(any_a<> const& thing) const
 	{ assert(___handle___); return ___read___().less_or_equal_(thing); }
 
-	inline any_a<> greater_or_equal__(range const& ___arguments___) const;
+	inline any_a<> greater_or_equal__(_range const& ___arguments___) const;
 
 	inline any_a<> greater_or_equal_(any_a<> const& thing) const
 	{ assert(___handle___); return boole(___read___().greater_or_equal_(thing)); }
@@ -170,9 +170,9 @@ public:
 	inline bool operator>=(any_a<> const& thing) const
 	{ assert(___handle___); return ___read___().greater_or_equal_(thing); }
 
-	inline any_a<> hash__(range const& ___arguments___) const;
+	inline any_a<> hash__(_range const& ___arguments___) const;
 
-	inline number_data_uint64 hash_() const
+	inline _number_data_uint64 hash_() const
 	{ assert(___handle___); return ___read___().hash_(); }
 
 	inline std :: size_t hash() const
@@ -195,16 +195,16 @@ protected:
 		virtual operator bool() const = 0;
 		virtual one_t const & extract_thing() const = 0;
 		virtual one_t & mutate_thing() = 0;
-		virtual symbol type_() const = 0;
-		virtual cat cat_() const = 0;
-		virtual unordered_herd cats_() const = 0;
-		virtual kind kind_() const = 0;
-		virtual unordered_herd kinds_() const = 0;
-		virtual unordered_shoal operations_() const = 0;
-		virtual any_a<> visit_(inventory & arguments) const = 0;
-		virtual any_a < > invoke(any_a < > & thing , range const & arguments ) const = 0;
-		virtual any_a < > operate(any_a < > & thing , range const & arguments ) const = 0;
-		virtual number_data_uint64 identity_() const = 0;
+		virtual _symbol type_() const = 0;
+		virtual _cat cat_() const = 0;
+		virtual _unordered_herd cats_() const = 0;
+		virtual _kind kind_() const = 0;
+		virtual _unordered_herd kinds_() const = 0;
+		virtual _unordered_shoal operations_() const = 0;
+		virtual any_a<> visit_(_inventory & arguments) const = 0;
+		virtual any_a < > invoke(any_a < > & thing , _range const & arguments ) const = 0;
+		virtual any_a < > operate(any_a < > & thing , _range const & arguments ) const = 0;
+		virtual _number_data_uint64 identity_() const = 0;
 		virtual void const * identity() const = 0;
 		virtual any_a<> identical_(any_a<> const& thing) const = 0;
 		virtual bool identical(any_a < > const & thing ) const = 0;
@@ -217,7 +217,7 @@ protected:
 		virtual bool greater_than_(any_a<> const& thing) const = 0;
 		virtual bool less_or_equal_(any_a<> const& thing) const = 0;
 		virtual bool greater_or_equal_(any_a<> const& thing) const = 0;
-		virtual number_data_uint64 hash_() const = 0;
+		virtual _number_data_uint64 hash_() const = 0;
 		virtual std :: size_t hash() const = 0;
 		virtual bool is(std :: string const & s ) const = 0;
 	};
@@ -256,34 +256,34 @@ protected:
 		virtual inline one_t & mutate_thing() final
 		{ return ___value___.mutate_thing(); }
 
-		virtual inline symbol type_() const final
+		virtual inline _symbol type_() const final
 		{ return ___value___.type_(); }
 
-		virtual inline cat cat_() const final
+		virtual inline _cat cat_() const final
 		{ return ___value___.cat_(); }
 
-		virtual inline unordered_herd cats_() const final
+		virtual inline _unordered_herd cats_() const final
 		{ return ___value___.cats_(); }
 
-		virtual inline kind kind_() const final
+		virtual inline _kind kind_() const final
 		{ return ___value___.kind_(); }
 
-		virtual inline unordered_herd kinds_() const final
+		virtual inline _unordered_herd kinds_() const final
 		{ return ___value___.kinds_(); }
 
-		virtual inline unordered_shoal operations_() const final
+		virtual inline _unordered_shoal operations_() const final
 		{ return ___value___.operations_(); }
 
-		virtual inline any_a<> visit_(inventory & arguments) const final
+		virtual inline any_a<> visit_(_inventory & arguments) const final
 		{ return ___value___.visit_(arguments); }
 
-		virtual inline any_a < > invoke(any_a < > & thing , range const & arguments ) const final
+		virtual inline any_a < > invoke(any_a < > & thing , _range const & arguments ) const final
 		{ return ___value___.invoke(thing, arguments); }
 
-		virtual inline any_a < > operate(any_a < > & thing , range const & arguments ) const final
+		virtual inline any_a < > operate(any_a < > & thing , _range const & arguments ) const final
 		{ return ___value___.operate(thing, arguments); }
 
-		virtual inline number_data_uint64 identity_() const final
+		virtual inline _number_data_uint64 identity_() const final
 		{ return ___value___.identity_(); }
 
 		virtual inline void const * identity() const final
@@ -322,7 +322,7 @@ protected:
 		virtual inline bool greater_or_equal_(any_a<> const& thing) const final
 		{ return bool{ ___value___.greater_or_equal_(thing) }; }
 
-		virtual inline number_data_uint64 hash_() const final
+		virtual inline _number_data_uint64 hash_() const final
 		{ return ___value___.hash_(); }
 
 		virtual inline std :: size_t hash() const final
@@ -521,35 +521,35 @@ public:
 		return any_a<>(thing, ___reference_tag___{});
 	}
 
-	template <typename ___cat_a___ = cat, typename ___kind_a___ = kind>
+	template <typename ___cat_a___ = _cat, typename ___kind_a___ = _kind>
 	static inline ___cat_a___ ___cat___()
 	{
 		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::any");
 		return CAT;
 	}
 
-	template <typename ___cat_a___ = cat, typename ___kind_a___ = kind, typename ___unordered_herd_a___ = unordered_herd>
+	template <typename ___cat_a___ = _cat, typename ___kind_a___ = _kind, typename ___unordered_herd_a___ = _unordered_herd>
 	static inline ___unordered_herd_a___ ___cats___()
 	{
 		static ___unordered_herd_a___ CATS = unordered_herd_vals(___cat___<___cat_a___, ___kind_a___>());
 		return CATS;
 	}
 
-	template <typename ___cat_a___ = cat, typename ___kind_a___ = kind>
+	template <typename ___cat_a___ = _cat, typename ___kind_a___ = _kind>
 	static inline ___kind_a___ ___kind___()
 	{
 		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>());
 		return KIND;
 	}
 
-	template <typename ___cat_a___ = cat, typename ___kind_a___ = kind, typename ___unordered_herd_a___ = unordered_herd>
+	template <typename ___cat_a___ = _cat, typename ___kind_a___ = _kind, typename ___unordered_herd_a___ = _unordered_herd>
 	static inline ___unordered_herd_a___ ___kinds___()
 	{
 		static ___unordered_herd_a___ KINDS = unordered_herd_vals(___kind___<___cat_a___, ___kind_a___>());
 		return KINDS;
 	}
 
-	template <typename ___unordered_shoal_a___ = unordered_shoal>
+	template <typename ___unordered_shoal_a___ = _unordered_shoal>
 	static inline ___unordered_shoal_a___ ___operations___()
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()

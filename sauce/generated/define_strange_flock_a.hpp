@@ -2,13 +2,13 @@
 namespace strange
 {
 
-template <typename _1_ = void>
+template <typename _1 = void>
 class flock_d;
 
-template <typename _1_ = void>
-inline flock_d<_1_> ___flock_dynamic___(any_a<> const& thing); 
+template <typename _1 = void>
+inline flock_d<_1> ___flock_dynamic___(any_a<> const& thing); 
 
-template <typename _1_>
+template <typename _1>
 class flock_a : public inventory_a<>
 {
 public:
@@ -262,7 +262,7 @@ public:
 		{
 			return flock_a{ thing.___handle___ };
 		}
-		return flock_a{ flock_d<_1_>{ thing } };
+		return flock_a{ flock_d<_1>{ thing } };
 	}
 
 	static inline flock_a ___cast_ref___(any_a<>& thing)
@@ -272,7 +272,7 @@ public:
 		{
 			return flock_a(thing.___handle___, ___reference_tag___{});
 		}
-		return flock_a{ flock_d<_1_>(thing, ___reference_tag___{}) };
+		return flock_a{ flock_d<_1>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -331,7 +331,7 @@ public:
 	}
 }; // class flock_a
 
-template <typename _1_>
+template <typename _1>
 class flock_d : public inventory_d<>
 {
 public:

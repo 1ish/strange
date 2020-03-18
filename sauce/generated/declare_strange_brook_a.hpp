@@ -2,7 +2,7 @@
 namespace strange
 {
 
-template <typename _1_>
+template <typename _primitive>
 class brook_a;
 
 } // namespace

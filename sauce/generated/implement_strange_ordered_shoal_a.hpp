@@ -15,10 +15,10 @@ bool const ___ordered_shoal_a_share___::share = []()
 	return shared_shoal;
 }();
 
-template <typename _1_>
-inline ordered_shoal_d<_1_> ___ordered_shoal_dynamic___(any_a<> const& thing)
+template <typename _1>
+inline ordered_shoal_d<_1> ___ordered_shoal_dynamic___(any_a<> const& thing)
 {
-	return ordered_shoal_d<_1_>{ thing };
+	return ordered_shoal_d<_1>{ thing };
 }
 
 } // namespace

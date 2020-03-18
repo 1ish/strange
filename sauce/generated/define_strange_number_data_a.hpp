@@ -2,51 +2,51 @@
 namespace strange
 {
 
-template <typename _1_>
+template <typename _primitive>
 class number_data_d;
 
-template <typename _1_>
-inline number_data_d<_1_> ___number_data_dynamic___(any_a<> const& thing); 
+template <typename _primitive>
+inline number_data_d<_primitive> ___number_data_dynamic___(any_a<> const& thing); 
 
-template <typename _1_>
+template <typename _primitive>
 class number_data_a : public number_a<>
 {
 public:
-	inline bool operator==(number_data_a < _1_ > const & number ) const
+	inline bool operator==(number_data_a < _primitive > const & number ) const
 	{ assert(___handle___); return ___read___().operator==(number); }
 
-	inline bool operator!=(number_data_a < _1_ > const & number ) const
+	inline bool operator!=(number_data_a < _primitive > const & number ) const
 	{ assert(___handle___); return ___read___().operator!=(number); }
 
-	inline bool operator<(number_data_a < _1_ > const & number ) const
+	inline bool operator<(number_data_a < _primitive > const & number ) const
 	{ assert(___handle___); return ___read___().operator<(number); }
 
-	inline bool operator>(number_data_a < _1_ > const & number ) const
+	inline bool operator>(number_data_a < _primitive > const & number ) const
 	{ assert(___handle___); return ___read___().operator>(number); }
 
-	inline bool operator<=(number_data_a < _1_ > const & number ) const
+	inline bool operator<=(number_data_a < _primitive > const & number ) const
 	{ assert(___handle___); return ___read___().operator<=(number); }
 
-	inline bool operator>=(number_data_a < _1_ > const & number ) const
+	inline bool operator>=(number_data_a < _primitive > const & number ) const
 	{ assert(___handle___); return ___read___().operator>=(number); }
 
-	inline _1_ const & extract_primitive() const
+	inline _primitive const & extract_primitive() const
 	{ assert(___handle___); return ___read___().extract_primitive(); }
 
-	inline _1_ & mutate_primitive()
+	inline _primitive & mutate_primitive()
 	{ assert(___handle___); return ___write___().mutate_primitive(); }
 
 protected:
 	struct ___number_data_a_handle_base___ : ___number_a_handle_base___
 	{
-		virtual bool operator==(number_data_a < _1_ > const & number ) const = 0;
-		virtual bool operator!=(number_data_a < _1_ > const & number ) const = 0;
-		virtual bool operator<(number_data_a < _1_ > const & number ) const = 0;
-		virtual bool operator>(number_data_a < _1_ > const & number ) const = 0;
-		virtual bool operator<=(number_data_a < _1_ > const & number ) const = 0;
-		virtual bool operator>=(number_data_a < _1_ > const & number ) const = 0;
-		virtual _1_ const & extract_primitive() const = 0;
-		virtual _1_ & mutate_primitive() = 0;
+		virtual bool operator==(number_data_a < _primitive > const & number ) const = 0;
+		virtual bool operator!=(number_data_a < _primitive > const & number ) const = 0;
+		virtual bool operator<(number_data_a < _primitive > const & number ) const = 0;
+		virtual bool operator>(number_data_a < _primitive > const & number ) const = 0;
+		virtual bool operator<=(number_data_a < _primitive > const & number ) const = 0;
+		virtual bool operator>=(number_data_a < _primitive > const & number ) const = 0;
+		virtual _primitive const & extract_primitive() const = 0;
+		virtual _primitive & mutate_primitive() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___number_data_a_handle_base___>
@@ -67,28 +67,28 @@ protected:
 			: ___number_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bool operator==(number_data_a < _1_ > const & number ) const final
+		virtual inline bool operator==(number_data_a < _primitive > const & number ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(number); }
 
-		virtual inline bool operator!=(number_data_a < _1_ > const & number ) const final
+		virtual inline bool operator!=(number_data_a < _primitive > const & number ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(number); }
 
-		virtual inline bool operator<(number_data_a < _1_ > const & number ) const final
+		virtual inline bool operator<(number_data_a < _primitive > const & number ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(number); }
 
-		virtual inline bool operator>(number_data_a < _1_ > const & number ) const final
+		virtual inline bool operator>(number_data_a < _primitive > const & number ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(number); }
 
-		virtual inline bool operator<=(number_data_a < _1_ > const & number ) const final
+		virtual inline bool operator<=(number_data_a < _primitive > const & number ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(number); }
 
-		virtual inline bool operator>=(number_data_a < _1_ > const & number ) const final
+		virtual inline bool operator>=(number_data_a < _primitive > const & number ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(number); }
 
-		virtual inline _1_ const & extract_primitive() const final
+		virtual inline _primitive const & extract_primitive() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_primitive(); }
 
-		virtual inline _1_ & mutate_primitive() final
+		virtual inline _primitive & mutate_primitive() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_primitive(); }
 
 	};
@@ -234,7 +234,7 @@ public:
 		{
 			return number_data_a{ thing.___handle___ };
 		}
-		return number_data_a{ number_data_d<_1_>{ thing } };
+		return number_data_a{ number_data_d<_primitive>{ thing } };
 	}
 
 	static inline number_data_a ___cast_ref___(any_a<>& thing)
@@ -244,7 +244,7 @@ public:
 		{
 			return number_data_a(thing.___handle___, ___reference_tag___{});
 		}
-		return number_data_a{ number_data_d<_1_>(thing, ___reference_tag___{}) };
+		return number_data_a{ number_data_d<_primitive>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -269,7 +269,7 @@ public:
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	static inline ___kind_a___ ___kind___()
 	{
-		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>(), flock_vals(kind_of<_1_>()));
+		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>(), flock_vals(kind_of<_primitive>()));
 		return KIND;
 	}
 
@@ -303,32 +303,32 @@ public:
 	}
 }; // class number_data_a
 
-template <typename _1_>
+template <typename _primitive>
 class number_data_d : public number_d<>
 {
 public:
-	inline bool operator==(number_data_a < _1_ > const & number ) const
+	inline bool operator==(number_data_a < _primitive > const & number ) const
 	{ return same_(number); }
 
-	inline bool operator!=(number_data_a < _1_ > const & number ) const
+	inline bool operator!=(number_data_a < _primitive > const & number ) const
 	{ return different_(number); }
 
-	inline bool operator<(number_data_a < _1_ > const & number ) const
+	inline bool operator<(number_data_a < _primitive > const & number ) const
 	{ return less_than_(number); }
 
-	inline bool operator>(number_data_a < _1_ > const & number ) const
+	inline bool operator>(number_data_a < _primitive > const & number ) const
 	{ return greater_than_(number); }
 
-	inline bool operator<=(number_data_a < _1_ > const & number ) const
+	inline bool operator<=(number_data_a < _primitive > const & number ) const
 	{ return less_or_equal_(number); }
 
-	inline bool operator>=(number_data_a < _1_ > const & number ) const
+	inline bool operator>=(number_data_a < _primitive > const & number ) const
 	{ return greater_or_equal_(number); }
 
-	inline _1_ const & extract_primitive() const
+	inline _primitive const & extract_primitive() const
 	{ throw dis("dynamic number_data_d::extract_primitive() not available"); }
 
-	inline _1_ & mutate_primitive()
+	inline _primitive & mutate_primitive()
 	{ throw dis("dynamic number_data_d::mutate_primitive() not available"); }
 
 	void ___weak___(number_d<>::___WEAK___ const& weak) const {}

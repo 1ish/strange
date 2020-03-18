@@ -2,13 +2,13 @@
 namespace strange
 {
 
-template <typename _1_ = void>
+template <typename _1 = void>
 class token_d;
 
-template <typename _1_ = void>
-inline token_d<_1_> ___token_dynamic___(any_a<> const& thing); 
+template <typename _1 = void>
+inline token_d<_1> ___token_dynamic___(any_a<> const& thing); 
 
-template <typename _1_>
+template <typename _1>
 class token_a : public any_a<>
 {
 public:
@@ -306,7 +306,7 @@ public:
 		{
 			return token_a{ thing.___handle___ };
 		}
-		return token_a{ token_d<_1_>{ thing } };
+		return token_a{ token_d<_1>{ thing } };
 	}
 
 	static inline token_a ___cast_ref___(any_a<>& thing)
@@ -316,7 +316,7 @@ public:
 		{
 			return token_a(thing.___handle___, ___reference_tag___{});
 		}
-		return token_a{ token_d<_1_>(thing, ___reference_tag___{}) };
+		return token_a{ token_d<_1>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -383,7 +383,7 @@ public:
 	}
 }; // class token_a
 
-template <typename _1_>
+template <typename _1>
 class token_d : public any_a<>
 {
 public:

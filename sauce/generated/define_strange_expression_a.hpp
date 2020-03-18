@@ -2,13 +2,13 @@
 namespace strange
 {
 
-template <typename _1_ = void>
+template <typename _1 = void>
 class expression_d;
 
-template <typename _1_ = void>
-inline expression_d<_1_> ___expression_dynamic___(any_a<> const& thing); 
+template <typename _1 = void>
+inline expression_d<_1> ___expression_dynamic___(any_a<> const& thing); 
 
-template <typename _1_>
+template <typename _1>
 class expression_a : public operation_a<>
 {
 public:
@@ -269,7 +269,7 @@ public:
 		{
 			return expression_a{ thing.___handle___ };
 		}
-		return expression_a{ expression_d<_1_>{ thing } };
+		return expression_a{ expression_d<_1>{ thing } };
 	}
 
 	static inline expression_a ___cast_ref___(any_a<>& thing)
@@ -279,7 +279,7 @@ public:
 		{
 			return expression_a(thing.___handle___, ___reference_tag___{});
 		}
-		return expression_a{ expression_d<_1_>(thing, ___reference_tag___{}) };
+		return expression_a{ expression_d<_1>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -345,7 +345,7 @@ public:
 	}
 }; // class expression_a
 
-template <typename _1_>
+template <typename _1>
 class expression_d : public operation_d<>
 {
 public:

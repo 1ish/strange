@@ -15,10 +15,10 @@ bool const ___unordered_herd_a_share___::share = []()
 	return shared_shoal;
 }();
 
-template <typename _1_>
-inline unordered_herd_d<_1_> ___unordered_herd_dynamic___(any_a<> const& thing)
+template <typename _1>
+inline unordered_herd_d<_1> ___unordered_herd_dynamic___(any_a<> const& thing)
 {
-	return unordered_herd_d<_1_>{ thing };
+	return unordered_herd_d<_1>{ thing };
 }
 
 } // namespace

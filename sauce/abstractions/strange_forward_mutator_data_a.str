@@ -2,15 +2,15 @@ false &&
 {	strange :
 	{	<forward_mutator_data> :: abstraction
 		(	// dimensions
-			#_1_ :<<>>#,
+			#type :<<>>#,
 			(	// parent
 				$$<forward_mutator>[],
 				{	// forward mutator data
-					'operator==' : "bool (forward_mutator_data_a<_1_> const& it) const",
-					'operator!=' : "bool (forward_mutator_data_a<_1_> const& it) const",
+					'operator==' : "bool (forward_mutator_data_a<_type> const& it) const",
+					'operator!=' : "bool (forward_mutator_data_a<_type> const& it) const",
 
-					extract_it : "_1_ const& () const",
-					mutate_it : "_1_& ()",
+					extract_it : "_type const& () const",
+					mutate_it : "_type& ()",
 				}
 			)
 		)

@@ -2,19 +2,19 @@ false &&
 {	strange :
 	{	<number_data> :: abstraction
 		(	// dimensions
-			#_1_ :<<>>#,
+			#primitive :<<>>#,
 			(	// parent
 				$$<number>[],
 				{	// number data
-					'operator==' : "bool (number_data_a<_1_> const& number) const { return same_(number); }",
-					'operator!=' : "bool (number_data_a<_1_> const& number) const { return different_(number); }",
-					'operator<' : "bool (number_data_a<_1_> const& number) const { return less_than_(number); }",
-					'operator>' : "bool (number_data_a<_1_> const& number) const { return greater_than_(number); }",
-					'operator<=' : "bool (number_data_a<_1_> const& number) const { return less_or_equal_(number); }",
-					'operator>=' : "bool (number_data_a<_1_> const& number) const { return greater_or_equal_(number); }",
+					'operator==' : "bool (number_data_a<_primitive> const& number) const { return same_(number); }",
+					'operator!=' : "bool (number_data_a<_primitive> const& number) const { return different_(number); }",
+					'operator<' : "bool (number_data_a<_primitive> const& number) const { return less_than_(number); }",
+					'operator>' : "bool (number_data_a<_primitive> const& number) const { return greater_than_(number); }",
+					'operator<=' : "bool (number_data_a<_primitive> const& number) const { return less_or_equal_(number); }",
+					'operator>=' : "bool (number_data_a<_primitive> const& number) const { return greater_or_equal_(number); }",
 
-					extract_primitive : "_1_ const& () const",
-					mutate_primitive : "_1_& ()",
+					extract_primitive : "_primitive const& () const",
+					mutate_primitive : "_primitive& ()",
 				}
 			)
 		)

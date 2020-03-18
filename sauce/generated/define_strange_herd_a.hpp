@@ -2,13 +2,13 @@
 namespace strange
 {
 
-template <typename _1_ = void>
+template <typename _1 = void>
 class herd_d;
 
-template <typename _1_ = void>
-inline herd_d<_1_> ___herd_dynamic___(any_a<> const& thing); 
+template <typename _1 = void>
+inline herd_d<_1> ___herd_dynamic___(any_a<> const& thing); 
 
-template <typename _1_>
+template <typename _1>
 class herd_a : public collection_a<>
 {
 public:
@@ -227,7 +227,7 @@ public:
 		{
 			return herd_a{ thing.___handle___ };
 		}
-		return herd_a{ herd_d<_1_>{ thing } };
+		return herd_a{ herd_d<_1>{ thing } };
 	}
 
 	static inline herd_a ___cast_ref___(any_a<>& thing)
@@ -237,7 +237,7 @@ public:
 		{
 			return herd_a(thing.___handle___, ___reference_tag___{});
 		}
-		return herd_a{ herd_d<_1_>(thing, ___reference_tag___{}) };
+		return herd_a{ herd_d<_1>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -296,7 +296,7 @@ public:
 	}
 }; // class herd_a
 
-template <typename _1_>
+template <typename _1>
 class herd_d : public collection_d<>
 {
 public:

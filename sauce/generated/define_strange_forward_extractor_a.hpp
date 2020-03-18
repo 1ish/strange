@@ -2,13 +2,13 @@
 namespace strange
 {
 
-template <typename _1_ = void>
+template <typename _1 = void>
 class forward_extractor_d;
 
-template <typename _1_ = void>
-inline forward_extractor_d<_1_> ___forward_extractor_dynamic___(any_a<> const& thing); 
+template <typename _1 = void>
+inline forward_extractor_d<_1> ___forward_extractor_dynamic___(any_a<> const& thing); 
 
-template <typename _1_>
+template <typename _1>
 class forward_extractor_a : public any_a<>
 {
 public:
@@ -231,7 +231,7 @@ public:
 		{
 			return forward_extractor_a{ thing.___handle___ };
 		}
-		return forward_extractor_a{ forward_extractor_d<_1_>{ thing } };
+		return forward_extractor_a{ forward_extractor_d<_1>{ thing } };
 	}
 
 	static inline forward_extractor_a ___cast_ref___(any_a<>& thing)
@@ -241,7 +241,7 @@ public:
 		{
 			return forward_extractor_a(thing.___handle___, ___reference_tag___{});
 		}
-		return forward_extractor_a{ forward_extractor_d<_1_>(thing, ___reference_tag___{}) };
+		return forward_extractor_a{ forward_extractor_d<_1>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -302,7 +302,7 @@ public:
 	}
 }; // class forward_extractor_a
 
-template <typename _1_>
+template <typename _1>
 class forward_extractor_d : public any_a<>
 {
 public:

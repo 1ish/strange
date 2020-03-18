@@ -2,7 +2,7 @@
 namespace strange
 {
 
-template <typename element>
+template <typename _element>
 class range_of_a;
 
 } // namespace

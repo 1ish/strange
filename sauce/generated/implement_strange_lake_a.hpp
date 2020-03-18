@@ -15,10 +15,10 @@ bool const ___lake_a_share___::share = []()
 	return shared_shoal;
 }();
 
-template <typename _1_>
-inline lake_d<_1_> ___lake_dynamic___(any_a<> const& thing)
+template <typename _primitive>
+inline lake_d<_primitive> ___lake_dynamic___(any_a<> const& thing)
 {
-	return lake_d<_1_>{ thing };
+	return lake_d<_primitive>{ thing };
 }
 
 } // namespace

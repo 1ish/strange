@@ -2,8 +2,8 @@
 namespace strange
 {
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::has__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> collection_a<_1>::has__(range_a<> const& ___arguments___) const
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -14,8 +14,8 @@ inline any_a<> collection_a<_1_>::has__(range_a<> const& ___arguments___) const
 	return has_(key);
 }
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::at__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> collection_a<_1>::at__(range_a<> const& ___arguments___) const
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -26,8 +26,8 @@ inline any_a<> collection_a<_1_>::at__(range_a<> const& ___arguments___) const
 	return at_(key);
 }
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::update__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> collection_a<_1>::update__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -43,8 +43,8 @@ inline any_a<> collection_a<_1_>::update__(range_a<> const& ___arguments___)
 	return update_(key, value);
 }
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::insert__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> collection_a<_1>::insert__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -60,8 +60,8 @@ inline any_a<> collection_a<_1_>::insert__(range_a<> const& ___arguments___)
 	return insert_(key, value);
 }
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::erase__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> collection_a<_1>::erase__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -72,26 +72,26 @@ inline any_a<> collection_a<_1_>::erase__(range_a<> const& ___arguments___)
 	return erase_(key);
 }
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::clear__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> collection_a<_1>::clear__(range_a<> const& ___arguments___)
 {
 	return clear_();
 }
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::size__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> collection_a<_1>::size__(range_a<> const& ___arguments___) const
 {
 	return size_();
 }
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::empty__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> collection_a<_1>::empty__(range_a<> const& ___arguments___) const
 {
 	return empty_();
 }
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::push_front__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> collection_a<_1>::push_front__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -102,14 +102,14 @@ inline any_a<> collection_a<_1_>::push_front__(range_a<> const& ___arguments___)
 	return push_front_(thing);
 }
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::pop_front__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> collection_a<_1>::pop_front__(range_a<> const& ___arguments___)
 {
 	return pop_front_();
 }
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::push_back__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> collection_a<_1>::push_back__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -120,14 +120,14 @@ inline any_a<> collection_a<_1_>::push_back__(range_a<> const& ___arguments___)
 	return push_back_(thing);
 }
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::pop_back__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> collection_a<_1>::pop_back__(range_a<> const& ___arguments___)
 {
 	return pop_back_();
 }
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::self_assign__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> collection_a<_1>::self_assign__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -138,8 +138,8 @@ inline any_a<> collection_a<_1_>::self_assign__(range_a<> const& ___arguments___
 	return self_assign_(range);
 }
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::self_add__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> collection_a<_1>::self_add__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -150,8 +150,8 @@ inline any_a<> collection_a<_1_>::self_add__(range_a<> const& ___arguments___)
 	return self_add_(range);
 }
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::add__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> collection_a<_1>::add__(range_a<> const& ___arguments___) const
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -162,8 +162,8 @@ inline any_a<> collection_a<_1_>::add__(range_a<> const& ___arguments___) const
 	return add_(range);
 }
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::self_subtract__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> collection_a<_1>::self_subtract__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -174,8 +174,8 @@ inline any_a<> collection_a<_1_>::self_subtract__(range_a<> const& ___arguments_
 	return self_subtract_(range);
 }
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::subtract__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> collection_a<_1>::subtract__(range_a<> const& ___arguments___) const
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -186,14 +186,14 @@ inline any_a<> collection_a<_1_>::subtract__(range_a<> const& ___arguments___) c
 	return subtract_(range);
 }
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::read_lock__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> collection_a<_1>::read_lock__(range_a<> const& ___arguments___) const
 {
 	return read_lock_();
 }
 
-template <typename _1_>
-inline any_a<> collection_a<_1_>::write_lock__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> collection_a<_1>::write_lock__(range_a<> const& ___arguments___) const
 {
 	return write_lock_();
 }
@@ -211,10 +211,10 @@ bool const ___collection_a_share___::share = []()
 	return shared_shoal;
 }();
 
-template <typename _1_>
-inline collection_d<_1_> ___collection_dynamic___(any_a<> const& thing)
+template <typename _1>
+inline collection_d<_1> ___collection_dynamic___(any_a<> const& thing)
 {
-	return collection_d<_1_>{ thing };
+	return collection_d<_1>{ thing };
 }
 
 } // namespace

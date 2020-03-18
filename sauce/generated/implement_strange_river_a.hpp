@@ -2,32 +2,32 @@
 namespace strange
 {
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::to_lake__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::to_lake__(range_a<> const& ___arguments___)
 {
 	return to_lake_();
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::get_char__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::get_char__(range_a<> const& ___arguments___)
 {
 	return get_char_();
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::peek_char__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::peek_char__(range_a<> const& ___arguments___)
 {
 	return peek_char_();
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::unget_char__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::unget_char__(range_a<> const& ___arguments___)
 {
 	return unget_char_();
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::put_back_char__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::put_back_char__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -38,8 +38,8 @@ inline any_a<> river_a<_1_>::put_back_char__(range_a<> const& ___arguments___)
 	return put_back_char_(int_8);
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::get_line__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::get_line__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -55,8 +55,8 @@ inline any_a<> river_a<_1_>::get_line__(range_a<> const& ___arguments___)
 	return get_line_(count, delimiter);
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::ignore__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::ignore__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -67,8 +67,8 @@ inline any_a<> river_a<_1_>::ignore__(range_a<> const& ___arguments___)
 	return ignore_(count);
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::read__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::read__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -79,14 +79,14 @@ inline any_a<> river_a<_1_>::read__(range_a<> const& ___arguments___)
 	return read_(count);
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::tellg__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> river_a<_1>::tellg__(range_a<> const& ___arguments___) const
 {
 	return tellg_();
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::seekg_beg__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::seekg_beg__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -97,8 +97,8 @@ inline any_a<> river_a<_1_>::seekg_beg__(range_a<> const& ___arguments___)
 	return seekg_beg_(offset);
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::seekg_end__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::seekg_end__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -109,8 +109,8 @@ inline any_a<> river_a<_1_>::seekg_end__(range_a<> const& ___arguments___)
 	return seekg_end_(offset);
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::seekg_cur__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::seekg_cur__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -121,14 +121,14 @@ inline any_a<> river_a<_1_>::seekg_cur__(range_a<> const& ___arguments___)
 	return seekg_cur_(offset);
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::sync__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::sync__(range_a<> const& ___arguments___)
 {
 	return sync_();
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::put_char__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::put_char__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -139,8 +139,8 @@ inline any_a<> river_a<_1_>::put_char__(range_a<> const& ___arguments___)
 	return put_char_(int_8);
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::write__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::write__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -151,14 +151,14 @@ inline any_a<> river_a<_1_>::write__(range_a<> const& ___arguments___)
 	return write_(lake);
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::tellp__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> river_a<_1>::tellp__(range_a<> const& ___arguments___) const
 {
 	return tellp_();
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::seekp_beg__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::seekp_beg__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -169,8 +169,8 @@ inline any_a<> river_a<_1_>::seekp_beg__(range_a<> const& ___arguments___)
 	return seekp_beg_(offset);
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::seekp_end__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::seekp_end__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -181,8 +181,8 @@ inline any_a<> river_a<_1_>::seekp_end__(range_a<> const& ___arguments___)
 	return seekp_end_(offset);
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::seekp_cur__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::seekp_cur__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -193,38 +193,38 @@ inline any_a<> river_a<_1_>::seekp_cur__(range_a<> const& ___arguments___)
 	return seekp_cur_(offset);
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::flush__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::flush__(range_a<> const& ___arguments___)
 {
 	return flush_();
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::good__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> river_a<_1>::good__(range_a<> const& ___arguments___) const
 {
 	return good_();
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::eof__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> river_a<_1>::eof__(range_a<> const& ___arguments___) const
 {
 	return eof_();
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::fail__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> river_a<_1>::fail__(range_a<> const& ___arguments___) const
 {
 	return fail_();
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::bad__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> river_a<_1>::bad__(range_a<> const& ___arguments___) const
 {
 	return bad_();
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::set_good__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::set_good__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -235,8 +235,8 @@ inline any_a<> river_a<_1_>::set_good__(range_a<> const& ___arguments___)
 	return set_good_(value);
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::set_eof__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::set_eof__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -247,8 +247,8 @@ inline any_a<> river_a<_1_>::set_eof__(range_a<> const& ___arguments___)
 	return set_eof_(value);
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::set_fail__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::set_fail__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -259,8 +259,8 @@ inline any_a<> river_a<_1_>::set_fail__(range_a<> const& ___arguments___)
 	return set_fail_(value);
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::set_bad__(range_a<> const& ___arguments___)
+template <typename _1>
+inline any_a<> river_a<_1>::set_bad__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -271,8 +271,8 @@ inline any_a<> river_a<_1_>::set_bad__(range_a<> const& ___arguments___)
 	return set_bad_(value);
 }
 
-template <typename _1_>
-inline any_a<> river_a<_1_>::filename__(range_a<> const& ___arguments___) const
+template <typename _1>
+inline any_a<> river_a<_1>::filename__(range_a<> const& ___arguments___) const
 {
 	return filename_();
 }
@@ -290,10 +290,10 @@ bool const ___river_a_share___::share = []()
 	return shared_shoal;
 }();
 
-template <typename _1_>
-inline river_d<_1_> ___river_dynamic___(any_a<> const& thing)
+template <typename _1>
+inline river_d<_1> ___river_dynamic___(any_a<> const& thing)
 {
-	return river_d<_1_>{ thing };
+	return river_d<_1>{ thing };
 }
 
 } // namespace

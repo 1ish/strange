@@ -2,14 +2,14 @@
 namespace strange
 {
 
-template <typename lake_int8>
-inline any_a<> misunderstanding_a<lake_int8>::to_lake__(range_a<> const& ___arguments___) const
+template <typename _lake_int8>
+inline any_a<> misunderstanding_a<_lake_int8>::to_lake__(range_a<> const& ___arguments___) const
 {
 	return to_lake_();
 }
 
-template <typename lake_int8>
-inline any_a<> misunderstanding_a<lake_int8>::add__(range_a<> const& ___arguments___) const
+template <typename _lake_int8>
+inline any_a<> misunderstanding_a<_lake_int8>::add__(range_a<> const& ___arguments___) const
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -33,10 +33,10 @@ bool const ___misunderstanding_a_share___::share = []()
 	return shared_shoal;
 }();
 
-template <typename lake_int8>
-inline misunderstanding_d<lake_int8> ___misunderstanding_dynamic___(any_a<> const& thing)
+template <typename _lake_int8>
+inline misunderstanding_d<_lake_int8> ___misunderstanding_dynamic___(any_a<> const& thing)
 {
-	return misunderstanding_d<lake_int8>{ thing };
+	return misunderstanding_d<_lake_int8>{ thing };
 }
 
 } // namespace

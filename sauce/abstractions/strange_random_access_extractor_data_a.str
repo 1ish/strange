@@ -2,19 +2,19 @@ false &&
 {	strange :
 	{	<random_access_extractor_data> :: abstraction
 		(	// dimensions
-			#_1_ :<<>>#,
+			#type :<<>>#,
 			(	// parent
 				$$<random_access_extractor>[],
 				{	// random access extractor data
-					'operator==' : "bool (random_access_extractor_data_a<_1_> const& it) const",
-					'operator!=' : "bool (random_access_extractor_data_a<_1_> const& it) const",
-					'operator<' : "bool (random_access_extractor_data_a<_1_> const& it) const",
-					'operator>' : "bool (random_access_extractor_data_a<_1_> const& it) const",
-					'operator<=' : "bool (random_access_extractor_data_a<_1_> const& it) const",
-					'operator>=' : "bool (random_access_extractor_data_a<_1_> const& it) const",
+					'operator==' : "bool (random_access_extractor_data_a<_type> const& it) const",
+					'operator!=' : "bool (random_access_extractor_data_a<_type> const& it) const",
+					'operator<' : "bool (random_access_extractor_data_a<_type> const& it) const",
+					'operator>' : "bool (random_access_extractor_data_a<_type> const& it) const",
+					'operator<=' : "bool (random_access_extractor_data_a<_type> const& it) const",
+					'operator>=' : "bool (random_access_extractor_data_a<_type> const& it) const",
 
-					extract_it : "_1_ const& () const",
-					mutate_it : "_1_& ()",
+					extract_it : "_type const& () const",
+					mutate_it : "_type& ()",
 				}
 			)
 		)

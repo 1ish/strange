@@ -2,35 +2,35 @@
 namespace strange
 {
 
-template <typename _1_>
+template <typename _type>
 class data_d;
 
-template <typename _1_>
-inline data_d<_1_> ___data_dynamic___(any_a<> const& thing); 
+template <typename _type>
+inline data_d<_type> ___data_dynamic___(any_a<> const& thing); 
 
-template <typename _1_>
+template <typename _type>
 class data_a : public any_a<>
 {
 public:
-	inline bool operator==(data_a < _1_ > const & data ) const
+	inline bool operator==(data_a < _type > const & data ) const
 	{ assert(___handle___); return ___read___().operator==(data); }
 
-	inline bool operator!=(data_a < _1_ > const & data ) const
+	inline bool operator!=(data_a < _type > const & data ) const
 	{ assert(___handle___); return ___read___().operator!=(data); }
 
-	inline _1_ const & extract_data() const
+	inline _type const & extract_data() const
 	{ assert(___handle___); return ___read___().extract_data(); }
 
-	inline _1_ & mutate_data()
+	inline _type & mutate_data()
 	{ assert(___handle___); return ___write___().mutate_data(); }
 
 protected:
 	struct ___data_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual bool operator==(data_a < _1_ > const & data ) const = 0;
-		virtual bool operator!=(data_a < _1_ > const & data ) const = 0;
-		virtual _1_ const & extract_data() const = 0;
-		virtual _1_ & mutate_data() = 0;
+		virtual bool operator==(data_a < _type > const & data ) const = 0;
+		virtual bool operator!=(data_a < _type > const & data ) const = 0;
+		virtual _type const & extract_data() const = 0;
+		virtual _type & mutate_data() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___data_a_handle_base___>
@@ -51,16 +51,16 @@ protected:
 			: ___any_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bool operator==(data_a < _1_ > const & data ) const final
+		virtual inline bool operator==(data_a < _type > const & data ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(data); }
 
-		virtual inline bool operator!=(data_a < _1_ > const & data ) const final
+		virtual inline bool operator!=(data_a < _type > const & data ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(data); }
 
-		virtual inline _1_ const & extract_data() const final
+		virtual inline _type const & extract_data() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_data(); }
 
-		virtual inline _1_ & mutate_data() final
+		virtual inline _type & mutate_data() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_data(); }
 
 	};
@@ -206,7 +206,7 @@ public:
 		{
 			return data_a{ thing.___handle___ };
 		}
-		return data_a{ data_d<_1_>{ thing } };
+		return data_a{ data_d<_type>{ thing } };
 	}
 
 	static inline data_a ___cast_ref___(any_a<>& thing)
@@ -216,7 +216,7 @@ public:
 		{
 			return data_a(thing.___handle___, ___reference_tag___{});
 		}
-		return data_a{ data_d<_1_>(thing, ___reference_tag___{}) };
+		return data_a{ data_d<_type>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -241,7 +241,7 @@ public:
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	static inline ___kind_a___ ___kind___()
 	{
-		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>(), flock_vals(kind_of<_1_>()));
+		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>(), flock_vals(kind_of<_type>()));
 		return KIND;
 	}
 
@@ -275,20 +275,20 @@ public:
 	}
 }; // class data_a
 
-template <typename _1_>
+template <typename _type>
 class data_d : public any_a<>
 {
 public:
-	inline bool operator==(data_a < _1_ > const & data ) const
+	inline bool operator==(data_a < _type > const & data ) const
 	{ throw dis("dynamic data_d::operator==(data) not available"); }
 
-	inline bool operator!=(data_a < _1_ > const & data ) const
+	inline bool operator!=(data_a < _type > const & data ) const
 	{ throw dis("dynamic data_d::operator!=(data) not available"); }
 
-	inline _1_ const & extract_data() const
+	inline _type const & extract_data() const
 	{ throw dis("dynamic data_d::extract_data() not available"); }
 
-	inline _1_ & mutate_data()
+	inline _type & mutate_data()
 	{ throw dis("dynamic data_d::mutate_data() not available"); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}

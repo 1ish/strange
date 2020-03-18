@@ -2,7 +2,7 @@
 namespace strange
 {
 
-template <typename _1_>
+template <typename _type>
 class bidirectional_mutator_data_a;
 
 } // namespace

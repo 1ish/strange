@@ -15,10 +15,10 @@ bool const ___herd_a_share___::share = []()
 	return shared_shoal;
 }();
 
-template <typename _1_>
-inline herd_d<_1_> ___herd_dynamic___(any_a<> const& thing)
+template <typename _1>
+inline herd_d<_1> ___herd_dynamic___(any_a<> const& thing)
 {
-	return herd_d<_1_>{ thing };
+	return herd_d<_1>{ thing };
 }
 
 } // namespace

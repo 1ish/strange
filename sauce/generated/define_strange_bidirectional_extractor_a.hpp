@@ -2,13 +2,13 @@
 namespace strange
 {
 
-template <typename _1_ = void>
+template <typename _1 = void>
 class bidirectional_extractor_d;
 
-template <typename _1_ = void>
-inline bidirectional_extractor_d<_1_> ___bidirectional_extractor_dynamic___(any_a<> const& thing); 
+template <typename _1 = void>
+inline bidirectional_extractor_d<_1> ___bidirectional_extractor_dynamic___(any_a<> const& thing); 
 
-template <typename _1_>
+template <typename _1>
 class bidirectional_extractor_a : public forward_extractor_a<>
 {
 public:
@@ -208,7 +208,7 @@ public:
 		{
 			return bidirectional_extractor_a{ thing.___handle___ };
 		}
-		return bidirectional_extractor_a{ bidirectional_extractor_d<_1_>{ thing } };
+		return bidirectional_extractor_a{ bidirectional_extractor_d<_1>{ thing } };
 	}
 
 	static inline bidirectional_extractor_a ___cast_ref___(any_a<>& thing)
@@ -218,7 +218,7 @@ public:
 		{
 			return bidirectional_extractor_a(thing.___handle___, ___reference_tag___{});
 		}
-		return bidirectional_extractor_a{ bidirectional_extractor_d<_1_>(thing, ___reference_tag___{}) };
+		return bidirectional_extractor_a{ bidirectional_extractor_d<_1>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -278,7 +278,7 @@ public:
 	}
 }; // class bidirectional_extractor_a
 
-template <typename _1_>
+template <typename _1>
 class bidirectional_extractor_d : public forward_extractor_d<>
 {
 public:

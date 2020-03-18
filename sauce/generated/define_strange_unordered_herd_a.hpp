@@ -2,13 +2,13 @@
 namespace strange
 {
 
-template <typename _1_ = void>
+template <typename _1 = void>
 class unordered_herd_d;
 
-template <typename _1_ = void>
-inline unordered_herd_d<_1_> ___unordered_herd_dynamic___(any_a<> const& thing); 
+template <typename _1 = void>
+inline unordered_herd_d<_1> ___unordered_herd_dynamic___(any_a<> const& thing); 
 
-template <typename _1_>
+template <typename _1>
 class unordered_herd_a : public herd_a<>
 {
 public:
@@ -220,7 +220,7 @@ public:
 		{
 			return unordered_herd_a{ thing.___handle___ };
 		}
-		return unordered_herd_a{ unordered_herd_d<_1_>{ thing } };
+		return unordered_herd_a{ unordered_herd_d<_1>{ thing } };
 	}
 
 	static inline unordered_herd_a ___cast_ref___(any_a<>& thing)
@@ -230,7 +230,7 @@ public:
 		{
 			return unordered_herd_a(thing.___handle___, ___reference_tag___{});
 		}
-		return unordered_herd_a{ unordered_herd_d<_1_>(thing, ___reference_tag___{}) };
+		return unordered_herd_a{ unordered_herd_d<_1>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -289,7 +289,7 @@ public:
 	}
 }; // class unordered_herd_a
 
-template <typename _1_>
+template <typename _1>
 class unordered_herd_d : public herd_d<>
 {
 public:

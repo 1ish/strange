@@ -15,10 +15,10 @@ bool const ___brook_a_share___::share = []()
 	return shared_shoal;
 }();
 
-template <typename _1_>
-inline brook_d<_1_> ___brook_dynamic___(any_a<> const& thing)
+template <typename _primitive>
+inline brook_d<_primitive> ___brook_dynamic___(any_a<> const& thing)
 {
-	return brook_d<_1_>{ thing };
+	return brook_d<_primitive>{ thing };
 }
 
 } // namespace

@@ -2,13 +2,13 @@
 namespace strange
 {
 
-template <typename element>
+template <typename _element>
 class range_of_d;
 
-template <typename element>
-inline range_of_d<element> ___range_of_dynamic___(any_a<> const& thing); 
+template <typename _element>
+inline range_of_d<_element> ___range_of_dynamic___(any_a<> const& thing); 
 
-template <typename element>
+template <typename _element>
 class range_of_a : public any_a<>
 {
 public:
@@ -196,7 +196,7 @@ public:
 		{
 			return range_of_a{ thing.___handle___ };
 		}
-		return range_of_a{ range_of_d<element>{ thing } };
+		return range_of_a{ range_of_d<_element>{ thing } };
 	}
 
 	static inline range_of_a ___cast_ref___(any_a<>& thing)
@@ -206,7 +206,7 @@ public:
 		{
 			return range_of_a(thing.___handle___, ___reference_tag___{});
 		}
-		return range_of_a{ range_of_d<element>(thing, ___reference_tag___{}) };
+		return range_of_a{ range_of_d<_element>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -231,7 +231,7 @@ public:
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	static inline ___kind_a___ ___kind___()
 	{
-		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>(), flock_vals(kind_of<element>()));
+		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>(), flock_vals(kind_of<_element>()));
 		return KIND;
 	}
 
@@ -267,7 +267,7 @@ public:
 	}
 }; // class range_of_a
 
-template <typename element>
+template <typename _element>
 class range_of_d : public any_a<>
 {
 public:

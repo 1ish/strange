@@ -2,13 +2,13 @@
 namespace strange
 {
 
-template <typename _1_ = void>
+template <typename _1 = void>
 class inventory_d;
 
-template <typename _1_ = void>
-inline inventory_d<_1_> ___inventory_dynamic___(any_a<> const& thing); 
+template <typename _1 = void>
+inline inventory_d<_1> ___inventory_dynamic___(any_a<> const& thing); 
 
-template <typename _1_>
+template <typename _1>
 class inventory_a : public collection_a<>
 {
 public:
@@ -231,7 +231,7 @@ public:
 		{
 			return inventory_a{ thing.___handle___ };
 		}
-		return inventory_a{ inventory_d<_1_>{ thing } };
+		return inventory_a{ inventory_d<_1>{ thing } };
 	}
 
 	static inline inventory_a ___cast_ref___(any_a<>& thing)
@@ -241,7 +241,7 @@ public:
 		{
 			return inventory_a(thing.___handle___, ___reference_tag___{});
 		}
-		return inventory_a{ inventory_d<_1_>(thing, ___reference_tag___{}) };
+		return inventory_a{ inventory_d<_1>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -302,7 +302,7 @@ public:
 	}
 }; // class inventory_a
 
-template <typename _1_>
+template <typename _1>
 class inventory_d : public collection_d<>
 {
 public:

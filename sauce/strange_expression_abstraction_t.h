@@ -366,7 +366,7 @@ protected:
 			river.write_string("template <");
 			if (_dimension_names.empty())
 			{
-				river.write_string("typename _1_ = void");
+				river.write_string("typename _1 = void");
 			}
 			else
 			{
@@ -383,7 +383,7 @@ protected:
 					{
 						river.write_string(", ");
 					}
-					river.write_string("typename " + fast<symbol_a<>>(name).to_string().substr(1));
+					river.write_string("typename _" + fast<symbol_a<>>(name).to_string().substr(1));
 
 					auto any_kind = *kit++;
 					if (check<expression_a<>>(any_kind))
@@ -418,7 +418,7 @@ protected:
 			river.write_string("template <");
 			if (_dimension_names.empty())
 			{
-				river.write_string("typename _1_");
+				river.write_string("typename _1");
 			}
 			else
 			{
@@ -433,7 +433,7 @@ protected:
 					{
 						river.write_string(", ");
 					}
-					river.write_string("typename " + fast<symbol_a<>>(name).to_string().substr(1));
+					river.write_string("typename _" + fast<symbol_a<>>(name).to_string().substr(1));
 				}
 			}
 			river.write_string(">\n");
@@ -443,7 +443,7 @@ protected:
 			river.write_string("<");
 			if (_dimension_names.empty())
 			{
-				river.write_string("_1_");
+				river.write_string("_1");
 			}
 			else
 			{
@@ -458,7 +458,7 @@ protected:
 					{
 						river.write_string(", ");
 					}
-					river.write_string(fast<symbol_a<>>(name).to_string().substr(1));
+					river.write_string("_" + fast<symbol_a<>>(name).to_string().substr(1));
 				}
 			}
 			river.write_string(">");
@@ -587,12 +587,12 @@ protected:
 				"\tusing ___SHARED___ = std::shared_ptr<___" + class_name + "_handle_base___>;\n\n"
 
 				"\t// operator overloads\n"
-				"\tinline " + class_name + "<> operator[](range const& arguments)\n"
+				"\tinline " + class_name + "<> operator[](_range const& arguments)\n"
 				"\t{\n"
 				"\t\treturn invoke(*this, arguments);\n"
 				"\t}\n\n"
 
-				"\tinline " + class_name + "<> operator()(range const& arguments)\n"
+				"\tinline " + class_name + "<> operator()(_range const& arguments)\n"
 				"\t{\n"
 				"\t\treturn operate(*this, arguments);\n"
 				"\t}\n\n"
@@ -702,8 +702,8 @@ protected:
 		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
 
 		river.write_string(
-			"\tinline any_a<> " + name + "_(range" +
-			(root ? "" : "_a<>") + " const& arguments)" + constness + "\n"
+			"\tinline any_a<> " + name + "_(" +
+			(root ? "_range" : "range_a<>") + " const& arguments)" + constness + "\n"
 			"\t{\n"
 			"\t\tassert(___handle___);\n"
 			"\t\tauto const op = operation(\"" + name + "\");\n"
@@ -776,8 +776,8 @@ protected:
 		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
 
 		river.write_string(
-			"\tinline any_a<> " + name + "_(range" +
-			(root ? "" : "_a<>") + " const& ___arguments___)" + constness + ";\n\n");			
+			"\tinline any_a<> " + name + "_(" +
+			(root ? "_range" : "range_a<>") + " const& ___arguments___)" + constness + ";\n\n");			
 
 		if (name == "increment_")
 		{
@@ -1071,7 +1071,6 @@ protected:
 				(extraction ? "___read___()." : "___write___().") +
 				name + arguments + "; }\n\n");
 		}
-		//TODO
 		else
 		{
 			river.write_string(
@@ -1111,8 +1110,8 @@ protected:
 		river.write_string(
 			"inline any_a<> " + class_name);
 		_declare_and_define_template_(version, 0, river, false, false);
-		river.write_string("::" + name + "_(range" +
-				(root ? "" : "_a<>") + " const& ___arguments___)" +
+		river.write_string("::" + name + "_(" +
+				(root ? "_range" : "range_a<>") + " const& ___arguments___)" +
 				std::string(extraction ? " const" : "") + "\n"
 			"{\n");
 		if (extraction)
@@ -1685,7 +1684,7 @@ protected:
 		// ___cat___()
 		if (root)
 		{
-			river.write_string("\ttemplate <typename ___cat_a___ = cat, typename ___kind_a___ = kind>\n");
+			river.write_string("\ttemplate <typename ___cat_a___ = _cat, typename ___kind_a___ = _kind>\n");
 		}
 		else
 		{
@@ -1719,7 +1718,7 @@ protected:
 		// ___cats___()
 		if (root)
 		{
-			river.write_string("\ttemplate <typename ___cat_a___ = cat, typename ___kind_a___ = kind, typename ___unordered_herd_a___ = unordered_herd>\n");
+			river.write_string("\ttemplate <typename ___cat_a___ = _cat, typename ___kind_a___ = _kind, typename ___unordered_herd_a___ = _unordered_herd>\n");
 		}
 		else
 		{
@@ -1749,7 +1748,7 @@ protected:
 		// ___kind___()
 		if (root)
 		{
-			river.write_string("\ttemplate <typename ___cat_a___ = cat, typename ___kind_a___ = kind>\n");
+			river.write_string("\ttemplate <typename ___cat_a___ = _cat, typename ___kind_a___ = _kind>\n");
 		}
 		else
 		{
@@ -1774,7 +1773,7 @@ protected:
 				{
 					river.write_string(", ");
 				}
-				river.write_string("kind_of<" + fast<symbol_a<>>(_dimension_names.at_index(--count)).to_string().substr(1) + ">()");
+				river.write_string("kind_of<_" + fast<symbol_a<>>(_dimension_names.at_index(--count)).to_string().substr(1) + ">()");
 			}
 			river.write_string(")");
 		}
@@ -1785,7 +1784,7 @@ protected:
 		// ___kinds___()
 		if (root)
 		{
-			river.write_string("\ttemplate <typename ___cat_a___ = cat, typename ___kind_a___ = kind, typename ___unordered_herd_a___ = unordered_herd>\n");
+			river.write_string("\ttemplate <typename ___cat_a___ = _cat, typename ___kind_a___ = _kind, typename ___unordered_herd_a___ = _unordered_herd>\n");
 		}
 		else
 		{
@@ -1815,7 +1814,7 @@ protected:
 		// ___operations___()
 		if (root)
 		{
-			river.write_string("\ttemplate <typename ___unordered_shoal_a___ = unordered_shoal>\n");
+			river.write_string("\ttemplate <typename ___unordered_shoal_a___ = _unordered_shoal>\n");
 		}
 		else
 		{

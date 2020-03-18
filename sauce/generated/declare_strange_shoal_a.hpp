@@ -2,7 +2,7 @@
 namespace strange
 {
 
-template <typename _1_ = void>
+template <typename _1 = void>
 class shoal_a;
 
 } // namespace

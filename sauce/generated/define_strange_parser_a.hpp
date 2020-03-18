@@ -2,13 +2,13 @@
 namespace strange
 {
 
-template <typename _1_ = void>
+template <typename _1 = void>
 class parser_d;
 
-template <typename _1_ = void>
-inline parser_d<_1_> ___parser_dynamic___(any_a<> const& thing); 
+template <typename _1 = void>
+inline parser_d<_1> ___parser_dynamic___(any_a<> const& thing); 
 
-template <typename _1_>
+template <typename _1>
 class parser_a : public any_a<>
 {
 public:
@@ -187,7 +187,7 @@ public:
 		{
 			return parser_a{ thing.___handle___ };
 		}
-		return parser_a{ parser_d<_1_>{ thing } };
+		return parser_a{ parser_d<_1>{ thing } };
 	}
 
 	static inline parser_a ___cast_ref___(any_a<>& thing)
@@ -197,7 +197,7 @@ public:
 		{
 			return parser_a(thing.___handle___, ___reference_tag___{});
 		}
-		return parser_a{ parser_d<_1_>(thing, ___reference_tag___{}) };
+		return parser_a{ parser_d<_1>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -257,7 +257,7 @@ public:
 	}
 }; // class parser_a
 
-template <typename _1_>
+template <typename _1>
 class parser_d : public any_a<>
 {
 public:
