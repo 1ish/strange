@@ -47,23 +47,22 @@ public:
 	// expression
 	inline expression_a<> recreate_() const
 	{
-		return _SUBSTITUTED_::template recreate_expression<_SUBSTITUTED_>(_SUBSTITUTED_::me_());
+		auto const recreated = _SUBSTITUTED_::template recreate_expression<_SUBSTITUTED_>(_SUBSTITUTED_::me_());
+		if (check<operation_a<>>(_thing))
+		{
+			auto const thing = recreated.evaluate_();
+			if (check<operation_a<>>(thing))
+			{
+				fast_ref<operation_a<>>(_thing).assign(fast<operation_a<>>(thing));
+			}
+		}
+		return recreated;
 	}
 
 	inline any_a<> evaluate_() const
 	{
 		any_a<> null;
 		return operate(null, range_a<>{});
-	}
-
-	inline void recreated(expression_a<> const& expression) const
-	{
-		auto const thing = expression.evaluate_();
-		if (check<operation_a<>>(_thing) && check<operation_a<>>(thing))
-		{
-			fast_ref<operation_a<>>(_thing).assign(fast<operation_a<>>(thing));
-		}
-		_thing = thing;
 	}
 
 	// public constructor

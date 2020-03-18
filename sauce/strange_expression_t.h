@@ -120,9 +120,7 @@ public:
 				recreated_vector.emplace_back(term);
 			}
 		}
-		auto const recreated_expression = _expression_::create_(expression.token_(), recreated_terms);
-		expression.recreated(recreated_expression);
-		return recreated_expression;
+		return _expression_::create_(expression.token_(), recreated_terms);
 	}
 
 	inline any_a<> evaluate_() const
@@ -130,9 +128,6 @@ public:
 		any_a<> null;
 		return operate(null, range_a<>{});
 	}
-
-	inline void recreated(expression_a<> const& expression) const
-	{}
 
 	inline any_a<> literal_() const
 	{

@@ -107,9 +107,6 @@ public:
 		return operation_c<___ego___>::me_(); //TODO?
 	}
 
-	inline void recreated(expression_a<> const& expression) const
-	{}
-
 	inline any_a<> literal__(range_a<> const& range) const
 	{
 		auto const op = operation_c<___ego___>::_operations.at_string("literal");

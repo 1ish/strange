@@ -6,7 +6,6 @@ false &&
 				$$<operation>[],
 				{	// expression
 					recreate_ :# (<expression>),
-					recreated : "void (expression_a<> const& expression) const {}", //TODO
 
 					literal_ :# (<>),
 					literal : "bool () const { return literal_(); }",

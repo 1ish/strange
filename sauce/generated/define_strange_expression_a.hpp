@@ -17,9 +17,6 @@ public:
 	inline expression_a<> recreate_() const
 	{ assert(___handle___); return ___read___().recreate_(); }
 
-	inline void recreated(expression_a < > const & expression ) const
-	{ assert(___handle___); ___read___().recreated(expression); }
-
 	inline any_a<> literal__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> literal_() const
@@ -63,7 +60,6 @@ protected:
 	struct ___expression_a_handle_base___ : ___operation_a_handle_base___
 	{
 		virtual expression_a<> recreate_() const = 0;
-		virtual void recreated(expression_a < > const & expression ) const = 0;
 		virtual any_a<> literal_() const = 0;
 		virtual bool literal() const = 0;
 		virtual any_a<> evaluate_() const = 0;
@@ -95,9 +91,6 @@ protected:
 
 		virtual inline expression_a<> recreate_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.recreate_(); }
-
-		virtual inline void recreated(expression_a < > const & expression ) const final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.recreated(expression); }
 
 		virtual inline any_a<> literal_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.literal_(); }
@@ -370,9 +363,6 @@ public:
 		}
 		return cast<expression_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
-
-	inline void recreated(expression_a < > const & expression ) const
-	{}
 
 	inline any_a<> literal__(range_a<> const& arguments) const
 	{
