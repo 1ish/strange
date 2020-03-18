@@ -587,12 +587,12 @@ protected:
 				"\tusing ___SHARED___ = std::shared_ptr<___" + class_name + "_handle_base___>;\n\n"
 
 				"\t// operator overloads\n"
-				"\tinline " + class_name + "<> operator[](_range const& arguments)\n"
+				"\tinline " + class_name + "<> operator[](range_a<> const& arguments)\n"
 				"\t{\n"
 				"\t\treturn invoke(*this, arguments);\n"
 				"\t}\n\n"
 
-				"\tinline " + class_name + "<> operator()(_range const& arguments)\n"
+				"\tinline " + class_name + "<> operator()(range_a<> const& arguments)\n"
 				"\t{\n"
 				"\t\treturn operate(*this, arguments);\n"
 				"\t}\n\n"
@@ -702,8 +702,7 @@ protected:
 		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
 
 		river.write_string(
-			"\tinline any_a<> " + name + "_(" +
-			(root ? "_range" : "range_a<>") + " const& arguments)" + constness + "\n"
+			"\tinline any_a<> " + name + "_(range_a<> const& arguments)" + constness + "\n"
 			"\t{\n"
 			"\t\tassert(___handle___);\n"
 			"\t\tauto const op = operation(\"" + name + "\");\n"
@@ -776,8 +775,7 @@ protected:
 		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
 
 		river.write_string(
-			"\tinline any_a<> " + name + "_(" +
-			(root ? "_range" : "range_a<>") + " const& ___arguments___)" + constness + ";\n\n");			
+			"\tinline any_a<> " + name + "_(range_a<> const& ___arguments___)" + constness + ";\n\n");			
 
 		if (name == "increment_")
 		{
@@ -1110,8 +1108,7 @@ protected:
 		river.write_string(
 			"inline any_a<> " + class_name);
 		_declare_and_define_template_(version, 0, river, false, false);
-		river.write_string("::" + name + "_(" +
-				(root ? "_range" : "range_a<>") + " const& ___arguments___)" +
+		river.write_string("::" + name + "_(range_a<> const& ___arguments___)" +
 				std::string(extraction ? " const" : "") + "\n"
 			"{\n");
 		if (extraction)

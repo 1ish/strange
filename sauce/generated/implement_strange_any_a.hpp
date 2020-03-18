@@ -2,44 +2,44 @@
 namespace strange
 {
 
-template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
-inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::type__(_range const& ___arguments___) const
+template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::type__(range_a<> const& ___arguments___) const
 {
 	return type_();
 }
 
-template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
-inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::cat__(_range const& ___arguments___) const
+template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::cat__(range_a<> const& ___arguments___) const
 {
 	return cat_();
 }
 
-template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
-inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::cats__(_range const& ___arguments___) const
+template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::cats__(range_a<> const& ___arguments___) const
 {
 	return cats_();
 }
 
-template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
-inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::kind__(_range const& ___arguments___) const
+template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::kind__(range_a<> const& ___arguments___) const
 {
 	return kind_();
 }
 
-template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
-inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::kinds__(_range const& ___arguments___) const
+template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::kinds__(range_a<> const& ___arguments___) const
 {
 	return kinds_();
 }
 
-template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
-inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::operations__(_range const& ___arguments___) const
+template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::operations__(range_a<> const& ___arguments___) const
 {
 	return operations_();
 }
 
-template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
-inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::visit__(_range const& ___arguments___) const
+template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::visit__(range_a<> const& ___arguments___) const
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -50,14 +50,14 @@ inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, 
 	return visit_(arguments);
 }
 
-template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
-inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::identity__(_range const& ___arguments___) const
+template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::identity__(range_a<> const& ___arguments___) const
 {
 	return identity_();
 }
 
-template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
-inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::identical__(_range const& ___arguments___) const
+template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::identical__(range_a<> const& ___arguments___) const
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -68,20 +68,20 @@ inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, 
 	return identical_(thing);
 }
 
-template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
-inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::nothing__(_range const& ___arguments___) const
+template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::nothing__(range_a<> const& ___arguments___) const
 {
 	return nothing_();
 }
 
-template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
-inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::something__(_range const& ___arguments___) const
+template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::something__(range_a<> const& ___arguments___) const
 {
 	return something_();
 }
 
-template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
-inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::same__(_range const& ___arguments___) const
+template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::same__(range_a<> const& ___arguments___) const
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -92,8 +92,8 @@ inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, 
 	return same_(thing);
 }
 
-template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
-inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::different__(_range const& ___arguments___) const
+template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::different__(range_a<> const& ___arguments___) const
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -104,8 +104,8 @@ inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, 
 	return different_(thing);
 }
 
-template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
-inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::less_than__(_range const& ___arguments___) const
+template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::less_than__(range_a<> const& ___arguments___) const
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -116,8 +116,8 @@ inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, 
 	return less_than_(thing);
 }
 
-template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
-inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::greater_than__(_range const& ___arguments___) const
+template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::greater_than__(range_a<> const& ___arguments___) const
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -128,8 +128,8 @@ inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, 
 	return greater_than_(thing);
 }
 
-template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
-inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::less_or_equal__(_range const& ___arguments___) const
+template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::less_or_equal__(range_a<> const& ___arguments___) const
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -140,8 +140,8 @@ inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, 
 	return less_or_equal_(thing);
 }
 
-template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
-inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::greater_or_equal__(_range const& ___arguments___) const
+template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::greater_or_equal__(range_a<> const& ___arguments___) const
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -152,8 +152,8 @@ inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, 
 	return greater_or_equal_(thing);
 }
 
-template <typename _range, typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
-inline any_a<> any_a<_range, _symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::hash__(_range const& ___arguments___) const
+template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::hash__(range_a<> const& ___arguments___) const
 {
 	return hash_();
 }
