@@ -2,13 +2,13 @@
 namespace strange
 {
 
-template <typename _1 = void>
+template <typename _element = any_a<> >
 class range_d;
 
-template <typename _1 = void>
-inline range_d<_1> ___range_dynamic___(any_a<> const& thing); 
+template <typename _element = any_a<> >
+inline range_d<_element> ___range_dynamic___(any_a<> const& thing); 
 
-template <typename _1>
+template <typename _element>
 class range_a : public any_a<>
 {
 public:
@@ -196,7 +196,7 @@ public:
 		{
 			return range_a{ thing.___handle___ };
 		}
-		return range_a{ range_d<_1>{ thing } };
+		return range_a{ range_d<_element>{ thing } };
 	}
 
 	static inline range_a ___cast_ref___(any_a<>& thing)
@@ -206,7 +206,7 @@ public:
 		{
 			return range_a(thing.___handle___, ___reference_tag___{});
 		}
-		return range_a{ range_d<_1>(thing, ___reference_tag___{}) };
+		return range_a{ range_d<_element>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -267,7 +267,7 @@ public:
 	}
 }; // class range_a
 
-template <typename _1>
+template <typename _element>
 class range_d : public any_a<>
 {
 public:

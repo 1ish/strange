@@ -24,7 +24,6 @@ class one_t;
 #include "generated/declare_strange_random_access_extractor_data_a.hpp"
 #include "generated/declare_strange_random_access_mutator_a.hpp"
 #include "generated/declare_strange_random_access_mutator_data_a.hpp"
-#include "generated/declare_strange_range_a.hpp"
 #include "generated/declare_strange_symbol_a.hpp"
 #include "generated/declare_strange_lake_a.hpp"
 
@@ -73,6 +72,7 @@ template <> struct std::hash<strange::any_a<>>
 };
 
 #include "generated/declare_strange_misunderstanding_a.hpp"
+#include "generated/declare_strange_range_a.hpp"
 #include "generated/declare_strange_range_of_a.hpp"
 #include "generated/declare_strange_collection_a.hpp"
 #include "generated/declare_strange_ordered_shoal_a.hpp"

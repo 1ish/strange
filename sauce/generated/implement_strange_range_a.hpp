@@ -2,14 +2,14 @@
 namespace strange
 {
 
-template <typename _1>
-inline any_a<> range_a<_1>::extract_begin__(range_a<> const& ___arguments___) const
+template <typename _element>
+inline any_a<> range_a<_element>::extract_begin__(range_a<> const& ___arguments___) const
 {
 	return extract_begin_();
 }
 
-template <typename _1>
-inline any_a<> range_a<_1>::extract_end__(range_a<> const& ___arguments___) const
+template <typename _element>
+inline any_a<> range_a<_element>::extract_end__(range_a<> const& ___arguments___) const
 {
 	return extract_end_();
 }
@@ -27,10 +27,10 @@ bool const ___range_a_share___::share = []()
 	return shared_shoal;
 }();
 
-template <typename _1>
-inline range_d<_1> ___range_dynamic___(any_a<> const& thing)
+template <typename _element>
+inline range_d<_element> ___range_dynamic___(any_a<> const& thing)
 {
-	return range_d<_1>{ thing };
+	return range_d<_element>{ thing };
 }
 
 } // namespace

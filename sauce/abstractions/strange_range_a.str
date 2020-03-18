@@ -1,7 +1,8 @@
 false &&
 {	strange :
 	{	<range> :: abstraction
-		(	// no dimensions
+		(	// dimensions
+			#element :<<>># <>,
 			(	// parent
 				$$<>[],
 				{	// range
