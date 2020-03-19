@@ -551,10 +551,10 @@ protected:
 		for (auto const& term : terms.extract_vector())
 		{
 			auto abs = river_t<>::create();
-			fast<expression_a<>>(term).generate_cpp(version, 0, abs, false, false);
 			if (first)
 			{
 				first = false;
+				fast<expression_a<>>(term).generate_cpp(version, 0, abs, false, false);
 				abs.seekg_beg(0);
 				auto exp = parser_t<>::create_().parse_(tokenizer_t<>::create_(abs));
 				auto river = river_t<>::create();
@@ -567,6 +567,14 @@ protected:
 				if (base_aspects != "<")
 				{
 					base_aspects += ",";
+				}
+				if (term.type_() == expression_local_at_t<>::type_())
+				{
+					fast<expression_a<>>(term).generate_cpp(version, 0, abs, false, false);
+				}
+				else
+				{
+					fast<expression_a<>>(term).generate_cpp(version, 0, abs, false, false, true);
 				}
 				base_aspects += abs.to_string();
 			}
