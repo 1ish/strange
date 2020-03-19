@@ -566,7 +566,7 @@ protected:
 			{
 				if (base_aspects != "<")
 				{
-					base_aspects += ", ";
+					base_aspects += ",";
 				}
 				base_aspects += abs.to_string();
 			}
@@ -1967,6 +1967,7 @@ protected:
 		int64_t toke = 1;
 		std::string argument;
 		bool optional = false;
+		int64_t nested = 0;
 		for (auto const& any_token : tokenizer)
 		{
 			if (!check<token_a<>>(any_token))
@@ -1997,7 +1998,22 @@ protected:
 				}
 				break;
 			case 2:
-				if (token.tag() == "punctuation" && token.symbol() == ")")
+				if (token.tag() == "punctuation")
+				{
+					if (token.symbol() == "<")
+					{
+						++nested;
+					}
+					else if (token.symbol() == ">")
+					{
+						--nested;
+					}
+				}
+				if (nested)
+				{
+					parameters += token.symbol() + " ";
+				}
+				else if (token.tag() == "punctuation" && token.symbol() == ")")
 				{
 					parameters += ")";
 					arguments += argument + ")";
