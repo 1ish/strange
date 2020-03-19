@@ -304,18 +304,18 @@ public:
 		return cast<bidirectional_mutator_a<>>(variadic_operate(op, *this));
 	}
 
-	void ___weak___(forward_mutator_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(forward_mutator_d::___WEAK___ const& weak) const {}
 
 	explicit bidirectional_mutator_d(any_a<> const& thing)
-		: forward_mutator_d<>{ thing }
+		: forward_mutator_d{ thing }
 	{}
 
 	explicit bidirectional_mutator_d(any_a<>& thing, ___reference_tag___)
-		: forward_mutator_d<>{ thing, ___reference_tag___{} }
+		: forward_mutator_d{ thing, ___reference_tag___{} }
 	{}
 
 	explicit bidirectional_mutator_d(any_a<>& thing, ___duplicate_tag___)
-		: forward_mutator_d<>{ thing, ___duplicate_tag___{} }
+		: forward_mutator_d{ thing, ___duplicate_tag___{} }
 	{}
 };
 

@@ -331,18 +331,18 @@ public:
 	inline _primitive & mutate_primitive()
 	{ throw dis("dynamic number_data_d::mutate_primitive() not available"); }
 
-	void ___weak___(number_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(number_d::___WEAK___ const& weak) const {}
 
 	explicit number_data_d(any_a<> const& thing)
-		: number_d<>{ thing }
+		: number_d{ thing }
 	{}
 
 	explicit number_data_d(any_a<>& thing, ___reference_tag___)
-		: number_d<>{ thing, ___reference_tag___{} }
+		: number_d{ thing, ___reference_tag___{} }
 	{}
 
 	explicit number_data_d(any_a<>& thing, ___duplicate_tag___)
-		: number_d<>{ thing, ___duplicate_tag___{} }
+		: number_d{ thing, ___duplicate_tag___{} }
 	{}
 };
 

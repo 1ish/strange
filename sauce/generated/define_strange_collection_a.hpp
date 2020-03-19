@@ -981,18 +981,18 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this)));
 	}
 
-	void ___weak___(range_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(range_d::___WEAK___ const& weak) const {}
 
 	explicit collection_d(any_a<> const& thing)
-		: range_d<>{ thing }
+		: range_d{ thing }
 	{}
 
 	explicit collection_d(any_a<>& thing, ___reference_tag___)
-		: range_d<>{ thing, ___reference_tag___{} }
+		: range_d{ thing, ___reference_tag___{} }
 	{}
 
 	explicit collection_d(any_a<>& thing, ___duplicate_tag___)
-		: range_d<>{ thing, ___duplicate_tag___{} }
+		: range_d{ thing, ___duplicate_tag___{} }
 	{}
 };
 

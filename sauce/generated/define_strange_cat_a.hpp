@@ -515,18 +515,18 @@ public:
 	inline std :: string code() const
 	{ return lake_to_string(code_()); }
 
-	void ___weak___(symbol_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(symbol_d::___WEAK___ const& weak) const {}
 
 	explicit cat_d(any_a<> const& thing)
-		: symbol_d<>{ thing }
+		: symbol_d{ thing }
 	{}
 
 	explicit cat_d(any_a<>& thing, ___reference_tag___)
-		: symbol_d<>{ thing, ___reference_tag___{} }
+		: symbol_d{ thing, ___reference_tag___{} }
 	{}
 
 	explicit cat_d(any_a<>& thing, ___duplicate_tag___)
-		: symbol_d<>{ thing, ___duplicate_tag___{} }
+		: symbol_d{ thing, ___duplicate_tag___{} }
 	{}
 };
 

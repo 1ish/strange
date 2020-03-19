@@ -356,18 +356,18 @@ public:
 		return cast<forward_extractor_a<>>(variadic_operate(op, *this));
 	}
 
-	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
+	void ___weak___(any_a::___WEAK___ const& weak) const {}
 
 	explicit forward_extractor_d(any_a<> const& thing)
-		: any_a<>{ thing }
+		: any_a{ thing }
 	{}
 
 	explicit forward_extractor_d(any_a<>& thing, ___reference_tag___)
-		: any_a<>{ thing, ___reference_tag___{} }
+		: any_a{ thing, ___reference_tag___{} }
 	{}
 
 	explicit forward_extractor_d(any_a<>& thing, ___duplicate_tag___)
-		: any_a<>{ thing, ___duplicate_tag___{} }
+		: any_a{ thing, ___duplicate_tag___{} }
 	{}
 };
 

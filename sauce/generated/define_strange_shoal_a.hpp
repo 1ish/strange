@@ -365,18 +365,18 @@ public:
 		return cast<forward_mutator_a<>>(variadic_operate(op, *this));
 	}
 
-	void ___weak___(collection_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(collection_d::___WEAK___ const& weak) const {}
 
 	explicit shoal_d(any_a<> const& thing)
-		: collection_d<>{ thing }
+		: collection_d{ thing }
 	{}
 
 	explicit shoal_d(any_a<>& thing, ___reference_tag___)
-		: collection_d<>{ thing, ___reference_tag___{} }
+		: collection_d{ thing, ___reference_tag___{} }
 	{}
 
 	explicit shoal_d(any_a<>& thing, ___duplicate_tag___)
-		: collection_d<>{ thing, ___duplicate_tag___{} }
+		: collection_d{ thing, ___duplicate_tag___{} }
 	{}
 };
 

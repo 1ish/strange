@@ -1509,18 +1509,18 @@ public:
 	inline std :: string filename() const
 	{ return lake_to_string(filename_()); }
 
-	void ___weak___(range_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(range_d::___WEAK___ const& weak) const {}
 
 	explicit river_d(any_a<> const& thing)
-		: range_d<>{ thing }
+		: range_d{ thing }
 	{}
 
 	explicit river_d(any_a<>& thing, ___reference_tag___)
-		: range_d<>{ thing, ___reference_tag___{} }
+		: range_d{ thing, ___reference_tag___{} }
 	{}
 
 	explicit river_d(any_a<>& thing, ___duplicate_tag___)
-		: range_d<>{ thing, ___duplicate_tag___{} }
+		: range_d{ thing, ___duplicate_tag___{} }
 	{}
 };
 

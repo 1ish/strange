@@ -269,10 +269,11 @@ protected:
 			+ "_a";
 		bool const root = _parent_expressions.size() <= 1;
 		std::string base_name;
+		std::string base_aspects;
 		std::string dynamic_name;
 		if (!root)
 		{
-			base_name = _class_base_name_(version);
+			base_name = _class_base_name_(version, base_aspects);
 			if (define)
 			{
 				dynamic_name = class_name;
@@ -291,10 +292,10 @@ protected:
 			}
 		}
 		_declare_and_define_template_(version, indent, river, declare, define);
-		_declare_and_define_class_(root, class_name, base_name, version, indent, river, declare, define);
+		_declare_and_define_class_(root, class_name, base_name, base_aspects, version, indent, river, declare, define);
 		if (declare && define && !root)
 		{
-			_define_class_dynamic_(class_name, base_name, version, river);
+			_define_class_dynamic_(class_name, base_name, base_aspects, version, river);
 		}
 		else if (!declare && define)
 		{
@@ -465,7 +466,7 @@ protected:
 		}
 	}
 
-	inline void _declare_and_define_class_(bool root, std::string const& class_name, std::string const& base_name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
+	inline void _declare_and_define_class_(bool root, std::string const& class_name, std::string const& base_name, std::string const& base_aspects, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
 	{
 		if (declare && !define)
 		{
@@ -473,7 +474,7 @@ protected:
 		}
 		else if (declare && define)
 		{
-			_define_class_(root, class_name, base_name, version, indent, river, declare, define);
+			_define_class_(root, class_name, base_name, base_aspects, version, indent, river, declare, define);
 		}
 		else if (!declare && define)
 		{
@@ -482,7 +483,7 @@ protected:
 		}
 	}
 
-	inline void _define_class_dynamic_(std::string class_name, std::string base_name, int64_t version, river_a<>& river) const
+	inline void _define_class_dynamic_(std::string class_name, std::string base_name, std::string const& base_aspects, int64_t version, river_a<>& river) const
 	{
 		_declare_and_define_template_(version, 0, river, true, true);
 		class_name[class_name.length() - 1] = 'd';
@@ -491,36 +492,36 @@ protected:
 			base_name[base_name.length() - 1] = 'd';
 		}
 		river.write_string(
-			"class " + class_name + " : public " + base_name + "<>\n"
+			"class " + class_name + " : public " + base_name + base_aspects + "\n"
 			"{\n");
 		_define_class_boilerplate_(false, class_name, version, 0, river);
 		auto const class_expression_terms = _class_expression_terms_();
 		_define_class_dynamic_members_(false, class_name, class_expression_terms, version, 0, river);
 		river.write_string(
-			"\tvoid ___weak___(" + base_name + "<>::___WEAK___ const& weak) const {}\n\n"
+			"\tvoid ___weak___(" + base_name + "::___WEAK___ const& weak) const {}\n\n"
 
 			"\texplicit " + class_name + "(any_a<> const& thing)\n"
-			"\t\t: " + base_name + "<>{ thing }\n"
+			"\t\t: " + base_name + "{ thing }\n"
 			"\t{}\n\n"
 
 			"\texplicit " + class_name + "(any_a<>& thing, ___reference_tag___)\n"
-			"\t\t: " + base_name + "<>{ thing, ___reference_tag___{} }\n"
+			"\t\t: " + base_name + "{ thing, ___reference_tag___{} }\n"
 			"\t{}\n\n"
 
 			"\texplicit " + class_name + "(any_a<>& thing, ___duplicate_tag___)\n"
-			"\t\t: " + base_name + "<>{ thing, ___duplicate_tag___{} }\n"
+			"\t\t: " + base_name + "{ thing, ___duplicate_tag___{} }\n"
 			"\t{}\n"
 			"};\n\n"		
 		);
 	}
 
-	inline void _define_class_(bool root, std::string const& class_name, std::string const& base_name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
+	inline void _define_class_(bool root, std::string const& class_name, std::string const& base_name, std::string const& base_aspects, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
 	{
 		river.write_string(
 			"class " + class_name);
 		if (!root)
 		{
-			river.write_string(" : public " + base_name + "<>");
+			river.write_string(" : public " + base_name + base_aspects);
 		}
 		river.write_string("\n"
 			"{\n");
@@ -532,7 +533,7 @@ protected:
 		river.write_string("}; // class " + class_name +"\n\n");
 	}
 
-	inline std::string _class_base_name_(int64_t version) const
+	inline std::string _class_base_name_(int64_t version, std::string& base_aspects) const
 	{
 		auto const expression = _parent_expressions.at_index(0);
 		if (expression.type_() != expression_operate_t<>::type_())
@@ -540,18 +541,34 @@ protected:
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-expression-operate base class definition");
 		}
 		auto const terms = fast<expression_a<>>(expression).terms_();
-		if (terms.size() < 1)
+		if (terms.empty())
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp expression-operate base class definition with too few terms");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp expression-operate base class definition with no terms");
 		}
-		auto abs = river_t<>::create();
-		fast<expression_a<>>(terms.at_index(0)).generate_cpp(version, 0, abs, false, false);
-		abs.seekg_beg(0);
-		auto exp = parser_t<>::create_().parse_(tokenizer_t<>::create_(abs));
-		auto river = river_t<>::create();
-		exp.generate_cpp(version, 0, river, false, false, true);
-		std::string str = river.to_string();
-		return str.substr(1, str.length() - 4);
+		bool first = true;
+		std::string base_name;
+		base_aspects = "<";
+		for (auto const& term : terms.extract_vector())
+		{
+			if (first)
+			{
+				first = false;
+				auto abs = river_t<>::create();
+				fast<expression_a<>>(terms.at_index(0)).generate_cpp(version, 0, abs, false, false);
+				abs.seekg_beg(0);
+				auto exp = parser_t<>::create_().parse_(tokenizer_t<>::create_(abs));
+				auto river = river_t<>::create();
+				exp.generate_cpp(version, 0, river, false, false, true);
+				std::string str = river.to_string();
+				base_name = str.substr(1, str.length() - 4);
+			}
+			else
+			{
+
+			}
+		}
+		base_aspects += ">";
+		return base_name;
 	}
 
 	inline flock_a<> _class_expression_terms_() const

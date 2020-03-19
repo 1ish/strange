@@ -409,18 +409,18 @@ public:
 	inline bool optional() const
 	{ return optional_(); }
 
-	void ___weak___(cat_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(cat_d::___WEAK___ const& weak) const {}
 
 	explicit kind_d(any_a<> const& thing)
-		: cat_d<>{ thing }
+		: cat_d{ thing }
 	{}
 
 	explicit kind_d(any_a<>& thing, ___reference_tag___)
-		: cat_d<>{ thing, ___reference_tag___{} }
+		: cat_d{ thing, ___reference_tag___{} }
 	{}
 
 	explicit kind_d(any_a<>& thing, ___duplicate_tag___)
-		: cat_d<>{ thing, ___duplicate_tag___{} }
+		: cat_d{ thing, ___duplicate_tag___{} }
 	{}
 };
 

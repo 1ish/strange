@@ -371,18 +371,18 @@ public:
 	inline std :: deque < _primitive > & mutate_deque()
 	{ throw dis("dynamic brook_d::mutate_deque() not available"); }
 
-	void ___weak___(inventory_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(inventory_d::___WEAK___ const& weak) const {}
 
 	explicit brook_d(any_a<> const& thing)
-		: inventory_d<>{ thing }
+		: inventory_d{ thing }
 	{}
 
 	explicit brook_d(any_a<>& thing, ___reference_tag___)
-		: inventory_d<>{ thing, ___reference_tag___{} }
+		: inventory_d{ thing, ___reference_tag___{} }
 	{}
 
 	explicit brook_d(any_a<>& thing, ___duplicate_tag___)
-		: inventory_d<>{ thing, ___duplicate_tag___{} }
+		: inventory_d{ thing, ___duplicate_tag___{} }
 	{}
 };
 

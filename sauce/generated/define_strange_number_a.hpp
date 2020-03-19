@@ -1371,18 +1371,18 @@ public:
 	inline bool little_endian() const
 	{ return little_endian_(); }
 
-	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
+	void ___weak___(any_a::___WEAK___ const& weak) const {}
 
 	explicit number_d(any_a<> const& thing)
-		: any_a<>{ thing }
+		: any_a{ thing }
 	{}
 
 	explicit number_d(any_a<>& thing, ___reference_tag___)
-		: any_a<>{ thing, ___reference_tag___{} }
+		: any_a{ thing, ___reference_tag___{} }
 	{}
 
 	explicit number_d(any_a<>& thing, ___duplicate_tag___)
-		: any_a<>{ thing, ___duplicate_tag___{} }
+		: any_a{ thing, ___duplicate_tag___{} }
 	{}
 };
 

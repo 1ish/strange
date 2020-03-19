@@ -407,18 +407,18 @@ public:
 		return cast<random_access_mutator_a<>>(variadic_operate(op, *const_cast<random_access_mutator_d*>(this), number));
 	}
 
-	void ___weak___(bidirectional_mutator_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(bidirectional_mutator_d::___WEAK___ const& weak) const {}
 
 	explicit random_access_mutator_d(any_a<> const& thing)
-		: bidirectional_mutator_d<>{ thing }
+		: bidirectional_mutator_d{ thing }
 	{}
 
 	explicit random_access_mutator_d(any_a<>& thing, ___reference_tag___)
-		: bidirectional_mutator_d<>{ thing, ___reference_tag___{} }
+		: bidirectional_mutator_d{ thing, ___reference_tag___{} }
 	{}
 
 	explicit random_access_mutator_d(any_a<>& thing, ___duplicate_tag___)
-		: bidirectional_mutator_d<>{ thing, ___duplicate_tag___{} }
+		: bidirectional_mutator_d{ thing, ___duplicate_tag___{} }
 	{}
 };
 

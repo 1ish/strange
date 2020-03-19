@@ -345,18 +345,18 @@ public:
 		return cast<flock_a<>>(variadic_operate(op, *const_cast<operation_d*>(this)));
 	}
 
-	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
+	void ___weak___(any_a::___WEAK___ const& weak) const {}
 
 	explicit operation_d(any_a<> const& thing)
-		: any_a<>{ thing }
+		: any_a{ thing }
 	{}
 
 	explicit operation_d(any_a<>& thing, ___reference_tag___)
-		: any_a<>{ thing, ___reference_tag___{} }
+		: any_a{ thing, ___reference_tag___{} }
 	{}
 
 	explicit operation_d(any_a<>& thing, ___duplicate_tag___)
-		: any_a<>{ thing, ___duplicate_tag___{} }
+		: any_a{ thing, ___duplicate_tag___{} }
 	{}
 };
 

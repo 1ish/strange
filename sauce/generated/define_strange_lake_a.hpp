@@ -371,18 +371,18 @@ public:
 	inline std :: vector < _primitive > & mutate_vector()
 	{ throw dis("dynamic lake_d::mutate_vector() not available"); }
 
-	void ___weak___(inventory_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(inventory_d::___WEAK___ const& weak) const {}
 
 	explicit lake_d(any_a<> const& thing)
-		: inventory_d<>{ thing }
+		: inventory_d{ thing }
 	{}
 
 	explicit lake_d(any_a<>& thing, ___reference_tag___)
-		: inventory_d<>{ thing, ___reference_tag___{} }
+		: inventory_d{ thing, ___reference_tag___{} }
 	{}
 
 	explicit lake_d(any_a<>& thing, ___duplicate_tag___)
-		: inventory_d<>{ thing, ___duplicate_tag___{} }
+		: inventory_d{ thing, ___duplicate_tag___{} }
 	{}
 };
 

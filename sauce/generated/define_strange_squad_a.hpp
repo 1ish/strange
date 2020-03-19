@@ -371,18 +371,18 @@ public:
 	inline std :: deque < any_a < > > & mutate_deque()
 	{ throw dis("dynamic squad_d::mutate_deque() not available"); }
 
-	void ___weak___(inventory_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(inventory_d::___WEAK___ const& weak) const {}
 
 	explicit squad_d(any_a<> const& thing)
-		: inventory_d<>{ thing }
+		: inventory_d{ thing }
 	{}
 
 	explicit squad_d(any_a<>& thing, ___reference_tag___)
-		: inventory_d<>{ thing, ___reference_tag___{} }
+		: inventory_d{ thing, ___reference_tag___{} }
 	{}
 
 	explicit squad_d(any_a<>& thing, ___duplicate_tag___)
-		: inventory_d<>{ thing, ___duplicate_tag___{} }
+		: inventory_d{ thing, ___duplicate_tag___{} }
 	{}
 };
 

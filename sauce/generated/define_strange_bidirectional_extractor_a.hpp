@@ -304,18 +304,18 @@ public:
 		return cast<bidirectional_extractor_a<>>(variadic_operate(op, *this));
 	}
 
-	void ___weak___(forward_extractor_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(forward_extractor_d::___WEAK___ const& weak) const {}
 
 	explicit bidirectional_extractor_d(any_a<> const& thing)
-		: forward_extractor_d<>{ thing }
+		: forward_extractor_d{ thing }
 	{}
 
 	explicit bidirectional_extractor_d(any_a<>& thing, ___reference_tag___)
-		: forward_extractor_d<>{ thing, ___reference_tag___{} }
+		: forward_extractor_d{ thing, ___reference_tag___{} }
 	{}
 
 	explicit bidirectional_extractor_d(any_a<>& thing, ___duplicate_tag___)
-		: forward_extractor_d<>{ thing, ___duplicate_tag___{} }
+		: forward_extractor_d{ thing, ___duplicate_tag___{} }
 	{}
 };
 

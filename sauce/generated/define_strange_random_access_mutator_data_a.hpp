@@ -331,18 +331,18 @@ public:
 	inline _type & mutate_it()
 	{ throw dis("dynamic random_access_mutator_data_d::mutate_it() not available"); }
 
-	void ___weak___(random_access_mutator_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(random_access_mutator_d::___WEAK___ const& weak) const {}
 
 	explicit random_access_mutator_data_d(any_a<> const& thing)
-		: random_access_mutator_d<>{ thing }
+		: random_access_mutator_d{ thing }
 	{}
 
 	explicit random_access_mutator_data_d(any_a<>& thing, ___reference_tag___)
-		: random_access_mutator_d<>{ thing, ___reference_tag___{} }
+		: random_access_mutator_d{ thing, ___reference_tag___{} }
 	{}
 
 	explicit random_access_mutator_data_d(any_a<>& thing, ___duplicate_tag___)
-		: random_access_mutator_d<>{ thing, ___duplicate_tag___{} }
+		: random_access_mutator_d{ thing, ___duplicate_tag___{} }
 	{}
 };
 
