@@ -1693,7 +1693,7 @@ protected:
 			"\t\tstatic ___cat_a___ CAT = cat_create<___cat_a___>(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\"");
 		// dimensions
 		int64_t count = _dimension_kinds.size();
-		while (count != 0)
+		while (count)
 		{
 			--count;
 			auto const name = _dimension_names.at_index(count);
@@ -1760,7 +1760,7 @@ protected:
 		{
 			river.write_string(", flock_vals(");
 			bool first = true;
-			while (count)
+			for (auto const& dimension_name : _dimension_names.extract_vector())
 			{
 				if (first)
 				{
@@ -1770,7 +1770,11 @@ protected:
 				{
 					river.write_string(", ");
 				}
-				river.write_string("kind_of<_" + fast<symbol_a<>>(_dimension_names.at_index(--count)).to_string().substr(1) + ">()");
+				river.write_string("kind_of<_" + fast<symbol_a<>>(dimension_name).to_string().substr(1) + ">()");
+				if (!--count)
+				{
+					break;
+				}
 			}
 			river.write_string(")");
 		}
