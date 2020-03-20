@@ -129,7 +129,7 @@ private:
 			: ___random_access_mutator_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bidirectional_mutator_a<>::___SHARED___ ___clone___() const final
+		virtual inline any_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___random_access_mutator_a_handle_final___>(___random_access_mutator_a_handle___<___TTT___>::___value___);
 		}
@@ -407,7 +407,7 @@ public:
 		return cast<random_access_mutator_a<>>(variadic_operate(op, *const_cast<random_access_mutator_d*>(this), number));
 	}
 
-	void ___weak___(bidirectional_mutator_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit random_access_mutator_d(any_a<> const& thing)
 		: bidirectional_mutator_d{ thing }

@@ -93,7 +93,7 @@ private:
 			: ___forward_extractor_data_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline forward_extractor_a< _element >::___SHARED___ ___clone___() const final
+		virtual inline any_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___forward_extractor_data_a_handle_final___>(___forward_extractor_data_a_handle___<___TTT___>::___value___);
 		}
@@ -291,7 +291,7 @@ public:
 	inline _type & mutate_it()
 	{ throw dis("dynamic forward_extractor_data_d::mutate_it() not available"); }
 
-	void ___weak___(forward_extractor_d< _element >::___WEAK___ const& weak) const {}
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit forward_extractor_data_d(any_a<> const& thing)
 		: forward_extractor_d{ thing }

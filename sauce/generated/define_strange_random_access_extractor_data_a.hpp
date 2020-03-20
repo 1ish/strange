@@ -121,7 +121,7 @@ private:
 			: ___random_access_extractor_data_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline random_access_extractor_a<>::___SHARED___ ___clone___() const final
+		virtual inline any_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___random_access_extractor_data_a_handle_final___>(___random_access_extractor_data_a_handle___<___TTT___>::___value___);
 		}
@@ -331,7 +331,7 @@ public:
 	inline _type & mutate_it()
 	{ throw dis("dynamic random_access_extractor_data_d::mutate_it() not available"); }
 
-	void ___weak___(random_access_extractor_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit random_access_extractor_data_d(any_a<> const& thing)
 		: random_access_extractor_d{ thing }

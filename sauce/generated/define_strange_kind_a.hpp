@@ -122,7 +122,7 @@ private:
 			: ___kind_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline cat_a<>::___SHARED___ ___clone___() const final
+		virtual inline any_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___kind_a_handle_final___>(___kind_a_handle___<___TTT___>::___value___);
 		}
@@ -409,7 +409,7 @@ public:
 	inline bool optional() const
 	{ return optional_(); }
 
-	void ___weak___(cat_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit kind_d(any_a<> const& thing)
 		: cat_d{ thing }

@@ -114,7 +114,7 @@ private:
 			: ___herd_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline collection_a<>::___SHARED___ ___clone___() const final
+		virtual inline any_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___herd_a_handle_final___>(___herd_a_handle___<___TTT___>::___value___);
 		}
@@ -321,7 +321,7 @@ public:
 	inline bool erase_string(std :: string const & s )
 	{ return erase(sym(s)); }
 
-	void ___weak___(collection_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit herd_d(any_a<> const& thing)
 		: collection_d{ thing }

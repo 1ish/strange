@@ -557,7 +557,7 @@ private:
 			: ___river_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline range_a<>::___SHARED___ ___clone___() const final
+		virtual inline any_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___river_a_handle_final___>(___river_a_handle___<___TTT___>::___value___);
 		}
@@ -1509,7 +1509,7 @@ public:
 	inline std :: string filename() const
 	{ return lake_to_string(filename_()); }
 
-	void ___weak___(range_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit river_d(any_a<> const& thing)
 		: range_d{ thing }

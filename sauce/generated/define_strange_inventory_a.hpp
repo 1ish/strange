@@ -118,7 +118,7 @@ private:
 			: ___inventory_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline collection_a<>::___SHARED___ ___clone___() const final
+		virtual inline any_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___inventory_a_handle_final___>(___inventory_a_handle___<___TTT___>::___value___);
 		}
@@ -365,7 +365,7 @@ public:
 		return cast<random_access_mutator_a<>>(variadic_operate(op, *this));
 	}
 
-	void ___weak___(collection_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit inventory_d(any_a<> const& thing)
 		: collection_d{ thing }

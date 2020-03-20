@@ -498,7 +498,7 @@ protected:
 		auto const class_expression_terms = _class_expression_terms_();
 		_define_class_dynamic_members_(false, class_name, class_expression_terms, version, 0, river);
 		river.write_string(
-			"\tvoid ___weak___(" + base_name + base_aspects + "::___WEAK___ const& weak) const {}\n\n"
+			"\tvoid ___weak___(any_a<>::___WEAK___ const& weak) const {}\n\n"
 
 			"\texplicit " + class_name + "(any_a<> const& thing)\n"
 			"\t\t: " + base_name + "{ thing }\n"
@@ -1332,7 +1332,7 @@ protected:
 				"\t\t\t: ___" + class_name + "_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)\n"
 				"\t\t{}\n\n"
 
-				"\t\tvirtual inline " + base_name + base_aspects + "::___SHARED___ ___clone___() const final\n"
+				"\t\tvirtual inline any_a<>::___SHARED___ ___clone___() const final\n"
 				"\t\t{\n"
 				"\t\t\treturn std::make_shared<___" + class_name + "_handle_final___>(___" + class_name + "_handle___<___TTT___>::___value___);\n"
 				"\t\t}\n"

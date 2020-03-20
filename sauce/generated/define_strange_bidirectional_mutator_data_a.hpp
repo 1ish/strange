@@ -93,7 +93,7 @@ private:
 			: ___bidirectional_mutator_data_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bidirectional_mutator_a<>::___SHARED___ ___clone___() const final
+		virtual inline any_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___bidirectional_mutator_data_a_handle_final___>(___bidirectional_mutator_data_a_handle___<___TTT___>::___value___);
 		}
@@ -291,7 +291,7 @@ public:
 	inline _type & mutate_it()
 	{ throw dis("dynamic bidirectional_mutator_data_d::mutate_it() not available"); }
 
-	void ___weak___(bidirectional_mutator_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit bidirectional_mutator_data_d(any_a<> const& thing)
 		: bidirectional_mutator_d{ thing }

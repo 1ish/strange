@@ -149,7 +149,7 @@ private:
 			: ___ordered_shoal_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline shoal_a<>::___SHARED___ ___clone___() const final
+		virtual inline any_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___ordered_shoal_a_handle_final___>(___ordered_shoal_a_handle___<___TTT___>::___value___);
 		}
@@ -371,7 +371,7 @@ public:
 	inline std :: map < any_a < > , any_a < > > & mutate_map()
 	{ throw dis("dynamic ordered_shoal_d::mutate_map() not available"); }
 
-	void ___weak___(shoal_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit ordered_shoal_d(any_a<> const& thing)
 		: shoal_d{ thing }
