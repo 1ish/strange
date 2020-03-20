@@ -135,7 +135,7 @@ private:
 			: ___ordered_herd_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline herd_a<>::template ___SHARED___ ___clone___() const final
+		virtual inline herd_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___ordered_herd_a_handle_final___>(___ordered_herd_a_handle___<___TTT___>::___value___);
 		}
@@ -351,7 +351,7 @@ public:
 	inline std :: set < any_a < > > & mutate_set()
 	{ throw dis("dynamic ordered_herd_d::mutate_set() not available"); }
 
-	void ___weak___(herd_d<>::template ___WEAK___ const& weak) const {}
+	void ___weak___(herd_d<>::___WEAK___ const& weak) const {}
 
 	explicit ordered_herd_d(any_a<> const& thing)
 		: herd_d{ thing }

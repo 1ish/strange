@@ -149,7 +149,7 @@ private:
 			: ___lake_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline inventory_a<>::template ___SHARED___ ___clone___() const final
+		virtual inline inventory_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___lake_a_handle_final___>(___lake_a_handle___<___TTT___>::___value___);
 		}
@@ -371,7 +371,7 @@ public:
 	inline std :: vector < _primitive > & mutate_vector()
 	{ throw dis("dynamic lake_d::mutate_vector() not available"); }
 
-	void ___weak___(inventory_d<>::template ___WEAK___ const& weak) const {}
+	void ___weak___(inventory_d<>::___WEAK___ const& weak) const {}
 
 	explicit lake_d(any_a<> const& thing)
 		: inventory_d{ thing }

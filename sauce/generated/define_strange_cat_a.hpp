@@ -156,7 +156,7 @@ private:
 			: ___cat_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline symbol_a<>::template ___SHARED___ ___clone___() const final
+		virtual inline symbol_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___cat_a_handle_final___>(___cat_a_handle___<___TTT___>::___value___);
 		}
@@ -515,7 +515,7 @@ public:
 	inline std :: string code() const
 	{ return lake_to_string(code_()); }
 
-	void ___weak___(symbol_d<>::template ___WEAK___ const& weak) const {}
+	void ___weak___(symbol_d<>::___WEAK___ const& weak) const {}
 
 	explicit cat_d(any_a<> const& thing)
 		: symbol_d{ thing }

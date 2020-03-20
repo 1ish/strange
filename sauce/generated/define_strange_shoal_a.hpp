@@ -118,7 +118,7 @@ private:
 			: ___shoal_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline collection_a<>::template ___SHARED___ ___clone___() const final
+		virtual inline collection_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___shoal_a_handle_final___>(___shoal_a_handle___<___TTT___>::___value___);
 		}
@@ -365,7 +365,7 @@ public:
 		return cast<forward_mutator_a<>>(variadic_operate(op, *this));
 	}
 
-	void ___weak___(collection_d<>::template ___WEAK___ const& weak) const {}
+	void ___weak___(collection_d<>::___WEAK___ const& weak) const {}
 
 	explicit shoal_d(any_a<> const& thing)
 		: collection_d{ thing }

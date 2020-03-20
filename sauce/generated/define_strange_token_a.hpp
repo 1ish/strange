@@ -193,7 +193,7 @@ private:
 			: ___token_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<>::template ___SHARED___ ___clone___() const final
+		virtual inline any_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___token_a_handle_final___>(___token_a_handle___<___TTT___>::___value___);
 		}
@@ -587,7 +587,7 @@ public:
 	inline std :: string report() const
 	{ return report_().to_string(); }
 
-	void ___weak___(any_a<>::template ___WEAK___ const& weak) const {}
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit token_d(any_a<> const& thing)
 		: any_a{ thing }

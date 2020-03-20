@@ -127,7 +127,7 @@ private:
 			: ___forward_mutator_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<>::template ___SHARED___ ___clone___() const final
+		virtual inline any_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___forward_mutator_a_handle_final___>(___forward_mutator_a_handle___<___TTT___>::___value___);
 		}
@@ -388,7 +388,7 @@ public:
 		return cast<forward_mutator_a<>>(variadic_operate(op, *this));
 	}
 
-	void ___weak___(any_a<>::template ___WEAK___ const& weak) const {}
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit forward_mutator_d(any_a<> const& thing)
 		: any_a{ thing }

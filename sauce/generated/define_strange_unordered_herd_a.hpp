@@ -107,7 +107,7 @@ private:
 			: ___unordered_herd_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline herd_a<>::template ___SHARED___ ___clone___() const final
+		virtual inline herd_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___unordered_herd_a_handle_final___>(___unordered_herd_a_handle___<___TTT___>::___value___);
 		}
@@ -311,7 +311,7 @@ public:
 	inline std :: unordered_set < any_a < > > & mutate_set()
 	{ throw dis("dynamic unordered_herd_d::mutate_set() not available"); }
 
-	void ___weak___(herd_d<>::template ___WEAK___ const& weak) const {}
+	void ___weak___(herd_d<>::___WEAK___ const& weak) const {}
 
 	explicit unordered_herd_d(any_a<> const& thing)
 		: herd_d{ thing }

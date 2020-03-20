@@ -104,7 +104,7 @@ private:
 			: ___operation_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<>::template ___SHARED___ ___clone___() const final
+		virtual inline any_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___operation_a_handle_final___>(___operation_a_handle___<___TTT___>::___value___);
 		}
@@ -345,7 +345,7 @@ public:
 		return cast<flock_a<>>(variadic_operate(op, *const_cast<operation_d*>(this)));
 	}
 
-	void ___weak___(any_a<>::template ___WEAK___ const& weak) const {}
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit operation_d(any_a<> const& thing)
 		: any_a{ thing }
