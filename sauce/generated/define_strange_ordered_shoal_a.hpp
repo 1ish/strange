@@ -13,43 +13,43 @@ class ordered_shoal_a : public shoal_a<>
 {
 public:
 	inline bool operator==(ordered_shoal_a < > const & shoal ) const
-	{ assert(___handle___); return ___read___().operator==(shoal); }
+	{ assert(any_a<>::___handle___); return ___read___().operator==(shoal); }
 
 	inline bool operator!=(ordered_shoal_a < > const & shoal ) const
-	{ assert(___handle___); return ___read___().operator!=(shoal); }
+	{ assert(any_a<>::___handle___); return ___read___().operator!=(shoal); }
 
 	inline bool operator<(ordered_shoal_a < > const & shoal ) const
-	{ assert(___handle___); return ___read___().operator<(shoal); }
+	{ assert(any_a<>::___handle___); return ___read___().operator<(shoal); }
 
 	inline bool operator>(ordered_shoal_a < > const & shoal ) const
-	{ assert(___handle___); return ___read___().operator>(shoal); }
+	{ assert(any_a<>::___handle___); return ___read___().operator>(shoal); }
 
 	inline bool operator<=(ordered_shoal_a < > const & shoal ) const
-	{ assert(___handle___); return ___read___().operator<=(shoal); }
+	{ assert(any_a<>::___handle___); return ___read___().operator<=(shoal); }
 
 	inline bool operator>=(ordered_shoal_a < > const & shoal ) const
-	{ assert(___handle___); return ___read___().operator>=(shoal); }
+	{ assert(any_a<>::___handle___); return ___read___().operator>=(shoal); }
 
 	inline bidirectional_extractor_data_a < typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_begin() const
-	{ assert(___handle___); return ___read___().extract_begin(); }
+	{ assert(any_a<>::___handle___); return ___read___().extract_begin(); }
 
 	inline bidirectional_extractor_data_a < typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_end() const
-	{ assert(___handle___); return ___read___().extract_end(); }
+	{ assert(any_a<>::___handle___); return ___read___().extract_end(); }
 
 	inline bidirectional_mutator_data_a < typename std :: map < any_a < > , any_a < > > :: iterator > mutate_begin()
-	{ assert(___handle___); return ___write___().mutate_begin(); }
+	{ assert(any_a<>::___handle___); return ___write___().mutate_begin(); }
 
 	inline bidirectional_mutator_data_a < typename std :: map < any_a < > , any_a < > > :: iterator > mutate_end()
-	{ assert(___handle___); return ___write___().mutate_end(); }
+	{ assert(any_a<>::___handle___); return ___write___().mutate_end(); }
 
 	inline std :: map < any_a < > , any_a < > > const & extract_map() const
-	{ assert(___handle___); return ___read___().extract_map(); }
+	{ assert(any_a<>::___handle___); return ___read___().extract_map(); }
 
 	inline std :: map < any_a < > , any_a < > > & mutate_map()
-	{ assert(___handle___); return ___write___().mutate_map(); }
+	{ assert(any_a<>::___handle___); return ___write___().mutate_map(); }
 
 protected:
-	struct ___ordered_shoal_a_handle_base___ : ___shoal_a_handle_base___
+	struct ___ordered_shoal_a_handle_base___ : shoal_a<>::___shoal_a_handle_base___
 	{
 		virtual bool operator==(ordered_shoal_a < > const & shoal ) const = 0;
 		virtual bool operator!=(ordered_shoal_a < > const & shoal ) const = 0;
@@ -66,58 +66,58 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___ordered_shoal_a_handle_base___>
-	struct ___ordered_shoal_a_handle___ : ___shoal_a_handle___<___TTT___, ___DHB___>
+	struct ___ordered_shoal_a_handle___ : shoal_a<>::___shoal_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___ordered_shoal_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: ___shoal_a_handle___<___TTT___, ___DHB___>{ value }
+			: shoal_a<>::template ___shoal_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___ordered_shoal_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: ___shoal_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: shoal_a<>::template ___shoal_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
-		inline ___ordered_shoal_a_handle___(___variadic_tag___, Args&&... args)
-			: ___shoal_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		inline ___ordered_shoal_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
+			: shoal_a<>::template ___shoal_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline bool operator==(ordered_shoal_a < > const & shoal ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(shoal); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(shoal); }
 
 		virtual inline bool operator!=(ordered_shoal_a < > const & shoal ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(shoal); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(shoal); }
 
 		virtual inline bool operator<(ordered_shoal_a < > const & shoal ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(shoal); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(shoal); }
 
 		virtual inline bool operator>(ordered_shoal_a < > const & shoal ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(shoal); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(shoal); }
 
 		virtual inline bool operator<=(ordered_shoal_a < > const & shoal ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(shoal); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(shoal); }
 
 		virtual inline bool operator>=(ordered_shoal_a < > const & shoal ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(shoal); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(shoal); }
 
 		virtual inline bidirectional_extractor_data_a < typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_begin() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
 
 		virtual inline bidirectional_extractor_data_a < typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_end() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
 
 		virtual inline bidirectional_mutator_data_a < typename std :: map < any_a < > , any_a < > > :: iterator > mutate_begin() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin(); }
 
 		virtual inline bidirectional_mutator_data_a < typename std :: map < any_a < > , any_a < > > :: iterator > mutate_end() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end(); }
 
 		virtual inline std :: map < any_a < > , any_a < > > const & extract_map() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_map(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_map(); }
 
 		virtual inline std :: map < any_a < > , any_a < > > & mutate_map() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_map(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_map(); }
 
 	};
 
@@ -145,11 +145,11 @@ private:
 		{}
 
 		template <typename... Args>
-		inline ___ordered_shoal_a_handle_final___(___variadic_tag___, Args&&... args)
-			: ___ordered_shoal_a_handle___<___TTT___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		inline ___ordered_shoal_a_handle_final___(any_a<>::___variadic_tag___, Args&&... args)
+			: ___ordered_shoal_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline ___SHARED___ ___clone___() const final
+		virtual inline shoal_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___ordered_shoal_a_handle_final___>(___ordered_shoal_a_handle___<___TTT___>::___value___);
 		}
@@ -167,17 +167,17 @@ private:
 protected:
 	inline ___ordered_shoal_a_handle_base___ const& ___read___() const noexcept
 	{
-		return *std::static_pointer_cast<___ordered_shoal_a_handle_base___ const>(___handle___);
+		return *std::static_pointer_cast<___ordered_shoal_a_handle_base___ const>(any_a<>::___handle___);
 	}
 
 	inline ___ordered_shoal_a_handle_base___& ___write___() noexcept
 	{
-		if (!___handle___.unique())
+		if (!any_a<>::___handle___.unique())
 		{
-			___handle___ = ___handle___->___clone___();
-			___handle___->___weak___(___handle___);
+			any_a<>::___handle___ = any_a<>::___handle___->___clone___();
+			any_a<>::___handle___->___weak___(any_a<>::___handle___);
 		}
-		return *std::static_pointer_cast<___ordered_shoal_a_handle_base___>(___handle___);
+		return *std::static_pointer_cast<___ordered_shoal_a_handle_base___>(any_a<>::___handle___);
 	}
 
 public:
@@ -188,57 +188,57 @@ public:
 
 	static inline ordered_shoal_a ref(ordered_shoal_a& other) noexcept
 	{
-		return ordered_shoal_a(other, ___reference_tag___{});
+		return ordered_shoal_a(other, any_a<>::___reference_tag___{});
 	}
 
 	static inline ordered_shoal_a dup(ordered_shoal_a& other) noexcept
 	{
-		return ordered_shoal_a(other, ___duplicate_tag___{});
+		return ordered_shoal_a(other, any_a<>::___duplicate_tag___{});
 	}
 
 	inline ordered_shoal_a() = default;
 
-	inline ordered_shoal_a(ordered_shoal_a& other, ___reference_tag___) noexcept
-		: shoal_a(other, ___reference_tag___{})
+	inline ordered_shoal_a(ordered_shoal_a& other, any_a<>::___reference_tag___) noexcept
+		: shoal_a<>(other, any_a<>::___reference_tag___{})
 	{}
 
-	inline ordered_shoal_a(ordered_shoal_a& other, ___duplicate_tag___) noexcept
-		: shoal_a(other, ___duplicate_tag___{})
+	inline ordered_shoal_a(ordered_shoal_a& other, any_a<>::___duplicate_tag___) noexcept
+		: shoal_a<>(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline ordered_shoal_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: shoal_a{ handle }
+		: shoal_a<>{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___ordered_shoal_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
-	explicit inline ordered_shoal_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
-		: shoal_a(handle, ___reference_tag___{})
+	explicit inline ordered_shoal_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
+		: shoal_a<>(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___ordered_shoal_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<ordered_shoal_a, std::decay_t<___TTT___>>::value>>
 	explicit inline ordered_shoal_a(___TTT___ value) noexcept
-		: shoal_a{ std::make_shared<___ordered_shoal_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: shoal_a<>{ std::make_shared<___ordered_shoal_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
-		___handle___->___weak___(___handle___);
+		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
-	explicit inline ordered_shoal_a(___variadic_tag___, ___TTT___*, Args&&... args)
-		: shoal_a{ std::make_shared<___ordered_shoal_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(___variadic_tag___{}, std::forward<Args>(args)...) }
+	explicit inline ordered_shoal_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
+		: shoal_a<>{ std::make_shared<___ordered_shoal_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
-		___handle___->___weak___(___handle___);
+		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___>
 	inline ordered_shoal_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___ordered_shoal_a_handle_base___>(handle));
-		___handle___ = handle;
+		any_a<>::___handle___ = handle;
 		return *this;
 	}
 
@@ -246,7 +246,7 @@ public:
 	inline ordered_shoal_a& operator=(___TTT___ value) noexcept
 	{
 		ordered_shoal_a temp{ std::move(value) };
-		std::swap(temp.___handle___, ___handle___);
+		std::swap(temp.___handle___, any_a<>::___handle___);
 		return *this;
 	}
 
@@ -270,9 +270,9 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___ordered_shoal_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return ordered_shoal_a(thing.___handle___, ___reference_tag___{});
+			return ordered_shoal_a(thing.___handle___, any_a<>::___reference_tag___{});
 		}
-		return ordered_shoal_a{ ordered_shoal_d<_1>(thing, ___reference_tag___{}) };
+		return ordered_shoal_a{ ordered_shoal_d<_1>(thing, any_a<>::___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -287,7 +287,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = shoal_a::___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = shoal_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -306,7 +306,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = shoal_a::___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = shoal_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -318,7 +318,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = shoal_a::___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = shoal_a<>::template ___operations___<___unordered_shoal_a___>();
 			return operations;
 		}();
 		return OPERATIONS;
@@ -327,7 +327,7 @@ public:
 	template <typename ___TTT___, typename... Args>
 	static inline ordered_shoal_a create(Args&&... args)
 	{
-		return ordered_shoal_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
+		return ordered_shoal_a(any_a<>::___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}
 }; // class ordered_shoal_a
 
@@ -371,18 +371,18 @@ public:
 	inline std :: map < any_a < > , any_a < > > & mutate_map()
 	{ throw dis("dynamic ordered_shoal_d::mutate_map() not available"); }
 
-	void ___weak___(shoal_d::___WEAK___ const& weak) const {}
+	void ___weak___(shoal_d<>::___WEAK___ const& weak) const {}
 
 	explicit ordered_shoal_d(any_a<> const& thing)
 		: shoal_d{ thing }
 	{}
 
-	explicit ordered_shoal_d(any_a<>& thing, ___reference_tag___)
-		: shoal_d{ thing, ___reference_tag___{} }
+	explicit ordered_shoal_d(any_a<>& thing, any_a<>::___reference_tag___)
+		: shoal_d{ thing, any_a<>::___reference_tag___{} }
 	{}
 
-	explicit ordered_shoal_d(any_a<>& thing, ___duplicate_tag___)
-		: shoal_d{ thing, ___duplicate_tag___{} }
+	explicit ordered_shoal_d(any_a<>& thing, any_a<>::___duplicate_tag___)
+		: shoal_d{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

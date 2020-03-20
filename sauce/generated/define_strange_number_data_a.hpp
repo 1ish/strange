@@ -13,31 +13,31 @@ class number_data_a : public number_a<>
 {
 public:
 	inline bool operator==(number_data_a < _primitive > const & number ) const
-	{ assert(___handle___); return ___read___().operator==(number); }
+	{ assert(any_a<>::___handle___); return ___read___().operator==(number); }
 
 	inline bool operator!=(number_data_a < _primitive > const & number ) const
-	{ assert(___handle___); return ___read___().operator!=(number); }
+	{ assert(any_a<>::___handle___); return ___read___().operator!=(number); }
 
 	inline bool operator<(number_data_a < _primitive > const & number ) const
-	{ assert(___handle___); return ___read___().operator<(number); }
+	{ assert(any_a<>::___handle___); return ___read___().operator<(number); }
 
 	inline bool operator>(number_data_a < _primitive > const & number ) const
-	{ assert(___handle___); return ___read___().operator>(number); }
+	{ assert(any_a<>::___handle___); return ___read___().operator>(number); }
 
 	inline bool operator<=(number_data_a < _primitive > const & number ) const
-	{ assert(___handle___); return ___read___().operator<=(number); }
+	{ assert(any_a<>::___handle___); return ___read___().operator<=(number); }
 
 	inline bool operator>=(number_data_a < _primitive > const & number ) const
-	{ assert(___handle___); return ___read___().operator>=(number); }
+	{ assert(any_a<>::___handle___); return ___read___().operator>=(number); }
 
 	inline _primitive const & extract_primitive() const
-	{ assert(___handle___); return ___read___().extract_primitive(); }
+	{ assert(any_a<>::___handle___); return ___read___().extract_primitive(); }
 
 	inline _primitive & mutate_primitive()
-	{ assert(___handle___); return ___write___().mutate_primitive(); }
+	{ assert(any_a<>::___handle___); return ___write___().mutate_primitive(); }
 
 protected:
-	struct ___number_data_a_handle_base___ : ___number_a_handle_base___
+	struct ___number_data_a_handle_base___ : number_a<>::___number_a_handle_base___
 	{
 		virtual bool operator==(number_data_a < _primitive > const & number ) const = 0;
 		virtual bool operator!=(number_data_a < _primitive > const & number ) const = 0;
@@ -50,46 +50,46 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___number_data_a_handle_base___>
-	struct ___number_data_a_handle___ : ___number_a_handle___<___TTT___, ___DHB___>
+	struct ___number_data_a_handle___ : number_a<>::___number_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___number_data_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: ___number_a_handle___<___TTT___, ___DHB___>{ value }
+			: number_a<>::template ___number_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___number_data_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: ___number_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: number_a<>::template ___number_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
-		inline ___number_data_a_handle___(___variadic_tag___, Args&&... args)
-			: ___number_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		inline ___number_data_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
+			: number_a<>::template ___number_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline bool operator==(number_data_a < _primitive > const & number ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(number); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(number); }
 
 		virtual inline bool operator!=(number_data_a < _primitive > const & number ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(number); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(number); }
 
 		virtual inline bool operator<(number_data_a < _primitive > const & number ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(number); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(number); }
 
 		virtual inline bool operator>(number_data_a < _primitive > const & number ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(number); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(number); }
 
 		virtual inline bool operator<=(number_data_a < _primitive > const & number ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(number); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(number); }
 
 		virtual inline bool operator>=(number_data_a < _primitive > const & number ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(number); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(number); }
 
 		virtual inline _primitive const & extract_primitive() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_primitive(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_primitive(); }
 
 		virtual inline _primitive & mutate_primitive() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_primitive(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_primitive(); }
 
 	};
 
@@ -117,11 +117,11 @@ private:
 		{}
 
 		template <typename... Args>
-		inline ___number_data_a_handle_final___(___variadic_tag___, Args&&... args)
-			: ___number_data_a_handle___<___TTT___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		inline ___number_data_a_handle_final___(any_a<>::___variadic_tag___, Args&&... args)
+			: ___number_data_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline ___SHARED___ ___clone___() const final
+		virtual inline number_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___number_data_a_handle_final___>(___number_data_a_handle___<___TTT___>::___value___);
 		}
@@ -139,17 +139,17 @@ private:
 protected:
 	inline ___number_data_a_handle_base___ const& ___read___() const noexcept
 	{
-		return *std::static_pointer_cast<___number_data_a_handle_base___ const>(___handle___);
+		return *std::static_pointer_cast<___number_data_a_handle_base___ const>(any_a<>::___handle___);
 	}
 
 	inline ___number_data_a_handle_base___& ___write___() noexcept
 	{
-		if (!___handle___.unique())
+		if (!any_a<>::___handle___.unique())
 		{
-			___handle___ = ___handle___->___clone___();
-			___handle___->___weak___(___handle___);
+			any_a<>::___handle___ = any_a<>::___handle___->___clone___();
+			any_a<>::___handle___->___weak___(any_a<>::___handle___);
 		}
-		return *std::static_pointer_cast<___number_data_a_handle_base___>(___handle___);
+		return *std::static_pointer_cast<___number_data_a_handle_base___>(any_a<>::___handle___);
 	}
 
 public:
@@ -160,57 +160,57 @@ public:
 
 	static inline number_data_a ref(number_data_a& other) noexcept
 	{
-		return number_data_a(other, ___reference_tag___{});
+		return number_data_a(other, any_a<>::___reference_tag___{});
 	}
 
 	static inline number_data_a dup(number_data_a& other) noexcept
 	{
-		return number_data_a(other, ___duplicate_tag___{});
+		return number_data_a(other, any_a<>::___duplicate_tag___{});
 	}
 
 	inline number_data_a() = default;
 
-	inline number_data_a(number_data_a& other, ___reference_tag___) noexcept
-		: number_a(other, ___reference_tag___{})
+	inline number_data_a(number_data_a& other, any_a<>::___reference_tag___) noexcept
+		: number_a<>(other, any_a<>::___reference_tag___{})
 	{}
 
-	inline number_data_a(number_data_a& other, ___duplicate_tag___) noexcept
-		: number_a(other, ___duplicate_tag___{})
+	inline number_data_a(number_data_a& other, any_a<>::___duplicate_tag___) noexcept
+		: number_a<>(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline number_data_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: number_a{ handle }
+		: number_a<>{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___number_data_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
-	explicit inline number_data_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
-		: number_a(handle, ___reference_tag___{})
+	explicit inline number_data_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
+		: number_a<>(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___number_data_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<number_data_a, std::decay_t<___TTT___>>::value>>
 	explicit inline number_data_a(___TTT___ value) noexcept
-		: number_a{ std::make_shared<___number_data_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: number_a<>{ std::make_shared<___number_data_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
-		___handle___->___weak___(___handle___);
+		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
-	explicit inline number_data_a(___variadic_tag___, ___TTT___*, Args&&... args)
-		: number_a{ std::make_shared<___number_data_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(___variadic_tag___{}, std::forward<Args>(args)...) }
+	explicit inline number_data_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
+		: number_a<>{ std::make_shared<___number_data_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
-		___handle___->___weak___(___handle___);
+		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___>
 	inline number_data_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___number_data_a_handle_base___>(handle));
-		___handle___ = handle;
+		any_a<>::___handle___ = handle;
 		return *this;
 	}
 
@@ -218,7 +218,7 @@ public:
 	inline number_data_a& operator=(___TTT___ value) noexcept
 	{
 		number_data_a temp{ std::move(value) };
-		std::swap(temp.___handle___, ___handle___);
+		std::swap(temp.___handle___, any_a<>::___handle___);
 		return *this;
 	}
 
@@ -242,9 +242,9 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___number_data_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return number_data_a(thing.___handle___, ___reference_tag___{});
+			return number_data_a(thing.___handle___, any_a<>::___reference_tag___{});
 		}
-		return number_data_a{ number_data_d<_primitive>(thing, ___reference_tag___{}) };
+		return number_data_a{ number_data_d<_primitive>(thing, any_a<>::___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -259,7 +259,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = number_a::___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = number_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -278,7 +278,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = number_a::___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = number_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -290,7 +290,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = number_a::___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = number_a<>::template ___operations___<___unordered_shoal_a___>();
 			return operations;
 		}();
 		return OPERATIONS;
@@ -299,7 +299,7 @@ public:
 	template <typename ___TTT___, typename... Args>
 	static inline number_data_a create(Args&&... args)
 	{
-		return number_data_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
+		return number_data_a(any_a<>::___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}
 }; // class number_data_a
 
@@ -331,18 +331,18 @@ public:
 	inline _primitive & mutate_primitive()
 	{ throw dis("dynamic number_data_d::mutate_primitive() not available"); }
 
-	void ___weak___(number_d::___WEAK___ const& weak) const {}
+	void ___weak___(number_d<>::___WEAK___ const& weak) const {}
 
 	explicit number_data_d(any_a<> const& thing)
 		: number_d{ thing }
 	{}
 
-	explicit number_data_d(any_a<>& thing, ___reference_tag___)
-		: number_d{ thing, ___reference_tag___{} }
+	explicit number_data_d(any_a<>& thing, any_a<>::___reference_tag___)
+		: number_d{ thing, any_a<>::___reference_tag___{} }
 	{}
 
-	explicit number_data_d(any_a<>& thing, ___duplicate_tag___)
-		: number_d{ thing, ___duplicate_tag___{} }
+	explicit number_data_d(any_a<>& thing, any_a<>::___duplicate_tag___)
+		: number_d{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

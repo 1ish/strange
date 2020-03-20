@@ -15,24 +15,24 @@ public:
 	inline any_a<> pure__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> pure_() const
-	{ assert(___handle___); return ___read___().pure_(); }
+	{ assert(any_a<>::___handle___); return ___read___().pure_(); }
 
 	inline bool pure() const
-	{ assert(___handle___); return ___read___().pure(); }
+	{ assert(any_a<>::___handle___); return ___read___().pure(); }
 
 	inline void aspects(unordered_shoal_a < > const & shoal )
-	{ assert(___handle___); ___write___().aspects(shoal); }
+	{ assert(any_a<>::___handle___); ___write___().aspects(shoal); }
 
 	inline void assign(operation_a < > const & operation )
-	{ assert(___handle___); ___write___().assign(operation); }
+	{ assert(any_a<>::___handle___); ___write___().assign(operation); }
 
 	inline any_a<> names__(range_a<> const& ___arguments___) const;
 
 	inline flock_a<> names_() const
-	{ assert(___handle___); return ___read___().names_(); }
+	{ assert(any_a<>::___handle___); return ___read___().names_(); }
 
 protected:
-	struct ___operation_a_handle_base___ : ___any_a_handle_base___
+	struct ___operation_a_handle_base___ : any_a<>::___any_a_handle_base___
 	{
 		virtual any_a<> pure_() const = 0;
 		virtual bool pure() const = 0;
@@ -42,37 +42,37 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___operation_a_handle_base___>
-	struct ___operation_a_handle___ : ___any_a_handle___<___TTT___, ___DHB___>
+	struct ___operation_a_handle___ : any_a<>::___any_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___operation_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: ___any_a_handle___<___TTT___, ___DHB___>{ value }
+			: any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___operation_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: ___any_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
-		inline ___operation_a_handle___(___variadic_tag___, Args&&... args)
-			: ___any_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		inline ___operation_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
+			: any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline any_a<> pure_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.pure_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.pure_(); }
 
 		virtual inline bool pure() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.pure(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.pure(); }
 
 		virtual inline void aspects(unordered_shoal_a < > const & shoal ) final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.aspects(shoal); }
+		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.aspects(shoal); }
 
 		virtual inline void assign(operation_a < > const & operation ) final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.assign(operation); }
+		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.assign(operation); }
 
 		virtual inline flock_a<> names_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.names_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.names_(); }
 
 	};
 
@@ -100,11 +100,11 @@ private:
 		{}
 
 		template <typename... Args>
-		inline ___operation_a_handle_final___(___variadic_tag___, Args&&... args)
-			: ___operation_a_handle___<___TTT___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		inline ___operation_a_handle_final___(any_a<>::___variadic_tag___, Args&&... args)
+			: ___operation_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline ___SHARED___ ___clone___() const final
+		virtual inline any_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___operation_a_handle_final___>(___operation_a_handle___<___TTT___>::___value___);
 		}
@@ -122,17 +122,17 @@ private:
 protected:
 	inline ___operation_a_handle_base___ const& ___read___() const noexcept
 	{
-		return *std::static_pointer_cast<___operation_a_handle_base___ const>(___handle___);
+		return *std::static_pointer_cast<___operation_a_handle_base___ const>(any_a<>::___handle___);
 	}
 
 	inline ___operation_a_handle_base___& ___write___() noexcept
 	{
-		if (!___handle___.unique())
+		if (!any_a<>::___handle___.unique())
 		{
-			___handle___ = ___handle___->___clone___();
-			___handle___->___weak___(___handle___);
+			any_a<>::___handle___ = any_a<>::___handle___->___clone___();
+			any_a<>::___handle___->___weak___(any_a<>::___handle___);
 		}
-		return *std::static_pointer_cast<___operation_a_handle_base___>(___handle___);
+		return *std::static_pointer_cast<___operation_a_handle_base___>(any_a<>::___handle___);
 	}
 
 public:
@@ -143,57 +143,57 @@ public:
 
 	static inline operation_a ref(operation_a& other) noexcept
 	{
-		return operation_a(other, ___reference_tag___{});
+		return operation_a(other, any_a<>::___reference_tag___{});
 	}
 
 	static inline operation_a dup(operation_a& other) noexcept
 	{
-		return operation_a(other, ___duplicate_tag___{});
+		return operation_a(other, any_a<>::___duplicate_tag___{});
 	}
 
 	inline operation_a() = default;
 
-	inline operation_a(operation_a& other, ___reference_tag___) noexcept
-		: any_a(other, ___reference_tag___{})
+	inline operation_a(operation_a& other, any_a<>::___reference_tag___) noexcept
+		: any_a<>(other, any_a<>::___reference_tag___{})
 	{}
 
-	inline operation_a(operation_a& other, ___duplicate_tag___) noexcept
-		: any_a(other, ___duplicate_tag___{})
+	inline operation_a(operation_a& other, any_a<>::___duplicate_tag___) noexcept
+		: any_a<>(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline operation_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: any_a{ handle }
+		: any_a<>{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___operation_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
-	explicit inline operation_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
-		: any_a(handle, ___reference_tag___{})
+	explicit inline operation_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
+		: any_a<>(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___operation_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<operation_a, std::decay_t<___TTT___>>::value>>
 	explicit inline operation_a(___TTT___ value) noexcept
-		: any_a{ std::make_shared<___operation_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: any_a<>{ std::make_shared<___operation_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
-		___handle___->___weak___(___handle___);
+		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
-	explicit inline operation_a(___variadic_tag___, ___TTT___*, Args&&... args)
-		: any_a{ std::make_shared<___operation_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(___variadic_tag___{}, std::forward<Args>(args)...) }
+	explicit inline operation_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
+		: any_a<>{ std::make_shared<___operation_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
-		___handle___->___weak___(___handle___);
+		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___>
 	inline operation_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___operation_a_handle_base___>(handle));
-		___handle___ = handle;
+		any_a<>::___handle___ = handle;
 		return *this;
 	}
 
@@ -201,7 +201,7 @@ public:
 	inline operation_a& operator=(___TTT___ value) noexcept
 	{
 		operation_a temp{ std::move(value) };
-		std::swap(temp.___handle___, ___handle___);
+		std::swap(temp.___handle___, any_a<>::___handle___);
 		return *this;
 	}
 
@@ -225,9 +225,9 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___operation_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return operation_a(thing.___handle___, ___reference_tag___{});
+			return operation_a(thing.___handle___, any_a<>::___reference_tag___{});
 		}
-		return operation_a{ operation_d<_1>(thing, ___reference_tag___{}) };
+		return operation_a{ operation_d<_1>(thing, any_a<>::___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -242,7 +242,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = any_a::___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = any_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -261,7 +261,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = any_a::___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = any_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -273,7 +273,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = any_a::___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = any_a<>::template ___operations___<___unordered_shoal_a___>();
 			operations.update_string("pure_", native_extraction_t<operation_a>::create(&operation_a::pure__));
 			operations.update_string("names_", native_extraction_t<operation_a>::create(&operation_a::names__));
 			return operations;
@@ -284,7 +284,7 @@ public:
 	template <typename ___TTT___, typename... Args>
 	static inline operation_a create(Args&&... args)
 	{
-		return operation_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
+		return operation_a(any_a<>::___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}
 }; // class operation_a
 
@@ -294,7 +294,7 @@ class operation_d : public any_a<>
 public:
 	inline any_a<> pure__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("pure_");
 		if (!op)
 		{
@@ -305,7 +305,7 @@ public:
 
 	inline any_a<> pure_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("pure_");
 		if (!op)
 		{
@@ -325,7 +325,7 @@ public:
 
 	inline any_a<> names__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("names_");
 		if (!op)
 		{
@@ -336,7 +336,7 @@ public:
 
 	inline flock_a<> names_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("names_");
 		if (!op)
 		{
@@ -345,18 +345,18 @@ public:
 		return cast<flock_a<>>(variadic_operate(op, *const_cast<operation_d*>(this)));
 	}
 
-	void ___weak___(any_a::___WEAK___ const& weak) const {}
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit operation_d(any_a<> const& thing)
 		: any_a{ thing }
 	{}
 
-	explicit operation_d(any_a<>& thing, ___reference_tag___)
-		: any_a{ thing, ___reference_tag___{} }
+	explicit operation_d(any_a<>& thing, any_a<>::___reference_tag___)
+		: any_a{ thing, any_a<>::___reference_tag___{} }
 	{}
 
-	explicit operation_d(any_a<>& thing, ___duplicate_tag___)
-		: any_a{ thing, ___duplicate_tag___{} }
+	explicit operation_d(any_a<>& thing, any_a<>::___duplicate_tag___)
+		: any_a{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

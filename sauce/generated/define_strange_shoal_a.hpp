@@ -13,32 +13,32 @@ class shoal_a : public collection_a<>
 {
 public:
 	inline bool has_string(std :: string const & s ) const
-	{ assert(___handle___); return ___read___().has_string(s); }
+	{ assert(any_a<>::___handle___); return ___read___().has_string(s); }
 
 	inline any_a < > at_string(std :: string const & s ) const
-	{ assert(___handle___); return ___read___().at_string(s); }
+	{ assert(any_a<>::___handle___); return ___read___().at_string(s); }
 
 	inline void update_string(std :: string const & s , any_a < > const & value )
-	{ assert(___handle___); ___write___().update_string(s, value); }
+	{ assert(any_a<>::___handle___); ___write___().update_string(s, value); }
 
 	inline bool insert_string(std :: string const & s , any_a < > const & value )
-	{ assert(___handle___); return ___write___().insert_string(s, value); }
+	{ assert(any_a<>::___handle___); return ___write___().insert_string(s, value); }
 
 	inline bool erase_string(std :: string const & s )
-	{ assert(___handle___); return ___write___().erase_string(s); }
+	{ assert(any_a<>::___handle___); return ___write___().erase_string(s); }
 
 	inline any_a<> mutate_begin__(range_a<> const& ___arguments___);
 
 	inline forward_mutator_a<> mutate_begin_()
-	{ assert(___handle___); return ___write___().mutate_begin_(); }
+	{ assert(any_a<>::___handle___); return ___write___().mutate_begin_(); }
 
 	inline any_a<> mutate_end__(range_a<> const& ___arguments___);
 
 	inline forward_mutator_a<> mutate_end_()
-	{ assert(___handle___); return ___write___().mutate_end_(); }
+	{ assert(any_a<>::___handle___); return ___write___().mutate_end_(); }
 
 protected:
-	struct ___shoal_a_handle_base___ : ___collection_a_handle_base___
+	struct ___shoal_a_handle_base___ : collection_a<>::___collection_a_handle_base___
 	{
 		virtual bool has_string(std :: string const & s ) const = 0;
 		virtual any_a < > at_string(std :: string const & s ) const = 0;
@@ -50,43 +50,43 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___shoal_a_handle_base___>
-	struct ___shoal_a_handle___ : ___collection_a_handle___<___TTT___, ___DHB___>
+	struct ___shoal_a_handle___ : collection_a<>::___collection_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___shoal_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: ___collection_a_handle___<___TTT___, ___DHB___>{ value }
+			: collection_a<>::template ___collection_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___shoal_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: ___collection_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: collection_a<>::template ___collection_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
-		inline ___shoal_a_handle___(___variadic_tag___, Args&&... args)
-			: ___collection_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		inline ___shoal_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
+			: collection_a<>::template ___collection_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline bool has_string(std :: string const & s ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.has_string(s); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.has_string(s); }
 
 		virtual inline any_a < > at_string(std :: string const & s ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.at_string(s); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.at_string(s); }
 
 		virtual inline void update_string(std :: string const & s , any_a < > const & value ) final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.update_string(s, value); }
+		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.update_string(s, value); }
 
 		virtual inline bool insert_string(std :: string const & s , any_a < > const & value ) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.insert_string(s, value); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.insert_string(s, value); }
 
 		virtual inline bool erase_string(std :: string const & s ) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.erase_string(s); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.erase_string(s); }
 
 		virtual inline forward_mutator_a<> mutate_begin_() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin_(); }
 
 		virtual inline forward_mutator_a<> mutate_end_() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end_(); }
 
 	};
 
@@ -114,11 +114,11 @@ private:
 		{}
 
 		template <typename... Args>
-		inline ___shoal_a_handle_final___(___variadic_tag___, Args&&... args)
-			: ___shoal_a_handle___<___TTT___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		inline ___shoal_a_handle_final___(any_a<>::___variadic_tag___, Args&&... args)
+			: ___shoal_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline ___SHARED___ ___clone___() const final
+		virtual inline collection_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___shoal_a_handle_final___>(___shoal_a_handle___<___TTT___>::___value___);
 		}
@@ -136,17 +136,17 @@ private:
 protected:
 	inline ___shoal_a_handle_base___ const& ___read___() const noexcept
 	{
-		return *std::static_pointer_cast<___shoal_a_handle_base___ const>(___handle___);
+		return *std::static_pointer_cast<___shoal_a_handle_base___ const>(any_a<>::___handle___);
 	}
 
 	inline ___shoal_a_handle_base___& ___write___() noexcept
 	{
-		if (!___handle___.unique())
+		if (!any_a<>::___handle___.unique())
 		{
-			___handle___ = ___handle___->___clone___();
-			___handle___->___weak___(___handle___);
+			any_a<>::___handle___ = any_a<>::___handle___->___clone___();
+			any_a<>::___handle___->___weak___(any_a<>::___handle___);
 		}
-		return *std::static_pointer_cast<___shoal_a_handle_base___>(___handle___);
+		return *std::static_pointer_cast<___shoal_a_handle_base___>(any_a<>::___handle___);
 	}
 
 public:
@@ -157,57 +157,57 @@ public:
 
 	static inline shoal_a ref(shoal_a& other) noexcept
 	{
-		return shoal_a(other, ___reference_tag___{});
+		return shoal_a(other, any_a<>::___reference_tag___{});
 	}
 
 	static inline shoal_a dup(shoal_a& other) noexcept
 	{
-		return shoal_a(other, ___duplicate_tag___{});
+		return shoal_a(other, any_a<>::___duplicate_tag___{});
 	}
 
 	inline shoal_a() = default;
 
-	inline shoal_a(shoal_a& other, ___reference_tag___) noexcept
-		: collection_a(other, ___reference_tag___{})
+	inline shoal_a(shoal_a& other, any_a<>::___reference_tag___) noexcept
+		: collection_a<>(other, any_a<>::___reference_tag___{})
 	{}
 
-	inline shoal_a(shoal_a& other, ___duplicate_tag___) noexcept
-		: collection_a(other, ___duplicate_tag___{})
+	inline shoal_a(shoal_a& other, any_a<>::___duplicate_tag___) noexcept
+		: collection_a<>(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline shoal_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: collection_a{ handle }
+		: collection_a<>{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___shoal_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
-	explicit inline shoal_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
-		: collection_a(handle, ___reference_tag___{})
+	explicit inline shoal_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
+		: collection_a<>(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___shoal_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<shoal_a, std::decay_t<___TTT___>>::value>>
 	explicit inline shoal_a(___TTT___ value) noexcept
-		: collection_a{ std::make_shared<___shoal_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: collection_a<>{ std::make_shared<___shoal_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
-		___handle___->___weak___(___handle___);
+		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
-	explicit inline shoal_a(___variadic_tag___, ___TTT___*, Args&&... args)
-		: collection_a{ std::make_shared<___shoal_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(___variadic_tag___{}, std::forward<Args>(args)...) }
+	explicit inline shoal_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
+		: collection_a<>{ std::make_shared<___shoal_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
-		___handle___->___weak___(___handle___);
+		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___>
 	inline shoal_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___shoal_a_handle_base___>(handle));
-		___handle___ = handle;
+		any_a<>::___handle___ = handle;
 		return *this;
 	}
 
@@ -215,7 +215,7 @@ public:
 	inline shoal_a& operator=(___TTT___ value) noexcept
 	{
 		shoal_a temp{ std::move(value) };
-		std::swap(temp.___handle___, ___handle___);
+		std::swap(temp.___handle___, any_a<>::___handle___);
 		return *this;
 	}
 
@@ -239,9 +239,9 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___shoal_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return shoal_a(thing.___handle___, ___reference_tag___{});
+			return shoal_a(thing.___handle___, any_a<>::___reference_tag___{});
 		}
-		return shoal_a{ shoal_d<_1>(thing, ___reference_tag___{}) };
+		return shoal_a{ shoal_d<_1>(thing, any_a<>::___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -256,7 +256,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = collection_a::___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = collection_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -275,7 +275,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = collection_a::___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = collection_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -287,7 +287,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = collection_a::___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = collection_a<>::template ___operations___<___unordered_shoal_a___>();
 			operations.update_string("mutate_begin_", native_mutation_t<shoal_a>::create(&shoal_a::mutate_begin__));
 			operations.update_string("mutate_end_", native_mutation_t<shoal_a>::create(&shoal_a::mutate_end__));
 			return operations;
@@ -298,7 +298,7 @@ public:
 	template <typename ___TTT___, typename... Args>
 	static inline shoal_a create(Args&&... args)
 	{
-		return shoal_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
+		return shoal_a(any_a<>::___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}
 }; // class shoal_a
 
@@ -323,7 +323,7 @@ public:
 
 	inline any_a<> mutate_begin__(range_a<> const& arguments)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("mutate_begin_");
 		if (!op)
 		{
@@ -334,7 +334,7 @@ public:
 
 	inline forward_mutator_a<> mutate_begin_()
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("mutate_begin_");
 		if (!op)
 		{
@@ -345,7 +345,7 @@ public:
 
 	inline any_a<> mutate_end__(range_a<> const& arguments)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("mutate_end_");
 		if (!op)
 		{
@@ -356,7 +356,7 @@ public:
 
 	inline forward_mutator_a<> mutate_end_()
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("mutate_end_");
 		if (!op)
 		{
@@ -365,18 +365,18 @@ public:
 		return cast<forward_mutator_a<>>(variadic_operate(op, *this));
 	}
 
-	void ___weak___(collection_d::___WEAK___ const& weak) const {}
+	void ___weak___(collection_d<>::___WEAK___ const& weak) const {}
 
 	explicit shoal_d(any_a<> const& thing)
 		: collection_d{ thing }
 	{}
 
-	explicit shoal_d(any_a<>& thing, ___reference_tag___)
-		: collection_d{ thing, ___reference_tag___{} }
+	explicit shoal_d(any_a<>& thing, any_a<>::___reference_tag___)
+		: collection_d{ thing, any_a<>::___reference_tag___{} }
 	{}
 
-	explicit shoal_d(any_a<>& thing, ___duplicate_tag___)
-		: collection_d{ thing, ___duplicate_tag___{} }
+	explicit shoal_d(any_a<>& thing, any_a<>::___duplicate_tag___)
+		: collection_d{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

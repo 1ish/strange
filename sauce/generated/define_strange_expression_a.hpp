@@ -15,49 +15,49 @@ public:
 	inline any_a<> recreate__(range_a<> const& ___arguments___) const;
 
 	inline expression_a<> recreate_() const
-	{ assert(___handle___); return ___read___().recreate_(); }
+	{ assert(any_a<>::___handle___); return ___read___().recreate_(); }
 
 	inline any_a<> literal__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> literal_() const
-	{ assert(___handle___); return ___read___().literal_(); }
+	{ assert(any_a<>::___handle___); return ___read___().literal_(); }
 
 	inline bool literal() const
-	{ assert(___handle___); return ___read___().literal(); }
+	{ assert(any_a<>::___handle___); return ___read___().literal(); }
 
 	inline any_a<> evaluate__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> evaluate_() const
-	{ assert(___handle___); return ___read___().evaluate_(); }
+	{ assert(any_a<>::___handle___); return ___read___().evaluate_(); }
 
 	inline any_a<> token__(range_a<> const& ___arguments___) const;
 
 	inline token_a<> token_() const
-	{ assert(___handle___); return ___read___().token_(); }
+	{ assert(any_a<>::___handle___); return ___read___().token_(); }
 
 	inline any_a<> terms__(range_a<> const& ___arguments___) const;
 
 	inline flock_a<> terms_() const
-	{ assert(___handle___); return ___read___().terms_(); }
+	{ assert(any_a<>::___handle___); return ___read___().terms_(); }
 
 	inline any_a<> generate__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> generate_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river) const
-	{ assert(___handle___); return ___read___().generate_(version, indent, river); }
+	{ assert(any_a<>::___handle___); return ___read___().generate_(version, indent, river); }
 
 	inline void generate(int64_t version , int64_t indent , river_a < > & river ) const
-	{ assert(___handle___); ___read___().generate(version, indent, river); }
+	{ assert(any_a<>::___handle___); ___read___().generate(version, indent, river); }
 
 	inline any_a<> generate_cpp__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> generate_cpp_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = strange::no() ) const
-	{ assert(___handle___); return ___read___().generate_cpp_(version, indent, river, declare, define, type); }
+	{ assert(any_a<>::___handle___); return ___read___().generate_cpp_(version, indent, river, declare, define, type); }
 
 	inline void generate_cpp(int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const
-	{ assert(___handle___); ___read___().generate_cpp(version, indent, river, declare, define, type); }
+	{ assert(any_a<>::___handle___); ___read___().generate_cpp(version, indent, river, declare, define, type); }
 
 protected:
-	struct ___expression_a_handle_base___ : ___operation_a_handle_base___
+	struct ___expression_a_handle_base___ : operation_a<>::___operation_a_handle_base___
 	{
 		virtual expression_a<> recreate_() const = 0;
 		virtual any_a<> literal_() const = 0;
@@ -72,52 +72,52 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___expression_a_handle_base___>
-	struct ___expression_a_handle___ : ___operation_a_handle___<___TTT___, ___DHB___>
+	struct ___expression_a_handle___ : operation_a<>::___operation_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___expression_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: ___operation_a_handle___<___TTT___, ___DHB___>{ value }
+			: operation_a<>::template ___operation_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___expression_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: ___operation_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: operation_a<>::template ___operation_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
-		inline ___expression_a_handle___(___variadic_tag___, Args&&... args)
-			: ___operation_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		inline ___expression_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
+			: operation_a<>::template ___operation_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline expression_a<> recreate_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.recreate_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.recreate_(); }
 
 		virtual inline any_a<> literal_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.literal_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.literal_(); }
 
 		virtual inline bool literal() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.literal(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.literal(); }
 
 		virtual inline any_a<> evaluate_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.evaluate_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.evaluate_(); }
 
 		virtual inline token_a<> token_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.token_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.token_(); }
 
 		virtual inline flock_a<> terms_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.terms_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.terms_(); }
 
 		virtual inline any_a<> generate_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.generate_(version, indent, river); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.generate_(version, indent, river); }
 
 		virtual inline void generate(int64_t version , int64_t indent , river_a < > & river ) const final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.generate(version, indent, river); }
+		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.generate(version, indent, river); }
 
 		virtual inline any_a<> generate_cpp_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = strange::no() ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.generate_cpp_(version, indent, river, declare, define, type); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.generate_cpp_(version, indent, river, declare, define, type); }
 
 		virtual inline void generate_cpp(int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.generate_cpp(version, indent, river, declare, define, type); }
+		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.generate_cpp(version, indent, river, declare, define, type); }
 
 	};
 
@@ -145,11 +145,11 @@ private:
 		{}
 
 		template <typename... Args>
-		inline ___expression_a_handle_final___(___variadic_tag___, Args&&... args)
-			: ___expression_a_handle___<___TTT___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		inline ___expression_a_handle_final___(any_a<>::___variadic_tag___, Args&&... args)
+			: ___expression_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline ___SHARED___ ___clone___() const final
+		virtual inline operation_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___expression_a_handle_final___>(___expression_a_handle___<___TTT___>::___value___);
 		}
@@ -167,17 +167,17 @@ private:
 protected:
 	inline ___expression_a_handle_base___ const& ___read___() const noexcept
 	{
-		return *std::static_pointer_cast<___expression_a_handle_base___ const>(___handle___);
+		return *std::static_pointer_cast<___expression_a_handle_base___ const>(any_a<>::___handle___);
 	}
 
 	inline ___expression_a_handle_base___& ___write___() noexcept
 	{
-		if (!___handle___.unique())
+		if (!any_a<>::___handle___.unique())
 		{
-			___handle___ = ___handle___->___clone___();
-			___handle___->___weak___(___handle___);
+			any_a<>::___handle___ = any_a<>::___handle___->___clone___();
+			any_a<>::___handle___->___weak___(any_a<>::___handle___);
 		}
-		return *std::static_pointer_cast<___expression_a_handle_base___>(___handle___);
+		return *std::static_pointer_cast<___expression_a_handle_base___>(any_a<>::___handle___);
 	}
 
 public:
@@ -188,57 +188,57 @@ public:
 
 	static inline expression_a ref(expression_a& other) noexcept
 	{
-		return expression_a(other, ___reference_tag___{});
+		return expression_a(other, any_a<>::___reference_tag___{});
 	}
 
 	static inline expression_a dup(expression_a& other) noexcept
 	{
-		return expression_a(other, ___duplicate_tag___{});
+		return expression_a(other, any_a<>::___duplicate_tag___{});
 	}
 
 	inline expression_a() = default;
 
-	inline expression_a(expression_a& other, ___reference_tag___) noexcept
-		: operation_a(other, ___reference_tag___{})
+	inline expression_a(expression_a& other, any_a<>::___reference_tag___) noexcept
+		: operation_a<>(other, any_a<>::___reference_tag___{})
 	{}
 
-	inline expression_a(expression_a& other, ___duplicate_tag___) noexcept
-		: operation_a(other, ___duplicate_tag___{})
+	inline expression_a(expression_a& other, any_a<>::___duplicate_tag___) noexcept
+		: operation_a<>(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline expression_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: operation_a{ handle }
+		: operation_a<>{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___expression_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
-	explicit inline expression_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
-		: operation_a(handle, ___reference_tag___{})
+	explicit inline expression_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
+		: operation_a<>(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___expression_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<expression_a, std::decay_t<___TTT___>>::value>>
 	explicit inline expression_a(___TTT___ value) noexcept
-		: operation_a{ std::make_shared<___expression_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: operation_a<>{ std::make_shared<___expression_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
-		___handle___->___weak___(___handle___);
+		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
-	explicit inline expression_a(___variadic_tag___, ___TTT___*, Args&&... args)
-		: operation_a{ std::make_shared<___expression_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(___variadic_tag___{}, std::forward<Args>(args)...) }
+	explicit inline expression_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
+		: operation_a<>{ std::make_shared<___expression_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
-		___handle___->___weak___(___handle___);
+		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___>
 	inline expression_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___expression_a_handle_base___>(handle));
-		___handle___ = handle;
+		any_a<>::___handle___ = handle;
 		return *this;
 	}
 
@@ -246,7 +246,7 @@ public:
 	inline expression_a& operator=(___TTT___ value) noexcept
 	{
 		expression_a temp{ std::move(value) };
-		std::swap(temp.___handle___, ___handle___);
+		std::swap(temp.___handle___, any_a<>::___handle___);
 		return *this;
 	}
 
@@ -270,9 +270,9 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___expression_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return expression_a(thing.___handle___, ___reference_tag___{});
+			return expression_a(thing.___handle___, any_a<>::___reference_tag___{});
 		}
-		return expression_a{ expression_d<_1>(thing, ___reference_tag___{}) };
+		return expression_a{ expression_d<_1>(thing, any_a<>::___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -287,7 +287,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = operation_a::___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = operation_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -306,7 +306,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = operation_a::___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = operation_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -318,7 +318,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = operation_a::___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = operation_a<>::template ___operations___<___unordered_shoal_a___>();
 			operations.update_string("recreate_", native_extraction_t<expression_a>::create(&expression_a::recreate__));
 			operations.update_string("literal_", native_extraction_t<expression_a>::create(&expression_a::literal__));
 			operations.update_string("evaluate_", native_extraction_t<expression_a>::create(&expression_a::evaluate__));
@@ -334,7 +334,7 @@ public:
 	template <typename ___TTT___, typename... Args>
 	static inline expression_a create(Args&&... args)
 	{
-		return expression_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
+		return expression_a(any_a<>::___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}
 }; // class expression_a
 
@@ -344,7 +344,7 @@ class expression_d : public operation_d<>
 public:
 	inline any_a<> recreate__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("recreate_");
 		if (!op)
 		{
@@ -355,7 +355,7 @@ public:
 
 	inline expression_a<> recreate_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("recreate_");
 		if (!op)
 		{
@@ -366,7 +366,7 @@ public:
 
 	inline any_a<> literal__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("literal_");
 		if (!op)
 		{
@@ -377,7 +377,7 @@ public:
 
 	inline any_a<> literal_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("literal_");
 		if (!op)
 		{
@@ -391,7 +391,7 @@ public:
 
 	inline any_a<> evaluate__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("evaluate_");
 		if (!op)
 		{
@@ -402,7 +402,7 @@ public:
 
 	inline any_a<> evaluate_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("evaluate_");
 		if (!op)
 		{
@@ -413,7 +413,7 @@ public:
 
 	inline any_a<> token__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("token_");
 		if (!op)
 		{
@@ -424,7 +424,7 @@ public:
 
 	inline token_a<> token_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("token_");
 		if (!op)
 		{
@@ -435,7 +435,7 @@ public:
 
 	inline any_a<> terms__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("terms_");
 		if (!op)
 		{
@@ -446,7 +446,7 @@ public:
 
 	inline flock_a<> terms_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("terms_");
 		if (!op)
 		{
@@ -457,7 +457,7 @@ public:
 
 	inline any_a<> generate__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("generate_");
 		if (!op)
 		{
@@ -468,7 +468,7 @@ public:
 
 	inline any_a<> generate_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("generate_");
 		if (!op)
 		{
@@ -482,7 +482,7 @@ public:
 
 	inline any_a<> generate_cpp__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("generate_cpp_");
 		if (!op)
 		{
@@ -493,7 +493,7 @@ public:
 
 	inline any_a<> generate_cpp_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = strange::no() ) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("generate_cpp_");
 		if (!op)
 		{
@@ -505,18 +505,18 @@ public:
 	inline void generate_cpp(int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const
 	{ generate_cpp_(num(version), num(indent), river, boole(declare), boole(define), boole(type)); }
 
-	void ___weak___(operation_d::___WEAK___ const& weak) const {}
+	void ___weak___(operation_d<>::___WEAK___ const& weak) const {}
 
 	explicit expression_d(any_a<> const& thing)
 		: operation_d{ thing }
 	{}
 
-	explicit expression_d(any_a<>& thing, ___reference_tag___)
-		: operation_d{ thing, ___reference_tag___{} }
+	explicit expression_d(any_a<>& thing, any_a<>::___reference_tag___)
+		: operation_d{ thing, any_a<>::___reference_tag___{} }
 	{}
 
-	explicit expression_d(any_a<>& thing, ___duplicate_tag___)
-		: operation_d{ thing, ___duplicate_tag___{} }
+	explicit expression_d(any_a<>& thing, any_a<>::___duplicate_tag___)
+		: operation_d{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

@@ -15,52 +15,52 @@ public:
 	inline any_a<> symbolic__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> symbolic_() const
-	{ assert(___handle___); return ___read___().symbolic_(); }
+	{ assert(any_a<>::___handle___); return ___read___().symbolic_(); }
 
 	inline bool symbolic() const
-	{ assert(___handle___); return ___read___().symbolic(); }
+	{ assert(any_a<>::___handle___); return ___read___().symbolic(); }
 
 	inline any_a<> order__(range_a<> const& ___arguments___) const;
 
 	inline number_data_int64_a<> order_() const
-	{ assert(___handle___); return ___read___().order_(); }
+	{ assert(any_a<>::___handle___); return ___read___().order_(); }
 
 	inline int64_t order() const
-	{ assert(___handle___); return ___read___().order(); }
+	{ assert(any_a<>::___handle___); return ___read___().order(); }
 
 	inline any_a<> name__(range_a<> const& ___arguments___) const;
 
 	inline symbol_a<> name_() const
-	{ assert(___handle___); return ___read___().name_(); }
+	{ assert(any_a<>::___handle___); return ___read___().name_(); }
 
 	inline std :: string name() const
-	{ assert(___handle___); return ___read___().name(); }
+	{ assert(any_a<>::___handle___); return ___read___().name(); }
 
 	inline any_a<> dimensions__(range_a<> const& ___arguments___) const;
 
 	inline flock_a<> dimensions_() const
-	{ assert(___handle___); return ___read___().dimensions_(); }
+	{ assert(any_a<>::___handle___); return ___read___().dimensions_(); }
 
 	inline any_a<> parameters__(range_a<> const& ___arguments___) const;
 
 	inline flock_a<> parameters_() const
-	{ assert(___handle___); return ___read___().parameters_(); }
+	{ assert(any_a<>::___handle___); return ___read___().parameters_(); }
 
 	inline any_a<> result__(range_a<> const& ___arguments___) const;
 
 	inline cat_a<> result_() const
-	{ assert(___handle___); return ___read___().result_(); }
+	{ assert(any_a<>::___handle___); return ___read___().result_(); }
 
 	inline any_a<> code__(range_a<> const& ___arguments___) const;
 
 	inline lake_int8_a<> code_() const
-	{ assert(___handle___); return ___read___().code_(); }
+	{ assert(any_a<>::___handle___); return ___read___().code_(); }
 
 	inline std :: string code() const
-	{ assert(___handle___); return ___read___().code(); }
+	{ assert(any_a<>::___handle___); return ___read___().code(); }
 
 protected:
-	struct ___cat_a_handle_base___ : ___symbol_a_handle_base___
+	struct ___cat_a_handle_base___ : symbol_a<>::___symbol_a_handle_base___
 	{
 		virtual any_a<> symbolic_() const = 0;
 		virtual bool symbolic() const = 0;
@@ -76,55 +76,55 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___cat_a_handle_base___>
-	struct ___cat_a_handle___ : ___symbol_a_handle___<___TTT___, ___DHB___>
+	struct ___cat_a_handle___ : symbol_a<>::___symbol_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___cat_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: ___symbol_a_handle___<___TTT___, ___DHB___>{ value }
+			: symbol_a<>::template ___symbol_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___cat_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: ___symbol_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: symbol_a<>::template ___symbol_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
-		inline ___cat_a_handle___(___variadic_tag___, Args&&... args)
-			: ___symbol_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		inline ___cat_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
+			: symbol_a<>::template ___symbol_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline any_a<> symbolic_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.symbolic_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.symbolic_(); }
 
 		virtual inline bool symbolic() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.symbolic(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.symbolic(); }
 
 		virtual inline number_data_int64_a<> order_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.order_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.order_(); }
 
 		virtual inline int64_t order() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.order(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.order(); }
 
 		virtual inline symbol_a<> name_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.name_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.name_(); }
 
 		virtual inline std :: string name() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.name(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.name(); }
 
 		virtual inline flock_a<> dimensions_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.dimensions_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.dimensions_(); }
 
 		virtual inline flock_a<> parameters_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.parameters_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.parameters_(); }
 
 		virtual inline cat_a<> result_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.result_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.result_(); }
 
 		virtual inline lake_int8_a<> code_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.code_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.code_(); }
 
 		virtual inline std :: string code() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.code(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.code(); }
 
 	};
 
@@ -152,11 +152,11 @@ private:
 		{}
 
 		template <typename... Args>
-		inline ___cat_a_handle_final___(___variadic_tag___, Args&&... args)
-			: ___cat_a_handle___<___TTT___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		inline ___cat_a_handle_final___(any_a<>::___variadic_tag___, Args&&... args)
+			: ___cat_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline ___SHARED___ ___clone___() const final
+		virtual inline symbol_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___cat_a_handle_final___>(___cat_a_handle___<___TTT___>::___value___);
 		}
@@ -174,17 +174,17 @@ private:
 protected:
 	inline ___cat_a_handle_base___ const& ___read___() const noexcept
 	{
-		return *std::static_pointer_cast<___cat_a_handle_base___ const>(___handle___);
+		return *std::static_pointer_cast<___cat_a_handle_base___ const>(any_a<>::___handle___);
 	}
 
 	inline ___cat_a_handle_base___& ___write___() noexcept
 	{
-		if (!___handle___.unique())
+		if (!any_a<>::___handle___.unique())
 		{
-			___handle___ = ___handle___->___clone___();
-			___handle___->___weak___(___handle___);
+			any_a<>::___handle___ = any_a<>::___handle___->___clone___();
+			any_a<>::___handle___->___weak___(any_a<>::___handle___);
 		}
-		return *std::static_pointer_cast<___cat_a_handle_base___>(___handle___);
+		return *std::static_pointer_cast<___cat_a_handle_base___>(any_a<>::___handle___);
 	}
 
 public:
@@ -195,57 +195,57 @@ public:
 
 	static inline cat_a ref(cat_a& other) noexcept
 	{
-		return cat_a(other, ___reference_tag___{});
+		return cat_a(other, any_a<>::___reference_tag___{});
 	}
 
 	static inline cat_a dup(cat_a& other) noexcept
 	{
-		return cat_a(other, ___duplicate_tag___{});
+		return cat_a(other, any_a<>::___duplicate_tag___{});
 	}
 
 	inline cat_a() = default;
 
-	inline cat_a(cat_a& other, ___reference_tag___) noexcept
-		: symbol_a(other, ___reference_tag___{})
+	inline cat_a(cat_a& other, any_a<>::___reference_tag___) noexcept
+		: symbol_a<>(other, any_a<>::___reference_tag___{})
 	{}
 
-	inline cat_a(cat_a& other, ___duplicate_tag___) noexcept
-		: symbol_a(other, ___duplicate_tag___{})
+	inline cat_a(cat_a& other, any_a<>::___duplicate_tag___) noexcept
+		: symbol_a<>(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline cat_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: symbol_a{ handle }
+		: symbol_a<>{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___cat_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
-	explicit inline cat_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
-		: symbol_a(handle, ___reference_tag___{})
+	explicit inline cat_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
+		: symbol_a<>(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___cat_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<cat_a, std::decay_t<___TTT___>>::value>>
 	explicit inline cat_a(___TTT___ value) noexcept
-		: symbol_a{ std::make_shared<___cat_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: symbol_a<>{ std::make_shared<___cat_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
-		___handle___->___weak___(___handle___);
+		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
-	explicit inline cat_a(___variadic_tag___, ___TTT___*, Args&&... args)
-		: symbol_a{ std::make_shared<___cat_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(___variadic_tag___{}, std::forward<Args>(args)...) }
+	explicit inline cat_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
+		: symbol_a<>{ std::make_shared<___cat_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
-		___handle___->___weak___(___handle___);
+		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___>
 	inline cat_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___cat_a_handle_base___>(handle));
-		___handle___ = handle;
+		any_a<>::___handle___ = handle;
 		return *this;
 	}
 
@@ -253,7 +253,7 @@ public:
 	inline cat_a& operator=(___TTT___ value) noexcept
 	{
 		cat_a temp{ std::move(value) };
-		std::swap(temp.___handle___, ___handle___);
+		std::swap(temp.___handle___, any_a<>::___handle___);
 		return *this;
 	}
 
@@ -277,9 +277,9 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___cat_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return cat_a(thing.___handle___, ___reference_tag___{});
+			return cat_a(thing.___handle___, any_a<>::___reference_tag___{});
 		}
-		return cat_a{ cat_d<_1>(thing, ___reference_tag___{}) };
+		return cat_a{ cat_d<_1>(thing, any_a<>::___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -294,7 +294,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = symbol_a::___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = symbol_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -313,7 +313,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = symbol_a::___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = symbol_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -325,7 +325,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = symbol_a::___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = symbol_a<>::template ___operations___<___unordered_shoal_a___>();
 			operations.update_string("symbolic_", native_extraction_t<cat_a>::create(&cat_a::symbolic__));
 			operations.update_string("order_", native_extraction_t<cat_a>::create(&cat_a::order__));
 			operations.update_string("name_", native_extraction_t<cat_a>::create(&cat_a::name__));
@@ -341,7 +341,7 @@ public:
 	template <typename ___TTT___, typename... Args>
 	static inline cat_a create(Args&&... args)
 	{
-		return cat_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
+		return cat_a(any_a<>::___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}
 }; // class cat_a
 
@@ -351,7 +351,7 @@ class cat_d : public symbol_d<>
 public:
 	inline any_a<> symbolic__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("symbolic_");
 		if (!op)
 		{
@@ -362,7 +362,7 @@ public:
 
 	inline any_a<> symbolic_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("symbolic_");
 		if (!op)
 		{
@@ -376,7 +376,7 @@ public:
 
 	inline any_a<> order__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("order_");
 		if (!op)
 		{
@@ -387,7 +387,7 @@ public:
 
 	inline number_data_int64_a<> order_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("order_");
 		if (!op)
 		{
@@ -401,7 +401,7 @@ public:
 
 	inline any_a<> name__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("name_");
 		if (!op)
 		{
@@ -412,7 +412,7 @@ public:
 
 	inline symbol_a<> name_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("name_");
 		if (!op)
 		{
@@ -426,7 +426,7 @@ public:
 
 	inline any_a<> dimensions__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("dimensions_");
 		if (!op)
 		{
@@ -437,7 +437,7 @@ public:
 
 	inline flock_a<> dimensions_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("dimensions_");
 		if (!op)
 		{
@@ -448,7 +448,7 @@ public:
 
 	inline any_a<> parameters__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("parameters_");
 		if (!op)
 		{
@@ -459,7 +459,7 @@ public:
 
 	inline flock_a<> parameters_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("parameters_");
 		if (!op)
 		{
@@ -470,7 +470,7 @@ public:
 
 	inline any_a<> result__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("result_");
 		if (!op)
 		{
@@ -481,7 +481,7 @@ public:
 
 	inline cat_a<> result_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("result_");
 		if (!op)
 		{
@@ -492,7 +492,7 @@ public:
 
 	inline any_a<> code__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("code_");
 		if (!op)
 		{
@@ -503,7 +503,7 @@ public:
 
 	inline lake_int8_a<> code_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("code_");
 		if (!op)
 		{
@@ -515,18 +515,18 @@ public:
 	inline std :: string code() const
 	{ return lake_to_string(code_()); }
 
-	void ___weak___(symbol_d::___WEAK___ const& weak) const {}
+	void ___weak___(symbol_d<>::___WEAK___ const& weak) const {}
 
 	explicit cat_d(any_a<> const& thing)
 		: symbol_d{ thing }
 	{}
 
-	explicit cat_d(any_a<>& thing, ___reference_tag___)
-		: symbol_d{ thing, ___reference_tag___{} }
+	explicit cat_d(any_a<>& thing, any_a<>::___reference_tag___)
+		: symbol_d{ thing, any_a<>::___reference_tag___{} }
 	{}
 
-	explicit cat_d(any_a<>& thing, ___duplicate_tag___)
-		: symbol_d{ thing, ___duplicate_tag___{} }
+	explicit cat_d(any_a<>& thing, any_a<>::___duplicate_tag___)
+		: symbol_d{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

@@ -1444,8 +1444,8 @@ protected:
 			"protected:\n"
 			"\tinline ___" + class_name + "_handle_base___ const& ___read___() const noexcept\n"
 			"\t{\n" + (root
-				? std::string{ "\t\treturn *any_a<>::___handle___;\n" }
-				: ("\t\treturn *std::static_pointer_cast<___" + class_name + "_handle_base___ const>(___handle___);\n")) +
+				? std::string{ "\t\treturn *___handle___;\n" }
+				: ("\t\treturn *std::static_pointer_cast<___" + class_name + "_handle_base___ const>(any_a<>::___handle___);\n")) +
 			"\t}\n\n"
 
 			"\tinline ___" + class_name + "_handle_base___& ___write___() noexcept\n"
@@ -1455,8 +1455,8 @@ protected:
 			"\t\t\t" + (root ? "" : "any_a<>::") + "___handle___ = " + (root ? "" : "any_a<>::") + "___handle___->___clone___();\n"
 			"\t\t\t" + (root ? "" : "any_a<>::") + "___handle___->___weak___(" + (root ? "" : "any_a<>::") + "___handle___);\n"
 			"\t\t}\n" + (root
-				? std::string{ "\t\treturn *any_a<>::___handle___;\n" }
-				: ("\t\treturn *std::static_pointer_cast<___" + class_name + "_handle_base___>(___handle___);\n")) +
+				? std::string{ "\t\treturn *___handle___;\n" }
+				: ("\t\treturn *std::static_pointer_cast<___" + class_name + "_handle_base___>(any_a<>::___handle___);\n")) +
 			"\t}\n\n");
 
 		if (root)

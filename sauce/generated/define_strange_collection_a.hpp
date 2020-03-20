@@ -15,95 +15,95 @@ public:
 	inline any_a<> has__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> has_(any_a<> const& key) const
-	{ assert(___handle___); return ___read___().has_(key); }
+	{ assert(any_a<>::___handle___); return ___read___().has_(key); }
 
 	inline bool has(any_a < > const & key ) const
-	{ assert(___handle___); return ___read___().has(key); }
+	{ assert(any_a<>::___handle___); return ___read___().has(key); }
 
 	inline any_a<> at__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> at_(any_a<> const& key) const
-	{ assert(___handle___); return ___read___().at_(key); }
+	{ assert(any_a<>::___handle___); return ___read___().at_(key); }
 
 	inline any_a<> update__(range_a<> const& ___arguments___);
 
 	inline any_a<> update_(any_a<> const& key, any_a<> const& value = strange::no() )
-	{ assert(___handle___); return ___write___().update_(key, value); }
+	{ assert(any_a<>::___handle___); return ___write___().update_(key, value); }
 
 	inline void update(any_a < > const & key , any_a < > const & value )
-	{ assert(___handle___); ___write___().update(key, value); }
+	{ assert(any_a<>::___handle___); ___write___().update(key, value); }
 
 	inline any_a<> insert__(range_a<> const& ___arguments___);
 
 	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = strange::no() )
-	{ assert(___handle___); return ___write___().insert_(key, value); }
+	{ assert(any_a<>::___handle___); return ___write___().insert_(key, value); }
 
 	inline void insert(any_a < > const & key , any_a < > const & value )
-	{ assert(___handle___); ___write___().insert(key, value); }
+	{ assert(any_a<>::___handle___); ___write___().insert(key, value); }
 
 	inline any_a<> erase__(range_a<> const& ___arguments___);
 
 	inline any_a<> erase_(any_a<> const& key)
-	{ assert(___handle___); return ___write___().erase_(key); }
+	{ assert(any_a<>::___handle___); return ___write___().erase_(key); }
 
 	inline bool erase(any_a < > const & key )
-	{ assert(___handle___); return ___write___().erase(key); }
+	{ assert(any_a<>::___handle___); return ___write___().erase(key); }
 
 	inline any_a<> clear__(range_a<> const& ___arguments___);
 
 	inline collection_a<> clear_()
-	{ assert(___handle___); return ___write___().clear_(); }
+	{ assert(any_a<>::___handle___); return ___write___().clear_(); }
 
 	inline void clear()
-	{ assert(___handle___); ___write___().clear(); }
+	{ assert(any_a<>::___handle___); ___write___().clear(); }
 
 	inline any_a<> size__(range_a<> const& ___arguments___) const;
 
 	inline number_data_int64_a<> size_() const
-	{ assert(___handle___); return ___read___().size_(); }
+	{ assert(any_a<>::___handle___); return ___read___().size_(); }
 
 	inline int64_t size() const
-	{ assert(___handle___); return ___read___().size(); }
+	{ assert(any_a<>::___handle___); return ___read___().size(); }
 
 	inline any_a<> empty__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> empty_() const
-	{ assert(___handle___); return ___read___().empty_(); }
+	{ assert(any_a<>::___handle___); return ___read___().empty_(); }
 
 	inline bool empty() const
-	{ assert(___handle___); return ___read___().empty(); }
+	{ assert(any_a<>::___handle___); return ___read___().empty(); }
 
 	inline any_a<> push_front__(range_a<> const& ___arguments___);
 
 	inline collection_a<> push_front_(any_a<> const& thing)
-	{ assert(___handle___); return ___write___().push_front_(thing); }
+	{ assert(any_a<>::___handle___); return ___write___().push_front_(thing); }
 
 	inline void push_front(any_a < > const & thing )
-	{ assert(___handle___); ___write___().push_front(thing); }
+	{ assert(any_a<>::___handle___); ___write___().push_front(thing); }
 
 	inline any_a<> pop_front__(range_a<> const& ___arguments___);
 
 	inline any_a<> pop_front_()
-	{ assert(___handle___); return ___write___().pop_front_(); }
+	{ assert(any_a<>::___handle___); return ___write___().pop_front_(); }
 
 	inline any_a<> push_back__(range_a<> const& ___arguments___);
 
 	inline collection_a<> push_back_(any_a<> const& thing)
-	{ assert(___handle___); return ___write___().push_back_(thing); }
+	{ assert(any_a<>::___handle___); return ___write___().push_back_(thing); }
 
 	inline void push_back(any_a < > const & thing )
-	{ assert(___handle___); ___write___().push_back(thing); }
+	{ assert(any_a<>::___handle___); ___write___().push_back(thing); }
 
 	inline any_a<> pop_back__(range_a<> const& ___arguments___);
 
 	inline any_a<> pop_back_()
-	{ assert(___handle___); return ___write___().pop_back_(); }
+	{ assert(any_a<>::___handle___); return ___write___().pop_back_(); }
 
 	inline any_a<> self_assign__(range_a<> const& ___arguments___);
 
 	inline collection_a self_assign_(range_a<> const& range)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		___write___().self_assign_(range);
 		return *this;
 	}
@@ -112,14 +112,14 @@ public:
 
 	inline collection_a self_add_(range_a<> const& range)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		___write___().self_add_(range);
 		return *this;
 	}
 
 	inline collection_a& operator+=(range_a<> const& range)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		___write___().self_add_(range);
 		return *this;
 	}
@@ -127,23 +127,23 @@ public:
 	inline any_a<> add__(range_a<> const& ___arguments___) const;
 
 	inline collection_a<> add_(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().add_(range); }
+	{ assert(any_a<>::___handle___); return ___read___().add_(range); }
 
 	inline collection_a<> operator+(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().add_(range); }
+	{ assert(any_a<>::___handle___); return ___read___().add_(range); }
 
 	inline any_a<> self_subtract__(range_a<> const& ___arguments___);
 
 	inline collection_a self_subtract_(range_a<> const& range)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		___write___().self_subtract_(range);
 		return *this;
 	}
 
 	inline collection_a& operator-=(range_a<> const& range)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		___write___().self_subtract_(range);
 		return *this;
 	}
@@ -151,23 +151,23 @@ public:
 	inline any_a<> subtract__(range_a<> const& ___arguments___) const;
 
 	inline collection_a<> subtract_(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().subtract_(range); }
+	{ assert(any_a<>::___handle___); return ___read___().subtract_(range); }
 
 	inline collection_a<> operator-(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().subtract_(range); }
+	{ assert(any_a<>::___handle___); return ___read___().subtract_(range); }
 
 	inline any_a<> read_lock__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> read_lock_() const
-	{ assert(___handle___); return ___read___().read_lock_(); }
+	{ assert(any_a<>::___handle___); return ___read___().read_lock_(); }
 
 	inline any_a<> write_lock__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> write_lock_() const
-	{ assert(___handle___); return ___read___().write_lock_(); }
+	{ assert(any_a<>::___handle___); return ___read___().write_lock_(); }
 
 protected:
-	struct ___collection_a_handle_base___ : ___range_a_handle_base___
+	struct ___collection_a_handle_base___ : range_a<>::___range_a_handle_base___
 	{
 		virtual any_a<> has_(any_a<> const& key) const = 0;
 		virtual bool has(any_a < > const & key ) const = 0;
@@ -200,106 +200,106 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___collection_a_handle_base___>
-	struct ___collection_a_handle___ : ___range_a_handle___<___TTT___, ___DHB___>
+	struct ___collection_a_handle___ : range_a<>::___range_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___collection_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: ___range_a_handle___<___TTT___, ___DHB___>{ value }
+			: range_a<>::template ___range_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___collection_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: ___range_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: range_a<>::template ___range_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
-		inline ___collection_a_handle___(___variadic_tag___, Args&&... args)
-			: ___range_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		inline ___collection_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
+			: range_a<>::template ___range_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline any_a<> has_(any_a<> const& key) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.has_(key); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.has_(key); }
 
 		virtual inline bool has(any_a < > const & key ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.has(key); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.has(key); }
 
 		virtual inline any_a<> at_(any_a<> const& key) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.at_(key); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.at_(key); }
 
 		virtual inline any_a<> update_(any_a<> const& key, any_a<> const& value = strange::no() ) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.update_(key, value); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.update_(key, value); }
 
 		virtual inline void update(any_a < > const & key , any_a < > const & value ) final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.update(key, value); }
+		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.update(key, value); }
 
 		virtual inline any_a<> insert_(any_a<> const& key, any_a<> const& value = strange::no() ) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.insert_(key, value); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.insert_(key, value); }
 
 		virtual inline void insert(any_a < > const & key , any_a < > const & value ) final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.insert(key, value); }
+		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.insert(key, value); }
 
 		virtual inline any_a<> erase_(any_a<> const& key) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.erase_(key); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.erase_(key); }
 
 		virtual inline bool erase(any_a < > const & key ) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.erase(key); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.erase(key); }
 
 		virtual inline collection_a<> clear_() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.clear_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.clear_(); }
 
 		virtual inline void clear() final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.clear(); }
+		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.clear(); }
 
 		virtual inline number_data_int64_a<> size_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.size_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.size_(); }
 
 		virtual inline int64_t size() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.size(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.size(); }
 
 		virtual inline any_a<> empty_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.empty_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.empty_(); }
 
 		virtual inline bool empty() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.empty(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.empty(); }
 
 		virtual inline collection_a<> push_front_(any_a<> const& thing) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.push_front_(thing); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.push_front_(thing); }
 
 		virtual inline void push_front(any_a < > const & thing ) final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.push_front(thing); }
+		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.push_front(thing); }
 
 		virtual inline any_a<> pop_front_() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.pop_front_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.pop_front_(); }
 
 		virtual inline collection_a<> push_back_(any_a<> const& thing) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.push_back_(thing); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.push_back_(thing); }
 
 		virtual inline void push_back(any_a < > const & thing ) final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.push_back(thing); }
+		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.push_back(thing); }
 
 		virtual inline any_a<> pop_back_() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.pop_back_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.pop_back_(); }
 
 		virtual inline void self_assign_(range_a<> const& range) final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_assign_(range); }
+		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_assign_(range); }
 
 		virtual inline void self_add_(range_a<> const& range) final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(range); }
+		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(range); }
 
 		virtual inline collection_a<> add_(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(range); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(range); }
 
 		virtual inline void self_subtract_(range_a<> const& range) final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(range); }
+		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(range); }
 
 		virtual inline collection_a<> subtract_(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract_(range); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract_(range); }
 
 		virtual inline any_a<> read_lock_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.read_lock_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.read_lock_(); }
 
 		virtual inline any_a<> write_lock_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.write_lock_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.write_lock_(); }
 
 	};
 
@@ -327,11 +327,11 @@ private:
 		{}
 
 		template <typename... Args>
-		inline ___collection_a_handle_final___(___variadic_tag___, Args&&... args)
-			: ___collection_a_handle___<___TTT___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		inline ___collection_a_handle_final___(any_a<>::___variadic_tag___, Args&&... args)
+			: ___collection_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline ___SHARED___ ___clone___() const final
+		virtual inline range_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___collection_a_handle_final___>(___collection_a_handle___<___TTT___>::___value___);
 		}
@@ -349,17 +349,17 @@ private:
 protected:
 	inline ___collection_a_handle_base___ const& ___read___() const noexcept
 	{
-		return *std::static_pointer_cast<___collection_a_handle_base___ const>(___handle___);
+		return *std::static_pointer_cast<___collection_a_handle_base___ const>(any_a<>::___handle___);
 	}
 
 	inline ___collection_a_handle_base___& ___write___() noexcept
 	{
-		if (!___handle___.unique())
+		if (!any_a<>::___handle___.unique())
 		{
-			___handle___ = ___handle___->___clone___();
-			___handle___->___weak___(___handle___);
+			any_a<>::___handle___ = any_a<>::___handle___->___clone___();
+			any_a<>::___handle___->___weak___(any_a<>::___handle___);
 		}
-		return *std::static_pointer_cast<___collection_a_handle_base___>(___handle___);
+		return *std::static_pointer_cast<___collection_a_handle_base___>(any_a<>::___handle___);
 	}
 
 public:
@@ -370,57 +370,57 @@ public:
 
 	static inline collection_a ref(collection_a& other) noexcept
 	{
-		return collection_a(other, ___reference_tag___{});
+		return collection_a(other, any_a<>::___reference_tag___{});
 	}
 
 	static inline collection_a dup(collection_a& other) noexcept
 	{
-		return collection_a(other, ___duplicate_tag___{});
+		return collection_a(other, any_a<>::___duplicate_tag___{});
 	}
 
 	inline collection_a() = default;
 
-	inline collection_a(collection_a& other, ___reference_tag___) noexcept
-		: range_a(other, ___reference_tag___{})
+	inline collection_a(collection_a& other, any_a<>::___reference_tag___) noexcept
+		: range_a<>(other, any_a<>::___reference_tag___{})
 	{}
 
-	inline collection_a(collection_a& other, ___duplicate_tag___) noexcept
-		: range_a(other, ___duplicate_tag___{})
+	inline collection_a(collection_a& other, any_a<>::___duplicate_tag___) noexcept
+		: range_a<>(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline collection_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: range_a{ handle }
+		: range_a<>{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___collection_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
-	explicit inline collection_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
-		: range_a(handle, ___reference_tag___{})
+	explicit inline collection_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
+		: range_a<>(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___collection_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<collection_a, std::decay_t<___TTT___>>::value>>
 	explicit inline collection_a(___TTT___ value) noexcept
-		: range_a{ std::make_shared<___collection_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: range_a<>{ std::make_shared<___collection_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
-		___handle___->___weak___(___handle___);
+		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
-	explicit inline collection_a(___variadic_tag___, ___TTT___*, Args&&... args)
-		: range_a{ std::make_shared<___collection_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(___variadic_tag___{}, std::forward<Args>(args)...) }
+	explicit inline collection_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
+		: range_a<>{ std::make_shared<___collection_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
-		___handle___->___weak___(___handle___);
+		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___>
 	inline collection_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___collection_a_handle_base___>(handle));
-		___handle___ = handle;
+		any_a<>::___handle___ = handle;
 		return *this;
 	}
 
@@ -428,7 +428,7 @@ public:
 	inline collection_a& operator=(___TTT___ value) noexcept
 	{
 		collection_a temp{ std::move(value) };
-		std::swap(temp.___handle___, ___handle___);
+		std::swap(temp.___handle___, any_a<>::___handle___);
 		return *this;
 	}
 
@@ -452,9 +452,9 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___collection_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return collection_a(thing.___handle___, ___reference_tag___{});
+			return collection_a(thing.___handle___, any_a<>::___reference_tag___{});
 		}
-		return collection_a{ collection_d<_1>(thing, ___reference_tag___{}) };
+		return collection_a{ collection_d<_1>(thing, any_a<>::___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -469,7 +469,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = range_a::___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = range_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -488,7 +488,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = range_a::___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = range_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -500,7 +500,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = range_a::___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = range_a<>::template ___operations___<___unordered_shoal_a___>();
 			operations.update_string("has_", native_extraction_t<collection_a>::create(&collection_a::has__));
 			operations.update_string("at_", native_extraction_t<collection_a>::create(&collection_a::at__));
 			operations.update_string("update_", native_mutation_t<collection_a>::create(&collection_a::update__));
@@ -528,7 +528,7 @@ public:
 	template <typename ___TTT___, typename... Args>
 	static inline collection_a create(Args&&... args)
 	{
-		return collection_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
+		return collection_a(any_a<>::___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}
 }; // class collection_a
 
@@ -538,7 +538,7 @@ class collection_d : public range_d<>
 public:
 	inline any_a<> has__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("has_");
 		if (!op)
 		{
@@ -549,7 +549,7 @@ public:
 
 	inline any_a<> has_(any_a<> const& key) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("has_");
 		if (!op)
 		{
@@ -563,7 +563,7 @@ public:
 
 	inline any_a<> at__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("at_");
 		if (!op)
 		{
@@ -574,7 +574,7 @@ public:
 
 	inline any_a<> at_(any_a<> const& key) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("at_");
 		if (!op)
 		{
@@ -585,7 +585,7 @@ public:
 
 	inline any_a<> update__(range_a<> const& arguments)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("update_");
 		if (!op)
 		{
@@ -596,7 +596,7 @@ public:
 
 	inline any_a<> update_(any_a<> const& key, any_a<> const& value = strange::no() )
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("update_");
 		if (!op)
 		{
@@ -610,7 +610,7 @@ public:
 
 	inline any_a<> insert__(range_a<> const& arguments)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("insert_");
 		if (!op)
 		{
@@ -621,7 +621,7 @@ public:
 
 	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = strange::no() )
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("insert_");
 		if (!op)
 		{
@@ -635,7 +635,7 @@ public:
 
 	inline any_a<> erase__(range_a<> const& arguments)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("erase_");
 		if (!op)
 		{
@@ -646,7 +646,7 @@ public:
 
 	inline any_a<> erase_(any_a<> const& key)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("erase_");
 		if (!op)
 		{
@@ -660,7 +660,7 @@ public:
 
 	inline any_a<> clear__(range_a<> const& arguments)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("clear_");
 		if (!op)
 		{
@@ -671,7 +671,7 @@ public:
 
 	inline collection_a<> clear_()
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("clear_");
 		if (!op)
 		{
@@ -685,7 +685,7 @@ public:
 
 	inline any_a<> size__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("size_");
 		if (!op)
 		{
@@ -696,7 +696,7 @@ public:
 
 	inline number_data_int64_a<> size_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("size_");
 		if (!op)
 		{
@@ -710,7 +710,7 @@ public:
 
 	inline any_a<> empty__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("empty_");
 		if (!op)
 		{
@@ -721,7 +721,7 @@ public:
 
 	inline any_a<> empty_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("empty_");
 		if (!op)
 		{
@@ -735,7 +735,7 @@ public:
 
 	inline any_a<> push_front__(range_a<> const& arguments)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("push_front_");
 		if (!op)
 		{
@@ -746,7 +746,7 @@ public:
 
 	inline collection_a<> push_front_(any_a<> const& thing)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("push_front_");
 		if (!op)
 		{
@@ -760,7 +760,7 @@ public:
 
 	inline any_a<> pop_front__(range_a<> const& arguments)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("pop_front_");
 		if (!op)
 		{
@@ -771,7 +771,7 @@ public:
 
 	inline any_a<> pop_front_()
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("pop_front_");
 		if (!op)
 		{
@@ -782,7 +782,7 @@ public:
 
 	inline any_a<> push_back__(range_a<> const& arguments)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("push_back_");
 		if (!op)
 		{
@@ -793,7 +793,7 @@ public:
 
 	inline collection_a<> push_back_(any_a<> const& thing)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("push_back_");
 		if (!op)
 		{
@@ -807,7 +807,7 @@ public:
 
 	inline any_a<> pop_back__(range_a<> const& arguments)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("pop_back_");
 		if (!op)
 		{
@@ -818,7 +818,7 @@ public:
 
 	inline any_a<> pop_back_()
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("pop_back_");
 		if (!op)
 		{
@@ -829,7 +829,7 @@ public:
 
 	inline any_a<> self_assign__(range_a<> const& arguments)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("self_assign_");
 		if (!op)
 		{
@@ -840,7 +840,7 @@ public:
 
 	inline collection_a<> self_assign_(range_a<> const& range)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("self_assign_");
 		if (!op)
 		{
@@ -851,7 +851,7 @@ public:
 
 	inline any_a<> self_add__(range_a<> const& arguments)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("self_add_");
 		if (!op)
 		{
@@ -862,7 +862,7 @@ public:
 
 	inline collection_a<> self_add_(range_a<> const& range)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("self_add_");
 		if (!op)
 		{
@@ -873,7 +873,7 @@ public:
 
 	inline any_a<> add__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("add_");
 		if (!op)
 		{
@@ -884,7 +884,7 @@ public:
 
 	inline collection_a<> add_(range_a<> const& range) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("add_");
 		if (!op)
 		{
@@ -895,7 +895,7 @@ public:
 
 	inline any_a<> self_subtract__(range_a<> const& arguments)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("self_subtract_");
 		if (!op)
 		{
@@ -906,7 +906,7 @@ public:
 
 	inline collection_a<> self_subtract_(range_a<> const& range)
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("self_subtract_");
 		if (!op)
 		{
@@ -917,7 +917,7 @@ public:
 
 	inline any_a<> subtract__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("subtract_");
 		if (!op)
 		{
@@ -928,7 +928,7 @@ public:
 
 	inline collection_a<> subtract_(range_a<> const& range) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("subtract_");
 		if (!op)
 		{
@@ -939,7 +939,7 @@ public:
 
 	inline any_a<> read_lock__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("read_lock_");
 		if (!op)
 		{
@@ -950,7 +950,7 @@ public:
 
 	inline any_a<> read_lock_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("read_lock_");
 		if (!op)
 		{
@@ -961,7 +961,7 @@ public:
 
 	inline any_a<> write_lock__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("write_lock_");
 		if (!op)
 		{
@@ -972,7 +972,7 @@ public:
 
 	inline any_a<> write_lock_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("write_lock_");
 		if (!op)
 		{
@@ -981,18 +981,18 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this)));
 	}
 
-	void ___weak___(range_d::___WEAK___ const& weak) const {}
+	void ___weak___(range_d<>::___WEAK___ const& weak) const {}
 
 	explicit collection_d(any_a<> const& thing)
 		: range_d{ thing }
 	{}
 
-	explicit collection_d(any_a<>& thing, ___reference_tag___)
-		: range_d{ thing, ___reference_tag___{} }
+	explicit collection_d(any_a<>& thing, any_a<>::___reference_tag___)
+		: range_d{ thing, any_a<>::___reference_tag___{} }
 	{}
 
-	explicit collection_d(any_a<>& thing, ___duplicate_tag___)
-		: range_d{ thing, ___duplicate_tag___{} }
+	explicit collection_d(any_a<>& thing, any_a<>::___duplicate_tag___)
+		: range_d{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

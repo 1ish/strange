@@ -15,34 +15,34 @@ public:
 	inline any_a<> aspects__(range_a<> const& ___arguments___) const;
 
 	inline flock_a<> aspects_() const
-	{ assert(___handle___); return ___read___().aspects_(); }
+	{ assert(any_a<>::___handle___); return ___read___().aspects_(); }
 
 	inline any_a<> fixed__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> fixed_() const
-	{ assert(___handle___); return ___read___().fixed_(); }
+	{ assert(any_a<>::___handle___); return ___read___().fixed_(); }
 
 	inline bool fixed() const
-	{ assert(___handle___); return ___read___().fixed(); }
+	{ assert(any_a<>::___handle___); return ___read___().fixed(); }
 
 	inline any_a<> reference__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> reference_() const
-	{ assert(___handle___); return ___read___().reference_(); }
+	{ assert(any_a<>::___handle___); return ___read___().reference_(); }
 
 	inline bool reference() const
-	{ assert(___handle___); return ___read___().reference(); }
+	{ assert(any_a<>::___handle___); return ___read___().reference(); }
 
 	inline any_a<> optional__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> optional_() const
-	{ assert(___handle___); return ___read___().optional_(); }
+	{ assert(any_a<>::___handle___); return ___read___().optional_(); }
 
 	inline bool optional() const
-	{ assert(___handle___); return ___read___().optional(); }
+	{ assert(any_a<>::___handle___); return ___read___().optional(); }
 
 protected:
-	struct ___kind_a_handle_base___ : ___cat_a_handle_base___
+	struct ___kind_a_handle_base___ : cat_a<>::___cat_a_handle_base___
 	{
 		virtual flock_a<> aspects_() const = 0;
 		virtual any_a<> fixed_() const = 0;
@@ -54,43 +54,43 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___kind_a_handle_base___>
-	struct ___kind_a_handle___ : ___cat_a_handle___<___TTT___, ___DHB___>
+	struct ___kind_a_handle___ : cat_a<>::___cat_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___kind_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: ___cat_a_handle___<___TTT___, ___DHB___>{ value }
+			: cat_a<>::template ___cat_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___kind_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: ___cat_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: cat_a<>::template ___cat_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
-		inline ___kind_a_handle___(___variadic_tag___, Args&&... args)
-			: ___cat_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		inline ___kind_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
+			: cat_a<>::template ___cat_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline flock_a<> aspects_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.aspects_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.aspects_(); }
 
 		virtual inline any_a<> fixed_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.fixed_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.fixed_(); }
 
 		virtual inline bool fixed() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.fixed(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.fixed(); }
 
 		virtual inline any_a<> reference_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.reference_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.reference_(); }
 
 		virtual inline bool reference() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.reference(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.reference(); }
 
 		virtual inline any_a<> optional_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.optional_(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.optional_(); }
 
 		virtual inline bool optional() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.optional(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.optional(); }
 
 	};
 
@@ -118,11 +118,11 @@ private:
 		{}
 
 		template <typename... Args>
-		inline ___kind_a_handle_final___(___variadic_tag___, Args&&... args)
-			: ___kind_a_handle___<___TTT___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		inline ___kind_a_handle_final___(any_a<>::___variadic_tag___, Args&&... args)
+			: ___kind_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline ___SHARED___ ___clone___() const final
+		virtual inline cat_a<>::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___kind_a_handle_final___>(___kind_a_handle___<___TTT___>::___value___);
 		}
@@ -140,17 +140,17 @@ private:
 protected:
 	inline ___kind_a_handle_base___ const& ___read___() const noexcept
 	{
-		return *std::static_pointer_cast<___kind_a_handle_base___ const>(___handle___);
+		return *std::static_pointer_cast<___kind_a_handle_base___ const>(any_a<>::___handle___);
 	}
 
 	inline ___kind_a_handle_base___& ___write___() noexcept
 	{
-		if (!___handle___.unique())
+		if (!any_a<>::___handle___.unique())
 		{
-			___handle___ = ___handle___->___clone___();
-			___handle___->___weak___(___handle___);
+			any_a<>::___handle___ = any_a<>::___handle___->___clone___();
+			any_a<>::___handle___->___weak___(any_a<>::___handle___);
 		}
-		return *std::static_pointer_cast<___kind_a_handle_base___>(___handle___);
+		return *std::static_pointer_cast<___kind_a_handle_base___>(any_a<>::___handle___);
 	}
 
 public:
@@ -161,57 +161,57 @@ public:
 
 	static inline kind_a ref(kind_a& other) noexcept
 	{
-		return kind_a(other, ___reference_tag___{});
+		return kind_a(other, any_a<>::___reference_tag___{});
 	}
 
 	static inline kind_a dup(kind_a& other) noexcept
 	{
-		return kind_a(other, ___duplicate_tag___{});
+		return kind_a(other, any_a<>::___duplicate_tag___{});
 	}
 
 	inline kind_a() = default;
 
-	inline kind_a(kind_a& other, ___reference_tag___) noexcept
-		: cat_a(other, ___reference_tag___{})
+	inline kind_a(kind_a& other, any_a<>::___reference_tag___) noexcept
+		: cat_a<>(other, any_a<>::___reference_tag___{})
 	{}
 
-	inline kind_a(kind_a& other, ___duplicate_tag___) noexcept
-		: cat_a(other, ___duplicate_tag___{})
+	inline kind_a(kind_a& other, any_a<>::___duplicate_tag___) noexcept
+		: cat_a<>(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline kind_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: cat_a{ handle }
+		: cat_a<>{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___kind_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
-	explicit inline kind_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
-		: cat_a(handle, ___reference_tag___{})
+	explicit inline kind_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
+		: cat_a<>(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___kind_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<kind_a, std::decay_t<___TTT___>>::value>>
 	explicit inline kind_a(___TTT___ value) noexcept
-		: cat_a{ std::make_shared<___kind_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: cat_a<>{ std::make_shared<___kind_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
-		___handle___->___weak___(___handle___);
+		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
-	explicit inline kind_a(___variadic_tag___, ___TTT___*, Args&&... args)
-		: cat_a{ std::make_shared<___kind_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(___variadic_tag___{}, std::forward<Args>(args)...) }
+	explicit inline kind_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
+		: cat_a<>{ std::make_shared<___kind_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
-		___handle___->___weak___(___handle___);
+		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___>
 	inline kind_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___kind_a_handle_base___>(handle));
-		___handle___ = handle;
+		any_a<>::___handle___ = handle;
 		return *this;
 	}
 
@@ -219,7 +219,7 @@ public:
 	inline kind_a& operator=(___TTT___ value) noexcept
 	{
 		kind_a temp{ std::move(value) };
-		std::swap(temp.___handle___, ___handle___);
+		std::swap(temp.___handle___, any_a<>::___handle___);
 		return *this;
 	}
 
@@ -243,9 +243,9 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___kind_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return kind_a(thing.___handle___, ___reference_tag___{});
+			return kind_a(thing.___handle___, any_a<>::___reference_tag___{});
 		}
-		return kind_a{ kind_d<_1>(thing, ___reference_tag___{}) };
+		return kind_a{ kind_d<_1>(thing, any_a<>::___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -260,7 +260,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = cat_a::___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = cat_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -279,7 +279,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = cat_a::___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = cat_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -291,7 +291,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = cat_a::___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = cat_a<>::template ___operations___<___unordered_shoal_a___>();
 			operations.update_string("aspects_", native_extraction_t<kind_a>::create(&kind_a::aspects__));
 			operations.update_string("fixed_", native_extraction_t<kind_a>::create(&kind_a::fixed__));
 			operations.update_string("reference_", native_extraction_t<kind_a>::create(&kind_a::reference__));
@@ -304,7 +304,7 @@ public:
 	template <typename ___TTT___, typename... Args>
 	static inline kind_a create(Args&&... args)
 	{
-		return kind_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
+		return kind_a(any_a<>::___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}
 }; // class kind_a
 
@@ -314,7 +314,7 @@ class kind_d : public cat_d<>
 public:
 	inline any_a<> aspects__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("aspects_");
 		if (!op)
 		{
@@ -325,7 +325,7 @@ public:
 
 	inline flock_a<> aspects_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("aspects_");
 		if (!op)
 		{
@@ -336,7 +336,7 @@ public:
 
 	inline any_a<> fixed__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("fixed_");
 		if (!op)
 		{
@@ -347,7 +347,7 @@ public:
 
 	inline any_a<> fixed_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("fixed_");
 		if (!op)
 		{
@@ -361,7 +361,7 @@ public:
 
 	inline any_a<> reference__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("reference_");
 		if (!op)
 		{
@@ -372,7 +372,7 @@ public:
 
 	inline any_a<> reference_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("reference_");
 		if (!op)
 		{
@@ -386,7 +386,7 @@ public:
 
 	inline any_a<> optional__(range_a<> const& arguments) const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___); 
 		auto const op = operation("optional_");
 		if (!op)
 		{
@@ -397,7 +397,7 @@ public:
 
 	inline any_a<> optional_() const
 	{
-		assert(___handle___);
+		assert(any_a<>::___handle___);
 		auto const op = operation("optional_");
 		if (!op)
 		{
@@ -409,18 +409,18 @@ public:
 	inline bool optional() const
 	{ return optional_(); }
 
-	void ___weak___(cat_d::___WEAK___ const& weak) const {}
+	void ___weak___(cat_d<>::___WEAK___ const& weak) const {}
 
 	explicit kind_d(any_a<> const& thing)
 		: cat_d{ thing }
 	{}
 
-	explicit kind_d(any_a<>& thing, ___reference_tag___)
-		: cat_d{ thing, ___reference_tag___{} }
+	explicit kind_d(any_a<>& thing, any_a<>::___reference_tag___)
+		: cat_d{ thing, any_a<>::___reference_tag___{} }
 	{}
 
-	explicit kind_d(any_a<>& thing, ___duplicate_tag___)
-		: cat_d{ thing, ___duplicate_tag___{} }
+	explicit kind_d(any_a<>& thing, any_a<>::___duplicate_tag___)
+		: cat_d{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 
