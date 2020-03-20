@@ -49,7 +49,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_vector(); }
 
 protected:
-	struct ___lake_a_handle_base___ : inventory_a<>::template ___inventory_a_handle_base___
+	struct ___lake_a_handle_base___ : inventory_a<>::___inventory_a_handle_base___
 	{
 		virtual bool operator==(lake_a < _primitive > const & lake ) const = 0;
 		virtual bool operator!=(lake_a < _primitive > const & lake ) const = 0;

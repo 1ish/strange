@@ -61,7 +61,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___read___().subtract_(number); }
 
 protected:
-	struct ___random_access_extractor_a_handle_base___ : bidirectional_extractor_a<>::template ___bidirectional_extractor_a_handle_base___
+	struct ___random_access_extractor_a_handle_base___ : bidirectional_extractor_a<>::___bidirectional_extractor_a_handle_base___
 	{
 		virtual void self_add_(number_a<> const& number) = 0;
 		virtual random_access_extractor_a<> add_(number_a<> const& number) const = 0;

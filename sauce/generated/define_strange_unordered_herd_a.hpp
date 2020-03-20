@@ -31,7 +31,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_set(); }
 
 protected:
-	struct ___unordered_herd_a_handle_base___ : herd_a<>::template ___herd_a_handle_base___
+	struct ___unordered_herd_a_handle_base___ : herd_a<>::___herd_a_handle_base___
 	{
 		virtual bool operator==(unordered_herd_a < > const & herd ) const = 0;
 		virtual bool operator!=(unordered_herd_a < > const & herd ) const = 0;

@@ -25,7 +25,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_it(); }
 
 protected:
-	struct ___forward_mutator_data_a_handle_base___ : forward_mutator_a<>::template ___forward_mutator_a_handle_base___
+	struct ___forward_mutator_data_a_handle_base___ : forward_mutator_a<>::___forward_mutator_a_handle_base___
 	{
 		virtual bool operator==(forward_mutator_data_a < _type > const & it ) const = 0;
 		virtual bool operator!=(forward_mutator_data_a < _type > const & it ) const = 0;

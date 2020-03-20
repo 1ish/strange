@@ -39,7 +39,7 @@ public:
 #endif
 
 protected:
-	struct ___bidirectional_mutator_a_handle_base___ : forward_mutator_a<>::template ___forward_mutator_a_handle_base___
+	struct ___bidirectional_mutator_a_handle_base___ : forward_mutator_a<>::___forward_mutator_a_handle_base___
 	{
 		virtual void decrement_() = 0;
 	};

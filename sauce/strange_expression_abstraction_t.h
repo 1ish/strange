@@ -1180,7 +1180,7 @@ protected:
 		else
 		{
 			river.write_string(
-				" : " + base_name + base_aspects + "::template ___" + base_name + "_handle_base___\n"
+				" : " + base_name + base_aspects + "::___" + base_name + "_handle_base___\n"
 				"\t{\n");
 		}
 		_define_class_members_(root, class_name, class_expression_terms, version, indent, river,

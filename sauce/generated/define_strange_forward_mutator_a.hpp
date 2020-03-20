@@ -55,7 +55,7 @@ public:
 #endif
 
 protected:
-	struct ___forward_mutator_a_handle_base___ : any_a<>::template ___any_a_handle_base___
+	struct ___forward_mutator_a_handle_base___ : any_a<>::___any_a_handle_base___
 	{
 		virtual any_a<> get_() const = 0;
 		virtual any_a<> set_(any_a<> const& thing) const = 0;

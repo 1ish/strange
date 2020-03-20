@@ -37,7 +37,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_primitive(); }
 
 protected:
-	struct ___number_data_a_handle_base___ : number_a<>::template ___number_a_handle_base___
+	struct ___number_data_a_handle_base___ : number_a<>::___number_a_handle_base___
 	{
 		virtual bool operator==(number_data_a < _primitive > const & number ) const = 0;
 		virtual bool operator!=(number_data_a < _primitive > const & number ) const = 0;

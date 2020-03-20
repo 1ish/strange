@@ -257,7 +257,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___read___().filename(); }
 
 protected:
-	struct ___river_a_handle_base___ : range_a<>::template ___range_a_handle_base___
+	struct ___river_a_handle_base___ : range_a<>::___range_a_handle_base___
 	{
 		virtual forward_extractor_data_a < any_a < > , std :: istreambuf_iterator < char > > extract_begin() const = 0;
 		virtual forward_extractor_data_a < any_a < > , std :: istreambuf_iterator < char > > extract_end() const = 0;

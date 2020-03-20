@@ -25,7 +25,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_it(); }
 
 protected:
-	struct ___bidirectional_extractor_data_a_handle_base___ : bidirectional_extractor_a<>::template ___bidirectional_extractor_a_handle_base___
+	struct ___bidirectional_extractor_data_a_handle_base___ : bidirectional_extractor_a<>::___bidirectional_extractor_a_handle_base___
 	{
 		virtual bool operator==(bidirectional_extractor_data_a < _type > const & it ) const = 0;
 		virtual bool operator!=(bidirectional_extractor_data_a < _type > const & it ) const = 0;

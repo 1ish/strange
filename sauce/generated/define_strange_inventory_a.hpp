@@ -38,7 +38,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_end_(); }
 
 protected:
-	struct ___inventory_a_handle_base___ : collection_a<>::template ___collection_a_handle_base___
+	struct ___inventory_a_handle_base___ : collection_a<>::___collection_a_handle_base___
 	{
 		virtual bool has_index(int64_t index ) const = 0;
 		virtual any_a < > at_index(int64_t index ) const = 0;

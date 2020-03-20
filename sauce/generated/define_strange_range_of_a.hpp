@@ -23,7 +23,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___read___().extract_end_(); }
 
 protected:
-	struct ___range_of_a_handle_base___ : any_a<>::template ___any_a_handle_base___
+	struct ___range_of_a_handle_base___ : any_a<>::___any_a_handle_base___
 	{
 		virtual forward_extractor_a< _element > extract_begin_() const = 0;
 		virtual forward_extractor_a< _element > extract_end_() const = 0;

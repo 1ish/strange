@@ -77,7 +77,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___read___().report(); }
 
 protected:
-	struct ___token_a_handle_base___ : any_a<>::template ___any_a_handle_base___
+	struct ___token_a_handle_base___ : any_a<>::___any_a_handle_base___
 	{
 		virtual symbol_a<> filename_() const = 0;
 		virtual std :: string filename() const = 0;

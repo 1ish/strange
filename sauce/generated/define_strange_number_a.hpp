@@ -306,7 +306,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___read___().little_endian(); }
 
 protected:
-	struct ___number_a_handle_base___ : any_a<>::template ___any_a_handle_base___
+	struct ___number_a_handle_base___ : any_a<>::___any_a_handle_base___
 	{
 		virtual void increment_() = 0;
 		virtual void decrement_() = 0;

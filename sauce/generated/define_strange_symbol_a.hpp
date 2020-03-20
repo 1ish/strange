@@ -53,7 +53,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___read___().add_(symbol); }
 
 protected:
-	struct ___symbol_a_handle_base___ : any_a<>::template ___any_a_handle_base___
+	struct ___symbol_a_handle_base___ : any_a<>::___any_a_handle_base___
 	{
 		virtual bool operator==(symbol_a < > const & symbol ) const = 0;
 		virtual bool operator!=(symbol_a < > const & symbol ) const = 0;

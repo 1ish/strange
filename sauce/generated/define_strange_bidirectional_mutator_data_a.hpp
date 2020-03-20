@@ -25,7 +25,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_it(); }
 
 protected:
-	struct ___bidirectional_mutator_data_a_handle_base___ : bidirectional_mutator_a<>::template ___bidirectional_mutator_a_handle_base___
+	struct ___bidirectional_mutator_data_a_handle_base___ : bidirectional_mutator_a<>::___bidirectional_mutator_a_handle_base___
 	{
 		virtual bool operator==(bidirectional_mutator_data_a < _type > const & it ) const = 0;
 		virtual bool operator!=(bidirectional_mutator_data_a < _type > const & it ) const = 0;

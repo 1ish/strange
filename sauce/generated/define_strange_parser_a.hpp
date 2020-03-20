@@ -18,7 +18,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().parse_(tokenizer); }
 
 protected:
-	struct ___parser_a_handle_base___ : any_a<>::template ___any_a_handle_base___
+	struct ___parser_a_handle_base___ : any_a<>::___any_a_handle_base___
 	{
 		virtual expression_a<> parse_(range_a<> const& tokenizer) = 0;
 	};

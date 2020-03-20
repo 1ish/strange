@@ -50,7 +50,7 @@ public:
 #endif
 
 protected:
-	struct ___forward_extractor_a_handle_base___ : any_a<>::template ___any_a_handle_base___
+	struct ___forward_extractor_a_handle_base___ : any_a<>::___any_a_handle_base___
 	{
 		virtual _element get_() const = 0;
 		virtual _element const & operator*() const = 0;

@@ -34,7 +34,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().erase_string(s); }
 
 protected:
-	struct ___herd_a_handle_base___ : collection_a<>::template ___collection_a_handle_base___
+	struct ___herd_a_handle_base___ : collection_a<>::___collection_a_handle_base___
 	{
 		virtual bool has_string(std :: string const & s ) const = 0;
 		virtual any_a < > at_string(std :: string const & s ) const = 0;

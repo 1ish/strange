@@ -60,7 +60,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___read___().code(); }
 
 protected:
-	struct ___cat_a_handle_base___ : symbol_a<>::template ___symbol_a_handle_base___
+	struct ___cat_a_handle_base___ : symbol_a<>::___symbol_a_handle_base___
 	{
 		virtual any_a<> symbolic_() const = 0;
 		virtual bool symbolic() const = 0;

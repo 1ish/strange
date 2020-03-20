@@ -25,7 +25,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_data(); }
 
 protected:
-	struct ___data_a_handle_base___ : any_a<>::template ___any_a_handle_base___
+	struct ___data_a_handle_base___ : any_a<>::___any_a_handle_base___
 	{
 		virtual bool operator==(data_a < _type > const & data ) const = 0;
 		virtual bool operator!=(data_a < _type > const & data ) const = 0;

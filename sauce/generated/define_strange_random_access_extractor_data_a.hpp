@@ -37,7 +37,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_it(); }
 
 protected:
-	struct ___random_access_extractor_data_a_handle_base___ : random_access_extractor_a<>::template ___random_access_extractor_a_handle_base___
+	struct ___random_access_extractor_data_a_handle_base___ : random_access_extractor_a<>::___random_access_extractor_a_handle_base___
 	{
 		virtual bool operator==(random_access_extractor_data_a < _type > const & it ) const = 0;
 		virtual bool operator!=(random_access_extractor_data_a < _type > const & it ) const = 0;

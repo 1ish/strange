@@ -49,7 +49,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_deque(); }
 
 protected:
-	struct ___squad_a_handle_base___ : inventory_a<>::template ___inventory_a_handle_base___
+	struct ___squad_a_handle_base___ : inventory_a<>::___inventory_a_handle_base___
 	{
 		virtual bool operator==(squad_a < > const & squad ) const = 0;
 		virtual bool operator!=(squad_a < > const & squad ) const = 0;

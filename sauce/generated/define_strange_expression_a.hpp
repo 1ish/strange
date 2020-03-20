@@ -57,7 +57,7 @@ public:
 	{ assert(any_a<>::___handle___); ___read___().generate_cpp(version, indent, river, declare, define, type); }
 
 protected:
-	struct ___expression_a_handle_base___ : operation_a<>::template ___operation_a_handle_base___
+	struct ___expression_a_handle_base___ : operation_a<>::___operation_a_handle_base___
 	{
 		virtual expression_a<> recreate_() const = 0;
 		virtual any_a<> literal_() const = 0;

@@ -37,7 +37,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_map(); }
 
 protected:
-	struct ___unordered_shoal_a_handle_base___ : shoal_a<>::template ___shoal_a_handle_base___
+	struct ___unordered_shoal_a_handle_base___ : shoal_a<>::___shoal_a_handle_base___
 	{
 		virtual bool operator==(unordered_shoal_a < > const & shoal ) const = 0;
 		virtual bool operator!=(unordered_shoal_a < > const & shoal ) const = 0;

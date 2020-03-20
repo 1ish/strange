@@ -167,7 +167,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___read___().write_lock_(); }
 
 protected:
-	struct ___collection_a_handle_base___ : range_a<>::template ___range_a_handle_base___
+	struct ___collection_a_handle_base___ : range_a<>::___range_a_handle_base___
 	{
 		virtual any_a<> has_(any_a<> const& key) const = 0;
 		virtual bool has(any_a < > const & key ) const = 0;

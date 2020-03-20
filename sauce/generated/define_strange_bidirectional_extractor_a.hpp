@@ -39,7 +39,7 @@ public:
 #endif
 
 protected:
-	struct ___bidirectional_extractor_a_handle_base___ : forward_extractor_a< any_a<> >::template ___forward_extractor_a_handle_base___
+	struct ___bidirectional_extractor_a_handle_base___ : forward_extractor_a< any_a<> >::___forward_extractor_a_handle_base___
 	{
 		virtual void decrement_() = 0;
 	};

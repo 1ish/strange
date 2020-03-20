@@ -42,7 +42,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___read___().optional(); }
 
 protected:
-	struct ___kind_a_handle_base___ : cat_a<>::template ___cat_a_handle_base___
+	struct ___kind_a_handle_base___ : cat_a<>::___cat_a_handle_base___
 	{
 		virtual flock_a<> aspects_() const = 0;
 		virtual any_a<> fixed_() const = 0;
