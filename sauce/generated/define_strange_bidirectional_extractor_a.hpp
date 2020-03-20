@@ -9,7 +9,7 @@ template <typename _1 = void>
 inline bidirectional_extractor_d<_1> ___bidirectional_extractor_dynamic___(any_a<> const& thing); 
 
 template <typename _1>
-class bidirectional_extractor_a : public forward_extractor_a<>
+class bidirectional_extractor_a : public forward_extractor_a< any_a<> >
 {
 public:
 	inline any_a<> decrement__(range_a<> const& ___arguments___);
@@ -279,7 +279,7 @@ public:
 }; // class bidirectional_extractor_a
 
 template <typename _1>
-class bidirectional_extractor_d : public forward_extractor_d<>
+class bidirectional_extractor_d : public forward_extractor_d< any_a<> >
 {
 public:
 	inline any_a<> decrement__(range_a<> const& arguments)

@@ -121,15 +121,15 @@ class unordered_shoal_t : public thing_t<___ego___>
 		{}
 	};
 
-	template <typename _iterator_, typename ___ego_it___ = forward_extractor_data_a<_iterator_>>
+	template <typename _element, typename _iterator_, typename ___ego_it___ = forward_extractor_data_a<_element, _iterator_>>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
 		// construction
 		template <typename F>
-		static inline forward_extractor_data_a<_iterator_> create(unordered_shoal_a<> const& unordered_shoal, unordered_shoal_t const& unordered_shoal_thing, F&& it)
+		static inline forward_extractor_data_a<_element, _iterator_> create(unordered_shoal_a<> const& unordered_shoal, unordered_shoal_t const& unordered_shoal_thing, F&& it)
 		{
-			return forward_extractor_data_a<_iterator_>::template create<extractor_t<_iterator_>>(unordered_shoal, unordered_shoal_thing, std::forward<F>(it));
+			return forward_extractor_data_a<_element, _iterator_>::template create<extractor_t<_element, _iterator_>>(unordered_shoal, unordered_shoal_thing, std::forward<F>(it));
 		}
 
 		// reflection
@@ -145,16 +145,16 @@ class unordered_shoal_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			return check<forward_extractor_data_a<_iterator_>>(thing) &&
-				_it == fast<forward_extractor_data_a<_iterator_>>(thing).extract_it();
+			return check<forward_extractor_data_a<_element, _iterator_>>(thing) &&
+				_it == fast<forward_extractor_data_a<_element, _iterator_>>(thing).extract_it();
 		}
 
-		inline bool operator==(forward_extractor_data_a<_iterator_> const& it) const
+		inline bool operator==(forward_extractor_data_a<_element, _iterator_> const& it) const
 		{
 			return _it == it.extract_it();
 		}
 
-		inline bool operator!=(forward_extractor_data_a<_iterator_> const& it) const
+		inline bool operator!=(forward_extractor_data_a<_element, _iterator_> const& it) const
 		{
 			return _it != it.extract_it();
 		}
@@ -330,28 +330,28 @@ public:
 	}
 
 	// range
-	inline forward_extractor_a<> extract_begin_() const
+	inline forward_extractor_a<any_a<>> extract_begin_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<typename std_unordered_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cbegin());
+		return extractor_t<any_a<>, typename std_unordered_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cbegin());
 	}
 
-	inline forward_extractor_data_a<typename std_unordered_map_any_any::const_iterator> extract_begin() const
+	inline forward_extractor_data_a<any_a<>, typename std_unordered_map_any_any::const_iterator> extract_begin() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<typename std_unordered_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cbegin());
+		return extractor_t<any_a<>, typename std_unordered_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cbegin());
 	}
 
-	inline forward_extractor_a<> extract_end_() const
+	inline forward_extractor_a<any_a<>> extract_end_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<typename std_unordered_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cend());
+		return extractor_t<any_a<>, typename std_unordered_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cend());
 	}
 
-	inline forward_extractor_data_a<typename std_unordered_map_any_any::const_iterator> extract_end() const
+	inline forward_extractor_data_a<any_a<>, typename std_unordered_map_any_any::const_iterator> extract_end() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<typename std_unordered_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cend());
+		return extractor_t<any_a<>, typename std_unordered_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cend());
 	}
 
 	inline forward_mutator_a<> mutate_begin_()

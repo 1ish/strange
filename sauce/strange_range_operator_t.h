@@ -8,15 +8,15 @@ namespace strange
 template <typename ___ego___>
 class range_operator_t : public thing_t<___ego___>
 {
-	template <typename _iterator_, typename ___ego_it___ = forward_extractor_data_a<_iterator_>>
+	template <typename _element, typename _iterator_, typename ___ego_it___ = forward_extractor_data_a<_element, _iterator_>>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
 		// construction
 		template <typename F>
-		static inline forward_extractor_data_a<_iterator_> create(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
+		static inline forward_extractor_data_a<_element, _iterator_> create(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
 		{
-			return forward_extractor_data_a<_iterator_>::template create<extractor_t<_iterator_>>(range, std::forward<F>(it), thing_ref, range_ref);
+			return forward_extractor_data_a<_element, _iterator_>::template create<extractor_t<_element, _iterator_>>(range, std::forward<F>(it), thing_ref, range_ref);
 		}
 
 		// reflection
@@ -32,16 +32,16 @@ class range_operator_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			return check<forward_extractor_data_a<_iterator_>>(thing) &&
-				_it == fast<forward_extractor_data_a<_iterator_>>(thing).extract_it();
+			return check<forward_extractor_data_a<_element, _iterator_>>(thing) &&
+				_it == fast<forward_extractor_data_a<_element, _iterator_>>(thing).extract_it();
 		}
 
-		inline bool operator==(forward_extractor_data_a<_iterator_> const& it) const
+		inline bool operator==(forward_extractor_data_a<_element, _iterator_> const& it) const
 		{
 			return _it == it.extract_it();
 		}
 
-		inline bool operator!=(forward_extractor_data_a<_iterator_> const& it) const
+		inline bool operator!=(forward_extractor_data_a<_element, _iterator_> const& it) const
 		{
 			return _it != it.extract_it();
 		}
@@ -126,7 +126,7 @@ public:
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.extract_begin_();
+		auto it = range.extract_begin_();
 		if (it == range.extract_end_())
 		{
 			throw dis("strange::range_operator::create passed empty range");
@@ -171,24 +171,24 @@ public:
 	}
 
 	// range
-	inline forward_extractor_a<> extract_begin_() const
+	inline forward_extractor_a<any_a<>> extract_begin_() const
 	{
-		return extractor_t<forward_extractor_a<>>::create(_range, _range.extract_begin_(), _thing_ref, _range_ref);
+		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_range, _range.extract_begin_(), _thing_ref, _range_ref);
 	}
 
-	inline forward_extractor_data_a<forward_extractor_a<>> extract_begin() const
+	inline forward_extractor_data_a<any_a<>, forward_extractor_a<any_a<>>> extract_begin() const
 	{
-		return extractor_t<forward_extractor_a<>>::create(_range, _range.extract_begin_(), _thing_ref, _range_ref);
+		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_range, _range.extract_begin_(), _thing_ref, _range_ref);
 	}
 
-	inline forward_extractor_a<> extract_end_() const
+	inline forward_extractor_a<any_a<>> extract_end_() const
 	{
-		return extractor_t<forward_extractor_a<>>::create(_range, _range.extract_end_(), _thing_ref, _range_ref);
+		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_range, _range.extract_end_(), _thing_ref, _range_ref);
 	}
 
-	inline forward_extractor_data_a<forward_extractor_a<>> extract_end() const
+	inline forward_extractor_data_a<any_a<>, forward_extractor_a<any_a<>>> extract_end() const
 	{
-		return extractor_t<forward_extractor_a<>>::create(_range, _range.extract_end_(), _thing_ref, _range_ref);
+		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_range, _range.extract_end_(), _thing_ref, _range_ref);
 	}
 
 protected:

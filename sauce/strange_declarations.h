@@ -292,7 +292,7 @@ inline _result_ num(_primitive_ primitive);
 
 // range
 inline range_a<> range_create();
-inline range_a<> range_create(forward_extractor_a<> const& begin, forward_extractor_a<> const& end);
+inline range_a<> range_create(forward_extractor_a<any_a<>> const& begin, forward_extractor_a<any_a<>> const& end);
 
 // flock
 template <bool _concurrent_ = false>

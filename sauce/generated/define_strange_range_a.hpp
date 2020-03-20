@@ -14,19 +14,19 @@ class range_a : public any_a<>
 public:
 	inline any_a<> extract_begin__(range_a<> const& ___arguments___) const;
 
-	inline forward_extractor_a<> extract_begin_() const
+	inline forward_extractor_a< any_a<> > extract_begin_() const
 	{ assert(___handle___); return ___read___().extract_begin_(); }
 
 	inline any_a<> extract_end__(range_a<> const& ___arguments___) const;
 
-	inline forward_extractor_a<> extract_end_() const
+	inline forward_extractor_a< any_a<> > extract_end_() const
 	{ assert(___handle___); return ___read___().extract_end_(); }
 
 protected:
 	struct ___range_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual forward_extractor_a<> extract_begin_() const = 0;
-		virtual forward_extractor_a<> extract_end_() const = 0;
+		virtual forward_extractor_a< any_a<> > extract_begin_() const = 0;
+		virtual forward_extractor_a< any_a<> > extract_end_() const = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___range_a_handle_base___>
@@ -47,10 +47,10 @@ protected:
 			: ___any_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline forward_extractor_a<> extract_begin_() const final
+		virtual inline forward_extractor_a< any_a<> > extract_begin_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin_(); }
 
-		virtual inline forward_extractor_a<> extract_end_() const final
+		virtual inline forward_extractor_a< any_a<> > extract_end_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end_(); }
 
 	};
@@ -282,7 +282,7 @@ public:
 		return op.operate(*const_cast<range_d*>(this), arguments);
 	}
 
-	inline forward_extractor_a<> extract_begin_() const
+	inline forward_extractor_a< any_a<> > extract_begin_() const
 	{
 		assert(___handle___);
 		auto const op = operation("extract_begin_");
@@ -290,7 +290,7 @@ public:
 		{
 			throw dis("dynamic range_d::extract_begin_ passed non-existent member");
 		}
-		return cast<forward_extractor_a<>>(variadic_operate(op, *const_cast<range_d*>(this)));
+		return cast<forward_extractor_a< any_a<> >>(variadic_operate(op, *const_cast<range_d*>(this)));
 	}
 
 	inline any_a<> extract_end__(range_a<> const& arguments) const
@@ -304,7 +304,7 @@ public:
 		return op.operate(*const_cast<range_d*>(this), arguments);
 	}
 
-	inline forward_extractor_a<> extract_end_() const
+	inline forward_extractor_a< any_a<> > extract_end_() const
 	{
 		assert(___handle___);
 		auto const op = operation("extract_end_");
@@ -312,7 +312,7 @@ public:
 		{
 			throw dis("dynamic range_d::extract_end_ passed non-existent member");
 		}
-		return cast<forward_extractor_a<>>(variadic_operate(op, *const_cast<range_d*>(this)));
+		return cast<forward_extractor_a< any_a<> >>(variadic_operate(op, *const_cast<range_d*>(this)));
 	}
 
 	void ___weak___(any_a::___WEAK___ const& weak) const {}

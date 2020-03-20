@@ -7,15 +7,15 @@ namespace strange
 template <typename ___ego___ = range_a<>>
 class tokenizer_t : public thing_t<___ego___>
 {
-	template <typename _iterator_, typename ___ego_it___ = forward_extractor_data_a<_iterator_>>
+	template <typename _element, typename _iterator_, typename ___ego_it___ = forward_extractor_data_a<_element, _iterator_>>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
 		// construction
 		template <typename F>
-		static inline forward_extractor_data_a<_iterator_> create(river_a<> const& river, F&& it)
+		static inline forward_extractor_data_a<_element, _iterator_> create(river_a<> const& river, F&& it)
 		{
-			return forward_extractor_data_a<_iterator_>::template create<extractor_t<_iterator_>>(river, std::forward<F>(it));
+			return forward_extractor_data_a<_element, _iterator_>::template create<extractor_t<_element, _iterator_>>(river, std::forward<F>(it));
 		}
 
 		// reflection
@@ -35,12 +35,12 @@ class tokenizer_t : public thing_t<___ego___>
 				_end == static_cast<extractor_t const&>(thing.extract_thing())._end;
 		}
 
-		inline bool operator==(forward_extractor_data_a<_iterator_> const& it) const
+		inline bool operator==(forward_extractor_data_a<_element, _iterator_> const& it) const
 		{
 			return same_(it);
 		}
 
-		inline bool operator!=(forward_extractor_data_a<_iterator_> const& it) const
+		inline bool operator!=(forward_extractor_data_a<_element, _iterator_> const& it) const
 		{
 			return !same_(it);
 		}
@@ -526,7 +526,7 @@ public:
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.extract_begin_();
+		auto it = range.extract_begin_();
 		if (it == range.extract_end_())
 		{
 			throw dis("strange::tokenizer::create passed empty range");
@@ -557,14 +557,14 @@ public:
 	}
 
 	// range
-	inline forward_extractor_a<> extract_begin_() const
+	inline forward_extractor_a<any_a<>> extract_begin_() const
 	{
-		return extractor_t<forward_extractor_a<>>::create(_river, _river.extract_begin_());
+		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_river, _river.extract_begin_());
 	}
 
-	inline forward_extractor_a<> extract_end_() const
+	inline forward_extractor_a<any_a<>> extract_end_() const
 	{
-		return extractor_t<forward_extractor_a<>>::create(_river, _river.extract_end_());
+		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_river, _river.extract_end_());
 	}
 
 protected:

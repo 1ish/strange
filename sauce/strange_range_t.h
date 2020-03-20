@@ -12,13 +12,13 @@ public:
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.extract_begin_();
+		auto it = range.extract_begin_();
 		if (it == range.extract_end_())
 		{
 			return create_();
 		}
 		any_a<> begin = *it;
-		if (!check<forward_extractor_a<>>(begin))
+		if (!check<forward_extractor_a<any_a<>>>(begin))
 		{
 			throw dis("strange::range::create passed non-mutator begin");
 		}
@@ -27,11 +27,11 @@ public:
 			throw dis("strange::range::create passed short range");
 		}
 		any_a<> end = *it;
-		if (!check<forward_extractor_a<>>(end))
+		if (!check<forward_extractor_a<any_a<>>>(end))
 		{
 			throw dis("strange::range::create passed non-mutator end");
 		}
-		return create_(fast<forward_extractor_a<>>(begin), fast<forward_extractor_a<>>(end));
+		return create_(fast<forward_extractor_a<any_a<>>>(begin), fast<forward_extractor_a<any_a<>>>(end));
 	}
 
 	static inline range_a<> create_()
@@ -40,7 +40,7 @@ public:
 		return VAL;
 	}
 
-	static inline range_a<> create_(forward_extractor_a<> const& begin, forward_extractor_a<> const& end)
+	static inline range_a<> create_(forward_extractor_a<any_a<>> const& begin, forward_extractor_a<any_a<>> const& end)
 	{
 		return range_a<>::create<range_t<>>(begin, end);
 	}
@@ -58,23 +58,23 @@ public:
 	}
 
 	// range
-	inline forward_extractor_a<> extract_begin_() const
+	inline forward_extractor_a<any_a<>> extract_begin_() const
 	{
 		return _begin;
 	}
 
-	inline forward_extractor_a<> extract_end_() const
+	inline forward_extractor_a<any_a<>> extract_end_() const
 	{
 		return _end;
 	}
 
 protected:
-	forward_extractor_a<> _begin;
-	forward_extractor_a<> _end;
+	forward_extractor_a<any_a<>> _begin;
+	forward_extractor_a<any_a<>> _end;
 
 	friend class any_a<>;
 
-	inline range_t(forward_extractor_a<> const& begin, forward_extractor_a<> const& end)
+	inline range_t(forward_extractor_a<any_a<>> const& begin, forward_extractor_a<any_a<>> const& end)
 		: thing_t<___ego___>{}
 		, _begin(begin)
 		, _end(end)
@@ -106,7 +106,7 @@ inline range_a<> range_create()
 	return range_t<>::create_();
 }
 
-inline range_a<> range_create(forward_extractor_a<> const& begin, forward_extractor_a<> const& end)
+inline range_a<> range_create(forward_extractor_a<any_a<>> const& begin, forward_extractor_a<any_a<>> const& end)
 {
 	return range_t<>::create_(begin, end);
 }

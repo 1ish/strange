@@ -46,7 +46,7 @@ public:
 	template <typename _expression_>
 	static inline any_a<> create_expression(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.extract_begin_();
+		auto it = range.extract_begin_();
 		if (it == range.extract_end_())
 		{
 			throw dis("[expression] create passed empty range");

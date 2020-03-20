@@ -2,7 +2,7 @@
 namespace strange
 {
 
-template <typename _1 = void>
+template <typename _element>
 class forward_extractor_a;
 
 } // namespace

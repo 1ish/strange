@@ -7,15 +7,15 @@ namespace strange
 template <typename ___ego___ = river_a<>>
 class river_t : public thing_t<___ego___>
 {
-	template <typename _iterator_, typename ___ego_it___ = forward_extractor_data_a<_iterator_>>
+	template <typename _element, typename _iterator_, typename ___ego_it___ = forward_extractor_data_a<_element, _iterator_>>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
 		// construction
 		template <typename F>
-		static inline forward_extractor_data_a<_iterator_> create(river_a<> const& river, F&& it)
+		static inline forward_extractor_data_a<_element, _iterator_> create(river_a<> const& river, F&& it)
 		{
-			return forward_extractor_data_a<_iterator_>::template create<extractor_t<_iterator_>>(river, std::forward<F>(it));
+			return forward_extractor_data_a<_element, _iterator_>::template create<extractor_t<_element, _iterator_>>(river, std::forward<F>(it));
 		}
 
 		// reflection
@@ -31,16 +31,16 @@ class river_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			return check<forward_extractor_data_a<_iterator_>>(thing) &&
-				_it == fast<forward_extractor_data_a<_iterator_>>(thing).extract_it();
+			return check<forward_extractor_data_a<_element, _iterator_>>(thing) &&
+				_it == fast<forward_extractor_data_a<_element, _iterator_>>(thing).extract_it();
 		}
 
-		inline bool operator==(forward_extractor_data_a<_iterator_> const& it) const
+		inline bool operator==(forward_extractor_data_a<_element, _iterator_> const& it) const
 		{
 			return _it == it.extract_it();
 		}
 
-		inline bool operator!=(forward_extractor_data_a<_iterator_> const& it) const
+		inline bool operator!=(forward_extractor_data_a<_element, _iterator_> const& it) const
 		{
 			return _it != it.extract_it();
 		}
@@ -128,7 +128,7 @@ public:
 
 	static inline any_a<> file__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.extract_begin_();
+		auto it = range.extract_begin_();
 		if (it == range.extract_end_())
 		{
 			throw dis("strange::river::file passed empty range");
@@ -217,32 +217,32 @@ public:
 	}
 
 	// range
-	inline forward_extractor_a<> extract_begin_() const
+	inline forward_extractor_a<any_a<>> extract_begin_() const
 	{
 		if (!_istream)
 		{
 			throw dis("strange::river::extract_begin can only be called on input rivers");
 		}
-		return extractor_t<std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{ *_istream });
+		return extractor_t<any_a<>, std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{ *_istream });
 	}
 
-	inline forward_extractor_data_a<std_istreambuf_iterator_char> extract_begin() const
+	inline forward_extractor_data_a<any_a<>, std_istreambuf_iterator_char> extract_begin() const
 	{
 		if (!_istream)
 		{
 			throw dis("strange::river::extract_begin can only be called on input rivers");
 		}
-		return extractor_t<std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{ *_istream });
+		return extractor_t<any_a<>, std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{ *_istream });
 	}
 
-	inline forward_extractor_a<> extract_end_() const
+	inline forward_extractor_a<any_a<>> extract_end_() const
 	{
-		return extractor_t<std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{});
+		return extractor_t<any_a<>, std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{});
 	}
 
-	inline forward_extractor_data_a<std_istreambuf_iterator_char> extract_end() const
+	inline forward_extractor_data_a<any_a<>, std_istreambuf_iterator_char> extract_end() const
 	{
-		return extractor_t<std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{});
+		return extractor_t<any_a<>, std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{});
 	}
 
 	// river input

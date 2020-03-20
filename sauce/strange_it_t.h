@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename ___ego___ = forward_extractor_a<>>
+template <typename ___ego___ = forward_extractor_a<any_a<>>>
 class it_t : public thing_t<___ego___>
 {
 public:
@@ -14,9 +14,9 @@ public:
 		return create_();
 	}
 
-	static inline forward_extractor_a<> create_()
+	static inline forward_extractor_a<any_a<>> create_()
 	{
-		static forward_extractor_a<> VAL = forward_extractor_a<>::create<it_t<>>();
+		static auto VAL = forward_extractor_a<any_a<>>::create<it_t<>>();
 		return VAL;
 	}
 
@@ -35,7 +35,7 @@ public:
 	// comparison
 	inline bool same_(any_a<> const& thing) const
 	{
-		return check<forward_extractor_a<>>(thing);
+		return check<forward_extractor_a<any_a<>>>(thing);
 	}
 
 	inline number_data_a<uint64_t> hash_() const

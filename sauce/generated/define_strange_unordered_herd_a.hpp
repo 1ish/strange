@@ -18,10 +18,10 @@ public:
 	inline bool operator!=(unordered_herd_a < > const & herd ) const
 	{ assert(___handle___); return ___read___().operator!=(herd); }
 
-	inline forward_extractor_data_a < typename std :: unordered_set < any_a < > > :: const_iterator > extract_begin() const
+	inline forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > extract_begin() const
 	{ assert(___handle___); return ___read___().extract_begin(); }
 
-	inline forward_extractor_data_a < typename std :: unordered_set < any_a < > > :: const_iterator > extract_end() const
+	inline forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > extract_end() const
 	{ assert(___handle___); return ___read___().extract_end(); }
 
 	inline std :: unordered_set < any_a < > > const & extract_set() const
@@ -35,8 +35,8 @@ protected:
 	{
 		virtual bool operator==(unordered_herd_a < > const & herd ) const = 0;
 		virtual bool operator!=(unordered_herd_a < > const & herd ) const = 0;
-		virtual forward_extractor_data_a < typename std :: unordered_set < any_a < > > :: const_iterator > extract_begin() const = 0;
-		virtual forward_extractor_data_a < typename std :: unordered_set < any_a < > > :: const_iterator > extract_end() const = 0;
+		virtual forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > extract_begin() const = 0;
+		virtual forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > extract_end() const = 0;
 		virtual std :: unordered_set < any_a < > > const & extract_set() const = 0;
 		virtual std :: unordered_set < any_a < > > & mutate_set() = 0;
 	};
@@ -65,10 +65,10 @@ protected:
 		virtual inline bool operator!=(unordered_herd_a < > const & herd ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(herd); }
 
-		virtual inline forward_extractor_data_a < typename std :: unordered_set < any_a < > > :: const_iterator > extract_begin() const final
+		virtual inline forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > extract_begin() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
 
-		virtual inline forward_extractor_data_a < typename std :: unordered_set < any_a < > > :: const_iterator > extract_end() const final
+		virtual inline forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > extract_end() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
 
 		virtual inline std :: unordered_set < any_a < > > const & extract_set() const final
@@ -299,10 +299,10 @@ public:
 	inline bool operator!=(unordered_herd_a < > const & herd ) const
 	{ throw dis("dynamic unordered_herd_d::operator!=(herd) not available"); }
 
-	inline forward_extractor_data_a < typename std :: unordered_set < any_a < > > :: const_iterator > extract_begin() const
+	inline forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > extract_begin() const
 	{ throw dis("dynamic unordered_herd_d::extract_begin() not available"); }
 
-	inline forward_extractor_data_a < typename std :: unordered_set < any_a < > > :: const_iterator > extract_end() const
+	inline forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > extract_end() const
 	{ throw dis("dynamic unordered_herd_d::extract_end() not available"); }
 
 	inline std :: unordered_set < any_a < > > const & extract_set() const

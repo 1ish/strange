@@ -17,7 +17,7 @@ public:
 
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		forward_extractor_a<> it = terms.extract_begin_();
+		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
 			return create(token, terms);
@@ -319,7 +319,36 @@ public:
 			else
 			{
 				std::string const name = _name.to_string();
-				river.write_string(" " + (name.empty() ? std::string("any") : name) + "_a<> "); //TODO
+				river.write_string(" " + (name.empty() ? std::string("any") : name) + "_a<");
+				if (_count >= 4 && _aspects.type_() == expression_flock_t<>::type_())
+				{
+					bool first = true;
+					for (auto const& term : _aspects.terms_().extract_vector())
+					{
+						if (!check<expression_a<>>(term))
+						{
+							break;
+						}
+						if (first)
+						{
+							first = false;
+						}
+						else
+						{
+							river.write_string(",");
+						}
+						auto const expression = fast<expression_a<>>(term);
+						if (expression.type_() == expression_local_at_t<>::type_())
+						{
+							expression.generate_cpp(version, 0, river, false, false);
+						}
+						else
+						{
+							expression.generate_cpp(version, 0, river, false, false, true);
+						}
+					}
+				}
+				river.write_string("> ");
 			}
 			if (_fixed)
 			{

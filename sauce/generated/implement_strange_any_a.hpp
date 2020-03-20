@@ -41,7 +41,7 @@ inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, 
 template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
 inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::visit__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("any_a::visit_ passed short range");
@@ -59,7 +59,7 @@ inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, 
 template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
 inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::identical__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("any_a::identical_ passed short range");
@@ -83,7 +83,7 @@ inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, 
 template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
 inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::same__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("any_a::same_ passed short range");
@@ -95,7 +95,7 @@ inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, 
 template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
 inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::different__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("any_a::different_ passed short range");
@@ -107,7 +107,7 @@ inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, 
 template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
 inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::less_than__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("any_a::less_than_ passed short range");
@@ -119,7 +119,7 @@ inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, 
 template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
 inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::greater_than__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("any_a::greater_than_ passed short range");
@@ -131,7 +131,7 @@ inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, 
 template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
 inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::less_or_equal__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("any_a::less_or_equal_ passed short range");
@@ -143,7 +143,7 @@ inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, 
 template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
 inline any_a<> any_a<_symbol, _cat, _kind, _inventory, _unordered_herd, _shoal, _unordered_shoal, _number_data_uint64>::greater_or_equal__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("any_a::greater_or_equal_ passed short range");

@@ -5,7 +5,7 @@ namespace strange
 template <typename _1>
 inline any_a<> random_access_mutator_a<_1>::self_add__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("random_access_mutator_a::self_add_ passed short range");
@@ -17,7 +17,7 @@ inline any_a<> random_access_mutator_a<_1>::self_add__(range_a<> const& ___argum
 template <typename _1>
 inline any_a<> random_access_mutator_a<_1>::add__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("random_access_mutator_a::add_ passed short range");
@@ -29,7 +29,7 @@ inline any_a<> random_access_mutator_a<_1>::add__(range_a<> const& ___arguments_
 template <typename _1>
 inline any_a<> random_access_mutator_a<_1>::self_subtract__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("random_access_mutator_a::self_subtract_ passed short range");
@@ -41,7 +41,7 @@ inline any_a<> random_access_mutator_a<_1>::self_subtract__(range_a<> const& ___
 template <typename _1>
 inline any_a<> random_access_mutator_a<_1>::subtract__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("random_access_mutator_a::subtract_ passed short range");

@@ -35,7 +35,7 @@ inline any_a<> expression_a<_1>::terms__(range_a<> const& ___arguments___) const
 template <typename _1>
 inline any_a<> expression_a<_1>::generate__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("expression_a::generate_ passed short range");
@@ -57,7 +57,7 @@ inline any_a<> expression_a<_1>::generate__(range_a<> const& ___arguments___) co
 template <typename _1>
 inline any_a<> expression_a<_1>::generate_cpp__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("expression_a::generate_cpp_ passed short range");

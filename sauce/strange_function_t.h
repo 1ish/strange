@@ -32,7 +32,7 @@ public:
 			: unordered_shoal_t<>::create_();
 		auto& local = local_shoal.mutate_map();
 		local.emplace(sym("$"), _shared);
-		forward_extractor_a<> ait = range.extract_begin_();
+		auto ait = range.extract_begin_();
 		auto nit = operation_t<___ego___>::_names.extract_vector().cbegin();
 		auto kit = _kinds.extract_vector().cbegin();
 		for (auto const& def : _defaults.extract_vector())

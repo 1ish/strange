@@ -66,7 +66,7 @@ public:
 	// function
 	static inline any_a<> invoke__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.extract_begin_();
+		auto it = range.extract_begin_();
 		if (it == range.extract_end_())
 		{
 			throw dis("strange::thing::invoke passed empty range");
@@ -82,7 +82,7 @@ public:
 
 	static inline any_a<> invoke(any_a<>& thing, range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.extract_begin_();
+		auto it = range.extract_begin_();
 		if (it == range.extract_end_())
 		{
 			throw dis("strange::thing::invoke passed short range");
@@ -103,7 +103,7 @@ public:
 
 	static inline any_a<> operate__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.extract_begin_();
+		auto it = range.extract_begin_();
 		if (it == range.extract_end_())
 		{
 			throw dis("strange::thing::operate passed empty range");
@@ -114,7 +114,7 @@ public:
 
 	static inline any_a<> operate(any_a<>& thing, range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.extract_begin_();
+		auto it = range.extract_begin_();
 		if (it == range.extract_end_())
 		{
 			throw dis("strange::thing::operate passed short range");

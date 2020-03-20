@@ -8,8 +8,8 @@ false &&
 					'operator==' : "bool (unordered_herd_a<> const& herd) const",
 					'operator!=' : "bool (unordered_herd_a<> const& herd) const",
 
-					extract_begin : "forward_extractor_data_a<typename std::unordered_set<any_a<>>::const_iterator> () const",
-					extract_end : "forward_extractor_data_a<typename std::unordered_set<any_a<>>::const_iterator> () const",
+					extract_begin : "forward_extractor_data_a<any_a<>, typename std::unordered_set<any_a<>>::const_iterator> () const",
+					extract_end : "forward_extractor_data_a<any_a<>, typename std::unordered_set<any_a<>>::const_iterator> () const",
 
 					extract_set : "std::unordered_set<any_a<>> const& () const",
 					mutate_set : "std::unordered_set<any_a<>>& ()",

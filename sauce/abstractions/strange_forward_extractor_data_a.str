@@ -2,12 +2,13 @@ false &&
 {	strange :
 	{	<forward_extractor_data> :: abstraction
 		(	// dimensions
+			#element :<<>>#,
 			#type :<<>>#,
 			(	// parent
-				$$<forward_extractor>[],
+				$$<forward_extractor>[#element],
 				{	// forward extractor data
-					'operator==' : "bool (forward_extractor_data_a<_type> const& it) const",
-					'operator!=' : "bool (forward_extractor_data_a<_type> const& it) const",
+					'operator==' : "bool (forward_extractor_data_a<_element, _type> const& it) const",
+					'operator!=' : "bool (forward_extractor_data_a<_element, _type> const& it) const",
 
 					extract_it : "_type const& () const",
 					mutate_it : "_type& ()",

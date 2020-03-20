@@ -2,25 +2,25 @@
 namespace strange
 {
 
-template <typename _1 = void>
+template <typename _element>
 class forward_extractor_d;
 
-template <typename _1 = void>
-inline forward_extractor_d<_1> ___forward_extractor_dynamic___(any_a<> const& thing); 
+template <typename _element>
+inline forward_extractor_d<_element> ___forward_extractor_dynamic___(any_a<> const& thing); 
 
-template <typename _1>
+template <typename _element>
 class forward_extractor_a : public any_a<>
 {
 public:
 	inline any_a<> get__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> get_() const
+	inline _element get_() const
 	{ assert(___handle___); return ___read___().get_(); }
 
-	inline any_a < > const & operator*() const
+	inline _element const & operator*() const
 	{ assert(___handle___); return ___read___().operator*(); }
 
-	inline any_a < > const * operator->() const
+	inline _element const * operator->() const
 	{ assert(___handle___); return ___read___().operator->(); }
 
 	inline any_a<> increment__(range_a<> const& ___arguments___);
@@ -52,9 +52,9 @@ public:
 protected:
 	struct ___forward_extractor_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual any_a<> get_() const = 0;
-		virtual any_a < > const & operator*() const = 0;
-		virtual any_a < > const * operator->() const = 0;
+		virtual _element get_() const = 0;
+		virtual _element const & operator*() const = 0;
+		virtual _element const * operator->() const = 0;
 		virtual void increment_() = 0;
 	};
 
@@ -76,13 +76,13 @@ protected:
 			: ___any_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> get_() const final
+		virtual inline _element get_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.get_(); }
 
-		virtual inline any_a < > const & operator*() const final
+		virtual inline _element const & operator*() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator*(); }
 
-		virtual inline any_a < > const * operator->() const final
+		virtual inline _element const * operator->() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator->(); }
 
 		virtual inline void increment_() final
@@ -231,7 +231,7 @@ public:
 		{
 			return forward_extractor_a{ thing.___handle___ };
 		}
-		return forward_extractor_a{ forward_extractor_d<_1>{ thing } };
+		return forward_extractor_a{ forward_extractor_d<_element>{ thing } };
 	}
 
 	static inline forward_extractor_a ___cast_ref___(any_a<>& thing)
@@ -241,13 +241,13 @@ public:
 		{
 			return forward_extractor_a(thing.___handle___, ___reference_tag___{});
 		}
-		return forward_extractor_a{ forward_extractor_d<_1>(thing, ___reference_tag___{}) };
+		return forward_extractor_a{ forward_extractor_d<_element>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	static inline ___cat_a___ ___cat___()
 	{
-		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::forward_extractor");
+		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::forward_extractor", flock_vals(kind_create<___kind_a___>(2, "")));
 		return CAT;
 	}
 
@@ -266,7 +266,7 @@ public:
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	static inline ___kind_a___ ___kind___()
 	{
-		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>());
+		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>(), flock_vals(kind_of<_element>()));
 		return KIND;
 	}
 
@@ -302,7 +302,7 @@ public:
 	}
 }; // class forward_extractor_a
 
-template <typename _1>
+template <typename _element>
 class forward_extractor_d : public any_a<>
 {
 public:
@@ -317,7 +317,7 @@ public:
 		return op.operate(*const_cast<forward_extractor_d*>(this), arguments);
 	}
 
-	inline any_a<> get_() const
+	inline _element get_() const
 	{
 		assert(___handle___);
 		auto const op = operation("get_");
@@ -325,13 +325,13 @@ public:
 		{
 			throw dis("dynamic forward_extractor_d::get_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *const_cast<forward_extractor_d*>(this)));
+		return cast<_element>(variadic_operate(op, *const_cast<forward_extractor_d*>(this)));
 	}
 
-	inline any_a < > const & operator*() const
+	inline _element const & operator*() const
 	{ throw dis("dynamic forward_extractor_d::operator*() not available"); }
 
-	inline any_a < > const * operator->() const
+	inline _element const * operator->() const
 	{ throw dis("dynamic forward_extractor_d::operator->() not available"); }
 
 	inline any_a<> increment__(range_a<> const& arguments)
@@ -345,7 +345,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline forward_extractor_a<> increment_()
+	inline forward_extractor_a< _element > increment_()
 	{
 		assert(___handle___);
 		auto const op = operation("increment_");
@@ -353,7 +353,7 @@ public:
 		{
 			throw dis("dynamic forward_extractor_d::increment_ passed non-existent member");
 		}
-		return cast<forward_extractor_a<>>(variadic_operate(op, *this));
+		return cast<forward_extractor_a< _element >>(variadic_operate(op, *this));
 	}
 
 	void ___weak___(any_a::___WEAK___ const& weak) const {}

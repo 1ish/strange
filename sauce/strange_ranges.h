@@ -5,22 +5,22 @@
 
 namespace strange
 {
-	inline forward_extractor_a<> begin(range_a<> const& range)
+	inline forward_extractor_a<any_a<>> begin(range_a<> const& range)
 	{
 		return range.extract_begin_();
 	}
 
-	inline forward_extractor_a<> end(range_a<> const& range)
+	inline forward_extractor_a<any_a<>> end(range_a<> const& range)
 	{
 		return range.extract_end_();
 	}
 
-	inline forward_extractor_a<> begin(shoal_a<> const& shoal)
+	inline forward_extractor_a<any_a<>> begin(shoal_a<> const& shoal)
 	{
 		return shoal.extract_begin_();
 	}
 
-	inline forward_extractor_a<> end(shoal_a<> const& shoal)
+	inline forward_extractor_a<any_a<>> end(shoal_a<> const& shoal)
 	{
 		return shoal.extract_end_();
 	}
@@ -35,12 +35,12 @@ namespace strange
 		return shoal.mutate_end_();
 	}
 
-	inline forward_extractor_a<> begin(inventory_a<> const& inventory)
+	inline forward_extractor_a<any_a<>> begin(inventory_a<> const& inventory)
 	{
 		return inventory.extract_begin_();
 	}
 
-	inline forward_extractor_a<> end(inventory_a<> const& inventory)
+	inline forward_extractor_a<any_a<>> end(inventory_a<> const& inventory)
 	{
 		return inventory.extract_end_();
 	}
@@ -173,22 +173,22 @@ namespace strange
 		return squad.mutate_end();
 	}
 
-	inline forward_extractor_data_a<typename std::unordered_set<any_a<>>::const_iterator> begin(unordered_herd_a<> const& herd)
+	inline forward_extractor_data_a<any_a<>, typename std::unordered_set<any_a<>>::const_iterator> begin(unordered_herd_a<> const& herd)
 	{
 		return herd.extract_begin();
 	}
 
-	inline forward_extractor_data_a<typename std::unordered_set<any_a<>>::const_iterator> end(unordered_herd_a<> const& herd)
+	inline forward_extractor_data_a<any_a<>, typename std::unordered_set<any_a<>>::const_iterator> end(unordered_herd_a<> const& herd)
 	{
 		return herd.extract_end();
 	}
 
-	inline forward_extractor_data_a<typename std::unordered_map<any_a<>, any_a<>>::const_iterator> begin(unordered_shoal_a<> const& shoal)
+	inline forward_extractor_data_a<any_a<>, typename std::unordered_map<any_a<>, any_a<>>::const_iterator> begin(unordered_shoal_a<> const& shoal)
 	{
 		return shoal.extract_begin();
 	}
 
-	inline forward_extractor_data_a<typename std::unordered_map<any_a<>, any_a<>>::const_iterator> end(unordered_shoal_a<> const& shoal)
+	inline forward_extractor_data_a<any_a<>, typename std::unordered_map<any_a<>, any_a<>>::const_iterator> end(unordered_shoal_a<> const& shoal)
 	{
 		return shoal.extract_end();
 	}
@@ -203,12 +203,12 @@ namespace strange
 		return shoal.mutate_end();
 	}
 
-	inline forward_extractor_data_a<std::istreambuf_iterator<char>> begin(river_a<> const& river)
+	inline forward_extractor_data_a<any_a<>, std::istreambuf_iterator<char>> begin(river_a<> const& river)
 	{
 		return river.extract_begin();
 	}
 
-	inline forward_extractor_data_a<std::istreambuf_iterator<char>> end(river_a<> const& river)
+	inline forward_extractor_data_a<any_a<>, std::istreambuf_iterator<char>> end(river_a<> const& river)
 	{
 		return river.extract_end();
 	}

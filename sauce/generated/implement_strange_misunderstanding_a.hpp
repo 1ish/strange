@@ -11,7 +11,7 @@ inline any_a<> misunderstanding_a<_lake_int8>::to_lake__(range_a<> const& ___arg
 template <typename _lake_int8>
 inline any_a<> misunderstanding_a<_lake_int8>::add__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("misunderstanding_a::add_ passed short range");

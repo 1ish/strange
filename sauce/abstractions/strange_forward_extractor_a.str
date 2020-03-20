@@ -1,15 +1,16 @@
 false &&
 {	strange :
 	{	<forward_extractor> :: abstraction
-		(	// no dimensions
+		(	// dimensions
+			#element :<<>>#,
 			(	// parent
 				$$<>[],
 				{	// forward extractor
-					get_ :# (<>),
-					'operator*' : "any_a<> const& () const",
-					'operator->' : "any_a<> const* () const",
+					get_ :# (<#element>),
+					'operator*' : "_element const& () const",
+					'operator->' : "_element const* () const",
 
-					increment_ := (<forward_extractor>),
+					increment_ := (<forward_extractor[<#element>]>),
 				}
 			)
 		)

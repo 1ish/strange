@@ -2,66 +2,66 @@
 namespace strange
 {
 
-template <typename _type>
+template <typename _element, typename _type>
 class forward_extractor_data_d;
 
-template <typename _type>
-inline forward_extractor_data_d<_type> ___forward_extractor_data_dynamic___(any_a<> const& thing); 
+template <typename _element, typename _type>
+inline forward_extractor_data_d<_element, _type> ___forward_extractor_data_dynamic___(any_a<> const& thing); 
 
-template <typename _type>
-class forward_extractor_data_a : public forward_extractor_a<>
+template <typename _element, typename _type>
+class forward_extractor_data_a : public forward_extractor_a< _element >
 {
 public:
-	inline bool operator==(forward_extractor_data_a < _type > const & it ) const
-	{ assert(___handle___); return ___read___().operator==(it); }
+	inline bool operator==(forward_extractor_data_a < _element , _type > const & it ) const
+	{ assert(any_a<>::___handle___); return ___read___().operator==(it); }
 
-	inline bool operator!=(forward_extractor_data_a < _type > const & it ) const
-	{ assert(___handle___); return ___read___().operator!=(it); }
+	inline bool operator!=(forward_extractor_data_a < _element , _type > const & it ) const
+	{ assert(any_a<>::___handle___); return ___read___().operator!=(it); }
 
 	inline _type const & extract_it() const
-	{ assert(___handle___); return ___read___().extract_it(); }
+	{ assert(any_a<>::___handle___); return ___read___().extract_it(); }
 
 	inline _type & mutate_it()
-	{ assert(___handle___); return ___write___().mutate_it(); }
+	{ assert(any_a<>::___handle___); return ___write___().mutate_it(); }
 
 protected:
-	struct ___forward_extractor_data_a_handle_base___ : ___forward_extractor_a_handle_base___
+	struct ___forward_extractor_data_a_handle_base___ : forward_extractor_a< _element >::___forward_extractor_a_handle_base___
 	{
-		virtual bool operator==(forward_extractor_data_a < _type > const & it ) const = 0;
-		virtual bool operator!=(forward_extractor_data_a < _type > const & it ) const = 0;
+		virtual bool operator==(forward_extractor_data_a < _element , _type > const & it ) const = 0;
+		virtual bool operator!=(forward_extractor_data_a < _element , _type > const & it ) const = 0;
 		virtual _type const & extract_it() const = 0;
 		virtual _type & mutate_it() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___forward_extractor_data_a_handle_base___>
-	struct ___forward_extractor_data_a_handle___ : ___forward_extractor_a_handle___<___TTT___, ___DHB___>
+	struct ___forward_extractor_data_a_handle___ : forward_extractor_a< _element >::___forward_extractor_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___forward_extractor_data_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: ___forward_extractor_a_handle___<___TTT___, ___DHB___>{ value }
+			: forward_extractor_a< _element >::template ___forward_extractor_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___forward_extractor_data_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: ___forward_extractor_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: forward_extractor_a< _element >::template ___forward_extractor_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
-		inline ___forward_extractor_data_a_handle___(___variadic_tag___, Args&&... args)
-			: ___forward_extractor_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		inline ___forward_extractor_data_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
+			: forward_extractor_a< _element >::template ___forward_extractor_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bool operator==(forward_extractor_data_a < _type > const & it ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(it); }
+		virtual inline bool operator==(forward_extractor_data_a < _element , _type > const & it ) const final
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(it); }
 
-		virtual inline bool operator!=(forward_extractor_data_a < _type > const & it ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(it); }
+		virtual inline bool operator!=(forward_extractor_data_a < _element , _type > const & it ) const final
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(it); }
 
 		virtual inline _type const & extract_it() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_it(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_it(); }
 
 		virtual inline _type & mutate_it() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_it(); }
+		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_it(); }
 
 	};
 
@@ -89,11 +89,11 @@ private:
 		{}
 
 		template <typename... Args>
-		inline ___forward_extractor_data_a_handle_final___(___variadic_tag___, Args&&... args)
-			: ___forward_extractor_data_a_handle___<___TTT___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		inline ___forward_extractor_data_a_handle_final___(any_a<>::___variadic_tag___, Args&&... args)
+			: ___forward_extractor_data_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline ___SHARED___ ___clone___() const final
+		virtual inline forward_extractor_a< _element >::___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___forward_extractor_data_a_handle_final___>(___forward_extractor_data_a_handle___<___TTT___>::___value___);
 		}
@@ -111,17 +111,17 @@ private:
 protected:
 	inline ___forward_extractor_data_a_handle_base___ const& ___read___() const noexcept
 	{
-		return *std::static_pointer_cast<___forward_extractor_data_a_handle_base___ const>(___handle___);
+		return *std::static_pointer_cast<___forward_extractor_data_a_handle_base___ const>(any_a<>::___handle___);
 	}
 
 	inline ___forward_extractor_data_a_handle_base___& ___write___() noexcept
 	{
-		if (!___handle___.unique())
+		if (!any_a<>::___handle___.unique())
 		{
-			___handle___ = ___handle___->___clone___();
-			___handle___->___weak___(___handle___);
+			any_a<>::___handle___ = any_a<>::___handle___->___clone___();
+			any_a<>::___handle___->___weak___(any_a<>::___handle___);
 		}
-		return *std::static_pointer_cast<___forward_extractor_data_a_handle_base___>(___handle___);
+		return *std::static_pointer_cast<___forward_extractor_data_a_handle_base___>(any_a<>::___handle___);
 	}
 
 public:
@@ -132,57 +132,57 @@ public:
 
 	static inline forward_extractor_data_a ref(forward_extractor_data_a& other) noexcept
 	{
-		return forward_extractor_data_a(other, ___reference_tag___{});
+		return forward_extractor_data_a(other, any_a<>::___reference_tag___{});
 	}
 
 	static inline forward_extractor_data_a dup(forward_extractor_data_a& other) noexcept
 	{
-		return forward_extractor_data_a(other, ___duplicate_tag___{});
+		return forward_extractor_data_a(other, any_a<>::___duplicate_tag___{});
 	}
 
 	inline forward_extractor_data_a() = default;
 
-	inline forward_extractor_data_a(forward_extractor_data_a& other, ___reference_tag___) noexcept
-		: forward_extractor_a(other, ___reference_tag___{})
+	inline forward_extractor_data_a(forward_extractor_data_a& other, any_a<>::___reference_tag___) noexcept
+		: forward_extractor_a< _element >(other, any_a<>::___reference_tag___{})
 	{}
 
-	inline forward_extractor_data_a(forward_extractor_data_a& other, ___duplicate_tag___) noexcept
-		: forward_extractor_a(other, ___duplicate_tag___{})
+	inline forward_extractor_data_a(forward_extractor_data_a& other, any_a<>::___duplicate_tag___) noexcept
+		: forward_extractor_a< _element >(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline forward_extractor_data_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: forward_extractor_a{ handle }
+		: forward_extractor_a< _element >{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___forward_extractor_data_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
-	explicit inline forward_extractor_data_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
-		: forward_extractor_a(handle, ___reference_tag___{})
+	explicit inline forward_extractor_data_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
+		: forward_extractor_a< _element >(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___forward_extractor_data_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<forward_extractor_data_a, std::decay_t<___TTT___>>::value>>
 	explicit inline forward_extractor_data_a(___TTT___ value) noexcept
-		: forward_extractor_a{ std::make_shared<___forward_extractor_data_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: forward_extractor_a< _element >{ std::make_shared<___forward_extractor_data_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
-		___handle___->___weak___(___handle___);
+		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
-	explicit inline forward_extractor_data_a(___variadic_tag___, ___TTT___*, Args&&... args)
-		: forward_extractor_a{ std::make_shared<___forward_extractor_data_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(___variadic_tag___{}, std::forward<Args>(args)...) }
+	explicit inline forward_extractor_data_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
+		: forward_extractor_a< _element >{ std::make_shared<___forward_extractor_data_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
-		___handle___->___weak___(___handle___);
+		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___>
 	inline forward_extractor_data_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___forward_extractor_data_a_handle_base___>(handle));
-		___handle___ = handle;
+		any_a<>::___handle___ = handle;
 		return *this;
 	}
 
@@ -190,7 +190,7 @@ public:
 	inline forward_extractor_data_a& operator=(___TTT___ value) noexcept
 	{
 		forward_extractor_data_a temp{ std::move(value) };
-		std::swap(temp.___handle___, ___handle___);
+		std::swap(temp.___handle___, any_a<>::___handle___);
 		return *this;
 	}
 
@@ -206,7 +206,7 @@ public:
 		{
 			return forward_extractor_data_a{ thing.___handle___ };
 		}
-		return forward_extractor_data_a{ forward_extractor_data_d<_type>{ thing } };
+		return forward_extractor_data_a{ forward_extractor_data_d<_element, _type>{ thing } };
 	}
 
 	static inline forward_extractor_data_a ___cast_ref___(any_a<>& thing)
@@ -214,15 +214,15 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___forward_extractor_data_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return forward_extractor_data_a(thing.___handle___, ___reference_tag___{});
+			return forward_extractor_data_a(thing.___handle___, any_a<>::___reference_tag___{});
 		}
-		return forward_extractor_data_a{ forward_extractor_data_d<_type>(thing, ___reference_tag___{}) };
+		return forward_extractor_data_a{ forward_extractor_data_d<_element, _type>(thing, any_a<>::___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	static inline ___cat_a___ ___cat___()
 	{
-		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::forward_extractor_data", flock_vals(kind_create<___kind_a___>(2, "")));
+		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::forward_extractor_data", flock_vals(kind_create<___kind_a___>(2, ""), kind_create<___kind_a___>(2, "")));
 		return CAT;
 	}
 
@@ -231,7 +231,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = forward_extractor_a::___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = forward_extractor_a< _element >::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -241,7 +241,7 @@ public:
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	static inline ___kind_a___ ___kind___()
 	{
-		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>(), flock_vals(kind_of<_type>()));
+		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>(), flock_vals(kind_of<_element>(), kind_of<_type>()));
 		return KIND;
 	}
 
@@ -250,7 +250,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = forward_extractor_a::___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = forward_extractor_a< _element >::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -262,7 +262,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = forward_extractor_a::___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = forward_extractor_a< _element >::template ___operations___<___unordered_shoal_a___>();
 			return operations;
 		}();
 		return OPERATIONS;
@@ -271,18 +271,18 @@ public:
 	template <typename ___TTT___, typename... Args>
 	static inline forward_extractor_data_a create(Args&&... args)
 	{
-		return forward_extractor_data_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
+		return forward_extractor_data_a(any_a<>::___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}
 }; // class forward_extractor_data_a
 
-template <typename _type>
-class forward_extractor_data_d : public forward_extractor_d<>
+template <typename _element, typename _type>
+class forward_extractor_data_d : public forward_extractor_d< _element >
 {
 public:
-	inline bool operator==(forward_extractor_data_a < _type > const & it ) const
+	inline bool operator==(forward_extractor_data_a < _element , _type > const & it ) const
 	{ throw dis("dynamic forward_extractor_data_d::operator==(it) not available"); }
 
-	inline bool operator!=(forward_extractor_data_a < _type > const & it ) const
+	inline bool operator!=(forward_extractor_data_a < _element , _type > const & it ) const
 	{ throw dis("dynamic forward_extractor_data_d::operator!=(it) not available"); }
 
 	inline _type const & extract_it() const
@@ -291,18 +291,18 @@ public:
 	inline _type & mutate_it()
 	{ throw dis("dynamic forward_extractor_data_d::mutate_it() not available"); }
 
-	void ___weak___(forward_extractor_d::___WEAK___ const& weak) const {}
+	void ___weak___(forward_extractor_d< _element >::___WEAK___ const& weak) const {}
 
 	explicit forward_extractor_data_d(any_a<> const& thing)
 		: forward_extractor_d{ thing }
 	{}
 
-	explicit forward_extractor_data_d(any_a<>& thing, ___reference_tag___)
-		: forward_extractor_d{ thing, ___reference_tag___{} }
+	explicit forward_extractor_data_d(any_a<>& thing, any_a<>::___reference_tag___)
+		: forward_extractor_d{ thing, any_a<>::___reference_tag___{} }
 	{}
 
-	explicit forward_extractor_data_d(any_a<>& thing, ___duplicate_tag___)
-		: forward_extractor_d{ thing, ___duplicate_tag___{} }
+	explicit forward_extractor_data_d(any_a<>& thing, any_a<>::___duplicate_tag___)
+		: forward_extractor_d{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 
