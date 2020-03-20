@@ -37,7 +37,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_primitive(); }
 
 protected:
-	struct ___number_data_a_handle_base___ : number_a<>::___number_a_handle_base___
+	struct ___number_data_a_handle_base___ : number_a<>::template ___number_a_handle_base___
 	{
 		virtual bool operator==(number_data_a < _primitive > const & number ) const = 0;
 		virtual bool operator!=(number_data_a < _primitive > const & number ) const = 0;
@@ -50,7 +50,7 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___number_data_a_handle_base___>
-	struct ___number_data_a_handle___ : number_a<>::___number_a_handle___<___TTT___, ___DHB___>
+	struct ___number_data_a_handle___ : number_a<>::template ___number_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___number_data_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
@@ -121,7 +121,7 @@ private:
 			: ___number_data_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline number_a<>::___SHARED___ ___clone___() const final
+		virtual inline number_a<>::template ___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___number_data_a_handle_final___>(___number_data_a_handle___<___TTT___>::___value___);
 		}
@@ -331,7 +331,7 @@ public:
 	inline _primitive & mutate_primitive()
 	{ throw dis("dynamic number_data_d::mutate_primitive() not available"); }
 
-	void ___weak___(number_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(number_d<>::template ___WEAK___ const& weak) const {}
 
 	explicit number_data_d(any_a<> const& thing)
 		: number_d{ thing }

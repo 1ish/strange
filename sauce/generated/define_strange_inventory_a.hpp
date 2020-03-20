@@ -38,7 +38,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_end_(); }
 
 protected:
-	struct ___inventory_a_handle_base___ : collection_a<>::___collection_a_handle_base___
+	struct ___inventory_a_handle_base___ : collection_a<>::template ___collection_a_handle_base___
 	{
 		virtual bool has_index(int64_t index ) const = 0;
 		virtual any_a < > at_index(int64_t index ) const = 0;
@@ -50,7 +50,7 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___inventory_a_handle_base___>
-	struct ___inventory_a_handle___ : collection_a<>::___collection_a_handle___<___TTT___, ___DHB___>
+	struct ___inventory_a_handle___ : collection_a<>::template ___collection_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___inventory_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
@@ -118,7 +118,7 @@ private:
 			: ___inventory_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline collection_a<>::___SHARED___ ___clone___() const final
+		virtual inline collection_a<>::template ___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___inventory_a_handle_final___>(___inventory_a_handle___<___TTT___>::___value___);
 		}
@@ -365,7 +365,7 @@ public:
 		return cast<random_access_mutator_a<>>(variadic_operate(op, *this));
 	}
 
-	void ___weak___(collection_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(collection_d<>::template ___WEAK___ const& weak) const {}
 
 	explicit inventory_d(any_a<> const& thing)
 		: collection_d{ thing }

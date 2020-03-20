@@ -60,7 +60,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___read___().code(); }
 
 protected:
-	struct ___cat_a_handle_base___ : symbol_a<>::___symbol_a_handle_base___
+	struct ___cat_a_handle_base___ : symbol_a<>::template ___symbol_a_handle_base___
 	{
 		virtual any_a<> symbolic_() const = 0;
 		virtual bool symbolic() const = 0;
@@ -76,7 +76,7 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___cat_a_handle_base___>
-	struct ___cat_a_handle___ : symbol_a<>::___symbol_a_handle___<___TTT___, ___DHB___>
+	struct ___cat_a_handle___ : symbol_a<>::template ___symbol_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___cat_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
@@ -156,7 +156,7 @@ private:
 			: ___cat_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline symbol_a<>::___SHARED___ ___clone___() const final
+		virtual inline symbol_a<>::template ___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___cat_a_handle_final___>(___cat_a_handle___<___TTT___>::___value___);
 		}
@@ -515,7 +515,7 @@ public:
 	inline std :: string code() const
 	{ return lake_to_string(code_()); }
 
-	void ___weak___(symbol_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(symbol_d<>::template ___WEAK___ const& weak) const {}
 
 	explicit cat_d(any_a<> const& thing)
 		: symbol_d{ thing }

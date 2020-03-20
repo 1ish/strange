@@ -49,7 +49,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_map(); }
 
 protected:
-	struct ___ordered_shoal_a_handle_base___ : shoal_a<>::___shoal_a_handle_base___
+	struct ___ordered_shoal_a_handle_base___ : shoal_a<>::template ___shoal_a_handle_base___
 	{
 		virtual bool operator==(ordered_shoal_a < > const & shoal ) const = 0;
 		virtual bool operator!=(ordered_shoal_a < > const & shoal ) const = 0;
@@ -66,7 +66,7 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___ordered_shoal_a_handle_base___>
-	struct ___ordered_shoal_a_handle___ : shoal_a<>::___shoal_a_handle___<___TTT___, ___DHB___>
+	struct ___ordered_shoal_a_handle___ : shoal_a<>::template ___shoal_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___ordered_shoal_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
@@ -149,7 +149,7 @@ private:
 			: ___ordered_shoal_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline shoal_a<>::___SHARED___ ___clone___() const final
+		virtual inline shoal_a<>::template ___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___ordered_shoal_a_handle_final___>(___ordered_shoal_a_handle___<___TTT___>::___value___);
 		}
@@ -371,7 +371,7 @@ public:
 	inline std :: map < any_a < > , any_a < > > & mutate_map()
 	{ throw dis("dynamic ordered_shoal_d::mutate_map() not available"); }
 
-	void ___weak___(shoal_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(shoal_d<>::template ___WEAK___ const& weak) const {}
 
 	explicit ordered_shoal_d(any_a<> const& thing)
 		: shoal_d{ thing }

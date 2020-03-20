@@ -61,7 +61,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___read___().subtract_(number); }
 
 protected:
-	struct ___random_access_extractor_a_handle_base___ : bidirectional_extractor_a<>::___bidirectional_extractor_a_handle_base___
+	struct ___random_access_extractor_a_handle_base___ : bidirectional_extractor_a<>::template ___bidirectional_extractor_a_handle_base___
 	{
 		virtual void self_add_(number_a<> const& number) = 0;
 		virtual random_access_extractor_a<> add_(number_a<> const& number) const = 0;
@@ -70,7 +70,7 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___random_access_extractor_a_handle_base___>
-	struct ___random_access_extractor_a_handle___ : bidirectional_extractor_a<>::___bidirectional_extractor_a_handle___<___TTT___, ___DHB___>
+	struct ___random_access_extractor_a_handle___ : bidirectional_extractor_a<>::template ___bidirectional_extractor_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___random_access_extractor_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
@@ -129,7 +129,7 @@ private:
 			: ___random_access_extractor_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bidirectional_extractor_a<>::___SHARED___ ___clone___() const final
+		virtual inline bidirectional_extractor_a<>::template ___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___random_access_extractor_a_handle_final___>(___random_access_extractor_a_handle___<___TTT___>::___value___);
 		}
@@ -407,7 +407,7 @@ public:
 		return cast<random_access_extractor_a<>>(variadic_operate(op, *const_cast<random_access_extractor_d*>(this), number));
 	}
 
-	void ___weak___(bidirectional_extractor_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(bidirectional_extractor_d<>::template ___WEAK___ const& weak) const {}
 
 	explicit random_access_extractor_d(any_a<> const& thing)
 		: bidirectional_extractor_d{ thing }

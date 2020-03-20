@@ -49,7 +49,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_vector(); }
 
 protected:
-	struct ___flock_a_handle_base___ : inventory_a<>::___inventory_a_handle_base___
+	struct ___flock_a_handle_base___ : inventory_a<>::template ___inventory_a_handle_base___
 	{
 		virtual bool operator==(flock_a < > const & flock ) const = 0;
 		virtual bool operator!=(flock_a < > const & flock ) const = 0;
@@ -66,7 +66,7 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___flock_a_handle_base___>
-	struct ___flock_a_handle___ : inventory_a<>::___inventory_a_handle___<___TTT___, ___DHB___>
+	struct ___flock_a_handle___ : inventory_a<>::template ___inventory_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___flock_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
@@ -149,7 +149,7 @@ private:
 			: ___flock_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline inventory_a<>::___SHARED___ ___clone___() const final
+		virtual inline inventory_a<>::template ___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___flock_a_handle_final___>(___flock_a_handle___<___TTT___>::___value___);
 		}
@@ -371,7 +371,7 @@ public:
 	inline std :: vector < any_a < > > & mutate_vector()
 	{ throw dis("dynamic flock_d::mutate_vector() not available"); }
 
-	void ___weak___(inventory_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(inventory_d<>::template ___WEAK___ const& weak) const {}
 
 	explicit flock_d(any_a<> const& thing)
 		: inventory_d{ thing }

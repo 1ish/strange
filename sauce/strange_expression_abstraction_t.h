@@ -498,7 +498,7 @@ protected:
 		auto const class_expression_terms = _class_expression_terms_();
 		_define_class_dynamic_members_(false, class_name, class_expression_terms, version, 0, river);
 		river.write_string(
-			"\tvoid ___weak___(" + base_name + base_aspects + "::___WEAK___ const& weak) const {}\n\n"
+			"\tvoid ___weak___(" + base_name + base_aspects + "::template ___WEAK___ const& weak) const {}\n\n"
 
 			"\texplicit " + class_name + "(any_a<> const& thing)\n"
 			"\t\t: " + base_name + "{ thing }\n"
@@ -1180,7 +1180,7 @@ protected:
 		else
 		{
 			river.write_string(
-				" : " + base_name + base_aspects + "::___" + base_name + "_handle_base___\n"
+				" : " + base_name + base_aspects + "::template ___" + base_name + "_handle_base___\n"
 				"\t{\n");
 		}
 		_define_class_members_(root, class_name, class_expression_terms, version, indent, river,
@@ -1224,7 +1224,7 @@ protected:
 		{
 			river.write_string(
 				"\ttemplate <typename ___TTT___, typename ___DHB___ = ___" + class_name + "_handle_base___>\n"
-				"\tstruct ___" + class_name + "_handle___ : " + base_name + base_aspects + "::___" + base_name + "_handle___<___TTT___, ___DHB___>\n"
+				"\tstruct ___" + class_name + "_handle___ : " + base_name + base_aspects + "::template ___" + base_name + "_handle___<___TTT___, ___DHB___>\n"
 				"\t{\n"
 				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
 				"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
@@ -1332,7 +1332,7 @@ protected:
 				"\t\t\t: ___" + class_name + "_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)\n"
 				"\t\t{}\n\n"
 
-				"\t\tvirtual inline " + base_name + base_aspects + "::___SHARED___ ___clone___() const final\n"
+				"\t\tvirtual inline " + base_name + base_aspects + "::template ___SHARED___ ___clone___() const final\n"
 				"\t\t{\n"
 				"\t\t\treturn std::make_shared<___" + class_name + "_handle_final___>(___" + class_name + "_handle___<___TTT___>::___value___);\n"
 				"\t\t}\n"

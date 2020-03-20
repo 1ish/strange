@@ -53,7 +53,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___read___().add_(symbol); }
 
 protected:
-	struct ___symbol_a_handle_base___ : any_a<>::___any_a_handle_base___
+	struct ___symbol_a_handle_base___ : any_a<>::template ___any_a_handle_base___
 	{
 		virtual bool operator==(symbol_a < > const & symbol ) const = 0;
 		virtual bool operator!=(symbol_a < > const & symbol ) const = 0;
@@ -69,7 +69,7 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___symbol_a_handle_base___>
-	struct ___symbol_a_handle___ : any_a<>::___any_a_handle___<___TTT___, ___DHB___>
+	struct ___symbol_a_handle___ : any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___symbol_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
@@ -149,7 +149,7 @@ private:
 			: ___symbol_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<>::___SHARED___ ___clone___() const final
+		virtual inline any_a<>::template ___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___symbol_a_handle_final___>(___symbol_a_handle___<___TTT___>::___value___);
 		}
@@ -408,7 +408,7 @@ public:
 		return cast<symbol_a<>>(variadic_operate(op, *const_cast<symbol_d*>(this), symbol));
 	}
 
-	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
+	void ___weak___(any_a<>::template ___WEAK___ const& weak) const {}
 
 	explicit symbol_d(any_a<> const& thing)
 		: any_a{ thing }

@@ -25,7 +25,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_it(); }
 
 protected:
-	struct ___forward_extractor_data_a_handle_base___ : forward_extractor_a< _element >::___forward_extractor_a_handle_base___
+	struct ___forward_extractor_data_a_handle_base___ : forward_extractor_a< _element >::template ___forward_extractor_a_handle_base___
 	{
 		virtual bool operator==(forward_extractor_data_a < _element , _type > const & it ) const = 0;
 		virtual bool operator!=(forward_extractor_data_a < _element , _type > const & it ) const = 0;
@@ -34,7 +34,7 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___forward_extractor_data_a_handle_base___>
-	struct ___forward_extractor_data_a_handle___ : forward_extractor_a< _element >::___forward_extractor_a_handle___<___TTT___, ___DHB___>
+	struct ___forward_extractor_data_a_handle___ : forward_extractor_a< _element >::template ___forward_extractor_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___forward_extractor_data_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
@@ -93,7 +93,7 @@ private:
 			: ___forward_extractor_data_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline forward_extractor_a< _element >::___SHARED___ ___clone___() const final
+		virtual inline forward_extractor_a< _element >::template ___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___forward_extractor_data_a_handle_final___>(___forward_extractor_data_a_handle___<___TTT___>::___value___);
 		}
@@ -291,7 +291,7 @@ public:
 	inline _type & mutate_it()
 	{ throw dis("dynamic forward_extractor_data_d::mutate_it() not available"); }
 
-	void ___weak___(forward_extractor_d< _element >::___WEAK___ const& weak) const {}
+	void ___weak___(forward_extractor_d< _element >::template ___WEAK___ const& weak) const {}
 
 	explicit forward_extractor_data_d(any_a<> const& thing)
 		: forward_extractor_d{ thing }

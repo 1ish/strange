@@ -42,7 +42,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___read___().optional(); }
 
 protected:
-	struct ___kind_a_handle_base___ : cat_a<>::___cat_a_handle_base___
+	struct ___kind_a_handle_base___ : cat_a<>::template ___cat_a_handle_base___
 	{
 		virtual flock_a<> aspects_() const = 0;
 		virtual any_a<> fixed_() const = 0;
@@ -54,7 +54,7 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___kind_a_handle_base___>
-	struct ___kind_a_handle___ : cat_a<>::___cat_a_handle___<___TTT___, ___DHB___>
+	struct ___kind_a_handle___ : cat_a<>::template ___cat_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___kind_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
@@ -122,7 +122,7 @@ private:
 			: ___kind_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline cat_a<>::___SHARED___ ___clone___() const final
+		virtual inline cat_a<>::template ___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___kind_a_handle_final___>(___kind_a_handle___<___TTT___>::___value___);
 		}
@@ -409,7 +409,7 @@ public:
 	inline bool optional() const
 	{ return optional_(); }
 
-	void ___weak___(cat_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(cat_d<>::template ___WEAK___ const& weak) const {}
 
 	explicit kind_d(any_a<> const& thing)
 		: cat_d{ thing }

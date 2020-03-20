@@ -37,7 +37,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_it(); }
 
 protected:
-	struct ___random_access_extractor_data_a_handle_base___ : random_access_extractor_a<>::___random_access_extractor_a_handle_base___
+	struct ___random_access_extractor_data_a_handle_base___ : random_access_extractor_a<>::template ___random_access_extractor_a_handle_base___
 	{
 		virtual bool operator==(random_access_extractor_data_a < _type > const & it ) const = 0;
 		virtual bool operator!=(random_access_extractor_data_a < _type > const & it ) const = 0;
@@ -50,7 +50,7 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___random_access_extractor_data_a_handle_base___>
-	struct ___random_access_extractor_data_a_handle___ : random_access_extractor_a<>::___random_access_extractor_a_handle___<___TTT___, ___DHB___>
+	struct ___random_access_extractor_data_a_handle___ : random_access_extractor_a<>::template ___random_access_extractor_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___random_access_extractor_data_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
@@ -121,7 +121,7 @@ private:
 			: ___random_access_extractor_data_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline random_access_extractor_a<>::___SHARED___ ___clone___() const final
+		virtual inline random_access_extractor_a<>::template ___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___random_access_extractor_data_a_handle_final___>(___random_access_extractor_data_a_handle___<___TTT___>::___value___);
 		}
@@ -331,7 +331,7 @@ public:
 	inline _type & mutate_it()
 	{ throw dis("dynamic random_access_extractor_data_d::mutate_it() not available"); }
 
-	void ___weak___(random_access_extractor_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(random_access_extractor_d<>::template ___WEAK___ const& weak) const {}
 
 	explicit random_access_extractor_data_d(any_a<> const& thing)
 		: random_access_extractor_d{ thing }

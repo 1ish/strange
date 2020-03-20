@@ -43,7 +43,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_set(); }
 
 protected:
-	struct ___ordered_herd_a_handle_base___ : herd_a<>::___herd_a_handle_base___
+	struct ___ordered_herd_a_handle_base___ : herd_a<>::template ___herd_a_handle_base___
 	{
 		virtual bool operator==(ordered_herd_a < > const & herd ) const = 0;
 		virtual bool operator!=(ordered_herd_a < > const & herd ) const = 0;
@@ -58,7 +58,7 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___ordered_herd_a_handle_base___>
-	struct ___ordered_herd_a_handle___ : herd_a<>::___herd_a_handle___<___TTT___, ___DHB___>
+	struct ___ordered_herd_a_handle___ : herd_a<>::template ___herd_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___ordered_herd_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
@@ -135,7 +135,7 @@ private:
 			: ___ordered_herd_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline herd_a<>::___SHARED___ ___clone___() const final
+		virtual inline herd_a<>::template ___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___ordered_herd_a_handle_final___>(___ordered_herd_a_handle___<___TTT___>::___value___);
 		}
@@ -351,7 +351,7 @@ public:
 	inline std :: set < any_a < > > & mutate_set()
 	{ throw dis("dynamic ordered_herd_d::mutate_set() not available"); }
 
-	void ___weak___(herd_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(herd_d<>::template ___WEAK___ const& weak) const {}
 
 	explicit ordered_herd_d(any_a<> const& thing)
 		: herd_d{ thing }

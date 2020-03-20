@@ -257,7 +257,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___read___().filename(); }
 
 protected:
-	struct ___river_a_handle_base___ : range_a<>::___range_a_handle_base___
+	struct ___river_a_handle_base___ : range_a<>::template ___range_a_handle_base___
 	{
 		virtual forward_extractor_data_a < any_a < > , std :: istreambuf_iterator < char > > extract_begin() const = 0;
 		virtual forward_extractor_data_a < any_a < > , std :: istreambuf_iterator < char > > extract_end() const = 0;
@@ -324,7 +324,7 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___river_a_handle_base___>
-	struct ___river_a_handle___ : range_a<>::___range_a_handle___<___TTT___, ___DHB___>
+	struct ___river_a_handle___ : range_a<>::template ___range_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___river_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
@@ -557,7 +557,7 @@ private:
 			: ___river_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline range_a<>::___SHARED___ ___clone___() const final
+		virtual inline range_a<>::template ___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___river_a_handle_final___>(___river_a_handle___<___TTT___>::___value___);
 		}
@@ -1509,7 +1509,7 @@ public:
 	inline std :: string filename() const
 	{ return lake_to_string(filename_()); }
 
-	void ___weak___(range_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(range_d<>::template ___WEAK___ const& weak) const {}
 
 	explicit river_d(any_a<> const& thing)
 		: range_d{ thing }

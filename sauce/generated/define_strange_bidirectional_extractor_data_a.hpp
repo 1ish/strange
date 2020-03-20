@@ -25,7 +25,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_it(); }
 
 protected:
-	struct ___bidirectional_extractor_data_a_handle_base___ : bidirectional_extractor_a<>::___bidirectional_extractor_a_handle_base___
+	struct ___bidirectional_extractor_data_a_handle_base___ : bidirectional_extractor_a<>::template ___bidirectional_extractor_a_handle_base___
 	{
 		virtual bool operator==(bidirectional_extractor_data_a < _type > const & it ) const = 0;
 		virtual bool operator!=(bidirectional_extractor_data_a < _type > const & it ) const = 0;
@@ -34,7 +34,7 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___bidirectional_extractor_data_a_handle_base___>
-	struct ___bidirectional_extractor_data_a_handle___ : bidirectional_extractor_a<>::___bidirectional_extractor_a_handle___<___TTT___, ___DHB___>
+	struct ___bidirectional_extractor_data_a_handle___ : bidirectional_extractor_a<>::template ___bidirectional_extractor_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___bidirectional_extractor_data_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
@@ -93,7 +93,7 @@ private:
 			: ___bidirectional_extractor_data_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bidirectional_extractor_a<>::___SHARED___ ___clone___() const final
+		virtual inline bidirectional_extractor_a<>::template ___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___bidirectional_extractor_data_a_handle_final___>(___bidirectional_extractor_data_a_handle___<___TTT___>::___value___);
 		}
@@ -291,7 +291,7 @@ public:
 	inline _type & mutate_it()
 	{ throw dis("dynamic bidirectional_extractor_data_d::mutate_it() not available"); }
 
-	void ___weak___(bidirectional_extractor_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(bidirectional_extractor_d<>::template ___WEAK___ const& weak) const {}
 
 	explicit bidirectional_extractor_data_d(any_a<> const& thing)
 		: bidirectional_extractor_d{ thing }

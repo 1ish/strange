@@ -29,7 +29,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___read___().add_(misunderstanding); }
 
 protected:
-	struct ___misunderstanding_a_handle_base___ : any_a<>::___any_a_handle_base___
+	struct ___misunderstanding_a_handle_base___ : any_a<>::template ___any_a_handle_base___
 	{
 		virtual _lake_int8 to_lake_() const = 0;
 		virtual std :: string to_string() const = 0;
@@ -37,7 +37,7 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___misunderstanding_a_handle_base___>
-	struct ___misunderstanding_a_handle___ : any_a<>::___any_a_handle___<___TTT___, ___DHB___>
+	struct ___misunderstanding_a_handle___ : any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___misunderstanding_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
@@ -93,7 +93,7 @@ private:
 			: ___misunderstanding_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<>::___SHARED___ ___clone___() const final
+		virtual inline any_a<>::template ___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___misunderstanding_a_handle_final___>(___misunderstanding_a_handle___<___TTT___>::___value___);
 		}
@@ -328,7 +328,7 @@ public:
 		return cast<misunderstanding_a<>>(variadic_operate(op, *const_cast<misunderstanding_d*>(this), misunderstanding));
 	}
 
-	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
+	void ___weak___(any_a<>::template ___WEAK___ const& weak) const {}
 
 	explicit misunderstanding_d(any_a<> const& thing)
 		: any_a{ thing }

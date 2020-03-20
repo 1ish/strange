@@ -34,7 +34,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().erase_string(s); }
 
 protected:
-	struct ___herd_a_handle_base___ : collection_a<>::___collection_a_handle_base___
+	struct ___herd_a_handle_base___ : collection_a<>::template ___collection_a_handle_base___
 	{
 		virtual bool has_string(std :: string const & s ) const = 0;
 		virtual any_a < > at_string(std :: string const & s ) const = 0;
@@ -46,7 +46,7 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___herd_a_handle_base___>
-	struct ___herd_a_handle___ : collection_a<>::___collection_a_handle___<___TTT___, ___DHB___>
+	struct ___herd_a_handle___ : collection_a<>::template ___collection_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___herd_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
@@ -114,7 +114,7 @@ private:
 			: ___herd_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline collection_a<>::___SHARED___ ___clone___() const final
+		virtual inline collection_a<>::template ___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___herd_a_handle_final___>(___herd_a_handle___<___TTT___>::___value___);
 		}
@@ -321,7 +321,7 @@ public:
 	inline bool erase_string(std :: string const & s )
 	{ return erase(sym(s)); }
 
-	void ___weak___(collection_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(collection_d<>::template ___WEAK___ const& weak) const {}
 
 	explicit herd_d(any_a<> const& thing)
 		: collection_d{ thing }

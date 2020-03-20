@@ -167,7 +167,7 @@ public:
 	{ assert(any_a<>::___handle___); return ___read___().write_lock_(); }
 
 protected:
-	struct ___collection_a_handle_base___ : range_a<>::___range_a_handle_base___
+	struct ___collection_a_handle_base___ : range_a<>::template ___range_a_handle_base___
 	{
 		virtual any_a<> has_(any_a<> const& key) const = 0;
 		virtual bool has(any_a < > const & key ) const = 0;
@@ -200,7 +200,7 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___collection_a_handle_base___>
-	struct ___collection_a_handle___ : range_a<>::___range_a_handle___<___TTT___, ___DHB___>
+	struct ___collection_a_handle___ : range_a<>::template ___range_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___collection_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
@@ -331,7 +331,7 @@ private:
 			: ___collection_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline range_a<>::___SHARED___ ___clone___() const final
+		virtual inline range_a<>::template ___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___collection_a_handle_final___>(___collection_a_handle___<___TTT___>::___value___);
 		}
@@ -981,7 +981,7 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this)));
 	}
 
-	void ___weak___(range_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(range_d<>::template ___WEAK___ const& weak) const {}
 
 	explicit collection_d(any_a<> const& thing)
 		: range_d{ thing }

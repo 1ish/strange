@@ -57,7 +57,7 @@ public:
 	{ assert(any_a<>::___handle___); ___read___().generate_cpp(version, indent, river, declare, define, type); }
 
 protected:
-	struct ___expression_a_handle_base___ : operation_a<>::___operation_a_handle_base___
+	struct ___expression_a_handle_base___ : operation_a<>::template ___operation_a_handle_base___
 	{
 		virtual expression_a<> recreate_() const = 0;
 		virtual any_a<> literal_() const = 0;
@@ -72,7 +72,7 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___expression_a_handle_base___>
-	struct ___expression_a_handle___ : operation_a<>::___operation_a_handle___<___TTT___, ___DHB___>
+	struct ___expression_a_handle___ : operation_a<>::template ___operation_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___expression_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
@@ -149,7 +149,7 @@ private:
 			: ___expression_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline operation_a<>::___SHARED___ ___clone___() const final
+		virtual inline operation_a<>::template ___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___expression_a_handle_final___>(___expression_a_handle___<___TTT___>::___value___);
 		}
@@ -505,7 +505,7 @@ public:
 	inline void generate_cpp(int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const
 	{ generate_cpp_(num(version), num(indent), river, boole(declare), boole(define), boole(type)); }
 
-	void ___weak___(operation_d<>::___WEAK___ const& weak) const {}
+	void ___weak___(operation_d<>::template ___WEAK___ const& weak) const {}
 
 	explicit expression_d(any_a<> const& thing)
 		: operation_d{ thing }

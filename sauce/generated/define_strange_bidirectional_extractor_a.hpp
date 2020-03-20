@@ -39,13 +39,13 @@ public:
 #endif
 
 protected:
-	struct ___bidirectional_extractor_a_handle_base___ : forward_extractor_a< any_a<> >::___forward_extractor_a_handle_base___
+	struct ___bidirectional_extractor_a_handle_base___ : forward_extractor_a< any_a<> >::template ___forward_extractor_a_handle_base___
 	{
 		virtual void decrement_() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___bidirectional_extractor_a_handle_base___>
-	struct ___bidirectional_extractor_a_handle___ : forward_extractor_a< any_a<> >::___forward_extractor_a_handle___<___TTT___, ___DHB___>
+	struct ___bidirectional_extractor_a_handle___ : forward_extractor_a< any_a<> >::template ___forward_extractor_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___bidirectional_extractor_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
@@ -95,7 +95,7 @@ private:
 			: ___bidirectional_extractor_a_handle___<___TTT___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline forward_extractor_a< any_a<> >::___SHARED___ ___clone___() const final
+		virtual inline forward_extractor_a< any_a<> >::template ___SHARED___ ___clone___() const final
 		{
 			return std::make_shared<___bidirectional_extractor_a_handle_final___>(___bidirectional_extractor_a_handle___<___TTT___>::___value___);
 		}
@@ -304,7 +304,7 @@ public:
 		return cast<bidirectional_extractor_a<>>(variadic_operate(op, *this));
 	}
 
-	void ___weak___(forward_extractor_d< any_a<> >::___WEAK___ const& weak) const {}
+	void ___weak___(forward_extractor_d< any_a<> >::template ___WEAK___ const& weak) const {}
 
 	explicit bidirectional_extractor_d(any_a<> const& thing)
 		: forward_extractor_d{ thing }
