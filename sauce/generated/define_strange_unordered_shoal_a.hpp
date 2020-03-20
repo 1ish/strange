@@ -334,15 +334,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit unordered_shoal_d(any_a<> const& thing)
-		: shoal_d{ thing }
+		: shoal_d<>{ thing }
 	{}
 
 	explicit unordered_shoal_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: shoal_d{ thing, any_a<>::___reference_tag___{} }
+		: shoal_d<>{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit unordered_shoal_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: shoal_d{ thing, any_a<>::___duplicate_tag___{} }
+		: shoal_d<>{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

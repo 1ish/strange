@@ -374,15 +374,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit squad_d(any_a<> const& thing)
-		: inventory_d{ thing }
+		: inventory_d<>{ thing }
 	{}
 
 	explicit squad_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: inventory_d{ thing, any_a<>::___reference_tag___{} }
+		: inventory_d<>{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit squad_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: inventory_d{ thing, any_a<>::___duplicate_tag___{} }
+		: inventory_d<>{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

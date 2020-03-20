@@ -324,15 +324,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit herd_d(any_a<> const& thing)
-		: collection_d{ thing }
+		: collection_d<>{ thing }
 	{}
 
 	explicit herd_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: collection_d{ thing, any_a<>::___reference_tag___{} }
+		: collection_d<>{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit herd_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: collection_d{ thing, any_a<>::___duplicate_tag___{} }
+		: collection_d<>{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

@@ -334,15 +334,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit random_access_extractor_data_d(any_a<> const& thing)
-		: random_access_extractor_d{ thing }
+		: random_access_extractor_d<>{ thing }
 	{}
 
 	explicit random_access_extractor_data_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: random_access_extractor_d{ thing, any_a<>::___reference_tag___{} }
+		: random_access_extractor_d<>{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit random_access_extractor_data_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: random_access_extractor_d{ thing, any_a<>::___duplicate_tag___{} }
+		: random_access_extractor_d<>{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

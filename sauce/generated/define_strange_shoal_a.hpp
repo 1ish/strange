@@ -368,15 +368,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit shoal_d(any_a<> const& thing)
-		: collection_d{ thing }
+		: collection_d<>{ thing }
 	{}
 
 	explicit shoal_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: collection_d{ thing, any_a<>::___reference_tag___{} }
+		: collection_d<>{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit shoal_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: collection_d{ thing, any_a<>::___duplicate_tag___{} }
+		: collection_d<>{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

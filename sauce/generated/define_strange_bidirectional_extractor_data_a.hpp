@@ -294,15 +294,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit bidirectional_extractor_data_d(any_a<> const& thing)
-		: bidirectional_extractor_d{ thing }
+		: bidirectional_extractor_d<>{ thing }
 	{}
 
 	explicit bidirectional_extractor_data_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: bidirectional_extractor_d{ thing, any_a<>::___reference_tag___{} }
+		: bidirectional_extractor_d<>{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit bidirectional_extractor_data_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: bidirectional_extractor_d{ thing, any_a<>::___duplicate_tag___{} }
+		: bidirectional_extractor_d<>{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

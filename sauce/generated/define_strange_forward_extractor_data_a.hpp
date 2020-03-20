@@ -294,15 +294,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit forward_extractor_data_d(any_a<> const& thing)
-		: forward_extractor_d{ thing }
+		: forward_extractor_d< _element >{ thing }
 	{}
 
 	explicit forward_extractor_data_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: forward_extractor_d{ thing, any_a<>::___reference_tag___{} }
+		: forward_extractor_d< _element >{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit forward_extractor_data_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: forward_extractor_d{ thing, any_a<>::___duplicate_tag___{} }
+		: forward_extractor_d< _element >{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

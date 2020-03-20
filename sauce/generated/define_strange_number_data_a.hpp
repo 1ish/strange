@@ -334,15 +334,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit number_data_d(any_a<> const& thing)
-		: number_d{ thing }
+		: number_d<>{ thing }
 	{}
 
 	explicit number_data_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: number_d{ thing, any_a<>::___reference_tag___{} }
+		: number_d<>{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit number_data_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: number_d{ thing, any_a<>::___duplicate_tag___{} }
+		: number_d<>{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

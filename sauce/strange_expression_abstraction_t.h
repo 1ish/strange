@@ -501,15 +501,15 @@ protected:
 			"\tvoid ___weak___(any_a<>::___WEAK___ const& weak) const {}\n\n"
 
 			"\texplicit " + class_name + "(any_a<> const& thing)\n"
-			"\t\t: " + base_name + "{ thing }\n"
+			"\t\t: " + base_name + base_aspects + "{ thing }\n"
 			"\t{}\n\n"
 
 			"\texplicit " + class_name + "(any_a<>& thing, any_a<>::___reference_tag___)\n"
-			"\t\t: " + base_name + "{ thing, any_a<>::___reference_tag___{} }\n"
+			"\t\t: " + base_name + base_aspects + "{ thing, any_a<>::___reference_tag___{} }\n"
 			"\t{}\n\n"
 
 			"\texplicit " + class_name + "(any_a<>& thing, any_a<>::___duplicate_tag___)\n"
-			"\t\t: " + base_name + "{ thing, any_a<>::___duplicate_tag___{} }\n"
+			"\t\t: " + base_name + base_aspects + "{ thing, any_a<>::___duplicate_tag___{} }\n"
 			"\t{}\n"
 			"};\n\n"		
 		);

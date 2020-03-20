@@ -314,15 +314,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit unordered_herd_d(any_a<> const& thing)
-		: herd_d{ thing }
+		: herd_d<>{ thing }
 	{}
 
 	explicit unordered_herd_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: herd_d{ thing, any_a<>::___reference_tag___{} }
+		: herd_d<>{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit unordered_herd_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: herd_d{ thing, any_a<>::___duplicate_tag___{} }
+		: herd_d<>{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

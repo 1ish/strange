@@ -518,15 +518,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit cat_d(any_a<> const& thing)
-		: symbol_d{ thing }
+		: symbol_d<>{ thing }
 	{}
 
 	explicit cat_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: symbol_d{ thing, any_a<>::___reference_tag___{} }
+		: symbol_d<>{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit cat_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: symbol_d{ thing, any_a<>::___duplicate_tag___{} }
+		: symbol_d<>{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

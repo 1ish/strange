@@ -410,15 +410,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit random_access_mutator_d(any_a<> const& thing)
-		: bidirectional_mutator_d{ thing }
+		: bidirectional_mutator_d<>{ thing }
 	{}
 
 	explicit random_access_mutator_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: bidirectional_mutator_d{ thing, any_a<>::___reference_tag___{} }
+		: bidirectional_mutator_d<>{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit random_access_mutator_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: bidirectional_mutator_d{ thing, any_a<>::___duplicate_tag___{} }
+		: bidirectional_mutator_d<>{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

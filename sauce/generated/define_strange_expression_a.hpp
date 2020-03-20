@@ -508,15 +508,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit expression_d(any_a<> const& thing)
-		: operation_d{ thing }
+		: operation_d<>{ thing }
 	{}
 
 	explicit expression_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: operation_d{ thing, any_a<>::___reference_tag___{} }
+		: operation_d<>{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit expression_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: operation_d{ thing, any_a<>::___duplicate_tag___{} }
+		: operation_d<>{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 
