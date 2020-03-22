@@ -4,8 +4,8 @@
 namespace strange
 {
 
-// template <typename ___ego___ = range_a<>>
-template <typename ___ego___>
+// template <typename _element = any_a<>, typename ___ego___ = range_a<_element>>
+template <typename _element, typename ___ego___>
 class range_t : public thing_t<___ego___>
 {
 public:
@@ -18,7 +18,7 @@ public:
 			return create_();
 		}
 		any_a<> begin = *it;
-		if (!check<forward_extractor_a<any_a<>>>(begin))
+		if (!check<forward_extractor_a<_element>>(begin))
 		{
 			throw dis("strange::range::create passed non-mutator begin");
 		}
@@ -27,22 +27,22 @@ public:
 			throw dis("strange::range::create passed short range");
 		}
 		any_a<> end = *it;
-		if (!check<forward_extractor_a<any_a<>>>(end))
+		if (!check<forward_extractor_a<_element>>(end))
 		{
 			throw dis("strange::range::create passed non-mutator end");
 		}
-		return create_(fast<forward_extractor_a<any_a<>>>(begin), fast<forward_extractor_a<any_a<>>>(end));
+		return create_(fast<forward_extractor_a<_element>>(begin), fast<forward_extractor_a<_element>>(end));
 	}
 
-	static inline range_a<> create_()
+	static inline range_a<_element> create_()
 	{
-		static range_a<> VAL = range_t<>::create_(it_t<>::create_(), it_t<>::create_());
+		static auto VAL = range_t<_element>::create_(it_t<_element>::create_(), it_t<_element>::create_());
 		return VAL;
 	}
 
-	static inline range_a<> create_(forward_extractor_a<any_a<>> const& begin, forward_extractor_a<any_a<>> const& end)
+	static inline range_a<_element> create_(forward_extractor_a<_element> const& begin, forward_extractor_a<_element> const& end)
 	{
-		return range_a<>::create<range_t<>>(begin, end);
+		return range_a<_element>::template create<range_t<_element>>(begin, end);
 	}
 
 	// reflection
@@ -58,23 +58,23 @@ public:
 	}
 
 	// range
-	inline forward_extractor_a<any_a<>> extract_begin_() const
+	inline forward_extractor_a<_element> extract_begin_() const
 	{
 		return _begin;
 	}
 
-	inline forward_extractor_a<any_a<>> extract_end_() const
+	inline forward_extractor_a<_element> extract_end_() const
 	{
 		return _end;
 	}
 
 protected:
-	forward_extractor_a<any_a<>> _begin;
-	forward_extractor_a<any_a<>> _end;
+	forward_extractor_a<_element> _begin;
+	forward_extractor_a<_element> _end;
 
 	friend class any_a<>;
 
-	inline range_t(forward_extractor_a<any_a<>> const& begin, forward_extractor_a<any_a<>> const& end)
+	inline range_t(forward_extractor_a<_element> const& begin, forward_extractor_a<_element> const& end)
 		: thing_t<___ego___>{}
 		, _begin(begin)
 		, _end(end)
@@ -85,11 +85,11 @@ private:
 	friend class ___range_t_share___;
 };
 
-template <typename ___ego___>
-bool const range_t<___ego___>::___share___ = []()
+template <typename _element, typename ___ego___>
+bool const range_t<_element, ___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
-	range_t<___ego___>::share(shoal);
+	range_t<_element, ___ego___>::share(shoal);
 	return shoal;
 }();
 
@@ -101,14 +101,18 @@ class ___range_t_share___
 	}
 };
 
-inline range_a<> range_create()
+// template <typename _element = any_a<>>
+template <typename _element>
+inline range_a<_element> range_create()
 {
-	return range_t<>::create_();
+	return range_t<_element>::create_();
 }
 
-inline range_a<> range_create(forward_extractor_a<any_a<>> const& begin, forward_extractor_a<any_a<>> const& end)
+// template <typename _element = any_a<>>
+template <typename _element>
+inline range_a<_element> range_create(forward_extractor_a<_element> const& begin, forward_extractor_a<_element> const& end)
 {
-	return range_t<>::create_(begin, end);
+	return range_t<_element>::create_(begin, end);
 }
 
 } // namespace strange

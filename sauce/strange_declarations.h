@@ -110,7 +110,7 @@ class native_extraction_t;
 template <typename _abstraction_, typename ___ego___ = operation_a<>>
 class native_mutation_t;
 
-template <typename ___ego___ = range_a<>>
+template <typename _element = any_a<>, typename ___ego___ = range_a<_element>>
 class range_t;
 
 template <typename ___ego___ = range_a<>>
@@ -291,8 +291,11 @@ template <typename _primitive_, typename _result_ = number_data_a<_primitive_>>
 inline _result_ num(_primitive_ primitive);
 
 // range
-inline range_a<> range_create();
-inline range_a<> range_create(forward_extractor_a<any_a<>> const& begin, forward_extractor_a<any_a<>> const& end);
+template <typename _element = any_a<>>
+inline range_a<_element> range_create();
+
+template <typename _element = any_a<>>
+inline range_a<_element> range_create(forward_extractor_a<_element> const& begin, forward_extractor_a<_element> const& end);
 
 // flock
 template <bool _concurrent_ = false>

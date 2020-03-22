@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename ___ego___ = forward_extractor_a<any_a<>>>
+template <typename _element = any_a<>, typename ___ego___ = forward_extractor_a<_element>>
 class it_t : public thing_t<___ego___>
 {
 public:
@@ -14,9 +14,9 @@ public:
 		return create_();
 	}
 
-	static inline forward_extractor_a<any_a<>> create_()
+	static inline forward_extractor_a<_element> create_()
 	{
-		static auto VAL = forward_extractor_a<any_a<>>::create<it_t<>>();
+		static auto VAL = forward_extractor_a<_element>::template create<it_t<_element>>();
 		return VAL;
 	}
 
@@ -35,7 +35,7 @@ public:
 	// comparison
 	inline bool same_(any_a<> const& thing) const
 	{
-		return check<forward_extractor_a<any_a<>>>(thing);
+		return check<forward_extractor_a<_element>>(thing);
 	}
 
 	inline number_data_a<uint64_t> hash_() const
@@ -80,11 +80,11 @@ private:
 	friend class ___it_t_share___;
 };
 
-template <typename ___ego___>
-bool const it_t<___ego___>::___share___ = []()
+template <typename _element, typename ___ego___>
+bool const it_t<_element, ___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
-	it_t<___ego___>::share(shoal);
+	it_t<_element, ___ego___>::share(shoal);
 	return shoal;
 }();
 
