@@ -7,15 +7,15 @@ namespace strange
 template <bool _concurrent_ = false, typename ___ego___ = ordered_herd_a<>>
 class ordered_herd_t : public thing_t<___ego___>
 {
-	template <typename _iterator_, typename ___ego_it___ = bidirectional_extractor_data_a<_iterator_>>
+	template <typename _element, typename _iterator_, typename ___ego_it___ = bidirectional_extractor_data_a<_element, _iterator_>>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
 		// construction
 		template <typename F>
-		static inline bidirectional_extractor_data_a<_iterator_> create(ordered_herd_a<> const& ordered_herd, ordered_herd_t const& ordered_herd_thing, F&& it)
+		static inline bidirectional_extractor_data_a<_element, _iterator_> create(ordered_herd_a<> const& ordered_herd, ordered_herd_t const& ordered_herd_thing, F&& it)
 		{
-			return bidirectional_extractor_data_a<_iterator_>::template create<extractor_t<_iterator_>>(ordered_herd, ordered_herd_thing, std::forward<F>(it));
+			return bidirectional_extractor_data_a<_element, _iterator_>::template create<extractor_t<_element, _iterator_>>(ordered_herd, ordered_herd_thing, std::forward<F>(it));
 		}
 
 		// reflection
@@ -31,16 +31,16 @@ class ordered_herd_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			return check<bidirectional_extractor_data_a<_iterator_>>(thing) &&
-				_it == fast<bidirectional_extractor_data_a<_iterator_>>(thing).extract_it();
+			return check<bidirectional_extractor_data_a<_element, _iterator_>>(thing) &&
+				_it == fast<bidirectional_extractor_data_a<_element, _iterator_>>(thing).extract_it();
 		}
 
-		inline bool operator==(bidirectional_extractor_data_a<_iterator_> const& it) const
+		inline bool operator==(bidirectional_extractor_data_a<_element, _iterator_> const& it) const
 		{
 			return _it == it.extract_it();
 		}
 
-		inline bool operator!=(bidirectional_extractor_data_a<_iterator_> const& it) const
+		inline bool operator!=(bidirectional_extractor_data_a<_element, _iterator_> const& it) const
 		{
 			return _it != it.extract_it();
 		}
@@ -284,28 +284,28 @@ public:
 	}
 
 	// range
-	inline bidirectional_extractor_a<> extract_begin_() const
+	inline bidirectional_extractor_a<any_a<>> extract_begin_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<typename std_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
+		return extractor_t<any_a<>, typename std_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
 	}
 
-	inline bidirectional_extractor_data_a<typename std_set_any::const_iterator> extract_begin() const
+	inline bidirectional_extractor_data_a<any_a<>, typename std_set_any::const_iterator> extract_begin() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<typename std_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
+		return extractor_t<any_a<>, typename std_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
 	}
 
-	inline bidirectional_extractor_a<> extract_end_() const
+	inline bidirectional_extractor_a<any_a<>> extract_end_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<typename std_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());
+		return extractor_t<any_a<>, typename std_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());
 	}
 
-	inline bidirectional_extractor_data_a<typename std_set_any::const_iterator> extract_end() const
+	inline bidirectional_extractor_data_a<any_a<>, typename std_set_any::const_iterator> extract_end() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<typename std_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());
+		return extractor_t<any_a<>, typename std_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());
 	}
 
 	// collection / herd

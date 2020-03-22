@@ -3,7 +3,7 @@ false &&
 	{	<random_access_extractor> :: abstraction
 		(	// no dimensions
 			(	// parent
-				$$<bidirectional_extractor>[],
+				$$<bidirectional_extractor>[<>],
 				{	// random access extractor
 					self_add_ := (number :<number>#, <random_access_extractor>),
 

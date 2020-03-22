@@ -1,11 +1,12 @@
 false &&
 {	strange :
 	{	<bidirectional_mutator> :: abstraction
-		(	// no dimensions
+		(	// dimensions
+			#element :<<>>#,
 			(	// parent
-				$$<forward_mutator>[<>],
+				$$<forward_mutator>[#element],
 				{	// bidirectional mutator
-					decrement_ := (<bidirectional_mutator>),
+					decrement_ := (<bidirectional_mutator[<#element>]>),
 				}
 			)
 		)

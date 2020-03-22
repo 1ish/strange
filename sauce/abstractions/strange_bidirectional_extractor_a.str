@@ -1,11 +1,12 @@
 false &&
 {	strange :
 	{	<bidirectional_extractor> :: abstraction
-		(	// no dimensions
+		(	// dimensions
+			#element :<<>>#,
 			(	// parent
-				$$<forward_extractor>[<>],
+				$$<forward_extractor>[#element],
 				{	// bidirectional extractor
-					decrement_ := (<bidirectional_extractor>),
+					decrement_ := (<bidirectional_extractor[<#element>]>),
 				}
 			)
 		)

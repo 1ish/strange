@@ -358,7 +358,7 @@ public:
 	inline any_a<> to_lake__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("to_lake_");
+		auto const op = any_a<>::operation("to_lake_");
 		if (!op)
 		{
 			throw dis("dynamic symbol_d::to_lake_ passed non-existent member");
@@ -369,7 +369,7 @@ public:
 	inline lake_int8_a<> to_lake_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("to_lake_");
+		auto const op = any_a<>::operation("to_lake_");
 		if (!op)
 		{
 			throw dis("dynamic symbol_d::to_lake_ passed non-existent member");
@@ -389,7 +389,7 @@ public:
 	inline any_a<> add__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("add_");
+		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
 			throw dis("dynamic symbol_d::add_ passed non-existent member");
@@ -400,7 +400,7 @@ public:
 	inline symbol_a<> add_(symbol_a<> const& symbol) const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("add_");
+		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
 			throw dis("dynamic symbol_d::add_ passed non-existent member");

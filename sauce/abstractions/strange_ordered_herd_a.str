@@ -12,8 +12,8 @@ false &&
 					'operator<=' : "bool (ordered_herd_a<> const& herd) const",
 					'operator>=' : "bool (ordered_herd_a<> const& herd) const",
 
-					extract_begin : "bidirectional_extractor_data_a<typename std::set<any_a<>>::const_iterator> () const",
-					extract_end : "bidirectional_extractor_data_a<typename std::set<any_a<>>::const_iterator> () const",
+					extract_begin : "bidirectional_extractor_data_a<any_a<>, typename std::set<any_a<>>::const_iterator> () const",
+					extract_end : "bidirectional_extractor_data_a<any_a<>, typename std::set<any_a<>>::const_iterator> () const",
 
 					extract_set : "std::set<any_a<>> const& () const",
 					mutate_set : "std::set<any_a<>>& ()",

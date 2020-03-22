@@ -345,7 +345,7 @@ public:
 	inline any_a<> recreate__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("recreate_");
+		auto const op = any_a<>::operation("recreate_");
 		if (!op)
 		{
 			throw dis("dynamic expression_d::recreate_ passed non-existent member");
@@ -356,7 +356,7 @@ public:
 	inline expression_a<> recreate_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("recreate_");
+		auto const op = any_a<>::operation("recreate_");
 		if (!op)
 		{
 			throw dis("dynamic expression_d::recreate_ passed non-existent member");
@@ -367,7 +367,7 @@ public:
 	inline any_a<> literal__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("literal_");
+		auto const op = any_a<>::operation("literal_");
 		if (!op)
 		{
 			throw dis("dynamic expression_d::literal_ passed non-existent member");
@@ -378,7 +378,7 @@ public:
 	inline any_a<> literal_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("literal_");
+		auto const op = any_a<>::operation("literal_");
 		if (!op)
 		{
 			throw dis("dynamic expression_d::literal_ passed non-existent member");
@@ -392,7 +392,7 @@ public:
 	inline any_a<> evaluate__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("evaluate_");
+		auto const op = any_a<>::operation("evaluate_");
 		if (!op)
 		{
 			throw dis("dynamic expression_d::evaluate_ passed non-existent member");
@@ -403,7 +403,7 @@ public:
 	inline any_a<> evaluate_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("evaluate_");
+		auto const op = any_a<>::operation("evaluate_");
 		if (!op)
 		{
 			throw dis("dynamic expression_d::evaluate_ passed non-existent member");
@@ -414,7 +414,7 @@ public:
 	inline any_a<> token__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("token_");
+		auto const op = any_a<>::operation("token_");
 		if (!op)
 		{
 			throw dis("dynamic expression_d::token_ passed non-existent member");
@@ -425,7 +425,7 @@ public:
 	inline token_a<> token_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("token_");
+		auto const op = any_a<>::operation("token_");
 		if (!op)
 		{
 			throw dis("dynamic expression_d::token_ passed non-existent member");
@@ -436,7 +436,7 @@ public:
 	inline any_a<> terms__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("terms_");
+		auto const op = any_a<>::operation("terms_");
 		if (!op)
 		{
 			throw dis("dynamic expression_d::terms_ passed non-existent member");
@@ -447,7 +447,7 @@ public:
 	inline flock_a<> terms_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("terms_");
+		auto const op = any_a<>::operation("terms_");
 		if (!op)
 		{
 			throw dis("dynamic expression_d::terms_ passed non-existent member");
@@ -458,7 +458,7 @@ public:
 	inline any_a<> generate__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("generate_");
+		auto const op = any_a<>::operation("generate_");
 		if (!op)
 		{
 			throw dis("dynamic expression_d::generate_ passed non-existent member");
@@ -469,7 +469,7 @@ public:
 	inline any_a<> generate_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river) const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("generate_");
+		auto const op = any_a<>::operation("generate_");
 		if (!op)
 		{
 			throw dis("dynamic expression_d::generate_ passed non-existent member");
@@ -483,7 +483,7 @@ public:
 	inline any_a<> generate_cpp__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("generate_cpp_");
+		auto const op = any_a<>::operation("generate_cpp_");
 		if (!op)
 		{
 			throw dis("dynamic expression_d::generate_cpp_ passed non-existent member");
@@ -494,7 +494,7 @@ public:
 	inline any_a<> generate_cpp_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = strange::no() ) const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("generate_cpp_");
+		auto const op = any_a<>::operation("generate_cpp_");
 		if (!op)
 		{
 			throw dis("dynamic expression_d::generate_cpp_ passed non-existent member");

@@ -284,7 +284,7 @@ public:
 	inline any_a<> to_lake__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("to_lake_");
+		auto const op = any_a<>::operation("to_lake_");
 		if (!op)
 		{
 			throw dis("dynamic misunderstanding_d::to_lake_ passed non-existent member");
@@ -295,7 +295,7 @@ public:
 	inline _lake_int8 to_lake_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("to_lake_");
+		auto const op = any_a<>::operation("to_lake_");
 		if (!op)
 		{
 			throw dis("dynamic misunderstanding_d::to_lake_ passed non-existent member");
@@ -309,7 +309,7 @@ public:
 	inline any_a<> add__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("add_");
+		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
 			throw dis("dynamic misunderstanding_d::add_ passed non-existent member");
@@ -320,7 +320,7 @@ public:
 	inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("add_");
+		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
 			throw dis("dynamic misunderstanding_d::add_ passed non-existent member");

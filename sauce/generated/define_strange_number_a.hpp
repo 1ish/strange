@@ -738,7 +738,7 @@ public:
 	inline any_a<> increment__(range_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("increment_");
+		auto const op = any_a<>::operation("increment_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::increment_ passed non-existent member");
@@ -749,7 +749,7 @@ public:
 	inline number_a<> increment_()
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("increment_");
+		auto const op = any_a<>::operation("increment_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::increment_ passed non-existent member");
@@ -760,7 +760,7 @@ public:
 	inline any_a<> decrement__(range_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("decrement_");
+		auto const op = any_a<>::operation("decrement_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::decrement_ passed non-existent member");
@@ -771,7 +771,7 @@ public:
 	inline number_a<> decrement_()
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("decrement_");
+		auto const op = any_a<>::operation("decrement_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::decrement_ passed non-existent member");
@@ -782,7 +782,7 @@ public:
 	inline any_a<> self_assign__(range_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("self_assign_");
+		auto const op = any_a<>::operation("self_assign_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::self_assign_ passed non-existent member");
@@ -793,7 +793,7 @@ public:
 	inline number_a<> self_assign_(number_a<> const& number)
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("self_assign_");
+		auto const op = any_a<>::operation("self_assign_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::self_assign_ passed non-existent member");
@@ -804,7 +804,7 @@ public:
 	inline any_a<> self_add__(range_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("self_add_");
+		auto const op = any_a<>::operation("self_add_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::self_add_ passed non-existent member");
@@ -815,7 +815,7 @@ public:
 	inline number_a<> self_add_(number_a<> const& number)
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("self_add_");
+		auto const op = any_a<>::operation("self_add_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::self_add_ passed non-existent member");
@@ -826,7 +826,7 @@ public:
 	inline any_a<> add__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("add_");
+		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::add_ passed non-existent member");
@@ -837,7 +837,7 @@ public:
 	inline number_a<> add_(number_a<> const& number) const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("add_");
+		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::add_ passed non-existent member");
@@ -848,7 +848,7 @@ public:
 	inline any_a<> self_subtract__(range_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("self_subtract_");
+		auto const op = any_a<>::operation("self_subtract_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::self_subtract_ passed non-existent member");
@@ -859,7 +859,7 @@ public:
 	inline number_a<> self_subtract_(number_a<> const& number)
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("self_subtract_");
+		auto const op = any_a<>::operation("self_subtract_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::self_subtract_ passed non-existent member");
@@ -870,7 +870,7 @@ public:
 	inline any_a<> subtract__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("subtract_");
+		auto const op = any_a<>::operation("subtract_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::subtract_ passed non-existent member");
@@ -881,7 +881,7 @@ public:
 	inline number_a<> subtract_(number_a<> const& number) const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("subtract_");
+		auto const op = any_a<>::operation("subtract_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::subtract_ passed non-existent member");
@@ -892,7 +892,7 @@ public:
 	inline any_a<> self_multiply__(range_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("self_multiply_");
+		auto const op = any_a<>::operation("self_multiply_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::self_multiply_ passed non-existent member");
@@ -903,7 +903,7 @@ public:
 	inline number_a<> self_multiply_(number_a<> const& number)
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("self_multiply_");
+		auto const op = any_a<>::operation("self_multiply_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::self_multiply_ passed non-existent member");
@@ -914,7 +914,7 @@ public:
 	inline any_a<> multiply__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("multiply_");
+		auto const op = any_a<>::operation("multiply_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::multiply_ passed non-existent member");
@@ -925,7 +925,7 @@ public:
 	inline number_a<> multiply_(number_a<> const& number) const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("multiply_");
+		auto const op = any_a<>::operation("multiply_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::multiply_ passed non-existent member");
@@ -936,7 +936,7 @@ public:
 	inline any_a<> self_divide__(range_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("self_divide_");
+		auto const op = any_a<>::operation("self_divide_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::self_divide_ passed non-existent member");
@@ -947,7 +947,7 @@ public:
 	inline number_a<> self_divide_(number_a<> const& number)
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("self_divide_");
+		auto const op = any_a<>::operation("self_divide_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::self_divide_ passed non-existent member");
@@ -958,7 +958,7 @@ public:
 	inline any_a<> divide__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("divide_");
+		auto const op = any_a<>::operation("divide_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::divide_ passed non-existent member");
@@ -969,7 +969,7 @@ public:
 	inline number_a<> divide_(number_a<> const& number) const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("divide_");
+		auto const op = any_a<>::operation("divide_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::divide_ passed non-existent member");
@@ -980,7 +980,7 @@ public:
 	inline any_a<> self_modulo__(range_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("self_modulo_");
+		auto const op = any_a<>::operation("self_modulo_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::self_modulo_ passed non-existent member");
@@ -991,7 +991,7 @@ public:
 	inline number_a<> self_modulo_(number_a<> const& number)
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("self_modulo_");
+		auto const op = any_a<>::operation("self_modulo_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::self_modulo_ passed non-existent member");
@@ -1002,7 +1002,7 @@ public:
 	inline any_a<> modulo__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("modulo_");
+		auto const op = any_a<>::operation("modulo_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::modulo_ passed non-existent member");
@@ -1013,7 +1013,7 @@ public:
 	inline number_a<> modulo_(number_a<> const& number) const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("modulo_");
+		auto const op = any_a<>::operation("modulo_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::modulo_ passed non-existent member");
@@ -1024,7 +1024,7 @@ public:
 	inline any_a<> to_int_64__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("to_int_64_");
+		auto const op = any_a<>::operation("to_int_64_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::to_int_64_ passed non-existent member");
@@ -1035,7 +1035,7 @@ public:
 	inline _number_data_int64 to_int_64_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("to_int_64_");
+		auto const op = any_a<>::operation("to_int_64_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::to_int_64_ passed non-existent member");
@@ -1049,7 +1049,7 @@ public:
 	inline any_a<> from_int_64__(range_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("from_int_64_");
+		auto const op = any_a<>::operation("from_int_64_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::from_int_64_ passed non-existent member");
@@ -1060,7 +1060,7 @@ public:
 	inline any_a<> from_int_64_(_number_data_int64 const& int_64)
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("from_int_64_");
+		auto const op = any_a<>::operation("from_int_64_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::from_int_64_ passed non-existent member");
@@ -1074,7 +1074,7 @@ public:
 	inline any_a<> to_uint_64__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("to_uint_64_");
+		auto const op = any_a<>::operation("to_uint_64_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::to_uint_64_ passed non-existent member");
@@ -1085,7 +1085,7 @@ public:
 	inline _number_data_uint64 to_uint_64_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("to_uint_64_");
+		auto const op = any_a<>::operation("to_uint_64_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::to_uint_64_ passed non-existent member");
@@ -1099,7 +1099,7 @@ public:
 	inline any_a<> from_uint_64__(range_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("from_uint_64_");
+		auto const op = any_a<>::operation("from_uint_64_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::from_uint_64_ passed non-existent member");
@@ -1110,7 +1110,7 @@ public:
 	inline any_a<> from_uint_64_(_number_data_uint64 const& uint_64)
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("from_uint_64_");
+		auto const op = any_a<>::operation("from_uint_64_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::from_uint_64_ passed non-existent member");
@@ -1124,7 +1124,7 @@ public:
 	inline any_a<> to_float_64__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("to_float_64_");
+		auto const op = any_a<>::operation("to_float_64_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::to_float_64_ passed non-existent member");
@@ -1135,7 +1135,7 @@ public:
 	inline _number_data_double to_float_64_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("to_float_64_");
+		auto const op = any_a<>::operation("to_float_64_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::to_float_64_ passed non-existent member");
@@ -1149,7 +1149,7 @@ public:
 	inline any_a<> from_float_64__(range_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("from_float_64_");
+		auto const op = any_a<>::operation("from_float_64_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::from_float_64_ passed non-existent member");
@@ -1160,7 +1160,7 @@ public:
 	inline any_a<> from_float_64_(_number_data_double const& float_64)
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("from_float_64_");
+		auto const op = any_a<>::operation("from_float_64_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::from_float_64_ passed non-existent member");
@@ -1174,7 +1174,7 @@ public:
 	inline any_a<> byte_size__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("byte_size_");
+		auto const op = any_a<>::operation("byte_size_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::byte_size_ passed non-existent member");
@@ -1185,7 +1185,7 @@ public:
 	inline _number_data_int64 byte_size_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("byte_size_");
+		auto const op = any_a<>::operation("byte_size_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::byte_size_ passed non-existent member");
@@ -1199,7 +1199,7 @@ public:
 	inline any_a<> is_int__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("is_int_");
+		auto const op = any_a<>::operation("is_int_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::is_int_ passed non-existent member");
@@ -1210,7 +1210,7 @@ public:
 	inline any_a<> is_int_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("is_int_");
+		auto const op = any_a<>::operation("is_int_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::is_int_ passed non-existent member");
@@ -1224,7 +1224,7 @@ public:
 	inline any_a<> is_signed__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("is_signed_");
+		auto const op = any_a<>::operation("is_signed_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::is_signed_ passed non-existent member");
@@ -1235,7 +1235,7 @@ public:
 	inline any_a<> is_signed_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("is_signed_");
+		auto const op = any_a<>::operation("is_signed_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::is_signed_ passed non-existent member");
@@ -1249,7 +1249,7 @@ public:
 	inline any_a<> is_nan__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("is_nan_");
+		auto const op = any_a<>::operation("is_nan_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::is_nan_ passed non-existent member");
@@ -1260,7 +1260,7 @@ public:
 	inline any_a<> is_nan_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("is_nan_");
+		auto const op = any_a<>::operation("is_nan_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::is_nan_ passed non-existent member");
@@ -1274,7 +1274,7 @@ public:
 	inline any_a<> is_inf__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("is_inf_");
+		auto const op = any_a<>::operation("is_inf_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::is_inf_ passed non-existent member");
@@ -1285,7 +1285,7 @@ public:
 	inline any_a<> is_inf_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("is_inf_");
+		auto const op = any_a<>::operation("is_inf_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::is_inf_ passed non-existent member");
@@ -1299,7 +1299,7 @@ public:
 	inline any_a<> is_finite__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("is_finite_");
+		auto const op = any_a<>::operation("is_finite_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::is_finite_ passed non-existent member");
@@ -1310,7 +1310,7 @@ public:
 	inline any_a<> is_finite_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("is_finite_");
+		auto const op = any_a<>::operation("is_finite_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::is_finite_ passed non-existent member");
@@ -1324,7 +1324,7 @@ public:
 	inline any_a<> is_normal__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("is_normal_");
+		auto const op = any_a<>::operation("is_normal_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::is_normal_ passed non-existent member");
@@ -1335,7 +1335,7 @@ public:
 	inline any_a<> is_normal_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("is_normal_");
+		auto const op = any_a<>::operation("is_normal_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::is_normal_ passed non-existent member");
@@ -1349,7 +1349,7 @@ public:
 	inline any_a<> little_endian__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("little_endian_");
+		auto const op = any_a<>::operation("little_endian_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::little_endian_ passed non-existent member");
@@ -1360,7 +1360,7 @@ public:
 	inline any_a<> little_endian_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("little_endian_");
+		auto const op = any_a<>::operation("little_endian_");
 		if (!op)
 		{
 			throw dis("dynamic number_d::little_endian_ passed non-existent member");

@@ -2,12 +2,13 @@ false &&
 {	strange :
 	{	<bidirectional_extractor_data> :: abstraction
 		(	// dimensions
+			#element :<<>>#,
 			#type :<<>>#,
 			(	// parent
-				$$<bidirectional_extractor>[],
+				$$<bidirectional_extractor>[#element],
 				{	// bidirectional extractor data
-					'operator==' : "bool (bidirectional_extractor_data_a<_type> const& it) const",
-					'operator!=' : "bool (bidirectional_extractor_data_a<_type> const& it) const",
+					'operator==' : "bool (bidirectional_extractor_data_a<_element, _type> const& it) const",
+					'operator!=' : "bool (bidirectional_extractor_data_a<_element, _type> const& it) const",
 
 					extract_it : "_type const& () const",
 					mutate_it : "_type& ()",

@@ -324,7 +324,7 @@ public:
 	inline any_a<> mutate_begin__(range_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("mutate_begin_");
+		auto const op = any_a<>::operation("mutate_begin_");
 		if (!op)
 		{
 			throw dis("dynamic shoal_d::mutate_begin_ passed non-existent member");
@@ -335,7 +335,7 @@ public:
 	inline forward_mutator_a< any_a<> > mutate_begin_()
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("mutate_begin_");
+		auto const op = any_a<>::operation("mutate_begin_");
 		if (!op)
 		{
 			throw dis("dynamic shoal_d::mutate_begin_ passed non-existent member");
@@ -346,7 +346,7 @@ public:
 	inline any_a<> mutate_end__(range_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("mutate_end_");
+		auto const op = any_a<>::operation("mutate_end_");
 		if (!op)
 		{
 			throw dis("dynamic shoal_d::mutate_end_ passed non-existent member");
@@ -357,7 +357,7 @@ public:
 	inline forward_mutator_a< any_a<> > mutate_end_()
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("mutate_end_");
+		auto const op = any_a<>::operation("mutate_end_");
 		if (!op)
 		{
 			throw dis("dynamic shoal_d::mutate_end_ passed non-existent member");

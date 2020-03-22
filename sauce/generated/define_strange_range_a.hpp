@@ -274,7 +274,7 @@ public:
 	inline any_a<> extract_begin__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("extract_begin_");
+		auto const op = any_a<>::operation("extract_begin_");
 		if (!op)
 		{
 			throw dis("dynamic range_d::extract_begin_ passed non-existent member");
@@ -285,7 +285,7 @@ public:
 	inline forward_extractor_a< _element > extract_begin_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("extract_begin_");
+		auto const op = any_a<>::operation("extract_begin_");
 		if (!op)
 		{
 			throw dis("dynamic range_d::extract_begin_ passed non-existent member");
@@ -296,7 +296,7 @@ public:
 	inline any_a<> extract_end__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("extract_end_");
+		auto const op = any_a<>::operation("extract_end_");
 		if (!op)
 		{
 			throw dis("dynamic range_d::extract_end_ passed non-existent member");
@@ -307,7 +307,7 @@ public:
 	inline forward_extractor_a< _element > extract_end_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("extract_end_");
+		auto const op = any_a<>::operation("extract_end_");
 		if (!op)
 		{
 			throw dis("dynamic range_d::extract_end_ passed non-existent member");

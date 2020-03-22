@@ -309,7 +309,7 @@ public:
 	inline any_a<> get__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("get_");
+		auto const op = any_a<>::operation("get_");
 		if (!op)
 		{
 			throw dis("dynamic forward_extractor_d::get_ passed non-existent member");
@@ -320,7 +320,7 @@ public:
 	inline _element get_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("get_");
+		auto const op = any_a<>::operation("get_");
 		if (!op)
 		{
 			throw dis("dynamic forward_extractor_d::get_ passed non-existent member");
@@ -337,7 +337,7 @@ public:
 	inline any_a<> increment__(range_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("increment_");
+		auto const op = any_a<>::operation("increment_");
 		if (!op)
 		{
 			throw dis("dynamic forward_extractor_d::increment_ passed non-existent member");
@@ -348,7 +348,7 @@ public:
 	inline forward_extractor_a< _element > increment_()
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("increment_");
+		auto const op = any_a<>::operation("increment_");
 		if (!op)
 		{
 			throw dis("dynamic forward_extractor_d::increment_ passed non-existent member");

@@ -390,7 +390,7 @@ public:
 	inline any_a<> filename__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("filename_");
+		auto const op = any_a<>::operation("filename_");
 		if (!op)
 		{
 			throw dis("dynamic token_d::filename_ passed non-existent member");
@@ -401,7 +401,7 @@ public:
 	inline symbol_a<> filename_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("filename_");
+		auto const op = any_a<>::operation("filename_");
 		if (!op)
 		{
 			throw dis("dynamic token_d::filename_ passed non-existent member");
@@ -415,7 +415,7 @@ public:
 	inline any_a<> line__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("line_");
+		auto const op = any_a<>::operation("line_");
 		if (!op)
 		{
 			throw dis("dynamic token_d::line_ passed non-existent member");
@@ -426,7 +426,7 @@ public:
 	inline number_data_int64_a<> line_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("line_");
+		auto const op = any_a<>::operation("line_");
 		if (!op)
 		{
 			throw dis("dynamic token_d::line_ passed non-existent member");
@@ -440,7 +440,7 @@ public:
 	inline any_a<> position__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("position_");
+		auto const op = any_a<>::operation("position_");
 		if (!op)
 		{
 			throw dis("dynamic token_d::position_ passed non-existent member");
@@ -451,7 +451,7 @@ public:
 	inline number_data_int64_a<> position_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("position_");
+		auto const op = any_a<>::operation("position_");
 		if (!op)
 		{
 			throw dis("dynamic token_d::position_ passed non-existent member");
@@ -465,7 +465,7 @@ public:
 	inline any_a<> tag__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("tag_");
+		auto const op = any_a<>::operation("tag_");
 		if (!op)
 		{
 			throw dis("dynamic token_d::tag_ passed non-existent member");
@@ -476,7 +476,7 @@ public:
 	inline symbol_a<> tag_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("tag_");
+		auto const op = any_a<>::operation("tag_");
 		if (!op)
 		{
 			throw dis("dynamic token_d::tag_ passed non-existent member");
@@ -490,7 +490,7 @@ public:
 	inline any_a<> symbol__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("symbol_");
+		auto const op = any_a<>::operation("symbol_");
 		if (!op)
 		{
 			throw dis("dynamic token_d::symbol_ passed non-existent member");
@@ -501,7 +501,7 @@ public:
 	inline symbol_a<> symbol_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("symbol_");
+		auto const op = any_a<>::operation("symbol_");
 		if (!op)
 		{
 			throw dis("dynamic token_d::symbol_ passed non-existent member");
@@ -515,7 +515,7 @@ public:
 	inline any_a<> literal__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("literal_");
+		auto const op = any_a<>::operation("literal_");
 		if (!op)
 		{
 			throw dis("dynamic token_d::literal_ passed non-existent member");
@@ -526,7 +526,7 @@ public:
 	inline any_a<> literal_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("literal_");
+		auto const op = any_a<>::operation("literal_");
 		if (!op)
 		{
 			throw dis("dynamic token_d::literal_ passed non-existent member");
@@ -540,7 +540,7 @@ public:
 	inline any_a<> precedence__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("precedence_");
+		auto const op = any_a<>::operation("precedence_");
 		if (!op)
 		{
 			throw dis("dynamic token_d::precedence_ passed non-existent member");
@@ -551,7 +551,7 @@ public:
 	inline number_data_int64_a<> precedence_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("precedence_");
+		auto const op = any_a<>::operation("precedence_");
 		if (!op)
 		{
 			throw dis("dynamic token_d::precedence_ passed non-existent member");
@@ -565,7 +565,7 @@ public:
 	inline any_a<> report__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = operation("report_");
+		auto const op = any_a<>::operation("report_");
 		if (!op)
 		{
 			throw dis("dynamic token_d::report_ passed non-existent member");
@@ -576,7 +576,7 @@ public:
 	inline misunderstanding_a<> report_() const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = operation("report_");
+		auto const op = any_a<>::operation("report_");
 		if (!op)
 		{
 			throw dis("dynamic token_d::report_ passed non-existent member");

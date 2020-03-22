@@ -3,7 +3,7 @@ false &&
 	{	<random_access_mutator> :: abstraction
 		(	// no dimensions
 			(	// parent
-				$$<bidirectional_mutator>[],
+				$$<bidirectional_mutator>[<>],
 				{	// random access mutator
 					self_add_ := (number :<number>#, <random_access_mutator>),
 
