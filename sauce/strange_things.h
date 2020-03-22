@@ -14,7 +14,6 @@
 #include "strange_it_t.h"
 #include "strange_symbol_t.h"
 #include "strange_range_t.h"
-#include "strange_range_of_t.h"
 #include "strange_misunderstanding_t.h"
 #include "strange_disagreement_t.h"
 #include "strange_ordered_shoal_t.h"
