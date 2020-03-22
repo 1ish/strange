@@ -2,30 +2,30 @@
 namespace strange
 {
 
-template <typename _1 = void>
+template <typename _element>
 class forward_mutator_d;
 
-template <typename _1 = void>
-inline forward_mutator_d<_1> ___forward_mutator_dynamic___(any_a<> const& thing); 
+template <typename _element>
+inline forward_mutator_d<_element> ___forward_mutator_dynamic___(any_a<> const& thing); 
 
-template <typename _1>
+template <typename _element>
 class forward_mutator_a : public any_a<>
 {
 public:
 	inline any_a<> get__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> get_() const
+	inline _element get_() const
 	{ assert(any_a<>::___handle___); return ___read___().get_(); }
 
 	inline any_a<> set__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> set_(any_a<> const& thing) const
+	inline _element set_(_element const& thing) const
 	{ assert(any_a<>::___handle___); return ___read___().set_(thing); }
 
-	inline any_a < > & operator*() const
+	inline _element & operator*() const
 	{ assert(any_a<>::___handle___); return ___read___().operator*(); }
 
-	inline any_a < > * operator->() const
+	inline _element * operator->() const
 	{ assert(any_a<>::___handle___); return ___read___().operator->(); }
 
 	inline any_a<> increment__(range_a<> const& ___arguments___);
@@ -57,10 +57,10 @@ public:
 protected:
 	struct ___forward_mutator_a_handle_base___ : any_a<>::___any_a_handle_base___
 	{
-		virtual any_a<> get_() const = 0;
-		virtual any_a<> set_(any_a<> const& thing) const = 0;
-		virtual any_a < > & operator*() const = 0;
-		virtual any_a < > * operator->() const = 0;
+		virtual _element get_() const = 0;
+		virtual _element set_(_element const& thing) const = 0;
+		virtual _element & operator*() const = 0;
+		virtual _element * operator->() const = 0;
 		virtual void increment_() = 0;
 	};
 
@@ -82,16 +82,16 @@ protected:
 			: any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> get_() const final
+		virtual inline _element get_() const final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.get_(); }
 
-		virtual inline any_a<> set_(any_a<> const& thing) const final
+		virtual inline _element set_(_element const& thing) const final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.set_(thing); }
 
-		virtual inline any_a < > & operator*() const final
+		virtual inline _element & operator*() const final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator*(); }
 
-		virtual inline any_a < > * operator->() const final
+		virtual inline _element * operator->() const final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator->(); }
 
 		virtual inline void increment_() final
@@ -240,7 +240,7 @@ public:
 		{
 			return forward_mutator_a{ thing.___handle___ };
 		}
-		return forward_mutator_a{ forward_mutator_d<_1>{ thing } };
+		return forward_mutator_a{ forward_mutator_d<_element>{ thing } };
 	}
 
 	static inline forward_mutator_a ___cast_ref___(any_a<>& thing)
@@ -250,13 +250,13 @@ public:
 		{
 			return forward_mutator_a(thing.___handle___, any_a<>::___reference_tag___{});
 		}
-		return forward_mutator_a{ forward_mutator_d<_1>(thing, any_a<>::___reference_tag___{}) };
+		return forward_mutator_a{ forward_mutator_d<_element>(thing, any_a<>::___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	static inline ___cat_a___ ___cat___()
 	{
-		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::forward_mutator");
+		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::forward_mutator", flock_vals(kind_create<___kind_a___>(2, "")));
 		return CAT;
 	}
 
@@ -275,7 +275,7 @@ public:
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	static inline ___kind_a___ ___kind___()
 	{
-		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>());
+		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>(), flock_vals(kind_of<_element>()));
 		return KIND;
 	}
 
@@ -312,7 +312,7 @@ public:
 	}
 }; // class forward_mutator_a
 
-template <typename _1>
+template <typename _element>
 class forward_mutator_d : public any_a<>
 {
 public:
@@ -327,7 +327,7 @@ public:
 		return op.operate(*const_cast<forward_mutator_d*>(this), arguments);
 	}
 
-	inline any_a<> get_() const
+	inline _element get_() const
 	{
 		assert(any_a<>::___handle___);
 		auto const op = operation("get_");
@@ -335,7 +335,7 @@ public:
 		{
 			throw dis("dynamic forward_mutator_d::get_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *const_cast<forward_mutator_d*>(this)));
+		return cast<_element>(variadic_operate(op, *const_cast<forward_mutator_d*>(this)));
 	}
 
 	inline any_a<> set__(range_a<> const& arguments) const
@@ -349,7 +349,7 @@ public:
 		return op.operate(*const_cast<forward_mutator_d*>(this), arguments);
 	}
 
-	inline any_a<> set_(any_a<> const& thing) const
+	inline _element set_(_element const& thing) const
 	{
 		assert(any_a<>::___handle___);
 		auto const op = operation("set_");
@@ -357,13 +357,13 @@ public:
 		{
 			throw dis("dynamic forward_mutator_d::set_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *const_cast<forward_mutator_d*>(this), thing));
+		return cast<_element>(variadic_operate(op, *const_cast<forward_mutator_d*>(this), thing));
 	}
 
-	inline any_a < > & operator*() const
+	inline _element & operator*() const
 	{ throw dis("dynamic forward_mutator_d::operator*() not available"); }
 
-	inline any_a < > * operator->() const
+	inline _element * operator->() const
 	{ throw dis("dynamic forward_mutator_d::operator->() not available"); }
 
 	inline any_a<> increment__(range_a<> const& arguments)
@@ -377,7 +377,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline forward_mutator_a<> increment_()
+	inline forward_mutator_a< _element > increment_()
 	{
 		assert(any_a<>::___handle___);
 		auto const op = operation("increment_");
@@ -385,7 +385,7 @@ public:
 		{
 			throw dis("dynamic forward_mutator_d::increment_ passed non-existent member");
 		}
-		return cast<forward_mutator_a<>>(variadic_operate(op, *this));
+		return cast<forward_mutator_a< _element >>(variadic_operate(op, *this));
 	}
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}

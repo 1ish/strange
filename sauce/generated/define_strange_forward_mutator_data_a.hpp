@@ -2,20 +2,20 @@
 namespace strange
 {
 
-template <typename _type>
+template <typename _element, typename _type>
 class forward_mutator_data_d;
 
-template <typename _type>
-inline forward_mutator_data_d<_type> ___forward_mutator_data_dynamic___(any_a<> const& thing); 
+template <typename _element, typename _type>
+inline forward_mutator_data_d<_element, _type> ___forward_mutator_data_dynamic___(any_a<> const& thing); 
 
-template <typename _type>
-class forward_mutator_data_a : public forward_mutator_a<>
+template <typename _element, typename _type>
+class forward_mutator_data_a : public forward_mutator_a< _element >
 {
 public:
-	inline bool operator==(forward_mutator_data_a < _type > const & it ) const
+	inline bool operator==(forward_mutator_data_a < _element , _type > const & it ) const
 	{ assert(any_a<>::___handle___); return ___read___().operator==(it); }
 
-	inline bool operator!=(forward_mutator_data_a < _type > const & it ) const
+	inline bool operator!=(forward_mutator_data_a < _element , _type > const & it ) const
 	{ assert(any_a<>::___handle___); return ___read___().operator!=(it); }
 
 	inline _type const & extract_it() const
@@ -25,36 +25,36 @@ public:
 	{ assert(any_a<>::___handle___); return ___write___().mutate_it(); }
 
 protected:
-	struct ___forward_mutator_data_a_handle_base___ : forward_mutator_a<>::___forward_mutator_a_handle_base___
+	struct ___forward_mutator_data_a_handle_base___ : forward_mutator_a< _element >::___forward_mutator_a_handle_base___
 	{
-		virtual bool operator==(forward_mutator_data_a < _type > const & it ) const = 0;
-		virtual bool operator!=(forward_mutator_data_a < _type > const & it ) const = 0;
+		virtual bool operator==(forward_mutator_data_a < _element , _type > const & it ) const = 0;
+		virtual bool operator!=(forward_mutator_data_a < _element , _type > const & it ) const = 0;
 		virtual _type const & extract_it() const = 0;
 		virtual _type & mutate_it() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___forward_mutator_data_a_handle_base___>
-	struct ___forward_mutator_data_a_handle___ : forward_mutator_a<>::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>
+	struct ___forward_mutator_data_a_handle___ : forward_mutator_a< _element >::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___forward_mutator_data_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: forward_mutator_a<>::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>{ value }
+			: forward_mutator_a< _element >::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___forward_mutator_data_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: forward_mutator_a<>::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: forward_mutator_a< _element >::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
 		inline ___forward_mutator_data_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
-			: forward_mutator_a<>::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
+			: forward_mutator_a< _element >::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bool operator==(forward_mutator_data_a < _type > const & it ) const final
+		virtual inline bool operator==(forward_mutator_data_a < _element , _type > const & it ) const final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(it); }
 
-		virtual inline bool operator!=(forward_mutator_data_a < _type > const & it ) const final
+		virtual inline bool operator!=(forward_mutator_data_a < _element , _type > const & it ) const final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(it); }
 
 		virtual inline _type const & extract_it() const final
@@ -143,37 +143,37 @@ public:
 	inline forward_mutator_data_a() = default;
 
 	inline forward_mutator_data_a(forward_mutator_data_a& other, any_a<>::___reference_tag___) noexcept
-		: forward_mutator_a<>(other, any_a<>::___reference_tag___{})
+		: forward_mutator_a< _element >(other, any_a<>::___reference_tag___{})
 	{}
 
 	inline forward_mutator_data_a(forward_mutator_data_a& other, any_a<>::___duplicate_tag___) noexcept
-		: forward_mutator_a<>(other, any_a<>::___duplicate_tag___{})
+		: forward_mutator_a< _element >(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline forward_mutator_data_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: forward_mutator_a<>{ handle }
+		: forward_mutator_a< _element >{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___forward_mutator_data_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
 	explicit inline forward_mutator_data_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
-		: forward_mutator_a<>(handle, any_a<>::___reference_tag___{})
+		: forward_mutator_a< _element >(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___forward_mutator_data_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<forward_mutator_data_a, std::decay_t<___TTT___>>::value>>
 	explicit inline forward_mutator_data_a(___TTT___ value) noexcept
-		: forward_mutator_a<>{ std::make_shared<___forward_mutator_data_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: forward_mutator_a< _element >{ std::make_shared<___forward_mutator_data_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
 	explicit inline forward_mutator_data_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
-		: forward_mutator_a<>{ std::make_shared<___forward_mutator_data_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
+		: forward_mutator_a< _element >{ std::make_shared<___forward_mutator_data_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
@@ -206,7 +206,7 @@ public:
 		{
 			return forward_mutator_data_a{ thing.___handle___ };
 		}
-		return forward_mutator_data_a{ forward_mutator_data_d<_type>{ thing } };
+		return forward_mutator_data_a{ forward_mutator_data_d<_element, _type>{ thing } };
 	}
 
 	static inline forward_mutator_data_a ___cast_ref___(any_a<>& thing)
@@ -216,13 +216,13 @@ public:
 		{
 			return forward_mutator_data_a(thing.___handle___, any_a<>::___reference_tag___{});
 		}
-		return forward_mutator_data_a{ forward_mutator_data_d<_type>(thing, any_a<>::___reference_tag___{}) };
+		return forward_mutator_data_a{ forward_mutator_data_d<_element, _type>(thing, any_a<>::___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	static inline ___cat_a___ ___cat___()
 	{
-		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::forward_mutator_data", flock_vals(kind_create<___kind_a___>(2, "")));
+		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::forward_mutator_data", flock_vals(kind_create<___kind_a___>(2, ""), kind_create<___kind_a___>(2, "")));
 		return CAT;
 	}
 
@@ -231,7 +231,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = forward_mutator_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = forward_mutator_a< _element >::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -241,7 +241,7 @@ public:
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	static inline ___kind_a___ ___kind___()
 	{
-		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>(), flock_vals(kind_of<_type>()));
+		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>(), flock_vals(kind_of<_element>(), kind_of<_type>()));
 		return KIND;
 	}
 
@@ -250,7 +250,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = forward_mutator_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = forward_mutator_a< _element >::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -262,7 +262,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = forward_mutator_a<>::template ___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = forward_mutator_a< _element >::template ___operations___<___unordered_shoal_a___>();
 			return operations;
 		}();
 		return OPERATIONS;
@@ -275,14 +275,14 @@ public:
 	}
 }; // class forward_mutator_data_a
 
-template <typename _type>
-class forward_mutator_data_d : public forward_mutator_d<>
+template <typename _element, typename _type>
+class forward_mutator_data_d : public forward_mutator_d< _element >
 {
 public:
-	inline bool operator==(forward_mutator_data_a < _type > const & it ) const
+	inline bool operator==(forward_mutator_data_a < _element , _type > const & it ) const
 	{ throw dis("dynamic forward_mutator_data_d::operator==(it) not available"); }
 
-	inline bool operator!=(forward_mutator_data_a < _type > const & it ) const
+	inline bool operator!=(forward_mutator_data_a < _element , _type > const & it ) const
 	{ throw dis("dynamic forward_mutator_data_d::operator!=(it) not available"); }
 
 	inline _type const & extract_it() const
@@ -294,15 +294,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit forward_mutator_data_d(any_a<> const& thing)
-		: forward_mutator_d<>{ thing }
+		: forward_mutator_d< _element >{ thing }
 	{}
 
 	explicit forward_mutator_data_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: forward_mutator_d<>{ thing, any_a<>::___reference_tag___{} }
+		: forward_mutator_d< _element >{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit forward_mutator_data_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: forward_mutator_d<>{ thing, any_a<>::___duplicate_tag___{} }
+		: forward_mutator_d< _element >{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

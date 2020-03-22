@@ -10,8 +10,8 @@ false &&
 
 					extract_begin : "forward_extractor_data_a<any_a<>, typename std::unordered_map<any_a<>, any_a<>>::const_iterator> () const",
 					extract_end : "forward_extractor_data_a<any_a<>, typename std::unordered_map<any_a<>, any_a<>>::const_iterator> () const",
-					mutate_begin : "forward_mutator_data_a<typename std::unordered_map<any_a<>, any_a<>>::iterator> ()",
-					mutate_end : "forward_mutator_data_a<typename std::unordered_map<any_a<>, any_a<>>::iterator> ()",
+					mutate_begin : "forward_mutator_data_a<any_a<>, typename std::unordered_map<any_a<>, any_a<>>::iterator> ()",
+					mutate_end : "forward_mutator_data_a<any_a<>, typename std::unordered_map<any_a<>, any_a<>>::iterator> ()",
 
 					extract_map : "std::unordered_map<any_a<>, any_a<>> const& () const",
 					mutate_map : "std::unordered_map<any_a<>, any_a<>>& ()",

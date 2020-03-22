@@ -25,12 +25,12 @@ namespace strange
 		return shoal.extract_end_();
 	}
 
-	inline forward_mutator_a<> begin(shoal_a<>& shoal)
+	inline forward_mutator_a<any_a<>> begin(shoal_a<>& shoal)
 	{
 		return shoal.mutate_begin_();
 	}
 
-	inline forward_mutator_a<> end(shoal_a<>& shoal)
+	inline forward_mutator_a<any_a<>> end(shoal_a<>& shoal)
 	{
 		return shoal.mutate_end_();
 	}
@@ -193,12 +193,12 @@ namespace strange
 		return shoal.extract_end();
 	}
 
-	inline forward_mutator_data_a<typename std::unordered_map<any_a<>, any_a<>>::iterator> begin(unordered_shoal_a<>& shoal)
+	inline forward_mutator_data_a<any_a<>, typename std::unordered_map<any_a<>, any_a<>>::iterator> begin(unordered_shoal_a<>& shoal)
 	{
 		return shoal.mutate_begin();
 	}
 
-	inline forward_mutator_data_a<typename std::unordered_map<any_a<>, any_a<>>::iterator> end(unordered_shoal_a<>& shoal)
+	inline forward_mutator_data_a<any_a<>, typename std::unordered_map<any_a<>, any_a<>>::iterator> end(unordered_shoal_a<>& shoal)
 	{
 		return shoal.mutate_end();
 	}

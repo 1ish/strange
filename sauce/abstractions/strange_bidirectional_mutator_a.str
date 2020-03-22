@@ -3,7 +3,7 @@ false &&
 	{	<bidirectional_mutator> :: abstraction
 		(	// no dimensions
 			(	// parent
-				$$<forward_mutator>[],
+				$$<forward_mutator>[<>],
 				{	// bidirectional mutator
 					decrement_ := (<bidirectional_mutator>),
 				}

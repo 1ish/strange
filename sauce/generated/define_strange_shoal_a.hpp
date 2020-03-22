@@ -29,12 +29,12 @@ public:
 
 	inline any_a<> mutate_begin__(range_a<> const& ___arguments___);
 
-	inline forward_mutator_a<> mutate_begin_()
+	inline forward_mutator_a< any_a<> > mutate_begin_()
 	{ assert(any_a<>::___handle___); return ___write___().mutate_begin_(); }
 
 	inline any_a<> mutate_end__(range_a<> const& ___arguments___);
 
-	inline forward_mutator_a<> mutate_end_()
+	inline forward_mutator_a< any_a<> > mutate_end_()
 	{ assert(any_a<>::___handle___); return ___write___().mutate_end_(); }
 
 protected:
@@ -45,8 +45,8 @@ protected:
 		virtual void update_string(std :: string const & s , any_a < > const & value ) = 0;
 		virtual bool insert_string(std :: string const & s , any_a < > const & value ) = 0;
 		virtual bool erase_string(std :: string const & s ) = 0;
-		virtual forward_mutator_a<> mutate_begin_() = 0;
-		virtual forward_mutator_a<> mutate_end_() = 0;
+		virtual forward_mutator_a< any_a<> > mutate_begin_() = 0;
+		virtual forward_mutator_a< any_a<> > mutate_end_() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___shoal_a_handle_base___>
@@ -82,10 +82,10 @@ protected:
 		virtual inline bool erase_string(std :: string const & s ) final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.erase_string(s); }
 
-		virtual inline forward_mutator_a<> mutate_begin_() final
+		virtual inline forward_mutator_a< any_a<> > mutate_begin_() final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin_(); }
 
-		virtual inline forward_mutator_a<> mutate_end_() final
+		virtual inline forward_mutator_a< any_a<> > mutate_end_() final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end_(); }
 
 	};
@@ -332,7 +332,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline forward_mutator_a<> mutate_begin_()
+	inline forward_mutator_a< any_a<> > mutate_begin_()
 	{
 		assert(any_a<>::___handle___);
 		auto const op = operation("mutate_begin_");
@@ -340,7 +340,7 @@ public:
 		{
 			throw dis("dynamic shoal_d::mutate_begin_ passed non-existent member");
 		}
-		return cast<forward_mutator_a<>>(variadic_operate(op, *this));
+		return cast<forward_mutator_a< any_a<> >>(variadic_operate(op, *this));
 	}
 
 	inline any_a<> mutate_end__(range_a<> const& arguments)
@@ -354,7 +354,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline forward_mutator_a<> mutate_end_()
+	inline forward_mutator_a< any_a<> > mutate_end_()
 	{
 		assert(any_a<>::___handle___);
 		auto const op = operation("mutate_end_");
@@ -362,7 +362,7 @@ public:
 		{
 			throw dis("dynamic shoal_d::mutate_end_ passed non-existent member");
 		}
-		return cast<forward_mutator_a<>>(variadic_operate(op, *this));
+		return cast<forward_mutator_a< any_a<> >>(variadic_operate(op, *this));
 	}
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}

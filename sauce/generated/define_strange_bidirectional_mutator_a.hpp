@@ -9,7 +9,7 @@ template <typename _1 = void>
 inline bidirectional_mutator_d<_1> ___bidirectional_mutator_dynamic___(any_a<> const& thing); 
 
 template <typename _1>
-class bidirectional_mutator_a : public forward_mutator_a<>
+class bidirectional_mutator_a : public forward_mutator_a< any_a<> >
 {
 public:
 	inline any_a<> decrement__(range_a<> const& ___arguments___);
@@ -39,27 +39,27 @@ public:
 #endif
 
 protected:
-	struct ___bidirectional_mutator_a_handle_base___ : forward_mutator_a<>::___forward_mutator_a_handle_base___
+	struct ___bidirectional_mutator_a_handle_base___ : forward_mutator_a< any_a<> >::___forward_mutator_a_handle_base___
 	{
 		virtual void decrement_() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___bidirectional_mutator_a_handle_base___>
-	struct ___bidirectional_mutator_a_handle___ : forward_mutator_a<>::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>
+	struct ___bidirectional_mutator_a_handle___ : forward_mutator_a< any_a<> >::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___bidirectional_mutator_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: forward_mutator_a<>::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>{ value }
+			: forward_mutator_a< any_a<> >::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___bidirectional_mutator_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: forward_mutator_a<>::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: forward_mutator_a< any_a<> >::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
 		inline ___bidirectional_mutator_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
-			: forward_mutator_a<>::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
+			: forward_mutator_a< any_a<> >::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline void decrement_() final
@@ -145,37 +145,37 @@ public:
 	inline bidirectional_mutator_a() = default;
 
 	inline bidirectional_mutator_a(bidirectional_mutator_a& other, any_a<>::___reference_tag___) noexcept
-		: forward_mutator_a<>(other, any_a<>::___reference_tag___{})
+		: forward_mutator_a< any_a<> >(other, any_a<>::___reference_tag___{})
 	{}
 
 	inline bidirectional_mutator_a(bidirectional_mutator_a& other, any_a<>::___duplicate_tag___) noexcept
-		: forward_mutator_a<>(other, any_a<>::___duplicate_tag___{})
+		: forward_mutator_a< any_a<> >(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline bidirectional_mutator_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: forward_mutator_a<>{ handle }
+		: forward_mutator_a< any_a<> >{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___bidirectional_mutator_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
 	explicit inline bidirectional_mutator_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
-		: forward_mutator_a<>(handle, any_a<>::___reference_tag___{})
+		: forward_mutator_a< any_a<> >(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___bidirectional_mutator_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<bidirectional_mutator_a, std::decay_t<___TTT___>>::value>>
 	explicit inline bidirectional_mutator_a(___TTT___ value) noexcept
-		: forward_mutator_a<>{ std::make_shared<___bidirectional_mutator_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: forward_mutator_a< any_a<> >{ std::make_shared<___bidirectional_mutator_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
 	explicit inline bidirectional_mutator_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
-		: forward_mutator_a<>{ std::make_shared<___bidirectional_mutator_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
+		: forward_mutator_a< any_a<> >{ std::make_shared<___bidirectional_mutator_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
@@ -233,7 +233,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = forward_mutator_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = forward_mutator_a< any_a<> >::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -252,7 +252,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = forward_mutator_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = forward_mutator_a< any_a<> >::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -264,7 +264,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = forward_mutator_a<>::template ___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = forward_mutator_a< any_a<> >::template ___operations___<___unordered_shoal_a___>();
 			operations.update_string("decrement_", native_mutation_t<bidirectional_mutator_a>::create(&bidirectional_mutator_a::decrement__));
 			return operations;
 		}();
@@ -279,7 +279,7 @@ public:
 }; // class bidirectional_mutator_a
 
 template <typename _1>
-class bidirectional_mutator_d : public forward_mutator_d<>
+class bidirectional_mutator_d : public forward_mutator_d< any_a<> >
 {
 public:
 	inline any_a<> decrement__(range_a<> const& arguments)
@@ -307,15 +307,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit bidirectional_mutator_d(any_a<> const& thing)
-		: forward_mutator_d<>{ thing }
+		: forward_mutator_d< any_a<> >{ thing }
 	{}
 
 	explicit bidirectional_mutator_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: forward_mutator_d<>{ thing, any_a<>::___reference_tag___{} }
+		: forward_mutator_d< any_a<> >{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit bidirectional_mutator_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: forward_mutator_d<>{ thing, any_a<>::___duplicate_tag___{} }
+		: forward_mutator_d< any_a<> >{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 
