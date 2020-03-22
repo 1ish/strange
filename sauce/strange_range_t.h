@@ -48,13 +48,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym("strange::range");
+		static symbol_a<> TYPE = sym("strange::range" + kind_of<_element>().to_string());
 		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::range::create", native_function_create(&range_t<>::create__));
+		shoal.update_string(type_().to_string() + "::create", native_function_create(&range_t<_element>::create__));
 	}
 
 	// range
