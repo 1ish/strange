@@ -5,7 +5,6 @@ false &&
 			#symbol :<<symbol>># <symbol>,
 			#cat :<<cat>># <cat>,
 			#kind :<<kind>># <kind>,
-			#inventory :<<inventory>># <inventory>,
 			#unordered_herd :<<unordered_herd>># <unordered_herd>,
 			#shoal :<<shoal>># <shoal>,
 			#unordered_shoal :<<unordered_shoal>># <unordered_shoal>,
@@ -30,7 +29,7 @@ false &&
 					operations_ :# (<#unordered_shoal>),
 
 					// visitor
-					visit_ :# (arguments :(#inventory)&, <any>),
+					visit_ :# (arguments :<inventory>&, <any>),
 
 					// function
 					invoke : "any_a<> (any_a<>& thing, range_a<> const& arguments) const",

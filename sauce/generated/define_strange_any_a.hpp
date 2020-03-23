@@ -2,7 +2,7 @@
 namespace strange
 {
 
-template <typename _symbol, typename _cat, typename _kind, typename _inventory, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+template <typename _symbol, typename _cat, typename _kind, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
 class any_a
 {
 protected:
@@ -81,7 +81,7 @@ public:
 
 	inline any_a<> visit__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> visit_(_inventory & arguments) const
+	inline any_a<> visit_(inventory_a<> & arguments) const
 	{ assert(___handle___); return ___read___().visit_(arguments); }
 
 	inline any_a < > invoke(any_a < > & thing , range_a < > const & arguments ) const
@@ -201,7 +201,7 @@ protected:
 		virtual _kind kind_() const = 0;
 		virtual _unordered_herd kinds_() const = 0;
 		virtual _unordered_shoal operations_() const = 0;
-		virtual any_a<> visit_(_inventory & arguments) const = 0;
+		virtual any_a<> visit_(inventory_a<> & arguments) const = 0;
 		virtual any_a < > invoke(any_a < > & thing , range_a < > const & arguments ) const = 0;
 		virtual any_a < > operate(any_a < > & thing , range_a < > const & arguments ) const = 0;
 		virtual _number_data_uint64 identity_() const = 0;
@@ -274,7 +274,7 @@ protected:
 		virtual inline _unordered_shoal operations_() const final
 		{ return ___value___.operations_(); }
 
-		virtual inline any_a<> visit_(_inventory & arguments) const final
+		virtual inline any_a<> visit_(inventory_a<> & arguments) const final
 		{ return ___value___.visit_(arguments); }
 
 		virtual inline any_a < > invoke(any_a < > & thing , range_a < > const & arguments ) const final
