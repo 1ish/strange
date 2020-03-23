@@ -2,7 +2,7 @@
 namespace strange
 {
 
-template <typename _symbol, typename _cat, typename _kind, typename _unordered_herd, typename _shoal, typename _unordered_shoal, typename _number_data_uint64>
+template <typename _symbol, typename _cat, typename _kind, typename _unordered_herd, typename _unordered_shoal, typename _number_data_uint64>
 class any_a
 {
 protected:

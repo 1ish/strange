@@ -6,7 +6,6 @@ false &&
 			#cat :<<cat>># <cat>,
 			#kind :<<kind>># <kind>,
 			#unordered_herd :<<unordered_herd>># <unordered_herd>,
-			#shoal :<<shoal>># <shoal>,
 			#unordered_shoal :<<unordered_shoal>># <unordered_shoal>,
 			#number_data_uint64 :<<number_data_uint64>># <number_data_uint64>,
 			(	// no parent
