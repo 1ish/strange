@@ -2,8 +2,8 @@
 namespace strange
 {
 
-template <typename _1>
-inline any_a<> random_access_extractor_a<_1>::self_add__(range_a<> const& ___arguments___)
+template <typename _element>
+inline any_a<> random_access_extractor_a<_element>::self_add__(range_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -14,8 +14,8 @@ inline any_a<> random_access_extractor_a<_1>::self_add__(range_a<> const& ___arg
 	return self_add_(number);
 }
 
-template <typename _1>
-inline any_a<> random_access_extractor_a<_1>::add__(range_a<> const& ___arguments___) const
+template <typename _element>
+inline any_a<> random_access_extractor_a<_element>::add__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -26,8 +26,8 @@ inline any_a<> random_access_extractor_a<_1>::add__(range_a<> const& ___argument
 	return add_(number);
 }
 
-template <typename _1>
-inline any_a<> random_access_extractor_a<_1>::self_subtract__(range_a<> const& ___arguments___)
+template <typename _element>
+inline any_a<> random_access_extractor_a<_element>::self_subtract__(range_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -38,8 +38,8 @@ inline any_a<> random_access_extractor_a<_1>::self_subtract__(range_a<> const& _
 	return self_subtract_(number);
 }
 
-template <typename _1>
-inline any_a<> random_access_extractor_a<_1>::subtract__(range_a<> const& ___arguments___) const
+template <typename _element>
+inline any_a<> random_access_extractor_a<_element>::subtract__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -63,10 +63,10 @@ bool const ___random_access_extractor_a_share___::share = []()
 	return shared_shoal;
 }();
 
-template <typename _1>
-inline random_access_extractor_d<_1> ___random_access_extractor_dynamic___(any_a<> const& thing)
+template <typename _element>
+inline random_access_extractor_d<_element> ___random_access_extractor_dynamic___(any_a<> const& thing)
 {
-	return random_access_extractor_d<_1>{ thing };
+	return random_access_extractor_d<_element>{ thing };
 }
 
 } // namespace

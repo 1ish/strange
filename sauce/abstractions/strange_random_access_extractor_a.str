@@ -1,17 +1,18 @@
 false &&
 {	strange :
 	{	<random_access_extractor> :: abstraction
-		(	// no dimensions
+		(	// dimensions
+			#element :<<>>#,
 			(	// parent
-				$$<bidirectional_extractor>[<>],
+				$$<bidirectional_extractor>[#element],
 				{	// random access extractor
-					self_add_ := (number :<number>#, <random_access_extractor>),
+					self_add_ := (number :<number>#, <random_access_extractor[<#element>]>),
 
-					add_ :# (number :<number>#, <random_access_extractor>),
+					add_ :# (number :<number>#, <random_access_extractor[<#element>]>),
 
-					self_subtract_ := (number :<number>#, <random_access_extractor>),
+					self_subtract_ := (number :<number>#, <random_access_extractor[<#element>]>),
 
-					subtract_ :# (number :<number>#, <random_access_extractor>),
+					subtract_ :# (number :<number>#, <random_access_extractor[<#element>]>),
 				}
 			)
 		)

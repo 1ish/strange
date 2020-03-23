@@ -13,10 +13,10 @@ false &&
 					'operator<=' : "bool (lake_a<_primitive> const& lake) const",
 					'operator>=' : "bool (lake_a<_primitive> const& lake) const",
 
-					extract_begin : "random_access_extractor_data_a<typename std::vector<_primitive>::const_iterator> () const",
-					extract_end : "random_access_extractor_data_a<typename std::vector<_primitive>::const_iterator> () const",
-					mutate_begin : "random_access_mutator_data_a<typename std::vector<_primitive>::iterator> ()",
-					mutate_end : "random_access_mutator_data_a<typename std::vector<_primitive>::iterator> ()",
+					extract_begin : "random_access_extractor_data_a<any_a<>, typename std::vector<_primitive>::const_iterator> () const",
+					extract_end : "random_access_extractor_data_a<any_a<>, typename std::vector<_primitive>::const_iterator> () const",
+					mutate_begin : "random_access_mutator_data_a<any_a<>, typename std::vector<_primitive>::iterator> ()",
+					mutate_end : "random_access_mutator_data_a<any_a<>, typename std::vector<_primitive>::iterator> ()",
 
 					extract_vector : "std::vector<_primitive> const& () const",
 					mutate_vector : "std::vector<_primitive>& ()",

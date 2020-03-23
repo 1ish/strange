@@ -12,8 +12,8 @@ false &&
 					erase_index : "bool (int64_t index) { return erase_(num(index)); }",
 
 					// mutable range
-					mutate_begin_ := (<random_access_mutator>),
-					mutate_end_ := (<random_access_mutator>),
+					mutate_begin_ := (<random_access_mutator[<>]>),
+					mutate_end_ := (<random_access_mutator[<>]>),
 				}
 			)
 		)

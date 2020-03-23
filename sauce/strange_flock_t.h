@@ -8,15 +8,15 @@ namespace strange
 template <bool _concurrent_, typename ___ego___>
 class flock_t : public thing_t<___ego___>
 {
-	template <typename _iterator_, typename ___ego_it___ = random_access_mutator_data_a<_iterator_>>
+	template <typename _element, typename _iterator_, typename ___ego_it___ = random_access_mutator_data_a<_element, _iterator_>>
 	class mutator_t : public thing_t<___ego_it___>
 	{
 	public:
 		// construction
 		template <typename F>
-		static inline random_access_mutator_data_a<_iterator_> create(flock_t const& flock_thing, F&& it)
+		static inline random_access_mutator_data_a<_element, _iterator_> create(flock_t const& flock_thing, F&& it)
 		{
-			return random_access_mutator_data_a<_iterator_>::template create<mutator_t<_iterator_>>(flock_thing, std::forward<F>(it));
+			return random_access_mutator_data_a<_element, _iterator_>::template create<mutator_t<_element, _iterator_>>(flock_thing, std::forward<F>(it));
 		}
 
 		// reflection
@@ -32,16 +32,16 @@ class flock_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			return check<random_access_mutator_data_a<_iterator_>>(thing) &&
-				_it == fast<random_access_mutator_data_a<_iterator_>>(thing).extract_it();
+			return check<random_access_mutator_data_a<_element, _iterator_>>(thing) &&
+				_it == fast<random_access_mutator_data_a<_element, _iterator_>>(thing).extract_it();
 		}
 
-		inline bool operator==(random_access_mutator_data_a<_iterator_> const& it) const
+		inline bool operator==(random_access_mutator_data_a<_element, _iterator_> const& it) const
 		{
 			return _it == it.extract_it();
 		}
 
-		inline bool operator!=(random_access_mutator_data_a<_iterator_> const& it) const
+		inline bool operator!=(random_access_mutator_data_a<_element, _iterator_> const& it) const
 		{
 			return _it != it.extract_it();
 		}
@@ -59,71 +59,71 @@ class flock_t : public thing_t<___ego___>
 
 		inline bool less_than_(any_a<> const& thing) const
 		{
-			return check<random_access_mutator_data_a<_iterator_>>(thing)
-				? _it < fast<random_access_mutator_data_a<_iterator_>>(thing).extract_it()
+			return check<random_access_mutator_data_a<_element, _iterator_>>(thing)
+				? _it < fast<random_access_mutator_data_a<_element, _iterator_>>(thing).extract_it()
 				: one_t::less_than_(thing);
 		}
 
-		inline bool operator<(random_access_mutator_data_a<_iterator_> const& it) const
+		inline bool operator<(random_access_mutator_data_a<_element, _iterator_> const& it) const
 		{
 			return _it < it.extract_it();
 		}
 
 		inline bool greater_than_(any_a<> const& thing) const
 		{
-			return check<random_access_mutator_data_a<_iterator_>>(thing)
-				? _it > fast<random_access_mutator_data_a<_iterator_>>(thing).extract_it()
+			return check<random_access_mutator_data_a<_element, _iterator_>>(thing)
+				? _it > fast<random_access_mutator_data_a<_element, _iterator_>>(thing).extract_it()
 				: one_t::greater_than_(thing);
 		}
 
-		inline bool operator>(random_access_mutator_data_a<_iterator_> const& it) const
+		inline bool operator>(random_access_mutator_data_a<_element, _iterator_> const& it) const
 		{
 			return _it > it.extract_it();
 		}
 
 		inline bool less_or_equal_(any_a<> const& thing) const
 		{
-			return check<random_access_mutator_data_a<_iterator_>>(thing)
-				? _it <= fast<random_access_mutator_data_a<_iterator_>>(thing).extract_it()
+			return check<random_access_mutator_data_a<_element, _iterator_>>(thing)
+				? _it <= fast<random_access_mutator_data_a<_element, _iterator_>>(thing).extract_it()
 				: one_t::less_or_equal_(thing);
 		}
 
-		inline bool operator<=(random_access_mutator_data_a<_iterator_> const& it) const
+		inline bool operator<=(random_access_mutator_data_a<_element, _iterator_> const& it) const
 		{
 			return _it <= it.extract_it();
 		}
 
 		inline bool greater_or_equal_(any_a<> const& thing) const
 		{
-			return check<random_access_mutator_data_a<_iterator_>>(thing)
-				? _it >= fast<random_access_mutator_data_a<_iterator_>>(thing).extract_it()
+			return check<random_access_mutator_data_a<_element, _iterator_>>(thing)
+				? _it >= fast<random_access_mutator_data_a<_element, _iterator_>>(thing).extract_it()
 				: one_t::greater_or_equal_(thing);
 		}
 
-		inline bool operator>=(random_access_mutator_data_a<_iterator_> const& it) const
+		inline bool operator>=(random_access_mutator_data_a<_element, _iterator_> const& it) const
 		{
 			return _it >= it.extract_it();
 		}
 
 		// forward mutator
-		inline any_a<> get_() const
+		inline _element get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_flock_thing._mutex);
 			return *_it;
 		}
 
-		inline any_a<> set_(any_a<> const& thing) const
+		inline _element set_(_element const& thing) const
 		{
 			typename concurrent_u<_concurrent_>::write_lock lock(_flock_thing._mutex);
 			return *_it = thing;
 		}
 
-		inline any_a<>* operator->() const
+		inline _element* operator->() const
 		{
 			return &operator*();
 		}
 
-		inline any_a<>& operator*() const
+		inline _element& operator*() const
 		{
 			return *_it;
 		}
@@ -148,7 +148,7 @@ class flock_t : public thing_t<___ego___>
 			_it += number.to_int_64();
 		}
 
-		inline random_access_mutator_a<> add_(number_a<> const& number) const
+		inline random_access_mutator_a<_element> add_(number_a<> const& number) const
 		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_flock_thing._mutex);
@@ -162,7 +162,7 @@ class flock_t : public thing_t<___ego___>
 			_it -= number.to_int_64();
 		}
 
-		inline random_access_mutator_a<> subtract_(number_a<> const& number) const
+		inline random_access_mutator_a<_element> subtract_(number_a<> const& number) const
 		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_flock_thing._mutex);
@@ -195,15 +195,15 @@ class flock_t : public thing_t<___ego___>
 		{}
 	};
 
-	template <typename _iterator_, typename ___ego_it___ = random_access_extractor_data_a<_iterator_>>
+	template <typename _element, typename _iterator_, typename ___ego_it___ = random_access_extractor_data_a<_element, _iterator_>>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
 		// construction
 		template <typename F>
-		static inline random_access_extractor_data_a<_iterator_> create(flock_a<> const& flock, flock_t const& flock_thing, F&& it)
+		static inline random_access_extractor_data_a<_element, _iterator_> create(flock_a<> const& flock, flock_t const& flock_thing, F&& it)
 		{
-			return random_access_extractor_data_a<_iterator_>::template create<extractor_t<_iterator_>>(flock, flock_thing, std::forward<F>(it));
+			return random_access_extractor_data_a<_element, _iterator_>::template create<extractor_t<_element, _iterator_>>(flock, flock_thing, std::forward<F>(it));
 		}
 
 		// reflection
@@ -219,16 +219,16 @@ class flock_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			return check<random_access_extractor_data_a<_iterator_>>(thing) &&
-				_it == fast<random_access_extractor_data_a<_iterator_>>(thing).extract_it();
+			return check<random_access_extractor_data_a<_element, _iterator_>>(thing) &&
+				_it == fast<random_access_extractor_data_a<_element, _iterator_>>(thing).extract_it();
 		}
 
-		inline bool operator==(random_access_extractor_data_a<_iterator_> const& it) const
+		inline bool operator==(random_access_extractor_data_a<_element, _iterator_> const& it) const
 		{
 			return _it == it.extract_it();
 		}
 
-		inline bool operator!=(random_access_extractor_data_a<_iterator_> const& it) const
+		inline bool operator!=(random_access_extractor_data_a<_element, _iterator_> const& it) const
 		{
 			return _it != it.extract_it();
 		}
@@ -246,65 +246,65 @@ class flock_t : public thing_t<___ego___>
 
 		inline bool less_than_(any_a<> const& thing) const
 		{
-			return check<random_access_extractor_data_a<_iterator_>>(thing)
-				? _it < fast<random_access_extractor_data_a<_iterator_>>(thing).extract_it()
+			return check<random_access_extractor_data_a<_element, _iterator_>>(thing)
+				? _it < fast<random_access_extractor_data_a<_element, _iterator_>>(thing).extract_it()
 				: one_t::less_than_(thing);
 		}
 
-		inline bool operator<(random_access_extractor_data_a<_iterator_> const& it) const
+		inline bool operator<(random_access_extractor_data_a<_element, _iterator_> const& it) const
 		{
 			return _it < it.extract_it();
 		}
 
 		inline bool greater_than_(any_a<> const& thing) const
 		{
-			return check<random_access_extractor_data_a<_iterator_>>(thing)
-				? _it > fast<random_access_extractor_data_a<_iterator_>>(thing).extract_it()
+			return check<random_access_extractor_data_a<_element, _iterator_>>(thing)
+				? _it > fast<random_access_extractor_data_a<_element, _iterator_>>(thing).extract_it()
 				: one_t::greater_than_(thing);
 		}
 
-		inline bool operator>(random_access_extractor_data_a<_iterator_> const& it) const
+		inline bool operator>(random_access_extractor_data_a<_element, _iterator_> const& it) const
 		{
 			return _it > it.extract_it();
 		}
 
 		inline bool less_or_equal_(any_a<> const& thing) const
 		{
-			return check<random_access_extractor_data_a<_iterator_>>(thing)
-				? _it <= fast<random_access_extractor_data_a<_iterator_>>(thing).extract_it()
+			return check<random_access_extractor_data_a<_element, _iterator_>>(thing)
+				? _it <= fast<random_access_extractor_data_a<_element, _iterator_>>(thing).extract_it()
 				: one_t::less_or_equal_(thing);
 		}
 
-		inline bool operator<=(random_access_extractor_data_a<_iterator_> const& it) const
+		inline bool operator<=(random_access_extractor_data_a<_element, _iterator_> const& it) const
 		{
 			return _it <= it.extract_it();
 		}
 
 		inline bool greater_or_equal_(any_a<> const& thing) const
 		{
-			return check<random_access_extractor_data_a<_iterator_>>(thing)
-				? _it >= fast<random_access_extractor_data_a<_iterator_>>(thing).extract_it()
+			return check<random_access_extractor_data_a<_element, _iterator_>>(thing)
+				? _it >= fast<random_access_extractor_data_a<_element, _iterator_>>(thing).extract_it()
 				: one_t::greater_or_equal_(thing);
 		}
 
-		inline bool operator>=(random_access_extractor_data_a<_iterator_> const& it) const
+		inline bool operator>=(random_access_extractor_data_a<_element, _iterator_> const& it) const
 		{
 			return _it >= it.extract_it();
 		}
 
 		// forward extractor
-		inline any_a<> get_() const
+		inline _element get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_flock_thing._mutex);
 			return *_it;
 		}
 
-		inline any_a<> const* operator->() const
+		inline _element const* operator->() const
 		{
 			return &operator*();
 		}
 
-		inline any_a<> const& operator*() const
+		inline _element const& operator*() const
 		{
 			return *_it;
 		}
@@ -329,7 +329,7 @@ class flock_t : public thing_t<___ego___>
 			_it += number.to_int_64();
 		}
 
-		inline random_access_extractor_a<> add_(number_a<> const& number) const
+		inline random_access_extractor_a<_element> add_(number_a<> const& number) const
 		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_flock_thing._mutex);
@@ -343,7 +343,7 @@ class flock_t : public thing_t<___ego___>
 			_it -= number.to_int_64();
 		}
 
-		inline random_access_extractor_a<> subtract_(number_a<> const& number) const
+		inline random_access_extractor_a<_element> subtract_(number_a<> const& number) const
 		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_flock_thing._mutex);
@@ -549,52 +549,52 @@ public:
 	}
 
 	// range
-	inline random_access_extractor_a<> extract_begin_() const
+	inline random_access_extractor_a<any_a<>> extract_begin_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<typename std_vector_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cbegin());
+		return extractor_t<any_a<>, typename std_vector_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cbegin());
 	}
 
-	inline random_access_extractor_data_a<typename std_vector_any::const_iterator> extract_begin() const
+	inline random_access_extractor_data_a<any_a<>, typename std_vector_any::const_iterator> extract_begin() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<typename std_vector_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cbegin());
+		return extractor_t<any_a<>, typename std_vector_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cbegin());
 	}
 
-	inline random_access_extractor_a<> extract_end_() const
+	inline random_access_extractor_a<any_a<>> extract_end_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<typename std_vector_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cend());
+		return extractor_t<any_a<>, typename std_vector_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cend());
 	}
 
-	inline random_access_extractor_data_a<typename std_vector_any::const_iterator> extract_end() const
+	inline random_access_extractor_data_a<any_a<>, typename std_vector_any::const_iterator> extract_end() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<typename std_vector_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cend());
+		return extractor_t<any_a<>, typename std_vector_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cend());
 	}
 
-	inline random_access_mutator_a<> mutate_begin_()
+	inline random_access_mutator_a<any_a<>> mutate_begin_()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return mutator_t<typename std_vector_any::iterator>::create(*this, _vector.begin());
+		return mutator_t<any_a<>, typename std_vector_any::iterator>::create(*this, _vector.begin());
 	}
 
-	inline random_access_mutator_data_a<typename std_vector_any::iterator> mutate_begin()
+	inline random_access_mutator_data_a<any_a<>, typename std_vector_any::iterator> mutate_begin()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return mutator_t<typename std_vector_any::iterator>::create(*this, _vector.begin());
+		return mutator_t<any_a<>, typename std_vector_any::iterator>::create(*this, _vector.begin());
 	}
 
-	inline random_access_mutator_a<> mutate_end_()
+	inline random_access_mutator_a<any_a<>> mutate_end_()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return mutator_t<typename std_vector_any::iterator>::create(*this, _vector.end());
+		return mutator_t<any_a<>, typename std_vector_any::iterator>::create(*this, _vector.end());
 	}
 
-	inline random_access_mutator_data_a<typename std_vector_any::iterator> mutate_end()
+	inline random_access_mutator_data_a<any_a<>, typename std_vector_any::iterator> mutate_end()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return mutator_t<typename std_vector_any::iterator>::create(*this, _vector.end());
+		return mutator_t<any_a<>, typename std_vector_any::iterator>::create(*this, _vector.end());
 	}
 
 	// collection

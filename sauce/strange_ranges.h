@@ -45,80 +45,80 @@ namespace strange
 		return inventory.extract_end_();
 	}
 
-	inline random_access_mutator_a<> begin(inventory_a<>& inventory)
+	inline random_access_mutator_a<any_a<>> begin(inventory_a<>& inventory)
 	{
 		return inventory.mutate_begin_();
 	}
 
-	inline random_access_mutator_a<> end(inventory_a<>& inventory)
+	inline random_access_mutator_a<any_a<>> end(inventory_a<>& inventory)
 	{
 		return inventory.mutate_end_();
 	}
 
 	template <typename _primitive_>
-	inline random_access_extractor_data_a<typename std::deque<_primitive_>::const_iterator> begin(brook_a<_primitive_> const& brook)
+	inline random_access_extractor_data_a<any_a<>, typename std::deque<_primitive_>::const_iterator> begin(brook_a<_primitive_> const& brook)
 	{
 		return brook.extract_begin();
 	}
 
 	template <typename _primitive_>
-	inline random_access_extractor_data_a<typename std::deque<_primitive_>::const_iterator> end(brook_a<_primitive_> const& brook)
+	inline random_access_extractor_data_a<any_a<>, typename std::deque<_primitive_>::const_iterator> end(brook_a<_primitive_> const& brook)
 	{
 		return brook.extract_end();
 	}
 
 	template <typename _primitive_>
-	inline random_access_mutator_data_a<typename std::deque<_primitive_>::iterator> begin(brook_a<_primitive_>& brook)
+	inline random_access_mutator_data_a<any_a<>, typename std::deque<_primitive_>::iterator> begin(brook_a<_primitive_>& brook)
 	{
 		return brook.mutate_begin();
 	}
 
 	template <typename _primitive_>
-	inline random_access_mutator_data_a<typename std::deque<_primitive_>::iterator> end(brook_a<_primitive_>& brook)
+	inline random_access_mutator_data_a<any_a<>, typename std::deque<_primitive_>::iterator> end(brook_a<_primitive_>& brook)
 	{
 		return brook.mutate_end();
 	}
 
-	inline random_access_extractor_data_a<typename std::vector<any_a<>>::const_iterator> begin(flock_a<> const& flock)
+	inline random_access_extractor_data_a<any_a<>, typename std::vector<any_a<>>::const_iterator> begin(flock_a<> const& flock)
 	{
 		return flock.extract_begin();
 	}
 
-	inline random_access_extractor_data_a<typename std::vector<any_a<>>::const_iterator> end(flock_a<> const& flock)
+	inline random_access_extractor_data_a<any_a<>, typename std::vector<any_a<>>::const_iterator> end(flock_a<> const& flock)
 	{
 		return flock.extract_end();
 	}
 
-	inline random_access_mutator_data_a<typename std::vector<any_a<>>::iterator> begin(flock_a<>& flock)
+	inline random_access_mutator_data_a<any_a<>, typename std::vector<any_a<>>::iterator> begin(flock_a<>& flock)
 	{
 		return flock.mutate_begin();
 	}
 
-	inline random_access_mutator_data_a<typename std::vector<any_a<>>::iterator> end(flock_a<>& flock)
+	inline random_access_mutator_data_a<any_a<>, typename std::vector<any_a<>>::iterator> end(flock_a<>& flock)
 	{
 		return flock.mutate_end();
 	}
 
 	template <typename _primitive_>
-	inline random_access_extractor_data_a<typename std::vector<_primitive_>::const_iterator> begin(lake_a<_primitive_> const& lake)
+	inline random_access_extractor_data_a<any_a<>, typename std::vector<_primitive_>::const_iterator> begin(lake_a<_primitive_> const& lake)
 	{
 		return lake.extract_begin();
 	}
 
 	template <typename _primitive_>
-	inline random_access_extractor_data_a<typename std::vector<_primitive_>::const_iterator> end(lake_a<_primitive_> const& lake)
+	inline random_access_extractor_data_a<any_a<>, typename std::vector<_primitive_>::const_iterator> end(lake_a<_primitive_> const& lake)
 	{
 		return lake.extract_end();
 	}
 
 	template <typename _primitive_>
-	inline random_access_mutator_data_a<typename std::vector<_primitive_>::iterator> begin(lake_a<_primitive_>& lake)
+	inline random_access_mutator_data_a<any_a<>, typename std::vector<_primitive_>::iterator> begin(lake_a<_primitive_>& lake)
 	{
 		return lake.mutate_begin();
 	}
 
 	template <typename _primitive_>
-	inline random_access_mutator_data_a<typename std::vector<_primitive_>::iterator> end(lake_a<_primitive_>& lake)
+	inline random_access_mutator_data_a<any_a<>, typename std::vector<_primitive_>::iterator> end(lake_a<_primitive_>& lake)
 	{
 		return lake.mutate_end();
 	}
@@ -153,22 +153,22 @@ namespace strange
 		return shoal.mutate_end();
 	}
 
-	inline random_access_extractor_data_a<typename std::deque<any_a<>>::const_iterator> begin(squad_a<> const& squad)
+	inline random_access_extractor_data_a<any_a<>, typename std::deque<any_a<>>::const_iterator> begin(squad_a<> const& squad)
 	{
 		return squad.extract_begin();
 	}
 
-	inline random_access_extractor_data_a<typename std::deque<any_a<>>::const_iterator> end(squad_a<> const& squad)
+	inline random_access_extractor_data_a<any_a<>, typename std::deque<any_a<>>::const_iterator> end(squad_a<> const& squad)
 	{
 		return squad.extract_end();
 	}
 
-	inline random_access_mutator_data_a<typename std::deque<any_a<>>::iterator> begin(squad_a<>& squad)
+	inline random_access_mutator_data_a<any_a<>, typename std::deque<any_a<>>::iterator> begin(squad_a<>& squad)
 	{
 		return squad.mutate_begin();
 	}
 
-	inline random_access_mutator_data_a<typename std::deque<any_a<>>::iterator> end(squad_a<>& squad)
+	inline random_access_mutator_data_a<any_a<>, typename std::deque<any_a<>>::iterator> end(squad_a<>& squad)
 	{
 		return squad.mutate_end();
 	}

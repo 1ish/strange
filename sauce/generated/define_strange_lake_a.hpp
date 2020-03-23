@@ -30,16 +30,16 @@ public:
 	inline bool operator>=(lake_a < _primitive > const & lake ) const
 	{ assert(any_a<>::___handle___); return ___read___().operator>=(lake); }
 
-	inline random_access_extractor_data_a < typename std :: vector < _primitive > :: const_iterator > extract_begin() const
+	inline random_access_extractor_data_a < any_a < > , typename std :: vector < _primitive > :: const_iterator > extract_begin() const
 	{ assert(any_a<>::___handle___); return ___read___().extract_begin(); }
 
-	inline random_access_extractor_data_a < typename std :: vector < _primitive > :: const_iterator > extract_end() const
+	inline random_access_extractor_data_a < any_a < > , typename std :: vector < _primitive > :: const_iterator > extract_end() const
 	{ assert(any_a<>::___handle___); return ___read___().extract_end(); }
 
-	inline random_access_mutator_data_a < typename std :: vector < _primitive > :: iterator > mutate_begin()
+	inline random_access_mutator_data_a < any_a < > , typename std :: vector < _primitive > :: iterator > mutate_begin()
 	{ assert(any_a<>::___handle___); return ___write___().mutate_begin(); }
 
-	inline random_access_mutator_data_a < typename std :: vector < _primitive > :: iterator > mutate_end()
+	inline random_access_mutator_data_a < any_a < > , typename std :: vector < _primitive > :: iterator > mutate_end()
 	{ assert(any_a<>::___handle___); return ___write___().mutate_end(); }
 
 	inline std :: vector < _primitive > const & extract_vector() const
@@ -57,10 +57,10 @@ protected:
 		virtual bool operator>(lake_a < _primitive > const & lake ) const = 0;
 		virtual bool operator<=(lake_a < _primitive > const & lake ) const = 0;
 		virtual bool operator>=(lake_a < _primitive > const & lake ) const = 0;
-		virtual random_access_extractor_data_a < typename std :: vector < _primitive > :: const_iterator > extract_begin() const = 0;
-		virtual random_access_extractor_data_a < typename std :: vector < _primitive > :: const_iterator > extract_end() const = 0;
-		virtual random_access_mutator_data_a < typename std :: vector < _primitive > :: iterator > mutate_begin() = 0;
-		virtual random_access_mutator_data_a < typename std :: vector < _primitive > :: iterator > mutate_end() = 0;
+		virtual random_access_extractor_data_a < any_a < > , typename std :: vector < _primitive > :: const_iterator > extract_begin() const = 0;
+		virtual random_access_extractor_data_a < any_a < > , typename std :: vector < _primitive > :: const_iterator > extract_end() const = 0;
+		virtual random_access_mutator_data_a < any_a < > , typename std :: vector < _primitive > :: iterator > mutate_begin() = 0;
+		virtual random_access_mutator_data_a < any_a < > , typename std :: vector < _primitive > :: iterator > mutate_end() = 0;
 		virtual std :: vector < _primitive > const & extract_vector() const = 0;
 		virtual std :: vector < _primitive > & mutate_vector() = 0;
 	};
@@ -101,16 +101,16 @@ protected:
 		virtual inline bool operator>=(lake_a < _primitive > const & lake ) const final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(lake); }
 
-		virtual inline random_access_extractor_data_a < typename std :: vector < _primitive > :: const_iterator > extract_begin() const final
+		virtual inline random_access_extractor_data_a < any_a < > , typename std :: vector < _primitive > :: const_iterator > extract_begin() const final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
 
-		virtual inline random_access_extractor_data_a < typename std :: vector < _primitive > :: const_iterator > extract_end() const final
+		virtual inline random_access_extractor_data_a < any_a < > , typename std :: vector < _primitive > :: const_iterator > extract_end() const final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
 
-		virtual inline random_access_mutator_data_a < typename std :: vector < _primitive > :: iterator > mutate_begin() final
+		virtual inline random_access_mutator_data_a < any_a < > , typename std :: vector < _primitive > :: iterator > mutate_begin() final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin(); }
 
-		virtual inline random_access_mutator_data_a < typename std :: vector < _primitive > :: iterator > mutate_end() final
+		virtual inline random_access_mutator_data_a < any_a < > , typename std :: vector < _primitive > :: iterator > mutate_end() final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end(); }
 
 		virtual inline std :: vector < _primitive > const & extract_vector() const final
@@ -353,16 +353,16 @@ public:
 	inline bool operator>=(lake_a < _primitive > const & lake ) const
 	{ throw dis("dynamic lake_d::operator>=(lake) not available"); }
 
-	inline random_access_extractor_data_a < typename std :: vector < _primitive > :: const_iterator > extract_begin() const
+	inline random_access_extractor_data_a < any_a < > , typename std :: vector < _primitive > :: const_iterator > extract_begin() const
 	{ throw dis("dynamic lake_d::extract_begin() not available"); }
 
-	inline random_access_extractor_data_a < typename std :: vector < _primitive > :: const_iterator > extract_end() const
+	inline random_access_extractor_data_a < any_a < > , typename std :: vector < _primitive > :: const_iterator > extract_end() const
 	{ throw dis("dynamic lake_d::extract_end() not available"); }
 
-	inline random_access_mutator_data_a < typename std :: vector < _primitive > :: iterator > mutate_begin()
+	inline random_access_mutator_data_a < any_a < > , typename std :: vector < _primitive > :: iterator > mutate_begin()
 	{ throw dis("dynamic lake_d::mutate_begin() not available"); }
 
-	inline random_access_mutator_data_a < typename std :: vector < _primitive > :: iterator > mutate_end()
+	inline random_access_mutator_data_a < any_a < > , typename std :: vector < _primitive > :: iterator > mutate_end()
 	{ throw dis("dynamic lake_d::mutate_end() not available"); }
 
 	inline std :: vector < _primitive > const & extract_vector() const

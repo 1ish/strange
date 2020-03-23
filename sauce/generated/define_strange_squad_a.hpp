@@ -30,16 +30,16 @@ public:
 	inline bool operator>=(squad_a < > const & squad ) const
 	{ assert(any_a<>::___handle___); return ___read___().operator>=(squad); }
 
-	inline random_access_extractor_data_a < typename std :: deque < any_a < > > :: const_iterator > extract_begin() const
+	inline random_access_extractor_data_a < any_a < > , typename std :: deque < any_a < > > :: const_iterator > extract_begin() const
 	{ assert(any_a<>::___handle___); return ___read___().extract_begin(); }
 
-	inline random_access_extractor_data_a < typename std :: deque < any_a < > > :: const_iterator > extract_end() const
+	inline random_access_extractor_data_a < any_a < > , typename std :: deque < any_a < > > :: const_iterator > extract_end() const
 	{ assert(any_a<>::___handle___); return ___read___().extract_end(); }
 
-	inline random_access_mutator_data_a < typename std :: deque < any_a < > > :: iterator > mutate_begin()
+	inline random_access_mutator_data_a < any_a < > , typename std :: deque < any_a < > > :: iterator > mutate_begin()
 	{ assert(any_a<>::___handle___); return ___write___().mutate_begin(); }
 
-	inline random_access_mutator_data_a < typename std :: deque < any_a < > > :: iterator > mutate_end()
+	inline random_access_mutator_data_a < any_a < > , typename std :: deque < any_a < > > :: iterator > mutate_end()
 	{ assert(any_a<>::___handle___); return ___write___().mutate_end(); }
 
 	inline std :: deque < any_a < > > const & extract_deque() const
@@ -57,10 +57,10 @@ protected:
 		virtual bool operator>(squad_a < > const & squad ) const = 0;
 		virtual bool operator<=(squad_a < > const & squad ) const = 0;
 		virtual bool operator>=(squad_a < > const & squad ) const = 0;
-		virtual random_access_extractor_data_a < typename std :: deque < any_a < > > :: const_iterator > extract_begin() const = 0;
-		virtual random_access_extractor_data_a < typename std :: deque < any_a < > > :: const_iterator > extract_end() const = 0;
-		virtual random_access_mutator_data_a < typename std :: deque < any_a < > > :: iterator > mutate_begin() = 0;
-		virtual random_access_mutator_data_a < typename std :: deque < any_a < > > :: iterator > mutate_end() = 0;
+		virtual random_access_extractor_data_a < any_a < > , typename std :: deque < any_a < > > :: const_iterator > extract_begin() const = 0;
+		virtual random_access_extractor_data_a < any_a < > , typename std :: deque < any_a < > > :: const_iterator > extract_end() const = 0;
+		virtual random_access_mutator_data_a < any_a < > , typename std :: deque < any_a < > > :: iterator > mutate_begin() = 0;
+		virtual random_access_mutator_data_a < any_a < > , typename std :: deque < any_a < > > :: iterator > mutate_end() = 0;
 		virtual std :: deque < any_a < > > const & extract_deque() const = 0;
 		virtual std :: deque < any_a < > > & mutate_deque() = 0;
 	};
@@ -101,16 +101,16 @@ protected:
 		virtual inline bool operator>=(squad_a < > const & squad ) const final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(squad); }
 
-		virtual inline random_access_extractor_data_a < typename std :: deque < any_a < > > :: const_iterator > extract_begin() const final
+		virtual inline random_access_extractor_data_a < any_a < > , typename std :: deque < any_a < > > :: const_iterator > extract_begin() const final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
 
-		virtual inline random_access_extractor_data_a < typename std :: deque < any_a < > > :: const_iterator > extract_end() const final
+		virtual inline random_access_extractor_data_a < any_a < > , typename std :: deque < any_a < > > :: const_iterator > extract_end() const final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
 
-		virtual inline random_access_mutator_data_a < typename std :: deque < any_a < > > :: iterator > mutate_begin() final
+		virtual inline random_access_mutator_data_a < any_a < > , typename std :: deque < any_a < > > :: iterator > mutate_begin() final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin(); }
 
-		virtual inline random_access_mutator_data_a < typename std :: deque < any_a < > > :: iterator > mutate_end() final
+		virtual inline random_access_mutator_data_a < any_a < > , typename std :: deque < any_a < > > :: iterator > mutate_end() final
 		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end(); }
 
 		virtual inline std :: deque < any_a < > > const & extract_deque() const final
@@ -353,16 +353,16 @@ public:
 	inline bool operator>=(squad_a < > const & squad ) const
 	{ throw dis("dynamic squad_d::operator>=(squad) not available"); }
 
-	inline random_access_extractor_data_a < typename std :: deque < any_a < > > :: const_iterator > extract_begin() const
+	inline random_access_extractor_data_a < any_a < > , typename std :: deque < any_a < > > :: const_iterator > extract_begin() const
 	{ throw dis("dynamic squad_d::extract_begin() not available"); }
 
-	inline random_access_extractor_data_a < typename std :: deque < any_a < > > :: const_iterator > extract_end() const
+	inline random_access_extractor_data_a < any_a < > , typename std :: deque < any_a < > > :: const_iterator > extract_end() const
 	{ throw dis("dynamic squad_d::extract_end() not available"); }
 
-	inline random_access_mutator_data_a < typename std :: deque < any_a < > > :: iterator > mutate_begin()
+	inline random_access_mutator_data_a < any_a < > , typename std :: deque < any_a < > > :: iterator > mutate_begin()
 	{ throw dis("dynamic squad_d::mutate_begin() not available"); }
 
-	inline random_access_mutator_data_a < typename std :: deque < any_a < > > :: iterator > mutate_end()
+	inline random_access_mutator_data_a < any_a < > , typename std :: deque < any_a < > > :: iterator > mutate_end()
 	{ throw dis("dynamic squad_d::mutate_end() not available"); }
 
 	inline std :: deque < any_a < > > const & extract_deque() const
