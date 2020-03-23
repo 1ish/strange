@@ -49,17 +49,17 @@ public:
 	}
 
 	// forward extractor
-	inline any_a<> get_() const
+	inline _element get_() const
 	{
 		return no();
 	}
 
-	inline any_a<> const* operator->() const
+	inline _element const* operator->() const
 	{
 		return &operator*();
 	}
 
-	inline any_a<> const& operator*() const
+	inline _element const& operator*() const
 	{
 		static any_a<> NO = no();
 		return NO;

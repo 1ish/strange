@@ -57,18 +57,18 @@ class unordered_herd_t : public thing_t<___ego___>
 		}
 
 		// forward extractor
-		inline any_a<> get_() const
+		inline _element get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_herd_thing._mutex);
 			return *_it;
 		}
 
-		inline any_a<> const* operator->() const
+		inline _element const* operator->() const
 		{
 			return &operator*();
 		}
 
-		inline any_a<> const& operator*() const
+		inline _element const& operator*() const
 		{
 			return *_it;
 		}

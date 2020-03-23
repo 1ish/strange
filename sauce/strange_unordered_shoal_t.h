@@ -58,7 +58,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 		}
 
 		// forward mutator
-		inline any_a<> get_() const
+		inline _element get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_shoal_thing._mutex);
 			_pair.update_index(0, _it->first);
@@ -66,7 +66,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 			return _pair;
 		}
 
-		inline any_a<> set_(any_a<> const& thing) const
+		inline _element set_(_element const& thing) const
 		{
 			if (!check<flock_a<>>(thing))
 			{
@@ -76,12 +76,12 @@ class unordered_shoal_t : public thing_t<___ego___>
 			return _it->second = fast<flock_a<>>(thing).at_index(1);
 		}
 
-		inline any_a<>* operator->() const
+		inline _element* operator->() const
 		{
 			return &operator*();
 		}
 
-		inline any_a<>& operator*() const
+		inline _element& operator*() const
 		{
 			_pair.update_index(0, _it->first);
 			_pair.update_index(1, _it->second);
@@ -171,7 +171,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 		}
 
 		// forward extractor
-		inline any_a<> get_() const
+		inline _element get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_shoal_thing._mutex);
 			_pair.update_index(0, _it->first);
@@ -179,12 +179,12 @@ class unordered_shoal_t : public thing_t<___ego___>
 			return _pair;
 		}
 
-		inline any_a<> const* operator->() const
+		inline _element const* operator->() const
 		{
 			return &operator*();
 		}
 
-		inline any_a<> const& operator*() const
+		inline _element const& operator*() const
 		{
 			_pair.update_index(0, _it->first);
 			_pair.update_index(1, _it->second);

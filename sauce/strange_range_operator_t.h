@@ -57,17 +57,17 @@ class range_operator_t : public thing_t<___ego___>
 		}
 
 		// forward extractor
-		inline any_a<> get_() const
+		inline _element get_() const
 		{
 			return operator*();
 		}
 
-		inline any_a<> const* operator->() const
+		inline _element const* operator->() const
 		{
 			return &operator*();
 		}
 
-		inline any_a<> const& operator*() const
+		inline _element const& operator*() const
 		{
 			auto& vector = _results.mutate_vector();
 			if (_it == _range.extract_end_())
