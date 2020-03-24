@@ -12,41 +12,29 @@ template <typename _1>
 class flock_a : public inventory_a<>
 {
 public:
-	inline bool operator==(flock_a < > const & flock ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator==(flock); }
+	inline bool operator==(flock_a < > const & flock ) const;
 
-	inline bool operator!=(flock_a < > const & flock ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator!=(flock); }
+	inline bool operator!=(flock_a < > const & flock ) const;
 
-	inline bool operator<(flock_a < > const & flock ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator<(flock); }
+	inline bool operator<(flock_a < > const & flock ) const;
 
-	inline bool operator>(flock_a < > const & flock ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator>(flock); }
+	inline bool operator>(flock_a < > const & flock ) const;
 
-	inline bool operator<=(flock_a < > const & flock ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator<=(flock); }
+	inline bool operator<=(flock_a < > const & flock ) const;
 
-	inline bool operator>=(flock_a < > const & flock ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator>=(flock); }
+	inline bool operator>=(flock_a < > const & flock ) const;
 
-	inline random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > extract_begin() const
-	{ assert(any_a<>::___handle___); return ___read___().extract_begin(); }
+	inline random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > extract_begin() const;
 
-	inline random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > extract_end() const
-	{ assert(any_a<>::___handle___); return ___read___().extract_end(); }
+	inline random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > extract_end() const;
 
-	inline random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > mutate_begin()
-	{ assert(any_a<>::___handle___); return ___write___().mutate_begin(); }
+	inline random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > mutate_begin();
 
-	inline random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > mutate_end()
-	{ assert(any_a<>::___handle___); return ___write___().mutate_end(); }
+	inline random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > mutate_end();
 
-	inline std :: vector < any_a < > > const & extract_vector() const
-	{ assert(any_a<>::___handle___); return ___read___().extract_vector(); }
+	inline std :: vector < any_a < > > const & extract_vector() const;
 
-	inline std :: vector < any_a < > > & mutate_vector()
-	{ assert(any_a<>::___handle___); return ___write___().mutate_vector(); }
+	inline std :: vector < any_a < > > & mutate_vector();
 
 protected:
 	struct ___flock_a_handle_base___ : inventory_a<>::___inventory_a_handle_base___
@@ -83,41 +71,29 @@ protected:
 			: inventory_a<>::template ___inventory_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bool operator==(flock_a < > const & flock ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(flock); }
+		virtual inline bool operator==(flock_a < > const & flock ) const final;
 
-		virtual inline bool operator!=(flock_a < > const & flock ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(flock); }
+		virtual inline bool operator!=(flock_a < > const & flock ) const final;
 
-		virtual inline bool operator<(flock_a < > const & flock ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(flock); }
+		virtual inline bool operator<(flock_a < > const & flock ) const final;
 
-		virtual inline bool operator>(flock_a < > const & flock ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(flock); }
+		virtual inline bool operator>(flock_a < > const & flock ) const final;
 
-		virtual inline bool operator<=(flock_a < > const & flock ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(flock); }
+		virtual inline bool operator<=(flock_a < > const & flock ) const final;
 
-		virtual inline bool operator>=(flock_a < > const & flock ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(flock); }
+		virtual inline bool operator>=(flock_a < > const & flock ) const final;
 
-		virtual inline random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > extract_begin() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
+		virtual inline random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > extract_begin() const final;
 
-		virtual inline random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > extract_end() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
+		virtual inline random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > extract_end() const final;
 
-		virtual inline random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > mutate_begin() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin(); }
+		virtual inline random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > mutate_begin() final;
 
-		virtual inline random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > mutate_end() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end(); }
+		virtual inline random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > mutate_end() final;
 
-		virtual inline std :: vector < any_a < > > const & extract_vector() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_vector(); }
+		virtual inline std :: vector < any_a < > > const & extract_vector() const final;
 
-		virtual inline std :: vector < any_a < > > & mutate_vector() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_vector(); }
+		virtual inline std :: vector < any_a < > > & mutate_vector() final;
 
 	};
 

@@ -9,10 +9,74 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<_number_data_int64, _number_data_uint64, _number_data_double> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::increment_()
+{
+	assert(any_a<>::___handle___);
+	___write___().increment_();
+	return *this;
+}
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<_number_data_int64, _number_data_uint64, _number_data_double>& number_a<_number_data_int64, _number_data_uint64, _number_data_double>::operator++()
+{
+	assert(any_a<>::___handle___);
+	___write___().increment_();
+	return *this;
+}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<_number_data_int64, _number_data_uint64, _number_data_double> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::operator++(int)
+{
+	assert(any_a<>::___handle___);
+	number_a result = *this;
+	___write___().increment_();
+	return result;
+}
+#endif
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline void number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::increment_()
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.increment_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::decrement__(range_a<> const& ___arguments___)
 {
 	return decrement_();
 }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<_number_data_int64, _number_data_uint64, _number_data_double> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::decrement_()
+{
+	assert(any_a<>::___handle___);
+	___write___().decrement_();
+	return *this;
+}
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<_number_data_int64, _number_data_uint64, _number_data_double>& number_a<_number_data_int64, _number_data_uint64, _number_data_double>::operator--()
+{
+	assert(any_a<>::___handle___);
+	___write___().decrement_();
+	return *this;
+}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<_number_data_int64, _number_data_uint64, _number_data_double> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::operator--(int)
+{
+	assert(any_a<>::___handle___);
+	number_a result = *this;
+	___write___().decrement_();
+	return result;
+}
+#endif
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline void number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::decrement_()
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.decrement_(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_assign__(range_a<> const& ___arguments___)
@@ -27,6 +91,19 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<_number_data_int64, _number_data_uint64, _number_data_double> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_assign_(number_a<> const& number)
+{
+	assert(any_a<>::___handle___);
+	___write___().self_assign_(number);
+	return *this;
+}
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline void number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::self_assign_(number_a<> const& number)
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_assign_(number); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_add__(range_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.extract_begin_();
@@ -37,6 +114,27 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto number = cast<number_a<>>(*___it___);
 	return self_add_(number);
 }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<_number_data_int64, _number_data_uint64, _number_data_double> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_add_(number_a<> const& number)
+{
+	assert(any_a<>::___handle___);
+	___write___().self_add_(number);
+	return *this;
+}
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<_number_data_int64, _number_data_uint64, _number_data_double>& number_a<_number_data_int64, _number_data_uint64, _number_data_double>::operator+=(number_a<> const& number)
+{
+	assert(any_a<>::___handle___);
+	___write___().self_add_(number);
+	return *this;
+}
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline void number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::self_add_(number_a<> const& number)
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(number); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::add__(range_a<> const& ___arguments___) const
@@ -51,6 +149,19 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::add_(number_a<> const& number) const
+{ assert(any_a<>::___handle___); return ___read___().add_(number); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::operator+(number_a<> const& number) const
+{ assert(any_a<>::___handle___); return ___read___().add_(number); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::add_(number_a<> const& number) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(number); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_subtract__(range_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.extract_begin_();
@@ -61,6 +172,27 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto number = cast<number_a<>>(*___it___);
 	return self_subtract_(number);
 }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<_number_data_int64, _number_data_uint64, _number_data_double> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_subtract_(number_a<> const& number)
+{
+	assert(any_a<>::___handle___);
+	___write___().self_subtract_(number);
+	return *this;
+}
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<_number_data_int64, _number_data_uint64, _number_data_double>& number_a<_number_data_int64, _number_data_uint64, _number_data_double>::operator-=(number_a<> const& number)
+{
+	assert(any_a<>::___handle___);
+	___write___().self_subtract_(number);
+	return *this;
+}
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline void number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::self_subtract_(number_a<> const& number)
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(number); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::subtract__(range_a<> const& ___arguments___) const
@@ -75,6 +207,19 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::subtract_(number_a<> const& number) const
+{ assert(any_a<>::___handle___); return ___read___().subtract_(number); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::operator-(number_a<> const& number) const
+{ assert(any_a<>::___handle___); return ___read___().subtract_(number); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::subtract_(number_a<> const& number) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract_(number); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_multiply__(range_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.extract_begin_();
@@ -85,6 +230,27 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto number = cast<number_a<>>(*___it___);
 	return self_multiply_(number);
 }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<_number_data_int64, _number_data_uint64, _number_data_double> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_multiply_(number_a<> const& number)
+{
+	assert(any_a<>::___handle___);
+	___write___().self_multiply_(number);
+	return *this;
+}
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<_number_data_int64, _number_data_uint64, _number_data_double>& number_a<_number_data_int64, _number_data_uint64, _number_data_double>::operator*=(number_a<> const& number)
+{
+	assert(any_a<>::___handle___);
+	___write___().self_multiply_(number);
+	return *this;
+}
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline void number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::self_multiply_(number_a<> const& number)
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_multiply_(number); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::multiply__(range_a<> const& ___arguments___) const
@@ -99,6 +265,19 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::multiply_(number_a<> const& number) const
+{ assert(any_a<>::___handle___); return ___read___().multiply_(number); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::operator*(number_a<> const& number) const
+{ assert(any_a<>::___handle___); return ___read___().multiply_(number); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::multiply_(number_a<> const& number) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.multiply_(number); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_divide__(range_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.extract_begin_();
@@ -109,6 +288,27 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto number = cast<number_a<>>(*___it___);
 	return self_divide_(number);
 }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<_number_data_int64, _number_data_uint64, _number_data_double> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_divide_(number_a<> const& number)
+{
+	assert(any_a<>::___handle___);
+	___write___().self_divide_(number);
+	return *this;
+}
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<_number_data_int64, _number_data_uint64, _number_data_double>& number_a<_number_data_int64, _number_data_uint64, _number_data_double>::operator/=(number_a<> const& number)
+{
+	assert(any_a<>::___handle___);
+	___write___().self_divide_(number);
+	return *this;
+}
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline void number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::self_divide_(number_a<> const& number)
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_divide_(number); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::divide__(range_a<> const& ___arguments___) const
@@ -123,6 +323,19 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::divide_(number_a<> const& number) const
+{ assert(any_a<>::___handle___); return ___read___().divide_(number); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::operator/(number_a<> const& number) const
+{ assert(any_a<>::___handle___); return ___read___().divide_(number); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::divide_(number_a<> const& number) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.divide_(number); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_modulo__(range_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.extract_begin_();
@@ -133,6 +346,27 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto number = cast<number_a<>>(*___it___);
 	return self_modulo_(number);
 }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<_number_data_int64, _number_data_uint64, _number_data_double> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_modulo_(number_a<> const& number)
+{
+	assert(any_a<>::___handle___);
+	___write___().self_modulo_(number);
+	return *this;
+}
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<_number_data_int64, _number_data_uint64, _number_data_double>& number_a<_number_data_int64, _number_data_uint64, _number_data_double>::operator%=(number_a<> const& number)
+{
+	assert(any_a<>::___handle___);
+	___write___().self_modulo_(number);
+	return *this;
+}
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline void number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::self_modulo_(number_a<> const& number)
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_modulo_(number); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::modulo__(range_a<> const& ___arguments___) const
@@ -147,10 +381,41 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::modulo_(number_a<> const& number) const
+{ assert(any_a<>::___handle___); return ___read___().modulo_(number); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::operator%(number_a<> const& number) const
+{ assert(any_a<>::___handle___); return ___read___().modulo_(number); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::modulo_(number_a<> const& number) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.modulo_(number); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::to_int_64__(range_a<> const& ___arguments___) const
 {
 	return to_int_64_();
 }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline _number_data_int64 number_a<_number_data_int64, _number_data_uint64, _number_data_double>::to_int_64_() const
+{ assert(any_a<>::___handle___); return ___read___().to_int_64_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline _number_data_int64 number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::to_int_64_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_int_64_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline int64_t number_a<_number_data_int64, _number_data_uint64, _number_data_double>::to_int_64() const
+{ assert(any_a<>::___handle___); return ___read___().to_int_64(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline int64_t number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::to_int_64() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_int_64(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_int_64__(range_a<> const& ___arguments___)
@@ -165,10 +430,46 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_int_64_(_number_data_int64 const& int_64)
+{ assert(any_a<>::___handle___); return ___write___().from_int_64_(int_64); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::from_int_64_(_number_data_int64 const& int_64)
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_int_64_(int_64); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline void number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_int_64(int64_t int_64 )
+{ assert(any_a<>::___handle___); ___write___().from_int_64(int_64); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline void number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::from_int_64(int64_t int_64 )
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_int_64(int_64); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::to_uint_64__(range_a<> const& ___arguments___) const
 {
 	return to_uint_64_();
 }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline _number_data_uint64 number_a<_number_data_int64, _number_data_uint64, _number_data_double>::to_uint_64_() const
+{ assert(any_a<>::___handle___); return ___read___().to_uint_64_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline _number_data_uint64 number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::to_uint_64_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_uint_64_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline uint64_t number_a<_number_data_int64, _number_data_uint64, _number_data_double>::to_uint_64() const
+{ assert(any_a<>::___handle___); return ___read___().to_uint_64(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline uint64_t number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::to_uint_64() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_uint_64(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_uint_64__(range_a<> const& ___arguments___)
@@ -183,10 +484,46 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_uint_64_(_number_data_uint64 const& uint_64)
+{ assert(any_a<>::___handle___); return ___write___().from_uint_64_(uint_64); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::from_uint_64_(_number_data_uint64 const& uint_64)
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_uint_64_(uint_64); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline void number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_uint_64(uint64_t uint_64 )
+{ assert(any_a<>::___handle___); ___write___().from_uint_64(uint_64); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline void number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::from_uint_64(uint64_t uint_64 )
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_uint_64(uint_64); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::to_float_64__(range_a<> const& ___arguments___) const
 {
 	return to_float_64_();
 }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline _number_data_double number_a<_number_data_int64, _number_data_uint64, _number_data_double>::to_float_64_() const
+{ assert(any_a<>::___handle___); return ___read___().to_float_64_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline _number_data_double number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::to_float_64_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_float_64_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline double number_a<_number_data_int64, _number_data_uint64, _number_data_double>::to_float_64() const
+{ assert(any_a<>::___handle___); return ___read___().to_float_64(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline double number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::to_float_64() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_float_64(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_float_64__(range_a<> const& ___arguments___)
@@ -201,10 +538,46 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_float_64_(_number_data_double const& float_64)
+{ assert(any_a<>::___handle___); return ___write___().from_float_64_(float_64); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::from_float_64_(_number_data_double const& float_64)
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_float_64_(float_64); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline void number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_float_64(double float_64 )
+{ assert(any_a<>::___handle___); ___write___().from_float_64(float_64); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline void number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::from_float_64(double float_64 )
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_float_64(float_64); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::byte_size__(range_a<> const& ___arguments___) const
 {
 	return byte_size_();
 }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline _number_data_int64 number_a<_number_data_int64, _number_data_uint64, _number_data_double>::byte_size_() const
+{ assert(any_a<>::___handle___); return ___read___().byte_size_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline _number_data_int64 number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::byte_size_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.byte_size_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline int64_t number_a<_number_data_int64, _number_data_uint64, _number_data_double>::byte_size() const
+{ assert(any_a<>::___handle___); return ___read___().byte_size(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline int64_t number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::byte_size() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.byte_size(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_int__(range_a<> const& ___arguments___) const
@@ -213,10 +586,46 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_int_() const
+{ assert(any_a<>::___handle___); return ___read___().is_int_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::is_int_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_int_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_int() const
+{ assert(any_a<>::___handle___); return ___read___().is_int(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::is_int() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_int(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_signed__(range_a<> const& ___arguments___) const
 {
 	return is_signed_();
 }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_signed_() const
+{ assert(any_a<>::___handle___); return ___read___().is_signed_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::is_signed_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_signed_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_signed() const
+{ assert(any_a<>::___handle___); return ___read___().is_signed(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::is_signed() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_signed(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_nan__(range_a<> const& ___arguments___) const
@@ -225,10 +634,46 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_nan_() const
+{ assert(any_a<>::___handle___); return ___read___().is_nan_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::is_nan_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_nan_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_nan() const
+{ assert(any_a<>::___handle___); return ___read___().is_nan(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::is_nan() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_nan(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_inf__(range_a<> const& ___arguments___) const
 {
 	return is_inf_();
 }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_inf_() const
+{ assert(any_a<>::___handle___); return ___read___().is_inf_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::is_inf_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_inf_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_inf() const
+{ assert(any_a<>::___handle___); return ___read___().is_inf(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::is_inf() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_inf(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_finite__(range_a<> const& ___arguments___) const
@@ -237,16 +682,70 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_finite_() const
+{ assert(any_a<>::___handle___); return ___read___().is_finite_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::is_finite_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_finite_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_finite() const
+{ assert(any_a<>::___handle___); return ___read___().is_finite(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::is_finite() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_finite(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_normal__(range_a<> const& ___arguments___) const
 {
 	return is_normal_();
 }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_normal_() const
+{ assert(any_a<>::___handle___); return ___read___().is_normal_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::is_normal_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_normal_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_normal() const
+{ assert(any_a<>::___handle___); return ___read___().is_normal(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::is_normal() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_normal(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::little_endian__(range_a<> const& ___arguments___) const
 {
 	return little_endian_();
 }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::little_endian_() const
+{ assert(any_a<>::___handle___); return ___read___().little_endian_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::little_endian_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.little_endian_(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_double>::little_endian() const
+{ assert(any_a<>::___handle___); return ___read___().little_endian(); }
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___TTT___, typename ___DHB___>
+inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::little_endian() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.little_endian(); }
 
 class ___number_a_share___
 {

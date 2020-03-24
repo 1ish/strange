@@ -202,7 +202,7 @@ public:
 		river.write_string("}\n");
 	}
 
-	void abstraction(int64_t version, std::string& result, std::string& parameters, std::string& arguments, std::string& constness) const
+	void abstraction(int64_t version, bool defaults, std::string& result, std::string& parameters, std::string& arguments, std::string& constness) const
 	{
 		if (_expression.type_() != expression_kind_t<>::type_())
 		{
@@ -268,7 +268,7 @@ public:
 			}
 			parameters += name.to_string();
 			arguments += name.to_string();
-			if (optional)
+			if (defaults && optional)
 			{
 				parameters += " =";
 				river = river_t<>::create();

@@ -14,44 +14,24 @@ class forward_mutator_a : public any_a<>
 public:
 	inline any_a<> get__(range_a<> const& ___arguments___) const;
 
-	inline _element get_() const
-	{ assert(any_a<>::___handle___); return ___read___().get_(); }
+	inline _element get_() const;
 
 	inline any_a<> set__(range_a<> const& ___arguments___) const;
 
-	inline _element set_(_element const& thing) const
-	{ assert(any_a<>::___handle___); return ___read___().set_(thing); }
+	inline _element set_(_element const& thing) const;
 
-	inline _element & operator*() const
-	{ assert(any_a<>::___handle___); return ___read___().operator*(); }
+	inline _element & operator*() const;
 
-	inline _element * operator->() const
-	{ assert(any_a<>::___handle___); return ___read___().operator->(); }
+	inline _element * operator->() const;
 
 	inline any_a<> increment__(range_a<> const& ___arguments___);
 
-	inline forward_mutator_a increment_()
-	{
-		assert(any_a<>::___handle___);
-		___write___().increment_();
-		return *this;
-	}
+	inline forward_mutator_a increment_();
 
-	inline forward_mutator_a& operator++()
-	{
-		assert(any_a<>::___handle___);
-		___write___().increment_();
-		return *this;
-	}
+	inline forward_mutator_a& operator++();
 
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline forward_mutator_a operator++(int)
-	{
-		assert(any_a<>::___handle___);
-		forward_mutator_a result = *this;
-		___write___().increment_();
-		return result;
-	}
+	inline forward_mutator_a operator++(int);
 #endif
 
 protected:
@@ -82,20 +62,15 @@ protected:
 			: any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline _element get_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.get_(); }
+		virtual inline _element get_() const final;
 
-		virtual inline _element set_(_element const& thing) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.set_(thing); }
+		virtual inline _element set_(_element const& thing) const final;
 
-		virtual inline _element & operator*() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator*(); }
+		virtual inline _element & operator*() const final;
 
-		virtual inline _element * operator->() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator->(); }
+		virtual inline _element * operator->() const final;
 
-		virtual inline void increment_() final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.increment_(); }
+		virtual inline void increment_() final;
 
 	};
 

@@ -8,6 +8,38 @@ inline any_a<> bidirectional_mutator_a<_element>::decrement__(range_a<> const& _
 	return decrement_();
 }
 
+template <typename _element>
+inline bidirectional_mutator_a<_element> bidirectional_mutator_a<_element>::decrement_()
+{
+	assert(any_a<>::___handle___);
+	___write___().decrement_();
+	return *this;
+}
+
+template <typename _element>
+inline bidirectional_mutator_a<_element>& bidirectional_mutator_a<_element>::operator--()
+{
+	assert(any_a<>::___handle___);
+	___write___().decrement_();
+	return *this;
+}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+template <typename _element>
+inline bidirectional_mutator_a<_element> bidirectional_mutator_a<_element>::operator--(int)
+{
+	assert(any_a<>::___handle___);
+	bidirectional_mutator_a result = *this;
+	___write___().decrement_();
+	return result;
+}
+#endif
+
+template <typename _element>
+template <typename ___TTT___, typename ___DHB___>
+inline void bidirectional_mutator_a<_element>::___bidirectional_mutator_a_handle___<___TTT___, ___DHB___>::decrement_()
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.decrement_(); }
+
 class ___bidirectional_mutator_a_share___
 {
 	static bool const share;

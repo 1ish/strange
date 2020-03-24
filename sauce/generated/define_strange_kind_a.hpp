@@ -14,32 +14,25 @@ class kind_a : public cat_a<>
 public:
 	inline any_a<> aspects__(range_a<> const& ___arguments___) const;
 
-	inline flock_a<> aspects_() const
-	{ assert(any_a<>::___handle___); return ___read___().aspects_(); }
+	inline flock_a<> aspects_() const;
 
 	inline any_a<> fixed__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> fixed_() const
-	{ assert(any_a<>::___handle___); return ___read___().fixed_(); }
+	inline any_a<> fixed_() const;
 
-	inline bool fixed() const
-	{ assert(any_a<>::___handle___); return ___read___().fixed(); }
+	inline bool fixed() const;
 
 	inline any_a<> reference__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> reference_() const
-	{ assert(any_a<>::___handle___); return ___read___().reference_(); }
+	inline any_a<> reference_() const;
 
-	inline bool reference() const
-	{ assert(any_a<>::___handle___); return ___read___().reference(); }
+	inline bool reference() const;
 
 	inline any_a<> optional__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> optional_() const
-	{ assert(any_a<>::___handle___); return ___read___().optional_(); }
+	inline any_a<> optional_() const;
 
-	inline bool optional() const
-	{ assert(any_a<>::___handle___); return ___read___().optional(); }
+	inline bool optional() const;
 
 protected:
 	struct ___kind_a_handle_base___ : cat_a<>::___cat_a_handle_base___
@@ -71,26 +64,19 @@ protected:
 			: cat_a<>::template ___cat_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline flock_a<> aspects_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.aspects_(); }
+		virtual inline flock_a<> aspects_() const final;
 
-		virtual inline any_a<> fixed_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.fixed_(); }
+		virtual inline any_a<> fixed_() const final;
 
-		virtual inline bool fixed() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.fixed(); }
+		virtual inline bool fixed() const final;
 
-		virtual inline any_a<> reference_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.reference_(); }
+		virtual inline any_a<> reference_() const final;
 
-		virtual inline bool reference() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.reference(); }
+		virtual inline bool reference() const final;
 
-		virtual inline any_a<> optional_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.optional_(); }
+		virtual inline any_a<> optional_() const final;
 
-		virtual inline bool optional() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.optional(); }
+		virtual inline bool optional() const final;
 
 	};
 

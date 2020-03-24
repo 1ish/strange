@@ -14,13 +14,11 @@ class range_a : public any_a<>
 public:
 	inline any_a<> extract_begin__(range_a<> const& ___arguments___) const;
 
-	inline forward_extractor_a< _element > extract_begin_() const
-	{ assert(any_a<>::___handle___); return ___read___().extract_begin_(); }
+	inline forward_extractor_a< _element > extract_begin_() const;
 
 	inline any_a<> extract_end__(range_a<> const& ___arguments___) const;
 
-	inline forward_extractor_a< _element > extract_end_() const
-	{ assert(any_a<>::___handle___); return ___read___().extract_end_(); }
+	inline forward_extractor_a< _element > extract_end_() const;
 
 protected:
 	struct ___range_a_handle_base___ : any_a<>::___any_a_handle_base___
@@ -47,11 +45,9 @@ protected:
 			: any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline forward_extractor_a< _element > extract_begin_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin_(); }
+		virtual inline forward_extractor_a< _element > extract_begin_() const final;
 
-		virtual inline forward_extractor_a< _element > extract_end_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end_(); }
+		virtual inline forward_extractor_a< _element > extract_end_() const final;
 
 	};
 

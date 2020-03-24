@@ -14,28 +14,12 @@ class bidirectional_mutator_a : public forward_mutator_a< _element >
 public:
 	inline any_a<> decrement__(range_a<> const& ___arguments___);
 
-	inline bidirectional_mutator_a decrement_()
-	{
-		assert(any_a<>::___handle___);
-		___write___().decrement_();
-		return *this;
-	}
+	inline bidirectional_mutator_a decrement_();
 
-	inline bidirectional_mutator_a& operator--()
-	{
-		assert(any_a<>::___handle___);
-		___write___().decrement_();
-		return *this;
-	}
+	inline bidirectional_mutator_a& operator--();
 
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline bidirectional_mutator_a operator--(int)
-	{
-		assert(any_a<>::___handle___);
-		bidirectional_mutator_a result = *this;
-		___write___().decrement_();
-		return result;
-	}
+	inline bidirectional_mutator_a operator--(int);
 #endif
 
 protected:
@@ -62,8 +46,7 @@ protected:
 			: forward_mutator_a< _element >::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline void decrement_() final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.decrement_(); }
+		virtual inline void decrement_() final;
 
 	};
 

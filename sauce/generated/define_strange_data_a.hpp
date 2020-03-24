@@ -12,17 +12,13 @@ template <typename _type>
 class data_a : public any_a<>
 {
 public:
-	inline bool operator==(data_a < _type > const & data ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator==(data); }
+	inline bool operator==(data_a < _type > const & data ) const;
 
-	inline bool operator!=(data_a < _type > const & data ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator!=(data); }
+	inline bool operator!=(data_a < _type > const & data ) const;
 
-	inline _type const & extract_data() const
-	{ assert(any_a<>::___handle___); return ___read___().extract_data(); }
+	inline _type const & extract_data() const;
 
-	inline _type & mutate_data()
-	{ assert(any_a<>::___handle___); return ___write___().mutate_data(); }
+	inline _type & mutate_data();
 
 protected:
 	struct ___data_a_handle_base___ : any_a<>::___any_a_handle_base___
@@ -51,17 +47,13 @@ protected:
 			: any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bool operator==(data_a < _type > const & data ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(data); }
+		virtual inline bool operator==(data_a < _type > const & data ) const final;
 
-		virtual inline bool operator!=(data_a < _type > const & data ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(data); }
+		virtual inline bool operator!=(data_a < _type > const & data ) const final;
 
-		virtual inline _type const & extract_data() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_data(); }
+		virtual inline _type const & extract_data() const final;
 
-		virtual inline _type & mutate_data() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_data(); }
+		virtual inline _type & mutate_data() final;
 
 	};
 

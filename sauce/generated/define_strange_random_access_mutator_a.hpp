@@ -14,51 +14,27 @@ class random_access_mutator_a : public bidirectional_mutator_a< _element >
 public:
 	inline any_a<> self_add__(range_a<> const& ___arguments___);
 
-	inline random_access_mutator_a self_add_(number_a<> const& number)
-	{
-		assert(any_a<>::___handle___);
-		___write___().self_add_(number);
-		return *this;
-	}
+	inline random_access_mutator_a self_add_(number_a<> const& number);
 
-	inline random_access_mutator_a& operator+=(number_a<> const& number)
-	{
-		assert(any_a<>::___handle___);
-		___write___().self_add_(number);
-		return *this;
-	}
+	inline random_access_mutator_a& operator+=(number_a<> const& number);
 
 	inline any_a<> add__(range_a<> const& ___arguments___) const;
 
-	inline random_access_mutator_a< _element > add_(number_a<> const& number) const
-	{ assert(any_a<>::___handle___); return ___read___().add_(number); }
+	inline random_access_mutator_a< _element > add_(number_a<> const& number) const;
 
-	inline random_access_mutator_a< _element > operator+(number_a<> const& number) const
-	{ assert(any_a<>::___handle___); return ___read___().add_(number); }
+	inline random_access_mutator_a< _element > operator+(number_a<> const& number) const;
 
 	inline any_a<> self_subtract__(range_a<> const& ___arguments___);
 
-	inline random_access_mutator_a self_subtract_(number_a<> const& number)
-	{
-		assert(any_a<>::___handle___);
-		___write___().self_subtract_(number);
-		return *this;
-	}
+	inline random_access_mutator_a self_subtract_(number_a<> const& number);
 
-	inline random_access_mutator_a& operator-=(number_a<> const& number)
-	{
-		assert(any_a<>::___handle___);
-		___write___().self_subtract_(number);
-		return *this;
-	}
+	inline random_access_mutator_a& operator-=(number_a<> const& number);
 
 	inline any_a<> subtract__(range_a<> const& ___arguments___) const;
 
-	inline random_access_mutator_a< _element > subtract_(number_a<> const& number) const
-	{ assert(any_a<>::___handle___); return ___read___().subtract_(number); }
+	inline random_access_mutator_a< _element > subtract_(number_a<> const& number) const;
 
-	inline random_access_mutator_a< _element > operator-(number_a<> const& number) const
-	{ assert(any_a<>::___handle___); return ___read___().subtract_(number); }
+	inline random_access_mutator_a< _element > operator-(number_a<> const& number) const;
 
 protected:
 	struct ___random_access_mutator_a_handle_base___ : bidirectional_mutator_a< _element >::___bidirectional_mutator_a_handle_base___
@@ -87,17 +63,13 @@ protected:
 			: bidirectional_mutator_a< _element >::template ___bidirectional_mutator_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline void self_add_(number_a<> const& number) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(number); }
+		virtual inline void self_add_(number_a<> const& number) final;
 
-		virtual inline random_access_mutator_a< _element > add_(number_a<> const& number) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(number); }
+		virtual inline random_access_mutator_a< _element > add_(number_a<> const& number) const final;
 
-		virtual inline void self_subtract_(number_a<> const& number) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(number); }
+		virtual inline void self_subtract_(number_a<> const& number) final;
 
-		virtual inline random_access_mutator_a< _element > subtract_(number_a<> const& number) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract_(number); }
+		virtual inline random_access_mutator_a< _element > subtract_(number_a<> const& number) const final;
 
 	};
 

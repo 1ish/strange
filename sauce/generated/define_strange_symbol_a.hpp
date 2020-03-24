@@ -12,45 +12,33 @@ template <typename _1>
 class symbol_a : public any_a<>
 {
 public:
-	inline bool operator==(symbol_a < > const & symbol ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator==(symbol); }
+	inline bool operator==(symbol_a < > const & symbol ) const;
 
-	inline bool operator!=(symbol_a < > const & symbol ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator!=(symbol); }
+	inline bool operator!=(symbol_a < > const & symbol ) const;
 
-	inline bool operator<(symbol_a < > const & symbol ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator<(symbol); }
+	inline bool operator<(symbol_a < > const & symbol ) const;
 
-	inline bool operator>(symbol_a < > const & symbol ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator>(symbol); }
+	inline bool operator>(symbol_a < > const & symbol ) const;
 
-	inline bool operator<=(symbol_a < > const & symbol ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator<=(symbol); }
+	inline bool operator<=(symbol_a < > const & symbol ) const;
 
-	inline bool operator>=(symbol_a < > const & symbol ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator>=(symbol); }
+	inline bool operator>=(symbol_a < > const & symbol ) const;
 
 	inline any_a<> to_lake__(range_a<> const& ___arguments___) const;
 
-	inline lake_int8_a<> to_lake_() const
-	{ assert(any_a<>::___handle___); return ___read___().to_lake_(); }
+	inline lake_int8_a<> to_lake_() const;
 
-	inline std :: string to_string() const
-	{ assert(any_a<>::___handle___); return ___read___().to_string(); }
+	inline std :: string to_string() const;
 
-	inline int8_t first_character() const
-	{ assert(any_a<>::___handle___); return ___read___().first_character(); }
+	inline int8_t first_character() const;
 
-	inline int8_t last_character() const
-	{ assert(any_a<>::___handle___); return ___read___().last_character(); }
+	inline int8_t last_character() const;
 
 	inline any_a<> add__(range_a<> const& ___arguments___) const;
 
-	inline symbol_a<> add_(symbol_a<> const& symbol) const
-	{ assert(any_a<>::___handle___); return ___read___().add_(symbol); }
+	inline symbol_a<> add_(symbol_a<> const& symbol) const;
 
-	inline symbol_a<> operator+(symbol_a<> const& symbol) const
-	{ assert(any_a<>::___handle___); return ___read___().add_(symbol); }
+	inline symbol_a<> operator+(symbol_a<> const& symbol) const;
 
 protected:
 	struct ___symbol_a_handle_base___ : any_a<>::___any_a_handle_base___
@@ -86,38 +74,27 @@ protected:
 			: any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bool operator==(symbol_a < > const & symbol ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(symbol); }
+		virtual inline bool operator==(symbol_a < > const & symbol ) const final;
 
-		virtual inline bool operator!=(symbol_a < > const & symbol ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(symbol); }
+		virtual inline bool operator!=(symbol_a < > const & symbol ) const final;
 
-		virtual inline bool operator<(symbol_a < > const & symbol ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(symbol); }
+		virtual inline bool operator<(symbol_a < > const & symbol ) const final;
 
-		virtual inline bool operator>(symbol_a < > const & symbol ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(symbol); }
+		virtual inline bool operator>(symbol_a < > const & symbol ) const final;
 
-		virtual inline bool operator<=(symbol_a < > const & symbol ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(symbol); }
+		virtual inline bool operator<=(symbol_a < > const & symbol ) const final;
 
-		virtual inline bool operator>=(symbol_a < > const & symbol ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(symbol); }
+		virtual inline bool operator>=(symbol_a < > const & symbol ) const final;
 
-		virtual inline lake_int8_a<> to_lake_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake_(); }
+		virtual inline lake_int8_a<> to_lake_() const final;
 
-		virtual inline std :: string to_string() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
+		virtual inline std :: string to_string() const final;
 
-		virtual inline int8_t first_character() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.first_character(); }
+		virtual inline int8_t first_character() const final;
 
-		virtual inline int8_t last_character() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.last_character(); }
+		virtual inline int8_t last_character() const final;
 
-		virtual inline symbol_a<> add_(symbol_a<> const& symbol) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(symbol); }
+		virtual inline symbol_a<> add_(symbol_a<> const& symbol) const final;
 
 	};
 

@@ -14,67 +14,51 @@ class token_a : public any_a<>
 public:
 	inline any_a<> filename__(range_a<> const& ___arguments___) const;
 
-	inline symbol_a<> filename_() const
-	{ assert(any_a<>::___handle___); return ___read___().filename_(); }
+	inline symbol_a<> filename_() const;
 
-	inline std :: string filename() const
-	{ assert(any_a<>::___handle___); return ___read___().filename(); }
+	inline std :: string filename() const;
 
 	inline any_a<> line__(range_a<> const& ___arguments___) const;
 
-	inline number_data_int64_a<> line_() const
-	{ assert(any_a<>::___handle___); return ___read___().line_(); }
+	inline number_data_int64_a<> line_() const;
 
-	inline int64_t line() const
-	{ assert(any_a<>::___handle___); return ___read___().line(); }
+	inline int64_t line() const;
 
 	inline any_a<> position__(range_a<> const& ___arguments___) const;
 
-	inline number_data_int64_a<> position_() const
-	{ assert(any_a<>::___handle___); return ___read___().position_(); }
+	inline number_data_int64_a<> position_() const;
 
-	inline int64_t position() const
-	{ assert(any_a<>::___handle___); return ___read___().position(); }
+	inline int64_t position() const;
 
 	inline any_a<> tag__(range_a<> const& ___arguments___) const;
 
-	inline symbol_a<> tag_() const
-	{ assert(any_a<>::___handle___); return ___read___().tag_(); }
+	inline symbol_a<> tag_() const;
 
-	inline std :: string tag() const
-	{ assert(any_a<>::___handle___); return ___read___().tag(); }
+	inline std :: string tag() const;
 
 	inline any_a<> symbol__(range_a<> const& ___arguments___) const;
 
-	inline symbol_a<> symbol_() const
-	{ assert(any_a<>::___handle___); return ___read___().symbol_(); }
+	inline symbol_a<> symbol_() const;
 
-	inline std :: string symbol() const
-	{ assert(any_a<>::___handle___); return ___read___().symbol(); }
+	inline std :: string symbol() const;
 
 	inline any_a<> literal__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> literal_() const
-	{ assert(any_a<>::___handle___); return ___read___().literal_(); }
+	inline any_a<> literal_() const;
 
-	inline bool literal() const
-	{ assert(any_a<>::___handle___); return ___read___().literal(); }
+	inline bool literal() const;
 
 	inline any_a<> precedence__(range_a<> const& ___arguments___) const;
 
-	inline number_data_int64_a<> precedence_() const
-	{ assert(any_a<>::___handle___); return ___read___().precedence_(); }
+	inline number_data_int64_a<> precedence_() const;
 
-	inline int64_t precedence() const
-	{ assert(any_a<>::___handle___); return ___read___().precedence(); }
+	inline int64_t precedence() const;
 
 	inline any_a<> report__(range_a<> const& ___arguments___) const;
 
-	inline misunderstanding_a<> report_() const
-	{ assert(any_a<>::___handle___); return ___read___().report_(); }
+	inline misunderstanding_a<> report_() const;
 
-	inline std :: string report() const
-	{ assert(any_a<>::___handle___); return ___read___().report(); }
+	inline std :: string report() const;
 
 protected:
 	struct ___token_a_handle_base___ : any_a<>::___any_a_handle_base___
@@ -115,53 +99,37 @@ protected:
 			: any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline symbol_a<> filename_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.filename_(); }
+		virtual inline symbol_a<> filename_() const final;
 
-		virtual inline std :: string filename() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.filename(); }
+		virtual inline std :: string filename() const final;
 
-		virtual inline number_data_int64_a<> line_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.line_(); }
+		virtual inline number_data_int64_a<> line_() const final;
 
-		virtual inline int64_t line() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.line(); }
+		virtual inline int64_t line() const final;
 
-		virtual inline number_data_int64_a<> position_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.position_(); }
+		virtual inline number_data_int64_a<> position_() const final;
 
-		virtual inline int64_t position() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.position(); }
+		virtual inline int64_t position() const final;
 
-		virtual inline symbol_a<> tag_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.tag_(); }
+		virtual inline symbol_a<> tag_() const final;
 
-		virtual inline std :: string tag() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.tag(); }
+		virtual inline std :: string tag() const final;
 
-		virtual inline symbol_a<> symbol_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.symbol_(); }
+		virtual inline symbol_a<> symbol_() const final;
 
-		virtual inline std :: string symbol() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.symbol(); }
+		virtual inline std :: string symbol() const final;
 
-		virtual inline any_a<> literal_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.literal_(); }
+		virtual inline any_a<> literal_() const final;
 
-		virtual inline bool literal() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.literal(); }
+		virtual inline bool literal() const final;
 
-		virtual inline number_data_int64_a<> precedence_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.precedence_(); }
+		virtual inline number_data_int64_a<> precedence_() const final;
 
-		virtual inline int64_t precedence() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.precedence(); }
+		virtual inline int64_t precedence() const final;
 
-		virtual inline misunderstanding_a<> report_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.report_(); }
+		virtual inline misunderstanding_a<> report_() const final;
 
-		virtual inline std :: string report() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.report(); }
+		virtual inline std :: string report() const final;
 
 	};
 

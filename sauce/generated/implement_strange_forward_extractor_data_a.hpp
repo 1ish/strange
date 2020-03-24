@@ -2,6 +2,42 @@
 namespace strange
 {
 
+template <typename _element, typename _type>
+inline bool forward_extractor_data_a<_element, _type>::operator==(forward_extractor_data_a < _element , _type > const & it ) const
+{ assert(any_a<>::___handle___); return ___read___().operator==(it); }
+
+template <typename _element, typename _type>
+template <typename ___TTT___, typename ___DHB___>
+inline bool forward_extractor_data_a<_element, _type>::___forward_extractor_data_a_handle___<___TTT___, ___DHB___>::operator==(forward_extractor_data_a < _element , _type > const & it ) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(it); }
+
+template <typename _element, typename _type>
+inline bool forward_extractor_data_a<_element, _type>::operator!=(forward_extractor_data_a < _element , _type > const & it ) const
+{ assert(any_a<>::___handle___); return ___read___().operator!=(it); }
+
+template <typename _element, typename _type>
+template <typename ___TTT___, typename ___DHB___>
+inline bool forward_extractor_data_a<_element, _type>::___forward_extractor_data_a_handle___<___TTT___, ___DHB___>::operator!=(forward_extractor_data_a < _element , _type > const & it ) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(it); }
+
+template <typename _element, typename _type>
+inline _type const & forward_extractor_data_a<_element, _type>::extract_it() const
+{ assert(any_a<>::___handle___); return ___read___().extract_it(); }
+
+template <typename _element, typename _type>
+template <typename ___TTT___, typename ___DHB___>
+inline _type const & forward_extractor_data_a<_element, _type>::___forward_extractor_data_a_handle___<___TTT___, ___DHB___>::extract_it() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_it(); }
+
+template <typename _element, typename _type>
+inline _type & forward_extractor_data_a<_element, _type>::mutate_it()
+{ assert(any_a<>::___handle___); return ___write___().mutate_it(); }
+
+template <typename _element, typename _type>
+template <typename ___TTT___, typename ___DHB___>
+inline _type & forward_extractor_data_a<_element, _type>::___forward_extractor_data_a_handle___<___TTT___, ___DHB___>::mutate_it()
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_it(); }
+
 class ___forward_extractor_data_a_share___
 {
 	static bool const share;

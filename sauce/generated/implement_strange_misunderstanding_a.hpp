@@ -9,6 +9,24 @@ inline any_a<> misunderstanding_a<_lake_int8>::to_lake__(range_a<> const& ___arg
 }
 
 template <typename _lake_int8>
+inline _lake_int8 misunderstanding_a<_lake_int8>::to_lake_() const
+{ assert(any_a<>::___handle___); return ___read___().to_lake_(); }
+
+template <typename _lake_int8>
+template <typename ___TTT___, typename ___DHB___>
+inline _lake_int8 misunderstanding_a<_lake_int8>::___misunderstanding_a_handle___<___TTT___, ___DHB___>::to_lake_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake_(); }
+
+template <typename _lake_int8>
+inline std :: string misunderstanding_a<_lake_int8>::to_string() const
+{ assert(any_a<>::___handle___); return ___read___().to_string(); }
+
+template <typename _lake_int8>
+template <typename ___TTT___, typename ___DHB___>
+inline std :: string misunderstanding_a<_lake_int8>::___misunderstanding_a_handle___<___TTT___, ___DHB___>::to_string() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
+
+template <typename _lake_int8>
 inline any_a<> misunderstanding_a<_lake_int8>::add__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
@@ -19,6 +37,19 @@ inline any_a<> misunderstanding_a<_lake_int8>::add__(range_a<> const& ___argumen
 	auto misunderstanding = cast<misunderstanding_a<>>(*___it___);
 	return add_(misunderstanding);
 }
+
+template <typename _lake_int8>
+inline misunderstanding_a<> misunderstanding_a<_lake_int8>::add_(misunderstanding_a<> const& misunderstanding) const
+{ assert(any_a<>::___handle___); return ___read___().add_(misunderstanding); }
+
+template <typename _lake_int8>
+inline misunderstanding_a<> misunderstanding_a<_lake_int8>::operator+(misunderstanding_a<> const& misunderstanding) const
+{ assert(any_a<>::___handle___); return ___read___().add_(misunderstanding); }
+
+template <typename _lake_int8>
+template <typename ___TTT___, typename ___DHB___>
+inline misunderstanding_a<> misunderstanding_a<_lake_int8>::___misunderstanding_a_handle___<___TTT___, ___DHB___>::add_(misunderstanding_a<> const& misunderstanding) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(misunderstanding); }
 
 class ___misunderstanding_a_share___
 {

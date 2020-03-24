@@ -5,8 +5,6 @@ false &&
 			#symbol :<<symbol>># <symbol>,
 			#cat :<<cat>># <cat>,
 			#kind :<<kind>># <kind>,
-			#unordered_herd :<<unordered_herd>># <unordered_herd>,
-			#unordered_shoal :<<unordered_shoal>># <unordered_shoal>,
 			#number_data_uint64 :<<number_data_uint64>># <number_data_uint64>,
 			(	// no parent
 				{
@@ -19,13 +17,13 @@ false &&
 
 					cat_ :# (<#cat>),
 
-					cats_ :# (<#unordered_herd>),
+					cats_ :# (<unordered_herd>),
 
 					kind_ :# (<#kind>),
 
-					kinds_ :# (<#unordered_herd>),
+					kinds_ :# (<unordered_herd>),
 
-					operations_ :# (<#unordered_shoal>),
+					operations_ :# (<unordered_shoal>),
 
 					// visitor
 					visit_ :# (arguments :<inventory>&, <any>),

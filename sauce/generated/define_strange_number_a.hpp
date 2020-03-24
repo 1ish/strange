@@ -14,296 +14,171 @@ class number_a : public any_a<>
 public:
 	inline any_a<> increment__(range_a<> const& ___arguments___);
 
-	inline number_a increment_()
-	{
-		assert(any_a<>::___handle___);
-		___write___().increment_();
-		return *this;
-	}
+	inline number_a increment_();
 
-	inline number_a& operator++()
-	{
-		assert(any_a<>::___handle___);
-		___write___().increment_();
-		return *this;
-	}
+	inline number_a& operator++();
 
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline number_a operator++(int)
-	{
-		assert(any_a<>::___handle___);
-		number_a result = *this;
-		___write___().increment_();
-		return result;
-	}
+	inline number_a operator++(int);
 #endif
 
 	inline any_a<> decrement__(range_a<> const& ___arguments___);
 
-	inline number_a decrement_()
-	{
-		assert(any_a<>::___handle___);
-		___write___().decrement_();
-		return *this;
-	}
+	inline number_a decrement_();
 
-	inline number_a& operator--()
-	{
-		assert(any_a<>::___handle___);
-		___write___().decrement_();
-		return *this;
-	}
+	inline number_a& operator--();
 
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline number_a operator--(int)
-	{
-		assert(any_a<>::___handle___);
-		number_a result = *this;
-		___write___().decrement_();
-		return result;
-	}
+	inline number_a operator--(int);
 #endif
 
 	inline any_a<> self_assign__(range_a<> const& ___arguments___);
 
-	inline number_a self_assign_(number_a<> const& number)
-	{
-		assert(any_a<>::___handle___);
-		___write___().self_assign_(number);
-		return *this;
-	}
+	inline number_a self_assign_(number_a<> const& number);
 
 	inline any_a<> self_add__(range_a<> const& ___arguments___);
 
-	inline number_a self_add_(number_a<> const& number)
-	{
-		assert(any_a<>::___handle___);
-		___write___().self_add_(number);
-		return *this;
-	}
+	inline number_a self_add_(number_a<> const& number);
 
-	inline number_a& operator+=(number_a<> const& number)
-	{
-		assert(any_a<>::___handle___);
-		___write___().self_add_(number);
-		return *this;
-	}
+	inline number_a& operator+=(number_a<> const& number);
 
 	inline any_a<> add__(range_a<> const& ___arguments___) const;
 
-	inline number_a<> add_(number_a<> const& number) const
-	{ assert(any_a<>::___handle___); return ___read___().add_(number); }
+	inline number_a<> add_(number_a<> const& number) const;
 
-	inline number_a<> operator+(number_a<> const& number) const
-	{ assert(any_a<>::___handle___); return ___read___().add_(number); }
+	inline number_a<> operator+(number_a<> const& number) const;
 
 	inline any_a<> self_subtract__(range_a<> const& ___arguments___);
 
-	inline number_a self_subtract_(number_a<> const& number)
-	{
-		assert(any_a<>::___handle___);
-		___write___().self_subtract_(number);
-		return *this;
-	}
+	inline number_a self_subtract_(number_a<> const& number);
 
-	inline number_a& operator-=(number_a<> const& number)
-	{
-		assert(any_a<>::___handle___);
-		___write___().self_subtract_(number);
-		return *this;
-	}
+	inline number_a& operator-=(number_a<> const& number);
 
 	inline any_a<> subtract__(range_a<> const& ___arguments___) const;
 
-	inline number_a<> subtract_(number_a<> const& number) const
-	{ assert(any_a<>::___handle___); return ___read___().subtract_(number); }
+	inline number_a<> subtract_(number_a<> const& number) const;
 
-	inline number_a<> operator-(number_a<> const& number) const
-	{ assert(any_a<>::___handle___); return ___read___().subtract_(number); }
+	inline number_a<> operator-(number_a<> const& number) const;
 
 	inline any_a<> self_multiply__(range_a<> const& ___arguments___);
 
-	inline number_a self_multiply_(number_a<> const& number)
-	{
-		assert(any_a<>::___handle___);
-		___write___().self_multiply_(number);
-		return *this;
-	}
+	inline number_a self_multiply_(number_a<> const& number);
 
-	inline number_a& operator*=(number_a<> const& number)
-	{
-		assert(any_a<>::___handle___);
-		___write___().self_multiply_(number);
-		return *this;
-	}
+	inline number_a& operator*=(number_a<> const& number);
 
 	inline any_a<> multiply__(range_a<> const& ___arguments___) const;
 
-	inline number_a<> multiply_(number_a<> const& number) const
-	{ assert(any_a<>::___handle___); return ___read___().multiply_(number); }
+	inline number_a<> multiply_(number_a<> const& number) const;
 
-	inline number_a<> operator*(number_a<> const& number) const
-	{ assert(any_a<>::___handle___); return ___read___().multiply_(number); }
+	inline number_a<> operator*(number_a<> const& number) const;
 
 	inline any_a<> self_divide__(range_a<> const& ___arguments___);
 
-	inline number_a self_divide_(number_a<> const& number)
-	{
-		assert(any_a<>::___handle___);
-		___write___().self_divide_(number);
-		return *this;
-	}
+	inline number_a self_divide_(number_a<> const& number);
 
-	inline number_a& operator/=(number_a<> const& number)
-	{
-		assert(any_a<>::___handle___);
-		___write___().self_divide_(number);
-		return *this;
-	}
+	inline number_a& operator/=(number_a<> const& number);
 
 	inline any_a<> divide__(range_a<> const& ___arguments___) const;
 
-	inline number_a<> divide_(number_a<> const& number) const
-	{ assert(any_a<>::___handle___); return ___read___().divide_(number); }
+	inline number_a<> divide_(number_a<> const& number) const;
 
-	inline number_a<> operator/(number_a<> const& number) const
-	{ assert(any_a<>::___handle___); return ___read___().divide_(number); }
+	inline number_a<> operator/(number_a<> const& number) const;
 
 	inline any_a<> self_modulo__(range_a<> const& ___arguments___);
 
-	inline number_a self_modulo_(number_a<> const& number)
-	{
-		assert(any_a<>::___handle___);
-		___write___().self_modulo_(number);
-		return *this;
-	}
+	inline number_a self_modulo_(number_a<> const& number);
 
-	inline number_a& operator%=(number_a<> const& number)
-	{
-		assert(any_a<>::___handle___);
-		___write___().self_modulo_(number);
-		return *this;
-	}
+	inline number_a& operator%=(number_a<> const& number);
 
 	inline any_a<> modulo__(range_a<> const& ___arguments___) const;
 
-	inline number_a<> modulo_(number_a<> const& number) const
-	{ assert(any_a<>::___handle___); return ___read___().modulo_(number); }
+	inline number_a<> modulo_(number_a<> const& number) const;
 
-	inline number_a<> operator%(number_a<> const& number) const
-	{ assert(any_a<>::___handle___); return ___read___().modulo_(number); }
+	inline number_a<> operator%(number_a<> const& number) const;
 
 	inline any_a<> to_int_64__(range_a<> const& ___arguments___) const;
 
-	inline _number_data_int64 to_int_64_() const
-	{ assert(any_a<>::___handle___); return ___read___().to_int_64_(); }
+	inline _number_data_int64 to_int_64_() const;
 
-	inline int64_t to_int_64() const
-	{ assert(any_a<>::___handle___); return ___read___().to_int_64(); }
+	inline int64_t to_int_64() const;
 
 	inline any_a<> from_int_64__(range_a<> const& ___arguments___);
 
-	inline any_a<> from_int_64_(_number_data_int64 const& int_64)
-	{ assert(any_a<>::___handle___); return ___write___().from_int_64_(int_64); }
+	inline any_a<> from_int_64_(_number_data_int64 const& int_64);
 
-	inline void from_int_64(int64_t int_64 )
-	{ assert(any_a<>::___handle___); ___write___().from_int_64(int_64); }
+	inline void from_int_64(int64_t int_64 );
 
 	inline any_a<> to_uint_64__(range_a<> const& ___arguments___) const;
 
-	inline _number_data_uint64 to_uint_64_() const
-	{ assert(any_a<>::___handle___); return ___read___().to_uint_64_(); }
+	inline _number_data_uint64 to_uint_64_() const;
 
-	inline uint64_t to_uint_64() const
-	{ assert(any_a<>::___handle___); return ___read___().to_uint_64(); }
+	inline uint64_t to_uint_64() const;
 
 	inline any_a<> from_uint_64__(range_a<> const& ___arguments___);
 
-	inline any_a<> from_uint_64_(_number_data_uint64 const& uint_64)
-	{ assert(any_a<>::___handle___); return ___write___().from_uint_64_(uint_64); }
+	inline any_a<> from_uint_64_(_number_data_uint64 const& uint_64);
 
-	inline void from_uint_64(uint64_t uint_64 )
-	{ assert(any_a<>::___handle___); ___write___().from_uint_64(uint_64); }
+	inline void from_uint_64(uint64_t uint_64 );
 
 	inline any_a<> to_float_64__(range_a<> const& ___arguments___) const;
 
-	inline _number_data_double to_float_64_() const
-	{ assert(any_a<>::___handle___); return ___read___().to_float_64_(); }
+	inline _number_data_double to_float_64_() const;
 
-	inline double to_float_64() const
-	{ assert(any_a<>::___handle___); return ___read___().to_float_64(); }
+	inline double to_float_64() const;
 
 	inline any_a<> from_float_64__(range_a<> const& ___arguments___);
 
-	inline any_a<> from_float_64_(_number_data_double const& float_64)
-	{ assert(any_a<>::___handle___); return ___write___().from_float_64_(float_64); }
+	inline any_a<> from_float_64_(_number_data_double const& float_64);
 
-	inline void from_float_64(double float_64 )
-	{ assert(any_a<>::___handle___); ___write___().from_float_64(float_64); }
+	inline void from_float_64(double float_64 );
 
 	inline any_a<> byte_size__(range_a<> const& ___arguments___) const;
 
-	inline _number_data_int64 byte_size_() const
-	{ assert(any_a<>::___handle___); return ___read___().byte_size_(); }
+	inline _number_data_int64 byte_size_() const;
 
-	inline int64_t byte_size() const
-	{ assert(any_a<>::___handle___); return ___read___().byte_size(); }
+	inline int64_t byte_size() const;
 
 	inline any_a<> is_int__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> is_int_() const
-	{ assert(any_a<>::___handle___); return ___read___().is_int_(); }
+	inline any_a<> is_int_() const;
 
-	inline bool is_int() const
-	{ assert(any_a<>::___handle___); return ___read___().is_int(); }
+	inline bool is_int() const;
 
 	inline any_a<> is_signed__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> is_signed_() const
-	{ assert(any_a<>::___handle___); return ___read___().is_signed_(); }
+	inline any_a<> is_signed_() const;
 
-	inline bool is_signed() const
-	{ assert(any_a<>::___handle___); return ___read___().is_signed(); }
+	inline bool is_signed() const;
 
 	inline any_a<> is_nan__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> is_nan_() const
-	{ assert(any_a<>::___handle___); return ___read___().is_nan_(); }
+	inline any_a<> is_nan_() const;
 
-	inline bool is_nan() const
-	{ assert(any_a<>::___handle___); return ___read___().is_nan(); }
+	inline bool is_nan() const;
 
 	inline any_a<> is_inf__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> is_inf_() const
-	{ assert(any_a<>::___handle___); return ___read___().is_inf_(); }
+	inline any_a<> is_inf_() const;
 
-	inline bool is_inf() const
-	{ assert(any_a<>::___handle___); return ___read___().is_inf(); }
+	inline bool is_inf() const;
 
 	inline any_a<> is_finite__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> is_finite_() const
-	{ assert(any_a<>::___handle___); return ___read___().is_finite_(); }
+	inline any_a<> is_finite_() const;
 
-	inline bool is_finite() const
-	{ assert(any_a<>::___handle___); return ___read___().is_finite(); }
+	inline bool is_finite() const;
 
 	inline any_a<> is_normal__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> is_normal_() const
-	{ assert(any_a<>::___handle___); return ___read___().is_normal_(); }
+	inline any_a<> is_normal_() const;
 
-	inline bool is_normal() const
-	{ assert(any_a<>::___handle___); return ___read___().is_normal(); }
+	inline bool is_normal() const;
 
 	inline any_a<> little_endian__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> little_endian_() const
-	{ assert(any_a<>::___handle___); return ___read___().little_endian_(); }
+	inline any_a<> little_endian_() const;
 
-	inline bool little_endian() const
-	{ assert(any_a<>::___handle___); return ___read___().little_endian(); }
+	inline bool little_endian() const;
 
 protected:
 	struct ___number_a_handle_base___ : any_a<>::___any_a_handle_base___
@@ -369,128 +244,87 @@ protected:
 			: any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline void increment_() final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.increment_(); }
+		virtual inline void increment_() final;
 
-		virtual inline void decrement_() final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.decrement_(); }
+		virtual inline void decrement_() final;
 
-		virtual inline void self_assign_(number_a<> const& number) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_assign_(number); }
+		virtual inline void self_assign_(number_a<> const& number) final;
 
-		virtual inline void self_add_(number_a<> const& number) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(number); }
+		virtual inline void self_add_(number_a<> const& number) final;
 
-		virtual inline number_a<> add_(number_a<> const& number) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(number); }
+		virtual inline number_a<> add_(number_a<> const& number) const final;
 
-		virtual inline void self_subtract_(number_a<> const& number) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(number); }
+		virtual inline void self_subtract_(number_a<> const& number) final;
 
-		virtual inline number_a<> subtract_(number_a<> const& number) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract_(number); }
+		virtual inline number_a<> subtract_(number_a<> const& number) const final;
 
-		virtual inline void self_multiply_(number_a<> const& number) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_multiply_(number); }
+		virtual inline void self_multiply_(number_a<> const& number) final;
 
-		virtual inline number_a<> multiply_(number_a<> const& number) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.multiply_(number); }
+		virtual inline number_a<> multiply_(number_a<> const& number) const final;
 
-		virtual inline void self_divide_(number_a<> const& number) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_divide_(number); }
+		virtual inline void self_divide_(number_a<> const& number) final;
 
-		virtual inline number_a<> divide_(number_a<> const& number) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.divide_(number); }
+		virtual inline number_a<> divide_(number_a<> const& number) const final;
 
-		virtual inline void self_modulo_(number_a<> const& number) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_modulo_(number); }
+		virtual inline void self_modulo_(number_a<> const& number) final;
 
-		virtual inline number_a<> modulo_(number_a<> const& number) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.modulo_(number); }
+		virtual inline number_a<> modulo_(number_a<> const& number) const final;
 
-		virtual inline _number_data_int64 to_int_64_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_int_64_(); }
+		virtual inline _number_data_int64 to_int_64_() const final;
 
-		virtual inline int64_t to_int_64() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_int_64(); }
+		virtual inline int64_t to_int_64() const final;
 
-		virtual inline any_a<> from_int_64_(_number_data_int64 const& int_64) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_int_64_(int_64); }
+		virtual inline any_a<> from_int_64_(_number_data_int64 const& int_64) final;
 
-		virtual inline void from_int_64(int64_t int_64 ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_int_64(int_64); }
+		virtual inline void from_int_64(int64_t int_64 ) final;
 
-		virtual inline _number_data_uint64 to_uint_64_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_uint_64_(); }
+		virtual inline _number_data_uint64 to_uint_64_() const final;
 
-		virtual inline uint64_t to_uint_64() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_uint_64(); }
+		virtual inline uint64_t to_uint_64() const final;
 
-		virtual inline any_a<> from_uint_64_(_number_data_uint64 const& uint_64) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_uint_64_(uint_64); }
+		virtual inline any_a<> from_uint_64_(_number_data_uint64 const& uint_64) final;
 
-		virtual inline void from_uint_64(uint64_t uint_64 ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_uint_64(uint_64); }
+		virtual inline void from_uint_64(uint64_t uint_64 ) final;
 
-		virtual inline _number_data_double to_float_64_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_float_64_(); }
+		virtual inline _number_data_double to_float_64_() const final;
 
-		virtual inline double to_float_64() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_float_64(); }
+		virtual inline double to_float_64() const final;
 
-		virtual inline any_a<> from_float_64_(_number_data_double const& float_64) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_float_64_(float_64); }
+		virtual inline any_a<> from_float_64_(_number_data_double const& float_64) final;
 
-		virtual inline void from_float_64(double float_64 ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_float_64(float_64); }
+		virtual inline void from_float_64(double float_64 ) final;
 
-		virtual inline _number_data_int64 byte_size_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.byte_size_(); }
+		virtual inline _number_data_int64 byte_size_() const final;
 
-		virtual inline int64_t byte_size() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.byte_size(); }
+		virtual inline int64_t byte_size() const final;
 
-		virtual inline any_a<> is_int_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_int_(); }
+		virtual inline any_a<> is_int_() const final;
 
-		virtual inline bool is_int() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_int(); }
+		virtual inline bool is_int() const final;
 
-		virtual inline any_a<> is_signed_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_signed_(); }
+		virtual inline any_a<> is_signed_() const final;
 
-		virtual inline bool is_signed() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_signed(); }
+		virtual inline bool is_signed() const final;
 
-		virtual inline any_a<> is_nan_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_nan_(); }
+		virtual inline any_a<> is_nan_() const final;
 
-		virtual inline bool is_nan() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_nan(); }
+		virtual inline bool is_nan() const final;
 
-		virtual inline any_a<> is_inf_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_inf_(); }
+		virtual inline any_a<> is_inf_() const final;
 
-		virtual inline bool is_inf() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_inf(); }
+		virtual inline bool is_inf() const final;
 
-		virtual inline any_a<> is_finite_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_finite_(); }
+		virtual inline any_a<> is_finite_() const final;
 
-		virtual inline bool is_finite() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_finite(); }
+		virtual inline bool is_finite() const final;
 
-		virtual inline any_a<> is_normal_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_normal_(); }
+		virtual inline any_a<> is_normal_() const final;
 
-		virtual inline bool is_normal() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_normal(); }
+		virtual inline bool is_normal() const final;
 
-		virtual inline any_a<> little_endian_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.little_endian_(); }
+		virtual inline any_a<> little_endian_() const final;
 
-		virtual inline bool little_endian() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.little_endian(); }
+		virtual inline bool little_endian() const final;
 
 	};
 

@@ -12,29 +12,21 @@ template <typename _primitive>
 class number_data_a : public number_a<>
 {
 public:
-	inline bool operator==(number_data_a < _primitive > const & number ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator==(number); }
+	inline bool operator==(number_data_a < _primitive > const & number ) const;
 
-	inline bool operator!=(number_data_a < _primitive > const & number ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator!=(number); }
+	inline bool operator!=(number_data_a < _primitive > const & number ) const;
 
-	inline bool operator<(number_data_a < _primitive > const & number ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator<(number); }
+	inline bool operator<(number_data_a < _primitive > const & number ) const;
 
-	inline bool operator>(number_data_a < _primitive > const & number ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator>(number); }
+	inline bool operator>(number_data_a < _primitive > const & number ) const;
 
-	inline bool operator<=(number_data_a < _primitive > const & number ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator<=(number); }
+	inline bool operator<=(number_data_a < _primitive > const & number ) const;
 
-	inline bool operator>=(number_data_a < _primitive > const & number ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator>=(number); }
+	inline bool operator>=(number_data_a < _primitive > const & number ) const;
 
-	inline _primitive const & extract_primitive() const
-	{ assert(any_a<>::___handle___); return ___read___().extract_primitive(); }
+	inline _primitive const & extract_primitive() const;
 
-	inline _primitive & mutate_primitive()
-	{ assert(any_a<>::___handle___); return ___write___().mutate_primitive(); }
+	inline _primitive & mutate_primitive();
 
 protected:
 	struct ___number_data_a_handle_base___ : number_a<>::___number_a_handle_base___
@@ -67,29 +59,21 @@ protected:
 			: number_a<>::template ___number_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bool operator==(number_data_a < _primitive > const & number ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(number); }
+		virtual inline bool operator==(number_data_a < _primitive > const & number ) const final;
 
-		virtual inline bool operator!=(number_data_a < _primitive > const & number ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(number); }
+		virtual inline bool operator!=(number_data_a < _primitive > const & number ) const final;
 
-		virtual inline bool operator<(number_data_a < _primitive > const & number ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(number); }
+		virtual inline bool operator<(number_data_a < _primitive > const & number ) const final;
 
-		virtual inline bool operator>(number_data_a < _primitive > const & number ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(number); }
+		virtual inline bool operator>(number_data_a < _primitive > const & number ) const final;
 
-		virtual inline bool operator<=(number_data_a < _primitive > const & number ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(number); }
+		virtual inline bool operator<=(number_data_a < _primitive > const & number ) const final;
 
-		virtual inline bool operator>=(number_data_a < _primitive > const & number ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(number); }
+		virtual inline bool operator>=(number_data_a < _primitive > const & number ) const final;
 
-		virtual inline _primitive const & extract_primitive() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_primitive(); }
+		virtual inline _primitive const & extract_primitive() const final;
 
-		virtual inline _primitive & mutate_primitive() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_primitive(); }
+		virtual inline _primitive & mutate_primitive() final;
 
 	};
 

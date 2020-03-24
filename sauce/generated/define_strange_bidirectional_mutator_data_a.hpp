@@ -12,17 +12,13 @@ template <typename _element, typename _type>
 class bidirectional_mutator_data_a : public bidirectional_mutator_a< _element >
 {
 public:
-	inline bool operator==(bidirectional_mutator_data_a < _element , _type > const & it ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator==(it); }
+	inline bool operator==(bidirectional_mutator_data_a < _element , _type > const & it ) const;
 
-	inline bool operator!=(bidirectional_mutator_data_a < _element , _type > const & it ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator!=(it); }
+	inline bool operator!=(bidirectional_mutator_data_a < _element , _type > const & it ) const;
 
-	inline _type const & extract_it() const
-	{ assert(any_a<>::___handle___); return ___read___().extract_it(); }
+	inline _type const & extract_it() const;
 
-	inline _type & mutate_it()
-	{ assert(any_a<>::___handle___); return ___write___().mutate_it(); }
+	inline _type & mutate_it();
 
 protected:
 	struct ___bidirectional_mutator_data_a_handle_base___ : bidirectional_mutator_a< _element >::___bidirectional_mutator_a_handle_base___
@@ -51,17 +47,13 @@ protected:
 			: bidirectional_mutator_a< _element >::template ___bidirectional_mutator_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bool operator==(bidirectional_mutator_data_a < _element , _type > const & it ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(it); }
+		virtual inline bool operator==(bidirectional_mutator_data_a < _element , _type > const & it ) const final;
 
-		virtual inline bool operator!=(bidirectional_mutator_data_a < _element , _type > const & it ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(it); }
+		virtual inline bool operator!=(bidirectional_mutator_data_a < _element , _type > const & it ) const final;
 
-		virtual inline _type const & extract_it() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_it(); }
+		virtual inline _type const & extract_it() const final;
 
-		virtual inline _type & mutate_it() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_it(); }
+		virtual inline _type & mutate_it() final;
 
 	};
 

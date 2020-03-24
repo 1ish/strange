@@ -14,47 +14,37 @@ class expression_a : public operation_a<>
 public:
 	inline any_a<> recreate__(range_a<> const& ___arguments___) const;
 
-	inline expression_a<> recreate_() const
-	{ assert(any_a<>::___handle___); return ___read___().recreate_(); }
+	inline expression_a<> recreate_() const;
 
 	inline any_a<> literal__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> literal_() const
-	{ assert(any_a<>::___handle___); return ___read___().literal_(); }
+	inline any_a<> literal_() const;
 
-	inline bool literal() const
-	{ assert(any_a<>::___handle___); return ___read___().literal(); }
+	inline bool literal() const;
 
 	inline any_a<> evaluate__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> evaluate_() const
-	{ assert(any_a<>::___handle___); return ___read___().evaluate_(); }
+	inline any_a<> evaluate_() const;
 
 	inline any_a<> token__(range_a<> const& ___arguments___) const;
 
-	inline token_a<> token_() const
-	{ assert(any_a<>::___handle___); return ___read___().token_(); }
+	inline token_a<> token_() const;
 
 	inline any_a<> terms__(range_a<> const& ___arguments___) const;
 
-	inline flock_a<> terms_() const
-	{ assert(any_a<>::___handle___); return ___read___().terms_(); }
+	inline flock_a<> terms_() const;
 
 	inline any_a<> generate__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> generate_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river) const
-	{ assert(any_a<>::___handle___); return ___read___().generate_(version, indent, river); }
+	inline any_a<> generate_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river) const;
 
-	inline void generate(int64_t version , int64_t indent , river_a < > & river ) const
-	{ assert(any_a<>::___handle___); ___read___().generate(version, indent, river); }
+	inline void generate(int64_t version , int64_t indent , river_a < > & river ) const;
 
 	inline any_a<> generate_cpp__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> generate_cpp_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = strange::no() ) const
-	{ assert(any_a<>::___handle___); return ___read___().generate_cpp_(version, indent, river, declare, define, type); }
+	inline any_a<> generate_cpp_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = strange::no() ) const;
 
-	inline void generate_cpp(int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const
-	{ assert(any_a<>::___handle___); ___read___().generate_cpp(version, indent, river, declare, define, type); }
+	inline void generate_cpp(int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const;
 
 protected:
 	struct ___expression_a_handle_base___ : operation_a<>::___operation_a_handle_base___
@@ -89,35 +79,25 @@ protected:
 			: operation_a<>::template ___operation_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline expression_a<> recreate_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.recreate_(); }
+		virtual inline expression_a<> recreate_() const final;
 
-		virtual inline any_a<> literal_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.literal_(); }
+		virtual inline any_a<> literal_() const final;
 
-		virtual inline bool literal() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.literal(); }
+		virtual inline bool literal() const final;
 
-		virtual inline any_a<> evaluate_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.evaluate_(); }
+		virtual inline any_a<> evaluate_() const final;
 
-		virtual inline token_a<> token_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.token_(); }
+		virtual inline token_a<> token_() const final;
 
-		virtual inline flock_a<> terms_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.terms_(); }
+		virtual inline flock_a<> terms_() const final;
 
-		virtual inline any_a<> generate_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.generate_(version, indent, river); }
+		virtual inline any_a<> generate_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river) const final;
 
-		virtual inline void generate(int64_t version , int64_t indent , river_a < > & river ) const final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.generate(version, indent, river); }
+		virtual inline void generate(int64_t version , int64_t indent , river_a < > & river ) const final;
 
-		virtual inline any_a<> generate_cpp_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = strange::no() ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.generate_cpp_(version, indent, river, declare, define, type); }
+		virtual inline any_a<> generate_cpp_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = strange::no() ) const final;
 
-		virtual inline void generate_cpp(int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.generate_cpp(version, indent, river, declare, define, type); }
+		virtual inline void generate_cpp(int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const final;
 
 	};
 

@@ -14,8 +14,7 @@ class parser_a : public any_a<>
 public:
 	inline any_a<> parse__(range_a<> const& ___arguments___);
 
-	inline expression_a<> parse_(range_a<> const& tokenizer)
-	{ assert(any_a<>::___handle___); return ___write___().parse_(tokenizer); }
+	inline expression_a<> parse_(range_a<> const& tokenizer);
 
 protected:
 	struct ___parser_a_handle_base___ : any_a<>::___any_a_handle_base___
@@ -41,8 +40,7 @@ protected:
 			: any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline expression_a<> parse_(range_a<> const& tokenizer) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.parse_(tokenizer); }
+		virtual inline expression_a<> parse_(range_a<> const& tokenizer) final;
 
 	};
 

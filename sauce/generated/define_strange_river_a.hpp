@@ -12,249 +12,187 @@ template <typename _1>
 class river_a : public range_a<>
 {
 public:
-	inline forward_extractor_data_a < any_a < > , std :: istreambuf_iterator < char > > extract_begin() const
-	{ assert(any_a<>::___handle___); return ___read___().extract_begin(); }
+	inline forward_extractor_data_a < any_a < > , std :: istreambuf_iterator < char > > extract_begin() const;
 
-	inline forward_extractor_data_a < any_a < > , std :: istreambuf_iterator < char > > extract_end() const
-	{ assert(any_a<>::___handle___); return ___read___().extract_end(); }
+	inline forward_extractor_data_a < any_a < > , std :: istreambuf_iterator < char > > extract_end() const;
 
 	inline any_a<> to_lake__(range_a<> const& ___arguments___);
 
-	inline lake_int8_a<> to_lake_()
-	{ assert(any_a<>::___handle___); return ___write___().to_lake_(); }
+	inline lake_int8_a<> to_lake_();
 
-	inline std :: string to_string()
-	{ assert(any_a<>::___handle___); return ___write___().to_string(); }
+	inline std :: string to_string();
 
 	inline any_a<> get_char__(range_a<> const& ___arguments___);
 
-	inline number_data_int8_a<> get_char_()
-	{ assert(any_a<>::___handle___); return ___write___().get_char_(); }
+	inline number_data_int8_a<> get_char_();
 
-	inline int8_t get_char()
-	{ assert(any_a<>::___handle___); return ___write___().get_char(); }
+	inline int8_t get_char();
 
 	inline any_a<> peek_char__(range_a<> const& ___arguments___);
 
-	inline number_data_int8_a<> peek_char_()
-	{ assert(any_a<>::___handle___); return ___write___().peek_char_(); }
+	inline number_data_int8_a<> peek_char_();
 
-	inline int8_t peek_char()
-	{ assert(any_a<>::___handle___); return ___write___().peek_char(); }
+	inline int8_t peek_char();
 
 	inline any_a<> unget_char__(range_a<> const& ___arguments___);
 
-	inline any_a<> unget_char_()
-	{ assert(any_a<>::___handle___); return ___write___().unget_char_(); }
+	inline any_a<> unget_char_();
 
-	inline void unget_char()
-	{ assert(any_a<>::___handle___); ___write___().unget_char(); }
+	inline void unget_char();
 
 	inline any_a<> put_back_char__(range_a<> const& ___arguments___);
 
-	inline any_a<> put_back_char_(number_data_int8_a<> const& int_8)
-	{ assert(any_a<>::___handle___); return ___write___().put_back_char_(int_8); }
+	inline any_a<> put_back_char_(number_data_int8_a<> const& int_8);
 
-	inline void put_back_char(int8_t int_8 )
-	{ assert(any_a<>::___handle___); ___write___().put_back_char(int_8); }
+	inline void put_back_char(int8_t int_8 );
 
 	inline any_a<> get_line__(range_a<> const& ___arguments___);
 
-	inline lake_int8_a<> get_line_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter)
-	{ assert(any_a<>::___handle___); return ___write___().get_line_(count, delimiter); }
+	inline lake_int8_a<> get_line_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter);
 
-	inline std :: vector < int8_t > get_line(int64_t count , int8_t delimiter )
-	{ assert(any_a<>::___handle___); return ___write___().get_line(count, delimiter); }
+	inline std :: vector < int8_t > get_line(int64_t count , int8_t delimiter );
 
 	inline any_a<> ignore__(range_a<> const& ___arguments___);
 
-	inline any_a<> ignore_(number_data_int64_a<> const& count)
-	{ assert(any_a<>::___handle___); return ___write___().ignore_(count); }
+	inline any_a<> ignore_(number_data_int64_a<> const& count);
 
-	inline void ignore(int64_t count )
-	{ assert(any_a<>::___handle___); ___write___().ignore(count); }
+	inline void ignore(int64_t count );
 
 	inline any_a<> read__(range_a<> const& ___arguments___);
 
-	inline lake_int8_a<> read_(number_data_int64_a<> const& count)
-	{ assert(any_a<>::___handle___); return ___write___().read_(count); }
+	inline lake_int8_a<> read_(number_data_int64_a<> const& count);
 
-	inline std :: vector < int8_t > read(int64_t count )
-	{ assert(any_a<>::___handle___); return ___write___().read(count); }
+	inline std :: vector < int8_t > read(int64_t count );
 
-	inline std :: string read_string(int64_t count )
-	{ assert(any_a<>::___handle___); return ___write___().read_string(count); }
+	inline std :: string read_string(int64_t count );
 
 	inline any_a<> tellg__(range_a<> const& ___arguments___) const;
 
-	inline number_data_int64_a<> tellg_() const
-	{ assert(any_a<>::___handle___); return ___read___().tellg_(); }
+	inline number_data_int64_a<> tellg_() const;
 
-	inline int64_t tellg() const
-	{ assert(any_a<>::___handle___); return ___read___().tellg(); }
+	inline int64_t tellg() const;
 
 	inline any_a<> seekg_beg__(range_a<> const& ___arguments___);
 
-	inline any_a<> seekg_beg_(number_data_int64_a<> const& offset)
-	{ assert(any_a<>::___handle___); return ___write___().seekg_beg_(offset); }
+	inline any_a<> seekg_beg_(number_data_int64_a<> const& offset);
 
-	inline void seekg_beg(int64_t offset )
-	{ assert(any_a<>::___handle___); ___write___().seekg_beg(offset); }
+	inline void seekg_beg(int64_t offset );
 
 	inline any_a<> seekg_end__(range_a<> const& ___arguments___);
 
-	inline any_a<> seekg_end_(number_data_int64_a<> const& offset)
-	{ assert(any_a<>::___handle___); return ___write___().seekg_end_(offset); }
+	inline any_a<> seekg_end_(number_data_int64_a<> const& offset);
 
-	inline void seekg_end(int64_t offset )
-	{ assert(any_a<>::___handle___); ___write___().seekg_end(offset); }
+	inline void seekg_end(int64_t offset );
 
 	inline any_a<> seekg_cur__(range_a<> const& ___arguments___);
 
-	inline any_a<> seekg_cur_(number_data_int64_a<> const& offset)
-	{ assert(any_a<>::___handle___); return ___write___().seekg_cur_(offset); }
+	inline any_a<> seekg_cur_(number_data_int64_a<> const& offset);
 
-	inline void seekg_cur(int64_t offset )
-	{ assert(any_a<>::___handle___); ___write___().seekg_cur(offset); }
+	inline void seekg_cur(int64_t offset );
 
 	inline any_a<> sync__(range_a<> const& ___arguments___);
 
-	inline any_a<> sync_()
-	{ assert(any_a<>::___handle___); return ___write___().sync_(); }
+	inline any_a<> sync_();
 
-	inline bool sync()
-	{ assert(any_a<>::___handle___); return ___write___().sync(); }
+	inline bool sync();
 
 	inline any_a<> put_char__(range_a<> const& ___arguments___);
 
-	inline any_a<> put_char_(number_data_int8_a<> const& int_8)
-	{ assert(any_a<>::___handle___); return ___write___().put_char_(int_8); }
+	inline any_a<> put_char_(number_data_int8_a<> const& int_8);
 
-	inline void put_char(int8_t int_8 )
-	{ assert(any_a<>::___handle___); ___write___().put_char(int_8); }
+	inline void put_char(int8_t int_8 );
 
 	inline any_a<> write__(range_a<> const& ___arguments___);
 
-	inline any_a<> write_(lake_int8_a<> const& lake)
-	{ assert(any_a<>::___handle___); return ___write___().write_(lake); }
+	inline any_a<> write_(lake_int8_a<> const& lake);
 
-	inline void write(std :: vector < int8_t > const & lake )
-	{ assert(any_a<>::___handle___); ___write___().write(lake); }
+	inline void write(std :: vector < int8_t > const & lake );
 
-	inline void write_string(std :: string const & str )
-	{ assert(any_a<>::___handle___); ___write___().write_string(str); }
+	inline void write_string(std :: string const & str );
 
 	inline any_a<> tellp__(range_a<> const& ___arguments___) const;
 
-	inline number_data_int64_a<> tellp_() const
-	{ assert(any_a<>::___handle___); return ___read___().tellp_(); }
+	inline number_data_int64_a<> tellp_() const;
 
-	inline int64_t tellp() const
-	{ assert(any_a<>::___handle___); return ___read___().tellp(); }
+	inline int64_t tellp() const;
 
 	inline any_a<> seekp_beg__(range_a<> const& ___arguments___);
 
-	inline any_a<> seekp_beg_(number_data_int64_a<> const& offset)
-	{ assert(any_a<>::___handle___); return ___write___().seekp_beg_(offset); }
+	inline any_a<> seekp_beg_(number_data_int64_a<> const& offset);
 
-	inline void seekp_beg(int64_t offset )
-	{ assert(any_a<>::___handle___); ___write___().seekp_beg(offset); }
+	inline void seekp_beg(int64_t offset );
 
 	inline any_a<> seekp_end__(range_a<> const& ___arguments___);
 
-	inline any_a<> seekp_end_(number_data_int64_a<> const& offset)
-	{ assert(any_a<>::___handle___); return ___write___().seekp_end_(offset); }
+	inline any_a<> seekp_end_(number_data_int64_a<> const& offset);
 
-	inline void seekp_end(int64_t offset )
-	{ assert(any_a<>::___handle___); ___write___().seekp_end(offset); }
+	inline void seekp_end(int64_t offset );
 
 	inline any_a<> seekp_cur__(range_a<> const& ___arguments___);
 
-	inline any_a<> seekp_cur_(number_data_int64_a<> const& offset)
-	{ assert(any_a<>::___handle___); return ___write___().seekp_cur_(offset); }
+	inline any_a<> seekp_cur_(number_data_int64_a<> const& offset);
 
-	inline void seekp_cur(int64_t offset )
-	{ assert(any_a<>::___handle___); ___write___().seekp_cur(offset); }
+	inline void seekp_cur(int64_t offset );
 
 	inline any_a<> flush__(range_a<> const& ___arguments___);
 
-	inline any_a<> flush_()
-	{ assert(any_a<>::___handle___); return ___write___().flush_(); }
+	inline any_a<> flush_();
 
-	inline void flush()
-	{ assert(any_a<>::___handle___); ___write___().flush(); }
+	inline void flush();
 
 	inline any_a<> good__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> good_() const
-	{ assert(any_a<>::___handle___); return ___read___().good_(); }
+	inline any_a<> good_() const;
 
-	inline bool good() const
-	{ assert(any_a<>::___handle___); return ___read___().good(); }
+	inline bool good() const;
 
 	inline any_a<> eof__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> eof_() const
-	{ assert(any_a<>::___handle___); return ___read___().eof_(); }
+	inline any_a<> eof_() const;
 
-	inline bool eof() const
-	{ assert(any_a<>::___handle___); return ___read___().eof(); }
+	inline bool eof() const;
 
 	inline any_a<> fail__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> fail_() const
-	{ assert(any_a<>::___handle___); return ___read___().fail_(); }
+	inline any_a<> fail_() const;
 
-	inline bool fail() const
-	{ assert(any_a<>::___handle___); return ___read___().fail(); }
+	inline bool fail() const;
 
 	inline any_a<> bad__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> bad_() const
-	{ assert(any_a<>::___handle___); return ___read___().bad_(); }
+	inline any_a<> bad_() const;
 
-	inline bool bad() const
-	{ assert(any_a<>::___handle___); return ___read___().bad(); }
+	inline bool bad() const;
 
 	inline any_a<> set_good__(range_a<> const& ___arguments___);
 
-	inline any_a<> set_good_(any_a<> const& value)
-	{ assert(any_a<>::___handle___); return ___write___().set_good_(value); }
+	inline any_a<> set_good_(any_a<> const& value);
 
-	inline void set_good(bool value )
-	{ assert(any_a<>::___handle___); ___write___().set_good(value); }
+	inline void set_good(bool value );
 
 	inline any_a<> set_eof__(range_a<> const& ___arguments___);
 
-	inline any_a<> set_eof_(any_a<> const& value)
-	{ assert(any_a<>::___handle___); return ___write___().set_eof_(value); }
+	inline any_a<> set_eof_(any_a<> const& value);
 
-	inline void set_eof(bool value )
-	{ assert(any_a<>::___handle___); ___write___().set_eof(value); }
+	inline void set_eof(bool value );
 
 	inline any_a<> set_fail__(range_a<> const& ___arguments___);
 
-	inline any_a<> set_fail_(any_a<> const& value)
-	{ assert(any_a<>::___handle___); return ___write___().set_fail_(value); }
+	inline any_a<> set_fail_(any_a<> const& value);
 
-	inline void set_fail(bool value )
-	{ assert(any_a<>::___handle___); ___write___().set_fail(value); }
+	inline void set_fail(bool value );
 
 	inline any_a<> set_bad__(range_a<> const& ___arguments___);
 
-	inline any_a<> set_bad_(any_a<> const& value)
-	{ assert(any_a<>::___handle___); return ___write___().set_bad_(value); }
+	inline any_a<> set_bad_(any_a<> const& value);
 
-	inline void set_bad(bool value )
-	{ assert(any_a<>::___handle___); ___write___().set_bad(value); }
+	inline void set_bad(bool value );
 
 	inline any_a<> filename__(range_a<> const& ___arguments___) const;
 
-	inline lake_int8_a<> filename_() const
-	{ assert(any_a<>::___handle___); return ___read___().filename_(); }
+	inline lake_int8_a<> filename_() const;
 
-	inline std :: string filename() const
-	{ assert(any_a<>::___handle___); return ___read___().filename(); }
+	inline std :: string filename() const;
 
 protected:
 	struct ___river_a_handle_base___ : range_a<>::___range_a_handle_base___
@@ -341,191 +279,129 @@ protected:
 			: range_a<>::template ___range_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline forward_extractor_data_a < any_a < > , std :: istreambuf_iterator < char > > extract_begin() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
+		virtual inline forward_extractor_data_a < any_a < > , std :: istreambuf_iterator < char > > extract_begin() const final;
 
-		virtual inline forward_extractor_data_a < any_a < > , std :: istreambuf_iterator < char > > extract_end() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
+		virtual inline forward_extractor_data_a < any_a < > , std :: istreambuf_iterator < char > > extract_end() const final;
 
-		virtual inline lake_int8_a<> to_lake_() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake_(); }
+		virtual inline lake_int8_a<> to_lake_() final;
 
-		virtual inline std :: string to_string() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
+		virtual inline std :: string to_string() final;
 
-		virtual inline number_data_int8_a<> get_char_() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.get_char_(); }
+		virtual inline number_data_int8_a<> get_char_() final;
 
-		virtual inline int8_t get_char() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.get_char(); }
+		virtual inline int8_t get_char() final;
 
-		virtual inline number_data_int8_a<> peek_char_() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.peek_char_(); }
+		virtual inline number_data_int8_a<> peek_char_() final;
 
-		virtual inline int8_t peek_char() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.peek_char(); }
+		virtual inline int8_t peek_char() final;
 
-		virtual inline any_a<> unget_char_() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unget_char_(); }
+		virtual inline any_a<> unget_char_() final;
 
-		virtual inline void unget_char() final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unget_char(); }
+		virtual inline void unget_char() final;
 
-		virtual inline any_a<> put_back_char_(number_data_int8_a<> const& int_8) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.put_back_char_(int_8); }
+		virtual inline any_a<> put_back_char_(number_data_int8_a<> const& int_8) final;
 
-		virtual inline void put_back_char(int8_t int_8 ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.put_back_char(int_8); }
+		virtual inline void put_back_char(int8_t int_8 ) final;
 
-		virtual inline lake_int8_a<> get_line_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.get_line_(count, delimiter); }
+		virtual inline lake_int8_a<> get_line_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter) final;
 
-		virtual inline std :: vector < int8_t > get_line(int64_t count , int8_t delimiter ) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.get_line(count, delimiter); }
+		virtual inline std :: vector < int8_t > get_line(int64_t count , int8_t delimiter ) final;
 
-		virtual inline any_a<> ignore_(number_data_int64_a<> const& count) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.ignore_(count); }
+		virtual inline any_a<> ignore_(number_data_int64_a<> const& count) final;
 
-		virtual inline void ignore(int64_t count ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.ignore(count); }
+		virtual inline void ignore(int64_t count ) final;
 
-		virtual inline lake_int8_a<> read_(number_data_int64_a<> const& count) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.read_(count); }
+		virtual inline lake_int8_a<> read_(number_data_int64_a<> const& count) final;
 
-		virtual inline std :: vector < int8_t > read(int64_t count ) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.read(count); }
+		virtual inline std :: vector < int8_t > read(int64_t count ) final;
 
-		virtual inline std :: string read_string(int64_t count ) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.read_string(count); }
+		virtual inline std :: string read_string(int64_t count ) final;
 
-		virtual inline number_data_int64_a<> tellg_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.tellg_(); }
+		virtual inline number_data_int64_a<> tellg_() const final;
 
-		virtual inline int64_t tellg() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.tellg(); }
+		virtual inline int64_t tellg() const final;
 
-		virtual inline any_a<> seekg_beg_(number_data_int64_a<> const& offset) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekg_beg_(offset); }
+		virtual inline any_a<> seekg_beg_(number_data_int64_a<> const& offset) final;
 
-		virtual inline void seekg_beg(int64_t offset ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekg_beg(offset); }
+		virtual inline void seekg_beg(int64_t offset ) final;
 
-		virtual inline any_a<> seekg_end_(number_data_int64_a<> const& offset) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekg_end_(offset); }
+		virtual inline any_a<> seekg_end_(number_data_int64_a<> const& offset) final;
 
-		virtual inline void seekg_end(int64_t offset ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekg_end(offset); }
+		virtual inline void seekg_end(int64_t offset ) final;
 
-		virtual inline any_a<> seekg_cur_(number_data_int64_a<> const& offset) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekg_cur_(offset); }
+		virtual inline any_a<> seekg_cur_(number_data_int64_a<> const& offset) final;
 
-		virtual inline void seekg_cur(int64_t offset ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekg_cur(offset); }
+		virtual inline void seekg_cur(int64_t offset ) final;
 
-		virtual inline any_a<> sync_() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.sync_(); }
+		virtual inline any_a<> sync_() final;
 
-		virtual inline bool sync() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.sync(); }
+		virtual inline bool sync() final;
 
-		virtual inline any_a<> put_char_(number_data_int8_a<> const& int_8) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.put_char_(int_8); }
+		virtual inline any_a<> put_char_(number_data_int8_a<> const& int_8) final;
 
-		virtual inline void put_char(int8_t int_8 ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.put_char(int_8); }
+		virtual inline void put_char(int8_t int_8 ) final;
 
-		virtual inline any_a<> write_(lake_int8_a<> const& lake) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.write_(lake); }
+		virtual inline any_a<> write_(lake_int8_a<> const& lake) final;
 
-		virtual inline void write(std :: vector < int8_t > const & lake ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.write(lake); }
+		virtual inline void write(std :: vector < int8_t > const & lake ) final;
 
-		virtual inline void write_string(std :: string const & str ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.write_string(str); }
+		virtual inline void write_string(std :: string const & str ) final;
 
-		virtual inline number_data_int64_a<> tellp_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.tellp_(); }
+		virtual inline number_data_int64_a<> tellp_() const final;
 
-		virtual inline int64_t tellp() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.tellp(); }
+		virtual inline int64_t tellp() const final;
 
-		virtual inline any_a<> seekp_beg_(number_data_int64_a<> const& offset) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekp_beg_(offset); }
+		virtual inline any_a<> seekp_beg_(number_data_int64_a<> const& offset) final;
 
-		virtual inline void seekp_beg(int64_t offset ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekp_beg(offset); }
+		virtual inline void seekp_beg(int64_t offset ) final;
 
-		virtual inline any_a<> seekp_end_(number_data_int64_a<> const& offset) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekp_end_(offset); }
+		virtual inline any_a<> seekp_end_(number_data_int64_a<> const& offset) final;
 
-		virtual inline void seekp_end(int64_t offset ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekp_end(offset); }
+		virtual inline void seekp_end(int64_t offset ) final;
 
-		virtual inline any_a<> seekp_cur_(number_data_int64_a<> const& offset) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekp_cur_(offset); }
+		virtual inline any_a<> seekp_cur_(number_data_int64_a<> const& offset) final;
 
-		virtual inline void seekp_cur(int64_t offset ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekp_cur(offset); }
+		virtual inline void seekp_cur(int64_t offset ) final;
 
-		virtual inline any_a<> flush_() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.flush_(); }
+		virtual inline any_a<> flush_() final;
 
-		virtual inline void flush() final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.flush(); }
+		virtual inline void flush() final;
 
-		virtual inline any_a<> good_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.good_(); }
+		virtual inline any_a<> good_() const final;
 
-		virtual inline bool good() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.good(); }
+		virtual inline bool good() const final;
 
-		virtual inline any_a<> eof_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.eof_(); }
+		virtual inline any_a<> eof_() const final;
 
-		virtual inline bool eof() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.eof(); }
+		virtual inline bool eof() const final;
 
-		virtual inline any_a<> fail_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.fail_(); }
+		virtual inline any_a<> fail_() const final;
 
-		virtual inline bool fail() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.fail(); }
+		virtual inline bool fail() const final;
 
-		virtual inline any_a<> bad_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.bad_(); }
+		virtual inline any_a<> bad_() const final;
 
-		virtual inline bool bad() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.bad(); }
+		virtual inline bool bad() const final;
 
-		virtual inline any_a<> set_good_(any_a<> const& value) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.set_good_(value); }
+		virtual inline any_a<> set_good_(any_a<> const& value) final;
 
-		virtual inline void set_good(bool value ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.set_good(value); }
+		virtual inline void set_good(bool value ) final;
 
-		virtual inline any_a<> set_eof_(any_a<> const& value) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.set_eof_(value); }
+		virtual inline any_a<> set_eof_(any_a<> const& value) final;
 
-		virtual inline void set_eof(bool value ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.set_eof(value); }
+		virtual inline void set_eof(bool value ) final;
 
-		virtual inline any_a<> set_fail_(any_a<> const& value) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.set_fail_(value); }
+		virtual inline any_a<> set_fail_(any_a<> const& value) final;
 
-		virtual inline void set_fail(bool value ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.set_fail(value); }
+		virtual inline void set_fail(bool value ) final;
 
-		virtual inline any_a<> set_bad_(any_a<> const& value) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.set_bad_(value); }
+		virtual inline any_a<> set_bad_(any_a<> const& value) final;
 
-		virtual inline void set_bad(bool value ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.set_bad(value); }
+		virtual inline void set_bad(bool value ) final;
 
-		virtual inline lake_int8_a<> filename_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.filename_(); }
+		virtual inline lake_int8_a<> filename_() const final;
 
-		virtual inline std :: string filename() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.filename(); }
+		virtual inline std :: string filename() const final;
 
 	};
 

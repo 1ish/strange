@@ -2,6 +2,78 @@
 namespace strange
 {
 
+template <typename _primitive>
+inline bool number_data_a<_primitive>::operator==(number_data_a < _primitive > const & number ) const
+{ assert(any_a<>::___handle___); return ___read___().operator==(number); }
+
+template <typename _primitive>
+template <typename ___TTT___, typename ___DHB___>
+inline bool number_data_a<_primitive>::___number_data_a_handle___<___TTT___, ___DHB___>::operator==(number_data_a < _primitive > const & number ) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(number); }
+
+template <typename _primitive>
+inline bool number_data_a<_primitive>::operator!=(number_data_a < _primitive > const & number ) const
+{ assert(any_a<>::___handle___); return ___read___().operator!=(number); }
+
+template <typename _primitive>
+template <typename ___TTT___, typename ___DHB___>
+inline bool number_data_a<_primitive>::___number_data_a_handle___<___TTT___, ___DHB___>::operator!=(number_data_a < _primitive > const & number ) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(number); }
+
+template <typename _primitive>
+inline bool number_data_a<_primitive>::operator<(number_data_a < _primitive > const & number ) const
+{ assert(any_a<>::___handle___); return ___read___().operator<(number); }
+
+template <typename _primitive>
+template <typename ___TTT___, typename ___DHB___>
+inline bool number_data_a<_primitive>::___number_data_a_handle___<___TTT___, ___DHB___>::operator<(number_data_a < _primitive > const & number ) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(number); }
+
+template <typename _primitive>
+inline bool number_data_a<_primitive>::operator>(number_data_a < _primitive > const & number ) const
+{ assert(any_a<>::___handle___); return ___read___().operator>(number); }
+
+template <typename _primitive>
+template <typename ___TTT___, typename ___DHB___>
+inline bool number_data_a<_primitive>::___number_data_a_handle___<___TTT___, ___DHB___>::operator>(number_data_a < _primitive > const & number ) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(number); }
+
+template <typename _primitive>
+inline bool number_data_a<_primitive>::operator<=(number_data_a < _primitive > const & number ) const
+{ assert(any_a<>::___handle___); return ___read___().operator<=(number); }
+
+template <typename _primitive>
+template <typename ___TTT___, typename ___DHB___>
+inline bool number_data_a<_primitive>::___number_data_a_handle___<___TTT___, ___DHB___>::operator<=(number_data_a < _primitive > const & number ) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(number); }
+
+template <typename _primitive>
+inline bool number_data_a<_primitive>::operator>=(number_data_a < _primitive > const & number ) const
+{ assert(any_a<>::___handle___); return ___read___().operator>=(number); }
+
+template <typename _primitive>
+template <typename ___TTT___, typename ___DHB___>
+inline bool number_data_a<_primitive>::___number_data_a_handle___<___TTT___, ___DHB___>::operator>=(number_data_a < _primitive > const & number ) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(number); }
+
+template <typename _primitive>
+inline _primitive const & number_data_a<_primitive>::extract_primitive() const
+{ assert(any_a<>::___handle___); return ___read___().extract_primitive(); }
+
+template <typename _primitive>
+template <typename ___TTT___, typename ___DHB___>
+inline _primitive const & number_data_a<_primitive>::___number_data_a_handle___<___TTT___, ___DHB___>::extract_primitive() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_primitive(); }
+
+template <typename _primitive>
+inline _primitive & number_data_a<_primitive>::mutate_primitive()
+{ assert(any_a<>::___handle___); return ___write___().mutate_primitive(); }
+
+template <typename _primitive>
+template <typename ___TTT___, typename ___DHB___>
+inline _primitive & number_data_a<_primitive>::___number_data_a_handle___<___TTT___, ___DHB___>::mutate_primitive()
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_primitive(); }
+
 class ___number_data_a_share___
 {
 	static bool const share;

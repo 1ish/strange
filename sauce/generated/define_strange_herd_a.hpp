@@ -12,26 +12,19 @@ template <typename _1>
 class herd_a : public collection_a<>
 {
 public:
-	inline bool has_string(std :: string const & s ) const
-	{ assert(any_a<>::___handle___); return ___read___().has_string(s); }
+	inline bool has_string(std :: string const & s ) const;
 
-	inline any_a < > at_string(std :: string const & s ) const
-	{ assert(any_a<>::___handle___); return ___read___().at_string(s); }
+	inline any_a < > at_string(std :: string const & s ) const;
 
-	inline void update_thing(any_a < > const & thing )
-	{ assert(any_a<>::___handle___); ___write___().update_thing(thing); }
+	inline void update_thing(any_a < > const & thing );
 
-	inline void update_string(std :: string const & s )
-	{ assert(any_a<>::___handle___); ___write___().update_string(s); }
+	inline void update_string(std :: string const & s );
 
-	inline bool insert_thing(any_a < > const & thing )
-	{ assert(any_a<>::___handle___); return ___write___().insert_thing(thing); }
+	inline bool insert_thing(any_a < > const & thing );
 
-	inline bool insert_string(std :: string const & s )
-	{ assert(any_a<>::___handle___); return ___write___().insert_string(s); }
+	inline bool insert_string(std :: string const & s );
 
-	inline bool erase_string(std :: string const & s )
-	{ assert(any_a<>::___handle___); return ___write___().erase_string(s); }
+	inline bool erase_string(std :: string const & s );
 
 protected:
 	struct ___herd_a_handle_base___ : collection_a<>::___collection_a_handle_base___
@@ -63,26 +56,19 @@ protected:
 			: collection_a<>::template ___collection_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bool has_string(std :: string const & s ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.has_string(s); }
+		virtual inline bool has_string(std :: string const & s ) const final;
 
-		virtual inline any_a < > at_string(std :: string const & s ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.at_string(s); }
+		virtual inline any_a < > at_string(std :: string const & s ) const final;
 
-		virtual inline void update_thing(any_a < > const & thing ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.update_thing(thing); }
+		virtual inline void update_thing(any_a < > const & thing ) final;
 
-		virtual inline void update_string(std :: string const & s ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.update_string(s); }
+		virtual inline void update_string(std :: string const & s ) final;
 
-		virtual inline bool insert_thing(any_a < > const & thing ) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.insert_thing(thing); }
+		virtual inline bool insert_thing(any_a < > const & thing ) final;
 
-		virtual inline bool insert_string(std :: string const & s ) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.insert_string(s); }
+		virtual inline bool insert_string(std :: string const & s ) final;
 
-		virtual inline bool erase_string(std :: string const & s ) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.erase_string(s); }
+		virtual inline bool erase_string(std :: string const & s ) final;
 
 	};
 

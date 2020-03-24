@@ -14,6 +14,15 @@ inline any_a<> parser_a<_1>::parse__(range_a<> const& ___arguments___)
 	return parse_(tokenizer);
 }
 
+template <typename _1>
+inline expression_a<> parser_a<_1>::parse_(range_a<> const& tokenizer)
+{ assert(any_a<>::___handle___); return ___write___().parse_(tokenizer); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline expression_a<> parser_a<_1>::___parser_a_handle___<___TTT___, ___DHB___>::parse_(range_a<> const& tokenizer)
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.parse_(tokenizer); }
+
 class ___parser_a_share___
 {
 	static bool const share;

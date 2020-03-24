@@ -14,50 +14,39 @@ class cat_a : public symbol_a<>
 public:
 	inline any_a<> symbolic__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> symbolic_() const
-	{ assert(any_a<>::___handle___); return ___read___().symbolic_(); }
+	inline any_a<> symbolic_() const;
 
-	inline bool symbolic() const
-	{ assert(any_a<>::___handle___); return ___read___().symbolic(); }
+	inline bool symbolic() const;
 
 	inline any_a<> order__(range_a<> const& ___arguments___) const;
 
-	inline number_data_int64_a<> order_() const
-	{ assert(any_a<>::___handle___); return ___read___().order_(); }
+	inline number_data_int64_a<> order_() const;
 
-	inline int64_t order() const
-	{ assert(any_a<>::___handle___); return ___read___().order(); }
+	inline int64_t order() const;
 
 	inline any_a<> name__(range_a<> const& ___arguments___) const;
 
-	inline symbol_a<> name_() const
-	{ assert(any_a<>::___handle___); return ___read___().name_(); }
+	inline symbol_a<> name_() const;
 
-	inline std :: string name() const
-	{ assert(any_a<>::___handle___); return ___read___().name(); }
+	inline std :: string name() const;
 
 	inline any_a<> dimensions__(range_a<> const& ___arguments___) const;
 
-	inline flock_a<> dimensions_() const
-	{ assert(any_a<>::___handle___); return ___read___().dimensions_(); }
+	inline flock_a<> dimensions_() const;
 
 	inline any_a<> parameters__(range_a<> const& ___arguments___) const;
 
-	inline flock_a<> parameters_() const
-	{ assert(any_a<>::___handle___); return ___read___().parameters_(); }
+	inline flock_a<> parameters_() const;
 
 	inline any_a<> result__(range_a<> const& ___arguments___) const;
 
-	inline cat_a<> result_() const
-	{ assert(any_a<>::___handle___); return ___read___().result_(); }
+	inline cat_a<> result_() const;
 
 	inline any_a<> code__(range_a<> const& ___arguments___) const;
 
-	inline lake_int8_a<> code_() const
-	{ assert(any_a<>::___handle___); return ___read___().code_(); }
+	inline lake_int8_a<> code_() const;
 
-	inline std :: string code() const
-	{ assert(any_a<>::___handle___); return ___read___().code(); }
+	inline std :: string code() const;
 
 protected:
 	struct ___cat_a_handle_base___ : symbol_a<>::___symbol_a_handle_base___
@@ -93,38 +82,27 @@ protected:
 			: symbol_a<>::template ___symbol_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> symbolic_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.symbolic_(); }
+		virtual inline any_a<> symbolic_() const final;
 
-		virtual inline bool symbolic() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.symbolic(); }
+		virtual inline bool symbolic() const final;
 
-		virtual inline number_data_int64_a<> order_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.order_(); }
+		virtual inline number_data_int64_a<> order_() const final;
 
-		virtual inline int64_t order() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.order(); }
+		virtual inline int64_t order() const final;
 
-		virtual inline symbol_a<> name_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.name_(); }
+		virtual inline symbol_a<> name_() const final;
 
-		virtual inline std :: string name() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.name(); }
+		virtual inline std :: string name() const final;
 
-		virtual inline flock_a<> dimensions_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.dimensions_(); }
+		virtual inline flock_a<> dimensions_() const final;
 
-		virtual inline flock_a<> parameters_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.parameters_(); }
+		virtual inline flock_a<> parameters_() const final;
 
-		virtual inline cat_a<> result_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.result_(); }
+		virtual inline cat_a<> result_() const final;
 
-		virtual inline lake_int8_a<> code_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.code_(); }
+		virtual inline lake_int8_a<> code_() const final;
 
-		virtual inline std :: string code() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.code(); }
+		virtual inline std :: string code() const final;
 
 	};
 

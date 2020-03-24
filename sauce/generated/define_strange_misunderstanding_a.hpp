@@ -14,19 +14,15 @@ class misunderstanding_a : public any_a<>
 public:
 	inline any_a<> to_lake__(range_a<> const& ___arguments___) const;
 
-	inline _lake_int8 to_lake_() const
-	{ assert(any_a<>::___handle___); return ___read___().to_lake_(); }
+	inline _lake_int8 to_lake_() const;
 
-	inline std :: string to_string() const
-	{ assert(any_a<>::___handle___); return ___read___().to_string(); }
+	inline std :: string to_string() const;
 
 	inline any_a<> add__(range_a<> const& ___arguments___) const;
 
-	inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const
-	{ assert(any_a<>::___handle___); return ___read___().add_(misunderstanding); }
+	inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const;
 
-	inline misunderstanding_a<> operator+(misunderstanding_a<> const& misunderstanding) const
-	{ assert(any_a<>::___handle___); return ___read___().add_(misunderstanding); }
+	inline misunderstanding_a<> operator+(misunderstanding_a<> const& misunderstanding) const;
 
 protected:
 	struct ___misunderstanding_a_handle_base___ : any_a<>::___any_a_handle_base___
@@ -54,14 +50,11 @@ protected:
 			: any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline _lake_int8 to_lake_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake_(); }
+		virtual inline _lake_int8 to_lake_() const final;
 
-		virtual inline std :: string to_string() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
+		virtual inline std :: string to_string() const final;
 
-		virtual inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(misunderstanding); }
+		virtual inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const final;
 
 	};
 

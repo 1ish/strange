@@ -9,10 +9,46 @@ inline any_a<> token_a<_1>::filename__(range_a<> const& ___arguments___) const
 }
 
 template <typename _1>
+inline symbol_a<> token_a<_1>::filename_() const
+{ assert(any_a<>::___handle___); return ___read___().filename_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline symbol_a<> token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::filename_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.filename_(); }
+
+template <typename _1>
+inline std :: string token_a<_1>::filename() const
+{ assert(any_a<>::___handle___); return ___read___().filename(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline std :: string token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::filename() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.filename(); }
+
+template <typename _1>
 inline any_a<> token_a<_1>::line__(range_a<> const& ___arguments___) const
 {
 	return line_();
 }
+
+template <typename _1>
+inline number_data_int64_a<> token_a<_1>::line_() const
+{ assert(any_a<>::___handle___); return ___read___().line_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline number_data_int64_a<> token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::line_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.line_(); }
+
+template <typename _1>
+inline int64_t token_a<_1>::line() const
+{ assert(any_a<>::___handle___); return ___read___().line(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline int64_t token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::line() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.line(); }
 
 template <typename _1>
 inline any_a<> token_a<_1>::position__(range_a<> const& ___arguments___) const
@@ -21,10 +57,46 @@ inline any_a<> token_a<_1>::position__(range_a<> const& ___arguments___) const
 }
 
 template <typename _1>
+inline number_data_int64_a<> token_a<_1>::position_() const
+{ assert(any_a<>::___handle___); return ___read___().position_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline number_data_int64_a<> token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::position_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.position_(); }
+
+template <typename _1>
+inline int64_t token_a<_1>::position() const
+{ assert(any_a<>::___handle___); return ___read___().position(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline int64_t token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::position() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.position(); }
+
+template <typename _1>
 inline any_a<> token_a<_1>::tag__(range_a<> const& ___arguments___) const
 {
 	return tag_();
 }
+
+template <typename _1>
+inline symbol_a<> token_a<_1>::tag_() const
+{ assert(any_a<>::___handle___); return ___read___().tag_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline symbol_a<> token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::tag_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.tag_(); }
+
+template <typename _1>
+inline std :: string token_a<_1>::tag() const
+{ assert(any_a<>::___handle___); return ___read___().tag(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline std :: string token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::tag() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.tag(); }
 
 template <typename _1>
 inline any_a<> token_a<_1>::symbol__(range_a<> const& ___arguments___) const
@@ -33,10 +105,46 @@ inline any_a<> token_a<_1>::symbol__(range_a<> const& ___arguments___) const
 }
 
 template <typename _1>
+inline symbol_a<> token_a<_1>::symbol_() const
+{ assert(any_a<>::___handle___); return ___read___().symbol_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline symbol_a<> token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::symbol_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.symbol_(); }
+
+template <typename _1>
+inline std :: string token_a<_1>::symbol() const
+{ assert(any_a<>::___handle___); return ___read___().symbol(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline std :: string token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::symbol() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.symbol(); }
+
+template <typename _1>
 inline any_a<> token_a<_1>::literal__(range_a<> const& ___arguments___) const
 {
 	return literal_();
 }
+
+template <typename _1>
+inline any_a<> token_a<_1>::literal_() const
+{ assert(any_a<>::___handle___); return ___read___().literal_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::literal_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.literal_(); }
+
+template <typename _1>
+inline bool token_a<_1>::literal() const
+{ assert(any_a<>::___handle___); return ___read___().literal(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::literal() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.literal(); }
 
 template <typename _1>
 inline any_a<> token_a<_1>::precedence__(range_a<> const& ___arguments___) const
@@ -45,10 +153,46 @@ inline any_a<> token_a<_1>::precedence__(range_a<> const& ___arguments___) const
 }
 
 template <typename _1>
+inline number_data_int64_a<> token_a<_1>::precedence_() const
+{ assert(any_a<>::___handle___); return ___read___().precedence_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline number_data_int64_a<> token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::precedence_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.precedence_(); }
+
+template <typename _1>
+inline int64_t token_a<_1>::precedence() const
+{ assert(any_a<>::___handle___); return ___read___().precedence(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline int64_t token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::precedence() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.precedence(); }
+
+template <typename _1>
 inline any_a<> token_a<_1>::report__(range_a<> const& ___arguments___) const
 {
 	return report_();
 }
+
+template <typename _1>
+inline misunderstanding_a<> token_a<_1>::report_() const
+{ assert(any_a<>::___handle___); return ___read___().report_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline misunderstanding_a<> token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::report_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.report_(); }
+
+template <typename _1>
+inline std :: string token_a<_1>::report() const
+{ assert(any_a<>::___handle___); return ___read___().report(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline std :: string token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::report() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.report(); }
 
 class ___token_a_share___
 {

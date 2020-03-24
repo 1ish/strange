@@ -12,41 +12,29 @@ template <typename _1>
 class ordered_shoal_a : public shoal_a<>
 {
 public:
-	inline bool operator==(ordered_shoal_a < > const & shoal ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator==(shoal); }
+	inline bool operator==(ordered_shoal_a < > const & shoal ) const;
 
-	inline bool operator!=(ordered_shoal_a < > const & shoal ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator!=(shoal); }
+	inline bool operator!=(ordered_shoal_a < > const & shoal ) const;
 
-	inline bool operator<(ordered_shoal_a < > const & shoal ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator<(shoal); }
+	inline bool operator<(ordered_shoal_a < > const & shoal ) const;
 
-	inline bool operator>(ordered_shoal_a < > const & shoal ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator>(shoal); }
+	inline bool operator>(ordered_shoal_a < > const & shoal ) const;
 
-	inline bool operator<=(ordered_shoal_a < > const & shoal ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator<=(shoal); }
+	inline bool operator<=(ordered_shoal_a < > const & shoal ) const;
 
-	inline bool operator>=(ordered_shoal_a < > const & shoal ) const
-	{ assert(any_a<>::___handle___); return ___read___().operator>=(shoal); }
+	inline bool operator>=(ordered_shoal_a < > const & shoal ) const;
 
-	inline bidirectional_extractor_data_a < any_a < > , typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_begin() const
-	{ assert(any_a<>::___handle___); return ___read___().extract_begin(); }
+	inline bidirectional_extractor_data_a < any_a < > , typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_begin() const;
 
-	inline bidirectional_extractor_data_a < any_a < > , typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_end() const
-	{ assert(any_a<>::___handle___); return ___read___().extract_end(); }
+	inline bidirectional_extractor_data_a < any_a < > , typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_end() const;
 
-	inline bidirectional_mutator_data_a < any_a < > , typename std :: map < any_a < > , any_a < > > :: iterator > mutate_begin()
-	{ assert(any_a<>::___handle___); return ___write___().mutate_begin(); }
+	inline bidirectional_mutator_data_a < any_a < > , typename std :: map < any_a < > , any_a < > > :: iterator > mutate_begin();
 
-	inline bidirectional_mutator_data_a < any_a < > , typename std :: map < any_a < > , any_a < > > :: iterator > mutate_end()
-	{ assert(any_a<>::___handle___); return ___write___().mutate_end(); }
+	inline bidirectional_mutator_data_a < any_a < > , typename std :: map < any_a < > , any_a < > > :: iterator > mutate_end();
 
-	inline std :: map < any_a < > , any_a < > > const & extract_map() const
-	{ assert(any_a<>::___handle___); return ___read___().extract_map(); }
+	inline std :: map < any_a < > , any_a < > > const & extract_map() const;
 
-	inline std :: map < any_a < > , any_a < > > & mutate_map()
-	{ assert(any_a<>::___handle___); return ___write___().mutate_map(); }
+	inline std :: map < any_a < > , any_a < > > & mutate_map();
 
 protected:
 	struct ___ordered_shoal_a_handle_base___ : shoal_a<>::___shoal_a_handle_base___
@@ -83,41 +71,29 @@ protected:
 			: shoal_a<>::template ___shoal_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bool operator==(ordered_shoal_a < > const & shoal ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(shoal); }
+		virtual inline bool operator==(ordered_shoal_a < > const & shoal ) const final;
 
-		virtual inline bool operator!=(ordered_shoal_a < > const & shoal ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(shoal); }
+		virtual inline bool operator!=(ordered_shoal_a < > const & shoal ) const final;
 
-		virtual inline bool operator<(ordered_shoal_a < > const & shoal ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(shoal); }
+		virtual inline bool operator<(ordered_shoal_a < > const & shoal ) const final;
 
-		virtual inline bool operator>(ordered_shoal_a < > const & shoal ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(shoal); }
+		virtual inline bool operator>(ordered_shoal_a < > const & shoal ) const final;
 
-		virtual inline bool operator<=(ordered_shoal_a < > const & shoal ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(shoal); }
+		virtual inline bool operator<=(ordered_shoal_a < > const & shoal ) const final;
 
-		virtual inline bool operator>=(ordered_shoal_a < > const & shoal ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(shoal); }
+		virtual inline bool operator>=(ordered_shoal_a < > const & shoal ) const final;
 
-		virtual inline bidirectional_extractor_data_a < any_a < > , typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_begin() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
+		virtual inline bidirectional_extractor_data_a < any_a < > , typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_begin() const final;
 
-		virtual inline bidirectional_extractor_data_a < any_a < > , typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_end() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
+		virtual inline bidirectional_extractor_data_a < any_a < > , typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_end() const final;
 
-		virtual inline bidirectional_mutator_data_a < any_a < > , typename std :: map < any_a < > , any_a < > > :: iterator > mutate_begin() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin(); }
+		virtual inline bidirectional_mutator_data_a < any_a < > , typename std :: map < any_a < > , any_a < > > :: iterator > mutate_begin() final;
 
-		virtual inline bidirectional_mutator_data_a < any_a < > , typename std :: map < any_a < > , any_a < > > :: iterator > mutate_end() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end(); }
+		virtual inline bidirectional_mutator_data_a < any_a < > , typename std :: map < any_a < > , any_a < > > :: iterator > mutate_end() final;
 
-		virtual inline std :: map < any_a < > , any_a < > > const & extract_map() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_map(); }
+		virtual inline std :: map < any_a < > , any_a < > > const & extract_map() const final;
 
-		virtual inline std :: map < any_a < > , any_a < > > & mutate_map() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_map(); }
+		virtual inline std :: map < any_a < > , any_a < > > & mutate_map() final;
 
 	};
 

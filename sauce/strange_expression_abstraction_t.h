@@ -728,7 +728,7 @@ protected:
 		std::string parameters;
 		std::string arguments;
 		std::string constness;
-		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
+		_parse_member_definition_(version, expression, extraction, true, result, parameters, arguments, constness);
 
 		river.write_string(
 			"\tinline any_a<> " + name + "_(range_a<> const& arguments)" + constness + "\n"
@@ -777,7 +777,7 @@ protected:
 		std::string arguments;
 		std::string constness;
 		std::string dynamic;
-		_parse_native_member_definition_(class_name, name, value, result, parameters, arguments, constness, dynamic);
+		_parse_native_member_definition_(class_name, name, value, true, result, parameters, arguments, constness, dynamic);
 		river.write_string(
 			"\tinline " + result);
 		if (result == class_name.substr(0, class_name.length() - 1) + "a")
@@ -801,7 +801,7 @@ protected:
 		std::string parameters;
 		std::string arguments;
 		std::string constness;
-		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
+		_parse_member_definition_(version, expression, extraction, true, result, parameters, arguments, constness);
 
 		river.write_string(
 			"\tinline any_a<> " + name + "_(range_a<> const& ___arguments___)" + constness + ";\n\n");			
@@ -809,302 +809,146 @@ protected:
 		if (name == "increment_")
 		{
 			river.write_string(
-				"\tinline " + class_name + " " + name + parameters + constness + "\n"
-				"\t{\n"
-				"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
-				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
-				"\t\treturn *this;\n"
-				"\t}\n\n"
+				"\tinline " + class_name + " " + name + parameters + constness + ";\n\n"
 
-				"\tinline " + class_name + "& operator++" + parameters + constness + "\n"
-				"\t{\n"
-				"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
-				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
-				"\t\treturn *this;\n"
-				"\t}\n\n"
+				"\tinline " + class_name + "& operator++" + parameters + constness + ";\n\n"
 
 				"#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS\n"
-				"\tinline " + class_name + " operator++(int)\n"
-				"\t{\n"
-				"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
-				"\t\t" + class_name + " result = *this;\n"
-				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
-				"\t\treturn result;\n"
-				"\t}\n"
+				"\tinline " + class_name + " operator++(int);\n"
 				"#endif\n\n");
 		}
 		else if (name == "decrement_")
 		{
 			river.write_string(
-				"\tinline " + class_name + " " + name + parameters + constness + "\n"
-				"\t{\n"
-				"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
-				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
-				"\t\treturn *this;\n"
-				"\t}\n\n"
+				"\tinline " + class_name + " " + name + parameters + constness + ";\n\n"
 
-				"\tinline " + class_name + "& operator--" + parameters + constness + "\n"
-				"\t{\n"
-				"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
-				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
-				"\t\treturn *this;\n"
-				"\t}\n\n"
+				"\tinline " + class_name + "& operator--" + parameters + constness + ";\n\n"
 
 				"#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS\n"
-				"\tinline " + class_name + " operator--(int)\n"
-				"\t{\n"
-				"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
-				"\t\t" + class_name + " result = *this;\n"
-				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
-				"\t\treturn result;\n"
-				"\t}\n"
+				"\tinline " + class_name + " operator--(int);\n"
 				"#endif\n\n");
 		}
 		else if (name == "self_assign_")
 		{
 			river.write_string(
-				"\tinline " + class_name + " " + name + parameters + constness + "\n"
-				"\t{\n"
-				"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
-				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
-				"\t\treturn *this;\n"
-				"\t}\n\n");
+				"\tinline " + class_name + " " + name + parameters + constness + ";\n\n");
 		}
 		else if (name == "self_add_")
 		{
 			river.write_string(
-				"\tinline " + class_name + " " + name + parameters + constness + "\n"
-				"\t{\n"
-				"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
-				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
-				"\t\treturn *this;\n"
-				"\t}\n\n"
+				"\tinline " + class_name + " " + name + parameters + constness + ";\n\n"
 
-				"\tinline " + class_name + "& operator+=" + parameters + constness + "\n"
-				"\t{\n"
-				"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
-				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
-				"\t\treturn *this;\n"
-				"\t}\n\n");
+				"\tinline " + class_name + "& operator+=" + parameters + constness + ";\n\n");
 		}
 		else if (name == "self_subtract_")
 		{
 			river.write_string(
-				"\tinline " + class_name + " " + name + parameters + constness + "\n"
-				"\t{\n"
-				"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
-				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
-				"\t\treturn *this;\n"
-				"\t}\n\n"
+				"\tinline " + class_name + " " + name + parameters + constness + ";\n\n"
 
-				"\tinline " + class_name + "& operator-=" + parameters + constness + "\n"
-				"\t{\n"
-				"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
-				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
-				"\t\treturn *this;\n"
-				"\t}\n\n");
+				"\tinline " + class_name + "& operator-=" + parameters + constness + ";\n\n");
 		}
 		else if (name == "self_multiply_")
 		{
 			river.write_string(
-				"\tinline " + class_name + " " + name + parameters + constness + "\n"
-				"\t{\n"
-				"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
-				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
-				"\t\treturn *this;\n"
-				"\t}\n\n"
+				"\tinline " + class_name + " " + name + parameters + constness + ";\n\n"
 
-				"\tinline " + class_name + "& operator*=" + parameters + constness + "\n"
-				"\t{\n"
-				"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
-				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
-				"\t\treturn *this;\n"
-				"\t}\n\n");
+				"\tinline " + class_name + "& operator*=" + parameters + constness + ";\n\n");
 		}
 		else if (name == "self_divide_")
 		{
 			river.write_string(
-				"\tinline " + class_name + " " + name + parameters + constness + "\n"
-				"\t{\n"
-				"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
-				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
-				"\t\treturn *this;\n"
-				"\t}\n\n"
+				"\tinline " + class_name + " " + name + parameters + constness + ";\n\n"
 
-				"\tinline " + class_name + "& operator/=" + parameters + constness + "\n"
-				"\t{\n"
-				"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
-				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
-				"\t\treturn *this;\n"
-				"\t}\n\n");
+				"\tinline " + class_name + "& operator/=" + parameters + constness + ";\n\n");
 		}
 		else if (name == "self_modulo_")
 		{
 			river.write_string(
-				"\tinline " + class_name + " " + name + parameters + constness + "\n"
-				"\t{\n"
-				"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
-				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
-				"\t\treturn *this;\n"
-				"\t}\n\n"
+				"\tinline " + class_name + " " + name + parameters + constness + ";\n\n"
 
-				"\tinline " + class_name + "& operator%=" + parameters + constness + "\n"
-				"\t{\n"
-				"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
-				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
-				"\t\treturn *this;\n"
-				"\t}\n\n");
+				"\tinline " + class_name + "& operator%=" + parameters + constness + ";\n\n");
 		}
 		else if (name == "add_")
 		{
 			river.write_string(
-				"\tinline " + result + " " + name + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "; }\n\n"
+				"\tinline " + result + " " + name + parameters + constness + ";\n\n"
 		
-				"\tinline " + result + " operator+" + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "; }\n\n");
+				"\tinline " + result + " operator+" + parameters + constness + ";\n\n");
 		}
 		else if (name == "subtract_")
 		{
 			river.write_string(
-				"\tinline " + result + " " + name + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "; }\n\n"
+				"\tinline " + result + " " + name + parameters + constness + ";\n\n"
 
-				"\tinline " + result + " operator-" + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "; }\n\n");
+				"\tinline " + result + " operator-" + parameters + constness + ";\n\n");
 		}
 		else if (name == "multiply_")
 		{
 			river.write_string(
-				"\tinline " + result + " " + name + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "; }\n\n"
+				"\tinline " + result + " " + name + parameters + constness + ";\n\n"
 		
-				"\tinline " + result + " operator*" + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "; }\n\n");
+				"\tinline " + result + " operator*" + parameters + constness + ";\n\n");
 		}
 		else if (name == "divide_")
 		{
 			river.write_string(
-				"\tinline " + result + " " + name + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "; }\n\n"
+				"\tinline " + result + " " + name + parameters + constness + ";\n\n"
 
-				"\tinline " + result + " operator/" + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "; }\n\n");
+				"\tinline " + result + " operator/" + parameters + constness + ";\n\n");
 		}
 		else if (name == "modulo_")
 		{
 			river.write_string(
-				"\tinline " + result + " " + name + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "; }\n\n"
+				"\tinline " + result + " " + name + parameters + constness + ";\n\n"
 
-				"\tinline " + result + " operator%" + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "; }\n\n");
+				"\tinline " + result + " operator%" + parameters + constness + ";\n\n");
 		}
 		else if (name == "same_")
 		{
 			river.write_string(
-				"\tinline " + result + " " + name + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return boole(" +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "); }\n\n"
+				"\tinline " + result + " " + name + parameters + constness + ";\n\n"
 			
-				"\tinline bool operator==" + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "; }\n\n");
+				"\tinline bool operator==" + parameters + constness + ";\n\n");
 		}
 		else if (name == "different_")
 		{
 			river.write_string(
-				"\tinline " + result + " " + name + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return boole(!" +
-				(extraction ? "___read___()." : "___write___().") +
-				"same_" + arguments + "); }\n\n"
+				"\tinline " + result + " " + name + parameters + constness + ";\n\n"
 			
-				"\tinline bool operator!=" + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return !" +
-				(extraction ? "___read___()." : "___write___().") +
-				"same_" + arguments + "; }\n\n");
+				"\tinline bool operator!=" + parameters + constness + ";\n\n");
 		}
 		else if (name == "less_than_")
 		{
 			river.write_string(
-				"\tinline " + result + " " + name + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return boole(" +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "); }\n\n"
+				"\tinline " + result + " " + name + parameters + constness + ";\n\n"
 			
-				"\tinline bool operator<" + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "; }\n\n");
+				"\tinline bool operator<" + parameters + constness + ";\n\n");
 		}
 		else if (name == "greater_than_")
 		{
 			river.write_string(
-				"\tinline " + result + " " + name + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return boole(" +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "); }\n\n"
+				"\tinline " + result + " " + name + parameters + constness + ";\n\n"
 			
-				"\tinline bool operator>" + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "; }\n\n");
+				"\tinline bool operator>" + parameters + constness + ";\n\n");
 		}
 		else if (name == "less_or_equal_")
 		{
 			river.write_string(
-				"\tinline " + result + " " + name + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return boole(" +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "); }\n\n"
+				"\tinline " + result + " " + name + parameters + constness + ";\n\n"
 			
-				"\tinline bool operator<=" + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "; }\n\n");
+				"\tinline bool operator<=" + parameters + constness + ";\n\n");
 		}
 		else if (name == "greater_or_equal_")
 		{
 			river.write_string(
-				"\tinline " + result + " " + name + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return boole(" +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "); }\n\n"
+				"\tinline " + result + " " + name + parameters + constness + ";\n\n"
 			
-				"\tinline bool operator>=" + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "; }\n\n");
+				"\tinline bool operator>=" + parameters + constness + ";\n\n");
 		}
 		else
 		{
 			river.write_string(
-				"\tinline " + result + " " + name + parameters + constness + "\n"
-				"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
-				(extraction ? "___read___()." : "___write___().") +
-				name + arguments + "; }\n\n");
+				"\tinline " + result + " " + name + parameters + constness + ";\n\n");
 		}
 	}
 
@@ -1115,13 +959,9 @@ protected:
 		std::string arguments;
 		std::string constness;
 		std::string dynamic;
-		_parse_native_member_definition_(class_name, name, value, result, parameters, arguments, constness, dynamic);
+		_parse_native_member_definition_(class_name, name, value, true, result, parameters, arguments, constness, dynamic);
 		river.write_string(
-			"\tinline " + result + " " + name + parameters + constness + "\n"
-			"\t{ assert(" + (root ? "" : "any_a<>::") + "___handle___); " +
-			(result == "void" ? "" : "return ") +
-			(constness.empty() ? "___write___()." : "___read___().") +
-			name + arguments + "; }\n\n");
+			"\tinline " + result + " " + name + parameters + constness + ";\n\n");
 	}
 
 	inline void _implement_class_nonvirtual_members_(bool root, std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
@@ -1152,10 +992,539 @@ protected:
 		}
 		river.write_string(
 			"}\n\n");
+
+		std::string result;
+		std::string parameters;
+		std::string arguments;
+		std::string constness;
+		_parse_member_definition_(version, expression, extraction, false, result, parameters, arguments, constness);
+
+		_declare_and_define_template_(version, 0, river, true, true);
+		if (name == "increment_")
+		{
+			river.write_string(
+				"inline " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string(" " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{\n"
+				"\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
+				"\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\treturn *this;\n"
+				"}\n\n");
+
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("& " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator++" + parameters + constness + "\n"
+				"{\n"
+				"\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
+				"\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\treturn *this;\n"
+				"}\n\n"
+
+				"#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS\n");
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string(" " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator++(int)\n"
+				"{\n"
+				"\tassert(" + std::string(root ? "" : "any_a<>::") + "___handle___);\n"
+				"\t" + class_name + " result = *this;\n"
+				"\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\treturn result;\n"
+				"}\n"
+				"#endif\n\n");
+		}
+		else if (name == "decrement_")
+		{
+			river.write_string(
+				"inline " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string(" " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{\n"
+				"\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
+				"\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\treturn *this;\n"
+				"}\n\n");
+
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("& " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator--" + parameters + constness + "\n"
+				"{\n"
+				"\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
+				"\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\treturn *this;\n"
+				"}\n\n"
+
+				"#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS\n");
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string(" " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator--(int)\n"
+				"{\n"
+				"\tassert(" + std::string(root ? "" : "any_a<>::") + "___handle___);\n"
+				"\t" + class_name + " result = *this;\n"
+				"\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\treturn result;\n"
+				"}\n"
+				"#endif\n\n");
+		}
+		else if (name == "self_assign_")
+		{
+			river.write_string(
+				"inline " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string(" " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{\n"
+				"\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
+				"\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\treturn *this;\n"
+				"}\n\n");
+		}
+		else if (name == "self_add_")
+		{
+			river.write_string(
+				"inline " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string(" " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{\n"
+				"\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
+				"\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\treturn *this;\n"
+				"}\n\n");
+
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("& " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator+=" + parameters + constness + "\n"
+				"{\n"
+				"\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
+				"\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\treturn *this;\n"
+				"}\n\n");
+		}
+		else if (name == "self_subtract_")
+		{
+			river.write_string(
+				"inline " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string(" " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{\n"
+				"\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
+				"\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\treturn *this;\n"
+				"}\n\n");
+
+				_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("& " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator-=" + parameters + constness + "\n"
+				"{\n"
+				"\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
+				"\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\treturn *this;\n"
+				"}\n\n");
+		}
+		else if (name == "self_multiply_")
+		{
+			river.write_string(
+				"inline " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string(" " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{\n"
+				"\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
+				"\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\treturn *this;\n"
+				"}\n\n");
+
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("& " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator*=" + parameters + constness + "\n"
+				"{\n"
+				"\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
+				"\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\treturn *this;\n"
+				"}\n\n");
+		}
+		else if (name == "self_divide_")
+		{
+			river.write_string(
+				"inline " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string(" " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{\n"
+				"\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
+				"\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\treturn *this;\n"
+				"}\n\n");
+
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("& " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator/=" + parameters + constness + "\n"
+				"{\n"
+				"\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
+				"\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\treturn *this;\n"
+				"}\n\n");
+		}
+		else if (name == "self_modulo_")
+		{
+			river.write_string(
+				"inline " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string(" " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{\n"
+				"\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
+				"\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\treturn *this;\n"
+				"}\n\n");
+
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("& " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator%=" + parameters + constness + "\n"
+				"{\n"
+				"\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
+				"\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\treturn *this;\n"
+				"}\n\n");
+		}
+		else if (name == "add_")
+		{
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator+" + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
+		else if (name == "subtract_")
+		{
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator-" + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
+		else if (name == "multiply_")
+		{
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator*" + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
+		else if (name == "divide_")
+		{
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator/" + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
+		else if (name == "modulo_")
+		{
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator%" + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
+		else if (name == "same_")
+		{
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return boole(" +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "); }\n\n");
+
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline bool " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator==" + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
+		else if (name == "different_")
+		{
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return boole(!" +
+				(extraction ? "___read___()." : "___write___().") +
+				"same_" + arguments + "); }\n\n");
+
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline bool " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator!=" + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return !" +
+				(extraction ? "___read___()." : "___write___().") +
+				"same_" + arguments + "; }\n\n");
+		}
+		else if (name == "less_than_")
+		{
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return boole(" +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "); }\n\n");
+
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline bool " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator<" + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
+		else if (name == "greater_than_")
+		{
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return boole(" +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "); }\n\n");
+
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline bool " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator>" + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
+		else if (name == "less_or_equal_")
+		{
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return boole(" +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "); }\n\n");
+
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline bool " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator<=" + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
+		else if (name == "greater_or_equal_")
+		{
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return boole(" +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "); }\n\n");
+
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline bool " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operator>=" + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
+		else
+		{
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
+
+		std::string const scope = root ? "" : "any_a<>::___any_a_handle___<___TTT___, ___DHB___>::";
+
+		if (name == "increment_" || name == "decrement_" || name == "self_add_" || name == "self_subtract_" ||
+			name == "self_multiply_" || name == "self_divide_" || name == "self_modulo_" || name == "self_assign_")
+		{
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(root ? "template <typename ___TTT___, typename ___BHB___>\n" : "template <typename ___TTT___, typename ___DHB___>\n");
+			river.write_string(
+				"inline void " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::___" + class_name + "_handle___<___TTT___, " + std::string(root ? "___BHB___>::" : "___DHB___>::") +
+				name + parameters + constness + "\n"
+				"{ " + scope + "___value___." + name + arguments + "; }\n\n");
+		}
+		else if (name == "same_" || name == "less_than_" || name == "greater_than_" ||
+			name == "less_or_equal_" || name == "greater_or_equal_")
+		{
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(root ? "template <typename ___TTT___, typename ___BHB___>\n" : "template <typename ___TTT___, typename ___DHB___>\n");
+			river.write_string(
+				"inline bool " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::___" + class_name + "_handle___<___TTT___, " + std::string(root ? "___BHB___>::" : "___DHB___>::") +
+				name + parameters + constness + "\n"
+				"{ return bool{ " + scope + "___value___." + name + arguments + " }; }\n\n");
+		}
+		else if (name != "different_")
+		{
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(root ? "template <typename ___TTT___, typename ___BHB___>\n" : "template <typename ___TTT___, typename ___DHB___>\n");
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::___" + class_name + "_handle___<___TTT___, " + std::string(root ? "___BHB___>::" : "___DHB___>::") +
+				name + parameters + constness + "\n"
+				"{ return " + scope + "___value___." + name + arguments + "; }\n\n");
+		}
 	}
 
 	inline void _implement_class_nonvirtual_native_member_(bool root, std::string const& class_name, std::string const& name, std::string const& value, int64_t version, river_a<>& river) const
-	{}
+	{
+		std::string result;
+		std::string parameters;
+		std::string arguments;
+		std::string constness;
+		std::string dynamic;
+		_parse_native_member_definition_(class_name, name, value, false, result, parameters, arguments, constness, dynamic);
+
+		_declare_and_define_template_(version, 0, river, true, true);
+		river.write_string(
+			"inline " + result + " " + class_name);
+		_declare_and_define_template_(version, 0, river, false, false);
+		river.write_string("::" + name + parameters + constness + "\n"
+			"{ assert(" + (root ? "" : "any_a<>::") + "___handle___); " +
+			(result == "void" ? "" : "return ") +
+			(constness.empty() ? "___write___()." : "___read___().") +
+			name + arguments + "; }\n\n");
+
+		std::string const scope = root ? "" : "any_a<>::___any_a_handle___<___TTT___, ___DHB___>::";
+
+		_declare_and_define_template_(version, 0, river, true, true);
+		river.write_string(root ? "template <typename ___TTT___, typename ___BHB___>\n" : "template <typename ___TTT___, typename ___DHB___>\n");
+		river.write_string(
+			"inline " + result + " " + class_name);
+		_declare_and_define_template_(version, 0, river, false, false);
+		river.write_string("::___" + class_name + "_handle___<___TTT___, " + std::string(root ? "___BHB___>::" : "___DHB___>::") +
+			name + parameters + constness + "\n"
+			"{ " + (result == "void" ? "" : "return ") +
+			scope + "___value___." + name + arguments + "; }\n\n");
+	}
 
 	inline void _define_class_handle_(bool root, std::string const& class_name, std::string const& base_name, std::string const& base_aspects, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
 	{
@@ -1355,7 +1724,7 @@ protected:
 		std::string parameters;
 		std::string arguments;
 		std::string constness;
-		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
+		_parse_member_definition_(version, expression, extraction, true, result, parameters, arguments, constness);
 
 		if (name == "increment_" || name == "decrement_" || name == "self_add_" || name == "self_subtract_" ||
 			name == "self_multiply_" || name == "self_divide_" || name == "self_modulo_" || name == "self_assign_")
@@ -1383,7 +1752,7 @@ protected:
 		std::string arguments;
 		std::string constness;
 		std::string dynamic;
-		_parse_native_member_definition_(class_name, name, value, result, parameters, arguments, constness, dynamic);
+		_parse_native_member_definition_(class_name, name, value, true, result, parameters, arguments, constness, dynamic);
 		river.write_string(
 			"\t\tvirtual " + result + " " + name + parameters + constness + " = 0;\n");
 	}
@@ -1394,29 +1763,24 @@ protected:
 		std::string parameters;
 		std::string arguments;
 		std::string constness;
-		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
+		_parse_member_definition_(version, expression, extraction, true, result, parameters, arguments, constness);
 	
-		std::string const scope = root ? "" : "any_a<>::___any_a_handle___<___TTT___, ___DHB___>::";
-
 		if (name == "increment_" || name == "decrement_" || name == "self_add_" || name == "self_subtract_" ||
 			name == "self_multiply_" || name == "self_divide_" || name == "self_modulo_" || name == "self_assign_")
 		{
 			river.write_string(
-				"\t\tvirtual inline void " + name + parameters + constness + " final\n"
-				"\t\t{ " + scope + "___value___." + name + arguments + "; }\n\n");
+				"\t\tvirtual inline void " + name + parameters + constness + " final;\n\n");
 		}
 		else if (name == "same_" || name == "less_than_" || name == "greater_than_" ||
 			name == "less_or_equal_" || name == "greater_or_equal_")
 		{
 			river.write_string(
-				"\t\tvirtual inline bool " + name + parameters + constness + " final\n"
-				"\t\t{ return bool{ " + scope + "___value___." + name + arguments + " }; }\n\n");
+				"\t\tvirtual inline bool " + name + parameters + constness + " final;\n\n");
 		}
 		else if (name != "different_")
 		{
 			river.write_string(
-				"\t\tvirtual inline " + result + " " + name + parameters + constness + " final\n"
-				"\t\t{ return " + scope + "___value___." + name + arguments + "; }\n\n");
+				"\t\tvirtual inline " + result + " " + name + parameters + constness + " final;\n\n");
 		}
 	}
 
@@ -1427,15 +1791,10 @@ protected:
 		std::string arguments;
 		std::string constness;
 		std::string dynamic;
-		_parse_native_member_definition_(class_name, name, value, result, parameters, arguments, constness, dynamic);
-
-		std::string const scope = root ? "" : "any_a<>::___any_a_handle___<___TTT___, ___DHB___>::";
+		_parse_native_member_definition_(class_name, name, value, true, result, parameters, arguments, constness, dynamic);
 
 		river.write_string(
-			"\t\tvirtual inline " + result + " " + name + parameters + constness + " final\n"
-			"\t\t{ " +
-				(result == "void" ? "" : "return ") +
-				scope + "___value___." + name + arguments + "; }\n\n");
+			"\t\tvirtual inline " + result + " " + name + parameters + constness + " final;\n\n");
 	}
 
 	inline void _define_class_implementation_(bool root, std::string const& class_name, std::string const& base_name, std::string const& base_aspects, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
@@ -1744,7 +2103,7 @@ protected:
 		// ___cats___()
 		if (root)
 		{
-			river.write_string("\ttemplate <typename ___cat_a___ = _cat, typename ___kind_a___ = _kind, typename ___unordered_herd_a___ = _unordered_herd>\n");
+			river.write_string("\ttemplate <typename ___cat_a___ = _cat, typename ___kind_a___ = _kind, typename ___unordered_herd_a___ = unordered_herd_a<>>\n");
 		}
 		else
 		{
@@ -1814,7 +2173,7 @@ protected:
 		// ___kinds___()
 		if (root)
 		{
-			river.write_string("\ttemplate <typename ___cat_a___ = _cat, typename ___kind_a___ = _kind, typename ___unordered_herd_a___ = _unordered_herd>\n");
+			river.write_string("\ttemplate <typename ___cat_a___ = _cat, typename ___kind_a___ = _kind, typename ___unordered_herd_a___ = unordered_herd_a<>>\n");
 		}
 		else
 		{
@@ -1844,7 +2203,7 @@ protected:
 		// ___operations___()
 		if (root)
 		{
-			river.write_string("\ttemplate <typename ___unordered_shoal_a___ = _unordered_shoal>\n");
+			river.write_string("\ttemplate <typename ___unordered_shoal_a___ = unordered_shoal_a<>>\n");
 		}
 		else
 		{
@@ -1926,7 +2285,7 @@ protected:
 		std::string parameters;
 		std::string arguments;
 		std::string constness;
-		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
+		_parse_member_definition_(version, expression, extraction, true, result, parameters, arguments, constness);
 
 		river.write_string(
 			"\t\t\toperations.update_string(\"" + name + "\", " +
@@ -1955,21 +2314,21 @@ protected:
 		);
 	}
 
-	inline void _parse_member_definition_(int64_t version, expression_a<> const& expression, bool extraction, std::string& result, std::string& parameters, std::string& arguments, std::string& constness) const
+	inline void _parse_member_definition_(int64_t version, expression_a<> const& expression, bool extraction, bool defaults, std::string& result, std::string& parameters, std::string& arguments, std::string& constness) const
 	{
 		if (extraction)
 		{
 			auto const& exp = static_cast<expression_extraction_t<> const&>(expression.extract_thing());
-			exp.abstraction(version, result, parameters, arguments, constness);
+			exp.abstraction(version, defaults, result, parameters, arguments, constness);
 		}
 		else
 		{
 			auto const& exp = static_cast<expression_mutation_t<> const&>(expression.extract_thing());
-			exp.abstraction(version, result, parameters, arguments, constness);
+			exp.abstraction(version, defaults, result, parameters, arguments, constness);
 		}
 	}
 
-	inline void _parse_native_member_definition_(std::string const& class_name, std::string const& name, std::string const& value, std::string& result, std::string& parameters, std::string& arguments, std::string& constness, std::string& dynamic) const
+	inline void _parse_native_member_definition_(std::string const& class_name, std::string const& name, std::string const& value, bool defaults, std::string& result, std::string& parameters, std::string& arguments, std::string& constness, std::string& dynamic) const
 	{
 		auto tokenizer = tokenizer_t<>::create_(river_t<>::create(value));
 		int64_t toke = 1;
@@ -2034,12 +2393,18 @@ protected:
 				}
 				else if (token.tag() == "punctuation" && token.symbol() == "=")
 				{
-					parameters += "= ";
+					if (defaults)
+					{
+						parameters += "= ";
+					}
 					optional = true;
 				}
 				else
 				{
-					parameters += token.symbol() + " ";
+					if (defaults || !optional)
+					{
+						parameters += token.symbol() + " ";
+					}
 					if (!optional && token.tag() == "name")
 					{
 						argument = token.symbol();

@@ -14,22 +14,17 @@ class operation_a : public any_a<>
 public:
 	inline any_a<> pure__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> pure_() const
-	{ assert(any_a<>::___handle___); return ___read___().pure_(); }
+	inline any_a<> pure_() const;
 
-	inline bool pure() const
-	{ assert(any_a<>::___handle___); return ___read___().pure(); }
+	inline bool pure() const;
 
-	inline void aspects(unordered_shoal_a < > const & shoal )
-	{ assert(any_a<>::___handle___); ___write___().aspects(shoal); }
+	inline void aspects(unordered_shoal_a < > const & shoal );
 
-	inline void assign(operation_a < > const & operation )
-	{ assert(any_a<>::___handle___); ___write___().assign(operation); }
+	inline void assign(operation_a < > const & operation );
 
 	inline any_a<> names__(range_a<> const& ___arguments___) const;
 
-	inline flock_a<> names_() const
-	{ assert(any_a<>::___handle___); return ___read___().names_(); }
+	inline flock_a<> names_() const;
 
 protected:
 	struct ___operation_a_handle_base___ : any_a<>::___any_a_handle_base___
@@ -59,20 +54,15 @@ protected:
 			: any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> pure_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.pure_(); }
+		virtual inline any_a<> pure_() const final;
 
-		virtual inline bool pure() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.pure(); }
+		virtual inline bool pure() const final;
 
-		virtual inline void aspects(unordered_shoal_a < > const & shoal ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.aspects(shoal); }
+		virtual inline void aspects(unordered_shoal_a < > const & shoal ) final;
 
-		virtual inline void assign(operation_a < > const & operation ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.assign(operation); }
+		virtual inline void assign(operation_a < > const & operation ) final;
 
-		virtual inline flock_a<> names_() const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.names_(); }
+		virtual inline flock_a<> names_() const final;
 
 	};
 

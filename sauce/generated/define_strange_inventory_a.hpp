@@ -12,30 +12,23 @@ template <typename _1>
 class inventory_a : public collection_a<>
 {
 public:
-	inline bool has_index(int64_t index ) const
-	{ assert(any_a<>::___handle___); return ___read___().has_index(index); }
+	inline bool has_index(int64_t index ) const;
 
-	inline any_a < > at_index(int64_t index ) const
-	{ assert(any_a<>::___handle___); return ___read___().at_index(index); }
+	inline any_a < > at_index(int64_t index ) const;
 
-	inline void update_index(int64_t index , any_a < > const & value )
-	{ assert(any_a<>::___handle___); ___write___().update_index(index, value); }
+	inline void update_index(int64_t index , any_a < > const & value );
 
-	inline bool insert_index(int64_t index , any_a < > const & value )
-	{ assert(any_a<>::___handle___); return ___write___().insert_index(index, value); }
+	inline bool insert_index(int64_t index , any_a < > const & value );
 
-	inline bool erase_index(int64_t index )
-	{ assert(any_a<>::___handle___); return ___write___().erase_index(index); }
+	inline bool erase_index(int64_t index );
 
 	inline any_a<> mutate_begin__(range_a<> const& ___arguments___);
 
-	inline random_access_mutator_a< any_a<> > mutate_begin_()
-	{ assert(any_a<>::___handle___); return ___write___().mutate_begin_(); }
+	inline random_access_mutator_a< any_a<> > mutate_begin_();
 
 	inline any_a<> mutate_end__(range_a<> const& ___arguments___);
 
-	inline random_access_mutator_a< any_a<> > mutate_end_()
-	{ assert(any_a<>::___handle___); return ___write___().mutate_end_(); }
+	inline random_access_mutator_a< any_a<> > mutate_end_();
 
 protected:
 	struct ___inventory_a_handle_base___ : collection_a<>::___collection_a_handle_base___
@@ -67,26 +60,19 @@ protected:
 			: collection_a<>::template ___collection_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bool has_index(int64_t index ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.has_index(index); }
+		virtual inline bool has_index(int64_t index ) const final;
 
-		virtual inline any_a < > at_index(int64_t index ) const final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.at_index(index); }
+		virtual inline any_a < > at_index(int64_t index ) const final;
 
-		virtual inline void update_index(int64_t index , any_a < > const & value ) final
-		{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.update_index(index, value); }
+		virtual inline void update_index(int64_t index , any_a < > const & value ) final;
 
-		virtual inline bool insert_index(int64_t index , any_a < > const & value ) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.insert_index(index, value); }
+		virtual inline bool insert_index(int64_t index , any_a < > const & value ) final;
 
-		virtual inline bool erase_index(int64_t index ) final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.erase_index(index); }
+		virtual inline bool erase_index(int64_t index ) final;
 
-		virtual inline random_access_mutator_a< any_a<> > mutate_begin_() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin_(); }
+		virtual inline random_access_mutator_a< any_a<> > mutate_begin_() final;
 
-		virtual inline random_access_mutator_a< any_a<> > mutate_end_() final
-		{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end_(); }
+		virtual inline random_access_mutator_a< any_a<> > mutate_end_() final;
 
 	};
 
