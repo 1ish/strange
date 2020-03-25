@@ -425,7 +425,7 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	{
 		throw dis("number_a::from_int_64_ passed short range");
 	}
-	auto int_64 = cast< _number_data_int64>(*___it___);
+	auto int_64 = cast< _number_data_int64 >(*___it___);
 	return from_int_64_(int_64);
 }
 
@@ -479,7 +479,7 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	{
 		throw dis("number_a::from_uint_64_ passed short range");
 	}
-	auto uint_64 = cast< _number_data_uint64>(*___it___);
+	auto uint_64 = cast< _number_data_uint64 >(*___it___);
 	return from_uint_64_(uint_64);
 }
 
@@ -533,7 +533,7 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	{
 		throw dis("number_a::from_float_64_ passed short range");
 	}
-	auto float_64 = cast< _number_data_double>(*___it___);
+	auto float_64 = cast< _number_data_double >(*___it___);
 	return from_float_64_(float_64);
 }
 

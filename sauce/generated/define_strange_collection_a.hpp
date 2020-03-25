@@ -2,47 +2,47 @@
 namespace strange
 {
 
-template <typename _1 = void>
+template <typename _key = any_a<> , typename _value = any_a<> , typename _element = any_a<> >
 class collection_d;
 
-template <typename _1 = void>
-inline collection_d<_1> ___collection_dynamic___(any_a<> const& thing); 
+template <typename _key = any_a<> , typename _value = any_a<> , typename _element = any_a<> >
+inline collection_d<_key, _value, _element> ___collection_dynamic___(any_a<> const& thing); 
 
-template <typename _1>
-class collection_a : public range_a<>
+template <typename _key, typename _value, typename _element>
+class collection_a : public range_a< _element >
 {
 public:
 	inline any_a<> has__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> has_(any_a<> const& key) const;
+	inline any_a<> has_(_key const& key) const;
 
-	inline bool has(any_a < > const & key ) const;
+	inline bool has(_key const & key ) const;
 
 	inline any_a<> at__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> at_(any_a<> const& key) const;
+	inline any_a<> at_(_key const& key) const;
 
 	inline any_a<> update__(range_a<> const& ___arguments___);
 
-	inline any_a<> update_(any_a<> const& key, any_a<> const& value = strange::no() );
+	inline _value update_(_key const& key, _value const& value = strange::no() );
 
-	inline void update(any_a < > const & key , any_a < > const & value );
+	inline void update(_key const & key , _value const & value );
 
 	inline any_a<> insert__(range_a<> const& ___arguments___);
 
-	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = strange::no() );
+	inline any_a<> insert_(_key const& key, _value const& value = strange::no() );
 
-	inline void insert(any_a < > const & key , any_a < > const & value );
+	inline void insert(_key const & key , _value const & value );
 
 	inline any_a<> erase__(range_a<> const& ___arguments___);
 
-	inline any_a<> erase_(any_a<> const& key);
+	inline any_a<> erase_(_key const& key);
 
-	inline bool erase(any_a < > const & key );
+	inline bool erase(_key const & key );
 
 	inline any_a<> clear__(range_a<> const& ___arguments___);
 
-	inline collection_a<> clear_();
+	inline collection_a< _key , _value , _element > clear_();
 
 	inline void clear();
 
@@ -60,51 +60,51 @@ public:
 
 	inline any_a<> push_front__(range_a<> const& ___arguments___);
 
-	inline collection_a<> push_front_(any_a<> const& thing);
+	inline collection_a< _key , _value , _element > push_front_(_element const& thing);
 
-	inline void push_front(any_a < > const & thing );
+	inline void push_front(_element const & thing );
 
 	inline any_a<> pop_front__(range_a<> const& ___arguments___);
 
-	inline any_a<> pop_front_();
+	inline _element pop_front_();
 
 	inline any_a<> push_back__(range_a<> const& ___arguments___);
 
-	inline collection_a<> push_back_(any_a<> const& thing);
+	inline collection_a< _key , _value , _element > push_back_(_element const& thing);
 
-	inline void push_back(any_a < > const & thing );
+	inline void push_back(_element const & thing );
 
 	inline any_a<> pop_back__(range_a<> const& ___arguments___);
 
-	inline any_a<> pop_back_();
+	inline _element pop_back_();
 
 	inline any_a<> self_assign__(range_a<> const& ___arguments___);
 
-	inline collection_a self_assign_(range_a<> const& range);
+	inline collection_a self_assign_(range_a< _element > const& range);
 
 	inline any_a<> self_add__(range_a<> const& ___arguments___);
 
-	inline collection_a self_add_(range_a<> const& range);
+	inline collection_a self_add_(range_a< _element > const& range);
 
-	inline collection_a& operator+=(range_a<> const& range);
+	inline collection_a& operator+=(range_a< _element > const& range);
 
 	inline any_a<> add__(range_a<> const& ___arguments___) const;
 
-	inline collection_a<> add_(range_a<> const& range) const;
+	inline collection_a< _key , _value , _element > add_(range_a< _element > const& range) const;
 
-	inline collection_a<> operator+(range_a<> const& range) const;
+	inline collection_a< _key , _value , _element > operator+(range_a< _element > const& range) const;
 
 	inline any_a<> self_subtract__(range_a<> const& ___arguments___);
 
-	inline collection_a self_subtract_(range_a<> const& range);
+	inline collection_a self_subtract_(range_a< _element > const& range);
 
-	inline collection_a& operator-=(range_a<> const& range);
+	inline collection_a& operator-=(range_a< _element > const& range);
 
 	inline any_a<> subtract__(range_a<> const& ___arguments___) const;
 
-	inline collection_a<> subtract_(range_a<> const& range) const;
+	inline collection_a< _key , _value , _element > subtract_(range_a< _element > const& range) const;
 
-	inline collection_a<> operator-(range_a<> const& range) const;
+	inline collection_a< _key , _value , _element > operator-(range_a< _element > const& range) const;
 
 	inline any_a<> read_lock__(range_a<> const& ___arguments___) const;
 
@@ -115,75 +115,75 @@ public:
 	inline any_a<> write_lock_() const;
 
 protected:
-	struct ___collection_a_handle_base___ : range_a<>::___range_a_handle_base___
+	struct ___collection_a_handle_base___ : range_a< _element >::___range_a_handle_base___
 	{
-		virtual any_a<> has_(any_a<> const& key) const = 0;
-		virtual bool has(any_a < > const & key ) const = 0;
-		virtual any_a<> at_(any_a<> const& key) const = 0;
-		virtual any_a<> update_(any_a<> const& key, any_a<> const& value = strange::no() ) = 0;
-		virtual void update(any_a < > const & key , any_a < > const & value ) = 0;
-		virtual any_a<> insert_(any_a<> const& key, any_a<> const& value = strange::no() ) = 0;
-		virtual void insert(any_a < > const & key , any_a < > const & value ) = 0;
-		virtual any_a<> erase_(any_a<> const& key) = 0;
-		virtual bool erase(any_a < > const & key ) = 0;
-		virtual collection_a<> clear_() = 0;
+		virtual any_a<> has_(_key const& key) const = 0;
+		virtual bool has(_key const & key ) const = 0;
+		virtual any_a<> at_(_key const& key) const = 0;
+		virtual _value update_(_key const& key, _value const& value = strange::no() ) = 0;
+		virtual void update(_key const & key , _value const & value ) = 0;
+		virtual any_a<> insert_(_key const& key, _value const& value = strange::no() ) = 0;
+		virtual void insert(_key const & key , _value const & value ) = 0;
+		virtual any_a<> erase_(_key const& key) = 0;
+		virtual bool erase(_key const & key ) = 0;
+		virtual collection_a< _key , _value , _element > clear_() = 0;
 		virtual void clear() = 0;
 		virtual number_data_int64_a<> size_() const = 0;
 		virtual int64_t size() const = 0;
 		virtual any_a<> empty_() const = 0;
 		virtual bool empty() const = 0;
-		virtual collection_a<> push_front_(any_a<> const& thing) = 0;
-		virtual void push_front(any_a < > const & thing ) = 0;
-		virtual any_a<> pop_front_() = 0;
-		virtual collection_a<> push_back_(any_a<> const& thing) = 0;
-		virtual void push_back(any_a < > const & thing ) = 0;
-		virtual any_a<> pop_back_() = 0;
-		virtual void self_assign_(range_a<> const& range) = 0;
-		virtual void self_add_(range_a<> const& range) = 0;
-		virtual collection_a<> add_(range_a<> const& range) const = 0;
-		virtual void self_subtract_(range_a<> const& range) = 0;
-		virtual collection_a<> subtract_(range_a<> const& range) const = 0;
+		virtual collection_a< _key , _value , _element > push_front_(_element const& thing) = 0;
+		virtual void push_front(_element const & thing ) = 0;
+		virtual _element pop_front_() = 0;
+		virtual collection_a< _key , _value , _element > push_back_(_element const& thing) = 0;
+		virtual void push_back(_element const & thing ) = 0;
+		virtual _element pop_back_() = 0;
+		virtual void self_assign_(range_a< _element > const& range) = 0;
+		virtual void self_add_(range_a< _element > const& range) = 0;
+		virtual collection_a< _key , _value , _element > add_(range_a< _element > const& range) const = 0;
+		virtual void self_subtract_(range_a< _element > const& range) = 0;
+		virtual collection_a< _key , _value , _element > subtract_(range_a< _element > const& range) const = 0;
 		virtual any_a<> read_lock_() const = 0;
 		virtual any_a<> write_lock_() const = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___collection_a_handle_base___>
-	struct ___collection_a_handle___ : range_a<>::template ___range_a_handle___<___TTT___, ___DHB___>
+	struct ___collection_a_handle___ : range_a< _element >::template ___range_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___collection_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: range_a<>::template ___range_a_handle___<___TTT___, ___DHB___>{ value }
+			: range_a< _element >::template ___range_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___collection_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: range_a<>::template ___range_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: range_a< _element >::template ___range_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
 		inline ___collection_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
-			: range_a<>::template ___range_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
+			: range_a< _element >::template ___range_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> has_(any_a<> const& key) const final;
+		virtual inline any_a<> has_(_key const& key) const final;
 
-		virtual inline bool has(any_a < > const & key ) const final;
+		virtual inline bool has(_key const & key ) const final;
 
-		virtual inline any_a<> at_(any_a<> const& key) const final;
+		virtual inline any_a<> at_(_key const& key) const final;
 
-		virtual inline any_a<> update_(any_a<> const& key, any_a<> const& value = strange::no() ) final;
+		virtual inline _value update_(_key const& key, _value const& value = strange::no() ) final;
 
-		virtual inline void update(any_a < > const & key , any_a < > const & value ) final;
+		virtual inline void update(_key const & key , _value const & value ) final;
 
-		virtual inline any_a<> insert_(any_a<> const& key, any_a<> const& value = strange::no() ) final;
+		virtual inline any_a<> insert_(_key const& key, _value const& value = strange::no() ) final;
 
-		virtual inline void insert(any_a < > const & key , any_a < > const & value ) final;
+		virtual inline void insert(_key const & key , _value const & value ) final;
 
-		virtual inline any_a<> erase_(any_a<> const& key) final;
+		virtual inline any_a<> erase_(_key const& key) final;
 
-		virtual inline bool erase(any_a < > const & key ) final;
+		virtual inline bool erase(_key const & key ) final;
 
-		virtual inline collection_a<> clear_() final;
+		virtual inline collection_a< _key , _value , _element > clear_() final;
 
 		virtual inline void clear() final;
 
@@ -195,27 +195,27 @@ protected:
 
 		virtual inline bool empty() const final;
 
-		virtual inline collection_a<> push_front_(any_a<> const& thing) final;
+		virtual inline collection_a< _key , _value , _element > push_front_(_element const& thing) final;
 
-		virtual inline void push_front(any_a < > const & thing ) final;
+		virtual inline void push_front(_element const & thing ) final;
 
-		virtual inline any_a<> pop_front_() final;
+		virtual inline _element pop_front_() final;
 
-		virtual inline collection_a<> push_back_(any_a<> const& thing) final;
+		virtual inline collection_a< _key , _value , _element > push_back_(_element const& thing) final;
 
-		virtual inline void push_back(any_a < > const & thing ) final;
+		virtual inline void push_back(_element const & thing ) final;
 
-		virtual inline any_a<> pop_back_() final;
+		virtual inline _element pop_back_() final;
 
-		virtual inline void self_assign_(range_a<> const& range) final;
+		virtual inline void self_assign_(range_a< _element > const& range) final;
 
-		virtual inline void self_add_(range_a<> const& range) final;
+		virtual inline void self_add_(range_a< _element > const& range) final;
 
-		virtual inline collection_a<> add_(range_a<> const& range) const final;
+		virtual inline collection_a< _key , _value , _element > add_(range_a< _element > const& range) const final;
 
-		virtual inline void self_subtract_(range_a<> const& range) final;
+		virtual inline void self_subtract_(range_a< _element > const& range) final;
 
-		virtual inline collection_a<> subtract_(range_a<> const& range) const final;
+		virtual inline collection_a< _key , _value , _element > subtract_(range_a< _element > const& range) const final;
 
 		virtual inline any_a<> read_lock_() const final;
 
@@ -301,37 +301,37 @@ public:
 	inline collection_a() = default;
 
 	inline collection_a(collection_a& other, any_a<>::___reference_tag___) noexcept
-		: range_a<>(other, any_a<>::___reference_tag___{})
+		: range_a< _element >(other, any_a<>::___reference_tag___{})
 	{}
 
 	inline collection_a(collection_a& other, any_a<>::___duplicate_tag___) noexcept
-		: range_a<>(other, any_a<>::___duplicate_tag___{})
+		: range_a< _element >(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline collection_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: range_a<>{ handle }
+		: range_a< _element >{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___collection_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
 	explicit inline collection_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
-		: range_a<>(handle, any_a<>::___reference_tag___{})
+		: range_a< _element >(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___collection_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<collection_a, std::decay_t<___TTT___>>::value>>
 	explicit inline collection_a(___TTT___ value) noexcept
-		: range_a<>{ std::make_shared<___collection_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: range_a< _element >{ std::make_shared<___collection_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
 	explicit inline collection_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
-		: range_a<>{ std::make_shared<___collection_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
+		: range_a< _element >{ std::make_shared<___collection_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
@@ -364,7 +364,7 @@ public:
 		{
 			return collection_a{ thing.___handle___ };
 		}
-		return collection_a{ collection_d<_1>{ thing } };
+		return collection_a{ collection_d<_key, _value, _element>{ thing } };
 	}
 
 	static inline collection_a ___cast_ref___(any_a<>& thing)
@@ -374,7 +374,7 @@ public:
 		{
 			return collection_a(thing.___handle___, any_a<>::___reference_tag___{});
 		}
-		return collection_a{ collection_d<_1>(thing, any_a<>::___reference_tag___{}) };
+		return collection_a{ collection_d<_key, _value, _element>(thing, any_a<>::___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -389,7 +389,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = range_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = range_a< _element >::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -408,7 +408,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = range_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = range_a< _element >::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -420,7 +420,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = range_a<>::template ___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = range_a< _element >::template ___operations___<___unordered_shoal_a___>();
 			operations.update_string("has_", native_extraction_t<collection_a>::create(&collection_a::has__));
 			operations.update_string("at_", native_extraction_t<collection_a>::create(&collection_a::at__));
 			operations.update_string("update_", native_mutation_t<collection_a>::create(&collection_a::update__));
@@ -452,8 +452,8 @@ public:
 	}
 }; // class collection_a
 
-template <typename _1>
-class collection_d : public range_d<>
+template <typename _key, typename _value, typename _element>
+class collection_d : public range_d< _element >
 {
 public:
 	inline any_a<> has__(range_a<> const& arguments) const
@@ -467,7 +467,7 @@ public:
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
 
-	inline any_a<> has_(any_a<> const& key) const
+	inline any_a<> has_(_key const& key) const
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("has_");
@@ -478,7 +478,7 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this), key));
 	}
 
-	inline bool has(any_a < > const & key ) const
+	inline bool has(_key const & key ) const
 	{ return has_(key); }
 
 	inline any_a<> at__(range_a<> const& arguments) const
@@ -492,7 +492,7 @@ public:
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
 
-	inline any_a<> at_(any_a<> const& key) const
+	inline any_a<> at_(_key const& key) const
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("at_");
@@ -514,7 +514,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> update_(any_a<> const& key, any_a<> const& value = strange::no() )
+	inline _value update_(_key const& key, _value const& value = strange::no() )
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("update_");
@@ -522,10 +522,10 @@ public:
 		{
 			throw dis("dynamic collection_d::update_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this, key, value));
+		return cast<_value>(variadic_operate(op, *this, key, value));
 	}
 
-	inline void update(any_a < > const & key , any_a < > const & value )
+	inline void update(_key const & key , _value const & value )
 	{ update_(key, value); }
 
 	inline any_a<> insert__(range_a<> const& arguments)
@@ -539,7 +539,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = strange::no() )
+	inline any_a<> insert_(_key const& key, _value const& value = strange::no() )
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("insert_");
@@ -550,7 +550,7 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *this, key, value));
 	}
 
-	inline void insert(any_a < > const & key , any_a < > const & value )
+	inline void insert(_key const & key , _value const & value )
 	{ insert_(key, value); }
 
 	inline any_a<> erase__(range_a<> const& arguments)
@@ -564,7 +564,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> erase_(any_a<> const& key)
+	inline any_a<> erase_(_key const& key)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("erase_");
@@ -575,7 +575,7 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *this, key));
 	}
 
-	inline bool erase(any_a < > const & key )
+	inline bool erase(_key const & key )
 	{ return erase_(key); }
 
 	inline any_a<> clear__(range_a<> const& arguments)
@@ -589,7 +589,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline collection_a<> clear_()
+	inline collection_a< _key , _value , _element > clear_()
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("clear_");
@@ -597,7 +597,7 @@ public:
 		{
 			throw dis("dynamic collection_d::clear_ passed non-existent member");
 		}
-		return cast<collection_a<>>(variadic_operate(op, *this));
+		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *this));
 	}
 
 	inline void clear()
@@ -664,7 +664,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline collection_a<> push_front_(any_a<> const& thing)
+	inline collection_a< _key , _value , _element > push_front_(_element const& thing)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("push_front_");
@@ -672,10 +672,10 @@ public:
 		{
 			throw dis("dynamic collection_d::push_front_ passed non-existent member");
 		}
-		return cast<collection_a<>>(variadic_operate(op, *this, thing));
+		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *this, thing));
 	}
 
-	inline void push_front(any_a < > const & thing )
+	inline void push_front(_element const & thing )
 	{ push_front_(thing); }
 
 	inline any_a<> pop_front__(range_a<> const& arguments)
@@ -689,7 +689,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> pop_front_()
+	inline _element pop_front_()
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("pop_front_");
@@ -697,7 +697,7 @@ public:
 		{
 			throw dis("dynamic collection_d::pop_front_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this));
+		return cast<_element>(variadic_operate(op, *this));
 	}
 
 	inline any_a<> push_back__(range_a<> const& arguments)
@@ -711,7 +711,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline collection_a<> push_back_(any_a<> const& thing)
+	inline collection_a< _key , _value , _element > push_back_(_element const& thing)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("push_back_");
@@ -719,10 +719,10 @@ public:
 		{
 			throw dis("dynamic collection_d::push_back_ passed non-existent member");
 		}
-		return cast<collection_a<>>(variadic_operate(op, *this, thing));
+		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *this, thing));
 	}
 
-	inline void push_back(any_a < > const & thing )
+	inline void push_back(_element const & thing )
 	{ push_back_(thing); }
 
 	inline any_a<> pop_back__(range_a<> const& arguments)
@@ -736,7 +736,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> pop_back_()
+	inline _element pop_back_()
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("pop_back_");
@@ -744,7 +744,7 @@ public:
 		{
 			throw dis("dynamic collection_d::pop_back_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this));
+		return cast<_element>(variadic_operate(op, *this));
 	}
 
 	inline any_a<> self_assign__(range_a<> const& arguments)
@@ -758,7 +758,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline collection_a<> self_assign_(range_a<> const& range)
+	inline collection_a< _key , _value , _element > self_assign_(range_a< _element > const& range)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("self_assign_");
@@ -766,7 +766,7 @@ public:
 		{
 			throw dis("dynamic collection_d::self_assign_ passed non-existent member");
 		}
-		return cast<collection_a<>>(variadic_operate(op, *this, range));
+		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *this, range));
 	}
 
 	inline any_a<> self_add__(range_a<> const& arguments)
@@ -780,7 +780,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline collection_a<> self_add_(range_a<> const& range)
+	inline collection_a< _key , _value , _element > self_add_(range_a< _element > const& range)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("self_add_");
@@ -788,7 +788,7 @@ public:
 		{
 			throw dis("dynamic collection_d::self_add_ passed non-existent member");
 		}
-		return cast<collection_a<>>(variadic_operate(op, *this, range));
+		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *this, range));
 	}
 
 	inline any_a<> add__(range_a<> const& arguments) const
@@ -802,7 +802,7 @@ public:
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
 
-	inline collection_a<> add_(range_a<> const& range) const
+	inline collection_a< _key , _value , _element > add_(range_a< _element > const& range) const
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("add_");
@@ -810,7 +810,7 @@ public:
 		{
 			throw dis("dynamic collection_d::add_ passed non-existent member");
 		}
-		return cast<collection_a<>>(variadic_operate(op, *const_cast<collection_d*>(this), range));
+		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *const_cast<collection_d*>(this), range));
 	}
 
 	inline any_a<> self_subtract__(range_a<> const& arguments)
@@ -824,7 +824,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline collection_a<> self_subtract_(range_a<> const& range)
+	inline collection_a< _key , _value , _element > self_subtract_(range_a< _element > const& range)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("self_subtract_");
@@ -832,7 +832,7 @@ public:
 		{
 			throw dis("dynamic collection_d::self_subtract_ passed non-existent member");
 		}
-		return cast<collection_a<>>(variadic_operate(op, *this, range));
+		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *this, range));
 	}
 
 	inline any_a<> subtract__(range_a<> const& arguments) const
@@ -846,7 +846,7 @@ public:
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
 
-	inline collection_a<> subtract_(range_a<> const& range) const
+	inline collection_a< _key , _value , _element > subtract_(range_a< _element > const& range) const
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("subtract_");
@@ -854,7 +854,7 @@ public:
 		{
 			throw dis("dynamic collection_d::subtract_ passed non-existent member");
 		}
-		return cast<collection_a<>>(variadic_operate(op, *const_cast<collection_d*>(this), range));
+		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *const_cast<collection_d*>(this), range));
 	}
 
 	inline any_a<> read_lock__(range_a<> const& arguments) const
@@ -904,15 +904,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit collection_d(any_a<> const& thing)
-		: range_d<>{ thing }
+		: range_d< _element >{ thing }
 	{}
 
 	explicit collection_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: range_d<>{ thing, any_a<>::___reference_tag___{} }
+		: range_d< _element >{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit collection_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: range_d<>{ thing, any_a<>::___duplicate_tag___{} }
+		: range_d< _element >{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

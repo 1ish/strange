@@ -307,7 +307,14 @@ public:
 				auto const exp = fast<expression_a<>>(any_kind);
 				exp.generate_cpp(version, 0, temp, false, false, true);
 				type = temp.to_string();
-				type = type.substr(0, type.find(' ', 1));
+				if (type.rfind("const& ") == type.length() - 7)
+				{
+					type = type.substr(0, type.length() - 7);
+				}
+				else if (type.rfind("& ") == type.length() - 2)
+				{
+					type = type.substr(0, type.length() - 2);
+				}
 				fixed = exp.terms_().at_index(6);
 				reference = exp.terms_().at_index(7);
 				optional = exp.terms_().at_index(8);

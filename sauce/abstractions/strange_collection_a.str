@@ -1,25 +1,28 @@
 false &&
 {	strange :
 	{	<collection> :: abstraction
-		(	// no dimensions
+		(	// dimensions
+			#key :<<>># <>,
+			#value :<<>># <>,
+			#element :<<>># <>,
 			(	// parent
-				$$<range>[],
+				$$<range>[#element],
 				{	// collection
-					has_ :# (key :#, <>),
-					has : "bool (any_a<> const& key) const { return has_(key); }",
+					has_ :# (key :<#key>#, <>),
+					has : "bool (_key const& key) const { return has_(key); }",
 
-					at_ :# (key :#, <>),
+					at_ :# (key :<#key>#, <>),
 
-					update_ := (key :#, value :# false, <>),
-					update : "void (any_a<> const& key, any_a<> const& value) { update_(key, value); }",
+					update_ := (key :<#key>#, value :<#value># false, <#value>),
+					update : "void (_key const& key, _value const& value) { update_(key, value); }",
 
-					insert_ := (key :#, value :# false, <>),
-					insert : "void (any_a<> const& key, any_a<> const& value) { insert_(key, value); }",
+					insert_ := (key :<#key>#, value :<#value># false, <>),
+					insert : "void (_key const& key, _value const& value) { insert_(key, value); }",
 
-					erase_ := (key :#, <>),
-					erase : "bool (any_a<> const& key) { return erase_(key); }",
+					erase_ := (key :<#key>#, <>),
+					erase : "bool (_key const& key) { return erase_(key); }",
 
-					clear_ := (<collection>),
+					clear_ := (<collection[<#key>, <#value>, <#element>]>),
 					clear : "void () { clear_(); }",
 
 					size_ :# (<number_data_int64>),
@@ -28,25 +31,25 @@ false &&
 					empty_ :# (<>),
 					empty : "bool () const { return empty_(); }",
 
-					push_front_ := (thing :#, <collection>),
-					push_front : "void (any_a<> const& thing) { push_front_(thing); }",
+					push_front_ := (thing :<#element>#, <collection[<#key>, <#value>, <#element>]>),
+					push_front : "void (_element const& thing) { push_front_(thing); }",
 
-					pop_front_ := (<>),
+					pop_front_ := (<#element>),
 
-					push_back_ := (thing :#, <collection>),
-					push_back : "void (any_a<> const& thing) { push_back_(thing); }",
+					push_back_ := (thing :<#element>#, <collection[<#key>, <#value>, <#element>]>),
+					push_back : "void (_element const& thing) { push_back_(thing); }",
 
-					pop_back_ := (<>),
+					pop_back_ := (<#element>),
 
-					self_assign_ := (range :<range>#, <collection>),
+					self_assign_ := (range :<range[<#element>]>#, <collection[<#key>, <#value>, <#element>]>),
 
-					self_add_ := (range :<range>#, <collection>),
+					self_add_ := (range :<range[<#element>]>#, <collection[<#key>, <#value>, <#element>]>),
 
-					add_ :# (range :<range>#, <collection>),
+					add_ :# (range :<range[<#element>]>#, <collection[<#key>, <#value>, <#element>]>),
 
-					self_subtract_ := (range :<range>#, <collection>),
+					self_subtract_ := (range :<range[<#element>]>#, <collection[<#key>, <#value>, <#element>]>),
 
-					subtract_ :# (range :<range>#, <collection>),
+					subtract_ :# (range :<range[<#element>]>#, <collection[<#key>, <#value>, <#element>]>),
 
 					read_lock_ :# (<>),
 

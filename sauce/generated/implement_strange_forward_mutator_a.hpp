@@ -25,7 +25,7 @@ inline any_a<> forward_mutator_a<_element>::set__(range_a<> const& ___arguments_
 	{
 		throw dis("forward_mutator_a::set_ passed short range");
 	}
-	auto thing = cast< _element>(*___it___);
+	auto thing = cast< _element >(*___it___);
 	return set_(thing);
 }
 
