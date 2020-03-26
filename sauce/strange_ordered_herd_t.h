@@ -403,7 +403,7 @@ public:
 		return _set.erase(sym(s));
 	}
 
-	inline collection_a<> clear_()
+	inline ___ego___ clear_()
 	{
 		clear();
 		return thing_t<___ego___>::me_();
@@ -437,7 +437,7 @@ public:
 		return _set.empty();
 	}
 
-	inline collection_a<> push_front_(any_a<> const& value)
+	inline ___ego___ push_front_(any_a<> const& value)
 	{
 		push_front(value);
 		return thing_t<___ego___>::me_();
@@ -462,7 +462,7 @@ public:
 		return result;
 	}
 
-	inline collection_a<> push_back_(any_a<> const& value)
+	inline ___ego___ push_back_(any_a<> const& value)
 	{
 		push_back(value);
 		return thing_t<___ego___>::me_();
@@ -546,7 +546,7 @@ public:
 		}
 	}
 
-	inline collection_a<> add_(range_a<> const& range) const
+	inline ___ego___ add_(range_a<> const& range) const
 	{
 		auto result = thing_t<___ego___>::me_();
 		result += range;
@@ -563,7 +563,7 @@ public:
 		}
 	}
 
-	inline collection_a<> subtract_(range_a<> const& range) const
+	inline ___ego___ subtract_(range_a<> const& range) const
 	{
 		auto result = thing_t<___ego___>::me_();
 		result -= range;

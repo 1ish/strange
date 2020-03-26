@@ -195,7 +195,7 @@ public:
 		return number_u<_primitive_>::to_int_64(_number);
 	}
 
-	inline any_a<> from_int_64_(number_data_a<int64_t> const& int_64)
+	inline ___ego___ from_int_64_(number_data_a<int64_t> const& int_64)
 	{
 		from_int_64(int_64.extract_primitive());
 		return thing_t<___ego___>::me_();
@@ -216,7 +216,7 @@ public:
 		return number_u<_primitive_>::to_uint_64(_number);
 	}
 
-	inline any_a<> from_uint_64_(number_data_a<uint64_t> const& uint_64)
+	inline ___ego___ from_uint_64_(number_data_a<uint64_t> const& uint_64)
 	{
 		from_uint_64(uint_64.extract_primitive());
 		return thing_t<___ego___>::me_();
@@ -237,7 +237,7 @@ public:
 		return number_u<_primitive_>::to_float_64(_number);
 	}
 
-	inline any_a<> from_float_64_(number_data_a<double> const& float_64)
+	inline ___ego___ from_float_64_(number_data_a<double> const& float_64)
 	{
 		from_float_64(float_64.extract_primitive());
 		return thing_t<___ego___>::me_();

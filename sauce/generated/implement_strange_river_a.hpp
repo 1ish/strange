@@ -99,12 +99,12 @@ inline any_a<> river_a<_1>::unget_char__(range_a<> const& ___arguments___)
 }
 
 template <typename _1>
-inline any_a<> river_a<_1>::unget_char_()
+inline river_a<> river_a<_1>::unget_char_()
 { assert(any_a<>::___handle___); return ___write___().unget_char_(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::unget_char_()
+inline river_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::unget_char_()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unget_char_(); }
 
 template <typename _1>
@@ -129,12 +129,12 @@ inline any_a<> river_a<_1>::put_back_char__(range_a<> const& ___arguments___)
 }
 
 template <typename _1>
-inline any_a<> river_a<_1>::put_back_char_(number_data_int8_a<> const& int_8)
+inline river_a<> river_a<_1>::put_back_char_(number_data_int8_a<> const& int_8)
 { assert(any_a<>::___handle___); return ___write___().put_back_char_(int_8); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::put_back_char_(number_data_int8_a<> const& int_8)
+inline river_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::put_back_char_(number_data_int8_a<> const& int_8)
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.put_back_char_(int_8); }
 
 template <typename _1>
@@ -194,12 +194,12 @@ inline any_a<> river_a<_1>::ignore__(range_a<> const& ___arguments___)
 }
 
 template <typename _1>
-inline any_a<> river_a<_1>::ignore_(number_data_int64_a<> const& count)
+inline river_a<> river_a<_1>::ignore_(number_data_int64_a<> const& count)
 { assert(any_a<>::___handle___); return ___write___().ignore_(count); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::ignore_(number_data_int64_a<> const& count)
+inline river_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::ignore_(number_data_int64_a<> const& count)
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.ignore_(count); }
 
 template <typename _1>
@@ -287,12 +287,12 @@ inline any_a<> river_a<_1>::seekg_beg__(range_a<> const& ___arguments___)
 }
 
 template <typename _1>
-inline any_a<> river_a<_1>::seekg_beg_(number_data_int64_a<> const& offset)
+inline river_a<> river_a<_1>::seekg_beg_(number_data_int64_a<> const& offset)
 { assert(any_a<>::___handle___); return ___write___().seekg_beg_(offset); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::seekg_beg_(number_data_int64_a<> const& offset)
+inline river_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::seekg_beg_(number_data_int64_a<> const& offset)
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekg_beg_(offset); }
 
 template <typename _1>
@@ -317,12 +317,12 @@ inline any_a<> river_a<_1>::seekg_end__(range_a<> const& ___arguments___)
 }
 
 template <typename _1>
-inline any_a<> river_a<_1>::seekg_end_(number_data_int64_a<> const& offset)
+inline river_a<> river_a<_1>::seekg_end_(number_data_int64_a<> const& offset)
 { assert(any_a<>::___handle___); return ___write___().seekg_end_(offset); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::seekg_end_(number_data_int64_a<> const& offset)
+inline river_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::seekg_end_(number_data_int64_a<> const& offset)
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekg_end_(offset); }
 
 template <typename _1>
@@ -347,12 +347,12 @@ inline any_a<> river_a<_1>::seekg_cur__(range_a<> const& ___arguments___)
 }
 
 template <typename _1>
-inline any_a<> river_a<_1>::seekg_cur_(number_data_int64_a<> const& offset)
+inline river_a<> river_a<_1>::seekg_cur_(number_data_int64_a<> const& offset)
 { assert(any_a<>::___handle___); return ___write___().seekg_cur_(offset); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::seekg_cur_(number_data_int64_a<> const& offset)
+inline river_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::seekg_cur_(number_data_int64_a<> const& offset)
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekg_cur_(offset); }
 
 template <typename _1>
@@ -401,12 +401,12 @@ inline any_a<> river_a<_1>::put_char__(range_a<> const& ___arguments___)
 }
 
 template <typename _1>
-inline any_a<> river_a<_1>::put_char_(number_data_int8_a<> const& int_8)
+inline river_a<> river_a<_1>::put_char_(number_data_int8_a<> const& int_8)
 { assert(any_a<>::___handle___); return ___write___().put_char_(int_8); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::put_char_(number_data_int8_a<> const& int_8)
+inline river_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::put_char_(number_data_int8_a<> const& int_8)
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.put_char_(int_8); }
 
 template <typename _1>
@@ -431,12 +431,12 @@ inline any_a<> river_a<_1>::write__(range_a<> const& ___arguments___)
 }
 
 template <typename _1>
-inline any_a<> river_a<_1>::write_(lake_int8_a<> const& lake)
+inline river_a<> river_a<_1>::write_(lake_int8_a<> const& lake)
 { assert(any_a<>::___handle___); return ___write___().write_(lake); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::write_(lake_int8_a<> const& lake)
+inline river_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::write_(lake_int8_a<> const& lake)
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.write_(lake); }
 
 template <typename _1>
@@ -494,12 +494,12 @@ inline any_a<> river_a<_1>::seekp_beg__(range_a<> const& ___arguments___)
 }
 
 template <typename _1>
-inline any_a<> river_a<_1>::seekp_beg_(number_data_int64_a<> const& offset)
+inline river_a<> river_a<_1>::seekp_beg_(number_data_int64_a<> const& offset)
 { assert(any_a<>::___handle___); return ___write___().seekp_beg_(offset); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::seekp_beg_(number_data_int64_a<> const& offset)
+inline river_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::seekp_beg_(number_data_int64_a<> const& offset)
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekp_beg_(offset); }
 
 template <typename _1>
@@ -524,12 +524,12 @@ inline any_a<> river_a<_1>::seekp_end__(range_a<> const& ___arguments___)
 }
 
 template <typename _1>
-inline any_a<> river_a<_1>::seekp_end_(number_data_int64_a<> const& offset)
+inline river_a<> river_a<_1>::seekp_end_(number_data_int64_a<> const& offset)
 { assert(any_a<>::___handle___); return ___write___().seekp_end_(offset); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::seekp_end_(number_data_int64_a<> const& offset)
+inline river_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::seekp_end_(number_data_int64_a<> const& offset)
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekp_end_(offset); }
 
 template <typename _1>
@@ -554,12 +554,12 @@ inline any_a<> river_a<_1>::seekp_cur__(range_a<> const& ___arguments___)
 }
 
 template <typename _1>
-inline any_a<> river_a<_1>::seekp_cur_(number_data_int64_a<> const& offset)
+inline river_a<> river_a<_1>::seekp_cur_(number_data_int64_a<> const& offset)
 { assert(any_a<>::___handle___); return ___write___().seekp_cur_(offset); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::seekp_cur_(number_data_int64_a<> const& offset)
+inline river_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::seekp_cur_(number_data_int64_a<> const& offset)
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekp_cur_(offset); }
 
 template <typename _1>
@@ -578,12 +578,12 @@ inline any_a<> river_a<_1>::flush__(range_a<> const& ___arguments___)
 }
 
 template <typename _1>
-inline any_a<> river_a<_1>::flush_()
+inline river_a<> river_a<_1>::flush_()
 { assert(any_a<>::___handle___); return ___write___().flush_(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::flush_()
+inline river_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::flush_()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.flush_(); }
 
 template <typename _1>
@@ -704,12 +704,12 @@ inline any_a<> river_a<_1>::set_good__(range_a<> const& ___arguments___)
 }
 
 template <typename _1>
-inline any_a<> river_a<_1>::set_good_(any_a<> const& value)
+inline river_a<> river_a<_1>::set_good_(any_a<> const& value)
 { assert(any_a<>::___handle___); return ___write___().set_good_(value); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::set_good_(any_a<> const& value)
+inline river_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::set_good_(any_a<> const& value)
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.set_good_(value); }
 
 template <typename _1>
@@ -734,12 +734,12 @@ inline any_a<> river_a<_1>::set_eof__(range_a<> const& ___arguments___)
 }
 
 template <typename _1>
-inline any_a<> river_a<_1>::set_eof_(any_a<> const& value)
+inline river_a<> river_a<_1>::set_eof_(any_a<> const& value)
 { assert(any_a<>::___handle___); return ___write___().set_eof_(value); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::set_eof_(any_a<> const& value)
+inline river_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::set_eof_(any_a<> const& value)
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.set_eof_(value); }
 
 template <typename _1>
@@ -764,12 +764,12 @@ inline any_a<> river_a<_1>::set_fail__(range_a<> const& ___arguments___)
 }
 
 template <typename _1>
-inline any_a<> river_a<_1>::set_fail_(any_a<> const& value)
+inline river_a<> river_a<_1>::set_fail_(any_a<> const& value)
 { assert(any_a<>::___handle___); return ___write___().set_fail_(value); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::set_fail_(any_a<> const& value)
+inline river_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::set_fail_(any_a<> const& value)
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.set_fail_(value); }
 
 template <typename _1>
@@ -794,12 +794,12 @@ inline any_a<> river_a<_1>::set_bad__(range_a<> const& ___arguments___)
 }
 
 template <typename _1>
-inline any_a<> river_a<_1>::set_bad_(any_a<> const& value)
+inline river_a<> river_a<_1>::set_bad_(any_a<> const& value)
 { assert(any_a<>::___handle___); return ___write___().set_bad_(value); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::set_bad_(any_a<> const& value)
+inline river_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::set_bad_(any_a<> const& value)
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.set_bad_(value); }
 
 template <typename _1>

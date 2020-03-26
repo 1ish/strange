@@ -17,16 +17,16 @@ false &&
 					peek_char_ := (<number_data_int8>),
 					peek_char : "int8_t () { return peek_char_().extract_primitive(); }",
 
-					unget_char_ := (<>),
+					unget_char_ := (<river>),
 					unget_char : "void () { unget_char_(); }",
 
-					put_back_char_ := (int_8 :<number_data_int8>#, <>),
+					put_back_char_ := (int_8 :<number_data_int8>#, <river>),
 					put_back_char : "void (int8_t int_8) { put_back_char_(num(int_8)); }",
 
 					get_line_ := (count :<number_data_int64>#, delimiter :<number_data_int8>#, <lake_int8>),
 					get_line : "std::vector<int8_t> (int64_t count, int8_t delimiter) { return get_line_(num(count), num(delimiter)).extract_vector(); }",
 
-					ignore_ := (count :<number_data_int64>#, <>),
+					ignore_ := (count :<number_data_int64>#, <river>),
 					ignore : "void (int64_t count) { ignore_(num(count)); }",
 
 					read_ := (count :<number_data_int64>#, <lake_int8>),
@@ -36,39 +36,39 @@ false &&
 					tellg_ :# (<number_data_int64>),
 					tellg : "int64_t () const { return tellg_().extract_primitive(); }",
 
-					seekg_beg_ := (offset :<number_data_int64>#, <>),
+					seekg_beg_ := (offset :<number_data_int64>#, <river>),
 					seekg_beg : "void (int64_t offset) { seekg_beg_(num(offset)); }",
 
-					seekg_end_ := (offset :<number_data_int64>#, <>),
+					seekg_end_ := (offset :<number_data_int64>#, <river>),
 					seekg_end : "void (int64_t offset) { seekg_end_(num(offset)); }",
 
-					seekg_cur_ := (offset :<number_data_int64>#, <>),
+					seekg_cur_ := (offset :<number_data_int64>#, <river>),
 					seekg_cur : "void (int64_t offset) { seekg_cur_(num(offset)); }",
 
 					sync_ := (<>),
 					sync : "bool () { return sync_(); }",
 
 					// river output
-					put_char_ := (int_8 :<number_data_int8>#, <>),
+					put_char_ := (int_8 :<number_data_int8>#, <river>),
 					put_char : "void (int8_t int_8) { put_char_(num(int_8)); }",
 
-					write_ := (lake :<lake_int8>#, <>),
+					write_ := (lake :<lake_int8>#, <river>),
 					write : "void (std::vector<int8_t> const& lake) { write_(lake_int8_create(lake)); }",
 					write_string : "void (std::string const& str) { write_(lake_from_string(str)); }",
 
 					tellp_ :# (<number_data_int64>),
 					tellp : "int64_t () const { return tellp_().extract_primitive(); }",
 
-					seekp_beg_ := (offset :<number_data_int64>#, <>),
+					seekp_beg_ := (offset :<number_data_int64>#, <river>),
 					seekp_beg : "void (int64_t offset) { seekp_beg_(num(offset)); }",
 
-					seekp_end_ := (offset :<number_data_int64>#, <>),
+					seekp_end_ := (offset :<number_data_int64>#, <river>),
 					seekp_end : "void (int64_t offset) { seekp_end_(num(offset)); }",
 
-					seekp_cur_ := (offset :<number_data_int64>#, <>),
+					seekp_cur_ := (offset :<number_data_int64>#, <river>),
 					seekp_cur : "void (int64_t offset) { seekp_cur_(num(offset)); }",
 
-					flush_ := (<>),
+					flush_ := (<river>),
 					flush : "void () { flush_(); }",
 
 					// river
@@ -84,16 +84,16 @@ false &&
 					bad_ :# (<>),
 					bad : "bool () const { return bad_(); }",
 
-					set_good_ := (value :#, <>),
+					set_good_ := (value :#, <river>),
 					set_good : "void (bool value) { set_good_(boole(value)); }",
 
-					set_eof_ := (value :#, <>),
+					set_eof_ := (value :#, <river>),
 					set_eof : "void (bool value) { set_eof_(boole(value)); }",
 
-					set_fail_ := (value :#, <>),
+					set_fail_ := (value :#, <river>),
 					set_fail : "void (bool value) { set_fail_(boole(value)); }",
 
-					set_bad_ := (value :#, <>),
+					set_bad_ := (value :#, <river>),
 					set_bad : "void (bool value) { set_bad_(boole(value)); }",
 
 					filename_ :# (<lake_int8>),

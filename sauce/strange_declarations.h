@@ -25,20 +25,8 @@ class one_t;
 #include "generated/declare_strange_random_access_mutator_a.hpp"
 #include "generated/declare_strange_random_access_mutator_data_a.hpp"
 #include "generated/declare_strange_symbol_a.hpp"
-#include "generated/declare_strange_lake_a.hpp"
-
-namespace strange
-{
-template <typename _1_ = void>
-using lake_int8_a = lake_a<int8_t>;
-}
-
 #include "generated/declare_strange_cat_a.hpp"
 #include "generated/declare_strange_kind_a.hpp"
-#include "generated/declare_strange_inventory_a.hpp"
-#include "generated/declare_strange_unordered_herd_a.hpp"
-#include "generated/declare_strange_shoal_a.hpp"
-#include "generated/declare_strange_unordered_shoal_a.hpp"
 #include "generated/declare_strange_number_data_a.hpp"
 
 namespace strange
@@ -71,14 +59,26 @@ template <> struct std::hash<strange::any_a<>>
 	}
 };
 
+#include "generated/declare_strange_lake_a.hpp"
+
+namespace strange
+{
+	template <typename _1_ = void>
+	using lake_int8_a = lake_a<int8_t>;
+}
+
 #include "generated/declare_strange_misunderstanding_a.hpp"
 #include "generated/declare_strange_range_a.hpp"
 #include "generated/declare_strange_collection_a.hpp"
-#include "generated/declare_strange_ordered_shoal_a.hpp"
+#include "generated/declare_strange_inventory_a.hpp"
 #include "generated/declare_strange_flock_a.hpp"
 #include "generated/declare_strange_squad_a.hpp"
 #include "generated/declare_strange_herd_a.hpp"
 #include "generated/declare_strange_ordered_herd_a.hpp"
+#include "generated/declare_strange_unordered_herd_a.hpp"
+#include "generated/declare_strange_shoal_a.hpp"
+#include "generated/declare_strange_ordered_shoal_a.hpp"
+#include "generated/declare_strange_unordered_shoal_a.hpp"
 #include "generated/declare_strange_data_a.hpp"
 #include "generated/declare_strange_number_a.hpp"
 #include "generated/declare_strange_river_a.hpp"

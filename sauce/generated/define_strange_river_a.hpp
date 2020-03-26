@@ -36,13 +36,13 @@ public:
 
 	inline any_a<> unget_char__(range_a<> const& ___arguments___);
 
-	inline any_a<> unget_char_();
+	inline river_a<> unget_char_();
 
 	inline void unget_char();
 
 	inline any_a<> put_back_char__(range_a<> const& ___arguments___);
 
-	inline any_a<> put_back_char_(number_data_int8_a<> const& int_8);
+	inline river_a<> put_back_char_(number_data_int8_a<> const& int_8);
 
 	inline void put_back_char(int8_t int_8 );
 
@@ -54,7 +54,7 @@ public:
 
 	inline any_a<> ignore__(range_a<> const& ___arguments___);
 
-	inline any_a<> ignore_(number_data_int64_a<> const& count);
+	inline river_a<> ignore_(number_data_int64_a<> const& count);
 
 	inline void ignore(int64_t count );
 
@@ -74,19 +74,19 @@ public:
 
 	inline any_a<> seekg_beg__(range_a<> const& ___arguments___);
 
-	inline any_a<> seekg_beg_(number_data_int64_a<> const& offset);
+	inline river_a<> seekg_beg_(number_data_int64_a<> const& offset);
 
 	inline void seekg_beg(int64_t offset );
 
 	inline any_a<> seekg_end__(range_a<> const& ___arguments___);
 
-	inline any_a<> seekg_end_(number_data_int64_a<> const& offset);
+	inline river_a<> seekg_end_(number_data_int64_a<> const& offset);
 
 	inline void seekg_end(int64_t offset );
 
 	inline any_a<> seekg_cur__(range_a<> const& ___arguments___);
 
-	inline any_a<> seekg_cur_(number_data_int64_a<> const& offset);
+	inline river_a<> seekg_cur_(number_data_int64_a<> const& offset);
 
 	inline void seekg_cur(int64_t offset );
 
@@ -98,13 +98,13 @@ public:
 
 	inline any_a<> put_char__(range_a<> const& ___arguments___);
 
-	inline any_a<> put_char_(number_data_int8_a<> const& int_8);
+	inline river_a<> put_char_(number_data_int8_a<> const& int_8);
 
 	inline void put_char(int8_t int_8 );
 
 	inline any_a<> write__(range_a<> const& ___arguments___);
 
-	inline any_a<> write_(lake_int8_a<> const& lake);
+	inline river_a<> write_(lake_int8_a<> const& lake);
 
 	inline void write(std :: vector < int8_t > const & lake );
 
@@ -118,25 +118,25 @@ public:
 
 	inline any_a<> seekp_beg__(range_a<> const& ___arguments___);
 
-	inline any_a<> seekp_beg_(number_data_int64_a<> const& offset);
+	inline river_a<> seekp_beg_(number_data_int64_a<> const& offset);
 
 	inline void seekp_beg(int64_t offset );
 
 	inline any_a<> seekp_end__(range_a<> const& ___arguments___);
 
-	inline any_a<> seekp_end_(number_data_int64_a<> const& offset);
+	inline river_a<> seekp_end_(number_data_int64_a<> const& offset);
 
 	inline void seekp_end(int64_t offset );
 
 	inline any_a<> seekp_cur__(range_a<> const& ___arguments___);
 
-	inline any_a<> seekp_cur_(number_data_int64_a<> const& offset);
+	inline river_a<> seekp_cur_(number_data_int64_a<> const& offset);
 
 	inline void seekp_cur(int64_t offset );
 
 	inline any_a<> flush__(range_a<> const& ___arguments___);
 
-	inline any_a<> flush_();
+	inline river_a<> flush_();
 
 	inline void flush();
 
@@ -166,25 +166,25 @@ public:
 
 	inline any_a<> set_good__(range_a<> const& ___arguments___);
 
-	inline any_a<> set_good_(any_a<> const& value);
+	inline river_a<> set_good_(any_a<> const& value);
 
 	inline void set_good(bool value );
 
 	inline any_a<> set_eof__(range_a<> const& ___arguments___);
 
-	inline any_a<> set_eof_(any_a<> const& value);
+	inline river_a<> set_eof_(any_a<> const& value);
 
 	inline void set_eof(bool value );
 
 	inline any_a<> set_fail__(range_a<> const& ___arguments___);
 
-	inline any_a<> set_fail_(any_a<> const& value);
+	inline river_a<> set_fail_(any_a<> const& value);
 
 	inline void set_fail(bool value );
 
 	inline any_a<> set_bad__(range_a<> const& ___arguments___);
 
-	inline any_a<> set_bad_(any_a<> const& value);
+	inline river_a<> set_bad_(any_a<> const& value);
 
 	inline void set_bad(bool value );
 
@@ -205,41 +205,41 @@ protected:
 		virtual int8_t get_char() = 0;
 		virtual number_data_int8_a<> peek_char_() = 0;
 		virtual int8_t peek_char() = 0;
-		virtual any_a<> unget_char_() = 0;
+		virtual river_a<> unget_char_() = 0;
 		virtual void unget_char() = 0;
-		virtual any_a<> put_back_char_(number_data_int8_a<> const& int_8) = 0;
+		virtual river_a<> put_back_char_(number_data_int8_a<> const& int_8) = 0;
 		virtual void put_back_char(int8_t int_8 ) = 0;
 		virtual lake_int8_a<> get_line_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter) = 0;
 		virtual std :: vector < int8_t > get_line(int64_t count , int8_t delimiter ) = 0;
-		virtual any_a<> ignore_(number_data_int64_a<> const& count) = 0;
+		virtual river_a<> ignore_(number_data_int64_a<> const& count) = 0;
 		virtual void ignore(int64_t count ) = 0;
 		virtual lake_int8_a<> read_(number_data_int64_a<> const& count) = 0;
 		virtual std :: vector < int8_t > read(int64_t count ) = 0;
 		virtual std :: string read_string(int64_t count ) = 0;
 		virtual number_data_int64_a<> tellg_() const = 0;
 		virtual int64_t tellg() const = 0;
-		virtual any_a<> seekg_beg_(number_data_int64_a<> const& offset) = 0;
+		virtual river_a<> seekg_beg_(number_data_int64_a<> const& offset) = 0;
 		virtual void seekg_beg(int64_t offset ) = 0;
-		virtual any_a<> seekg_end_(number_data_int64_a<> const& offset) = 0;
+		virtual river_a<> seekg_end_(number_data_int64_a<> const& offset) = 0;
 		virtual void seekg_end(int64_t offset ) = 0;
-		virtual any_a<> seekg_cur_(number_data_int64_a<> const& offset) = 0;
+		virtual river_a<> seekg_cur_(number_data_int64_a<> const& offset) = 0;
 		virtual void seekg_cur(int64_t offset ) = 0;
 		virtual any_a<> sync_() = 0;
 		virtual bool sync() = 0;
-		virtual any_a<> put_char_(number_data_int8_a<> const& int_8) = 0;
+		virtual river_a<> put_char_(number_data_int8_a<> const& int_8) = 0;
 		virtual void put_char(int8_t int_8 ) = 0;
-		virtual any_a<> write_(lake_int8_a<> const& lake) = 0;
+		virtual river_a<> write_(lake_int8_a<> const& lake) = 0;
 		virtual void write(std :: vector < int8_t > const & lake ) = 0;
 		virtual void write_string(std :: string const & str ) = 0;
 		virtual number_data_int64_a<> tellp_() const = 0;
 		virtual int64_t tellp() const = 0;
-		virtual any_a<> seekp_beg_(number_data_int64_a<> const& offset) = 0;
+		virtual river_a<> seekp_beg_(number_data_int64_a<> const& offset) = 0;
 		virtual void seekp_beg(int64_t offset ) = 0;
-		virtual any_a<> seekp_end_(number_data_int64_a<> const& offset) = 0;
+		virtual river_a<> seekp_end_(number_data_int64_a<> const& offset) = 0;
 		virtual void seekp_end(int64_t offset ) = 0;
-		virtual any_a<> seekp_cur_(number_data_int64_a<> const& offset) = 0;
+		virtual river_a<> seekp_cur_(number_data_int64_a<> const& offset) = 0;
 		virtual void seekp_cur(int64_t offset ) = 0;
-		virtual any_a<> flush_() = 0;
+		virtual river_a<> flush_() = 0;
 		virtual void flush() = 0;
 		virtual any_a<> good_() const = 0;
 		virtual bool good() const = 0;
@@ -249,13 +249,13 @@ protected:
 		virtual bool fail() const = 0;
 		virtual any_a<> bad_() const = 0;
 		virtual bool bad() const = 0;
-		virtual any_a<> set_good_(any_a<> const& value) = 0;
+		virtual river_a<> set_good_(any_a<> const& value) = 0;
 		virtual void set_good(bool value ) = 0;
-		virtual any_a<> set_eof_(any_a<> const& value) = 0;
+		virtual river_a<> set_eof_(any_a<> const& value) = 0;
 		virtual void set_eof(bool value ) = 0;
-		virtual any_a<> set_fail_(any_a<> const& value) = 0;
+		virtual river_a<> set_fail_(any_a<> const& value) = 0;
 		virtual void set_fail(bool value ) = 0;
-		virtual any_a<> set_bad_(any_a<> const& value) = 0;
+		virtual river_a<> set_bad_(any_a<> const& value) = 0;
 		virtual void set_bad(bool value ) = 0;
 		virtual lake_int8_a<> filename_() const = 0;
 		virtual std :: string filename() const = 0;
@@ -295,11 +295,11 @@ protected:
 
 		virtual inline int8_t peek_char() final;
 
-		virtual inline any_a<> unget_char_() final;
+		virtual inline river_a<> unget_char_() final;
 
 		virtual inline void unget_char() final;
 
-		virtual inline any_a<> put_back_char_(number_data_int8_a<> const& int_8) final;
+		virtual inline river_a<> put_back_char_(number_data_int8_a<> const& int_8) final;
 
 		virtual inline void put_back_char(int8_t int_8 ) final;
 
@@ -307,7 +307,7 @@ protected:
 
 		virtual inline std :: vector < int8_t > get_line(int64_t count , int8_t delimiter ) final;
 
-		virtual inline any_a<> ignore_(number_data_int64_a<> const& count) final;
+		virtual inline river_a<> ignore_(number_data_int64_a<> const& count) final;
 
 		virtual inline void ignore(int64_t count ) final;
 
@@ -321,15 +321,15 @@ protected:
 
 		virtual inline int64_t tellg() const final;
 
-		virtual inline any_a<> seekg_beg_(number_data_int64_a<> const& offset) final;
+		virtual inline river_a<> seekg_beg_(number_data_int64_a<> const& offset) final;
 
 		virtual inline void seekg_beg(int64_t offset ) final;
 
-		virtual inline any_a<> seekg_end_(number_data_int64_a<> const& offset) final;
+		virtual inline river_a<> seekg_end_(number_data_int64_a<> const& offset) final;
 
 		virtual inline void seekg_end(int64_t offset ) final;
 
-		virtual inline any_a<> seekg_cur_(number_data_int64_a<> const& offset) final;
+		virtual inline river_a<> seekg_cur_(number_data_int64_a<> const& offset) final;
 
 		virtual inline void seekg_cur(int64_t offset ) final;
 
@@ -337,11 +337,11 @@ protected:
 
 		virtual inline bool sync() final;
 
-		virtual inline any_a<> put_char_(number_data_int8_a<> const& int_8) final;
+		virtual inline river_a<> put_char_(number_data_int8_a<> const& int_8) final;
 
 		virtual inline void put_char(int8_t int_8 ) final;
 
-		virtual inline any_a<> write_(lake_int8_a<> const& lake) final;
+		virtual inline river_a<> write_(lake_int8_a<> const& lake) final;
 
 		virtual inline void write(std :: vector < int8_t > const & lake ) final;
 
@@ -351,19 +351,19 @@ protected:
 
 		virtual inline int64_t tellp() const final;
 
-		virtual inline any_a<> seekp_beg_(number_data_int64_a<> const& offset) final;
+		virtual inline river_a<> seekp_beg_(number_data_int64_a<> const& offset) final;
 
 		virtual inline void seekp_beg(int64_t offset ) final;
 
-		virtual inline any_a<> seekp_end_(number_data_int64_a<> const& offset) final;
+		virtual inline river_a<> seekp_end_(number_data_int64_a<> const& offset) final;
 
 		virtual inline void seekp_end(int64_t offset ) final;
 
-		virtual inline any_a<> seekp_cur_(number_data_int64_a<> const& offset) final;
+		virtual inline river_a<> seekp_cur_(number_data_int64_a<> const& offset) final;
 
 		virtual inline void seekp_cur(int64_t offset ) final;
 
-		virtual inline any_a<> flush_() final;
+		virtual inline river_a<> flush_() final;
 
 		virtual inline void flush() final;
 
@@ -383,19 +383,19 @@ protected:
 
 		virtual inline bool bad() const final;
 
-		virtual inline any_a<> set_good_(any_a<> const& value) final;
+		virtual inline river_a<> set_good_(any_a<> const& value) final;
 
 		virtual inline void set_good(bool value ) final;
 
-		virtual inline any_a<> set_eof_(any_a<> const& value) final;
+		virtual inline river_a<> set_eof_(any_a<> const& value) final;
 
 		virtual inline void set_eof(bool value ) final;
 
-		virtual inline any_a<> set_fail_(any_a<> const& value) final;
+		virtual inline river_a<> set_fail_(any_a<> const& value) final;
 
 		virtual inline void set_fail(bool value ) final;
 
-		virtual inline any_a<> set_bad_(any_a<> const& value) final;
+		virtual inline river_a<> set_bad_(any_a<> const& value) final;
 
 		virtual inline void set_bad(bool value ) final;
 
@@ -740,7 +740,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> unget_char_()
+	inline river_a<> unget_char_()
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("unget_char_");
@@ -748,7 +748,7 @@ public:
 		{
 			throw dis("dynamic river_d::unget_char_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this));
+		return cast<river_a<>>(variadic_operate(op, *this));
 	}
 
 	inline void unget_char()
@@ -765,7 +765,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> put_back_char_(number_data_int8_a<> const& int_8)
+	inline river_a<> put_back_char_(number_data_int8_a<> const& int_8)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("put_back_char_");
@@ -773,7 +773,7 @@ public:
 		{
 			throw dis("dynamic river_d::put_back_char_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this, int_8));
+		return cast<river_a<>>(variadic_operate(op, *this, int_8));
 	}
 
 	inline void put_back_char(int8_t int_8 )
@@ -815,7 +815,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> ignore_(number_data_int64_a<> const& count)
+	inline river_a<> ignore_(number_data_int64_a<> const& count)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("ignore_");
@@ -823,7 +823,7 @@ public:
 		{
 			throw dis("dynamic river_d::ignore_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this, count));
+		return cast<river_a<>>(variadic_operate(op, *this, count));
 	}
 
 	inline void ignore(int64_t count )
@@ -893,7 +893,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> seekg_beg_(number_data_int64_a<> const& offset)
+	inline river_a<> seekg_beg_(number_data_int64_a<> const& offset)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("seekg_beg_");
@@ -901,7 +901,7 @@ public:
 		{
 			throw dis("dynamic river_d::seekg_beg_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this, offset));
+		return cast<river_a<>>(variadic_operate(op, *this, offset));
 	}
 
 	inline void seekg_beg(int64_t offset )
@@ -918,7 +918,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> seekg_end_(number_data_int64_a<> const& offset)
+	inline river_a<> seekg_end_(number_data_int64_a<> const& offset)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("seekg_end_");
@@ -926,7 +926,7 @@ public:
 		{
 			throw dis("dynamic river_d::seekg_end_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this, offset));
+		return cast<river_a<>>(variadic_operate(op, *this, offset));
 	}
 
 	inline void seekg_end(int64_t offset )
@@ -943,7 +943,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> seekg_cur_(number_data_int64_a<> const& offset)
+	inline river_a<> seekg_cur_(number_data_int64_a<> const& offset)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("seekg_cur_");
@@ -951,7 +951,7 @@ public:
 		{
 			throw dis("dynamic river_d::seekg_cur_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this, offset));
+		return cast<river_a<>>(variadic_operate(op, *this, offset));
 	}
 
 	inline void seekg_cur(int64_t offset )
@@ -993,7 +993,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> put_char_(number_data_int8_a<> const& int_8)
+	inline river_a<> put_char_(number_data_int8_a<> const& int_8)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("put_char_");
@@ -1001,7 +1001,7 @@ public:
 		{
 			throw dis("dynamic river_d::put_char_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this, int_8));
+		return cast<river_a<>>(variadic_operate(op, *this, int_8));
 	}
 
 	inline void put_char(int8_t int_8 )
@@ -1018,7 +1018,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> write_(lake_int8_a<> const& lake)
+	inline river_a<> write_(lake_int8_a<> const& lake)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("write_");
@@ -1026,7 +1026,7 @@ public:
 		{
 			throw dis("dynamic river_d::write_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this, lake));
+		return cast<river_a<>>(variadic_operate(op, *this, lake));
 	}
 
 	inline void write(std :: vector < int8_t > const & lake )
@@ -1071,7 +1071,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> seekp_beg_(number_data_int64_a<> const& offset)
+	inline river_a<> seekp_beg_(number_data_int64_a<> const& offset)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("seekp_beg_");
@@ -1079,7 +1079,7 @@ public:
 		{
 			throw dis("dynamic river_d::seekp_beg_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this, offset));
+		return cast<river_a<>>(variadic_operate(op, *this, offset));
 	}
 
 	inline void seekp_beg(int64_t offset )
@@ -1096,7 +1096,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> seekp_end_(number_data_int64_a<> const& offset)
+	inline river_a<> seekp_end_(number_data_int64_a<> const& offset)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("seekp_end_");
@@ -1104,7 +1104,7 @@ public:
 		{
 			throw dis("dynamic river_d::seekp_end_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this, offset));
+		return cast<river_a<>>(variadic_operate(op, *this, offset));
 	}
 
 	inline void seekp_end(int64_t offset )
@@ -1121,7 +1121,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> seekp_cur_(number_data_int64_a<> const& offset)
+	inline river_a<> seekp_cur_(number_data_int64_a<> const& offset)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("seekp_cur_");
@@ -1129,7 +1129,7 @@ public:
 		{
 			throw dis("dynamic river_d::seekp_cur_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this, offset));
+		return cast<river_a<>>(variadic_operate(op, *this, offset));
 	}
 
 	inline void seekp_cur(int64_t offset )
@@ -1146,7 +1146,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> flush_()
+	inline river_a<> flush_()
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("flush_");
@@ -1154,7 +1154,7 @@ public:
 		{
 			throw dis("dynamic river_d::flush_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this));
+		return cast<river_a<>>(variadic_operate(op, *this));
 	}
 
 	inline void flush()
@@ -1271,7 +1271,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> set_good_(any_a<> const& value)
+	inline river_a<> set_good_(any_a<> const& value)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("set_good_");
@@ -1279,7 +1279,7 @@ public:
 		{
 			throw dis("dynamic river_d::set_good_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this, value));
+		return cast<river_a<>>(variadic_operate(op, *this, value));
 	}
 
 	inline void set_good(bool value )
@@ -1296,7 +1296,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> set_eof_(any_a<> const& value)
+	inline river_a<> set_eof_(any_a<> const& value)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("set_eof_");
@@ -1304,7 +1304,7 @@ public:
 		{
 			throw dis("dynamic river_d::set_eof_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this, value));
+		return cast<river_a<>>(variadic_operate(op, *this, value));
 	}
 
 	inline void set_eof(bool value )
@@ -1321,7 +1321,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> set_fail_(any_a<> const& value)
+	inline river_a<> set_fail_(any_a<> const& value)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("set_fail_");
@@ -1329,7 +1329,7 @@ public:
 		{
 			throw dis("dynamic river_d::set_fail_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this, value));
+		return cast<river_a<>>(variadic_operate(op, *this, value));
 	}
 
 	inline void set_fail(bool value )
@@ -1346,7 +1346,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> set_bad_(any_a<> const& value)
+	inline river_a<> set_bad_(any_a<> const& value)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("set_bad_");
@@ -1354,7 +1354,7 @@ public:
 		{
 			throw dis("dynamic river_d::set_bad_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this, value));
+		return cast<river_a<>>(variadic_operate(op, *this, value));
 	}
 
 	inline void set_bad(bool value )

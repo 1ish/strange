@@ -2,19 +2,19 @@
 namespace strange
 {
 
-template <typename _1 = void>
+template <typename _element = any_a<> >
 class inventory_d;
 
-template <typename _1 = void>
-inline inventory_d<_1> ___inventory_dynamic___(any_a<> const& thing); 
+template <typename _element = any_a<> >
+inline inventory_d<_element> ___inventory_dynamic___(any_a<> const& thing); 
 
-template <typename _1>
-class inventory_a : public collection_a<>
+template <typename _element>
+class inventory_a : public collection_a< number_data_int64_a<> , _element , _element >
 {
 public:
 	inline bool has_index(int64_t index ) const;
 
-	inline any_a < > at_index(int64_t index ) const;
+	inline _element at_index(int64_t index ) const;
 
 	inline void update_index(int64_t index , any_a < > const & value );
 
@@ -31,10 +31,10 @@ public:
 	inline random_access_mutator_a< any_a<> > mutate_end_();
 
 protected:
-	struct ___inventory_a_handle_base___ : collection_a<>::___collection_a_handle_base___
+	struct ___inventory_a_handle_base___ : collection_a< number_data_int64_a<> , _element , _element >::___collection_a_handle_base___
 	{
 		virtual bool has_index(int64_t index ) const = 0;
-		virtual any_a < > at_index(int64_t index ) const = 0;
+		virtual _element at_index(int64_t index ) const = 0;
 		virtual void update_index(int64_t index , any_a < > const & value ) = 0;
 		virtual bool insert_index(int64_t index , any_a < > const & value ) = 0;
 		virtual bool erase_index(int64_t index ) = 0;
@@ -43,26 +43,26 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___inventory_a_handle_base___>
-	struct ___inventory_a_handle___ : collection_a<>::template ___collection_a_handle___<___TTT___, ___DHB___>
+	struct ___inventory_a_handle___ : collection_a< number_data_int64_a<> , _element , _element >::template ___collection_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___inventory_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: collection_a<>::template ___collection_a_handle___<___TTT___, ___DHB___>{ value }
+			: collection_a< number_data_int64_a<> , _element , _element >::template ___collection_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___inventory_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: collection_a<>::template ___collection_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: collection_a< number_data_int64_a<> , _element , _element >::template ___collection_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
 		inline ___inventory_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
-			: collection_a<>::template ___collection_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
+			: collection_a< number_data_int64_a<> , _element , _element >::template ___collection_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline bool has_index(int64_t index ) const final;
 
-		virtual inline any_a < > at_index(int64_t index ) const final;
+		virtual inline _element at_index(int64_t index ) const final;
 
 		virtual inline void update_index(int64_t index , any_a < > const & value ) final;
 
@@ -154,37 +154,37 @@ public:
 	inline inventory_a() = default;
 
 	inline inventory_a(inventory_a& other, any_a<>::___reference_tag___) noexcept
-		: collection_a<>(other, any_a<>::___reference_tag___{})
+		: collection_a< number_data_int64_a<> , _element , _element >(other, any_a<>::___reference_tag___{})
 	{}
 
 	inline inventory_a(inventory_a& other, any_a<>::___duplicate_tag___) noexcept
-		: collection_a<>(other, any_a<>::___duplicate_tag___{})
+		: collection_a< number_data_int64_a<> , _element , _element >(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline inventory_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: collection_a<>{ handle }
+		: collection_a< number_data_int64_a<> , _element , _element >{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___inventory_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
 	explicit inline inventory_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
-		: collection_a<>(handle, any_a<>::___reference_tag___{})
+		: collection_a< number_data_int64_a<> , _element , _element >(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___inventory_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<inventory_a, std::decay_t<___TTT___>>::value>>
 	explicit inline inventory_a(___TTT___ value) noexcept
-		: collection_a<>{ std::make_shared<___inventory_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: collection_a< number_data_int64_a<> , _element , _element >{ std::make_shared<___inventory_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
 	explicit inline inventory_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
-		: collection_a<>{ std::make_shared<___inventory_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
+		: collection_a< number_data_int64_a<> , _element , _element >{ std::make_shared<___inventory_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
@@ -217,7 +217,7 @@ public:
 		{
 			return inventory_a{ thing.___handle___ };
 		}
-		return inventory_a{ inventory_d<_1>{ thing } };
+		return inventory_a{ inventory_d<_element>{ thing } };
 	}
 
 	static inline inventory_a ___cast_ref___(any_a<>& thing)
@@ -227,7 +227,7 @@ public:
 		{
 			return inventory_a(thing.___handle___, any_a<>::___reference_tag___{});
 		}
-		return inventory_a{ inventory_d<_1>(thing, any_a<>::___reference_tag___{}) };
+		return inventory_a{ inventory_d<_element>(thing, any_a<>::___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -242,7 +242,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = collection_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = collection_a< number_data_int64_a<> , _element , _element >::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -261,7 +261,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = collection_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = collection_a< number_data_int64_a<> , _element , _element >::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -273,7 +273,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = collection_a<>::template ___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = collection_a< number_data_int64_a<> , _element , _element >::template ___operations___<___unordered_shoal_a___>();
 			operations.update_string("mutate_begin_", native_mutation_t<inventory_a>::create(&inventory_a::mutate_begin__));
 			operations.update_string("mutate_end_", native_mutation_t<inventory_a>::create(&inventory_a::mutate_end__));
 			return operations;
@@ -288,24 +288,24 @@ public:
 	}
 }; // class inventory_a
 
-template <typename _1>
-class inventory_d : public collection_d<>
+template <typename _element>
+class inventory_d : public collection_d< number_data_int64_a<> , _element , _element >
 {
 public:
 	inline bool has_index(int64_t index ) const
-	{ return has_(num(index)); }
+	{ return collection_d<number_data_int64_a<>, _element , _element>::has_(num(index)); }
 
-	inline any_a < > at_index(int64_t index ) const
-	{ return at_(num(index)); }
+	inline _element at_index(int64_t index ) const
+	{ return collection_d<number_data_int64_a<>, _element , _element>::at_(num(index)); }
 
 	inline void update_index(int64_t index , any_a < > const & value )
-	{ update_(num(index), value); }
+	{ collection_d<number_data_int64_a<>, _element , _element>::update_(num(index), value); }
 
 	inline bool insert_index(int64_t index , any_a < > const & value )
-	{ return insert_(num(index), value); }
+	{ return collection_d<number_data_int64_a<>, _element , _element>::insert_(num(index), value); }
 
 	inline bool erase_index(int64_t index )
-	{ return erase_(num(index)); }
+	{ return collection_d<number_data_int64_a<>, _element , _element>::erase_(num(index)); }
 
 	inline any_a<> mutate_begin__(range_a<> const& arguments)
 	{
@@ -354,15 +354,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit inventory_d(any_a<> const& thing)
-		: collection_d<>{ thing }
+		: collection_d< number_data_int64_a<> , _element , _element >{ thing }
 	{}
 
 	explicit inventory_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: collection_d<>{ thing, any_a<>::___reference_tag___{} }
+		: collection_d< number_data_int64_a<> , _element , _element >{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit inventory_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: collection_d<>{ thing, any_a<>::___duplicate_tag___{} }
+		: collection_d< number_data_int64_a<> , _element , _element >{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

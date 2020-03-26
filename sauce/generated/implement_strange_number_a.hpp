@@ -430,12 +430,12 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_int_64_(_number_data_int64 const& int_64)
+inline number_a< _number_data_int64 , _number_data_uint64 , _number_data_double > number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_int_64_(_number_data_int64 const& int_64)
 { assert(any_a<>::___handle___); return ___write___().from_int_64_(int_64); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::from_int_64_(_number_data_int64 const& int_64)
+inline number_a< _number_data_int64 , _number_data_uint64 , _number_data_double > number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::from_int_64_(_number_data_int64 const& int_64)
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_int_64_(int_64); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
@@ -484,12 +484,12 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_uint_64_(_number_data_uint64 const& uint_64)
+inline number_a< _number_data_int64 , _number_data_uint64 , _number_data_double > number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_uint_64_(_number_data_uint64 const& uint_64)
 { assert(any_a<>::___handle___); return ___write___().from_uint_64_(uint_64); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::from_uint_64_(_number_data_uint64 const& uint_64)
+inline number_a< _number_data_int64 , _number_data_uint64 , _number_data_double > number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::from_uint_64_(_number_data_uint64 const& uint_64)
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_uint_64_(uint_64); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
@@ -538,12 +538,12 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_float_64_(_number_data_double const& float_64)
+inline number_a< _number_data_int64 , _number_data_uint64 , _number_data_double > number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_float_64_(_number_data_double const& float_64)
 { assert(any_a<>::___handle___); return ___write___().from_float_64_(float_64); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::from_float_64_(_number_data_double const& float_64)
+inline number_a< _number_data_int64 , _number_data_uint64 , _number_data_double > number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::from_float_64_(_number_data_double const& float_64)
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_float_64_(float_64); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>

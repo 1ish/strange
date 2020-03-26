@@ -104,7 +104,7 @@ public:
 
 	inline any_a<> from_int_64__(range_a<> const& ___arguments___);
 
-	inline any_a<> from_int_64_(_number_data_int64 const& int_64);
+	inline number_a< _number_data_int64 , _number_data_uint64 , _number_data_double > from_int_64_(_number_data_int64 const& int_64);
 
 	inline void from_int_64(int64_t int_64 );
 
@@ -116,7 +116,7 @@ public:
 
 	inline any_a<> from_uint_64__(range_a<> const& ___arguments___);
 
-	inline any_a<> from_uint_64_(_number_data_uint64 const& uint_64);
+	inline number_a< _number_data_int64 , _number_data_uint64 , _number_data_double > from_uint_64_(_number_data_uint64 const& uint_64);
 
 	inline void from_uint_64(uint64_t uint_64 );
 
@@ -128,7 +128,7 @@ public:
 
 	inline any_a<> from_float_64__(range_a<> const& ___arguments___);
 
-	inline any_a<> from_float_64_(_number_data_double const& float_64);
+	inline number_a< _number_data_int64 , _number_data_uint64 , _number_data_double > from_float_64_(_number_data_double const& float_64);
 
 	inline void from_float_64(double float_64 );
 
@@ -198,15 +198,15 @@ protected:
 		virtual number_a<> modulo_(number_a<> const& number) const = 0;
 		virtual _number_data_int64 to_int_64_() const = 0;
 		virtual int64_t to_int_64() const = 0;
-		virtual any_a<> from_int_64_(_number_data_int64 const& int_64) = 0;
+		virtual number_a< _number_data_int64 , _number_data_uint64 , _number_data_double > from_int_64_(_number_data_int64 const& int_64) = 0;
 		virtual void from_int_64(int64_t int_64 ) = 0;
 		virtual _number_data_uint64 to_uint_64_() const = 0;
 		virtual uint64_t to_uint_64() const = 0;
-		virtual any_a<> from_uint_64_(_number_data_uint64 const& uint_64) = 0;
+		virtual number_a< _number_data_int64 , _number_data_uint64 , _number_data_double > from_uint_64_(_number_data_uint64 const& uint_64) = 0;
 		virtual void from_uint_64(uint64_t uint_64 ) = 0;
 		virtual _number_data_double to_float_64_() const = 0;
 		virtual double to_float_64() const = 0;
-		virtual any_a<> from_float_64_(_number_data_double const& float_64) = 0;
+		virtual number_a< _number_data_int64 , _number_data_uint64 , _number_data_double > from_float_64_(_number_data_double const& float_64) = 0;
 		virtual void from_float_64(double float_64 ) = 0;
 		virtual _number_data_int64 byte_size_() const = 0;
 		virtual int64_t byte_size() const = 0;
@@ -274,7 +274,7 @@ protected:
 
 		virtual inline int64_t to_int_64() const final;
 
-		virtual inline any_a<> from_int_64_(_number_data_int64 const& int_64) final;
+		virtual inline number_a< _number_data_int64 , _number_data_uint64 , _number_data_double > from_int_64_(_number_data_int64 const& int_64) final;
 
 		virtual inline void from_int_64(int64_t int_64 ) final;
 
@@ -282,7 +282,7 @@ protected:
 
 		virtual inline uint64_t to_uint_64() const final;
 
-		virtual inline any_a<> from_uint_64_(_number_data_uint64 const& uint_64) final;
+		virtual inline number_a< _number_data_int64 , _number_data_uint64 , _number_data_double > from_uint_64_(_number_data_uint64 const& uint_64) final;
 
 		virtual inline void from_uint_64(uint64_t uint_64 ) final;
 
@@ -290,7 +290,7 @@ protected:
 
 		virtual inline double to_float_64() const final;
 
-		virtual inline any_a<> from_float_64_(_number_data_double const& float_64) final;
+		virtual inline number_a< _number_data_int64 , _number_data_uint64 , _number_data_double > from_float_64_(_number_data_double const& float_64) final;
 
 		virtual inline void from_float_64(double float_64 ) final;
 
@@ -891,7 +891,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> from_int_64_(_number_data_int64 const& int_64)
+	inline number_a< _number_data_int64 , _number_data_uint64 , _number_data_double > from_int_64_(_number_data_int64 const& int_64)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("from_int_64_");
@@ -899,7 +899,7 @@ public:
 		{
 			throw dis("dynamic number_d::from_int_64_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this, int_64));
+		return cast<number_a< _number_data_int64 , _number_data_uint64 , _number_data_double >>(variadic_operate(op, *this, int_64));
 	}
 
 	inline void from_int_64(int64_t int_64 )
@@ -941,7 +941,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> from_uint_64_(_number_data_uint64 const& uint_64)
+	inline number_a< _number_data_int64 , _number_data_uint64 , _number_data_double > from_uint_64_(_number_data_uint64 const& uint_64)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("from_uint_64_");
@@ -949,7 +949,7 @@ public:
 		{
 			throw dis("dynamic number_d::from_uint_64_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this, uint_64));
+		return cast<number_a< _number_data_int64 , _number_data_uint64 , _number_data_double >>(variadic_operate(op, *this, uint_64));
 	}
 
 	inline void from_uint_64(uint64_t uint_64 )
@@ -991,7 +991,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> from_float_64_(_number_data_double const& float_64)
+	inline number_a< _number_data_int64 , _number_data_uint64 , _number_data_double > from_float_64_(_number_data_double const& float_64)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("from_float_64_");
@@ -999,7 +999,7 @@ public:
 		{
 			throw dis("dynamic number_d::from_float_64_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *this, float_64));
+		return cast<number_a< _number_data_int64 , _number_data_uint64 , _number_data_double >>(variadic_operate(op, *this, float_64));
 	}
 
 	inline void from_float_64(double float_64 )
