@@ -1,15 +1,17 @@
 false &&
 {	strange :
 	{	<shoal> :: abstraction
-		(	// no dimensions
+		(	// dimensions
+			#key :<<>># <>,
+			#value :<<>># <>,
 			(	// parent
-				$$<collection>[],
+				$$<collection>[#key, #value],
 				{	// shoal
-					has_string : "bool (std::string const& s) const { return has(sym(s)); }",
-					at_string : "any_a<> (std::string const& s) const { return at_(sym(s)); }",
-					update_string : "void (std::string const& s, any_a<> const& value) { update_(sym(s), value); }",
-					insert_string : "bool (std::string const& s, any_a<> const& value) { return insert_(sym(s), value); }",
-					erase_string : "bool (std::string const& s) { return erase_(sym(s)); }",
+					has_string : "bool (std::string const& s) const { return collection_d<_key, _value>::has(sym(s)); }",
+					at_string : "_value (std::string const& s) const { return collection_d<_key, _value>::at_(sym(s)); }",
+					update_string : "void (std::string const& s, any_a<> const& value) { collection_d<_key, _value>::update_(sym(s), value); }",
+					insert_string : "bool (std::string const& s, any_a<> const& value) { return collection_d<_key, _value>::insert_(sym(s), value); }",
+					erase_string : "bool (std::string const& s) { return collection_d<_key, _value>::erase_(sym(s)); }",
 
 					// mutable range
 					mutate_begin_ := (<forward_mutator[<>]>),
