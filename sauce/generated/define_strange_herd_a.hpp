@@ -2,69 +2,69 @@
 namespace strange
 {
 
-template <typename _1 = void>
+template <typename _element = any_a<> >
 class herd_d;
 
-template <typename _1 = void>
-inline herd_d<_1> ___herd_dynamic___(any_a<> const& thing); 
+template <typename _element = any_a<> >
+inline herd_d<_element> ___herd_dynamic___(any_a<> const& thing); 
 
-template <typename _1>
-class herd_a : public collection_a<>
+template <typename _element>
+class herd_a : public collection_a< _element , _element , _element >
 {
 public:
 	inline bool has_string(std :: string const & s ) const;
 
-	inline any_a < > at_string(std :: string const & s ) const;
+	inline _element at_string(std :: string const & s ) const;
 
-	inline void update_thing(any_a < > const & thing );
+	inline void update_thing(_element const & thing );
 
 	inline void update_string(std :: string const & s );
 
-	inline bool insert_thing(any_a < > const & thing );
+	inline bool insert_thing(_element const & thing );
 
 	inline bool insert_string(std :: string const & s );
 
 	inline bool erase_string(std :: string const & s );
 
 protected:
-	struct ___herd_a_handle_base___ : collection_a<>::___collection_a_handle_base___
+	struct ___herd_a_handle_base___ : collection_a< _element , _element , _element >::___collection_a_handle_base___
 	{
 		virtual bool has_string(std :: string const & s ) const = 0;
-		virtual any_a < > at_string(std :: string const & s ) const = 0;
-		virtual void update_thing(any_a < > const & thing ) = 0;
+		virtual _element at_string(std :: string const & s ) const = 0;
+		virtual void update_thing(_element const & thing ) = 0;
 		virtual void update_string(std :: string const & s ) = 0;
-		virtual bool insert_thing(any_a < > const & thing ) = 0;
+		virtual bool insert_thing(_element const & thing ) = 0;
 		virtual bool insert_string(std :: string const & s ) = 0;
 		virtual bool erase_string(std :: string const & s ) = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___herd_a_handle_base___>
-	struct ___herd_a_handle___ : collection_a<>::template ___collection_a_handle___<___TTT___, ___DHB___>
+	struct ___herd_a_handle___ : collection_a< _element , _element , _element >::template ___collection_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___herd_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: collection_a<>::template ___collection_a_handle___<___TTT___, ___DHB___>{ value }
+			: collection_a< _element , _element , _element >::template ___collection_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___herd_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: collection_a<>::template ___collection_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: collection_a< _element , _element , _element >::template ___collection_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
 		inline ___herd_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
-			: collection_a<>::template ___collection_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
+			: collection_a< _element , _element , _element >::template ___collection_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline bool has_string(std :: string const & s ) const final;
 
-		virtual inline any_a < > at_string(std :: string const & s ) const final;
+		virtual inline _element at_string(std :: string const & s ) const final;
 
-		virtual inline void update_thing(any_a < > const & thing ) final;
+		virtual inline void update_thing(_element const & thing ) final;
 
 		virtual inline void update_string(std :: string const & s ) final;
 
-		virtual inline bool insert_thing(any_a < > const & thing ) final;
+		virtual inline bool insert_thing(_element const & thing ) final;
 
 		virtual inline bool insert_string(std :: string const & s ) final;
 
@@ -150,37 +150,37 @@ public:
 	inline herd_a() = default;
 
 	inline herd_a(herd_a& other, any_a<>::___reference_tag___) noexcept
-		: collection_a<>(other, any_a<>::___reference_tag___{})
+		: collection_a< _element , _element , _element >(other, any_a<>::___reference_tag___{})
 	{}
 
 	inline herd_a(herd_a& other, any_a<>::___duplicate_tag___) noexcept
-		: collection_a<>(other, any_a<>::___duplicate_tag___{})
+		: collection_a< _element , _element , _element >(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline herd_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: collection_a<>{ handle }
+		: collection_a< _element , _element , _element >{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___herd_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
 	explicit inline herd_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
-		: collection_a<>(handle, any_a<>::___reference_tag___{})
+		: collection_a< _element , _element , _element >(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___herd_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<herd_a, std::decay_t<___TTT___>>::value>>
 	explicit inline herd_a(___TTT___ value) noexcept
-		: collection_a<>{ std::make_shared<___herd_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: collection_a< _element , _element , _element >{ std::make_shared<___herd_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
 	explicit inline herd_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
-		: collection_a<>{ std::make_shared<___herd_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
+		: collection_a< _element , _element , _element >{ std::make_shared<___herd_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
@@ -213,7 +213,7 @@ public:
 		{
 			return herd_a{ thing.___handle___ };
 		}
-		return herd_a{ herd_d<_1>{ thing } };
+		return herd_a{ herd_d<_element>{ thing } };
 	}
 
 	static inline herd_a ___cast_ref___(any_a<>& thing)
@@ -223,7 +223,7 @@ public:
 		{
 			return herd_a(thing.___handle___, any_a<>::___reference_tag___{});
 		}
-		return herd_a{ herd_d<_1>(thing, any_a<>::___reference_tag___{}) };
+		return herd_a{ herd_d<_element>(thing, any_a<>::___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -238,7 +238,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = collection_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = collection_a< _element , _element , _element >::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -257,7 +257,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = collection_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = collection_a< _element , _element , _element >::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -269,7 +269,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = collection_a<>::template ___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = collection_a< _element , _element , _element >::template ___operations___<___unordered_shoal_a___>();
 			return operations;
 		}();
 		return OPERATIONS;
@@ -282,43 +282,43 @@ public:
 	}
 }; // class herd_a
 
-template <typename _1>
-class herd_d : public collection_d<>
+template <typename _element>
+class herd_d : public collection_d< _element , _element , _element >
 {
 public:
 	inline bool has_string(std :: string const & s ) const
-	{ return has(sym(s)); }
+	{ return collection_d<_element , _element , _element>::has(sym(s)); }
 
-	inline any_a < > at_string(std :: string const & s ) const
-	{ return at_(sym(s)); }
+	inline _element at_string(std :: string const & s ) const
+	{ return collection_d<_element , _element , _element>::at_(sym(s)); }
 
-	inline void update_thing(any_a < > const & thing )
-	{ update_(thing, no()); }
+	inline void update_thing(_element const & thing )
+	{ collection_d<_element , _element , _element>::update_(thing, no()); }
 
 	inline void update_string(std :: string const & s )
-	{ update_thing(sym(s)); }
+	{ collection_d<_element , _element , _element>::update_thing(sym(s)); }
 
-	inline bool insert_thing(any_a < > const & thing )
-	{ return insert_(thing, no()); }
+	inline bool insert_thing(_element const & thing )
+	{ return collection_d<_element , _element , _element>::insert_(thing, no()); }
 
 	inline bool insert_string(std :: string const & s )
-	{ return insert_thing(sym(s)); }
+	{ return collection_d<_element , _element , _element>::insert_thing(sym(s)); }
 
 	inline bool erase_string(std :: string const & s )
-	{ return erase(sym(s)); }
+	{ return collection_d<_element , _element , _element>::erase(sym(s)); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit herd_d(any_a<> const& thing)
-		: collection_d<>{ thing }
+		: collection_d< _element , _element , _element >{ thing }
 	{}
 
 	explicit herd_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: collection_d<>{ thing, any_a<>::___reference_tag___{} }
+		: collection_d< _element , _element , _element >{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit herd_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: collection_d<>{ thing, any_a<>::___duplicate_tag___{} }
+		: collection_d< _element , _element , _element >{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

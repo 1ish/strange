@@ -1,21 +1,22 @@
 false &&
 {	strange :
 	{	<herd> :: abstraction
-		(	// no dimensions
+		(	// dimensions
+			#element :<<>># <>,
 			(	// parent
-				$$<collection>[],
+				$$<collection>[#element, #element, #element],
 				{	// herd
-					has_string : "bool (std::string const& s) const { return has(sym(s)); }",
+					has_string : "bool (std::string const& s) const { return collection_d<_element , _element , _element>::has(sym(s)); }",
 
-					at_string : "any_a<> (std::string const& s) const { return at_(sym(s)); }",
+					at_string : "_element (std::string const& s) const { return collection_d<_element , _element , _element>::at_(sym(s)); }",
 
-					update_thing : "void (any_a<> const& thing) { update_(thing, no()); }",
-					update_string : "void (std::string const& s) { update_thing(sym(s)); }",
+					update_thing : "void (_element const& thing) { collection_d<_element , _element , _element>::update_(thing, no()); }",
+					update_string : "void (std::string const& s) { collection_d<_element , _element , _element>::update_thing(sym(s)); }",
 
-					insert_thing : "bool (any_a<> const& thing) { return insert_(thing, no()); }",
-					insert_string : "bool (std::string const& s) { return insert_thing(sym(s)); }",
+					insert_thing : "bool (_element const& thing) { return collection_d<_element , _element , _element>::insert_(thing, no()); }",
+					insert_string : "bool (std::string const& s) { return collection_d<_element , _element , _element>::insert_thing(sym(s)); }",
 
-					erase_string : "bool (std::string const& s) { return erase(sym(s)); }",
+					erase_string : "bool (std::string const& s) { return collection_d<_element , _element , _element>::erase(sym(s)); }",
 				}
 			)
 		)
