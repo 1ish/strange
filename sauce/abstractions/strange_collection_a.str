@@ -13,10 +13,10 @@ false &&
 
 					at_ :# (key :<#key>#, <>),
 
-					update_ := (key :<#key>#, value :<#value># false, <#value>),
+					update_ := (key :<#key>#, value :<#value>#, <#value>),
 					update : "void (_key const& key, _value const& value) { update_(key, value); }",
 
-					insert_ := (key :<#key>#, value :<#value># false, <>),
+					insert_ := (key :<#key>#, value :<#value>#, <>),
 					insert : "void (_key const& key, _value const& value) { insert_(key, value); }",
 
 					erase_ := (key :<#key>#, <>),

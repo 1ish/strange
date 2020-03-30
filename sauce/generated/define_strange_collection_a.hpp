@@ -24,13 +24,13 @@ public:
 
 	inline any_a<> update__(range_a<> const& ___arguments___);
 
-	inline _value update_(_key const& key, _value const& value = strange::no() );
+	inline _value update_(_key const& key, _value const& value);
 
 	inline void update(_key const & key , _value const & value );
 
 	inline any_a<> insert__(range_a<> const& ___arguments___);
 
-	inline any_a<> insert_(_key const& key, _value const& value = strange::no() );
+	inline any_a<> insert_(_key const& key, _value const& value);
 
 	inline void insert(_key const & key , _value const & value );
 
@@ -120,9 +120,9 @@ protected:
 		virtual any_a<> has_(_key const& key) const = 0;
 		virtual bool has(_key const & key ) const = 0;
 		virtual any_a<> at_(_key const& key) const = 0;
-		virtual _value update_(_key const& key, _value const& value = strange::no() ) = 0;
+		virtual _value update_(_key const& key, _value const& value) = 0;
 		virtual void update(_key const & key , _value const & value ) = 0;
-		virtual any_a<> insert_(_key const& key, _value const& value = strange::no() ) = 0;
+		virtual any_a<> insert_(_key const& key, _value const& value) = 0;
 		virtual void insert(_key const & key , _value const & value ) = 0;
 		virtual any_a<> erase_(_key const& key) = 0;
 		virtual bool erase(_key const & key ) = 0;
@@ -171,11 +171,11 @@ protected:
 
 		virtual inline any_a<> at_(_key const& key) const final;
 
-		virtual inline _value update_(_key const& key, _value const& value = strange::no() ) final;
+		virtual inline _value update_(_key const& key, _value const& value) final;
 
 		virtual inline void update(_key const & key , _value const & value ) final;
 
-		virtual inline any_a<> insert_(_key const& key, _value const& value = strange::no() ) final;
+		virtual inline any_a<> insert_(_key const& key, _value const& value) final;
 
 		virtual inline void insert(_key const & key , _value const & value ) final;
 
@@ -514,7 +514,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline _value update_(_key const& key, _value const& value = strange::no() )
+	inline _value update_(_key const& key, _value const& value)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("update_");
@@ -539,7 +539,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> insert_(_key const& key, _value const& value = strange::no() )
+	inline any_a<> insert_(_key const& key, _value const& value)
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("insert_");

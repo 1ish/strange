@@ -21,21 +21,21 @@ inline _element inventory_a<_element>::___inventory_a_handle___<___TTT___, ___DH
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.at_index(index); }
 
 template <typename _element>
-inline void inventory_a<_element>::update_index(int64_t index , any_a < > const & value )
+inline void inventory_a<_element>::update_index(int64_t index , _element const & value )
 { assert(any_a<>::___handle___); ___write___().update_index(index, value); }
 
 template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline void inventory_a<_element>::___inventory_a_handle___<___TTT___, ___DHB___>::update_index(int64_t index , any_a < > const & value )
+inline void inventory_a<_element>::___inventory_a_handle___<___TTT___, ___DHB___>::update_index(int64_t index , _element const & value )
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.update_index(index, value); }
 
 template <typename _element>
-inline bool inventory_a<_element>::insert_index(int64_t index , any_a < > const & value )
+inline bool inventory_a<_element>::insert_index(int64_t index , _element const & value )
 { assert(any_a<>::___handle___); return ___write___().insert_index(index, value); }
 
 template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bool inventory_a<_element>::___inventory_a_handle___<___TTT___, ___DHB___>::insert_index(int64_t index , any_a < > const & value )
+inline bool inventory_a<_element>::___inventory_a_handle___<___TTT___, ___DHB___>::insert_index(int64_t index , _element const & value )
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.insert_index(index, value); }
 
 template <typename _element>
@@ -54,12 +54,12 @@ inline any_a<> inventory_a<_element>::mutate_begin__(range_a<> const& ___argumen
 }
 
 template <typename _element>
-inline random_access_mutator_a< any_a<> > inventory_a<_element>::mutate_begin_()
+inline random_access_mutator_a< _element > inventory_a<_element>::mutate_begin_()
 { assert(any_a<>::___handle___); return ___write___().mutate_begin_(); }
 
 template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline random_access_mutator_a< any_a<> > inventory_a<_element>::___inventory_a_handle___<___TTT___, ___DHB___>::mutate_begin_()
+inline random_access_mutator_a< _element > inventory_a<_element>::___inventory_a_handle___<___TTT___, ___DHB___>::mutate_begin_()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin_(); }
 
 template <typename _element>
@@ -69,12 +69,12 @@ inline any_a<> inventory_a<_element>::mutate_end__(range_a<> const& ___arguments
 }
 
 template <typename _element>
-inline random_access_mutator_a< any_a<> > inventory_a<_element>::mutate_end_()
+inline random_access_mutator_a< _element > inventory_a<_element>::mutate_end_()
 { assert(any_a<>::___handle___); return ___write___().mutate_end_(); }
 
 template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline random_access_mutator_a< any_a<> > inventory_a<_element>::___inventory_a_handle___<___TTT___, ___DHB___>::mutate_end_()
+inline random_access_mutator_a< _element > inventory_a<_element>::___inventory_a_handle___<___TTT___, ___DHB___>::mutate_end_()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end_(); }
 
 class ___inventory_a_share___

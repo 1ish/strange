@@ -16,9 +16,9 @@ public:
 
 	inline _value at_string(std :: string const & s ) const;
 
-	inline void update_string(std :: string const & s , any_a < > const & value );
+	inline void update_string(std :: string const & s , _value const & value );
 
-	inline bool insert_string(std :: string const & s , any_a < > const & value );
+	inline bool insert_string(std :: string const & s , _value const & value );
 
 	inline bool erase_string(std :: string const & s );
 
@@ -35,8 +35,8 @@ protected:
 	{
 		virtual bool has_string(std :: string const & s ) const = 0;
 		virtual _value at_string(std :: string const & s ) const = 0;
-		virtual void update_string(std :: string const & s , any_a < > const & value ) = 0;
-		virtual bool insert_string(std :: string const & s , any_a < > const & value ) = 0;
+		virtual void update_string(std :: string const & s , _value const & value ) = 0;
+		virtual bool insert_string(std :: string const & s , _value const & value ) = 0;
 		virtual bool erase_string(std :: string const & s ) = 0;
 		virtual forward_mutator_a< any_a<> > mutate_begin_() = 0;
 		virtual forward_mutator_a< any_a<> > mutate_end_() = 0;
@@ -64,9 +64,9 @@ protected:
 
 		virtual inline _value at_string(std :: string const & s ) const final;
 
-		virtual inline void update_string(std :: string const & s , any_a < > const & value ) final;
+		virtual inline void update_string(std :: string const & s , _value const & value ) final;
 
-		virtual inline bool insert_string(std :: string const & s , any_a < > const & value ) final;
+		virtual inline bool insert_string(std :: string const & s , _value const & value ) final;
 
 		virtual inline bool erase_string(std :: string const & s ) final;
 
@@ -298,10 +298,10 @@ public:
 	inline _value at_string(std :: string const & s ) const
 	{ return collection_d<_key, _value>::at_(sym(s)); }
 
-	inline void update_string(std :: string const & s , any_a < > const & value )
+	inline void update_string(std :: string const & s , _value const & value )
 	{ collection_d<_key, _value>::update_(sym(s), value); }
 
-	inline bool insert_string(std :: string const & s , any_a < > const & value )
+	inline bool insert_string(std :: string const & s , _value const & value )
 	{ return collection_d<_key, _value>::insert_(sym(s), value); }
 
 	inline bool erase_string(std :: string const & s )

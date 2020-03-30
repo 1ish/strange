@@ -290,7 +290,6 @@ public:
 			return;
 		}
 		river.write_string("\tauto ___it___ = ___arguments___.extract_begin_();\n");
-		auto temp = river_t<>::create();
 		std::string arguments = "(";
 		auto kit = _kinds.extract_vector().cbegin();
 		bool first = true;
@@ -305,6 +304,7 @@ public:
 			if (check<expression_a<>>(any_kind))
 			{
 				auto const exp = fast<expression_a<>>(any_kind);
+				auto temp = river_t<>::create();
 				exp.generate_cpp(version, 0, temp, false, false, true);
 				type = temp.to_string();
 				if (type.rfind("const& ") == type.length() - 7)

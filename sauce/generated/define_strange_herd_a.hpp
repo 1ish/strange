@@ -293,13 +293,13 @@ public:
 	{ return collection_d<_element , _element , _element>::at_(sym(s)); }
 
 	inline void update_thing(_element const & thing )
-	{ collection_d<_element , _element , _element>::update_(thing, no()); }
+	{ collection_d<_element , _element , _element>::update_(thing, thing); }
 
 	inline void update_string(std :: string const & s )
 	{ collection_d<_element , _element , _element>::update_thing(sym(s)); }
 
 	inline bool insert_thing(_element const & thing )
-	{ return collection_d<_element , _element , _element>::insert_(thing, no()); }
+	{ return collection_d<_element , _element , _element>::insert_(thing, thing); }
 
 	inline bool insert_string(std :: string const & s )
 	{ return collection_d<_element , _element , _element>::insert_thing(sym(s)); }

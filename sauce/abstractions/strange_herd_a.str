@@ -10,10 +10,10 @@ false &&
 
 					at_string : "_element (std::string const& s) const { return collection_d<_element , _element , _element>::at_(sym(s)); }",
 
-					update_thing : "void (_element const& thing) { collection_d<_element , _element , _element>::update_(thing, no()); }",
+					update_thing : "void (_element const& thing) { collection_d<_element , _element , _element>::update_(thing, thing); }",
 					update_string : "void (std::string const& s) { collection_d<_element , _element , _element>::update_thing(sym(s)); }",
 
-					insert_thing : "bool (_element const& thing) { return collection_d<_element , _element , _element>::insert_(thing, no()); }",
+					insert_thing : "bool (_element const& thing) { return collection_d<_element , _element , _element>::insert_(thing, thing); }",
 					insert_string : "bool (std::string const& s) { return collection_d<_element , _element , _element>::insert_thing(sym(s)); }",
 
 					erase_string : "bool (std::string const& s) { return collection_d<_element , _element , _element>::erase(sym(s)); }",

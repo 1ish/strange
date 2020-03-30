@@ -16,30 +16,30 @@ public:
 
 	inline _element at_index(int64_t index ) const;
 
-	inline void update_index(int64_t index , any_a < > const & value );
+	inline void update_index(int64_t index , _element const & value );
 
-	inline bool insert_index(int64_t index , any_a < > const & value );
+	inline bool insert_index(int64_t index , _element const & value );
 
 	inline bool erase_index(int64_t index );
 
 	inline any_a<> mutate_begin__(range_a<> const& ___arguments___);
 
-	inline random_access_mutator_a< any_a<> > mutate_begin_();
+	inline random_access_mutator_a< _element > mutate_begin_();
 
 	inline any_a<> mutate_end__(range_a<> const& ___arguments___);
 
-	inline random_access_mutator_a< any_a<> > mutate_end_();
+	inline random_access_mutator_a< _element > mutate_end_();
 
 protected:
 	struct ___inventory_a_handle_base___ : collection_a< number_data_int64_a<> , _element , _element >::___collection_a_handle_base___
 	{
 		virtual bool has_index(int64_t index ) const = 0;
 		virtual _element at_index(int64_t index ) const = 0;
-		virtual void update_index(int64_t index , any_a < > const & value ) = 0;
-		virtual bool insert_index(int64_t index , any_a < > const & value ) = 0;
+		virtual void update_index(int64_t index , _element const & value ) = 0;
+		virtual bool insert_index(int64_t index , _element const & value ) = 0;
 		virtual bool erase_index(int64_t index ) = 0;
-		virtual random_access_mutator_a< any_a<> > mutate_begin_() = 0;
-		virtual random_access_mutator_a< any_a<> > mutate_end_() = 0;
+		virtual random_access_mutator_a< _element > mutate_begin_() = 0;
+		virtual random_access_mutator_a< _element > mutate_end_() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___inventory_a_handle_base___>
@@ -64,15 +64,15 @@ protected:
 
 		virtual inline _element at_index(int64_t index ) const final;
 
-		virtual inline void update_index(int64_t index , any_a < > const & value ) final;
+		virtual inline void update_index(int64_t index , _element const & value ) final;
 
-		virtual inline bool insert_index(int64_t index , any_a < > const & value ) final;
+		virtual inline bool insert_index(int64_t index , _element const & value ) final;
 
 		virtual inline bool erase_index(int64_t index ) final;
 
-		virtual inline random_access_mutator_a< any_a<> > mutate_begin_() final;
+		virtual inline random_access_mutator_a< _element > mutate_begin_() final;
 
-		virtual inline random_access_mutator_a< any_a<> > mutate_end_() final;
+		virtual inline random_access_mutator_a< _element > mutate_end_() final;
 
 	};
 
@@ -298,10 +298,10 @@ public:
 	inline _element at_index(int64_t index ) const
 	{ return collection_d<number_data_int64_a<>, _element , _element>::at_(num(index)); }
 
-	inline void update_index(int64_t index , any_a < > const & value )
+	inline void update_index(int64_t index , _element const & value )
 	{ collection_d<number_data_int64_a<>, _element , _element>::update_(num(index), value); }
 
-	inline bool insert_index(int64_t index , any_a < > const & value )
+	inline bool insert_index(int64_t index , _element const & value )
 	{ return collection_d<number_data_int64_a<>, _element , _element>::insert_(num(index), value); }
 
 	inline bool erase_index(int64_t index )
@@ -318,7 +318,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline random_access_mutator_a< any_a<> > mutate_begin_()
+	inline random_access_mutator_a< _element > mutate_begin_()
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("mutate_begin_");
@@ -326,7 +326,7 @@ public:
 		{
 			throw dis("dynamic inventory_d::mutate_begin_ passed non-existent member");
 		}
-		return cast<random_access_mutator_a< any_a<> >>(variadic_operate(op, *this));
+		return cast<random_access_mutator_a< _element >>(variadic_operate(op, *this));
 	}
 
 	inline any_a<> mutate_end__(range_a<> const& arguments)
@@ -340,7 +340,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline random_access_mutator_a< any_a<> > mutate_end_()
+	inline random_access_mutator_a< _element > mutate_end_()
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("mutate_end_");
@@ -348,7 +348,7 @@ public:
 		{
 			throw dis("dynamic inventory_d::mutate_end_ passed non-existent member");
 		}
-		return cast<random_access_mutator_a< any_a<> >>(variadic_operate(op, *this));
+		return cast<random_access_mutator_a< _element >>(variadic_operate(op, *this));
 	}
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}

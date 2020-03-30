@@ -5,12 +5,14 @@
 
 namespace strange
 {
-	inline forward_extractor_a<any_a<>> begin(range_a<> const& range)
+	template <typename _element>
+	inline forward_extractor_a<_element> begin(range_a<_element> const& range)
 	{
 		return range.extract_begin_();
 	}
 
-	inline forward_extractor_a<any_a<>> end(range_a<> const& range)
+	template <typename _element>
+	inline forward_extractor_a<_element> end(range_a<_element> const& range)
 	{
 		return range.extract_end_();
 	}
@@ -56,25 +58,25 @@ namespace strange
 	}
 
 	template <typename _primitive_>
-	inline random_access_extractor_data_a<any_a<>, typename std::deque<_primitive_>::const_iterator> begin(brook_a<_primitive_> const& brook)
+	inline random_access_extractor_data_a<number_data_a<int64_t>, typename std::deque<_primitive_>::const_iterator> begin(brook_a<_primitive_> const& brook)
 	{
 		return brook.extract_begin();
 	}
 
 	template <typename _primitive_>
-	inline random_access_extractor_data_a<any_a<>, typename std::deque<_primitive_>::const_iterator> end(brook_a<_primitive_> const& brook)
+	inline random_access_extractor_data_a<number_data_a<int64_t>, typename std::deque<_primitive_>::const_iterator> end(brook_a<_primitive_> const& brook)
 	{
 		return brook.extract_end();
 	}
 
 	template <typename _primitive_>
-	inline random_access_mutator_data_a<any_a<>, typename std::deque<_primitive_>::iterator> begin(brook_a<_primitive_>& brook)
+	inline random_access_mutator_data_a<number_data_a<int64_t>, typename std::deque<_primitive_>::iterator> begin(brook_a<_primitive_>& brook)
 	{
 		return brook.mutate_begin();
 	}
 
 	template <typename _primitive_>
-	inline random_access_mutator_data_a<any_a<>, typename std::deque<_primitive_>::iterator> end(brook_a<_primitive_>& brook)
+	inline random_access_mutator_data_a<number_data_a<int64_t>, typename std::deque<_primitive_>::iterator> end(brook_a<_primitive_>& brook)
 	{
 		return brook.mutate_end();
 	}

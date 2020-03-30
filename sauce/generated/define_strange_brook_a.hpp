@@ -9,7 +9,7 @@ template <typename _primitive>
 inline brook_d<_primitive> ___brook_dynamic___(any_a<> const& thing); 
 
 template <typename _primitive>
-class brook_a : public inventory_a<>
+class brook_a : public inventory_a< number_data_a< _primitive > >
 {
 public:
 	inline bool operator==(brook_a < _primitive > const & brook ) const;
@@ -24,20 +24,20 @@ public:
 
 	inline bool operator>=(brook_a < _primitive > const & brook ) const;
 
-	inline random_access_extractor_data_a < any_a < > , typename std :: deque < _primitive > :: const_iterator > extract_begin() const;
+	inline random_access_extractor_data_a < number_data_a < _primitive > , typename std :: deque < _primitive > :: const_iterator > extract_begin() const;
 
-	inline random_access_extractor_data_a < any_a < > , typename std :: deque < _primitive > :: const_iterator > extract_end() const;
+	inline random_access_extractor_data_a < number_data_a < _primitive > , typename std :: deque < _primitive > :: const_iterator > extract_end() const;
 
-	inline random_access_mutator_data_a < any_a < > , typename std :: deque < _primitive > :: iterator > mutate_begin();
+	inline random_access_mutator_data_a < number_data_a < _primitive > , typename std :: deque < _primitive > :: iterator > mutate_begin();
 
-	inline random_access_mutator_data_a < any_a < > , typename std :: deque < _primitive > :: iterator > mutate_end();
+	inline random_access_mutator_data_a < number_data_a < _primitive > , typename std :: deque < _primitive > :: iterator > mutate_end();
 
 	inline std :: deque < _primitive > const & extract_deque() const;
 
 	inline std :: deque < _primitive > & mutate_deque();
 
 protected:
-	struct ___brook_a_handle_base___ : inventory_a<>::___inventory_a_handle_base___
+	struct ___brook_a_handle_base___ : inventory_a< number_data_a< _primitive > >::___inventory_a_handle_base___
 	{
 		virtual bool operator==(brook_a < _primitive > const & brook ) const = 0;
 		virtual bool operator!=(brook_a < _primitive > const & brook ) const = 0;
@@ -45,30 +45,30 @@ protected:
 		virtual bool operator>(brook_a < _primitive > const & brook ) const = 0;
 		virtual bool operator<=(brook_a < _primitive > const & brook ) const = 0;
 		virtual bool operator>=(brook_a < _primitive > const & brook ) const = 0;
-		virtual random_access_extractor_data_a < any_a < > , typename std :: deque < _primitive > :: const_iterator > extract_begin() const = 0;
-		virtual random_access_extractor_data_a < any_a < > , typename std :: deque < _primitive > :: const_iterator > extract_end() const = 0;
-		virtual random_access_mutator_data_a < any_a < > , typename std :: deque < _primitive > :: iterator > mutate_begin() = 0;
-		virtual random_access_mutator_data_a < any_a < > , typename std :: deque < _primitive > :: iterator > mutate_end() = 0;
+		virtual random_access_extractor_data_a < number_data_a < _primitive > , typename std :: deque < _primitive > :: const_iterator > extract_begin() const = 0;
+		virtual random_access_extractor_data_a < number_data_a < _primitive > , typename std :: deque < _primitive > :: const_iterator > extract_end() const = 0;
+		virtual random_access_mutator_data_a < number_data_a < _primitive > , typename std :: deque < _primitive > :: iterator > mutate_begin() = 0;
+		virtual random_access_mutator_data_a < number_data_a < _primitive > , typename std :: deque < _primitive > :: iterator > mutate_end() = 0;
 		virtual std :: deque < _primitive > const & extract_deque() const = 0;
 		virtual std :: deque < _primitive > & mutate_deque() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___brook_a_handle_base___>
-	struct ___brook_a_handle___ : inventory_a<>::template ___inventory_a_handle___<___TTT___, ___DHB___>
+	struct ___brook_a_handle___ : inventory_a< number_data_a< _primitive > >::template ___inventory_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___brook_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: inventory_a<>::template ___inventory_a_handle___<___TTT___, ___DHB___>{ value }
+			: inventory_a< number_data_a< _primitive > >::template ___inventory_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___brook_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: inventory_a<>::template ___inventory_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: inventory_a< number_data_a< _primitive > >::template ___inventory_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
 		inline ___brook_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
-			: inventory_a<>::template ___inventory_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
+			: inventory_a< number_data_a< _primitive > >::template ___inventory_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline bool operator==(brook_a < _primitive > const & brook ) const final;
@@ -83,13 +83,13 @@ protected:
 
 		virtual inline bool operator>=(brook_a < _primitive > const & brook ) const final;
 
-		virtual inline random_access_extractor_data_a < any_a < > , typename std :: deque < _primitive > :: const_iterator > extract_begin() const final;
+		virtual inline random_access_extractor_data_a < number_data_a < _primitive > , typename std :: deque < _primitive > :: const_iterator > extract_begin() const final;
 
-		virtual inline random_access_extractor_data_a < any_a < > , typename std :: deque < _primitive > :: const_iterator > extract_end() const final;
+		virtual inline random_access_extractor_data_a < number_data_a < _primitive > , typename std :: deque < _primitive > :: const_iterator > extract_end() const final;
 
-		virtual inline random_access_mutator_data_a < any_a < > , typename std :: deque < _primitive > :: iterator > mutate_begin() final;
+		virtual inline random_access_mutator_data_a < number_data_a < _primitive > , typename std :: deque < _primitive > :: iterator > mutate_begin() final;
 
-		virtual inline random_access_mutator_data_a < any_a < > , typename std :: deque < _primitive > :: iterator > mutate_end() final;
+		virtual inline random_access_mutator_data_a < number_data_a < _primitive > , typename std :: deque < _primitive > :: iterator > mutate_end() final;
 
 		virtual inline std :: deque < _primitive > const & extract_deque() const final;
 
@@ -175,37 +175,37 @@ public:
 	inline brook_a() = default;
 
 	inline brook_a(brook_a& other, any_a<>::___reference_tag___) noexcept
-		: inventory_a<>(other, any_a<>::___reference_tag___{})
+		: inventory_a< number_data_a< _primitive > >(other, any_a<>::___reference_tag___{})
 	{}
 
 	inline brook_a(brook_a& other, any_a<>::___duplicate_tag___) noexcept
-		: inventory_a<>(other, any_a<>::___duplicate_tag___{})
+		: inventory_a< number_data_a< _primitive > >(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline brook_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: inventory_a<>{ handle }
+		: inventory_a< number_data_a< _primitive > >{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___brook_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
 	explicit inline brook_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
-		: inventory_a<>(handle, any_a<>::___reference_tag___{})
+		: inventory_a< number_data_a< _primitive > >(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___brook_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<brook_a, std::decay_t<___TTT___>>::value>>
 	explicit inline brook_a(___TTT___ value) noexcept
-		: inventory_a<>{ std::make_shared<___brook_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: inventory_a< number_data_a< _primitive > >{ std::make_shared<___brook_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
 	explicit inline brook_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
-		: inventory_a<>{ std::make_shared<___brook_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
+		: inventory_a< number_data_a< _primitive > >{ std::make_shared<___brook_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
@@ -263,7 +263,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = inventory_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = inventory_a< number_data_a< _primitive > >::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -282,7 +282,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = inventory_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = inventory_a< number_data_a< _primitive > >::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -294,7 +294,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = inventory_a<>::template ___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = inventory_a< number_data_a< _primitive > >::template ___operations___<___unordered_shoal_a___>();
 			return operations;
 		}();
 		return OPERATIONS;
@@ -308,7 +308,7 @@ public:
 }; // class brook_a
 
 template <typename _primitive>
-class brook_d : public inventory_d<>
+class brook_d : public inventory_d< number_data_a< _primitive > >
 {
 public:
 	inline bool operator==(brook_a < _primitive > const & brook ) const
@@ -329,16 +329,16 @@ public:
 	inline bool operator>=(brook_a < _primitive > const & brook ) const
 	{ throw dis("dynamic brook_d::operator>=(brook) not available"); }
 
-	inline random_access_extractor_data_a < any_a < > , typename std :: deque < _primitive > :: const_iterator > extract_begin() const
+	inline random_access_extractor_data_a < number_data_a < _primitive > , typename std :: deque < _primitive > :: const_iterator > extract_begin() const
 	{ throw dis("dynamic brook_d::extract_begin() not available"); }
 
-	inline random_access_extractor_data_a < any_a < > , typename std :: deque < _primitive > :: const_iterator > extract_end() const
+	inline random_access_extractor_data_a < number_data_a < _primitive > , typename std :: deque < _primitive > :: const_iterator > extract_end() const
 	{ throw dis("dynamic brook_d::extract_end() not available"); }
 
-	inline random_access_mutator_data_a < any_a < > , typename std :: deque < _primitive > :: iterator > mutate_begin()
+	inline random_access_mutator_data_a < number_data_a < _primitive > , typename std :: deque < _primitive > :: iterator > mutate_begin()
 	{ throw dis("dynamic brook_d::mutate_begin() not available"); }
 
-	inline random_access_mutator_data_a < any_a < > , typename std :: deque < _primitive > :: iterator > mutate_end()
+	inline random_access_mutator_data_a < number_data_a < _primitive > , typename std :: deque < _primitive > :: iterator > mutate_end()
 	{ throw dis("dynamic brook_d::mutate_end() not available"); }
 
 	inline std :: deque < _primitive > const & extract_deque() const
@@ -350,15 +350,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit brook_d(any_a<> const& thing)
-		: inventory_d<>{ thing }
+		: inventory_d< number_data_a< _primitive > >{ thing }
 	{}
 
 	explicit brook_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: inventory_d<>{ thing, any_a<>::___reference_tag___{} }
+		: inventory_d< number_data_a< _primitive > >{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit brook_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: inventory_d<>{ thing, any_a<>::___duplicate_tag___{} }
+		: inventory_d< number_data_a< _primitive > >{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

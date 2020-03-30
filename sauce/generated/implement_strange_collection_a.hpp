@@ -64,9 +64,9 @@ inline any_a<> collection_a<_key, _value, _element>::update__(range_a<> const& _
 	auto key = cast< _key >(*___it___);
 	if (++___it___ == ___arguments___.extract_end_())
 	{
-		return update_(key);
+		throw dis("collection_a::update_ passed short range");
 	}
-	auto value = cast<>(*___it___);
+	auto value = cast< _value >(*___it___);
 	return update_(key, value);
 }
 
@@ -99,9 +99,9 @@ inline any_a<> collection_a<_key, _value, _element>::insert__(range_a<> const& _
 	auto key = cast< _key >(*___it___);
 	if (++___it___ == ___arguments___.extract_end_())
 	{
-		return insert_(key);
+		throw dis("collection_a::insert_ passed short range");
 	}
-	auto value = cast<>(*___it___);
+	auto value = cast< _value >(*___it___);
 	return insert_(key, value);
 }
 
