@@ -6,11 +6,11 @@ false &&
 			(	// parent
 				$$<>[],
 				{	// forward extractor
-					get_ :# (<#element>),
+					get_ :# (< #element >),
 					'operator*' : "_element const& () const",
 					'operator->' : "_element const* () const",
 
-					increment_ := (<forward_extractor[<#element>]>),
+					increment_ := (<forward_extractor[< #element >]>),
 				}
 			)
 		)

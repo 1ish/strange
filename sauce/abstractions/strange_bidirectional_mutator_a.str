@@ -4,9 +4,9 @@ false &&
 		(	// dimensions
 			#element :<<>>#,
 			(	// parent
-				$$<forward_mutator>[#element],
+				$$<forward_mutator>[ #element ],
 				{	// bidirectional mutator
-					decrement_ := (<bidirectional_mutator[<#element>]>),
+					decrement_ := (<bidirectional_mutator[< #element >]>),
 				}
 			)
 		)

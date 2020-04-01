@@ -4,7 +4,7 @@ false &&
 		(	// dimensions
 			#primitive :<<>>#,
 			(	// parent
-				$$<inventory>[<number_data[#primitive]>],
+				$$<inventory>[<number_data[ #primitive ]>],
 				{	// brook
 					'operator==' : "bool (brook_a<_primitive> const& brook) const",
 					'operator!=' : "bool (brook_a<_primitive> const& brook) const",

@@ -21,6 +21,27 @@ inline _element herd_a<_element>::___herd_a_handle___<___TTT___, ___DHB___>::at_
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.at_string(s); }
 
 template <typename _element>
+inline any_a<> herd_a<_element>::update_thing__(range_a<> const& ___arguments___)
+{
+	auto ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
+	{
+		throw dis("herd_a::update_thing_ passed short range");
+	}
+	auto thing = cast< _element >(*___it___);
+	return update_thing_(thing);
+}
+
+template <typename _element>
+inline _element herd_a<_element>::update_thing_(_element const& thing)
+{ assert(any_a<>::___handle___); return ___write___().update_thing_(thing); }
+
+template <typename _element>
+template <typename ___TTT___, typename ___DHB___>
+inline _element herd_a<_element>::___herd_a_handle___<___TTT___, ___DHB___>::update_thing_(_element const& thing)
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.update_thing_(thing); }
+
+template <typename _element>
 inline void herd_a<_element>::update_thing(_element const & thing )
 { assert(any_a<>::___handle___); ___write___().update_thing(thing); }
 
@@ -37,6 +58,27 @@ template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
 inline void herd_a<_element>::___herd_a_handle___<___TTT___, ___DHB___>::update_string(std :: string const & s )
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.update_string(s); }
+
+template <typename _element>
+inline any_a<> herd_a<_element>::insert_thing__(range_a<> const& ___arguments___)
+{
+	auto ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
+	{
+		throw dis("herd_a::insert_thing_ passed short range");
+	}
+	auto thing = cast< _element >(*___it___);
+	return insert_thing_(thing);
+}
+
+template <typename _element>
+inline any_a<> herd_a<_element>::insert_thing_(_element const& thing)
+{ assert(any_a<>::___handle___); return ___write___().insert_thing_(thing); }
+
+template <typename _element>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> herd_a<_element>::___herd_a_handle___<___TTT___, ___DHB___>::insert_thing_(_element const& thing)
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.insert_thing_(thing); }
 
 template <typename _element>
 inline bool herd_a<_element>::insert_thing(_element const & thing )

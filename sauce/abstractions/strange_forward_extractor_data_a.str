@@ -5,7 +5,7 @@ false &&
 			#element :<<>>#,
 			#type :<<>>#,
 			(	// parent
-				$$<forward_extractor>[#element],
+				$$<forward_extractor>[ #element ],
 				{	// forward extractor data
 					'operator==' : "bool (forward_extractor_data_a<_element, _type> const& it) const",
 					'operator!=' : "bool (forward_extractor_data_a<_element, _type> const& it) const",

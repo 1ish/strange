@@ -4,7 +4,7 @@ false &&
 		(	// dimensions
 			#element :<<>># <>,
 			(	// parent
-				$$<collection>[<number_data_int64>, #element, #element],
+				$$<collection>[ <number_data_int64>, #element , #element ],
 				{	// inventory
 					has_index : "bool (int64_t index) const { return collection_d<number_data_int64_a<>, _element , _element>::has_(num(index)); }",
 					at_index : "_element (int64_t index) const { return collection_d<number_data_int64_a<>, _element , _element>::at_(num(index)); }",
@@ -13,8 +13,8 @@ false &&
 					erase_index : "bool (int64_t index) { return collection_d<number_data_int64_a<>, _element , _element>::erase_(num(index)); }",
 
 					// mutable range
-					mutate_begin_ := (<random_access_mutator[<#element>]>),
-					mutate_end_ := (<random_access_mutator[<#element>]>),
+					mutate_begin_ := (<random_access_mutator[< #element >]>),
+					mutate_end_ := (<random_access_mutator[< #element >]>),
 				}
 			)
 		)

@@ -5,7 +5,7 @@ false &&
 			#key :<<>># <>,
 			#value :<<>># <>,
 			(	// parent
-				$$<collection>[#key, #value],
+				$$<collection>[ #key , #value ],
 				{	// shoal
 					has_string : "bool (std::string const& s) const { return collection_d<_key, _value>::has(sym(s)); }",
 					at_string : "_value (std::string const& s) const { return collection_d<_key, _value>::at_(sym(s)); }",

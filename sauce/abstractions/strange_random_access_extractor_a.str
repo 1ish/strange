@@ -4,15 +4,15 @@ false &&
 		(	// dimensions
 			#element :<<>>#,
 			(	// parent
-				$$<bidirectional_extractor>[#element],
+				$$<bidirectional_extractor>[ #element ],
 				{	// random access extractor
-					self_add_ := (number :<number>#, <random_access_extractor[<#element>]>),
+					self_add_ := (number :<number>#, <random_access_extractor[< #element >]>),
 
-					add_ :# (number :<number>#, <random_access_extractor[<#element>]>),
+					add_ :# (number :<number>#, <random_access_extractor[< #element >]>),
 
-					self_subtract_ := (number :<number>#, <random_access_extractor[<#element>]>),
+					self_subtract_ := (number :<number>#, <random_access_extractor[< #element >]>),
 
-					subtract_ :# (number :<number>#, <random_access_extractor[<#element>]>),
+					subtract_ :# (number :<number>#, <random_access_extractor[< #element >]>),
 				}
 			)
 		)

@@ -342,10 +342,10 @@ public:
 		return at_(sym(s));
 	}
 
-	inline any_a<> update_(any_a<> const& key, any_a<> const& value = no())
+	inline any_a<> update_(any_a<> const& key, any_a<> const&)
 	{
-		update(key, value);
-		return value;
+		update_thing(key);
+		return key;
 	}
 
 	inline void update(any_a<> const& key, any_a<> const&)
@@ -353,11 +353,17 @@ public:
 		update_thing(key);
 	}
 
-	inline void update_thing(any_a<> const& key)
+	inline any_a<> update_thing_(any_a<> const& thing)
+	{
+		update_thing(thing);
+		return thing;
+	}
+
+	inline void update_thing(any_a<> const& thing)
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		_set.erase(key);
-		_set.insert(key);
+		_set.erase(thing);
+		_set.insert(thing);
 	}
 
 	inline void update_string(std::string const& s)
@@ -365,9 +371,9 @@ public:
 		update_thing(sym(s));
 	}
 
-	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = no())
+	inline any_a<> insert_(any_a<> const& key, any_a<> const&)
 	{
-		return boole(insert(key, value));
+		return boole(insert_thing(key));
 	}
 
 	inline bool insert(any_a<> const& key, any_a<> const&)
@@ -375,10 +381,15 @@ public:
 		return insert_thing(key);
 	}
 
-	inline bool insert_thing(any_a<> const& key)
+	inline any_a<> insert_thing_(any_a<> const& thing)
+	{
+		return boole(insert_thing(thing));
+	}
+
+	inline bool insert_thing(any_a<> const& thing)
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		return _set.insert(key).second;
+		return _set.insert(thing).second;
 	}
 
 	inline bool insert_string(std::string const& s)

@@ -6,12 +6,12 @@ false &&
 			(	// parent
 				$$<>[],
 				{	// forward mutator
-					get_ :# (<#element>),
-					set_ :# (thing :<#element>#, <#element>),
+					get_ :# (< #element >),
+					set_ :# (thing :< #element >#, < #element >),
 					'operator*' : "_element& () const",
 					'operator->' : "_element* () const",
 
-					increment_ := (<forward_mutator[<#element>]>),
+					increment_ := (<forward_mutator[< #element >]>),
 				}
 			)
 		)

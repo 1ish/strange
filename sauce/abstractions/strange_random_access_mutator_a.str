@@ -4,15 +4,15 @@ false &&
 		(	// dimensions
 			#element :<<>>#,
 			(	// parent
-				$$<bidirectional_mutator>[#element],
+				$$<bidirectional_mutator>[ #element ],
 				{	// random access mutator
-					self_add_ := (number :<number>#, <random_access_mutator[<#element>]>),
+					self_add_ := (number :<number>#, <random_access_mutator[< #element >]>),
 
-					add_ :# (number :<number>#, <random_access_mutator[<#element>]>),
+					add_ :# (number :<number>#, <random_access_mutator[< #element >]>),
 
-					self_subtract_ := (number :<number>#, <random_access_mutator[<#element>]>),
+					self_subtract_ := (number :<number>#, <random_access_mutator[< #element >]>),
 
-					subtract_ :# (number :<number>#, <random_access_mutator[<#element>]>),
+					subtract_ :# (number :<number>#, <random_access_mutator[< #element >]>),
 				}
 			)
 		)

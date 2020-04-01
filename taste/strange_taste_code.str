@@ -15,7 +15,7 @@
 
 			<collection> :: abstraction
 			(	#element :<<>># <>,
-				(	$$<strange::range>[#element],
+				(	$$<strange::range>[ #element ],
 					{	empty_ :# (<>),
 						size_ :# (<number_int_64>),
 						has_ :# (item :#, <>),
@@ -26,7 +26,7 @@
 
 			<forest> :: abstraction
 			(	#element :<<>>,
-				(	$$<taste::collection>[#element],
+				(	$$<taste::collection>[ #element ],
 					{}
 				)
 			),
@@ -56,12 +56,15 @@
 			_x :=		// any_a<> _x										- constructor
 
 			forest :: thing
-			(	#element :<<>># <>,
-				(	$$strange::flock[#element],
-					{	create :: function
+			(	// dimensions
+				#element :<<>># <>,
+				(	// parents
+					$$strange::flock[ #element ],
+					{	// operations
+						create :: function
 						(	range :<strange::range># $$strange::range::create[],
-							animate(<taste::forest[#element]>, ^^[#element], range),
-						//	$$<strange::range[#element]>::animate[$$taste::forest[#element], range],
+							animate(<taste::forest[ #element ]>, ^^[ #element ], range),
+						//	$$<strange::range[ #element ]>::animate[$$taste::forest[ #element ], range],
 						),
 
 						_forest_ :=

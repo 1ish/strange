@@ -34,25 +34,25 @@ false &&
 
 					modulo_ :# (number :<number>#, <number>),
 
-					to_int_64_ :# (<#number_data_int64>),
+					to_int_64_ :# (< #number_data_int64 >),
 					to_int_64 : "int64_t () const { return to_int_64_().extract_primitive(); }",
 
-					from_int_64_ := (int_64 :<#number_data_int64>#, <number[<#number_data_int64>, <#number_data_uint64>, <#number_data_double>]>),
+					from_int_64_ := (int_64 :< #number_data_int64 >#, <number[< #number_data_int64 >, < #number_data_uint64 >, < #number_data_double >]>),
 					from_int_64 : "void (int64_t int_64) { from_int_64_(num<int64_t, _number_data_int64>(int_64)); }",
 
-					to_uint_64_ :# (<#number_data_uint64>),
+					to_uint_64_ :# (< #number_data_uint64 >),
 					to_uint_64 : "uint64_t () const { return to_uint_64_().extract_primitive(); }",
 
-					from_uint_64_ := (uint_64 :<#number_data_uint64>#, <number[<#number_data_int64>, <#number_data_uint64>, <#number_data_double>]>),
+					from_uint_64_ := (uint_64 :< #number_data_uint64 >#, <number[< #number_data_int64 >, < #number_data_uint64 >, < #number_data_double >]>),
 					from_uint_64 : "void (uint64_t uint_64) { from_uint_64_(num<uint64_t, _number_data_uint64>(uint_64)); }",
 
-					to_float_64_ :# (<#number_data_double>),
+					to_float_64_ :# (< #number_data_double >),
 					to_float_64 : "double () const { return to_float_64_().extract_primitive(); }",
 
-					from_float_64_ := (float_64 :<#number_data_double>#, <number[<#number_data_int64>, <#number_data_uint64>, <#number_data_double>]>),
+					from_float_64_ := (float_64 :< #number_data_double >#, <number[< #number_data_int64 >, < #number_data_uint64 >, < #number_data_double >]>),
 					from_float_64 : "void (double float_64) { from_float_64_(num<double, _number_data_double>(float_64)); }",
 
-					byte_size_ :# (<#number_data_int64>),
+					byte_size_ :# (< #number_data_int64 >),
 					byte_size : "int64_t () const { return byte_size_().extract_primitive(); }",
 
 					is_int_ :# (<>),

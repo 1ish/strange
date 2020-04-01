@@ -16,9 +16,17 @@ public:
 
 	inline _element at_string(std :: string const & s ) const;
 
+	inline any_a<> update_thing__(range_a<> const& ___arguments___);
+
+	inline _element update_thing_(_element const& thing);
+
 	inline void update_thing(_element const & thing );
 
 	inline void update_string(std :: string const & s );
+
+	inline any_a<> insert_thing__(range_a<> const& ___arguments___);
+
+	inline any_a<> insert_thing_(_element const& thing);
 
 	inline bool insert_thing(_element const & thing );
 
@@ -31,8 +39,10 @@ protected:
 	{
 		virtual bool has_string(std :: string const & s ) const = 0;
 		virtual _element at_string(std :: string const & s ) const = 0;
+		virtual _element update_thing_(_element const& thing) = 0;
 		virtual void update_thing(_element const & thing ) = 0;
 		virtual void update_string(std :: string const & s ) = 0;
+		virtual any_a<> insert_thing_(_element const& thing) = 0;
 		virtual bool insert_thing(_element const & thing ) = 0;
 		virtual bool insert_string(std :: string const & s ) = 0;
 		virtual bool erase_string(std :: string const & s ) = 0;
@@ -60,9 +70,13 @@ protected:
 
 		virtual inline _element at_string(std :: string const & s ) const final;
 
+		virtual inline _element update_thing_(_element const& thing) final;
+
 		virtual inline void update_thing(_element const & thing ) final;
 
 		virtual inline void update_string(std :: string const & s ) final;
+
+		virtual inline any_a<> insert_thing_(_element const& thing) final;
 
 		virtual inline bool insert_thing(_element const & thing ) final;
 
@@ -270,6 +284,8 @@ public:
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
 			___unordered_shoal_a___ operations = collection_a< _element , _element , _element >::template ___operations___<___unordered_shoal_a___>();
+			operations.update_string("update_thing_", native_mutation_t<herd_a>::create(&herd_a::update_thing__));
+			operations.update_string("insert_thing_", native_mutation_t<herd_a>::create(&herd_a::insert_thing__));
 			return operations;
 		}();
 		return OPERATIONS;
@@ -292,11 +308,55 @@ public:
 	inline _element at_string(std :: string const & s ) const
 	{ return collection_d<_element , _element , _element>::at_(sym(s)); }
 
+	inline any_a<> update_thing__(range_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("update_thing_");
+		if (!op)
+		{
+			throw dis("dynamic herd_d::update_thing_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline _element update_thing_(_element const& thing)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("update_thing_");
+		if (!op)
+		{
+			throw dis("dynamic herd_d::update_thing_ passed non-existent member");
+		}
+		return cast<_element>(variadic_operate(op, *this, thing));
+	}
+
 	inline void update_thing(_element const & thing )
 	{ collection_d<_element , _element , _element>::update_(thing, thing); }
 
 	inline void update_string(std :: string const & s )
 	{ collection_d<_element , _element , _element>::update_thing(sym(s)); }
+
+	inline any_a<> insert_thing__(range_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("insert_thing_");
+		if (!op)
+		{
+			throw dis("dynamic herd_d::insert_thing_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline any_a<> insert_thing_(_element const& thing)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("insert_thing_");
+		if (!op)
+		{
+			throw dis("dynamic herd_d::insert_thing_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *this, thing));
+	}
 
 	inline bool insert_thing(_element const & thing )
 	{ return collection_d<_element , _element , _element>::insert_(thing, thing); }

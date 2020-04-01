@@ -4,9 +4,9 @@ false &&
 		(	// dimensions
 			#element :<<>>#,
 			(	// parent
-				$$<forward_extractor>[#element],
+				$$<forward_extractor>[ #element ],
 				{	// bidirectional extractor
-					decrement_ := (<bidirectional_extractor[<#element>]>),
+					decrement_ := (<bidirectional_extractor[< #element >]>),
 				}
 			)
 		)

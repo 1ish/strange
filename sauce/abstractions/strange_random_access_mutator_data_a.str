@@ -5,7 +5,7 @@ false &&
 			#element :<<>>#,
 			#type :<<>>#,
 			(	// parent
-				$$<random_access_mutator>[#element],
+				$$<random_access_mutator>[ #element ],
 				{	// random access mutator data
 					'operator==' : "bool (random_access_mutator_data_a<_element, _type> const& it) const",
 					'operator!=' : "bool (random_access_mutator_data_a<_element, _type> const& it) const",
