@@ -1,24 +1,25 @@
 false &&
 {	strange :
 	{	<flock> :: abstraction
-		(	// no dimensions
+		(	// dimensions
+			#element :<<>># <>,
 			(	// parent
-				$$<inventory>[],
+				$$<inventory>[ #element ],
 				{	// flock
-					'operator==' : "bool (flock_a<> const& flock) const",
-					'operator!=' : "bool (flock_a<> const& flock) const",
-					'operator<' : "bool (flock_a<> const& flock) const",
-					'operator>' : "bool (flock_a<> const& flock) const",
-					'operator<=' : "bool (flock_a<> const& flock) const",
-					'operator>=' : "bool (flock_a<> const& flock) const",
+					'operator==' : "bool (flock_a<_element> const& flock) const",
+					'operator!=' : "bool (flock_a<_element> const& flock) const",
+					'operator<' : "bool (flock_a<_element> const& flock) const",
+					'operator>' : "bool (flock_a<_element> const& flock) const",
+					'operator<=' : "bool (flock_a<_element> const& flock) const",
+					'operator>=' : "bool (flock_a<_element> const& flock) const",
 
-					extract_begin : "random_access_extractor_data_a<any_a<>, typename std::vector<any_a<>>::const_iterator> () const",
-					extract_end : "random_access_extractor_data_a<any_a<>, typename std::vector<any_a<>>::const_iterator> () const",
-					mutate_begin : "random_access_mutator_data_a<any_a<>, typename std::vector<any_a<>>::iterator> ()",
-					mutate_end : "random_access_mutator_data_a<any_a<>, typename std::vector<any_a<>>::iterator> ()",
+					extract_begin : "random_access_extractor_data_a<_element, typename std::vector<_element>::const_iterator> () const",
+					extract_end : "random_access_extractor_data_a<_element, typename std::vector<_element>::const_iterator> () const",
+					mutate_begin : "random_access_mutator_data_a<_element, typename std::vector<_element>::iterator> ()",
+					mutate_end : "random_access_mutator_data_a<_element, typename std::vector<_element>::iterator> ()",
 
-					extract_vector : "std::vector<any_a<>> const& () const",
-					mutate_vector : "std::vector<any_a<>>& ()",
+					extract_vector : "std::vector<_element> const& () const",
+					mutate_vector : "std::vector<_element>& ()",
 				}
 			)
 		)

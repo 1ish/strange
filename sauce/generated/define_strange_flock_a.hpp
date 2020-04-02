@@ -2,98 +2,98 @@
 namespace strange
 {
 
-template <typename _1 = void>
+template <typename _element = any_a<> >
 class flock_d;
 
-template <typename _1 = void>
-inline flock_d<_1> ___flock_dynamic___(any_a<> const& thing); 
+template <typename _element = any_a<> >
+inline flock_d<_element> ___flock_dynamic___(any_a<> const& thing); 
 
-template <typename _1>
-class flock_a : public inventory_a<>
+template <typename _element>
+class flock_a : public inventory_a< _element >
 {
 public:
-	inline bool operator==(flock_a < > const & flock ) const;
+	inline bool operator==(flock_a < _element > const & flock ) const;
 
-	inline bool operator!=(flock_a < > const & flock ) const;
+	inline bool operator!=(flock_a < _element > const & flock ) const;
 
-	inline bool operator<(flock_a < > const & flock ) const;
+	inline bool operator<(flock_a < _element > const & flock ) const;
 
-	inline bool operator>(flock_a < > const & flock ) const;
+	inline bool operator>(flock_a < _element > const & flock ) const;
 
-	inline bool operator<=(flock_a < > const & flock ) const;
+	inline bool operator<=(flock_a < _element > const & flock ) const;
 
-	inline bool operator>=(flock_a < > const & flock ) const;
+	inline bool operator>=(flock_a < _element > const & flock ) const;
 
-	inline random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > extract_begin() const;
+	inline random_access_extractor_data_a < _element , typename std :: vector < _element > :: const_iterator > extract_begin() const;
 
-	inline random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > extract_end() const;
+	inline random_access_extractor_data_a < _element , typename std :: vector < _element > :: const_iterator > extract_end() const;
 
-	inline random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > mutate_begin();
+	inline random_access_mutator_data_a < _element , typename std :: vector < _element > :: iterator > mutate_begin();
 
-	inline random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > mutate_end();
+	inline random_access_mutator_data_a < _element , typename std :: vector < _element > :: iterator > mutate_end();
 
-	inline std :: vector < any_a < > > const & extract_vector() const;
+	inline std :: vector < _element > const & extract_vector() const;
 
-	inline std :: vector < any_a < > > & mutate_vector();
+	inline std :: vector < _element > & mutate_vector();
 
 protected:
-	struct ___flock_a_handle_base___ : inventory_a<>::___inventory_a_handle_base___
+	struct ___flock_a_handle_base___ : inventory_a< _element >::___inventory_a_handle_base___
 	{
-		virtual bool operator==(flock_a < > const & flock ) const = 0;
-		virtual bool operator!=(flock_a < > const & flock ) const = 0;
-		virtual bool operator<(flock_a < > const & flock ) const = 0;
-		virtual bool operator>(flock_a < > const & flock ) const = 0;
-		virtual bool operator<=(flock_a < > const & flock ) const = 0;
-		virtual bool operator>=(flock_a < > const & flock ) const = 0;
-		virtual random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > extract_begin() const = 0;
-		virtual random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > extract_end() const = 0;
-		virtual random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > mutate_begin() = 0;
-		virtual random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > mutate_end() = 0;
-		virtual std :: vector < any_a < > > const & extract_vector() const = 0;
-		virtual std :: vector < any_a < > > & mutate_vector() = 0;
+		virtual bool operator==(flock_a < _element > const & flock ) const = 0;
+		virtual bool operator!=(flock_a < _element > const & flock ) const = 0;
+		virtual bool operator<(flock_a < _element > const & flock ) const = 0;
+		virtual bool operator>(flock_a < _element > const & flock ) const = 0;
+		virtual bool operator<=(flock_a < _element > const & flock ) const = 0;
+		virtual bool operator>=(flock_a < _element > const & flock ) const = 0;
+		virtual random_access_extractor_data_a < _element , typename std :: vector < _element > :: const_iterator > extract_begin() const = 0;
+		virtual random_access_extractor_data_a < _element , typename std :: vector < _element > :: const_iterator > extract_end() const = 0;
+		virtual random_access_mutator_data_a < _element , typename std :: vector < _element > :: iterator > mutate_begin() = 0;
+		virtual random_access_mutator_data_a < _element , typename std :: vector < _element > :: iterator > mutate_end() = 0;
+		virtual std :: vector < _element > const & extract_vector() const = 0;
+		virtual std :: vector < _element > & mutate_vector() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___flock_a_handle_base___>
-	struct ___flock_a_handle___ : inventory_a<>::template ___inventory_a_handle___<___TTT___, ___DHB___>
+	struct ___flock_a_handle___ : inventory_a< _element >::template ___inventory_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___flock_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: inventory_a<>::template ___inventory_a_handle___<___TTT___, ___DHB___>{ value }
+			: inventory_a< _element >::template ___inventory_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___flock_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: inventory_a<>::template ___inventory_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: inventory_a< _element >::template ___inventory_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
 		inline ___flock_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
-			: inventory_a<>::template ___inventory_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
+			: inventory_a< _element >::template ___inventory_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bool operator==(flock_a < > const & flock ) const final;
+		virtual inline bool operator==(flock_a < _element > const & flock ) const final;
 
-		virtual inline bool operator!=(flock_a < > const & flock ) const final;
+		virtual inline bool operator!=(flock_a < _element > const & flock ) const final;
 
-		virtual inline bool operator<(flock_a < > const & flock ) const final;
+		virtual inline bool operator<(flock_a < _element > const & flock ) const final;
 
-		virtual inline bool operator>(flock_a < > const & flock ) const final;
+		virtual inline bool operator>(flock_a < _element > const & flock ) const final;
 
-		virtual inline bool operator<=(flock_a < > const & flock ) const final;
+		virtual inline bool operator<=(flock_a < _element > const & flock ) const final;
 
-		virtual inline bool operator>=(flock_a < > const & flock ) const final;
+		virtual inline bool operator>=(flock_a < _element > const & flock ) const final;
 
-		virtual inline random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > extract_begin() const final;
+		virtual inline random_access_extractor_data_a < _element , typename std :: vector < _element > :: const_iterator > extract_begin() const final;
 
-		virtual inline random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > extract_end() const final;
+		virtual inline random_access_extractor_data_a < _element , typename std :: vector < _element > :: const_iterator > extract_end() const final;
 
-		virtual inline random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > mutate_begin() final;
+		virtual inline random_access_mutator_data_a < _element , typename std :: vector < _element > :: iterator > mutate_begin() final;
 
-		virtual inline random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > mutate_end() final;
+		virtual inline random_access_mutator_data_a < _element , typename std :: vector < _element > :: iterator > mutate_end() final;
 
-		virtual inline std :: vector < any_a < > > const & extract_vector() const final;
+		virtual inline std :: vector < _element > const & extract_vector() const final;
 
-		virtual inline std :: vector < any_a < > > & mutate_vector() final;
+		virtual inline std :: vector < _element > & mutate_vector() final;
 
 	};
 
@@ -175,37 +175,37 @@ public:
 	inline flock_a() = default;
 
 	inline flock_a(flock_a& other, any_a<>::___reference_tag___) noexcept
-		: inventory_a<>(other, any_a<>::___reference_tag___{})
+		: inventory_a< _element >(other, any_a<>::___reference_tag___{})
 	{}
 
 	inline flock_a(flock_a& other, any_a<>::___duplicate_tag___) noexcept
-		: inventory_a<>(other, any_a<>::___duplicate_tag___{})
+		: inventory_a< _element >(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline flock_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: inventory_a<>{ handle }
+		: inventory_a< _element >{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___flock_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
 	explicit inline flock_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
-		: inventory_a<>(handle, any_a<>::___reference_tag___{})
+		: inventory_a< _element >(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___flock_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<flock_a, std::decay_t<___TTT___>>::value>>
 	explicit inline flock_a(___TTT___ value) noexcept
-		: inventory_a<>{ std::make_shared<___flock_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: inventory_a< _element >{ std::make_shared<___flock_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
 	explicit inline flock_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
-		: inventory_a<>{ std::make_shared<___flock_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
+		: inventory_a< _element >{ std::make_shared<___flock_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
@@ -238,7 +238,7 @@ public:
 		{
 			return flock_a{ thing.___handle___ };
 		}
-		return flock_a{ flock_d<_1>{ thing } };
+		return flock_a{ flock_d<_element>{ thing } };
 	}
 
 	static inline flock_a ___cast_ref___(any_a<>& thing)
@@ -248,7 +248,7 @@ public:
 		{
 			return flock_a(thing.___handle___, any_a<>::___reference_tag___{});
 		}
-		return flock_a{ flock_d<_1>(thing, any_a<>::___reference_tag___{}) };
+		return flock_a{ flock_d<_element>(thing, any_a<>::___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -263,7 +263,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = inventory_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = inventory_a< _element >::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -282,7 +282,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = inventory_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = inventory_a< _element >::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -294,7 +294,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = inventory_a<>::template ___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = inventory_a< _element >::template ___operations___<___unordered_shoal_a___>();
 			return operations;
 		}();
 		return OPERATIONS;
@@ -307,58 +307,58 @@ public:
 	}
 }; // class flock_a
 
-template <typename _1>
-class flock_d : public inventory_d<>
+template <typename _element>
+class flock_d : public inventory_d< _element >
 {
 public:
-	inline bool operator==(flock_a < > const & flock ) const
+	inline bool operator==(flock_a < _element > const & flock ) const
 	{ throw dis("dynamic flock_d::operator==(flock) not available"); }
 
-	inline bool operator!=(flock_a < > const & flock ) const
+	inline bool operator!=(flock_a < _element > const & flock ) const
 	{ throw dis("dynamic flock_d::operator!=(flock) not available"); }
 
-	inline bool operator<(flock_a < > const & flock ) const
+	inline bool operator<(flock_a < _element > const & flock ) const
 	{ throw dis("dynamic flock_d::operator<(flock) not available"); }
 
-	inline bool operator>(flock_a < > const & flock ) const
+	inline bool operator>(flock_a < _element > const & flock ) const
 	{ throw dis("dynamic flock_d::operator>(flock) not available"); }
 
-	inline bool operator<=(flock_a < > const & flock ) const
+	inline bool operator<=(flock_a < _element > const & flock ) const
 	{ throw dis("dynamic flock_d::operator<=(flock) not available"); }
 
-	inline bool operator>=(flock_a < > const & flock ) const
+	inline bool operator>=(flock_a < _element > const & flock ) const
 	{ throw dis("dynamic flock_d::operator>=(flock) not available"); }
 
-	inline random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > extract_begin() const
+	inline random_access_extractor_data_a < _element , typename std :: vector < _element > :: const_iterator > extract_begin() const
 	{ throw dis("dynamic flock_d::extract_begin() not available"); }
 
-	inline random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > extract_end() const
+	inline random_access_extractor_data_a < _element , typename std :: vector < _element > :: const_iterator > extract_end() const
 	{ throw dis("dynamic flock_d::extract_end() not available"); }
 
-	inline random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > mutate_begin()
+	inline random_access_mutator_data_a < _element , typename std :: vector < _element > :: iterator > mutate_begin()
 	{ throw dis("dynamic flock_d::mutate_begin() not available"); }
 
-	inline random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > mutate_end()
+	inline random_access_mutator_data_a < _element , typename std :: vector < _element > :: iterator > mutate_end()
 	{ throw dis("dynamic flock_d::mutate_end() not available"); }
 
-	inline std :: vector < any_a < > > const & extract_vector() const
+	inline std :: vector < _element > const & extract_vector() const
 	{ throw dis("dynamic flock_d::extract_vector() not available"); }
 
-	inline std :: vector < any_a < > > & mutate_vector()
+	inline std :: vector < _element > & mutate_vector()
 	{ throw dis("dynamic flock_d::mutate_vector() not available"); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit flock_d(any_a<> const& thing)
-		: inventory_d<>{ thing }
+		: inventory_d< _element >{ thing }
 	{}
 
 	explicit flock_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: inventory_d<>{ thing, any_a<>::___reference_tag___{} }
+		: inventory_d< _element >{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit flock_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: inventory_d<>{ thing, any_a<>::___duplicate_tag___{} }
+		: inventory_d< _element >{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

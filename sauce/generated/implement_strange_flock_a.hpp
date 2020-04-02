@@ -2,112 +2,112 @@
 namespace strange
 {
 
-template <typename _1>
-inline bool flock_a<_1>::operator==(flock_a < > const & flock ) const
+template <typename _element>
+inline bool flock_a<_element>::operator==(flock_a < _element > const & flock ) const
 { assert(any_a<>::___handle___); return ___read___().operator==(flock); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bool flock_a<_1>::___flock_a_handle___<___TTT___, ___DHB___>::operator==(flock_a < > const & flock ) const
+inline bool flock_a<_element>::___flock_a_handle___<___TTT___, ___DHB___>::operator==(flock_a < _element > const & flock ) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(flock); }
 
-template <typename _1>
-inline bool flock_a<_1>::operator!=(flock_a < > const & flock ) const
+template <typename _element>
+inline bool flock_a<_element>::operator!=(flock_a < _element > const & flock ) const
 { assert(any_a<>::___handle___); return ___read___().operator!=(flock); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bool flock_a<_1>::___flock_a_handle___<___TTT___, ___DHB___>::operator!=(flock_a < > const & flock ) const
+inline bool flock_a<_element>::___flock_a_handle___<___TTT___, ___DHB___>::operator!=(flock_a < _element > const & flock ) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(flock); }
 
-template <typename _1>
-inline bool flock_a<_1>::operator<(flock_a < > const & flock ) const
+template <typename _element>
+inline bool flock_a<_element>::operator<(flock_a < _element > const & flock ) const
 { assert(any_a<>::___handle___); return ___read___().operator<(flock); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bool flock_a<_1>::___flock_a_handle___<___TTT___, ___DHB___>::operator<(flock_a < > const & flock ) const
+inline bool flock_a<_element>::___flock_a_handle___<___TTT___, ___DHB___>::operator<(flock_a < _element > const & flock ) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(flock); }
 
-template <typename _1>
-inline bool flock_a<_1>::operator>(flock_a < > const & flock ) const
+template <typename _element>
+inline bool flock_a<_element>::operator>(flock_a < _element > const & flock ) const
 { assert(any_a<>::___handle___); return ___read___().operator>(flock); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bool flock_a<_1>::___flock_a_handle___<___TTT___, ___DHB___>::operator>(flock_a < > const & flock ) const
+inline bool flock_a<_element>::___flock_a_handle___<___TTT___, ___DHB___>::operator>(flock_a < _element > const & flock ) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(flock); }
 
-template <typename _1>
-inline bool flock_a<_1>::operator<=(flock_a < > const & flock ) const
+template <typename _element>
+inline bool flock_a<_element>::operator<=(flock_a < _element > const & flock ) const
 { assert(any_a<>::___handle___); return ___read___().operator<=(flock); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bool flock_a<_1>::___flock_a_handle___<___TTT___, ___DHB___>::operator<=(flock_a < > const & flock ) const
+inline bool flock_a<_element>::___flock_a_handle___<___TTT___, ___DHB___>::operator<=(flock_a < _element > const & flock ) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(flock); }
 
-template <typename _1>
-inline bool flock_a<_1>::operator>=(flock_a < > const & flock ) const
+template <typename _element>
+inline bool flock_a<_element>::operator>=(flock_a < _element > const & flock ) const
 { assert(any_a<>::___handle___); return ___read___().operator>=(flock); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bool flock_a<_1>::___flock_a_handle___<___TTT___, ___DHB___>::operator>=(flock_a < > const & flock ) const
+inline bool flock_a<_element>::___flock_a_handle___<___TTT___, ___DHB___>::operator>=(flock_a < _element > const & flock ) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(flock); }
 
-template <typename _1>
-inline random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > flock_a<_1>::extract_begin() const
+template <typename _element>
+inline random_access_extractor_data_a < _element , typename std :: vector < _element > :: const_iterator > flock_a<_element>::extract_begin() const
 { assert(any_a<>::___handle___); return ___read___().extract_begin(); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > flock_a<_1>::___flock_a_handle___<___TTT___, ___DHB___>::extract_begin() const
+inline random_access_extractor_data_a < _element , typename std :: vector < _element > :: const_iterator > flock_a<_element>::___flock_a_handle___<___TTT___, ___DHB___>::extract_begin() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
 
-template <typename _1>
-inline random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > flock_a<_1>::extract_end() const
+template <typename _element>
+inline random_access_extractor_data_a < _element , typename std :: vector < _element > :: const_iterator > flock_a<_element>::extract_end() const
 { assert(any_a<>::___handle___); return ___read___().extract_end(); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline random_access_extractor_data_a < any_a < > , typename std :: vector < any_a < > > :: const_iterator > flock_a<_1>::___flock_a_handle___<___TTT___, ___DHB___>::extract_end() const
+inline random_access_extractor_data_a < _element , typename std :: vector < _element > :: const_iterator > flock_a<_element>::___flock_a_handle___<___TTT___, ___DHB___>::extract_end() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
 
-template <typename _1>
-inline random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > flock_a<_1>::mutate_begin()
+template <typename _element>
+inline random_access_mutator_data_a < _element , typename std :: vector < _element > :: iterator > flock_a<_element>::mutate_begin()
 { assert(any_a<>::___handle___); return ___write___().mutate_begin(); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > flock_a<_1>::___flock_a_handle___<___TTT___, ___DHB___>::mutate_begin()
+inline random_access_mutator_data_a < _element , typename std :: vector < _element > :: iterator > flock_a<_element>::___flock_a_handle___<___TTT___, ___DHB___>::mutate_begin()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin(); }
 
-template <typename _1>
-inline random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > flock_a<_1>::mutate_end()
+template <typename _element>
+inline random_access_mutator_data_a < _element , typename std :: vector < _element > :: iterator > flock_a<_element>::mutate_end()
 { assert(any_a<>::___handle___); return ___write___().mutate_end(); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline random_access_mutator_data_a < any_a < > , typename std :: vector < any_a < > > :: iterator > flock_a<_1>::___flock_a_handle___<___TTT___, ___DHB___>::mutate_end()
+inline random_access_mutator_data_a < _element , typename std :: vector < _element > :: iterator > flock_a<_element>::___flock_a_handle___<___TTT___, ___DHB___>::mutate_end()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end(); }
 
-template <typename _1>
-inline std :: vector < any_a < > > const & flock_a<_1>::extract_vector() const
+template <typename _element>
+inline std :: vector < _element > const & flock_a<_element>::extract_vector() const
 { assert(any_a<>::___handle___); return ___read___().extract_vector(); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: vector < any_a < > > const & flock_a<_1>::___flock_a_handle___<___TTT___, ___DHB___>::extract_vector() const
+inline std :: vector < _element > const & flock_a<_element>::___flock_a_handle___<___TTT___, ___DHB___>::extract_vector() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_vector(); }
 
-template <typename _1>
-inline std :: vector < any_a < > > & flock_a<_1>::mutate_vector()
+template <typename _element>
+inline std :: vector < _element > & flock_a<_element>::mutate_vector()
 { assert(any_a<>::___handle___); return ___write___().mutate_vector(); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: vector < any_a < > > & flock_a<_1>::___flock_a_handle___<___TTT___, ___DHB___>::mutate_vector()
+inline std :: vector < _element > & flock_a<_element>::___flock_a_handle___<___TTT___, ___DHB___>::mutate_vector()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_vector(); }
 
 class ___flock_a_share___
@@ -123,10 +123,10 @@ bool const ___flock_a_share___::share = []()
 	return shared_shoal;
 }();
 
-template <typename _1>
-inline flock_d<_1> ___flock_dynamic___(any_a<> const& thing)
+template <typename _element>
+inline flock_d<_element> ___flock_dynamic___(any_a<> const& thing)
 {
-	return flock_d<_1>{ thing };
+	return flock_d<_element>{ thing };
 }
 
 } // namespace
