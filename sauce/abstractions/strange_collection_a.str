@@ -11,7 +11,7 @@ false &&
 					has_ :# (key :< #key >#, <>),
 					has : "bool (_key const& key) const { return has_(key); }",
 
-					at_ :# (key :< #key >#, <>),
+					at_ :# (key :< #key >#, < #value >),
 
 					update_ := (key :< #key >#, value :< #value >#, < #value >),
 					update : "void (_key const& key, _value const& value) { update_(key, value); }",

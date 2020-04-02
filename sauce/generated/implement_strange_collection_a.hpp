@@ -45,12 +45,12 @@ inline any_a<> collection_a<_key, _value, _element>::at__(range_a<> const& ___ar
 }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::at_(_key const& key) const
+inline _value collection_a<_key, _value, _element>::at_(_key const& key) const
 { assert(any_a<>::___handle___); return ___read___().at_(key); }
 
 template <typename _key, typename _value, typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> collection_a<_key, _value, _element>::___collection_a_handle___<___TTT___, ___DHB___>::at_(_key const& key) const
+inline _value collection_a<_key, _value, _element>::___collection_a_handle___<___TTT___, ___DHB___>::at_(_key const& key) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.at_(key); }
 
 template <typename _key, typename _value, typename _element>

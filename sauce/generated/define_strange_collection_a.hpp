@@ -20,7 +20,7 @@ public:
 
 	inline any_a<> at__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> at_(_key const& key) const;
+	inline _value at_(_key const& key) const;
 
 	inline any_a<> update__(range_a<> const& ___arguments___);
 
@@ -119,7 +119,7 @@ protected:
 	{
 		virtual any_a<> has_(_key const& key) const = 0;
 		virtual bool has(_key const & key ) const = 0;
-		virtual any_a<> at_(_key const& key) const = 0;
+		virtual _value at_(_key const& key) const = 0;
 		virtual _value update_(_key const& key, _value const& value) = 0;
 		virtual void update(_key const & key , _value const & value ) = 0;
 		virtual any_a<> insert_(_key const& key, _value const& value) = 0;
@@ -169,7 +169,7 @@ protected:
 
 		virtual inline bool has(_key const & key ) const final;
 
-		virtual inline any_a<> at_(_key const& key) const final;
+		virtual inline _value at_(_key const& key) const final;
 
 		virtual inline _value update_(_key const& key, _value const& value) final;
 
@@ -492,7 +492,7 @@ public:
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
 
-	inline any_a<> at_(_key const& key) const
+	inline _value at_(_key const& key) const
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("at_");
@@ -500,7 +500,7 @@ public:
 		{
 			throw dis("dynamic collection_d::at_ passed non-existent member");
 		}
-		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this), key));
+		return cast<_value>(variadic_operate(op, *const_cast<collection_d*>(this), key));
 	}
 
 	inline any_a<> update__(range_a<> const& arguments)
