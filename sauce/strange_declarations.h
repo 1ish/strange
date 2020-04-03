@@ -115,7 +115,7 @@ class range_t;
 template <typename ___ego___ = range_a<>>
 class range_operator_t;
 
-template <bool _concurrent_ = false, typename ___ego___ = flock_a<>>
+template <typename _element = any_a<>, bool _concurrent_ = false, typename ___ego___ = flock_a<_element>>
 class flock_t;
 
 template <bool _concurrent_ = false, typename ___ego___ = unordered_shoal_a<>>
@@ -297,8 +297,8 @@ template <typename _element = any_a<>>
 inline range_a<_element> range_create(forward_extractor_a<_element> const& begin, forward_extractor_a<_element> const& end);
 
 // flock
-template <bool _concurrent_ = false>
-inline flock_a<> flock_create();
+template <typename _element = any_a<>, bool _concurrent_ = false>
+inline flock_a<_element> flock_create();
 
 template <typename F>
 inline flock_a<> flock_create(F&& init);

@@ -452,7 +452,8 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym("strange::brook_" + number_u<_primitive_>::category() +
+		static symbol_a<> TYPE = sym("strange::brook_" + 
+			number_u<_primitive_>::category() +
 			(_concurrent_ ? "_concurrent" : ""));
 		return TYPE;
 	}
@@ -869,7 +870,7 @@ public:
 		}
 		else
 		{
-			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<number_data_a<_primitive_>>>(range) ? fast<collection_a<number_data_a<_primitive_>>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_deque.clear();
 			for (auto const& thing : range)
@@ -891,7 +892,7 @@ public:
 		}
 		else
 		{
-			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<number_data_a<_primitive_>>>(range) ? fast<collection_a<number_data_a<_primitive_>>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			for (auto const& thing : range)
 			{
@@ -909,15 +910,13 @@ public:
 
 	inline void self_subtract_(range_a<number_data_a<_primitive_>> const& range)
 	{
-		if (check<collection_a<>>(range))
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
+		if (check<collection_a<number_data_a<_primitive_>>>(range))
 		{
-			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 			_deque.resize(std::size_t(std::max<int64_t>(0, int64_t(_deque.size()) - fast<collection_a<>>(range).size())));
 		}
 		else
 		{
-			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
-			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			for (auto const& thing : range)
 			{
 				if (_deque.empty())

@@ -17,42 +17,50 @@ namespace strange
 		return range.extract_end_();
 	}
 
-	inline forward_extractor_a<any_a<>> begin(shoal_a<> const& shoal)
+	template <typename _key, typename _value>
+	inline forward_extractor_a<any_a<>> begin(shoal_a<_key, _value> const& shoal)
 	{
 		return shoal.extract_begin_();
 	}
 
-	inline forward_extractor_a<any_a<>> end(shoal_a<> const& shoal)
+	template <typename _key, typename _value>
+	inline forward_extractor_a<any_a<>> end(shoal_a<_key, _value> const& shoal)
 	{
 		return shoal.extract_end_();
 	}
 
-	inline forward_mutator_a<any_a<>> begin(shoal_a<>& shoal)
+	template <typename _key, typename _value>
+	inline forward_mutator_a<any_a<>> begin(shoal_a<_key, _value>& shoal)
 	{
 		return shoal.mutate_begin_();
 	}
 
-	inline forward_mutator_a<any_a<>> end(shoal_a<>& shoal)
+	template <typename _key, typename _value>
+	inline forward_mutator_a<any_a<>> end(shoal_a<_key, _value>& shoal)
 	{
 		return shoal.mutate_end_();
 	}
 
-	inline forward_extractor_a<any_a<>> begin(inventory_a<> const& inventory)
+	template <typename _element>
+	inline forward_extractor_a<_element> begin(inventory_a<_element> const& inventory)
 	{
 		return inventory.extract_begin_();
 	}
 
-	inline forward_extractor_a<any_a<>> end(inventory_a<> const& inventory)
+	template <typename _element>
+	inline forward_extractor_a<_element> end(inventory_a<_element> const& inventory)
 	{
 		return inventory.extract_end_();
 	}
 
-	inline random_access_mutator_a<any_a<>> begin(inventory_a<>& inventory)
+	template <typename _element>
+	inline random_access_mutator_a<_element> begin(inventory_a<_element>& inventory)
 	{
 		return inventory.mutate_begin_();
 	}
 
-	inline random_access_mutator_a<any_a<>> end(inventory_a<>& inventory)
+	template <typename _element>
+	inline random_access_mutator_a<_element> end(inventory_a<_element>& inventory)
 	{
 		return inventory.mutate_end_();
 	}
@@ -81,22 +89,26 @@ namespace strange
 		return brook.mutate_end();
 	}
 
-	inline random_access_extractor_data_a<any_a<>, typename std::vector<any_a<>>::const_iterator> begin(flock_a<> const& flock)
+	template <typename _element>
+	inline random_access_extractor_data_a<_element, typename std::vector<_element>::const_iterator> begin(flock_a<_element> const& flock)
 	{
 		return flock.extract_begin();
 	}
 
-	inline random_access_extractor_data_a<any_a<>, typename std::vector<any_a<>>::const_iterator> end(flock_a<> const& flock)
+	template <typename _element>
+	inline random_access_extractor_data_a<_element, typename std::vector<_element>::const_iterator> end(flock_a<_element> const& flock)
 	{
 		return flock.extract_end();
 	}
 
-	inline random_access_mutator_data_a<any_a<>, typename std::vector<any_a<>>::iterator> begin(flock_a<>& flock)
+	template <typename _element>
+	inline random_access_mutator_data_a<_element, typename std::vector<_element>::iterator> begin(flock_a<_element>& flock)
 	{
 		return flock.mutate_begin();
 	}
 
-	inline random_access_mutator_data_a<any_a<>, typename std::vector<any_a<>>::iterator> end(flock_a<>& flock)
+	template <typename _element>
+	inline random_access_mutator_data_a<_element, typename std::vector<_element>::iterator> end(flock_a<_element>& flock)
 	{
 		return flock.mutate_end();
 	}
