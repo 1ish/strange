@@ -913,7 +913,7 @@ public:
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		if (check<collection_a<number_data_a<_primitive_>>>(range))
 		{
-			_deque.resize(std::size_t(std::max<int64_t>(0, int64_t(_deque.size()) - fast<collection_a<>>(range).size())));
+			_deque.resize(std::size_t(std::max<int64_t>(0, int64_t(_deque.size()) - fast<collection_a<number_data_a<_primitive_>>>(range).size())));
 		}
 		else
 		{

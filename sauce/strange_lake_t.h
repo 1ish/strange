@@ -405,7 +405,19 @@ public:
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		return create_() += range;
+		auto result = create_();
+		if (check<range_a<number_data_a<_primitive_>>>(range))
+		{
+			result += fast<range_a<number_data_a<_primitive_>>>(range);
+		}
+		else
+		{
+			for (auto const& thing : range)
+			{
+				result.push_back(cast<number_data_a<_primitive_>>(thing));
+			}
+		}
+		return result;
 	}
 
 	static inline lake_a<_primitive_> create_()
@@ -440,7 +452,8 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym("strange::lake_" + number_u<_primitive_>::category() +
+		static symbol_a<> TYPE = sym("strange::lake_" + 
+			number_u<_primitive_>::category() +
 			(_concurrent_ ? "_concurrent" : ""));
 		return TYPE;
 	}
@@ -464,13 +477,13 @@ public:
 	inline bool operator==(lake_a<_primitive_> const& lake) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _vector == fast<lake_a<_primitive_>>(lake).extract_vector();
+		return _vector == lake.extract_vector();
 	}
 
 	inline bool operator!=(lake_a<_primitive_> const& lake) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _vector != fast<lake_a<_primitive_>>(lake).extract_vector();
+		return _vector != lake.extract_vector();
 	}
 
 	inline number_data_a<uint64_t> hash_() const
@@ -554,63 +567,63 @@ public:
 	}
 
 	// range
-	inline random_access_extractor_a<any_a<>> extract_begin_() const
+	inline random_access_extractor_a<number_data_a<_primitive_>> extract_begin_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<any_a<>, typename std_vector_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cbegin());
+		return extractor_t<number_data_a<_primitive_>, typename std_vector_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cbegin());
 	}
 
-	inline random_access_extractor_data_a<any_a<>, typename std_vector_number::const_iterator> extract_begin() const
+	inline random_access_extractor_data_a<number_data_a<_primitive_>, typename std_vector_number::const_iterator> extract_begin() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<any_a<>, typename std_vector_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cbegin());
+		return extractor_t<number_data_a<_primitive_>, typename std_vector_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cbegin());
 	}
 
-	inline random_access_extractor_a<any_a<>> extract_end_() const
+	inline random_access_extractor_a<number_data_a<_primitive_>> extract_end_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<any_a<>, typename std_vector_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cend());
+		return extractor_t<number_data_a<_primitive_>, typename std_vector_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cend());
 	}
 
-	inline random_access_extractor_data_a<any_a<>, typename std_vector_number::const_iterator> extract_end() const
+	inline random_access_extractor_data_a<number_data_a<_primitive_>, typename std_vector_number::const_iterator> extract_end() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<any_a<>, typename std_vector_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cend());
+		return extractor_t<number_data_a<_primitive_>, typename std_vector_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cend());
 	}
 
-	inline random_access_mutator_a<any_a<>> mutate_begin_()
+	inline random_access_mutator_a<number_data_a<_primitive_>> mutate_begin_()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return mutator_t<any_a<>, typename std_vector_number::iterator>::create(*this, _vector.begin());
+		return mutator_t<number_data_a<_primitive_>, typename std_vector_number::iterator>::create(*this, _vector.begin());
 	}
 
-	inline random_access_mutator_data_a<any_a<>, typename std_vector_number::iterator> mutate_begin()
+	inline random_access_mutator_data_a<number_data_a<_primitive_>, typename std_vector_number::iterator> mutate_begin()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return mutator_t<any_a<>, typename std_vector_number::iterator>::create(*this, _vector.begin());
+		return mutator_t<number_data_a<_primitive_>, typename std_vector_number::iterator>::create(*this, _vector.begin());
 	}
 
-	inline random_access_mutator_a<any_a<>> mutate_end_()
+	inline random_access_mutator_a<number_data_a<_primitive_>> mutate_end_()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return mutator_t<any_a<>, typename std_vector_number::iterator>::create(*this, _vector.end());
+		return mutator_t<number_data_a<_primitive_>, typename std_vector_number::iterator>::create(*this, _vector.end());
 	}
 
-	inline random_access_mutator_data_a<any_a<>, typename std_vector_number::iterator> mutate_end()
+	inline random_access_mutator_data_a<number_data_a<_primitive_>, typename std_vector_number::iterator> mutate_end()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return mutator_t<any_a<>, typename std_vector_number::iterator>::create(*this, _vector.end());
+		return mutator_t<number_data_a<_primitive_>, typename std_vector_number::iterator>::create(*this, _vector.end());
 	}
 
 	// collection
-	inline any_a<> has_(any_a<> const& key) const
+	inline any_a<> has_(number_data_a<int64_t> const& key) const
 	{
 		return boole(has(key));
 	}
 
-	inline bool has(any_a<> const& key) const
+	inline bool has(number_data_a<int64_t> const& key) const
 	{
-		return check<number_a<>>(key) && has_index(fast<number_a<>>(key).to_int_64());
+		return has_index(key.extract_primitive());
 	}
 
 	inline bool has_index(int64_t index) const
@@ -618,16 +631,12 @@ public:
 		return index >= 0 && index < size();
 	}
 
-	inline any_a<> at_(any_a<> const& key) const
+	inline number_data_a<_primitive_> at_(number_data_a<int64_t> const& key) const
 	{
-		if (check<number_a<>>(key))
-		{
-			return at_index(fast<number_a<>>(key).to_int_64());
-		}
-		return at_index(-1);
+		return at_index(key.extract_primitive());
 	}
 
-	inline any_a<> at_index(int64_t index) const
+	inline number_data_a<_primitive_> at_index(int64_t index) const
 	{
 		return num(pat(index));
 	}
@@ -642,27 +651,20 @@ public:
 		return _primitive_{};
 	}
 
-	inline any_a<> update_(any_a<> const& key, any_a<> const& value = no())
+	inline number_data_a<_primitive_> update_(number_data_a<int64_t> const& key, number_data_a<_primitive_> const& value = no())
 	{
 		update(key, value);
 		return value;
 	}
 
-	inline void update(any_a<> const& key, any_a<> const& value)
+	inline void update(number_data_a<int64_t> const& key, number_data_a<_primitive_> const& value)
 	{
-		if (check<number_a<>>(key))
-		{
-			update_index(fast<number_a<>>(key).to_int_64(), value);
-		}
+		update_index(key.extract_primitive(), value);
 	}
 
-	inline void update_index(int64_t index, any_a<> const& value)
+	inline void update_index(int64_t index, number_data_a<_primitive_> const& value)
 	{
-		if (!check<number_a<>>(value))
-		{
-			throw dis("strange::lake::update passed non-number value");
-		}
-		return pupdate(index, number_u<_primitive_>::from_number(fast<number_a<>>(value)));
+		return pupdate(index, value.extract_primitive());
 	}
 
 	inline void pupdate(int64_t index, _primitive_ number)
@@ -686,23 +688,19 @@ public:
 		}
 	}
 
-	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = no())
+	inline any_a<> insert_(number_data_a<int64_t> const& key, number_data_a<_primitive_> const& value = no())
 	{
 		return boole(insert(key, value));
 	}
 
-	inline bool insert(any_a<> const& key, any_a<> const& value)
+	inline bool insert(number_data_a<int64_t> const& key, number_data_a<_primitive_> const& value)
 	{
-		return check<number_a<>>(key) && insert_index(fast<number_a<>>(key).to_int_64(), value);
+		return insert_index(key.extract_primitive(), value);
 	}
 
-	inline bool insert_index(int64_t index, any_a<> const& value)
+	inline bool insert_index(int64_t index, number_data_a<_primitive_> const& value)
 	{
-		if (!check<number_a<>>(value))
-		{
-			throw dis("strange::lake::insert passed non-number value");
-		}
-		return pinsert(index, number_u<_primitive_>::from_number(fast<number_a<>>(value)));
+		return pinsert(index, value.extract_primitive());
 	}
 
 	inline bool pinsert(int64_t index, _primitive_ number)
@@ -732,14 +730,14 @@ public:
 		return false;
 	}
 
-	inline any_a<> erase_(any_a<> const& key)
+	inline any_a<> erase_(number_data_a<int64_t> const& key)
 	{
 		return boole(erase(key));
 	}
 
-	inline bool erase(any_a<> const& key)
+	inline bool erase(number_data_a<int64_t> const& key)
 	{
-		return check<number_a<>>(key) && erase_index(fast<number_a<>>(key).to_int_64());
+		return erase_index(key.extract_primitive());
 	}
 
 	inline bool erase_index(int64_t index)
@@ -787,13 +785,13 @@ public:
 		return _vector.empty();
 	}
 
-	inline ___ego___ push_front_(any_a<> const& value)
+	inline ___ego___ push_front_(number_data_a<_primitive_> const& value)
 	{
 		push_front(value);
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void push_front(any_a<> const& thing)
+	inline void push_front(number_data_a<_primitive_> const& thing)
 	{
 		push_back(thing);
 	}
@@ -803,7 +801,7 @@ public:
 		push_back(number);
 	}
 
-	inline any_a<> pop_front_()
+	inline number_data_a<_primitive_> pop_front_()
 	{
 		return pop_back_();
 	}
@@ -813,19 +811,15 @@ public:
 		return pop_back();
 	}
 
-	inline ___ego___ push_back_(any_a<> const& value)
+	inline ___ego___ push_back_(number_data_a<_primitive_> const& value)
 	{
 		push_back(value);
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void push_back(any_a<> const& thing)
+	inline void push_back(number_data_a<_primitive_> const& thing)
 	{
-		if (!check<number_a<>>(thing))
-		{
-			throw dis("strange::lake::push_back passed non-number");
-		}
-		push_back(number_u<_primitive_>::from_number(fast<number_a<>>(thing)));
+		push_back(thing.extract_primitive());
 	}
 
 	inline void push_back(_primitive_ number)
@@ -834,12 +828,12 @@ public:
 		_vector.push_back(number);
 	}
 
-	inline any_a<> pop_back_()
+	inline number_data_a<_primitive_> pop_back_()
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		if (_vector.empty())
 		{
-			return no();
+			throw dis("strange::lake::pop_back called on empty lake");
 		}
 		_primitive_ number = _vector.back();
 		_vector.pop_back();
@@ -854,7 +848,7 @@ public:
 		return number;
 	}
 
-	inline void self_assign_(range_a<> const& range)
+	inline void self_assign_(range_a<number_data_a<_primitive_>> const& range)
 	{
 		if (check<lake_a<_primitive_>>(range))
 		{
@@ -865,7 +859,7 @@ public:
 		}
 		else
 		{
-			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<number_data_a<_primitive_>>>(range) ? fast<collection_a<number_data_a<_primitive_>>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_vector.clear();
 			for (auto const& thing : range)
@@ -875,7 +869,7 @@ public:
 		}
 	}
 	
-	inline void self_add_(range_a<> const& range)
+	inline void self_add_(range_a<number_data_a<_primitive_>> const& range)
 	{
 		if (check<lake_a<_primitive_>>(range))
 		{
@@ -887,7 +881,7 @@ public:
 		}
 		else
 		{
-			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<number_data_a<_primitive_>>>(range) ? fast<collection_a<number_data_a<_primitive_>>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			for (auto const& thing : range)
 			{
@@ -896,24 +890,22 @@ public:
 		}
 	}
 
-	inline ___ego___ add_(range_a<> const& range) const
+	inline ___ego___ add_(range_a<number_data_a<_primitive_>> const& range) const
 	{
 		auto result = thing_t<___ego___>::me_();
 		result += range;
 		return result;
 	}
 
-	inline void self_subtract_(range_a<> const& range)
+	inline void self_subtract_(range_a<number_data_a<_primitive_>> const& range)
 	{
-		if (check<collection_a<>>(range))
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
+		if (check<collection_a<number_data_a<_primitive_>>>(range))
 		{
-			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			_vector.resize(std::size_t(std::max<int64_t>(0, int64_t(_vector.size()) - fast<collection_a<>>(range).size())));
+			_vector.resize(std::size_t(std::max<int64_t>(0, int64_t(_vector.size()) - fast<collection_a<number_data_a<_primitive_>>>(range).size())));
 		}
 		else
 		{
-			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
-			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			for (auto const& thing : range)
 			{
 				if (_vector.empty())
@@ -925,7 +917,7 @@ public:
 		}
 	}
 
-	inline ___ego___ subtract_(range_a<> const& range) const
+	inline ___ego___ subtract_(range_a<number_data_a<_primitive_>> const& range) const
 	{
 		auto result = thing_t<___ego___>::me_();
 		result -= range;

@@ -875,7 +875,7 @@ public:
 		}
 	}
 
-	inline ___ego___ subtract_(range_a<> const& range) const
+	inline ___ego___ subtract_(range_a<_element> const& range) const
 	{
 		auto result = thing_t<___ego___>::me_();
 		result -= range;

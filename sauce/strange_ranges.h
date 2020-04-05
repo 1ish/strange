@@ -114,25 +114,25 @@ namespace strange
 	}
 
 	template <typename _primitive_>
-	inline random_access_extractor_data_a<any_a<>, typename std::vector<_primitive_>::const_iterator> begin(lake_a<_primitive_> const& lake)
+	inline random_access_extractor_data_a<number_data_a<_primitive_>, typename std::vector<_primitive_>::const_iterator> begin(lake_a<_primitive_> const& lake)
 	{
 		return lake.extract_begin();
 	}
 
 	template <typename _primitive_>
-	inline random_access_extractor_data_a<any_a<>, typename std::vector<_primitive_>::const_iterator> end(lake_a<_primitive_> const& lake)
+	inline random_access_extractor_data_a<number_data_a<_primitive_>, typename std::vector<_primitive_>::const_iterator> end(lake_a<_primitive_> const& lake)
 	{
 		return lake.extract_end();
 	}
 
 	template <typename _primitive_>
-	inline random_access_mutator_data_a<any_a<>, typename std::vector<_primitive_>::iterator> begin(lake_a<_primitive_>& lake)
+	inline random_access_mutator_data_a<number_data_a<_primitive_>, typename std::vector<_primitive_>::iterator> begin(lake_a<_primitive_>& lake)
 	{
 		return lake.mutate_begin();
 	}
 
 	template <typename _primitive_>
-	inline random_access_mutator_data_a<any_a<>, typename std::vector<_primitive_>::iterator> end(lake_a<_primitive_>& lake)
+	inline random_access_mutator_data_a<number_data_a<_primitive_>, typename std::vector<_primitive_>::iterator> end(lake_a<_primitive_>& lake)
 	{
 		return lake.mutate_end();
 	}
