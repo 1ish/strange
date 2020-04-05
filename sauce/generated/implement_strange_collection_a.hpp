@@ -115,13 +115,13 @@ inline any_a<> collection_a<_key, _value, _element>::___collection_a_handle___<_
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.insert_(key, value); }
 
 template <typename _key, typename _value, typename _element>
-inline void collection_a<_key, _value, _element>::insert(_key const & key , _value const & value )
-{ assert(any_a<>::___handle___); ___write___().insert(key, value); }
+inline bool collection_a<_key, _value, _element>::insert(_key const & key , _value const & value )
+{ assert(any_a<>::___handle___); return ___write___().insert(key, value); }
 
 template <typename _key, typename _value, typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline void collection_a<_key, _value, _element>::___collection_a_handle___<___TTT___, ___DHB___>::insert(_key const & key , _value const & value )
-{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.insert(key, value); }
+inline bool collection_a<_key, _value, _element>::___collection_a_handle___<___TTT___, ___DHB___>::insert(_key const & key , _value const & value )
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.insert(key, value); }
 
 template <typename _key, typename _value, typename _element>
 inline any_a<> collection_a<_key, _value, _element>::erase__(range_a<> const& ___arguments___)

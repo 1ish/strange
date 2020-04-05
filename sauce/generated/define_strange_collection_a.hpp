@@ -32,7 +32,7 @@ public:
 
 	inline any_a<> insert_(_key const& key, _value const& value);
 
-	inline void insert(_key const & key , _value const & value );
+	inline bool insert(_key const & key , _value const & value );
 
 	inline any_a<> erase__(range_a<> const& ___arguments___);
 
@@ -123,7 +123,7 @@ protected:
 		virtual _value update_(_key const& key, _value const& value) = 0;
 		virtual void update(_key const & key , _value const & value ) = 0;
 		virtual any_a<> insert_(_key const& key, _value const& value) = 0;
-		virtual void insert(_key const & key , _value const & value ) = 0;
+		virtual bool insert(_key const & key , _value const & value ) = 0;
 		virtual any_a<> erase_(_key const& key) = 0;
 		virtual bool erase(_key const & key ) = 0;
 		virtual collection_a< _key , _value , _element > clear_() = 0;
@@ -177,7 +177,7 @@ protected:
 
 		virtual inline any_a<> insert_(_key const& key, _value const& value) final;
 
-		virtual inline void insert(_key const & key , _value const & value ) final;
+		virtual inline bool insert(_key const & key , _value const & value ) final;
 
 		virtual inline any_a<> erase_(_key const& key) final;
 
@@ -550,8 +550,8 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *this, key, value));
 	}
 
-	inline void insert(_key const & key , _value const & value )
-	{ insert_(key, value); }
+	inline bool insert(_key const & key , _value const & value )
+	{ return insert_(key, value); }
 
 	inline any_a<> erase__(range_a<> const& arguments)
 	{

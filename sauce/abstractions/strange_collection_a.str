@@ -17,7 +17,7 @@ false &&
 					update : "void (_key const& key, _value const& value) { update_(key, value); }",
 
 					insert_ := (key :< #key >#, value :< #value >#, <>),
-					insert : "void (_key const& key, _value const& value) { insert_(key, value); }",
+					insert : "bool (_key const& key, _value const& value) { return insert_(key, value); }",
 
 					erase_ := (key :< #key >#, <>),
 					erase : "bool (_key const& key) { return erase_(key); }",
