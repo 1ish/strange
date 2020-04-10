@@ -4,18 +4,18 @@
 namespace strange
 {
 
-template <bool _concurrent_ = false, typename ___ego___ = unordered_herd_a<>>
+template <typename _element = any_a<>, bool _concurrent_ = false, typename ___ego___ = unordered_herd_a<_element>>
 class unordered_herd_t : public thing_t<___ego___>
 {
-	template <typename _element, typename _iterator_, typename ___ego_it___ = forward_extractor_data_a<_element, _iterator_>>
+	template <typename _element_it, typename _iterator_, typename ___ego_it___ = forward_extractor_data_a<_element_it, _iterator_>>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
 		// construction
 		template <typename F>
-		static inline forward_extractor_data_a<_element, _iterator_> create(unordered_herd_a<> const& unordered_herd, unordered_herd_t const& unordered_herd_thing, F&& it)
+		static inline forward_extractor_data_a<_element_it, _iterator_> create(unordered_herd_a<_element_it> const& unordered_herd, unordered_herd_t const& unordered_herd_thing, F&& it)
 		{
-			return forward_extractor_data_a<_element, _iterator_>::template create<extractor_t<_element, _iterator_>>(unordered_herd, unordered_herd_thing, std::forward<F>(it));
+			return forward_extractor_data_a<_element_it, _iterator_>::template create<extractor_t<_element_it, _iterator_>>(unordered_herd, unordered_herd_thing, std::forward<F>(it));
 		}
 
 		// reflection
@@ -31,16 +31,16 @@ class unordered_herd_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			return check<forward_extractor_data_a<_element, _iterator_>>(thing) &&
-				_it == fast<forward_extractor_data_a<_element, _iterator_>>(thing).extract_it();
+			return check<forward_extractor_data_a<_element_it, _iterator_>>(thing) &&
+				_it == fast<forward_extractor_data_a<_element_it, _iterator_>>(thing).extract_it();
 		}
 
-		inline bool operator==(forward_extractor_data_a<_element, _iterator_> const& it) const
+		inline bool operator==(forward_extractor_data_a<_element_it, _iterator_> const& it) const
 		{
 			return _it == it.extract_it();
 		}
 
-		inline bool operator!=(forward_extractor_data_a<_element, _iterator_> const& it) const
+		inline bool operator!=(forward_extractor_data_a<_element_it, _iterator_> const& it) const
 		{
 			return _it != it.extract_it();
 		}
@@ -57,18 +57,18 @@ class unordered_herd_t : public thing_t<___ego___>
 		}
 
 		// forward extractor
-		inline _element get_() const
+		inline _element_it get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_herd_thing._mutex);
 			return *_it;
 		}
 
-		inline _element const* operator->() const
+		inline _element_it const* operator->() const
 		{
 			return &operator*();
 		}
 
-		inline _element const& operator*() const
+		inline _element_it const& operator*() const
 		{
 			return *_it;
 		}
@@ -107,53 +107,67 @@ class unordered_herd_t : public thing_t<___ego___>
 	};
 
 public:
-	using std_unordered_set_any = std::unordered_set<any_a<>>;
+	using std_unordered_set_element = std::unordered_set<_element>;
 
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		return create_() += range;
+		auto result = create_();
+		if (check<range_a<_element>>(range))
+		{
+			result += fast<range_a<_element>>(range);
+		}
+		else
+		{
+			for (auto const& thing : range)
+			{
+				result.push_back(cast<_element>(thing));
+			}
+		}
+		return result;
 	}
 
-	static inline unordered_herd_a<> create_()
+	static inline unordered_herd_a<_element> create_()
 	{
-		return create(std_unordered_set_any{});
+		return create(std_unordered_set_element{});
 	}
 
 	template <typename... Args>
-	static inline unordered_herd_a<> create_(Args&&... args)
+	static inline unordered_herd_a<_element> create_(Args&&... args)
 	{
-		return create(variadic_u<any_a<>>::unordered_set(std::forward<Args>(args)...));
+		return create(variadic_u<_element>::unordered_set(std::forward<Args>(args)...));
 	}
 
 	template <typename... Args>
-	static inline unordered_herd_a<> create_refs_(Args&&... args)
+	static inline unordered_herd_a<_element> create_refs_(Args&&... args)
 	{
-		return create(variadic_u<any_a<>>::unordered_set_ref(std::forward<Args>(args)...));
+		return create(variadic_u<_element>::unordered_set_ref(std::forward<Args>(args)...));
 	}
 
 	template <typename... Args>
-	static inline unordered_herd_a<> create_dups_(Args&&... args)
+	static inline unordered_herd_a<_element> create_dups_(Args&&... args)
 	{
-		return create(variadic_u<any_a<>>::unordered_set_dup(std::forward<Args>(args)...));
+		return create(variadic_u<_element>::unordered_set_dup(std::forward<Args>(args)...));
 	}
 
 	template <typename F>
-	static inline unordered_herd_a<> create(F&& init)
+	static inline unordered_herd_a<_element> create(F&& init)
 	{
-		return unordered_herd_a<>::create<unordered_herd_t<_concurrent_>>(std::forward<F>(init));
+		return unordered_herd_a<_element>::template create<unordered_herd_t<_element, _concurrent_>>(std::forward<F>(init));
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym("strange::unordered_herd" + std::string{ _concurrent_ ? "_concurrent" : "" });
+		static symbol_a<> TYPE = sym("strange::unordered_herd" + 
+			std::string{ _concurrent_ ? "_concurrent" : "" } +
+			kind_of<_element>().to_string());
 		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string(type_().to_string() + "::create", native_function_create(&unordered_herd_t<_concurrent_>::create__));
+		shoal.update_string(type_().to_string() + "::create", native_function_create(&unordered_herd_t<_element, _concurrent_>::create__));
 	}
 
 	// visitor pattern
@@ -176,21 +190,21 @@ public:
 	// comparison
 	inline bool same_(any_a<> const& thing) const
 	{
-		if (!check<unordered_herd_a<>>(thing))
+		if (!check<unordered_herd_a<_element>>(thing))
 		{
 			return false;
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _set == fast<unordered_herd_a<>>(thing).extract_set();
+		return _set == fast<unordered_herd_a<_element>>(thing).extract_set();
 	}
 
-	inline bool operator==(unordered_herd_a<> const& herd) const
+	inline bool operator==(unordered_herd_a<_element> const& herd) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _set == herd.extract_set();
 	}
 
-	inline bool operator!=(unordered_herd_a<> const& herd) const
+	inline bool operator!=(unordered_herd_a<_element> const& herd) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _set != herd.extract_set();
@@ -214,40 +228,40 @@ public:
 	}
 
 	// range
-	inline forward_extractor_a<any_a<>> extract_begin_() const
+	inline forward_extractor_a<_element> extract_begin_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<any_a<>, typename std_unordered_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
+		return extractor_t<_element, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
 	}
 
-	inline forward_extractor_data_a<any_a<>, typename std_unordered_set_any::const_iterator> extract_begin() const
+	inline forward_extractor_data_a<_element, typename std_unordered_set_element::const_iterator> extract_begin() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<any_a<>, typename std_unordered_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
+		return extractor_t<_element, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
 	}
 
-	inline forward_extractor_a<any_a<>> extract_end_() const
+	inline forward_extractor_a<_element> extract_end_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<any_a<>, typename std_unordered_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());
+		return extractor_t<_element, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());
 	}
 
-	inline forward_extractor_data_a<any_a<>, typename std_unordered_set_any::const_iterator> extract_end() const
+	inline forward_extractor_data_a<_element, typename std_unordered_set_element::const_iterator> extract_end() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<any_a<>, typename std_unordered_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());
+		return extractor_t<_element, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());
 	}
 
 	// collection
-	inline any_a<> has_(any_a<> const& key) const
+	inline any_a<> has_(_element const& key) const
 	{
 		return boole(has(key));
 	}
 
-	inline bool has(any_a<> const& key) const
+	inline bool has(_element const& key) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		std_unordered_set_any::const_iterator const it = _set.find(key);
+		typename std_unordered_set_element::const_iterator const it = _set.find(key);
 		return it != _set.cend();
 	}
 
@@ -256,10 +270,10 @@ public:
 		return has(sym(s));
 	}
 
-	inline any_a<> at_(any_a<> const& key) const
+	inline any_a<> at_(_element const& key) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		std_unordered_set_any::const_iterator const it = _set.find(key);
+		typename std_unordered_set_element::const_iterator const it = _set.find(key);
 		if (it == _set.cend())
 		{
 			return mis("strange::unordered_herd::at key not found");
@@ -267,29 +281,29 @@ public:
 		return *it;
 	}
 
-	inline any_a<> at_string(std::string const& s) const
+	inline _element at_string(std::string const& s) const
 	{
 		return at_(sym(s));
 	}
 
-	inline any_a<> update_(any_a<> const& key, any_a<> const&)
+	inline _element update_(_element const& key, _element const&)
 	{
 		update_thing(key);
 		return key;
 	}
 
-	inline void update(any_a<> const& key, any_a<> const&)
+	inline void update(_element const& key, _element const&)
 	{
 		update_thing(key);
 	}
 
-	inline any_a<> update_thing_(any_a<> const& thing)
+	inline _element update_thing_(_element const& thing)
 	{
 		update_thing(thing);
 		return thing;
 	}
 
-	inline void update_thing(any_a<> const& thing)
+	inline void update_thing(_element const& thing)
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		_set.erase(thing);
@@ -301,22 +315,22 @@ public:
 		update_thing(sym(s));
 	}
 
-	inline any_a<> insert_(any_a<> const& key, any_a<> const&)
+	inline any_a<> insert_(_element const& key, _element const&)
 	{
 		return boole(insert_thing(key));
 	}
 
-	inline bool insert(any_a<> const& key, any_a<> const&)
+	inline bool insert(_element const& key, _element const&)
 	{
 		return insert_thing(key);
 	}
 
-	inline any_a<> insert_thing_(any_a<> const& thing)
+	inline any_a<> insert_thing_(_element const& thing)
 	{
 		return boole(insert_thing(thing));
 	}
 
-	inline bool insert_thing(any_a<> const& thing)
+	inline bool insert_thing(_element const& thing)
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		return _set.insert(thing).second;
@@ -327,12 +341,12 @@ public:
 		return insert_thing(sym(s));
 	}
 
-	inline any_a<> erase_(any_a<> const& key)
+	inline any_a<> erase_(_element const& key)
 	{
 		return boole(erase(key));
 	}
 
-	inline bool erase(any_a<> const& key)
+	inline bool erase(_element const& key)
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		return _set.erase(key);
@@ -378,59 +392,59 @@ public:
 		return _set.empty();
 	}
 
-	inline ___ego___ push_front_(any_a<> const& value)
+	inline ___ego___ push_front_(_element const& value)
 	{
 		push_front(value);
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void push_front(any_a<> const& thing)
+	inline void push_front(_element const& thing)
 	{
 		push_back(thing);
 	}
 
-	inline any_a<> pop_front_()
+	inline _element pop_front_()
 	{
 		return pop_back_();
 	}
 
-	inline ___ego___ push_back_(any_a<> const& value)
+	inline ___ego___ push_back_(_element const& value)
 	{
 		push_back(value);
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void push_back(any_a<> const& thing)
+	inline void push_back(_element const& thing)
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		_set.insert(thing);
 	}
 
-	inline any_a<> pop_back_()
+	inline _element pop_back_()
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		std_unordered_set_any::const_iterator const it = _set.cbegin();
+		typename std_unordered_set_element::const_iterator const it = _set.cbegin();
 		if (it == _set.cend())
 		{
-			return no();
+			throw dis("strange::unordered_herd::pop_back called on empty flock");
 		}
-		any_a<> result = *it;
+		_element result = *it;
 		_set.erase(it);
 		return result;
 	}
 
-	inline void self_assign_(range_a<> const& range)
+	inline void self_assign_(range_a<_element> const& range)
 	{
-		if (check<unordered_herd_a<>>(range))
+		if (check<unordered_herd_a<_element>>(range))
 		{
-			auto const other = fast<unordered_herd_a<>>(range);
+			auto const other = fast<unordered_herd_a<_element>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_set = other.extract_set();
 		}
-		else if (check<ordered_herd_a<>>(range))
+		else if (check<ordered_herd_a<_element>>(range))
 		{
-			auto const other = fast<ordered_herd_a<>>(range);
+			auto const other = fast<ordered_herd_a<_element>>(range);
 			auto read_lock = other.read_lock_();
 			auto const& other_set = other.extract_set();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
@@ -439,7 +453,7 @@ public:
 		}
 		else
 		{
-			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<_element>>(range) ? fast<collection_a<_element>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_set.clear();
 			for (auto const& thing : range)
@@ -449,19 +463,19 @@ public:
 		}
 	}
 
-	inline void self_add_(range_a<> const& range)
+	inline void self_add_(range_a<_element> const& range)
 	{
-		if (check<unordered_herd_a<>>(range))
+		if (check<unordered_herd_a<_element>>(range))
 		{
-			auto const other = fast<unordered_herd_a<>>(range);
+			auto const other = fast<unordered_herd_a<_element>>(range);
 			auto read_lock = other.read_lock_();
 			auto const& other_set = other.extract_set();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_set.insert(other_set.cbegin(), other_set.cend());
 		}
-		else if (check<ordered_herd_a<>>(range))
+		else if (check<ordered_herd_a<_element>>(range))
 		{
-			auto const other = fast<ordered_herd_a<>>(range);
+			auto const other = fast<ordered_herd_a<_element>>(range);
 			auto read_lock = other.read_lock_();
 			auto const& other_set = other.extract_set();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
@@ -469,7 +483,7 @@ public:
 		}
 		else
 		{
-			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<_element>>(range) ? fast<collection_a<_element>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			for (auto const& thing : range)
 			{
@@ -478,16 +492,16 @@ public:
 		}
 	}
 
-	inline ___ego___ add_(range_a<> const& range) const
+	inline ___ego___ add_(range_a<_element> const& range) const
 	{
 		auto result = thing_t<___ego___>::me_();
 		result += range;
 		return result;
 	}
 
-	inline void self_subtract_(range_a<> const& range)
+	inline void self_subtract_(range_a<_element> const& range)
 	{
-		auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
+		auto read_lock = check<collection_a<_element>>(range) ? fast<collection_a<_element>>(range).read_lock_() : no();
 		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 		for (auto const& thing : range)
 		{
@@ -495,7 +509,7 @@ public:
 		}
 	}
 
-	inline ___ego___ subtract_(range_a<> const& range) const
+	inline ___ego___ subtract_(range_a<_element> const& range) const
 	{
 		auto result = thing_t<___ego___>::me_();
 		result -= range;
@@ -513,19 +527,19 @@ public:
 	}
 
 	// data
-	inline std_unordered_set_any const& extract_set() const
+	inline std_unordered_set_element const& extract_set() const
 	{
 		return _set;
 	}
 
-	inline std_unordered_set_any& mutate_set()
+	inline std_unordered_set_element& mutate_set()
 	{
 		return _set;
 	}
 
 protected:
 	typename concurrent_u<_concurrent_>::mutex mutable _mutex;
-	std_unordered_set_any _set;
+	std_unordered_set_element _set;
 
 	friend class any_a<>;
 
@@ -554,11 +568,11 @@ private:
 	friend class ___unordered_herd_t_share___;
 };
 
-template <bool _concurrent_, typename ___ego___>
-bool const unordered_herd_t<_concurrent_, ___ego___>::___share___ = []()
+template <typename _element, bool _concurrent_, typename ___ego___>
+bool const unordered_herd_t<_element, _concurrent_, ___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
-	unordered_herd_t<_concurrent_, ___ego___>::share(shoal);
+	unordered_herd_t<_element, _concurrent_, ___ego___>::share(shoal);
 	return shoal;
 }();
 
@@ -567,15 +581,15 @@ class ___unordered_herd_t_share___
 	static inline bool ___share___()
 	{
 		return unordered_herd_t<>::___share___
-			&& unordered_herd_t<true>::___share___;
+			&& unordered_herd_t<any_a<>, true>::___share___;
 	}
 };
 
-// template <bool _concurrent_ = false>
-template <bool _concurrent_>
-inline unordered_herd_a<> unordered_herd_create()
+// template <typename _element = any_a<>, bool _concurrent_ = false>
+template <typename _element, bool _concurrent_>
+inline unordered_herd_a<_element> unordered_herd_create()
 {
-	return unordered_herd_t<_concurrent_>::create_();
+	return unordered_herd_t<_element, _concurrent_>::create_();
 }
 
 template <typename... Args>

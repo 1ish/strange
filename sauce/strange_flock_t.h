@@ -642,7 +642,7 @@ public:
 		return mis("strange::flock::at index out of bounds");
 	}
 
-	inline any_a<> update_(number_data_a<int64_t> const& key, _element const& value)
+	inline _element update_(number_data_a<int64_t> const& key, _element const& value)
 	{
 		update(key, value);
 		return value;
@@ -674,7 +674,7 @@ public:
 		}
 	}
 
-	inline any_a<> insert_(number_data_a<int64_t> const& key, _element const& value = no())
+	inline any_a<> insert_(number_data_a<int64_t> const& key, _element const& value)
 	{
 		return boole(insert(key, value));
 	}
@@ -801,7 +801,7 @@ public:
 		{
 			throw dis("strange::flock::pop_back called on empty flock");
 		}
-		any_a<> result = _vector.back();
+		_element result = _vector.back();
 		_vector.pop_back();
 		return result;
 	}

@@ -320,7 +320,7 @@ template <typename F>
 inline lake_a<int8_t> lake_int8_create(F&& init);
 
 // ordered herd
-template <bool _concurrent_ = false>
+template <typename _element = any_a<>, bool _concurrent_ = false>
 inline ordered_herd_a<> ordered_herd_create();
 
 template <typename... Args>
@@ -344,7 +344,7 @@ template <bool _concurrent_ = false>
 inline squad_a<> squad_create();
 
 // unordered herd
-template <bool _concurrent_ = false>
+template <typename _element = any_a<>, bool _concurrent_ = false>
 inline unordered_herd_a<> unordered_herd_create();
 
 template <typename... Args>

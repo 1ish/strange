@@ -2,94 +2,94 @@
 namespace strange
 {
 
-template <typename _1>
-inline bool ordered_herd_a<_1>::operator==(ordered_herd_a < > const & herd ) const
+template <typename _element>
+inline bool ordered_herd_a<_element>::operator==(ordered_herd_a < _element > const & herd ) const
 { assert(any_a<>::___handle___); return ___read___().operator==(herd); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bool ordered_herd_a<_1>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::operator==(ordered_herd_a < > const & herd ) const
+inline bool ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::operator==(ordered_herd_a < _element > const & herd ) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(herd); }
 
-template <typename _1>
-inline bool ordered_herd_a<_1>::operator!=(ordered_herd_a < > const & herd ) const
+template <typename _element>
+inline bool ordered_herd_a<_element>::operator!=(ordered_herd_a < _element > const & herd ) const
 { assert(any_a<>::___handle___); return ___read___().operator!=(herd); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bool ordered_herd_a<_1>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::operator!=(ordered_herd_a < > const & herd ) const
+inline bool ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::operator!=(ordered_herd_a < _element > const & herd ) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(herd); }
 
-template <typename _1>
-inline bool ordered_herd_a<_1>::operator<(ordered_herd_a < > const & herd ) const
+template <typename _element>
+inline bool ordered_herd_a<_element>::operator<(ordered_herd_a < _element > const & herd ) const
 { assert(any_a<>::___handle___); return ___read___().operator<(herd); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bool ordered_herd_a<_1>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::operator<(ordered_herd_a < > const & herd ) const
+inline bool ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::operator<(ordered_herd_a < _element > const & herd ) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(herd); }
 
-template <typename _1>
-inline bool ordered_herd_a<_1>::operator>(ordered_herd_a < > const & herd ) const
+template <typename _element>
+inline bool ordered_herd_a<_element>::operator>(ordered_herd_a < _element > const & herd ) const
 { assert(any_a<>::___handle___); return ___read___().operator>(herd); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bool ordered_herd_a<_1>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::operator>(ordered_herd_a < > const & herd ) const
+inline bool ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::operator>(ordered_herd_a < _element > const & herd ) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(herd); }
 
-template <typename _1>
-inline bool ordered_herd_a<_1>::operator<=(ordered_herd_a < > const & herd ) const
+template <typename _element>
+inline bool ordered_herd_a<_element>::operator<=(ordered_herd_a < _element > const & herd ) const
 { assert(any_a<>::___handle___); return ___read___().operator<=(herd); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bool ordered_herd_a<_1>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::operator<=(ordered_herd_a < > const & herd ) const
+inline bool ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::operator<=(ordered_herd_a < _element > const & herd ) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(herd); }
 
-template <typename _1>
-inline bool ordered_herd_a<_1>::operator>=(ordered_herd_a < > const & herd ) const
+template <typename _element>
+inline bool ordered_herd_a<_element>::operator>=(ordered_herd_a < _element > const & herd ) const
 { assert(any_a<>::___handle___); return ___read___().operator>=(herd); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bool ordered_herd_a<_1>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::operator>=(ordered_herd_a < > const & herd ) const
+inline bool ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::operator>=(ordered_herd_a < _element > const & herd ) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(herd); }
 
-template <typename _1>
-inline bidirectional_extractor_data_a < any_a < > , typename std :: set < any_a < > > :: const_iterator > ordered_herd_a<_1>::extract_begin() const
+template <typename _element>
+inline bidirectional_extractor_data_a < _element , typename std :: set < _element > :: const_iterator > ordered_herd_a<_element>::extract_begin() const
 { assert(any_a<>::___handle___); return ___read___().extract_begin(); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bidirectional_extractor_data_a < any_a < > , typename std :: set < any_a < > > :: const_iterator > ordered_herd_a<_1>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::extract_begin() const
+inline bidirectional_extractor_data_a < _element , typename std :: set < _element > :: const_iterator > ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::extract_begin() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
 
-template <typename _1>
-inline bidirectional_extractor_data_a < any_a < > , typename std :: set < any_a < > > :: const_iterator > ordered_herd_a<_1>::extract_end() const
+template <typename _element>
+inline bidirectional_extractor_data_a < _element , typename std :: set < _element > :: const_iterator > ordered_herd_a<_element>::extract_end() const
 { assert(any_a<>::___handle___); return ___read___().extract_end(); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bidirectional_extractor_data_a < any_a < > , typename std :: set < any_a < > > :: const_iterator > ordered_herd_a<_1>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::extract_end() const
+inline bidirectional_extractor_data_a < _element , typename std :: set < _element > :: const_iterator > ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::extract_end() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
 
-template <typename _1>
-inline std :: set < any_a < > > const & ordered_herd_a<_1>::extract_set() const
+template <typename _element>
+inline std :: set < _element > const & ordered_herd_a<_element>::extract_set() const
 { assert(any_a<>::___handle___); return ___read___().extract_set(); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: set < any_a < > > const & ordered_herd_a<_1>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::extract_set() const
+inline std :: set < _element > const & ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::extract_set() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_set(); }
 
-template <typename _1>
-inline std :: set < any_a < > > & ordered_herd_a<_1>::mutate_set()
+template <typename _element>
+inline std :: set < _element > & ordered_herd_a<_element>::mutate_set()
 { assert(any_a<>::___handle___); return ___write___().mutate_set(); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: set < any_a < > > & ordered_herd_a<_1>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::mutate_set()
+inline std :: set < _element > & ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::mutate_set()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_set(); }
 
 class ___ordered_herd_a_share___
@@ -105,10 +105,10 @@ bool const ___ordered_herd_a_share___::share = []()
 	return shared_shoal;
 }();
 
-template <typename _1>
-inline ordered_herd_d<_1> ___ordered_herd_dynamic___(any_a<> const& thing)
+template <typename _element>
+inline ordered_herd_d<_element> ___ordered_herd_dynamic___(any_a<> const& thing)
 {
-	return ordered_herd_d<_1>{ thing };
+	return ordered_herd_d<_element>{ thing };
 }
 
 } // namespace

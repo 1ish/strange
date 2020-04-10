@@ -2,68 +2,68 @@
 namespace strange
 {
 
-template <typename _1 = void>
+template <typename _element = any_a<> >
 class unordered_herd_d;
 
-template <typename _1 = void>
-inline unordered_herd_d<_1> ___unordered_herd_dynamic___(any_a<> const& thing); 
+template <typename _element = any_a<> >
+inline unordered_herd_d<_element> ___unordered_herd_dynamic___(any_a<> const& thing); 
 
-template <typename _1>
-class unordered_herd_a : public herd_a<>
+template <typename _element>
+class unordered_herd_a : public herd_a< _element >
 {
 public:
-	inline bool operator==(unordered_herd_a < > const & herd ) const;
+	inline bool operator==(unordered_herd_a < _element > const & herd ) const;
 
-	inline bool operator!=(unordered_herd_a < > const & herd ) const;
+	inline bool operator!=(unordered_herd_a < _element > const & herd ) const;
 
-	inline forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > extract_begin() const;
+	inline forward_extractor_data_a < _element , typename std :: unordered_set < _element > :: const_iterator > extract_begin() const;
 
-	inline forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > extract_end() const;
+	inline forward_extractor_data_a < _element , typename std :: unordered_set < _element > :: const_iterator > extract_end() const;
 
-	inline std :: unordered_set < any_a < > > const & extract_set() const;
+	inline std :: unordered_set < _element > const & extract_set() const;
 
-	inline std :: unordered_set < any_a < > > & mutate_set();
+	inline std :: unordered_set < _element > & mutate_set();
 
 protected:
-	struct ___unordered_herd_a_handle_base___ : herd_a<>::___herd_a_handle_base___
+	struct ___unordered_herd_a_handle_base___ : herd_a< _element >::___herd_a_handle_base___
 	{
-		virtual bool operator==(unordered_herd_a < > const & herd ) const = 0;
-		virtual bool operator!=(unordered_herd_a < > const & herd ) const = 0;
-		virtual forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > extract_begin() const = 0;
-		virtual forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > extract_end() const = 0;
-		virtual std :: unordered_set < any_a < > > const & extract_set() const = 0;
-		virtual std :: unordered_set < any_a < > > & mutate_set() = 0;
+		virtual bool operator==(unordered_herd_a < _element > const & herd ) const = 0;
+		virtual bool operator!=(unordered_herd_a < _element > const & herd ) const = 0;
+		virtual forward_extractor_data_a < _element , typename std :: unordered_set < _element > :: const_iterator > extract_begin() const = 0;
+		virtual forward_extractor_data_a < _element , typename std :: unordered_set < _element > :: const_iterator > extract_end() const = 0;
+		virtual std :: unordered_set < _element > const & extract_set() const = 0;
+		virtual std :: unordered_set < _element > & mutate_set() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___unordered_herd_a_handle_base___>
-	struct ___unordered_herd_a_handle___ : herd_a<>::template ___herd_a_handle___<___TTT___, ___DHB___>
+	struct ___unordered_herd_a_handle___ : herd_a< _element >::template ___herd_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___unordered_herd_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: herd_a<>::template ___herd_a_handle___<___TTT___, ___DHB___>{ value }
+			: herd_a< _element >::template ___herd_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___unordered_herd_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: herd_a<>::template ___herd_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: herd_a< _element >::template ___herd_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
 		inline ___unordered_herd_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
-			: herd_a<>::template ___herd_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
+			: herd_a< _element >::template ___herd_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bool operator==(unordered_herd_a < > const & herd ) const final;
+		virtual inline bool operator==(unordered_herd_a < _element > const & herd ) const final;
 
-		virtual inline bool operator!=(unordered_herd_a < > const & herd ) const final;
+		virtual inline bool operator!=(unordered_herd_a < _element > const & herd ) const final;
 
-		virtual inline forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > extract_begin() const final;
+		virtual inline forward_extractor_data_a < _element , typename std :: unordered_set < _element > :: const_iterator > extract_begin() const final;
 
-		virtual inline forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > extract_end() const final;
+		virtual inline forward_extractor_data_a < _element , typename std :: unordered_set < _element > :: const_iterator > extract_end() const final;
 
-		virtual inline std :: unordered_set < any_a < > > const & extract_set() const final;
+		virtual inline std :: unordered_set < _element > const & extract_set() const final;
 
-		virtual inline std :: unordered_set < any_a < > > & mutate_set() final;
+		virtual inline std :: unordered_set < _element > & mutate_set() final;
 
 	};
 
@@ -145,37 +145,37 @@ public:
 	inline unordered_herd_a() = default;
 
 	inline unordered_herd_a(unordered_herd_a& other, any_a<>::___reference_tag___) noexcept
-		: herd_a<>(other, any_a<>::___reference_tag___{})
+		: herd_a< _element >(other, any_a<>::___reference_tag___{})
 	{}
 
 	inline unordered_herd_a(unordered_herd_a& other, any_a<>::___duplicate_tag___) noexcept
-		: herd_a<>(other, any_a<>::___duplicate_tag___{})
+		: herd_a< _element >(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline unordered_herd_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: herd_a<>{ handle }
+		: herd_a< _element >{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___unordered_herd_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
 	explicit inline unordered_herd_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
-		: herd_a<>(handle, any_a<>::___reference_tag___{})
+		: herd_a< _element >(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___unordered_herd_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<unordered_herd_a, std::decay_t<___TTT___>>::value>>
 	explicit inline unordered_herd_a(___TTT___ value) noexcept
-		: herd_a<>{ std::make_shared<___unordered_herd_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: herd_a< _element >{ std::make_shared<___unordered_herd_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
 	explicit inline unordered_herd_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
-		: herd_a<>{ std::make_shared<___unordered_herd_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
+		: herd_a< _element >{ std::make_shared<___unordered_herd_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
@@ -208,7 +208,7 @@ public:
 		{
 			return unordered_herd_a{ thing.___handle___ };
 		}
-		return unordered_herd_a{ unordered_herd_d<_1>{ thing } };
+		return unordered_herd_a{ unordered_herd_d<_element>{ thing } };
 	}
 
 	static inline unordered_herd_a ___cast_ref___(any_a<>& thing)
@@ -218,7 +218,7 @@ public:
 		{
 			return unordered_herd_a(thing.___handle___, any_a<>::___reference_tag___{});
 		}
-		return unordered_herd_a{ unordered_herd_d<_1>(thing, any_a<>::___reference_tag___{}) };
+		return unordered_herd_a{ unordered_herd_d<_element>(thing, any_a<>::___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -233,7 +233,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = herd_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = herd_a< _element >::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -252,7 +252,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = herd_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = herd_a< _element >::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -264,7 +264,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = herd_a<>::template ___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = herd_a< _element >::template ___operations___<___unordered_shoal_a___>();
 			return operations;
 		}();
 		return OPERATIONS;
@@ -277,40 +277,40 @@ public:
 	}
 }; // class unordered_herd_a
 
-template <typename _1>
-class unordered_herd_d : public herd_d<>
+template <typename _element>
+class unordered_herd_d : public herd_d< _element >
 {
 public:
-	inline bool operator==(unordered_herd_a < > const & herd ) const
+	inline bool operator==(unordered_herd_a < _element > const & herd ) const
 	{ throw dis("dynamic unordered_herd_d::operator==(herd) not available"); }
 
-	inline bool operator!=(unordered_herd_a < > const & herd ) const
+	inline bool operator!=(unordered_herd_a < _element > const & herd ) const
 	{ throw dis("dynamic unordered_herd_d::operator!=(herd) not available"); }
 
-	inline forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > extract_begin() const
+	inline forward_extractor_data_a < _element , typename std :: unordered_set < _element > :: const_iterator > extract_begin() const
 	{ throw dis("dynamic unordered_herd_d::extract_begin() not available"); }
 
-	inline forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > extract_end() const
+	inline forward_extractor_data_a < _element , typename std :: unordered_set < _element > :: const_iterator > extract_end() const
 	{ throw dis("dynamic unordered_herd_d::extract_end() not available"); }
 
-	inline std :: unordered_set < any_a < > > const & extract_set() const
+	inline std :: unordered_set < _element > const & extract_set() const
 	{ throw dis("dynamic unordered_herd_d::extract_set() not available"); }
 
-	inline std :: unordered_set < any_a < > > & mutate_set()
+	inline std :: unordered_set < _element > & mutate_set()
 	{ throw dis("dynamic unordered_herd_d::mutate_set() not available"); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit unordered_herd_d(any_a<> const& thing)
-		: herd_d<>{ thing }
+		: herd_d< _element >{ thing }
 	{}
 
 	explicit unordered_herd_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: herd_d<>{ thing, any_a<>::___reference_tag___{} }
+		: herd_d< _element >{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit unordered_herd_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: herd_d<>{ thing, any_a<>::___duplicate_tag___{} }
+		: herd_d< _element >{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

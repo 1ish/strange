@@ -2,58 +2,58 @@
 namespace strange
 {
 
-template <typename _1>
-inline bool unordered_herd_a<_1>::operator==(unordered_herd_a < > const & herd ) const
+template <typename _element>
+inline bool unordered_herd_a<_element>::operator==(unordered_herd_a < _element > const & herd ) const
 { assert(any_a<>::___handle___); return ___read___().operator==(herd); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bool unordered_herd_a<_1>::___unordered_herd_a_handle___<___TTT___, ___DHB___>::operator==(unordered_herd_a < > const & herd ) const
+inline bool unordered_herd_a<_element>::___unordered_herd_a_handle___<___TTT___, ___DHB___>::operator==(unordered_herd_a < _element > const & herd ) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(herd); }
 
-template <typename _1>
-inline bool unordered_herd_a<_1>::operator!=(unordered_herd_a < > const & herd ) const
+template <typename _element>
+inline bool unordered_herd_a<_element>::operator!=(unordered_herd_a < _element > const & herd ) const
 { assert(any_a<>::___handle___); return ___read___().operator!=(herd); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bool unordered_herd_a<_1>::___unordered_herd_a_handle___<___TTT___, ___DHB___>::operator!=(unordered_herd_a < > const & herd ) const
+inline bool unordered_herd_a<_element>::___unordered_herd_a_handle___<___TTT___, ___DHB___>::operator!=(unordered_herd_a < _element > const & herd ) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(herd); }
 
-template <typename _1>
-inline forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > unordered_herd_a<_1>::extract_begin() const
+template <typename _element>
+inline forward_extractor_data_a < _element , typename std :: unordered_set < _element > :: const_iterator > unordered_herd_a<_element>::extract_begin() const
 { assert(any_a<>::___handle___); return ___read___().extract_begin(); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > unordered_herd_a<_1>::___unordered_herd_a_handle___<___TTT___, ___DHB___>::extract_begin() const
+inline forward_extractor_data_a < _element , typename std :: unordered_set < _element > :: const_iterator > unordered_herd_a<_element>::___unordered_herd_a_handle___<___TTT___, ___DHB___>::extract_begin() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
 
-template <typename _1>
-inline forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > unordered_herd_a<_1>::extract_end() const
+template <typename _element>
+inline forward_extractor_data_a < _element , typename std :: unordered_set < _element > :: const_iterator > unordered_herd_a<_element>::extract_end() const
 { assert(any_a<>::___handle___); return ___read___().extract_end(); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline forward_extractor_data_a < any_a < > , typename std :: unordered_set < any_a < > > :: const_iterator > unordered_herd_a<_1>::___unordered_herd_a_handle___<___TTT___, ___DHB___>::extract_end() const
+inline forward_extractor_data_a < _element , typename std :: unordered_set < _element > :: const_iterator > unordered_herd_a<_element>::___unordered_herd_a_handle___<___TTT___, ___DHB___>::extract_end() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
 
-template <typename _1>
-inline std :: unordered_set < any_a < > > const & unordered_herd_a<_1>::extract_set() const
+template <typename _element>
+inline std :: unordered_set < _element > const & unordered_herd_a<_element>::extract_set() const
 { assert(any_a<>::___handle___); return ___read___().extract_set(); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: unordered_set < any_a < > > const & unordered_herd_a<_1>::___unordered_herd_a_handle___<___TTT___, ___DHB___>::extract_set() const
+inline std :: unordered_set < _element > const & unordered_herd_a<_element>::___unordered_herd_a_handle___<___TTT___, ___DHB___>::extract_set() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_set(); }
 
-template <typename _1>
-inline std :: unordered_set < any_a < > > & unordered_herd_a<_1>::mutate_set()
+template <typename _element>
+inline std :: unordered_set < _element > & unordered_herd_a<_element>::mutate_set()
 { assert(any_a<>::___handle___); return ___write___().mutate_set(); }
 
-template <typename _1>
+template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: unordered_set < any_a < > > & unordered_herd_a<_1>::___unordered_herd_a_handle___<___TTT___, ___DHB___>::mutate_set()
+inline std :: unordered_set < _element > & unordered_herd_a<_element>::___unordered_herd_a_handle___<___TTT___, ___DHB___>::mutate_set()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_set(); }
 
 class ___unordered_herd_a_share___
@@ -69,10 +69,10 @@ bool const ___unordered_herd_a_share___::share = []()
 	return shared_shoal;
 }();
 
-template <typename _1>
-inline unordered_herd_d<_1> ___unordered_herd_dynamic___(any_a<> const& thing)
+template <typename _element>
+inline unordered_herd_d<_element> ___unordered_herd_dynamic___(any_a<> const& thing)
 {
-	return unordered_herd_d<_1>{ thing };
+	return unordered_herd_d<_element>{ thing };
 }
 
 } // namespace

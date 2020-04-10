@@ -137,12 +137,14 @@ namespace strange
 		return lake.mutate_end();
 	}
 
-	inline bidirectional_extractor_data_a<any_a<>, typename std::set<any_a<>>::const_iterator> begin(ordered_herd_a<> const& herd)
+	template <typename _element>
+	inline bidirectional_extractor_data_a<_element, typename std::set<_element>::const_iterator> begin(ordered_herd_a<_element> const& herd)
 	{
 		return herd.extract_begin();
 	}
 
-	inline bidirectional_extractor_data_a<any_a<>, typename std::set<any_a<>>::const_iterator> end(ordered_herd_a<> const& herd)
+	template <typename _element>
+	inline bidirectional_extractor_data_a<_element, typename std::set<_element>::const_iterator> end(ordered_herd_a<_element> const& herd)
 	{
 		return herd.extract_end();
 	}
@@ -187,12 +189,14 @@ namespace strange
 		return squad.mutate_end();
 	}
 
-	inline forward_extractor_data_a<any_a<>, typename std::unordered_set<any_a<>>::const_iterator> begin(unordered_herd_a<> const& herd)
+	template <typename _element>
+	inline forward_extractor_data_a<_element, typename std::unordered_set<_element>::const_iterator> begin(unordered_herd_a<_element> const& herd)
 	{
 		return herd.extract_begin();
 	}
 
-	inline forward_extractor_data_a<any_a<>, typename std::unordered_set<any_a<>>::const_iterator> end(unordered_herd_a<> const& herd)
+	template <typename _element>
+	inline forward_extractor_data_a<_element, typename std::unordered_set<_element>::const_iterator> end(unordered_herd_a<_element> const& herd)
 	{
 		return herd.extract_end();
 	}

@@ -1,22 +1,23 @@
 false &&
 {	strange :
 	{	<ordered_herd> :: abstraction
-		(	// no dimensions
+		(	// dimensions
+			#element :<<>># <>,
 			(	// parent
-				$$<herd>[],
+				$$<herd>[ #element ],
 				{	// ordered herd
-					'operator==' : "bool (ordered_herd_a<> const& herd) const",
-					'operator!=' : "bool (ordered_herd_a<> const& herd) const",
-					'operator<' : "bool (ordered_herd_a<> const& herd) const",
-					'operator>' : "bool (ordered_herd_a<> const& herd) const",
-					'operator<=' : "bool (ordered_herd_a<> const& herd) const",
-					'operator>=' : "bool (ordered_herd_a<> const& herd) const",
+					'operator==' : "bool (ordered_herd_a<_element> const& herd) const",
+					'operator!=' : "bool (ordered_herd_a<_element> const& herd) const",
+					'operator<' : "bool (ordered_herd_a<_element> const& herd) const",
+					'operator>' : "bool (ordered_herd_a<_element> const& herd) const",
+					'operator<=' : "bool (ordered_herd_a<_element> const& herd) const",
+					'operator>=' : "bool (ordered_herd_a<_element> const& herd) const",
 
-					extract_begin : "bidirectional_extractor_data_a<any_a<>, typename std::set<any_a<>>::const_iterator> () const",
-					extract_end : "bidirectional_extractor_data_a<any_a<>, typename std::set<any_a<>>::const_iterator> () const",
+					extract_begin : "bidirectional_extractor_data_a<_element, typename std::set<_element>::const_iterator> () const",
+					extract_end : "bidirectional_extractor_data_a<_element, typename std::set<_element>::const_iterator> () const",
 
-					extract_set : "std::set<any_a<>> const& () const",
-					mutate_set : "std::set<any_a<>>& ()",
+					extract_set : "std::set<_element> const& () const",
+					mutate_set : "std::set<_element>& ()",
 				}
 			)
 		)

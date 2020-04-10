@@ -1,18 +1,19 @@
 false &&
 {	strange :
 	{	<unordered_herd> :: abstraction
-		(	// no dimensions
+		(	// dimensions
+			#element :<<>># <>,
 			(	// parent
-				$$<herd>[],
+				$$<herd>[ #element ],
 				{	// unordered herd
-					'operator==' : "bool (unordered_herd_a<> const& herd) const",
-					'operator!=' : "bool (unordered_herd_a<> const& herd) const",
+					'operator==' : "bool (unordered_herd_a<_element> const& herd) const",
+					'operator!=' : "bool (unordered_herd_a<_element> const& herd) const",
 
-					extract_begin : "forward_extractor_data_a<any_a<>, typename std::unordered_set<any_a<>>::const_iterator> () const",
-					extract_end : "forward_extractor_data_a<any_a<>, typename std::unordered_set<any_a<>>::const_iterator> () const",
+					extract_begin : "forward_extractor_data_a<_element, typename std::unordered_set<_element>::const_iterator> () const",
+					extract_end : "forward_extractor_data_a<_element, typename std::unordered_set<_element>::const_iterator> () const",
 
-					extract_set : "std::unordered_set<any_a<>> const& () const",
-					mutate_set : "std::unordered_set<any_a<>>& ()",
+					extract_set : "std::unordered_set<_element> const& () const",
+					mutate_set : "std::unordered_set<_element>& ()",
 				}
 			)
 		)
