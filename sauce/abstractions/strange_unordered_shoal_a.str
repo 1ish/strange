@@ -1,20 +1,22 @@
 false &&
 {	strange :
 	{	<unordered_shoal> :: abstraction
-		(	// no dimensions
+		(	// dimensions
+			#key :<<>># <>,
+			#value :<<>># <>,
 			(	// parent
-				$$<shoal>[],
+				$$<shoal>[ #key , #value ],
 				{	// unordered shoal
-					'operator==' : "bool (unordered_shoal_a<> const& shoal) const",
-					'operator!=' : "bool (unordered_shoal_a<> const& shoal) const",
+					'operator==' : "bool (unordered_shoal_a<_key, _value> const& shoal) const",
+					'operator!=' : "bool (unordered_shoal_a<_key, _value> const& shoal) const",
 
-					extract_begin : "forward_extractor_data_a<any_a<>, typename std::unordered_map<any_a<>, any_a<>>::const_iterator> () const",
-					extract_end : "forward_extractor_data_a<any_a<>, typename std::unordered_map<any_a<>, any_a<>>::const_iterator> () const",
-					mutate_begin : "forward_mutator_data_a<any_a<>, typename std::unordered_map<any_a<>, any_a<>>::iterator> ()",
-					mutate_end : "forward_mutator_data_a<any_a<>, typename std::unordered_map<any_a<>, any_a<>>::iterator> ()",
+					extract_begin : "forward_extractor_data_a<flock_a<>, typename std::unordered_map<_key, _value>::const_iterator> () const",
+					extract_end : "forward_extractor_data_a<flock_a<>, typename std::unordered_map<_key, _value>::const_iterator> () const",
+					mutate_begin : "forward_mutator_data_a<flock_a<>, typename std::unordered_map<_key, _value>::iterator> ()",
+					mutate_end : "forward_mutator_data_a<flock_a<>, typename std::unordered_map<_key, _value>::iterator> ()",
 
-					extract_map : "std::unordered_map<any_a<>, any_a<>> const& () const",
-					mutate_map : "std::unordered_map<any_a<>, any_a<>>& ()",
+					extract_map : "std::unordered_map<_key, _value> const& () const",
+					mutate_map : "std::unordered_map<_key, _value>& ()",
 				}
 			)
 		)

@@ -118,7 +118,7 @@ class range_operator_t;
 template <typename _element = any_a<>, bool _concurrent_ = false, typename ___ego___ = flock_a<_element>>
 class flock_t;
 
-template <bool _concurrent_ = false, typename ___ego___ = unordered_shoal_a<>>
+template <typename _key = any_a<>, typename _value = any_a<>, bool _concurrent_ = false, typename ___ego___ = unordered_shoal_a<>>
 class unordered_shoal_t;
 
 template <typename ___ego___ = expression_a<>>
@@ -321,7 +321,7 @@ inline lake_a<int8_t> lake_int8_create(F&& init);
 
 // ordered herd
 template <typename _element = any_a<>, bool _concurrent_ = false>
-inline ordered_herd_a<> ordered_herd_create();
+inline ordered_herd_a<_element> ordered_herd_create();
 
 template <typename... Args>
 inline ordered_herd_a<> ordered_herd_vals(Args&&... args);
@@ -333,8 +333,8 @@ template <typename... Args>
 inline ordered_herd_a<> ordered_herd_dups(Args&&... args);
 
 // ordered shoal
-template <bool _concurrent_ = false>
-inline ordered_shoal_a<> ordered_shoal_create();
+template <typename _key = any_a<>, typename _value = any_a<>, bool _concurrent_ = false>
+inline ordered_shoal_a<_key, _value> ordered_shoal_create();
 
 template <typename... Args>
 inline ordered_shoal_a<> ordered_shoal_vals(Args&&... args);
@@ -345,7 +345,7 @@ inline squad_a<> squad_create();
 
 // unordered herd
 template <typename _element = any_a<>, bool _concurrent_ = false>
-inline unordered_herd_a<> unordered_herd_create();
+inline unordered_herd_a<_element> unordered_herd_create();
 
 template <typename... Args>
 inline unordered_herd_a<> unordered_herd_vals(Args&&... args);
@@ -357,7 +357,7 @@ template <typename... Args>
 inline unordered_herd_a<> unordered_herd_dups(Args&&... args);
 
 // unordered shoal
-template <bool _concurrent_ = false, typename ___unordered_shoal_a___ = unordered_shoal_a<>>
+template <typename _key = any_a<>, typename _value = any_a<>, bool _concurrent_ = false, typename ___unordered_shoal_a___ = unordered_shoal_a<_key, _value>>
 inline ___unordered_shoal_a___ unordered_shoal_create();
 
 template <typename... Args>

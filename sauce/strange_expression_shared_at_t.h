@@ -51,7 +51,7 @@ public:
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_at::operate passed non-unordered-shoal local");
 		}
 #endif
-		auto& local = const_cast<unordered_shoal_t<>::std_unordered_map_any_any&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
+		auto& local = const_cast<std::unordered_map<any_a<>, any_a<>>&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
 		auto lit = local.find(sym("$"));
 		if (lit == local.end())
 		{
@@ -64,7 +64,7 @@ public:
 		}
 #endif
 		auto& shared = static_cast<unordered_shoal_a<>&>(lit->second);
-		auto& map = const_cast<unordered_shoal_t<>::std_unordered_map_any_any&>(shared.extract_map());
+		auto& map = const_cast<std::unordered_map<any_a<>, any_a<>>&>(shared.extract_map());
 		auto lock = shared.read_lock_();
 		auto it = map.find(_key);
 		if (it == map.end())
@@ -83,7 +83,7 @@ public:
 	inline any_a<> evaluate_() const
 	{
 		auto local = unordered_shoal_create();
-		local.insert_string("$", unordered_shoal_create<true>());
+		local.insert_string("$", unordered_shoal_create<any_a<>, any_a<>, true>());
 		return operate(local, range_create());
 	}
 

@@ -9,7 +9,7 @@ template <typename _key = any_a<> , typename _value = any_a<> >
 inline shoal_d<_key, _value> ___shoal_dynamic___(any_a<> const& thing); 
 
 template <typename _key, typename _value>
-class shoal_a : public collection_a< _key , _value >
+class shoal_a : public collection_a< _key , _value , flock_a<> >
 {
 public:
 	inline bool has_string(std :: string const & s ) const;
@@ -24,40 +24,40 @@ public:
 
 	inline any_a<> mutate_begin__(range_a<> const& ___arguments___);
 
-	inline forward_mutator_a< any_a<> > mutate_begin_();
+	inline forward_mutator_a< flock_a<> > mutate_begin_();
 
 	inline any_a<> mutate_end__(range_a<> const& ___arguments___);
 
-	inline forward_mutator_a< any_a<> > mutate_end_();
+	inline forward_mutator_a< flock_a<> > mutate_end_();
 
 protected:
-	struct ___shoal_a_handle_base___ : collection_a< _key , _value >::___collection_a_handle_base___
+	struct ___shoal_a_handle_base___ : collection_a< _key , _value , flock_a<> >::___collection_a_handle_base___
 	{
 		virtual bool has_string(std :: string const & s ) const = 0;
 		virtual _value at_string(std :: string const & s ) const = 0;
 		virtual void update_string(std :: string const & s , _value const & value ) = 0;
 		virtual bool insert_string(std :: string const & s , _value const & value ) = 0;
 		virtual bool erase_string(std :: string const & s ) = 0;
-		virtual forward_mutator_a< any_a<> > mutate_begin_() = 0;
-		virtual forward_mutator_a< any_a<> > mutate_end_() = 0;
+		virtual forward_mutator_a< flock_a<> > mutate_begin_() = 0;
+		virtual forward_mutator_a< flock_a<> > mutate_end_() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___shoal_a_handle_base___>
-	struct ___shoal_a_handle___ : collection_a< _key , _value >::template ___collection_a_handle___<___TTT___, ___DHB___>
+	struct ___shoal_a_handle___ : collection_a< _key , _value , flock_a<> >::template ___collection_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___shoal_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: collection_a< _key , _value >::template ___collection_a_handle___<___TTT___, ___DHB___>{ value }
+			: collection_a< _key , _value , flock_a<> >::template ___collection_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___shoal_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: collection_a< _key , _value >::template ___collection_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: collection_a< _key , _value , flock_a<> >::template ___collection_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
 		inline ___shoal_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
-			: collection_a< _key , _value >::template ___collection_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
+			: collection_a< _key , _value , flock_a<> >::template ___collection_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline bool has_string(std :: string const & s ) const final;
@@ -70,9 +70,9 @@ protected:
 
 		virtual inline bool erase_string(std :: string const & s ) final;
 
-		virtual inline forward_mutator_a< any_a<> > mutate_begin_() final;
+		virtual inline forward_mutator_a< flock_a<> > mutate_begin_() final;
 
-		virtual inline forward_mutator_a< any_a<> > mutate_end_() final;
+		virtual inline forward_mutator_a< flock_a<> > mutate_end_() final;
 
 	};
 
@@ -154,37 +154,37 @@ public:
 	inline shoal_a() = default;
 
 	inline shoal_a(shoal_a& other, any_a<>::___reference_tag___) noexcept
-		: collection_a< _key , _value >(other, any_a<>::___reference_tag___{})
+		: collection_a< _key , _value , flock_a<> >(other, any_a<>::___reference_tag___{})
 	{}
 
 	inline shoal_a(shoal_a& other, any_a<>::___duplicate_tag___) noexcept
-		: collection_a< _key , _value >(other, any_a<>::___duplicate_tag___{})
+		: collection_a< _key , _value , flock_a<> >(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline shoal_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: collection_a< _key , _value >{ handle }
+		: collection_a< _key , _value , flock_a<> >{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___shoal_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
 	explicit inline shoal_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
-		: collection_a< _key , _value >(handle, any_a<>::___reference_tag___{})
+		: collection_a< _key , _value , flock_a<> >(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___shoal_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<shoal_a, std::decay_t<___TTT___>>::value>>
 	explicit inline shoal_a(___TTT___ value) noexcept
-		: collection_a< _key , _value >{ std::make_shared<___shoal_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: collection_a< _key , _value , flock_a<> >{ std::make_shared<___shoal_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
 	explicit inline shoal_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
-		: collection_a< _key , _value >{ std::make_shared<___shoal_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
+		: collection_a< _key , _value , flock_a<> >{ std::make_shared<___shoal_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
@@ -242,7 +242,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = collection_a< _key , _value >::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = collection_a< _key , _value , flock_a<> >::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -261,7 +261,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = collection_a< _key , _value >::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = collection_a< _key , _value , flock_a<> >::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -273,7 +273,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = collection_a< _key , _value >::template ___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = collection_a< _key , _value , flock_a<> >::template ___operations___<___unordered_shoal_a___>();
 			operations.update_string("mutate_begin_", native_mutation_t<shoal_a>::create(&shoal_a::mutate_begin__));
 			operations.update_string("mutate_end_", native_mutation_t<shoal_a>::create(&shoal_a::mutate_end__));
 			return operations;
@@ -289,7 +289,7 @@ public:
 }; // class shoal_a
 
 template <typename _key, typename _value>
-class shoal_d : public collection_d< _key , _value >
+class shoal_d : public collection_d< _key , _value , flock_a<> >
 {
 public:
 	inline bool has_string(std :: string const & s ) const
@@ -318,7 +318,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline forward_mutator_a< any_a<> > mutate_begin_()
+	inline forward_mutator_a< flock_a<> > mutate_begin_()
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("mutate_begin_");
@@ -326,7 +326,7 @@ public:
 		{
 			throw dis("dynamic shoal_d::mutate_begin_ passed non-existent member");
 		}
-		return cast<forward_mutator_a< any_a<> >>(variadic_operate(op, *this));
+		return cast<forward_mutator_a< flock_a<> >>(variadic_operate(op, *this));
 	}
 
 	inline any_a<> mutate_end__(range_a<> const& arguments)
@@ -340,7 +340,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline forward_mutator_a< any_a<> > mutate_end_()
+	inline forward_mutator_a< flock_a<> > mutate_end_()
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("mutate_end_");
@@ -348,21 +348,21 @@ public:
 		{
 			throw dis("dynamic shoal_d::mutate_end_ passed non-existent member");
 		}
-		return cast<forward_mutator_a< any_a<> >>(variadic_operate(op, *this));
+		return cast<forward_mutator_a< flock_a<> >>(variadic_operate(op, *this));
 	}
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit shoal_d(any_a<> const& thing)
-		: collection_d< _key , _value >{ thing }
+		: collection_d< _key , _value , flock_a<> >{ thing }
 	{}
 
 	explicit shoal_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: collection_d< _key , _value >{ thing, any_a<>::___reference_tag___{} }
+		: collection_d< _key , _value , flock_a<> >{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit shoal_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: collection_d< _key , _value >{ thing, any_a<>::___duplicate_tag___{} }
+		: collection_d< _key , _value , flock_a<> >{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

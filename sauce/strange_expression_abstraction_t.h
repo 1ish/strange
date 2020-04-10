@@ -2217,7 +2217,7 @@ protected:
 			"\t\t\t___unordered_shoal_a___ operations = ");
 		if (root)
 		{
-			river.write_string("unordered_shoal_create<false, ___unordered_shoal_a___>();\n"
+			river.write_string("unordered_shoal_create<any_a<>, any_a<>, false, ___unordered_shoal_a___>();\n"
 				"\t\t\toperations.update_string(\"call_\", native_mutation_t<any_a>::create(&any_a::operator[]));\n"
 				"\t\t\toperations.update_string(\"perform_\", native_mutation_t<any_a>::create(&any_a::operator()));\n");
 		}

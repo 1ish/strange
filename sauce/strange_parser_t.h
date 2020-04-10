@@ -864,7 +864,7 @@ private:
 				try
 				{
 					// auto lock = _shared.write_lock_();
-					clash = !const_cast<unordered_shoal_t<>::std_unordered_map_any_any&>(_shared.extract_map()).emplace(new_scope_symbol, value.evaluate_()).second;
+					clash = !const_cast<std::unordered_map<any_a<>, any_a<>>&>(_shared.extract_map()).emplace(new_scope_symbol, value.evaluate_()).second;
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{

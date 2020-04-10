@@ -39,7 +39,7 @@ false &&
 					push_back_ := (thing :< #element >#, <collection[< #key >, < #value >, < #element >]>),
 					push_back : "void (_element const& thing) { push_back_(thing); }",
 
-					pop_back_ := (<#element>),
+					pop_back_ := (< #element >),
 
 					self_assign_ := (range :<range[< #element >]>#, <collection[< #key >, < #value >, < #element >]>),
 

@@ -60,7 +60,7 @@ public:
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_member_range::operate passed non-unordered-shoal local");
 		}
 #endif
-		auto& local = const_cast<unordered_shoal_t<>::std_unordered_map_any_any&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
+		auto& local = const_cast<std::unordered_map<any_a<>, any_a<>>&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
 		auto it = local.find(sym("^"));
 		if (it == local.end())
 		{
@@ -83,7 +83,7 @@ public:
 	inline any_a<> evaluate_() const
 	{
 		auto local = unordered_shoal_create();
-		local.insert_string("$", unordered_shoal_create<true>());
+		local.insert_string("$", unordered_shoal_create<any_a<>, any_a<>, true>());
 		return operate(local, range_create());
 	}
 

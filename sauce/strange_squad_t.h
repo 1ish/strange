@@ -52,7 +52,6 @@ class squad_t : public thing_t<___ego___>
 
 		inline std::size_t hash() const
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			return std::hash<void const*>{}(&*_it);
 		}
 
@@ -107,13 +106,11 @@ class squad_t : public thing_t<___ego___>
 		// forward mutator
 		inline _element get_() const
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			return *_it;
 		}
 
 		inline _element set_(_element const& thing) const
 		{
-			typename concurrent_u<_concurrent_>::write_lock lock(_squad_thing._mutex);
 			return operator*() = thing;
 		}
 
@@ -129,42 +126,36 @@ class squad_t : public thing_t<___ego___>
 
 		inline void increment_()
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			++_it;
 		}
 
 		// bidirectional mutator
 		inline void decrement_()
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			--_it;
 		}
 
 		// random access mutator
 		inline void self_add_(number_a<> const& number)
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			_it += number.to_int_64();
 		}
 
 		inline random_access_mutator_a<_element> add_(number_a<> const& number) const
 		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			result.mutate_it() += number.to_int_64();
 			return result;
 		}
 
 		inline void self_subtract_(number_a<> const& number)
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			_it -= number.to_int_64();
 		}
 
 		inline random_access_mutator_a<_element> subtract_(number_a<> const& number) const
 		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			result.mutate_it() -= number.to_int_64();
 			return result;
 		}
@@ -239,7 +230,6 @@ class squad_t : public thing_t<___ego___>
 
 		inline std::size_t hash() const
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			return std::hash<void const*>{}(&*_it);
 		}
 
@@ -294,7 +284,6 @@ class squad_t : public thing_t<___ego___>
 		// forward extractor
 		inline _element get_() const
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			return *_it;
 		}
 
@@ -310,42 +299,36 @@ class squad_t : public thing_t<___ego___>
 
 		inline void increment_()
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			++_it;
 		}
 
 		// bidirectional mutator
 		inline void decrement_()
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			--_it;
 		}
 
 		// random access mutator
 		inline void self_add_(number_a<> const& number)
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			_it += number.to_int_64();
 		}
 
 		inline random_access_extractor_a<_element> add_(number_a<> const& number) const
 		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			result.mutate_it() += number.to_int_64();
 			return result;
 		}
 
 		inline void self_subtract_(number_a<> const& number)
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			_it -= number.to_int_64();
 		}
 
 		inline random_access_extractor_a<_element> subtract_(number_a<> const& number) const
 		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			result.mutate_it() -= number.to_int_64();
 			return result;
 		}
@@ -550,49 +533,41 @@ public:
 	// range
 	inline random_access_extractor_a<any_a<>> extract_begin_() const
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return extractor_t<any_a<>, typename std_deque_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cbegin());
 	}
 
 	inline random_access_extractor_data_a<any_a<>, typename std_deque_any::const_iterator> extract_begin() const
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return extractor_t<any_a<>, typename std_deque_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cbegin());
 	}
 
 	inline random_access_extractor_a<any_a<>> extract_end_() const
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return extractor_t<any_a<>, typename std_deque_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cend());
 	}
 
 	inline random_access_extractor_data_a<any_a<>, typename std_deque_any::const_iterator> extract_end() const
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return extractor_t<any_a<>, typename std_deque_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cend());
 	}
 
 	inline random_access_mutator_a<any_a<>> mutate_begin_()
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return mutator_t<any_a<>, typename std_deque_any::iterator>::create(*this, _deque.begin());
 	}
 
 	inline random_access_mutator_data_a<any_a<>, typename std_deque_any::iterator> mutate_begin()
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return mutator_t<any_a<>, typename std_deque_any::iterator>::create(*this, _deque.begin());
 	}
 
 	inline random_access_mutator_a<any_a<>> mutate_end_()
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return mutator_t<any_a<>, typename std_deque_any::iterator>::create(*this, _deque.end());
 	}
 
 	inline random_access_mutator_data_a<any_a<>, typename std_deque_any::iterator> mutate_end()
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return mutator_t<any_a<>, typename std_deque_any::iterator>::create(*this, _deque.end());
 	}
 

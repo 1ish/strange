@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <typename ___ego___ = unordered_shoal_a<>>
-class conception_t : public unordered_shoal_t<false, ___ego___>
+class conception_t : public unordered_shoal_t<any_a<>, any_a<>, false, ___ego___>
 {
 public:
 	// construction
@@ -147,8 +147,8 @@ public:
 			{
 				continue;
 			}
-			auto const it = unordered_shoal_t<false, ___ego___>::_map.find(key);
-			if (it != unordered_shoal_t<false, ___ego___>::_map.cend())
+			auto const it = unordered_shoal_t<any_a<>, any_a<>, false, ___ego___>::_map.find(key);
+			if (it != unordered_shoal_t<any_a<>, any_a<>, false, ___ego___>::_map.cend())
 			{
 				// check overrides
 				if (intimate || !member.second.kinds_().has_(it->second.kind_()))
@@ -159,7 +159,7 @@ public:
 			}
 			else
 			{
-				unordered_shoal_t<false, ___ego___>::_map.emplace(key, member.second);
+				unordered_shoal_t<any_a<>, any_a<>, false, ___ego___>::_map.emplace(key, member.second);
 			}
 		}
 	}
@@ -168,7 +168,7 @@ protected:
 	friend class any_a<>;
 
 	inline conception_t(range_a<> const& parents)
-		: unordered_shoal_t<false, ___ego___>{ std::unordered_map<any_a<>, any_a<>>{} }
+		: unordered_shoal_t<any_a<>, any_a<>, false, ___ego___>{ std::unordered_map<any_a<>, any_a<>>{} }
 	{
 		symbol_a<> type = sym("");
 		cat_a<> cat = cat_t<>::create_();
@@ -185,11 +185,11 @@ protected:
 			merge(fast<unordered_shoal_a<>>(parent), type, cat, cats, kind, kinds);
 		}
 		// add operations for type, cat, cats, kind and kinds
-		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("type"), attribute_extraction_create(type));
-		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("cat"), attribute_extraction_create(cat));
-		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("cats"), attribute_extraction_create(cats));
-		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("kind"), attribute_extraction_create(kind));
-		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("kinds"), attribute_extraction_create(kinds));
+		unordered_shoal_t<any_a<>, any_a<>, false, ___ego___>::_map.emplace(sym("type"), attribute_extraction_create(type));
+		unordered_shoal_t<any_a<>, any_a<>, false, ___ego___>::_map.emplace(sym("cat"), attribute_extraction_create(cat));
+		unordered_shoal_t<any_a<>, any_a<>, false, ___ego___>::_map.emplace(sym("cats"), attribute_extraction_create(cats));
+		unordered_shoal_t<any_a<>, any_a<>, false, ___ego___>::_map.emplace(sym("kind"), attribute_extraction_create(kind));
+		unordered_shoal_t<any_a<>, any_a<>, false, ___ego___>::_map.emplace(sym("kinds"), attribute_extraction_create(kinds));
 	}
 
 private:

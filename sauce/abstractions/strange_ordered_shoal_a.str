@@ -1,24 +1,26 @@
 false &&
 {	strange :
 	{	<ordered_shoal> :: abstraction
-		(	// no dimensions
+		(	// dimensions
+			#key :<<>># <>,
+			#value :<<>># <>,
 			(	// parent
-				$$<shoal>[],
+				$$<shoal>[ #key , #value ],
 				{	// ordered shoal
-					'operator==' : "bool (ordered_shoal_a<> const& shoal) const",
-					'operator!=' : "bool (ordered_shoal_a<> const& shoal) const",
-					'operator<' : "bool (ordered_shoal_a<> const& shoal) const",
-					'operator>' : "bool (ordered_shoal_a<> const& shoal) const",
-					'operator<=' : "bool (ordered_shoal_a<> const& shoal) const",
-					'operator>=' : "bool (ordered_shoal_a<> const& shoal) const",
+					'operator==' : "bool (ordered_shoal_a<_key, _value> const& shoal) const",
+					'operator!=' : "bool (ordered_shoal_a<_key, _value> const& shoal) const",
+					'operator<' : "bool (ordered_shoal_a<_key, _value> const& shoal) const",
+					'operator>' : "bool (ordered_shoal_a<_key, _value> const& shoal) const",
+					'operator<=' : "bool (ordered_shoal_a<_key, _value> const& shoal) const",
+					'operator>=' : "bool (ordered_shoal_a<_key, _value> const& shoal) const",
 
-					extract_begin : "bidirectional_extractor_data_a<any_a<>, typename std::map<any_a<>, any_a<>>::const_iterator> () const",
-					extract_end : "bidirectional_extractor_data_a<any_a<>, typename std::map<any_a<>, any_a<>>::const_iterator> () const",
-					mutate_begin : "bidirectional_mutator_data_a<any_a<>, typename std::map<any_a<>, any_a<>>::iterator> ()",
-					mutate_end : "bidirectional_mutator_data_a<any_a<>, typename std::map<any_a<>, any_a<>>::iterator> ()",
+					extract_begin : "bidirectional_extractor_data_a<flock_a<>, typename std::map<_key, _value>::const_iterator> () const",
+					extract_end : "bidirectional_extractor_data_a<flock_a<>, typename std::map<_key, _value>::const_iterator> () const",
+					mutate_begin : "bidirectional_mutator_data_a<flock_a<>, typename std::map<_key, _value>::iterator> ()",
+					mutate_end : "bidirectional_mutator_data_a<flock_a<>, typename std::map<_key, _value>::iterator> ()",
 
-					extract_map : "std::map<any_a<>, any_a<>> const& () const",
-					mutate_map : "std::map<any_a<>, any_a<>>& ()",
+					extract_map : "std::map<_key, _value> const& () const",
+					mutate_map : "std::map<_key, _value>& ()",
 				}
 			)
 		)

@@ -52,14 +52,12 @@ class unordered_herd_t : public thing_t<___ego___>
 
 		inline std::size_t hash() const
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_herd_thing._mutex);
 			return std::hash<void const*>{}(&*_it);
 		}
 
 		// forward extractor
 		inline _element_it get_() const
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_herd_thing._mutex);
 			return *_it;
 		}
 
@@ -75,7 +73,6 @@ class unordered_herd_t : public thing_t<___ego___>
 
 		inline void increment_()
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_herd_thing._mutex);
 			++_it;
 		}
 
@@ -230,25 +227,21 @@ public:
 	// range
 	inline forward_extractor_a<_element> extract_begin_() const
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return extractor_t<_element, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
 	}
 
 	inline forward_extractor_data_a<_element, typename std_unordered_set_element::const_iterator> extract_begin() const
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return extractor_t<_element, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
 	}
 
 	inline forward_extractor_a<_element> extract_end_() const
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return extractor_t<_element, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());
 	}
 
 	inline forward_extractor_data_a<_element, typename std_unordered_set_element::const_iterator> extract_end() const
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return extractor_t<_element, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());
 	}
 

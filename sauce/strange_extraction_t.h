@@ -154,7 +154,7 @@ protected:
 		, _defaults{ defaults }
 		, _expression{ expression }
 		, _aspects{ no() }
-		, _shared{ unordered_shoal_t<true>::create_() }
+		, _shared{ unordered_shoal_t<any_a<>, any_a<>, true>::create_() }
 	{}
 };
 

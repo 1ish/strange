@@ -4,18 +4,18 @@
 namespace strange
 {
 
-template <bool _concurrent_ = false, typename ___ego___ = ordered_shoal_a<>>
+template <typename _key = any_a<>, typename _value = any_a<>, bool _concurrent_ = false, typename ___ego___ = ordered_shoal_a<_key, _value>>
 class ordered_shoal_t : public thing_t<___ego___>
 {
-	template <typename _element, typename _iterator_, typename ___ego_it___ = bidirectional_mutator_data_a<_element, _iterator_>>
+	template <typename _element_it, typename _iterator_, typename ___ego_it___ = bidirectional_mutator_data_a<_element_it, _iterator_>>
 	class mutator_t : public thing_t<___ego_it___>
 	{
 	public:
 		// construction
 		template <typename F>
-		static inline bidirectional_mutator_data_a<_element, _iterator_> create(ordered_shoal_t const& ordered_shoal_thing, F&& it)
+		static inline bidirectional_mutator_data_a<_element_it, _iterator_> create(ordered_shoal_t const& ordered_shoal_thing, F&& it)
 		{
-			return bidirectional_mutator_data_a<_element, _iterator_>::template create<mutator_t<_element, _iterator_>>(ordered_shoal_thing, std::forward<F>(it));
+			return bidirectional_mutator_data_a<_element_it, _iterator_>::template create<mutator_t<_element_it, _iterator_>>(ordered_shoal_thing, std::forward<F>(it));
 		}
 
 		// reflection
@@ -31,16 +31,16 @@ class ordered_shoal_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			return check<bidirectional_mutator_data_a<_element, _iterator_>>(thing) &&
-				_it == fast<bidirectional_mutator_data_a<_element, _iterator_>>(thing).extract_it();
+			return check<bidirectional_mutator_data_a<_element_it, _iterator_>>(thing) &&
+				_it == fast<bidirectional_mutator_data_a<_element_it, _iterator_>>(thing).extract_it();
 		}
 
-		inline bool operator==(bidirectional_mutator_data_a<_element, _iterator_> const& it) const
+		inline bool operator==(bidirectional_mutator_data_a<_element_it, _iterator_> const& it) const
 		{
 			return _it == it.extract_it();
 		}
 
-		inline bool operator!=(bidirectional_mutator_data_a<_element, _iterator_> const& it) const
+		inline bool operator!=(bidirectional_mutator_data_a<_element_it, _iterator_> const& it) const
 		{
 			return _it != it.extract_it();
 		}
@@ -52,35 +52,29 @@ class ordered_shoal_t : public thing_t<___ego___>
 
 		inline std::size_t hash() const
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_ordered_shoal_thing._mutex);
 			return std::hash<void const*>{}(&*_it);
 		}
 
 		// forward mutator
-		inline _element get_() const
+		inline _element_it get_() const
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_ordered_shoal_thing._mutex);
 			_pair.update_index(0, _it->first);
 			_pair.update_index(1, _it->second);
 			return _pair;
 		}
 
-		inline _element set_(_element const& thing) const
+		inline _element_it set_(_element_it const& thing) const
 		{
-			if (!check<flock_a<>>(thing))
-			{
-				throw dis("strange::ordered_shoal::mutator set passed non-flock");
-			}
-			typename concurrent_u<_concurrent_>::write_lock lock(_ordered_shoal_thing._mutex);
-			return _it->second = fast<flock_a<>>(thing).at_index(1);
+			_it->second = cast<typename _iterator_::value_type::second_type>(thing.at_index(1));
+			return thing;
 		}
 
-		inline _element* operator->() const
+		inline _element_it* operator->() const
 		{
 			return &operator*();
 		}
 
-		inline _element& operator*() const
+		inline _element_it& operator*() const
 		{
 			_pair.update_index(0, _it->first);
 			_pair.update_index(1, _it->second);
@@ -89,14 +83,12 @@ class ordered_shoal_t : public thing_t<___ego___>
 
 		inline void increment_()
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_ordered_shoal_thing._mutex);
 			++_it;
 		}
 
 		// bidirectional mutator
 		inline void decrement_()
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_ordered_shoal_thing._mutex);
 			--_it;
 		}
 
@@ -113,7 +105,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		flock_a<> mutable _pair; // stashing mutator
+		_element_it mutable _pair; // stashing mutator
 		ordered_shoal_t const& _ordered_shoal_thing;
 
 		friend class any_a<>;
@@ -127,15 +119,15 @@ class ordered_shoal_t : public thing_t<___ego___>
 		{}
 	};
 
-	template <typename _element, typename _iterator_, typename ___ego_it___ = bidirectional_extractor_data_a<_element, _iterator_>>
+	template <typename _element_it, typename _iterator_, typename ___ego_it___ = bidirectional_extractor_data_a<_element_it, _iterator_>>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
 		// construction
 		template <typename F>
-		static inline bidirectional_extractor_data_a<_element, _iterator_> create(ordered_shoal_a<> const& ordered_shoal, ordered_shoal_t const& ordered_shoal_thing, F&& it)
+		static inline bidirectional_extractor_data_a<_element_it, _iterator_> create(ordered_shoal_a<> const& ordered_shoal, ordered_shoal_t const& ordered_shoal_thing, F&& it)
 		{
-			return bidirectional_extractor_data_a<_element, _iterator_>::template create<extractor_t<_element, _iterator_>>(ordered_shoal, ordered_shoal_thing, std::forward<F>(it));
+			return bidirectional_extractor_data_a<_element_it, _iterator_>::template create<extractor_t<_element_it, _iterator_>>(ordered_shoal, ordered_shoal_thing, std::forward<F>(it));
 		}
 
 		// reflection
@@ -151,16 +143,16 @@ class ordered_shoal_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			return check<bidirectional_extractor_data_a<_element, _iterator_>>(thing) &&
-				_it == fast<bidirectional_extractor_data_a<_element, _iterator_>>(thing).extract_it();
+			return check<bidirectional_extractor_data_a<_element_it, _iterator_>>(thing) &&
+				_it == fast<bidirectional_extractor_data_a<_element_it, _iterator_>>(thing).extract_it();
 		}
 
-		inline bool operator==(bidirectional_extractor_data_a<_element, _iterator_> const& it) const
+		inline bool operator==(bidirectional_extractor_data_a<_element_it, _iterator_> const& it) const
 		{
 			return _it == it.extract_it();
 		}
 
-		inline bool operator!=(bidirectional_extractor_data_a<_element, _iterator_> const& it) const
+		inline bool operator!=(bidirectional_extractor_data_a<_element_it, _iterator_> const& it) const
 		{
 			return _it != it.extract_it();
 		}
@@ -172,25 +164,23 @@ class ordered_shoal_t : public thing_t<___ego___>
 
 		inline std::size_t hash() const
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_ordered_shoal_thing._mutex);
 			return std::hash<void const*>{}(&*_it);
 		}
 
 		// forward extractor
-		inline _element get_() const
+		inline _element_it get_() const
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_ordered_shoal_thing._mutex);
 			_pair.update_index(0, _it->first);
 			_pair.update_index(1, _it->second);
 			return _pair;
 		}
 
-		inline _element const* operator->() const
+		inline _element_it const* operator->() const
 		{
 			return &operator*();
 		}
 
-		inline _element const& operator*() const
+		inline _element_it const& operator*() const
 		{
 			_pair.update_index(0, _it->first);
 			_pair.update_index(1, _it->second);
@@ -199,14 +189,12 @@ class ordered_shoal_t : public thing_t<___ego___>
 
 		inline void increment_()
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_ordered_shoal_thing._mutex);
 			++_it;
 		}
 
 		// bidirectional mutator
 		inline void decrement_()
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_ordered_shoal_thing._mutex);
 			--_it;
 		}
 
@@ -224,7 +212,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 	protected:
 		_iterator_ _it;
 		ordered_shoal_a<> const _ordered_shoal;
-		flock_a<> mutable _pair; // stashing mutator
+		_element_it mutable _pair; // stashing mutator
 		ordered_shoal_t const& _ordered_shoal_thing;
 
 		friend class any_a<>;
@@ -240,41 +228,48 @@ class ordered_shoal_t : public thing_t<___ego___>
 	};
 
 public:
-	using std_map_any_any = std::map<any_a<>, any_a<>>;
+	using std_map_key_value = std::map<_key, _value>;
 
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		return create_() += range;
+		auto result = create_();
+		if (check<range_a<flock_a<>>>(range))
+		{
+			result += fast<range_a<flock_a<>>>(range);
+		}
+		return result;
 	}
 
-	static inline ordered_shoal_a<> create_()
+	static inline ordered_shoal_a<_key, _value> create_()
 	{
-		return create(std_map_any_any{});
+		return create(std_map_key_value{});
 	}
 
 	template <typename... Args>
-	static inline ordered_shoal_a<> create_(Args&&... args)
+	static inline ordered_shoal_a<_key, _value> create_(Args&&... args)
 	{
-		return create(variadic_pair_u<>::map(std::forward<Args>(args)...));
+		return create(variadic_pair_u<_key, _value>::map(std::forward<Args>(args)...));
 	}
 
 	template <typename F>
-	static inline ordered_shoal_a<> create(F&& init)
+	static inline ordered_shoal_a<_key, _value> create(F&& init)
 	{
-		return ordered_shoal_a<>::create<ordered_shoal_t<_concurrent_>>(std::forward<F>(init));
+		return ordered_shoal_a<_key, _value>::template create<ordered_shoal_t<_key, _value, _concurrent_>>(std::forward<F>(init));
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym("strange::ordered_shoal" + std::string{ _concurrent_ ? "_concurrent" : "" });
+		static symbol_a<> TYPE = sym("strange::ordered_shoal" + 
+			std::string{ _concurrent_ ? "_concurrent" : "" } +
+			kind_of<_key>().to_string() + "_" + kind_of<_value>().to_string());
 		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string(type_().to_string() + "::create", native_function_create(&ordered_shoal_t<_concurrent_>::create__));
+		shoal.update_string(type_().to_string() + "::create", native_function_create(&ordered_shoal_t<_key, _value, _concurrent_>::create__));
 	}
 
 	// visitor pattern
@@ -299,21 +294,21 @@ public:
 	// comparison
 	inline bool same_(any_a<> const& thing) const
 	{
-		if (!check<ordered_shoal_a<>>(thing))
+		if (!check<ordered_shoal_a<_key, _value>>(thing))
 		{
 			return false;
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _map == fast<ordered_shoal_a<>>(thing).extract_map();
+		return _map == fast<ordered_shoal_a<_key, _value>>(thing).extract_map();
 	}
 
-	inline bool operator==(ordered_shoal_a<> const& shoal) const
+	inline bool operator==(ordered_shoal_a<_key, _value> const& shoal) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _map == shoal.extract_map();
 	}
 
-	inline bool operator!=(ordered_shoal_a<> const& shoal) const
+	inline bool operator!=(ordered_shoal_a<_key, _value> const& shoal) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _map != shoal.extract_map();
@@ -339,15 +334,15 @@ public:
 
 	inline bool less_than_(any_a<> const& thing) const
 	{
-		if (!check<ordered_shoal_a<>>(thing))
+		if (!check<ordered_shoal_a<_key, _value>>(thing))
 		{
 			return one_t::less_than_(thing);
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _map < fast<ordered_shoal_a<>>(thing).extract_map();
+		return _map < fast<ordered_shoal_a<_key, _value>>(thing).extract_map();
 	}
 
-	inline bool operator<(ordered_shoal_a<> const& shoal) const
+	inline bool operator<(ordered_shoal_a<_key, _value> const& shoal) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _map < shoal.extract_map();
@@ -355,15 +350,15 @@ public:
 
 	inline bool greater_than_(any_a<> const& thing) const
 	{
-		if (!check<ordered_shoal_a<>>(thing))
+		if (!check<ordered_shoal_a<_key, _value>>(thing))
 		{
 			return one_t::greater_than_(thing);
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _map > fast<ordered_shoal_a<>>(thing).extract_map();
+		return _map > fast<ordered_shoal_a<_key, _value>>(thing).extract_map();
 	}
 
-	inline bool operator>(ordered_shoal_a<> const& shoal) const
+	inline bool operator>(ordered_shoal_a<_key, _value> const& shoal) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _map > shoal.extract_map();
@@ -371,15 +366,15 @@ public:
 
 	inline bool less_or_equal_(any_a<> const& thing) const
 	{
-		if (!check<ordered_shoal_a<>>(thing))
+		if (!check<ordered_shoal_a<_key, _value>>(thing))
 		{
 			return one_t::less_or_equal_(thing);
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _map <= fast<ordered_shoal_a<>>(thing).extract_map();
+		return _map <= fast<ordered_shoal_a<_key, _value>>(thing).extract_map();
 	}
 
-	inline bool operator<=(ordered_shoal_a<> const& shoal) const
+	inline bool operator<=(ordered_shoal_a<_key, _value> const& shoal) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _map <= shoal.extract_map();
@@ -387,79 +382,71 @@ public:
 
 	inline bool greater_or_equal_(any_a<> const& thing) const
 	{
-		if (!check<ordered_shoal_a<>>(thing))
+		if (!check<ordered_shoal_a<_key, _value>>(thing))
 		{
 			return one_t::greater_or_equal_(thing);
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _map >= fast<ordered_shoal_a<>>(thing).extract_map();
+		return _map >= fast<ordered_shoal_a<_key, _value>>(thing).extract_map();
 	}
 
-	inline bool operator>=(ordered_shoal_a<> const& shoal) const
+	inline bool operator>=(ordered_shoal_a<_key, _value> const& shoal) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _map >= shoal.extract_map();
 	}
 
 	// range
-	inline bidirectional_extractor_a<any_a<>> extract_begin_() const
+	inline bidirectional_extractor_a<flock_a<>> extract_begin_() const
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<any_a<>, typename std_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cbegin());
+		return extractor_t<flock_a<>, typename std_map_key_value::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cbegin());
 	}
 
-	inline bidirectional_extractor_data_a<any_a<>, typename std_map_any_any::const_iterator> extract_begin() const
+	inline bidirectional_extractor_data_a<flock_a<>, typename std_map_key_value::const_iterator> extract_begin() const
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<any_a<>, typename std_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cbegin());
+		return extractor_t<flock_a<>, typename std_map_key_value::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cbegin());
 	}
 
-	inline bidirectional_extractor_a<any_a<>> extract_end_() const
+	inline bidirectional_extractor_a<flock_a<>> extract_end_() const
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<any_a<>, typename std_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cend());
+		return extractor_t<flock_a<>, typename std_map_key_value::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cend());
 	}
 
-	inline bidirectional_extractor_data_a<any_a<>, typename std_map_any_any::const_iterator> extract_end() const
+	inline bidirectional_extractor_data_a<flock_a<>, typename std_map_key_value::const_iterator> extract_end() const
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return extractor_t<any_a<>, typename std_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cend());
+		return extractor_t<flock_a<>, typename std_map_key_value::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cend());
 	}
 
-	inline bidirectional_mutator_a<any_a<>> mutate_begin_()
+	inline bidirectional_mutator_a<flock_a<>> mutate_begin_()
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return mutator_t<any_a<>, typename std_map_any_any::iterator>::create(*this, _map.begin());
+		return mutator_t<flock_a<>, typename std_map_key_value::iterator>::create(*this, _map.begin());
 	}
 
-	inline bidirectional_mutator_data_a<any_a<>, typename std_map_any_any::iterator> mutate_begin()
+	inline bidirectional_mutator_data_a<flock_a<>, typename std_map_key_value::iterator> mutate_begin()
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return mutator_t<any_a<>, typename std_map_any_any::iterator>::create(*this, _map.begin());
+		return mutator_t<flock_a<>, typename std_map_key_value::iterator>::create(*this, _map.begin());
 	}
 
-	inline bidirectional_mutator_a<any_a<>> mutate_end_()
+	inline bidirectional_mutator_a<flock_a<>> mutate_end_()
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return mutator_t<any_a<>, typename std_map_any_any::iterator>::create(*this, _map.end());
+		return mutator_t<flock_a<>, typename std_map_key_value::iterator>::create(*this, _map.end());
 	}
 
-	inline bidirectional_mutator_data_a<any_a<>, typename std_map_any_any::iterator> mutate_end()
+	inline bidirectional_mutator_data_a<flock_a<>, typename std_map_key_value::iterator> mutate_end()
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return mutator_t<any_a<>, typename std_map_any_any::iterator>::create(*this, _map.end());
+		return mutator_t<flock_a<>, typename std_map_key_value::iterator>::create(*this, _map.end());
 	}
 
 	// collection
-	inline any_a<> has_(any_a<> const& key) const
+	inline any_a<> has_(_key const& key) const
 	{
 		return boole(has(key));
 	}
 
-	inline bool has(any_a<> const& key) const
+	inline bool has(_key const& key) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		std_map_any_any::const_iterator const it = _map.find(key);
+		typename std_map_key_value::const_iterator const it = _map.find(key);
 		return it != _map.cend();
 	}
 
@@ -468,10 +455,10 @@ public:
 		return has(sym(s));
 	}
 
-	inline any_a<> at_(any_a<> const& key) const
+	inline _value at_(_key const& key) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		std_map_any_any::const_iterator const it = _map.find(key);
+		typename std_map_key_value::const_iterator const it = _map.find(key);
 		if (it == _map.cend())
 		{
 			return mis("strange::ordered_shoal::at key not found");
@@ -479,51 +466,51 @@ public:
 		return it->second;
 	}
 
-	inline any_a<> at_string(std::string const& s) const
+	inline _value at_string(std::string const& s) const
 	{
 		return at_(sym(s));
 	}
 
-	inline any_a<> update_(any_a<> const& key, any_a<> const& value = no())
+	inline _value update_(_key const& key, _value const& value)
 	{
 		update(key, value);
 		return value;
 	}
 
-	inline void update(any_a<> const& key, any_a<> const& value)
+	inline void update(_key const& key, _value const& value)
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		_map[key] = value;
 	}
 
-	inline void update_string(std::string const& s, any_a<> const& value)
+	inline void update_string(std::string const& s, _value const& value)
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		_map[sym(s)] = value;
 	}
 
-	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = no())
+	inline any_a<> insert_(_key const& key, _value const& value)
 	{
 		return boole(insert(key, value));
 	}
 
-	inline bool insert(any_a<> const& key, any_a<> const& value)
+	inline bool insert(_key const& key, _value const& value)
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		return _map.emplace(key, value).second;
 	}
 
-	inline bool insert_string(std::string const& s, any_a<> const& value)
+	inline bool insert_string(std::string const& s, _value const& value)
 	{
 		return insert(sym(s), value);
 	}
 
-	inline any_a<> erase_(any_a<> const& key)
+	inline any_a<> erase_(_key const& key)
 	{
 		return boole(erase(key));
 	}
 
-	inline bool erase(any_a<> const& key)
+	inline bool erase(_key const& key)
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		return _map.erase(key);
@@ -569,68 +556,68 @@ public:
 		return _map.empty();
 	}
 
-	inline ___ego___ push_front_(any_a<> const& value)
+	inline ___ego___ push_front_(flock_a<> const& pair)
 	{
-		push_front(value);
+		push_front(pair);
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void push_front(any_a<> const& thing)
+	inline void push_front(flock_a<> const& pair)
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		_map[thing] = thing;
+		_map[cast<_key>(pair.at_index(0))] = cast<_value>(pair.at_index(1));
 	}
 
-	inline any_a<> pop_front_()
+	inline flock_a<> pop_front_()
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		std_map_any_any::const_iterator const it = _map.cbegin();
+		typename std_map_key_value::const_iterator const it = _map.cbegin();
 		if (it == _map.cend())
 		{
-			return no();
+			throw dis("strange::ordered_shoal::pop_front called on empty ordered_shoal");
 		}
-		any_a<> result = it->second;
+		auto result = flock_vals(it->first, it->second);
 		_map.erase(it);
 		return result;
 	}
 
-	inline ___ego___ push_back_(any_a<> const& value)
+	inline ___ego___ push_back_(flock_a<> const& pair)
 	{
-		push_back(value);
+		push_back(pair);
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void push_back(any_a<> const& thing)
+	inline void push_back(flock_a<> const& pair)
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		_map[thing] = thing;
+		_map[cast<_key>(pair.at_index(0))] = cast<_value>(pair.at_index(1));
 	}
 
-	inline any_a<> pop_back_()
+	inline flock_a<> pop_back_()
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		std_map_any_any::const_iterator it = _map.cend();
+		typename std_map_key_value::const_iterator it = _map.cend();
 		if (it == _map.cbegin())
 		{
-			return no();
+			throw dis("strange::ordered_shoal::pop_back called on empty ordered_shoal");
 		}
-		any_a<> result = (--it)->second;
+		auto result = flock_vals(it->first, it->second);
 		_map.erase(it);
 		return result;
 	}
 
-	inline void self_assign_(range_a<> const& range)
+	inline void self_assign_(range_a<flock_a<>> const& range)
 	{
-		if (check<ordered_shoal_a<>>(range))
+		if (check<ordered_shoal_a<_key, _value>>(range))
 		{
-			auto const other = fast<ordered_shoal_a<>>(range);
+			auto const other = fast<ordered_shoal_a<_key, _value>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_map = other.extract_map();
 		}
-		else if (check<unordered_shoal_a<>>(range))
+		else if (check<unordered_shoal_a<_key, _value>>(range))
 		{
-			auto const other = fast<unordered_shoal_a<>>(range);
+			auto const other = fast<unordered_shoal_a<_key, _value>>(range);
 			auto read_lock = other.read_lock_();
 			auto const& other_map = other.extract_map();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
@@ -639,38 +626,33 @@ public:
 		}
 		else
 		{
-			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<_key, _value, flock_a<>>>(range) ? fast<collection_a<_key, _value, flock_a<>>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_map.clear();
-			for (auto const& thing : range)
+			for (auto const& pair : range)
 			{
-				if (!check<flock_a<>>(thing))
-				{
-					throw dis("strange::ordered_shoal self_assign passed range containing non-flock");
-				}
-				flock_a<> pair = fast<flock_a<>>(thing);
 				if (pair.size() != 2)
 				{
 					throw dis("strange::ordered_shoal self_assign passed range containing flock of wrong size");
 				}
-				_map.emplace(pair.at_index(0), pair.at_index(1));
+				_map.emplace(cast<_key>(pair.at_index(0)), cast<_value>(pair.at_index(1)));
 			}
 		}
 	}
 	
-	inline void self_add_(range_a<> const& range)
+	inline void self_add_(range_a<flock_a<>> const& range)
 	{
-		if (check<ordered_shoal_a<>>(range))
+		if (check<ordered_shoal_a<_key, _value>>(range))
 		{
-			auto const other = fast<ordered_shoal_a<>>(range);
+			auto const other = fast<ordered_shoal_a<_key, _value>>(range);
 			auto read_lock = other.read_lock_();
 			auto const& other_map = other.extract_map();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_map.insert(other_map.cbegin(), other_map.cend());
 		}
-		else if (check<unordered_shoal_a<>>(range))
+		else if (check<unordered_shoal_a<_key, _value>>(range))
 		{
-			auto const other = fast<unordered_shoal_a<>>(range);
+			auto const other = fast<unordered_shoal_a<_key, _value>>(range);
 			auto read_lock = other.read_lock_();
 			auto const& other_map = other.extract_map();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
@@ -678,36 +660,31 @@ public:
 		}
 		else
 		{
-			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<_key, _value, flock_a<>>>(range) ? fast<collection_a<_key, _value, flock_a<>>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			for (auto const& thing : range)
+			for (auto const& pair : range)
 			{
-				if (!check<flock_a<>>(thing))
-				{
-					throw dis("strange::ordered_shoal += passed range containing non-flock");
-				}
-				flock_a<> pair = fast<flock_a<>>(thing);
 				if (pair.size() != 2)
 				{
 					throw dis("strange::ordered_shoal += passed range containing flock of wrong size");
 				}
-				_map.emplace(pair.at_index(0), pair.at_index(1));
+				_map.emplace(cast<_key>(pair.at_index(0)), cast<_value>(pair.at_index(1)));
 			}
 		}
 	}
 
-	inline ___ego___ add_(range_a<> const& range) const
+	inline ___ego___ add_(range_a<flock_a<>> const& range) const
 	{
 		auto result = thing_t<___ego___>::me_();
 		result += range;
 		return result;
 	}
 
-	inline void self_subtract_(range_a<> const& range)
+	inline void self_subtract_(range_a<flock_a<>> const& range)
 	{
-		if (check<ordered_shoal_a<>>(range))
+		if (check<ordered_shoal_a<_key, _value>>(range))
 		{
-			auto const other = fast<ordered_shoal_a<>>(range);
+			auto const other = fast<ordered_shoal_a<_key, _value>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			for (auto const& pair : other.extract_map())
@@ -715,9 +692,9 @@ public:
 				_map.erase(pair.first);
 			}
 		}
-		else if (check<unordered_shoal_a<>>(range))
+		else if (check<unordered_shoal_a<_key, _value>>(range))
 		{
-			auto const other = fast<unordered_shoal_a<>>(range);
+			auto const other = fast<unordered_shoal_a<_key, _value>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			for (auto const& pair : other.extract_map())
@@ -727,16 +704,20 @@ public:
 		}
 		else
 		{
-			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<_key, _value, flock_a<>>>(range) ? fast<collection_a<_key, _value, flock_a<>>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			for (auto const& thing : range)
+			for (auto const& pair : range)
 			{
-				_map.erase(thing);
+				if (pair.empty())
+				{
+					throw dis("strange::ordered_shoal -= passed range containing empty flock");
+				}
+				_map.erase(cast<_key>(pair.at_index(0)));
 			}
 		}
 	}
 
-	inline ___ego___ subtract_(range_a<> const& range) const
+	inline ___ego___ subtract_(range_a<flock_a<>> const& range) const
 	{
 		auto result = thing_t<___ego___>::me_();
 		result -= range;
@@ -754,19 +735,19 @@ public:
 	}
 
 	// data
-	inline std_map_any_any const& extract_map() const
+	inline std_map_key_value const& extract_map() const
 	{
 		return _map;
 	}
 
-	inline std_map_any_any& mutate_map()
+	inline std_map_key_value& mutate_map()
 	{
 		return _map;
 	}
 
 protected:
 	typename concurrent_u<_concurrent_>::mutex mutable _mutex;
-	std_map_any_any _map;
+	std_map_key_value _map;
 
 	friend class any_a<>;
 
@@ -795,11 +776,11 @@ private:
 	friend class ___ordered_shoal_t_share___;
 };
 
-template <bool _concurrent_, typename ___ego___>
-bool const ordered_shoal_t<_concurrent_, ___ego___>::___share___ = []()
+template <typename _key, typename _value, bool _concurrent_, typename ___ego___>
+bool const ordered_shoal_t<_key, _value, _concurrent_, ___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
-	ordered_shoal_t<_concurrent_, ___ego___>::share(shoal);
+	ordered_shoal_t<_key, _value, _concurrent_, ___ego___>::share(shoal);
 	return shoal;
 }();
 
@@ -808,15 +789,15 @@ class ___ordered_shoal_t_share___
 	static inline bool ___share___()
 	{
 		return ordered_shoal_t<>::___share___
-			&& ordered_shoal_t<true>::___share___;
+			&& ordered_shoal_t<any_a<>, any_a<>, true>::___share___;
 	}
 };
 
-// template <bool _concurrent_ = false>
-template <bool _concurrent_>
-inline ordered_shoal_a<> ordered_shoal_create()
+// template <typename _key = any_a<>, typename _value = any_a<>, bool _concurrent_ = false>
+template <typename _key, typename _value, bool _concurrent_>
+inline ordered_shoal_a<_key, _value> ordered_shoal_create()
 {
-	return ordered_shoal_t<_concurrent_>::create_();
+	return ordered_shoal_t<_key, _value, _concurrent_>::create_();
 }
 
 template <typename... Args>

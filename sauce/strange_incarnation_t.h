@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <typename ___ego___ = unordered_shoal_a<>>
-class incarnation_t : public unordered_shoal_t<false, ___ego___>
+class incarnation_t : public unordered_shoal_t<any_a<>, any_a<>, false, ___ego___>
 {
 public:
 	// construction
@@ -41,17 +41,17 @@ public:
 			{
 				if (value == defaults.extract_end_())
 				{
-					unordered_shoal_t<false, ___ego___>::_map.emplace(name, attribute_extraction_create(no()));
+					unordered_shoal_t<any_a<>, any_a<>, false, ___ego___>::_map.emplace(name, attribute_extraction_create(no()));
 				}
 				else
 				{
-					unordered_shoal_t<false, ___ego___>::_map.emplace(name, attribute_extraction_create(*value));
+					unordered_shoal_t<any_a<>, any_a<>, false, ___ego___>::_map.emplace(name, attribute_extraction_create(*value));
 					++value;
 				}
 			}
 			else
 			{
-				unordered_shoal_t<false, ___ego___>::_map.emplace(name, attribute_extraction_create(*aspect));
+				unordered_shoal_t<any_a<>, any_a<>, false, ___ego___>::_map.emplace(name, attribute_extraction_create(*aspect));
 				++aspect;
 				if (value != defaults.extract_end_())
 				{
@@ -65,7 +65,7 @@ protected:
 	friend class any_a<>;
 
 	inline incarnation_t(unordered_shoal_a<> const& inspiration, flock_a<> const& mention, flock_a<> const& aspects, flock_a<> const& defaults)
-		: unordered_shoal_t<false, ___ego___>{ inspiration.extract_map() }
+		: unordered_shoal_t<any_a<>, any_a<>, false, ___ego___>{ inspiration.extract_map() }
 	{
 		incarnate(mention, aspects, defaults);
 	}
