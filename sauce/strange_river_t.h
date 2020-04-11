@@ -92,7 +92,7 @@ class river_t : public thing_t<___ego___>
 	protected:
 		_iterator_ _it;
 		river_a<> const _river;
-		number_data_a<int8_t> mutable _int_8; // stashing mutator
+		number_data_a<int8_t> mutable _int_8; // stashing iterator
 
 		friend class any_a<>;
 

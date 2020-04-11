@@ -4,18 +4,18 @@
 namespace strange
 {
 
-template <bool _concurrent_ = false, typename ___ego___ = squad_a<>>
+template <typename _element = any_a<>, bool _concurrent_ = false, typename ___ego___ = squad_a<_element>>
 class squad_t : public thing_t<___ego___>
 {
-	template <typename _element, typename _iterator_, typename ___ego_it___ = random_access_mutator_data_a<_element, _iterator_>>
+	template <typename _element_it, typename _iterator_, typename ___ego_it___ = random_access_mutator_data_a<_element_it, _iterator_>>
 	class mutator_t : public thing_t<___ego_it___>
 	{
 	public:
 		// construction
 		template <typename F>
-		static inline random_access_mutator_data_a<_element, _iterator_> create(squad_t const& squad_thing, F&& it)
+		static inline random_access_mutator_data_a<_element_it, _iterator_> create(F&& it)
 		{
-			return random_access_mutator_data_a<_element, _iterator_>::template create<mutator_t<_element, _iterator_>>(squad_thing, std::forward<F>(it));
+			return random_access_mutator_data_a<_element_it, _iterator_>::template create<mutator_t<_element_it, _iterator_>>(std::forward<F>(it));
 		}
 
 		// reflection
@@ -31,16 +31,16 @@ class squad_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			return check<random_access_mutator_data_a<_element, _iterator_>>(thing) &&
-				_it == fast<random_access_mutator_data_a<_element, _iterator_>>(thing).extract_it();
+			return check<random_access_mutator_data_a<_element_it, _iterator_>>(thing) &&
+				_it == fast<random_access_mutator_data_a<_element_it, _iterator_>>(thing).extract_it();
 		}
 
-		inline bool operator==(random_access_mutator_data_a<_element, _iterator_> const& it) const
+		inline bool operator==(random_access_mutator_data_a<_element_it, _iterator_> const& it) const
 		{
 			return _it == it.extract_it();
 		}
 
-		inline bool operator!=(random_access_mutator_data_a<_element, _iterator_> const& it) const
+		inline bool operator!=(random_access_mutator_data_a<_element_it, _iterator_> const& it) const
 		{
 			return _it != it.extract_it();
 		}
@@ -57,69 +57,69 @@ class squad_t : public thing_t<___ego___>
 
 		inline bool less_than_(any_a<> const& thing) const
 		{
-			return check<random_access_mutator_data_a<_element, _iterator_>>(thing)
-				? _it < fast<random_access_mutator_data_a<_element, _iterator_>>(thing).extract_it()
+			return check<random_access_mutator_data_a<_element_it, _iterator_>>(thing)
+				? _it < fast<random_access_mutator_data_a<_element_it, _iterator_>>(thing).extract_it()
 				: one_t::less_than_(thing);
 		}
 
-		inline bool operator<(random_access_mutator_data_a<_element, _iterator_> const& it) const
+		inline bool operator<(random_access_mutator_data_a<_element_it, _iterator_> const& it) const
 		{
 			return _it < it.extract_it();
 		}
 
 		inline bool greater_than_(any_a<> const& thing) const
 		{
-			return check<random_access_mutator_data_a<_element, _iterator_>>(thing)
-				? _it > fast<random_access_mutator_data_a<_element, _iterator_>>(thing).extract_it()
+			return check<random_access_mutator_data_a<_element_it, _iterator_>>(thing)
+				? _it > fast<random_access_mutator_data_a<_element_it, _iterator_>>(thing).extract_it()
 				: one_t::greater_than_(thing);
 		}
 
-		inline bool operator>(random_access_mutator_data_a<_element, _iterator_> const& it) const
+		inline bool operator>(random_access_mutator_data_a<_element_it, _iterator_> const& it) const
 		{
 			return _it > it.extract_it();
 		}
 
 		inline bool less_or_equal_(any_a<> const& thing) const
 		{
-			return check<random_access_mutator_data_a<_element, _iterator_>>(thing)
-				? _it <= fast<random_access_mutator_data_a<_element, _iterator_>>(thing).extract_it()
+			return check<random_access_mutator_data_a<_element_it, _iterator_>>(thing)
+				? _it <= fast<random_access_mutator_data_a<_element_it, _iterator_>>(thing).extract_it()
 				: one_t::less_or_equal_(thing);
 		}
 
-		inline bool operator<=(random_access_mutator_data_a<_element, _iterator_> const& it) const
+		inline bool operator<=(random_access_mutator_data_a<_element_it, _iterator_> const& it) const
 		{
 			return _it <= it.extract_it();
 		}
 
 		inline bool greater_or_equal_(any_a<> const& thing) const
 		{
-			return check<random_access_mutator_data_a<_element, _iterator_>>(thing)
-				? _it >= fast<random_access_mutator_data_a<_element, _iterator_>>(thing).extract_it()
+			return check<random_access_mutator_data_a<_element_it, _iterator_>>(thing)
+				? _it >= fast<random_access_mutator_data_a<_element_it, _iterator_>>(thing).extract_it()
 				: one_t::greater_or_equal_(thing);
 		}
 
-		inline bool operator>=(random_access_mutator_data_a<_element, _iterator_> const& it) const
+		inline bool operator>=(random_access_mutator_data_a<_element_it, _iterator_> const& it) const
 		{
 			return _it >= it.extract_it();
 		}
 
 		// forward mutator
-		inline _element get_() const
+		inline _element_it get_() const
 		{
 			return *_it;
 		}
 
-		inline _element set_(_element const& thing) const
+		inline _element_it set_(_element_it const& thing) const
 		{
 			return operator*() = thing;
 		}
 
-		inline _element* operator->() const
+		inline _element_it* operator->() const
 		{
 			return &operator*();
 		}
 
-		inline _element& operator*() const
+		inline _element_it& operator*() const
 		{
 			return *_it;
 		}
@@ -141,7 +141,7 @@ class squad_t : public thing_t<___ego___>
 			_it += number.to_int_64();
 		}
 
-		inline random_access_mutator_a<_element> add_(number_a<> const& number) const
+		inline random_access_mutator_a<_element_it> add_(number_a<> const& number) const
 		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
 			result.mutate_it() += number.to_int_64();
@@ -153,7 +153,7 @@ class squad_t : public thing_t<___ego___>
 			_it -= number.to_int_64();
 		}
 
-		inline random_access_mutator_a<_element> subtract_(number_a<> const& number) const
+		inline random_access_mutator_a<_element_it> subtract_(number_a<> const& number) const
 		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
 			result.mutate_it() -= number.to_int_64();
@@ -173,27 +173,25 @@ class squad_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		squad_t const& _squad_thing;
 
 		friend class any_a<>;
 
 		template <typename F>
-		inline mutator_t(squad_t const& squad_thing, F&& it)
+		inline mutator_t(F&& it)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
-			, _squad_thing{ squad_thing }
 		{}
 	};
 
-	template <typename _element, typename _iterator_, typename ___ego_it___ = random_access_extractor_data_a<_element, _iterator_>>
+	template <typename _element_it, typename _iterator_, typename ___ego_it___ = random_access_extractor_data_a<_element_it, _iterator_>>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
 		// construction
 		template <typename F>
-		static inline random_access_extractor_data_a<_element, _iterator_> create(squad_a<> const& squad, squad_t const& squad_thing, F&& it)
+		static inline random_access_extractor_data_a<_element_it, _iterator_> create(squad_a<> const& squad, F&& it)
 		{
-			return random_access_extractor_data_a<_element, _iterator_>::template create<extractor_t<_element, _iterator_>>(squad, squad_thing, std::forward<F>(it));
+			return random_access_extractor_data_a<_element_it, _iterator_>::template create<extractor_t<_element_it, _iterator_>>(squad, std::forward<F>(it));
 		}
 
 		// reflection
@@ -209,16 +207,16 @@ class squad_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			return check<random_access_extractor_data_a<_element, _iterator_>>(thing) &&
-				_it == fast<random_access_extractor_data_a<_element, _iterator_>>(thing).extract_it();
+			return check<random_access_extractor_data_a<_element_it, _iterator_>>(thing) &&
+				_it == fast<random_access_extractor_data_a<_element_it, _iterator_>>(thing).extract_it();
 		}
 
-		inline bool operator==(random_access_extractor_data_a<_element, _iterator_> const& it) const
+		inline bool operator==(random_access_extractor_data_a<_element_it, _iterator_> const& it) const
 		{
 			return _it == it.extract_it();
 		}
 
-		inline bool operator!=(random_access_extractor_data_a<_element, _iterator_> const& it) const
+		inline bool operator!=(random_access_extractor_data_a<_element_it, _iterator_> const& it) const
 		{
 			return _it != it.extract_it();
 		}
@@ -235,64 +233,64 @@ class squad_t : public thing_t<___ego___>
 
 		inline bool less_than_(any_a<> const& thing) const
 		{
-			return check<random_access_extractor_data_a<_element, _iterator_>>(thing)
-				? _it < fast<random_access_extractor_data_a<_element, _iterator_>>(thing).extract_it()
+			return check<random_access_extractor_data_a<_element_it, _iterator_>>(thing)
+				? _it < fast<random_access_extractor_data_a<_element_it, _iterator_>>(thing).extract_it()
 				: one_t::less_than_(thing);
 		}
 
-		inline bool operator<(random_access_extractor_data_a<_element, _iterator_> const& it) const
+		inline bool operator<(random_access_extractor_data_a<_element_it, _iterator_> const& it) const
 		{
 			return _it < it.extract_it();
 		}
 
 		inline bool greater_than_(any_a<> const& thing) const
 		{
-			return check<random_access_extractor_data_a<_element, _iterator_>>(thing)
-				? _it > fast<random_access_extractor_data_a<_element, _iterator_>>(thing).extract_it()
+			return check<random_access_extractor_data_a<_element_it, _iterator_>>(thing)
+				? _it > fast<random_access_extractor_data_a<_element_it, _iterator_>>(thing).extract_it()
 				: one_t::greater_than_(thing);
 		}
 
-		inline bool operator>(random_access_extractor_data_a<_element, _iterator_> const& it) const
+		inline bool operator>(random_access_extractor_data_a<_element_it, _iterator_> const& it) const
 		{
 			return _it > it.extract_it();
 		}
 
 		inline bool less_or_equal_(any_a<> const& thing) const
 		{
-			return check<random_access_extractor_data_a<_element, _iterator_>>(thing)
-				? _it <= fast<random_access_extractor_data_a<_element, _iterator_>>(thing).extract_it()
+			return check<random_access_extractor_data_a<_element_it, _iterator_>>(thing)
+				? _it <= fast<random_access_extractor_data_a<_element_it, _iterator_>>(thing).extract_it()
 				: one_t::less_or_equal_(thing);
 		}
 
-		inline bool operator<=(random_access_extractor_data_a<_element, _iterator_> const& it) const
+		inline bool operator<=(random_access_extractor_data_a<_element_it, _iterator_> const& it) const
 		{
 			return _it <= it.extract_it();
 		}
 
 		inline bool greater_or_equal_(any_a<> const& thing) const
 		{
-			return check<random_access_extractor_data_a<_element, _iterator_>>(thing)
-				? _it >= fast<random_access_extractor_data_a<_element, _iterator_>>(thing).extract_it()
+			return check<random_access_extractor_data_a<_element_it, _iterator_>>(thing)
+				? _it >= fast<random_access_extractor_data_a<_element_it, _iterator_>>(thing).extract_it()
 				: one_t::greater_or_equal_(thing);
 		}
 
-		inline bool operator>=(random_access_extractor_data_a<_element, _iterator_> const& it) const
+		inline bool operator>=(random_access_extractor_data_a<_element_it, _iterator_> const& it) const
 		{
 			return _it >= it.extract_it();
 		}
 
 		// forward extractor
-		inline _element get_() const
+		inline _element_it get_() const
 		{
 			return *_it;
 		}
 
-		inline _element const* operator->() const
+		inline _element_it const* operator->() const
 		{
 			return &operator*();
 		}
 
-		inline _element const& operator*() const
+		inline _element_it const& operator*() const
 		{
 			return *_it;
 		}
@@ -314,7 +312,7 @@ class squad_t : public thing_t<___ego___>
 			_it += number.to_int_64();
 		}
 
-		inline random_access_extractor_a<_element> add_(number_a<> const& number) const
+		inline random_access_extractor_a<_element_it> add_(number_a<> const& number) const
 		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
 			result.mutate_it() += number.to_int_64();
@@ -326,7 +324,7 @@ class squad_t : public thing_t<___ego___>
 			_it -= number.to_int_64();
 		}
 
-		inline random_access_extractor_a<_element> subtract_(number_a<> const& number) const
+		inline random_access_extractor_a<_element_it> subtract_(number_a<> const& number) const
 		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
 			result.mutate_it() -= number.to_int_64();
@@ -347,67 +345,79 @@ class squad_t : public thing_t<___ego___>
 	protected:
 		_iterator_ _it;
 		squad_a<> const _squad;
-		squad_t const& _squad_thing;
 
 		friend class any_a<>;
 
 		template <typename F>
-		inline extractor_t(squad_a<> const& squad, squad_t const& squad_thing, F&& it)
+		inline extractor_t(squad_a<> const& squad, F&& it)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _squad{ squad }
-			, _squad_thing{ squad_thing }
 		{}
 	};
 
 public:
-	using std_deque_any = std::deque<any_a<>>;
+	using std_deque_element = std::deque<_element>;
 
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		return create_() += range;
+		auto result = create_();
+		if (check<range_a<_element>>(range))
+		{
+			result += fast<range_a<_element>>(range);
+		}
+		else
+		{
+			for (auto const& thing : range)
+			{
+				result.push_back(cast<_element>(thing));
+			}
+		}
+		return result;
 	}
 
-	static inline squad_a<> create_()
+	static inline squad_a<_element> create_()
 	{
-		return create(std_deque_any{});
+		return create(std_deque_element{});
 	}
 
 	template <typename... Args>
-	static inline squad_a<> create_(Args&&... args)
+	static inline squad_a<_element> create_(Args&&... args)
 	{
-		return create(variadic_u<>::deque(std::forward<Args>(args)...));
+		return create(variadic_u<_element>::deque(std::forward<Args>(args)...));
 	}
 
 	template <typename... Args>
-	static inline squad_a<> create_refs_(Args&&... args)
+	static inline squad_a<_element> create_refs_(Args&&... args)
 	{
-		return create(variadic_u<>::deque_ref(std::forward<Args>(args)...));
+		return create(variadic_u<_element>::deque_ref(std::forward<Args>(args)...));
 	}
 
 	template <typename... Args>
-	static inline squad_a<> create_dups_(Args&&... args)
+	static inline squad_a<_element> create_dups_(Args&&... args)
 	{
-		return create(variadic_u<>::deque_dup(std::forward<Args>(args)...));
+		return create(variadic_u<_element>::deque_dup(std::forward<Args>(args)...));
 	}
 
 	template <typename F>
-	static inline squad_a<> create(F&& init)
+	static inline squad_a<_element> create(F&& init)
 	{
-		return squad_a<>::create<squad_t<_concurrent_>>(std::forward<F>(init));
+		return squad_a<_element>::template create<squad_t<_element, _concurrent_>>(std::forward<F>(init));
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym("strange::squad" + std::string{ _concurrent_ ? "_concurrent" : "" });
+		static symbol_a<> TYPE = sym("strange::squad" + 
+			std::string{ _concurrent_ ? "_concurrent" : "" } +
+			kind_of<_element>().to_string());
 		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string(type_().to_string() + "::create", native_function_create(&squad_t<_concurrent_>::create__));
+		shoal.update_string(type_().to_string() + "::create", native_function_create(&squad_t<_element, _concurrent_>::create__));
 	}
 
 	// visitor pattern
@@ -430,21 +440,21 @@ public:
 	// comparison
 	inline bool same_(any_a<> const& thing) const
 	{
-		if (!check<squad_a<>>(thing))
+		if (!check<squad_a<_element>>(thing))
 		{
 			return false;
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _deque == fast<squad_a<>>(thing).extract_deque();
+		return _deque == fast<squad_a<_element>>(thing).extract_deque();
 	}
 
-	inline bool operator==(squad_a<> const& squad) const
+	inline bool operator==(squad_a<_element> const& squad) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _deque == squad.extract_deque();
 	}
 
-	inline bool operator!=(squad_a<> const& squad) const
+	inline bool operator!=(squad_a<_element> const& squad) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _deque != squad.extract_deque();
@@ -468,15 +478,15 @@ public:
 
 	inline bool less_than_(any_a<> const& thing) const
 	{
-		if (!check<squad_a<>>(thing))
+		if (!check<squad_a<_element>>(thing))
 		{
 			return one_t::less_than_(thing);
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _deque < fast<squad_a<>>(thing).extract_deque();
+		return _deque < fast<squad_a<_element>>(thing).extract_deque();
 	}
 
-	inline bool operator<(squad_a<> const& squad) const
+	inline bool operator<(squad_a<_element> const& squad) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _deque < squad.extract_deque();
@@ -484,15 +494,15 @@ public:
 
 	inline bool greater_than_(any_a<> const& thing) const
 	{
-		if (!check<squad_a<>>(thing))
+		if (!check<squad_a<_element>>(thing))
 		{
 			return one_t::greater_than_(thing);
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _deque > fast<squad_a<>>(thing).extract_deque();
+		return _deque > fast<squad_a<_element>>(thing).extract_deque();
 	}
 
-	inline bool operator>(squad_a<> const& squad) const
+	inline bool operator>(squad_a<_element> const& squad) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _deque > squad.extract_deque();
@@ -500,15 +510,15 @@ public:
 
 	inline bool less_or_equal_(any_a<> const& thing) const
 	{
-		if (!check<squad_a<>>(thing))
+		if (!check<squad_a<_element>>(thing))
 		{
 			return one_t::less_or_equal_(thing);
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _deque <= fast<squad_a<>>(thing).extract_deque();
+		return _deque <= fast<squad_a<_element>>(thing).extract_deque();
 	}
 
-	inline bool operator<=(squad_a<> const& squad) const
+	inline bool operator<=(squad_a<_element> const& squad) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _deque <= squad.extract_deque();
@@ -516,70 +526,70 @@ public:
 
 	inline bool greater_or_equal_(any_a<> const& thing) const
 	{
-		if (!check<squad_a<>>(thing))
+		if (!check<squad_a<_element>>(thing))
 		{
 			return one_t::greater_or_equal_(thing);
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _deque >= fast<squad_a<>>(thing).extract_deque();
+		return _deque >= fast<squad_a<_element>>(thing).extract_deque();
 	}
 
-	inline bool operator>=(squad_a<> const& squad) const
+	inline bool operator>=(squad_a<_element> const& squad) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _deque >= squad.extract_deque();
 	}
 
 	// range
-	inline random_access_extractor_a<any_a<>> extract_begin_() const
+	inline random_access_extractor_a<_element> extract_begin_() const
 	{
-		return extractor_t<any_a<>, typename std_deque_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cbegin());
+		return extractor_t<_element, typename std_deque_element::const_iterator>::create(thing_t<___ego___>::me_(), _deque.cbegin());
 	}
 
-	inline random_access_extractor_data_a<any_a<>, typename std_deque_any::const_iterator> extract_begin() const
+	inline random_access_extractor_data_a<_element, typename std_deque_element::const_iterator> extract_begin() const
 	{
-		return extractor_t<any_a<>, typename std_deque_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cbegin());
+		return extractor_t<_element, typename std_deque_element::const_iterator>::create(thing_t<___ego___>::me_(), _deque.cbegin());
 	}
 
-	inline random_access_extractor_a<any_a<>> extract_end_() const
+	inline random_access_extractor_a<_element> extract_end_() const
 	{
-		return extractor_t<any_a<>, typename std_deque_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cend());
+		return extractor_t<_element, typename std_deque_element::const_iterator>::create(thing_t<___ego___>::me_(), _deque.cend());
 	}
 
-	inline random_access_extractor_data_a<any_a<>, typename std_deque_any::const_iterator> extract_end() const
+	inline random_access_extractor_data_a<_element, typename std_deque_element::const_iterator> extract_end() const
 	{
-		return extractor_t<any_a<>, typename std_deque_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cend());
+		return extractor_t<_element, typename std_deque_element::const_iterator>::create(thing_t<___ego___>::me_(), _deque.cend());
 	}
 
-	inline random_access_mutator_a<any_a<>> mutate_begin_()
+	inline random_access_mutator_a<_element> mutate_begin_()
 	{
-		return mutator_t<any_a<>, typename std_deque_any::iterator>::create(*this, _deque.begin());
+		return mutator_t<_element, typename std_deque_element::iterator>::create(_deque.begin());
 	}
 
-	inline random_access_mutator_data_a<any_a<>, typename std_deque_any::iterator> mutate_begin()
+	inline random_access_mutator_data_a<_element, typename std_deque_element::iterator> mutate_begin()
 	{
-		return mutator_t<any_a<>, typename std_deque_any::iterator>::create(*this, _deque.begin());
+		return mutator_t<_element, typename std_deque_element::iterator>::create(_deque.begin());
 	}
 
-	inline random_access_mutator_a<any_a<>> mutate_end_()
+	inline random_access_mutator_a<_element> mutate_end_()
 	{
-		return mutator_t<any_a<>, typename std_deque_any::iterator>::create(*this, _deque.end());
+		return mutator_t<_element, typename std_deque_element::iterator>::create(_deque.end());
 	}
 
-	inline random_access_mutator_data_a<any_a<>, typename std_deque_any::iterator> mutate_end()
+	inline random_access_mutator_data_a<_element, typename std_deque_element::iterator> mutate_end()
 	{
-		return mutator_t<any_a<>, typename std_deque_any::iterator>::create(*this, _deque.end());
+		return mutator_t<_element, typename std_deque_element::iterator>::create(_deque.end());
 	}
 
 	// collection
-	inline any_a<> has_(any_a<> const& key) const
+	inline any_a<> has_(number_data_a<int64_t> const& key) const
 	{
 		return boole(has(key));
 	}
 
-	inline bool has(any_a<> const& key) const
+	inline bool has(number_data_a<int64_t> const& key) const
 	{
-		return check<number_a<>>(key) && has_index(fast<number_a<>>(key).to_int_64());
+		return has_index(key.extract_primitive());
 	}
 
 	inline bool has_index(int64_t index) const
@@ -587,16 +597,12 @@ public:
 		return index >= 0 && index < size();
 	}
 
-	inline any_a<> at_(any_a<> const& key) const
+	inline _element at_(number_data_a<int64_t> const& key) const
 	{
-		if (check<number_a<>>(key))
-		{
-			return at_index(fast<number_a<>>(key).to_int_64());
-		}
-		return mis("strange::squad::at index is not a number");
+		return at_index(key.extract_primitive());
 	}
 
-	inline any_a<> at_index(int64_t index) const
+	inline _element at_index(int64_t index) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		if (index >= 0 && index < int64_t(_deque.size()))
@@ -606,21 +612,18 @@ public:
 		return mis("strange::squad::at index out of bounds");
 	}
 
-	inline any_a<> update_(any_a<> const& key, any_a<> const& value = no())
+	inline _element update_(number_data_a<int64_t> const& key, _element const& value)
 	{
 		update(key, value);
 		return value;
 	}
 
-	inline void update(any_a<> const& key, any_a<> const& value)
+	inline void update(number_data_a<int64_t> const& key, _element const& value)
 	{
-		if (check<number_a<>>(key))
-		{
-			update_index(fast<number_a<>>(key).to_int_64(), value);
-		}
+		update_index(key.extract_primitive(), value);
 	}
 
-	inline void update_index(int64_t index, any_a<> const& value)
+	inline void update_index(int64_t index, _element const& value)
 	{
 		if (index >= 0)
 		{
@@ -641,17 +644,17 @@ public:
 		}
 	}
 
-	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = no())
+	inline any_a<> insert_(number_data_a<int64_t> const& key, _element const& value)
 	{
 		return boole(insert(key, value));
 	}
 
-	inline bool insert(any_a<> const& key, any_a<> const& value)
+	inline bool insert(number_data_a<int64_t> const& key, _element const& value)
 	{
-		return check<number_a<>>(key) && insert_index(fast<number_a<>>(key).to_int_64(), value);
+		return insert_index(key.extract_primitive(), value);
 	}
 
-	inline bool insert_index(int64_t index, any_a<> const& value)
+	inline bool insert_index(int64_t index, _element const& value)
 	{
 		if (index >= 0)
 		{
@@ -678,14 +681,14 @@ public:
 		return false;
 	}
 
-	inline any_a<> erase_(any_a<> const& key)
+	inline any_a<> erase_(number_data_a<int64_t> const& key)
 	{
 		return boole(erase(key));
 	}
 
-	inline bool erase(any_a<> const& key)
+	inline bool erase(number_data_a<int64_t> const& key)
 	{
-		return check<number_a<>>(key) && erase_index(fast<number_a<>>(key).to_int_64());
+		return erase_index(key.extract_primitive());
 	}
 
 	inline bool erase_index(int64_t index)
@@ -733,66 +736,66 @@ public:
 		return _deque.empty();
 	}
 
-	inline ___ego___ push_front_(any_a<> const& value)
+	inline ___ego___ push_front_(_element const& value)
 	{
 		push_front(value);
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void push_front(any_a<> const& thing)
+	inline void push_front(_element const& thing)
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		_deque.push_front(thing);
 	}
 
-	inline any_a<> pop_front_()
+	inline _element pop_front_()
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		if (_deque.empty())
 		{
-			return no();
+			throw dis("strange::squad::pop_front called on empty squad");
 		}
-		any_a<> result = _deque.front();
+		_element result = _deque.front();
 		_deque.pop_front();
 		return result;
 	}
 
-	inline ___ego___ push_back_(any_a<> const& value)
+	inline ___ego___ push_back_(_element const& value)
 	{
 		push_back(value);
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void push_back(any_a<> const& thing)
+	inline void push_back(_element const& thing)
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		_deque.push_back(thing);
 	}
 
-	inline any_a<> pop_back_()
+	inline _element pop_back_()
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		if (_deque.empty())
 		{
-			return no();
+			throw dis("strange::squad::pop_back called on empty squad");
 		}
-		any_a<> result = _deque.back();
+		_element result = _deque.back();
 		_deque.pop_back();
 		return result;
 	}
 
-	inline void self_assign_(range_a<> const& range)
+	inline void self_assign_(range_a<_element> const& range)
 	{
-		if (check<squad_a<>>(range))
+		if (check<squad_a<_element>>(range))
 		{
-			auto const other = fast<squad_a<>>(range);
+			auto const other = fast<squad_a<_element>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_deque = other.extract_deque();
 		}
 		else
 		{
-			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<_element>>(range) ? fast<collection_a<_element>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_deque.clear();
 			for (auto const& thing : range)
@@ -802,11 +805,11 @@ public:
 		}
 	}
 
-	inline void self_add_(range_a<> const& range)
+	inline void self_add_(range_a<_element> const& range)
 	{
-		if (check<squad_a<>>(range))
+		if (check<squad_a<_element>>(range))
 		{
-			auto const other = fast<squad_a<>>(range);
+			auto const other = fast<squad_a<_element>>(range);
 			auto read_lock = other.read_lock_();
 			auto const& other_deque = other.extract_deque();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
@@ -814,7 +817,7 @@ public:
 		}
 		else
 		{
-			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<_element>>(range) ? fast<collection_a<_element>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			for (auto const& thing : range)
 			{
@@ -823,24 +826,22 @@ public:
 		}
 	}
 
-	inline ___ego___ add_(range_a<> const& range) const
+	inline ___ego___ add_(range_a<_element> const& range) const
 	{
 		auto result = thing_t<___ego___>::me_();
 		result += range;
 		return result;
 	}
 
-	inline void self_subtract_(range_a<> const& range)
+	inline void self_subtract_(range_a<_element> const& range)
 	{
-		if (check<collection_a<>>(range))
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
+		if (check<collection_a<_element>>(range))
 		{
-			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			_deque.resize(std::size_t(std::max<int64_t>(0, int64_t(_deque.size()) - fast<collection_a<>>(range).size())));
+			_deque.resize(std::size_t(std::max<int64_t>(0, int64_t(_deque.size()) - fast<collection_a<_element>>(range).size())));
 		}
 		else
 		{
-			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
-			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			for (auto const& thing : range)
 			{
 				if (_deque.empty())
@@ -852,7 +853,7 @@ public:
 		}
 	}
 
-	inline ___ego___ subtract_(range_a<> const& range) const
+	inline ___ego___ subtract_(range_a<_element> const& range) const
 	{
 		auto result = thing_t<___ego___>::me_();
 		result -= range;
@@ -870,19 +871,19 @@ public:
 	}
 
 	// data
-	inline std_deque_any const& extract_deque() const
+	inline std_deque_element const& extract_deque() const
 	{
 		return _deque;
 	}
 
-	inline std_deque_any& mutate_deque()
+	inline std_deque_element& mutate_deque()
 	{
 		return _deque;
 	}
 
 protected:
 	typename concurrent_u<_concurrent_>::mutex mutable _mutex;
-	std_deque_any _deque;
+	std_deque_element _deque;
 
 	friend class any_a<>;
 
@@ -911,11 +912,11 @@ private:
 	friend class ___squad_t_share___;
 };
 
-template <bool _concurrent_, typename ___ego___>
-bool const squad_t<_concurrent_, ___ego___>::___share___ = []()
+template <typename _element, bool _concurrent_, typename ___ego___>
+bool const squad_t<_element, _concurrent_, ___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
-	squad_t<_concurrent_, ___ego___>::share(shoal);
+	squad_t<_element, _concurrent_, ___ego___>::share(shoal);
 	return shoal;
 }();
 
@@ -924,15 +925,15 @@ class ___squad_t_share___
 	static inline bool ___share___()
 	{
 		return squad_t<>::___share___
-			&& squad_t<true>::___share___;
+			&& squad_t<any_a<>, true>::___share___;
 	}
 };
 
-// template <bool _concurrent_ = false>
-template <bool _concurrent_>
-inline squad_a<> squad_create()
+// template <typename _element = any_a<>, bool _concurrent_ = false>
+template <typename _element, bool _concurrent_>
+inline squad_a<_element> squad_create()
 {
-	return squad_t<_concurrent_>::create_();
+	return squad_t<_element, _concurrent_>::create_();
 }
 
 } // namespace strange

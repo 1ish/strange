@@ -1,24 +1,25 @@
 false &&
 {	strange :
 	{	<squad> :: abstraction
-		(	// no dimensions
+		(	// dimensions
+			#element :<<>># <>,
 			(	// parent
-				$$<inventory>[],
+				$$<inventory>[ #element ],
 				{	// squad
-					'operator==' : "bool (squad_a<> const& squad) const",
-					'operator!=' : "bool (squad_a<> const& squad) const",
-					'operator<' : "bool (squad_a<> const& squad) const",
-					'operator>' : "bool (squad_a<> const& squad) const",
-					'operator<=' : "bool (squad_a<> const& squad) const",
-					'operator>=' : "bool (squad_a<> const& squad) const",
+					'operator==' : "bool (squad_a<_element> const& squad) const",
+					'operator!=' : "bool (squad_a<_element> const& squad) const",
+					'operator<' : "bool (squad_a<_element> const& squad) const",
+					'operator>' : "bool (squad_a<_element> const& squad) const",
+					'operator<=' : "bool (squad_a<_element> const& squad) const",
+					'operator>=' : "bool (squad_a<_element> const& squad) const",
 
-					extract_begin : "random_access_extractor_data_a<any_a<>, typename std::deque<any_a<>>::const_iterator> () const",
-					extract_end : "random_access_extractor_data_a<any_a<>, typename std::deque<any_a<>>::const_iterator> () const",
-					mutate_begin : "random_access_mutator_data_a<any_a<>, typename std::deque<any_a<>>::iterator> ()",
-					mutate_end : "random_access_mutator_data_a<any_a<>, typename std::deque<any_a<>>::iterator> ()",
+					extract_begin : "random_access_extractor_data_a<_element, typename std::deque<_element>::const_iterator> () const",
+					extract_end : "random_access_extractor_data_a<_element, typename std::deque<_element>::const_iterator> () const",
+					mutate_begin : "random_access_mutator_data_a<_element, typename std::deque<_element>::iterator> ()",
+					mutate_end : "random_access_mutator_data_a<_element, typename std::deque<_element>::iterator> ()",
 
-					extract_deque : "std::deque<any_a<>> const& () const",
-					mutate_deque : "std::deque<any_a<>>& ()",
+					extract_deque : "std::deque<_element> const& () const",
+					mutate_deque : "std::deque<_element>& ()",
 				}
 			)
 		)

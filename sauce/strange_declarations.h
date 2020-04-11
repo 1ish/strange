@@ -340,8 +340,8 @@ template <typename... Args>
 inline ordered_shoal_a<> ordered_shoal_vals(Args&&... args);
 
 // squad
-template <bool _concurrent_ = false>
-inline squad_a<> squad_create();
+template <typename _element = any_a<>, bool _concurrent_ = false>
+inline squad_a<_element> squad_create();
 
 // unordered herd
 template <typename _element = any_a<>, bool _concurrent_ = false>

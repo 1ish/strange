@@ -13,9 +13,9 @@ class unordered_herd_t : public thing_t<___ego___>
 	public:
 		// construction
 		template <typename F>
-		static inline forward_extractor_data_a<_element_it, _iterator_> create(unordered_herd_a<_element_it> const& unordered_herd, unordered_herd_t const& unordered_herd_thing, F&& it)
+		static inline forward_extractor_data_a<_element_it, _iterator_> create(unordered_herd_a<_element_it> const& unordered_herd, F&& it)
 		{
-			return forward_extractor_data_a<_element_it, _iterator_>::template create<extractor_t<_element_it, _iterator_>>(unordered_herd, unordered_herd_thing, std::forward<F>(it));
+			return forward_extractor_data_a<_element_it, _iterator_>::template create<extractor_t<_element_it, _iterator_>>(unordered_herd, std::forward<F>(it));
 		}
 
 		// reflection
@@ -90,16 +90,14 @@ class unordered_herd_t : public thing_t<___ego___>
 	protected:
 		_iterator_ _it;
 		unordered_herd_a<> const _unordered_herd;
-		unordered_herd_t const& _unordered_herd_thing;
 
 		friend class any_a<>;
 
 		template <typename F>
-		inline extractor_t(unordered_herd_a<> const& unordered_herd, unordered_herd_t const& unordered_herd_thing, F&& it)
+		inline extractor_t(unordered_herd_a<> const& unordered_herd, F&& it)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _unordered_herd{ unordered_herd }
-			, _unordered_herd_thing{ unordered_herd_thing }
 		{}
 	};
 
@@ -227,22 +225,22 @@ public:
 	// range
 	inline forward_extractor_a<_element> extract_begin_() const
 	{
-		return extractor_t<_element, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
+		return extractor_t<_element, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), _set.cbegin());
 	}
 
 	inline forward_extractor_data_a<_element, typename std_unordered_set_element::const_iterator> extract_begin() const
 	{
-		return extractor_t<_element, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
+		return extractor_t<_element, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), _set.cbegin());
 	}
 
 	inline forward_extractor_a<_element> extract_end_() const
 	{
-		return extractor_t<_element, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());
+		return extractor_t<_element, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), _set.cend());
 	}
 
 	inline forward_extractor_data_a<_element, typename std_unordered_set_element::const_iterator> extract_end() const
 	{
-		return extractor_t<_element, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());
+		return extractor_t<_element, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), _set.cend());
 	}
 
 	// collection

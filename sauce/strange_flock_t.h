@@ -14,9 +14,9 @@ class flock_t : public thing_t<___ego___>
 	public:
 		// construction
 		template <typename F>
-		static inline random_access_mutator_data_a<_element_it, _iterator_> create(flock_t const& flock_thing, F&& it)
+		static inline random_access_mutator_data_a<_element_it, _iterator_> create(F&& it)
 		{
-			return random_access_mutator_data_a<_element_it, _iterator_>::template create<mutator_t<_element_it, _iterator_>>(flock_thing, std::forward<F>(it));
+			return random_access_mutator_data_a<_element_it, _iterator_>::template create<mutator_t<_element_it, _iterator_>>(std::forward<F>(it));
 		}
 
 		// reflection
@@ -174,15 +174,13 @@ class flock_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		flock_t const& _flock_thing;
 
 		friend class any_a<>;
 
 		template <typename F>
-		inline mutator_t(flock_t const& flock_thing, F&& it)
+		inline mutator_t(F&& it)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
-			, _flock_thing{ flock_thing }
 		{}
 	};
 
@@ -192,9 +190,9 @@ class flock_t : public thing_t<___ego___>
 	public:
 		// construction
 		template <typename F>
-		static inline random_access_extractor_data_a<_element_it, _iterator_> create(flock_a<_element_it> const& flock, flock_t const& flock_thing, F&& it)
+		static inline random_access_extractor_data_a<_element_it, _iterator_> create(flock_a<_element_it> const& flock, F&& it)
 		{
-			return random_access_extractor_data_a<_element_it, _iterator_>::template create<extractor_t<_element_it, _iterator_>>(flock, flock_thing, std::forward<F>(it));
+			return random_access_extractor_data_a<_element_it, _iterator_>::template create<extractor_t<_element_it, _iterator_>>(flock, std::forward<F>(it));
 		}
 
 		// reflection
@@ -348,16 +346,14 @@ class flock_t : public thing_t<___ego___>
 	protected:
 		_iterator_ _it;
 		flock_a<_element_it> const _flock;
-		flock_t const& _flock_thing;
 
 		friend class any_a<>;
 
 		template <typename F>
-		inline extractor_t(flock_a<_element_it> const& flock, flock_t const& flock_thing, F&& it)
+		inline extractor_t(flock_a<_element_it> const& flock, F&& it)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _flock{ flock }
-			, _flock_thing{ flock_thing }
 		{}
 	};
 
@@ -548,42 +544,42 @@ public:
 	// range
 	inline random_access_extractor_a<_element> extract_begin_() const
 	{
-		return extractor_t<_element, typename std_vector_element::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cbegin());
+		return extractor_t<_element, typename std_vector_element::const_iterator>::create(thing_t<___ego___>::me_(), _vector.cbegin());
 	}
 
 	inline random_access_extractor_data_a<_element, typename std_vector_element::const_iterator> extract_begin() const
 	{
-		return extractor_t<_element, typename std_vector_element::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cbegin());
+		return extractor_t<_element, typename std_vector_element::const_iterator>::create(thing_t<___ego___>::me_(), _vector.cbegin());
 	}
 
 	inline random_access_extractor_a<_element> extract_end_() const
 	{
-		return extractor_t<_element, typename std_vector_element::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cend());
+		return extractor_t<_element, typename std_vector_element::const_iterator>::create(thing_t<___ego___>::me_(), _vector.cend());
 	}
 
 	inline random_access_extractor_data_a<_element, typename std_vector_element::const_iterator> extract_end() const
 	{
-		return extractor_t<_element, typename std_vector_element::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cend());
+		return extractor_t<_element, typename std_vector_element::const_iterator>::create(thing_t<___ego___>::me_(), _vector.cend());
 	}
 
 	inline random_access_mutator_a<_element> mutate_begin_()
 	{
-		return mutator_t<_element, typename std_vector_element::iterator>::create(*this, _vector.begin());
+		return mutator_t<_element, typename std_vector_element::iterator>::create(_vector.begin());
 	}
 
 	inline random_access_mutator_data_a<_element, typename std_vector_element::iterator> mutate_begin()
 	{
-		return mutator_t<_element, typename std_vector_element::iterator>::create(*this, _vector.begin());
+		return mutator_t<_element, typename std_vector_element::iterator>::create(_vector.begin());
 	}
 
 	inline random_access_mutator_a<_element> mutate_end_()
 	{
-		return mutator_t<_element, typename std_vector_element::iterator>::create(*this, _vector.end());
+		return mutator_t<_element, typename std_vector_element::iterator>::create(_vector.end());
 	}
 
 	inline random_access_mutator_data_a<_element, typename std_vector_element::iterator> mutate_end()
 	{
-		return mutator_t<_element, typename std_vector_element::iterator>::create(*this, _vector.end());
+		return mutator_t<_element, typename std_vector_element::iterator>::create(_vector.end());
 	}
 
 	// collection

@@ -13,9 +13,9 @@ class ordered_shoal_t : public thing_t<___ego___>
 	public:
 		// construction
 		template <typename F>
-		static inline bidirectional_mutator_data_a<_element_it, _iterator_> create(ordered_shoal_t const& ordered_shoal_thing, F&& it)
+		static inline bidirectional_mutator_data_a<_element_it, _iterator_> create(F&& it)
 		{
-			return bidirectional_mutator_data_a<_element_it, _iterator_>::template create<mutator_t<_element_it, _iterator_>>(ordered_shoal_thing, std::forward<F>(it));
+			return bidirectional_mutator_data_a<_element_it, _iterator_>::template create<mutator_t<_element_it, _iterator_>>(std::forward<F>(it));
 		}
 
 		// reflection
@@ -105,17 +105,15 @@ class ordered_shoal_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		_element_it mutable _pair; // stashing mutator
-		ordered_shoal_t const& _ordered_shoal_thing;
+		_element_it mutable _pair; // stashing iterator
 
 		friend class any_a<>;
 
 		template <typename F>
-		inline mutator_t(ordered_shoal_t const& ordered_shoal_thing, F&& it)
+		inline mutator_t(F&& it)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _pair{ flock_create() }
-			, _ordered_shoal_thing{ ordered_shoal_thing }
 		{}
 	};
 
@@ -125,9 +123,9 @@ class ordered_shoal_t : public thing_t<___ego___>
 	public:
 		// construction
 		template <typename F>
-		static inline bidirectional_extractor_data_a<_element_it, _iterator_> create(ordered_shoal_a<> const& ordered_shoal, ordered_shoal_t const& ordered_shoal_thing, F&& it)
+		static inline bidirectional_extractor_data_a<_element_it, _iterator_> create(ordered_shoal_a<> const& ordered_shoal, F&& it)
 		{
-			return bidirectional_extractor_data_a<_element_it, _iterator_>::template create<extractor_t<_element_it, _iterator_>>(ordered_shoal, ordered_shoal_thing, std::forward<F>(it));
+			return bidirectional_extractor_data_a<_element_it, _iterator_>::template create<extractor_t<_element_it, _iterator_>>(ordered_shoal, std::forward<F>(it));
 		}
 
 		// reflection
@@ -212,18 +210,16 @@ class ordered_shoal_t : public thing_t<___ego___>
 	protected:
 		_iterator_ _it;
 		ordered_shoal_a<> const _ordered_shoal;
-		_element_it mutable _pair; // stashing mutator
-		ordered_shoal_t const& _ordered_shoal_thing;
+		_element_it mutable _pair; // stashing iterator
 
 		friend class any_a<>;
 
 		template <typename F>
-		inline extractor_t(ordered_shoal_a<> const& ordered_shoal, ordered_shoal_t const& ordered_shoal_thing, F&& it)
+		inline extractor_t(ordered_shoal_a<> const& ordered_shoal, F&& it)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _ordered_shoal{ ordered_shoal }
 			, _pair{ flock_create() }
-			, _ordered_shoal_thing{ ordered_shoal_thing }
 		{}
 	};
 
@@ -399,42 +395,42 @@ public:
 	// range
 	inline bidirectional_extractor_a<flock_a<>> extract_begin_() const
 	{
-		return extractor_t<flock_a<>, typename std_map_key_value::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cbegin());
+		return extractor_t<flock_a<>, typename std_map_key_value::const_iterator>::create(thing_t<___ego___>::me_(), _map.cbegin());
 	}
 
 	inline bidirectional_extractor_data_a<flock_a<>, typename std_map_key_value::const_iterator> extract_begin() const
 	{
-		return extractor_t<flock_a<>, typename std_map_key_value::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cbegin());
+		return extractor_t<flock_a<>, typename std_map_key_value::const_iterator>::create(thing_t<___ego___>::me_(), _map.cbegin());
 	}
 
 	inline bidirectional_extractor_a<flock_a<>> extract_end_() const
 	{
-		return extractor_t<flock_a<>, typename std_map_key_value::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cend());
+		return extractor_t<flock_a<>, typename std_map_key_value::const_iterator>::create(thing_t<___ego___>::me_(), _map.cend());
 	}
 
 	inline bidirectional_extractor_data_a<flock_a<>, typename std_map_key_value::const_iterator> extract_end() const
 	{
-		return extractor_t<flock_a<>, typename std_map_key_value::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cend());
+		return extractor_t<flock_a<>, typename std_map_key_value::const_iterator>::create(thing_t<___ego___>::me_(), _map.cend());
 	}
 
 	inline bidirectional_mutator_a<flock_a<>> mutate_begin_()
 	{
-		return mutator_t<flock_a<>, typename std_map_key_value::iterator>::create(*this, _map.begin());
+		return mutator_t<flock_a<>, typename std_map_key_value::iterator>::create(_map.begin());
 	}
 
 	inline bidirectional_mutator_data_a<flock_a<>, typename std_map_key_value::iterator> mutate_begin()
 	{
-		return mutator_t<flock_a<>, typename std_map_key_value::iterator>::create(*this, _map.begin());
+		return mutator_t<flock_a<>, typename std_map_key_value::iterator>::create(_map.begin());
 	}
 
 	inline bidirectional_mutator_a<flock_a<>> mutate_end_()
 	{
-		return mutator_t<flock_a<>, typename std_map_key_value::iterator>::create(*this, _map.end());
+		return mutator_t<flock_a<>, typename std_map_key_value::iterator>::create(_map.end());
 	}
 
 	inline bidirectional_mutator_data_a<flock_a<>, typename std_map_key_value::iterator> mutate_end()
 	{
-		return mutator_t<flock_a<>, typename std_map_key_value::iterator>::create(*this, _map.end());
+		return mutator_t<flock_a<>, typename std_map_key_value::iterator>::create(_map.end());
 	}
 
 	// collection
