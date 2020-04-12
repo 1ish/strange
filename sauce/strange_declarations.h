@@ -79,6 +79,7 @@ namespace strange
 #include "generated/declare_strange_shoal_a.hpp"
 #include "generated/declare_strange_ordered_shoal_a.hpp"
 #include "generated/declare_strange_unordered_shoal_a.hpp"
+#include "generated/declare_strange_parcel_a.hpp"
 #include "generated/declare_strange_data_a.hpp"
 #include "generated/declare_strange_number_a.hpp"
 #include "generated/declare_strange_river_a.hpp"
