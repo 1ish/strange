@@ -16,6 +16,72 @@ public:
 
 	inline any_a<> unwrap_() const;
 
+	inline any_a<> close__(range_a<> const& ___arguments___);
+
+	inline any_a<> close_();
+
+	inline any_a<> closed__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> closed_() const;
+
+	inline any_a<> reopen__(range_a<> const& ___arguments___);
+
+	inline any_a<> reopen_();
+
+	inline any_a<> binary__(range_a<> const& ___arguments___) const;
+
+	inline lake_int8_a<> binary_() const;
+
+	inline std :: string binary() const;
+
+	inline any_a<> to_number__(range_a<> const& ___arguments___) const;
+
+	inline number_a<> to_number_() const;
+
+	inline any_a<> to_number_or__(range_a<> const& ___arguments___) const;
+
+	inline number_a<> to_number_or_(number_a<> const& number) const;
+
+	inline any_a<> to_int_64__(range_a<> const& ___arguments___) const;
+
+	inline number_data_int64_a<> to_int_64_() const;
+
+	inline any_a<> to_float_64__(range_a<> const& ___arguments___) const;
+
+	inline number_data_double_a<> to_float_64_() const;
+
+	inline any_a<> to_symbol__(range_a<> const& ___arguments___) const;
+
+	inline symbol_a<> to_symbol_() const;
+
+	inline any_a<> to_flock__(range_a<> const& ___arguments___) const;
+
+	inline flock_a<> to_flock_() const;
+
+	inline any_a<> to_lake__(range_a<> const& ___arguments___) const;
+
+	inline lake_int8_a<> to_lake_() const;
+
+	inline any_a<> to_ordered_herd__(range_a<> const& ___arguments___) const;
+
+	inline ordered_herd_a<> to_ordered_herd_() const;
+
+	inline any_a<> to_ordered_shoal__(range_a<> const& ___arguments___) const;
+
+	inline ordered_shoal_a<> to_ordered_shoal_() const;
+
+	inline any_a<> to_squad__(range_a<> const& ___arguments___) const;
+
+	inline squad_a<> to_squad_() const;
+
+	inline any_a<> to_unordered_herd__(range_a<> const& ___arguments___) const;
+
+	inline unordered_herd_a<> to_unordered_herd_() const;
+
+	inline any_a<> to_unordered_shoal__(range_a<> const& ___arguments___) const;
+
+	inline unordered_shoal_a<> to_unordered_shoal_() const;
+
 	inline bool operator==(parcel_a < > const & parcel ) const;
 
 	inline bool operator!=(parcel_a < > const & parcel ) const;
@@ -44,6 +110,23 @@ protected:
 	struct ___parcel_a_handle_base___ : shoal_a< symbol_a<> , parcel_a<> >::___shoal_a_handle_base___
 	{
 		virtual any_a<> unwrap_() const = 0;
+		virtual any_a<> close_() = 0;
+		virtual any_a<> closed_() const = 0;
+		virtual any_a<> reopen_() = 0;
+		virtual lake_int8_a<> binary_() const = 0;
+		virtual std :: string binary() const = 0;
+		virtual number_a<> to_number_() const = 0;
+		virtual number_a<> to_number_or_(number_a<> const& number) const = 0;
+		virtual number_data_int64_a<> to_int_64_() const = 0;
+		virtual number_data_double_a<> to_float_64_() const = 0;
+		virtual symbol_a<> to_symbol_() const = 0;
+		virtual flock_a<> to_flock_() const = 0;
+		virtual lake_int8_a<> to_lake_() const = 0;
+		virtual ordered_herd_a<> to_ordered_herd_() const = 0;
+		virtual ordered_shoal_a<> to_ordered_shoal_() const = 0;
+		virtual squad_a<> to_squad_() const = 0;
+		virtual unordered_herd_a<> to_unordered_herd_() const = 0;
+		virtual unordered_shoal_a<> to_unordered_shoal_() const = 0;
 		virtual bool operator==(parcel_a < > const & parcel ) const = 0;
 		virtual bool operator!=(parcel_a < > const & parcel ) const = 0;
 		virtual bool operator<(parcel_a < > const & parcel ) const = 0;
@@ -77,6 +160,40 @@ protected:
 		{}
 
 		virtual inline any_a<> unwrap_() const final;
+
+		virtual inline any_a<> close_() final;
+
+		virtual inline any_a<> closed_() const final;
+
+		virtual inline any_a<> reopen_() final;
+
+		virtual inline lake_int8_a<> binary_() const final;
+
+		virtual inline std :: string binary() const final;
+
+		virtual inline number_a<> to_number_() const final;
+
+		virtual inline number_a<> to_number_or_(number_a<> const& number) const final;
+
+		virtual inline number_data_int64_a<> to_int_64_() const final;
+
+		virtual inline number_data_double_a<> to_float_64_() const final;
+
+		virtual inline symbol_a<> to_symbol_() const final;
+
+		virtual inline flock_a<> to_flock_() const final;
+
+		virtual inline lake_int8_a<> to_lake_() const final;
+
+		virtual inline ordered_herd_a<> to_ordered_herd_() const final;
+
+		virtual inline ordered_shoal_a<> to_ordered_shoal_() const final;
+
+		virtual inline squad_a<> to_squad_() const final;
+
+		virtual inline unordered_herd_a<> to_unordered_herd_() const final;
+
+		virtual inline unordered_shoal_a<> to_unordered_shoal_() const final;
 
 		virtual inline bool operator==(parcel_a < > const & parcel ) const final;
 
@@ -303,6 +420,22 @@ public:
 		{
 			___unordered_shoal_a___ operations = shoal_a< symbol_a<> , parcel_a<> >::template ___operations___<___unordered_shoal_a___>();
 			operations.update_string("unwrap_", native_extraction_t<parcel_a>::create(&parcel_a::unwrap__));
+			operations.update_string("close_", native_mutation_t<parcel_a>::create(&parcel_a::close__));
+			operations.update_string("closed_", native_extraction_t<parcel_a>::create(&parcel_a::closed__));
+			operations.update_string("reopen_", native_mutation_t<parcel_a>::create(&parcel_a::reopen__));
+			operations.update_string("binary_", native_extraction_t<parcel_a>::create(&parcel_a::binary__));
+			operations.update_string("to_number_", native_extraction_t<parcel_a>::create(&parcel_a::to_number__));
+			operations.update_string("to_number_or_", native_extraction_t<parcel_a>::create(&parcel_a::to_number_or__));
+			operations.update_string("to_int_64_", native_extraction_t<parcel_a>::create(&parcel_a::to_int_64__));
+			operations.update_string("to_float_64_", native_extraction_t<parcel_a>::create(&parcel_a::to_float_64__));
+			operations.update_string("to_symbol_", native_extraction_t<parcel_a>::create(&parcel_a::to_symbol__));
+			operations.update_string("to_flock_", native_extraction_t<parcel_a>::create(&parcel_a::to_flock__));
+			operations.update_string("to_lake_", native_extraction_t<parcel_a>::create(&parcel_a::to_lake__));
+			operations.update_string("to_ordered_herd_", native_extraction_t<parcel_a>::create(&parcel_a::to_ordered_herd__));
+			operations.update_string("to_ordered_shoal_", native_extraction_t<parcel_a>::create(&parcel_a::to_ordered_shoal__));
+			operations.update_string("to_squad_", native_extraction_t<parcel_a>::create(&parcel_a::to_squad__));
+			operations.update_string("to_unordered_herd_", native_extraction_t<parcel_a>::create(&parcel_a::to_unordered_herd__));
+			operations.update_string("to_unordered_shoal_", native_extraction_t<parcel_a>::create(&parcel_a::to_unordered_shoal__));
 			return operations;
 		}();
 		return OPERATIONS;
@@ -339,6 +472,361 @@ public:
 			throw dis("dynamic parcel_d::unwrap_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline any_a<> close__(range_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("close_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::close_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline any_a<> close_()
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("close_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::close_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *this));
+	}
+
+	inline any_a<> closed__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("closed_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::closed_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> closed_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("closed_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::closed_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline any_a<> reopen__(range_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("reopen_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::reopen_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline any_a<> reopen_()
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("reopen_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::reopen_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *this));
+	}
+
+	inline any_a<> binary__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("binary_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::binary_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline lake_int8_a<> binary_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("binary_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::binary_ passed non-existent member");
+		}
+		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline std :: string binary() const
+	{ return lake_to_string(binary_()); }
+
+	inline any_a<> to_number__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("to_number_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_number_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline number_a<> to_number_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_number_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_number_ passed non-existent member");
+		}
+		return cast<number_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline any_a<> to_number_or__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("to_number_or_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_number_or_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline number_a<> to_number_or_(number_a<> const& number) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_number_or_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_number_or_ passed non-existent member");
+		}
+		return cast<number_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this), number));
+	}
+
+	inline any_a<> to_int_64__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("to_int_64_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_int_64_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline number_data_int64_a<> to_int_64_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_int_64_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_int_64_ passed non-existent member");
+		}
+		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline any_a<> to_float_64__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("to_float_64_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_float_64_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline number_data_double_a<> to_float_64_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_float_64_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_float_64_ passed non-existent member");
+		}
+		return cast<number_data_double_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline any_a<> to_symbol__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("to_symbol_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_symbol_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline symbol_a<> to_symbol_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_symbol_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_symbol_ passed non-existent member");
+		}
+		return cast<symbol_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline any_a<> to_flock__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("to_flock_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_flock_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline flock_a<> to_flock_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_flock_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_flock_ passed non-existent member");
+		}
+		return cast<flock_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline any_a<> to_lake__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("to_lake_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_lake_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline lake_int8_a<> to_lake_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_lake_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_lake_ passed non-existent member");
+		}
+		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline any_a<> to_ordered_herd__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("to_ordered_herd_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_ordered_herd_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline ordered_herd_a<> to_ordered_herd_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_ordered_herd_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_ordered_herd_ passed non-existent member");
+		}
+		return cast<ordered_herd_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline any_a<> to_ordered_shoal__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("to_ordered_shoal_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_ordered_shoal_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline ordered_shoal_a<> to_ordered_shoal_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_ordered_shoal_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_ordered_shoal_ passed non-existent member");
+		}
+		return cast<ordered_shoal_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline any_a<> to_squad__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("to_squad_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_squad_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline squad_a<> to_squad_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_squad_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_squad_ passed non-existent member");
+		}
+		return cast<squad_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline any_a<> to_unordered_herd__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("to_unordered_herd_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_unordered_herd_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline unordered_herd_a<> to_unordered_herd_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_unordered_herd_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_unordered_herd_ passed non-existent member");
+		}
+		return cast<unordered_herd_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline any_a<> to_unordered_shoal__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("to_unordered_shoal_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_unordered_shoal_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline unordered_shoal_a<> to_unordered_shoal_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_unordered_shoal_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::to_unordered_shoal_ passed non-existent member");
+		}
+		return cast<unordered_shoal_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
 	}
 
 	inline bool operator==(parcel_a < > const & parcel ) const

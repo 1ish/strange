@@ -7,6 +7,34 @@ false &&
 				{	// parcel
 					unwrap_ :# (<>),
 
+					close_ := (<>),
+					closed_ :# (<>),
+					reopen_ := (<>),
+
+					binary_ :# (<lake_int8>),
+					binary : "std::string () const { return lake_to_string(binary_()); }",
+
+					to_number_ :# (<number>),
+					to_number_or_ :# (number :<number>#, <number>),
+					to_int_64_ :# (<number_data_int64>),
+					to_float_64_ :# (<number_data_double>),
+
+					to_symbol_ :# (<symbol>),
+
+					to_flock_ :# (<flock>),
+
+					to_lake_ :# (<lake_int8>),
+
+					to_ordered_herd_ :# (<ordered_herd>),
+
+					to_ordered_shoal_ :# (<ordered_shoal>),
+
+					to_squad_ :# (<squad>),
+
+					to_unordered_herd_ :# (<unordered_herd>),
+
+					to_unordered_shoal_ :# (<unordered_shoal>),
+
 					'operator==' : "bool (parcel_a<> const& parcel) const",
 					'operator!=' : "bool (parcel_a<> const& parcel) const",
 					'operator<' : "bool (parcel_a<> const& parcel) const",
