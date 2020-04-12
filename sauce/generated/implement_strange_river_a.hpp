@@ -835,6 +835,54 @@ template <typename ___TTT___, typename ___DHB___>
 inline std :: string river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::filename() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.filename(); }
 
+template <typename _1>
+inline any_a<> river_a<_1>::close__(range_a<> const& ___arguments___)
+{
+	return close_();
+}
+
+template <typename _1>
+inline any_a<> river_a<_1>::close_()
+{ assert(any_a<>::___handle___); return ___write___().close_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::close_()
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.close_(); }
+
+template <typename _1>
+inline void river_a<_1>::close()
+{ assert(any_a<>::___handle___); ___write___().close(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::close()
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.close(); }
+
+template <typename _1>
+inline any_a<> river_a<_1>::closed__(range_a<> const& ___arguments___) const
+{
+	return closed_();
+}
+
+template <typename _1>
+inline any_a<> river_a<_1>::closed_() const
+{ assert(any_a<>::___handle___); return ___read___().closed_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::closed_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.closed_(); }
+
+template <typename _1>
+inline bool river_a<_1>::closed()
+{ assert(any_a<>::___handle___); return ___write___().closed(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::closed()
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.closed(); }
+
 class ___river_a_share___
 {
 	static bool const share;

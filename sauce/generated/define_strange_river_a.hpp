@@ -194,6 +194,18 @@ public:
 
 	inline std :: string filename() const;
 
+	inline any_a<> close__(range_a<> const& ___arguments___);
+
+	inline any_a<> close_();
+
+	inline void close();
+
+	inline any_a<> closed__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> closed_() const;
+
+	inline bool closed();
+
 protected:
 	struct ___river_a_handle_base___ : range_a<>::___range_a_handle_base___
 	{
@@ -259,6 +271,10 @@ protected:
 		virtual void set_bad(bool value ) = 0;
 		virtual lake_int8_a<> filename_() const = 0;
 		virtual std :: string filename() const = 0;
+		virtual any_a<> close_() = 0;
+		virtual void close() = 0;
+		virtual any_a<> closed_() const = 0;
+		virtual bool closed() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___river_a_handle_base___>
@@ -402,6 +418,14 @@ protected:
 		virtual inline lake_int8_a<> filename_() const final;
 
 		virtual inline std :: string filename() const final;
+
+		virtual inline any_a<> close_() final;
+
+		virtual inline void close() final;
+
+		virtual inline any_a<> closed_() const final;
+
+		virtual inline bool closed() final;
 
 	};
 
@@ -632,6 +656,8 @@ public:
 			operations.update_string("set_fail_", native_mutation_t<river_a>::create(&river_a::set_fail__));
 			operations.update_string("set_bad_", native_mutation_t<river_a>::create(&river_a::set_bad__));
 			operations.update_string("filename_", native_extraction_t<river_a>::create(&river_a::filename__));
+			operations.update_string("close_", native_mutation_t<river_a>::create(&river_a::close__));
+			operations.update_string("closed_", native_extraction_t<river_a>::create(&river_a::closed__));
 			return operations;
 		}();
 		return OPERATIONS;
@@ -1384,6 +1410,56 @@ public:
 
 	inline std :: string filename() const
 	{ return lake_to_string(filename_()); }
+
+	inline any_a<> close__(range_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("close_");
+		if (!op)
+		{
+			throw dis("dynamic river_d::close_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline any_a<> close_()
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("close_");
+		if (!op)
+		{
+			throw dis("dynamic river_d::close_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *this));
+	}
+
+	inline void close()
+	{ close_(); }
+
+	inline any_a<> closed__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("closed_");
+		if (!op)
+		{
+			throw dis("dynamic river_d::closed_ passed non-existent member");
+		}
+		return op.operate(*const_cast<river_d*>(this), arguments);
+	}
+
+	inline any_a<> closed_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("closed_");
+		if (!op)
+		{
+			throw dis("dynamic river_d::closed_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
+	}
+
+	inline bool closed()
+	{ return closed_(); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 

@@ -733,6 +733,32 @@ public:
 		return _filename;
 	}
 
+	inline any_a<> close_()
+	{
+		close();
+		return thing_t<___ego___>::me_();
+	}
+
+	inline void close()
+	{
+		auto file = std::dynamic_pointer_cast<std::basic_fstream<char>>(_stream);
+		if (file)
+		{
+			file->close();
+		}
+	}
+
+	inline any_a<> closed_() const
+	{
+		return boole(closed());
+	}
+
+	inline bool closed() const
+	{
+		auto file = std::dynamic_pointer_cast<std::basic_fstream<char>>(_stream);
+		return file && !file->is_open();
+	}
+
 protected:
 	std::istream* const _istream;
 	std::ostream* const _ostream;
