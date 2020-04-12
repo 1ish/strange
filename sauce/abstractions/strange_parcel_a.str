@@ -17,34 +17,53 @@ false &&
 					json_ :# (<lake_int8>),
 					json : "std::string () const { return lake_to_string(json_()); }",
 
+					is_null_ :# (<>),
+
+					is_boolean_ :# (<>),
+					boolean_ :# (<>),
+					boolean_or_ :# (boolean :#, <>),
+
+					is_number_ :# (<>),
 					number_ :# (<number>),
 					number_or_ :# (number :<number>#, <number>),
+
+					is_int_64_ :# (<>),
 					int_64_ :# (<number_data_int64>),
 					int_64_or_ :# (number :<number_data_int64>#, <number_data_int64>),
+
+					is_float_64_ :# (<>),
 					float_64_ :# (<number_data_double>),
 					float_64_or_ :# (number :<number_data_double>#, <number_data_double>),
 
+					is_symbol_ :# (<>),
 					symbol_ :# (<symbol>),
 					symbol_or_ :# (symbol :<symbol>#, <symbol>),
 
+					is_flock_ :# (<>),
 					flock_ :# (<flock[<parcel>]>),
 					flock_or_ :# (flock :<flock[<parcel>]>#, <flock[<parcel>]>),
 
+					is_lake_ :# (<>),
 					lake_ :# (<lake_int8>),
 					lake_or_ :# (lake :<lake_int8>#, <lake_int8>),
 
+					is_ordered_herd_ :# (<>),
 					ordered_herd_ :# (<ordered_herd[<parcel>]>),
 					ordered_herd_or_ :# (herd :<ordered_herd[<parcel>]>#, <ordered_herd[<parcel>]>),
 
+					is_ordered_shoal_ :# (<>),
 					ordered_shoal_ :# (<ordered_shoal[<>, <parcel>]>),
 					ordered_shoal_or_ :# (shoal :<ordered_shoal[<>, <parcel>]>#, <ordered_shoal[<>, <parcel>]>),
 
+					is_squad_ :# (<>),
 					squad_ :# (<squad[<parcel>]>),
 					squad_or_ :# (squad :<squad[<parcel>]>#, <squad[<parcel>]>),
 
+					is_unordered_herd_ :# (<>),
 					unordered_herd_ :# (<unordered_herd[<parcel>]>),
 					unordered_herd_or_ :# (herd :<unordered_herd[<parcel>]>#, <unordered_herd[<parcel>]>),
 
+					is_unordered_shoal_ :# (<>),
 					unordered_shoal_ :# (<unordered_shoal[<>, <parcel>]>),
 					unordered_shoal_or_ :# (shoal :<unordered_shoal[<>, <parcel>]>#, <unordered_shoal[<>, <parcel>]>),
 

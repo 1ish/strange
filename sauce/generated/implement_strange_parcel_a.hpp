@@ -111,6 +111,87 @@ inline std :: string parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.json(); }
 
 template <typename _1>
+inline any_a<> parcel_a<_1>::is_null__(range_a<> const& ___arguments___) const
+{
+	return is_null_();
+}
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_null_() const
+{ assert(any_a<>::___handle___); return ___read___().is_null_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_null_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_null_(); }
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_boolean__(range_a<> const& ___arguments___) const
+{
+	return is_boolean_();
+}
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_boolean_() const
+{ assert(any_a<>::___handle___); return ___read___().is_boolean_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_boolean_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_boolean_(); }
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::boolean__(range_a<> const& ___arguments___) const
+{
+	return boolean_();
+}
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::boolean_() const
+{ assert(any_a<>::___handle___); return ___read___().boolean_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::boolean_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.boolean_(); }
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::boolean_or__(range_a<> const& ___arguments___) const
+{
+	auto ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
+	{
+		throw dis("parcel_a::boolean_or_ passed short range");
+	}
+	auto boolean = cast<any_a<>>(*___it___);
+	return boolean_or_(boolean);
+}
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::boolean_or_(any_a<> const& boolean) const
+{ assert(any_a<>::___handle___); return ___read___().boolean_or_(boolean); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::boolean_or_(any_a<> const& boolean) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.boolean_or_(boolean); }
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_number__(range_a<> const& ___arguments___) const
+{
+	return is_number_();
+}
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_number_() const
+{ assert(any_a<>::___handle___); return ___read___().is_number_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_number_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_number_(); }
+
+template <typename _1>
 inline any_a<> parcel_a<_1>::number__(range_a<> const& ___arguments___) const
 {
 	return number_();
@@ -145,6 +226,21 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline number_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::number_or_(number_a<> const& number) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.number_or_(number); }
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_int_64__(range_a<> const& ___arguments___) const
+{
+	return is_int_64_();
+}
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_int_64_() const
+{ assert(any_a<>::___handle___); return ___read___().is_int_64_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_int_64_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_int_64_(); }
 
 template <typename _1>
 inline any_a<> parcel_a<_1>::int_64__(range_a<> const& ___arguments___) const
@@ -183,6 +279,21 @@ inline number_data_int64_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___D
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.int_64_or_(number); }
 
 template <typename _1>
+inline any_a<> parcel_a<_1>::is_float_64__(range_a<> const& ___arguments___) const
+{
+	return is_float_64_();
+}
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_float_64_() const
+{ assert(any_a<>::___handle___); return ___read___().is_float_64_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_float_64_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_float_64_(); }
+
+template <typename _1>
 inline any_a<> parcel_a<_1>::float_64__(range_a<> const& ___arguments___) const
 {
 	return float_64_();
@@ -217,6 +328,21 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline number_data_double_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::float_64_or_(number_data_double_a<> const& number) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.float_64_or_(number); }
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_symbol__(range_a<> const& ___arguments___) const
+{
+	return is_symbol_();
+}
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_symbol_() const
+{ assert(any_a<>::___handle___); return ___read___().is_symbol_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_symbol_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_symbol_(); }
 
 template <typename _1>
 inline any_a<> parcel_a<_1>::symbol__(range_a<> const& ___arguments___) const
@@ -255,6 +381,21 @@ inline symbol_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::sym
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.symbol_or_(symbol); }
 
 template <typename _1>
+inline any_a<> parcel_a<_1>::is_flock__(range_a<> const& ___arguments___) const
+{
+	return is_flock_();
+}
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_flock_() const
+{ assert(any_a<>::___handle___); return ___read___().is_flock_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_flock_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_flock_(); }
+
+template <typename _1>
 inline any_a<> parcel_a<_1>::flock__(range_a<> const& ___arguments___) const
 {
 	return flock_();
@@ -289,6 +430,21 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline flock_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::flock_or_(flock_a<> const& flock) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.flock_or_(flock); }
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_lake__(range_a<> const& ___arguments___) const
+{
+	return is_lake_();
+}
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_lake_() const
+{ assert(any_a<>::___handle___); return ___read___().is_lake_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_lake_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_lake_(); }
 
 template <typename _1>
 inline any_a<> parcel_a<_1>::lake__(range_a<> const& ___arguments___) const
@@ -327,6 +483,21 @@ inline lake_int8_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.lake_or_(lake); }
 
 template <typename _1>
+inline any_a<> parcel_a<_1>::is_ordered_herd__(range_a<> const& ___arguments___) const
+{
+	return is_ordered_herd_();
+}
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_ordered_herd_() const
+{ assert(any_a<>::___handle___); return ___read___().is_ordered_herd_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_ordered_herd_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_ordered_herd_(); }
+
+template <typename _1>
 inline any_a<> parcel_a<_1>::ordered_herd__(range_a<> const& ___arguments___) const
 {
 	return ordered_herd_();
@@ -361,6 +532,21 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline ordered_herd_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::ordered_herd_or_(ordered_herd_a<> const& herd) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.ordered_herd_or_(herd); }
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_ordered_shoal__(range_a<> const& ___arguments___) const
+{
+	return is_ordered_shoal_();
+}
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_ordered_shoal_() const
+{ assert(any_a<>::___handle___); return ___read___().is_ordered_shoal_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_ordered_shoal_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_ordered_shoal_(); }
 
 template <typename _1>
 inline any_a<> parcel_a<_1>::ordered_shoal__(range_a<> const& ___arguments___) const
@@ -399,6 +585,21 @@ inline ordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::___parcel_a_handle_
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.ordered_shoal_or_(shoal); }
 
 template <typename _1>
+inline any_a<> parcel_a<_1>::is_squad__(range_a<> const& ___arguments___) const
+{
+	return is_squad_();
+}
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_squad_() const
+{ assert(any_a<>::___handle___); return ___read___().is_squad_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_squad_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_squad_(); }
+
+template <typename _1>
 inline any_a<> parcel_a<_1>::squad__(range_a<> const& ___arguments___) const
 {
 	return squad_();
@@ -435,6 +636,21 @@ inline squad_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___D
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.squad_or_(squad); }
 
 template <typename _1>
+inline any_a<> parcel_a<_1>::is_unordered_herd__(range_a<> const& ___arguments___) const
+{
+	return is_unordered_herd_();
+}
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_unordered_herd_() const
+{ assert(any_a<>::___handle___); return ___read___().is_unordered_herd_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_unordered_herd_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_unordered_herd_(); }
+
+template <typename _1>
 inline any_a<> parcel_a<_1>::unordered_herd__(range_a<> const& ___arguments___) const
 {
 	return unordered_herd_();
@@ -469,6 +685,21 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline unordered_herd_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unordered_herd_or_(unordered_herd_a<> const& herd) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unordered_herd_or_(herd); }
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_unordered_shoal__(range_a<> const& ___arguments___) const
+{
+	return is_unordered_shoal_();
+}
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::is_unordered_shoal_() const
+{ assert(any_a<>::___handle___); return ___read___().is_unordered_shoal_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_unordered_shoal_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_unordered_shoal_(); }
 
 template <typename _1>
 inline any_a<> parcel_a<_1>::unordered_shoal__(range_a<> const& ___arguments___) const

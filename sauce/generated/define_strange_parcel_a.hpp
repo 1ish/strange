@@ -40,6 +40,26 @@ public:
 
 	inline std :: string json() const;
 
+	inline any_a<> is_null__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> is_null_() const;
+
+	inline any_a<> is_boolean__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> is_boolean_() const;
+
+	inline any_a<> boolean__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> boolean_() const;
+
+	inline any_a<> boolean_or__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> boolean_or_(any_a<> const& boolean) const;
+
+	inline any_a<> is_number__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> is_number_() const;
+
 	inline any_a<> number__(range_a<> const& ___arguments___) const;
 
 	inline number_a<> number_() const;
@@ -47,6 +67,10 @@ public:
 	inline any_a<> number_or__(range_a<> const& ___arguments___) const;
 
 	inline number_a<> number_or_(number_a<> const& number) const;
+
+	inline any_a<> is_int_64__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> is_int_64_() const;
 
 	inline any_a<> int_64__(range_a<> const& ___arguments___) const;
 
@@ -56,6 +80,10 @@ public:
 
 	inline number_data_int64_a<> int_64_or_(number_data_int64_a<> const& number) const;
 
+	inline any_a<> is_float_64__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> is_float_64_() const;
+
 	inline any_a<> float_64__(range_a<> const& ___arguments___) const;
 
 	inline number_data_double_a<> float_64_() const;
@@ -63,6 +91,10 @@ public:
 	inline any_a<> float_64_or__(range_a<> const& ___arguments___) const;
 
 	inline number_data_double_a<> float_64_or_(number_data_double_a<> const& number) const;
+
+	inline any_a<> is_symbol__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> is_symbol_() const;
 
 	inline any_a<> symbol__(range_a<> const& ___arguments___) const;
 
@@ -72,6 +104,10 @@ public:
 
 	inline symbol_a<> symbol_or_(symbol_a<> const& symbol) const;
 
+	inline any_a<> is_flock__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> is_flock_() const;
+
 	inline any_a<> flock__(range_a<> const& ___arguments___) const;
 
 	inline flock_a< parcel_a<> > flock_() const;
@@ -79,6 +115,10 @@ public:
 	inline any_a<> flock_or__(range_a<> const& ___arguments___) const;
 
 	inline flock_a< parcel_a<> > flock_or_(flock_a<> const& flock) const;
+
+	inline any_a<> is_lake__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> is_lake_() const;
 
 	inline any_a<> lake__(range_a<> const& ___arguments___) const;
 
@@ -88,6 +128,10 @@ public:
 
 	inline lake_int8_a<> lake_or_(lake_int8_a<> const& lake) const;
 
+	inline any_a<> is_ordered_herd__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> is_ordered_herd_() const;
+
 	inline any_a<> ordered_herd__(range_a<> const& ___arguments___) const;
 
 	inline ordered_herd_a< parcel_a<> > ordered_herd_() const;
@@ -95,6 +139,10 @@ public:
 	inline any_a<> ordered_herd_or__(range_a<> const& ___arguments___) const;
 
 	inline ordered_herd_a< parcel_a<> > ordered_herd_or_(ordered_herd_a<> const& herd) const;
+
+	inline any_a<> is_ordered_shoal__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> is_ordered_shoal_() const;
 
 	inline any_a<> ordered_shoal__(range_a<> const& ___arguments___) const;
 
@@ -104,6 +152,10 @@ public:
 
 	inline ordered_shoal_a< any_a<> , parcel_a<> > ordered_shoal_or_(ordered_shoal_a<> const& shoal) const;
 
+	inline any_a<> is_squad__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> is_squad_() const;
+
 	inline any_a<> squad__(range_a<> const& ___arguments___) const;
 
 	inline squad_a< parcel_a<> > squad_() const;
@@ -112,6 +164,10 @@ public:
 
 	inline squad_a< parcel_a<> > squad_or_(squad_a<> const& squad) const;
 
+	inline any_a<> is_unordered_herd__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> is_unordered_herd_() const;
+
 	inline any_a<> unordered_herd__(range_a<> const& ___arguments___) const;
 
 	inline unordered_herd_a< parcel_a<> > unordered_herd_() const;
@@ -119,6 +175,10 @@ public:
 	inline any_a<> unordered_herd_or__(range_a<> const& ___arguments___) const;
 
 	inline unordered_herd_a< parcel_a<> > unordered_herd_or_(unordered_herd_a<> const& herd) const;
+
+	inline any_a<> is_unordered_shoal__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> is_unordered_shoal_() const;
 
 	inline any_a<> unordered_shoal__(range_a<> const& ___arguments___) const;
 
@@ -167,26 +227,41 @@ protected:
 		virtual std :: string binary() const = 0;
 		virtual lake_int8_a<> json_() const = 0;
 		virtual std :: string json() const = 0;
+		virtual any_a<> is_null_() const = 0;
+		virtual any_a<> is_boolean_() const = 0;
+		virtual any_a<> boolean_() const = 0;
+		virtual any_a<> boolean_or_(any_a<> const& boolean) const = 0;
+		virtual any_a<> is_number_() const = 0;
 		virtual number_a<> number_() const = 0;
 		virtual number_a<> number_or_(number_a<> const& number) const = 0;
+		virtual any_a<> is_int_64_() const = 0;
 		virtual number_data_int64_a<> int_64_() const = 0;
 		virtual number_data_int64_a<> int_64_or_(number_data_int64_a<> const& number) const = 0;
+		virtual any_a<> is_float_64_() const = 0;
 		virtual number_data_double_a<> float_64_() const = 0;
 		virtual number_data_double_a<> float_64_or_(number_data_double_a<> const& number) const = 0;
+		virtual any_a<> is_symbol_() const = 0;
 		virtual symbol_a<> symbol_() const = 0;
 		virtual symbol_a<> symbol_or_(symbol_a<> const& symbol) const = 0;
+		virtual any_a<> is_flock_() const = 0;
 		virtual flock_a< parcel_a<> > flock_() const = 0;
 		virtual flock_a< parcel_a<> > flock_or_(flock_a<> const& flock) const = 0;
+		virtual any_a<> is_lake_() const = 0;
 		virtual lake_int8_a<> lake_() const = 0;
 		virtual lake_int8_a<> lake_or_(lake_int8_a<> const& lake) const = 0;
+		virtual any_a<> is_ordered_herd_() const = 0;
 		virtual ordered_herd_a< parcel_a<> > ordered_herd_() const = 0;
 		virtual ordered_herd_a< parcel_a<> > ordered_herd_or_(ordered_herd_a<> const& herd) const = 0;
+		virtual any_a<> is_ordered_shoal_() const = 0;
 		virtual ordered_shoal_a< any_a<> , parcel_a<> > ordered_shoal_() const = 0;
 		virtual ordered_shoal_a< any_a<> , parcel_a<> > ordered_shoal_or_(ordered_shoal_a<> const& shoal) const = 0;
+		virtual any_a<> is_squad_() const = 0;
 		virtual squad_a< parcel_a<> > squad_() const = 0;
 		virtual squad_a< parcel_a<> > squad_or_(squad_a<> const& squad) const = 0;
+		virtual any_a<> is_unordered_herd_() const = 0;
 		virtual unordered_herd_a< parcel_a<> > unordered_herd_() const = 0;
 		virtual unordered_herd_a< parcel_a<> > unordered_herd_or_(unordered_herd_a<> const& herd) const = 0;
+		virtual any_a<> is_unordered_shoal_() const = 0;
 		virtual unordered_shoal_a< any_a<> , parcel_a<> > unordered_shoal_() const = 0;
 		virtual unordered_shoal_a< any_a<> , parcel_a<> > unordered_shoal_or_(unordered_shoal_a<> const& shoal) const = 0;
 		virtual bool operator==(parcel_a < > const & parcel ) const = 0;
@@ -237,45 +312,75 @@ protected:
 
 		virtual inline std :: string json() const final;
 
+		virtual inline any_a<> is_null_() const final;
+
+		virtual inline any_a<> is_boolean_() const final;
+
+		virtual inline any_a<> boolean_() const final;
+
+		virtual inline any_a<> boolean_or_(any_a<> const& boolean) const final;
+
+		virtual inline any_a<> is_number_() const final;
+
 		virtual inline number_a<> number_() const final;
 
 		virtual inline number_a<> number_or_(number_a<> const& number) const final;
+
+		virtual inline any_a<> is_int_64_() const final;
 
 		virtual inline number_data_int64_a<> int_64_() const final;
 
 		virtual inline number_data_int64_a<> int_64_or_(number_data_int64_a<> const& number) const final;
 
+		virtual inline any_a<> is_float_64_() const final;
+
 		virtual inline number_data_double_a<> float_64_() const final;
 
 		virtual inline number_data_double_a<> float_64_or_(number_data_double_a<> const& number) const final;
+
+		virtual inline any_a<> is_symbol_() const final;
 
 		virtual inline symbol_a<> symbol_() const final;
 
 		virtual inline symbol_a<> symbol_or_(symbol_a<> const& symbol) const final;
 
+		virtual inline any_a<> is_flock_() const final;
+
 		virtual inline flock_a< parcel_a<> > flock_() const final;
 
 		virtual inline flock_a< parcel_a<> > flock_or_(flock_a<> const& flock) const final;
+
+		virtual inline any_a<> is_lake_() const final;
 
 		virtual inline lake_int8_a<> lake_() const final;
 
 		virtual inline lake_int8_a<> lake_or_(lake_int8_a<> const& lake) const final;
 
+		virtual inline any_a<> is_ordered_herd_() const final;
+
 		virtual inline ordered_herd_a< parcel_a<> > ordered_herd_() const final;
 
 		virtual inline ordered_herd_a< parcel_a<> > ordered_herd_or_(ordered_herd_a<> const& herd) const final;
+
+		virtual inline any_a<> is_ordered_shoal_() const final;
 
 		virtual inline ordered_shoal_a< any_a<> , parcel_a<> > ordered_shoal_() const final;
 
 		virtual inline ordered_shoal_a< any_a<> , parcel_a<> > ordered_shoal_or_(ordered_shoal_a<> const& shoal) const final;
 
+		virtual inline any_a<> is_squad_() const final;
+
 		virtual inline squad_a< parcel_a<> > squad_() const final;
 
 		virtual inline squad_a< parcel_a<> > squad_or_(squad_a<> const& squad) const final;
 
+		virtual inline any_a<> is_unordered_herd_() const final;
+
 		virtual inline unordered_herd_a< parcel_a<> > unordered_herd_() const final;
 
 		virtual inline unordered_herd_a< parcel_a<> > unordered_herd_or_(unordered_herd_a<> const& herd) const final;
+
+		virtual inline any_a<> is_unordered_shoal_() const final;
 
 		virtual inline unordered_shoal_a< any_a<> , parcel_a<> > unordered_shoal_() const final;
 
@@ -511,26 +616,41 @@ public:
 			operations.update_string("reopen_", native_mutation_t<parcel_a>::create(&parcel_a::reopen__));
 			operations.update_string("binary_", native_extraction_t<parcel_a>::create(&parcel_a::binary__));
 			operations.update_string("json_", native_extraction_t<parcel_a>::create(&parcel_a::json__));
+			operations.update_string("is_null_", native_extraction_t<parcel_a>::create(&parcel_a::is_null__));
+			operations.update_string("is_boolean_", native_extraction_t<parcel_a>::create(&parcel_a::is_boolean__));
+			operations.update_string("boolean_", native_extraction_t<parcel_a>::create(&parcel_a::boolean__));
+			operations.update_string("boolean_or_", native_extraction_t<parcel_a>::create(&parcel_a::boolean_or__));
+			operations.update_string("is_number_", native_extraction_t<parcel_a>::create(&parcel_a::is_number__));
 			operations.update_string("number_", native_extraction_t<parcel_a>::create(&parcel_a::number__));
 			operations.update_string("number_or_", native_extraction_t<parcel_a>::create(&parcel_a::number_or__));
+			operations.update_string("is_int_64_", native_extraction_t<parcel_a>::create(&parcel_a::is_int_64__));
 			operations.update_string("int_64_", native_extraction_t<parcel_a>::create(&parcel_a::int_64__));
 			operations.update_string("int_64_or_", native_extraction_t<parcel_a>::create(&parcel_a::int_64_or__));
+			operations.update_string("is_float_64_", native_extraction_t<parcel_a>::create(&parcel_a::is_float_64__));
 			operations.update_string("float_64_", native_extraction_t<parcel_a>::create(&parcel_a::float_64__));
 			operations.update_string("float_64_or_", native_extraction_t<parcel_a>::create(&parcel_a::float_64_or__));
+			operations.update_string("is_symbol_", native_extraction_t<parcel_a>::create(&parcel_a::is_symbol__));
 			operations.update_string("symbol_", native_extraction_t<parcel_a>::create(&parcel_a::symbol__));
 			operations.update_string("symbol_or_", native_extraction_t<parcel_a>::create(&parcel_a::symbol_or__));
+			operations.update_string("is_flock_", native_extraction_t<parcel_a>::create(&parcel_a::is_flock__));
 			operations.update_string("flock_", native_extraction_t<parcel_a>::create(&parcel_a::flock__));
 			operations.update_string("flock_or_", native_extraction_t<parcel_a>::create(&parcel_a::flock_or__));
+			operations.update_string("is_lake_", native_extraction_t<parcel_a>::create(&parcel_a::is_lake__));
 			operations.update_string("lake_", native_extraction_t<parcel_a>::create(&parcel_a::lake__));
 			operations.update_string("lake_or_", native_extraction_t<parcel_a>::create(&parcel_a::lake_or__));
+			operations.update_string("is_ordered_herd_", native_extraction_t<parcel_a>::create(&parcel_a::is_ordered_herd__));
 			operations.update_string("ordered_herd_", native_extraction_t<parcel_a>::create(&parcel_a::ordered_herd__));
 			operations.update_string("ordered_herd_or_", native_extraction_t<parcel_a>::create(&parcel_a::ordered_herd_or__));
+			operations.update_string("is_ordered_shoal_", native_extraction_t<parcel_a>::create(&parcel_a::is_ordered_shoal__));
 			operations.update_string("ordered_shoal_", native_extraction_t<parcel_a>::create(&parcel_a::ordered_shoal__));
 			operations.update_string("ordered_shoal_or_", native_extraction_t<parcel_a>::create(&parcel_a::ordered_shoal_or__));
+			operations.update_string("is_squad_", native_extraction_t<parcel_a>::create(&parcel_a::is_squad__));
 			operations.update_string("squad_", native_extraction_t<parcel_a>::create(&parcel_a::squad__));
 			operations.update_string("squad_or_", native_extraction_t<parcel_a>::create(&parcel_a::squad_or__));
+			operations.update_string("is_unordered_herd_", native_extraction_t<parcel_a>::create(&parcel_a::is_unordered_herd__));
 			operations.update_string("unordered_herd_", native_extraction_t<parcel_a>::create(&parcel_a::unordered_herd__));
 			operations.update_string("unordered_herd_or_", native_extraction_t<parcel_a>::create(&parcel_a::unordered_herd_or__));
+			operations.update_string("is_unordered_shoal_", native_extraction_t<parcel_a>::create(&parcel_a::is_unordered_shoal__));
 			operations.update_string("unordered_shoal_", native_extraction_t<parcel_a>::create(&parcel_a::unordered_shoal__));
 			operations.update_string("unordered_shoal_or_", native_extraction_t<parcel_a>::create(&parcel_a::unordered_shoal_or__));
 			operations.update_string("key_begin_", native_extraction_t<parcel_a>::create(&parcel_a::key_begin__));
@@ -689,6 +809,116 @@ public:
 	inline std :: string json() const
 	{ return lake_to_string(json_()); }
 
+	inline any_a<> is_null__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("is_null_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_null_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> is_null_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_null_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_null_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline any_a<> is_boolean__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("is_boolean_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_boolean_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> is_boolean_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_boolean_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_boolean_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline any_a<> boolean__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("boolean_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::boolean_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> boolean_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("boolean_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::boolean_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline any_a<> boolean_or__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("boolean_or_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::boolean_or_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> boolean_or_(any_a<> const& boolean) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("boolean_or_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::boolean_or_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this), boolean));
+	}
+
+	inline any_a<> is_number__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("is_number_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_number_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> is_number_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_number_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_number_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
 	inline any_a<> number__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
@@ -731,6 +961,28 @@ public:
 			throw dis("dynamic parcel_d::number_or_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this), number));
+	}
+
+	inline any_a<> is_int_64__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("is_int_64_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_int_64_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> is_int_64_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_int_64_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_int_64_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
 	}
 
 	inline any_a<> int_64__(range_a<> const& arguments) const
@@ -777,6 +1029,28 @@ public:
 		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this), number));
 	}
 
+	inline any_a<> is_float_64__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("is_float_64_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_float_64_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> is_float_64_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_float_64_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_float_64_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
 	inline any_a<> float_64__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
@@ -819,6 +1093,28 @@ public:
 			throw dis("dynamic parcel_d::float_64_or_ passed non-existent member");
 		}
 		return cast<number_data_double_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this), number));
+	}
+
+	inline any_a<> is_symbol__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("is_symbol_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_symbol_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> is_symbol_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_symbol_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_symbol_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
 	}
 
 	inline any_a<> symbol__(range_a<> const& arguments) const
@@ -865,6 +1161,28 @@ public:
 		return cast<symbol_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this), symbol));
 	}
 
+	inline any_a<> is_flock__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("is_flock_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_flock_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> is_flock_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_flock_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_flock_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
 	inline any_a<> flock__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
@@ -907,6 +1225,28 @@ public:
 			throw dis("dynamic parcel_d::flock_or_ passed non-existent member");
 		}
 		return cast<flock_a< parcel_a<> >>(variadic_operate(op, *const_cast<parcel_d*>(this), flock));
+	}
+
+	inline any_a<> is_lake__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("is_lake_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_lake_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> is_lake_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_lake_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_lake_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
 	}
 
 	inline any_a<> lake__(range_a<> const& arguments) const
@@ -953,6 +1293,28 @@ public:
 		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this), lake));
 	}
 
+	inline any_a<> is_ordered_herd__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("is_ordered_herd_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_ordered_herd_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> is_ordered_herd_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_ordered_herd_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_ordered_herd_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
 	inline any_a<> ordered_herd__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
@@ -995,6 +1357,28 @@ public:
 			throw dis("dynamic parcel_d::ordered_herd_or_ passed non-existent member");
 		}
 		return cast<ordered_herd_a< parcel_a<> >>(variadic_operate(op, *const_cast<parcel_d*>(this), herd));
+	}
+
+	inline any_a<> is_ordered_shoal__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("is_ordered_shoal_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_ordered_shoal_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> is_ordered_shoal_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_ordered_shoal_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_ordered_shoal_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
 	}
 
 	inline any_a<> ordered_shoal__(range_a<> const& arguments) const
@@ -1041,6 +1425,28 @@ public:
 		return cast<ordered_shoal_a< any_a<> , parcel_a<> >>(variadic_operate(op, *const_cast<parcel_d*>(this), shoal));
 	}
 
+	inline any_a<> is_squad__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("is_squad_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_squad_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> is_squad_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_squad_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_squad_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
 	inline any_a<> squad__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
@@ -1085,6 +1491,28 @@ public:
 		return cast<squad_a< parcel_a<> >>(variadic_operate(op, *const_cast<parcel_d*>(this), squad));
 	}
 
+	inline any_a<> is_unordered_herd__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("is_unordered_herd_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_unordered_herd_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> is_unordered_herd_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_unordered_herd_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_unordered_herd_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
 	inline any_a<> unordered_herd__(range_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
@@ -1127,6 +1555,28 @@ public:
 			throw dis("dynamic parcel_d::unordered_herd_or_ passed non-existent member");
 		}
 		return cast<unordered_herd_a< parcel_a<> >>(variadic_operate(op, *const_cast<parcel_d*>(this), herd));
+	}
+
+	inline any_a<> is_unordered_shoal__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("is_unordered_shoal_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_unordered_shoal_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> is_unordered_shoal_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_unordered_shoal_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::is_unordered_shoal_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
 	}
 
 	inline any_a<> unordered_shoal__(range_a<> const& arguments) const
