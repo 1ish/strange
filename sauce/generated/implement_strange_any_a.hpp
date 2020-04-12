@@ -429,6 +429,21 @@ template <typename ___TTT___, typename ___BHB___>
 inline bool any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::is(std :: string const & s ) const
 { return ___value___.is(s); }
 
+template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::parcel__(range_a<> const& ___arguments___) const
+{
+	return parcel_();
+}
+
+template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
+inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::parcel_() const
+{ assert(___handle___); return ___read___().parcel_(); }
+
+template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
+template <typename ___TTT___, typename ___BHB___>
+inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::parcel_() const
+{ return ___value___.parcel_(); }
+
 class ___any_a_share___
 {
 	static bool const share;

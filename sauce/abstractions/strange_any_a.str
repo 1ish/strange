@@ -62,6 +62,9 @@ false &&
 					hash : "std::size_t () const",
 
 					is : "bool (std::string const& s) const",
+
+					// serialization
+					parcel_ :# (<parcel>),
 				}
 			)
 		)

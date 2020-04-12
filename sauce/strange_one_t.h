@@ -92,6 +92,11 @@ public:
 		return identity() >= thing.identity();
 	}
 
+	inline parcel_a<> parcel_() const
+	{
+		return parcel_a<>{};
+	}
+
 protected:
 	any_a<>::___WEAK___ mutable _meek;
 
