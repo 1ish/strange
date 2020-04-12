@@ -9,7 +9,7 @@ template <typename _1 = void>
 inline parcel_d<_1> ___parcel_dynamic___(any_a<> const& thing); 
 
 template <typename _1>
-class parcel_a : public shoal_a< symbol_a<> , parcel_a<> >
+class parcel_a : public collection_a< any_a<> , parcel_a<> , parcel_a<> >
 {
 public:
 	inline any_a<> unwrap__(range_a<> const& ___arguments___) const;
@@ -94,20 +94,20 @@ public:
 
 	inline bool operator>=(parcel_a < > const & parcel ) const;
 
-	inline bidirectional_extractor_data_a < flock_a < > , typename dart :: packet :: iterator > extract_begin() const;
+	inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_begin() const;
 
-	inline bidirectional_extractor_data_a < flock_a < > , typename dart :: packet :: iterator > extract_end() const;
+	inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_end() const;
 
-	inline bidirectional_mutator_data_a < flock_a < > , typename dart :: packet :: iterator > mutate_begin();
+	inline bidirectional_mutator_data_a < parcel_a < > , typename dart :: packet :: iterator > mutate_begin();
 
-	inline bidirectional_mutator_data_a < flock_a < > , typename dart :: packet :: iterator > mutate_end();
+	inline bidirectional_mutator_data_a < parcel_a < > , typename dart :: packet :: iterator > mutate_end();
 
 	inline dart :: packet const & extract_packet() const;
 
 	inline dart :: packet & mutate_packet();
 
 protected:
-	struct ___parcel_a_handle_base___ : shoal_a< symbol_a<> , parcel_a<> >::___shoal_a_handle_base___
+	struct ___parcel_a_handle_base___ : collection_a< any_a<> , parcel_a<> , parcel_a<> >::___collection_a_handle_base___
 	{
 		virtual any_a<> unwrap_() const = 0;
 		virtual any_a<> close_() = 0;
@@ -133,30 +133,30 @@ protected:
 		virtual bool operator>(parcel_a < > const & parcel ) const = 0;
 		virtual bool operator<=(parcel_a < > const & parcel ) const = 0;
 		virtual bool operator>=(parcel_a < > const & parcel ) const = 0;
-		virtual bidirectional_extractor_data_a < flock_a < > , typename dart :: packet :: iterator > extract_begin() const = 0;
-		virtual bidirectional_extractor_data_a < flock_a < > , typename dart :: packet :: iterator > extract_end() const = 0;
-		virtual bidirectional_mutator_data_a < flock_a < > , typename dart :: packet :: iterator > mutate_begin() = 0;
-		virtual bidirectional_mutator_data_a < flock_a < > , typename dart :: packet :: iterator > mutate_end() = 0;
+		virtual bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_begin() const = 0;
+		virtual bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_end() const = 0;
+		virtual bidirectional_mutator_data_a < parcel_a < > , typename dart :: packet :: iterator > mutate_begin() = 0;
+		virtual bidirectional_mutator_data_a < parcel_a < > , typename dart :: packet :: iterator > mutate_end() = 0;
 		virtual dart :: packet const & extract_packet() const = 0;
 		virtual dart :: packet & mutate_packet() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___parcel_a_handle_base___>
-	struct ___parcel_a_handle___ : shoal_a< symbol_a<> , parcel_a<> >::template ___shoal_a_handle___<___TTT___, ___DHB___>
+	struct ___parcel_a_handle___ : collection_a< any_a<> , parcel_a<> , parcel_a<> >::template ___collection_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___parcel_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: shoal_a< symbol_a<> , parcel_a<> >::template ___shoal_a_handle___<___TTT___, ___DHB___>{ value }
+			: collection_a< any_a<> , parcel_a<> , parcel_a<> >::template ___collection_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___parcel_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: shoal_a< symbol_a<> , parcel_a<> >::template ___shoal_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: collection_a< any_a<> , parcel_a<> , parcel_a<> >::template ___collection_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
 		inline ___parcel_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
-			: shoal_a< symbol_a<> , parcel_a<> >::template ___shoal_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
+			: collection_a< any_a<> , parcel_a<> , parcel_a<> >::template ___collection_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline any_a<> unwrap_() const final;
@@ -207,13 +207,13 @@ protected:
 
 		virtual inline bool operator>=(parcel_a < > const & parcel ) const final;
 
-		virtual inline bidirectional_extractor_data_a < flock_a < > , typename dart :: packet :: iterator > extract_begin() const final;
+		virtual inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_begin() const final;
 
-		virtual inline bidirectional_extractor_data_a < flock_a < > , typename dart :: packet :: iterator > extract_end() const final;
+		virtual inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_end() const final;
 
-		virtual inline bidirectional_mutator_data_a < flock_a < > , typename dart :: packet :: iterator > mutate_begin() final;
+		virtual inline bidirectional_mutator_data_a < parcel_a < > , typename dart :: packet :: iterator > mutate_begin() final;
 
-		virtual inline bidirectional_mutator_data_a < flock_a < > , typename dart :: packet :: iterator > mutate_end() final;
+		virtual inline bidirectional_mutator_data_a < parcel_a < > , typename dart :: packet :: iterator > mutate_end() final;
 
 		virtual inline dart :: packet const & extract_packet() const final;
 
@@ -299,37 +299,37 @@ public:
 	inline parcel_a() = default;
 
 	inline parcel_a(parcel_a& other, any_a<>::___reference_tag___) noexcept
-		: shoal_a< symbol_a<> , parcel_a<> >(other, any_a<>::___reference_tag___{})
+		: collection_a< any_a<> , parcel_a<> , parcel_a<> >(other, any_a<>::___reference_tag___{})
 	{}
 
 	inline parcel_a(parcel_a& other, any_a<>::___duplicate_tag___) noexcept
-		: shoal_a< symbol_a<> , parcel_a<> >(other, any_a<>::___duplicate_tag___{})
+		: collection_a< any_a<> , parcel_a<> , parcel_a<> >(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline parcel_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: shoal_a< symbol_a<> , parcel_a<> >{ handle }
+		: collection_a< any_a<> , parcel_a<> , parcel_a<> >{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___parcel_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
 	explicit inline parcel_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
-		: shoal_a< symbol_a<> , parcel_a<> >(handle, any_a<>::___reference_tag___{})
+		: collection_a< any_a<> , parcel_a<> , parcel_a<> >(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___parcel_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<parcel_a, std::decay_t<___TTT___>>::value>>
 	explicit inline parcel_a(___TTT___ value) noexcept
-		: shoal_a< symbol_a<> , parcel_a<> >{ std::make_shared<___parcel_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: collection_a< any_a<> , parcel_a<> , parcel_a<> >{ std::make_shared<___parcel_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
 	explicit inline parcel_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
-		: shoal_a< symbol_a<> , parcel_a<> >{ std::make_shared<___parcel_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
+		: collection_a< any_a<> , parcel_a<> , parcel_a<> >{ std::make_shared<___parcel_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
@@ -387,7 +387,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = shoal_a< symbol_a<> , parcel_a<> >::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = collection_a< any_a<> , parcel_a<> , parcel_a<> >::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -406,7 +406,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = shoal_a< symbol_a<> , parcel_a<> >::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = collection_a< any_a<> , parcel_a<> , parcel_a<> >::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -418,7 +418,7 @@ public:
 	{
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
-			___unordered_shoal_a___ operations = shoal_a< symbol_a<> , parcel_a<> >::template ___operations___<___unordered_shoal_a___>();
+			___unordered_shoal_a___ operations = collection_a< any_a<> , parcel_a<> , parcel_a<> >::template ___operations___<___unordered_shoal_a___>();
 			operations.update_string("unwrap_", native_extraction_t<parcel_a>::create(&parcel_a::unwrap__));
 			operations.update_string("close_", native_mutation_t<parcel_a>::create(&parcel_a::close__));
 			operations.update_string("closed_", native_extraction_t<parcel_a>::create(&parcel_a::closed__));
@@ -449,7 +449,7 @@ public:
 }; // class parcel_a
 
 template <typename _1>
-class parcel_d : public shoal_d< symbol_a<> , parcel_a<> >
+class parcel_d : public collection_d< any_a<> , parcel_a<> , parcel_a<> >
 {
 public:
 	inline any_a<> unwrap__(range_a<> const& arguments) const
@@ -847,16 +847,16 @@ public:
 	inline bool operator>=(parcel_a < > const & parcel ) const
 	{ throw dis("dynamic parcel_d::operator>=(parcel) not available"); }
 
-	inline bidirectional_extractor_data_a < flock_a < > , typename dart :: packet :: iterator > extract_begin() const
+	inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_begin() const
 	{ throw dis("dynamic parcel_d::extract_begin() not available"); }
 
-	inline bidirectional_extractor_data_a < flock_a < > , typename dart :: packet :: iterator > extract_end() const
+	inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_end() const
 	{ throw dis("dynamic parcel_d::extract_end() not available"); }
 
-	inline bidirectional_mutator_data_a < flock_a < > , typename dart :: packet :: iterator > mutate_begin()
+	inline bidirectional_mutator_data_a < parcel_a < > , typename dart :: packet :: iterator > mutate_begin()
 	{ throw dis("dynamic parcel_d::mutate_begin() not available"); }
 
-	inline bidirectional_mutator_data_a < flock_a < > , typename dart :: packet :: iterator > mutate_end()
+	inline bidirectional_mutator_data_a < parcel_a < > , typename dart :: packet :: iterator > mutate_end()
 	{ throw dis("dynamic parcel_d::mutate_end() not available"); }
 
 	inline dart :: packet const & extract_packet() const
@@ -868,15 +868,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit parcel_d(any_a<> const& thing)
-		: shoal_d< symbol_a<> , parcel_a<> >{ thing }
+		: collection_d< any_a<> , parcel_a<> , parcel_a<> >{ thing }
 	{}
 
 	explicit parcel_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: shoal_d< symbol_a<> , parcel_a<> >{ thing, any_a<>::___reference_tag___{} }
+		: collection_d< any_a<> , parcel_a<> , parcel_a<> >{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit parcel_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: shoal_d< symbol_a<> , parcel_a<> >{ thing, any_a<>::___duplicate_tag___{} }
+		: collection_d< any_a<> , parcel_a<> , parcel_a<> >{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

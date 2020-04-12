@@ -173,22 +173,22 @@ namespace strange
 		return shoal.mutate_end();
 	}
 
-	inline bidirectional_extractor_data_a<flock_a<>, typename dart::packet::iterator> begin(parcel_a<> const& parcel)
+	inline bidirectional_extractor_data_a<parcel_a<>, typename dart::packet::iterator> begin(parcel_a<> const& parcel)
 	{
 		return parcel.extract_begin();
 	}
 
-	inline bidirectional_extractor_data_a<flock_a<>, typename dart::packet::iterator> end(parcel_a<> const& parcel)
+	inline bidirectional_extractor_data_a<parcel_a<>, typename dart::packet::iterator> end(parcel_a<> const& parcel)
 	{
 		return parcel.extract_end();
 	}
 
-	inline bidirectional_mutator_data_a<flock_a<>, typename dart::packet::iterator> begin(parcel_a<>& parcel)
+	inline bidirectional_mutator_data_a<parcel_a<>, typename dart::packet::iterator> begin(parcel_a<>& parcel)
 	{
 		return parcel.mutate_begin();
 	}
 
-	inline bidirectional_mutator_data_a<flock_a<>, typename dart::packet::iterator> end(parcel_a<>& parcel)
+	inline bidirectional_mutator_data_a<parcel_a<>, typename dart::packet::iterator> end(parcel_a<>& parcel)
 	{
 		return parcel.mutate_end();
 	}

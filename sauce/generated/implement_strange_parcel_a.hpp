@@ -327,39 +327,39 @@ inline bool parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::operator>
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(parcel); }
 
 template <typename _1>
-inline bidirectional_extractor_data_a < flock_a < > , typename dart :: packet :: iterator > parcel_a<_1>::extract_begin() const
+inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > parcel_a<_1>::extract_begin() const
 { assert(any_a<>::___handle___); return ___read___().extract_begin(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline bidirectional_extractor_data_a < flock_a < > , typename dart :: packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::extract_begin() const
+inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::extract_begin() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
 
 template <typename _1>
-inline bidirectional_extractor_data_a < flock_a < > , typename dart :: packet :: iterator > parcel_a<_1>::extract_end() const
+inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > parcel_a<_1>::extract_end() const
 { assert(any_a<>::___handle___); return ___read___().extract_end(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline bidirectional_extractor_data_a < flock_a < > , typename dart :: packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::extract_end() const
+inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::extract_end() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
 
 template <typename _1>
-inline bidirectional_mutator_data_a < flock_a < > , typename dart :: packet :: iterator > parcel_a<_1>::mutate_begin()
+inline bidirectional_mutator_data_a < parcel_a < > , typename dart :: packet :: iterator > parcel_a<_1>::mutate_begin()
 { assert(any_a<>::___handle___); return ___write___().mutate_begin(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline bidirectional_mutator_data_a < flock_a < > , typename dart :: packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::mutate_begin()
+inline bidirectional_mutator_data_a < parcel_a < > , typename dart :: packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::mutate_begin()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin(); }
 
 template <typename _1>
-inline bidirectional_mutator_data_a < flock_a < > , typename dart :: packet :: iterator > parcel_a<_1>::mutate_end()
+inline bidirectional_mutator_data_a < parcel_a < > , typename dart :: packet :: iterator > parcel_a<_1>::mutate_end()
 { assert(any_a<>::___handle___); return ___write___().mutate_end(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline bidirectional_mutator_data_a < flock_a < > , typename dart :: packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::mutate_end()
+inline bidirectional_mutator_data_a < parcel_a < > , typename dart :: packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::mutate_end()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end(); }
 
 template <typename _1>
