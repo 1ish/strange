@@ -94,6 +94,18 @@ public:
 
 	inline bool operator>=(parcel_a < > const & parcel ) const;
 
+	inline any_a<> key_begin__(range_a<> const& ___arguments___) const;
+
+	inline bidirectional_extractor_a< parcel_a<> > key_begin_() const;
+
+	inline any_a<> key_end__(range_a<> const& ___arguments___) const;
+
+	inline bidirectional_extractor_a< parcel_a<> > key_end_() const;
+
+	inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > key_begin() const;
+
+	inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > key_end() const;
+
 	inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_begin() const;
 
 	inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_end() const;
@@ -133,6 +145,10 @@ protected:
 		virtual bool operator>(parcel_a < > const & parcel ) const = 0;
 		virtual bool operator<=(parcel_a < > const & parcel ) const = 0;
 		virtual bool operator>=(parcel_a < > const & parcel ) const = 0;
+		virtual bidirectional_extractor_a< parcel_a<> > key_begin_() const = 0;
+		virtual bidirectional_extractor_a< parcel_a<> > key_end_() const = 0;
+		virtual bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > key_begin() const = 0;
+		virtual bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > key_end() const = 0;
 		virtual bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_begin() const = 0;
 		virtual bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_end() const = 0;
 		virtual bidirectional_mutator_data_a < parcel_a < > , typename dart :: packet :: iterator > mutate_begin() = 0;
@@ -206,6 +222,14 @@ protected:
 		virtual inline bool operator<=(parcel_a < > const & parcel ) const final;
 
 		virtual inline bool operator>=(parcel_a < > const & parcel ) const final;
+
+		virtual inline bidirectional_extractor_a< parcel_a<> > key_begin_() const final;
+
+		virtual inline bidirectional_extractor_a< parcel_a<> > key_end_() const final;
+
+		virtual inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > key_begin() const final;
+
+		virtual inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > key_end() const final;
 
 		virtual inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_begin() const final;
 
@@ -436,6 +460,8 @@ public:
 			operations.update_string("to_squad_", native_extraction_t<parcel_a>::create(&parcel_a::to_squad__));
 			operations.update_string("to_unordered_herd_", native_extraction_t<parcel_a>::create(&parcel_a::to_unordered_herd__));
 			operations.update_string("to_unordered_shoal_", native_extraction_t<parcel_a>::create(&parcel_a::to_unordered_shoal__));
+			operations.update_string("key_begin_", native_extraction_t<parcel_a>::create(&parcel_a::key_begin__));
+			operations.update_string("key_end_", native_extraction_t<parcel_a>::create(&parcel_a::key_end__));
 			return operations;
 		}();
 		return OPERATIONS;
@@ -846,6 +872,56 @@ public:
 
 	inline bool operator>=(parcel_a < > const & parcel ) const
 	{ throw dis("dynamic parcel_d::operator>=(parcel) not available"); }
+
+	inline any_a<> key_begin__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("key_begin_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::key_begin_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline bidirectional_extractor_a< parcel_a<> > key_begin_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("key_begin_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::key_begin_ passed non-existent member");
+		}
+		return cast<bidirectional_extractor_a< parcel_a<> >>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline any_a<> key_end__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("key_end_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::key_end_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline bidirectional_extractor_a< parcel_a<> > key_end_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("key_end_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::key_end_ passed non-existent member");
+		}
+		return cast<bidirectional_extractor_a< parcel_a<> >>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > key_begin() const
+	{ throw dis("dynamic parcel_d::key_begin() not available"); }
+
+	inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > key_end() const
+	{ throw dis("dynamic parcel_d::key_end() not available"); }
 
 	inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_begin() const
 	{ throw dis("dynamic parcel_d::extract_begin() not available"); }

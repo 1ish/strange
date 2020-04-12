@@ -42,6 +42,11 @@ false &&
 					'operator<=' : "bool (parcel_a<> const& parcel) const",
 					'operator>=' : "bool (parcel_a<> const& parcel) const",
 
+					key_begin_ :# (<bidirectional_extractor[<parcel>]>),
+					key_end_ :# (<bidirectional_extractor[<parcel>]>),
+					key_begin : "bidirectional_extractor_data_a<parcel_a<>, typename dart::packet::iterator> () const",
+					key_end : "bidirectional_extractor_data_a<parcel_a<>, typename dart::packet::iterator> () const",
+
 					extract_begin : "bidirectional_extractor_data_a<parcel_a<>, typename dart::packet::iterator> () const",
 					extract_end : "bidirectional_extractor_data_a<parcel_a<>, typename dart::packet::iterator> () const",
 					mutate_begin : "bidirectional_mutator_data_a<parcel_a<>, typename dart::packet::iterator> ()",
