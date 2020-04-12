@@ -14,38 +14,47 @@ false &&
 					binary_ :# (<lake_int8>),
 					binary : "std::string () const { return lake_to_string(binary_()); }",
 
-					to_number_ :# (<number>),
-					to_number_or_ :# (number :<number>#, <number>),
-					to_int_64_ :# (<number_data_int64>),
-					to_float_64_ :# (<number_data_double>),
+					json_ :# (<lake_int8>),
+					json : "std::string () const { return lake_to_string(json_()); }",
 
-					to_symbol_ :# (<symbol>),
+					number_ :# (<number>),
+					number_or_ :# (number :<number>#, <number>),
+					int_64_ :# (<number_data_int64>),
+					int_64_or_ :# (number :<number_data_int64>#, <number_data_int64>),
+					float_64_ :# (<number_data_double>),
+					float_64_or_ :# (number :<number_data_double>#, <number_data_double>),
 
-					to_flock_ :# (<flock>),
+					symbol_ :# (<symbol>),
+					symbol_or_ :# (symbol :<symbol>#, <symbol>),
 
-					to_lake_ :# (<lake_int8>),
+					flock_ :# (<flock[<parcel>]>),
+					flock_or_ :# (flock :<flock[<parcel>]>#, <flock[<parcel>]>),
 
-					to_ordered_herd_ :# (<ordered_herd>),
+					lake_ :# (<lake_int8>),
+					lake_or_ :# (lake :<lake_int8>#, <lake_int8>),
 
-					to_ordered_shoal_ :# (<ordered_shoal>),
+					ordered_herd_ :# (<ordered_herd[<parcel>]>),
+					ordered_herd_or_ :# (herd :<ordered_herd[<parcel>]>#, <ordered_herd[<parcel>]>),
 
-					to_squad_ :# (<squad>),
+					ordered_shoal_ :# (<ordered_shoal[<>, <parcel>]>),
+					ordered_shoal_or_ :# (shoal :<ordered_shoal[<>, <parcel>]>#, <ordered_shoal[<>, <parcel>]>),
 
-					to_unordered_herd_ :# (<unordered_herd>),
+					squad_ :# (<squad[<parcel>]>),
+					squad_or_ :# (squad :<squad[<parcel>]>#, <squad[<parcel>]>),
 
-					to_unordered_shoal_ :# (<unordered_shoal>),
+					unordered_herd_ :# (<unordered_herd[<parcel>]>),
+					unordered_herd_or_ :# (herd :<unordered_herd[<parcel>]>#, <unordered_herd[<parcel>]>),
+
+					unordered_shoal_ :# (<unordered_shoal[<>, <parcel>]>),
+					unordered_shoal_or_ :# (shoal :<unordered_shoal[<>, <parcel>]>#, <unordered_shoal[<>, <parcel>]>),
 
 					'operator==' : "bool (parcel_a<> const& parcel) const",
 					'operator!=' : "bool (parcel_a<> const& parcel) const",
-					'operator<' : "bool (parcel_a<> const& parcel) const",
-					'operator>' : "bool (parcel_a<> const& parcel) const",
-					'operator<=' : "bool (parcel_a<> const& parcel) const",
-					'operator>=' : "bool (parcel_a<> const& parcel) const",
 
-					key_begin_ :# (<bidirectional_extractor[<parcel>]>),
-					key_end_ :# (<bidirectional_extractor[<parcel>]>),
-					key_begin : "bidirectional_extractor_data_a<parcel_a<>, typename dart::packet::iterator> () const",
-					key_end : "bidirectional_extractor_data_a<parcel_a<>, typename dart::packet::iterator> () const",
+					key_begin_ :# (<bidirectional_extractor[<>]>),
+					key_end_ :# (<bidirectional_extractor[<>]>),
+					key_begin : "bidirectional_extractor_data_a<any_a<>, typename dart::packet::iterator> () const",
+					key_end : "bidirectional_extractor_data_a<any_a<>, typename dart::packet::iterator> () const",
 
 					extract_begin : "bidirectional_extractor_data_a<parcel_a<>, typename dart::packet::iterator> () const",
 					extract_end : "bidirectional_extractor_data_a<parcel_a<>, typename dart::packet::iterator> () const",

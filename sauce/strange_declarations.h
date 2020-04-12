@@ -45,12 +45,10 @@ using number_data_double_a = number_data_a<double>;
 }
 
 #include "generated/declare_strange_any_a.hpp"
-
 namespace strange
 {
 	inline std::size_t hash_of(any_a<> const& thing);
 }
-
 template <> struct std::hash<strange::any_a<>>
 {
 	inline std::size_t operator()(strange::any_a<> const& thing) const
@@ -80,6 +78,18 @@ namespace strange
 #include "generated/declare_strange_ordered_shoal_a.hpp"
 #include "generated/declare_strange_unordered_shoal_a.hpp"
 #include "generated/declare_strange_parcel_a.hpp"
+namespace strange
+{
+	inline std::size_t hash_of(parcel_a<> const& thing);
+}
+template <> struct std::hash<strange::parcel_a<>>
+{
+	inline std::size_t operator()(strange::parcel_a<> const& thing) const
+	{
+		return strange::hash_of(thing);
+	}
+};
+
 #include "generated/declare_strange_data_a.hpp"
 #include "generated/declare_strange_number_a.hpp"
 #include "generated/declare_strange_river_a.hpp"
