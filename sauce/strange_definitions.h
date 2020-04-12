@@ -6,6 +6,14 @@
 namespace strange
 {
 
+// hash
+
+template <typename ___ego___>
+inline std::size_t hash_of(___ego___ const& thing)
+{
+	return thing.hash();
+}
+
 // logic
 
 inline any_a<> yes()

@@ -6,10 +6,6 @@
 
 namespace strange
 {
-	inline std::size_t hash_of(any_a<> const& thing)
-	{
-		return thing.hash();
-	}
 	template <>
 	inline kind_a<> kind_of<std::set<any_a<>>::const_iterator>();
 	template <>
@@ -64,13 +60,6 @@ namespace strange
 #include "generated/define_strange_brook_a.hpp"
 #include "generated/define_strange_river_a.hpp"
 #include "generated/define_strange_parcel_a.hpp"
-namespace strange
-{
-	inline std::size_t hash_of(parcel_a<> const& thing)
-	{
-		return thing.hash();
-	}
-}
 #include "generated/define_strange_cat_a.hpp"
 #include "generated/define_strange_kind_a.hpp"
 #include "generated/define_strange_token_a.hpp"
