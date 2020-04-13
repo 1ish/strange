@@ -147,13 +147,13 @@ public:
 
 	inline bool is(std :: string const & s ) const;
 
-	inline any_a<> parcel__(range_a<> const& ___arguments___) const;
+	inline any_a<> to_parcel__(range_a<> const& ___arguments___) const;
 
-	inline parcel_a<> parcel_() const;
+	inline parcel_a<> to_parcel_() const;
 
-	inline any_a<> parcel_unique__(range_a<> const& ___arguments___) const;
+	inline any_a<> to_parcel_unique__(range_a<> const& ___arguments___) const;
 
-	inline parcel_a<> parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const;
+	inline parcel_a<> to_parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const;
 
 protected:
 	struct ___any_a_handle_base___
@@ -194,8 +194,8 @@ protected:
 		virtual _number_data_uint64 hash_() const = 0;
 		virtual std :: size_t hash() const = 0;
 		virtual bool is(std :: string const & s ) const = 0;
-		virtual parcel_a<> parcel_() const = 0;
-		virtual parcel_a<> parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const = 0;
+		virtual parcel_a<> to_parcel_() const = 0;
+		virtual parcel_a<> to_parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const = 0;
 	};
 
 	template <typename ___TTT___, typename ___BHB___ = ___any_a_handle_base___>
@@ -280,9 +280,9 @@ protected:
 
 		virtual inline bool is(std :: string const & s ) const final;
 
-		virtual inline parcel_a<> parcel_() const final;
+		virtual inline parcel_a<> to_parcel_() const final;
 
-		virtual inline parcel_a<> parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const final;
+		virtual inline parcel_a<> to_parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const final;
 
 		___TTT___ ___value___;
 	};

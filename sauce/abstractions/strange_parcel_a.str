@@ -6,76 +6,75 @@ false &&
 				$$<collection>[<>, <parcel>, <parcel>],
 				{	// parcel
 					unwrap_ :# (<>),
-//TODO something is broken here:
 					unwrap_unique_ :# (shoal :<unordered_shoal[<number_data_uint64>, <>]>&, <>),
 
 					close_ := (<>),
 					closed_ :# (<>),
 					reopen_ := (<>),
 
-					binary_ :# (<lake_int8>),
-					binary : "std::string () const { return lake_to_string(binary_()); }",
+					to_json_ :# (<lake_int8>),
+					to_json : "std::string () const { return lake_to_string(to_json_()); }",
 
-					json_ :# (<lake_int8>),
-					json : "std::string () const { return lake_to_string(json_()); }",
+					to_binary_ :# (<lake_int8>),
+					to_binary : "std::string () const { return lake_to_string(to_binary_()); }",
 
 					is_null_ :# (<>),
 
 					is_boolean_ :# (<>),
-					boolean_ :# (<>),
-					boolean_or_ :# (boolean :#, <>),
+					to_boolean_ :# (<>),
+					to_boolean_or_ :# (boolean :#, <>),
 
 					is_number_ :# (<>),
-					number_ :# (<number>),
-					number_or_ :# (number :<number>#, <number>),
+					to_number_ :# (<number>),
+					to_number_or_ :# (number :<number>#, <number>),
 
 					is_int_64_ :# (<>),
-					int_64_ :# (<number_data_int64>),
-					int_64_or_ :# (number :<number_data_int64>#, <number_data_int64>),
+					to_int_64_ :# (<number_data_int64>),
+					to_int_64_or_ :# (number :<number_data_int64>#, <number_data_int64>),
 
 					is_float_64_ :# (<>),
-					float_64_ :# (<number_data_double>),
-					float_64_or_ :# (number :<number_data_double>#, <number_data_double>),
+					to_float_64_ :# (<number_data_double>),
+					to_float_64_or_ :# (number :<number_data_double>#, <number_data_double>),
 
 					is_symbol_ :# (<>),
-					symbol_ :# (<symbol>),
-					symbol_or_ :# (symbol :<symbol>#, <symbol>),
+					to_symbol_ :# (<symbol>),
+					to_symbol_or_ :# (symbol :<symbol>#, <symbol>),
 
 					is_flock_ :# (<>),
-					flock_ :# (<flock[<parcel>]>),
-					flock_or_ :# (flock :<flock[<parcel>]>#, <flock[<parcel>]>),
+					to_flock_ :# (<flock[<parcel>]>),
+					to_flock_or_ :# (flock :<flock[<parcel>]>#, <flock[<parcel>]>),
 
 					is_lake_ :# (<>),
-					lake_ :# (<lake_int8>),
-					lake_or_ :# (lake :<lake_int8>#, <lake_int8>),
+					to_lake_ :# (<lake_int8>),
+					to_lake_or_ :# (lake :<lake_int8>#, <lake_int8>),
 
 					is_ordered_herd_ :# (<>),
-					ordered_herd_ :# (<ordered_herd[<parcel>]>),
-					ordered_herd_or_ :# (herd :<ordered_herd[<parcel>]>#, <ordered_herd[<parcel>]>),
+					to_ordered_herd_ :# (<ordered_herd[<parcel>]>),
+					to_ordered_herd_or_ :# (herd :<ordered_herd[<parcel>]>#, <ordered_herd[<parcel>]>),
 
 					is_ordered_shoal_ :# (<>),
-					ordered_shoal_ :# (<ordered_shoal[<>, <parcel>]>),
-					ordered_shoal_or_ :# (shoal :<ordered_shoal[<>, <parcel>]>#, <ordered_shoal[<>, <parcel>]>),
+					to_ordered_shoal_ :# (<ordered_shoal[<>, <parcel>]>),
+					to_ordered_shoal_or_ :# (shoal :<ordered_shoal[<>, <parcel>]>#, <ordered_shoal[<>, <parcel>]>),
 
 					is_squad_ :# (<>),
-					squad_ :# (<squad[<parcel>]>),
-					squad_or_ :# (squad :<squad[<parcel>]>#, <squad[<parcel>]>),
+					to_squad_ :# (<squad[<parcel>]>),
+					to_squad_or_ :# (squad :<squad[<parcel>]>#, <squad[<parcel>]>),
 
 					is_unordered_herd_ :# (<>),
-					unordered_herd_ :# (<unordered_herd[<parcel>]>),
-					unordered_herd_or_ :# (herd :<unordered_herd[<parcel>]>#, <unordered_herd[<parcel>]>),
+					to_unordered_herd_ :# (<unordered_herd[<parcel>]>),
+					to_unordered_herd_or_ :# (herd :<unordered_herd[<parcel>]>#, <unordered_herd[<parcel>]>),
 
 					is_unordered_shoal_ :# (<>),
-					unordered_shoal_ :# (<unordered_shoal[<>, <parcel>]>),
-					unordered_shoal_or_ :# (shoal :<unordered_shoal[<>, <parcel>]>#, <unordered_shoal[<>, <parcel>]>),
+					to_unordered_shoal_ :# (<unordered_shoal[<>, <parcel>]>),
+					to_unordered_shoal_or_ :# (shoal :<unordered_shoal[<>, <parcel>]>#, <unordered_shoal[<>, <parcel>]>),
 
 					'operator==' : "bool (parcel_a<> const& parcel) const",
 					'operator!=' : "bool (parcel_a<> const& parcel) const",
 
-					key_begin_ :# (<bidirectional_extractor[<>]>),
-					key_end_ :# (<bidirectional_extractor[<>]>),
-					key_begin : "bidirectional_extractor_data_a<any_a<>, typename dart::packet::iterator> () const",
-					key_end : "bidirectional_extractor_data_a<any_a<>, typename dart::packet::iterator> () const",
+					keys_begin_ :# (<bidirectional_extractor[<>]>),
+					keys_end_ :# (<bidirectional_extractor[<>]>),
+					keys_begin : "bidirectional_extractor_data_a<any_a<>, typename dart::packet::iterator> () const",
+					keys_end : "bidirectional_extractor_data_a<any_a<>, typename dart::packet::iterator> () const",
 
 					extract_begin : "bidirectional_extractor_data_a<parcel_a<>, typename dart::packet::iterator> () const",
 					extract_end : "bidirectional_extractor_data_a<parcel_a<>, typename dart::packet::iterator> () const",

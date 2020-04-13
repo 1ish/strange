@@ -430,40 +430,40 @@ inline bool any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___
 { return ___value___.is(s); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::parcel__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::to_parcel__(range_a<> const& ___arguments___) const
 {
-	return parcel_();
+	return to_parcel_();
 }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::parcel_() const
-{ assert(___handle___); return ___read___().parcel_(); }
+inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::to_parcel_() const
+{ assert(___handle___); return ___read___().to_parcel_(); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
 template <typename ___TTT___, typename ___BHB___>
-inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::parcel_() const
-{ return ___value___.parcel_(); }
+inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::to_parcel_() const
+{ return ___value___.to_parcel_(); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::parcel_unique__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::to_parcel_unique__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
-		throw dis("any_a::parcel_unique_ passed short range");
+		throw dis("any_a::to_parcel_unique_ passed short range");
 	}
 	auto herd = cast_dup< unordered_herd_a< _number_data_uint64 > >(*___it___);
-	return parcel_unique_(herd);
+	return to_parcel_unique_(herd);
 }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const
-{ assert(___handle___); return ___read___().parcel_unique_(herd); }
+inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::to_parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const
+{ assert(___handle___); return ___read___().to_parcel_unique_(herd); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
 template <typename ___TTT___, typename ___BHB___>
-inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const
-{ return ___value___.parcel_unique_(herd); }
+inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::to_parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const
+{ return ___value___.to_parcel_unique_(herd); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
 inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::operation(std::string const& name) const
@@ -498,8 +498,8 @@ inline ___unordered_shoal_a___ any_a<_symbol, _cat, _kind, _number_data_uint64>:
 		operations.update(sym("less_or_equal_"), native_extraction_t<any_a>::create(&any_a::less_or_equal__));
 		operations.update(sym("greater_or_equal_"), native_extraction_t<any_a>::create(&any_a::greater_or_equal__));
 		operations.update(sym("hash_"), native_extraction_t<any_a>::create(&any_a::hash__));
-		operations.update(sym("parcel_"), native_extraction_t<any_a>::create(&any_a::parcel__));
-		operations.update(sym("parcel_unique_"), native_extraction_t<any_a>::create(&any_a::parcel_unique__));
+		operations.update(sym("to_parcel_"), native_extraction_t<any_a>::create(&any_a::to_parcel__));
+		operations.update(sym("to_parcel_unique_"), native_extraction_t<any_a>::create(&any_a::to_parcel_unique__));
 		return operations;
 	}();
 	return OPERATIONS;

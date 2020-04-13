@@ -64,8 +64,8 @@ false &&
 					is : "bool (std::string const& s) const",
 
 					// serialization
-					parcel_ :# (<parcel>),
-					parcel_unique_ :# (herd :<unordered_herd[<#number_data_uint64>]>&, <parcel>),
+					to_parcel_ :# (<parcel>),
+					to_parcel_unique_ :# (herd :<unordered_herd[<#number_data_uint64>]>&, <parcel>),
 				}
 			)
 		)

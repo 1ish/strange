@@ -84,52 +84,52 @@ inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::reopen
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.reopen_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::binary__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_json__(range_a<> const& ___arguments___) const
 {
-	return binary_();
+	return to_json_();
 }
 
 template <typename _1>
-inline lake_int8_a<> parcel_a<_1>::binary_() const
-{ assert(any_a<>::___handle___); return ___read___().binary_(); }
+inline lake_int8_a<> parcel_a<_1>::to_json_() const
+{ assert(any_a<>::___handle___); return ___read___().to_json_(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline lake_int8_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::binary_() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.binary_(); }
+inline lake_int8_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_json_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_json_(); }
 
 template <typename _1>
-inline std :: string parcel_a<_1>::binary() const
-{ assert(any_a<>::___handle___); return ___read___().binary(); }
+inline std :: string parcel_a<_1>::to_json() const
+{ assert(any_a<>::___handle___); return ___read___().to_json(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: string parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::binary() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.binary(); }
+inline std :: string parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_json() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_json(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::json__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_binary__(range_a<> const& ___arguments___) const
 {
-	return json_();
+	return to_binary_();
 }
 
 template <typename _1>
-inline lake_int8_a<> parcel_a<_1>::json_() const
-{ assert(any_a<>::___handle___); return ___read___().json_(); }
+inline lake_int8_a<> parcel_a<_1>::to_binary_() const
+{ assert(any_a<>::___handle___); return ___read___().to_binary_(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline lake_int8_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::json_() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.json_(); }
+inline lake_int8_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_binary_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_binary_(); }
 
 template <typename _1>
-inline std :: string parcel_a<_1>::json() const
-{ assert(any_a<>::___handle___); return ___read___().json(); }
+inline std :: string parcel_a<_1>::to_binary() const
+{ assert(any_a<>::___handle___); return ___read___().to_binary(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: string parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::json() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.json(); }
+inline std :: string parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_binary() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_binary(); }
 
 template <typename _1>
 inline any_a<> parcel_a<_1>::is_null__(range_a<> const& ___arguments___) const
@@ -162,40 +162,40 @@ inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_boo
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_boolean_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::boolean__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_boolean__(range_a<> const& ___arguments___) const
 {
-	return boolean_();
+	return to_boolean_();
 }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::boolean_() const
-{ assert(any_a<>::___handle___); return ___read___().boolean_(); }
+inline any_a<> parcel_a<_1>::to_boolean_() const
+{ assert(any_a<>::___handle___); return ___read___().to_boolean_(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::boolean_() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.boolean_(); }
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_boolean_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_boolean_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::boolean_or__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_boolean_or__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
-		throw dis("parcel_a::boolean_or_ passed short range");
+		throw dis("parcel_a::to_boolean_or_ passed short range");
 	}
 	auto boolean = cast<any_a<>>(*___it___);
-	return boolean_or_(boolean);
+	return to_boolean_or_(boolean);
 }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::boolean_or_(any_a<> const& boolean) const
-{ assert(any_a<>::___handle___); return ___read___().boolean_or_(boolean); }
+inline any_a<> parcel_a<_1>::to_boolean_or_(any_a<> const& boolean) const
+{ assert(any_a<>::___handle___); return ___read___().to_boolean_or_(boolean); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::boolean_or_(any_a<> const& boolean) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.boolean_or_(boolean); }
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_boolean_or_(any_a<> const& boolean) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_boolean_or_(boolean); }
 
 template <typename _1>
 inline any_a<> parcel_a<_1>::is_number__(range_a<> const& ___arguments___) const
@@ -213,40 +213,40 @@ inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_num
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_number_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::number__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_number__(range_a<> const& ___arguments___) const
 {
-	return number_();
+	return to_number_();
 }
 
 template <typename _1>
-inline number_a<> parcel_a<_1>::number_() const
-{ assert(any_a<>::___handle___); return ___read___().number_(); }
+inline number_a<> parcel_a<_1>::to_number_() const
+{ assert(any_a<>::___handle___); return ___read___().to_number_(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline number_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::number_() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.number_(); }
+inline number_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_number_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_number_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::number_or__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_number_or__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
-		throw dis("parcel_a::number_or_ passed short range");
+		throw dis("parcel_a::to_number_or_ passed short range");
 	}
 	auto number = cast<number_a<>>(*___it___);
-	return number_or_(number);
+	return to_number_or_(number);
 }
 
 template <typename _1>
-inline number_a<> parcel_a<_1>::number_or_(number_a<> const& number) const
-{ assert(any_a<>::___handle___); return ___read___().number_or_(number); }
+inline number_a<> parcel_a<_1>::to_number_or_(number_a<> const& number) const
+{ assert(any_a<>::___handle___); return ___read___().to_number_or_(number); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline number_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::number_or_(number_a<> const& number) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.number_or_(number); }
+inline number_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_number_or_(number_a<> const& number) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_number_or_(number); }
 
 template <typename _1>
 inline any_a<> parcel_a<_1>::is_int_64__(range_a<> const& ___arguments___) const
@@ -264,40 +264,40 @@ inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_int
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_int_64_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::int_64__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_int_64__(range_a<> const& ___arguments___) const
 {
-	return int_64_();
+	return to_int_64_();
 }
 
 template <typename _1>
-inline number_data_int64_a<> parcel_a<_1>::int_64_() const
-{ assert(any_a<>::___handle___); return ___read___().int_64_(); }
+inline number_data_int64_a<> parcel_a<_1>::to_int_64_() const
+{ assert(any_a<>::___handle___); return ___read___().to_int_64_(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline number_data_int64_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::int_64_() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.int_64_(); }
+inline number_data_int64_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_int_64_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_int_64_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::int_64_or__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_int_64_or__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
-		throw dis("parcel_a::int_64_or_ passed short range");
+		throw dis("parcel_a::to_int_64_or_ passed short range");
 	}
 	auto number = cast<number_data_int64_a<>>(*___it___);
-	return int_64_or_(number);
+	return to_int_64_or_(number);
 }
 
 template <typename _1>
-inline number_data_int64_a<> parcel_a<_1>::int_64_or_(number_data_int64_a<> const& number) const
-{ assert(any_a<>::___handle___); return ___read___().int_64_or_(number); }
+inline number_data_int64_a<> parcel_a<_1>::to_int_64_or_(number_data_int64_a<> const& number) const
+{ assert(any_a<>::___handle___); return ___read___().to_int_64_or_(number); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline number_data_int64_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::int_64_or_(number_data_int64_a<> const& number) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.int_64_or_(number); }
+inline number_data_int64_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_int_64_or_(number_data_int64_a<> const& number) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_int_64_or_(number); }
 
 template <typename _1>
 inline any_a<> parcel_a<_1>::is_float_64__(range_a<> const& ___arguments___) const
@@ -315,40 +315,40 @@ inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_flo
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_float_64_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::float_64__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_float_64__(range_a<> const& ___arguments___) const
 {
-	return float_64_();
+	return to_float_64_();
 }
 
 template <typename _1>
-inline number_data_double_a<> parcel_a<_1>::float_64_() const
-{ assert(any_a<>::___handle___); return ___read___().float_64_(); }
+inline number_data_double_a<> parcel_a<_1>::to_float_64_() const
+{ assert(any_a<>::___handle___); return ___read___().to_float_64_(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline number_data_double_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::float_64_() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.float_64_(); }
+inline number_data_double_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_float_64_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_float_64_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::float_64_or__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_float_64_or__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
-		throw dis("parcel_a::float_64_or_ passed short range");
+		throw dis("parcel_a::to_float_64_or_ passed short range");
 	}
 	auto number = cast<number_data_double_a<>>(*___it___);
-	return float_64_or_(number);
+	return to_float_64_or_(number);
 }
 
 template <typename _1>
-inline number_data_double_a<> parcel_a<_1>::float_64_or_(number_data_double_a<> const& number) const
-{ assert(any_a<>::___handle___); return ___read___().float_64_or_(number); }
+inline number_data_double_a<> parcel_a<_1>::to_float_64_or_(number_data_double_a<> const& number) const
+{ assert(any_a<>::___handle___); return ___read___().to_float_64_or_(number); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline number_data_double_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::float_64_or_(number_data_double_a<> const& number) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.float_64_or_(number); }
+inline number_data_double_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_float_64_or_(number_data_double_a<> const& number) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_float_64_or_(number); }
 
 template <typename _1>
 inline any_a<> parcel_a<_1>::is_symbol__(range_a<> const& ___arguments___) const
@@ -366,40 +366,40 @@ inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_sym
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_symbol_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::symbol__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_symbol__(range_a<> const& ___arguments___) const
 {
-	return symbol_();
+	return to_symbol_();
 }
 
 template <typename _1>
-inline symbol_a<> parcel_a<_1>::symbol_() const
-{ assert(any_a<>::___handle___); return ___read___().symbol_(); }
+inline symbol_a<> parcel_a<_1>::to_symbol_() const
+{ assert(any_a<>::___handle___); return ___read___().to_symbol_(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline symbol_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::symbol_() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.symbol_(); }
+inline symbol_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_symbol_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_symbol_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::symbol_or__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_symbol_or__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
-		throw dis("parcel_a::symbol_or_ passed short range");
+		throw dis("parcel_a::to_symbol_or_ passed short range");
 	}
 	auto symbol = cast<symbol_a<>>(*___it___);
-	return symbol_or_(symbol);
+	return to_symbol_or_(symbol);
 }
 
 template <typename _1>
-inline symbol_a<> parcel_a<_1>::symbol_or_(symbol_a<> const& symbol) const
-{ assert(any_a<>::___handle___); return ___read___().symbol_or_(symbol); }
+inline symbol_a<> parcel_a<_1>::to_symbol_or_(symbol_a<> const& symbol) const
+{ assert(any_a<>::___handle___); return ___read___().to_symbol_or_(symbol); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline symbol_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::symbol_or_(symbol_a<> const& symbol) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.symbol_or_(symbol); }
+inline symbol_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_symbol_or_(symbol_a<> const& symbol) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_symbol_or_(symbol); }
 
 template <typename _1>
 inline any_a<> parcel_a<_1>::is_flock__(range_a<> const& ___arguments___) const
@@ -417,40 +417,40 @@ inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_flo
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_flock_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::flock__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_flock__(range_a<> const& ___arguments___) const
 {
-	return flock_();
+	return to_flock_();
 }
 
 template <typename _1>
-inline flock_a< parcel_a<> > parcel_a<_1>::flock_() const
-{ assert(any_a<>::___handle___); return ___read___().flock_(); }
+inline flock_a< parcel_a<> > parcel_a<_1>::to_flock_() const
+{ assert(any_a<>::___handle___); return ___read___().to_flock_(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline flock_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::flock_() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.flock_(); }
+inline flock_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_flock_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_flock_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::flock_or__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_flock_or__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
-		throw dis("parcel_a::flock_or_ passed short range");
+		throw dis("parcel_a::to_flock_or_ passed short range");
 	}
 	auto flock = cast<flock_a<parcel_a<>>>(*___it___);
-	return flock_or_(flock);
+	return to_flock_or_(flock);
 }
 
 template <typename _1>
-inline flock_a< parcel_a<> > parcel_a<_1>::flock_or_(flock_a<parcel_a<>> const& flock) const
-{ assert(any_a<>::___handle___); return ___read___().flock_or_(flock); }
+inline flock_a< parcel_a<> > parcel_a<_1>::to_flock_or_(flock_a<parcel_a<>> const& flock) const
+{ assert(any_a<>::___handle___); return ___read___().to_flock_or_(flock); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline flock_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::flock_or_(flock_a<parcel_a<>> const& flock) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.flock_or_(flock); }
+inline flock_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_flock_or_(flock_a<parcel_a<>> const& flock) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_flock_or_(flock); }
 
 template <typename _1>
 inline any_a<> parcel_a<_1>::is_lake__(range_a<> const& ___arguments___) const
@@ -468,40 +468,40 @@ inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_lak
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_lake_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::lake__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_lake__(range_a<> const& ___arguments___) const
 {
-	return lake_();
+	return to_lake_();
 }
 
 template <typename _1>
-inline lake_int8_a<> parcel_a<_1>::lake_() const
-{ assert(any_a<>::___handle___); return ___read___().lake_(); }
+inline lake_int8_a<> parcel_a<_1>::to_lake_() const
+{ assert(any_a<>::___handle___); return ___read___().to_lake_(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline lake_int8_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::lake_() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.lake_(); }
+inline lake_int8_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_lake_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::lake_or__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_lake_or__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
-		throw dis("parcel_a::lake_or_ passed short range");
+		throw dis("parcel_a::to_lake_or_ passed short range");
 	}
 	auto lake = cast<lake_int8_a<>>(*___it___);
-	return lake_or_(lake);
+	return to_lake_or_(lake);
 }
 
 template <typename _1>
-inline lake_int8_a<> parcel_a<_1>::lake_or_(lake_int8_a<> const& lake) const
-{ assert(any_a<>::___handle___); return ___read___().lake_or_(lake); }
+inline lake_int8_a<> parcel_a<_1>::to_lake_or_(lake_int8_a<> const& lake) const
+{ assert(any_a<>::___handle___); return ___read___().to_lake_or_(lake); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline lake_int8_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::lake_or_(lake_int8_a<> const& lake) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.lake_or_(lake); }
+inline lake_int8_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_lake_or_(lake_int8_a<> const& lake) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake_or_(lake); }
 
 template <typename _1>
 inline any_a<> parcel_a<_1>::is_ordered_herd__(range_a<> const& ___arguments___) const
@@ -519,40 +519,40 @@ inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_ord
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_ordered_herd_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::ordered_herd__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_ordered_herd__(range_a<> const& ___arguments___) const
 {
-	return ordered_herd_();
+	return to_ordered_herd_();
 }
 
 template <typename _1>
-inline ordered_herd_a< parcel_a<> > parcel_a<_1>::ordered_herd_() const
-{ assert(any_a<>::___handle___); return ___read___().ordered_herd_(); }
+inline ordered_herd_a< parcel_a<> > parcel_a<_1>::to_ordered_herd_() const
+{ assert(any_a<>::___handle___); return ___read___().to_ordered_herd_(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline ordered_herd_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::ordered_herd_() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.ordered_herd_(); }
+inline ordered_herd_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_ordered_herd_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_ordered_herd_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::ordered_herd_or__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_ordered_herd_or__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
-		throw dis("parcel_a::ordered_herd_or_ passed short range");
+		throw dis("parcel_a::to_ordered_herd_or_ passed short range");
 	}
 	auto herd = cast<ordered_herd_a<parcel_a<>>>(*___it___);
-	return ordered_herd_or_(herd);
+	return to_ordered_herd_or_(herd);
 }
 
 template <typename _1>
-inline ordered_herd_a< parcel_a<> > parcel_a<_1>::ordered_herd_or_(ordered_herd_a<parcel_a<>> const& herd) const
-{ assert(any_a<>::___handle___); return ___read___().ordered_herd_or_(herd); }
+inline ordered_herd_a< parcel_a<> > parcel_a<_1>::to_ordered_herd_or_(ordered_herd_a<parcel_a<>> const& herd) const
+{ assert(any_a<>::___handle___); return ___read___().to_ordered_herd_or_(herd); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline ordered_herd_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::ordered_herd_or_(ordered_herd_a<parcel_a<>> const& herd) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.ordered_herd_or_(herd); }
+inline ordered_herd_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_ordered_herd_or_(ordered_herd_a<parcel_a<>> const& herd) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_ordered_herd_or_(herd); }
 
 template <typename _1>
 inline any_a<> parcel_a<_1>::is_ordered_shoal__(range_a<> const& ___arguments___) const
@@ -570,40 +570,40 @@ inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_ord
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_ordered_shoal_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::ordered_shoal__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_ordered_shoal__(range_a<> const& ___arguments___) const
 {
-	return ordered_shoal_();
+	return to_ordered_shoal_();
 }
 
 template <typename _1>
-inline ordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::ordered_shoal_() const
-{ assert(any_a<>::___handle___); return ___read___().ordered_shoal_(); }
+inline ordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::to_ordered_shoal_() const
+{ assert(any_a<>::___handle___); return ___read___().to_ordered_shoal_(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline ordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::ordered_shoal_() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.ordered_shoal_(); }
+inline ordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_ordered_shoal_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_ordered_shoal_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::ordered_shoal_or__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_ordered_shoal_or__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
-		throw dis("parcel_a::ordered_shoal_or_ passed short range");
+		throw dis("parcel_a::to_ordered_shoal_or_ passed short range");
 	}
 	auto shoal = cast<ordered_shoal_a<strange::any_a<>, parcel_a<>>>(*___it___);
-	return ordered_shoal_or_(shoal);
+	return to_ordered_shoal_or_(shoal);
 }
 
 template <typename _1>
-inline ordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::ordered_shoal_or_(ordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const
-{ assert(any_a<>::___handle___); return ___read___().ordered_shoal_or_(shoal); }
+inline ordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::to_ordered_shoal_or_(ordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const
+{ assert(any_a<>::___handle___); return ___read___().to_ordered_shoal_or_(shoal); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline ordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::ordered_shoal_or_(ordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.ordered_shoal_or_(shoal); }
+inline ordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_ordered_shoal_or_(ordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_ordered_shoal_or_(shoal); }
 
 template <typename _1>
 inline any_a<> parcel_a<_1>::is_squad__(range_a<> const& ___arguments___) const
@@ -621,40 +621,40 @@ inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_squ
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_squad_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::squad__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_squad__(range_a<> const& ___arguments___) const
 {
-	return squad_();
+	return to_squad_();
 }
 
 template <typename _1>
-inline squad_a< parcel_a<> > parcel_a<_1>::squad_() const
-{ assert(any_a<>::___handle___); return ___read___().squad_(); }
+inline squad_a< parcel_a<> > parcel_a<_1>::to_squad_() const
+{ assert(any_a<>::___handle___); return ___read___().to_squad_(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline squad_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::squad_() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.squad_(); }
+inline squad_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_squad_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_squad_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::squad_or__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_squad_or__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
-		throw dis("parcel_a::squad_or_ passed short range");
+		throw dis("parcel_a::to_squad_or_ passed short range");
 	}
 	auto squad = cast<squad_a<parcel_a<>>>(*___it___);
-	return squad_or_(squad);
+	return to_squad_or_(squad);
 }
 
 template <typename _1>
-inline squad_a< parcel_a<> > parcel_a<_1>::squad_or_(squad_a<parcel_a<>> const& squad) const
-{ assert(any_a<>::___handle___); return ___read___().squad_or_(squad); }
+inline squad_a< parcel_a<> > parcel_a<_1>::to_squad_or_(squad_a<parcel_a<>> const& squad) const
+{ assert(any_a<>::___handle___); return ___read___().to_squad_or_(squad); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline squad_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::squad_or_(squad_a<parcel_a<>> const& squad) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.squad_or_(squad); }
+inline squad_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_squad_or_(squad_a<parcel_a<>> const& squad) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_squad_or_(squad); }
 
 template <typename _1>
 inline any_a<> parcel_a<_1>::is_unordered_herd__(range_a<> const& ___arguments___) const
@@ -672,40 +672,40 @@ inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_uno
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_unordered_herd_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::unordered_herd__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_unordered_herd__(range_a<> const& ___arguments___) const
 {
-	return unordered_herd_();
+	return to_unordered_herd_();
 }
 
 template <typename _1>
-inline unordered_herd_a< parcel_a<> > parcel_a<_1>::unordered_herd_() const
-{ assert(any_a<>::___handle___); return ___read___().unordered_herd_(); }
+inline unordered_herd_a< parcel_a<> > parcel_a<_1>::to_unordered_herd_() const
+{ assert(any_a<>::___handle___); return ___read___().to_unordered_herd_(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline unordered_herd_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unordered_herd_() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unordered_herd_(); }
+inline unordered_herd_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_unordered_herd_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_unordered_herd_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::unordered_herd_or__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_unordered_herd_or__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
-		throw dis("parcel_a::unordered_herd_or_ passed short range");
+		throw dis("parcel_a::to_unordered_herd_or_ passed short range");
 	}
 	auto herd = cast<unordered_herd_a<parcel_a<>>>(*___it___);
-	return unordered_herd_or_(herd);
+	return to_unordered_herd_or_(herd);
 }
 
 template <typename _1>
-inline unordered_herd_a< parcel_a<> > parcel_a<_1>::unordered_herd_or_(unordered_herd_a<parcel_a<>> const& herd) const
-{ assert(any_a<>::___handle___); return ___read___().unordered_herd_or_(herd); }
+inline unordered_herd_a< parcel_a<> > parcel_a<_1>::to_unordered_herd_or_(unordered_herd_a<parcel_a<>> const& herd) const
+{ assert(any_a<>::___handle___); return ___read___().to_unordered_herd_or_(herd); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline unordered_herd_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unordered_herd_or_(unordered_herd_a<parcel_a<>> const& herd) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unordered_herd_or_(herd); }
+inline unordered_herd_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_unordered_herd_or_(unordered_herd_a<parcel_a<>> const& herd) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_unordered_herd_or_(herd); }
 
 template <typename _1>
 inline any_a<> parcel_a<_1>::is_unordered_shoal__(range_a<> const& ___arguments___) const
@@ -723,40 +723,40 @@ inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::is_uno
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_unordered_shoal_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::unordered_shoal__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_unordered_shoal__(range_a<> const& ___arguments___) const
 {
-	return unordered_shoal_();
+	return to_unordered_shoal_();
 }
 
 template <typename _1>
-inline unordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::unordered_shoal_() const
-{ assert(any_a<>::___handle___); return ___read___().unordered_shoal_(); }
+inline unordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::to_unordered_shoal_() const
+{ assert(any_a<>::___handle___); return ___read___().to_unordered_shoal_(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline unordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unordered_shoal_() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unordered_shoal_(); }
+inline unordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_unordered_shoal_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_unordered_shoal_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::unordered_shoal_or__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::to_unordered_shoal_or__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
-		throw dis("parcel_a::unordered_shoal_or_ passed short range");
+		throw dis("parcel_a::to_unordered_shoal_or_ passed short range");
 	}
 	auto shoal = cast<unordered_shoal_a<strange::any_a<>, parcel_a<>>>(*___it___);
-	return unordered_shoal_or_(shoal);
+	return to_unordered_shoal_or_(shoal);
 }
 
 template <typename _1>
-inline unordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::unordered_shoal_or_(unordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const
-{ assert(any_a<>::___handle___); return ___read___().unordered_shoal_or_(shoal); }
+inline unordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::to_unordered_shoal_or_(unordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const
+{ assert(any_a<>::___handle___); return ___read___().to_unordered_shoal_or_(shoal); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline unordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unordered_shoal_or_(unordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unordered_shoal_or_(shoal); }
+inline unordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::to_unordered_shoal_or_(unordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_unordered_shoal_or_(shoal); }
 
 template <typename _1>
 inline bool parcel_a<_1>::operator==(parcel_a < > const & parcel ) const
@@ -777,52 +777,52 @@ inline bool parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::operator!
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(parcel); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::key_begin__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::keys_begin__(range_a<> const& ___arguments___) const
 {
-	return key_begin_();
+	return keys_begin_();
 }
 
 template <typename _1>
-inline bidirectional_extractor_a< any_a<> > parcel_a<_1>::key_begin_() const
-{ assert(any_a<>::___handle___); return ___read___().key_begin_(); }
+inline bidirectional_extractor_a< any_a<> > parcel_a<_1>::keys_begin_() const
+{ assert(any_a<>::___handle___); return ___read___().keys_begin_(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline bidirectional_extractor_a< any_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::key_begin_() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.key_begin_(); }
+inline bidirectional_extractor_a< any_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::keys_begin_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.keys_begin_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::key_end__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::keys_end__(range_a<> const& ___arguments___) const
 {
-	return key_end_();
+	return keys_end_();
 }
 
 template <typename _1>
-inline bidirectional_extractor_a< any_a<> > parcel_a<_1>::key_end_() const
-{ assert(any_a<>::___handle___); return ___read___().key_end_(); }
+inline bidirectional_extractor_a< any_a<> > parcel_a<_1>::keys_end_() const
+{ assert(any_a<>::___handle___); return ___read___().keys_end_(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline bidirectional_extractor_a< any_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::key_end_() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.key_end_(); }
+inline bidirectional_extractor_a< any_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::keys_end_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.keys_end_(); }
 
 template <typename _1>
-inline bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > parcel_a<_1>::key_begin() const
-{ assert(any_a<>::___handle___); return ___read___().key_begin(); }
-
-template <typename _1>
-template <typename ___TTT___, typename ___DHB___>
-inline bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::key_begin() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.key_begin(); }
-
-template <typename _1>
-inline bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > parcel_a<_1>::key_end() const
-{ assert(any_a<>::___handle___); return ___read___().key_end(); }
+inline bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > parcel_a<_1>::keys_begin() const
+{ assert(any_a<>::___handle___); return ___read___().keys_begin(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::key_end() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.key_end(); }
+inline bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::keys_begin() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.keys_begin(); }
+
+template <typename _1>
+inline bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > parcel_a<_1>::keys_end() const
+{ assert(any_a<>::___handle___); return ___read___().keys_end(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::keys_end() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.keys_end(); }
 
 template <typename _1>
 inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > parcel_a<_1>::extract_begin() const
@@ -890,47 +890,47 @@ inline ___unordered_shoal_a___ parcel_a<_1>::___operations___()
 		operations.update(sym("close_"), native_mutation_t<parcel_a>::create(&parcel_a::close__));
 		operations.update(sym("closed_"), native_extraction_t<parcel_a>::create(&parcel_a::closed__));
 		operations.update(sym("reopen_"), native_mutation_t<parcel_a>::create(&parcel_a::reopen__));
-		operations.update(sym("binary_"), native_extraction_t<parcel_a>::create(&parcel_a::binary__));
-		operations.update(sym("json_"), native_extraction_t<parcel_a>::create(&parcel_a::json__));
+		operations.update(sym("to_json_"), native_extraction_t<parcel_a>::create(&parcel_a::to_json__));
+		operations.update(sym("to_binary_"), native_extraction_t<parcel_a>::create(&parcel_a::to_binary__));
 		operations.update(sym("is_null_"), native_extraction_t<parcel_a>::create(&parcel_a::is_null__));
 		operations.update(sym("is_boolean_"), native_extraction_t<parcel_a>::create(&parcel_a::is_boolean__));
-		operations.update(sym("boolean_"), native_extraction_t<parcel_a>::create(&parcel_a::boolean__));
-		operations.update(sym("boolean_or_"), native_extraction_t<parcel_a>::create(&parcel_a::boolean_or__));
+		operations.update(sym("to_boolean_"), native_extraction_t<parcel_a>::create(&parcel_a::to_boolean__));
+		operations.update(sym("to_boolean_or_"), native_extraction_t<parcel_a>::create(&parcel_a::to_boolean_or__));
 		operations.update(sym("is_number_"), native_extraction_t<parcel_a>::create(&parcel_a::is_number__));
-		operations.update(sym("number_"), native_extraction_t<parcel_a>::create(&parcel_a::number__));
-		operations.update(sym("number_or_"), native_extraction_t<parcel_a>::create(&parcel_a::number_or__));
+		operations.update(sym("to_number_"), native_extraction_t<parcel_a>::create(&parcel_a::to_number__));
+		operations.update(sym("to_number_or_"), native_extraction_t<parcel_a>::create(&parcel_a::to_number_or__));
 		operations.update(sym("is_int_64_"), native_extraction_t<parcel_a>::create(&parcel_a::is_int_64__));
-		operations.update(sym("int_64_"), native_extraction_t<parcel_a>::create(&parcel_a::int_64__));
-		operations.update(sym("int_64_or_"), native_extraction_t<parcel_a>::create(&parcel_a::int_64_or__));
+		operations.update(sym("to_int_64_"), native_extraction_t<parcel_a>::create(&parcel_a::to_int_64__));
+		operations.update(sym("to_int_64_or_"), native_extraction_t<parcel_a>::create(&parcel_a::to_int_64_or__));
 		operations.update(sym("is_float_64_"), native_extraction_t<parcel_a>::create(&parcel_a::is_float_64__));
-		operations.update(sym("float_64_"), native_extraction_t<parcel_a>::create(&parcel_a::float_64__));
-		operations.update(sym("float_64_or_"), native_extraction_t<parcel_a>::create(&parcel_a::float_64_or__));
+		operations.update(sym("to_float_64_"), native_extraction_t<parcel_a>::create(&parcel_a::to_float_64__));
+		operations.update(sym("to_float_64_or_"), native_extraction_t<parcel_a>::create(&parcel_a::to_float_64_or__));
 		operations.update(sym("is_symbol_"), native_extraction_t<parcel_a>::create(&parcel_a::is_symbol__));
-		operations.update(sym("symbol_"), native_extraction_t<parcel_a>::create(&parcel_a::symbol__));
-		operations.update(sym("symbol_or_"), native_extraction_t<parcel_a>::create(&parcel_a::symbol_or__));
+		operations.update(sym("to_symbol_"), native_extraction_t<parcel_a>::create(&parcel_a::to_symbol__));
+		operations.update(sym("to_symbol_or_"), native_extraction_t<parcel_a>::create(&parcel_a::to_symbol_or__));
 		operations.update(sym("is_flock_"), native_extraction_t<parcel_a>::create(&parcel_a::is_flock__));
-		operations.update(sym("flock_"), native_extraction_t<parcel_a>::create(&parcel_a::flock__));
-		operations.update(sym("flock_or_"), native_extraction_t<parcel_a>::create(&parcel_a::flock_or__));
+		operations.update(sym("to_flock_"), native_extraction_t<parcel_a>::create(&parcel_a::to_flock__));
+		operations.update(sym("to_flock_or_"), native_extraction_t<parcel_a>::create(&parcel_a::to_flock_or__));
 		operations.update(sym("is_lake_"), native_extraction_t<parcel_a>::create(&parcel_a::is_lake__));
-		operations.update(sym("lake_"), native_extraction_t<parcel_a>::create(&parcel_a::lake__));
-		operations.update(sym("lake_or_"), native_extraction_t<parcel_a>::create(&parcel_a::lake_or__));
+		operations.update(sym("to_lake_"), native_extraction_t<parcel_a>::create(&parcel_a::to_lake__));
+		operations.update(sym("to_lake_or_"), native_extraction_t<parcel_a>::create(&parcel_a::to_lake_or__));
 		operations.update(sym("is_ordered_herd_"), native_extraction_t<parcel_a>::create(&parcel_a::is_ordered_herd__));
-		operations.update(sym("ordered_herd_"), native_extraction_t<parcel_a>::create(&parcel_a::ordered_herd__));
-		operations.update(sym("ordered_herd_or_"), native_extraction_t<parcel_a>::create(&parcel_a::ordered_herd_or__));
+		operations.update(sym("to_ordered_herd_"), native_extraction_t<parcel_a>::create(&parcel_a::to_ordered_herd__));
+		operations.update(sym("to_ordered_herd_or_"), native_extraction_t<parcel_a>::create(&parcel_a::to_ordered_herd_or__));
 		operations.update(sym("is_ordered_shoal_"), native_extraction_t<parcel_a>::create(&parcel_a::is_ordered_shoal__));
-		operations.update(sym("ordered_shoal_"), native_extraction_t<parcel_a>::create(&parcel_a::ordered_shoal__));
-		operations.update(sym("ordered_shoal_or_"), native_extraction_t<parcel_a>::create(&parcel_a::ordered_shoal_or__));
+		operations.update(sym("to_ordered_shoal_"), native_extraction_t<parcel_a>::create(&parcel_a::to_ordered_shoal__));
+		operations.update(sym("to_ordered_shoal_or_"), native_extraction_t<parcel_a>::create(&parcel_a::to_ordered_shoal_or__));
 		operations.update(sym("is_squad_"), native_extraction_t<parcel_a>::create(&parcel_a::is_squad__));
-		operations.update(sym("squad_"), native_extraction_t<parcel_a>::create(&parcel_a::squad__));
-		operations.update(sym("squad_or_"), native_extraction_t<parcel_a>::create(&parcel_a::squad_or__));
+		operations.update(sym("to_squad_"), native_extraction_t<parcel_a>::create(&parcel_a::to_squad__));
+		operations.update(sym("to_squad_or_"), native_extraction_t<parcel_a>::create(&parcel_a::to_squad_or__));
 		operations.update(sym("is_unordered_herd_"), native_extraction_t<parcel_a>::create(&parcel_a::is_unordered_herd__));
-		operations.update(sym("unordered_herd_"), native_extraction_t<parcel_a>::create(&parcel_a::unordered_herd__));
-		operations.update(sym("unordered_herd_or_"), native_extraction_t<parcel_a>::create(&parcel_a::unordered_herd_or__));
+		operations.update(sym("to_unordered_herd_"), native_extraction_t<parcel_a>::create(&parcel_a::to_unordered_herd__));
+		operations.update(sym("to_unordered_herd_or_"), native_extraction_t<parcel_a>::create(&parcel_a::to_unordered_herd_or__));
 		operations.update(sym("is_unordered_shoal_"), native_extraction_t<parcel_a>::create(&parcel_a::is_unordered_shoal__));
-		operations.update(sym("unordered_shoal_"), native_extraction_t<parcel_a>::create(&parcel_a::unordered_shoal__));
-		operations.update(sym("unordered_shoal_or_"), native_extraction_t<parcel_a>::create(&parcel_a::unordered_shoal_or__));
-		operations.update(sym("key_begin_"), native_extraction_t<parcel_a>::create(&parcel_a::key_begin__));
-		operations.update(sym("key_end_"), native_extraction_t<parcel_a>::create(&parcel_a::key_end__));
+		operations.update(sym("to_unordered_shoal_"), native_extraction_t<parcel_a>::create(&parcel_a::to_unordered_shoal__));
+		operations.update(sym("to_unordered_shoal_or_"), native_extraction_t<parcel_a>::create(&parcel_a::to_unordered_shoal_or__));
+		operations.update(sym("keys_begin_"), native_extraction_t<parcel_a>::create(&parcel_a::keys_begin__));
+		operations.update(sym("keys_end_"), native_extraction_t<parcel_a>::create(&parcel_a::keys_end__));
 		return operations;
 	}();
 	return OPERATIONS;

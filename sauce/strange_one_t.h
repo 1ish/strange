@@ -92,12 +92,12 @@ public:
 		return identity() >= thing.identity();
 	}
 
-	inline parcel_a<> parcel_() const
+	inline parcel_a<> to_parcel_() const
 	{
 		return parcel_a<>{};
 	}
 
-	inline parcel_a<> parcel_unique_(unordered_herd_a<number_data_a<uint64_t>>& herd) const
+	inline parcel_a<> to_parcel_unique_(unordered_herd_a<number_data_a<uint64_t>>& herd) const
 	{
 		return parcel_a<>{};
 	}
