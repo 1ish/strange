@@ -63,15 +63,6 @@ inline bool herd_a<_element>::___herd_a_handle___<___TTT___, ___DHB___>::insert_
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.insert_thing(thing); }
 
 template <typename _element>
-inline bool herd_a<_element>::insert_string(std :: string const & s )
-{ assert(any_a<>::___handle___); return ___write___().insert_string(s); }
-
-template <typename _element>
-template <typename ___TTT___, typename ___DHB___>
-inline bool herd_a<_element>::___herd_a_handle___<___TTT___, ___DHB___>::insert_string(std :: string const & s )
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.insert_string(s); }
-
-template <typename _element>
 inline bool herd_a<_element>::erase_string(std :: string const & s )
 { assert(any_a<>::___handle___); return ___write___().erase_string(s); }
 

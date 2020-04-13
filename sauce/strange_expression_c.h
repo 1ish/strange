@@ -149,7 +149,7 @@ public:
 			return op.operate(thing, range);
 		}
 		auto local = unordered_shoal_t<>::create_();
-		local.insert_string("$", unordered_shoal_t<any_a<>, any_a<>, true>::create_());
+		local.insert(sym("$"), unordered_shoal_t<any_a<>, any_a<>, true>::create_());
 		return operation_c<___ego___>::operate(local, range_t<>::create_());
 	}
 
@@ -162,7 +162,7 @@ public:
 			return op.operate(thing, range_t<>::create_());
 		}
 		auto local = unordered_shoal_t<>::create_();
-		local.insert_string("$", unordered_shoal_t<any_a<>, any_a<>, true>::create_());
+		local.insert(sym("$"), unordered_shoal_t<any_a<>, any_a<>, true>::create_());
 		return operation_c<___ego___>::operate(local, range_t<>::create_());
 	}
 

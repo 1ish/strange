@@ -381,11 +381,6 @@ public:
 		return _set.insert(thing).second;
 	}
 
-	inline bool insert_string(std::string const& s)
-	{
-		return insert_thing(sym(s));
-	}
-
 	inline any_a<> erase_(_element const& key)
 	{
 		return boole(erase(key));

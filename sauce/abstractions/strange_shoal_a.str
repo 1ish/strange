@@ -7,7 +7,6 @@ false &&
 			(	// parent
 				$$<collection>[ #key , #value, <flock> ],
 				{	// shoal
-					insert_string : "bool (std::string const& s, _value const& value) { return collection_d<_key, _value>::insert_(cast<_key>(sym(s)), value); }",
 					erase_string : "bool (std::string const& s) { return collection_d<_key, _value>::erase_(cast<_key>(sym(s))); }",
 
 					// mutable range

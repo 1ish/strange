@@ -24,8 +24,6 @@ public:
 
 	inline bool insert_thing(_element const & thing );
 
-	inline bool insert_string(std :: string const & s );
-
 	inline bool erase_string(std :: string const & s );
 
 protected:
@@ -35,7 +33,6 @@ protected:
 		virtual void update_thing(_element const & thing ) = 0;
 		virtual any_a<> insert_thing_(_element const& thing) = 0;
 		virtual bool insert_thing(_element const & thing ) = 0;
-		virtual bool insert_string(std :: string const & s ) = 0;
 		virtual bool erase_string(std :: string const & s ) = 0;
 	};
 
@@ -64,8 +61,6 @@ protected:
 		virtual inline any_a<> insert_thing_(_element const& thing) final;
 
 		virtual inline bool insert_thing(_element const & thing ) final;
-
-		virtual inline bool insert_string(std :: string const & s ) final;
 
 		virtual inline bool erase_string(std :: string const & s ) final;
 
@@ -326,9 +321,6 @@ public:
 
 	inline bool insert_thing(_element const & thing )
 	{ return insert_thing_(thing); }
-
-	inline bool insert_string(std :: string const & s )
-	{ return insert_thing(cast<_element>(sym(s))); }
 
 	inline bool erase_string(std :: string const & s )
 	{ return collection_d<_element , _element , _element>::erase(cast<_element>(sym(s))); }

@@ -480,11 +480,6 @@ public:
 		return _map.emplace(key, value).second;
 	}
 
-	inline bool insert_string(std::string const& s, _value const& value)
-	{
-		return insert(sym(s), value);
-	}
-
 	inline any_a<> erase_(_key const& key)
 	{
 		return boole(erase(key));

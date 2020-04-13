@@ -161,7 +161,7 @@ public:
 			}
 			_merge(fast<unordered_shoal_a<>>(parent), child, aspects_shoal);
 		}
-		child.insert_string("#", aspects_shoal);
+		child.insert(sym("#"), aspects_shoal);
 		return child;
 	}
 
