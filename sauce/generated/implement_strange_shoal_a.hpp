@@ -3,15 +3,6 @@ namespace strange
 {
 
 template <typename _key, typename _value>
-inline bool shoal_a<_key, _value>::erase_string(std :: string const & s )
-{ assert(any_a<>::___handle___); return ___write___().erase_string(s); }
-
-template <typename _key, typename _value>
-template <typename ___TTT___, typename ___DHB___>
-inline bool shoal_a<_key, _value>::___shoal_a_handle___<___TTT___, ___DHB___>::erase_string(std :: string const & s )
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.erase_string(s); }
-
-template <typename _key, typename _value>
 inline any_a<> shoal_a<_key, _value>::mutate_begin__(range_a<> const& ___arguments___)
 {
 	return mutate_begin_();

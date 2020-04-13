@@ -392,12 +392,6 @@ public:
 		return _set.erase(key);
 	}
 
-	inline bool erase_string(std::string const& s)
-	{
-		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		return _set.erase(sym(s));
-	}
-
 	inline ___ego___ clear_()
 	{
 		clear();

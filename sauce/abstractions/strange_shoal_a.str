@@ -7,8 +7,6 @@ false &&
 			(	// parent
 				$$<collection>[ #key , #value, <flock> ],
 				{	// shoal
-					erase_string : "bool (std::string const& s) { return collection_d<_key, _value>::erase_(cast<_key>(sym(s))); }",
-
 					// mutable range
 					mutate_begin_ := (<forward_mutator[<flock>]>),
 					mutate_end_ := (<forward_mutator[<flock>]>),

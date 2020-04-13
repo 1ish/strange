@@ -12,8 +12,6 @@ template <typename _key, typename _value>
 class shoal_a : public collection_a< _key , _value , flock_a<> >
 {
 public:
-	inline bool erase_string(std :: string const & s );
-
 	inline any_a<> mutate_begin__(range_a<> const& ___arguments___);
 
 	inline forward_mutator_a< flock_a<> > mutate_begin_();
@@ -25,7 +23,6 @@ public:
 protected:
 	struct ___shoal_a_handle_base___ : collection_a< _key , _value , flock_a<> >::___collection_a_handle_base___
 	{
-		virtual bool erase_string(std :: string const & s ) = 0;
 		virtual forward_mutator_a< flock_a<> > mutate_begin_() = 0;
 		virtual forward_mutator_a< flock_a<> > mutate_end_() = 0;
 	};
@@ -47,8 +44,6 @@ protected:
 		inline ___shoal_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
 			: collection_a< _key , _value , flock_a<> >::template ___collection_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
-
-		virtual inline bool erase_string(std :: string const & s ) final;
 
 		virtual inline forward_mutator_a< flock_a<> > mutate_begin_() final;
 
@@ -262,9 +257,6 @@ template <typename _key, typename _value>
 class shoal_d : public collection_d< _key , _value , flock_a<> >
 {
 public:
-	inline bool erase_string(std :: string const & s )
-	{ return collection_d<_key, _value>::erase_(cast<_key>(sym(s))); }
-
 	inline any_a<> mutate_begin__(range_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
