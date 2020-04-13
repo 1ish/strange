@@ -140,6 +140,40 @@ public:
 		return cat_t<___ego___>::_dimensions == kind.dimensions_() && _aspects == kind.aspects_() && cat_t<___ego___>::_parameters == kind.parameters_() && cat_t<___ego___>::result_() == kind.result_();
 	}
 
+	// cat
+	inline std::string code() const
+	{
+		std::string code = cat_t<___ego___>::_name.to_string();
+		if (code.empty())
+		{
+			code = "strange::any";
+		}
+
+		code += "_a<";
+		bool any = false;
+		for (auto const& aspect : _aspects)
+		{
+			if (any)
+			{
+				code += ", ";
+			}
+			else
+			{
+				any = true;
+			}
+			if (check<cat_a<>>(aspect))
+			{
+				code += fast<cat_a<>>(aspect).code();
+			}
+			else
+			{
+				code += "#" + std::to_string(aspect.hash()); //TODO
+			}
+		}
+		code += ">";
+		return code;
+	}
+
 	// kind
 	inline flock_a<> aspects_() const
 	{

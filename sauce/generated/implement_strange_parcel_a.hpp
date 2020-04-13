@@ -25,17 +25,17 @@ inline any_a<> parcel_a<_1>::unwrap_unique__(range_a<> const& ___arguments___) c
 	{
 		throw dis("parcel_a::unwrap_unique_ passed short range");
 	}
-	auto shoal = cast_dup<unordered_shoal_a<>>(*___it___);
+	auto shoal = cast_dup<unordered_shoal_a<number_data_uint64_a<>, strange::any_a<>>>(*___it___);
 	return unwrap_unique_(shoal);
 }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::unwrap_unique_(unordered_shoal_a<> & shoal) const
+inline any_a<> parcel_a<_1>::unwrap_unique_(unordered_shoal_a<number_data_uint64_a<>, strange::any_a<>> & shoal) const
 { assert(any_a<>::___handle___); return ___read___().unwrap_unique_(shoal); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unwrap_unique_(unordered_shoal_a<> & shoal) const
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unwrap_unique_(unordered_shoal_a<number_data_uint64_a<>, strange::any_a<>> & shoal) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unwrap_unique_(shoal); }
 
 template <typename _1>
@@ -439,17 +439,17 @@ inline any_a<> parcel_a<_1>::flock_or__(range_a<> const& ___arguments___) const
 	{
 		throw dis("parcel_a::flock_or_ passed short range");
 	}
-	auto flock = cast<flock_a<>>(*___it___);
+	auto flock = cast<flock_a<parcel_a<>>>(*___it___);
 	return flock_or_(flock);
 }
 
 template <typename _1>
-inline flock_a< parcel_a<> > parcel_a<_1>::flock_or_(flock_a<> const& flock) const
+inline flock_a< parcel_a<> > parcel_a<_1>::flock_or_(flock_a<parcel_a<>> const& flock) const
 { assert(any_a<>::___handle___); return ___read___().flock_or_(flock); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline flock_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::flock_or_(flock_a<> const& flock) const
+inline flock_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::flock_or_(flock_a<parcel_a<>> const& flock) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.flock_or_(flock); }
 
 template <typename _1>
@@ -541,17 +541,17 @@ inline any_a<> parcel_a<_1>::ordered_herd_or__(range_a<> const& ___arguments___)
 	{
 		throw dis("parcel_a::ordered_herd_or_ passed short range");
 	}
-	auto herd = cast<ordered_herd_a<>>(*___it___);
+	auto herd = cast<ordered_herd_a<parcel_a<>>>(*___it___);
 	return ordered_herd_or_(herd);
 }
 
 template <typename _1>
-inline ordered_herd_a< parcel_a<> > parcel_a<_1>::ordered_herd_or_(ordered_herd_a<> const& herd) const
+inline ordered_herd_a< parcel_a<> > parcel_a<_1>::ordered_herd_or_(ordered_herd_a<parcel_a<>> const& herd) const
 { assert(any_a<>::___handle___); return ___read___().ordered_herd_or_(herd); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline ordered_herd_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::ordered_herd_or_(ordered_herd_a<> const& herd) const
+inline ordered_herd_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::ordered_herd_or_(ordered_herd_a<parcel_a<>> const& herd) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.ordered_herd_or_(herd); }
 
 template <typename _1>
@@ -592,17 +592,17 @@ inline any_a<> parcel_a<_1>::ordered_shoal_or__(range_a<> const& ___arguments___
 	{
 		throw dis("parcel_a::ordered_shoal_or_ passed short range");
 	}
-	auto shoal = cast<ordered_shoal_a<>>(*___it___);
+	auto shoal = cast<ordered_shoal_a<strange::any_a<>, parcel_a<>>>(*___it___);
 	return ordered_shoal_or_(shoal);
 }
 
 template <typename _1>
-inline ordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::ordered_shoal_or_(ordered_shoal_a<> const& shoal) const
+inline ordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::ordered_shoal_or_(ordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const
 { assert(any_a<>::___handle___); return ___read___().ordered_shoal_or_(shoal); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline ordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::ordered_shoal_or_(ordered_shoal_a<> const& shoal) const
+inline ordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::ordered_shoal_or_(ordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.ordered_shoal_or_(shoal); }
 
 template <typename _1>
@@ -643,17 +643,17 @@ inline any_a<> parcel_a<_1>::squad_or__(range_a<> const& ___arguments___) const
 	{
 		throw dis("parcel_a::squad_or_ passed short range");
 	}
-	auto squad = cast<squad_a<>>(*___it___);
+	auto squad = cast<squad_a<parcel_a<>>>(*___it___);
 	return squad_or_(squad);
 }
 
 template <typename _1>
-inline squad_a< parcel_a<> > parcel_a<_1>::squad_or_(squad_a<> const& squad) const
+inline squad_a< parcel_a<> > parcel_a<_1>::squad_or_(squad_a<parcel_a<>> const& squad) const
 { assert(any_a<>::___handle___); return ___read___().squad_or_(squad); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline squad_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::squad_or_(squad_a<> const& squad) const
+inline squad_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::squad_or_(squad_a<parcel_a<>> const& squad) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.squad_or_(squad); }
 
 template <typename _1>
@@ -694,17 +694,17 @@ inline any_a<> parcel_a<_1>::unordered_herd_or__(range_a<> const& ___arguments__
 	{
 		throw dis("parcel_a::unordered_herd_or_ passed short range");
 	}
-	auto herd = cast<unordered_herd_a<>>(*___it___);
+	auto herd = cast<unordered_herd_a<parcel_a<>>>(*___it___);
 	return unordered_herd_or_(herd);
 }
 
 template <typename _1>
-inline unordered_herd_a< parcel_a<> > parcel_a<_1>::unordered_herd_or_(unordered_herd_a<> const& herd) const
+inline unordered_herd_a< parcel_a<> > parcel_a<_1>::unordered_herd_or_(unordered_herd_a<parcel_a<>> const& herd) const
 { assert(any_a<>::___handle___); return ___read___().unordered_herd_or_(herd); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline unordered_herd_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unordered_herd_or_(unordered_herd_a<> const& herd) const
+inline unordered_herd_a< parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unordered_herd_or_(unordered_herd_a<parcel_a<>> const& herd) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unordered_herd_or_(herd); }
 
 template <typename _1>
@@ -745,17 +745,17 @@ inline any_a<> parcel_a<_1>::unordered_shoal_or__(range_a<> const& ___arguments_
 	{
 		throw dis("parcel_a::unordered_shoal_or_ passed short range");
 	}
-	auto shoal = cast<unordered_shoal_a<>>(*___it___);
+	auto shoal = cast<unordered_shoal_a<strange::any_a<>, parcel_a<>>>(*___it___);
 	return unordered_shoal_or_(shoal);
 }
 
 template <typename _1>
-inline unordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::unordered_shoal_or_(unordered_shoal_a<> const& shoal) const
+inline unordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::unordered_shoal_or_(unordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const
 { assert(any_a<>::___handle___); return ___read___().unordered_shoal_or_(shoal); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline unordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unordered_shoal_or_(unordered_shoal_a<> const& shoal) const
+inline unordered_shoal_a< any_a<> , parcel_a<> > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unordered_shoal_or_(unordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unordered_shoal_or_(shoal); }
 
 template <typename _1>

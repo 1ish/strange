@@ -176,7 +176,7 @@ public:
 	inline std::string code() const
 	{
 		auto const name = _name.to_string();
-		return (name.empty() ? std::string("strange::any") : name) + "_a<>"; //TODO
+		return (name.empty() ? std::string("strange::any") : name) + "_a<>";
 	}
 
 protected:
@@ -210,7 +210,7 @@ protected:
 		symbol += name.to_string();
 
 		bool any = false;
-		int64_t anys = 0;
+/*		int64_t anys = 0;
 		for (auto const& dimension : dimensions)
 		{
 			cat_a<> const cat = fast<cat_a<>>(dimension);
@@ -243,20 +243,9 @@ protected:
 		}
 
 		anys = 0;
+*/
 		for (auto const& aspect : aspects)
 		{
-			bool const is_cat = check<cat_a<>>(aspect);
-			cat_a<> cat;
-			if (is_cat)
-			{
-				cat = fast<cat_a<>>(aspect);
-			}
-			std::string str;
-			if (is_cat && (str = cat.to_string()) == "<>")
-			{
-				++anys;
-				continue;
-			}
 			if (any)
 			{
 				symbol += ",";
@@ -266,14 +255,9 @@ protected:
 				symbol += "[";
 				any = true;
 			}
-			while (anys)
+			if (check<cat_a<>>(aspect))
 			{
-				symbol += "<>,";
-				--anys;
-			}
-			if (is_cat)
-			{
-				symbol += str;
+				symbol += fast<cat_a<>>(aspect).to_string();
 			}
 			else
 			{
@@ -286,7 +270,7 @@ protected:
 			any = false;
 		}
 
-		anys = 0;
+		int64_t anys = 0;
 		for (auto const& parameter : parameters)
 		{
 			cat_a<> const cat = fast<cat_a<>>(parameter);

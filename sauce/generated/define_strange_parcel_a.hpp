@@ -18,7 +18,7 @@ public:
 
 	inline any_a<> unwrap_unique__(range_a<> const& ___arguments___) const;
 
-	inline any_a<> unwrap_unique_(unordered_shoal_a<> & shoal) const;
+	inline any_a<> unwrap_unique_(unordered_shoal_a<number_data_uint64_a<>, strange::any_a<>> & shoal) const;
 
 	inline any_a<> close__(range_a<> const& ___arguments___);
 
@@ -118,7 +118,7 @@ public:
 
 	inline any_a<> flock_or__(range_a<> const& ___arguments___) const;
 
-	inline flock_a< parcel_a<> > flock_or_(flock_a<> const& flock) const;
+	inline flock_a< parcel_a<> > flock_or_(flock_a<parcel_a<>> const& flock) const;
 
 	inline any_a<> is_lake__(range_a<> const& ___arguments___) const;
 
@@ -142,7 +142,7 @@ public:
 
 	inline any_a<> ordered_herd_or__(range_a<> const& ___arguments___) const;
 
-	inline ordered_herd_a< parcel_a<> > ordered_herd_or_(ordered_herd_a<> const& herd) const;
+	inline ordered_herd_a< parcel_a<> > ordered_herd_or_(ordered_herd_a<parcel_a<>> const& herd) const;
 
 	inline any_a<> is_ordered_shoal__(range_a<> const& ___arguments___) const;
 
@@ -154,7 +154,7 @@ public:
 
 	inline any_a<> ordered_shoal_or__(range_a<> const& ___arguments___) const;
 
-	inline ordered_shoal_a< any_a<> , parcel_a<> > ordered_shoal_or_(ordered_shoal_a<> const& shoal) const;
+	inline ordered_shoal_a< any_a<> , parcel_a<> > ordered_shoal_or_(ordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const;
 
 	inline any_a<> is_squad__(range_a<> const& ___arguments___) const;
 
@@ -166,7 +166,7 @@ public:
 
 	inline any_a<> squad_or__(range_a<> const& ___arguments___) const;
 
-	inline squad_a< parcel_a<> > squad_or_(squad_a<> const& squad) const;
+	inline squad_a< parcel_a<> > squad_or_(squad_a<parcel_a<>> const& squad) const;
 
 	inline any_a<> is_unordered_herd__(range_a<> const& ___arguments___) const;
 
@@ -178,7 +178,7 @@ public:
 
 	inline any_a<> unordered_herd_or__(range_a<> const& ___arguments___) const;
 
-	inline unordered_herd_a< parcel_a<> > unordered_herd_or_(unordered_herd_a<> const& herd) const;
+	inline unordered_herd_a< parcel_a<> > unordered_herd_or_(unordered_herd_a<parcel_a<>> const& herd) const;
 
 	inline any_a<> is_unordered_shoal__(range_a<> const& ___arguments___) const;
 
@@ -190,7 +190,7 @@ public:
 
 	inline any_a<> unordered_shoal_or__(range_a<> const& ___arguments___) const;
 
-	inline unordered_shoal_a< any_a<> , parcel_a<> > unordered_shoal_or_(unordered_shoal_a<> const& shoal) const;
+	inline unordered_shoal_a< any_a<> , parcel_a<> > unordered_shoal_or_(unordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const;
 
 	inline bool operator==(parcel_a < > const & parcel ) const;
 
@@ -224,7 +224,7 @@ protected:
 	struct ___parcel_a_handle_base___ : collection_a< any_a<> , parcel_a<> , parcel_a<> >::___collection_a_handle_base___
 	{
 		virtual any_a<> unwrap_() const = 0;
-		virtual any_a<> unwrap_unique_(unordered_shoal_a<> & shoal) const = 0;
+		virtual any_a<> unwrap_unique_(unordered_shoal_a<number_data_uint64_a<>, strange::any_a<>> & shoal) const = 0;
 		virtual any_a<> close_() = 0;
 		virtual any_a<> closed_() const = 0;
 		virtual any_a<> reopen_() = 0;
@@ -250,25 +250,25 @@ protected:
 		virtual symbol_a<> symbol_or_(symbol_a<> const& symbol) const = 0;
 		virtual any_a<> is_flock_() const = 0;
 		virtual flock_a< parcel_a<> > flock_() const = 0;
-		virtual flock_a< parcel_a<> > flock_or_(flock_a<> const& flock) const = 0;
+		virtual flock_a< parcel_a<> > flock_or_(flock_a<parcel_a<>> const& flock) const = 0;
 		virtual any_a<> is_lake_() const = 0;
 		virtual lake_int8_a<> lake_() const = 0;
 		virtual lake_int8_a<> lake_or_(lake_int8_a<> const& lake) const = 0;
 		virtual any_a<> is_ordered_herd_() const = 0;
 		virtual ordered_herd_a< parcel_a<> > ordered_herd_() const = 0;
-		virtual ordered_herd_a< parcel_a<> > ordered_herd_or_(ordered_herd_a<> const& herd) const = 0;
+		virtual ordered_herd_a< parcel_a<> > ordered_herd_or_(ordered_herd_a<parcel_a<>> const& herd) const = 0;
 		virtual any_a<> is_ordered_shoal_() const = 0;
 		virtual ordered_shoal_a< any_a<> , parcel_a<> > ordered_shoal_() const = 0;
-		virtual ordered_shoal_a< any_a<> , parcel_a<> > ordered_shoal_or_(ordered_shoal_a<> const& shoal) const = 0;
+		virtual ordered_shoal_a< any_a<> , parcel_a<> > ordered_shoal_or_(ordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const = 0;
 		virtual any_a<> is_squad_() const = 0;
 		virtual squad_a< parcel_a<> > squad_() const = 0;
-		virtual squad_a< parcel_a<> > squad_or_(squad_a<> const& squad) const = 0;
+		virtual squad_a< parcel_a<> > squad_or_(squad_a<parcel_a<>> const& squad) const = 0;
 		virtual any_a<> is_unordered_herd_() const = 0;
 		virtual unordered_herd_a< parcel_a<> > unordered_herd_() const = 0;
-		virtual unordered_herd_a< parcel_a<> > unordered_herd_or_(unordered_herd_a<> const& herd) const = 0;
+		virtual unordered_herd_a< parcel_a<> > unordered_herd_or_(unordered_herd_a<parcel_a<>> const& herd) const = 0;
 		virtual any_a<> is_unordered_shoal_() const = 0;
 		virtual unordered_shoal_a< any_a<> , parcel_a<> > unordered_shoal_() const = 0;
-		virtual unordered_shoal_a< any_a<> , parcel_a<> > unordered_shoal_or_(unordered_shoal_a<> const& shoal) const = 0;
+		virtual unordered_shoal_a< any_a<> , parcel_a<> > unordered_shoal_or_(unordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const = 0;
 		virtual bool operator==(parcel_a < > const & parcel ) const = 0;
 		virtual bool operator!=(parcel_a < > const & parcel ) const = 0;
 		virtual bidirectional_extractor_a< any_a<> > key_begin_() const = 0;
@@ -303,7 +303,7 @@ protected:
 
 		virtual inline any_a<> unwrap_() const final;
 
-		virtual inline any_a<> unwrap_unique_(unordered_shoal_a<> & shoal) const final;
+		virtual inline any_a<> unwrap_unique_(unordered_shoal_a<number_data_uint64_a<>, strange::any_a<>> & shoal) const final;
 
 		virtual inline any_a<> close_() final;
 
@@ -355,7 +355,7 @@ protected:
 
 		virtual inline flock_a< parcel_a<> > flock_() const final;
 
-		virtual inline flock_a< parcel_a<> > flock_or_(flock_a<> const& flock) const final;
+		virtual inline flock_a< parcel_a<> > flock_or_(flock_a<parcel_a<>> const& flock) const final;
 
 		virtual inline any_a<> is_lake_() const final;
 
@@ -367,31 +367,31 @@ protected:
 
 		virtual inline ordered_herd_a< parcel_a<> > ordered_herd_() const final;
 
-		virtual inline ordered_herd_a< parcel_a<> > ordered_herd_or_(ordered_herd_a<> const& herd) const final;
+		virtual inline ordered_herd_a< parcel_a<> > ordered_herd_or_(ordered_herd_a<parcel_a<>> const& herd) const final;
 
 		virtual inline any_a<> is_ordered_shoal_() const final;
 
 		virtual inline ordered_shoal_a< any_a<> , parcel_a<> > ordered_shoal_() const final;
 
-		virtual inline ordered_shoal_a< any_a<> , parcel_a<> > ordered_shoal_or_(ordered_shoal_a<> const& shoal) const final;
+		virtual inline ordered_shoal_a< any_a<> , parcel_a<> > ordered_shoal_or_(ordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const final;
 
 		virtual inline any_a<> is_squad_() const final;
 
 		virtual inline squad_a< parcel_a<> > squad_() const final;
 
-		virtual inline squad_a< parcel_a<> > squad_or_(squad_a<> const& squad) const final;
+		virtual inline squad_a< parcel_a<> > squad_or_(squad_a<parcel_a<>> const& squad) const final;
 
 		virtual inline any_a<> is_unordered_herd_() const final;
 
 		virtual inline unordered_herd_a< parcel_a<> > unordered_herd_() const final;
 
-		virtual inline unordered_herd_a< parcel_a<> > unordered_herd_or_(unordered_herd_a<> const& herd) const final;
+		virtual inline unordered_herd_a< parcel_a<> > unordered_herd_or_(unordered_herd_a<parcel_a<>> const& herd) const final;
 
 		virtual inline any_a<> is_unordered_shoal_() const final;
 
 		virtual inline unordered_shoal_a< any_a<> , parcel_a<> > unordered_shoal_() const final;
 
-		virtual inline unordered_shoal_a< any_a<> , parcel_a<> > unordered_shoal_or_(unordered_shoal_a<> const& shoal) const final;
+		virtual inline unordered_shoal_a< any_a<> , parcel_a<> > unordered_shoal_or_(unordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const final;
 
 		virtual inline bool operator==(parcel_a < > const & parcel ) const final;
 
@@ -658,7 +658,7 @@ public:
 		return op.operate(*const_cast<parcel_d*>(this), arguments);
 	}
 
-	inline any_a<> unwrap_unique_(unordered_shoal_a<> & shoal) const
+	inline any_a<> unwrap_unique_(unordered_shoal_a<number_data_uint64_a<>, strange::any_a<>> & shoal) const
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("unwrap_unique_");
@@ -1192,7 +1192,7 @@ public:
 		return op.operate(*const_cast<parcel_d*>(this), arguments);
 	}
 
-	inline flock_a< parcel_a<> > flock_or_(flock_a<> const& flock) const
+	inline flock_a< parcel_a<> > flock_or_(flock_a<parcel_a<>> const& flock) const
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("flock_or_");
@@ -1324,7 +1324,7 @@ public:
 		return op.operate(*const_cast<parcel_d*>(this), arguments);
 	}
 
-	inline ordered_herd_a< parcel_a<> > ordered_herd_or_(ordered_herd_a<> const& herd) const
+	inline ordered_herd_a< parcel_a<> > ordered_herd_or_(ordered_herd_a<parcel_a<>> const& herd) const
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("ordered_herd_or_");
@@ -1390,7 +1390,7 @@ public:
 		return op.operate(*const_cast<parcel_d*>(this), arguments);
 	}
 
-	inline ordered_shoal_a< any_a<> , parcel_a<> > ordered_shoal_or_(ordered_shoal_a<> const& shoal) const
+	inline ordered_shoal_a< any_a<> , parcel_a<> > ordered_shoal_or_(ordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("ordered_shoal_or_");
@@ -1456,7 +1456,7 @@ public:
 		return op.operate(*const_cast<parcel_d*>(this), arguments);
 	}
 
-	inline squad_a< parcel_a<> > squad_or_(squad_a<> const& squad) const
+	inline squad_a< parcel_a<> > squad_or_(squad_a<parcel_a<>> const& squad) const
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("squad_or_");
@@ -1522,7 +1522,7 @@ public:
 		return op.operate(*const_cast<parcel_d*>(this), arguments);
 	}
 
-	inline unordered_herd_a< parcel_a<> > unordered_herd_or_(unordered_herd_a<> const& herd) const
+	inline unordered_herd_a< parcel_a<> > unordered_herd_or_(unordered_herd_a<parcel_a<>> const& herd) const
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("unordered_herd_or_");
@@ -1588,7 +1588,7 @@ public:
 		return op.operate(*const_cast<parcel_d*>(this), arguments);
 	}
 
-	inline unordered_shoal_a< any_a<> , parcel_a<> > unordered_shoal_or_(unordered_shoal_a<> const& shoal) const
+	inline unordered_shoal_a< any_a<> , parcel_a<> > unordered_shoal_or_(unordered_shoal_a<strange::any_a<>, parcel_a<>> const& shoal) const
 	{
 		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("unordered_shoal_or_");
