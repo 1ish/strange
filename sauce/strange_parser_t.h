@@ -450,7 +450,7 @@ private:
 		token_a<> const& token,
 		context_ptr const& context)
 	{
-		auto const instruction = _shared.at_string(token.symbol() + "!");
+		auto const instruction = _shared.at_(sym(token.symbol() + "!"));
 		if (!instruction)
 		{
 			throw dis("strange::parser instruction not recognised:") + token.report_();
@@ -604,7 +604,7 @@ private:
 			}
 			return expression_shared_at_t<>::create_(token, flock_t<>::create_(name));
 		}
-		if (!non_instruction && _shared.has_string(token.symbol() + "!"))
+		if (!non_instruction && _shared.has(sym(token.symbol() + "!")))
 		{
 			return _instruction(token, context);
 		}
@@ -887,7 +887,7 @@ private:
 					{
 						throw dis("strange::parser shoal member instruction without name following it:") + _token.report_();
 					}
-					instruction = _shared.at_string(_token.symbol() + "!");
+					instruction = _shared.at_(sym(_token.symbol() + "!"));
 					if (!instruction)
 					{
 						throw dis("strange::parser shoal member instruction not recognised:") + _token.report_();
@@ -959,7 +959,7 @@ private:
 					{
 						throw dis("strange::parser shoal attribute instruction without name following it:") + _token.report_();
 					}
-					instruction = _shared.at_string(_token.symbol() + "!");
+					instruction = _shared.at_(sym(_token.symbol() + "!"));
 					if (!instruction)
 					{
 						throw dis("strange::parser shoal attribute instruction not recognised:") + _token.report_();

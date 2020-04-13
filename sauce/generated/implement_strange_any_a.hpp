@@ -465,6 +465,12 @@ template <typename ___TTT___, typename ___BHB___>
 inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const
 { return ___value___.parcel_unique_(herd); }
 
+template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::operation(std::string const& name) const
+{
+	return ___read___().operations_().at_(sym(name));
+}
+
 class ___any_a_share___
 {
 	static bool const share;

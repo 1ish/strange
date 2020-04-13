@@ -3,24 +3,6 @@ namespace strange
 {
 
 template <typename _key, typename _value>
-inline bool shoal_a<_key, _value>::has_string(std :: string const & s ) const
-{ assert(any_a<>::___handle___); return ___read___().has_string(s); }
-
-template <typename _key, typename _value>
-template <typename ___TTT___, typename ___DHB___>
-inline bool shoal_a<_key, _value>::___shoal_a_handle___<___TTT___, ___DHB___>::has_string(std :: string const & s ) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.has_string(s); }
-
-template <typename _key, typename _value>
-inline _value shoal_a<_key, _value>::at_string(std :: string const & s ) const
-{ assert(any_a<>::___handle___); return ___read___().at_string(s); }
-
-template <typename _key, typename _value>
-template <typename ___TTT___, typename ___DHB___>
-inline _value shoal_a<_key, _value>::___shoal_a_handle___<___TTT___, ___DHB___>::at_string(std :: string const & s ) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.at_string(s); }
-
-template <typename _key, typename _value>
 inline void shoal_a<_key, _value>::update_string(std :: string const & s , _value const & value )
 { assert(any_a<>::___handle___); ___write___().update_string(s, value); }
 

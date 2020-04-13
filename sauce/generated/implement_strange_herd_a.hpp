@@ -3,24 +3,6 @@ namespace strange
 {
 
 template <typename _element>
-inline bool herd_a<_element>::has_string(std :: string const & s ) const
-{ assert(any_a<>::___handle___); return ___read___().has_string(s); }
-
-template <typename _element>
-template <typename ___TTT___, typename ___DHB___>
-inline bool herd_a<_element>::___herd_a_handle___<___TTT___, ___DHB___>::has_string(std :: string const & s ) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.has_string(s); }
-
-template <typename _element>
-inline _element herd_a<_element>::at_string(std :: string const & s ) const
-{ assert(any_a<>::___handle___); return ___read___().at_string(s); }
-
-template <typename _element>
-template <typename ___TTT___, typename ___DHB___>
-inline _element herd_a<_element>::___herd_a_handle___<___TTT___, ___DHB___>::at_string(std :: string const & s ) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.at_string(s); }
-
-template <typename _element>
 inline any_a<> herd_a<_element>::update_thing__(range_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.extract_begin_();

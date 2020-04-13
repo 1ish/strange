@@ -33,7 +33,7 @@ public:
 	// reflection
 	inline any_a<> type__(range_a<> const& range) const
 	{
-		auto const op = any_c<___ego___>::_operations.at_string("type");
+		auto const op = any_c<___ego___>::_operations.at_(sym("type"));
 		if (op)
 		{
 			any_a<> thing = any_c<___ego___>::me_();
@@ -45,7 +45,7 @@ public:
 
 	inline symbol_a<> type_() const
 	{
-		auto const op = any_c<___ego___>::_operations.at_string("type");
+		auto const op = any_c<___ego___>::_operations.at_(sym("type"));
 		if (op)
 		{
 			any_a<> thing = any_c<___ego___>::me_();
@@ -62,7 +62,7 @@ public:
 
 	inline any_a<> shared__(range_a<> const& range) const
 	{
-		auto const op = any_c<___ego___>::_operations.at_string("shared");
+		auto const op = any_c<___ego___>::_operations.at_(sym("shared"));
 		if (op)
 		{
 			any_a<> thing = any_c<___ego___>::me_();
@@ -75,7 +75,7 @@ public:
 
 	inline unordered_shoal_a<> shared_() const
 	{
-		auto const op = any_c<___ego___>::_operations.at_string("shared");
+		auto const op = any_c<___ego___>::_operations.at_(sym("shared"));
 		if (op)
 		{
 			any_a<> thing = any_c<___ego___>::me_();
@@ -99,13 +99,13 @@ public:
 	// operation
 	inline any_a<> pure__(range_a<> const& range) const
 	{
-		auto const op = any_c<___ego___>::_operations.at_string("pure");
+		auto const op = any_c<___ego___>::_operations.at_(sym("pure"));
 		if (op)
 		{
 			any_a<> thing = any_c<___ego___>::me_();
 			return op.operate(thing, range);
 		}
-		auto const oper = any_c<___ego___>::_operations.at_string("operate");
+		auto const oper = any_c<___ego___>::_operations.at_(sym("operate"));
 		if (check<operation_a<>>(oper))
 		{
 			return fast<operation_a<>>(oper).pure_();
@@ -115,13 +115,13 @@ public:
 
 	inline any_a<> pure_() const
 	{
-		auto const op = any_c<___ego___>::_operations.at_string("pure");
+		auto const op = any_c<___ego___>::_operations.at_(sym("pure"));
 		if (op)
 		{
 			any_a<> thing = any_c<___ego___>::me_();
 			return op.operate(thing, range_t<>::create_());
 		}
-		auto const oper = any_c<___ego___>::_operations.at_string("operate");
+		auto const oper = any_c<___ego___>::_operations.at_(sym("operate"));
 		if (check<operation_a<>>(oper))
 		{
 			return fast<operation_a<>>(oper).pure_();
@@ -131,13 +131,13 @@ public:
 
 	inline bool pure() const
 	{
-		auto const op = any_c<___ego___>::_operations.at_string("pure");
+		auto const op = any_c<___ego___>::_operations.at_(sym("pure"));
 		if (op)
 		{
 			any_a<> thing = any_c<___ego___>::me_();
 			return op.operate(thing, range_t<>::create_());
 		}
-		auto const oper = any_c<___ego___>::_operations.at_string("operate");
+		auto const oper = any_c<___ego___>::_operations.at_(sym("operate"));
 		if (check<operation_a<>>(oper))
 		{
 			return fast<operation_a<>>(oper).pure();
@@ -153,7 +153,7 @@ public:
 
 	inline any_a<> names__(range_a<> const& range) const
 	{
-		auto const op = any_c<___ego___>::_operations.at_string("names");
+		auto const op = any_c<___ego___>::_operations.at_(sym("names"));
 		if (op)
 		{
 			any_a<> thing = any_c<___ego___>::me_();
@@ -164,7 +164,7 @@ public:
 
 	inline flock_a<> names_() const
 	{
-		auto const op = any_c<___ego___>::_operations.at_string("names");
+		auto const op = any_c<___ego___>::_operations.at_(sym("names"));
 		if (op)
 		{
 			any_a<> thing = any_c<___ego___>::me_();

@@ -202,9 +202,9 @@ protected:
 	static inline void _merge(unordered_shoal_a<> const& parent, unordered_shoal_a<>& child, any_a<> aspects)
 	{
 		auto& map = child.mutate_map();
-		if (parent.has_string("#"))
+		if (parent.has(sym("#")))
 		{
-			aspects = parent.at_string("#");
+			aspects = parent.at_(sym("#"));
 		}
 		bool const aspects_unordered_shoal = check<unordered_shoal_a<>>(aspects);
 		for (auto const& member : parent.extract_map())

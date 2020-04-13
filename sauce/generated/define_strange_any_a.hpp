@@ -351,10 +351,7 @@ protected:
 		return *___handle___;
 	}
 
-	inline any_a<> operation(std::string const& name) const
-	{
-		return ___read___().operations_().at_string(name);
-	}
+	inline any_a<> operation(std::string const& name) const;
 
 public:
 	inline bool is_ref() const

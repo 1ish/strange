@@ -48,7 +48,7 @@ public:
 			sym("something"),
 			sym("different"));
 
-		auto const type_op = parent.at_string("type");
+		auto const type_op = parent.at_(sym("type"));
 		if (!type_op)
 		{
 			type = sym("");
@@ -65,7 +65,7 @@ public:
 		}
 		auto const type_string = type.to_string();
 
-		auto const cat_op = parent.at_string("cat");
+		auto const cat_op = parent.at_(sym("cat"));
 		if (!cat_op)
 		{
 			cat = cat_t<>::create_();
@@ -82,7 +82,7 @@ public:
 		}
 		cats.insert_thing(cat);
 
-		auto const cats_op = parent.at_string("cats");
+		auto const cats_op = parent.at_(sym("cats"));
 		any_a<> cats_any;
 		if (cats_op)
 		{
@@ -95,7 +95,7 @@ public:
 			cats += fast<unordered_herd_a<>>(cats_any);
 		}
 
-		auto const kind_op = parent.at_string("kind");
+		auto const kind_op = parent.at_(sym("kind"));
 		if (!kind_op)
 		{
 			kind = cat_op ? kind_from_cat(cat) : kind_t<>::create_();
@@ -112,7 +112,7 @@ public:
 		}
 		kinds.insert_thing(kind);
 
-		auto const kinds_op = parent.at_string("kinds");
+		auto const kinds_op = parent.at_(sym("kinds"));
 		if (!kinds_op)
 		{
 			if (check<unordered_herd_a<>>(cats_any))

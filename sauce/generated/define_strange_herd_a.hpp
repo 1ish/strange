@@ -12,10 +12,6 @@ template <typename _element>
 class herd_a : public collection_a< _element , _element , _element >
 {
 public:
-	inline bool has_string(std :: string const & s ) const;
-
-	inline _element at_string(std :: string const & s ) const;
-
 	inline any_a<> update_thing__(range_a<> const& ___arguments___);
 
 	inline _element update_thing_(_element const& thing);
@@ -37,8 +33,6 @@ public:
 protected:
 	struct ___herd_a_handle_base___ : collection_a< _element , _element , _element >::___collection_a_handle_base___
 	{
-		virtual bool has_string(std :: string const & s ) const = 0;
-		virtual _element at_string(std :: string const & s ) const = 0;
 		virtual _element update_thing_(_element const& thing) = 0;
 		virtual void update_thing(_element const & thing ) = 0;
 		virtual void update_string(std :: string const & s ) = 0;
@@ -65,10 +59,6 @@ protected:
 		inline ___herd_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
 			: collection_a< _element , _element , _element >::template ___collection_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
-
-		virtual inline bool has_string(std :: string const & s ) const final;
-
-		virtual inline _element at_string(std :: string const & s ) const final;
 
 		virtual inline _element update_thing_(_element const& thing) final;
 
@@ -302,12 +292,6 @@ template <typename _element>
 class herd_d : public collection_d< _element , _element , _element >
 {
 public:
-	inline bool has_string(std :: string const & s ) const
-	{ return collection_d<_element , _element , _element>::has(cast<_element>(sym(s))); }
-
-	inline _element at_string(std :: string const & s ) const
-	{ return collection_d<_element , _element , _element>::at_(cast<_element>(sym(s))); }
-
 	inline any_a<> update_thing__(range_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 

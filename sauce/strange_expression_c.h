@@ -33,7 +33,7 @@ public:
 	// reflection
 	inline any_a<> type__(range_a<> const& range) const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("type");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("type"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
@@ -45,7 +45,7 @@ public:
 
 	inline symbol_a<> type_() const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("type");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("type"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
@@ -62,7 +62,7 @@ public:
 
 	inline any_a<> shared__(range_a<> const& range) const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("shared");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("shared"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
@@ -75,7 +75,7 @@ public:
 
 	inline unordered_shoal_a<> shared_() const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("shared");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("shared"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
@@ -109,7 +109,7 @@ public:
 
 	inline any_a<> literal__(range_a<> const& range) const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("literal");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("literal"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
@@ -120,7 +120,7 @@ public:
 
 	inline any_a<> literal_() const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("literal");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("literal"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
@@ -131,7 +131,7 @@ public:
 
 	inline bool literal() const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("literal");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("literal"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
@@ -142,7 +142,7 @@ public:
 
 	inline any_a<> evaluate__(range_a<> const& range) const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("evaluate");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("evaluate"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
@@ -155,7 +155,7 @@ public:
 
 	inline any_a<> evaluate_() const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("evaluate");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("evaluate"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
@@ -168,7 +168,7 @@ public:
 
 	inline any_a<> token__(range_a<> const& range) const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("token");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("token"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
@@ -179,7 +179,7 @@ public:
 
 	inline token_a<> token_() const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("token");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("token"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
@@ -195,7 +195,7 @@ public:
 
 	inline any_a<> terms__(range_a<> const& range) const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("terms");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("terms"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
@@ -206,7 +206,7 @@ public:
 
 	inline flock_a<> terms_() const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("terms");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("terms"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
@@ -222,7 +222,7 @@ public:
 
 	inline any_a<> generate__(range_a<> const& range) const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("generate");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("generate"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
@@ -261,7 +261,7 @@ public:
 
 	inline any_a<> generate_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("generate");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("generate"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
@@ -272,7 +272,7 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("generate");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("generate"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
@@ -282,7 +282,7 @@ public:
 
 	inline any_a<> generate_cpp__(range_a<> const& range) const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("generate_cpp");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("generate_cpp"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
@@ -321,7 +321,7 @@ public:
 
 	inline any_a<> generate_cpp_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = no()) const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("generate_cpp");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("generate_cpp"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
@@ -332,7 +332,7 @@ public:
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const
 	{
-		auto const op = operation_c<___ego___>::_operations.at_string("generate_cpp");
+		auto const op = operation_c<___ego___>::_operations.at_(sym("generate_cpp"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();

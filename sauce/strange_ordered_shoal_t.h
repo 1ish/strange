@@ -446,11 +446,6 @@ public:
 		return it != _map.cend();
 	}
 
-	inline bool has_string(std::string const& s) const
-	{
-		return has(sym(s));
-	}
-
 	inline _value at_(_key const& key) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
@@ -460,11 +455,6 @@ public:
 			return mis("strange::ordered_shoal::at key not found");
 		}
 		return it->second;
-	}
-
-	inline _value at_string(std::string const& s) const
-	{
-		return at_(sym(s));
 	}
 
 	inline _value update_(_key const& key, _value const& value)

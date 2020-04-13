@@ -44,7 +44,7 @@ public:
 	// reflection
 	inline any_a<> type__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("type");
+		auto const op = _operations.at_(sym("type"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -56,7 +56,7 @@ public:
 
 	inline symbol_a<> type_() const
 	{
-		auto const op = _operations.at_string("type");
+		auto const op = _operations.at_(sym("type"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -73,7 +73,7 @@ public:
 
 	inline any_a<> shared__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("shared");
+		auto const op = _operations.at_(sym("shared"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -86,7 +86,7 @@ public:
 
 	inline unordered_shoal_a<> shared_() const
 	{
-		auto const op = _operations.at_string("shared");
+		auto const op = _operations.at_(sym("shared"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -109,7 +109,7 @@ public:
 
 	inline any_a<> cat__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("cat");
+		auto const op = _operations.at_(sym("cat"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -120,7 +120,7 @@ public:
 	
 	inline cat_a<> cat_() const
 	{
-		auto const op = _operations.at_string("cat");
+		auto const op = _operations.at_(sym("cat"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -136,7 +136,7 @@ public:
 
 	inline any_a<> cats__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("cats");
+		auto const op = _operations.at_(sym("cats"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -147,7 +147,7 @@ public:
 
 	inline unordered_herd_a<> cats_() const
 	{
-		auto const op = _operations.at_string("cats");
+		auto const op = _operations.at_(sym("cats"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -163,7 +163,7 @@ public:
 
 	inline any_a<> kind__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("kind");
+		auto const op = _operations.at_(sym("kind"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -174,7 +174,7 @@ public:
 
 	inline kind_a<> kind_() const
 	{
-		auto const op = _operations.at_string("kind");
+		auto const op = _operations.at_(sym("kind"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -190,7 +190,7 @@ public:
 
 	inline any_a<> kinds__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("kinds");
+		auto const op = _operations.at_(sym("kinds"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -201,7 +201,7 @@ public:
 
 	inline unordered_herd_a<> kinds_() const
 	{
-		auto const op = _operations.at_string("kinds");
+		auto const op = _operations.at_(sym("kinds"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -228,7 +228,7 @@ public:
 	// visitor pattern
 	inline any_a<> visit__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("visit");
+		auto const op = _operations.at_(sym("visit"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -245,7 +245,7 @@ public:
 	// function
 	inline any_a<> invoke(any_a<>& thing, range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("invoke");
+		auto const op = _operations.at_(sym("invoke"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -266,7 +266,7 @@ public:
 
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("operate");
+		auto const op = _operations.at_(sym("operate"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -330,7 +330,7 @@ public:
 
 	inline any_a<> same__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("same");
+		auto const op = _operations.at_(sym("same"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -346,7 +346,7 @@ public:
 
 	inline bool same_(any_a<> const& thing) const
 	{
-		auto const op = _operations.at_string("same");
+		auto const op = _operations.at_(sym("same"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -372,7 +372,7 @@ public:
 
 	inline any_a<> hash__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("hash");
+		auto const op = _operations.at_(sym("hash"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -383,7 +383,7 @@ public:
 
 	inline number_data_a<uint64_t> hash_() const
 	{
-		auto const op = _operations.at_string("hash");
+		auto const op = _operations.at_(sym("hash"));
 		if (op)
 		{
 			any_a<> thing = me_();
@@ -399,7 +399,7 @@ public:
 
 	inline std::size_t hash() const
 	{
-		auto const op = _operations.at_string("hash");
+		auto const op = _operations.at_(sym("hash"));
 		if (op)
 		{
 			any_a<> thing = me_();

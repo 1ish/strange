@@ -12,10 +12,6 @@ template <typename _key, typename _value>
 class shoal_a : public collection_a< _key , _value , flock_a<> >
 {
 public:
-	inline bool has_string(std :: string const & s ) const;
-
-	inline _value at_string(std :: string const & s ) const;
-
 	inline void update_string(std :: string const & s , _value const & value );
 
 	inline bool insert_string(std :: string const & s , _value const & value );
@@ -33,8 +29,6 @@ public:
 protected:
 	struct ___shoal_a_handle_base___ : collection_a< _key , _value , flock_a<> >::___collection_a_handle_base___
 	{
-		virtual bool has_string(std :: string const & s ) const = 0;
-		virtual _value at_string(std :: string const & s ) const = 0;
 		virtual void update_string(std :: string const & s , _value const & value ) = 0;
 		virtual bool insert_string(std :: string const & s , _value const & value ) = 0;
 		virtual bool erase_string(std :: string const & s ) = 0;
@@ -59,10 +53,6 @@ protected:
 		inline ___shoal_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
 			: collection_a< _key , _value , flock_a<> >::template ___collection_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
-
-		virtual inline bool has_string(std :: string const & s ) const final;
-
-		virtual inline _value at_string(std :: string const & s ) const final;
 
 		virtual inline void update_string(std :: string const & s , _value const & value ) final;
 
@@ -292,12 +282,6 @@ template <typename _key, typename _value>
 class shoal_d : public collection_d< _key , _value , flock_a<> >
 {
 public:
-	inline bool has_string(std :: string const & s ) const
-	{ return collection_d<_key, _value>::has(cast<_key>(sym(s))); }
-
-	inline _value at_string(std :: string const & s ) const
-	{ return collection_d<_key, _value>::at_(cast<_key>(sym(s))); }
-
 	inline void update_string(std :: string const & s , _value const & value )
 	{ collection_d<_key, _value>::update_(cast<_key>(sym(s)), value); }
 

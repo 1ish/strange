@@ -470,14 +470,17 @@ protected:
 	{
 		if (declare && !define)
 		{
+			// declare
 			river.write_string("class " + class_name + ";\n\n");
 		}
 		else if (declare && define)
 		{
+			// define
 			_define_class_(root, class_name, base_name, base_aspects, version, indent, river, declare, define);
 		}
 		else if (!declare && define)
 		{
+			// implement
 			auto const class_expression_terms = _class_expression_terms_();
 			_implement_class_nonvirtual_members_(root, class_name, class_expression_terms, version, indent, river);
 		}
@@ -969,6 +972,17 @@ protected:
 		_define_class_members_(root, class_name, class_expression_terms, version, indent, river,
 			&expression_abstraction_t::_implement_class_nonvirtual_member_,
 			&expression_abstraction_t::_implement_class_nonvirtual_native_member_);
+		if (root)
+		{
+			_declare_and_define_template_(version, 0, river, true, true);
+			river.write_string(
+				"inline any_a<> " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::operation(std::string const& name) const\n"
+				"{\n"
+				"\treturn ___read___().operations_().at_(sym(name));\n"
+				"}\n\n");
+		}
 	}
 
 	inline void _implement_class_nonvirtual_member_(bool root, std::string const& class_name, std::string const& name, expression_a<> const& expression, bool extraction, int64_t version, river_a<>& river) const
@@ -1821,10 +1835,7 @@ protected:
 		if (root)
 		{
 			river.write_string(
-				"\tinline any_a<> operation(std::string const& name) const\n"
-				"\t{\n"
-				"\t\treturn ___read___().operations_().at_string(name);\n"
-				"\t}\n\n");
+				"\tinline any_a<> operation(std::string const& name) const;\n\n");
 		}
 
 		river.write_string(

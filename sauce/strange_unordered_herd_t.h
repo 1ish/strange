@@ -256,11 +256,6 @@ public:
 		return it != _set.cend();
 	}
 
-	inline bool has_string(std::string const& s) const
-	{
-		return has(sym(s));
-	}
-
 	inline any_a<> at_(_element const& key) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
@@ -270,11 +265,6 @@ public:
 			return mis("strange::unordered_herd::at key not found");
 		}
 		return *it;
-	}
-
-	inline _element at_string(std::string const& s) const
-	{
-		return at_(sym(s));
 	}
 
 	inline _element update_(_element const& key, _element const&)
