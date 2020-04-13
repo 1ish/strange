@@ -315,7 +315,7 @@ public:
 	}
 
 	inline void update_thing(_element const & thing )
-	{ collection_d<_element , _element , _element>::update_(thing, thing); }
+	{ update_thing_(thing); }
 
 	inline void update_string(std :: string const & s )
 	{ update_thing(cast<_element>(sym(s))); }
@@ -343,7 +343,7 @@ public:
 	}
 
 	inline bool insert_thing(_element const & thing )
-	{ return collection_d<_element , _element , _element>::insert_(thing, thing); }
+	{ return insert_thing_(thing); }
 
 	inline bool insert_string(std :: string const & s )
 	{ return insert_thing(cast<_element>(sym(s))); }

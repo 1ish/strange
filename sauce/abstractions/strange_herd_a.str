@@ -7,11 +7,11 @@ false &&
 				$$<collection>[ #element , #element , #element ],
 				{	// herd
 					update_thing_ := (thing :< #element >#, < #element >),
-					update_thing : "void (_element const& thing) { collection_d<_element , _element , _element>::update_(thing, thing); }",
+					update_thing : "void (_element const& thing) { update_thing_(thing); }",
 					update_string : "void (std::string const& s) { update_thing(cast<_element>(sym(s))); }",
 
 					insert_thing_ := (thing :< #element >#, <>),
-					insert_thing : "bool (_element const& thing) { return collection_d<_element , _element , _element>::insert_(thing, thing); }",
+					insert_thing : "bool (_element const& thing) { return insert_thing_(thing); }",
 					insert_string : "bool (std::string const& s) { return insert_thing(cast<_element>(sym(s))); }",
 
 					erase_string : "bool (std::string const& s) { return collection_d<_element , _element , _element>::erase(cast<_element>(sym(s))); }",
