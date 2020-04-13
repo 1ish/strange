@@ -74,6 +74,18 @@ template <typename ___TTT___, typename ___DHB___>
 inline _primitive & number_data_a<_primitive>::___number_data_a_handle___<___TTT___, ___DHB___>::mutate_primitive()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_primitive(); }
 
+template <typename _primitive>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ number_data_a<_primitive>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = number_a<>::template ___operations___<___unordered_shoal_a___>();
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___number_data_a_share___
 {
 	static bool const share;

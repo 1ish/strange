@@ -38,6 +38,18 @@ template <typename ___TTT___, typename ___DHB___>
 inline _type & bidirectional_extractor_data_a<_element, _type>::___bidirectional_extractor_data_a_handle___<___TTT___, ___DHB___>::mutate_it()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_it(); }
 
+template <typename _element, typename _type>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ bidirectional_extractor_data_a<_element, _type>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = bidirectional_extractor_a< _element >::template ___operations___<___unordered_shoal_a___>();
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___bidirectional_extractor_data_a_share___
 {
 	static bool const share;

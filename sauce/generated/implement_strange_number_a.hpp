@@ -747,6 +747,45 @@ template <typename ___TTT___, typename ___DHB___>
 inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___number_a_handle___<___TTT___, ___DHB___>::little_endian() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.little_endian(); }
 
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = any_a<>::template ___operations___<___unordered_shoal_a___>();
+		operations.update(sym("increment_"), native_mutation_t<number_a>::create(&number_a::increment__));
+		operations.update(sym("decrement_"), native_mutation_t<number_a>::create(&number_a::decrement__));
+		operations.update(sym("self_assign_"), native_mutation_t<number_a>::create(&number_a::self_assign__));
+		operations.update(sym("self_add_"), native_mutation_t<number_a>::create(&number_a::self_add__));
+		operations.update(sym("add_"), native_extraction_t<number_a>::create(&number_a::add__));
+		operations.update(sym("self_subtract_"), native_mutation_t<number_a>::create(&number_a::self_subtract__));
+		operations.update(sym("subtract_"), native_extraction_t<number_a>::create(&number_a::subtract__));
+		operations.update(sym("self_multiply_"), native_mutation_t<number_a>::create(&number_a::self_multiply__));
+		operations.update(sym("multiply_"), native_extraction_t<number_a>::create(&number_a::multiply__));
+		operations.update(sym("self_divide_"), native_mutation_t<number_a>::create(&number_a::self_divide__));
+		operations.update(sym("divide_"), native_extraction_t<number_a>::create(&number_a::divide__));
+		operations.update(sym("self_modulo_"), native_mutation_t<number_a>::create(&number_a::self_modulo__));
+		operations.update(sym("modulo_"), native_extraction_t<number_a>::create(&number_a::modulo__));
+		operations.update(sym("to_int_64_"), native_extraction_t<number_a>::create(&number_a::to_int_64__));
+		operations.update(sym("from_int_64_"), native_mutation_t<number_a>::create(&number_a::from_int_64__));
+		operations.update(sym("to_uint_64_"), native_extraction_t<number_a>::create(&number_a::to_uint_64__));
+		operations.update(sym("from_uint_64_"), native_mutation_t<number_a>::create(&number_a::from_uint_64__));
+		operations.update(sym("to_float_64_"), native_extraction_t<number_a>::create(&number_a::to_float_64__));
+		operations.update(sym("from_float_64_"), native_mutation_t<number_a>::create(&number_a::from_float_64__));
+		operations.update(sym("byte_size_"), native_extraction_t<number_a>::create(&number_a::byte_size__));
+		operations.update(sym("is_int_"), native_extraction_t<number_a>::create(&number_a::is_int__));
+		operations.update(sym("is_signed_"), native_extraction_t<number_a>::create(&number_a::is_signed__));
+		operations.update(sym("is_nan_"), native_extraction_t<number_a>::create(&number_a::is_nan__));
+		operations.update(sym("is_inf_"), native_extraction_t<number_a>::create(&number_a::is_inf__));
+		operations.update(sym("is_finite_"), native_extraction_t<number_a>::create(&number_a::is_finite__));
+		operations.update(sym("is_normal_"), native_extraction_t<number_a>::create(&number_a::is_normal__));
+		operations.update(sym("little_endian_"), native_extraction_t<number_a>::create(&number_a::little_endian__));
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___number_a_share___
 {
 	static bool const share;

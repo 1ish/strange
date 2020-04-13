@@ -259,17 +259,7 @@ public:
 	}
 
 	template <typename ___unordered_shoal_a___ = unordered_shoal_a<>>
-	static inline ___unordered_shoal_a___ ___operations___()
-	{
-		static ___unordered_shoal_a___ OPERATIONS = []()
-		{
-			___unordered_shoal_a___ operations = collection_a< _key , _value , flock_a<> >::template ___operations___<___unordered_shoal_a___>();
-			operations.update_string("mutate_begin_", native_mutation_t<shoal_a>::create(&shoal_a::mutate_begin__));
-			operations.update_string("mutate_end_", native_mutation_t<shoal_a>::create(&shoal_a::mutate_end__));
-			return operations;
-		}();
-		return OPERATIONS;
-	}
+	static inline ___unordered_shoal_a___ ___operations___();
 
 	template <typename ___TTT___, typename... Args>
 	static inline shoal_a create(Args&&... args)

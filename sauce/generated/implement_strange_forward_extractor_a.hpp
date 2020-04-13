@@ -73,6 +73,20 @@ template <typename ___TTT___, typename ___DHB___>
 inline void forward_extractor_a<_element>::___forward_extractor_a_handle___<___TTT___, ___DHB___>::increment_()
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.increment_(); }
 
+template <typename _element>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ forward_extractor_a<_element>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = any_a<>::template ___operations___<___unordered_shoal_a___>();
+		operations.update(sym("get_"), native_extraction_t<forward_extractor_a>::create(&forward_extractor_a::get__));
+		operations.update(sym("increment_"), native_mutation_t<forward_extractor_a>::create(&forward_extractor_a::increment__));
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___forward_extractor_a_share___
 {
 	static bool const share;

@@ -118,6 +118,22 @@ template <typename ___TTT___, typename ___DHB___>
 inline random_access_mutator_a< _element > random_access_mutator_a<_element>::___random_access_mutator_a_handle___<___TTT___, ___DHB___>::subtract_(number_a<> const& number) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract_(number); }
 
+template <typename _element>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ random_access_mutator_a<_element>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = bidirectional_mutator_a< _element >::template ___operations___<___unordered_shoal_a___>();
+		operations.update(sym("self_add_"), native_mutation_t<random_access_mutator_a>::create(&random_access_mutator_a::self_add__));
+		operations.update(sym("add_"), native_extraction_t<random_access_mutator_a>::create(&random_access_mutator_a::add__));
+		operations.update(sym("self_subtract_"), native_mutation_t<random_access_mutator_a>::create(&random_access_mutator_a::self_subtract__));
+		operations.update(sym("subtract_"), native_extraction_t<random_access_mutator_a>::create(&random_access_mutator_a::subtract__));
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___random_access_mutator_a_share___
 {
 	static bool const share;

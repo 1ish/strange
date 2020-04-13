@@ -250,15 +250,7 @@ public:
 	}
 
 	template <typename ___unordered_shoal_a___ = unordered_shoal_a<>>
-	static inline ___unordered_shoal_a___ ___operations___()
-	{
-		static ___unordered_shoal_a___ OPERATIONS = []()
-		{
-			___unordered_shoal_a___ operations = bidirectional_extractor_a< _element >::template ___operations___<___unordered_shoal_a___>();
-			return operations;
-		}();
-		return OPERATIONS;
-	}
+	static inline ___unordered_shoal_a___ ___operations___();
 
 	template <typename ___TTT___, typename... Args>
 	static inline bidirectional_extractor_data_a create(Args&&... args)

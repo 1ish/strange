@@ -878,6 +878,64 @@ template <typename ___TTT___, typename ___DHB___>
 inline dart :: packet & parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::mutate_packet()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_packet(); }
 
+template <typename _1>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ parcel_a<_1>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = collection_a< any_a<> , parcel_a<> , parcel_a<> >::template ___operations___<___unordered_shoal_a___>();
+		operations.update(sym("unwrap_"), native_extraction_t<parcel_a>::create(&parcel_a::unwrap__));
+		operations.update(sym("unwrap_unique_"), native_extraction_t<parcel_a>::create(&parcel_a::unwrap_unique__));
+		operations.update(sym("close_"), native_mutation_t<parcel_a>::create(&parcel_a::close__));
+		operations.update(sym("closed_"), native_extraction_t<parcel_a>::create(&parcel_a::closed__));
+		operations.update(sym("reopen_"), native_mutation_t<parcel_a>::create(&parcel_a::reopen__));
+		operations.update(sym("binary_"), native_extraction_t<parcel_a>::create(&parcel_a::binary__));
+		operations.update(sym("json_"), native_extraction_t<parcel_a>::create(&parcel_a::json__));
+		operations.update(sym("is_null_"), native_extraction_t<parcel_a>::create(&parcel_a::is_null__));
+		operations.update(sym("is_boolean_"), native_extraction_t<parcel_a>::create(&parcel_a::is_boolean__));
+		operations.update(sym("boolean_"), native_extraction_t<parcel_a>::create(&parcel_a::boolean__));
+		operations.update(sym("boolean_or_"), native_extraction_t<parcel_a>::create(&parcel_a::boolean_or__));
+		operations.update(sym("is_number_"), native_extraction_t<parcel_a>::create(&parcel_a::is_number__));
+		operations.update(sym("number_"), native_extraction_t<parcel_a>::create(&parcel_a::number__));
+		operations.update(sym("number_or_"), native_extraction_t<parcel_a>::create(&parcel_a::number_or__));
+		operations.update(sym("is_int_64_"), native_extraction_t<parcel_a>::create(&parcel_a::is_int_64__));
+		operations.update(sym("int_64_"), native_extraction_t<parcel_a>::create(&parcel_a::int_64__));
+		operations.update(sym("int_64_or_"), native_extraction_t<parcel_a>::create(&parcel_a::int_64_or__));
+		operations.update(sym("is_float_64_"), native_extraction_t<parcel_a>::create(&parcel_a::is_float_64__));
+		operations.update(sym("float_64_"), native_extraction_t<parcel_a>::create(&parcel_a::float_64__));
+		operations.update(sym("float_64_or_"), native_extraction_t<parcel_a>::create(&parcel_a::float_64_or__));
+		operations.update(sym("is_symbol_"), native_extraction_t<parcel_a>::create(&parcel_a::is_symbol__));
+		operations.update(sym("symbol_"), native_extraction_t<parcel_a>::create(&parcel_a::symbol__));
+		operations.update(sym("symbol_or_"), native_extraction_t<parcel_a>::create(&parcel_a::symbol_or__));
+		operations.update(sym("is_flock_"), native_extraction_t<parcel_a>::create(&parcel_a::is_flock__));
+		operations.update(sym("flock_"), native_extraction_t<parcel_a>::create(&parcel_a::flock__));
+		operations.update(sym("flock_or_"), native_extraction_t<parcel_a>::create(&parcel_a::flock_or__));
+		operations.update(sym("is_lake_"), native_extraction_t<parcel_a>::create(&parcel_a::is_lake__));
+		operations.update(sym("lake_"), native_extraction_t<parcel_a>::create(&parcel_a::lake__));
+		operations.update(sym("lake_or_"), native_extraction_t<parcel_a>::create(&parcel_a::lake_or__));
+		operations.update(sym("is_ordered_herd_"), native_extraction_t<parcel_a>::create(&parcel_a::is_ordered_herd__));
+		operations.update(sym("ordered_herd_"), native_extraction_t<parcel_a>::create(&parcel_a::ordered_herd__));
+		operations.update(sym("ordered_herd_or_"), native_extraction_t<parcel_a>::create(&parcel_a::ordered_herd_or__));
+		operations.update(sym("is_ordered_shoal_"), native_extraction_t<parcel_a>::create(&parcel_a::is_ordered_shoal__));
+		operations.update(sym("ordered_shoal_"), native_extraction_t<parcel_a>::create(&parcel_a::ordered_shoal__));
+		operations.update(sym("ordered_shoal_or_"), native_extraction_t<parcel_a>::create(&parcel_a::ordered_shoal_or__));
+		operations.update(sym("is_squad_"), native_extraction_t<parcel_a>::create(&parcel_a::is_squad__));
+		operations.update(sym("squad_"), native_extraction_t<parcel_a>::create(&parcel_a::squad__));
+		operations.update(sym("squad_or_"), native_extraction_t<parcel_a>::create(&parcel_a::squad_or__));
+		operations.update(sym("is_unordered_herd_"), native_extraction_t<parcel_a>::create(&parcel_a::is_unordered_herd__));
+		operations.update(sym("unordered_herd_"), native_extraction_t<parcel_a>::create(&parcel_a::unordered_herd__));
+		operations.update(sym("unordered_herd_or_"), native_extraction_t<parcel_a>::create(&parcel_a::unordered_herd_or__));
+		operations.update(sym("is_unordered_shoal_"), native_extraction_t<parcel_a>::create(&parcel_a::is_unordered_shoal__));
+		operations.update(sym("unordered_shoal_"), native_extraction_t<parcel_a>::create(&parcel_a::unordered_shoal__));
+		operations.update(sym("unordered_shoal_or_"), native_extraction_t<parcel_a>::create(&parcel_a::unordered_shoal_or__));
+		operations.update(sym("key_begin_"), native_extraction_t<parcel_a>::create(&parcel_a::key_begin__));
+		operations.update(sym("key_end_"), native_extraction_t<parcel_a>::create(&parcel_a::key_end__));
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___parcel_a_share___
 {
 	static bool const share;

@@ -266,19 +266,7 @@ public:
 	}
 
 	template <typename ___unordered_shoal_a___ = unordered_shoal_a<>>
-	static inline ___unordered_shoal_a___ ___operations___()
-	{
-		static ___unordered_shoal_a___ OPERATIONS = []()
-		{
-			___unordered_shoal_a___ operations = bidirectional_mutator_a< _element >::template ___operations___<___unordered_shoal_a___>();
-			operations.update_string("self_add_", native_mutation_t<random_access_mutator_a>::create(&random_access_mutator_a::self_add__));
-			operations.update_string("add_", native_extraction_t<random_access_mutator_a>::create(&random_access_mutator_a::add__));
-			operations.update_string("self_subtract_", native_mutation_t<random_access_mutator_a>::create(&random_access_mutator_a::self_subtract__));
-			operations.update_string("subtract_", native_extraction_t<random_access_mutator_a>::create(&random_access_mutator_a::subtract__));
-			return operations;
-		}();
-		return OPERATIONS;
-	}
+	static inline ___unordered_shoal_a___ ___operations___();
 
 	template <typename ___TTT___, typename... Args>
 	static inline random_access_mutator_a create(Args&&... args)

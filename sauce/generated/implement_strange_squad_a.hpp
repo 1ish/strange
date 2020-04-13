@@ -110,6 +110,18 @@ template <typename ___TTT___, typename ___DHB___>
 inline std :: deque < _element > & squad_a<_element>::___squad_a_handle___<___TTT___, ___DHB___>::mutate_deque()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_deque(); }
 
+template <typename _element>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ squad_a<_element>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = inventory_a< _element >::template ___operations___<___unordered_shoal_a___>();
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___squad_a_share___
 {
 	static bool const share;

@@ -32,6 +32,20 @@ template <typename ___TTT___, typename ___DHB___>
 inline forward_extractor_a< _element > range_a<_element>::___range_a_handle___<___TTT___, ___DHB___>::extract_end_() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end_(); }
 
+template <typename _element>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ range_a<_element>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = any_a<>::template ___operations___<___unordered_shoal_a___>();
+		operations.update(sym("extract_begin_"), native_extraction_t<range_a>::create(&range_a::extract_begin__));
+		operations.update(sym("extract_end_"), native_extraction_t<range_a>::create(&range_a::extract_end__));
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___range_a_share___
 {
 	static bool const share;

@@ -194,6 +194,26 @@ template <typename ___TTT___, typename ___DHB___>
 inline std :: string token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::report() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.report(); }
 
+template <typename _1>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ token_a<_1>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = any_a<>::template ___operations___<___unordered_shoal_a___>();
+		operations.update(sym("filename_"), native_extraction_t<token_a>::create(&token_a::filename__));
+		operations.update(sym("line_"), native_extraction_t<token_a>::create(&token_a::line__));
+		operations.update(sym("position_"), native_extraction_t<token_a>::create(&token_a::position__));
+		operations.update(sym("tag_"), native_extraction_t<token_a>::create(&token_a::tag__));
+		operations.update(sym("symbol_"), native_extraction_t<token_a>::create(&token_a::symbol__));
+		operations.update(sym("literal_"), native_extraction_t<token_a>::create(&token_a::literal__));
+		operations.update(sym("precedence_"), native_extraction_t<token_a>::create(&token_a::precedence__));
+		operations.update(sym("report_"), native_extraction_t<token_a>::create(&token_a::report__));
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___token_a_share___
 {
 	static bool const share;

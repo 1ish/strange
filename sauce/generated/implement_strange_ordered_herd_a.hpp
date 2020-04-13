@@ -92,6 +92,18 @@ template <typename ___TTT___, typename ___DHB___>
 inline std :: set < _element > & ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::mutate_set()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_set(); }
 
+template <typename _element>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ ordered_herd_a<_element>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = herd_a< _element >::template ___operations___<___unordered_shoal_a___>();
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___ordered_herd_a_share___
 {
 	static bool const share;

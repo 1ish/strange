@@ -89,6 +89,22 @@ template <typename ___TTT___, typename ___DHB___>
 inline bool kind_a<_1>::___kind_a_handle___<___TTT___, ___DHB___>::optional() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.optional(); }
 
+template <typename _1>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ kind_a<_1>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = cat_a<>::template ___operations___<___unordered_shoal_a___>();
+		operations.update(sym("aspects_"), native_extraction_t<kind_a>::create(&kind_a::aspects__));
+		operations.update(sym("fixed_"), native_extraction_t<kind_a>::create(&kind_a::fixed__));
+		operations.update(sym("reference_"), native_extraction_t<kind_a>::create(&kind_a::reference__));
+		operations.update(sym("optional_"), native_extraction_t<kind_a>::create(&kind_a::optional__));
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___kind_a_share___
 {
 	static bool const share;

@@ -143,6 +143,25 @@ template <typename ___TTT___, typename ___DHB___>
 inline std :: string cat_a<_1>::___cat_a_handle___<___TTT___, ___DHB___>::code() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.code(); }
 
+template <typename _1>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ cat_a<_1>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = symbol_a<>::template ___operations___<___unordered_shoal_a___>();
+		operations.update(sym("symbolic_"), native_extraction_t<cat_a>::create(&cat_a::symbolic__));
+		operations.update(sym("order_"), native_extraction_t<cat_a>::create(&cat_a::order__));
+		operations.update(sym("name_"), native_extraction_t<cat_a>::create(&cat_a::name__));
+		operations.update(sym("dimensions_"), native_extraction_t<cat_a>::create(&cat_a::dimensions__));
+		operations.update(sym("parameters_"), native_extraction_t<cat_a>::create(&cat_a::parameters__));
+		operations.update(sym("result_"), native_extraction_t<cat_a>::create(&cat_a::result__));
+		operations.update(sym("code_"), native_extraction_t<cat_a>::create(&cat_a::code__));
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___cat_a_share___
 {
 	static bool const share;

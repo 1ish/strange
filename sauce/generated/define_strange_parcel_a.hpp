@@ -612,61 +612,7 @@ public:
 	}
 
 	template <typename ___unordered_shoal_a___ = unordered_shoal_a<>>
-	static inline ___unordered_shoal_a___ ___operations___()
-	{
-		static ___unordered_shoal_a___ OPERATIONS = []()
-		{
-			___unordered_shoal_a___ operations = collection_a< any_a<> , parcel_a<> , parcel_a<> >::template ___operations___<___unordered_shoal_a___>();
-			operations.update_string("unwrap_", native_extraction_t<parcel_a>::create(&parcel_a::unwrap__));
-			operations.update_string("unwrap_unique_", native_extraction_t<parcel_a>::create(&parcel_a::unwrap_unique__));
-			operations.update_string("close_", native_mutation_t<parcel_a>::create(&parcel_a::close__));
-			operations.update_string("closed_", native_extraction_t<parcel_a>::create(&parcel_a::closed__));
-			operations.update_string("reopen_", native_mutation_t<parcel_a>::create(&parcel_a::reopen__));
-			operations.update_string("binary_", native_extraction_t<parcel_a>::create(&parcel_a::binary__));
-			operations.update_string("json_", native_extraction_t<parcel_a>::create(&parcel_a::json__));
-			operations.update_string("is_null_", native_extraction_t<parcel_a>::create(&parcel_a::is_null__));
-			operations.update_string("is_boolean_", native_extraction_t<parcel_a>::create(&parcel_a::is_boolean__));
-			operations.update_string("boolean_", native_extraction_t<parcel_a>::create(&parcel_a::boolean__));
-			operations.update_string("boolean_or_", native_extraction_t<parcel_a>::create(&parcel_a::boolean_or__));
-			operations.update_string("is_number_", native_extraction_t<parcel_a>::create(&parcel_a::is_number__));
-			operations.update_string("number_", native_extraction_t<parcel_a>::create(&parcel_a::number__));
-			operations.update_string("number_or_", native_extraction_t<parcel_a>::create(&parcel_a::number_or__));
-			operations.update_string("is_int_64_", native_extraction_t<parcel_a>::create(&parcel_a::is_int_64__));
-			operations.update_string("int_64_", native_extraction_t<parcel_a>::create(&parcel_a::int_64__));
-			operations.update_string("int_64_or_", native_extraction_t<parcel_a>::create(&parcel_a::int_64_or__));
-			operations.update_string("is_float_64_", native_extraction_t<parcel_a>::create(&parcel_a::is_float_64__));
-			operations.update_string("float_64_", native_extraction_t<parcel_a>::create(&parcel_a::float_64__));
-			operations.update_string("float_64_or_", native_extraction_t<parcel_a>::create(&parcel_a::float_64_or__));
-			operations.update_string("is_symbol_", native_extraction_t<parcel_a>::create(&parcel_a::is_symbol__));
-			operations.update_string("symbol_", native_extraction_t<parcel_a>::create(&parcel_a::symbol__));
-			operations.update_string("symbol_or_", native_extraction_t<parcel_a>::create(&parcel_a::symbol_or__));
-			operations.update_string("is_flock_", native_extraction_t<parcel_a>::create(&parcel_a::is_flock__));
-			operations.update_string("flock_", native_extraction_t<parcel_a>::create(&parcel_a::flock__));
-			operations.update_string("flock_or_", native_extraction_t<parcel_a>::create(&parcel_a::flock_or__));
-			operations.update_string("is_lake_", native_extraction_t<parcel_a>::create(&parcel_a::is_lake__));
-			operations.update_string("lake_", native_extraction_t<parcel_a>::create(&parcel_a::lake__));
-			operations.update_string("lake_or_", native_extraction_t<parcel_a>::create(&parcel_a::lake_or__));
-			operations.update_string("is_ordered_herd_", native_extraction_t<parcel_a>::create(&parcel_a::is_ordered_herd__));
-			operations.update_string("ordered_herd_", native_extraction_t<parcel_a>::create(&parcel_a::ordered_herd__));
-			operations.update_string("ordered_herd_or_", native_extraction_t<parcel_a>::create(&parcel_a::ordered_herd_or__));
-			operations.update_string("is_ordered_shoal_", native_extraction_t<parcel_a>::create(&parcel_a::is_ordered_shoal__));
-			operations.update_string("ordered_shoal_", native_extraction_t<parcel_a>::create(&parcel_a::ordered_shoal__));
-			operations.update_string("ordered_shoal_or_", native_extraction_t<parcel_a>::create(&parcel_a::ordered_shoal_or__));
-			operations.update_string("is_squad_", native_extraction_t<parcel_a>::create(&parcel_a::is_squad__));
-			operations.update_string("squad_", native_extraction_t<parcel_a>::create(&parcel_a::squad__));
-			operations.update_string("squad_or_", native_extraction_t<parcel_a>::create(&parcel_a::squad_or__));
-			operations.update_string("is_unordered_herd_", native_extraction_t<parcel_a>::create(&parcel_a::is_unordered_herd__));
-			operations.update_string("unordered_herd_", native_extraction_t<parcel_a>::create(&parcel_a::unordered_herd__));
-			operations.update_string("unordered_herd_or_", native_extraction_t<parcel_a>::create(&parcel_a::unordered_herd_or__));
-			operations.update_string("is_unordered_shoal_", native_extraction_t<parcel_a>::create(&parcel_a::is_unordered_shoal__));
-			operations.update_string("unordered_shoal_", native_extraction_t<parcel_a>::create(&parcel_a::unordered_shoal__));
-			operations.update_string("unordered_shoal_or_", native_extraction_t<parcel_a>::create(&parcel_a::unordered_shoal_or__));
-			operations.update_string("key_begin_", native_extraction_t<parcel_a>::create(&parcel_a::key_begin__));
-			operations.update_string("key_end_", native_extraction_t<parcel_a>::create(&parcel_a::key_end__));
-			return operations;
-		}();
-		return OPERATIONS;
-	}
+	static inline ___unordered_shoal_a___ ___operations___();
 
 	template <typename ___TTT___, typename... Args>
 	static inline parcel_a create(Args&&... args)

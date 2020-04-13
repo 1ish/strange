@@ -110,6 +110,18 @@ template <typename ___TTT___, typename ___DHB___>
 inline std :: vector < _primitive > & lake_a<_primitive>::___lake_a_handle___<___TTT___, ___DHB___>::mutate_vector()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_vector(); }
 
+template <typename _primitive>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ lake_a<_primitive>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = inventory_a< number_data_a< _primitive > >::template ___operations___<___unordered_shoal_a___>();
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___lake_a_share___
 {
 	static bool const share;

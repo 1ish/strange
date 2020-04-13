@@ -89,6 +89,20 @@ template <typename ___TTT___, typename ___DHB___>
 inline bool herd_a<_element>::___herd_a_handle___<___TTT___, ___DHB___>::erase_string(std :: string const & s )
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.erase_string(s); }
 
+template <typename _element>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ herd_a<_element>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = collection_a< _element , _element , _element >::template ___operations___<___unordered_shoal_a___>();
+		operations.update(sym("update_thing_"), native_mutation_t<herd_a>::create(&herd_a::update_thing__));
+		operations.update(sym("insert_thing_"), native_mutation_t<herd_a>::create(&herd_a::insert_thing__));
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___herd_a_share___
 {
 	static bool const share;

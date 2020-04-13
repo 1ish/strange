@@ -181,6 +181,25 @@ template <typename ___TTT___, typename ___DHB___>
 inline void expression_a<_1>::___expression_a_handle___<___TTT___, ___DHB___>::generate_cpp(int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type ) const
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.generate_cpp(version, indent, river, declare, define, type); }
 
+template <typename _1>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ expression_a<_1>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = operation_a<>::template ___operations___<___unordered_shoal_a___>();
+		operations.update(sym("recreate_"), native_extraction_t<expression_a>::create(&expression_a::recreate__));
+		operations.update(sym("literal_"), native_extraction_t<expression_a>::create(&expression_a::literal__));
+		operations.update(sym("evaluate_"), native_extraction_t<expression_a>::create(&expression_a::evaluate__));
+		operations.update(sym("token_"), native_extraction_t<expression_a>::create(&expression_a::token__));
+		operations.update(sym("terms_"), native_extraction_t<expression_a>::create(&expression_a::terms__));
+		operations.update(sym("generate_"), native_extraction_t<expression_a>::create(&expression_a::generate__));
+		operations.update(sym("generate_cpp_"), native_extraction_t<expression_a>::create(&expression_a::generate_cpp__));
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___expression_a_share___
 {
 	static bool const share;

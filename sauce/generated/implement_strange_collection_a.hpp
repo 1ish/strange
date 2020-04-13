@@ -486,6 +486,37 @@ template <typename ___TTT___, typename ___DHB___>
 inline any_a<> collection_a<_key, _value, _element>::___collection_a_handle___<___TTT___, ___DHB___>::write_lock_() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.write_lock_(); }
 
+template <typename _key, typename _value, typename _element>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ collection_a<_key, _value, _element>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = range_a< _element >::template ___operations___<___unordered_shoal_a___>();
+		operations.update(sym("has_"), native_extraction_t<collection_a>::create(&collection_a::has__));
+		operations.update(sym("at_"), native_extraction_t<collection_a>::create(&collection_a::at__));
+		operations.update(sym("update_"), native_mutation_t<collection_a>::create(&collection_a::update__));
+		operations.update(sym("insert_"), native_mutation_t<collection_a>::create(&collection_a::insert__));
+		operations.update(sym("erase_"), native_mutation_t<collection_a>::create(&collection_a::erase__));
+		operations.update(sym("clear_"), native_mutation_t<collection_a>::create(&collection_a::clear__));
+		operations.update(sym("size_"), native_extraction_t<collection_a>::create(&collection_a::size__));
+		operations.update(sym("empty_"), native_extraction_t<collection_a>::create(&collection_a::empty__));
+		operations.update(sym("push_front_"), native_mutation_t<collection_a>::create(&collection_a::push_front__));
+		operations.update(sym("pop_front_"), native_mutation_t<collection_a>::create(&collection_a::pop_front__));
+		operations.update(sym("push_back_"), native_mutation_t<collection_a>::create(&collection_a::push_back__));
+		operations.update(sym("pop_back_"), native_mutation_t<collection_a>::create(&collection_a::pop_back__));
+		operations.update(sym("self_assign_"), native_mutation_t<collection_a>::create(&collection_a::self_assign__));
+		operations.update(sym("self_add_"), native_mutation_t<collection_a>::create(&collection_a::self_add__));
+		operations.update(sym("add_"), native_extraction_t<collection_a>::create(&collection_a::add__));
+		operations.update(sym("self_subtract_"), native_mutation_t<collection_a>::create(&collection_a::self_subtract__));
+		operations.update(sym("subtract_"), native_extraction_t<collection_a>::create(&collection_a::subtract__));
+		operations.update(sym("read_lock_"), native_extraction_t<collection_a>::create(&collection_a::read_lock__));
+		operations.update(sym("write_lock_"), native_extraction_t<collection_a>::create(&collection_a::write_lock__));
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___collection_a_share___
 {
 	static bool const share;

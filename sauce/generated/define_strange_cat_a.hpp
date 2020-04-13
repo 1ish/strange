@@ -299,22 +299,7 @@ public:
 	}
 
 	template <typename ___unordered_shoal_a___ = unordered_shoal_a<>>
-	static inline ___unordered_shoal_a___ ___operations___()
-	{
-		static ___unordered_shoal_a___ OPERATIONS = []()
-		{
-			___unordered_shoal_a___ operations = symbol_a<>::template ___operations___<___unordered_shoal_a___>();
-			operations.update_string("symbolic_", native_extraction_t<cat_a>::create(&cat_a::symbolic__));
-			operations.update_string("order_", native_extraction_t<cat_a>::create(&cat_a::order__));
-			operations.update_string("name_", native_extraction_t<cat_a>::create(&cat_a::name__));
-			operations.update_string("dimensions_", native_extraction_t<cat_a>::create(&cat_a::dimensions__));
-			operations.update_string("parameters_", native_extraction_t<cat_a>::create(&cat_a::parameters__));
-			operations.update_string("result_", native_extraction_t<cat_a>::create(&cat_a::result__));
-			operations.update_string("code_", native_extraction_t<cat_a>::create(&cat_a::code__));
-			return operations;
-		}();
-		return OPERATIONS;
-	}
+	static inline ___unordered_shoal_a___ ___operations___();
 
 	template <typename ___TTT___, typename... Args>
 	static inline cat_a create(Args&&... args)

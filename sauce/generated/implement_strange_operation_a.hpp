@@ -59,6 +59,20 @@ template <typename ___TTT___, typename ___DHB___>
 inline flock_a<> operation_a<_1>::___operation_a_handle___<___TTT___, ___DHB___>::names_() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.names_(); }
 
+template <typename _1>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ operation_a<_1>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = any_a<>::template ___operations___<___unordered_shoal_a___>();
+		operations.update(sym("pure_"), native_extraction_t<operation_a>::create(&operation_a::pure__));
+		operations.update(sym("names_"), native_extraction_t<operation_a>::create(&operation_a::names__));
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___operation_a_share___
 {
 	static bool const share;

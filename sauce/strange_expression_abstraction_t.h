@@ -129,8 +129,8 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_abstraction::create", native_function_create(&expression_abstraction_t<>::create__));
-		shoal.update_string("abstraction!", native_function_create(&expression_abstraction_t<>::create__));
+		shoal.update(sym("strange::expression_abstraction::create"), native_function_create(&expression_abstraction_t<>::create__));
+		shoal.update(sym("abstraction!"), native_function_create(&expression_abstraction_t<>::create__));
 	}
 
 	// expression
@@ -482,7 +482,7 @@ protected:
 		{
 			// implement
 			auto const class_expression_terms = _class_expression_terms_();
-			_implement_class_nonvirtual_members_(root, class_name, class_expression_terms, version, indent, river);
+			_implement_class_nonvirtual_members_(root, class_name, base_name, base_aspects, class_expression_terms, version, indent, river);
 		}
 	}
 
@@ -967,11 +967,12 @@ protected:
 			"\tinline " + result + " " + name + parameters + constness + ";\n\n");
 	}
 
-	inline void _implement_class_nonvirtual_members_(bool root, std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
+	inline void _implement_class_nonvirtual_members_(bool root, std::string const& class_name, std::string const& base_name, std::string const& base_aspects, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
 	{
 		_define_class_members_(root, class_name, class_expression_terms, version, indent, river,
 			&expression_abstraction_t::_implement_class_nonvirtual_member_,
 			&expression_abstraction_t::_implement_class_nonvirtual_native_member_);
+
 		if (root)
 		{
 			_declare_and_define_template_(version, 0, river, true, true);
@@ -983,6 +984,36 @@ protected:
 				"\treturn ___read___().operations_().at_(sym(name));\n"
 				"}\n\n");
 		}
+
+		// ___operations___()
+		_declare_and_define_template_(version, 0, river, true, true);
+		river.write_string(
+			"template <typename ___unordered_shoal_a___>\n"
+			"inline ___unordered_shoal_a___ " + class_name);
+		_declare_and_define_template_(version, 0, river, false, false);
+		river.write_string("::___operations___()\n"
+			"{\n"
+			"\tstatic ___unordered_shoal_a___ OPERATIONS = []()\n"
+			"\t{\n"
+			"\t\t___unordered_shoal_a___ operations = ");
+		if (root)
+		{
+			river.write_string("unordered_shoal_create<any_a<>, any_a<>, false, ___unordered_shoal_a___>();\n"
+				"\t\toperations.update(sym(\"call_\"), native_mutation_t<any_a>::create(&any_a::operator[]));\n"
+				"\t\toperations.update(sym(\"perform_\"), native_mutation_t<any_a>::create(&any_a::operator()));\n");
+		}
+		else
+		{
+			river.write_string(base_name + base_aspects + "::template ___operations___<___unordered_shoal_a___>();\n");
+		}
+		_define_class_members_(root, class_name, class_expression_terms, version, indent, river,
+			&expression_abstraction_t::_define_class_operation_,
+			&expression_abstraction_t::_define_class_operation_native_);
+		river.write_string(
+			"\t\treturn operations;\n"
+			"\t}();\n"
+			"\treturn OPERATIONS;\n"
+			"}\n\n");
 	}
 
 	inline void _implement_class_nonvirtual_member_(bool root, std::string const& class_name, std::string const& name, expression_a<> const& expression, bool extraction, int64_t version, river_a<>& river) const
@@ -2212,38 +2243,9 @@ protected:
 			"\t}\n\n");
 
 		// ___operations___()
-		if (root)
-		{
-			river.write_string("\ttemplate <typename ___unordered_shoal_a___ = unordered_shoal_a<>>\n");
-		}
-		else
-		{
-			river.write_string("\ttemplate <typename ___unordered_shoal_a___ = unordered_shoal_a<>>\n");
-		}
 		river.write_string(
-			"\tstatic inline ___unordered_shoal_a___ ___operations___()\n"
-			"\t{\n"
-			"\t\tstatic ___unordered_shoal_a___ OPERATIONS = []()\n"
-			"\t\t{\n"
-			"\t\t\t___unordered_shoal_a___ operations = ");
-		if (root)
-		{
-			river.write_string("unordered_shoal_create<any_a<>, any_a<>, false, ___unordered_shoal_a___>();\n"
-				"\t\t\toperations.update_string(\"call_\", native_mutation_t<any_a>::create(&any_a::operator[]));\n"
-				"\t\t\toperations.update_string(\"perform_\", native_mutation_t<any_a>::create(&any_a::operator()));\n");
-		}
-		else
-		{
-			river.write_string(base_name + base_aspects + "::template ___operations___<___unordered_shoal_a___>();\n");
-		}
-		_define_class_members_(root, class_name, class_expression_terms, version, indent, river,
-			&expression_abstraction_t::_define_class_operation_,
-			&expression_abstraction_t::_define_class_operation_native_);
-		river.write_string(
-			"\t\t\treturn operations;\n"
-			"\t\t}();\n"
-			"\t\treturn OPERATIONS;\n"
-			"\t}\n\n");
+			"\ttemplate <typename ___unordered_shoal_a___ = unordered_shoal_a<>>\n"
+			"\tstatic inline ___unordered_shoal_a___ ___operations___();\n\n");
 	}
 
 	inline void _define_class_relfection_dimensions_(int64_t count, flock_a<> const& dimension_kinds, int64_t version, river_a<>& river) const
@@ -2299,7 +2301,7 @@ protected:
 		_parse_member_definition_(version, expression, extraction, true, result, parameters, arguments, constness);
 
 		river.write_string(
-			"\t\t\toperations.update_string(\"" + name + "\", " +
+			"\t\toperations.update(sym(\"" + name + "\"), " +
 			(extraction ? "native_extraction_t<" : "native_mutation_t<") +
 			class_name + ">::create(&" + class_name + "::" + name + "_));\n");
 	}

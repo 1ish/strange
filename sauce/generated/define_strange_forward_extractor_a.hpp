@@ -260,17 +260,7 @@ public:
 	}
 
 	template <typename ___unordered_shoal_a___ = unordered_shoal_a<>>
-	static inline ___unordered_shoal_a___ ___operations___()
-	{
-		static ___unordered_shoal_a___ OPERATIONS = []()
-		{
-			___unordered_shoal_a___ operations = any_a<>::template ___operations___<___unordered_shoal_a___>();
-			operations.update_string("get_", native_extraction_t<forward_extractor_a>::create(&forward_extractor_a::get__));
-			operations.update_string("increment_", native_mutation_t<forward_extractor_a>::create(&forward_extractor_a::increment__));
-			return operations;
-		}();
-		return OPERATIONS;
-	}
+	static inline ___unordered_shoal_a___ ___operations___();
 
 	template <typename ___TTT___, typename... Args>
 	static inline forward_extractor_a create(Args&&... args)

@@ -38,6 +38,18 @@ template <typename ___TTT___, typename ___DHB___>
 inline _type & data_a<_type>::___data_a_handle___<___TTT___, ___DHB___>::mutate_data()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_data(); }
 
+template <typename _type>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ data_a<_type>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = any_a<>::template ___operations___<___unordered_shoal_a___>();
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___data_a_share___
 {
 	static bool const share;

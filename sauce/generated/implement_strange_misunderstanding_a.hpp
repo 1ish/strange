@@ -51,6 +51,20 @@ template <typename ___TTT___, typename ___DHB___>
 inline misunderstanding_a<> misunderstanding_a<_lake_int8>::___misunderstanding_a_handle___<___TTT___, ___DHB___>::add_(misunderstanding_a<> const& misunderstanding) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(misunderstanding); }
 
+template <typename _lake_int8>
+template <typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ misunderstanding_a<_lake_int8>::___operations___()
+{
+	static ___unordered_shoal_a___ OPERATIONS = []()
+	{
+		___unordered_shoal_a___ operations = any_a<>::template ___operations___<___unordered_shoal_a___>();
+		operations.update(sym("to_lake_"), native_extraction_t<misunderstanding_a>::create(&misunderstanding_a::to_lake__));
+		operations.update(sym("add_"), native_extraction_t<misunderstanding_a>::create(&misunderstanding_a::add__));
+		return operations;
+	}();
+	return OPERATIONS;
+}
+
 class ___misunderstanding_a_share___
 {
 	static bool const share;

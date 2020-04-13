@@ -244,17 +244,7 @@ public:
 	}
 
 	template <typename ___unordered_shoal_a___ = unordered_shoal_a<>>
-	static inline ___unordered_shoal_a___ ___operations___()
-	{
-		static ___unordered_shoal_a___ OPERATIONS = []()
-		{
-			___unordered_shoal_a___ operations = any_a<>::template ___operations___<___unordered_shoal_a___>();
-			operations.update_string("extract_begin_", native_extraction_t<range_a>::create(&range_a::extract_begin__));
-			operations.update_string("extract_end_", native_extraction_t<range_a>::create(&range_a::extract_end__));
-			return operations;
-		}();
-		return OPERATIONS;
-	}
+	static inline ___unordered_shoal_a___ ___operations___();
 
 	template <typename ___TTT___, typename... Args>
 	static inline range_a create(Args&&... args)

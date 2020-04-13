@@ -500,37 +500,7 @@ public:
 	}
 
 	template <typename ___unordered_shoal_a___ = unordered_shoal_a<>>
-	static inline ___unordered_shoal_a___ ___operations___()
-	{
-		static ___unordered_shoal_a___ OPERATIONS = []()
-		{
-			___unordered_shoal_a___ operations = unordered_shoal_create<any_a<>, any_a<>, false, ___unordered_shoal_a___>();
-			operations.update_string("call_", native_mutation_t<any_a>::create(&any_a::operator[]));
-			operations.update_string("perform_", native_mutation_t<any_a>::create(&any_a::operator()));
-			operations.update_string("type_", native_extraction_t<any_a>::create(&any_a::type__));
-			operations.update_string("cat_", native_extraction_t<any_a>::create(&any_a::cat__));
-			operations.update_string("cats_", native_extraction_t<any_a>::create(&any_a::cats__));
-			operations.update_string("kind_", native_extraction_t<any_a>::create(&any_a::kind__));
-			operations.update_string("kinds_", native_extraction_t<any_a>::create(&any_a::kinds__));
-			operations.update_string("operations_", native_extraction_t<any_a>::create(&any_a::operations__));
-			operations.update_string("visit_", native_extraction_t<any_a>::create(&any_a::visit__));
-			operations.update_string("identity_", native_extraction_t<any_a>::create(&any_a::identity__));
-			operations.update_string("identical_", native_extraction_t<any_a>::create(&any_a::identical__));
-			operations.update_string("nothing_", native_extraction_t<any_a>::create(&any_a::nothing__));
-			operations.update_string("something_", native_extraction_t<any_a>::create(&any_a::something__));
-			operations.update_string("same_", native_extraction_t<any_a>::create(&any_a::same__));
-			operations.update_string("different_", native_extraction_t<any_a>::create(&any_a::different__));
-			operations.update_string("less_than_", native_extraction_t<any_a>::create(&any_a::less_than__));
-			operations.update_string("greater_than_", native_extraction_t<any_a>::create(&any_a::greater_than__));
-			operations.update_string("less_or_equal_", native_extraction_t<any_a>::create(&any_a::less_or_equal__));
-			operations.update_string("greater_or_equal_", native_extraction_t<any_a>::create(&any_a::greater_or_equal__));
-			operations.update_string("hash_", native_extraction_t<any_a>::create(&any_a::hash__));
-			operations.update_string("parcel_", native_extraction_t<any_a>::create(&any_a::parcel__));
-			operations.update_string("parcel_unique_", native_extraction_t<any_a>::create(&any_a::parcel_unique__));
-			return operations;
-		}();
-		return OPERATIONS;
-	}
+	static inline ___unordered_shoal_a___ ___operations___();
 
 	template <typename ___TTT___, typename... Args>
 	static inline any_a create(Args&&... args)
