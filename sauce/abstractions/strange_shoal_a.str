@@ -7,11 +7,11 @@ false &&
 			(	// parent
 				$$<collection>[ #key , #value, <flock> ],
 				{	// shoal
-					has_string : "bool (std::string const& s) const { return collection_d<_key, _value>::has(sym(s)); }",
-					at_string : "_value (std::string const& s) const { return collection_d<_key, _value>::at_(sym(s)); }",
-					update_string : "void (std::string const& s, _value const& value) { collection_d<_key, _value>::update_(sym(s), value); }",
-					insert_string : "bool (std::string const& s, _value const& value) { return collection_d<_key, _value>::insert_(sym(s), value); }",
-					erase_string : "bool (std::string const& s) { return collection_d<_key, _value>::erase_(sym(s)); }",
+					has_string : "bool (std::string const& s) const { return collection_d<_key, _value>::has(cast<_key>(sym(s))); }",
+					at_string : "_value (std::string const& s) const { return collection_d<_key, _value>::at_(cast<_key>(sym(s))); }",
+					update_string : "void (std::string const& s, _value const& value) { collection_d<_key, _value>::update_(cast<_key>(sym(s)), value); }",
+					insert_string : "bool (std::string const& s, _value const& value) { return collection_d<_key, _value>::insert_(cast<_key>(sym(s)), value); }",
+					erase_string : "bool (std::string const& s) { return collection_d<_key, _value>::erase_(cast<_key>(sym(s))); }",
 
 					// mutable range
 					mutate_begin_ := (<forward_mutator[<flock>]>),

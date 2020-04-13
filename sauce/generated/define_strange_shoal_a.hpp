@@ -293,19 +293,19 @@ class shoal_d : public collection_d< _key , _value , flock_a<> >
 {
 public:
 	inline bool has_string(std :: string const & s ) const
-	{ return collection_d<_key, _value>::has(sym(s)); }
+	{ return collection_d<_key, _value>::has(cast<_key>(sym(s))); }
 
 	inline _value at_string(std :: string const & s ) const
-	{ return collection_d<_key, _value>::at_(sym(s)); }
+	{ return collection_d<_key, _value>::at_(cast<_key>(sym(s))); }
 
 	inline void update_string(std :: string const & s , _value const & value )
-	{ collection_d<_key, _value>::update_(sym(s), value); }
+	{ collection_d<_key, _value>::update_(cast<_key>(sym(s)), value); }
 
 	inline bool insert_string(std :: string const & s , _value const & value )
-	{ return collection_d<_key, _value>::insert_(sym(s), value); }
+	{ return collection_d<_key, _value>::insert_(cast<_key>(sym(s)), value); }
 
 	inline bool erase_string(std :: string const & s )
-	{ return collection_d<_key, _value>::erase_(sym(s)); }
+	{ return collection_d<_key, _value>::erase_(cast<_key>(sym(s))); }
 
 	inline any_a<> mutate_begin__(range_a<> const& arguments)
 	{

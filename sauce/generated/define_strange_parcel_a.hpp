@@ -16,6 +16,10 @@ public:
 
 	inline any_a<> unwrap_() const;
 
+	inline any_a<> unwrap_unique__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> unwrap_unique_(unordered_shoal_a<> & shoal) const;
+
 	inline any_a<> close__(range_a<> const& ___arguments___);
 
 	inline any_a<> close_();
@@ -220,6 +224,7 @@ protected:
 	struct ___parcel_a_handle_base___ : collection_a< any_a<> , parcel_a<> , parcel_a<> >::___collection_a_handle_base___
 	{
 		virtual any_a<> unwrap_() const = 0;
+		virtual any_a<> unwrap_unique_(unordered_shoal_a<> & shoal) const = 0;
 		virtual any_a<> close_() = 0;
 		virtual any_a<> closed_() const = 0;
 		virtual any_a<> reopen_() = 0;
@@ -297,6 +302,8 @@ protected:
 		{}
 
 		virtual inline any_a<> unwrap_() const final;
+
+		virtual inline any_a<> unwrap_unique_(unordered_shoal_a<> & shoal) const final;
 
 		virtual inline any_a<> close_() final;
 
@@ -611,6 +618,7 @@ public:
 		{
 			___unordered_shoal_a___ operations = collection_a< any_a<> , parcel_a<> , parcel_a<> >::template ___operations___<___unordered_shoal_a___>();
 			operations.update_string("unwrap_", native_extraction_t<parcel_a>::create(&parcel_a::unwrap__));
+			operations.update_string("unwrap_unique_", native_extraction_t<parcel_a>::create(&parcel_a::unwrap_unique__));
 			operations.update_string("close_", native_mutation_t<parcel_a>::create(&parcel_a::close__));
 			operations.update_string("closed_", native_extraction_t<parcel_a>::create(&parcel_a::closed__));
 			operations.update_string("reopen_", native_mutation_t<parcel_a>::create(&parcel_a::reopen__));
@@ -691,6 +699,28 @@ public:
 			throw dis("dynamic parcel_d::unwrap_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline any_a<> unwrap_unique__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("unwrap_unique_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::unwrap_unique_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> unwrap_unique_(unordered_shoal_a<> & shoal) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("unwrap_unique_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::unwrap_unique_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this), shoal));
 	}
 
 	inline any_a<> close__(range_a<> const& arguments)

@@ -6,6 +6,8 @@ false &&
 				$$<collection>[<>, <parcel>, <parcel>],
 				{	// parcel
 					unwrap_ :# (<>),
+//TODO something is broken here:
+					unwrap_unique_ :# (shoal :<unordered_shoal[<number_data_uint64>, <>]>&, <>),
 
 					close_ := (<>),
 					closed_ :# (<>),

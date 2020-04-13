@@ -18,6 +18,27 @@ inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unwrap
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unwrap_(); }
 
 template <typename _1>
+inline any_a<> parcel_a<_1>::unwrap_unique__(range_a<> const& ___arguments___) const
+{
+	auto ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
+	{
+		throw dis("parcel_a::unwrap_unique_ passed short range");
+	}
+	auto shoal = cast_dup<unordered_shoal_a<>>(*___it___);
+	return unwrap_unique_(shoal);
+}
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::unwrap_unique_(unordered_shoal_a<> & shoal) const
+{ assert(any_a<>::___handle___); return ___read___().unwrap_unique_(shoal); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unwrap_unique_(unordered_shoal_a<> & shoal) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unwrap_unique_(shoal); }
+
+template <typename _1>
 inline any_a<> parcel_a<_1>::close__(range_a<> const& ___arguments___)
 {
 	return close_();

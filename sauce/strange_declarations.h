@@ -9,6 +9,10 @@ namespace strange
 {
 // things
 class one_t;
+
+// hash
+template <typename ___ego___>
+inline std::size_t hash_of(___ego___ const& thing);
 }
 
 // abstractions
@@ -28,6 +32,13 @@ class one_t;
 #include "generated/declare_strange_cat_a.hpp"
 #include "generated/declare_strange_kind_a.hpp"
 #include "generated/declare_strange_number_data_a.hpp"
+template <> struct std::hash<strange::number_data_a<uint64_t>>
+{
+	inline std::size_t operator()(strange::number_data_a<uint64_t> const& thing) const
+	{
+		return strange::hash_of(thing);
+	}
+};
 
 namespace strange
 {
@@ -45,11 +56,6 @@ using number_data_double_a = number_data_a<double>;
 }
 
 #include "generated/declare_strange_any_a.hpp"
-namespace strange
-{
-	template <typename ___ego___>
-	inline std::size_t hash_of(___ego___ const& thing);
-}
 template <> struct std::hash<strange::any_a<>>
 {
 	inline std::size_t operator()(strange::any_a<> const& thing) const
@@ -61,8 +67,8 @@ template <> struct std::hash<strange::any_a<>>
 
 namespace strange
 {
-	template <typename _1_ = void>
-	using lake_int8_a = lake_a<int8_t>;
+template <typename _1_ = void>
+using lake_int8_a = lake_a<int8_t>;
 }
 
 #include "generated/declare_strange_misunderstanding_a.hpp"

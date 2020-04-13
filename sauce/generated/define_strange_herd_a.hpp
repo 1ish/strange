@@ -303,10 +303,10 @@ class herd_d : public collection_d< _element , _element , _element >
 {
 public:
 	inline bool has_string(std :: string const & s ) const
-	{ return collection_d<_element , _element , _element>::has(sym(s)); }
+	{ return collection_d<_element , _element , _element>::has(cast<_element>(sym(s))); }
 
 	inline _element at_string(std :: string const & s ) const
-	{ return collection_d<_element , _element , _element>::at_(sym(s)); }
+	{ return collection_d<_element , _element , _element>::at_(cast<_element>(sym(s))); }
 
 	inline any_a<> update_thing__(range_a<> const& arguments)
 	{
@@ -334,7 +334,7 @@ public:
 	{ collection_d<_element , _element , _element>::update_(thing, thing); }
 
 	inline void update_string(std :: string const & s )
-	{ collection_d<_element , _element , _element>::update_thing(sym(s)); }
+	{ update_thing(cast<_element>(sym(s))); }
 
 	inline any_a<> insert_thing__(range_a<> const& arguments)
 	{
@@ -362,10 +362,10 @@ public:
 	{ return collection_d<_element , _element , _element>::insert_(thing, thing); }
 
 	inline bool insert_string(std :: string const & s )
-	{ return collection_d<_element , _element , _element>::insert_thing(sym(s)); }
+	{ return insert_thing(cast<_element>(sym(s))); }
 
 	inline bool erase_string(std :: string const & s )
-	{ return collection_d<_element , _element , _element>::erase(sym(s)); }
+	{ return collection_d<_element , _element , _element>::erase(cast<_element>(sym(s))); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 

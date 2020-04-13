@@ -106,4 +106,33 @@ namespace strange
 #include "generated/implement_strange_random_access_extractor_data_a.hpp"
 #include "generated/implement_strange_random_access_mutator_a.hpp"
 #include "generated/implement_strange_random_access_mutator_data_a.hpp"
+
+namespace dart
+{
+	namespace convert
+	{
+		template <>
+		struct conversion_traits<strange::any_a<>>
+		{
+			template <class Packet>
+			Packet to_dart(strange::any_a<> const& thing)
+			{
+				return thing.parcel_().extract_packet();
+			}
+			template <class Packet>
+			strange::any_a<> from_dart(Packet const& pkt)
+			{
+				//TODO return strange::parcel_t<>::create(pkt).unwrap_();
+				return strange::any_a<>{};
+			}
+			template <class Packet>
+			bool compare(Packet const& pkt, strange::any_a<> const& thing)
+			{
+				//TODO return strange::parcel_t<>::create(pkt).unwrap_() == thing;
+				return false;
+			}
+		};
+	}
+}
+
 #endif

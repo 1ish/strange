@@ -151,6 +151,10 @@ public:
 
 	inline parcel_a<> parcel_() const;
 
+	inline any_a<> parcel_unique__(range_a<> const& ___arguments___) const;
+
+	inline parcel_a<> parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const;
+
 protected:
 	struct ___any_a_handle_base___
 	{
@@ -191,6 +195,7 @@ protected:
 		virtual std :: size_t hash() const = 0;
 		virtual bool is(std :: string const & s ) const = 0;
 		virtual parcel_a<> parcel_() const = 0;
+		virtual parcel_a<> parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const = 0;
 	};
 
 	template <typename ___TTT___, typename ___BHB___ = ___any_a_handle_base___>
@@ -276,6 +281,8 @@ protected:
 		virtual inline bool is(std :: string const & s ) const final;
 
 		virtual inline parcel_a<> parcel_() const final;
+
+		virtual inline parcel_a<> parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const final;
 
 		___TTT___ ___value___;
 	};
@@ -522,6 +529,7 @@ public:
 			operations.update_string("greater_or_equal_", native_extraction_t<any_a>::create(&any_a::greater_or_equal__));
 			operations.update_string("hash_", native_extraction_t<any_a>::create(&any_a::hash__));
 			operations.update_string("parcel_", native_extraction_t<any_a>::create(&any_a::parcel__));
+			operations.update_string("parcel_unique_", native_extraction_t<any_a>::create(&any_a::parcel_unique__));
 			return operations;
 		}();
 		return OPERATIONS;

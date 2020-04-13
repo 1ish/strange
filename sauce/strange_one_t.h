@@ -97,6 +97,11 @@ public:
 		return parcel_a<>{};
 	}
 
+	inline parcel_a<> parcel_unique_(unordered_herd_a<number_data_a<uint64_t>>& herd) const
+	{
+		return parcel_a<>{};
+	}
+
 protected:
 	any_a<>::___WEAK___ mutable _meek;
 
