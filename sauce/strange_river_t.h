@@ -209,11 +209,11 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::river::create", native_function_create(&river_t<>::create__));
-		shoal.update_string("strange::river::file", native_function_create(&river_t<>::file__));
-		shoal.update_string("strange::river::in", native_function_create(&river_t<>::in__));
-		shoal.update_string("strange::river::out", native_function_create(&river_t<>::out__));
-		shoal.update_string("strange::river::err", native_function_create(&river_t<>::err__));
+		shoal.update(sym("strange::river::create"), native_function_create(&river_t<>::create__));
+		shoal.update(sym("strange::river::file"), native_function_create(&river_t<>::file__));
+		shoal.update(sym("strange::river::in"), native_function_create(&river_t<>::in__));
+		shoal.update(sym("strange::river::out"), native_function_create(&river_t<>::out__));
+		shoal.update(sym("strange::river::err"), native_function_create(&river_t<>::err__));
 	}
 
 	// range

@@ -93,7 +93,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("<strange::operation>::animate", native_function_create(&operation_c<>::animate__));
+		shoal.update(sym("<strange::operation>::animate"), native_function_create(&operation_c<>::animate__));
 	}
 
 	// operation

@@ -109,7 +109,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_extraction::create", native_function_create(&expression_extraction_t<>::create__));
+		shoal.update(sym("strange::expression_extraction::create"), native_function_create(&expression_extraction_t<>::create__));
 	}
 
 	// expression

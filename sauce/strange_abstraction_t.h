@@ -83,7 +83,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::abstraction::create", native_function_create(&abstraction_t<>::create__));
+		shoal.update(sym("strange::abstraction::create"), native_function_create(&abstraction_t<>::create__));
 	}
 
 	// function

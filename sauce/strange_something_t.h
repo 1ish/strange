@@ -29,7 +29,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::something::create", native_function_create(&something_t<>::create__));
+		shoal.update(sym("strange::something::create"), native_function_create(&something_t<>::create__));
 	}
 
 	// comparison

@@ -167,7 +167,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::range_operator::create", native_function_create(&range_operator_t<>::create__));
+		shoal.update(sym("strange::range_operator::create"), native_function_create(&range_operator_t<>::create__));
 	}
 
 	// range

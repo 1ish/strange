@@ -168,7 +168,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string(type_().to_string() + "::create", native_function_create(&ordered_herd_t<_element, _concurrent_>::create__));
+		shoal.update(sym(type_().to_string() + "::create"), native_function_create(&ordered_herd_t<_element, _concurrent_>::create__));
 	}
 
 	// visitor pattern

@@ -28,8 +28,8 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_break::create", native_function_create(&expression_break_t<>::create__));
-		shoal.update_string("break!", native_function_create(&expression_break_t<>::create__));
+		shoal.update(sym("strange::expression_break::create"), native_function_create(&expression_break_t<>::create__));
+		shoal.update(sym("break!"), native_function_create(&expression_break_t<>::create__));
 	}
 
 	// function

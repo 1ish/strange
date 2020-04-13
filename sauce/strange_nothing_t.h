@@ -35,7 +35,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::nothing::create", native_function_create(&nothing_t<>::create__));
+		shoal.update(sym("strange::nothing::create"), native_function_create(&nothing_t<>::create__));
 	}
 
 	// comparison

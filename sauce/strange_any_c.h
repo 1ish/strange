@@ -104,7 +104,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("<strange::any>::animate", native_function_create(&any_c<>::animate__));
+		shoal.update(sym("<strange::any>::animate"), native_function_create(&any_c<>::animate__));
 	}
 
 	inline any_a<> cat__(range_a<> const& range) const

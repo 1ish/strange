@@ -57,7 +57,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		// nope: shoal.update_string("strange::expression_invoke_attribute::create", native_function_create(&expression_invoke_attribute_t<>::create__));
+		// nope: shoal.update(sym("strange::expression_invoke_attribute::create"), native_function_create(&expression_invoke_attribute_t<>::create__));
 	}
 
 	// function

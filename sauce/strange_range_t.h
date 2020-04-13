@@ -55,7 +55,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string(type_().to_string() + "::create", native_function_create(&range_t<_element>::create__));
+		shoal.update(sym(type_().to_string() + "::create"), native_function_create(&range_t<_element>::create__));
 	}
 
 	// range

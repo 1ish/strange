@@ -39,7 +39,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::misunderstanding::create", native_function_create(&misunderstanding_t<>::create__));
+		shoal.update(sym("strange::misunderstanding::create"), native_function_create(&misunderstanding_t<>::create__));
 	}
 
 	// comparison

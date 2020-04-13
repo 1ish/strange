@@ -553,7 +553,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::tokenizer::create", native_function_create(&tokenizer_t<>::create__));
+		shoal.update(sym("strange::tokenizer::create"), native_function_create(&tokenizer_t<>::create__));
 	}
 
 	// range
@@ -582,44 +582,44 @@ protected:
 		static auto PRECEDENCE = []()
 		{
 			auto precedence = unordered_shoal_t<>::create_();
-			precedence.update_string("@?", number_int_64_t<>::create(85));
-			precedence.update_string("@", number_int_64_t<>::create(85));
-			precedence.update_string("@=", number_int_64_t<>::create(85));
-			precedence.update_string("@+", number_int_64_t<>::create(85));
-			precedence.update_string("@-", number_int_64_t<>::create(85));
-			precedence.update_string("@<", number_int_64_t<>::create(85));
-			precedence.update_string(">@", number_int_64_t<>::create(85));
-			precedence.update_string("@>", number_int_64_t<>::create(85));
-			precedence.update_string("<@", number_int_64_t<>::create(85));
-			precedence.update_string("++", number_int_64_t<>::create(80));
-			precedence.update_string("--", number_int_64_t<>::create(80));
-			precedence.update_string("?", number_int_64_t<>::create(80));
-			precedence.update_string("!", number_int_64_t<>::create(80));
-			precedence.update_string("#", number_int_64_t<>::create(80));
-			precedence.update_string("*", number_int_64_t<>::create(75));
-			precedence.update_string("/", number_int_64_t<>::create(75));
-			precedence.update_string("%", number_int_64_t<>::create(75));
-			precedence.update_string("+", number_int_64_t<>::create(70));
-			precedence.update_string("-", number_int_64_t<>::create(70));
-			precedence.update_string("<", number_int_64_t<>::create(65));
-			precedence.update_string(">", number_int_64_t<>::create(65));
-			precedence.update_string("<=", number_int_64_t<>::create(65));
-			precedence.update_string(">=", number_int_64_t<>::create(65));
-			precedence.update_string("==", number_int_64_t<>::create(60));
-			precedence.update_string("!=", number_int_64_t<>::create(60));
-			precedence.update_string("|", number_int_64_t<>::create(55));
-			precedence.update_string("&&", number_int_64_t<>::create(50));
-			precedence.update_string("!&", number_int_64_t<>::create(50));
-			precedence.update_string("%%", number_int_64_t<>::create(45));
-			precedence.update_string("!%", number_int_64_t<>::create(45));
-			precedence.update_string("||", number_int_64_t<>::create(40));
-			precedence.update_string("!|", number_int_64_t<>::create(40));
-			precedence.update_string("=", number_int_64_t<>::create(35));
-			precedence.update_string("+=", number_int_64_t<>::create(35));
-			precedence.update_string("-=", number_int_64_t<>::create(35));
-			precedence.update_string("*=", number_int_64_t<>::create(35));
-			precedence.update_string("/=", number_int_64_t<>::create(35));
-			precedence.update_string("%=", number_int_64_t<>::create(35));
+			precedence.update(sym("@?"), number_int_64_t<>::create(85));
+			precedence.update(sym("@"), number_int_64_t<>::create(85));
+			precedence.update(sym("@="), number_int_64_t<>::create(85));
+			precedence.update(sym("@+"), number_int_64_t<>::create(85));
+			precedence.update(sym("@-"), number_int_64_t<>::create(85));
+			precedence.update(sym("@<"), number_int_64_t<>::create(85));
+			precedence.update(sym(">@"), number_int_64_t<>::create(85));
+			precedence.update(sym("@>"), number_int_64_t<>::create(85));
+			precedence.update(sym("<@"), number_int_64_t<>::create(85));
+			precedence.update(sym("++"), number_int_64_t<>::create(80));
+			precedence.update(sym("--"), number_int_64_t<>::create(80));
+			precedence.update(sym("?"), number_int_64_t<>::create(80));
+			precedence.update(sym("!"), number_int_64_t<>::create(80));
+			precedence.update(sym("#"), number_int_64_t<>::create(80));
+			precedence.update(sym("*"), number_int_64_t<>::create(75));
+			precedence.update(sym("/"), number_int_64_t<>::create(75));
+			precedence.update(sym("%"), number_int_64_t<>::create(75));
+			precedence.update(sym("+"), number_int_64_t<>::create(70));
+			precedence.update(sym("-"), number_int_64_t<>::create(70));
+			precedence.update(sym("<"), number_int_64_t<>::create(65));
+			precedence.update(sym(">"), number_int_64_t<>::create(65));
+			precedence.update(sym("<="), number_int_64_t<>::create(65));
+			precedence.update(sym(">="), number_int_64_t<>::create(65));
+			precedence.update(sym("=="), number_int_64_t<>::create(60));
+			precedence.update(sym("!="), number_int_64_t<>::create(60));
+			precedence.update(sym("|"), number_int_64_t<>::create(55));
+			precedence.update(sym("&&"), number_int_64_t<>::create(50));
+			precedence.update(sym("!&"), number_int_64_t<>::create(50));
+			precedence.update(sym("%%"), number_int_64_t<>::create(45));
+			precedence.update(sym("!%"), number_int_64_t<>::create(45));
+			precedence.update(sym("||"), number_int_64_t<>::create(40));
+			precedence.update(sym("!|"), number_int_64_t<>::create(40));
+			precedence.update(sym("="), number_int_64_t<>::create(35));
+			precedence.update(sym("+="), number_int_64_t<>::create(35));
+			precedence.update(sym("-="), number_int_64_t<>::create(35));
+			precedence.update(sym("*="), number_int_64_t<>::create(35));
+			precedence.update(sym("/="), number_int_64_t<>::create(35));
+			precedence.update(sym("%="), number_int_64_t<>::create(35));
 			return precedence;
 		}();
 		auto p = PRECEDENCE.at_(sym(str));
