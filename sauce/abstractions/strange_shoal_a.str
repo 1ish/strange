@@ -7,7 +7,6 @@ false &&
 			(	// parent
 				$$<collection>[ #key , #value, <flock> ],
 				{	// shoal
-					update_string : "void (std::string const& s, _value const& value) { collection_d<_key, _value>::update_(cast<_key>(sym(s)), value); }",
 					insert_string : "bool (std::string const& s, _value const& value) { return collection_d<_key, _value>::insert_(cast<_key>(sym(s)), value); }",
 					erase_string : "bool (std::string const& s) { return collection_d<_key, _value>::erase_(cast<_key>(sym(s))); }",
 

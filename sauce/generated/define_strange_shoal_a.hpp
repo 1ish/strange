@@ -12,8 +12,6 @@ template <typename _key, typename _value>
 class shoal_a : public collection_a< _key , _value , flock_a<> >
 {
 public:
-	inline void update_string(std :: string const & s , _value const & value );
-
 	inline bool insert_string(std :: string const & s , _value const & value );
 
 	inline bool erase_string(std :: string const & s );
@@ -29,7 +27,6 @@ public:
 protected:
 	struct ___shoal_a_handle_base___ : collection_a< _key , _value , flock_a<> >::___collection_a_handle_base___
 	{
-		virtual void update_string(std :: string const & s , _value const & value ) = 0;
 		virtual bool insert_string(std :: string const & s , _value const & value ) = 0;
 		virtual bool erase_string(std :: string const & s ) = 0;
 		virtual forward_mutator_a< flock_a<> > mutate_begin_() = 0;
@@ -53,8 +50,6 @@ protected:
 		inline ___shoal_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
 			: collection_a< _key , _value , flock_a<> >::template ___collection_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
-
-		virtual inline void update_string(std :: string const & s , _value const & value ) final;
 
 		virtual inline bool insert_string(std :: string const & s , _value const & value ) final;
 
@@ -272,9 +267,6 @@ template <typename _key, typename _value>
 class shoal_d : public collection_d< _key , _value , flock_a<> >
 {
 public:
-	inline void update_string(std :: string const & s , _value const & value )
-	{ collection_d<_key, _value>::update_(cast<_key>(sym(s)), value); }
-
 	inline bool insert_string(std :: string const & s , _value const & value )
 	{ return collection_d<_key, _value>::insert_(cast<_key>(sym(s)), value); }
 

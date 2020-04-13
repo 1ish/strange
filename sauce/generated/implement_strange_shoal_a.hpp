@@ -3,15 +3,6 @@ namespace strange
 {
 
 template <typename _key, typename _value>
-inline void shoal_a<_key, _value>::update_string(std :: string const & s , _value const & value )
-{ assert(any_a<>::___handle___); ___write___().update_string(s, value); }
-
-template <typename _key, typename _value>
-template <typename ___TTT___, typename ___DHB___>
-inline void shoal_a<_key, _value>::___shoal_a_handle___<___TTT___, ___DHB___>::update_string(std :: string const & s , _value const & value )
-{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.update_string(s, value); }
-
-template <typename _key, typename _value>
 inline bool shoal_a<_key, _value>::insert_string(std :: string const & s , _value const & value )
 { assert(any_a<>::___handle___); return ___write___().insert_string(s, value); }
 

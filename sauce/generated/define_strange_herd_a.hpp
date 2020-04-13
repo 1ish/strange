@@ -18,8 +18,6 @@ public:
 
 	inline void update_thing(_element const & thing );
 
-	inline void update_string(std :: string const & s );
-
 	inline any_a<> insert_thing__(range_a<> const& ___arguments___);
 
 	inline any_a<> insert_thing_(_element const& thing);
@@ -35,7 +33,6 @@ protected:
 	{
 		virtual _element update_thing_(_element const& thing) = 0;
 		virtual void update_thing(_element const & thing ) = 0;
-		virtual void update_string(std :: string const & s ) = 0;
 		virtual any_a<> insert_thing_(_element const& thing) = 0;
 		virtual bool insert_thing(_element const & thing ) = 0;
 		virtual bool insert_string(std :: string const & s ) = 0;
@@ -63,8 +60,6 @@ protected:
 		virtual inline _element update_thing_(_element const& thing) final;
 
 		virtual inline void update_thing(_element const & thing ) final;
-
-		virtual inline void update_string(std :: string const & s ) final;
 
 		virtual inline any_a<> insert_thing_(_element const& thing) final;
 
@@ -306,9 +301,6 @@ public:
 
 	inline void update_thing(_element const & thing )
 	{ update_thing_(thing); }
-
-	inline void update_string(std :: string const & s )
-	{ update_thing(cast<_element>(sym(s))); }
 
 	inline any_a<> insert_thing__(range_a<> const& arguments)
 	{

@@ -8,7 +8,6 @@ false &&
 				{	// herd
 					update_thing_ := (thing :< #element >#, < #element >),
 					update_thing : "void (_element const& thing) { update_thing_(thing); }",
-					update_string : "void (std::string const& s) { update_thing(cast<_element>(sym(s))); }",
 
 					insert_thing_ := (thing :< #element >#, <>),
 					insert_thing : "bool (_element const& thing) { return insert_thing_(thing); }",

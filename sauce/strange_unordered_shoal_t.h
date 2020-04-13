@@ -399,12 +399,6 @@ public:
 		_map[key] = value;
 	}
 
-	inline void update_string(std::string const& s, _value const& value)
-	{
-		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		_map[sym(s)] = value;
-	}
-
 	inline any_a<> insert_(_key const& key, _value const& value)
 	{
 		return boole(insert(key, value));

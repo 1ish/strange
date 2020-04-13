@@ -33,15 +33,6 @@ inline void herd_a<_element>::___herd_a_handle___<___TTT___, ___DHB___>::update_
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.update_thing(thing); }
 
 template <typename _element>
-inline void herd_a<_element>::update_string(std :: string const & s )
-{ assert(any_a<>::___handle___); ___write___().update_string(s); }
-
-template <typename _element>
-template <typename ___TTT___, typename ___DHB___>
-inline void herd_a<_element>::___herd_a_handle___<___TTT___, ___DHB___>::update_string(std :: string const & s )
-{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.update_string(s); }
-
-template <typename _element>
 inline any_a<> herd_a<_element>::insert_thing__(range_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.extract_begin_();

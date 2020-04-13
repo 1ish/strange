@@ -360,11 +360,6 @@ public:
 		_set.insert(thing);
 	}
 
-	inline void update_string(std::string const& s)
-	{
-		update_thing(sym(s));
-	}
-
 	inline any_a<> insert_(_element const& key, _element const&)
 	{
 		return boole(insert_thing(key));
