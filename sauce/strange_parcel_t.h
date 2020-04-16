@@ -165,8 +165,8 @@ private:
 
 		inline std::size_t hash() const
 		{
-			assert(_it->is_finalized());
-			return std::hash<void const*>{}(_it->get_bytes().data());
+			dart_packet copy = *_it;
+			return std::hash<void const*>{}(copy.finalize().get_bytes().data());
 		}
 
 		// forward extractor
@@ -339,7 +339,9 @@ public:
 
 	inline std::size_t hash() const
 	{
-		return 0; //TODO
+		dart_packet copy = _packet;
+		auto bytes = copy.finalize().get_bytes();
+		return std::hash<std::string>{}(std::string{ reinterpret_cast<char const*>(bytes.data()), bytes.size() });
 	}
 
 	// range
