@@ -226,6 +226,11 @@ class ___range_operator_t_share___
 	}
 };
 
+inline range_a<> range_operator_create(range_a<> const& range, any_a<>& thing_ref, range_a<> const& range_ref)
+{
+	return range_operator_t<>::create_(range, thing_ref, range_ref);
+}
+
 } // namespace strange
 
 #endif

@@ -3,6 +3,42 @@ namespace strange
 {
 
 template <typename _1>
+inline any_a<> parcel_a<_1>::unwrap__(range_a<> const& ___arguments___) const
+{
+	return unwrap_();
+}
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::unwrap_() const
+{ assert(any_a<>::___handle___); return ___read___().unwrap_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unwrap_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unwrap_(); }
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::unwrap_unique__(range_a<> const& ___arguments___) const
+{
+	auto ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
+	{
+		throw dis("parcel_a::unwrap_unique_ passed short range");
+	}
+	auto shoal = cast_dup<unordered_shoal_a<number_data_uint64_a<>, strange::any_a<>>>(*___it___);
+	return unwrap_unique_(shoal);
+}
+
+template <typename _1>
+inline any_a<> parcel_a<_1>::unwrap_unique_(unordered_shoal_a<number_data_uint64_a<>, strange::any_a<>> & shoal) const
+{ assert(any_a<>::___handle___); return ___read___().unwrap_unique_(shoal); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unwrap_unique_(unordered_shoal_a<number_data_uint64_a<>, strange::any_a<>> & shoal) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unwrap_unique_(shoal); }
+
+template <typename _1>
 inline bool parcel_a<_1>::operator==(parcel_a < > const & parcel ) const
 { assert(any_a<>::___handle___); return ___read___().operator==(parcel); }
 
@@ -111,6 +147,8 @@ inline ___unordered_shoal_a___ parcel_a<_1>::___operations___()
 	static ___unordered_shoal_a___ OPERATIONS = []()
 	{
 		___unordered_shoal_a___ operations = collection_a< any_a<> , parcel_a<> , parcel_a<> >::template ___operations___<___unordered_shoal_a___>();
+		operations.update(sym("unwrap_"), native_extraction_t<parcel_a>::create(&parcel_a::unwrap__));
+		operations.update(sym("unwrap_unique_"), native_extraction_t<parcel_a>::create(&parcel_a::unwrap_unique__));
 		operations.update(sym("keys_begin_"), native_extraction_t<parcel_a>::create(&parcel_a::keys_begin__));
 		operations.update(sym("keys_end_"), native_extraction_t<parcel_a>::create(&parcel_a::keys_end__));
 		return operations;

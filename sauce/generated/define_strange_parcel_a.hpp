@@ -12,6 +12,14 @@ template <typename _1>
 class parcel_a : public collection_a< any_a<> , parcel_a<> , parcel_a<> >
 {
 public:
+	inline any_a<> unwrap__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> unwrap_() const;
+
+	inline any_a<> unwrap_unique__(range_a<> const& ___arguments___) const;
+
+	inline any_a<> unwrap_unique_(unordered_shoal_a<number_data_uint64_a<>, strange::any_a<>> & shoal) const;
+
 	inline bool operator==(parcel_a < > const & parcel ) const;
 
 	inline bool operator!=(parcel_a < > const & parcel ) const;
@@ -39,6 +47,8 @@ public:
 protected:
 	struct ___parcel_a_handle_base___ : collection_a< any_a<> , parcel_a<> , parcel_a<> >::___collection_a_handle_base___
 	{
+		virtual any_a<> unwrap_() const = 0;
+		virtual any_a<> unwrap_unique_(unordered_shoal_a<number_data_uint64_a<>, strange::any_a<>> & shoal) const = 0;
 		virtual bool operator==(parcel_a < > const & parcel ) const = 0;
 		virtual bool operator!=(parcel_a < > const & parcel ) const = 0;
 		virtual bidirectional_extractor_a< any_a<> > keys_begin_() const = 0;
@@ -68,6 +78,10 @@ protected:
 		inline ___parcel_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
 			: collection_a< any_a<> , parcel_a<> , parcel_a<> >::template ___collection_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
+
+		virtual inline any_a<> unwrap_() const final;
+
+		virtual inline any_a<> unwrap_unique_(unordered_shoal_a<number_data_uint64_a<>, strange::any_a<>> & shoal) const final;
 
 		virtual inline bool operator==(parcel_a < > const & parcel ) const final;
 
@@ -297,6 +311,50 @@ template <typename _1>
 class parcel_d : public collection_d< any_a<> , parcel_a<> , parcel_a<> >
 {
 public:
+	inline any_a<> unwrap__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("unwrap_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::unwrap_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> unwrap_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("unwrap_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::unwrap_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this)));
+	}
+
+	inline any_a<> unwrap_unique__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("unwrap_unique_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::unwrap_unique_ passed non-existent member");
+		}
+		return op.operate(*const_cast<parcel_d*>(this), arguments);
+	}
+
+	inline any_a<> unwrap_unique_(unordered_shoal_a<number_data_uint64_a<>, strange::any_a<>> & shoal) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("unwrap_unique_");
+		if (!op)
+		{
+			throw dis("dynamic parcel_d::unwrap_unique_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this), shoal));
+	}
+
 	inline bool operator==(parcel_a < > const & parcel ) const
 	{ throw dis("dynamic parcel_d::operator==(parcel) not available"); }
 

@@ -308,6 +308,9 @@ inline range_a<_element> range_create();
 template <typename _element = any_a<>>
 inline range_a<_element> range_create(forward_extractor_a<_element> const& begin, forward_extractor_a<_element> const& end);
 
+// range operator
+inline range_a<> range_operator_create(range_a<> const& range, any_a<>& thing_ref, range_a<> const& range_ref);
+
 // flock
 template <typename _element = any_a<>, bool _concurrent_ = false>
 inline flock_a<_element> flock_create();

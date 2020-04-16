@@ -73,7 +73,7 @@ private:
 		inline _element_it const& operator*() const
 		{
 			_parcel_thing._shadow_keys.resize(_parcel_thing.size());
-			auto& thing = _parcel_thing._shadow_keys[_pos];
+			_element_it& thing = _parcel_thing._shadow_keys[_pos];
 			thing = get_();
 			return thing;
 		}
@@ -183,7 +183,7 @@ private:
 		inline _element_it const& operator*() const
 		{
 			_parcel_thing._shadow_values.resize(_parcel_thing.size());
-			auto& thing = _parcel_thing._shadow_values[_pos];
+			_element_it& thing = _parcel_thing._shadow_values[_pos];
 			thing = get_();
 			return thing;
 		}
@@ -381,6 +381,16 @@ public:
 	inline bidirectional_extractor_data_a<parcel_a<>, typename dart_packet::iterator> extract_end() const
 	{
 		return extractor_t<parcel_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend());
+	}
+
+	inline bidirectional_extractor_a<any_a<>> any_begin_() const
+	{
+		return extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cbegin());
+	}
+
+	inline bidirectional_extractor_a<any_a<>> any_end_() const
+	{
+		return extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend());
 	}
 
 	// collection / parcel
@@ -614,6 +624,22 @@ public:
 	inline any_a<> write_lock_() const
 	{
 		return data_t<write_lock_ptr<_concurrent_>>::create(make_write_lock_ptr<_concurrent_>(_mutex));
+	}
+
+	// parcel
+	inline any_a<> unwrap_() const
+	{
+		//TODO to_range_any_()
+		range_a<> contents = range_t<>::create_(any_begin_(), any_end_());
+		auto thing = no();
+		return thing_t<>::invoke__(range_operator_create(contents, thing, range_a<>{}));
+	}
+
+	inline any_a<> unwrap_unique_(unordered_shoal_a<number_data_a<uint64_t>, any_a<>>& shoal) const
+	{
+		//TODO to_range_any_()
+		range_a<> contents = range_t<>::create_(any_begin_(), any_end_());
+		return thing_t<>::invoke__(range_operator_create(contents, shoal, range_a<>{}));
 	}
 
 	// data
