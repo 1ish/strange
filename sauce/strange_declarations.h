@@ -351,6 +351,22 @@ inline ordered_shoal_a<_key, _value> ordered_shoal_create();
 template <typename... Args>
 inline ordered_shoal_a<> ordered_shoal_vals(Args&&... args);
 
+// parcel
+template <bool _concurrent_ = false>
+inline parcel_a<> parcel_create();
+
+template <typename F>
+inline parcel_a<> parcel_create(F&& init);
+
+template <typename... Args>
+inline parcel_a<> parcel_vals(Args&&... args);
+
+template <typename... Args>
+inline parcel_a<> parcel_refs(Args&&... args);
+
+template <typename... Args>
+inline parcel_a<> parcel_dups(Args&&... args);
+
 // squad
 template <typename _element = any_a<>, bool _concurrent_ = false>
 inline squad_a<_element> squad_create();
@@ -522,6 +538,8 @@ template <>
 inline kind_a<> kind_of<std::vector<double>::iterator>();
 template <>
 inline kind_a<> kind_of<std::deque<double>::iterator>();
+template <>
+inline kind_a<> kind_of<dart::packet::iterator>();
 
 // attributes
 inline operation_a<> attribute_extraction_create(any_a<> const& thing);

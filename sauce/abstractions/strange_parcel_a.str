@@ -5,7 +5,7 @@ false &&
 			(	// parent
 				$$<collection>[<>, <parcel>, <parcel>],
 				{	// parcel
-					unwrap_ :# (<>),
+/*					unwrap_ :# (<>),
 					unwrap_unique_ :# (shoal :<unordered_shoal[<number_data_uint64>, <>]>&, <>),
 
 					close_ := (<>),
@@ -67,7 +67,7 @@ false &&
 					is_unordered_shoal_ :# (<>),
 					to_unordered_shoal_ :# (<unordered_shoal[<>, <parcel>]>),
 					to_unordered_shoal_or_ :# (shoal :<unordered_shoal[<>, <parcel>]>#, <unordered_shoal[<>, <parcel>]>),
-
+*/
 					'operator==' : "bool (parcel_a<> const& parcel) const",
 					'operator!=' : "bool (parcel_a<> const& parcel) const",
 
@@ -78,8 +78,6 @@ false &&
 
 					extract_begin : "bidirectional_extractor_data_a<parcel_a<>, typename dart::packet::iterator> () const",
 					extract_end : "bidirectional_extractor_data_a<parcel_a<>, typename dart::packet::iterator> () const",
-					mutate_begin : "bidirectional_mutator_data_a<parcel_a<>, typename dart::packet::iterator> ()",
-					mutate_end : "bidirectional_mutator_data_a<parcel_a<>, typename dart::packet::iterator> ()",
 
 					extract_packet : "dart::packet const& () const",
 					mutate_packet : "dart::packet& ()",

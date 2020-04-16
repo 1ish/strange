@@ -26,6 +26,7 @@
 #include "strange_number_reference_t.h"
 #include "strange_lake_t.h"
 #include "strange_brook_t.h"
+#include "strange_parcel_t.h"
 #include "strange_river_t.h"
 #include "strange_cat_t.h"
 #include "strange_kind_t.h"

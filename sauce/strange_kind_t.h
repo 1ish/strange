@@ -693,6 +693,12 @@ inline kind_a<> kind_of<std::deque<double>::iterator>()
 }
 
 template <>
+inline kind_a<> kind_of<dart::packet::iterator>()
+{
+	return kind_create(1, "\"dart::packet::iterator\"");
+}
+
+template <>
 inline kind_a<> kind_of<std::set<any_a<>>::const_iterator>()
 {
 	return kind_create(1, "\"std::set<any_a<>>::const_iterator\"");
