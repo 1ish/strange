@@ -383,17 +383,14 @@ public:
 		return extractor_t<parcel_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend());
 	}
 
-	inline bidirectional_extractor_a<any_a<>> any_begin_() const
-	{
-		return extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cbegin());
-	}
-
-	inline bidirectional_extractor_a<any_a<>> any_end_() const
-	{
-		return extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend());
-	}
-
 	// collection / parcel
+	inline range_a<> to_range_any_() const
+	{
+		return range_t<>::create_(
+			extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cbegin()),
+			extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend()));
+	}
+
 	inline any_a<> has_(any_a<> const& key) const
 	{
 		return boole(has(key));
@@ -629,17 +626,13 @@ public:
 	// parcel
 	inline any_a<> unwrap_() const
 	{
-		//TODO to_range_any_()
-		range_a<> contents = range_t<>::create_(any_begin_(), any_end_());
 		auto thing = no();
-		return thing_t<>::invoke__(range_operator_create(contents, thing, range_a<>{}));
+		return thing_t<>::invoke__(range_operator_create(to_range_any_(), thing, range_a<>{}));
 	}
 
 	inline any_a<> unwrap_unique_(unordered_shoal_a<number_data_a<uint64_t>, any_a<>>& shoal) const
 	{
-		//TODO to_range_any_()
-		range_a<> contents = range_t<>::create_(any_begin_(), any_end_());
-		return thing_t<>::invoke__(range_operator_create(contents, shoal, range_a<>{}));
+		return thing_t<>::invoke__(range_operator_create(to_range_any_(), shoal, range_a<>{}));
 	}
 
 	// data
