@@ -400,13 +400,14 @@ public:
 
 	inline bool has(any_a<> const& key) const
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		if (check<symbol_a<>>(key))
 		{
-			return _packet.find(fast<symbol_a<>>(key).to_string()) != _packet.cend();
+			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+			return _packet.has_key(fast<symbol_a<>>(key).to_string());
 		}
 		if (check<number_a<>>(key))
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 			return fast<number_a<>>(key).to_uint_64() < _packet.size();
 		}
 		throw dis("strange::parcel::has passed wrong type of key");
@@ -414,13 +415,14 @@ public:
 
 	inline parcel_a<> at_(any_a<> const& key) const
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		if (check<symbol_a<>>(key))
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 			return create(_packet.at(fast<symbol_a<>>(key).to_string()));
 		}
 		if (check<number_a<>>(key))
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 			return create(_packet.at(fast<number_a<>>(key).to_uint_64()));
 		}
 		throw dis("strange::parcel::at passed wrong type of key");
@@ -434,7 +436,17 @@ public:
 
 	inline void update(any_a<> const& key, parcel_a<> const& value)
 	{
-		//TODO
+		if (check<symbol_a<>>(key))
+		{
+			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
+			_packet.set(fast<symbol_a<>>(key).to_string(), value.extract_packet());
+		}
+		if (check<number_a<>>(key))
+		{
+			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
+			_packet.set(fast<number_a<>>(key).to_uint_64(), value.extract_packet());
+		}
+		throw dis("strange::parcel::update passed wrong type of key");
 	}
 
 	inline any_a<> insert_(any_a<> const& key, parcel_a<> const& value)
@@ -444,7 +456,29 @@ public:
 
 	inline bool insert(any_a<> const& key, parcel_a<> const& value)
 	{
-		return false; //TODO
+		if (check<symbol_a<>>(key))
+		{
+			auto const key_string = fast<symbol_a<>>(key).to_string();
+			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
+			bool const result = !_packet.has_key(key_string);
+			if (result)
+			{
+				_packet.insert(key_string, value.extract_packet());
+			}
+			return result;
+		}
+		if (check<number_a<>>(key))
+		{
+			auto const index = fast<number_a<>>(key).to_uint_64();
+			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
+			bool const result = index <= _packet.size();
+			if (result)
+			{
+				_packet.insert(index, value.extract_packet());
+			}
+			return result;
+		}
+		throw dis("strange::parcel::insert passed wrong type of key");
 	}
 
 	inline any_a<> erase_(any_a<> const& key)
@@ -454,8 +488,29 @@ public:
 
 	inline bool erase(any_a<> const& key)
 	{
-		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		return false; //TODO
+		if (check<symbol_a<>>(key))
+		{
+			auto const key_string = fast<symbol_a<>>(key).to_string();
+			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
+			bool const result = _packet.has_key(key_string);
+			if (result)
+			{
+				_packet.erase(key_string);
+			}
+			return result;
+		}
+		if (check<number_a<>>(key))
+		{
+			auto const index = fast<number_a<>>(key).to_uint_64();
+			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
+			bool const result = index < _packet.size();
+			if (result)
+			{
+				_packet.erase(index);
+			}
+			return result;
+		}
+		throw dis("strange::parcel::erase passed wrong type of key");
 	}
 
 	inline ___ego___ clear_()
