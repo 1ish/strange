@@ -67,28 +67,30 @@ public:
 	static inline any_a<> invoke__(range_a<> const& range)
 	{
 		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto end = range.extract_end_();
+		if (it == end)
 		{
 			throw dis("strange::thing::invoke passed empty range");
 		}
 		any_a<> thing = fast_dup(*it);
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			throw dis("strange::thing::invoke passed short range");
 		}
 		any_a<> member = *it;
-		return invoke_member(thing, member, range_create(++it, range.extract_end_()));
+		return invoke_member(thing, member, range_create(++it, end));
 	}
 
 	static inline any_a<> invoke(any_a<>& thing, range_a<> const& range)
 	{
 		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto end = range.extract_end_();
+		if (it == end)
 		{
 			throw dis("strange::thing::invoke passed short range");
 		}
 		any_a<> member = *it;
-		return invoke_member(thing, member, range_create(++it, range.extract_end_()));
+		return invoke_member(thing, member, range_create(++it, end));
 	}
 
 	static inline any_a<> invoke_member(any_a<>& thing, any_a<> const& member, range_a<> const& range)
@@ -104,23 +106,25 @@ public:
 	static inline any_a<> operate__(range_a<> const& range)
 	{
 		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto end = range.extract_end_();
+		if (it == end)
 		{
 			throw dis("strange::thing::operate passed empty range");
 		}
 		any_a<> thing = fast_dup(*it);
-		return thing.operate(thing, range_create(++it, range.extract_end_()));
+		return thing.operate(thing, range_create(++it, end));
 	}
 
 	static inline any_a<> operate(any_a<>& thing, range_a<> const& range)
 	{
 		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto end = range.extract_end_();
+		if (it == end)
 		{
 			throw dis("strange::thing::operate passed short range");
 		}
 		any_a<> operation = *it;
-		return operation.operate(thing, range_create(++it, range.extract_end_()));
+		return operation.operate(thing, range_create(++it, end));
 	}
 
 	// identification

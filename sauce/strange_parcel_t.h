@@ -683,15 +683,78 @@ public:
 	// parcel
 	inline any_a<> unwrap_() const
 	{
-		auto thing = no();
-		return thing_t<>::invoke__(range_operator_create(to_range_any_(), thing, range_a<>{}));
+		auto no_shoal = no();
+		return unwrap(no_shoal);
 	}
 
 	inline any_a<> unwrap_unique_(unordered_shoal_a<number_data_a<uint64_t>, any_a<>>& shoal) const
 	{
-		return thing_t<>::invoke__(range_operator_create(to_range_any_(), shoal, range_a<>{}));
+		return unwrap(shoal);
 	}
 
+	inline any_a<> unwrap(any_a<>& shoal) const
+	{
+		switch (_packet.get_type())
+		{
+		case dart_packet::type::array:
+		{
+			auto range = range_operator_create(to_range_any_(), shoal, range_a<>{});
+			auto it = range.extract_begin_();
+			auto end = range.extract_end_();
+			if (it == end)
+			{
+				throw dis("strange::parcel::unwrap called for empty array");
+			}
+			auto name = *it;
+			if (!check<symbol_a<>>(name))
+			{
+				throw dis("strange::parcel::unwrap called for array with non-symbol function name");
+			}
+			auto function = shared().at_(fast<symbol_a<>>(name));
+			if (!function)
+			{
+				throw dis("strange::parcel::unwrap called for array with unrecognised function name");
+			}
+			return function.operate(function, range_create(++it, end));
+		}
+		case dart_packet::type::boolean:
+		{
+			bool const boolean = _packet.boolean();
+			if (boolean == bool{ shoal })
+			{
+				return shoal;
+			}
+			return boole(boolean);
+		}
+		case dart_packet::type::decimal:
+			return num(_packet.decimal());
+		case dart_packet::type::integer:
+			if (check<unordered_shoal_a<number_data_a<uint64_t>, any_a<>>>(shoal))
+			{
+				auto thing = fast<unordered_shoal_a<number_data_a<uint64_t>, any_a<>>>(shoal).at_(num(_packet.integer()).to_uint_64_());
+				if (!thing)
+				{
+					throw dis("strange::parcel::unwrap called for integer with unknown reference");
+				}
+				return thing;
+			}
+			return num(_packet.integer());
+		case dart_packet::type::null:
+			return any_a<>{};
+		case dart_packet::type::object:
+			return thing_t<___ego___>::me_();
+		case dart_packet::type::string:
+			return sym(_packet.str());
+		}
+		throw dis("strange::parcel::unwrap called for unrecognised packet type");
+	}
+
+	// function
+	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
+	{
+		return unwrap(thing);
+	}
+	
 	// data
 	inline dart_packet const& extract_packet() const
 	{

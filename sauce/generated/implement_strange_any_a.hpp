@@ -114,7 +114,8 @@ template <typename _symbol, typename _cat, typename _kind, typename _number_data
 inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::visit__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("any_a::visit_ passed short range");
 	}
@@ -177,7 +178,8 @@ template <typename _symbol, typename _cat, typename _kind, typename _number_data
 inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::identical__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("any_a::identical_ passed short range");
 	}
@@ -255,7 +257,8 @@ template <typename _symbol, typename _cat, typename _kind, typename _number_data
 inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::same__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("any_a::same_ passed short range");
 	}
@@ -280,7 +283,8 @@ template <typename _symbol, typename _cat, typename _kind, typename _number_data
 inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::different__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("any_a::different_ passed short range");
 	}
@@ -300,7 +304,8 @@ template <typename _symbol, typename _cat, typename _kind, typename _number_data
 inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::less_than__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("any_a::less_than_ passed short range");
 	}
@@ -325,7 +330,8 @@ template <typename _symbol, typename _cat, typename _kind, typename _number_data
 inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::greater_than__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("any_a::greater_than_ passed short range");
 	}
@@ -350,7 +356,8 @@ template <typename _symbol, typename _cat, typename _kind, typename _number_data
 inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::less_or_equal__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("any_a::less_or_equal_ passed short range");
 	}
@@ -375,7 +382,8 @@ template <typename _symbol, typename _cat, typename _kind, typename _number_data
 inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::greater_or_equal__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("any_a::greater_or_equal_ passed short range");
 	}
@@ -448,7 +456,8 @@ template <typename _symbol, typename _cat, typename _kind, typename _number_data
 inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::to_parcel_unique__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("any_a::to_parcel_unique_ passed short range");
 	}

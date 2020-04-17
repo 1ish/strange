@@ -6,7 +6,8 @@ template <typename _element>
 inline any_a<> herd_a<_element>::update_thing__(range_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("herd_a::update_thing_ passed short range");
 	}
@@ -36,7 +37,8 @@ template <typename _element>
 inline any_a<> herd_a<_element>::insert_thing__(range_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("herd_a::insert_thing_ passed short range");
 	}

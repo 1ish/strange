@@ -6,7 +6,8 @@ template <typename _element>
 inline any_a<> random_access_mutator_a<_element>::self_add__(range_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("random_access_mutator_a::self_add_ passed short range");
 	}
@@ -39,7 +40,8 @@ template <typename _element>
 inline any_a<> random_access_mutator_a<_element>::add__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("random_access_mutator_a::add_ passed short range");
 	}
@@ -64,7 +66,8 @@ template <typename _element>
 inline any_a<> random_access_mutator_a<_element>::self_subtract__(range_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("random_access_mutator_a::self_subtract_ passed short range");
 	}
@@ -97,7 +100,8 @@ template <typename _element>
 inline any_a<> random_access_mutator_a<_element>::subtract__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("random_access_mutator_a::subtract_ passed short range");
 	}

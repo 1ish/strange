@@ -18,7 +18,8 @@ public:
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		auto it = terms.extract_begin_();
-		if (it == terms.extract_end_())
+		auto end = terms.extract_end_();
+		if (it == end)
 		{
 			throw dis(token.report() + "strange::expression_extraction::create not passed any terms");
 		}
@@ -32,16 +33,16 @@ public:
 		auto expressions = flock_t<>::create_();
 		auto defaults = flock_t<>::create_();
 		any_a<> expression = expression_t<>::create(token);
-		bool end = ++it == terms.extract_end_();
-		while (!end)
+		bool at_end = ++it == end;
+		while (!at_end)
 		{
 			auto const& term = *it;
-			end = ++it == terms.extract_end_();
+			at_end = ++it == end;
 			if (!check<expression_a<>>(term))
 			{
 				throw dis(token.report() + "strange::expression_extraction::create passed non-expression term");
 			}
-			if (end) // expression
+			if (at_end) // expression
 			{
 				expression = term;
 				break;
@@ -289,7 +290,9 @@ public:
 				"\treturn " + member + "();\n");
 			return;
 		}
-		river.write_string("\tauto ___it___ = ___arguments___.extract_begin_();\n");
+		river.write_string(
+			"\tauto ___it___ = ___arguments___.extract_begin_();\n"
+			"\tauto ___end___ = ___arguments___.extract_end_();\n");
 		std::string arguments = "(";
 		auto kit = _kinds.extract_vector().cbegin();
 		bool first = true;
@@ -339,7 +342,7 @@ public:
 				optional = kind.optional();
 			}
 			river.write_string(
-				"\tif (" + std::string(first ? "___it___" : "++___it___") + " == ___arguments___.extract_end_())\n"
+				"\tif (" + std::string(first ? "___it___" : "++___it___") + " == ___end___)\n"
 				"\t{\n" +
 				(optional
 					? "\t\treturn " + member + arguments + ");\n"

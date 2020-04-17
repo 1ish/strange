@@ -21,7 +21,8 @@ template <typename _element>
 inline any_a<> forward_mutator_a<_element>::set__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("forward_mutator_a::set_ passed short range");
 	}

@@ -102,7 +102,8 @@ template <typename _1>
 inline any_a<> symbol_a<_1>::add__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("symbol_a::add_ passed short range");
 	}

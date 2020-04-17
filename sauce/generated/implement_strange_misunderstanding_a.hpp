@@ -30,7 +30,8 @@ template <typename _lake_int8>
 inline any_a<> misunderstanding_a<_lake_int8>::add__(range_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("misunderstanding_a::add_ passed short range");
 	}

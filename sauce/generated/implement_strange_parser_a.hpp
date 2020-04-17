@@ -6,7 +6,8 @@ template <typename _1>
 inline any_a<> parser_a<_1>::parse__(range_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
+	auto ___end___ = ___arguments___.extract_end_();
+	if (___it___ == ___end___)
 	{
 		throw dis("parser_a::parse_ passed short range");
 	}
