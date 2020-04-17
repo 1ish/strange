@@ -106,7 +106,7 @@ namespace strange
 #include "generated/implement_strange_random_access_extractor_data_a.hpp"
 #include "generated/implement_strange_random_access_mutator_a.hpp"
 #include "generated/implement_strange_random_access_mutator_data_a.hpp"
-
+/*
 namespace dart
 {
 	namespace convert
@@ -132,5 +132,5 @@ namespace dart
 		};
 	}
 }
-
+*/
 #endif
