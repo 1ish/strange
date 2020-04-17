@@ -698,24 +698,64 @@ public:
 		{
 		case dart_packet::type::array:
 		{
-			auto range = range_operator_create(to_range_any_(), shoal, range_a<>{});
-			auto it = range.extract_begin_();
-			auto end = range.extract_end_();
-			if (it == end)
+			auto it = _packet.cbegin();
+			auto end = _packet.cend();
+			if (it == end || !it->is_boolean())
 			{
-				throw dis("strange::parcel::unwrap called for empty array");
+				break;
 			}
-			auto name = *it;
-			if (!check<symbol_a<>>(name))
+			auto unique = it->boolean();
+			if (++it == end)
 			{
-				throw dis("strange::parcel::unwrap called for array with non-symbol function name");
+				throw dis("strange::parcel::unwrap called for array with initial boolean and nothing else");
 			}
-			auto function = shared().at_(fast<symbol_a<>>(name));
+			number_data_a<uint64_t> id;
+			if (unique)
+			{
+				if (!it->is_integer())
+				{
+					throw dis("strange::parcel::unwrap called for array with unique true but no reference id");
+				}
+				id = num(static_cast<uint64_t>(it->integer()));
+				if (++it == end)
+				{
+					if (!check<unordered_shoal_a<number_data_a<uint64_t>, any_a<>>>(shoal))
+					{
+						throw dis("strange::parcel::unwrap called for array with reference id but no shoal");
+					}
+					auto unordered_shoal = fast<unordered_shoal_a<number_data_a<uint64_t>, any_a<>>>(shoal);
+					if (!unordered_shoal.has(id))
+					{
+						throw dis("strange::parcel::unwrap called for array with unknown reference id");
+					}
+					return unordered_shoal.at_(id);
+				}
+			}
+			if (!it->is_str())
+			{
+				throw dis("strange::parcel::unwrap called for array with no name");
+			}
+			auto name = sym(it->str());
+			auto function = shared().at_(name);
 			if (!function)
 			{
-				throw dis("strange::parcel::unwrap called for array with unrecognised function name");
+				throw dis("strange::parcel::unwrap called for array with unrecognised function name: ") + name;
 			}
-			return function.operate(function, range_create(++it, end));
+			auto range = (++it == end)
+				? range_t<>::create_()
+				: range_operator_create(
+					range_t<>::create_(
+						extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, it),
+						extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, end)),
+					shoal, range_a<>{});
+			auto result = function.operate(function, range);
+			if (unique && 
+				check<unordered_shoal_a<number_data_a<uint64_t>, any_a<>>>(shoal) &&
+				!fast<unordered_shoal_a<number_data_a<uint64_t>, any_a<>>>(shoal).insert(id, result))
+			{
+				throw dis("strange::parcel::unwrap called for array with duplicate reference id");
+			}
+			return result;
 		}
 		case dart_packet::type::boolean:
 		{
@@ -729,28 +769,19 @@ public:
 		case dart_packet::type::decimal:
 			return num(_packet.decimal());
 		case dart_packet::type::integer:
-			if (check<unordered_shoal_a<number_data_a<uint64_t>, any_a<>>>(shoal))
-			{
-				auto thing = fast<unordered_shoal_a<number_data_a<uint64_t>, any_a<>>>(shoal).at_(num(_packet.integer()).to_uint_64_());
-				if (!thing)
-				{
-					throw dis("strange::parcel::unwrap called for integer with unknown reference");
-				}
-				return thing;
-			}
 			return num(_packet.integer());
 		case dart_packet::type::null:
 			return any_a<>{};
-		case dart_packet::type::object:
-			return thing_t<___ego___>::me_();
 		case dart_packet::type::string:
 			return sym(_packet.str());
+		default:
+			break;
 		}
-		throw dis("strange::parcel::unwrap called for unrecognised packet type");
+		return thing_t<___ego___>::me_();
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const&) const
 	{
 		return unwrap(thing);
 	}
