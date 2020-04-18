@@ -31,12 +31,12 @@ protected:
 	struct ___shoal_a_handle___ : collection_a< _key , _value , flock_a<> >::template ___collection_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline ___shoal_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
+		inline ___shoal_a_handle___(___TTT___ value, typename std_enable_if_t<std::is_reference<___UUU___>::value>* = 0)
 			: collection_a< _key , _value , flock_a<> >::template ___collection_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline ___shoal_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
+		inline ___shoal_a_handle___(___TTT___ value, typename std_enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: collection_a< _key , _value , flock_a<> >::template ___collection_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
@@ -65,12 +65,12 @@ private:
 	struct ___shoal_a_handle_final___ final : ___shoal_a_handle___<___TTT___>
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline ___shoal_a_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
+		inline ___shoal_a_handle_final___(___TTT___ value, typename std_enable_if_t<std::is_reference<___UUU___>::value>* = 0)
 			: ___shoal_a_handle___<___TTT___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline ___shoal_a_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
+		inline ___shoal_a_handle_final___(___TTT___ value, typename std_enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: ___shoal_a_handle___<___TTT___>{ std::move(value) }
 		{}
 
@@ -150,7 +150,7 @@ public:
 		assert(!handle || std::dynamic_pointer_cast<___shoal_a_handle_base___>(handle));
 	}
 
-	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<shoal_a, std::decay_t<___TTT___>>::value>>
+	template <typename ___TTT___, typename = typename std_enable_if_t<!std::is_base_of<shoal_a, std::decay_t<___TTT___>>::value>>
 	explicit inline shoal_a(___TTT___ value) noexcept
 		: collection_a< _key , _value , flock_a<> >{ std::make_shared<___shoal_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
@@ -172,7 +172,7 @@ public:
 		return *this;
 	}
 
-	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<shoal_a, std::decay_t<___TTT___>>::value>>
+	template <typename ___TTT___, typename = typename std_enable_if_t<!std::is_base_of<shoal_a, std::decay_t<___TTT___>>::value>>
 	inline shoal_a& operator=(___TTT___ value) noexcept
 	{
 		shoal_a temp{ std::move(value) };

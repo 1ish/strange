@@ -39,12 +39,12 @@ protected:
 	struct ___unordered_herd_a_handle___ : herd_a< _element >::template ___herd_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline ___unordered_herd_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
+		inline ___unordered_herd_a_handle___(___TTT___ value, typename std_enable_if_t<std::is_reference<___UUU___>::value>* = 0)
 			: herd_a< _element >::template ___herd_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline ___unordered_herd_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
+		inline ___unordered_herd_a_handle___(___TTT___ value, typename std_enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: herd_a< _element >::template ___herd_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
@@ -81,12 +81,12 @@ private:
 	struct ___unordered_herd_a_handle_final___ final : ___unordered_herd_a_handle___<___TTT___>
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline ___unordered_herd_a_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
+		inline ___unordered_herd_a_handle_final___(___TTT___ value, typename std_enable_if_t<std::is_reference<___UUU___>::value>* = 0)
 			: ___unordered_herd_a_handle___<___TTT___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline ___unordered_herd_a_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
+		inline ___unordered_herd_a_handle_final___(___TTT___ value, typename std_enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: ___unordered_herd_a_handle___<___TTT___>{ std::move(value) }
 		{}
 
@@ -166,7 +166,7 @@ public:
 		assert(!handle || std::dynamic_pointer_cast<___unordered_herd_a_handle_base___>(handle));
 	}
 
-	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<unordered_herd_a, std::decay_t<___TTT___>>::value>>
+	template <typename ___TTT___, typename = typename std_enable_if_t<!std::is_base_of<unordered_herd_a, std::decay_t<___TTT___>>::value>>
 	explicit inline unordered_herd_a(___TTT___ value) noexcept
 		: herd_a< _element >{ std::make_shared<___unordered_herd_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
@@ -188,7 +188,7 @@ public:
 		return *this;
 	}
 
-	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<unordered_herd_a, std::decay_t<___TTT___>>::value>>
+	template <typename ___TTT___, typename = typename std_enable_if_t<!std::is_base_of<unordered_herd_a, std::decay_t<___TTT___>>::value>>
 	inline unordered_herd_a& operator=(___TTT___ value) noexcept
 	{
 		unordered_herd_a temp{ std::move(value) };

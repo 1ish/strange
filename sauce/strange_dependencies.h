@@ -48,6 +48,8 @@ namespace strange
 	using std_weak_ptr = std::weak_ptr<_thing>;
 	template<typename _thing>
 	using std_shared_ptr = std::shared_ptr<_thing>;
+	template<bool _condition, typename _type = void>
+	using std_enable_if_t = std::enable_if_t<_condition, _type>;
 
 	using dart_packet = dart::packet;
 }
