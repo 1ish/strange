@@ -32,12 +32,12 @@ protected:
 	struct ___bidirectional_mutator_a_handle___ : forward_mutator_a< _element >::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline ___bidirectional_mutator_a_handle___(___TTT___ value, typename std_enable_if_t<std::is_reference<___UUU___>::value>* = 0)
+		inline ___bidirectional_mutator_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
 			: forward_mutator_a< _element >::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline ___bidirectional_mutator_a_handle___(___TTT___ value, typename std_enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
+		inline ___bidirectional_mutator_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: forward_mutator_a< _element >::template ___forward_mutator_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
@@ -64,12 +64,12 @@ private:
 	struct ___bidirectional_mutator_a_handle_final___ final : ___bidirectional_mutator_a_handle___<___TTT___>
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline ___bidirectional_mutator_a_handle_final___(___TTT___ value, typename std_enable_if_t<std::is_reference<___UUU___>::value>* = 0)
+		inline ___bidirectional_mutator_a_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
 			: ___bidirectional_mutator_a_handle___<___TTT___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline ___bidirectional_mutator_a_handle_final___(___TTT___ value, typename std_enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
+		inline ___bidirectional_mutator_a_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: ___bidirectional_mutator_a_handle___<___TTT___>{ std::move(value) }
 		{}
 
@@ -149,7 +149,7 @@ public:
 		assert(!handle || std::dynamic_pointer_cast<___bidirectional_mutator_a_handle_base___>(handle));
 	}
 
-	template <typename ___TTT___, typename = typename std_enable_if_t<!std::is_base_of<bidirectional_mutator_a, std::decay_t<___TTT___>>::value>>
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<bidirectional_mutator_a, std::decay_t<___TTT___>>::value>>
 	explicit inline bidirectional_mutator_a(___TTT___ value) noexcept
 		: forward_mutator_a< _element >{ std::make_shared<___bidirectional_mutator_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
@@ -171,7 +171,7 @@ public:
 		return *this;
 	}
 
-	template <typename ___TTT___, typename = typename std_enable_if_t<!std::is_base_of<bidirectional_mutator_a, std::decay_t<___TTT___>>::value>>
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<bidirectional_mutator_a, std::decay_t<___TTT___>>::value>>
 	inline bidirectional_mutator_a& operator=(___TTT___ value) noexcept
 	{
 		bidirectional_mutator_a temp{ std::move(value) };

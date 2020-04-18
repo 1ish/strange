@@ -68,12 +68,12 @@ protected:
 	struct ___cat_a_handle___ : symbol_a<>::template ___symbol_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline ___cat_a_handle___(___TTT___ value, typename std_enable_if_t<std::is_reference<___UUU___>::value>* = 0)
+		inline ___cat_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
 			: symbol_a<>::template ___symbol_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline ___cat_a_handle___(___TTT___ value, typename std_enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
+		inline ___cat_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: symbol_a<>::template ___symbol_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
@@ -120,12 +120,12 @@ private:
 	struct ___cat_a_handle_final___ final : ___cat_a_handle___<___TTT___>
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline ___cat_a_handle_final___(___TTT___ value, typename std_enable_if_t<std::is_reference<___UUU___>::value>* = 0)
+		inline ___cat_a_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
 			: ___cat_a_handle___<___TTT___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline ___cat_a_handle_final___(___TTT___ value, typename std_enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
+		inline ___cat_a_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: ___cat_a_handle___<___TTT___>{ std::move(value) }
 		{}
 
@@ -205,7 +205,7 @@ public:
 		assert(!handle || std::dynamic_pointer_cast<___cat_a_handle_base___>(handle));
 	}
 
-	template <typename ___TTT___, typename = typename std_enable_if_t<!std::is_base_of<cat_a, std::decay_t<___TTT___>>::value>>
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<cat_a, std::decay_t<___TTT___>>::value>>
 	explicit inline cat_a(___TTT___ value) noexcept
 		: symbol_a<>{ std::make_shared<___cat_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
@@ -227,7 +227,7 @@ public:
 		return *this;
 	}
 
-	template <typename ___TTT___, typename = typename std_enable_if_t<!std::is_base_of<cat_a, std::decay_t<___TTT___>>::value>>
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<cat_a, std::decay_t<___TTT___>>::value>>
 	inline cat_a& operator=(___TTT___ value) noexcept
 	{
 		cat_a temp{ std::move(value) };

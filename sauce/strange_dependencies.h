@@ -28,28 +28,37 @@
 namespace strange
 {
 	using std_size_t = std::size_t;
+
 	using std_string = std::string;
+
 	using std_stringstream = std::stringstream;
+
 	template<typename _element>
 	using std_deque = std::deque<_element>;
+
 	template<typename _element>
 	using std_vector = std::vector<_element>;
+
 	template<typename _element>
 	using std_set = std::set<_element>;
+
 	template<typename _key, typename _value>
 	using std_map = std::map<_key, _value>;
+
 	template<typename _char>
 	using std_istreambuf_iterator = std::istreambuf_iterator<_char>;
+
 	template<typename _element>
 	using std_unordered_set = std::unordered_set<_element>;
+
 	template<typename _key, typename _value>
 	using std_unordered_map = std::unordered_map<_key, _value>;
+
 	template<typename _thing>
 	using std_weak_ptr = std::weak_ptr<_thing>;
+
 	template<typename _thing>
 	using std_shared_ptr = std::shared_ptr<_thing>;
-	template<bool _condition, typename _type = void>
-	using std_enable_if_t = std::enable_if_t<_condition, _type>;
 
 	using dart_packet = dart::packet;
 }

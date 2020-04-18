@@ -85,12 +85,12 @@ protected:
 	struct ___token_a_handle___ : any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline ___token_a_handle___(___TTT___ value, typename std_enable_if_t<std::is_reference<___UUU___>::value>* = 0)
+		inline ___token_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
 			: any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline ___token_a_handle___(___TTT___ value, typename std_enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
+		inline ___token_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
@@ -147,12 +147,12 @@ private:
 	struct ___token_a_handle_final___ final : ___token_a_handle___<___TTT___>
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline ___token_a_handle_final___(___TTT___ value, typename std_enable_if_t<std::is_reference<___UUU___>::value>* = 0)
+		inline ___token_a_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
 			: ___token_a_handle___<___TTT___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline ___token_a_handle_final___(___TTT___ value, typename std_enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
+		inline ___token_a_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: ___token_a_handle___<___TTT___>{ std::move(value) }
 		{}
 
@@ -232,7 +232,7 @@ public:
 		assert(!handle || std::dynamic_pointer_cast<___token_a_handle_base___>(handle));
 	}
 
-	template <typename ___TTT___, typename = typename std_enable_if_t<!std::is_base_of<token_a, std::decay_t<___TTT___>>::value>>
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<token_a, std::decay_t<___TTT___>>::value>>
 	explicit inline token_a(___TTT___ value) noexcept
 		: any_a<>{ std::make_shared<___token_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
@@ -254,7 +254,7 @@ public:
 		return *this;
 	}
 
-	template <typename ___TTT___, typename = typename std_enable_if_t<!std::is_base_of<token_a, std::decay_t<___TTT___>>::value>>
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<token_a, std::decay_t<___TTT___>>::value>>
 	inline token_a& operator=(___TTT___ value) noexcept
 	{
 		token_a temp{ std::move(value) };

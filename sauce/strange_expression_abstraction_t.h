@@ -1611,12 +1611,12 @@ protected:
 				"\tstruct ___" + class_name + "_handle___ : ___BHB___\n"
 				"\t{\n"
 				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
-				"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std_enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
+				"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
 				"\t\t\t: ___value___{ value }\n"
 				"\t\t{}\n\n"
 
 				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
-				"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std_enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
+				"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
 				"\t\t\t: ___value___{ std::move(value) }\n"
 				"\t\t{}\n\n"
 
@@ -1642,12 +1642,12 @@ protected:
 				"\tstruct ___" + class_name + "_handle___ : " + base_name + base_aspects + "::template ___" + base_name + "_handle___<___TTT___, ___DHB___>\n"
 				"\t{\n"
 				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
-				"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std_enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
+				"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
 				"\t\t\t: " + base_name + base_aspects + "::template ___" + base_name + "_handle___<___TTT___, ___DHB___>{ value }\n"
 				"\t\t{}\n\n"
 
 				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
-				"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std_enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
+				"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
 				"\t\t\t: " + base_name + base_aspects + "::template ___" + base_name + "_handle___<___TTT___, ___DHB___>{ std::move(value) }\n"
 				"\t\t{}\n\n"
 
@@ -1684,12 +1684,12 @@ protected:
 				"\tstruct ___" + class_name + "_handle_final___ final : ___" + class_name + "_handle___<___TTT___>\n"
 				"\t{\n"
 				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
-				"\t\tinline ___" + class_name + "_handle_final___(___TTT___ value, typename std_enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
+				"\t\tinline ___" + class_name + "_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
 				"\t\t\t: ___" + class_name + "_handle___<___TTT___>{ value }\n"
 				"\t\t{}\n\n"
 
 				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
-				"\t\tinline ___" + class_name + "_handle_final___(___TTT___ value, typename std_enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
+				"\t\tinline ___" + class_name + "_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
 				"\t\t\t: ___" + class_name + "_handle___<___TTT___>{ std::move(value) }\n"
 				"\t\t{}\n\n"
 
@@ -1733,12 +1733,12 @@ protected:
 				"\tstruct ___" + class_name + "_handle_final___ final : ___" + class_name + "_handle___<___TTT___>\n"
 				"\t{\n"
 				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
-				"\t\tinline ___" + class_name + "_handle_final___(___TTT___ value, typename std_enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
+				"\t\tinline ___" + class_name + "_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
 				"\t\t\t: ___" + class_name + "_handle___<___TTT___>{ value }\n"
 				"\t\t{}\n\n"
 
 				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
-				"\t\tinline ___" + class_name + "_handle_final___(___TTT___ value, typename std_enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
+				"\t\tinline ___" + class_name + "_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
 				"\t\t\t: ___" + class_name + "_handle___<___TTT___>{ std::move(value) }\n"
 				"\t\t{}\n\n"
 
@@ -1952,7 +1952,7 @@ protected:
 				"\t\t, ___handle___{ reinterpret_cast<___SHARED___&>(handle) }\n"
 				"\t{}\n\n"
 
-				"\ttemplate <typename ___TTT___, typename = typename std_enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
+				"\ttemplate <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
 				"\texplicit inline " + class_name + "(___TTT___ value) noexcept\n"
 				"\t\t: ___shared___{ std::make_shared<___" + class_name + "_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }\n"
 				"\t\t, ___handle___{ ___shared___ }\n"
@@ -1975,7 +1975,7 @@ protected:
 				"\t\treturn *this;\n"
 				"\t}\n\n"
 
-				"\ttemplate <typename ___TTT___, typename = typename std_enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
+				"\ttemplate <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
 				"\tinline " + class_name + "& operator=(___TTT___ value) noexcept\n"
 				"\t{\n"
 				"\t\t" + class_name + " temp{ std::move(value) };\n"
@@ -2028,7 +2028,7 @@ protected:
 				"\t\tassert(!handle || std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(handle));\n"
 				"\t}\n\n"
 
-				"\ttemplate <typename ___TTT___, typename = typename std_enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
+				"\ttemplate <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
 				"\texplicit inline " + class_name + "(___TTT___ value) noexcept\n"
 				"\t\t: " + base_name + base_aspects + "{ std::make_shared<___" + class_name + "_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }\n"
 				"\t{\n"
@@ -2050,7 +2050,7 @@ protected:
 				"\t\treturn *this;\n"
 				"\t}\n\n"
 
-				"\ttemplate <typename ___TTT___, typename = typename std_enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
+				"\ttemplate <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
 				"\tinline " + class_name + "& operator=(___TTT___ value) noexcept\n"
 				"\t{\n"
 				"\t\t" + class_name + " temp{ std::move(value) };\n"

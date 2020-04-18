@@ -202,12 +202,12 @@ protected:
 	struct ___any_a_handle___ : ___BHB___
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline ___any_a_handle___(___TTT___ value, typename std_enable_if_t<std::is_reference<___UUU___>::value>* = 0)
+		inline ___any_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
 			: ___value___{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline ___any_a_handle___(___TTT___ value, typename std_enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
+		inline ___any_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: ___value___{ std::move(value) }
 		{}
 
@@ -306,12 +306,12 @@ private:
 	struct ___any_a_handle_final___ final : ___any_a_handle___<___TTT___>
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline ___any_a_handle_final___(___TTT___ value, typename std_enable_if_t<std::is_reference<___UUU___>::value>* = 0)
+		inline ___any_a_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
 			: ___any_a_handle___<___TTT___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline ___any_a_handle_final___(___TTT___ value, typename std_enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
+		inline ___any_a_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: ___any_a_handle___<___TTT___>{ std::move(value) }
 		{}
 
@@ -425,7 +425,7 @@ public:
 		, ___handle___{ reinterpret_cast<___SHARED___&>(handle) }
 	{}
 
-	template <typename ___TTT___, typename = typename std_enable_if_t<!std::is_base_of<any_a, std::decay_t<___TTT___>>::value>>
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<any_a, std::decay_t<___TTT___>>::value>>
 	explicit inline any_a(___TTT___ value) noexcept
 		: ___shared___{ std::make_shared<___any_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 		, ___handle___{ ___shared___ }
@@ -448,7 +448,7 @@ public:
 		return *this;
 	}
 
-	template <typename ___TTT___, typename = typename std_enable_if_t<!std::is_base_of<any_a, std::decay_t<___TTT___>>::value>>
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<any_a, std::decay_t<___TTT___>>::value>>
 	inline any_a& operator=(___TTT___ value) noexcept
 	{
 		any_a temp{ std::move(value) };
