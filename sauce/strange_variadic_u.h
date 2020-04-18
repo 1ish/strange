@@ -158,119 +158,119 @@ public:
 		return collection;
 	}
 
-	static inline void variadic(std::set<_1_>& collection)
+	static inline void variadic(std_set<_1_>& collection)
 	{}
 
 	template <typename... Args>
-	static inline void variadic(std::set<_1_>& collection, int64_t i, Args&&... args)
+	static inline void variadic(std_set<_1_>& collection, int64_t i, Args&&... args)
 	{
 		collection.emplace(num(i));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic(std::set<_1_>& collection, double f, Args&&... args)
+	static inline void variadic(std_set<_1_>& collection, double f, Args&&... args)
 	{
 		collection.emplace(num(f));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic(std::set<_1_>& collection, std_string const& s, Args&&... args)
+	static inline void variadic(std_set<_1_>& collection, std_string const& s, Args&&... args)
 	{
 		collection.emplace(sym(s));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic(std::set<_1_>& collection, _1_ const& thing, Args&&... args)
+	static inline void variadic(std_set<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
 		collection.emplace(thing);
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline std::set<_1_> set(Args&&... args)
+	static inline std_set<_1_> set(Args&&... args)
 	{
-		std::set<_1_> collection;
+		std_set<_1_> collection;
 		variadic(collection, std::forward<Args>(args)...);
 		return collection;
 	}
 
-	static inline void variadic_ref(std::set<_1_>& collection)
+	static inline void variadic_ref(std_set<_1_>& collection)
 	{}
 
 	template <typename... Args>
-	static inline void variadic_ref(std::set<_1_>& collection, int64_t i, Args&&... args)
+	static inline void variadic_ref(std_set<_1_>& collection, int64_t i, Args&&... args)
 	{
 		collection.emplace(num(i));
 		variadic_ref(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic_ref(std::set<_1_>& collection, double f, Args&&... args)
+	static inline void variadic_ref(std_set<_1_>& collection, double f, Args&&... args)
 	{
 		collection.emplace(num(f));
 		variadic_ref(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic_ref(std::set<_1_>& collection, std_string const& s, Args&&... args)
+	static inline void variadic_ref(std_set<_1_>& collection, std_string const& s, Args&&... args)
 	{
 		collection.emplace(sym(s));
 		variadic_ref(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic_ref(std::set<_1_>& collection, _1_ const& thing, Args&&... args)
+	static inline void variadic_ref(std_set<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
 		collection.emplace(const_cast<_1_&>(thing), typename _1_::___reference_tag___{});
 		variadic_ref(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline std::set<_1_> set_ref(Args&&... args)
+	static inline std_set<_1_> set_ref(Args&&... args)
 	{
-		std::set<_1_> collection;
+		std_set<_1_> collection;
 		variadic_ref(collection, std::forward<Args>(args)...);
 		return collection;
 	}
 
-	static inline void variadic_dup(std::set<_1_>& collection)
+	static inline void variadic_dup(std_set<_1_>& collection)
 	{}
 
 	template <typename... Args>
-	static inline void variadic_dup(std::set<_1_>& collection, int64_t i, Args&&... args)
+	static inline void variadic_dup(std_set<_1_>& collection, int64_t i, Args&&... args)
 	{
 		collection.emplace(num(i));
 		variadic_dup(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic_dup(std::set<_1_>& collection, double f, Args&&... args)
+	static inline void variadic_dup(std_set<_1_>& collection, double f, Args&&... args)
 	{
 		collection.emplace(num(f));
 		variadic_dup(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic_dup(std::set<_1_>& collection, std_string const& s, Args&&... args)
+	static inline void variadic_dup(std_set<_1_>& collection, std_string const& s, Args&&... args)
 	{
 		collection.emplace(sym(s));
 		variadic_dup(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic_dup(std::set<_1_>& collection, _1_ const& thing, Args&&... args)
+	static inline void variadic_dup(std_set<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
 		collection.emplace(const_cast<_1_&>(thing), typename _1_::___duplicate_tag___{});
 		variadic_dup(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline std::set<_1_> set_dup(Args&&... args)
+	static inline std_set<_1_> set_dup(Args&&... args)
 	{
-		std::set<_1_> collection;
+		std_set<_1_> collection;
 		variadic_dup(collection, std::forward<Args>(args)...);
 		return collection;
 	}

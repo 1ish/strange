@@ -213,7 +213,7 @@ public:
 	inline std_size_t hash() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		std::set<any_a<>> const ordered(_set.cbegin(), _set.cend());
+		std_set<any_a<>> const ordered(_set.cbegin(), _set.cend());
 		std_size_t seed = std::hash<std_size_t>{}(_set.size());
 		for (auto const& item : ordered)
 		{

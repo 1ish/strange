@@ -13,11 +13,11 @@ false &&
 					'operator<=' : "bool (ordered_herd_a<_element> const& herd) const",
 					'operator>=' : "bool (ordered_herd_a<_element> const& herd) const",
 
-					extract_begin : "bidirectional_extractor_data_a<_element, typename std::set<_element>::const_iterator> () const",
-					extract_end : "bidirectional_extractor_data_a<_element, typename std::set<_element>::const_iterator> () const",
+					extract_begin : "bidirectional_extractor_data_a<_element, typename std_set<_element>::const_iterator> () const",
+					extract_end : "bidirectional_extractor_data_a<_element, typename std_set<_element>::const_iterator> () const",
 
-					extract_set : "std::set<_element> const& () const",
-					mutate_set : "std::set<_element>& ()",
+					extract_set : "std_set<_element> const& () const",
+					mutate_set : "std_set<_element>& ()",
 				}
 			)
 		)

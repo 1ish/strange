@@ -699,9 +699,9 @@ inline kind_a<> kind_of<dart_packet::iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::set<any_a<>>::const_iterator>()
+inline kind_a<> kind_of<std_set<any_a<>>::const_iterator>()
 {
-	return kind_create(1, "\"std::set<any_a<>>::const_iterator\"");
+	return kind_create(1, "\"std_set<any_a<>>::const_iterator\"");
 }
 
 template <>

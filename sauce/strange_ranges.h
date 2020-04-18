@@ -138,13 +138,13 @@ namespace strange
 	}
 
 	template <typename _element>
-	inline bidirectional_extractor_data_a<_element, typename std::set<_element>::const_iterator> begin(ordered_herd_a<_element> const& herd)
+	inline bidirectional_extractor_data_a<_element, typename std_set<_element>::const_iterator> begin(ordered_herd_a<_element> const& herd)
 	{
 		return herd.extract_begin();
 	}
 
 	template <typename _element>
-	inline bidirectional_extractor_data_a<_element, typename std::set<_element>::const_iterator> end(ordered_herd_a<_element> const& herd)
+	inline bidirectional_extractor_data_a<_element, typename std_set<_element>::const_iterator> end(ordered_herd_a<_element> const& herd)
 	{
 		return herd.extract_end();
 	}

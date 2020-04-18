@@ -57,39 +57,39 @@ inline bool ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(herd); }
 
 template <typename _element>
-inline bidirectional_extractor_data_a < _element , typename std :: set < _element > :: const_iterator > ordered_herd_a<_element>::extract_begin() const
+inline bidirectional_extractor_data_a < _element , typename std_set < _element > :: const_iterator > ordered_herd_a<_element>::extract_begin() const
 { assert(any_a<>::___handle___); return ___read___().extract_begin(); }
 
 template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bidirectional_extractor_data_a < _element , typename std :: set < _element > :: const_iterator > ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::extract_begin() const
+inline bidirectional_extractor_data_a < _element , typename std_set < _element > :: const_iterator > ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::extract_begin() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
 
 template <typename _element>
-inline bidirectional_extractor_data_a < _element , typename std :: set < _element > :: const_iterator > ordered_herd_a<_element>::extract_end() const
+inline bidirectional_extractor_data_a < _element , typename std_set < _element > :: const_iterator > ordered_herd_a<_element>::extract_end() const
 { assert(any_a<>::___handle___); return ___read___().extract_end(); }
 
 template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline bidirectional_extractor_data_a < _element , typename std :: set < _element > :: const_iterator > ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::extract_end() const
+inline bidirectional_extractor_data_a < _element , typename std_set < _element > :: const_iterator > ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::extract_end() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
 
 template <typename _element>
-inline std :: set < _element > const & ordered_herd_a<_element>::extract_set() const
+inline std_set < _element > const & ordered_herd_a<_element>::extract_set() const
 { assert(any_a<>::___handle___); return ___read___().extract_set(); }
 
 template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: set < _element > const & ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::extract_set() const
+inline std_set < _element > const & ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::extract_set() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_set(); }
 
 template <typename _element>
-inline std :: set < _element > & ordered_herd_a<_element>::mutate_set()
+inline std_set < _element > & ordered_herd_a<_element>::mutate_set()
 { assert(any_a<>::___handle___); return ___write___().mutate_set(); }
 
 template <typename _element>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: set < _element > & ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::mutate_set()
+inline std_set < _element > & ordered_herd_a<_element>::___ordered_herd_a_handle___<___TTT___, ___DHB___>::mutate_set()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_set(); }
 
 template <typename _element>

@@ -34,6 +34,8 @@ namespace strange
 	using std_deque = std::deque<_element>;
 	template<typename _element>
 	using std_vector = std::vector<_element>;
+	template<typename _element>
+	using std_set = std::set<_element>;
 
 	using dart_packet = dart::packet;
 }

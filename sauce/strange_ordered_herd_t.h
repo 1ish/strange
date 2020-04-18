@@ -108,7 +108,7 @@ class ordered_herd_t : public thing_t<___ego___>
 	};
 
 public:
-	using std_set_element = std::set<_element>;
+	using std_set_element = std_set<_element>;
 
 	// construction
 	static inline any_a<> create__(range_a<> const& range)

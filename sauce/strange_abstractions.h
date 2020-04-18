@@ -7,7 +7,7 @@
 namespace strange
 {
 	template <>
-	inline kind_a<> kind_of<std::set<any_a<>>::const_iterator>();
+	inline kind_a<> kind_of<std_set<any_a<>>::const_iterator>();
 	template <>
 	inline kind_a<> kind_of<std::map<any_a<>, any_a<>>::const_iterator>();
 	template <>
