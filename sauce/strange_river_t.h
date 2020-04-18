@@ -760,14 +760,14 @@ public:
 	}
 
 protected:
-	std::istream* const _istream;
-	std::ostream* const _ostream;
+	std_istream* const _istream;
+	std_ostream* const _ostream;
 	std_shared_ptr_basic_ios_char const _stream;
 	std_string const _filename;
 
 	friend class any_a<>;
 
-	inline river_t(std::istream* const is = nullptr, std::ostream* const os = nullptr, std_shared_ptr_basic_ios_char const& stream = std_shared_ptr_basic_ios_char{}, std_string const& filename = std_string{})
+	inline river_t(std_istream* const is = nullptr, std_ostream* const os = nullptr, std_shared_ptr_basic_ios_char const& stream = std_shared_ptr_basic_ios_char{}, std_string const& filename = std_string{})
 		: thing_t<___ego___>{}
 		, _istream{ is }
 		, _ostream{ os }

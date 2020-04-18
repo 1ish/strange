@@ -45,9 +45,6 @@ namespace strange
 	template<typename _key, typename _value>
 	using std_map = std::map<_key, _value>;
 
-	template<typename _char>
-	using std_istreambuf_iterator = std::istreambuf_iterator<_char>;
-
 	template<typename _element>
 	using std_unordered_set = std::unordered_set<_element>;
 
@@ -59,6 +56,13 @@ namespace strange
 
 	template<typename _thing>
 	using std_shared_ptr = std::shared_ptr<_thing>;
+
+	template<typename _char>
+	using std_istreambuf_iterator = std::istreambuf_iterator<_char>;
+
+	using std_istream = std::istream;
+
+	using std_ostream = std::ostream;
 
 	using dart_packet = dart::packet;
 }
