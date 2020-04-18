@@ -83,77 +83,77 @@ public:
 		return collection;
 	}
 
-	static inline void variadic(std::deque<_1_>& collection)
+	static inline void variadic(std_deque<_1_>& collection)
 	{}
 
 	template <typename... Args>
-	static inline void variadic(std::deque<_1_>& collection, std_string const& s, Args&&... args)
+	static inline void variadic(std_deque<_1_>& collection, std_string const& s, Args&&... args)
 	{
 		collection.emplace_back(sym(s));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic(std::deque<_1_>& collection, _1_ const& thing, Args&&... args)
+	static inline void variadic(std_deque<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
 		collection.emplace_back(thing);
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline std::deque<_1_> deque(Args&&... args)
+	static inline std_deque<_1_> deque(Args&&... args)
 	{
-		std::deque<_1_> collection;
+		std_deque<_1_> collection;
 		variadic(collection, std::forward<Args>(args)...);
 		return collection;
 	}
 
-	static inline void variadic_ref(std::deque<_1_>& collection)
+	static inline void variadic_ref(std_deque<_1_>& collection)
 	{}
 
 	template <typename... Args>
-	static inline void variadic_ref(std::deque<_1_>& collection, std_string const& s, Args&&... args)
+	static inline void variadic_ref(std_deque<_1_>& collection, std_string const& s, Args&&... args)
 	{
 		collection.emplace_back(sym(s));
 		variadic_ref(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic_ref(std::deque<_1_>& collection, _1_ const& thing, Args&&... args)
+	static inline void variadic_ref(std_deque<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
 		collection.emplace_back(const_cast<_1_&>(thing), typename _1_::___reference_tag___{});
 		variadic_ref(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline std::deque<_1_> deque_ref(Args&&... args)
+	static inline std_deque<_1_> deque_ref(Args&&... args)
 	{
-		std::deque<_1_> collection;
+		std_deque<_1_> collection;
 		variadic_ref(collection, std::forward<Args>(args)...);
 		return collection;
 	}
 
-	static inline void variadic_dup(std::deque<_1_>& collection)
+	static inline void variadic_dup(std_deque<_1_>& collection)
 	{}
 
 	template <typename... Args>
-	static inline void variadic_dup(std::deque<_1_>& collection, std_string const& s, Args&&... args)
+	static inline void variadic_dup(std_deque<_1_>& collection, std_string const& s, Args&&... args)
 	{
 		collection.emplace_back(sym(s));
 		variadic_dup(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic_dup(std::deque<_1_>& collection, _1_ const& thing, Args&&... args)
+	static inline void variadic_dup(std_deque<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
 		collection.emplace_back(const_cast<_1_&>(thing), typename _1_::___duplicate_tag___{});
 		variadic_dup(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline std::deque<_1_> deque_dup(Args&&... args)
+	static inline std_deque<_1_> deque_dup(Args&&... args)
 	{
-		std::deque<_1_> collection;
+		std_deque<_1_> collection;
 		variadic_dup(collection, std::forward<Args>(args)...);
 		return collection;
 	}

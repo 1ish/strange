@@ -66,25 +66,25 @@ namespace strange
 	}
 
 	template <typename _primitive_>
-	inline random_access_extractor_data_a<number_data_a<int64_t>, typename std::deque<_primitive_>::const_iterator> begin(brook_a<_primitive_> const& brook)
+	inline random_access_extractor_data_a<number_data_a<int64_t>, typename std_deque<_primitive_>::const_iterator> begin(brook_a<_primitive_> const& brook)
 	{
 		return brook.extract_begin();
 	}
 
 	template <typename _primitive_>
-	inline random_access_extractor_data_a<number_data_a<int64_t>, typename std::deque<_primitive_>::const_iterator> end(brook_a<_primitive_> const& brook)
+	inline random_access_extractor_data_a<number_data_a<int64_t>, typename std_deque<_primitive_>::const_iterator> end(brook_a<_primitive_> const& brook)
 	{
 		return brook.extract_end();
 	}
 
 	template <typename _primitive_>
-	inline random_access_mutator_data_a<number_data_a<int64_t>, typename std::deque<_primitive_>::iterator> begin(brook_a<_primitive_>& brook)
+	inline random_access_mutator_data_a<number_data_a<int64_t>, typename std_deque<_primitive_>::iterator> begin(brook_a<_primitive_>& brook)
 	{
 		return brook.mutate_begin();
 	}
 
 	template <typename _primitive_>
-	inline random_access_mutator_data_a<number_data_a<int64_t>, typename std::deque<_primitive_>::iterator> end(brook_a<_primitive_>& brook)
+	inline random_access_mutator_data_a<number_data_a<int64_t>, typename std_deque<_primitive_>::iterator> end(brook_a<_primitive_>& brook)
 	{
 		return brook.mutate_end();
 	}
@@ -183,22 +183,22 @@ namespace strange
 		return parcel.extract_end();
 	}
 
-	inline random_access_extractor_data_a<any_a<>, typename std::deque<any_a<>>::const_iterator> begin(squad_a<> const& squad)
+	inline random_access_extractor_data_a<any_a<>, typename std_deque<any_a<>>::const_iterator> begin(squad_a<> const& squad)
 	{
 		return squad.extract_begin();
 	}
 
-	inline random_access_extractor_data_a<any_a<>, typename std::deque<any_a<>>::const_iterator> end(squad_a<> const& squad)
+	inline random_access_extractor_data_a<any_a<>, typename std_deque<any_a<>>::const_iterator> end(squad_a<> const& squad)
 	{
 		return squad.extract_end();
 	}
 
-	inline random_access_mutator_data_a<any_a<>, typename std::deque<any_a<>>::iterator> begin(squad_a<>& squad)
+	inline random_access_mutator_data_a<any_a<>, typename std_deque<any_a<>>::iterator> begin(squad_a<>& squad)
 	{
 		return squad.mutate_begin();
 	}
 
-	inline random_access_mutator_data_a<any_a<>, typename std::deque<any_a<>>::iterator> end(squad_a<>& squad)
+	inline random_access_mutator_data_a<any_a<>, typename std_deque<any_a<>>::iterator> end(squad_a<>& squad)
 	{
 		return squad.mutate_end();
 	}

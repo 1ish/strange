@@ -464,83 +464,83 @@ inline kind_a<> kind_of<std::istreambuf_iterator<char>>();
 template <>
 inline kind_a<> kind_of<std::vector<int8_t>::const_iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<int8_t>::const_iterator>();
+inline kind_a<> kind_of<std_deque<int8_t>::const_iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<uint8_t>::const_iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<uint8_t>::const_iterator>();
+inline kind_a<> kind_of<std_deque<uint8_t>::const_iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<int16_t>::const_iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<int16_t>::const_iterator>();
+inline kind_a<> kind_of<std_deque<int16_t>::const_iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<uint16_t>::const_iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<uint16_t>::const_iterator>();
+inline kind_a<> kind_of<std_deque<uint16_t>::const_iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<int32_t>::const_iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<int32_t>::const_iterator>();
+inline kind_a<> kind_of<std_deque<int32_t>::const_iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<uint32_t>::const_iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<uint32_t>::const_iterator>();
+inline kind_a<> kind_of<std_deque<uint32_t>::const_iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<int64_t>::const_iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<int64_t>::const_iterator>();
+inline kind_a<> kind_of<std_deque<int64_t>::const_iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<uint64_t>::const_iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<uint64_t>::const_iterator>();
+inline kind_a<> kind_of<std_deque<uint64_t>::const_iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<float>::const_iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<float>::const_iterator>();
+inline kind_a<> kind_of<std_deque<float>::const_iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<double>::const_iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<double>::const_iterator>();
+inline kind_a<> kind_of<std_deque<double>::const_iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<int8_t>::iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<int8_t>::iterator>();
+inline kind_a<> kind_of<std_deque<int8_t>::iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<uint8_t>::iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<uint8_t>::iterator>();
+inline kind_a<> kind_of<std_deque<uint8_t>::iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<int16_t>::iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<int16_t>::iterator>();
+inline kind_a<> kind_of<std_deque<int16_t>::iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<uint16_t>::iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<uint16_t>::iterator>();
+inline kind_a<> kind_of<std_deque<uint16_t>::iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<int32_t>::iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<int32_t>::iterator>();
+inline kind_a<> kind_of<std_deque<int32_t>::iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<uint32_t>::iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<uint32_t>::iterator>();
+inline kind_a<> kind_of<std_deque<uint32_t>::iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<int64_t>::iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<int64_t>::iterator>();
+inline kind_a<> kind_of<std_deque<int64_t>::iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<uint64_t>::iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<uint64_t>::iterator>();
+inline kind_a<> kind_of<std_deque<uint64_t>::iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<float>::iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<float>::iterator>();
+inline kind_a<> kind_of<std_deque<float>::iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<double>::iterator>();
 template <>
-inline kind_a<> kind_of<std::deque<double>::iterator>();
+inline kind_a<> kind_of<std_deque<double>::iterator>();
 template <>
 inline kind_a<> kind_of<dart_packet::iterator>();
 

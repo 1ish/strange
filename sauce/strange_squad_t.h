@@ -357,7 +357,7 @@ class squad_t : public thing_t<___ego___>
 	};
 
 public:
-	using std_deque_element = std::deque<_element>;
+	using std_deque_element = std_deque<_element>;
 
 	// construction
 	static inline any_a<> create__(range_a<> const& range)

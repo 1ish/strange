@@ -13,13 +13,13 @@ false &&
 					'operator<=' : "bool (squad_a<_element> const& squad) const",
 					'operator>=' : "bool (squad_a<_element> const& squad) const",
 
-					extract_begin : "random_access_extractor_data_a<_element, typename std::deque<_element>::const_iterator> () const",
-					extract_end : "random_access_extractor_data_a<_element, typename std::deque<_element>::const_iterator> () const",
-					mutate_begin : "random_access_mutator_data_a<_element, typename std::deque<_element>::iterator> ()",
-					mutate_end : "random_access_mutator_data_a<_element, typename std::deque<_element>::iterator> ()",
+					extract_begin : "random_access_extractor_data_a<_element, typename std_deque<_element>::const_iterator> () const",
+					extract_end : "random_access_extractor_data_a<_element, typename std_deque<_element>::const_iterator> () const",
+					mutate_begin : "random_access_mutator_data_a<_element, typename std_deque<_element>::iterator> ()",
+					mutate_end : "random_access_mutator_data_a<_element, typename std_deque<_element>::iterator> ()",
 
-					extract_deque : "std::deque<_element> const& () const",
-					mutate_deque : "std::deque<_element>& ()",
+					extract_deque : "std_deque<_element> const& () const",
+					mutate_deque : "std_deque<_element>& ()",
 				}
 			)
 		)
