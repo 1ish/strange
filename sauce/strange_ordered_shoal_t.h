@@ -50,7 +50,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 			return num(uint64_t(hash()));
 		}
 
-		inline std::size_t hash() const
+		inline std_size_t hash() const
 		{
 			return std::hash<void const*>{}(&*_it);
 		}
@@ -160,7 +160,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 			return num(uint64_t(hash()));
 		}
 
-		inline std::size_t hash() const
+		inline std_size_t hash() const
 		{
 			return std::hash<void const*>{}(&*_it);
 		}
@@ -315,13 +315,13 @@ public:
 		return num(uint64_t(hash()));
 	}
 
-	inline std::size_t hash() const
+	inline std_size_t hash() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		std::size_t seed = std::hash<std::size_t>{}(_map.size());
+		std_size_t seed = std::hash<std_size_t>{}(_map.size());
 		for (auto const& pair : _map)
 		{
-			std::size_t pseed = pair.first.hash();
+			std_size_t pseed = pair.first.hash();
 			pseed ^= pair.second.hash() + 0x9e3779b9 + (pseed << 6) + (pseed >> 2);
 			seed ^= pseed + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 		}

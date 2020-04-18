@@ -322,8 +322,8 @@ protected:
 	{
 		auto split_scope = flock_t<>::create_();
 		std::string const scope = _scope.to_string();
-		std::size_t begin = 0;
-		std::size_t pos = scope.find("::", begin);
+		std_size_t begin = 0;
+		std_size_t pos = scope.find("::", begin);
 		int64_t nest = 1;
 		while (pos != std::string::npos)
 		{
@@ -2104,7 +2104,7 @@ protected:
 	inline void _define_class_relfection_(bool root, std::string const& class_name, std::string const& base_name, std::string const& base_aspects, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
 	{
 		std::string scope = _scope.to_string();
-		std::size_t const pos = scope.rfind("::");
+		std_size_t const pos = scope.rfind("::");
 		scope = pos == std::string::npos
 			? std::string{}
 			: scope.substr(0, pos + 2);

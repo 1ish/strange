@@ -54,7 +54,7 @@ private:
 			return num(uint64_t(hash()));
 		}
 
-		inline std::size_t hash() const
+		inline std_size_t hash() const
 		{
 			return std::hash<void const*>{}(_it->str());
 		}
@@ -163,7 +163,7 @@ private:
 			return num(uint64_t(hash()));
 		}
 
-		inline std::size_t hash() const
+		inline std_size_t hash() const
 		{
 			dart_packet copy = *_it;
 			return std::hash<void const*>{}(copy.finalize().get_bytes().data());
@@ -337,7 +337,7 @@ public:
 		return num(uint64_t(hash()));
 	}
 
-	inline std::size_t hash() const
+	inline std_size_t hash() const
 	{
 		dart_packet copy = _packet;
 		auto bytes = copy.finalize().get_bytes();

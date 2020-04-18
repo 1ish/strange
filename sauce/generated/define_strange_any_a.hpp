@@ -143,7 +143,7 @@ public:
 
 	inline _number_data_uint64 hash_() const;
 
-	inline std :: size_t hash() const;
+	inline std_size_t hash() const;
 
 	inline bool is(std :: string const & s ) const;
 
@@ -192,7 +192,7 @@ protected:
 		virtual bool less_or_equal_(any_a<> const& thing) const = 0;
 		virtual bool greater_or_equal_(any_a<> const& thing) const = 0;
 		virtual _number_data_uint64 hash_() const = 0;
-		virtual std :: size_t hash() const = 0;
+		virtual std_size_t hash() const = 0;
 		virtual bool is(std :: string const & s ) const = 0;
 		virtual parcel_a<> to_parcel_() const = 0;
 		virtual parcel_a<> to_parcel_unique_(herd_a< _number_data_uint64 > & unique_herd) const = 0;
@@ -276,7 +276,7 @@ protected:
 
 		virtual inline _number_data_uint64 hash_() const final;
 
-		virtual inline std :: size_t hash() const final;
+		virtual inline std_size_t hash() const final;
 
 		virtual inline bool is(std :: string const & s ) const final;
 

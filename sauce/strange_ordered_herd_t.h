@@ -50,7 +50,7 @@ class ordered_herd_t : public thing_t<___ego___>
 			return num(uint64_t(hash()));
 		}
 
-		inline std::size_t hash() const
+		inline std_size_t hash() const
 		{
 			return std::hash<void const*>{}(&*_it);
 		}
@@ -216,10 +216,10 @@ public:
 		return num(uint64_t(hash()));
 	}
 
-	inline std::size_t hash() const
+	inline std_size_t hash() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		std::size_t seed = std::hash<std::size_t>{}(_set.size());
+		std_size_t seed = std::hash<std_size_t>{}(_set.size());
 		for (auto const& item : _set)
 		{
 			seed ^= item.hash() + 0x9e3779b9 + (seed << 6) + (seed >> 2);

@@ -50,7 +50,7 @@ class squad_t : public thing_t<___ego___>
 			return num(uint64_t(hash()));
 		}
 
-		inline std::size_t hash() const
+		inline std_size_t hash() const
 		{
 			return std::hash<void const*>{}(&*_it);
 		}
@@ -226,7 +226,7 @@ class squad_t : public thing_t<___ego___>
 			return num(uint64_t(hash()));
 		}
 
-		inline std::size_t hash() const
+		inline std_size_t hash() const
 		{
 			return std::hash<void const*>{}(&*_it);
 		}
@@ -465,10 +465,10 @@ public:
 		return num(uint64_t(hash()));
 	}
 
-	inline std::size_t hash() const
+	inline std_size_t hash() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		std::size_t seed = std::hash<std::size_t>{}(_deque.size());
+		std_size_t seed = std::hash<std_size_t>{}(_deque.size());
 		for (auto const& item : _deque)
 		{
 			seed ^= item.hash() + 0x9e3779b9 + (seed << 6) + (seed >> 2);
@@ -607,7 +607,7 @@ public:
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		if (index >= 0 && index < int64_t(_deque.size()))
 		{
-			return _deque[std::size_t(index)];
+			return _deque[std_size_t(index)];
 		}
 		return mis("strange::squad::at index out of bounds");
 	}
@@ -637,9 +637,9 @@ public:
 			{
 				if (index > siz)
 				{
-					_deque.resize(std::size_t(index) + 1, no());
+					_deque.resize(std_size_t(index) + 1, no());
 				}
-				_deque[std::size_t(index)] = value;
+				_deque[std_size_t(index)] = value;
 			}
 		}
 	}
@@ -668,8 +668,8 @@ public:
 			{
 				if (index > siz)
 				{
-					_deque.resize(std::size_t(index) + 1, no());
-					_deque[std::size_t(index)] = value;
+					_deque.resize(std_size_t(index) + 1, no());
+					_deque[std_size_t(index)] = value;
 				}
 				else
 				{
@@ -838,7 +838,7 @@ public:
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		if (check<collection_a<_element>>(range))
 		{
-			_deque.resize(std::size_t(std::max<int64_t>(0, int64_t(_deque.size()) - fast<collection_a<_element>>(range).size())));
+			_deque.resize(std_size_t(std::max<int64_t>(0, int64_t(_deque.size()) - fast<collection_a<_element>>(range).size())));
 		}
 		else
 		{

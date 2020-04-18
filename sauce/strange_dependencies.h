@@ -25,4 +25,9 @@
 
 #include "../../libdart/include/dart.h"
 
+namespace strange
+{
+	using std_size_t = std::size_t;
+}
+
 #endif

@@ -43,7 +43,7 @@ public:
 		return num(uint64_t(hash()));
 	}
 
-	inline std::size_t hash() const
+	inline std_size_t hash() const
 	{
 		return no().hash();
 	}

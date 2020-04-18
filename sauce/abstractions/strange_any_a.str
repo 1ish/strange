@@ -59,7 +59,7 @@ false &&
 					greater_or_equal_ :# (thing :<any>#, <any>),
 
 					hash_ :# (<#number_data_uint64>),
-					hash : "std::size_t () const",
+					hash : "std_size_t () const",
 
 					is : "bool (std::string const& s) const",
 

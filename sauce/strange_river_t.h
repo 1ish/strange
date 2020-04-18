@@ -50,7 +50,7 @@ class river_t : public thing_t<___ego___>
 			return num(uint64_t(hash()));
 		}
 
-		inline std::size_t hash() const
+		inline std_size_t hash() const
 		{
 			return std::hash<int64_t>{}(_it == _iterator_{});
 		}
@@ -345,9 +345,9 @@ public:
 			std::getline(*_istream, str, char(delimiter));
 			return std::vector<int8_t>(str.cbegin(), str.cend());
 		}
-		std::vector<int8_t> v(std::size_t(++count), 0);
+		std::vector<int8_t> v(std_size_t(++count), 0);
 		_istream->getline(reinterpret_cast<char*>(&v[0]), count, char(delimiter));
-		v.resize(std::size_t(std::max<int64_t>(0, _istream->gcount() - 1)));
+		v.resize(std_size_t(std::max<int64_t>(0, _istream->gcount() - 1)));
 		return v;
 	}
 
@@ -385,9 +385,9 @@ public:
 		{
 			count = STRANGE_RIVER_DEFAULT_READ_SIZE;
 		}
-		std::vector<int8_t> v(std::size_t(count), 0);
+		std::vector<int8_t> v(std_size_t(count), 0);
 		_istream->read(reinterpret_cast<char*>(&v[0]), count);
-		v.resize(std::size_t(_istream->gcount()));
+		v.resize(std_size_t(_istream->gcount()));
 		return v;
 	}
 
@@ -405,9 +405,9 @@ public:
 		{
 			count = STRANGE_RIVER_DEFAULT_READ_SIZE;
 		}
-		std::string s(std::size_t(count), '\0');
+		std::string s(std_size_t(count), '\0');
 		_istream->read(&s[0], count);
-		s.resize(std::size_t(_istream->gcount()));
+		s.resize(std_size_t(_istream->gcount()));
 		return s;
 	}
 

@@ -397,7 +397,7 @@ public:
 		return number_uint_64_t<>::create(uint64_t(std::hash<void const*>{}(identity())));
 	}
 
-	inline std::size_t hash() const
+	inline std_size_t hash() const
 	{
 		auto const op = _operations.at_(sym("hash"));
 		if (op)

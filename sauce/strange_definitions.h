@@ -9,7 +9,7 @@ namespace strange
 // hash
 
 template <typename ___ego___>
-inline std::size_t hash_of(___ego___ const& thing)
+inline std_size_t hash_of(___ego___ const& thing)
 {
 	return thing.hash();
 }

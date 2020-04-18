@@ -51,7 +51,7 @@ class range_operator_t : public thing_t<___ego___>
 			return num(uint64_t(hash()));
 		}
 
-		inline std::size_t hash() const
+		inline std_size_t hash() const
 		{
 			return std::hash<void const*>{}(&*_it);
 		}
@@ -106,7 +106,7 @@ class range_operator_t : public thing_t<___ego___>
 		any_a<>& _thing_ref;
 		range_a<> const& _range_ref;
 		flock_a<> mutable _results;
-		std::size_t _pos;
+		std_size_t _pos;
 
 		friend class any_a<>;
 

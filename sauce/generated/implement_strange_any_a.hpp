@@ -420,12 +420,12 @@ inline _number_data_uint64 any_a<_symbol, _cat, _kind, _number_data_uint64>::___
 { return ___value___.hash_(); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline std :: size_t any_a<_symbol, _cat, _kind, _number_data_uint64>::hash() const
+inline std_size_t any_a<_symbol, _cat, _kind, _number_data_uint64>::hash() const
 { assert(___handle___); return ___read___().hash(); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
 template <typename ___TTT___, typename ___BHB___>
-inline std :: size_t any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::hash() const
+inline std_size_t any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::hash() const
 { return ___value___.hash(); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>

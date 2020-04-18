@@ -69,9 +69,9 @@ public:
 		return num(uint64_t(hash()));
 	}
 
-	inline std::size_t hash() const
+	inline std_size_t hash() const
 	{
-		static std::size_t const HASH = std::hash<int64_t>{}(0);
+		static std_size_t const HASH = std::hash<int64_t>{}(0);
 		return HASH;
 	}
 

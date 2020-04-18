@@ -51,7 +51,7 @@ class flock_t : public thing_t<___ego___>
 			return num(uint64_t(hash()));
 		}
 
-		inline std::size_t hash() const
+		inline std_size_t hash() const
 		{
 			return std::hash<void const*>{}(&*_it);
 		}
@@ -227,7 +227,7 @@ class flock_t : public thing_t<___ego___>
 			return num(uint64_t(hash()));
 		}
 
-		inline std::size_t hash() const
+		inline std_size_t hash() const
 		{
 			return std::hash<void const*>{}(&*_it);
 		}
@@ -466,10 +466,10 @@ public:
 		return num(uint64_t(hash()));
 	}
 
-	inline std::size_t hash() const
+	inline std_size_t hash() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		std::size_t seed = std::hash<std::size_t>{}(_vector.size());
+		std_size_t seed = std::hash<std_size_t>{}(_vector.size());
 		for (auto const& item : _vector)
 		{
 			seed ^= item.hash() + 0x9e3779b9 + (seed << 6) + (seed >> 2);
@@ -608,7 +608,7 @@ public:
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		if (index >= 0 && index < int64_t(_vector.size()))
 		{
-			return _vector[std::size_t(index)];
+			return _vector[std_size_t(index)];
 		}
 		return mis("strange::flock::at index out of bounds");
 	}
@@ -638,9 +638,9 @@ public:
 			{
 				if (index > siz)
 				{
-					_vector.resize(std::size_t(index) + 1, no());
+					_vector.resize(std_size_t(index) + 1, no());
 				}
-				_vector[std::size_t(index)] = value;
+				_vector[std_size_t(index)] = value;
 			}
 		}
 	}
@@ -669,8 +669,8 @@ public:
 			{
 				if (index > siz)
 				{
-					_vector.resize(std::size_t(index) + 1, no());
-					_vector[std::size_t(index)] = value;
+					_vector.resize(std_size_t(index) + 1, no());
+					_vector[std_size_t(index)] = value;
 				}
 				else
 				{
@@ -831,7 +831,7 @@ public:
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		if (check<collection_a<_element>>(range))
 		{
-			_vector.resize(std::size_t(std::max<int64_t>(0, int64_t(_vector.size()) - fast<collection_a<_element>>(range).size())));
+			_vector.resize(std_size_t(std::max<int64_t>(0, int64_t(_vector.size()) - fast<collection_a<_element>>(range).size())));
 		}
 		else
 		{

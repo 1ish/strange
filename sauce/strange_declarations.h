@@ -12,7 +12,7 @@ class one_t;
 
 // hash
 template <typename ___ego___>
-inline std::size_t hash_of(___ego___ const& thing);
+inline std_size_t hash_of(___ego___ const& thing);
 }
 
 // abstractions
@@ -34,7 +34,7 @@ inline std::size_t hash_of(___ego___ const& thing);
 #include "generated/declare_strange_number_data_a.hpp"
 template <> struct std::hash<strange::number_data_a<uint64_t>>
 {
-	inline std::size_t operator()(strange::number_data_a<uint64_t> const& thing) const
+	inline strange::std_size_t operator()(strange::number_data_a<uint64_t> const& thing) const
 	{
 		return strange::hash_of(thing);
 	}
@@ -58,7 +58,7 @@ using number_data_double_a = number_data_a<double>;
 #include "generated/declare_strange_any_a.hpp"
 template <> struct std::hash<strange::any_a<>>
 {
-	inline std::size_t operator()(strange::any_a<> const& thing) const
+	inline strange::std_size_t operator()(strange::any_a<> const& thing) const
 	{
 		return strange::hash_of(thing);
 	}
@@ -86,7 +86,7 @@ using lake_int8_a = lake_a<int8_t>;
 #include "generated/declare_strange_parcel_a.hpp"
 template <> struct std::hash<strange::parcel_a<>>
 {
-	inline std::size_t operator()(strange::parcel_a<> const& thing) const
+	inline strange::std_size_t operator()(strange::parcel_a<> const& thing) const
 	{
 		return strange::hash_of(thing);
 	}
