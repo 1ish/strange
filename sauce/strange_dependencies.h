@@ -30,6 +30,8 @@ namespace strange
 	using std_size_t = std::size_t;
 	using std_string = std::string;
 	using std_stringstream = std::stringstream;
+
+	using dart_packet = dart::packet;
 }
 
 #endif

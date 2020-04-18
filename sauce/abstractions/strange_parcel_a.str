@@ -76,14 +76,14 @@ false &&
 
 					keys_begin_ :# (<bidirectional_extractor[<>]>),
 					keys_end_ :# (<bidirectional_extractor[<>]>),
-					keys_begin : "bidirectional_extractor_data_a<any_a<>, typename dart::packet::iterator> () const",
-					keys_end : "bidirectional_extractor_data_a<any_a<>, typename dart::packet::iterator> () const",
+					keys_begin : "bidirectional_extractor_data_a<any_a<>, typename dart_packet::iterator> () const",
+					keys_end : "bidirectional_extractor_data_a<any_a<>, typename dart_packet::iterator> () const",
 
-					extract_begin : "bidirectional_extractor_data_a<parcel_a<>, typename dart::packet::iterator> () const",
-					extract_end : "bidirectional_extractor_data_a<parcel_a<>, typename dart::packet::iterator> () const",
+					extract_begin : "bidirectional_extractor_data_a<parcel_a<>, typename dart_packet::iterator> () const",
+					extract_end : "bidirectional_extractor_data_a<parcel_a<>, typename dart_packet::iterator> () const",
 
-					extract_packet : "dart::packet const& () const",
-					mutate_packet : "dart::packet& ()",
+					extract_packet : "dart_packet const& () const",
+					mutate_packet : "dart_packet& ()",
 				}
 			)
 		)

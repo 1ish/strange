@@ -542,7 +542,7 @@ inline kind_a<> kind_of<std::vector<double>::iterator>();
 template <>
 inline kind_a<> kind_of<std::deque<double>::iterator>();
 template <>
-inline kind_a<> kind_of<dart::packet::iterator>();
+inline kind_a<> kind_of<dart_packet::iterator>();
 
 // attributes
 inline operation_a<> attribute_extraction_create(any_a<> const& thing);

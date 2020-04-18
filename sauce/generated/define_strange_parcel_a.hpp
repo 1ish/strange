@@ -34,17 +34,17 @@ public:
 
 	inline bidirectional_extractor_a< any_a<> > keys_end_() const;
 
-	inline bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > keys_begin() const;
+	inline bidirectional_extractor_data_a < any_a < > , typename dart_packet :: iterator > keys_begin() const;
 
-	inline bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > keys_end() const;
+	inline bidirectional_extractor_data_a < any_a < > , typename dart_packet :: iterator > keys_end() const;
 
-	inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_begin() const;
+	inline bidirectional_extractor_data_a < parcel_a < > , typename dart_packet :: iterator > extract_begin() const;
 
-	inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_end() const;
+	inline bidirectional_extractor_data_a < parcel_a < > , typename dart_packet :: iterator > extract_end() const;
 
-	inline dart :: packet const & extract_packet() const;
+	inline dart_packet const & extract_packet() const;
 
-	inline dart :: packet & mutate_packet();
+	inline dart_packet & mutate_packet();
 
 protected:
 	struct ___parcel_a_handle_base___ : collection_a< any_a<> , parcel_a<> , parcel_a<> >::___collection_a_handle_base___
@@ -56,12 +56,12 @@ protected:
 		virtual bool operator!=(parcel_a < > const & parcel ) const = 0;
 		virtual bidirectional_extractor_a< any_a<> > keys_begin_() const = 0;
 		virtual bidirectional_extractor_a< any_a<> > keys_end_() const = 0;
-		virtual bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > keys_begin() const = 0;
-		virtual bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > keys_end() const = 0;
-		virtual bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_begin() const = 0;
-		virtual bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_end() const = 0;
-		virtual dart :: packet const & extract_packet() const = 0;
-		virtual dart :: packet & mutate_packet() = 0;
+		virtual bidirectional_extractor_data_a < any_a < > , typename dart_packet :: iterator > keys_begin() const = 0;
+		virtual bidirectional_extractor_data_a < any_a < > , typename dart_packet :: iterator > keys_end() const = 0;
+		virtual bidirectional_extractor_data_a < parcel_a < > , typename dart_packet :: iterator > extract_begin() const = 0;
+		virtual bidirectional_extractor_data_a < parcel_a < > , typename dart_packet :: iterator > extract_end() const = 0;
+		virtual dart_packet const & extract_packet() const = 0;
+		virtual dart_packet & mutate_packet() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___parcel_a_handle_base___>
@@ -96,17 +96,17 @@ protected:
 
 		virtual inline bidirectional_extractor_a< any_a<> > keys_end_() const final;
 
-		virtual inline bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > keys_begin() const final;
+		virtual inline bidirectional_extractor_data_a < any_a < > , typename dart_packet :: iterator > keys_begin() const final;
 
-		virtual inline bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > keys_end() const final;
+		virtual inline bidirectional_extractor_data_a < any_a < > , typename dart_packet :: iterator > keys_end() const final;
 
-		virtual inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_begin() const final;
+		virtual inline bidirectional_extractor_data_a < parcel_a < > , typename dart_packet :: iterator > extract_begin() const final;
 
-		virtual inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_end() const final;
+		virtual inline bidirectional_extractor_data_a < parcel_a < > , typename dart_packet :: iterator > extract_end() const final;
 
-		virtual inline dart :: packet const & extract_packet() const final;
+		virtual inline dart_packet const & extract_packet() const final;
 
-		virtual inline dart :: packet & mutate_packet() final;
+		virtual inline dart_packet & mutate_packet() final;
 
 	};
 
@@ -413,22 +413,22 @@ public:
 		return cast<bidirectional_extractor_a< any_a<> >>(variadic_operate(op, *const_cast<parcel_d*>(this)));
 	}
 
-	inline bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > keys_begin() const
+	inline bidirectional_extractor_data_a < any_a < > , typename dart_packet :: iterator > keys_begin() const
 	{ throw dis("dynamic parcel_d::keys_begin() not available"); }
 
-	inline bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > keys_end() const
+	inline bidirectional_extractor_data_a < any_a < > , typename dart_packet :: iterator > keys_end() const
 	{ throw dis("dynamic parcel_d::keys_end() not available"); }
 
-	inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_begin() const
+	inline bidirectional_extractor_data_a < parcel_a < > , typename dart_packet :: iterator > extract_begin() const
 	{ throw dis("dynamic parcel_d::extract_begin() not available"); }
 
-	inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > extract_end() const
+	inline bidirectional_extractor_data_a < parcel_a < > , typename dart_packet :: iterator > extract_end() const
 	{ throw dis("dynamic parcel_d::extract_end() not available"); }
 
-	inline dart :: packet const & extract_packet() const
+	inline dart_packet const & extract_packet() const
 	{ throw dis("dynamic parcel_d::extract_packet() not available"); }
 
-	inline dart :: packet & mutate_packet()
+	inline dart_packet & mutate_packet()
 	{ throw dis("dynamic parcel_d::mutate_packet() not available"); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}

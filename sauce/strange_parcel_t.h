@@ -7,10 +7,6 @@ namespace strange
 template <bool _concurrent_ = false, typename ___ego___ = parcel_a<>>
 class parcel_t : public thing_t<___ego___>
 {
-public:
-	using dart_packet = dart::packet;
-
-private:
 	template <typename _element_it, typename _iterator_, typename ___ego_it___ = bidirectional_extractor_data_a<_element_it, _iterator_>>
 	class key_extractor_t : public thing_t<___ego_it___>
 	{

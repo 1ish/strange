@@ -173,12 +173,12 @@ namespace strange
 		return shoal.mutate_end();
 	}
 
-	inline bidirectional_extractor_data_a<parcel_a<>, typename dart::packet::iterator> begin(parcel_a<> const& parcel)
+	inline bidirectional_extractor_data_a<parcel_a<>, typename dart_packet::iterator> begin(parcel_a<> const& parcel)
 	{
 		return parcel.extract_begin();
 	}
 
-	inline bidirectional_extractor_data_a<parcel_a<>, typename dart::packet::iterator> end(parcel_a<> const& parcel)
+	inline bidirectional_extractor_data_a<parcel_a<>, typename dart_packet::iterator> end(parcel_a<> const& parcel)
 	{
 		return parcel.extract_end();
 	}

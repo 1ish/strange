@@ -109,57 +109,57 @@ inline bidirectional_extractor_a< any_a<> > parcel_a<_1>::___parcel_a_handle___<
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.keys_end_(); }
 
 template <typename _1>
-inline bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > parcel_a<_1>::keys_begin() const
+inline bidirectional_extractor_data_a < any_a < > , typename dart_packet :: iterator > parcel_a<_1>::keys_begin() const
 { assert(any_a<>::___handle___); return ___read___().keys_begin(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::keys_begin() const
+inline bidirectional_extractor_data_a < any_a < > , typename dart_packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::keys_begin() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.keys_begin(); }
 
 template <typename _1>
-inline bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > parcel_a<_1>::keys_end() const
+inline bidirectional_extractor_data_a < any_a < > , typename dart_packet :: iterator > parcel_a<_1>::keys_end() const
 { assert(any_a<>::___handle___); return ___read___().keys_end(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline bidirectional_extractor_data_a < any_a < > , typename dart :: packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::keys_end() const
+inline bidirectional_extractor_data_a < any_a < > , typename dart_packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::keys_end() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.keys_end(); }
 
 template <typename _1>
-inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > parcel_a<_1>::extract_begin() const
+inline bidirectional_extractor_data_a < parcel_a < > , typename dart_packet :: iterator > parcel_a<_1>::extract_begin() const
 { assert(any_a<>::___handle___); return ___read___().extract_begin(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::extract_begin() const
+inline bidirectional_extractor_data_a < parcel_a < > , typename dart_packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::extract_begin() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
 
 template <typename _1>
-inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > parcel_a<_1>::extract_end() const
+inline bidirectional_extractor_data_a < parcel_a < > , typename dart_packet :: iterator > parcel_a<_1>::extract_end() const
 { assert(any_a<>::___handle___); return ___read___().extract_end(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline bidirectional_extractor_data_a < parcel_a < > , typename dart :: packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::extract_end() const
+inline bidirectional_extractor_data_a < parcel_a < > , typename dart_packet :: iterator > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::extract_end() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
 
 template <typename _1>
-inline dart :: packet const & parcel_a<_1>::extract_packet() const
+inline dart_packet const & parcel_a<_1>::extract_packet() const
 { assert(any_a<>::___handle___); return ___read___().extract_packet(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline dart :: packet const & parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::extract_packet() const
+inline dart_packet const & parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::extract_packet() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_packet(); }
 
 template <typename _1>
-inline dart :: packet & parcel_a<_1>::mutate_packet()
+inline dart_packet & parcel_a<_1>::mutate_packet()
 { assert(any_a<>::___handle___); return ___write___().mutate_packet(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline dart :: packet & parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::mutate_packet()
+inline dart_packet & parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::mutate_packet()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_packet(); }
 
 template <typename _1>
