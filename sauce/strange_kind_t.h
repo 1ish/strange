@@ -705,15 +705,15 @@ inline kind_a<> kind_of<std_set<any_a<>>::const_iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::map<any_a<>, any_a<>>::const_iterator>()
+inline kind_a<> kind_of<std_map<any_a<>, any_a<>>::const_iterator>()
 {
-	return kind_create(1, "\"std::map<any_a<>, any_a<>>::const_iterator\"");
+	return kind_create(1, "\"std_map<any_a<>, any_a<>>::const_iterator\"");
 }
 
 template <>
-inline kind_a<> kind_of<std::map<any_a<>, any_a<>>::iterator>()
+inline kind_a<> kind_of<std_map<any_a<>, any_a<>>::iterator>()
 {
-	return kind_create(1, "\"std::map<any_a<>, any_a<>>::iterator\"");
+	return kind_create(1, "\"std_map<any_a<>, any_a<>>::iterator\"");
 }
 
 template <>

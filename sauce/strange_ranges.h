@@ -150,25 +150,25 @@ namespace strange
 	}
 
 	template <typename _key, typename _value>
-	inline bidirectional_extractor_data_a<flock_a<>, typename std::map<_key, _value>::const_iterator> begin(ordered_shoal_a<_key, _value> const& shoal)
+	inline bidirectional_extractor_data_a<flock_a<>, typename std_map<_key, _value>::const_iterator> begin(ordered_shoal_a<_key, _value> const& shoal)
 	{
 		return shoal.extract_begin();
 	}
 
 	template <typename _key, typename _value>
-	inline bidirectional_extractor_data_a<flock_a<>, typename std::map<_key, _value>::const_iterator> end(ordered_shoal_a<_key, _value> const& shoal)
+	inline bidirectional_extractor_data_a<flock_a<>, typename std_map<_key, _value>::const_iterator> end(ordered_shoal_a<_key, _value> const& shoal)
 	{
 		return shoal.extract_end();
 	}
 
 	template <typename _key, typename _value>
-	inline bidirectional_mutator_data_a<flock_a<>, typename std::map<_key, _value>::iterator> begin(ordered_shoal_a<_key, _value>& shoal)
+	inline bidirectional_mutator_data_a<flock_a<>, typename std_map<_key, _value>::iterator> begin(ordered_shoal_a<_key, _value>& shoal)
 	{
 		return shoal.mutate_begin();
 	}
 
 	template <typename _key, typename _value>
-	inline bidirectional_mutator_data_a<flock_a<>, typename std::map<_key, _value>::iterator> end(ordered_shoal_a<_key, _value>& shoal)
+	inline bidirectional_mutator_data_a<flock_a<>, typename std_map<_key, _value>::iterator> end(ordered_shoal_a<_key, _value>& shoal)
 	{
 		return shoal.mutate_end();
 	}

@@ -224,7 +224,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 	};
 
 public:
-	using std_map_key_value = std::map<_key, _value>;
+	using std_map_key_value = std_map<_key, _value>;
 
 	// construction
 	static inline any_a<> create__(range_a<> const& range)

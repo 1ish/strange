@@ -36,6 +36,8 @@ namespace strange
 	using std_vector = std::vector<_element>;
 	template<typename _element>
 	using std_set = std::set<_element>;
+	template<typename _key, typename _value>
+	using std_map = std::map<_key, _value>;
 
 	using dart_packet = dart::packet;
 }

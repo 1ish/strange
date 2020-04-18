@@ -24,17 +24,17 @@ public:
 
 	inline bool operator>=(ordered_shoal_a < _key , _value > const & shoal ) const;
 
-	inline bidirectional_extractor_data_a < flock_a < > , typename std :: map < _key , _value > :: const_iterator > extract_begin() const;
+	inline bidirectional_extractor_data_a < flock_a < > , typename std_map < _key , _value > :: const_iterator > extract_begin() const;
 
-	inline bidirectional_extractor_data_a < flock_a < > , typename std :: map < _key , _value > :: const_iterator > extract_end() const;
+	inline bidirectional_extractor_data_a < flock_a < > , typename std_map < _key , _value > :: const_iterator > extract_end() const;
 
-	inline bidirectional_mutator_data_a < flock_a < > , typename std :: map < _key , _value > :: iterator > mutate_begin();
+	inline bidirectional_mutator_data_a < flock_a < > , typename std_map < _key , _value > :: iterator > mutate_begin();
 
-	inline bidirectional_mutator_data_a < flock_a < > , typename std :: map < _key , _value > :: iterator > mutate_end();
+	inline bidirectional_mutator_data_a < flock_a < > , typename std_map < _key , _value > :: iterator > mutate_end();
 
-	inline std :: map < _key , _value > const & extract_map() const;
+	inline std_map < _key , _value > const & extract_map() const;
 
-	inline std :: map < _key , _value > & mutate_map();
+	inline std_map < _key , _value > & mutate_map();
 
 protected:
 	struct ___ordered_shoal_a_handle_base___ : shoal_a< _key , _value >::___shoal_a_handle_base___
@@ -45,12 +45,12 @@ protected:
 		virtual bool operator>(ordered_shoal_a < _key , _value > const & shoal ) const = 0;
 		virtual bool operator<=(ordered_shoal_a < _key , _value > const & shoal ) const = 0;
 		virtual bool operator>=(ordered_shoal_a < _key , _value > const & shoal ) const = 0;
-		virtual bidirectional_extractor_data_a < flock_a < > , typename std :: map < _key , _value > :: const_iterator > extract_begin() const = 0;
-		virtual bidirectional_extractor_data_a < flock_a < > , typename std :: map < _key , _value > :: const_iterator > extract_end() const = 0;
-		virtual bidirectional_mutator_data_a < flock_a < > , typename std :: map < _key , _value > :: iterator > mutate_begin() = 0;
-		virtual bidirectional_mutator_data_a < flock_a < > , typename std :: map < _key , _value > :: iterator > mutate_end() = 0;
-		virtual std :: map < _key , _value > const & extract_map() const = 0;
-		virtual std :: map < _key , _value > & mutate_map() = 0;
+		virtual bidirectional_extractor_data_a < flock_a < > , typename std_map < _key , _value > :: const_iterator > extract_begin() const = 0;
+		virtual bidirectional_extractor_data_a < flock_a < > , typename std_map < _key , _value > :: const_iterator > extract_end() const = 0;
+		virtual bidirectional_mutator_data_a < flock_a < > , typename std_map < _key , _value > :: iterator > mutate_begin() = 0;
+		virtual bidirectional_mutator_data_a < flock_a < > , typename std_map < _key , _value > :: iterator > mutate_end() = 0;
+		virtual std_map < _key , _value > const & extract_map() const = 0;
+		virtual std_map < _key , _value > & mutate_map() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___ordered_shoal_a_handle_base___>
@@ -83,17 +83,17 @@ protected:
 
 		virtual inline bool operator>=(ordered_shoal_a < _key , _value > const & shoal ) const final;
 
-		virtual inline bidirectional_extractor_data_a < flock_a < > , typename std :: map < _key , _value > :: const_iterator > extract_begin() const final;
+		virtual inline bidirectional_extractor_data_a < flock_a < > , typename std_map < _key , _value > :: const_iterator > extract_begin() const final;
 
-		virtual inline bidirectional_extractor_data_a < flock_a < > , typename std :: map < _key , _value > :: const_iterator > extract_end() const final;
+		virtual inline bidirectional_extractor_data_a < flock_a < > , typename std_map < _key , _value > :: const_iterator > extract_end() const final;
 
-		virtual inline bidirectional_mutator_data_a < flock_a < > , typename std :: map < _key , _value > :: iterator > mutate_begin() final;
+		virtual inline bidirectional_mutator_data_a < flock_a < > , typename std_map < _key , _value > :: iterator > mutate_begin() final;
 
-		virtual inline bidirectional_mutator_data_a < flock_a < > , typename std :: map < _key , _value > :: iterator > mutate_end() final;
+		virtual inline bidirectional_mutator_data_a < flock_a < > , typename std_map < _key , _value > :: iterator > mutate_end() final;
 
-		virtual inline std :: map < _key , _value > const & extract_map() const final;
+		virtual inline std_map < _key , _value > const & extract_map() const final;
 
-		virtual inline std :: map < _key , _value > & mutate_map() final;
+		virtual inline std_map < _key , _value > & mutate_map() final;
 
 	};
 
@@ -321,22 +321,22 @@ public:
 	inline bool operator>=(ordered_shoal_a < _key , _value > const & shoal ) const
 	{ throw dis("dynamic ordered_shoal_d::operator>=(shoal) not available"); }
 
-	inline bidirectional_extractor_data_a < flock_a < > , typename std :: map < _key , _value > :: const_iterator > extract_begin() const
+	inline bidirectional_extractor_data_a < flock_a < > , typename std_map < _key , _value > :: const_iterator > extract_begin() const
 	{ throw dis("dynamic ordered_shoal_d::extract_begin() not available"); }
 
-	inline bidirectional_extractor_data_a < flock_a < > , typename std :: map < _key , _value > :: const_iterator > extract_end() const
+	inline bidirectional_extractor_data_a < flock_a < > , typename std_map < _key , _value > :: const_iterator > extract_end() const
 	{ throw dis("dynamic ordered_shoal_d::extract_end() not available"); }
 
-	inline bidirectional_mutator_data_a < flock_a < > , typename std :: map < _key , _value > :: iterator > mutate_begin()
+	inline bidirectional_mutator_data_a < flock_a < > , typename std_map < _key , _value > :: iterator > mutate_begin()
 	{ throw dis("dynamic ordered_shoal_d::mutate_begin() not available"); }
 
-	inline bidirectional_mutator_data_a < flock_a < > , typename std :: map < _key , _value > :: iterator > mutate_end()
+	inline bidirectional_mutator_data_a < flock_a < > , typename std_map < _key , _value > :: iterator > mutate_end()
 	{ throw dis("dynamic ordered_shoal_d::mutate_end() not available"); }
 
-	inline std :: map < _key , _value > const & extract_map() const
+	inline std_map < _key , _value > const & extract_map() const
 	{ throw dis("dynamic ordered_shoal_d::extract_map() not available"); }
 
-	inline std :: map < _key , _value > & mutate_map()
+	inline std_map < _key , _value > & mutate_map()
 	{ throw dis("dynamic ordered_shoal_d::mutate_map() not available"); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}

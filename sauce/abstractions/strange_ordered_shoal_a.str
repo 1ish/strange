@@ -14,13 +14,13 @@ false &&
 					'operator<=' : "bool (ordered_shoal_a<_key, _value> const& shoal) const",
 					'operator>=' : "bool (ordered_shoal_a<_key, _value> const& shoal) const",
 
-					extract_begin : "bidirectional_extractor_data_a<flock_a<>, typename std::map<_key, _value>::const_iterator> () const",
-					extract_end : "bidirectional_extractor_data_a<flock_a<>, typename std::map<_key, _value>::const_iterator> () const",
-					mutate_begin : "bidirectional_mutator_data_a<flock_a<>, typename std::map<_key, _value>::iterator> ()",
-					mutate_end : "bidirectional_mutator_data_a<flock_a<>, typename std::map<_key, _value>::iterator> ()",
+					extract_begin : "bidirectional_extractor_data_a<flock_a<>, typename std_map<_key, _value>::const_iterator> () const",
+					extract_end : "bidirectional_extractor_data_a<flock_a<>, typename std_map<_key, _value>::const_iterator> () const",
+					mutate_begin : "bidirectional_mutator_data_a<flock_a<>, typename std_map<_key, _value>::iterator> ()",
+					mutate_end : "bidirectional_mutator_data_a<flock_a<>, typename std_map<_key, _value>::iterator> ()",
 
-					extract_map : "std::map<_key, _value> const& () const",
-					mutate_map : "std::map<_key, _value>& ()",
+					extract_map : "std_map<_key, _value> const& () const",
+					mutate_map : "std_map<_key, _value>& ()",
 				}
 			)
 		)

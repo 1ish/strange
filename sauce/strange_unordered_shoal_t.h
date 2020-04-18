@@ -306,7 +306,7 @@ public:
 
 	inline std_size_t hash() const
 	{
-		std::map<any_a<>, std_size_t> ordered;
+		std_map<any_a<>, std_size_t> ordered;
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		for (auto const& pair : _map)
 		{
