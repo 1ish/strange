@@ -3,21 +3,21 @@ namespace strange
 {
 
 template <typename _1>
-inline forward_extractor_data_a < any_a < > , std :: istreambuf_iterator < char > > river_a<_1>::extract_begin() const
+inline forward_extractor_data_a < any_a < > , std_istreambuf_iterator < char > > river_a<_1>::extract_begin() const
 { assert(any_a<>::___handle___); return ___read___().extract_begin(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline forward_extractor_data_a < any_a < > , std :: istreambuf_iterator < char > > river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::extract_begin() const
+inline forward_extractor_data_a < any_a < > , std_istreambuf_iterator < char > > river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::extract_begin() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
 
 template <typename _1>
-inline forward_extractor_data_a < any_a < > , std :: istreambuf_iterator < char > > river_a<_1>::extract_end() const
+inline forward_extractor_data_a < any_a < > , std_istreambuf_iterator < char > > river_a<_1>::extract_end() const
 { assert(any_a<>::___handle___); return ___read___().extract_end(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline forward_extractor_data_a < any_a < > , std :: istreambuf_iterator < char > > river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::extract_end() const
+inline forward_extractor_data_a < any_a < > , std_istreambuf_iterator < char > > river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::extract_end() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
 
 template <typename _1>

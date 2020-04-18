@@ -38,6 +38,8 @@ namespace strange
 	using std_set = std::set<_element>;
 	template<typename _key, typename _value>
 	using std_map = std::map<_key, _value>;
+	template<typename _char>
+	using std_istreambuf_iterator = std::istreambuf_iterator<_char>;
 
 	using dart_packet = dart::packet;
 }

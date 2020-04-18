@@ -107,7 +107,7 @@ class river_t : public thing_t<___ego___>
 
 public:
 	using std_shared_ptr_basic_ios_char = std::shared_ptr<std::basic_ios<char>>;
-	using std_istreambuf_iterator_char = std::istreambuf_iterator<char>;
+	using std_istreambuf_iterator_char = std_istreambuf_iterator<char>;
 
 	// construction
 	static inline any_a<> create__(range_a<> const& _)

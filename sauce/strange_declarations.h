@@ -460,7 +460,7 @@ inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<true>::read_lock>>
 template <>
 inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<true>::write_lock>>();
 template <>
-inline kind_a<> kind_of<std::istreambuf_iterator<char>>();
+inline kind_a<> kind_of<std_istreambuf_iterator<char>>();
 template <>
 inline kind_a<> kind_of<std_vector<int8_t>::const_iterator>();
 template <>

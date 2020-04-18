@@ -239,12 +239,12 @@ namespace strange
 		return shoal.mutate_end();
 	}
 
-	inline forward_extractor_data_a<any_a<>, std::istreambuf_iterator<char>> begin(river_a<> const& river)
+	inline forward_extractor_data_a<any_a<>, std_istreambuf_iterator<char>> begin(river_a<> const& river)
 	{
 		return river.extract_begin();
 	}
 
-	inline forward_extractor_data_a<any_a<>, std::istreambuf_iterator<char>> end(river_a<> const& river)
+	inline forward_extractor_data_a<any_a<>, std_istreambuf_iterator<char>> end(river_a<> const& river)
 	{
 		return river.extract_end();
 	}

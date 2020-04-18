@@ -447,9 +447,9 @@ inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<true>::write_lock>
 }
 
 template <>
-inline kind_a<> kind_of<std::istreambuf_iterator<char>>()
+inline kind_a<> kind_of<std_istreambuf_iterator<char>>()
 {
-	return kind_create(1, "\"std::istreambuf_iterator<char>\"");
+	return kind_create(1, "\"std_istreambuf_iterator<char>\"");
 }
 
 template <>
