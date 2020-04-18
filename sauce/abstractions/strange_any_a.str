@@ -65,7 +65,7 @@ false &&
 
 					// serialization
 					to_parcel_ :# (<parcel>),
-					to_parcel_unique_ :# (herd :<unordered_herd[<#number_data_uint64>]>&, <parcel>),
+					to_parcel_unique_ :# (unique_herd :<herd[<#number_data_uint64>]>&, <parcel>),
 				}
 			)
 		)

@@ -153,7 +153,7 @@ public:
 
 	inline any_a<> to_parcel_unique__(range_a<> const& ___arguments___) const;
 
-	inline parcel_a<> to_parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const;
+	inline parcel_a<> to_parcel_unique_(herd_a< _number_data_uint64 > & unique_herd) const;
 
 protected:
 	struct ___any_a_handle_base___
@@ -195,7 +195,7 @@ protected:
 		virtual std :: size_t hash() const = 0;
 		virtual bool is(std :: string const & s ) const = 0;
 		virtual parcel_a<> to_parcel_() const = 0;
-		virtual parcel_a<> to_parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const = 0;
+		virtual parcel_a<> to_parcel_unique_(herd_a< _number_data_uint64 > & unique_herd) const = 0;
 	};
 
 	template <typename ___TTT___, typename ___BHB___ = ___any_a_handle_base___>
@@ -282,7 +282,7 @@ protected:
 
 		virtual inline parcel_a<> to_parcel_() const final;
 
-		virtual inline parcel_a<> to_parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const final;
+		virtual inline parcel_a<> to_parcel_unique_(herd_a< _number_data_uint64 > & unique_herd) const final;
 
 		___TTT___ ___value___;
 	};

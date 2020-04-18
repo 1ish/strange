@@ -681,18 +681,19 @@ public:
 	}
 
 	// parcel
-	inline any_a<> unwrap_() const
+	inline any_a<> unwrap_(shoal_a<> const& shared_shoal) const
 	{
 		auto no_shoal = no();
-		return unwrap(no_shoal);
+		return operate(no_shoal, reinterpret_cast<range_a<> const&>(shared_shoal));
 	}
 
-	inline any_a<> unwrap_unique_(unordered_shoal_a<number_data_a<uint64_t>, any_a<>>& shoal) const
+	inline any_a<> unwrap_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_a<uint64_t>, any_a<>>& unique_shoal) const
 	{
-		return unwrap(shoal);
+		return operate(unique_shoal, reinterpret_cast<range_a<> const&>(shared_shoal));
 	}
 
-	inline any_a<> unwrap(any_a<>& shoal) const
+	// function
+	inline any_a<> operate(any_a<>& unique_shoal, range_a<> const& shared_shoal) const
 	{
 		switch (_packet.get_type())
 		{
@@ -719,16 +720,16 @@ public:
 				id = num(static_cast<uint64_t>(it->integer()));
 				if (++it == end)
 				{
-					if (!check<unordered_shoal_a<number_data_a<uint64_t>, any_a<>>>(shoal))
+					if (!check<shoal_a<number_data_a<uint64_t>, any_a<>>>(unique_shoal))
 					{
 						throw dis("strange::parcel::unwrap called for array with reference id but no shoal");
 					}
-					auto unordered_shoal = fast<unordered_shoal_a<number_data_a<uint64_t>, any_a<>>>(shoal);
-					if (!unordered_shoal.has(id))
+					auto shoal = fast<shoal_a<number_data_a<uint64_t>, any_a<>>>(unique_shoal);
+					if (!shoal.has(id))
 					{
 						throw dis("strange::parcel::unwrap called for array with unknown reference id");
 					}
-					return unordered_shoal.at_(id);
+					return shoal.at_(id);
 				}
 			}
 			if (!it->is_str())
@@ -736,22 +737,22 @@ public:
 				throw dis("strange::parcel::unwrap called for array with no name");
 			}
 			auto name = sym(it->str());
-			auto function = shared().at_(name);
+			auto function = reinterpret_cast<shoal_a<> const&>(shared_shoal).at_(name);
 			if (!function)
 			{
 				throw dis("strange::parcel::unwrap called for array with unrecognised function name: ") + name;
 			}
 			auto range = (++it == end)
 				? range_t<>::create_()
-				: range_operator_create(
+				: range_operator_create( //TODO get rid of reinterpret_casts by doing something different here
 					range_t<>::create_(
 						extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, it),
 						extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, end)),
-					shoal, range_a<>{});
+					unique_shoal, shared_shoal);
 			auto result = function.operate(function, range);
 			if (unique && 
-				check<unordered_shoal_a<number_data_a<uint64_t>, any_a<>>>(shoal) &&
-				!fast<unordered_shoal_a<number_data_a<uint64_t>, any_a<>>>(shoal).insert(id, result))
+				check<shoal_a<number_data_a<uint64_t>, any_a<>>>(unique_shoal) &&
+				!fast<shoal_a<number_data_a<uint64_t>, any_a<>>>(unique_shoal).insert(id, result))
 			{
 				throw dis("strange::parcel::unwrap called for array with duplicate reference id");
 			}
@@ -760,9 +761,9 @@ public:
 		case dart_packet::type::boolean:
 		{
 			bool const boolean = _packet.boolean();
-			if (boolean == bool{ shoal })
+			if (boolean == bool{ unique_shoal })
 			{
-				return shoal;
+				return unique_shoal;
 			}
 			return boole(boolean);
 		}
@@ -780,12 +781,6 @@ public:
 		return thing_t<___ego___>::me_();
 	}
 
-	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const&) const
-	{
-		return unwrap(thing);
-	}
-	
 	// data
 	inline dart_packet const& extract_packet() const
 	{

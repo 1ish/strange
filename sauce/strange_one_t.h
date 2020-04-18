@@ -97,7 +97,7 @@ public:
 		return parcel_a<>{};
 	}
 
-	inline parcel_a<> to_parcel_unique_(unordered_herd_a<number_data_a<uint64_t>>& herd) const
+	inline parcel_a<> to_parcel_unique_(herd_a<number_data_a<uint64_t>>& unique_herd) const
 	{
 		return parcel_a<>{};
 	}

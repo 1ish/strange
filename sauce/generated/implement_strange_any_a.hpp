@@ -461,18 +461,18 @@ inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::to_parcel_uniqu
 	{
 		throw dis("any_a::to_parcel_unique_ passed short range");
 	}
-	auto herd = cast_dup< unordered_herd_a< _number_data_uint64 > >(*___it___);
-	return to_parcel_unique_(herd);
+	auto unique_herd = cast_dup< herd_a< _number_data_uint64 > >(*___it___);
+	return to_parcel_unique_(unique_herd);
 }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::to_parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const
-{ assert(___handle___); return ___read___().to_parcel_unique_(herd); }
+inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::to_parcel_unique_(herd_a< _number_data_uint64 > & unique_herd) const
+{ assert(___handle___); return ___read___().to_parcel_unique_(unique_herd); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
 template <typename ___TTT___, typename ___BHB___>
-inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::to_parcel_unique_(unordered_herd_a< _number_data_uint64 > & herd) const
-{ return ___value___.to_parcel_unique_(herd); }
+inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::to_parcel_unique_(herd_a< _number_data_uint64 > & unique_herd) const
+{ return ___value___.to_parcel_unique_(unique_herd); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
 inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::operation(std::string const& name) const

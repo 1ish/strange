@@ -5,8 +5,8 @@ false &&
 			(	// parent
 				$$<collection>[<>, <parcel>, <parcel>],
 				{	// parcel
-					unwrap_ :# (<>),
-					unwrap_unique_ :# (shoal :<unordered_shoal[<number_data_uint64>, <>]>&, <>),
+					unwrap_ :# (shared_shoal :<shoal>#, <>),
+					unwrap_unique_ :# (shared_shoal :<shoal>#, unique_shoal :<shoal[<number_data_uint64>, <>]>&, <>),
 /*
 					close_ := (<>),
 					closed_ :# (<>),
@@ -14,59 +14,61 @@ false &&
 
 					to_json_ :# (<lake_int8>),
 					to_json : "std::string () const { return lake_to_string(to_json_()); }",
+					set_json_ :# (json :<lake_int8>&, <>),
 
 					to_binary_ :# (<lake_int8>),
 					to_binary : "std::string () const { return lake_to_string(to_binary_()); }",
+					set_binary_ :# (binary :<lake_int8>&, <>),
 
 					is_null_ :# (<>),
 
 					is_boolean_ :# (<>),
 					to_boolean_ :# (<>),
-					to_boolean_or_ :# (boolean :#, <>),
 
 					is_number_ :# (<>),
 					to_number_ :# (<number>),
-					to_number_or_ :# (number :<number>#, <number>),
+					set_number_ :# (number :<number>&, <>),
 
 					is_int_64_ :# (<>),
 					to_int_64_ :# (<number_data_int64>),
-					to_int_64_or_ :# (number :<number_data_int64>#, <number_data_int64>),
+					set_int_64_ :# (number :<number_data_int64>&, <>),
 
 					is_float_64_ :# (<>),
 					to_float_64_ :# (<number_data_double>),
-					to_float_64_or_ :# (number :<number_data_double>#, <number_data_double>),
-
-					is_symbol_ :# (<>),
-					to_symbol_ :# (<symbol>),
-					to_symbol_or_ :# (symbol :<symbol>#, <symbol>),
-
-					is_flock_ :# (<>),
-					to_flock_ :# (<flock[<parcel>]>),
-					to_flock_or_ :# (flock :<flock[<parcel>]>#, <flock[<parcel>]>),
+					set_float_64_ :# (number :<number_data_double>&, <>),
 
 					is_lake_ :# (<>),
 					to_lake_ :# (<lake_int8>),
-					to_lake_or_ :# (lake :<lake_int8>#, <lake_int8>),
+					set_lake_ :# (lake :<lake_int8>&, <>),
 
-					is_ordered_herd_ :# (<>),
-					to_ordered_herd_ :# (<ordered_herd[<parcel>]>),
-					to_ordered_herd_or_ :# (herd :<ordered_herd[<parcel>]>#, <ordered_herd[<parcel>]>),
+					to_symbol_ :# (<symbol>),
 
-					is_ordered_shoal_ :# (<>),
-					to_ordered_shoal_ :# (<ordered_shoal[<>, <parcel>]>),
-					to_ordered_shoal_or_ :# (shoal :<ordered_shoal[<>, <parcel>]>#, <ordered_shoal[<>, <parcel>]>),
+					is_inventory_ :# (<>),
+					set_inventory_ :# (inventory :<inventory[<parcel>]>&, <>),
 
-					is_squad_ :# (<>),
+					to_flock_ :# (<flock[<parcel>]>),
+					set_flock_ :# (flock :<flock[<parcel>]>&, <>),
+
 					to_squad_ :# (<squad[<parcel>]>),
-					to_squad_or_ :# (squad :<squad[<parcel>]>#, <squad[<parcel>]>),
+					set_squad_ :# (squad :<squad[<parcel>]>&, <>),
 
-					is_unordered_herd_ :# (<>),
+					is_herd_ :# (<>),
+					set_herd_ :# (herd :<herd[<parcel>]>&, <>),
+
+					to_ordered_herd_ :# (<ordered_herd[<parcel>]>),
+					set_ordered_herd_ :# (herd :<ordered_herd[<parcel>]>&, <>),
+
 					to_unordered_herd_ :# (<unordered_herd[<parcel>]>),
-					to_unordered_herd_or_ :# (herd :<unordered_herd[<parcel>]>#, <unordered_herd[<parcel>]>),
+					set_unordered_herd_ :# (herd :<unordered_herd[<parcel>]>&, <>),
 
-					is_unordered_shoal_ :# (<>),
+					is_shoal_ :# (<>),
+					set_shoal_ :# (shoal :<shoal[<>, <parcel>]>&, <>),
+
+					to_ordered_shoal_ :# (<ordered_shoal[<>, <parcel>]>),
+					set_ordered_shoal_ :# (shoal :<ordered_shoal[<>, <parcel>]>&, <>),
+
 					to_unordered_shoal_ :# (<unordered_shoal[<>, <parcel>]>),
-					to_unordered_shoal_or_ :# (shoal :<unordered_shoal[<>, <parcel>]>#, <unordered_shoal[<>, <parcel>]>),
+					set_unordered_shoal_ :# (shoal :<unordered_shoal[<>, <parcel>]>&, <>),
 */
 					'operator==' : "bool (parcel_a<> const& parcel) const",
 					'operator!=' : "bool (parcel_a<> const& parcel) const",
