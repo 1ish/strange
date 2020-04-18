@@ -28,7 +28,7 @@ public:
 
 	inline symbol_a<> name_() const;
 
-	inline std :: string name() const;
+	inline std_string name() const;
 
 	inline any_a<> dimensions__(range_a<> const& ___arguments___) const;
 
@@ -46,7 +46,7 @@ public:
 
 	inline lake_int8_a<> code_() const;
 
-	inline std :: string code() const;
+	inline std_string code() const;
 
 protected:
 	struct ___cat_a_handle_base___ : symbol_a<>::___symbol_a_handle_base___
@@ -56,12 +56,12 @@ protected:
 		virtual number_data_int64_a<> order_() const = 0;
 		virtual int64_t order() const = 0;
 		virtual symbol_a<> name_() const = 0;
-		virtual std :: string name() const = 0;
+		virtual std_string name() const = 0;
 		virtual flock_a<> dimensions_() const = 0;
 		virtual flock_a<> parameters_() const = 0;
 		virtual cat_a<> result_() const = 0;
 		virtual lake_int8_a<> code_() const = 0;
-		virtual std :: string code() const = 0;
+		virtual std_string code() const = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___cat_a_handle_base___>
@@ -92,7 +92,7 @@ protected:
 
 		virtual inline symbol_a<> name_() const final;
 
-		virtual inline std :: string name() const final;
+		virtual inline std_string name() const final;
 
 		virtual inline flock_a<> dimensions_() const final;
 
@@ -102,7 +102,7 @@ protected:
 
 		virtual inline lake_int8_a<> code_() const final;
 
-		virtual inline std :: string code() const final;
+		virtual inline std_string code() const final;
 
 	};
 
@@ -384,7 +384,7 @@ public:
 		return cast<symbol_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
 
-	inline std :: string name() const
+	inline std_string name() const
 	{ return name_().to_string(); }
 
 	inline any_a<> dimensions__(range_a<> const& arguments) const
@@ -475,7 +475,7 @@ public:
 		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
 
-	inline std :: string code() const
+	inline std_string code() const
 	{ return lake_to_string(code_()); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}

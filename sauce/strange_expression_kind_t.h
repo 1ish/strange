@@ -318,8 +318,8 @@ public:
 			}
 			else
 			{
-				std::string const name = _name.to_string();
-				river.write_string(" " + (name.empty() ? std::string("any") : name) + "_a<");
+				std_string const name = _name.to_string();
+				river.write_string(" " + (name.empty() ? std_string("any") : name) + "_a<");
 				if (_count >= 4 && _aspects.type_() == expression_flock_t<>::type_())
 				{
 					bool first = true;

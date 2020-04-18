@@ -61,7 +61,7 @@ false &&
 					hash_ :# (<#number_data_uint64>),
 					hash : "std_size_t () const",
 
-					is : "bool (std::string const& s) const",
+					is : "bool (std_string const& s) const",
 
 					// serialization
 					to_parcel_ :# (<parcel>),

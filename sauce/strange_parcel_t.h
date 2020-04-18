@@ -282,7 +282,7 @@ public:
 	static inline symbol_a<> type_()
 	{
 		static symbol_a<> TYPE = sym("strange::parcel" + 
-			std::string{ _concurrent_ ? "_concurrent" : "" });
+			std_string{ _concurrent_ ? "_concurrent" : "" });
 		return TYPE;
 	}
 
@@ -341,7 +341,7 @@ public:
 	{
 		dart_packet copy = _packet;
 		auto bytes = copy.finalize().get_bytes();
-		return std::hash<std::string>{}(std::string{ reinterpret_cast<char const*>(bytes.data()), bytes.size() });
+		return std::hash<std_string>{}(std_string{ reinterpret_cast<char const*>(bytes.data()), bytes.size() });
 	}
 
 	// range

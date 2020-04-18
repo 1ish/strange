@@ -36,12 +36,12 @@ inline lake_int8_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::to
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake_(); }
 
 template <typename _1>
-inline std :: string river_a<_1>::to_string()
+inline std_string river_a<_1>::to_string()
 { assert(any_a<>::___handle___); return ___write___().to_string(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: string river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::to_string()
+inline std_string river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::to_string()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
 
 template <typename _1>
@@ -246,12 +246,12 @@ inline std :: vector < int8_t > river_a<_1>::___river_a_handle___<___TTT___, ___
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.read(count); }
 
 template <typename _1>
-inline std :: string river_a<_1>::read_string(int64_t count )
+inline std_string river_a<_1>::read_string(int64_t count )
 { assert(any_a<>::___handle___); return ___write___().read_string(count); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: string river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::read_string(int64_t count )
+inline std_string river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::read_string(int64_t count )
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.read_string(count); }
 
 template <typename _1>
@@ -458,12 +458,12 @@ inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::write(std :
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.write(lake); }
 
 template <typename _1>
-inline void river_a<_1>::write_string(std :: string const & str )
+inline void river_a<_1>::write_string(std_string const & str )
 { assert(any_a<>::___handle___); ___write___().write_string(str); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::write_string(std :: string const & str )
+inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::write_string(std_string const & str )
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.write_string(str); }
 
 template <typename _1>
@@ -843,12 +843,12 @@ inline lake_int8_a<> river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::fi
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.filename_(); }
 
 template <typename _1>
-inline std :: string river_a<_1>::filename() const
+inline std_string river_a<_1>::filename() const
 { assert(any_a<>::___handle___); return ___read___().filename(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: string river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::filename() const
+inline std_string river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::filename() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.filename(); }
 
 template <typename _1>

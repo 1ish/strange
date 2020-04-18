@@ -91,7 +91,7 @@ public:
 		return token_a<>::create<token_t<>>(filename, line, position, tag, symbol, literal, precedence);
 	}
 
-	static inline token_a<> create(std::string const& tag, range_a<> const& range, create_member member)
+	static inline token_a<> create(std_string const& tag, range_a<> const& range, create_member member)
 	{
 		auto it = range.extract_begin_();
 		if (it == range.extract_end_())
@@ -152,7 +152,7 @@ public:
 		return create_(filename, line, position, sym("symbol"), symbol);
 	}
 
-	static inline token_a<> create_symbol(std::string const& filename, int64_t line, int64_t position, std::string const& symbol)
+	static inline token_a<> create_symbol(std_string const& filename, int64_t line, int64_t position, std_string const& symbol)
 	{
 		return create_symbol_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol));
 	}
@@ -167,7 +167,7 @@ public:
 		return create_(filename, line, position, sym("lake"), symbol, lake_from_string(symbol.to_string()));
 	}
 
-	static inline token_a<> create_lake(std::string const& filename, int64_t line, int64_t position, std::string const& symbol)
+	static inline token_a<> create_lake(std_string const& filename, int64_t line, int64_t position, std_string const& symbol)
 	{
 		return create_lake_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol));
 	}
@@ -182,7 +182,7 @@ public:
 		return create_(filename, line, position, sym("int"), symbol, int_64_from_string(symbol.to_string()));
 	}
 
-	static inline token_a<> create_int(std::string const& filename, int64_t line, int64_t position, std::string const& symbol)
+	static inline token_a<> create_int(std_string const& filename, int64_t line, int64_t position, std_string const& symbol)
 	{
 		return create_int_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol));
 	}
@@ -197,7 +197,7 @@ public:
 		return create_(filename, line, position, sym("float"), symbol, float_64_from_string(symbol.to_string()));
 	}
 
-	static inline token_a<> create_float(std::string const& filename, int64_t line, int64_t position, std::string const& symbol)
+	static inline token_a<> create_float(std_string const& filename, int64_t line, int64_t position, std_string const& symbol)
 	{
 		return create_float_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol));
 	}
@@ -212,7 +212,7 @@ public:
 		return create_(filename, line, position, sym("name"), symbol);
 	}
 
-	static inline token_a<> create_name(std::string const& filename, int64_t line, int64_t position, std::string const& symbol)
+	static inline token_a<> create_name(std_string const& filename, int64_t line, int64_t position, std_string const& symbol)
 	{
 		return create_name_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol));
 	}
@@ -232,7 +232,7 @@ public:
 		return create_(filename, line, position, sym("punctuation"), symbol, symbol, precedence);
 	}
 
-	static inline token_a<> create_punctuation(std::string const& filename, int64_t line, int64_t position, std::string const& symbol, int64_t precedence)
+	static inline token_a<> create_punctuation(std_string const& filename, int64_t line, int64_t position, std_string const& symbol, int64_t precedence)
 	{
 		return create_punctuation_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol), number_int_64_t<>::create(precedence));
 	}
@@ -247,7 +247,7 @@ public:
 		return create_(filename, line, position, sym("error"), symbol);
 	}
 
-	static inline token_a<> create_error(std::string const& filename, int64_t line, int64_t position, std::string const& symbol)
+	static inline token_a<> create_error(std_string const& filename, int64_t line, int64_t position, std_string const& symbol)
 	{
 		return create_error_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol));
 	}
@@ -277,7 +277,7 @@ public:
 		return _filename;
 	}
 
-	inline std::string filename() const
+	inline std_string filename() const
 	{
 		return _filename.to_string();
 	}
@@ -307,7 +307,7 @@ public:
 		return _tag;
 	}
 
-	inline std::string tag() const
+	inline std_string tag() const
 	{
 		return _tag.to_string();
 	}
@@ -317,7 +317,7 @@ public:
 		return _symbol;
 	}
 
-	inline std::string symbol() const
+	inline std_string symbol() const
 	{
 		return _symbol.to_string();
 	}
@@ -347,7 +347,7 @@ public:
 		return mis(report());
 	}
 
-	inline std::string report() const
+	inline std_string report() const
 	{
 		return filename() + "(" + std::to_string(line()) + "," + std::to_string(position()) + "): " + tag() + " '" + symbol() + "'\n";
 	}

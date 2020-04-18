@@ -20,7 +20,7 @@ public:
 
 	inline lake_int8_a<> to_lake_();
 
-	inline std :: string to_string();
+	inline std_string to_string();
 
 	inline any_a<> get_char__(range_a<> const& ___arguments___);
 
@@ -64,7 +64,7 @@ public:
 
 	inline std :: vector < int8_t > read(int64_t count );
 
-	inline std :: string read_string(int64_t count );
+	inline std_string read_string(int64_t count );
 
 	inline any_a<> tellg__(range_a<> const& ___arguments___) const;
 
@@ -108,7 +108,7 @@ public:
 
 	inline void write(std :: vector < int8_t > const & lake );
 
-	inline void write_string(std :: string const & str );
+	inline void write_string(std_string const & str );
 
 	inline any_a<> tellp__(range_a<> const& ___arguments___) const;
 
@@ -192,7 +192,7 @@ public:
 
 	inline lake_int8_a<> filename_() const;
 
-	inline std :: string filename() const;
+	inline std_string filename() const;
 
 	inline any_a<> close__(range_a<> const& ___arguments___);
 
@@ -212,7 +212,7 @@ protected:
 		virtual forward_extractor_data_a < any_a < > , std :: istreambuf_iterator < char > > extract_begin() const = 0;
 		virtual forward_extractor_data_a < any_a < > , std :: istreambuf_iterator < char > > extract_end() const = 0;
 		virtual lake_int8_a<> to_lake_() = 0;
-		virtual std :: string to_string() = 0;
+		virtual std_string to_string() = 0;
 		virtual number_data_int8_a<> get_char_() = 0;
 		virtual int8_t get_char() = 0;
 		virtual number_data_int8_a<> peek_char_() = 0;
@@ -227,7 +227,7 @@ protected:
 		virtual void ignore(int64_t count ) = 0;
 		virtual lake_int8_a<> read_(number_data_int64_a<> const& count) = 0;
 		virtual std :: vector < int8_t > read(int64_t count ) = 0;
-		virtual std :: string read_string(int64_t count ) = 0;
+		virtual std_string read_string(int64_t count ) = 0;
 		virtual number_data_int64_a<> tellg_() const = 0;
 		virtual int64_t tellg() const = 0;
 		virtual river_a<> seekg_beg_(number_data_int64_a<> const& offset) = 0;
@@ -242,7 +242,7 @@ protected:
 		virtual void put_char(int8_t int_8 ) = 0;
 		virtual river_a<> write_(lake_int8_a<> const& lake) = 0;
 		virtual void write(std :: vector < int8_t > const & lake ) = 0;
-		virtual void write_string(std :: string const & str ) = 0;
+		virtual void write_string(std_string const & str ) = 0;
 		virtual number_data_int64_a<> tellp_() const = 0;
 		virtual int64_t tellp() const = 0;
 		virtual river_a<> seekp_beg_(number_data_int64_a<> const& offset) = 0;
@@ -270,7 +270,7 @@ protected:
 		virtual river_a<> set_bad_(any_a<> const& value) = 0;
 		virtual void set_bad(bool value ) = 0;
 		virtual lake_int8_a<> filename_() const = 0;
-		virtual std :: string filename() const = 0;
+		virtual std_string filename() const = 0;
 		virtual any_a<> close_() = 0;
 		virtual void close() = 0;
 		virtual any_a<> closed_() const = 0;
@@ -301,7 +301,7 @@ protected:
 
 		virtual inline lake_int8_a<> to_lake_() final;
 
-		virtual inline std :: string to_string() final;
+		virtual inline std_string to_string() final;
 
 		virtual inline number_data_int8_a<> get_char_() final;
 
@@ -331,7 +331,7 @@ protected:
 
 		virtual inline std :: vector < int8_t > read(int64_t count ) final;
 
-		virtual inline std :: string read_string(int64_t count ) final;
+		virtual inline std_string read_string(int64_t count ) final;
 
 		virtual inline number_data_int64_a<> tellg_() const final;
 
@@ -361,7 +361,7 @@ protected:
 
 		virtual inline void write(std :: vector < int8_t > const & lake ) final;
 
-		virtual inline void write_string(std :: string const & str ) final;
+		virtual inline void write_string(std_string const & str ) final;
 
 		virtual inline number_data_int64_a<> tellp_() const final;
 
@@ -417,7 +417,7 @@ protected:
 
 		virtual inline lake_int8_a<> filename_() const final;
 
-		virtual inline std :: string filename() const final;
+		virtual inline std_string filename() const final;
 
 		virtual inline any_a<> close_() final;
 
@@ -663,7 +663,7 @@ public:
 		return cast<lake_int8_a<>>(variadic_operate(op, *this));
 	}
 
-	inline std :: string to_string()
+	inline std_string to_string()
 	{ return lake_to_string(to_lake_()); }
 
 	inline any_a<> get_char__(range_a<> const& arguments)
@@ -841,7 +841,7 @@ public:
 	inline std :: vector < int8_t > read(int64_t count )
 	{ return read_(num(count)).extract_vector(); }
 
-	inline std :: string read_string(int64_t count )
+	inline std_string read_string(int64_t count )
 	{ return lake_to_string(read_(num(count))); }
 
 	inline any_a<> tellg__(range_a<> const& arguments) const
@@ -1019,7 +1019,7 @@ public:
 	inline void write(std :: vector < int8_t > const & lake )
 	{ write_(lake_int8_create(lake)); }
 
-	inline void write_string(std :: string const & str )
+	inline void write_string(std_string const & str )
 	{ write_(lake_from_string(str)); }
 
 	inline any_a<> tellp__(range_a<> const& arguments) const
@@ -1369,7 +1369,7 @@ public:
 		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
 
-	inline std :: string filename() const
+	inline std_string filename() const
 	{ return lake_to_string(filename_()); }
 
 	inline any_a<> close__(range_a<> const& arguments)

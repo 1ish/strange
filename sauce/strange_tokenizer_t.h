@@ -121,7 +121,7 @@ class tokenizer_t : public thing_t<___ego___>
 			bool escape = false;
 			bool commentblock = false;
 			bool commentline = false;
-			std::string token;
+			std_string token;
 
 			for (bool first = true;;)
 			{
@@ -432,7 +432,7 @@ class tokenizer_t : public thing_t<___ego___>
 						return punctuation_token(token);
 					default:
 						// single character punctuation
-						return punctuation_token(std::string(&char1, 1));
+						return punctuation_token(std_string(&char1, 1));
 					}
 				}
 				if (!commentblock && !commentline)
@@ -486,37 +486,37 @@ class tokenizer_t : public thing_t<___ego___>
 			return c >= '0' && c <= '9';
 		}
 
-		inline token_a<> symbol_token(std::string const& str) const
+		inline token_a<> symbol_token(std_string const& str) const
 		{
 			return token_t<>::create_symbol(_river.filename(), _start_line, _start_position, str);
 		}
 
-		inline token_a<> lake_token(std::string const& str) const
+		inline token_a<> lake_token(std_string const& str) const
 		{
 			return token_t<>::create_lake(_river.filename(), _start_line, _start_position, str);
 		}
 
-		inline token_a<> int_token(std::string const& str) const
+		inline token_a<> int_token(std_string const& str) const
 		{
 			return token_t<>::create_int(_river.filename(), _start_line, _start_position, str);
 		}
 
-		inline token_a<> float_token(std::string const& str) const
+		inline token_a<> float_token(std_string const& str) const
 		{
 			return token_t<>::create_float(_river.filename(), _start_line, _start_position, str);
 		}
 
-		inline token_a<> name_token(std::string const& str) const
+		inline token_a<> name_token(std_string const& str) const
 		{
 			return token_t<>::create_name(_river.filename(), _start_line, _start_position, str);
 		}
 
-		inline token_a<> punctuation_token(std::string const& str) const
+		inline token_a<> punctuation_token(std_string const& str) const
 		{
 			return token_t<>::create_punctuation(_river.filename(), _start_line, _start_position, str, _precedence_(str));
 		}
 
-		inline token_a<> error_token(std::string const& str) const
+		inline token_a<> error_token(std_string const& str) const
 		{
 			return token_t<>::create_error(_river.filename(), _line, _position, str);
 		}
@@ -577,7 +577,7 @@ protected:
 		, _river(river)
 	{}
 
-	static inline int64_t _precedence_(std::string const& str)
+	static inline int64_t _precedence_(std_string const& str)
 	{
 		static auto PRECEDENCE = []()
 		{

@@ -99,7 +99,7 @@ public:
 		return kind_a<>::create<kind_t<>>(order.extract_primitive(), name, dimensions, aspects, parameters, result, fixed, reference, optional);
 	}
 
-	static inline kind_a<> create(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_create(), flock_a<> const& aspects = flock_create(), flock_a<> const& parameters = flock_create(), symbol_a<> const& result = cat_t<___ego___>::any_sym(), bool fixed = false, bool reference = false, bool optional = false)
+	static inline kind_a<> create(int64_t order, std_string const& name = "", flock_a<> const& dimensions = flock_create(), flock_a<> const& aspects = flock_create(), flock_a<> const& parameters = flock_create(), symbol_a<> const& result = cat_t<___ego___>::any_sym(), bool fixed = false, bool reference = false, bool optional = false)
 	{
 		if (name == "strange::any")
 		{
@@ -141,9 +141,9 @@ public:
 	}
 
 	// cat
-	inline std::string code() const
+	inline std_string code() const
 	{
-		std::string code = cat_t<___ego___>::_name.to_string();
+		std_string code = cat_t<___ego___>::_name.to_string();
 		if (code.empty())
 		{
 			code = "strange::any";
@@ -247,34 +247,34 @@ class ___kind_t_share___
 	}
 };
 
-//inline kind_a<> kind_create(int64_t order = 1, std::string const& name = "");
+//inline kind_a<> kind_create(int64_t order = 1, std_string const& name = "");
 template <typename ___kind_a___>
-inline ___kind_a___ kind_create(int64_t order, std::string const& name)
+inline ___kind_a___ kind_create(int64_t order, std_string const& name)
 {
 	return kind_t<>::create(order, name);
 }
 
 template <typename ___kind_a___>
-inline ___kind_a___ kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions)
+inline ___kind_a___ kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions)
 {
 	return kind_t<>::create(order, name, dimensions);
 }
 
 template <typename ___kind_a___>
-inline ___kind_a___ kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects)
+inline ___kind_a___ kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects)
 {
 	return kind_t<>::create(order, name, dimensions, aspects);
 }
 
 template <typename ___kind_a___>
-inline ___kind_a___ kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters)
+inline ___kind_a___ kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters)
 {
 	return kind_t<>::create(order, name, dimensions, aspects, parameters);
 }
 
-//inline kind_a<> kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false);
+//inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false);
 template <typename ___kind_a___>
-inline ___kind_a___ kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed, bool reference, bool optional)
+inline ___kind_a___ kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed, bool reference, bool optional)
 {
 	return kind_t<>::create(order, name, dimensions, aspects, parameters, result, fixed, reference, optional);
 }

@@ -16,7 +16,7 @@ public:
 
 	inline symbol_a<> filename_() const;
 
-	inline std :: string filename() const;
+	inline std_string filename() const;
 
 	inline any_a<> line__(range_a<> const& ___arguments___) const;
 
@@ -34,13 +34,13 @@ public:
 
 	inline symbol_a<> tag_() const;
 
-	inline std :: string tag() const;
+	inline std_string tag() const;
 
 	inline any_a<> symbol__(range_a<> const& ___arguments___) const;
 
 	inline symbol_a<> symbol_() const;
 
-	inline std :: string symbol() const;
+	inline std_string symbol() const;
 
 	inline any_a<> literal__(range_a<> const& ___arguments___) const;
 
@@ -58,27 +58,27 @@ public:
 
 	inline misunderstanding_a<> report_() const;
 
-	inline std :: string report() const;
+	inline std_string report() const;
 
 protected:
 	struct ___token_a_handle_base___ : any_a<>::___any_a_handle_base___
 	{
 		virtual symbol_a<> filename_() const = 0;
-		virtual std :: string filename() const = 0;
+		virtual std_string filename() const = 0;
 		virtual number_data_int64_a<> line_() const = 0;
 		virtual int64_t line() const = 0;
 		virtual number_data_int64_a<> position_() const = 0;
 		virtual int64_t position() const = 0;
 		virtual symbol_a<> tag_() const = 0;
-		virtual std :: string tag() const = 0;
+		virtual std_string tag() const = 0;
 		virtual symbol_a<> symbol_() const = 0;
-		virtual std :: string symbol() const = 0;
+		virtual std_string symbol() const = 0;
 		virtual any_a<> literal_() const = 0;
 		virtual bool literal() const = 0;
 		virtual number_data_int64_a<> precedence_() const = 0;
 		virtual int64_t precedence() const = 0;
 		virtual misunderstanding_a<> report_() const = 0;
-		virtual std :: string report() const = 0;
+		virtual std_string report() const = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___token_a_handle_base___>
@@ -101,7 +101,7 @@ protected:
 
 		virtual inline symbol_a<> filename_() const final;
 
-		virtual inline std :: string filename() const final;
+		virtual inline std_string filename() const final;
 
 		virtual inline number_data_int64_a<> line_() const final;
 
@@ -113,11 +113,11 @@ protected:
 
 		virtual inline symbol_a<> tag_() const final;
 
-		virtual inline std :: string tag() const final;
+		virtual inline std_string tag() const final;
 
 		virtual inline symbol_a<> symbol_() const final;
 
-		virtual inline std :: string symbol() const final;
+		virtual inline std_string symbol() const final;
 
 		virtual inline any_a<> literal_() const final;
 
@@ -129,7 +129,7 @@ protected:
 
 		virtual inline misunderstanding_a<> report_() const final;
 
-		virtual inline std :: string report() const final;
+		virtual inline std_string report() const final;
 
 	};
 
@@ -361,7 +361,7 @@ public:
 		return cast<symbol_a<>>(variadic_operate(op, *const_cast<token_d*>(this)));
 	}
 
-	inline std :: string filename() const
+	inline std_string filename() const
 	{ return filename_().to_string(); }
 
 	inline any_a<> line__(range_a<> const& arguments) const
@@ -436,7 +436,7 @@ public:
 		return cast<symbol_a<>>(variadic_operate(op, *const_cast<token_d*>(this)));
 	}
 
-	inline std :: string tag() const
+	inline std_string tag() const
 	{ return tag_().to_string(); }
 
 	inline any_a<> symbol__(range_a<> const& arguments) const
@@ -461,7 +461,7 @@ public:
 		return cast<symbol_a<>>(variadic_operate(op, *const_cast<token_d*>(this)));
 	}
 
-	inline std :: string symbol() const
+	inline std_string symbol() const
 	{ return symbol_().to_string(); }
 
 	inline any_a<> literal__(range_a<> const& arguments) const
@@ -536,7 +536,7 @@ public:
 		return cast<misunderstanding_a<>>(variadic_operate(op, *const_cast<token_d*>(this)));
 	}
 
-	inline std :: string report() const
+	inline std_string report() const
 	{ return report_().to_string(); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}

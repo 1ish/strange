@@ -145,7 +145,7 @@ public:
 
 	inline std_size_t hash() const;
 
-	inline bool is(std :: string const & s ) const;
+	inline bool is(std_string const & s ) const;
 
 	inline any_a<> to_parcel__(range_a<> const& ___arguments___) const;
 
@@ -193,7 +193,7 @@ protected:
 		virtual bool greater_or_equal_(any_a<> const& thing) const = 0;
 		virtual _number_data_uint64 hash_() const = 0;
 		virtual std_size_t hash() const = 0;
-		virtual bool is(std :: string const & s ) const = 0;
+		virtual bool is(std_string const & s ) const = 0;
 		virtual parcel_a<> to_parcel_() const = 0;
 		virtual parcel_a<> to_parcel_unique_(herd_a< _number_data_uint64 > & unique_herd) const = 0;
 	};
@@ -278,7 +278,7 @@ protected:
 
 		virtual inline std_size_t hash() const final;
 
-		virtual inline bool is(std :: string const & s ) const final;
+		virtual inline bool is(std_string const & s ) const final;
 
 		virtual inline parcel_a<> to_parcel_() const final;
 
@@ -351,7 +351,7 @@ protected:
 		return *___handle___;
 	}
 
-	inline any_a<> operation(std::string const& name) const;
+	inline any_a<> operation(std_string const& name) const;
 
 public:
 	inline bool is_ref() const

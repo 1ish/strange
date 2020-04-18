@@ -6,7 +6,7 @@ false &&
 				$$<>[],
 				{	// token
 					filename_ :# (<symbol>),
-					filename : "std::string () const { return filename_().to_string(); }",
+					filename : "std_string () const { return filename_().to_string(); }",
 
 					line_ :# (<number_data_int64>),
 					line : "int64_t () const { return line_().extract_primitive(); }",
@@ -15,10 +15,10 @@ false &&
 					position : "int64_t () const { return position_().extract_primitive(); }",
 
 					tag_ :# (<symbol>),
-					tag : "std::string () const { return tag_().to_string(); }",
+					tag : "std_string () const { return tag_().to_string(); }",
 
 					symbol_ :# (<symbol>),
-					symbol : "std::string () const { return symbol_().to_string(); }",
+					symbol : "std_string () const { return symbol_().to_string(); }",
 
 					literal_ :# (<>),
 					literal : "bool () const { return literal_(); }",
@@ -27,7 +27,7 @@ false &&
 					precedence : "int64_t () const { return precedence_().extract_primitive(); }",
 
 					report_ :# (<misunderstanding>),
-					report : "std::string () const { return report_().to_string(); }",
+					report : "std_string () const { return report_().to_string(); }",
 				}
 			)
 		)

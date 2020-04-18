@@ -14,11 +14,11 @@ false &&
 					reopen_ := (<>),
 
 					to_json_ :# (<lake_int8>),
-					to_json : "std::string () const { return lake_to_string(to_json_()); }",
+					to_json : "std_string () const { return lake_to_string(to_json_()); }",
 					set_json_ :# (json :<lake_int8>&, <>),
 
 					to_binary_ :# (<lake_int8>),
-					to_binary : "std::string () const { return lake_to_string(to_binary_()); }",
+					to_binary : "std_string () const { return lake_to_string(to_binary_()); }",
 					set_binary_ :# (binary :<lake_int8>&, <>),
 
 					is_null_ :# (<>),

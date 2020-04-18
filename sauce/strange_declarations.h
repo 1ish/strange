@@ -295,8 +295,8 @@ template <typename _abstraction_, typename... Args>
 inline operation_a<> native_mutation_create(native_member_pointer<_abstraction_> const fun, Args&&... args);
 
 // number
-inline number_data_a<int64_t> int_64_from_string(std::string const& str);
-inline number_data_a<double> float_64_from_string(std::string const& str);
+inline number_data_a<int64_t> int_64_from_string(std_string const& str);
+inline number_data_a<double> float_64_from_string(std_string const& str);
 
 template <typename _primitive_, typename _result_ = number_data_a<_primitive_>>
 inline _result_ num(_primitive_ primitive);
@@ -328,8 +328,8 @@ template <typename... Args>
 inline flock_a<> flock_dups(Args&&... args);
 
 // lake
-inline lake_a<int8_t> lake_from_string(std::string const& str);
-inline std::string lake_to_string(lake_a<int8_t> const& lake);
+inline lake_a<int8_t> lake_from_string(std_string const& str);
+inline std_string lake_to_string(lake_a<int8_t> const& lake);
 
 template <typename F>
 inline lake_a<int8_t> lake_int8_create(F&& init);
@@ -396,29 +396,29 @@ inline unordered_shoal_a<> unordered_shoal_vals(Args&&... args);
 
 // cat
 template <typename ___cat_a___ = cat_a<>>
-inline ___cat_a___ cat_create(int64_t order = 1, std::string const& name = "");
+inline ___cat_a___ cat_create(int64_t order = 1, std_string const& name = "");
 
 template <typename ___cat_a___ = cat_a<>>
-inline ___cat_a___ cat_create(int64_t order, std::string const& name, flock_a<> const& dimensions);
+inline ___cat_a___ cat_create(int64_t order, std_string const& name, flock_a<> const& dimensions);
 
 template <typename ___cat_a___ = cat_a<>>
-inline ___cat_a___ cat_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& parameters, symbol_a<> const& result);
+inline ___cat_a___ cat_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& parameters, symbol_a<> const& result);
 
 // kind
 template <typename ___kind_a___ = kind_a<>>
-inline ___kind_a___ kind_create(int64_t order = 1, std::string const& name = "");
+inline ___kind_a___ kind_create(int64_t order = 1, std_string const& name = "");
 
 template <typename ___kind_a___ = kind_a<>>
-inline ___kind_a___ kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions);
+inline ___kind_a___ kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions);
 
 template <typename ___kind_a___ = kind_a<>>
-inline ___kind_a___ kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects);
+inline ___kind_a___ kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects);
 
 template <typename ___kind_a___ = kind_a<>>
-inline ___kind_a___ kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters);
+inline ___kind_a___ kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters);
 
 template <typename ___kind_a___ = kind_a<>>
-inline ___kind_a___ kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false);
+inline ___kind_a___ kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false);
 
 inline kind_a<> kind_from_cat(cat_a<> const& cat);
 inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects);

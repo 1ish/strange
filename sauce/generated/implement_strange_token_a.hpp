@@ -18,12 +18,12 @@ inline symbol_a<> token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::filen
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.filename_(); }
 
 template <typename _1>
-inline std :: string token_a<_1>::filename() const
+inline std_string token_a<_1>::filename() const
 { assert(any_a<>::___handle___); return ___read___().filename(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: string token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::filename() const
+inline std_string token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::filename() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.filename(); }
 
 template <typename _1>
@@ -90,12 +90,12 @@ inline symbol_a<> token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::tag_(
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.tag_(); }
 
 template <typename _1>
-inline std :: string token_a<_1>::tag() const
+inline std_string token_a<_1>::tag() const
 { assert(any_a<>::___handle___); return ___read___().tag(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: string token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::tag() const
+inline std_string token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::tag() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.tag(); }
 
 template <typename _1>
@@ -114,12 +114,12 @@ inline symbol_a<> token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::symbo
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.symbol_(); }
 
 template <typename _1>
-inline std :: string token_a<_1>::symbol() const
+inline std_string token_a<_1>::symbol() const
 { assert(any_a<>::___handle___); return ___read___().symbol(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: string token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::symbol() const
+inline std_string token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::symbol() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.symbol(); }
 
 template <typename _1>
@@ -186,12 +186,12 @@ inline misunderstanding_a<> token_a<_1>::___token_a_handle___<___TTT___, ___DHB_
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.report_(); }
 
 template <typename _1>
-inline std :: string token_a<_1>::report() const
+inline std_string token_a<_1>::report() const
 { assert(any_a<>::___handle___); return ___read___().report(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: string token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::report() const
+inline std_string token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::report() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.report(); }
 
 template <typename _1>

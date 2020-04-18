@@ -67,7 +67,7 @@ public:
 		return std::hash<void const*>{}(identity());
 	}
 
-	static inline bool is(std::string const& s)
+	static inline bool is(std_string const& s)
 	{
 		return false;
 	}

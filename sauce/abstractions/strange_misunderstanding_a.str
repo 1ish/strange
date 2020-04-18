@@ -7,7 +7,7 @@ false &&
 				$$<>[],
 				{	// misunderstanding
 					to_lake_ :# (<#lake_int8>),
-					to_string : "std::string () const { return lake_to_string(to_lake_()); }",
+					to_string : "std_string () const { return lake_to_string(to_lake_()); }",
 
 					add_ :# (misunderstanding :<misunderstanding>#, <misunderstanding>),
 				}

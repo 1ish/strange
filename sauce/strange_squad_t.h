@@ -410,7 +410,7 @@ public:
 	static inline symbol_a<> type_()
 	{
 		static symbol_a<> TYPE = sym("strange::squad" + 
-			std::string{ _concurrent_ ? "_concurrent" : "" } +
+			std_string{ _concurrent_ ? "_concurrent" : "" } +
 			kind_of<_element>().to_string());
 		return TYPE;
 	}

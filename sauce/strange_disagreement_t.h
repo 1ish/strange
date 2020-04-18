@@ -56,7 +56,7 @@ public:
 
 	inline std_size_t hash() const
 	{
-		return std::hash<std::string>{}(to_string());
+		return std::hash<std_string>{}(to_string());
 	}
 
 	// misunderstanding
@@ -65,7 +65,7 @@ public:
 		return lake_from_string(_string);
 	}
 
-	inline std::string to_string() const
+	inline std_string to_string() const
 	{
 		return _string;
 	}
@@ -76,7 +76,7 @@ public:
 	}
 
 protected:
-	std::string const _string;
+	std_string const _string;
 
 	friend class any_a<>;
 

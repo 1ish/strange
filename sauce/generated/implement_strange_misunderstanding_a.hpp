@@ -18,12 +18,12 @@ inline _lake_int8 misunderstanding_a<_lake_int8>::___misunderstanding_a_handle__
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake_(); }
 
 template <typename _lake_int8>
-inline std :: string misunderstanding_a<_lake_int8>::to_string() const
+inline std_string misunderstanding_a<_lake_int8>::to_string() const
 { assert(any_a<>::___handle___); return ___read___().to_string(); }
 
 template <typename _lake_int8>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: string misunderstanding_a<_lake_int8>::___misunderstanding_a_handle___<___TTT___, ___DHB___>::to_string() const
+inline std_string misunderstanding_a<_lake_int8>::___misunderstanding_a_handle___<___TTT___, ___DHB___>::to_string() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
 
 template <typename _lake_int8>

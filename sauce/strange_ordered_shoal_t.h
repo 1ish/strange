@@ -258,7 +258,7 @@ public:
 	static inline symbol_a<> type_()
 	{
 		static symbol_a<> TYPE = sym("strange::ordered_shoal" + 
-			std::string{ _concurrent_ ? "_concurrent" : "" } +
+			std_string{ _concurrent_ ? "_concurrent" : "" } +
 			kind_of<_key>().to_string() + "_" + kind_of<_value>().to_string());
 		return TYPE;
 	}

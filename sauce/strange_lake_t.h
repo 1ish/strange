@@ -1016,15 +1016,15 @@ class ___lake_t_share___
 	}
 };
 
-inline lake_a<int8_t> lake_from_string(std::string const& str)
+inline lake_a<int8_t> lake_from_string(std_string const& str)
 {
 	return lake_int_8_t<>::create(lake_int_8_t<>::std_vector_primitive(str.cbegin(), str.cend()));
 }
 
-inline std::string lake_to_string(lake_a<int8_t> const& lake)
+inline std_string lake_to_string(lake_a<int8_t> const& lake)
 {
 	auto const& v = lake.extract_vector();
-	return std::string(v.cbegin(), v.cend());
+	return std_string(v.cbegin(), v.cend());
 }
 
 template <typename F>

@@ -12,7 +12,7 @@ false &&
 					order : "int64_t () const { return order_().to_int_64(); }",
 
 					name_ :# (<symbol>),
-					name : "std::string () const { return name_().to_string(); }",
+					name : "std_string () const { return name_().to_string(); }",
 
 					dimensions_ :# (<flock>),
 
@@ -21,7 +21,7 @@ false &&
 					result_ :# (<cat>),
 
 					code_ :# (<lake_int8>),
-					code : "std::string () const { return lake_to_string(code_()); }",
+					code : "std_string () const { return lake_to_string(code_()); }",
 				}
 			)
 		)

@@ -429,12 +429,12 @@ inline std_size_t any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_han
 { return ___value___.hash(); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline bool any_a<_symbol, _cat, _kind, _number_data_uint64>::is(std :: string const & s ) const
+inline bool any_a<_symbol, _cat, _kind, _number_data_uint64>::is(std_string const & s ) const
 { assert(___handle___); return ___read___().is(s); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
 template <typename ___TTT___, typename ___BHB___>
-inline bool any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::is(std :: string const & s ) const
+inline bool any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::is(std_string const & s ) const
 { return ___value___.is(s); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
@@ -475,7 +475,7 @@ inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_han
 { return ___value___.to_parcel_unique_(unique_herd); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::operation(std::string const& name) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::operation(std_string const& name) const
 {
 	return ___read___().operations_().at_(sym(name));
 }

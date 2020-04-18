@@ -203,7 +203,7 @@ public:
 		river.write_string("}\n");
 	}
 
-	void abstraction(int64_t version, bool defaults, std::string& result, std::string& parameters, std::string& arguments, std::string& constness) const
+	void abstraction(int64_t version, bool defaults, std_string& result, std_string& parameters, std_string& arguments, std_string& constness) const
 	{
 		if (_expression.type_() != expression_kind_t<>::type_())
 		{
@@ -282,7 +282,7 @@ public:
 		constness = "";
 	}
 
-	void abstraction_arguments(std::string const& class_name, std::string const& member, int64_t version, river_a<>& river) const
+	void abstraction_arguments(std_string const& class_name, std_string const& member, int64_t version, river_a<>& river) const
 	{
 		if (_names.empty())
 		{
@@ -293,14 +293,14 @@ public:
 		river.write_string(
 			"\tauto ___it___ = ___arguments___.extract_begin_();\n"
 			"\tauto ___end___ = ___arguments___.extract_end_();\n");
-		std::string arguments = "(";
+		std_string arguments = "(";
 		auto kit = _kinds.extract_vector().cbegin();
 		bool first = true;
 		for (auto const& name : _names.extract_vector())
 		{
 			auto const name_string = fast<symbol_a<>>(name).to_string();
 			auto const any_kind = *kit++;
-			std::string type;
+			std_string type;
 			bool fixed = false;
 			bool reference = false;
 			bool optional = false;
@@ -342,11 +342,11 @@ public:
 				optional = kind.optional();
 			}
 			river.write_string(
-				"\tif (" + std::string(first ? "___it___" : "++___it___") + " == ___end___)\n"
+				"\tif (" + std_string(first ? "___it___" : "++___it___") + " == ___end___)\n"
 				"\t{\n" +
 				(optional
 					? "\t\treturn " + member + arguments + ");\n"
-					: std::string("\t\tthrow dis(\"" + class_name + "::" + member +
+					: std_string("\t\tthrow dis(\"" + class_name + "::" + member +
 						" passed short range\");\n")) +
 				"\t}\n"
 				"\tauto " + name_string +

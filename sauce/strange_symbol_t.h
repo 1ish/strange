@@ -79,7 +79,7 @@ public:
 		return _hash;
 	}
 
-	inline bool is(std::string const& s) const
+	inline bool is(std_string const& s) const
 	{
 		return _string == s;
 	}
@@ -138,7 +138,7 @@ public:
 		return lake_from_string(_string);
 	}
 
-	inline std::string to_string() const
+	inline std_string to_string() const
 	{
 		return _string;
 	}
@@ -160,7 +160,7 @@ public:
 	}
 
 protected:
-	std::string const _string;
+	std_string const _string;
 	std_size_t const _hash;
 
 	friend class any_a<>;
@@ -169,7 +169,7 @@ protected:
 	inline symbol_t(F&& s)
 		: thing_t<___ego___>{}
 		, _string{ std::forward<F>(s) }
-		, _hash{ std::hash<std::string>{}(_string) }
+		, _hash{ std::hash<std_string>{}(_string) }
 	{}
 
 private:

@@ -181,7 +181,7 @@ private:
 		else if (_token.tag() == "punctuation")
 		{
 			auto const token = _token;
-			std::string const op = token.symbol();
+			std_string const op = token.symbol();
 			if (op == "$" || op == "#") // shared local / dimension
 			{
 				initial = _initial_local(context);
@@ -650,7 +650,7 @@ private:
 
 	inline symbol_a<> _scope()
 	{
-		std::string scope;
+		std_string scope;
 		for (bool first = true;;first = false)
 		{
 			if (_token.tag() != "name")
@@ -1570,7 +1570,7 @@ private:
 		return _subsequent(min_precedence, expression_operate_range_t<>::create_(token, terms), context);
 	}
 
-	static inline bool _delimiter(std::string const& op)
+	static inline bool _delimiter(std_string const& op)
 	{
 		return op == "," || op == ":" || op == "::" || op == ":#" || op == ":=" || op == ":<" || op == ":(" || op == ";" || op == "]" || op == "}" || op == ")" || op == "<~" || op == "~)" || op == "~]" || op == "~}";
 	}

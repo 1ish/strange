@@ -66,12 +66,12 @@ inline symbol_a<> cat_a<_1>::___cat_a_handle___<___TTT___, ___DHB___>::name_() c
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.name_(); }
 
 template <typename _1>
-inline std :: string cat_a<_1>::name() const
+inline std_string cat_a<_1>::name() const
 { assert(any_a<>::___handle___); return ___read___().name(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: string cat_a<_1>::___cat_a_handle___<___TTT___, ___DHB___>::name() const
+inline std_string cat_a<_1>::___cat_a_handle___<___TTT___, ___DHB___>::name() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.name(); }
 
 template <typename _1>
@@ -135,12 +135,12 @@ inline lake_int8_a<> cat_a<_1>::___cat_a_handle___<___TTT___, ___DHB___>::code_(
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.code_(); }
 
 template <typename _1>
-inline std :: string cat_a<_1>::code() const
+inline std_string cat_a<_1>::code() const
 { assert(any_a<>::___handle___); return ___read___().code(); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: string cat_a<_1>::___cat_a_handle___<___TTT___, ___DHB___>::code() const
+inline std_string cat_a<_1>::___cat_a_handle___<___TTT___, ___DHB___>::code() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.code(); }
 
 template <typename _1>

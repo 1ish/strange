@@ -9,7 +9,7 @@ false &&
 					extract_end : "forward_extractor_data_a<any_a<>, std::istreambuf_iterator<char>> () const",
 
 					to_lake_ := (<lake_int8>),
-					to_string : "std::string () { return lake_to_string(to_lake_()); }",
+					to_string : "std_string () { return lake_to_string(to_lake_()); }",
 
 					get_char_ := (<number_data_int8>),
 					get_char : "int8_t () { return get_char_().extract_primitive(); }",
@@ -31,7 +31,7 @@ false &&
 
 					read_ := (count :<number_data_int64>#, <lake_int8>),
 					read : "std::vector<int8_t> (int64_t count) { return read_(num(count)).extract_vector(); }",
-					read_string : "std::string (int64_t count) { return lake_to_string(read_(num(count))); }",
+					read_string : "std_string (int64_t count) { return lake_to_string(read_(num(count))); }",
 
 					tellg_ :# (<number_data_int64>),
 					tellg : "int64_t () const { return tellg_().extract_primitive(); }",
@@ -54,7 +54,7 @@ false &&
 
 					write_ := (lake :<lake_int8>#, <river>),
 					write : "void (std::vector<int8_t> const& lake) { write_(lake_int8_create(lake)); }",
-					write_string : "void (std::string const& str) { write_(lake_from_string(str)); }",
+					write_string : "void (std_string const& str) { write_(lake_from_string(str)); }",
 
 					tellp_ :# (<number_data_int64>),
 					tellp : "int64_t () const { return tellp_().extract_primitive(); }",
@@ -97,7 +97,7 @@ false &&
 					set_bad : "void (bool value) { set_bad_(boole(value)); }",
 
 					filename_ :# (<lake_int8>),
-					filename : "std::string () const { return lake_to_string(filename_()); }",
+					filename : "std_string () const { return lake_to_string(filename_()); }",
 
 					close_ := (<>),
 					close : "void () { close_(); }",

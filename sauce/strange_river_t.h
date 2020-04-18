@@ -120,9 +120,9 @@ public:
 		return create();
 	}
 
-	static inline river_a<> create(std::string const& str = std::string())
+	static inline river_a<> create(std_string const& str = std_string())
 	{
-		std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(str);
+		std::shared_ptr<std_stringstream> stream = std::make_shared<std_stringstream>(str);
 		return river_a<>::create<river_t<>>(stream.get(), stream.get(), stream);
 	}
 
@@ -160,7 +160,7 @@ public:
 		return file(lake_to_string(name));
 	}
 
-	static inline river_a<> file(std::string const& name, bool in = true, bool out = false, bool trunc = false)
+	static inline river_a<> file(std_string const& name, bool in = true, bool out = false, bool trunc = false)
 	{
 		std::shared_ptr<std::fstream> stream = std::make_shared<std::fstream>(name,
 			std::fstream::binary |
@@ -256,9 +256,9 @@ public:
 		return result;
 	}
 
-	inline std::string to_string()
+	inline std_string to_string()
 	{
-		std::string result;
+		std_string result;
 		while (good())
 		{
 			result += read_string();
@@ -341,7 +341,7 @@ public:
 		}
 		if (count < 0)
 		{
-			std::string str;
+			std_string str;
 			std::getline(*_istream, str, char(delimiter));
 			return std::vector<int8_t>(str.cbegin(), str.cend());
 		}
@@ -391,11 +391,11 @@ public:
 		return v;
 	}
 
-	inline std::string read_string(int64_t count = -1)
+	inline std_string read_string(int64_t count = -1)
 	{
 		if (!count)
 		{
-			return std::string{};
+			return std_string{};
 		}
 		if (!_istream)
 		{
@@ -405,7 +405,7 @@ public:
 		{
 			count = STRANGE_RIVER_DEFAULT_READ_SIZE;
 		}
-		std::string s(std_size_t(count), '\0');
+		std_string s(std_size_t(count), '\0');
 		_istream->read(&s[0], count);
 		s.resize(std_size_t(_istream->gcount()));
 		return s;
@@ -519,7 +519,7 @@ public:
 		_ostream->write(reinterpret_cast<char const*>(&lake[0]), int64_t(lake.size()));
 	}
 
-	inline void write_string(std::string const& str)
+	inline void write_string(std_string const& str)
 	{
 		if (str.empty())
 		{
@@ -728,7 +728,7 @@ public:
 		return lake_from_string(_filename);
 	}
 
-	inline std::string filename() const
+	inline std_string filename() const
 	{
 		return _filename;
 	}
@@ -763,11 +763,11 @@ protected:
 	std::istream* const _istream;
 	std::ostream* const _ostream;
 	std_shared_ptr_basic_ios_char const _stream;
-	std::string const _filename;
+	std_string const _filename;
 
 	friend class any_a<>;
 
-	inline river_t(std::istream* const is = nullptr, std::ostream* const os = nullptr, std_shared_ptr_basic_ios_char const& stream = std_shared_ptr_basic_ios_char{}, std::string const& filename = std::string{})
+	inline river_t(std::istream* const is = nullptr, std::ostream* const os = nullptr, std_shared_ptr_basic_ios_char const& stream = std_shared_ptr_basic_ios_char{}, std_string const& filename = std_string{})
 		: thing_t<___ego___>{}
 		, _istream{ is }
 		, _ostream{ os }

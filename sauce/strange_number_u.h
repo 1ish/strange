@@ -11,7 +11,7 @@ template <typename _primitive_>
 class number_u
 {
 public:
-	static inline std::string category();
+	static inline std_string category();
 	static inline _primitive_ from_number(number_a<> const& other);
 	static inline _primitive_ from_int_64(int64_t other);
 	static inline _primitive_ from_uint_64(uint64_t other);
@@ -32,7 +32,7 @@ template <>
 class number_u<int8_t>
 {
 public:
-	static inline std::string category()
+	static inline std_string category()
 	{
 		return "int_8";
 	}
@@ -118,7 +118,7 @@ template <>
 class number_u<uint8_t>
 {
 public:
-	static inline std::string category()
+	static inline std_string category()
 	{
 		return "uint_8";
 	}
@@ -213,7 +213,7 @@ template <>
 class number_u<int16_t>
 {
 public:
-	static inline std::string category()
+	static inline std_string category()
 	{
 		return "int_16";
 	}
@@ -299,7 +299,7 @@ template <>
 class number_u<uint16_t>
 {
 public:
-	static inline std::string category()
+	static inline std_string category()
 	{
 		return "uint_16";
 	}
@@ -394,7 +394,7 @@ template <>
 class number_u<int32_t>
 {
 public:
-	static inline std::string category()
+	static inline std_string category()
 	{
 		return "int_32";
 	}
@@ -480,7 +480,7 @@ template <>
 class number_u<uint32_t>
 {
 public:
-	static inline std::string category()
+	static inline std_string category()
 	{
 		return "uint_32";
 	}
@@ -575,7 +575,7 @@ template <>
 class number_u<int64_t>
 {
 public:
-	static inline std::string category()
+	static inline std_string category()
 	{
 		return "int_64";
 	}
@@ -661,7 +661,7 @@ template <>
 class number_u<uint64_t>
 {
 public:
-	static inline std::string category()
+	static inline std_string category()
 	{
 		return "uint_64";
 	}
@@ -756,7 +756,7 @@ template <>
 class number_u<float>
 {
 public:
-	static inline std::string category()
+	static inline std_string category()
 	{
 		return "float_32";
 	}
@@ -845,7 +845,7 @@ template <>
 class number_u<double>
 {
 public:
-	static inline std::string category()
+	static inline std_string category()
 	{
 		return "float_64";
 	}

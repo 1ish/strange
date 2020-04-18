@@ -75,7 +75,7 @@ public:
 		return cat_a<>::create<cat_t<>>(order.extract_primitive(), name, dimensions, flock_t<>::create_(), parameters, result);
 	}
 
-	static inline cat_a<> create(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym())
+	static inline cat_a<> create(int64_t order, std_string const& name = "", flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym())
 	{
 		if (name == "strange::any")
 		{
@@ -148,7 +148,7 @@ public:
 		return _name;
 	}
 
-	inline std::string name() const
+	inline std_string name() const
 	{
 		return _name.to_string();
 	}
@@ -173,10 +173,10 @@ public:
 		return lake_from_string(code());
 	}
 
-	inline std::string code() const
+	inline std_string code() const
 	{
 		auto const name = _name.to_string();
-		return (name.empty() ? std::string("strange::any") : name) + "_a<>";
+		return (name.empty() ? std_string("strange::any") : name) + "_a<>";
 	}
 
 protected:
@@ -199,9 +199,9 @@ protected:
 		, _result{ _result_(result) }
 	{}
 
-	static inline std::string const _symbol_(int64_t order, symbol_a<> const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result)
+	static inline std_string const _symbol_(int64_t order, symbol_a<> const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result)
 	{
-		std::string symbol;
+		std_string symbol;
 		for (int64_t o = 0; o < order; ++o)
 		{
 			symbol += "<";
@@ -214,7 +214,7 @@ protected:
 		for (auto const& dimension : dimensions)
 		{
 			cat_a<> const cat = fast<cat_a<>>(dimension);
-			std::string const str = cat.to_string();
+			std_string const str = cat.to_string();
 			if (str == "<>")
 			{
 				++anys;
@@ -274,7 +274,7 @@ protected:
 		for (auto const& parameter : parameters)
 		{
 			cat_a<> const cat = fast<cat_a<>>(parameter);
-			std::string const str = cat.to_string();
+			std_string const str = cat.to_string();
 			if (str == "<>")
 			{
 				++anys;
@@ -303,7 +303,7 @@ protected:
 
 		if (check<cat_a<>>(result))
 		{
-			std::string const str = result.to_string();
+			std_string const str = result.to_string();
 			if (str != "<>")
 			{
 				symbol += ":" + str;
@@ -374,19 +374,19 @@ class ___cat_t_share___
 };
 
 template <typename ___cat_a___>
-inline ___cat_a___ cat_create(int64_t order, std::string const& name)
+inline ___cat_a___ cat_create(int64_t order, std_string const& name)
 {
 	return cat_t<>::create(order, name);
 }
 
 template <typename ___cat_a___>
-inline ___cat_a___ cat_create(int64_t order, std::string const& name, flock_a<> const& dimensions)
+inline ___cat_a___ cat_create(int64_t order, std_string const& name, flock_a<> const& dimensions)
 {
 	return cat_t<>::create(order, name, dimensions);
 }
 
 template <typename ___cat_a___>
-inline ___cat_a___ cat_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& parameters, symbol_a<> const& result)
+inline ___cat_a___ cat_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& parameters, symbol_a<> const& result)
 {
 	return cat_t<>::create(order, name, dimensions, parameters, result);
 }

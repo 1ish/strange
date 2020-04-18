@@ -16,7 +16,7 @@ public:
 
 	inline _lake_int8 to_lake_() const;
 
-	inline std :: string to_string() const;
+	inline std_string to_string() const;
 
 	inline any_a<> add__(range_a<> const& ___arguments___) const;
 
@@ -28,7 +28,7 @@ protected:
 	struct ___misunderstanding_a_handle_base___ : any_a<>::___any_a_handle_base___
 	{
 		virtual _lake_int8 to_lake_() const = 0;
-		virtual std :: string to_string() const = 0;
+		virtual std_string to_string() const = 0;
 		virtual misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const = 0;
 	};
 
@@ -52,7 +52,7 @@ protected:
 
 		virtual inline _lake_int8 to_lake_() const final;
 
-		virtual inline std :: string to_string() const final;
+		virtual inline std_string to_string() const final;
 
 		virtual inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const final;
 
@@ -286,7 +286,7 @@ public:
 		return cast<_lake_int8>(variadic_operate(op, *const_cast<misunderstanding_d*>(this)));
 	}
 
-	inline std :: string to_string() const
+	inline std_string to_string() const
 	{ return lake_to_string(to_lake_()); }
 
 	inline any_a<> add__(range_a<> const& arguments) const

@@ -12,15 +12,15 @@ using namespace strange;
 
 namespace
 {
-	std::string const taste_dir = "../../strange/taste/";
-	std::string const abstractions_dir = "../../strange/sauce/abstractions/";
-	std::string const generate_cpp_dir = "../../strange/sauce/generated/";
+	std_string const taste_dir = "../../strange/taste/";
+	std_string const abstractions_dir = "../../strange/sauce/abstractions/";
+	std_string const generate_cpp_dir = "../../strange/sauce/generated/";
 }
 
 #ifdef STRANGE_TASTE_DEBUG
 std::ostream& std__cout = std::cout;
 #else
-std::stringstream discard;
+std_stringstream discard;
 std::ostream& std__cout = discard;
 #endif
 
