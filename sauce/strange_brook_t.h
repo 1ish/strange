@@ -930,7 +930,7 @@ public:
 protected:
 	typename concurrent_u<_concurrent_>::mutex mutable _mutex;
 	std_deque_primitive _deque;
-	std::vector<number_data_a<_primitive_>> mutable _shadow;
+	std_vector<number_data_a<_primitive_>> mutable _shadow;
 
 	friend class any_a<>;
 

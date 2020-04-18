@@ -19,11 +19,11 @@ namespace strange
 	template <>
 	inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>>::iterator>();
 	template <>
-	inline kind_a<> kind_of<std::vector<any_a<>>::const_iterator>();
+	inline kind_a<> kind_of<std_vector<any_a<>>::const_iterator>();
 	template <>
 	inline kind_a<> kind_of<std_deque<any_a<>>::const_iterator>();
 	template <>
-	inline kind_a<> kind_of<std::vector<any_a<>>::iterator>();
+	inline kind_a<> kind_of<std_vector<any_a<>>::iterator>();
 	template <>
 	inline kind_a<> kind_of<std_deque<any_a<>>::iterator>();
 }

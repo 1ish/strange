@@ -453,9 +453,9 @@ inline kind_a<> kind_of<std::istreambuf_iterator<char>>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<int8_t>::const_iterator>()
+inline kind_a<> kind_of<std_vector<int8_t>::const_iterator>()
 {
-	return kind_create(1, "\"std::vector<int8_t>::const_iterator\"");
+	return kind_create(1, "\"std_vector<int8_t>::const_iterator\"");
 }
 
 template <>
@@ -465,9 +465,9 @@ inline kind_a<> kind_of<std_deque<int8_t>::const_iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<uint8_t>::const_iterator>()
+inline kind_a<> kind_of<std_vector<uint8_t>::const_iterator>()
 {
-	return kind_create(1, "\"std::vector<uint8_t>::const_iterator\"");
+	return kind_create(1, "\"std_vector<uint8_t>::const_iterator\"");
 }
 
 template <>
@@ -477,9 +477,9 @@ inline kind_a<> kind_of<std_deque<uint8_t>::const_iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<int16_t>::const_iterator>()
+inline kind_a<> kind_of<std_vector<int16_t>::const_iterator>()
 {
-	return kind_create(1, "\"std::vector<int16_t>::const_iterator\"");
+	return kind_create(1, "\"std_vector<int16_t>::const_iterator\"");
 }
 
 template <>
@@ -489,9 +489,9 @@ inline kind_a<> kind_of<std_deque<int16_t>::const_iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<uint16_t>::const_iterator>()
+inline kind_a<> kind_of<std_vector<uint16_t>::const_iterator>()
 {
-	return kind_create(1, "\"std::vector<uint16_t>::const_iterator\"");
+	return kind_create(1, "\"std_vector<uint16_t>::const_iterator\"");
 }
 
 template <>
@@ -501,9 +501,9 @@ inline kind_a<> kind_of<std_deque<uint16_t>::const_iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<int32_t>::const_iterator>()
+inline kind_a<> kind_of<std_vector<int32_t>::const_iterator>()
 {
-	return kind_create(1, "\"std::vector<int32_t>::const_iterator\"");
+	return kind_create(1, "\"std_vector<int32_t>::const_iterator\"");
 }
 
 template <>
@@ -513,9 +513,9 @@ inline kind_a<> kind_of<std_deque<int32_t>::const_iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<uint32_t>::const_iterator>()
+inline kind_a<> kind_of<std_vector<uint32_t>::const_iterator>()
 {
-	return kind_create(1, "\"std::vector<uint32_t>::const_iterator\"");
+	return kind_create(1, "\"std_vector<uint32_t>::const_iterator\"");
 }
 
 template <>
@@ -525,9 +525,9 @@ inline kind_a<> kind_of<std_deque<uint32_t>::const_iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<int64_t>::const_iterator>()
+inline kind_a<> kind_of<std_vector<int64_t>::const_iterator>()
 {
-	return kind_create(1, "\"std::vector<int64_t>::const_iterator\"");
+	return kind_create(1, "\"std_vector<int64_t>::const_iterator\"");
 }
 
 template <>
@@ -537,9 +537,9 @@ inline kind_a<> kind_of<std_deque<int64_t>::const_iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<uint64_t>::const_iterator>()
+inline kind_a<> kind_of<std_vector<uint64_t>::const_iterator>()
 {
-	return kind_create(1, "\"std::vector<uint64_t>::const_iterator\"");
+	return kind_create(1, "\"std_vector<uint64_t>::const_iterator\"");
 }
 
 template <>
@@ -549,9 +549,9 @@ inline kind_a<> kind_of<std_deque<uint64_t>::const_iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<float>::const_iterator>()
+inline kind_a<> kind_of<std_vector<float>::const_iterator>()
 {
-	return kind_create(1, "\"std::vector<float>::const_iterator\"");
+	return kind_create(1, "\"std_vector<float>::const_iterator\"");
 }
 
 template <>
@@ -561,9 +561,9 @@ inline kind_a<> kind_of<std_deque<float>::const_iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<double>::const_iterator>()
+inline kind_a<> kind_of<std_vector<double>::const_iterator>()
 {
-	return kind_create(1, "\"std::vector<double>::const_iterator\"");
+	return kind_create(1, "\"std_vector<double>::const_iterator\"");
 }
 
 template <>
@@ -573,9 +573,9 @@ inline kind_a<> kind_of<std_deque<double>::const_iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<int8_t>::iterator>()
+inline kind_a<> kind_of<std_vector<int8_t>::iterator>()
 {
-	return kind_create(1, "\"std::vector<int8_t>::iterator\"");
+	return kind_create(1, "\"std_vector<int8_t>::iterator\"");
 }
 
 template <>
@@ -585,9 +585,9 @@ inline kind_a<> kind_of<std_deque<int8_t>::iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<uint8_t>::iterator>()
+inline kind_a<> kind_of<std_vector<uint8_t>::iterator>()
 {
-	return kind_create(1, "\"std::vector<uint8_t>::iterator\"");
+	return kind_create(1, "\"std_vector<uint8_t>::iterator\"");
 }
 
 template <>
@@ -597,9 +597,9 @@ inline kind_a<> kind_of<std_deque<uint8_t>::iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<int16_t>::iterator>()
+inline kind_a<> kind_of<std_vector<int16_t>::iterator>()
 {
-	return kind_create(1, "\"std::vector<int16_t>::iterator\"");
+	return kind_create(1, "\"std_vector<int16_t>::iterator\"");
 }
 
 template <>
@@ -609,9 +609,9 @@ inline kind_a<> kind_of<std_deque<int16_t>::iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<uint16_t>::iterator>()
+inline kind_a<> kind_of<std_vector<uint16_t>::iterator>()
 {
-	return kind_create(1, "\"std::vector<uint16_t>::iterator\"");
+	return kind_create(1, "\"std_vector<uint16_t>::iterator\"");
 }
 
 template <>
@@ -621,9 +621,9 @@ inline kind_a<> kind_of<std_deque<uint16_t>::iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<int32_t>::iterator>()
+inline kind_a<> kind_of<std_vector<int32_t>::iterator>()
 {
-	return kind_create(1, "\"std::vector<int32_t>::iterator\"");
+	return kind_create(1, "\"std_vector<int32_t>::iterator\"");
 }
 
 template <>
@@ -633,9 +633,9 @@ inline kind_a<> kind_of<std_deque<int32_t>::iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<uint32_t>::iterator>()
+inline kind_a<> kind_of<std_vector<uint32_t>::iterator>()
 {
-	return kind_create(1, "\"std::vector<uint32_t>::iterator\"");
+	return kind_create(1, "\"std_vector<uint32_t>::iterator\"");
 }
 
 template <>
@@ -645,9 +645,9 @@ inline kind_a<> kind_of<std_deque<uint32_t>::iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<int64_t>::iterator>()
+inline kind_a<> kind_of<std_vector<int64_t>::iterator>()
 {
-	return kind_create(1, "\"std::vector<int64_t>::iterator\"");
+	return kind_create(1, "\"std_vector<int64_t>::iterator\"");
 }
 
 template <>
@@ -657,9 +657,9 @@ inline kind_a<> kind_of<std_deque<int64_t>::iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<uint64_t>::iterator>()
+inline kind_a<> kind_of<std_vector<uint64_t>::iterator>()
 {
-	return kind_create(1, "\"std::vector<uint64_t>::iterator\"");
+	return kind_create(1, "\"std_vector<uint64_t>::iterator\"");
 }
 
 template <>
@@ -669,9 +669,9 @@ inline kind_a<> kind_of<std_deque<uint64_t>::iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<float>::iterator>()
+inline kind_a<> kind_of<std_vector<float>::iterator>()
 {
-	return kind_create(1, "\"std::vector<float>::iterator\"");
+	return kind_create(1, "\"std_vector<float>::iterator\"");
 }
 
 template <>
@@ -681,9 +681,9 @@ inline kind_a<> kind_of<std_deque<float>::iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<double>::iterator>()
+inline kind_a<> kind_of<std_vector<double>::iterator>()
 {
-	return kind_create(1, "\"std::vector<double>::iterator\"");
+	return kind_create(1, "\"std_vector<double>::iterator\"");
 }
 
 template <>
@@ -735,9 +735,9 @@ inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>>::iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<any_a<>>::const_iterator>()
+inline kind_a<> kind_of<std_vector<any_a<>>::const_iterator>()
 {
-	return kind_create(1, "\"std::vector<any_a<>>::const_iterator\"");
+	return kind_create(1, "\"std_vector<any_a<>>::const_iterator\"");
 }
 
 template <>
@@ -747,9 +747,9 @@ inline kind_a<> kind_of<std_deque<any_a<>>::const_iterator>()
 }
 
 template <>
-inline kind_a<> kind_of<std::vector<any_a<>>::iterator>()
+inline kind_a<> kind_of<std_vector<any_a<>>::iterator>()
 {
-	return kind_create(1, "\"std::vector<any_a<>>::iterator\"");
+	return kind_create(1, "\"std_vector<any_a<>>::iterator\"");
 }
 
 template <>

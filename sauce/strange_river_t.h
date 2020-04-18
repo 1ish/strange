@@ -329,11 +329,11 @@ public:
 		return lake_int_8_t<>::create(get_line(count.extract_primitive(), delimiter.extract_primitive()));
 	}
 
-	inline std::vector<int8_t> get_line(int64_t count = -1, int8_t delimiter = '\n')
+	inline std_vector<int8_t> get_line(int64_t count = -1, int8_t delimiter = '\n')
 	{
 		if (!count)
 		{
-			return std::vector<int8_t>{};
+			return std_vector<int8_t>{};
 		}
 		if (!_istream)
 		{
@@ -343,9 +343,9 @@ public:
 		{
 			std_string str;
 			std::getline(*_istream, str, char(delimiter));
-			return std::vector<int8_t>(str.cbegin(), str.cend());
+			return std_vector<int8_t>(str.cbegin(), str.cend());
 		}
-		std::vector<int8_t> v(std_size_t(++count), 0);
+		std_vector<int8_t> v(std_size_t(++count), 0);
 		_istream->getline(reinterpret_cast<char*>(&v[0]), count, char(delimiter));
 		v.resize(std_size_t(std::max<int64_t>(0, _istream->gcount() - 1)));
 		return v;
@@ -371,11 +371,11 @@ public:
 		return lake_int_8_t<>::create(read(count.extract_primitive()));
 	}
 
-	inline std::vector<int8_t> read(int64_t count = -1)
+	inline std_vector<int8_t> read(int64_t count = -1)
 	{
 		if (!count)
 		{
-			return std::vector<int8_t>{};
+			return std_vector<int8_t>{};
 		}
 		if (!_istream)
 		{
@@ -385,7 +385,7 @@ public:
 		{
 			count = STRANGE_RIVER_DEFAULT_READ_SIZE;
 		}
-		std::vector<int8_t> v(std_size_t(count), 0);
+		std_vector<int8_t> v(std_size_t(count), 0);
 		_istream->read(reinterpret_cast<char*>(&v[0]), count);
 		v.resize(std_size_t(_istream->gcount()));
 		return v;
@@ -506,7 +506,7 @@ public:
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void write(std::vector<int8_t> const& lake)
+	inline void write(std_vector<int8_t> const& lake)
 	{
 		if (lake.empty())
 		{

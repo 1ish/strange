@@ -379,7 +379,7 @@ class lake_t : public thing_t<___ego___>
 	};
 
 public:
-	using std_vector_primitive = std::vector<_primitive_>;
+	using std_vector_primitive = std_vector<_primitive_>;
 
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
@@ -919,7 +919,7 @@ public:
 protected:
 	typename concurrent_u<_concurrent_>::mutex mutable _mutex;
 	std_vector_primitive _vector;
-	std::vector<number_data_a<_primitive_>> mutable _shadow;
+	std_vector<number_data_a<_primitive_>> mutable _shadow;
 
 	friend class any_a<>;
 

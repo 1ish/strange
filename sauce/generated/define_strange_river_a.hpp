@@ -50,7 +50,7 @@ public:
 
 	inline lake_int8_a<> get_line_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter);
 
-	inline std :: vector < int8_t > get_line(int64_t count , int8_t delimiter );
+	inline std_vector < int8_t > get_line(int64_t count , int8_t delimiter );
 
 	inline any_a<> ignore__(range_a<> const& ___arguments___);
 
@@ -62,7 +62,7 @@ public:
 
 	inline lake_int8_a<> read_(number_data_int64_a<> const& count);
 
-	inline std :: vector < int8_t > read(int64_t count );
+	inline std_vector < int8_t > read(int64_t count );
 
 	inline std_string read_string(int64_t count );
 
@@ -106,7 +106,7 @@ public:
 
 	inline river_a<> write_(lake_int8_a<> const& lake);
 
-	inline void write(std :: vector < int8_t > const & lake );
+	inline void write(std_vector < int8_t > const & lake );
 
 	inline void write_string(std_string const & str );
 
@@ -222,11 +222,11 @@ protected:
 		virtual river_a<> put_back_char_(number_data_int8_a<> const& int_8) = 0;
 		virtual void put_back_char(int8_t int_8 ) = 0;
 		virtual lake_int8_a<> get_line_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter) = 0;
-		virtual std :: vector < int8_t > get_line(int64_t count , int8_t delimiter ) = 0;
+		virtual std_vector < int8_t > get_line(int64_t count , int8_t delimiter ) = 0;
 		virtual river_a<> ignore_(number_data_int64_a<> const& count) = 0;
 		virtual void ignore(int64_t count ) = 0;
 		virtual lake_int8_a<> read_(number_data_int64_a<> const& count) = 0;
-		virtual std :: vector < int8_t > read(int64_t count ) = 0;
+		virtual std_vector < int8_t > read(int64_t count ) = 0;
 		virtual std_string read_string(int64_t count ) = 0;
 		virtual number_data_int64_a<> tellg_() const = 0;
 		virtual int64_t tellg() const = 0;
@@ -241,7 +241,7 @@ protected:
 		virtual river_a<> put_char_(number_data_int8_a<> const& int_8) = 0;
 		virtual void put_char(int8_t int_8 ) = 0;
 		virtual river_a<> write_(lake_int8_a<> const& lake) = 0;
-		virtual void write(std :: vector < int8_t > const & lake ) = 0;
+		virtual void write(std_vector < int8_t > const & lake ) = 0;
 		virtual void write_string(std_string const & str ) = 0;
 		virtual number_data_int64_a<> tellp_() const = 0;
 		virtual int64_t tellp() const = 0;
@@ -321,7 +321,7 @@ protected:
 
 		virtual inline lake_int8_a<> get_line_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter) final;
 
-		virtual inline std :: vector < int8_t > get_line(int64_t count , int8_t delimiter ) final;
+		virtual inline std_vector < int8_t > get_line(int64_t count , int8_t delimiter ) final;
 
 		virtual inline river_a<> ignore_(number_data_int64_a<> const& count) final;
 
@@ -329,7 +329,7 @@ protected:
 
 		virtual inline lake_int8_a<> read_(number_data_int64_a<> const& count) final;
 
-		virtual inline std :: vector < int8_t > read(int64_t count ) final;
+		virtual inline std_vector < int8_t > read(int64_t count ) final;
 
 		virtual inline std_string read_string(int64_t count ) final;
 
@@ -359,7 +359,7 @@ protected:
 
 		virtual inline river_a<> write_(lake_int8_a<> const& lake) final;
 
-		virtual inline void write(std :: vector < int8_t > const & lake ) final;
+		virtual inline void write(std_vector < int8_t > const & lake ) final;
 
 		virtual inline void write_string(std_string const & str ) final;
 
@@ -788,7 +788,7 @@ public:
 		return cast<lake_int8_a<>>(variadic_operate(op, *this, count, delimiter));
 	}
 
-	inline std :: vector < int8_t > get_line(int64_t count , int8_t delimiter )
+	inline std_vector < int8_t > get_line(int64_t count , int8_t delimiter )
 	{ return get_line_(num(count), num(delimiter)).extract_vector(); }
 
 	inline any_a<> ignore__(range_a<> const& arguments)
@@ -838,7 +838,7 @@ public:
 		return cast<lake_int8_a<>>(variadic_operate(op, *this, count));
 	}
 
-	inline std :: vector < int8_t > read(int64_t count )
+	inline std_vector < int8_t > read(int64_t count )
 	{ return read_(num(count)).extract_vector(); }
 
 	inline std_string read_string(int64_t count )
@@ -1016,7 +1016,7 @@ public:
 		return cast<river_a<>>(variadic_operate(op, *this, lake));
 	}
 
-	inline void write(std :: vector < int8_t > const & lake )
+	inline void write(std_vector < int8_t > const & lake )
 	{ write_(lake_int8_create(lake)); }
 
 	inline void write_string(std_string const & str )

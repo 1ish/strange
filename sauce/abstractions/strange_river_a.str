@@ -24,13 +24,13 @@ false &&
 					put_back_char : "void (int8_t int_8) { put_back_char_(num(int_8)); }",
 
 					get_line_ := (count :<number_data_int64>#, delimiter :<number_data_int8>#, <lake_int8>),
-					get_line : "std::vector<int8_t> (int64_t count, int8_t delimiter) { return get_line_(num(count), num(delimiter)).extract_vector(); }",
+					get_line : "std_vector<int8_t> (int64_t count, int8_t delimiter) { return get_line_(num(count), num(delimiter)).extract_vector(); }",
 
 					ignore_ := (count :<number_data_int64>#, <river>),
 					ignore : "void (int64_t count) { ignore_(num(count)); }",
 
 					read_ := (count :<number_data_int64>#, <lake_int8>),
-					read : "std::vector<int8_t> (int64_t count) { return read_(num(count)).extract_vector(); }",
+					read : "std_vector<int8_t> (int64_t count) { return read_(num(count)).extract_vector(); }",
 					read_string : "std_string (int64_t count) { return lake_to_string(read_(num(count))); }",
 
 					tellg_ :# (<number_data_int64>),
@@ -53,7 +53,7 @@ false &&
 					put_char : "void (int8_t int_8) { put_char_(num(int_8)); }",
 
 					write_ := (lake :<lake_int8>#, <river>),
-					write : "void (std::vector<int8_t> const& lake) { write_(lake_int8_create(lake)); }",
+					write : "void (std_vector<int8_t> const& lake) { write_(lake_int8_create(lake)); }",
 					write_string : "void (std_string const& str) { write_(lake_from_string(str)); }",
 
 					tellp_ :# (<number_data_int64>),

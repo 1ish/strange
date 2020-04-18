@@ -8,77 +8,77 @@ template <typename _1_ = any_a<>, typename _2_ = std::hash<_1_>>
 class variadic_u
 {
 public:
-	static inline void variadic(std::vector<_1_>& collection)
+	static inline void variadic(std_vector<_1_>& collection)
 	{}
 
 	template <typename... Args>
-	static inline void variadic(std::vector<_1_>& collection, std_string const& s, Args&&... args)
+	static inline void variadic(std_vector<_1_>& collection, std_string const& s, Args&&... args)
 	{
 		collection.emplace_back(sym(s));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic(std::vector<_1_>& collection, _1_ const& thing, Args&&... args)
+	static inline void variadic(std_vector<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
 		collection.emplace_back(thing);
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline std::vector<_1_> vector(Args&&... args)
+	static inline std_vector<_1_> vector(Args&&... args)
 	{
-		std::vector<_1_> collection;
+		std_vector<_1_> collection;
 		variadic(collection, std::forward<Args>(args)...);
 		return collection;
 	}
 
-	static inline void variadic_ref(std::vector<_1_>& collection)
+	static inline void variadic_ref(std_vector<_1_>& collection)
 	{}
 
 	template <typename... Args>
-	static inline void variadic_ref(std::vector<_1_>& collection, std_string const& s, Args&&... args)
+	static inline void variadic_ref(std_vector<_1_>& collection, std_string const& s, Args&&... args)
 	{
 		collection.emplace_back(sym(s));
 		variadic_ref(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic_ref(std::vector<_1_>& collection, _1_ const& thing, Args&&... args)
+	static inline void variadic_ref(std_vector<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
 		collection.emplace_back(const_cast<_1_&>(thing), typename _1_::___reference_tag___{});
 		variadic_ref(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline std::vector<_1_> vector_ref(Args&&... args)
+	static inline std_vector<_1_> vector_ref(Args&&... args)
 	{
-		std::vector<_1_> collection;
+		std_vector<_1_> collection;
 		variadic_ref(collection, std::forward<Args>(args)...);
 		return collection;
 	}
 
-	static inline void variadic_dup(std::vector<_1_>& collection)
+	static inline void variadic_dup(std_vector<_1_>& collection)
 	{}
 
 	template <typename... Args>
-	static inline void variadic_dup(std::vector<_1_>& collection, std_string const& s, Args&&... args)
+	static inline void variadic_dup(std_vector<_1_>& collection, std_string const& s, Args&&... args)
 	{
 		collection.emplace_back(sym(s));
 		variadic_dup(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic_dup(std::vector<_1_>& collection, _1_ const& thing, Args&&... args)
+	static inline void variadic_dup(std_vector<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
 		collection.emplace_back(const_cast<_1_&>(thing), typename _1_::___duplicate_tag___{});
 		variadic_dup(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline std::vector<_1_> vector_dup(Args&&... args)
+	static inline std_vector<_1_> vector_dup(Args&&... args)
 	{
-		std::vector<_1_> collection;
+		std_vector<_1_> collection;
 		variadic_dup(collection, std::forward<Args>(args)...);
 		return collection;
 	}

@@ -358,7 +358,7 @@ class flock_t : public thing_t<___ego___>
 	};
 
 public:
-	using std_vector_element = std::vector<_element>;
+	using std_vector_element = std_vector<_element>;
 
 	// construction
 	static inline any_a<> create__(range_a<> const& range)

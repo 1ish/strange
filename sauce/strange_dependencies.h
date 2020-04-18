@@ -32,6 +32,8 @@ namespace strange
 	using std_stringstream = std::stringstream;
 	template<typename _element>
 	using std_deque = std::deque<_element>;
+	template<typename _element>
+	using std_vector = std::vector<_element>;
 
 	using dart_packet = dart::packet;
 }

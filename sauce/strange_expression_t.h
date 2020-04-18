@@ -105,9 +105,9 @@ public:
 	template <typename _expression_>
 	static inline expression_a<> recreate_expression(expression_a<> const& expression)
 	{
-		std::vector<any_a<>> const& vector = expression.terms_().extract_vector();
+		std_vector<any_a<>> const& vector = expression.terms_().extract_vector();
 		auto recreated_terms = flock_create();
-		std::vector<any_a<>>& recreated_vector = recreated_terms.mutate_vector();
+		std_vector<any_a<>>& recreated_vector = recreated_terms.mutate_vector();
 		recreated_vector.reserve(vector.size());
 		for (auto const& term : vector)
 		{

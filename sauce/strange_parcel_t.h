@@ -794,8 +794,8 @@ public:
 protected:
 	typename concurrent_u<_concurrent_>::mutex mutable _mutex;
 	dart_packet _packet;
-	std::vector<any_a<>> mutable _shadow_keys;
-	std::vector<parcel_a<>> mutable _shadow_values;
+	std_vector<any_a<>> mutable _shadow_keys;
+	std_vector<parcel_a<>> mutable _shadow_values;
 
 	friend class any_a<>;
 

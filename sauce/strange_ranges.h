@@ -90,49 +90,49 @@ namespace strange
 	}
 
 	template <typename _element>
-	inline random_access_extractor_data_a<_element, typename std::vector<_element>::const_iterator> begin(flock_a<_element> const& flock)
+	inline random_access_extractor_data_a<_element, typename std_vector<_element>::const_iterator> begin(flock_a<_element> const& flock)
 	{
 		return flock.extract_begin();
 	}
 
 	template <typename _element>
-	inline random_access_extractor_data_a<_element, typename std::vector<_element>::const_iterator> end(flock_a<_element> const& flock)
+	inline random_access_extractor_data_a<_element, typename std_vector<_element>::const_iterator> end(flock_a<_element> const& flock)
 	{
 		return flock.extract_end();
 	}
 
 	template <typename _element>
-	inline random_access_mutator_data_a<_element, typename std::vector<_element>::iterator> begin(flock_a<_element>& flock)
+	inline random_access_mutator_data_a<_element, typename std_vector<_element>::iterator> begin(flock_a<_element>& flock)
 	{
 		return flock.mutate_begin();
 	}
 
 	template <typename _element>
-	inline random_access_mutator_data_a<_element, typename std::vector<_element>::iterator> end(flock_a<_element>& flock)
+	inline random_access_mutator_data_a<_element, typename std_vector<_element>::iterator> end(flock_a<_element>& flock)
 	{
 		return flock.mutate_end();
 	}
 
 	template <typename _primitive_>
-	inline random_access_extractor_data_a<number_data_a<_primitive_>, typename std::vector<_primitive_>::const_iterator> begin(lake_a<_primitive_> const& lake)
+	inline random_access_extractor_data_a<number_data_a<_primitive_>, typename std_vector<_primitive_>::const_iterator> begin(lake_a<_primitive_> const& lake)
 	{
 		return lake.extract_begin();
 	}
 
 	template <typename _primitive_>
-	inline random_access_extractor_data_a<number_data_a<_primitive_>, typename std::vector<_primitive_>::const_iterator> end(lake_a<_primitive_> const& lake)
+	inline random_access_extractor_data_a<number_data_a<_primitive_>, typename std_vector<_primitive_>::const_iterator> end(lake_a<_primitive_> const& lake)
 	{
 		return lake.extract_end();
 	}
 
 	template <typename _primitive_>
-	inline random_access_mutator_data_a<number_data_a<_primitive_>, typename std::vector<_primitive_>::iterator> begin(lake_a<_primitive_>& lake)
+	inline random_access_mutator_data_a<number_data_a<_primitive_>, typename std_vector<_primitive_>::iterator> begin(lake_a<_primitive_>& lake)
 	{
 		return lake.mutate_begin();
 	}
 
 	template <typename _primitive_>
-	inline random_access_mutator_data_a<number_data_a<_primitive_>, typename std::vector<_primitive_>::iterator> end(lake_a<_primitive_>& lake)
+	inline random_access_mutator_data_a<number_data_a<_primitive_>, typename std_vector<_primitive_>::iterator> end(lake_a<_primitive_>& lake)
 	{
 		return lake.mutate_end();
 	}
