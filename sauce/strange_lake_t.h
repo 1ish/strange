@@ -379,7 +379,7 @@ class lake_t : public thing_t<___ego___>
 	};
 
 public:
-	using std_vector_number = std::vector<_primitive_>;
+	using std_vector_primitive = std::vector<_primitive_>;
 
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
@@ -401,7 +401,7 @@ public:
 
 	static inline lake_a<_primitive_> create_()
 	{
-		return create(std_vector_number{});
+		return create(std_vector_primitive{});
 	}
 
 	template <typename... Args>
@@ -548,42 +548,42 @@ public:
 	// range
 	inline random_access_extractor_a<number_data_a<_primitive_>> extract_begin_() const
 	{
-		return extractor_t<number_data_a<_primitive_>, typename std_vector_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cbegin());
+		return extractor_t<number_data_a<_primitive_>, typename std_vector_primitive::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cbegin());
 	}
 
-	inline random_access_extractor_data_a<number_data_a<_primitive_>, typename std_vector_number::const_iterator> extract_begin() const
+	inline random_access_extractor_data_a<number_data_a<_primitive_>, typename std_vector_primitive::const_iterator> extract_begin() const
 	{
-		return extractor_t<number_data_a<_primitive_>, typename std_vector_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cbegin());
+		return extractor_t<number_data_a<_primitive_>, typename std_vector_primitive::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cbegin());
 	}
 
 	inline random_access_extractor_a<number_data_a<_primitive_>> extract_end_() const
 	{
-		return extractor_t<number_data_a<_primitive_>, typename std_vector_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cend());
+		return extractor_t<number_data_a<_primitive_>, typename std_vector_primitive::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cend());
 	}
 
-	inline random_access_extractor_data_a<number_data_a<_primitive_>, typename std_vector_number::const_iterator> extract_end() const
+	inline random_access_extractor_data_a<number_data_a<_primitive_>, typename std_vector_primitive::const_iterator> extract_end() const
 	{
-		return extractor_t<number_data_a<_primitive_>, typename std_vector_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cend());
+		return extractor_t<number_data_a<_primitive_>, typename std_vector_primitive::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cend());
 	}
 
 	inline random_access_mutator_a<number_data_a<_primitive_>> mutate_begin_()
 	{
-		return mutator_t<number_data_a<_primitive_>, typename std_vector_number::iterator>::create(*this, _vector.begin());
+		return mutator_t<number_data_a<_primitive_>, typename std_vector_primitive::iterator>::create(*this, _vector.begin());
 	}
 
-	inline random_access_mutator_data_a<number_data_a<_primitive_>, typename std_vector_number::iterator> mutate_begin()
+	inline random_access_mutator_data_a<number_data_a<_primitive_>, typename std_vector_primitive::iterator> mutate_begin()
 	{
-		return mutator_t<number_data_a<_primitive_>, typename std_vector_number::iterator>::create(*this, _vector.begin());
+		return mutator_t<number_data_a<_primitive_>, typename std_vector_primitive::iterator>::create(*this, _vector.begin());
 	}
 
 	inline random_access_mutator_a<number_data_a<_primitive_>> mutate_end_()
 	{
-		return mutator_t<number_data_a<_primitive_>, typename std_vector_number::iterator>::create(*this, _vector.end());
+		return mutator_t<number_data_a<_primitive_>, typename std_vector_primitive::iterator>::create(*this, _vector.end());
 	}
 
-	inline random_access_mutator_data_a<number_data_a<_primitive_>, typename std_vector_number::iterator> mutate_end()
+	inline random_access_mutator_data_a<number_data_a<_primitive_>, typename std_vector_primitive::iterator> mutate_end()
 	{
-		return mutator_t<number_data_a<_primitive_>, typename std_vector_number::iterator>::create(*this, _vector.end());
+		return mutator_t<number_data_a<_primitive_>, typename std_vector_primitive::iterator>::create(*this, _vector.end());
 	}
 
 	// collection
@@ -906,19 +906,19 @@ public:
 	}
 
 	// data
-	inline std_vector_number const& extract_vector() const
+	inline std_vector_primitive const& extract_vector() const
 	{
 		return _vector;
 	}
 
-	inline std_vector_number& mutate_vector()
+	inline std_vector_primitive& mutate_vector()
 	{
 		return _vector;
 	}
 
 protected:
 	typename concurrent_u<_concurrent_>::mutex mutable _mutex;
-	std_vector_number _vector;
+	std_vector_primitive _vector;
 	std::vector<number_data_a<_primitive_>> mutable _shadow;
 
 	friend class any_a<>;
@@ -1018,7 +1018,7 @@ class ___lake_t_share___
 
 inline lake_a<int8_t> lake_from_string(std::string const& str)
 {
-	return lake_int_8_t<>::create(lake_int_8_t<>::std_vector_number(str.cbegin(), str.cend()));
+	return lake_int_8_t<>::create(lake_int_8_t<>::std_vector_primitive(str.cbegin(), str.cend()));
 }
 
 inline std::string lake_to_string(lake_a<int8_t> const& lake)

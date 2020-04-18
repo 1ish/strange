@@ -106,7 +106,7 @@ class river_t : public thing_t<___ego___>
 	};
 
 public:
-	using std_shared_basic_ios_char = std::shared_ptr<std::basic_ios<char>>;
+	using std_shared_ptr_basic_ios_char = std::shared_ptr<std::basic_ios<char>>;
 	using std_istreambuf_iterator_char = std::istreambuf_iterator<char>;
 
 	// construction
@@ -762,12 +762,12 @@ public:
 protected:
 	std::istream* const _istream;
 	std::ostream* const _ostream;
-	std_shared_basic_ios_char const _stream;
+	std_shared_ptr_basic_ios_char const _stream;
 	std::string const _filename;
 
 	friend class any_a<>;
 
-	inline river_t(std::istream* const is = nullptr, std::ostream* const os = nullptr, std_shared_basic_ios_char const& stream = std_shared_basic_ios_char{}, std::string const& filename = std::string{})
+	inline river_t(std::istream* const is = nullptr, std::ostream* const os = nullptr, std_shared_ptr_basic_ios_char const& stream = std_shared_ptr_basic_ios_char{}, std::string const& filename = std::string{})
 		: thing_t<___ego___>{}
 		, _istream{ is }
 		, _ostream{ os }

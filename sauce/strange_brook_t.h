@@ -379,7 +379,7 @@ class brook_t : public thing_t<___ego___>
 	};
 
 public:
-	using std_deque_number = std::deque<_primitive_>;
+	using std_deque_primitive = std::deque<_primitive_>;
 
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
@@ -401,7 +401,7 @@ public:
 
 	static inline brook_a<_primitive_> create_()
 	{
-		return create(std_deque_number{});
+		return create(std_deque_primitive{});
 	}
 
 	template <typename... Args>
@@ -548,42 +548,42 @@ public:
 	// range
 	inline random_access_extractor_a<number_data_a<_primitive_>> extract_begin_() const
 	{
-		return extractor_t<number_data_a<_primitive_>, typename std_deque_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cbegin());
+		return extractor_t<number_data_a<_primitive_>, typename std_deque_primitive::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cbegin());
 	}
 
-	inline random_access_extractor_data_a<number_data_a<_primitive_>, typename std_deque_number::const_iterator> extract_begin() const
+	inline random_access_extractor_data_a<number_data_a<_primitive_>, typename std_deque_primitive::const_iterator> extract_begin() const
 	{
-		return extractor_t<number_data_a<_primitive_>, typename std_deque_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cbegin());
+		return extractor_t<number_data_a<_primitive_>, typename std_deque_primitive::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cbegin());
 	}
 
 	inline random_access_extractor_a<number_data_a<_primitive_>> extract_end_() const
 	{
-		return extractor_t<number_data_a<_primitive_>, typename std_deque_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cend());
+		return extractor_t<number_data_a<_primitive_>, typename std_deque_primitive::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cend());
 	}
 
-	inline random_access_extractor_data_a<number_data_a<_primitive_>, typename std_deque_number::const_iterator> extract_end() const
+	inline random_access_extractor_data_a<number_data_a<_primitive_>, typename std_deque_primitive::const_iterator> extract_end() const
 	{
-		return extractor_t<number_data_a<_primitive_>, typename std_deque_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cend());
+		return extractor_t<number_data_a<_primitive_>, typename std_deque_primitive::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cend());
 	}
 
 	inline random_access_mutator_a<number_data_a<_primitive_>> mutate_begin_()
 	{
-		return mutator_t<number_data_a<_primitive_>, typename std_deque_number::iterator>::create(*this, _deque.begin());
+		return mutator_t<number_data_a<_primitive_>, typename std_deque_primitive::iterator>::create(*this, _deque.begin());
 	}
 
-	inline random_access_mutator_data_a<number_data_a<_primitive_>, typename std_deque_number::iterator> mutate_begin()
+	inline random_access_mutator_data_a<number_data_a<_primitive_>, typename std_deque_primitive::iterator> mutate_begin()
 	{
-		return mutator_t<number_data_a<_primitive_>, typename std_deque_number::iterator>::create(*this, _deque.begin());
+		return mutator_t<number_data_a<_primitive_>, typename std_deque_primitive::iterator>::create(*this, _deque.begin());
 	}
 
 	inline random_access_mutator_a<number_data_a<_primitive_>> mutate_end_()
 	{
-		return mutator_t<number_data_a<_primitive_>, typename std_deque_number::iterator>::create(*this, _deque.end());
+		return mutator_t<number_data_a<_primitive_>, typename std_deque_primitive::iterator>::create(*this, _deque.end());
 	}
 
-	inline random_access_mutator_data_a<number_data_a<_primitive_>, typename std_deque_number::iterator> mutate_end()
+	inline random_access_mutator_data_a<number_data_a<_primitive_>, typename std_deque_primitive::iterator> mutate_end()
 	{
-		return mutator_t<number_data_a<_primitive_>, typename std_deque_number::iterator>::create(*this, _deque.end());
+		return mutator_t<number_data_a<_primitive_>, typename std_deque_primitive::iterator>::create(*this, _deque.end());
 	}
 
 	// collection
@@ -917,19 +917,19 @@ public:
 	}
 
 	// data
-	inline std_deque_number const& extract_deque() const
+	inline std_deque_primitive const& extract_deque() const
 	{
 		return _deque;
 	}
 
-	inline std_deque_number& mutate_deque()
+	inline std_deque_primitive& mutate_deque()
 	{
 		return _deque;
 	}
 
 protected:
 	typename concurrent_u<_concurrent_>::mutex mutable _mutex;
-	std_deque_number _deque;
+	std_deque_primitive _deque;
 	std::vector<number_data_a<_primitive_>> mutable _shadow;
 
 	friend class any_a<>;
