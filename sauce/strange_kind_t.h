@@ -423,27 +423,27 @@ inline kind_a<> kind_of<double>()
 }
 
 template <>
-inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<false>::read_lock>>()
+inline kind_a<> kind_of<std_shared_ptr<strange::concurrent_u<false>::read_lock>>()
 {
-	return kind_create(1, "\"std::shared_ptr<strange::concurrent_u<false>::read_lock>\"");
+	return kind_create(1, "\"std_shared_ptr<strange::concurrent_u<false>::read_lock>\"");
 }
 
 template <>
-inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<false>::write_lock>>()
+inline kind_a<> kind_of<std_shared_ptr<strange::concurrent_u<false>::write_lock>>()
 {
-	return kind_create(1, "\"std::shared_ptr<strange::concurrent_u<false>::write_lock>\"");
+	return kind_create(1, "\"std_shared_ptr<strange::concurrent_u<false>::write_lock>\"");
 }
 
 template <>
-inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<true>::read_lock>>()
+inline kind_a<> kind_of<std_shared_ptr<strange::concurrent_u<true>::read_lock>>()
 {
-	return kind_create(1, "\"std::shared_ptr<strange::concurrent_u<true>::read_lock>\"");
+	return kind_create(1, "\"std_shared_ptr<strange::concurrent_u<true>::read_lock>\"");
 }
 
 template <>
-inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<true>::write_lock>>()
+inline kind_a<> kind_of<std_shared_ptr<strange::concurrent_u<true>::write_lock>>()
 {
-	return kind_create(1, "\"std::shared_ptr<strange::concurrent_u<true>::write_lock>\"");
+	return kind_create(1, "\"std_shared_ptr<strange::concurrent_u<true>::write_lock>\"");
 }
 
 template <>

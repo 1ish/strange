@@ -219,14 +219,14 @@ public:
 	{}
 
 	template <typename ___TTT___>
-	explicit inline token_a(std::shared_ptr<___TTT___> const& handle) noexcept
+	explicit inline token_a(std_shared_ptr<___TTT___> const& handle) noexcept
 		: any_a<>{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___token_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
-	explicit inline token_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
+	explicit inline token_a(std_shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
 		: any_a<>(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___token_a_handle_base___>(handle));
@@ -247,7 +247,7 @@ public:
 	}
 
 	template <typename ___TTT___>
-	inline token_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
+	inline token_a& operator=(std_shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___token_a_handle_base___>(handle));
 		any_a<>::___handle___ = handle;

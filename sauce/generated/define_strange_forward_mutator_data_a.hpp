@@ -143,14 +143,14 @@ public:
 	{}
 
 	template <typename ___TTT___>
-	explicit inline forward_mutator_data_a(std::shared_ptr<___TTT___> const& handle) noexcept
+	explicit inline forward_mutator_data_a(std_shared_ptr<___TTT___> const& handle) noexcept
 		: forward_mutator_a< _element >{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___forward_mutator_data_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
-	explicit inline forward_mutator_data_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
+	explicit inline forward_mutator_data_a(std_shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
 		: forward_mutator_a< _element >(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___forward_mutator_data_a_handle_base___>(handle));
@@ -171,7 +171,7 @@ public:
 	}
 
 	template <typename ___TTT___>
-	inline forward_mutator_data_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
+	inline forward_mutator_data_a& operator=(std_shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___forward_mutator_data_a_handle_base___>(handle));
 		any_a<>::___handle___ = handle;

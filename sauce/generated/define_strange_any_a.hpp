@@ -16,8 +16,8 @@ public:
 	struct ___variadic_tag___ {};
 
 	// shared pointer typedefs
-	using ___WEAK___ = std::weak_ptr<___any_a_handle_base___>;
-	using ___SHARED___ = std::shared_ptr<___any_a_handle_base___>;
+	using ___WEAK___ = std_weak_ptr<___any_a_handle_base___>;
+	using ___SHARED___ = std_shared_ptr<___any_a_handle_base___>;
 
 	// operator overloads
 	inline any_a<> operator[](range_a<> const& arguments)
@@ -414,13 +414,13 @@ public:
 	virtual ~any_a() = default;
 
 	template <typename ___TTT___>
-	explicit inline any_a(std::shared_ptr<___TTT___> const& handle) noexcept
+	explicit inline any_a(std_shared_ptr<___TTT___> const& handle) noexcept
 		: ___shared___{ handle }
 		, ___handle___{ ___shared___ }
 	{}
 
 	template <typename ___TTT___>
-	explicit inline any_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
+	explicit inline any_a(std_shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
 		: ___shared___{ ___SHARED___{} }
 		, ___handle___{ reinterpret_cast<___SHARED___&>(handle) }
 	{}
@@ -442,7 +442,7 @@ public:
 	}
 
 	template <typename ___TTT___>
-	inline any_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
+	inline any_a& operator=(std_shared_ptr<___TTT___> const& handle) noexcept
 	{
 		___handle___ = handle;
 		return *this;

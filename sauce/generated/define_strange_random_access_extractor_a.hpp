@@ -159,14 +159,14 @@ public:
 	{}
 
 	template <typename ___TTT___>
-	explicit inline random_access_extractor_a(std::shared_ptr<___TTT___> const& handle) noexcept
+	explicit inline random_access_extractor_a(std_shared_ptr<___TTT___> const& handle) noexcept
 		: bidirectional_extractor_a< _element >{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___random_access_extractor_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
-	explicit inline random_access_extractor_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
+	explicit inline random_access_extractor_a(std_shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
 		: bidirectional_extractor_a< _element >(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___random_access_extractor_a_handle_base___>(handle));
@@ -187,7 +187,7 @@ public:
 	}
 
 	template <typename ___TTT___>
-	inline random_access_extractor_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
+	inline random_access_extractor_a& operator=(std_shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___random_access_extractor_a_handle_base___>(handle));
 		any_a<>::___handle___ = handle;

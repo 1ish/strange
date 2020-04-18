@@ -34,7 +34,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		// nope: shoal.update(sym(type_().to_string() + "::create"), native_function_create(&data_t<std::shared_ptr<strange::concurrent_u<false>::read_lock>>::create__));
+		// nope: shoal.update(sym(type_().to_string() + "::create"), native_function_create(&data_t<std_shared_ptr<strange::concurrent_u<false>::read_lock>>::create__));
 	}
 
 	// comparison
@@ -102,10 +102,10 @@ class ___data_t_share___
 {
 	static inline bool ___share___()
 	{
-		return data_t<std::shared_ptr<strange::concurrent_u<false>::read_lock>>::___share___
-			&& data_t<std::shared_ptr<strange::concurrent_u<true>::read_lock>>::___share___
-			&& data_t<std::shared_ptr<strange::concurrent_u<false>::write_lock>>::___share___
-			&& data_t<std::shared_ptr<strange::concurrent_u<true>::write_lock>>::___share___;
+		return data_t<std_shared_ptr<strange::concurrent_u<false>::read_lock>>::___share___
+			&& data_t<std_shared_ptr<strange::concurrent_u<true>::read_lock>>::___share___
+			&& data_t<std_shared_ptr<strange::concurrent_u<false>::write_lock>>::___share___
+			&& data_t<std_shared_ptr<strange::concurrent_u<true>::write_lock>>::___share___;
 	}
 };
 

@@ -183,14 +183,14 @@ public:
 	{}
 
 	template <typename ___TTT___>
-	explicit inline brook_a(std::shared_ptr<___TTT___> const& handle) noexcept
+	explicit inline brook_a(std_shared_ptr<___TTT___> const& handle) noexcept
 		: inventory_a< number_data_a< _primitive > >{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___brook_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
-	explicit inline brook_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
+	explicit inline brook_a(std_shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
 		: inventory_a< number_data_a< _primitive > >(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___brook_a_handle_base___>(handle));
@@ -211,7 +211,7 @@ public:
 	}
 
 	template <typename ___TTT___>
-	inline brook_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
+	inline brook_a& operator=(std_shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___brook_a_handle_base___>(handle));
 		any_a<>::___handle___ = handle;

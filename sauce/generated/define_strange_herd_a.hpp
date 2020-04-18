@@ -147,14 +147,14 @@ public:
 	{}
 
 	template <typename ___TTT___>
-	explicit inline herd_a(std::shared_ptr<___TTT___> const& handle) noexcept
+	explicit inline herd_a(std_shared_ptr<___TTT___> const& handle) noexcept
 		: collection_a< _element , _element , _element >{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___herd_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
-	explicit inline herd_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
+	explicit inline herd_a(std_shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
 		: collection_a< _element , _element , _element >(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___herd_a_handle_base___>(handle));
@@ -175,7 +175,7 @@ public:
 	}
 
 	template <typename ___TTT___>
-	inline herd_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
+	inline herd_a& operator=(std_shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___herd_a_handle_base___>(handle));
 		any_a<>::___handle___ = handle;

@@ -183,14 +183,14 @@ public:
 	{}
 
 	template <typename ___TTT___>
-	explicit inline ordered_shoal_a(std::shared_ptr<___TTT___> const& handle) noexcept
+	explicit inline ordered_shoal_a(std_shared_ptr<___TTT___> const& handle) noexcept
 		: shoal_a< _key , _value >{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___ordered_shoal_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
-	explicit inline ordered_shoal_a(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
+	explicit inline ordered_shoal_a(std_shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
 		: shoal_a< _key , _value >(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___ordered_shoal_a_handle_base___>(handle));
@@ -211,7 +211,7 @@ public:
 	}
 
 	template <typename ___TTT___>
-	inline ordered_shoal_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
+	inline ordered_shoal_a& operator=(std_shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___ordered_shoal_a_handle_base___>(handle));
 		any_a<>::___handle___ = handle;

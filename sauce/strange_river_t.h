@@ -106,7 +106,7 @@ class river_t : public thing_t<___ego___>
 	};
 
 public:
-	using std_shared_ptr_basic_ios_char = std::shared_ptr<std::basic_ios<char>>;
+	using std_shared_ptr_basic_ios_char = std_shared_ptr<std::basic_ios<char>>;
 	using std_istreambuf_iterator_char = std_istreambuf_iterator<char>;
 
 	// construction
@@ -122,7 +122,7 @@ public:
 
 	static inline river_a<> create(std_string const& str = std_string())
 	{
-		std::shared_ptr<std_stringstream> stream = std::make_shared<std_stringstream>(str);
+		std_shared_ptr<std_stringstream> stream = std::make_shared<std_stringstream>(str);
 		return river_a<>::create<river_t<>>(stream.get(), stream.get(), stream);
 	}
 
@@ -162,7 +162,7 @@ public:
 
 	static inline river_a<> file(std_string const& name, bool in = true, bool out = false, bool trunc = false)
 	{
-		std::shared_ptr<std::fstream> stream = std::make_shared<std::fstream>(name,
+		std_shared_ptr<std::fstream> stream = std::make_shared<std::fstream>(name,
 			std::fstream::binary |
 			(in ? std::fstream::in : static_cast<std::fstream::openmode>(0)) |
 			(out ? std::fstream::out : static_cast<std::fstream::openmode>(0)) |

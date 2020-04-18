@@ -616,8 +616,8 @@ protected:
 				"\tstruct ___variadic_tag___ {};\n\n"
 
 				"\t// shared pointer typedefs\n"
-				"\tusing ___WEAK___ = std::weak_ptr<___" + class_name + "_handle_base___>;\n"
-				"\tusing ___SHARED___ = std::shared_ptr<___" + class_name + "_handle_base___>;\n\n"
+				"\tusing ___WEAK___ = std_weak_ptr<___" + class_name + "_handle_base___>;\n"
+				"\tusing ___SHARED___ = std_shared_ptr<___" + class_name + "_handle_base___>;\n\n"
 
 				"\t// operator overloads\n"
 				"\tinline " + class_name + "<> operator[](range_a<> const& arguments)\n"
@@ -1941,13 +1941,13 @@ protected:
 				"\tvirtual ~" + class_name + "() = default;\n\n"
 
 				"\ttemplate <typename ___TTT___>\n"
-				"\texplicit inline " + class_name + "(std::shared_ptr<___TTT___> const& handle) noexcept\n"
+				"\texplicit inline " + class_name + "(std_shared_ptr<___TTT___> const& handle) noexcept\n"
 				"\t\t: ___shared___{ handle }\n"
 				"\t\t, ___handle___{ ___shared___ }\n"
 				"\t{}\n\n"
 
 				"\ttemplate <typename ___TTT___>\n"
-				"\texplicit inline " + class_name + "(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept\n"
+				"\texplicit inline " + class_name + "(std_shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept\n"
 				"\t\t: ___shared___{ ___SHARED___{} }\n"
 				"\t\t, ___handle___{ reinterpret_cast<___SHARED___&>(handle) }\n"
 				"\t{}\n\n"
@@ -1969,7 +1969,7 @@ protected:
 				"\t}\n\n"
 				
 				"\ttemplate <typename ___TTT___>\n"
-				"\tinline " + class_name + "& operator=(std::shared_ptr<___TTT___> const& handle) noexcept\n"
+				"\tinline " + class_name + "& operator=(std_shared_ptr<___TTT___> const& handle) noexcept\n"
 				"\t{\n"
 				"\t\t___handle___ = handle;\n"
 				"\t\treturn *this;\n"
@@ -2015,14 +2015,14 @@ protected:
 				"\t{}\n\n"
 
 				"\ttemplate <typename ___TTT___>\n"
-				"\texplicit inline " + class_name + "(std::shared_ptr<___TTT___> const& handle) noexcept\n"
+				"\texplicit inline " + class_name + "(std_shared_ptr<___TTT___> const& handle) noexcept\n"
 				"\t\t: " + base_name + base_aspects + "{ handle }\n"
 				"\t{\n"
 				"\t\tassert(!handle || std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(handle));\n"
 				"\t}\n\n"
 
 				"\ttemplate <typename ___TTT___>\n"
-				"\texplicit inline " + class_name + "(std::shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept\n"
+				"\texplicit inline " + class_name + "(std_shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept\n"
 				"\t\t: " + base_name + base_aspects + "(handle, any_a<>::___reference_tag___{})\n"
 				"\t{\n"
 				"\t\tassert(!handle || std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(handle));\n"
@@ -2043,7 +2043,7 @@ protected:
 				"\t}\n\n"
 
 				"\ttemplate <typename ___TTT___>\n"
-				"\tinline " + class_name + "& operator=(std::shared_ptr<___TTT___> const& handle) noexcept\n"
+				"\tinline " + class_name + "& operator=(std_shared_ptr<___TTT___> const& handle) noexcept\n"
 				"\t{\n"
 				"\t\tassert(!handle || std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(handle));\n"
 				"\t\tany_a<>::___handle___ = handle;\n"

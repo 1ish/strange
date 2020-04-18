@@ -44,6 +44,10 @@ namespace strange
 	using std_unordered_set = std::unordered_set<_element>;
 	template<typename _key, typename _value>
 	using std_unordered_map = std::unordered_map<_key, _value>;
+	template<typename _thing>
+	using std_weak_ptr = std::weak_ptr<_thing>;
+	template<typename _thing>
+	using std_shared_ptr = std::shared_ptr<_thing>;
 
 	using dart_packet = dart::packet;
 }

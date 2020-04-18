@@ -74,7 +74,7 @@ private:
 	unordered_shoal_a<> _shared;
 
 	struct context_struct;
-	using context_ptr = std::shared_ptr<context_struct>;
+	using context_ptr = std_shared_ptr<context_struct>;
 
 	struct context_struct
 	{
