@@ -51,7 +51,7 @@ public:
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_local_at::operate passed non-unordered-shoal local");
 		}
 #endif
-		auto& local = const_cast<std::unordered_map<any_a<>, any_a<>>&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
+		auto& local = const_cast<std_unordered_map<any_a<>, any_a<>>&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
 		auto it = local.find(_key);
 		if (it == local.end())
 		{

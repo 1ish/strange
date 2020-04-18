@@ -21,57 +21,57 @@ inline bool unordered_shoal_a<_key, _value>::___unordered_shoal_a_handle___<___T
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(shoal); }
 
 template <typename _key, typename _value>
-inline forward_extractor_data_a < flock_a < > , typename std :: unordered_map < _key , _value > :: const_iterator > unordered_shoal_a<_key, _value>::extract_begin() const
+inline forward_extractor_data_a < flock_a < > , typename std_unordered_map < _key , _value > :: const_iterator > unordered_shoal_a<_key, _value>::extract_begin() const
 { assert(any_a<>::___handle___); return ___read___().extract_begin(); }
 
 template <typename _key, typename _value>
 template <typename ___TTT___, typename ___DHB___>
-inline forward_extractor_data_a < flock_a < > , typename std :: unordered_map < _key , _value > :: const_iterator > unordered_shoal_a<_key, _value>::___unordered_shoal_a_handle___<___TTT___, ___DHB___>::extract_begin() const
+inline forward_extractor_data_a < flock_a < > , typename std_unordered_map < _key , _value > :: const_iterator > unordered_shoal_a<_key, _value>::___unordered_shoal_a_handle___<___TTT___, ___DHB___>::extract_begin() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
 
 template <typename _key, typename _value>
-inline forward_extractor_data_a < flock_a < > , typename std :: unordered_map < _key , _value > :: const_iterator > unordered_shoal_a<_key, _value>::extract_end() const
+inline forward_extractor_data_a < flock_a < > , typename std_unordered_map < _key , _value > :: const_iterator > unordered_shoal_a<_key, _value>::extract_end() const
 { assert(any_a<>::___handle___); return ___read___().extract_end(); }
 
 template <typename _key, typename _value>
 template <typename ___TTT___, typename ___DHB___>
-inline forward_extractor_data_a < flock_a < > , typename std :: unordered_map < _key , _value > :: const_iterator > unordered_shoal_a<_key, _value>::___unordered_shoal_a_handle___<___TTT___, ___DHB___>::extract_end() const
+inline forward_extractor_data_a < flock_a < > , typename std_unordered_map < _key , _value > :: const_iterator > unordered_shoal_a<_key, _value>::___unordered_shoal_a_handle___<___TTT___, ___DHB___>::extract_end() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
 
 template <typename _key, typename _value>
-inline forward_mutator_data_a < flock_a < > , typename std :: unordered_map < _key , _value > :: iterator > unordered_shoal_a<_key, _value>::mutate_begin()
+inline forward_mutator_data_a < flock_a < > , typename std_unordered_map < _key , _value > :: iterator > unordered_shoal_a<_key, _value>::mutate_begin()
 { assert(any_a<>::___handle___); return ___write___().mutate_begin(); }
 
 template <typename _key, typename _value>
 template <typename ___TTT___, typename ___DHB___>
-inline forward_mutator_data_a < flock_a < > , typename std :: unordered_map < _key , _value > :: iterator > unordered_shoal_a<_key, _value>::___unordered_shoal_a_handle___<___TTT___, ___DHB___>::mutate_begin()
+inline forward_mutator_data_a < flock_a < > , typename std_unordered_map < _key , _value > :: iterator > unordered_shoal_a<_key, _value>::___unordered_shoal_a_handle___<___TTT___, ___DHB___>::mutate_begin()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin(); }
 
 template <typename _key, typename _value>
-inline forward_mutator_data_a < flock_a < > , typename std :: unordered_map < _key , _value > :: iterator > unordered_shoal_a<_key, _value>::mutate_end()
+inline forward_mutator_data_a < flock_a < > , typename std_unordered_map < _key , _value > :: iterator > unordered_shoal_a<_key, _value>::mutate_end()
 { assert(any_a<>::___handle___); return ___write___().mutate_end(); }
 
 template <typename _key, typename _value>
 template <typename ___TTT___, typename ___DHB___>
-inline forward_mutator_data_a < flock_a < > , typename std :: unordered_map < _key , _value > :: iterator > unordered_shoal_a<_key, _value>::___unordered_shoal_a_handle___<___TTT___, ___DHB___>::mutate_end()
+inline forward_mutator_data_a < flock_a < > , typename std_unordered_map < _key , _value > :: iterator > unordered_shoal_a<_key, _value>::___unordered_shoal_a_handle___<___TTT___, ___DHB___>::mutate_end()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end(); }
 
 template <typename _key, typename _value>
-inline std :: unordered_map < _key , _value > const & unordered_shoal_a<_key, _value>::extract_map() const
+inline std_unordered_map < _key , _value > const & unordered_shoal_a<_key, _value>::extract_map() const
 { assert(any_a<>::___handle___); return ___read___().extract_map(); }
 
 template <typename _key, typename _value>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: unordered_map < _key , _value > const & unordered_shoal_a<_key, _value>::___unordered_shoal_a_handle___<___TTT___, ___DHB___>::extract_map() const
+inline std_unordered_map < _key , _value > const & unordered_shoal_a<_key, _value>::___unordered_shoal_a_handle___<___TTT___, ___DHB___>::extract_map() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_map(); }
 
 template <typename _key, typename _value>
-inline std :: unordered_map < _key , _value > & unordered_shoal_a<_key, _value>::mutate_map()
+inline std_unordered_map < _key , _value > & unordered_shoal_a<_key, _value>::mutate_map()
 { assert(any_a<>::___handle___); return ___write___().mutate_map(); }
 
 template <typename _key, typename _value>
 template <typename ___TTT___, typename ___DHB___>
-inline std :: unordered_map < _key , _value > & unordered_shoal_a<_key, _value>::___unordered_shoal_a_handle___<___TTT___, ___DHB___>::mutate_map()
+inline std_unordered_map < _key , _value > & unordered_shoal_a<_key, _value>::___unordered_shoal_a_handle___<___TTT___, ___DHB___>::mutate_map()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_map(); }
 
 template <typename _key, typename _value>

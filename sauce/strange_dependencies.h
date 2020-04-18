@@ -42,6 +42,8 @@ namespace strange
 	using std_istreambuf_iterator = std::istreambuf_iterator<_char>;
 	template<typename _element>
 	using std_unordered_set = std::unordered_set<_element>;
+	template<typename _key, typename _value>
+	using std_unordered_map = std::unordered_map<_key, _value>;
 
 	using dart_packet = dart::packet;
 }
