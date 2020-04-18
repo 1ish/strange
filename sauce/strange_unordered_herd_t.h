@@ -102,7 +102,7 @@ class unordered_herd_t : public thing_t<___ego___>
 	};
 
 public:
-	using std_unordered_set_element = std::unordered_set<_element>;
+	using std_unordered_set_element = std_unordered_set<_element>;
 
 	// construction
 	static inline any_a<> create__(range_a<> const& range)

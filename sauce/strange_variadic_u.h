@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename _1_ = any_a<>, typename _2_ = std::hash<_1_>>
+template <typename _1_ = any_a<>>
 class variadic_u
 {
 public:
@@ -275,119 +275,119 @@ public:
 		return collection;
 	}
 
-	static inline void variadic(std::unordered_set<_1_, _2_>& collection)
+	static inline void variadic(std_unordered_set<_1_>& collection)
 	{}
 
 	template <typename... Args>
-	static inline void variadic(std::unordered_set<_1_, _2_>& collection, int64_t i, Args&&... args)
+	static inline void variadic(std_unordered_set<_1_>& collection, int64_t i, Args&&... args)
 	{
 		collection.emplace(num(i));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic(std::unordered_set<_1_, _2_>& collection, double f, Args&&... args)
+	static inline void variadic(std_unordered_set<_1_>& collection, double f, Args&&... args)
 	{
 		collection.emplace(num(f));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic(std::unordered_set<_1_, _2_>& collection, std_string const& s, Args&&... args)
+	static inline void variadic(std_unordered_set<_1_>& collection, std_string const& s, Args&&... args)
 	{
 		collection.emplace(sym(s));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic(std::unordered_set<_1_, _2_>& collection, _1_ const& thing, Args&&... args)
+	static inline void variadic(std_unordered_set<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
 		collection.emplace(thing);
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline std::unordered_set<_1_, _2_> unordered_set(Args&&... args)
+	static inline std_unordered_set<_1_> unordered_set(Args&&... args)
 	{
-		std::unordered_set<_1_, _2_> collection;
+		std_unordered_set<_1_> collection;
 		variadic(collection, std::forward<Args>(args)...);
 		return collection;
 	}
 
-	static inline void variadic_ref(std::unordered_set<_1_, _2_>& collection)
+	static inline void variadic_ref(std_unordered_set<_1_>& collection)
 	{}
 
 	template <typename... Args>
-	static inline void variadic_ref(std::unordered_set<_1_, _2_>& collection, int64_t i, Args&&... args)
+	static inline void variadic_ref(std_unordered_set<_1_>& collection, int64_t i, Args&&... args)
 	{
 		collection.emplace(num(i));
 		variadic_ref(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic_ref(std::unordered_set<_1_, _2_>& collection, double f, Args&&... args)
+	static inline void variadic_ref(std_unordered_set<_1_>& collection, double f, Args&&... args)
 	{
 		collection.emplace(num(f));
 		variadic_ref(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic_ref(std::unordered_set<_1_, _2_>& collection, std_string const& s, Args&&... args)
+	static inline void variadic_ref(std_unordered_set<_1_>& collection, std_string const& s, Args&&... args)
 	{
 		collection.emplace(sym(s));
 		variadic_ref(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic_ref(std::unordered_set<_1_, _2_>& collection, _1_ const& thing, Args&&... args)
+	static inline void variadic_ref(std_unordered_set<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
 		collection.emplace(const_cast<_1_&>(thing), typename _1_::___reference_tag___{});
 		variadic_ref(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline std::unordered_set<_1_, _2_> unordered_set_ref(Args&&... args)
+	static inline std_unordered_set<_1_> unordered_set_ref(Args&&... args)
 	{
-		std::unordered_set<_1_, _2_> collection;
+		std_unordered_set<_1_> collection;
 		variadic_ref(collection, std::forward<Args>(args)...);
 		return collection;
 	}
 
-	static inline void variadic_dup(std::unordered_set<_1_, _2_>& collection)
+	static inline void variadic_dup(std_unordered_set<_1_>& collection)
 	{}
 
 	template <typename... Args>
-	static inline void variadic_dup(std::unordered_set<_1_, _2_>& collection, int64_t i, Args&&... args)
+	static inline void variadic_dup(std_unordered_set<_1_>& collection, int64_t i, Args&&... args)
 	{
 		collection.emplace(num(i));
 		variadic_dup(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic_dup(std::unordered_set<_1_, _2_>& collection, double f, Args&&... args)
+	static inline void variadic_dup(std_unordered_set<_1_>& collection, double f, Args&&... args)
 	{
 		collection.emplace(num(f));
 		variadic_dup(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic_dup(std::unordered_set<_1_, _2_>& collection, std_string const& s, Args&&... args)
+	static inline void variadic_dup(std_unordered_set<_1_>& collection, std_string const& s, Args&&... args)
 	{
 		collection.emplace(sym(s));
 		variadic_dup(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic_dup(std::unordered_set<_1_, _2_>& collection, _1_ const& thing, Args&&... args)
+	static inline void variadic_dup(std_unordered_set<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
 		collection.emplace(const_cast<_1_&>(thing), typename _1_::___duplicate_tag___{});
 		variadic_dup(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline std::unordered_set<_1_, _2_> unordered_set_dup(Args&&... args)
+	static inline std_unordered_set<_1_> unordered_set_dup(Args&&... args)
 	{
-		std::unordered_set<_1_, _2_> collection;
+		std_unordered_set<_1_> collection;
 		variadic_dup(collection, std::forward<Args>(args)...);
 		return collection;
 	}

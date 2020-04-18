@@ -204,13 +204,13 @@ namespace strange
 	}
 
 	template <typename _element>
-	inline forward_extractor_data_a<_element, typename std::unordered_set<_element>::const_iterator> begin(unordered_herd_a<_element> const& herd)
+	inline forward_extractor_data_a<_element, typename std_unordered_set<_element>::const_iterator> begin(unordered_herd_a<_element> const& herd)
 	{
 		return herd.extract_begin();
 	}
 
 	template <typename _element>
-	inline forward_extractor_data_a<_element, typename std::unordered_set<_element>::const_iterator> end(unordered_herd_a<_element> const& herd)
+	inline forward_extractor_data_a<_element, typename std_unordered_set<_element>::const_iterator> end(unordered_herd_a<_element> const& herd)
 	{
 		return herd.extract_end();
 	}

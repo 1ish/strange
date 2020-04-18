@@ -9,11 +9,11 @@ false &&
 					'operator==' : "bool (unordered_herd_a<_element> const& herd) const",
 					'operator!=' : "bool (unordered_herd_a<_element> const& herd) const",
 
-					extract_begin : "forward_extractor_data_a<_element, typename std::unordered_set<_element>::const_iterator> () const",
-					extract_end : "forward_extractor_data_a<_element, typename std::unordered_set<_element>::const_iterator> () const",
+					extract_begin : "forward_extractor_data_a<_element, typename std_unordered_set<_element>::const_iterator> () const",
+					extract_end : "forward_extractor_data_a<_element, typename std_unordered_set<_element>::const_iterator> () const",
 
-					extract_set : "std::unordered_set<_element> const& () const",
-					mutate_set : "std::unordered_set<_element>& ()",
+					extract_set : "std_unordered_set<_element> const& () const",
+					mutate_set : "std_unordered_set<_element>& ()",
 				}
 			)
 		)
