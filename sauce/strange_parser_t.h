@@ -504,6 +504,11 @@ private:
 					{
 						throw dis("strange::parser cannot reassign fixed variable:") + _token.report_();
 					}
+					if ((check<kind_a<>>(kind) && fast<kind_a<>>(kind).reference()) ||
+						(check<expression_a<>>(kind) && fast<expression_a<>>(kind).terms_().at_index(7)))
+					{
+						throw dis("strange::parser cannot reassign referenced variable:") + _token.report_();
+					}
 					update = true;
 					_next();
 				}

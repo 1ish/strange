@@ -7,6 +7,7 @@ false &&
 				{	// parcel
 					unwrap_ :# (shared_shoal :<shoal>#, <>),
 					unwrap_unique_ :# (shared_shoal :<shoal>#, unique_shoal :<shoal[<number_data_uint64>, <>]>&, <>),
+					unwrap : "any_a<> (shoal_a<> const& shared_shoal, any_a<>& unique_shoal) const",
 /*
 					close_ := (<>),
 					closed_ :# (<>),

@@ -52,6 +52,15 @@ inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unwrap
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unwrap_unique_(shared_shoal, unique_shoal); }
 
 template <typename _1>
+inline any_a < > parcel_a<_1>::unwrap(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const
+{ assert(any_a<>::___handle___); return ___read___().unwrap(shared_shoal, unique_shoal); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a < > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unwrap(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unwrap(shared_shoal, unique_shoal); }
+
+template <typename _1>
 inline bool parcel_a<_1>::operator==(parcel_a < > const & parcel ) const
 { assert(any_a<>::___handle___); return ___read___().operator==(parcel); }
 

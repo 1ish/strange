@@ -684,16 +684,15 @@ public:
 	inline any_a<> unwrap_(shoal_a<> const& shared_shoal) const
 	{
 		auto no_shoal = no();
-		return operate(no_shoal, reinterpret_cast<range_a<> const&>(shared_shoal));
+		return unwrap(shared_shoal, no_shoal);
 	}
 
 	inline any_a<> unwrap_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_a<uint64_t>, any_a<>>& unique_shoal) const
 	{
-		return operate(unique_shoal, reinterpret_cast<range_a<> const&>(shared_shoal));
+		return unwrap(shared_shoal, unique_shoal);
 	}
 
-	// function
-	inline any_a<> operate(any_a<>& unique_shoal, range_a<> const& shared_shoal) const
+	inline any_a<> unwrap(shoal_a<> const& shared_shoal, any_a<>& unique_shoal) const
 	{
 		switch (_packet.get_type())
 		{
@@ -737,19 +736,23 @@ public:
 				throw dis("strange::parcel::unwrap called for array with no name");
 			}
 			auto name = sym(it->str());
-			auto function = reinterpret_cast<shoal_a<> const&>(shared_shoal).at_(name);
+			auto function = shared_shoal.at_(name);
 			if (!function)
 			{
 				throw dis("strange::parcel::unwrap called for array with unrecognised function name: ") + name;
 			}
-			auto range = (++it == end)
-				? range_t<>::create_()
-				: range_operator_create( //TODO get rid of reinterpret_casts by doing something different here
-					range_t<>::create_(
-						extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, it),
-						extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, end)),
-					unique_shoal, shared_shoal);
-			auto result = function.operate(function, range);
+			auto flock = flock_t<>::create_();
+			int64_t const remaining = _packet.size() - (unique ? 3 : 2);
+			if (remaining)
+			{
+				auto& vector = flock.mutate_vector();
+				vector.reserve(remaining);
+				while (++it != end)
+				{
+					vector.push_back(create(*it).unwrap(shared_shoal, unique_shoal));
+				}
+			}
+			auto result = function.operate(function, flock);
 			if (unique && 
 				check<shoal_a<number_data_a<uint64_t>, any_a<>>>(unique_shoal) &&
 				!fast<shoal_a<number_data_a<uint64_t>, any_a<>>>(unique_shoal).insert(id, result))
