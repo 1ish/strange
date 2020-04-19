@@ -32,12 +32,12 @@ public:
 
 	static inline read_lock_ptr make_read_lock_ptr(mutex& m)
 	{
-		return std::make_shared<read_lock>(m);
+		return std_make_shared<read_lock>(m);
 	}
 
 	static inline write_lock_ptr make_write_lock_ptr(mutex& m)
 	{
-		return std::make_shared<write_lock>(m);
+		return std_make_shared<write_lock>(m);
 	}
 };
 
@@ -53,12 +53,12 @@ public:
 
 	static inline read_lock_ptr make_read_lock_ptr(mutex& m)
 	{
-		return std::make_shared<read_lock>(m);
+		return std_make_shared<read_lock>(m);
 	}
 
 	static inline write_lock_ptr make_write_lock_ptr(mutex& m)
 	{
-		return std::make_shared<write_lock>(m);
+		return std_make_shared<write_lock>(m);
 	}
 };
 
@@ -71,13 +71,13 @@ using write_lock_ptr = typename concurrent_u<_concurrent_>::write_lock_ptr;
 template <bool _concurrent_>
 inline read_lock_ptr<_concurrent_> make_read_lock_ptr(typename concurrent_u<_concurrent_>::mutex& m)
 {
-	return std::make_shared<typename concurrent_u<_concurrent_>::read_lock>(m);
+	return std_make_shared<typename concurrent_u<_concurrent_>::read_lock>(m);
 }
 
 template <bool _concurrent_>
 inline write_lock_ptr<_concurrent_> make_write_lock_ptr(typename concurrent_u<_concurrent_>::mutex& m)
 {
-	return std::make_shared<typename concurrent_u<_concurrent_>::write_lock>(m);
+	return std_make_shared<typename concurrent_u<_concurrent_>::write_lock>(m);
 }
 
 }

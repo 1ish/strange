@@ -107,7 +107,7 @@ private:
 
 		virtual inline any_a<>::___SHARED___ ___clone___() const final
 		{
-			return std::make_shared<___number_data_a_handle_final___>(___number_data_a_handle___<___TTT___>::___value___);
+			return std_make_shared<___number_data_a_handle_final___>(___number_data_a_handle___<___TTT___>::___value___);
 		}
 	};
 
@@ -178,14 +178,14 @@ public:
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<number_data_a, std::decay_t<___TTT___>>::value>>
 	explicit inline number_data_a(___TTT___ value) noexcept
-		: number_a<>{ std::make_shared<___number_data_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: number_a<>{ std_make_shared<___number_data_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
 	explicit inline number_data_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
-		: number_a<>{ std::make_shared<___number_data_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
+		: number_a<>{ std_make_shared<___number_data_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}

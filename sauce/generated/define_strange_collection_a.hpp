@@ -253,7 +253,7 @@ private:
 
 		virtual inline any_a<>::___SHARED___ ___clone___() const final
 		{
-			return std::make_shared<___collection_a_handle_final___>(___collection_a_handle___<___TTT___>::___value___);
+			return std_make_shared<___collection_a_handle_final___>(___collection_a_handle___<___TTT___>::___value___);
 		}
 	};
 
@@ -324,14 +324,14 @@ public:
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<collection_a, std::decay_t<___TTT___>>::value>>
 	explicit inline collection_a(___TTT___ value) noexcept
-		: range_a< _element >{ std::make_shared<___collection_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: range_a< _element >{ std_make_shared<___collection_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
 	explicit inline collection_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
-		: range_a< _element >{ std::make_shared<___collection_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
+		: range_a< _element >{ std_make_shared<___collection_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}

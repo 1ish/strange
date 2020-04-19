@@ -106,7 +106,7 @@ class river_t : public thing_t<___ego___>
 	};
 
 public:
-	using std_shared_ptr_basic_ios_char = std_shared_ptr<std::basic_ios<char>>;
+	using std_shared_ptr_basic_ios_char = std_shared_ptr<std_basic_ios<char>>;
 	using std_istreambuf_iterator_char = std_istreambuf_iterator<char>;
 
 	// construction
@@ -122,7 +122,7 @@ public:
 
 	static inline river_a<> create(std_string const& str = std_string())
 	{
-		std_shared_ptr<std_stringstream> stream = std::make_shared<std_stringstream>(str);
+		std_shared_ptr<std_stringstream> stream = std_make_shared<std_stringstream>(str);
 		return river_a<>::create<river_t<>>(stream.get(), stream.get(), stream);
 	}
 
@@ -162,11 +162,11 @@ public:
 
 	static inline river_a<> file(std_string const& name, bool in = true, bool out = false, bool trunc = false)
 	{
-		std_shared_ptr<std::fstream> stream = std::make_shared<std::fstream>(name,
-			std::fstream::binary |
-			(in ? std::fstream::in : static_cast<std::fstream::openmode>(0)) |
-			(out ? std::fstream::out : static_cast<std::fstream::openmode>(0)) |
-			(trunc ? std::fstream::trunc : static_cast<std::fstream::openmode>(0)));
+		std_shared_ptr<std_fstream> stream = std_make_shared<std_fstream>(name,
+			std_fstream::binary |
+			(in ? std_fstream::in : static_cast<std_fstream::openmode>(0)) |
+			(out ? std_fstream::out : static_cast<std_fstream::openmode>(0)) |
+			(trunc ? std_fstream::trunc : static_cast<std_fstream::openmode>(0)));
 		return river_a<>::create<river_t<>>(stream.get(), stream.get(), stream, name);
 	}
 
@@ -177,7 +177,7 @@ public:
 
 	static inline river_a<> in_()
 	{
-		return river_a<>::create<river_t<>>(&std::cin);
+		return river_a<>::create<river_t<>>(&standard_in());
 	}
 
 	static inline any_a<> out__(range_a<> const& _)
@@ -187,7 +187,7 @@ public:
 
 	static inline river_a<> out_()
 	{
-		return river_a<>::create<river_t<>>(nullptr, &std::cout);
+		return river_a<>::create<river_t<>>(nullptr, &standard_out());
 	}
 
 	static inline any_a<> err__(range_a<> const& _)
@@ -197,7 +197,7 @@ public:
 
 	static inline river_a<> err_()
 	{
-		return river_a<>::create<river_t<>>(nullptr, &std::cerr);
+		return river_a<>::create<river_t<>>(nullptr, &standard_err());
 	}
 
 	// reflection
@@ -437,7 +437,7 @@ public:
 		{
 			throw dis("strange::river::seekg_beg can only be called on input rivers");
 		}
-		_istream->seekg(offset, std::ios_base::beg);
+		_istream->seekg(offset, std_ios_base::beg);
 	}
 
 	inline ___ego___ seekg_end_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
@@ -452,7 +452,7 @@ public:
 		{
 			throw dis("strange::river::seekg_end can only be called on input rivers");
 		}
-		_istream->seekg(offset, std::ios_base::end);
+		_istream->seekg(offset, std_ios_base::end);
 	}
 
 	inline ___ego___ seekg_cur_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
@@ -467,7 +467,7 @@ public:
 		{
 			throw dis("strange::river::seekg_cur can only be called on input rivers");
 		}
-		_istream->seekg(offset, std::ios_base::cur);
+		_istream->seekg(offset, std_ios_base::cur);
 	}
 
 	inline any_a<> sync_()
@@ -558,7 +558,7 @@ public:
 		{
 			throw dis("strange::river::seekp_beg can only be called on output rivers");
 		}
-		_ostream->seekp(offset, std::ios_base::beg);
+		_ostream->seekp(offset, std_ios_base::beg);
 	}
 
 	inline ___ego___ seekp_end_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
@@ -573,7 +573,7 @@ public:
 		{
 			throw dis("strange::river::seekp_end can only be called on output rivers");
 		}
-		_ostream->seekp(offset, std::ios_base::end);
+		_ostream->seekp(offset, std_ios_base::end);
 	}
 
 	inline ___ego___ seekp_cur_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
@@ -588,7 +588,7 @@ public:
 		{
 			throw dis("strange::river::seekp_cur can only be called on output rivers");
 		}
-		_ostream->seekp(offset, std::ios_base::cur);
+		_ostream->seekp(offset, std_ios_base::cur);
 	}
 
 	inline ___ego___ flush_()
@@ -614,7 +614,7 @@ public:
 
 	inline bool good() const
 	{
-		return (_istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream))->good();
+		return (_istream ? static_cast<std_basic_ios<char>*>(_istream) : static_cast<std_basic_ios<char>*>(_ostream))->good();
 	}
 
 	inline any_a<> eof_() const
@@ -624,7 +624,7 @@ public:
 
 	inline bool eof() const
 	{
-		return (_istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream))->eof();
+		return (_istream ? static_cast<std_basic_ios<char>*>(_istream) : static_cast<std_basic_ios<char>*>(_ostream))->eof();
 	}
 
 	inline any_a<> fail_() const
@@ -634,7 +634,7 @@ public:
 
 	inline bool fail() const
 	{
-		return (_istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream))->fail();
+		return (_istream ? static_cast<std_basic_ios<char>*>(_istream) : static_cast<std_basic_ios<char>*>(_ostream))->fail();
 	}
 
 	inline any_a<> bad_() const
@@ -644,7 +644,7 @@ public:
 
 	inline bool bad() const
 	{
-		return (_istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream))->bad();
+		return (_istream ? static_cast<std_basic_ios<char>*>(_istream) : static_cast<std_basic_ios<char>*>(_ostream))->bad();
 	}
 
 	inline ___ego___ set_good_(any_a<> const& value = yes())
@@ -655,14 +655,14 @@ public:
 
 	inline void set_good(bool value = true)
 	{
-		std::basic_ios<char>* const ios = _istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream);
+		std_basic_ios<char>* const ios = _istream ? static_cast<std_basic_ios<char>*>(_istream) : static_cast<std_basic_ios<char>*>(_ostream);
 		if (value)
 		{
 			ios->clear();
 		}
 		else
 		{
-			ios->setstate(std::ios_base::badbit);
+			ios->setstate(std_ios_base::badbit);
 		}
 	}
 
@@ -674,14 +674,14 @@ public:
 
 	inline void set_eof(bool value = true)
 	{
-		std::basic_ios<char>* const ios = _istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream);
+		std_basic_ios<char>* const ios = _istream ? static_cast<std_basic_ios<char>*>(_istream) : static_cast<std_basic_ios<char>*>(_ostream);
 		if (value)
 		{
-			ios->setstate(std::ios_base::eofbit);
+			ios->setstate(std_ios_base::eofbit);
 		}
 		else
 		{
-			ios->clear((ios->fail() ? std::ios_base::failbit : std::ios_base::goodbit) | (ios->bad() ? std::ios_base::badbit : std::ios_base::goodbit));
+			ios->clear((ios->fail() ? std_ios_base::failbit : std_ios_base::goodbit) | (ios->bad() ? std_ios_base::badbit : std_ios_base::goodbit));
 		}
 	}
 
@@ -693,14 +693,14 @@ public:
 
 	inline void set_fail(bool value = true)
 	{
-		std::basic_ios<char>* const ios = _istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream);
+		std_basic_ios<char>* const ios = _istream ? static_cast<std_basic_ios<char>*>(_istream) : static_cast<std_basic_ios<char>*>(_ostream);
 		if (value)
 		{
-			ios->setstate(std::ios_base::failbit);
+			ios->setstate(std_ios_base::failbit);
 		}
 		else
 		{
-			ios->clear((ios->eof() ? std::ios_base::eofbit : std::ios_base::goodbit) | (ios->bad() ? std::ios_base::badbit : std::ios_base::goodbit));
+			ios->clear((ios->eof() ? std_ios_base::eofbit : std_ios_base::goodbit) | (ios->bad() ? std_ios_base::badbit : std_ios_base::goodbit));
 		}
 	}
 
@@ -712,14 +712,14 @@ public:
 
 	inline void set_bad(bool value = true)
 	{
-		std::basic_ios<char>* const ios = _istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream);
+		std_basic_ios<char>* const ios = _istream ? static_cast<std_basic_ios<char>*>(_istream) : static_cast<std_basic_ios<char>*>(_ostream);
 		if (value)
 		{
-			ios->setstate(std::ios_base::badbit);
+			ios->setstate(std_ios_base::badbit);
 		}
 		else
 		{
-			ios->clear((ios->eof() ? std::ios_base::eofbit : std::ios_base::goodbit) | (ios->fail() ? std::ios_base::failbit : std::ios_base::goodbit));
+			ios->clear((ios->eof() ? std_ios_base::eofbit : std_ios_base::goodbit) | (ios->fail() ? std_ios_base::failbit : std_ios_base::goodbit));
 		}
 	}
 
@@ -741,7 +741,7 @@ public:
 
 	inline void close()
 	{
-		auto file = std::dynamic_pointer_cast<std::basic_fstream<char>>(_stream);
+		auto file = std::dynamic_pointer_cast<std_basic_fstream<char>>(_stream);
 		if (file)
 		{
 			file->close();
@@ -755,7 +755,7 @@ public:
 
 	inline bool closed() const
 	{
-		auto file = std::dynamic_pointer_cast<std::basic_fstream<char>>(_stream);
+		auto file = std::dynamic_pointer_cast<std_basic_fstream<char>>(_stream);
 		return file && !file->is_open();
 	}
 

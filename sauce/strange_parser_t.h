@@ -42,7 +42,7 @@ public:
 		{
 			throw dis("strange::parser tokenizer error:") + _token.report_();
 		}
-		auto const result = _initial(0, std::make_shared<context_struct>());
+		auto const result = _initial(0, std_make_shared<context_struct>());
 		if (_it != _end)
 		{
 			throw dis("strange::parser unparsed tokens:") + _token.report_();
@@ -275,7 +275,7 @@ private:
 		auto const token = _token;
 		if (!context->meta)
 		{
-			context->meta = std::make_shared<context_struct>();
+			context->meta = std_make_shared<context_struct>();
 		}
 		context->meta->emit = context;
 		context->meta->emissions.clear();
@@ -727,7 +727,7 @@ private:
 					{
 						auto context_fixed = unordered_herd_a<>::ref(context->fixed);
 						auto context_kind = unordered_shoal_a<>::ref(context->kind);
-						key_context = std::make_shared<context_struct>(
+						key_context = std_make_shared<context_struct>(
 							context->scope,
 							context->scope,
 							context_fixed,
@@ -843,7 +843,7 @@ private:
 				{
 					auto context_fixed = unordered_herd_a<>::ref(context->fixed);
 					auto context_kind = unordered_shoal_a<>::ref(context->kind);
-					value_context = std::make_shared<context_struct>(
+					value_context = std_make_shared<context_struct>(
 						context->scope,
 						new_scope_symbol,
 						context_fixed,
@@ -858,7 +858,7 @@ private:
 				// shared scope
 				auto new_fixed = _remove_herd_non_dimensions(context->fixed);
 				auto new_kind = _remove_shoal_non_dimensions(context->kind);
-				value = _initial(0, std::make_shared<context_struct>(
+				value = _initial(0, std_make_shared<context_struct>(
 					context->scope,
 					new_scope_symbol,
 					new_fixed,
@@ -910,7 +910,7 @@ private:
 				auto terms = flock_t<>::create_(new_scope_symbol);
 				auto new_fixed = _remove_herd_non_dimensions(context->fixed);
 				auto new_kind = _remove_shoal_non_dimensions(context->kind);
-				terms += _elements(std::make_shared<context_struct>(
+				terms += _elements(std_make_shared<context_struct>(
 					context->scope,
 					new_scope_symbol,
 					new_fixed,
@@ -978,7 +978,7 @@ private:
 				auto new_fixed = _remove_herd_non_dimensions(context->fixed);
 				auto new_kind = _remove_shoal_non_dimensions(context->kind);
 				auto const terms = flock_t<>::create_(key_symbol, kind, _initial(0,
-					std::make_shared<context_struct>(
+					std_make_shared<context_struct>(
 						context->scope,
 						new_scope_symbol,
 						new_fixed,
@@ -1588,7 +1588,7 @@ private:
 			new_fixed_herd.mutate();
 			new_kind_shoal.mutate();
 		}
-		auto new_context = std::make_shared<context_struct>(
+		auto new_context = std_make_shared<context_struct>(
 			context->shoal,
 			context->scope,
 			new_fixed_herd,

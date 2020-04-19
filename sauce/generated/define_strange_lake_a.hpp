@@ -127,7 +127,7 @@ private:
 
 		virtual inline any_a<>::___SHARED___ ___clone___() const final
 		{
-			return std::make_shared<___lake_a_handle_final___>(___lake_a_handle___<___TTT___>::___value___);
+			return std_make_shared<___lake_a_handle_final___>(___lake_a_handle___<___TTT___>::___value___);
 		}
 	};
 
@@ -198,14 +198,14 @@ public:
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<lake_a, std::decay_t<___TTT___>>::value>>
 	explicit inline lake_a(___TTT___ value) noexcept
-		: inventory_a< number_data_a< _primitive > >{ std::make_shared<___lake_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: inventory_a< number_data_a< _primitive > >{ std_make_shared<___lake_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
 	explicit inline lake_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
-		: inventory_a< number_data_a< _primitive > >{ std::make_shared<___lake_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
+		: inventory_a< number_data_a< _primitive > >{ std_make_shared<___lake_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
