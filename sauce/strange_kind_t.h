@@ -167,7 +167,7 @@ public:
 			}
 			else
 			{
-				code += "#" + std::to_string(aspect.hash()); //TODO
+				code += "#" + std_to_string(aspect.hash()); //TODO
 			}
 		}
 		code += ">";

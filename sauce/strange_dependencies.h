@@ -31,6 +31,20 @@ namespace strange
 
 	using std_string = std::string;
 
+	inline std_string std_to_string(int8_t _primitive) { return std::to_string(_primitive); }
+	inline std_string std_to_string(uint8_t _primitive) { return std::to_string(_primitive); }
+	inline std_string std_to_string(int16_t _primitive) { return std::to_string(_primitive); }
+	inline std_string std_to_string(uint16_t _primitive) { return std::to_string(_primitive); }
+	inline std_string std_to_string(int32_t _primitive) { return std::to_string(_primitive); }
+	inline std_string std_to_string(uint32_t _primitive) { return std::to_string(_primitive); }
+	inline std_string std_to_string(int64_t _primitive) { return std::to_string(_primitive); }
+	inline std_string std_to_string(uint64_t _primitive) { return std::to_string(_primitive); }
+	inline std_string std_to_string(float _primitive) { return std::to_string(_primitive); }
+	inline std_string std_to_string(double _primitive) { return std::to_string(_primitive); }
+
+	inline int64_t std_stoll(std_string const& _str, std_size_t* _pos = nullptr, int _base = 10) { return std::stoll(_str, _pos, _base); }
+	inline double std_stod(std_string const& _str, std_size_t* _pos = nullptr) { return std::stod(_str, _pos); }
+
 	using std_stringstream = std::stringstream;
 
 	template <typename _element>
@@ -77,7 +91,7 @@ namespace strange
 
 	inline std_istream& standard_in() { return std::cin; }
 	inline std_ostream& standard_out() { return std::cout; }
-	inline std_ostream& standard_err() { return std::cerr; }
+	inline std_ostream& standard_error() { return std::cerr; }
 
 	using std_ios_base = std::ios_base;
 
@@ -85,9 +99,6 @@ namespace strange
 	//std::runtime_error
 	//std::pair
 	//std::getline
-	//std::stoll
-	//std::stod
-	//std::to_string inline string to_string(unsigned long long _Val)
 
 	using dart_packet = dart::packet;
 }

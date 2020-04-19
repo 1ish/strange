@@ -429,12 +429,12 @@ class ___number_t_share___
 
 inline number_data_a<int64_t> int_64_from_string(std_string const& str)
 {
-	return number_int_64_t<>::create(std::stoll(str));
+	return number_int_64_t<>::create(std_stoll(str));
 }
 
 inline number_data_a<double> float_64_from_string(std_string const& str)
 {
-	return number_float_64_t<>::create(std::stod(str));
+	return number_float_64_t<>::create(std_stod(str));
 }
 
 template <typename _primitive_, typename _result_>

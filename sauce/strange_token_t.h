@@ -349,7 +349,7 @@ public:
 
 	inline std_string report() const
 	{
-		return filename() + "(" + std::to_string(line()) + "," + std::to_string(position()) + "): " + tag() + " '" + symbol() + "'\n";
+		return filename() + "(" + std_to_string(line()) + "," + std_to_string(position()) + "): " + tag() + " '" + symbol() + "'\n";
 	}
 
 protected:

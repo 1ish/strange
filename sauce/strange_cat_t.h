@@ -261,7 +261,7 @@ protected:
 			}
 			else
 			{
-				symbol += "#" + std::to_string(aspect.hash());
+				symbol += "#" + std_to_string(aspect.hash());
 			}
 		}
 		if (any)

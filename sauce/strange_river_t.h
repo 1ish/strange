@@ -197,7 +197,7 @@ public:
 
 	static inline river_a<> err_()
 	{
-		return river_a<>::create<river_t<>>(nullptr, &standard_err());
+		return river_a<>::create<river_t<>>(nullptr, &standard_error());
 	}
 
 	// reflection

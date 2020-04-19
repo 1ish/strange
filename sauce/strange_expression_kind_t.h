@@ -365,7 +365,7 @@ public:
 			//TODO _count == 10 : _expression
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::generate_cpp expression kind expression not implemented yet");
 		}
-		river.write_string(" strange::kind_t<>::create(\"" + std::to_string(_order) + ", " + _name.to_string() + "\"");
+		river.write_string(" strange::kind_t<>::create(\"" + std_to_string(_order) + ", " + _name.to_string() + "\"");
 		if (_count >= 3)
 		{
 			river.write_string(",");

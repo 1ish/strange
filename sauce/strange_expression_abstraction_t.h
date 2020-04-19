@@ -2272,7 +2272,7 @@ protected:
 			{
 				auto const kind = fast<kind_a<>>(dimension_kind);
 				river.write_string("kind_create<___kind_a___>(" +
-					std::to_string(kind.order()) + ", \"" +
+					std_to_string(kind.order()) + ", \"" +
 					kind.name_().to_string() + "\"");
 				if (kind != ANY_KIND)
 				{
