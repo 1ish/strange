@@ -113,12 +113,12 @@ inline misunderstanding_a<> dis(F&& s)
 	return disagreement_t<>::create(std::forward<F>(s));
 }
 
-inline misunderstanding_a<> operator+(std::exception const& e, misunderstanding_a<> const& m)
+inline misunderstanding_a<> operator+(std_exception const& e, misunderstanding_a<> const& m)
 {
 	return dis(e.what()) + m;
 }
 
-inline misunderstanding_a<> operator+(misunderstanding_a<> const& m, std::exception const& e)
+inline misunderstanding_a<> operator+(misunderstanding_a<> const& m, std_exception const& e)
 {
 	return m + mis(e.what());
 }

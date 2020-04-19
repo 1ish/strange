@@ -10,29 +10,29 @@ class expression_t : public operation_t<___ego___>
 {
 public:
 	// instructions
-	class break_i : public std::runtime_error
+	class break_i : public std_runtime_error
 	{
 	public:
 		break_i()
-			: std::runtime_error("strange::expression::break escaped")
+			: std_runtime_error("strange::expression::break escaped")
 		{}
 	};
 
-	class continue_i : public std::runtime_error
+	class continue_i : public std_runtime_error
 	{
 	public:
 		continue_i()
-			: std::runtime_error("strange::expression::continue escaped")
+			: std_runtime_error("strange::expression::continue escaped")
 		{}
 	};
 
-	class return_i : public std::runtime_error
+	class return_i : public std_runtime_error
 	{
 	public:
 		any_a<> const result;
 
 		return_i(any_a<> const& thing = no())
-			: std::runtime_error("strange::expression::return escaped")
+			: std_runtime_error("strange::expression::return escaped")
 			, result{ thing }
 		{}
 	};

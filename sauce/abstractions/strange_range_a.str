@@ -8,6 +8,8 @@ false &&
 				{	// range
 					extract_begin_ :# (<forward_extractor[ #element ]>),
 					extract_end_ :# (<forward_extractor[ #element ]>),
+
+					to_range_any_ :# (<range>),
 				}
 			)
 		)

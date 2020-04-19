@@ -11,6 +11,8 @@ false &&
 					'operator->' : "_element const* () const",
 
 					increment_ := (<forward_extractor[< #element >]>),
+
+					to_extractor_any_ :# (<forward_extractor[<>]>),
 				}
 			)
 		)

@@ -21,7 +21,7 @@ TEST_CASE("strange parse and generate cpp brook", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }
 */
@@ -44,7 +44,7 @@ TEST_CASE("strange parse and generate cpp file bidirectional_extractor abstracti
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }
 
@@ -67,7 +67,7 @@ TEST_CASE("strange parse and generate cpp file bidirectional_extractor_data abst
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }
 
@@ -90,7 +90,7 @@ TEST_CASE("strange parse and generate cpp file bidirectional_mutator abstraction
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }
 
@@ -113,7 +113,7 @@ TEST_CASE("strange parse and generate cpp file bidirectional_mutator_data abstra
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }
 
@@ -136,7 +136,7 @@ TEST_CASE("strange parse and generate cpp file forward_extractor abstraction", "
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }
 
@@ -159,7 +159,7 @@ TEST_CASE("strange parse and generate cpp file forward_extractor_data abstractio
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }
 
@@ -182,7 +182,7 @@ TEST_CASE("strange parse and generate cpp file forward_mutator abstraction", "[p
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }
 
@@ -205,7 +205,7 @@ TEST_CASE("strange parse and generate cpp file forward_mutator_data abstraction"
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }
 
@@ -228,7 +228,7 @@ TEST_CASE("strange parse and generate cpp file random_access_extractor abstracti
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }
 
@@ -251,7 +251,7 @@ TEST_CASE("strange parse and generate cpp file random_access_extractor_data abst
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }
 
@@ -274,7 +274,7 @@ TEST_CASE("strange parse and generate cpp file random_access_mutator abstraction
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }
 
@@ -297,6 +297,6 @@ TEST_CASE("strange parse and generate cpp file random_access_mutator_data abstra
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }

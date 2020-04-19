@@ -89,6 +89,11 @@ class range_operator_t : public thing_t<___ego___>
 			++_pos;
 		}
 
+		inline forward_extractor_a<any_a<>> to_extractor_any_() const
+		{
+			return extractor_t<any_a<>, _iterator_>::create(_range, _it, _thing_ref, _range_ref);
+		}
+
 		// data
 		inline _iterator_ const& extract_it() const
 		{
@@ -189,6 +194,11 @@ public:
 	inline forward_extractor_data_a<any_a<>, forward_extractor_a<any_a<>>> extract_end() const
 	{
 		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_range, _range.extract_end_(), _thing_ref, _range_ref);
+	}
+
+	inline range_a<> to_range_any_() const
+	{
+		return range_t<>::create_(extract_begin_(), extract_end_());
 	}
 
 protected:

@@ -78,6 +78,11 @@ class river_t : public thing_t<___ego___>
 			++_it;
 		}
 
+		inline forward_extractor_a<any_a<>> to_extractor_any_() const
+		{
+			return extractor_t<any_a<>, _iterator_>::create(_river, _it);
+		}
+
 		// data
 		inline _iterator_ const& extract_it() const
 		{
@@ -243,6 +248,17 @@ public:
 	inline forward_extractor_data_a<any_a<>, std_istreambuf_iterator_char> extract_end() const
 	{
 		return extractor_t<any_a<>, std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{});
+	}
+
+	inline range_a<> to_range_any_() const
+	{
+		if (!_istream)
+		{
+			throw dis("strange::river::to_range_any can only be called on input rivers");
+		}
+		return range_t<>::create_(
+			extractor_t<any_a<>, std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{ *_istream }),
+			extractor_t<any_a<>, std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{}));
 	}
 
 	// river input

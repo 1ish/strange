@@ -7,7 +7,7 @@ TEST_CASE("strange river create_file input code", "[river_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }
 
@@ -23,7 +23,7 @@ TEST_CASE("strange tokenize code", "[tokenizer_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }
 
@@ -39,7 +39,7 @@ TEST_CASE("strange parse and generate code", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }
 
@@ -53,6 +53,6 @@ TEST_CASE("strange parse and evaluate code", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }

@@ -68,6 +68,11 @@ public:
 	inline void increment_()
 	{}
 
+	inline forward_extractor_a<any_a<>> to_extractor_any_() const
+	{
+		return it_t<any_a<>>::create_();
+	}
+
 protected:
 	friend class any_a<>;
 

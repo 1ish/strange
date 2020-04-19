@@ -100,7 +100,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		_element_it mutable _pair; // stashing iterator
+		flock_a<> mutable _pair; // stashing iterator
 
 		friend class any_a<>;
 
@@ -185,6 +185,11 @@ class unordered_shoal_t : public thing_t<___ego___>
 			++_it;
 		}
 
+		inline forward_extractor_a<any_a<>> to_extractor_any_() const
+		{
+			return extractor_t<any_a<>, _iterator_>::create(_unordered_shoal, _it);
+		}
+
 		// data
 		inline _iterator_ const& extract_it() const
 		{
@@ -199,7 +204,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 	protected:
 		_iterator_ _it;
 		unordered_shoal_a<> const _unordered_shoal;
-		_element_it mutable _pair; // stashing iterator
+		flock_a<> mutable _pair; // stashing iterator
 
 		friend class any_a<>;
 
@@ -361,6 +366,13 @@ public:
 	inline forward_mutator_data_a<flock_a<>, typename std_unordered_map_key_value::iterator> mutate_end()
 	{
 		return mutator_t<flock_a<>, typename std_unordered_map_key_value::iterator>::create(_map.end());
+	}
+
+	inline range_a<> to_range_any_() const
+	{
+		return range_t<>::create_(
+			extractor_t<any_a<>, typename std_unordered_map_key_value::const_iterator>::create(thing_t<___ego___>::me_(), _map.cbegin()),
+			extractor_t<any_a<>, typename std_unordered_map_key_value::const_iterator>::create(thing_t<___ego___>::me_(), _map.cend()));
 	}
 
 	// collection

@@ -100,8 +100,8 @@ namespace strange
 
 	using std_ios_base = std::ios_base;
 
-	//std::exception
-	//std::runtime_error
+	using std_exception = std::exception;
+	using std_runtime_error = std::runtime_error;
 
 	using dart_packet = dart::packet;
 }

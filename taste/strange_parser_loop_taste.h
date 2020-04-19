@@ -11,7 +11,7 @@ TEST_CASE("strange tokenize loop", "[tokenizer_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }
 
@@ -53,7 +53,7 @@ TEST_CASE("strange parse and generate loops", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }
 
@@ -68,7 +68,7 @@ TEST_CASE("strange parse and evaluate loop", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }
 
@@ -137,6 +137,6 @@ TEST_CASE("strange parse and evaluate loops", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }

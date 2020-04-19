@@ -69,6 +69,11 @@ public:
 		return _end;
 	}
 
+	inline range_a<> to_range_any_() const
+	{
+		return range_t<>::create_(_begin.to_extractor_any_(), _end.to_extractor_any_());
+	}
+
 protected:
 	forward_extractor_a<_element> _begin;
 	forward_extractor_a<_element> _end;

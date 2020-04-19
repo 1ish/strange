@@ -8,9 +8,6 @@ false &&
 			(	// parent
 				$$<range>[ #element ],
 				{	// collection
-
-					//TODO to_range_any_ :# (<range>),
-
 					has_ :# (key :< #key >#, <>),
 					has : "bool (_key const& key) const { return has_(key); }",
 

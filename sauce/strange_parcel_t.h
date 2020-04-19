@@ -80,7 +80,12 @@ class parcel_t : public thing_t<___ego___>
 			++_pos;
 		}
 
-		// bidirectional mutator
+		inline forward_extractor_a<any_a<>> to_extractor_any_() const
+		{
+			return bidirectional_extractor_data_a<any_a<>, _iterator_>::template create<key_extractor_t<any_a<>, _iterator_>>(_parcel, _parcel_thing, _it, _pos);
+		}
+
+		// bidirectional extractor
 		inline void decrement_()
 		{
 			--_it;
@@ -113,6 +118,15 @@ class parcel_t : public thing_t<___ego___>
 			, _parcel{ parcel }
 			, _parcel_thing{ parcel_thing }
 			, _pos{ _it == parcel_thing._packet.key_begin() ? 0 : parcel_thing.size() }
+		{}
+
+		template <typename F>
+		inline key_extractor_t(parcel_a<> const& parcel, parcel_t const& parcel_thing, F&& it, int64_t pos)
+			: thing_t<___ego_it___>{}
+			, _it{ std::forward<F>(it) }
+			, _parcel{ parcel }
+			, _parcel_thing{ parcel_thing }
+			, _pos{ pos }
 		{}
 	};
 
@@ -190,7 +204,12 @@ class parcel_t : public thing_t<___ego___>
 			++_pos;
 		}
 
-		// bidirectional mutator
+		inline forward_extractor_a<any_a<>> to_extractor_any_() const
+		{
+			return bidirectional_extractor_data_a<any_a<>, _iterator_>::template create<extractor_t<any_a<>, _iterator_>>(_parcel, _parcel_thing, _it, _pos);
+		}
+
+		// bidirectional extractor
 		inline void decrement_()
 		{
 			--_it;
@@ -223,6 +242,15 @@ class parcel_t : public thing_t<___ego___>
 			, _parcel{ parcel }
 			, _parcel_thing{ parcel_thing }
 			, _pos{ _it == parcel_thing._packet.cbegin() ? 0 : parcel_thing.size() }
+		{}
+
+		template <typename F>
+		inline extractor_t(parcel_a<> const& parcel, parcel_t const& parcel_thing, F&& it, int64_t pos)
+			: thing_t<___ego_it___>{}
+			, _it{ std::forward<F>(it) }
+			, _parcel{ parcel }
+			, _parcel_thing{ parcel_thing }
+			, _pos{ pos }
 		{}
 	};
 
@@ -381,7 +409,6 @@ public:
 		return extractor_t<parcel_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend());
 	}
 
-	// collection / parcel
 	inline range_a<> to_range_any_() const
 	{
 		return range_t<>::create_(
@@ -389,6 +416,7 @@ public:
 			extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend()));
 	}
 
+	// collection / parcel
 	inline any_a<> has_(any_a<> const& key) const
 	{
 		return boole(has(key));

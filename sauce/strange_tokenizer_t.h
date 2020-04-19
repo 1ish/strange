@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename ___ego___ = range_a<>>
+template <typename ___ego___ = range_a<>> //TODO range_a<token_a<>>
 class tokenizer_t : public thing_t<___ego___>
 {
 	template <typename _element, typename _iterator_, typename ___ego_it___ = forward_extractor_data_a<_element, _iterator_>>
@@ -89,6 +89,11 @@ class tokenizer_t : public thing_t<___ego___>
 					}
 				}
 			}
+		}
+
+		inline forward_extractor_a<any_a<>> to_extractor_any_() const
+		{
+			return extractor_t<any_a<>, _iterator_>::create(_river, _it);
 		}
 
 		// data
@@ -565,6 +570,13 @@ public:
 	inline forward_extractor_a<any_a<>> extract_end_() const
 	{
 		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_river, _river.extract_end_());
+	}
+
+	inline range_a<> to_range_any_() const
+	{
+		return range_t<>::create_(
+			extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_river, _river.extract_begin_()),
+			extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_river, _river.extract_end_()));
 	}
 
 protected:

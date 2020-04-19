@@ -74,6 +74,21 @@ inline void forward_extractor_a<_element>::___forward_extractor_a_handle___<___T
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.increment_(); }
 
 template <typename _element>
+inline any_a<> forward_extractor_a<_element>::to_extractor_any__(range_a<> const& ___arguments___) const
+{
+	return to_extractor_any_();
+}
+
+template <typename _element>
+inline forward_extractor_a< any_a<> > forward_extractor_a<_element>::to_extractor_any_() const
+{ assert(any_a<>::___handle___); return ___read___().to_extractor_any_(); }
+
+template <typename _element>
+template <typename ___TTT___, typename ___DHB___>
+inline forward_extractor_a< any_a<> > forward_extractor_a<_element>::___forward_extractor_a_handle___<___TTT___, ___DHB___>::to_extractor_any_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_extractor_any_(); }
+
+template <typename _element>
 template <typename ___unordered_shoal_a___>
 inline ___unordered_shoal_a___ forward_extractor_a<_element>::___operations___()
 {
@@ -82,6 +97,7 @@ inline ___unordered_shoal_a___ forward_extractor_a<_element>::___operations___()
 		___unordered_shoal_a___ operations = any_a<>::template ___operations___<___unordered_shoal_a___>();
 		operations.update(sym("get_"), native_extraction_t<forward_extractor_a>::create(&forward_extractor_a::get__));
 		operations.update(sym("increment_"), native_mutation_t<forward_extractor_a>::create(&forward_extractor_a::increment__));
+		operations.update(sym("to_extractor_any_"), native_extraction_t<forward_extractor_a>::create(&forward_extractor_a::to_extractor_any__));
 		return operations;
 	}();
 	return OPERATIONS;

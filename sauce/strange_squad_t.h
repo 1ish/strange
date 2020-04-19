@@ -300,13 +300,18 @@ class squad_t : public thing_t<___ego___>
 			++_it;
 		}
 
-		// bidirectional mutator
+		inline forward_extractor_a<any_a<>> to_extractor_any_() const
+		{
+			return extractor_t<any_a<>, _iterator_>::create(_squad, _it);
+		}
+
+		// bidirectional extractor
 		inline void decrement_()
 		{
 			--_it;
 		}
 
-		// random access mutator
+		// random access extractor
 		inline void self_add_(number_a<> const& number)
 		{
 			_it += number.to_int_64();
@@ -579,6 +584,13 @@ public:
 	inline random_access_mutator_data_a<_element, typename std_deque_element::iterator> mutate_end()
 	{
 		return mutator_t<_element, typename std_deque_element::iterator>::create(_deque.end());
+	}
+
+	inline range_a<> to_range_any_() const
+	{
+		return range_t<>::create_(
+			extractor_t<any_a<>, typename std_deque_element::const_iterator>::create(thing_t<___ego___>::me_(), _deque.cbegin()),
+			extractor_t<any_a<>, typename std_deque_element::const_iterator>::create(thing_t<___ego___>::me_(), _deque.cend()));
 	}
 
 	// collection

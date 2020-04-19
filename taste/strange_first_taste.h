@@ -57,6 +57,6 @@ TEST_CASE("strange parse and generate cpp cat abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std::runtime_error(m.to_string());
+		throw std_runtime_error(m.to_string());
 	}
 }

@@ -30,6 +30,10 @@ public:
 	inline forward_extractor_a operator++(int);
 #endif
 
+	inline any_a<> to_extractor_any__(range_a<> const& ___arguments___) const;
+
+	inline forward_extractor_a< any_a<> > to_extractor_any_() const;
+
 protected:
 	struct ___forward_extractor_a_handle_base___ : any_a<>::___any_a_handle_base___
 	{
@@ -37,6 +41,7 @@ protected:
 		virtual _element const & operator*() const = 0;
 		virtual _element const * operator->() const = 0;
 		virtual void increment_() = 0;
+		virtual forward_extractor_a< any_a<> > to_extractor_any_() const = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___forward_extractor_a_handle_base___>
@@ -64,6 +69,8 @@ protected:
 		virtual inline _element const * operator->() const final;
 
 		virtual inline void increment_() final;
+
+		virtual inline forward_extractor_a< any_a<> > to_extractor_any_() const final;
 
 	};
 
@@ -321,6 +328,28 @@ public:
 			throw dis("dynamic forward_extractor_d::increment_ passed non-existent member");
 		}
 		return cast<forward_extractor_a< _element >>(variadic_operate(op, *this));
+	}
+
+	inline any_a<> to_extractor_any__(range_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___); 
+		auto const op = any_a<>::operation("to_extractor_any_");
+		if (!op)
+		{
+			throw dis("dynamic forward_extractor_d::to_extractor_any_ passed non-existent member");
+		}
+		return op.operate(*const_cast<forward_extractor_d*>(this), arguments);
+	}
+
+	inline forward_extractor_a< any_a<> > to_extractor_any_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_extractor_any_");
+		if (!op)
+		{
+			throw dis("dynamic forward_extractor_d::to_extractor_any_ passed non-existent member");
+		}
+		return cast<forward_extractor_a< any_a<> >>(variadic_operate(op, *const_cast<forward_extractor_d*>(this)));
 	}
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}

@@ -76,6 +76,11 @@ class unordered_herd_t : public thing_t<___ego___>
 			++_it;
 		}
 
+		inline forward_extractor_a<any_a<>> to_extractor_any_() const
+		{
+			return extractor_t<any_a<>, _iterator_>::create(_unordered_herd, _it);
+		}
+
 		// data
 		inline _iterator_ const& extract_it() const
 		{
@@ -241,6 +246,13 @@ public:
 	inline forward_extractor_data_a<_element, typename std_unordered_set_element::const_iterator> extract_end() const
 	{
 		return extractor_t<_element, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), _set.cend());
+	}
+
+	inline range_a<> to_range_any_() const
+	{
+		return range_t<>::create_(
+			extractor_t<any_a<>, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), _set.cbegin()),
+			extractor_t<any_a<>, typename std_unordered_set_element::const_iterator>::create(thing_t<___ego___>::me_(), _set.cend()));
 	}
 
 	// collection
