@@ -14,9 +14,9 @@ false &&
 					name_ :# (<symbol>),
 					name : "std_string () const { return name_().to_string(); }",
 
-					dimensions_ :# (<flock>),
+					dimensions_ :# (<flock>), //TODO <flock[<kind>]>
 
-					parameters_ :# (<flock>),
+					parameters_ :# (<flock>), //TODO <flock[<kind>]>
 
 					result_ :# (<cat>),
 

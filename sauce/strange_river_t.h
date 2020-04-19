@@ -115,7 +115,7 @@ public:
 	using std_istreambuf_iterator_char = std_istreambuf_iterator<char>;
 
 	// construction
-	static inline any_a<> create__(range_a<> const& _)
+	static inline any_a<> create__(range_a<> const&)
 	{
 		return create_();
 	}
@@ -340,12 +340,12 @@ public:
 		_istream->putback(char(int_8));
 	}
 
-	inline lake_a<int8_t> get_line_(number_data_a<int64_t> const& count = number_int_64_t<>::create(-1), number_data_a<int8_t> const& delimiter = number_int_8_t<>::create('\n'))
+	inline lake_a<int8_t> get_line_(number_data_a<int64_t> const& count = number_int_64_t<>::create(-1), number_data_a<int8_t> const& delimiter = number_int_8_t<>::create('\n')) //TODO
 	{
 		return lake_int_8_t<>::create(get_line(count.extract_primitive(), delimiter.extract_primitive()));
 	}
 
-	inline std_vector<int8_t> get_line(int64_t count = -1, int8_t delimiter = '\n')
+	inline std_vector<int8_t> get_line(int64_t count = -1, int8_t delimiter = '\n') //TODO
 	{
 		if (!count)
 		{
@@ -367,13 +367,13 @@ public:
 		return v;
 	}
 
-	inline ___ego___ ignore_(number_data_a<int64_t> const& count = number_int_64_t<>::create(1))
+	inline ___ego___ ignore_(number_data_a<int64_t> const& count = number_int_64_t<>::create(1)) //TODO
 	{
 		ignore(count.extract_primitive());
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void ignore(int64_t count = 1)
+	inline void ignore(int64_t count = 1) //TODO
 	{
 		if (!_istream)
 		{
@@ -382,12 +382,12 @@ public:
 		_istream->ignore(count);
 	}
 
-	inline lake_a<int8_t> read_(number_data_a<int64_t> const& count = number_int_64_t<>::create(-1))
+	inline lake_a<int8_t> read_(number_data_a<int64_t> const& count = number_int_64_t<>::create(-1)) //TODO
 	{
 		return lake_int_8_t<>::create(read(count.extract_primitive()));
 	}
 
-	inline std_vector<int8_t> read(int64_t count = -1)
+	inline std_vector<int8_t> read(int64_t count = -1) //TODO
 	{
 		if (!count)
 		{
@@ -407,7 +407,7 @@ public:
 		return v;
 	}
 
-	inline std_string read_string(int64_t count = -1)
+	inline std_string read_string(int64_t count = -1) //TODO
 	{
 		if (!count)
 		{
@@ -441,13 +441,13 @@ public:
 		return _istream->tellg();
 	}
 
-	inline ___ego___ seekg_beg_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
+	inline ___ego___ seekg_beg_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_()) //TODO
 	{
 		seekg_beg(offset.extract_primitive());
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void seekg_beg(int64_t offset = 0)
+	inline void seekg_beg(int64_t offset = 0) //TODO
 	{
 		if (!_istream)
 		{
@@ -456,13 +456,13 @@ public:
 		_istream->seekg(offset, std_ios_base::beg);
 	}
 
-	inline ___ego___ seekg_end_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
+	inline ___ego___ seekg_end_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_()) //TODO
 	{
 		seekg_end(offset.extract_primitive());
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void seekg_end(int64_t offset = 0)
+	inline void seekg_end(int64_t offset = 0) //TODO
 	{
 		if (!_istream)
 		{
@@ -471,13 +471,13 @@ public:
 		_istream->seekg(offset, std_ios_base::end);
 	}
 
-	inline ___ego___ seekg_cur_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
+	inline ___ego___ seekg_cur_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_()) //TODO
 	{
 		seekg_cur(offset.extract_primitive());
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void seekg_cur(int64_t offset = 0)
+	inline void seekg_cur(int64_t offset = 0) //TODO
 	{
 		if (!_istream)
 		{
@@ -562,13 +562,13 @@ public:
 		return _ostream->tellp();
 	}
 
-	inline ___ego___ seekp_beg_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
+	inline ___ego___ seekp_beg_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_()) //TODO
 	{
 		seekp_beg(offset.extract_primitive());
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void seekp_beg(int64_t offset = 0)
+	inline void seekp_beg(int64_t offset = 0) //TODO
 	{
 		if (!_ostream)
 		{
@@ -577,13 +577,13 @@ public:
 		_ostream->seekp(offset, std_ios_base::beg);
 	}
 
-	inline ___ego___ seekp_end_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
+	inline ___ego___ seekp_end_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_()) //TODO
 	{
 		seekp_end(offset.extract_primitive());
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void seekp_end(int64_t offset = 0)
+	inline void seekp_end(int64_t offset = 0) //TODO
 	{
 		if (!_ostream)
 		{
@@ -592,13 +592,13 @@ public:
 		_ostream->seekp(offset, std_ios_base::end);
 	}
 
-	inline ___ego___ seekp_cur_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
+	inline ___ego___ seekp_cur_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_()) //TODO
 	{
 		seekp_cur(offset.extract_primitive());
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void seekp_cur(int64_t offset = 0)
+	inline void seekp_cur(int64_t offset = 0) //TODO
 	{
 		if (!_ostream)
 		{
@@ -663,13 +663,13 @@ public:
 		return (_istream ? static_cast<std_basic_ios<char>*>(_istream) : static_cast<std_basic_ios<char>*>(_ostream))->bad();
 	}
 
-	inline ___ego___ set_good_(any_a<> const& value = yes())
+	inline ___ego___ set_good_(any_a<> const& value = yes()) //TODO
 	{
 		set_good(value.something());
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void set_good(bool value = true)
+	inline void set_good(bool value = true) //TODO
 	{
 		std_basic_ios<char>* const ios = _istream ? static_cast<std_basic_ios<char>*>(_istream) : static_cast<std_basic_ios<char>*>(_ostream);
 		if (value)
@@ -682,13 +682,13 @@ public:
 		}
 	}
 
-	inline ___ego___ set_eof_(any_a<> const& value = yes())
+	inline ___ego___ set_eof_(any_a<> const& value = yes()) //TODO
 	{
 		set_eof(value.something());
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void set_eof(bool value = true)
+	inline void set_eof(bool value = true) //TODO
 	{
 		std_basic_ios<char>* const ios = _istream ? static_cast<std_basic_ios<char>*>(_istream) : static_cast<std_basic_ios<char>*>(_ostream);
 		if (value)
@@ -701,13 +701,13 @@ public:
 		}
 	}
 
-	inline ___ego___ set_fail_(any_a<> const& value = yes())
+	inline ___ego___ set_fail_(any_a<> const& value = yes()) //TODO
 	{
 		set_fail(value.something());
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void set_fail(bool value = true)
+	inline void set_fail(bool value = true) //TODO
 	{
 		std_basic_ios<char>* const ios = _istream ? static_cast<std_basic_ios<char>*>(_istream) : static_cast<std_basic_ios<char>*>(_ostream);
 		if (value)
@@ -720,13 +720,13 @@ public:
 		}
 	}
 
-	inline ___ego___ set_bad_(any_a<> const& value = yes())
+	inline ___ego___ set_bad_(any_a<> const& value = yes()) //TODO
 	{
 		set_bad(value.something());
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void set_bad(bool value = true)
+	inline void set_bad(bool value = true) //TODO
 	{
 		std_basic_ios<char>* const ios = _istream ? static_cast<std_basic_ios<char>*>(_istream) : static_cast<std_basic_ios<char>*>(_ostream);
 		if (value)

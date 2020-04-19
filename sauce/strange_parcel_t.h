@@ -763,7 +763,7 @@ public:
 			auto function = shared_shoal.at_(name);
 			if (!function)
 			{
-				throw dis("strange::parcel::unwrap called for array with unrecognised function name: ") + name;
+				throw dis("strange::parcel::unwrap called for array with unrecognised function name: " + name.to_string());
 			}
 			auto flock = flock_t<>::create_();
 			int64_t const remaining = _packet.size() - (unique ? 3 : 2);

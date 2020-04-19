@@ -17,13 +17,13 @@ false &&
 
 					cat_ :# (<#cat>),
 
-					cats_ :# (<unordered_herd>),
+					cats_ :# (<unordered_herd>), //TODO <unordered_herd[<#cat>]>
 
 					kind_ :# (<#kind>),
 
-					kinds_ :# (<unordered_herd>),
+					kinds_ :# (<unordered_herd>), //TODO <unordered_herd[<#kind>]>
 
-					operations_ :# (<unordered_shoal>),
+					operations_ :# (<unordered_shoal>), //TODO <unordered_shoal[<#symbol>, <operation>]>
 
 					// visitor
 					visit_ :# (arguments :<inventory>&, <any>),

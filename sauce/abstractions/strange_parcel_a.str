@@ -82,6 +82,12 @@ false &&
 					extract_begin : "bidirectional_extractor_data_a<parcel_a<>, typename dart_packet::iterator> () const",
 					extract_end : "bidirectional_extractor_data_a<parcel_a<>, typename dart_packet::iterator> () const",
 
+					//TODO mutable range
+/*					mutate_begin_ := (<bidirectional_mutator[<parcel>]>),
+					mutate_end_ := (<bidirectional_mutator[<parcel>]>),
+					mutate_begin : "bidirectional_mutator_data_a<parcel_a<>, typename dart_packet::iterator> ()",
+					mutate_end : "bidirectional_mutator_data_a<flock_a<>, typename dart_packet::iterator> ()",
+*/
 					extract_packet : "dart_packet const& () const",
 					mutate_packet : "dart_packet& ()",
 				}
