@@ -181,9 +181,9 @@ protected:
 		, _range{ range }
 	{}
 
-	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, expression_a<> const& expression, symbol_a<> const& member, range_a<> const& range)
+	static inline std_pair<bool, bool> is_pure_literal(token_a<> const& token, expression_a<> const& expression, symbol_a<> const& member, range_a<> const& range)
 	{
-		std::pair<bool, bool> pure_literal(false, false); //TODO pure literal
+		std_pair<bool, bool> pure_literal(false, false); //TODO pure literal
 		return pure_literal;
 	}
 

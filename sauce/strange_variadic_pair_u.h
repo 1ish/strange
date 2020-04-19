@@ -12,28 +12,28 @@ public:
 	{}
 
 	template <typename... Args>
-	static inline void variadic(std_map<_1_, _2_>& collection, std::pair<std_string, _2_> const& p, Args&&... args)
+	static inline void variadic(std_map<_1_, _2_>& collection, std_pair<std_string, _2_> const& p, Args&&... args)
 	{
 		collection.emplace(sym(p.first), p.second);
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic(std_map<_1_, _2_>& collection, std::pair<_1_, std_string> const& p, Args&&... args)
+	static inline void variadic(std_map<_1_, _2_>& collection, std_pair<_1_, std_string> const& p, Args&&... args)
 	{
 		collection.emplace(p.first, sym(p.second));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic(std_map<_1_, _2_>& collection, std::pair<std_string, std_string> const& p, Args&&... args)
+	static inline void variadic(std_map<_1_, _2_>& collection, std_pair<std_string, std_string> const& p, Args&&... args)
 	{
 		collection.emplace(sym(p.first), sym(p.second));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic(std_map<_1_, _2_>& collection, std::pair<_1_, _2_> const& p, Args&&... args)
+	static inline void variadic(std_map<_1_, _2_>& collection, std_pair<_1_, _2_> const& p, Args&&... args)
 	{
 		collection.emplace(p.first, p.second);
 		variadic(collection, std::forward<Args>(args)...);
@@ -51,28 +51,28 @@ public:
 	{}
 
 	template <typename... Args>
-	static inline void variadic(std_unordered_map<_1_, _2_>& collection, std::pair<std_string, _2_> const& p, Args&&... args)
+	static inline void variadic(std_unordered_map<_1_, _2_>& collection, std_pair<std_string, _2_> const& p, Args&&... args)
 	{
 		collection.emplace(sym(p.first), p.second);
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic(std_unordered_map<_1_, _2_>& collection, std::pair<_1_, std_string> const& p, Args&&... args)
+	static inline void variadic(std_unordered_map<_1_, _2_>& collection, std_pair<_1_, std_string> const& p, Args&&... args)
 	{
 		collection.emplace(p.first, sym(p.second));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic(std_unordered_map<_1_, _2_>& collection, std::pair<std_string, std_string> const& p, Args&&... args)
+	static inline void variadic(std_unordered_map<_1_, _2_>& collection, std_pair<std_string, std_string> const& p, Args&&... args)
 	{
 		collection.emplace(sym(p.first), sym(p.second));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic(std_unordered_map<_1_, _2_>& collection, std::pair<_1_, _2_> const& p, Args&&... args)
+	static inline void variadic(std_unordered_map<_1_, _2_>& collection, std_pair<_1_, _2_> const& p, Args&&... args)
 	{
 		collection.emplace(p.first, p.second);
 		variadic(collection, std::forward<Args>(args)...);

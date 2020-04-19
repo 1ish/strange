@@ -155,9 +155,9 @@ protected:
 		, _assign{ true }
 	{}
 
-	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, flock_a<> const& terms, expression_a<> const& expression_thing, symbol_a<> const& member, expression_a<> const& expression_value)
+	static inline std_pair<bool, bool> is_pure_literal(token_a<> const& token, flock_a<> const& terms, expression_a<> const& expression_thing, symbol_a<> const& member, expression_a<> const& expression_value)
 	{
-		std::pair<bool, bool> pure_literal(false, false); //TODO pure literal
+		std_pair<bool, bool> pure_literal(false, false); //TODO pure literal
 		if (!expression_thing.literal() || !expression_value.literal())
 		{
 			pure_literal.first = false;

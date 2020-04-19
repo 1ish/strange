@@ -191,15 +191,15 @@ protected:
 		, _token(token)
 	{}
 
-	inline expression_t(token_a<> const& token, std::pair<bool, bool> const& pure_literal, flock_a<> const& names = flock_t<>::create_())
+	inline expression_t(token_a<> const& token, std_pair<bool, bool> const& pure_literal, flock_a<> const& names = flock_t<>::create_())
 		: operation_t<___ego___>(pure_literal.first, names)
 		, _literal(pure_literal.second)
 		, _token(token)
 	{}
 
-	static inline std::pair<bool, bool> pure_literal_terms(token_a<> const& token, flock_a<> const& terms)
+	static inline std_pair<bool, bool> pure_literal_terms(token_a<> const& token, flock_a<> const& terms)
 	{
-		std::pair<bool, bool> pure_literal(true, true);
+		std_pair<bool, bool> pure_literal(true, true);
 		for (auto const& term : terms.extract_vector())
 		{
 			if (!check<expression_a<>>(term))

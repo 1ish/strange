@@ -142,9 +142,9 @@ protected:
 		, _range{ range }
 	{}
 
-	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, expression_a<> const& thing_expression, symbol_a<> const& member, expression_a<> const& range_expression)
+	static inline std_pair<bool, bool> is_pure_literal(token_a<> const& token, expression_a<> const& thing_expression, symbol_a<> const& member, expression_a<> const& range_expression)
 	{
-		std::pair<bool, bool> pure_literal(false, false); //TODO pure literal
+		std_pair<bool, bool> pure_literal(false, false); //TODO pure literal
 		if (!thing_expression.literal())
 		{
 			pure_literal.first = false;

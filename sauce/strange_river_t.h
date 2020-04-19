@@ -342,7 +342,7 @@ public:
 		if (count < 0)
 		{
 			std_string str;
-			std::getline(*_istream, str, char(delimiter));
+			std_getline(*_istream, str, char(delimiter));
 			return std_vector<int8_t>(str.cbegin(), str.cend());
 		}
 		std_vector<int8_t> v(std_size_t(++count), 0);

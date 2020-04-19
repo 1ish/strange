@@ -65,6 +65,9 @@ namespace strange
 	template <typename _key, typename _value>
 	using std_unordered_map = std::unordered_map<_key, _value>;
 
+	template <typename _first, typename _second>
+	using std_pair = std::pair<_first, _second>;
+
 	template <typename _thing>
 	using std_weak_ptr = std::weak_ptr<_thing>;
 
@@ -89,6 +92,8 @@ namespace strange
 
 	using std_fstream = std::fstream;
 
+	inline std_istream& std_getline(std_istream& _istr, std_string& _str, char _delim) { return std::getline(_istr, _str, _delim); }
+
 	inline std_istream& standard_in() { return std::cin; }
 	inline std_ostream& standard_out() { return std::cout; }
 	inline std_ostream& standard_error() { return std::cerr; }
@@ -97,8 +102,6 @@ namespace strange
 
 	//std::exception
 	//std::runtime_error
-	//std::pair
-	//std::getline
 
 	using dart_packet = dart::packet;
 }

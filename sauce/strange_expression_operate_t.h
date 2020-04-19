@@ -156,9 +156,9 @@ protected:
 		, _terms{ terms }
 	{}
 
-	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, flock_a<> const& terms)
+	static inline std_pair<bool, bool> is_pure_literal(token_a<> const& token, flock_a<> const& terms)
 	{
-		std::pair<bool, bool> pure_literal(false, false); //TODO pure literal
+		std_pair<bool, bool> pure_literal(false, false); //TODO pure literal
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{

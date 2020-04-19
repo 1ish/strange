@@ -66,7 +66,7 @@ protected:
 
 	friend class any_a<>;
 
-	inline native_extraction_t(native_const_member_pointer<_abstraction_> const fun, std::pair<kind_a<>, flock_a<>> const& kind_names)
+	inline native_extraction_t(native_const_member_pointer<_abstraction_> const fun, std_pair<kind_a<>, flock_a<>> const& kind_names)
 		: operation_t<___ego___>{ false, kind_names.second } //TODO pure
 		, _function{ fun }
 		, _kind{ kind_names.first }

@@ -46,9 +46,9 @@ protected:
 		, _names(names)
 	{}
 
-	static inline std::pair<kind_a<>, flock_a<>> kind_names_params(flock_a<> const& params)
+	static inline std_pair<kind_a<>, flock_a<>> kind_names_params(flock_a<> const& params)
 	{
-		std::pair<kind_a<>, flock_a<>> kind_names(kind_create(), flock_create());
+		std_pair<kind_a<>, flock_a<>> kind_names(kind_create(), flock_create());
 		auto it = params.extract_begin_();
 		if (it == params.extract_end_())
 		{

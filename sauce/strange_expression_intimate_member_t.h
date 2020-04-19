@@ -120,9 +120,9 @@ protected:
 		, _member{ member }
 	{}
 
-	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, symbol_a<> const& member)
+	static inline std_pair<bool, bool> is_pure_literal(token_a<> const& token, symbol_a<> const& member)
 	{
-		std::pair<bool, bool> pure_literal(false, false); //TODO pure literal
+		std_pair<bool, bool> pure_literal(false, false); //TODO pure literal
 		return pure_literal;
 	}
 
