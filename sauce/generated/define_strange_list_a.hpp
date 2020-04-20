@@ -12,11 +12,11 @@ template <typename _1>
 class list_a : public any_a<>
 {
 public:
-	inline any_a<> begin__(range_a<> const& ___arguments___) const;
+	inline any_a<> begin__(list_a<> const& ___arguments___) const;
 
 	inline forward_extractor_a< any_a<> > begin_() const;
 
-	inline any_a<> end__(range_a<> const& ___arguments___) const;
+	inline any_a<> end__(list_a<> const& ___arguments___) const;
 
 	inline forward_extractor_a< any_a<> > end_() const;
 
@@ -257,7 +257,7 @@ template <typename _1>
 class list_d : public any_a<>
 {
 public:
-	inline any_a<> begin__(range_a<> const& arguments) const
+	inline any_a<> begin__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("begin_");
@@ -279,7 +279,7 @@ public:
 		return cast<forward_extractor_a< any_a<> >>(variadic_operate(op, *const_cast<list_d*>(this)));
 	}
 
-	inline any_a<> end__(range_a<> const& arguments) const
+	inline any_a<> end__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("end_");

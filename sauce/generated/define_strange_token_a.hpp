@@ -12,49 +12,49 @@ template <typename _1>
 class token_a : public any_a<>
 {
 public:
-	inline any_a<> filename__(range_a<> const& ___arguments___) const;
+	inline any_a<> filename__(list_a<> const& ___arguments___) const;
 
 	inline symbol_a<> filename_() const;
 
 	inline std_string filename() const;
 
-	inline any_a<> line__(range_a<> const& ___arguments___) const;
+	inline any_a<> line__(list_a<> const& ___arguments___) const;
 
 	inline number_data_int64_a<> line_() const;
 
 	inline int64_t line() const;
 
-	inline any_a<> position__(range_a<> const& ___arguments___) const;
+	inline any_a<> position__(list_a<> const& ___arguments___) const;
 
 	inline number_data_int64_a<> position_() const;
 
 	inline int64_t position() const;
 
-	inline any_a<> tag__(range_a<> const& ___arguments___) const;
+	inline any_a<> tag__(list_a<> const& ___arguments___) const;
 
 	inline symbol_a<> tag_() const;
 
 	inline std_string tag() const;
 
-	inline any_a<> symbol__(range_a<> const& ___arguments___) const;
+	inline any_a<> symbol__(list_a<> const& ___arguments___) const;
 
 	inline symbol_a<> symbol_() const;
 
 	inline std_string symbol() const;
 
-	inline any_a<> literal__(range_a<> const& ___arguments___) const;
+	inline any_a<> literal__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> literal_() const;
 
 	inline bool literal() const;
 
-	inline any_a<> precedence__(range_a<> const& ___arguments___) const;
+	inline any_a<> precedence__(list_a<> const& ___arguments___) const;
 
 	inline number_data_int64_a<> precedence_() const;
 
 	inline int64_t precedence() const;
 
-	inline any_a<> report__(range_a<> const& ___arguments___) const;
+	inline any_a<> report__(list_a<> const& ___arguments___) const;
 
 	inline misunderstanding_a<> report_() const;
 
@@ -339,7 +339,7 @@ template <typename _1>
 class token_d : public any_a<>
 {
 public:
-	inline any_a<> filename__(range_a<> const& arguments) const
+	inline any_a<> filename__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("filename_");
@@ -364,7 +364,7 @@ public:
 	inline std_string filename() const
 	{ return filename_().to_string(); }
 
-	inline any_a<> line__(range_a<> const& arguments) const
+	inline any_a<> line__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("line_");
@@ -389,7 +389,7 @@ public:
 	inline int64_t line() const
 	{ return line_().extract_primitive(); }
 
-	inline any_a<> position__(range_a<> const& arguments) const
+	inline any_a<> position__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("position_");
@@ -414,7 +414,7 @@ public:
 	inline int64_t position() const
 	{ return position_().extract_primitive(); }
 
-	inline any_a<> tag__(range_a<> const& arguments) const
+	inline any_a<> tag__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("tag_");
@@ -439,7 +439,7 @@ public:
 	inline std_string tag() const
 	{ return tag_().to_string(); }
 
-	inline any_a<> symbol__(range_a<> const& arguments) const
+	inline any_a<> symbol__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("symbol_");
@@ -464,7 +464,7 @@ public:
 	inline std_string symbol() const
 	{ return symbol_().to_string(); }
 
-	inline any_a<> literal__(range_a<> const& arguments) const
+	inline any_a<> literal__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("literal_");
@@ -489,7 +489,7 @@ public:
 	inline bool literal() const
 	{ return literal_(); }
 
-	inline any_a<> precedence__(range_a<> const& arguments) const
+	inline any_a<> precedence__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("precedence_");
@@ -514,7 +514,7 @@ public:
 	inline int64_t precedence() const
 	{ return precedence_().extract_primitive(); }
 
-	inline any_a<> report__(range_a<> const& arguments) const
+	inline any_a<> report__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("report_");

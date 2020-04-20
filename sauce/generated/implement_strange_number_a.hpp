@@ -3,7 +3,7 @@ namespace strange
 {
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::increment__(range_a<> const& ___arguments___)
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::increment__(list_a<> const& ___arguments___)
 {
 	return increment_();
 }
@@ -41,7 +41,7 @@ inline void number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.increment_(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::decrement__(range_a<> const& ___arguments___)
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::decrement__(list_a<> const& ___arguments___)
 {
 	return decrement_();
 }
@@ -79,10 +79,10 @@ inline void number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.decrement_(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_assign__(range_a<> const& ___arguments___)
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_assign__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("number_a::self_assign_ passed short range");
@@ -105,10 +105,10 @@ inline void number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_assign_(number); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_add__(range_a<> const& ___arguments___)
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_add__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("number_a::self_add_ passed short range");
@@ -139,10 +139,10 @@ inline void number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(number); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::add__(range_a<> const& ___arguments___) const
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::add__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("number_a::add_ passed short range");
@@ -165,10 +165,10 @@ inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(number); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_subtract__(range_a<> const& ___arguments___)
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_subtract__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("number_a::self_subtract_ passed short range");
@@ -199,10 +199,10 @@ inline void number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(number); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::subtract__(range_a<> const& ___arguments___) const
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::subtract__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("number_a::subtract_ passed short range");
@@ -225,10 +225,10 @@ inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract_(number); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_multiply__(range_a<> const& ___arguments___)
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_multiply__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("number_a::self_multiply_ passed short range");
@@ -259,10 +259,10 @@ inline void number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_multiply_(number); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::multiply__(range_a<> const& ___arguments___) const
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::multiply__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("number_a::multiply_ passed short range");
@@ -285,10 +285,10 @@ inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.multiply_(number); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_divide__(range_a<> const& ___arguments___)
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_divide__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("number_a::self_divide_ passed short range");
@@ -319,10 +319,10 @@ inline void number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_divide_(number); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::divide__(range_a<> const& ___arguments___) const
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::divide__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("number_a::divide_ passed short range");
@@ -345,10 +345,10 @@ inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.divide_(number); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_modulo__(range_a<> const& ___arguments___)
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::self_modulo__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("number_a::self_modulo_ passed short range");
@@ -379,10 +379,10 @@ inline void number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_modulo_(number); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::modulo__(range_a<> const& ___arguments___) const
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::modulo__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("number_a::modulo_ passed short range");
@@ -405,7 +405,7 @@ inline number_a<> number_a<_number_data_int64, _number_data_uint64, _number_data
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.modulo_(number); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::to_int_64__(range_a<> const& ___arguments___) const
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::to_int_64__(list_a<> const& ___arguments___) const
 {
 	return to_int_64_();
 }
@@ -429,10 +429,10 @@ inline int64_t number_a<_number_data_int64, _number_data_uint64, _number_data_do
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_int_64(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_int_64__(range_a<> const& ___arguments___)
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_int_64__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("number_a::from_int_64_ passed short range");
@@ -460,7 +460,7 @@ inline void number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_int_64(int_64); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::to_uint_64__(range_a<> const& ___arguments___) const
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::to_uint_64__(list_a<> const& ___arguments___) const
 {
 	return to_uint_64_();
 }
@@ -484,10 +484,10 @@ inline uint64_t number_a<_number_data_int64, _number_data_uint64, _number_data_d
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_uint_64(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_uint_64__(range_a<> const& ___arguments___)
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_uint_64__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("number_a::from_uint_64_ passed short range");
@@ -515,7 +515,7 @@ inline void number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_uint_64(uint_64); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::to_float_64__(range_a<> const& ___arguments___) const
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::to_float_64__(list_a<> const& ___arguments___) const
 {
 	return to_float_64_();
 }
@@ -539,10 +539,10 @@ inline double number_a<_number_data_int64, _number_data_uint64, _number_data_dou
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_float_64(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_float_64__(range_a<> const& ___arguments___)
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::from_float_64__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("number_a::from_float_64_ passed short range");
@@ -570,7 +570,7 @@ inline void number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_float_64(float_64); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::byte_size__(range_a<> const& ___arguments___) const
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::byte_size__(list_a<> const& ___arguments___) const
 {
 	return byte_size_();
 }
@@ -594,7 +594,7 @@ inline int64_t number_a<_number_data_int64, _number_data_uint64, _number_data_do
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.byte_size(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_int__(range_a<> const& ___arguments___) const
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_int__(list_a<> const& ___arguments___) const
 {
 	return is_int_();
 }
@@ -618,7 +618,7 @@ inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_int(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_signed__(range_a<> const& ___arguments___) const
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_signed__(list_a<> const& ___arguments___) const
 {
 	return is_signed_();
 }
@@ -642,7 +642,7 @@ inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_signed(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_nan__(range_a<> const& ___arguments___) const
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_nan__(list_a<> const& ___arguments___) const
 {
 	return is_nan_();
 }
@@ -666,7 +666,7 @@ inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_nan(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_inf__(range_a<> const& ___arguments___) const
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_inf__(list_a<> const& ___arguments___) const
 {
 	return is_inf_();
 }
@@ -690,7 +690,7 @@ inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_inf(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_finite__(range_a<> const& ___arguments___) const
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_finite__(list_a<> const& ___arguments___) const
 {
 	return is_finite_();
 }
@@ -714,7 +714,7 @@ inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_finite(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_normal__(range_a<> const& ___arguments___) const
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::is_normal__(list_a<> const& ___arguments___) const
 {
 	return is_normal_();
 }
@@ -738,7 +738,7 @@ inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_normal(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::little_endian__(range_a<> const& ___arguments___) const
+inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::little_endian__(list_a<> const& ___arguments___) const
 {
 	return little_endian_();
 }

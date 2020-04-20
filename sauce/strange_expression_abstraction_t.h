@@ -9,7 +9,7 @@ class expression_abstraction_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
 		return expression_t<___ego___>::template create_expression<expression_abstraction_t<___ego___>>(list);
 	}
@@ -620,12 +620,12 @@ protected:
 				"\tusing ___SHARED___ = std_shared_ptr<___" + class_name + "_handle_base___>;\n\n"
 
 				"\t// operator overloads\n"
-				"\tinline " + class_name + "<> operator[](range_a<> const& arguments)\n"
+				"\tinline " + class_name + "<> operator[](list_a<> const& arguments)\n"
 				"\t{\n"
 				"\t\treturn invoke(*this, arguments);\n"
 				"\t}\n\n"
 
-				"\tinline " + class_name + "<> operator()(range_a<> const& arguments)\n"
+				"\tinline " + class_name + "<> operator()(list_a<> const& arguments)\n"
 				"\t{\n"
 				"\t\treturn operate(*this, arguments);\n"
 				"\t}\n\n"
@@ -735,7 +735,7 @@ protected:
 		_parse_member_definition_(version, expression, extraction, true, result, parameters, arguments, constness);
 
 		river.write_string(
-			"\tinline any_a<> " + name + "_(range_a<> const& arguments)" + constness + "\n"
+			"\tinline any_a<> " + name + "_(list_a<> const& arguments)" + constness + "\n"
 			"\t{\n"
 			"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___); \n"
 			"\t\tauto const op = " + (root ? "" : "any_a<>::") + "operation(\"" + name + "\");\n"
@@ -808,7 +808,7 @@ protected:
 		_parse_member_definition_(version, expression, extraction, true, result, parameters, arguments, constness);
 
 		river.write_string(
-			"\tinline any_a<> " + name + "_(range_a<> const& ___arguments___)" + constness + ";\n\n");			
+			"\tinline any_a<> " + name + "_(list_a<> const& ___arguments___)" + constness + ";\n\n");			
 
 		if (name == "increment_")
 		{
@@ -1023,7 +1023,7 @@ protected:
 		river.write_string(
 			"inline any_a<> " + class_name);
 		_declare_and_define_template_(version, 0, river, false, false);
-		river.write_string("::" + name + "_(range_a<> const& ___arguments___)" +
+		river.write_string("::" + name + "_(list_a<> const& ___arguments___)" +
 				std_string(extraction ? " const" : "") + "\n"
 			"{\n");
 		if (extraction)

@@ -51,7 +51,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>&, range_a<> const& list) const
+	inline any_a<> operate(any_a<>&, list_a<> const& list) const
 	{
 		return _function(list);
 	}

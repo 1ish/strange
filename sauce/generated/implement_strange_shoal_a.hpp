@@ -3,7 +3,7 @@ namespace strange
 {
 
 template <typename _key, typename _value>
-inline any_a<> shoal_a<_key, _value>::mutate_begin__(range_a<> const& ___arguments___)
+inline any_a<> shoal_a<_key, _value>::mutate_begin__(list_a<> const& ___arguments___)
 {
 	return mutate_begin_();
 }
@@ -18,7 +18,7 @@ inline forward_mutator_a< flock_a<> > shoal_a<_key, _value>::___shoal_a_handle__
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin_(); }
 
 template <typename _key, typename _value>
-inline any_a<> shoal_a<_key, _value>::mutate_end__(range_a<> const& ___arguments___)
+inline any_a<> shoal_a<_key, _value>::mutate_end__(list_a<> const& ___arguments___)
 {
 	return mutate_end_();
 }

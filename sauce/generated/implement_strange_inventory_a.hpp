@@ -48,7 +48,7 @@ inline bool inventory_a<_element>::___inventory_a_handle___<___TTT___, ___DHB___
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.erase_index(index); }
 
 template <typename _element>
-inline any_a<> inventory_a<_element>::mutate_begin__(range_a<> const& ___arguments___)
+inline any_a<> inventory_a<_element>::mutate_begin__(list_a<> const& ___arguments___)
 {
 	return mutate_begin_();
 }
@@ -63,7 +63,7 @@ inline random_access_mutator_a< _element > inventory_a<_element>::___inventory_a
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin_(); }
 
 template <typename _element>
-inline any_a<> inventory_a<_element>::mutate_end__(range_a<> const& ___arguments___)
+inline any_a<> inventory_a<_element>::mutate_end__(list_a<> const& ___arguments___)
 {
 	return mutate_end_();
 }

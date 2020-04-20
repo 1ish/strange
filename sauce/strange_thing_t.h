@@ -64,10 +64,10 @@ public:
 	}
 
 	// function
-	static inline any_a<> invoke__(range_a<> const& list)
+	static inline any_a<> invoke__(list_a<> const& list)
 	{
-		auto it = list.extract_begin_();
-		auto end = list.extract_end_();
+		auto it = list.begin_();
+		auto end = list.end_();
 		if (it == end)
 		{
 			throw dis("strange::thing::invoke passed empty list");
@@ -81,10 +81,10 @@ public:
 		return invoke_member(thing, member, range_create(++it, end));
 	}
 
-	static inline any_a<> invoke(any_a<>& thing, range_a<> const& list)
+	static inline any_a<> invoke(any_a<>& thing, list_a<> const& list)
 	{
-		auto it = list.extract_begin_();
-		auto end = list.extract_end_();
+		auto it = list.begin_();
+		auto end = list.end_();
 		if (it == end)
 		{
 			throw dis("strange::thing::invoke passed short list");
@@ -93,7 +93,7 @@ public:
 		return invoke_member(thing, member, range_create(++it, end));
 	}
 
-	static inline any_a<> invoke_member(any_a<>& thing, any_a<> const& member, range_a<> const& list)
+	static inline any_a<> invoke_member(any_a<>& thing, any_a<> const& member, list_a<> const& list)
 	{
 		auto const op = thing.operations_().at_(member);
 		if (!op)
@@ -103,10 +103,10 @@ public:
 		return op.operate(thing, list);
 	}
 
-	static inline any_a<> operate__(range_a<> const& list)
+	static inline any_a<> operate__(list_a<> const& list)
 	{
-		auto it = list.extract_begin_();
-		auto end = list.extract_end_();
+		auto it = list.begin_();
+		auto end = list.end_();
 		if (it == end)
 		{
 			throw dis("strange::thing::operate passed empty list");
@@ -115,10 +115,10 @@ public:
 		return thing.operate(thing, range_create(++it, end));
 	}
 
-	static inline any_a<> operate(any_a<>& thing, range_a<> const& list)
+	static inline any_a<> operate(any_a<>& thing, list_a<> const& list)
 	{
-		auto it = list.extract_begin_();
-		auto end = list.extract_end_();
+		auto it = list.begin_();
+		auto end = list.end_();
 		if (it == end)
 		{
 			throw dis("strange::thing::operate passed short list");

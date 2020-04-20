@@ -12,37 +12,37 @@ template <typename _1>
 class cat_a : public symbol_a<>
 {
 public:
-	inline any_a<> symbolic__(range_a<> const& ___arguments___) const;
+	inline any_a<> symbolic__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> symbolic_() const;
 
 	inline bool symbolic() const;
 
-	inline any_a<> order__(range_a<> const& ___arguments___) const;
+	inline any_a<> order__(list_a<> const& ___arguments___) const;
 
 	inline number_data_int64_a<> order_() const;
 
 	inline int64_t order() const;
 
-	inline any_a<> name__(range_a<> const& ___arguments___) const;
+	inline any_a<> name__(list_a<> const& ___arguments___) const;
 
 	inline symbol_a<> name_() const;
 
 	inline std_string name() const;
 
-	inline any_a<> dimensions__(range_a<> const& ___arguments___) const;
+	inline any_a<> dimensions__(list_a<> const& ___arguments___) const;
 
 	inline flock_a<> dimensions_() const;
 
-	inline any_a<> parameters__(range_a<> const& ___arguments___) const;
+	inline any_a<> parameters__(list_a<> const& ___arguments___) const;
 
 	inline flock_a<> parameters_() const;
 
-	inline any_a<> result__(range_a<> const& ___arguments___) const;
+	inline any_a<> result__(list_a<> const& ___arguments___) const;
 
 	inline cat_a<> result_() const;
 
-	inline any_a<> code__(range_a<> const& ___arguments___) const;
+	inline any_a<> code__(list_a<> const& ___arguments___) const;
 
 	inline lake_int8_a<> code_() const;
 
@@ -312,7 +312,7 @@ template <typename _1>
 class cat_d : public symbol_d<>
 {
 public:
-	inline any_a<> symbolic__(range_a<> const& arguments) const
+	inline any_a<> symbolic__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("symbolic_");
@@ -337,7 +337,7 @@ public:
 	inline bool symbolic() const
 	{ return symbolic_(); }
 
-	inline any_a<> order__(range_a<> const& arguments) const
+	inline any_a<> order__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("order_");
@@ -362,7 +362,7 @@ public:
 	inline int64_t order() const
 	{ return order_().to_int_64(); }
 
-	inline any_a<> name__(range_a<> const& arguments) const
+	inline any_a<> name__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("name_");
@@ -387,7 +387,7 @@ public:
 	inline std_string name() const
 	{ return name_().to_string(); }
 
-	inline any_a<> dimensions__(range_a<> const& arguments) const
+	inline any_a<> dimensions__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("dimensions_");
@@ -409,7 +409,7 @@ public:
 		return cast<flock_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
 
-	inline any_a<> parameters__(range_a<> const& arguments) const
+	inline any_a<> parameters__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("parameters_");
@@ -431,7 +431,7 @@ public:
 		return cast<flock_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
 
-	inline any_a<> result__(range_a<> const& arguments) const
+	inline any_a<> result__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("result_");
@@ -453,7 +453,7 @@ public:
 		return cast<cat_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
 
-	inline any_a<> code__(range_a<> const& arguments) const
+	inline any_a<> code__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("code_");

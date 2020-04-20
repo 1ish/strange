@@ -9,7 +9,7 @@ class expression_continue_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
 		return expression_t<___ego___>::template create_expression<expression_continue_t<___ego___>>(list);
 	}
@@ -33,7 +33,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>&, range_a<> const&) const
+	inline any_a<> operate(any_a<>&, list_a<> const&) const
 	{
 		throw typename expression_t<___ego___>::continue_i{};
 	}
@@ -47,7 +47,7 @@ public:
 	inline any_a<> evaluate_() const
 	{
 		any_a<> null;
-		return operate(null, range_a<>{});
+		return operate(null, list_a<>{});
 	}
 
 	inline any_a<> generate_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const

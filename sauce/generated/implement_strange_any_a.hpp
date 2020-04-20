@@ -21,7 +21,7 @@ inline one_t & any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle
 { return ___value___.mutate_thing(); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::type__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::type__(list_a<> const& ___arguments___) const
 {
 	return type_();
 }
@@ -36,7 +36,7 @@ inline _symbol any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle
 { return ___value___.type_(); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::cat__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::cat__(list_a<> const& ___arguments___) const
 {
 	return cat_();
 }
@@ -51,7 +51,7 @@ inline _cat any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___
 { return ___value___.cat_(); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::cats__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::cats__(list_a<> const& ___arguments___) const
 {
 	return cats_();
 }
@@ -66,7 +66,7 @@ inline unordered_herd_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::___a
 { return ___value___.cats_(); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::kind__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::kind__(list_a<> const& ___arguments___) const
 {
 	return kind_();
 }
@@ -81,7 +81,7 @@ inline _kind any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle__
 { return ___value___.kind_(); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::kinds__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::kinds__(list_a<> const& ___arguments___) const
 {
 	return kinds_();
 }
@@ -96,7 +96,7 @@ inline unordered_herd_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::___a
 { return ___value___.kinds_(); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::operations__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::operations__(list_a<> const& ___arguments___) const
 {
 	return operations_();
 }
@@ -111,10 +111,10 @@ inline unordered_shoal_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::___
 { return ___value___.operations_(); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::visit__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::visit__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("any_a::visit_ passed short range");
@@ -133,25 +133,25 @@ inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle
 { return ___value___.visit_(arguments); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a < > any_a<_symbol, _cat, _kind, _number_data_uint64>::invoke(any_a < > & thing , range_a < > const & arguments ) const
+inline any_a < > any_a<_symbol, _cat, _kind, _number_data_uint64>::invoke(any_a < > & thing , list_a < > const & arguments ) const
 { assert(___handle___); return ___read___().invoke(thing, arguments); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
 template <typename ___TTT___, typename ___BHB___>
-inline any_a < > any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::invoke(any_a < > & thing , range_a < > const & arguments ) const
+inline any_a < > any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::invoke(any_a < > & thing , list_a < > const & arguments ) const
 { return ___value___.invoke(thing, arguments); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a < > any_a<_symbol, _cat, _kind, _number_data_uint64>::operate(any_a < > & thing , range_a < > const & arguments ) const
+inline any_a < > any_a<_symbol, _cat, _kind, _number_data_uint64>::operate(any_a < > & thing , list_a < > const & arguments ) const
 { assert(___handle___); return ___read___().operate(thing, arguments); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
 template <typename ___TTT___, typename ___BHB___>
-inline any_a < > any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::operate(any_a < > & thing , range_a < > const & arguments ) const
+inline any_a < > any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::operate(any_a < > & thing , list_a < > const & arguments ) const
 { return ___value___.operate(thing, arguments); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::identity__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::identity__(list_a<> const& ___arguments___) const
 {
 	return identity_();
 }
@@ -175,10 +175,10 @@ inline void const * any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_h
 { return ___value___.identity(); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::identical__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::identical__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("any_a::identical_ passed short range");
@@ -206,7 +206,7 @@ inline bool any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___
 { return ___value___.identical(thing); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::nothing__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::nothing__(list_a<> const& ___arguments___) const
 {
 	return nothing_();
 }
@@ -230,7 +230,7 @@ inline bool any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___
 { return ___value___.nothing(); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::something__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::something__(list_a<> const& ___arguments___) const
 {
 	return something_();
 }
@@ -254,10 +254,10 @@ inline bool any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___
 { return ___value___.something(); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::same__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::same__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("any_a::same_ passed short range");
@@ -280,10 +280,10 @@ inline bool any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___
 { return bool{ ___value___.same_(thing) }; }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::different__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::different__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("any_a::different_ passed short range");
@@ -301,10 +301,10 @@ inline bool any_a<_symbol, _cat, _kind, _number_data_uint64>::operator!=(any_a<>
 { assert(___handle___); return !___read___().same_(thing); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::less_than__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::less_than__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("any_a::less_than_ passed short range");
@@ -327,10 +327,10 @@ inline bool any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___
 { return bool{ ___value___.less_than_(thing) }; }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::greater_than__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::greater_than__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("any_a::greater_than_ passed short range");
@@ -353,10 +353,10 @@ inline bool any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___
 { return bool{ ___value___.greater_than_(thing) }; }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::less_or_equal__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::less_or_equal__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("any_a::less_or_equal_ passed short range");
@@ -379,10 +379,10 @@ inline bool any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___
 { return bool{ ___value___.less_or_equal_(thing) }; }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::greater_or_equal__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::greater_or_equal__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("any_a::greater_or_equal_ passed short range");
@@ -405,7 +405,7 @@ inline bool any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___
 { return bool{ ___value___.greater_or_equal_(thing) }; }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::hash__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::hash__(list_a<> const& ___arguments___) const
 {
 	return hash_();
 }
@@ -438,7 +438,7 @@ inline bool any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___
 { return ___value___.is(s); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::to_parcel__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::to_parcel__(list_a<> const& ___arguments___) const
 {
 	return to_parcel_();
 }
@@ -453,10 +453,10 @@ inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_han
 { return ___value___.to_parcel_(); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::to_parcel_unique__(range_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::to_parcel_unique__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("any_a::to_parcel_unique_ passed short range");

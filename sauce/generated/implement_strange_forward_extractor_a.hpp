@@ -3,7 +3,7 @@ namespace strange
 {
 
 template <typename _element>
-inline any_a<> forward_extractor_a<_element>::get__(range_a<> const& ___arguments___) const
+inline any_a<> forward_extractor_a<_element>::get__(list_a<> const& ___arguments___) const
 {
 	return get_();
 }
@@ -36,7 +36,7 @@ inline _element const * forward_extractor_a<_element>::___forward_extractor_a_ha
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator->(); }
 
 template <typename _element>
-inline any_a<> forward_extractor_a<_element>::increment__(range_a<> const& ___arguments___)
+inline any_a<> forward_extractor_a<_element>::increment__(list_a<> const& ___arguments___)
 {
 	return increment_();
 }
@@ -74,7 +74,7 @@ inline void forward_extractor_a<_element>::___forward_extractor_a_handle___<___T
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.increment_(); }
 
 template <typename _element>
-inline any_a<> forward_extractor_a<_element>::to_extractor_any__(range_a<> const& ___arguments___) const
+inline any_a<> forward_extractor_a<_element>::to_extractor_any__(list_a<> const& ___arguments___) const
 {
 	return to_extractor_any_();
 }

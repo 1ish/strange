@@ -10,7 +10,7 @@ class expression_literal_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
 		return expression_t<___ego___>::template create_expression<expression_literal_t<___ego___>>(list);
 	}
@@ -31,10 +31,10 @@ public:
 	}
 
 	// validation
-	static inline any_a<> validate__(range_a<> const& list)
+	static inline any_a<> validate__(list_a<> const& list)
 	{
-		auto it = list.extract_begin_();
-		if (it == list.extract_end_())
+		auto it = list.begin_();
+		if (it == list.end_())
 		{
 			throw dis("strange::expression_literal::validate passed empty list");
 		}
@@ -79,7 +79,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>&, range_a<> const&) const
+	inline any_a<> operate(any_a<>&, list_a<> const&) const
 	{
 		return _thing;
 	}
@@ -93,7 +93,7 @@ public:
 	inline any_a<> evaluate_() const
 	{
 		any_a<> null;
-		return operate(null, range_a<>{});
+		return operate(null, list_a<>{});
 	}
 
 	inline flock_a<> terms_() const

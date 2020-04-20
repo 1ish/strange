@@ -3,7 +3,7 @@ namespace strange
 {
 
 template <typename _1>
-inline any_a<> operation_a<_1>::pure__(range_a<> const& ___arguments___) const
+inline any_a<> operation_a<_1>::pure__(list_a<> const& ___arguments___) const
 {
 	return pure_();
 }
@@ -45,7 +45,7 @@ inline void operation_a<_1>::___operation_a_handle___<___TTT___, ___DHB___>::ass
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.assign(operation); }
 
 template <typename _1>
-inline any_a<> operation_a<_1>::names__(range_a<> const& ___arguments___) const
+inline any_a<> operation_a<_1>::names__(list_a<> const& ___arguments___) const
 {
 	return names_();
 }

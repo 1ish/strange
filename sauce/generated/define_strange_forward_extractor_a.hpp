@@ -12,7 +12,7 @@ template <typename _element>
 class forward_extractor_a : public any_a<>
 {
 public:
-	inline any_a<> get__(range_a<> const& ___arguments___) const;
+	inline any_a<> get__(list_a<> const& ___arguments___) const;
 
 	inline _element get_() const;
 
@@ -20,7 +20,7 @@ public:
 
 	inline _element const * operator->() const;
 
-	inline any_a<> increment__(range_a<> const& ___arguments___);
+	inline any_a<> increment__(list_a<> const& ___arguments___);
 
 	inline forward_extractor_a increment_();
 
@@ -30,7 +30,7 @@ public:
 	inline forward_extractor_a operator++(int);
 #endif
 
-	inline any_a<> to_extractor_any__(range_a<> const& ___arguments___) const;
+	inline any_a<> to_extractor_any__(list_a<> const& ___arguments___) const;
 
 	inline forward_extractor_a< any_a<> > to_extractor_any_() const;
 
@@ -280,7 +280,7 @@ template <typename _element>
 class forward_extractor_d : public any_a<>
 {
 public:
-	inline any_a<> get__(range_a<> const& arguments) const
+	inline any_a<> get__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("get_");
@@ -308,7 +308,7 @@ public:
 	inline _element const * operator->() const
 	{ throw dis("dynamic forward_extractor_d::operator->() not available"); }
 
-	inline any_a<> increment__(range_a<> const& arguments)
+	inline any_a<> increment__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("increment_");
@@ -330,7 +330,7 @@ public:
 		return cast<forward_extractor_a< _element >>(variadic_operate(op, *this));
 	}
 
-	inline any_a<> to_extractor_any__(range_a<> const& arguments) const
+	inline any_a<> to_extractor_any__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("to_extractor_any_");

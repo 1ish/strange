@@ -3,7 +3,7 @@ namespace strange
 {
 
 template <typename _1>
-inline any_a<> cat_a<_1>::symbolic__(range_a<> const& ___arguments___) const
+inline any_a<> cat_a<_1>::symbolic__(list_a<> const& ___arguments___) const
 {
 	return symbolic_();
 }
@@ -27,7 +27,7 @@ inline bool cat_a<_1>::___cat_a_handle___<___TTT___, ___DHB___>::symbolic() cons
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.symbolic(); }
 
 template <typename _1>
-inline any_a<> cat_a<_1>::order__(range_a<> const& ___arguments___) const
+inline any_a<> cat_a<_1>::order__(list_a<> const& ___arguments___) const
 {
 	return order_();
 }
@@ -51,7 +51,7 @@ inline int64_t cat_a<_1>::___cat_a_handle___<___TTT___, ___DHB___>::order() cons
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.order(); }
 
 template <typename _1>
-inline any_a<> cat_a<_1>::name__(range_a<> const& ___arguments___) const
+inline any_a<> cat_a<_1>::name__(list_a<> const& ___arguments___) const
 {
 	return name_();
 }
@@ -75,7 +75,7 @@ inline std_string cat_a<_1>::___cat_a_handle___<___TTT___, ___DHB___>::name() co
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.name(); }
 
 template <typename _1>
-inline any_a<> cat_a<_1>::dimensions__(range_a<> const& ___arguments___) const
+inline any_a<> cat_a<_1>::dimensions__(list_a<> const& ___arguments___) const
 {
 	return dimensions_();
 }
@@ -90,7 +90,7 @@ inline flock_a<> cat_a<_1>::___cat_a_handle___<___TTT___, ___DHB___>::dimensions
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.dimensions_(); }
 
 template <typename _1>
-inline any_a<> cat_a<_1>::parameters__(range_a<> const& ___arguments___) const
+inline any_a<> cat_a<_1>::parameters__(list_a<> const& ___arguments___) const
 {
 	return parameters_();
 }
@@ -105,7 +105,7 @@ inline flock_a<> cat_a<_1>::___cat_a_handle___<___TTT___, ___DHB___>::parameters
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.parameters_(); }
 
 template <typename _1>
-inline any_a<> cat_a<_1>::result__(range_a<> const& ___arguments___) const
+inline any_a<> cat_a<_1>::result__(list_a<> const& ___arguments___) const
 {
 	return result_();
 }
@@ -120,7 +120,7 @@ inline cat_a<> cat_a<_1>::___cat_a_handle___<___TTT___, ___DHB___>::result_() co
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.result_(); }
 
 template <typename _1>
-inline any_a<> cat_a<_1>::code__(range_a<> const& ___arguments___) const
+inline any_a<> cat_a<_1>::code__(list_a<> const& ___arguments___) const
 {
 	return code_();
 }

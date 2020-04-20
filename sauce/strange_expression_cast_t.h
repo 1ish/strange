@@ -9,7 +9,7 @@ class expression_cast_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
 		return expression_t<___ego___>::template create_expression<expression_cast_t<___ego___>>(list);
 	}
@@ -61,7 +61,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
+	inline any_a<> operate(any_a<>& thing, list_a<> const& list) const
 	{
 		auto const evaluated = _thing.operate(thing, list);
 		auto const abstraction = _abstraction.operate(thing, list);

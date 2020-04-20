@@ -3,7 +3,7 @@ namespace strange
 {
 
 template <typename _1>
-inline any_a<> token_a<_1>::filename__(range_a<> const& ___arguments___) const
+inline any_a<> token_a<_1>::filename__(list_a<> const& ___arguments___) const
 {
 	return filename_();
 }
@@ -27,7 +27,7 @@ inline std_string token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::filen
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.filename(); }
 
 template <typename _1>
-inline any_a<> token_a<_1>::line__(range_a<> const& ___arguments___) const
+inline any_a<> token_a<_1>::line__(list_a<> const& ___arguments___) const
 {
 	return line_();
 }
@@ -51,7 +51,7 @@ inline int64_t token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::line() c
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.line(); }
 
 template <typename _1>
-inline any_a<> token_a<_1>::position__(range_a<> const& ___arguments___) const
+inline any_a<> token_a<_1>::position__(list_a<> const& ___arguments___) const
 {
 	return position_();
 }
@@ -75,7 +75,7 @@ inline int64_t token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::position
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.position(); }
 
 template <typename _1>
-inline any_a<> token_a<_1>::tag__(range_a<> const& ___arguments___) const
+inline any_a<> token_a<_1>::tag__(list_a<> const& ___arguments___) const
 {
 	return tag_();
 }
@@ -99,7 +99,7 @@ inline std_string token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::tag()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.tag(); }
 
 template <typename _1>
-inline any_a<> token_a<_1>::symbol__(range_a<> const& ___arguments___) const
+inline any_a<> token_a<_1>::symbol__(list_a<> const& ___arguments___) const
 {
 	return symbol_();
 }
@@ -123,7 +123,7 @@ inline std_string token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::symbo
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.symbol(); }
 
 template <typename _1>
-inline any_a<> token_a<_1>::literal__(range_a<> const& ___arguments___) const
+inline any_a<> token_a<_1>::literal__(list_a<> const& ___arguments___) const
 {
 	return literal_();
 }
@@ -147,7 +147,7 @@ inline bool token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::literal() c
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.literal(); }
 
 template <typename _1>
-inline any_a<> token_a<_1>::precedence__(range_a<> const& ___arguments___) const
+inline any_a<> token_a<_1>::precedence__(list_a<> const& ___arguments___) const
 {
 	return precedence_();
 }
@@ -171,7 +171,7 @@ inline int64_t token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::preceden
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.precedence(); }
 
 template <typename _1>
-inline any_a<> token_a<_1>::report__(range_a<> const& ___arguments___) const
+inline any_a<> token_a<_1>::report__(list_a<> const& ___arguments___) const
 {
 	return report_();
 }

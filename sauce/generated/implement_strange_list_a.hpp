@@ -3,7 +3,7 @@ namespace strange
 {
 
 template <typename _1>
-inline any_a<> list_a<_1>::begin__(range_a<> const& ___arguments___) const
+inline any_a<> list_a<_1>::begin__(list_a<> const& ___arguments___) const
 {
 	return begin_();
 }
@@ -18,7 +18,7 @@ inline forward_extractor_a< any_a<> > list_a<_1>::___list_a_handle___<___TTT___,
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.begin_(); }
 
 template <typename _1>
-inline any_a<> list_a<_1>::end__(range_a<> const& ___arguments___) const
+inline any_a<> list_a<_1>::end__(list_a<> const& ___arguments___) const
 {
 	return end_();
 }

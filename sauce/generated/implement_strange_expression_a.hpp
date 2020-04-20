@@ -3,7 +3,7 @@ namespace strange
 {
 
 template <typename _1>
-inline any_a<> expression_a<_1>::recreate__(range_a<> const& ___arguments___) const
+inline any_a<> expression_a<_1>::recreate__(list_a<> const& ___arguments___) const
 {
 	return recreate_();
 }
@@ -18,7 +18,7 @@ inline expression_a<> expression_a<_1>::___expression_a_handle___<___TTT___, ___
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.recreate_(); }
 
 template <typename _1>
-inline any_a<> expression_a<_1>::literal__(range_a<> const& ___arguments___) const
+inline any_a<> expression_a<_1>::literal__(list_a<> const& ___arguments___) const
 {
 	return literal_();
 }
@@ -42,7 +42,7 @@ inline bool expression_a<_1>::___expression_a_handle___<___TTT___, ___DHB___>::l
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.literal(); }
 
 template <typename _1>
-inline any_a<> expression_a<_1>::evaluate__(range_a<> const& ___arguments___) const
+inline any_a<> expression_a<_1>::evaluate__(list_a<> const& ___arguments___) const
 {
 	return evaluate_();
 }
@@ -57,7 +57,7 @@ inline any_a<> expression_a<_1>::___expression_a_handle___<___TTT___, ___DHB___>
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.evaluate_(); }
 
 template <typename _1>
-inline any_a<> expression_a<_1>::token__(range_a<> const& ___arguments___) const
+inline any_a<> expression_a<_1>::token__(list_a<> const& ___arguments___) const
 {
 	return token_();
 }
@@ -72,7 +72,7 @@ inline token_a<> expression_a<_1>::___expression_a_handle___<___TTT___, ___DHB__
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.token_(); }
 
 template <typename _1>
-inline any_a<> expression_a<_1>::terms__(range_a<> const& ___arguments___) const
+inline any_a<> expression_a<_1>::terms__(list_a<> const& ___arguments___) const
 {
 	return terms_();
 }
@@ -87,10 +87,10 @@ inline flock_a<> expression_a<_1>::___expression_a_handle___<___TTT___, ___DHB__
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.terms_(); }
 
 template <typename _1>
-inline any_a<> expression_a<_1>::generate__(range_a<> const& ___arguments___) const
+inline any_a<> expression_a<_1>::generate__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("expression_a::generate_ passed short range");
@@ -128,10 +128,10 @@ inline void expression_a<_1>::___expression_a_handle___<___TTT___, ___DHB___>::g
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.generate(version, indent, river); }
 
 template <typename _1>
-inline any_a<> expression_a<_1>::generate_cpp__(range_a<> const& ___arguments___) const
+inline any_a<> expression_a<_1>::generate_cpp__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("expression_a::generate_cpp_ passed short range");

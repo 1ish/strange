@@ -3,10 +3,10 @@ namespace strange
 {
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::unwrap__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::unwrap__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("parcel_a::unwrap_ passed short range");
@@ -25,10 +25,10 @@ inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unwrap
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unwrap_(shared_shoal); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::unwrap_unique__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::unwrap_unique__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("parcel_a::unwrap_unique_ passed short range");
@@ -79,7 +79,7 @@ inline bool parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::operator!
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(parcel); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::keys_begin__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::keys_begin__(list_a<> const& ___arguments___) const
 {
 	return keys_begin_();
 }
@@ -94,7 +94,7 @@ inline bidirectional_extractor_a< any_a<> > parcel_a<_1>::___parcel_a_handle___<
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.keys_begin_(); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::keys_end__(range_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::keys_end__(list_a<> const& ___arguments___) const
 {
 	return keys_end_();
 }

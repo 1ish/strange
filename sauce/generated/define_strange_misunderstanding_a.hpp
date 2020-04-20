@@ -12,13 +12,13 @@ template <typename _lake_int8>
 class misunderstanding_a : public any_a<>
 {
 public:
-	inline any_a<> to_lake__(range_a<> const& ___arguments___) const;
+	inline any_a<> to_lake__(list_a<> const& ___arguments___) const;
 
 	inline _lake_int8 to_lake_() const;
 
 	inline std_string to_string() const;
 
-	inline any_a<> add__(range_a<> const& ___arguments___) const;
+	inline any_a<> add__(list_a<> const& ___arguments___) const;
 
 	inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const;
 
@@ -264,7 +264,7 @@ template <typename _lake_int8>
 class misunderstanding_d : public any_a<>
 {
 public:
-	inline any_a<> to_lake__(range_a<> const& arguments) const
+	inline any_a<> to_lake__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("to_lake_");
@@ -289,7 +289,7 @@ public:
 	inline std_string to_string() const
 	{ return lake_to_string(to_lake_()); }
 
-	inline any_a<> add__(range_a<> const& arguments) const
+	inline any_a<> add__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("add_");

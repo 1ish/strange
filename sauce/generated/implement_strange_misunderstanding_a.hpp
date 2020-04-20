@@ -3,7 +3,7 @@ namespace strange
 {
 
 template <typename _lake_int8>
-inline any_a<> misunderstanding_a<_lake_int8>::to_lake__(range_a<> const& ___arguments___) const
+inline any_a<> misunderstanding_a<_lake_int8>::to_lake__(list_a<> const& ___arguments___) const
 {
 	return to_lake_();
 }
@@ -27,10 +27,10 @@ inline std_string misunderstanding_a<_lake_int8>::___misunderstanding_a_handle__
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
 
 template <typename _lake_int8>
-inline any_a<> misunderstanding_a<_lake_int8>::add__(range_a<> const& ___arguments___) const
+inline any_a<> misunderstanding_a<_lake_int8>::add__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("misunderstanding_a::add_ passed short range");

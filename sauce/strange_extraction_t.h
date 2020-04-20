@@ -25,7 +25,7 @@ public:
 	{}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
+	inline any_a<> operate(any_a<>& thing, list_a<> const& list) const
 	{
 		auto local_shoal = check<unordered_shoal_a<>>(_aspects)
 			? fast<unordered_shoal_a<>>(_aspects)
@@ -33,8 +33,8 @@ public:
 		auto& local = local_shoal.mutate_map();
 		local.emplace(sym("$"), _shared);
 		local.emplace(sym("^"), thing);
-		auto abegin = list.extract_begin_();
-		auto aend = list.extract_end_();
+		auto abegin = list.begin_();
+		auto aend = list.end_();
 		auto ait = abegin;
 		auto nit = operation_t<___ego___>::_names.extract_vector().cbegin();
 		auto kit = _kinds.extract_vector().cbegin();

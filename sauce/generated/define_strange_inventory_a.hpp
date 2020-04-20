@@ -22,11 +22,11 @@ public:
 
 	inline bool erase_index(int64_t index );
 
-	inline any_a<> mutate_begin__(range_a<> const& ___arguments___);
+	inline any_a<> mutate_begin__(list_a<> const& ___arguments___);
 
 	inline random_access_mutator_a< _element > mutate_begin_();
 
-	inline any_a<> mutate_end__(range_a<> const& ___arguments___);
+	inline any_a<> mutate_end__(list_a<> const& ___arguments___);
 
 	inline random_access_mutator_a< _element > mutate_end_();
 
@@ -297,7 +297,7 @@ public:
 	inline bool erase_index(int64_t index )
 	{ return collection_d<number_data_int64_a<>, _element , _element>::erase_(num(index)); }
 
-	inline any_a<> mutate_begin__(range_a<> const& arguments)
+	inline any_a<> mutate_begin__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("mutate_begin_");
@@ -319,7 +319,7 @@ public:
 		return cast<random_access_mutator_a< _element >>(variadic_operate(op, *this));
 	}
 
-	inline any_a<> mutate_end__(range_a<> const& arguments)
+	inline any_a<> mutate_end__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("mutate_end_");

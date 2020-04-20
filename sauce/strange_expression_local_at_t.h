@@ -10,7 +10,7 @@ class expression_local_at_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
 		return expression_t<___ego___>::template create_expression<expression_local_at_t<___ego___>>(list);
 	}
@@ -43,7 +43,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const&) const
+	inline any_a<> operate(any_a<>& thing, list_a<> const&) const
 	{
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))

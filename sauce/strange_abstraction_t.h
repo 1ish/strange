@@ -9,7 +9,7 @@ class abstraction_t : public operation_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
 		auto it = list.begin_();
 		auto end = list.end_();
@@ -88,7 +88,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>&, range_a<> const& list) const
+	inline any_a<> operate(any_a<>&, list_a<> const& list) const
 	{
 		//TODO cache range -> child
 		auto aspects_shoal = unordered_shoal_t<>::create_();

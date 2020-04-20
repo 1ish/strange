@@ -12,7 +12,7 @@ template <typename _1>
 class parser_a : public any_a<>
 {
 public:
-	inline any_a<> parse__(range_a<> const& ___arguments___);
+	inline any_a<> parse__(list_a<> const& ___arguments___);
 
 	inline expression_a<> parse_(range_a<strange::any_a<>> const& tokenizer);
 
@@ -250,7 +250,7 @@ template <typename _1>
 class parser_d : public any_a<>
 {
 public:
-	inline any_a<> parse__(range_a<> const& arguments)
+	inline any_a<> parse__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("parse_");

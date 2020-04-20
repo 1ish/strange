@@ -387,7 +387,7 @@ public:
 	using std_vector_primitive = std_vector<_primitive_>;
 
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
 		auto result = create_();
 		if (check<range_a<number_data_a<_primitive_>>>(list))

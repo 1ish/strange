@@ -12,11 +12,11 @@ template <typename _element>
 class forward_mutator_a : public any_a<>
 {
 public:
-	inline any_a<> get__(range_a<> const& ___arguments___) const;
+	inline any_a<> get__(list_a<> const& ___arguments___) const;
 
 	inline _element get_() const;
 
-	inline any_a<> set__(range_a<> const& ___arguments___) const;
+	inline any_a<> set__(list_a<> const& ___arguments___) const;
 
 	inline _element set_(_element const& thing) const;
 
@@ -24,7 +24,7 @@ public:
 
 	inline _element * operator->() const;
 
-	inline any_a<> increment__(range_a<> const& ___arguments___);
+	inline any_a<> increment__(list_a<> const& ___arguments___);
 
 	inline forward_mutator_a increment_();
 
@@ -280,7 +280,7 @@ template <typename _element>
 class forward_mutator_d : public any_a<>
 {
 public:
-	inline any_a<> get__(range_a<> const& arguments) const
+	inline any_a<> get__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("get_");
@@ -302,7 +302,7 @@ public:
 		return cast<_element>(variadic_operate(op, *const_cast<forward_mutator_d*>(this)));
 	}
 
-	inline any_a<> set__(range_a<> const& arguments) const
+	inline any_a<> set__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("set_");
@@ -330,7 +330,7 @@ public:
 	inline _element * operator->() const
 	{ throw dis("dynamic forward_mutator_d::operator->() not available"); }
 
-	inline any_a<> increment__(range_a<> const& arguments)
+	inline any_a<> increment__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("increment_");

@@ -10,10 +10,10 @@ class any_c : public one_t
 {
 public:
 	// construction
-	static inline any_a<> animate__(range_a<> const& list)
+	static inline any_a<> animate__(list_a<> const& list)
 	{
-		auto it = list.extract_begin_();
-		if (it == list.extract_end_())
+		auto it = list.begin_();
+		if (it == list.end_())
 		{
 			throw dis("<strange::any>::animate passed empty list");
 		}
@@ -42,7 +42,7 @@ public:
 	}
 
 	// reflection
-	inline any_a<> type__(range_a<> const& list) const
+	inline any_a<> type__(list_a<> const& list) const
 	{
 		auto const op = _operations.at_(sym("type"));
 		if (op)
@@ -71,7 +71,7 @@ public:
 		return TYPE;
 	}
 
-	inline any_a<> shared__(range_a<> const& list) const
+	inline any_a<> shared__(list_a<> const& list) const
 	{
 		auto const op = _operations.at_(sym("shared"));
 		if (op)
@@ -107,7 +107,7 @@ public:
 		shoal.update(sym("<strange::any>::animate"), native_function_create(&any_c<>::animate__));
 	}
 
-	inline any_a<> cat__(range_a<> const& list) const
+	inline any_a<> cat__(list_a<> const& list) const
 	{
 		auto const op = _operations.at_(sym("cat"));
 		if (op)
@@ -134,7 +134,7 @@ public:
 		return ___ego___::___cat___();
 	}
 
-	inline any_a<> cats__(range_a<> const& list) const
+	inline any_a<> cats__(list_a<> const& list) const
 	{
 		auto const op = _operations.at_(sym("cats"));
 		if (op)
@@ -161,7 +161,7 @@ public:
 		return ___ego___::___cats___();
 	}
 
-	inline any_a<> kind__(range_a<> const& list) const
+	inline any_a<> kind__(list_a<> const& list) const
 	{
 		auto const op = _operations.at_(sym("kind"));
 		if (op)
@@ -188,7 +188,7 @@ public:
 		return ___ego___::___kind___();
 	}
 
-	inline any_a<> kinds__(range_a<> const& list) const
+	inline any_a<> kinds__(list_a<> const& list) const
 	{
 		auto const op = _operations.at_(sym("kinds"));
 		if (op)
@@ -215,7 +215,7 @@ public:
 		return ___ego___::___kinds___();
 	}
 
-	inline any_a<> operations__(range_a<> const& list) const // cannot be overridden
+	inline any_a<> operations__(list_a<> const& list) const // cannot be overridden
 	{
 		return _operations;
 	}
@@ -226,7 +226,7 @@ public:
 	}
 
 	// visitor pattern
-	inline any_a<> visit__(range_a<> const& list) const
+	inline any_a<> visit__(list_a<> const& list) const
 	{
 		auto const op = _operations.at_(sym("visit"));
 		if (op)
@@ -243,16 +243,20 @@ public:
 	}
 
 	// function
-	inline any_a<> invoke(any_a<>& thing, range_a<> const& list) const
+	inline any_a<> invoke(any_a<>& thing, list_a<> const& list) const
 	{
 		auto const op = _operations.at_(sym("invoke"));
 		if (op)
 		{
-			any_a<> thing = me_();
-			op.operate(thing, flock_t<>::create_(thing) += list);
+			auto flock = flock_t<>::create_(me_());
+			for (auto const& thing : list)
+			{
+				flock.push_back(thing);
+			}
+			op.operate(thing, flock);
 		}
-		auto it = list.extract_begin_();
-		if (it == list.extract_end_())
+		auto it = list.begin_();
+		if (it == list.end_())
 		{
 			throw dis("<strange::any>::invoke passed short list");
 		}
@@ -261,28 +265,32 @@ public:
 		{
 			throw dis("<strange::any>::invoke passed non-existent member");
 		}
-		return thing.operations_().at_(member).operate(thing, range_t<>::create_(++it, list.extract_end_()));
+		return thing.operations_().at_(member).operate(thing, range_t<>::create_(++it, list.end_()));
 	}
 
-	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
+	inline any_a<> operate(any_a<>& thing, list_a<> const& list) const
 	{
 		auto const op = _operations.at_(sym("operate"));
 		if (op)
 		{
-			any_a<> thing = me_();
-			op.operate(thing, flock_t<>::create_(thing) += list);
+			auto flock = flock_t<>::create_(me_());
+			for (auto const& thing : list)
+			{
+				flock.push_back(thing);
+			}
+			op.operate(thing, flock);
 		}
-		auto it = list.extract_begin_();
-		if (it == list.extract_end_())
+		auto it = list.begin_();
+		if (it == list.end_())
 		{
 			throw dis("<strange::any>::operate passed short list");
 		}
 		any_a<> operation = *it;
-		return operation.operate(thing, range_t<>::create_(++it, list.extract_end_()));
+		return operation.operate(thing, range_t<>::create_(++it, list.end_()));
 	}
 
 	// identification
-	inline any_a<> identity__(range_a<> const&) const // cannot be overridden
+	inline any_a<> identity__(list_a<> const&) const // cannot be overridden
 	{
 		return identity_();
 	}
@@ -292,10 +300,10 @@ public:
 		return number_uint_64_t<>::create(uint64_t(identity()));
 	}
 
-	inline any_a<> identical__(range_a<> const& list) const // cannot be overridden
+	inline any_a<> identical__(list_a<> const& list) const // cannot be overridden
 	{
-		auto it = list.extract_begin_();
-		if (it == list.extract_end_())
+		auto it = list.begin_();
+		if (it == list.end_())
 		{
 			throw dis("<strange::any>::identical passed empty list");
 		}
@@ -308,7 +316,7 @@ public:
 	}
 
 	// comparison
-	inline any_a<> nothing__(range_a<> const&) const // cannot be overridden
+	inline any_a<> nothing__(list_a<> const&) const // cannot be overridden
 	{
 		return nothing_();
 	}
@@ -318,7 +326,7 @@ public:
 		return no();
 	}
 
-	inline any_a<> something__(range_a<> const&) const // cannot be overridden
+	inline any_a<> something__(list_a<> const&) const // cannot be overridden
 	{
 		return something_();
 	}
@@ -328,7 +336,7 @@ public:
 		return yes();
 	}
 
-	inline any_a<> same__(range_a<> const& list) const
+	inline any_a<> same__(list_a<> const& list) const
 	{
 		auto const op = _operations.at_(sym("same"));
 		if (op)
@@ -336,8 +344,8 @@ public:
 			any_a<> thing = me_();
 			return op.operate(thing, list);
 		}
-		auto it = list.extract_begin_();
-		if (it == list.extract_end_())
+		auto it = list.begin_();
+		if (it == list.end_())
 		{
 			throw dis("<strange::any>::same passed empty list");
 		}
@@ -355,10 +363,10 @@ public:
 		return identical_(thing);
 	}
 
-	inline any_a<> different__(range_a<> const& list) const // cannot be overridden
+	inline any_a<> different__(list_a<> const& list) const // cannot be overridden
 	{
-		auto it = list.extract_begin_();
-		if (it == list.extract_end_())
+		auto it = list.begin_();
+		if (it == list.end_())
 		{
 			throw dis("<strange::any>::different passed empty list");
 		}
@@ -370,7 +378,7 @@ public:
 		return !same_(thing);
 	}
 
-	inline any_a<> hash__(range_a<> const& list) const
+	inline any_a<> hash__(list_a<> const& list) const
 	{
 		auto const op = _operations.at_(sym("hash"));
 		if (op)
@@ -414,34 +422,34 @@ public:
 	}
 
 	// creature
-	static inline any_a<> intimate__(range_a<> const& list)
+	static inline any_a<> intimate__(list_a<> const& list)
 	{
-		auto it = list.extract_begin_();
-		if (it == list.extract_end_())
+		auto it = list.begin_();
+		if (it == list.end_())
 		{
 			throw dis("<strange::any>::intimate passed empty list");
 		}
 		any_a<> thing = fast_dup(*it);
-		if (++it == list.extract_end_())
+		if (++it == list.end_())
 		{
 			throw dis("<strange::any>::intimate passed short list");
 		}
 		any_a<> member = *it;
-		return intimate(thing, member, range_t<>::create_(++it, list.extract_end_()));
+		return intimate(thing, member, range_t<>::create_(++it, list.end_()));
 	}
 
-	static inline any_a<> intimate_(any_a<>& thing, range_a<> const& list)
+	static inline any_a<> intimate_(any_a<>& thing, list_a<> const& list)
 	{
-		auto it = list.extract_begin_();
-		if (it == list.extract_end_())
+		auto it = list.begin_();
+		if (it == list.end_())
 		{
 			throw dis("<strange::any>::intimate passed short list");
 		}
 		any_a<> member = *it;
-		return intimate(thing, member, range_t<>::create_(++it, list.extract_end_()));
+		return intimate(thing, member, range_t<>::create_(++it, list.end_()));
 	}
 
-	static inline any_a<> intimate(any_a<>& thing, any_a<> const& member, range_a<> const& list)
+	static inline any_a<> intimate(any_a<>& thing, any_a<> const& member, list_a<> const& list)
 	{
 		auto const& conception = static_cast<any_c<> const&>(thing.extract_thing())._conception;
 		if (!conception.has_(member))

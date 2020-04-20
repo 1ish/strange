@@ -3,10 +3,10 @@ namespace strange
 {
 
 template <typename _element>
-inline any_a<> random_access_mutator_a<_element>::self_add__(range_a<> const& ___arguments___)
+inline any_a<> random_access_mutator_a<_element>::self_add__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("random_access_mutator_a::self_add_ passed short range");
@@ -37,10 +37,10 @@ inline void random_access_mutator_a<_element>::___random_access_mutator_a_handle
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(number); }
 
 template <typename _element>
-inline any_a<> random_access_mutator_a<_element>::add__(range_a<> const& ___arguments___) const
+inline any_a<> random_access_mutator_a<_element>::add__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("random_access_mutator_a::add_ passed short range");
@@ -63,10 +63,10 @@ inline random_access_mutator_a< _element > random_access_mutator_a<_element>::__
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(number); }
 
 template <typename _element>
-inline any_a<> random_access_mutator_a<_element>::self_subtract__(range_a<> const& ___arguments___)
+inline any_a<> random_access_mutator_a<_element>::self_subtract__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("random_access_mutator_a::self_subtract_ passed short range");
@@ -97,10 +97,10 @@ inline void random_access_mutator_a<_element>::___random_access_mutator_a_handle
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(number); }
 
 template <typename _element>
-inline any_a<> random_access_mutator_a<_element>::subtract__(range_a<> const& ___arguments___) const
+inline any_a<> random_access_mutator_a<_element>::subtract__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("random_access_mutator_a::subtract_ passed short range");

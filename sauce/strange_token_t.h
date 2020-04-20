@@ -11,10 +11,10 @@ class token_t : public thing_t<___ego___>
 
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
-		auto it = list.extract_begin_();
-		auto end = list.extract_end_();
+		auto it = list.begin_();
+		auto end = list.end_();
 		if (it == end)
 		{
 			throw dis("strange::token::create passed empty list");
@@ -92,10 +92,10 @@ public:
 		return token_a<>::create<token_t<>>(filename, line, position, tag, symbol, literal, precedence);
 	}
 
-	static inline token_a<> create(std_string const& tag, range_a<> const& list, create_member member)
+	static inline token_a<> create(std_string const& tag, list_a<> const& list, create_member member)
 	{
-		auto it = list.extract_begin_();
-		auto end = list.extract_end_();
+		auto it = list.begin_();
+		auto end = list.end_();
 		if (it == end)
 		{
 			throw dis("strange::token::create_" + tag + " passed empty list");
@@ -144,7 +144,7 @@ public:
 		return member(fast<symbol_a<>>(filename), fast<number_data_a<int64_t>>(line), fast<number_data_a<int64_t>>(position), fast<symbol_a<>>(symbol), fast<number_data_a<int64_t>>(precedence));
 	}
 
-	static inline any_a<> create_symbol__(range_a<> const& list)
+	static inline any_a<> create_symbol__(list_a<> const& list)
 	{
 		return create("symbol", list, &create_symbol_);
 	}
@@ -159,7 +159,7 @@ public:
 		return create_symbol_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol));
 	}
 
-	static inline any_a<> create_lake__(range_a<> const& list)
+	static inline any_a<> create_lake__(list_a<> const& list)
 	{
 		return create("lake", list, &create_lake_);
 	}
@@ -174,7 +174,7 @@ public:
 		return create_lake_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol));
 	}
 
-	static inline any_a<> create_int__(range_a<> const& list)
+	static inline any_a<> create_int__(list_a<> const& list)
 	{
 		return create("int", list, &create_int_);
 	}
@@ -189,7 +189,7 @@ public:
 		return create_int_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol));
 	}
 
-	static inline any_a<> create_float__(range_a<> const& list)
+	static inline any_a<> create_float__(list_a<> const& list)
 	{
 		return create("float", list, &create_float_);
 	}
@@ -204,7 +204,7 @@ public:
 		return create_float_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol));
 	}
 
-	static inline any_a<> create_name__(range_a<> const& list)
+	static inline any_a<> create_name__(list_a<> const& list)
 	{
 		return create("name", list, &create_name_);
 	}
@@ -219,7 +219,7 @@ public:
 		return create_name_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol));
 	}
 
-	static inline any_a<> create_punctuation__(range_a<> const& list)
+	static inline any_a<> create_punctuation__(list_a<> const& list)
 	{
 		return create("punctuation", list, &create_punctuation_);
 	}
@@ -239,7 +239,7 @@ public:
 		return create_punctuation_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol), number_int_64_t<>::create(precedence));
 	}
 
-	static inline any_a<> create_error__(range_a<> const& list)
+	static inline any_a<> create_error__(list_a<> const& list)
 	{
 		return create("error", list, &create_error_);
 	}

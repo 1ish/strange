@@ -12,35 +12,35 @@ template <typename _1>
 class expression_a : public operation_a<>
 {
 public:
-	inline any_a<> recreate__(range_a<> const& ___arguments___) const;
+	inline any_a<> recreate__(list_a<> const& ___arguments___) const;
 
 	inline expression_a<> recreate_() const;
 
-	inline any_a<> literal__(range_a<> const& ___arguments___) const;
+	inline any_a<> literal__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> literal_() const;
 
 	inline bool literal() const;
 
-	inline any_a<> evaluate__(range_a<> const& ___arguments___) const;
+	inline any_a<> evaluate__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> evaluate_() const;
 
-	inline any_a<> token__(range_a<> const& ___arguments___) const;
+	inline any_a<> token__(list_a<> const& ___arguments___) const;
 
 	inline token_a<> token_() const;
 
-	inline any_a<> terms__(range_a<> const& ___arguments___) const;
+	inline any_a<> terms__(list_a<> const& ___arguments___) const;
 
 	inline flock_a<> terms_() const;
 
-	inline any_a<> generate__(range_a<> const& ___arguments___) const;
+	inline any_a<> generate__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> generate_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river) const;
 
 	inline void generate(int64_t version , int64_t indent , river_a < > & river ) const;
 
-	inline any_a<> generate_cpp__(range_a<> const& ___arguments___) const;
+	inline any_a<> generate_cpp__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> generate_cpp_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = strange::no() ) const;
 
@@ -307,7 +307,7 @@ template <typename _1>
 class expression_d : public operation_d<>
 {
 public:
-	inline any_a<> recreate__(range_a<> const& arguments) const
+	inline any_a<> recreate__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("recreate_");
@@ -329,7 +329,7 @@ public:
 		return cast<expression_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
 
-	inline any_a<> literal__(range_a<> const& arguments) const
+	inline any_a<> literal__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("literal_");
@@ -354,7 +354,7 @@ public:
 	inline bool literal() const
 	{ return literal_(); }
 
-	inline any_a<> evaluate__(range_a<> const& arguments) const
+	inline any_a<> evaluate__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("evaluate_");
@@ -376,7 +376,7 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
 
-	inline any_a<> token__(range_a<> const& arguments) const
+	inline any_a<> token__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("token_");
@@ -398,7 +398,7 @@ public:
 		return cast<token_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
 
-	inline any_a<> terms__(range_a<> const& arguments) const
+	inline any_a<> terms__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("terms_");
@@ -420,7 +420,7 @@ public:
 		return cast<flock_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
 
-	inline any_a<> generate__(range_a<> const& arguments) const
+	inline any_a<> generate__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("generate_");
@@ -445,7 +445,7 @@ public:
 	inline void generate(int64_t version , int64_t indent , river_a < > & river ) const
 	{ generate_(num(version), num(indent), river); }
 
-	inline any_a<> generate_cpp__(range_a<> const& arguments) const
+	inline any_a<> generate_cpp__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("generate_cpp_");

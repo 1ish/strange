@@ -232,7 +232,7 @@ public:
 	using std_map_key_value = std_map<_key, _value>;
 
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
 		auto result = create_();
 		if (check<range_a<flock_a<>>>(list))

@@ -12,23 +12,23 @@ template <typename _1>
 class kind_a : public cat_a<>
 {
 public:
-	inline any_a<> aspects__(range_a<> const& ___arguments___) const;
+	inline any_a<> aspects__(list_a<> const& ___arguments___) const;
 
 	inline flock_a<> aspects_() const;
 
-	inline any_a<> fixed__(range_a<> const& ___arguments___) const;
+	inline any_a<> fixed__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> fixed_() const;
 
 	inline bool fixed() const;
 
-	inline any_a<> reference__(range_a<> const& ___arguments___) const;
+	inline any_a<> reference__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> reference_() const;
 
 	inline bool reference() const;
 
-	inline any_a<> optional__(range_a<> const& ___arguments___) const;
+	inline any_a<> optional__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> optional_() const;
 
@@ -286,7 +286,7 @@ template <typename _1>
 class kind_d : public cat_d<>
 {
 public:
-	inline any_a<> aspects__(range_a<> const& arguments) const
+	inline any_a<> aspects__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("aspects_");
@@ -308,7 +308,7 @@ public:
 		return cast<flock_a<>>(variadic_operate(op, *const_cast<kind_d*>(this)));
 	}
 
-	inline any_a<> fixed__(range_a<> const& arguments) const
+	inline any_a<> fixed__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("fixed_");
@@ -333,7 +333,7 @@ public:
 	inline bool fixed() const
 	{ return fixed_(); }
 
-	inline any_a<> reference__(range_a<> const& arguments) const
+	inline any_a<> reference__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("reference_");
@@ -358,7 +358,7 @@ public:
 	inline bool reference() const
 	{ return reference_(); }
 
-	inline any_a<> optional__(range_a<> const& arguments) const
+	inline any_a<> optional__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("optional_");

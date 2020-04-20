@@ -38,16 +38,16 @@ public:
 	};
 
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
 		return create_expression<expression_t<___ego___>>(list);
 	}
 	
 	template <typename _expression_>
-	static inline any_a<> create_expression(range_a<> const& list)
+	static inline any_a<> create_expression(list_a<> const& list)
 	{
-		auto it = list.extract_begin_();
-		auto end = list.extract_end_();
+		auto it = list.begin_();
+		auto end = list.end_();
 		if (it == end)
 		{
 			throw dis("[expression] create passed empty list");
@@ -92,7 +92,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>&, range_a<> const&) const
+	inline any_a<> operate(any_a<>&, list_a<> const&) const
 	{
 		return no();
 	}
@@ -127,7 +127,7 @@ public:
 	inline any_a<> evaluate_() const
 	{
 		any_a<> null;
-		return operate(null, range_a<>{});
+		return operate(null, list_a<>{});
 	}
 
 	inline any_a<> literal_() const

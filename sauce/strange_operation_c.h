@@ -10,10 +10,10 @@ class operation_c : public any_c<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> animate__(range_a<> const& list)
+	static inline any_a<> animate__(list_a<> const& list)
 	{
-		auto it = list.extract_begin_();
-		if (it == list.extract_end_())
+		auto it = list.begin_();
+		if (it == list.end_())
 		{
 			throw dis("<strange::operation>::animate passed empty list");
 		}
@@ -31,7 +31,7 @@ public:
 	}
 
 	// reflection
-	inline any_a<> type__(range_a<> const& list) const
+	inline any_a<> type__(list_a<> const& list) const
 	{
 		auto const op = any_c<___ego___>::_operations.at_(sym("type"));
 		if (op)
@@ -60,7 +60,7 @@ public:
 		return TYPE;
 	}
 
-	inline any_a<> shared__(range_a<> const& list) const
+	inline any_a<> shared__(list_a<> const& list) const
 	{
 		auto const op = any_c<___ego___>::_operations.at_(sym("shared"));
 		if (op)
@@ -97,7 +97,7 @@ public:
 	}
 
 	// operation
-	inline any_a<> pure__(range_a<> const& list) const
+	inline any_a<> pure__(list_a<> const& list) const
 	{
 		auto const op = any_c<___ego___>::_operations.at_(sym("pure"));
 		if (op)
@@ -151,7 +151,7 @@ public:
 	static inline void assign(operation_a<> const&)
 	{}
 
-	inline any_a<> names__(range_a<> const& list) const
+	inline any_a<> names__(list_a<> const& list) const
 	{
 		auto const op = any_c<___ego___>::_operations.at_(sym("names"));
 		if (op)

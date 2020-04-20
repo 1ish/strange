@@ -10,7 +10,7 @@ class expression_operate_range_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
 		return expression_t<___ego___>::template create_expression<expression_operate_range_t<___ego___>>(list);
 	}
@@ -52,15 +52,15 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
+	inline any_a<> operate(any_a<>& thing, list_a<> const& list) const
 	{
 		auto thing_term = _thing.operate(thing, list);
 		auto const range_term = _list.operate(thing, list);
-		if (!check<range_a<>>(range_term))
+		if (!check<list_a<>>(range_term))
 		{
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate_range::operate with non-range term");
 		}
-		return thing_term.operate(thing_term, fast<range_a<>>(range_term));
+		return thing_term.operate(thing_term, fast<list_a<>>(range_term));
 	}
 
 	// expression

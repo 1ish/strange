@@ -3,7 +3,7 @@ namespace strange
 {
 
 template <typename _element>
-inline any_a<> bidirectional_mutator_a<_element>::decrement__(range_a<> const& ___arguments___)
+inline any_a<> bidirectional_mutator_a<_element>::decrement__(list_a<> const& ___arguments___)
 {
 	return decrement_();
 }

@@ -9,7 +9,7 @@ class conception_t : public unordered_shoal_t<any_a<>, any_a<>, false, ___ego___
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
 		return unordered_shoal_a<>::create<conception_t<>>(list);
 	}
@@ -167,7 +167,7 @@ public:
 protected:
 	friend class any_a<>;
 
-	inline conception_t(range_a<> const& parents)
+	inline conception_t(list_a<> const& parents)
 		: unordered_shoal_t<any_a<>, any_a<>, false, ___ego___>{ std_unordered_map<any_a<>, any_a<>>{} }
 	{
 		symbol_a<> type = sym("");

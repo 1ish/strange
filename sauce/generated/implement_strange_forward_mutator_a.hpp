@@ -3,7 +3,7 @@ namespace strange
 {
 
 template <typename _element>
-inline any_a<> forward_mutator_a<_element>::get__(range_a<> const& ___arguments___) const
+inline any_a<> forward_mutator_a<_element>::get__(list_a<> const& ___arguments___) const
 {
 	return get_();
 }
@@ -18,10 +18,10 @@ inline _element forward_mutator_a<_element>::___forward_mutator_a_handle___<___T
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.get_(); }
 
 template <typename _element>
-inline any_a<> forward_mutator_a<_element>::set__(range_a<> const& ___arguments___) const
+inline any_a<> forward_mutator_a<_element>::set__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("forward_mutator_a::set_ passed short range");
@@ -58,7 +58,7 @@ inline _element * forward_mutator_a<_element>::___forward_mutator_a_handle___<__
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator->(); }
 
 template <typename _element>
-inline any_a<> forward_mutator_a<_element>::increment__(range_a<> const& ___arguments___)
+inline any_a<> forward_mutator_a<_element>::increment__(list_a<> const& ___arguments___)
 {
 	return increment_();
 }

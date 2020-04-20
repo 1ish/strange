@@ -57,7 +57,7 @@ inline bool symbol_a<_1>::___symbol_a_handle___<___TTT___, ___DHB___>::operator>
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(symbol); }
 
 template <typename _1>
-inline any_a<> symbol_a<_1>::to_lake__(range_a<> const& ___arguments___) const
+inline any_a<> symbol_a<_1>::to_lake__(list_a<> const& ___arguments___) const
 {
 	return to_lake_();
 }
@@ -99,10 +99,10 @@ inline int8_t symbol_a<_1>::___symbol_a_handle___<___TTT___, ___DHB___>::last_ch
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.last_character(); }
 
 template <typename _1>
-inline any_a<> symbol_a<_1>::add__(range_a<> const& ___arguments___) const
+inline any_a<> symbol_a<_1>::add__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("symbol_a::add_ passed short range");

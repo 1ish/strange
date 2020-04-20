@@ -9,10 +9,10 @@ class cat_t : public symbol_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
-		auto it = list.extract_begin_();
-		auto end = list.extract_end_();
+		auto it = list.begin_();
+		auto end = list.end_();
 		if (it == end)
 		{
 			return create_();

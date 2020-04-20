@@ -39,7 +39,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>&, range_a<> const&) const
+	inline any_a<> operate(any_a<>&, list_a<> const&) const
 	{
 		return _thing;
 	}
@@ -62,7 +62,7 @@ public:
 	inline any_a<> evaluate_() const
 	{
 		any_a<> null;
-		return operate(null, range_a<>{});
+		return operate(null, list_a<>{});
 	}
 
 	// public constructor

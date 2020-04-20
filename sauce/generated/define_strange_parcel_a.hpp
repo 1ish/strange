@@ -12,11 +12,11 @@ template <typename _1>
 class parcel_a : public collection_a< any_a<> , parcel_a<> , parcel_a<> >
 {
 public:
-	inline any_a<> unwrap__(range_a<> const& ___arguments___) const;
+	inline any_a<> unwrap__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> unwrap_(shoal_a<> const& shared_shoal) const;
 
-	inline any_a<> unwrap_unique__(range_a<> const& ___arguments___) const;
+	inline any_a<> unwrap_unique__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> unwrap_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_uint64_a<>, strange::any_a<>> & unique_shoal) const;
 
@@ -26,11 +26,11 @@ public:
 
 	inline bool operator!=(parcel_a < > const & parcel ) const;
 
-	inline any_a<> keys_begin__(range_a<> const& ___arguments___) const;
+	inline any_a<> keys_begin__(list_a<> const& ___arguments___) const;
 
 	inline bidirectional_extractor_a< any_a<> > keys_begin_() const;
 
-	inline any_a<> keys_end__(range_a<> const& ___arguments___) const;
+	inline any_a<> keys_end__(list_a<> const& ___arguments___) const;
 
 	inline bidirectional_extractor_a< any_a<> > keys_end_() const;
 
@@ -316,7 +316,7 @@ template <typename _1>
 class parcel_d : public collection_d< any_a<> , parcel_a<> , parcel_a<> >
 {
 public:
-	inline any_a<> unwrap__(range_a<> const& arguments) const
+	inline any_a<> unwrap__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("unwrap_");
@@ -338,7 +338,7 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *const_cast<parcel_d*>(this), shared_shoal));
 	}
 
-	inline any_a<> unwrap_unique__(range_a<> const& arguments) const
+	inline any_a<> unwrap_unique__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("unwrap_unique_");
@@ -369,7 +369,7 @@ public:
 	inline bool operator!=(parcel_a < > const & parcel ) const
 	{ throw dis("dynamic parcel_d::operator!=(parcel) not available"); }
 
-	inline any_a<> keys_begin__(range_a<> const& arguments) const
+	inline any_a<> keys_begin__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("keys_begin_");
@@ -391,7 +391,7 @@ public:
 		return cast<bidirectional_extractor_a< any_a<> >>(variadic_operate(op, *const_cast<parcel_d*>(this)));
 	}
 
-	inline any_a<> keys_end__(range_a<> const& arguments) const
+	inline any_a<> keys_end__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("keys_end_");

@@ -43,10 +43,10 @@ inline shoal_a<>& shared()
 
 inline any_a<> operator|(any_a<> const& thing, any_a<> const& adaptor)
 {
-	if (check<range_a<>>(thing))
+	if (check<list_a<>>(thing))
 	{
 		any_a<> _;
-		return adaptor.operate(_, fast<range_a<>>(thing));
+		return adaptor.operate(_, fast<list_a<>>(thing));
 	}
 	if (check<misunderstanding_a<>>(thing))
 	{

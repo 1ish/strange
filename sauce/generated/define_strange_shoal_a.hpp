@@ -12,11 +12,11 @@ template <typename _key, typename _value>
 class shoal_a : public collection_a< _key , _value , flock_a<> >
 {
 public:
-	inline any_a<> mutate_begin__(range_a<> const& ___arguments___);
+	inline any_a<> mutate_begin__(list_a<> const& ___arguments___);
 
 	inline forward_mutator_a< flock_a<> > mutate_begin_();
 
-	inline any_a<> mutate_end__(range_a<> const& ___arguments___);
+	inline any_a<> mutate_end__(list_a<> const& ___arguments___);
 
 	inline forward_mutator_a< flock_a<> > mutate_end_();
 
@@ -257,7 +257,7 @@ template <typename _key, typename _value>
 class shoal_d : public collection_d< _key , _value , flock_a<> >
 {
 public:
-	inline any_a<> mutate_begin__(range_a<> const& arguments)
+	inline any_a<> mutate_begin__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("mutate_begin_");
@@ -279,7 +279,7 @@ public:
 		return cast<forward_mutator_a< flock_a<> >>(variadic_operate(op, *this));
 	}
 
-	inline any_a<> mutate_end__(range_a<> const& arguments)
+	inline any_a<> mutate_end__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("mutate_end_");

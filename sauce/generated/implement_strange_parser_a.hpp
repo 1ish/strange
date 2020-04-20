@@ -3,10 +3,10 @@ namespace strange
 {
 
 template <typename _1>
-inline any_a<> parser_a<_1>::parse__(range_a<> const& ___arguments___)
+inline any_a<> parser_a<_1>::parse__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("parser_a::parse_ passed short range");

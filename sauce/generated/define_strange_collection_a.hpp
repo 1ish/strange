@@ -12,105 +12,105 @@ template <typename _key, typename _value, typename _element>
 class collection_a : public range_a< _element >
 {
 public:
-	inline any_a<> has__(range_a<> const& ___arguments___) const;
+	inline any_a<> has__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> has_(_key const& key) const;
 
 	inline bool has(_key const & key ) const;
 
-	inline any_a<> at__(range_a<> const& ___arguments___) const;
+	inline any_a<> at__(list_a<> const& ___arguments___) const;
 
 	inline _value at_(_key const& key) const;
 
-	inline any_a<> update__(range_a<> const& ___arguments___);
+	inline any_a<> update__(list_a<> const& ___arguments___);
 
 	inline _value update_(_key const& key, _value const& value);
 
 	inline void update(_key const & key , _value const & value );
 
-	inline any_a<> insert__(range_a<> const& ___arguments___);
+	inline any_a<> insert__(list_a<> const& ___arguments___);
 
 	inline any_a<> insert_(_key const& key, _value const& value);
 
 	inline bool insert(_key const & key , _value const & value );
 
-	inline any_a<> erase__(range_a<> const& ___arguments___);
+	inline any_a<> erase__(list_a<> const& ___arguments___);
 
 	inline any_a<> erase_(_key const& key);
 
 	inline bool erase(_key const & key );
 
-	inline any_a<> clear__(range_a<> const& ___arguments___);
+	inline any_a<> clear__(list_a<> const& ___arguments___);
 
 	inline collection_a< _key , _value , _element > clear_();
 
 	inline void clear();
 
-	inline any_a<> size__(range_a<> const& ___arguments___) const;
+	inline any_a<> size__(list_a<> const& ___arguments___) const;
 
 	inline number_data_int64_a<> size_() const;
 
 	inline int64_t size() const;
 
-	inline any_a<> empty__(range_a<> const& ___arguments___) const;
+	inline any_a<> empty__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> empty_() const;
 
 	inline bool empty() const;
 
-	inline any_a<> push_front__(range_a<> const& ___arguments___);
+	inline any_a<> push_front__(list_a<> const& ___arguments___);
 
 	inline collection_a< _key , _value , _element > push_front_(_element const& thing);
 
 	inline void push_front(_element const & thing );
 
-	inline any_a<> pop_front__(range_a<> const& ___arguments___);
+	inline any_a<> pop_front__(list_a<> const& ___arguments___);
 
 	inline _element pop_front_();
 
-	inline any_a<> push_back__(range_a<> const& ___arguments___);
+	inline any_a<> push_back__(list_a<> const& ___arguments___);
 
 	inline collection_a< _key , _value , _element > push_back_(_element const& thing);
 
 	inline void push_back(_element const & thing );
 
-	inline any_a<> pop_back__(range_a<> const& ___arguments___);
+	inline any_a<> pop_back__(list_a<> const& ___arguments___);
 
 	inline _element pop_back_();
 
-	inline any_a<> self_assign__(range_a<> const& ___arguments___);
+	inline any_a<> self_assign__(list_a<> const& ___arguments___);
 
 	inline collection_a self_assign_(range_a< _element > const& range);
 
-	inline any_a<> self_add__(range_a<> const& ___arguments___);
+	inline any_a<> self_add__(list_a<> const& ___arguments___);
 
 	inline collection_a self_add_(range_a< _element > const& range);
 
 	inline collection_a& operator+=(range_a< _element > const& range);
 
-	inline any_a<> add__(range_a<> const& ___arguments___) const;
+	inline any_a<> add__(list_a<> const& ___arguments___) const;
 
 	inline collection_a< _key , _value , _element > add_(range_a< _element > const& range) const;
 
 	inline collection_a< _key , _value , _element > operator+(range_a< _element > const& range) const;
 
-	inline any_a<> self_subtract__(range_a<> const& ___arguments___);
+	inline any_a<> self_subtract__(list_a<> const& ___arguments___);
 
 	inline collection_a self_subtract_(range_a< _element > const& range);
 
 	inline collection_a& operator-=(range_a< _element > const& range);
 
-	inline any_a<> subtract__(range_a<> const& ___arguments___) const;
+	inline any_a<> subtract__(list_a<> const& ___arguments___) const;
 
 	inline collection_a< _key , _value , _element > subtract_(range_a< _element > const& range) const;
 
 	inline collection_a< _key , _value , _element > operator-(range_a< _element > const& range) const;
 
-	inline any_a<> read_lock__(range_a<> const& ___arguments___) const;
+	inline any_a<> read_lock__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> read_lock_() const;
 
-	inline any_a<> write_lock__(range_a<> const& ___arguments___) const;
+	inline any_a<> write_lock__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> write_lock_() const;
 
@@ -429,7 +429,7 @@ template <typename _key, typename _value, typename _element>
 class collection_d : public range_d< _element >
 {
 public:
-	inline any_a<> has__(range_a<> const& arguments) const
+	inline any_a<> has__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("has_");
@@ -454,7 +454,7 @@ public:
 	inline bool has(_key const & key ) const
 	{ return has_(key); }
 
-	inline any_a<> at__(range_a<> const& arguments) const
+	inline any_a<> at__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("at_");
@@ -476,7 +476,7 @@ public:
 		return cast<_value>(variadic_operate(op, *const_cast<collection_d*>(this), key));
 	}
 
-	inline any_a<> update__(range_a<> const& arguments)
+	inline any_a<> update__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("update_");
@@ -501,7 +501,7 @@ public:
 	inline void update(_key const & key , _value const & value )
 	{ update_(key, value); }
 
-	inline any_a<> insert__(range_a<> const& arguments)
+	inline any_a<> insert__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("insert_");
@@ -526,7 +526,7 @@ public:
 	inline bool insert(_key const & key , _value const & value )
 	{ return insert_(key, value); }
 
-	inline any_a<> erase__(range_a<> const& arguments)
+	inline any_a<> erase__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("erase_");
@@ -551,7 +551,7 @@ public:
 	inline bool erase(_key const & key )
 	{ return erase_(key); }
 
-	inline any_a<> clear__(range_a<> const& arguments)
+	inline any_a<> clear__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("clear_");
@@ -576,7 +576,7 @@ public:
 	inline void clear()
 	{ clear_(); }
 
-	inline any_a<> size__(range_a<> const& arguments) const
+	inline any_a<> size__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("size_");
@@ -601,7 +601,7 @@ public:
 	inline int64_t size() const
 	{ return size_().extract_primitive(); }
 
-	inline any_a<> empty__(range_a<> const& arguments) const
+	inline any_a<> empty__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("empty_");
@@ -626,7 +626,7 @@ public:
 	inline bool empty() const
 	{ return empty_(); }
 
-	inline any_a<> push_front__(range_a<> const& arguments)
+	inline any_a<> push_front__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("push_front_");
@@ -651,7 +651,7 @@ public:
 	inline void push_front(_element const & thing )
 	{ push_front_(thing); }
 
-	inline any_a<> pop_front__(range_a<> const& arguments)
+	inline any_a<> pop_front__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("pop_front_");
@@ -673,7 +673,7 @@ public:
 		return cast<_element>(variadic_operate(op, *this));
 	}
 
-	inline any_a<> push_back__(range_a<> const& arguments)
+	inline any_a<> push_back__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("push_back_");
@@ -698,7 +698,7 @@ public:
 	inline void push_back(_element const & thing )
 	{ push_back_(thing); }
 
-	inline any_a<> pop_back__(range_a<> const& arguments)
+	inline any_a<> pop_back__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("pop_back_");
@@ -720,7 +720,7 @@ public:
 		return cast<_element>(variadic_operate(op, *this));
 	}
 
-	inline any_a<> self_assign__(range_a<> const& arguments)
+	inline any_a<> self_assign__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("self_assign_");
@@ -742,7 +742,7 @@ public:
 		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *this, range));
 	}
 
-	inline any_a<> self_add__(range_a<> const& arguments)
+	inline any_a<> self_add__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("self_add_");
@@ -764,7 +764,7 @@ public:
 		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *this, range));
 	}
 
-	inline any_a<> add__(range_a<> const& arguments) const
+	inline any_a<> add__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("add_");
@@ -786,7 +786,7 @@ public:
 		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *const_cast<collection_d*>(this), range));
 	}
 
-	inline any_a<> self_subtract__(range_a<> const& arguments)
+	inline any_a<> self_subtract__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("self_subtract_");
@@ -808,7 +808,7 @@ public:
 		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *this, range));
 	}
 
-	inline any_a<> subtract__(range_a<> const& arguments) const
+	inline any_a<> subtract__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("subtract_");
@@ -830,7 +830,7 @@ public:
 		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *const_cast<collection_d*>(this), range));
 	}
 
-	inline any_a<> read_lock__(range_a<> const& arguments) const
+	inline any_a<> read_lock__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("read_lock_");
@@ -852,7 +852,7 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this)));
 	}
 
-	inline any_a<> write_lock__(range_a<> const& arguments) const
+	inline any_a<> write_lock__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("write_lock_");

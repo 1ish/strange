@@ -4,7 +4,7 @@
 namespace strange
 {
 
-// template <typename ___ego___ = range_a<>>
+// template <typename ___ego___ = list_a<>>
 template <typename ___ego___>
 class range_operator_t : public thing_t<___ego___>
 {
@@ -14,7 +14,7 @@ class range_operator_t : public thing_t<___ego___>
 	public:
 		// construction
 		template <typename F>
-		static inline forward_extractor_data_a<_element, _iterator_> create(range_a<> const& list, F&& it, any_a<>& thing_ref, range_a<> const& list_ref)
+		static inline forward_extractor_data_a<_element, _iterator_> create(list_a<> const& list, F&& it, any_a<>& thing_ref, list_a<> const& list_ref)
 		{
 			return forward_extractor_data_a<_element, _iterator_>::template create<extractor_t<_element, _iterator_>>(list, std::forward<F>(it), thing_ref, list_ref);
 		}
@@ -70,7 +70,7 @@ class range_operator_t : public thing_t<___ego___>
 		inline _element const& operator*() const
 		{
 			auto& vector = _results.mutate_vector();
-			if (_it == _list.extract_end_())
+			if (_it == _list.end_())
 			{
 				vector.resize(_pos + 1);
 			}
@@ -107,16 +107,16 @@ class range_operator_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		range_a<> const _list;
+		list_a<> const _list;
 		any_a<>& _thing_ref;
-		range_a<> const& _list_ref;
+		list_a<> const& _list_ref;
 		flock_a<> mutable _results;
 		std_size_t _pos;
 
 		friend class any_a<>;
 
 		template <typename F>
-		inline extractor_t(range_a<> const& list, F&& it, any_a<>& thing_ref, range_a<> const& list_ref)
+		inline extractor_t(list_a<> const& list, F&& it, any_a<>& thing_ref, list_a<> const& list_ref)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _list{ list }
@@ -129,16 +129,16 @@ class range_operator_t : public thing_t<___ego___>
 
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
-		auto it = list.extract_begin_();
-		auto end = list.extract_end_();
+		auto it = list.begin_();
+		auto end = list.end_();
 		if (it == end)
 		{
 			throw dis("strange::range_operator::create passed empty list");
 		}
 		any_a<> the_list = *it;
-		if (!check<range_a<>>(the_list))
+		if (!check<list_a<>>(the_list))
 		{
 			throw dis("strange::range_operator::create passed non-list");
 		}
@@ -152,16 +152,16 @@ public:
 			throw dis("strange::range_operator::create passed short list");
 		}
 		any_a<> list_ref = fast_dup(*it);
-		if (!check<range_a<>>(list_ref))
+		if (!check<list_a<>>(list_ref))
 		{
 			throw dis("strange::range_operator::create passed non-list list ref");
 		}
-		return create_(fast<range_a<>>(the_list), thing_ref, fast_dup<range_a<>>(list_ref));
+		return create_(fast<list_a<>>(the_list), thing_ref, fast_dup<list_a<>>(list_ref));
 	}
 
-	static inline range_a<> create_(range_a<> const& list, any_a<>& thing_ref, range_a<> const& list_ref)
+	static inline list_a<> create_(list_a<> const& list, any_a<>& thing_ref, list_a<> const& list_ref)
 	{
-		return range_a<>::create<range_operator_t<>>(list, thing_ref, list_ref);
+		return list_a<>::create<range_operator_t<>>(list, thing_ref, list_ref);
 	}
 
 	// reflection
@@ -179,43 +179,43 @@ public:
 	// list
 	inline forward_extractor_a<any_a<>> begin_() const
 	{
-		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_list, _list.extract_begin_(), _thing_ref, _list_ref);
+		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_list, _list.begin_(), _thing_ref, _list_ref);
 	}
 
 	inline forward_extractor_a<any_a<>> end_() const
 	{
-		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_list, _list.extract_end_(), _thing_ref, _list_ref);
+		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_list, _list.end_(), _thing_ref, _list_ref);
 	}
 
 	// range
 	inline forward_extractor_a<any_a<>> extract_begin_() const
 	{
-		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_list, _list.extract_begin_(), _thing_ref, _list_ref);
+		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_list, _list.begin_(), _thing_ref, _list_ref);
 	}
 
 	inline forward_extractor_data_a<any_a<>, forward_extractor_a<any_a<>>> extract_begin() const
 	{
-		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_list, _list.extract_begin_(), _thing_ref, _list_ref);
+		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_list, _list.begin_(), _thing_ref, _list_ref);
 	}
 
 	inline forward_extractor_a<any_a<>> extract_end_() const
 	{
-		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_list, _list.extract_end_(), _thing_ref, _list_ref);
+		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_list, _list.end_(), _thing_ref, _list_ref);
 	}
 
 	inline forward_extractor_data_a<any_a<>, forward_extractor_a<any_a<>>> extract_end() const
 	{
-		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_list, _list.extract_end_(), _thing_ref, _list_ref);
+		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_list, _list.end_(), _thing_ref, _list_ref);
 	}
 
 protected:
-	range_a<> const _list;
+	list_a<> const _list;
 	any_a<>& _thing_ref;
-	range_a<> const& _list_ref;
+	list_a<> const& _list_ref;
 
 	friend class any_a<>;
 
-	inline range_operator_t(range_a<> const& list, any_a<>& thing_ref, range_a<> const& list_ref)
+	inline range_operator_t(list_a<> const& list, any_a<>& thing_ref, list_a<> const& list_ref)
 		: thing_t<___ego___>{}
 		, _list(list)
 		, _thing_ref(thing_ref)
@@ -243,7 +243,7 @@ class ___range_operator_t_share___
 	}
 };
 
-inline range_a<> range_operator_create(range_a<> const& list, any_a<>& thing_ref, range_a<> const& list_ref)
+inline list_a<> range_operator_create(list_a<> const& list, any_a<>& thing_ref, list_a<> const& list_ref)
 {
 	return range_operator_t<>::create_(list, thing_ref, list_ref);
 }

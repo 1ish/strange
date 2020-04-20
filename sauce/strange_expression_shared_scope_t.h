@@ -10,7 +10,7 @@ class expression_shared_scope_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
 		return expression_t<___ego___>::template create_expression<expression_shared_scope_t<___ego___>>(list);
 	}
@@ -60,7 +60,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>&, range_a<> const&) const
+	inline any_a<> operate(any_a<>&, list_a<> const&) const
 	{
 		auto value = _shared.at_(_key);
 		if (!value)
@@ -79,7 +79,7 @@ public:
 	inline any_a<> evaluate_() const
 	{
 		any_a<> null;
-		return operate(null, range_a<>{});
+		return operate(null, list_a<>{});
 	}
 
 	inline flock_a<> terms_() const

@@ -20,12 +20,12 @@ public:
 	using ___SHARED___ = std_shared_ptr<___any_a_handle_base___>;
 
 	// operator overloads
-	inline any_a<> operator[](range_a<> const& arguments)
+	inline any_a<> operator[](list_a<> const& arguments)
 	{
 		return invoke(*this, arguments);
 	}
 
-	inline any_a<> operator()(range_a<> const& arguments)
+	inline any_a<> operator()(list_a<> const& arguments)
 	{
 		return operate(*this, arguments);
 	}
@@ -47,99 +47,99 @@ public:
 
 	inline one_t & mutate_thing();
 
-	inline any_a<> type__(range_a<> const& ___arguments___) const;
+	inline any_a<> type__(list_a<> const& ___arguments___) const;
 
 	inline _symbol type_() const;
 
-	inline any_a<> cat__(range_a<> const& ___arguments___) const;
+	inline any_a<> cat__(list_a<> const& ___arguments___) const;
 
 	inline _cat cat_() const;
 
-	inline any_a<> cats__(range_a<> const& ___arguments___) const;
+	inline any_a<> cats__(list_a<> const& ___arguments___) const;
 
 	inline unordered_herd_a<> cats_() const;
 
-	inline any_a<> kind__(range_a<> const& ___arguments___) const;
+	inline any_a<> kind__(list_a<> const& ___arguments___) const;
 
 	inline _kind kind_() const;
 
-	inline any_a<> kinds__(range_a<> const& ___arguments___) const;
+	inline any_a<> kinds__(list_a<> const& ___arguments___) const;
 
 	inline unordered_herd_a<> kinds_() const;
 
-	inline any_a<> operations__(range_a<> const& ___arguments___) const;
+	inline any_a<> operations__(list_a<> const& ___arguments___) const;
 
 	inline unordered_shoal_a<> operations_() const;
 
-	inline any_a<> visit__(range_a<> const& ___arguments___) const;
+	inline any_a<> visit__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> visit_(inventory_a<> & arguments) const;
 
-	inline any_a < > invoke(any_a < > & thing , range_a < > const & arguments ) const;
+	inline any_a < > invoke(any_a < > & thing , list_a < > const & arguments ) const;
 
-	inline any_a < > operate(any_a < > & thing , range_a < > const & arguments ) const;
+	inline any_a < > operate(any_a < > & thing , list_a < > const & arguments ) const;
 
-	inline any_a<> identity__(range_a<> const& ___arguments___) const;
+	inline any_a<> identity__(list_a<> const& ___arguments___) const;
 
 	inline _number_data_uint64 identity_() const;
 
 	inline void const * identity() const;
 
-	inline any_a<> identical__(range_a<> const& ___arguments___) const;
+	inline any_a<> identical__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> identical_(any_a<> const& thing) const;
 
 	inline bool identical(any_a < > const & thing ) const;
 
-	inline any_a<> nothing__(range_a<> const& ___arguments___) const;
+	inline any_a<> nothing__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> nothing_() const;
 
 	inline bool nothing() const;
 
-	inline any_a<> something__(range_a<> const& ___arguments___) const;
+	inline any_a<> something__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> something_() const;
 
 	inline bool something() const;
 
-	inline any_a<> same__(range_a<> const& ___arguments___) const;
+	inline any_a<> same__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> same_(any_a<> const& thing) const;
 
 	inline bool operator==(any_a<> const& thing) const;
 
-	inline any_a<> different__(range_a<> const& ___arguments___) const;
+	inline any_a<> different__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> different_(any_a<> const& thing) const;
 
 	inline bool operator!=(any_a<> const& thing) const;
 
-	inline any_a<> less_than__(range_a<> const& ___arguments___) const;
+	inline any_a<> less_than__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> less_than_(any_a<> const& thing) const;
 
 	inline bool operator<(any_a<> const& thing) const;
 
-	inline any_a<> greater_than__(range_a<> const& ___arguments___) const;
+	inline any_a<> greater_than__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> greater_than_(any_a<> const& thing) const;
 
 	inline bool operator>(any_a<> const& thing) const;
 
-	inline any_a<> less_or_equal__(range_a<> const& ___arguments___) const;
+	inline any_a<> less_or_equal__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> less_or_equal_(any_a<> const& thing) const;
 
 	inline bool operator<=(any_a<> const& thing) const;
 
-	inline any_a<> greater_or_equal__(range_a<> const& ___arguments___) const;
+	inline any_a<> greater_or_equal__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> greater_or_equal_(any_a<> const& thing) const;
 
 	inline bool operator>=(any_a<> const& thing) const;
 
-	inline any_a<> hash__(range_a<> const& ___arguments___) const;
+	inline any_a<> hash__(list_a<> const& ___arguments___) const;
 
 	inline _number_data_uint64 hash_() const;
 
@@ -147,11 +147,11 @@ public:
 
 	inline bool is(std_string const & s ) const;
 
-	inline any_a<> to_parcel__(range_a<> const& ___arguments___) const;
+	inline any_a<> to_parcel__(list_a<> const& ___arguments___) const;
 
 	inline parcel_a<> to_parcel_() const;
 
-	inline any_a<> to_parcel_unique__(range_a<> const& ___arguments___) const;
+	inline any_a<> to_parcel_unique__(list_a<> const& ___arguments___) const;
 
 	inline parcel_a<> to_parcel_unique_(herd_a< _number_data_uint64 > & unique_herd) const;
 
@@ -176,8 +176,8 @@ protected:
 		virtual unordered_herd_a<> kinds_() const = 0;
 		virtual unordered_shoal_a<> operations_() const = 0;
 		virtual any_a<> visit_(inventory_a<> & arguments) const = 0;
-		virtual any_a < > invoke(any_a < > & thing , range_a < > const & arguments ) const = 0;
-		virtual any_a < > operate(any_a < > & thing , range_a < > const & arguments ) const = 0;
+		virtual any_a < > invoke(any_a < > & thing , list_a < > const & arguments ) const = 0;
+		virtual any_a < > operate(any_a < > & thing , list_a < > const & arguments ) const = 0;
 		virtual _number_data_uint64 identity_() const = 0;
 		virtual void const * identity() const = 0;
 		virtual any_a<> identical_(any_a<> const& thing) const = 0;
@@ -244,9 +244,9 @@ protected:
 
 		virtual inline any_a<> visit_(inventory_a<> & arguments) const final;
 
-		virtual inline any_a < > invoke(any_a < > & thing , range_a < > const & arguments ) const final;
+		virtual inline any_a < > invoke(any_a < > & thing , list_a < > const & arguments ) const final;
 
-		virtual inline any_a < > operate(any_a < > & thing , range_a < > const & arguments ) const final;
+		virtual inline any_a < > operate(any_a < > & thing , list_a < > const & arguments ) const final;
 
 		virtual inline _number_data_uint64 identity_() const final;
 

@@ -9,7 +9,7 @@ class expression_return_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
 		return expression_t<___ego___>::template create_expression<expression_return_t<___ego___>>(list);
 	}
@@ -62,7 +62,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
+	inline any_a<> operate(any_a<>& thing, list_a<> const& list) const
 	{
 		throw typename expression_t<___ego___>::return_i{ _result.operate(thing, list) };
 	}

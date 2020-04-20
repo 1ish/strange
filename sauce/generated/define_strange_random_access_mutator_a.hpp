@@ -12,25 +12,25 @@ template <typename _element>
 class random_access_mutator_a : public bidirectional_mutator_a< _element >
 {
 public:
-	inline any_a<> self_add__(range_a<> const& ___arguments___);
+	inline any_a<> self_add__(list_a<> const& ___arguments___);
 
 	inline random_access_mutator_a self_add_(number_a<> const& number);
 
 	inline random_access_mutator_a& operator+=(number_a<> const& number);
 
-	inline any_a<> add__(range_a<> const& ___arguments___) const;
+	inline any_a<> add__(list_a<> const& ___arguments___) const;
 
 	inline random_access_mutator_a< _element > add_(number_a<> const& number) const;
 
 	inline random_access_mutator_a< _element > operator+(number_a<> const& number) const;
 
-	inline any_a<> self_subtract__(range_a<> const& ___arguments___);
+	inline any_a<> self_subtract__(list_a<> const& ___arguments___);
 
 	inline random_access_mutator_a self_subtract_(number_a<> const& number);
 
 	inline random_access_mutator_a& operator-=(number_a<> const& number);
 
-	inline any_a<> subtract__(range_a<> const& ___arguments___) const;
+	inline any_a<> subtract__(list_a<> const& ___arguments___) const;
 
 	inline random_access_mutator_a< _element > subtract_(number_a<> const& number) const;
 
@@ -279,7 +279,7 @@ template <typename _element>
 class random_access_mutator_d : public bidirectional_mutator_d< _element >
 {
 public:
-	inline any_a<> self_add__(range_a<> const& arguments)
+	inline any_a<> self_add__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("self_add_");
@@ -301,7 +301,7 @@ public:
 		return cast<random_access_mutator_a< _element >>(variadic_operate(op, *this, number));
 	}
 
-	inline any_a<> add__(range_a<> const& arguments) const
+	inline any_a<> add__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("add_");
@@ -323,7 +323,7 @@ public:
 		return cast<random_access_mutator_a< _element >>(variadic_operate(op, *const_cast<random_access_mutator_d*>(this), number));
 	}
 
-	inline any_a<> self_subtract__(range_a<> const& arguments)
+	inline any_a<> self_subtract__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("self_subtract_");
@@ -345,7 +345,7 @@ public:
 		return cast<random_access_mutator_a< _element >>(variadic_operate(op, *this, number));
 	}
 
-	inline any_a<> subtract__(range_a<> const& arguments) const
+	inline any_a<> subtract__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("subtract_");

@@ -10,10 +10,10 @@ class expression_c : public operation_c<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> animate__(range_a<> const& list)
+	static inline any_a<> animate__(list_a<> const& list)
 	{
-		auto it = list.extract_begin_();
-		if (it == list.extract_end_())
+		auto it = list.begin_();
+		if (it == list.end_())
 		{
 			throw dis("<strange::expression>::animate passed empty list");
 		}
@@ -31,7 +31,7 @@ public:
 	}
 
 	// reflection
-	inline any_a<> type__(range_a<> const& list) const
+	inline any_a<> type__(list_a<> const& list) const
 	{
 		auto const op = operation_c<___ego___>::_operations.at_(sym("type"));
 		if (op)
@@ -60,7 +60,7 @@ public:
 		return TYPE;
 	}
 
-	inline any_a<> shared__(range_a<> const& list) const
+	inline any_a<> shared__(list_a<> const& list) const
 	{
 		auto const op = operation_c<___ego___>::_operations.at_(sym("shared"));
 		if (op)
@@ -97,7 +97,7 @@ public:
 	}
 
 	// expression
-	inline any_a<> recreate__(range_a<> const&) const // cannot be overridden
+	inline any_a<> recreate__(list_a<> const&) const // cannot be overridden
 	{
 		return recreate_();
 	}
@@ -107,7 +107,7 @@ public:
 		return operation_c<___ego___>::me_(); //TODO?
 	}
 
-	inline any_a<> literal__(range_a<> const& list) const
+	inline any_a<> literal__(list_a<> const& list) const
 	{
 		auto const op = operation_c<___ego___>::_operations.at_(sym("literal"));
 		if (op)
@@ -140,7 +140,7 @@ public:
 		return false;
 	}
 
-	inline any_a<> evaluate__(range_a<> const& list) const
+	inline any_a<> evaluate__(list_a<> const& list) const
 	{
 		auto const op = operation_c<___ego___>::_operations.at_(sym("evaluate"));
 		if (op)
@@ -166,7 +166,7 @@ public:
 		return operation_c<___ego___>::operate(local, range_t<>::create_());
 	}
 
-	inline any_a<> token__(range_a<> const& list) const
+	inline any_a<> token__(list_a<> const& list) const
 	{
 		auto const op = operation_c<___ego___>::_operations.at_(sym("token"));
 		if (op)
@@ -193,7 +193,7 @@ public:
 		return token_t<>::create_punctuation_();
 	}
 
-	inline any_a<> terms__(range_a<> const& list) const
+	inline any_a<> terms__(list_a<> const& list) const
 	{
 		auto const op = operation_c<___ego___>::_operations.at_(sym("terms"));
 		if (op)
@@ -220,7 +220,7 @@ public:
 		return flock_t<>::create_();
 	}
 
-	inline any_a<> generate__(range_a<> const& list) const
+	inline any_a<> generate__(list_a<> const& list) const
 	{
 		auto const op = operation_c<___ego___>::_operations.at_(sym("generate"));
 		if (op)
@@ -228,8 +228,8 @@ public:
 			any_a<> thing = operation_c<___ego___>::me_();
 			return op.operate(thing, list);
 		}
-		auto it = list.extract_begin_();
-		if (it == list.extract_end_())
+		auto it = list.begin_();
+		if (it == list.end_())
 		{
 			throw dis("<strange::expression>::generate passed empty list");
 		}
@@ -238,7 +238,7 @@ public:
 		{
 			throw dis("<strange::expression>::generate passed non-int-64 version");
 		}
-		if (++it == list.extract_end_())
+		if (++it == list.end_())
 		{
 			throw dis("<strange::expression>::generate passed short list");
 		}
@@ -247,7 +247,7 @@ public:
 		{
 			throw dis("<strange::expression>::generate passed non-int-64 indent");
 		}
-		if (++it == list.extract_end_())
+		if (++it == list.end_())
 		{
 			throw dis("<strange::expression>::generate passed short list");
 		}
@@ -280,7 +280,7 @@ public:
 		}
 	}
 
-	inline any_a<> generate_cpp__(range_a<> const& list) const
+	inline any_a<> generate_cpp__(list_a<> const& list) const
 	{
 		auto const op = operation_c<___ego___>::_operations.at_(sym("generate_cpp"));
 		if (op)
@@ -288,8 +288,8 @@ public:
 			any_a<> thing = operation_c<___ego___>::me_();
 			return op.operate(thing, list);
 		}
-		auto it = list.extract_begin_();
-		if (it == list.extract_end_())
+		auto it = list.begin_();
+		if (it == list.end_())
 		{
 			throw dis("<strange::expression>::generate_cpp passed empty list");
 		}
@@ -298,7 +298,7 @@ public:
 		{
 			throw dis("<strange::expression>::generate_cpp passed non-int-64 version");
 		}
-		if (++it == list.extract_end_())
+		if (++it == list.end_())
 		{
 			throw dis("<strange::expression>::generate_cpp passed short list");
 		}
@@ -307,7 +307,7 @@ public:
 		{
 			throw dis("<strange::expression>::generate_cpp passed non-int-64 indent");
 		}
-		if (++it == list.extract_end_())
+		if (++it == list.end_())
 		{
 			throw dis("<strange::expression>::generate_cpp passed short list");
 		}

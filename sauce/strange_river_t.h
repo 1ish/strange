@@ -115,7 +115,7 @@ public:
 	using std_istreambuf_iterator_char = std_istreambuf_iterator<char>;
 
 	// construction
-	static inline any_a<> create__(range_a<> const&)
+	static inline any_a<> create__(list_a<> const&)
 	{
 		return create_();
 	}
@@ -131,10 +131,10 @@ public:
 		return river_a<>::create<river_t<>>(stream.get(), stream.get(), stream);
 	}
 
-	static inline any_a<> file__(range_a<> const& list)
+	static inline any_a<> file__(list_a<> const& list)
 	{
-		auto it = list.extract_begin_();
-		auto end = list.extract_end_();
+		auto it = list.begin_();
+		auto end = list.end_();
 		if (it == end)
 		{
 			throw dis("strange::river::file passed empty list");
@@ -176,7 +176,7 @@ public:
 		return river_a<>::create<river_t<>>(stream.get(), stream.get(), stream, name);
 	}
 
-	static inline any_a<> in__(range_a<> const&)
+	static inline any_a<> in__(list_a<> const&)
 	{
 		return in_();
 	}
@@ -186,7 +186,7 @@ public:
 		return river_a<>::create<river_t<>>(&standard_in());
 	}
 
-	static inline any_a<> out__(range_a<> const&)
+	static inline any_a<> out__(list_a<> const&)
 	{
 		return out_();
 	}
@@ -196,7 +196,7 @@ public:
 		return river_a<>::create<river_t<>>(nullptr, &standard_out());
 	}
 
-	static inline any_a<> err__(range_a<> const&)
+	static inline any_a<> err__(list_a<> const&)
 	{
 		return err_();
 	}

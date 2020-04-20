@@ -24,7 +24,7 @@ public:
 
 	inline bool operator>=(symbol_a < > const & symbol ) const;
 
-	inline any_a<> to_lake__(range_a<> const& ___arguments___) const;
+	inline any_a<> to_lake__(list_a<> const& ___arguments___) const;
 
 	inline lake_int8_a<> to_lake_() const;
 
@@ -34,7 +34,7 @@ public:
 
 	inline int8_t last_character() const;
 
-	inline any_a<> add__(range_a<> const& ___arguments___) const;
+	inline any_a<> add__(list_a<> const& ___arguments___) const;
 
 	inline symbol_a<> add_(symbol_a<> const& symbol) const;
 
@@ -322,7 +322,7 @@ public:
 	inline bool operator>=(symbol_a < > const & symbol ) const
 	{ return greater_or_equal_(symbol); }
 
-	inline any_a<> to_lake__(range_a<> const& arguments) const
+	inline any_a<> to_lake__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("to_lake_");
@@ -353,7 +353,7 @@ public:
 	inline int8_t last_character() const
 	{ auto const lake = to_lake_(); return lake.extract_vector()[lake.size() - 1]; }
 
-	inline any_a<> add__(range_a<> const& arguments) const
+	inline any_a<> add__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("add_");

@@ -365,7 +365,7 @@ public:
 	using std_deque_element = std_deque<_element>;
 
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
 		auto result = create_();
 		if (check<range_a<_element>>(list))

@@ -21,7 +21,7 @@ inline forward_extractor_data_a < any_a < > , std_istreambuf_iterator < char > >
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::to_lake__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::to_lake__(list_a<> const& ___arguments___)
 {
 	return to_lake_();
 }
@@ -45,7 +45,7 @@ inline std_string river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::to_st
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::get_char__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::get_char__(list_a<> const& ___arguments___)
 {
 	return get_char_();
 }
@@ -69,7 +69,7 @@ inline int8_t river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::get_char(
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.get_char(); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::peek_char__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::peek_char__(list_a<> const& ___arguments___)
 {
 	return peek_char_();
 }
@@ -93,7 +93,7 @@ inline int8_t river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::peek_char
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.peek_char(); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::unget_char__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::unget_char__(list_a<> const& ___arguments___)
 {
 	return unget_char_();
 }
@@ -117,10 +117,10 @@ inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::unget_char(
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unget_char(); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::put_back_char__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::put_back_char__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("river_a::put_back_char_ passed short range");
@@ -148,10 +148,10 @@ inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::put_back_ch
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.put_back_char(int_8); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::get_line__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::get_line__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("river_a::get_line_ passed short range");
@@ -184,10 +184,10 @@ inline std_vector < int8_t > river_a<_1>::___river_a_handle___<___TTT___, ___DHB
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.get_line(count, delimiter); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::ignore__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::ignore__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("river_a::ignore_ passed short range");
@@ -215,10 +215,10 @@ inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::ignore(int6
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.ignore(count); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::read__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::read__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("river_a::read_ passed short range");
@@ -255,7 +255,7 @@ inline std_string river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::read_
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.read_string(count); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::tellg__(range_a<> const& ___arguments___) const
+inline any_a<> river_a<_1>::tellg__(list_a<> const& ___arguments___) const
 {
 	return tellg_();
 }
@@ -279,10 +279,10 @@ inline int64_t river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::tellg() 
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.tellg(); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::seekg_beg__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::seekg_beg__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("river_a::seekg_beg_ passed short range");
@@ -310,10 +310,10 @@ inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::seekg_beg(i
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekg_beg(offset); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::seekg_end__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::seekg_end__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("river_a::seekg_end_ passed short range");
@@ -341,10 +341,10 @@ inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::seekg_end(i
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekg_end(offset); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::seekg_cur__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::seekg_cur__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("river_a::seekg_cur_ passed short range");
@@ -372,7 +372,7 @@ inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::seekg_cur(i
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekg_cur(offset); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::sync__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::sync__(list_a<> const& ___arguments___)
 {
 	return sync_();
 }
@@ -396,10 +396,10 @@ inline bool river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::sync()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.sync(); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::put_char__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::put_char__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("river_a::put_char_ passed short range");
@@ -427,10 +427,10 @@ inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::put_char(in
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.put_char(int_8); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::write__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::write__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("river_a::write_ passed short range");
@@ -467,7 +467,7 @@ inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::write_strin
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.write_string(str); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::tellp__(range_a<> const& ___arguments___) const
+inline any_a<> river_a<_1>::tellp__(list_a<> const& ___arguments___) const
 {
 	return tellp_();
 }
@@ -491,10 +491,10 @@ inline int64_t river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::tellp() 
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.tellp(); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::seekp_beg__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::seekp_beg__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("river_a::seekp_beg_ passed short range");
@@ -522,10 +522,10 @@ inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::seekp_beg(i
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekp_beg(offset); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::seekp_end__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::seekp_end__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("river_a::seekp_end_ passed short range");
@@ -553,10 +553,10 @@ inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::seekp_end(i
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekp_end(offset); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::seekp_cur__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::seekp_cur__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("river_a::seekp_cur_ passed short range");
@@ -584,7 +584,7 @@ inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::seekp_cur(i
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.seekp_cur(offset); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::flush__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::flush__(list_a<> const& ___arguments___)
 {
 	return flush_();
 }
@@ -608,7 +608,7 @@ inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::flush()
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.flush(); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::good__(range_a<> const& ___arguments___) const
+inline any_a<> river_a<_1>::good__(list_a<> const& ___arguments___) const
 {
 	return good_();
 }
@@ -632,7 +632,7 @@ inline bool river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::good() cons
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.good(); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::eof__(range_a<> const& ___arguments___) const
+inline any_a<> river_a<_1>::eof__(list_a<> const& ___arguments___) const
 {
 	return eof_();
 }
@@ -656,7 +656,7 @@ inline bool river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::eof() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.eof(); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::fail__(range_a<> const& ___arguments___) const
+inline any_a<> river_a<_1>::fail__(list_a<> const& ___arguments___) const
 {
 	return fail_();
 }
@@ -680,7 +680,7 @@ inline bool river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::fail() cons
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.fail(); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::bad__(range_a<> const& ___arguments___) const
+inline any_a<> river_a<_1>::bad__(list_a<> const& ___arguments___) const
 {
 	return bad_();
 }
@@ -704,10 +704,10 @@ inline bool river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::bad() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.bad(); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::set_good__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::set_good__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("river_a::set_good_ passed short range");
@@ -735,10 +735,10 @@ inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::set_good(bo
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.set_good(value); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::set_eof__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::set_eof__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("river_a::set_eof_ passed short range");
@@ -766,10 +766,10 @@ inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::set_eof(boo
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.set_eof(value); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::set_fail__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::set_fail__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("river_a::set_fail_ passed short range");
@@ -797,10 +797,10 @@ inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::set_fail(bo
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.set_fail(value); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::set_bad__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::set_bad__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("river_a::set_bad_ passed short range");
@@ -828,7 +828,7 @@ inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::set_bad(boo
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.set_bad(value); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::filename__(range_a<> const& ___arguments___) const
+inline any_a<> river_a<_1>::filename__(list_a<> const& ___arguments___) const
 {
 	return filename_();
 }
@@ -852,7 +852,7 @@ inline std_string river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::filen
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.filename(); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::close__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1>::close__(list_a<> const& ___arguments___)
 {
 	return close_();
 }
@@ -876,7 +876,7 @@ inline void river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::close()
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.close(); }
 
 template <typename _1>
-inline any_a<> river_a<_1>::closed__(range_a<> const& ___arguments___) const
+inline any_a<> river_a<_1>::closed__(list_a<> const& ___arguments___) const
 {
 	return closed_();
 }

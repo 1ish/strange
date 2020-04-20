@@ -25,9 +25,9 @@ public:
 	{}
 
 	// function
-	inline any_a<> operate(any_a<>&, range_a<> const& list) const
+	inline any_a<> operate(any_a<>&, list_a<> const& list) const
 	{
-		if (list.extract_begin_() != list.extract_end_()) //TODO check when parsing instead
+		if (list.begin_() != list.end_()) //TODO check when parsing instead
 		{
 			throw dis("strange::attribute_extraction passed non-empty list");
 		}

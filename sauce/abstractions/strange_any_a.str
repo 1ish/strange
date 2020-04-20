@@ -29,8 +29,8 @@ false &&
 					visit_ :# (arguments :<inventory>&, <any>),
 
 					// function
-					invoke : "any_a<> (any_a<>& thing, range_a<> const& arguments) const",
-					operate : "any_a<> (any_a<>& thing, range_a<> const& arguments) const",
+					invoke : "any_a<> (any_a<>& thing, list_a<> const& arguments) const",
+					operate : "any_a<> (any_a<>& thing, list_a<> const& arguments) const",
 
 					// identification
 					identity_ :# (<#number_data_uint64>),

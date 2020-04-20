@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename ___ego___ = range_a<>> //TODO range_a<token_a<>>
+template <typename ___ego___ = range_a<any_a<>>> //TODO range_a<token_a<>>
 class tokenizer_t : public thing_t<___ego___>
 {
 	template <typename _element, typename _iterator_, typename ___ego_it___ = forward_extractor_data_a<_element, _iterator_>>
@@ -529,10 +529,10 @@ class tokenizer_t : public thing_t<___ego___>
 
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
-		auto it = list.extract_begin_();
-		if (it == list.extract_end_())
+		auto it = list.begin_();
+		if (it == list.end_())
 		{
 			throw dis("strange::tokenizer::create passed empty list");
 		}
@@ -544,9 +544,9 @@ public:
 		return create_(fast<river_a<>>(river));
 	}
 
-	static inline range_a<> create_(river_a<> const& river)
+	static inline range_a<any_a<>> create_(river_a<> const& river)
 	{
-		return range_a<>::create<tokenizer_t<>>(river);
+		return range_a<any_a<>>::create<tokenizer_t<>>(river);
 	}
 
 	// reflection

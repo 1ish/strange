@@ -12,13 +12,13 @@ template <typename _element>
 class herd_a : public collection_a< _element , _element , _element >
 {
 public:
-	inline any_a<> update_thing__(range_a<> const& ___arguments___);
+	inline any_a<> update_thing__(list_a<> const& ___arguments___);
 
 	inline _element update_thing_(_element const& thing);
 
 	inline void update_thing(_element const & thing );
 
-	inline any_a<> insert_thing__(range_a<> const& ___arguments___);
+	inline any_a<> insert_thing__(list_a<> const& ___arguments___);
 
 	inline any_a<> insert_thing_(_element const& thing);
 
@@ -267,7 +267,7 @@ template <typename _element>
 class herd_d : public collection_d< _element , _element , _element >
 {
 public:
-	inline any_a<> update_thing__(range_a<> const& arguments)
+	inline any_a<> update_thing__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("update_thing_");
@@ -292,7 +292,7 @@ public:
 	inline void update_thing(_element const & thing )
 	{ update_thing_(thing); }
 
-	inline any_a<> insert_thing__(range_a<> const& arguments)
+	inline any_a<> insert_thing__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("insert_thing_");

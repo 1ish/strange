@@ -9,7 +9,7 @@ class expression_for_range_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
 		return expression_t<___ego___>::template create_expression<expression_for_range_t<___ego___>>(list);
 	}
@@ -85,7 +85,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
+	inline any_a<> operate(any_a<>& thing, list_a<> const& list) const
 	{
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
@@ -114,14 +114,14 @@ public:
 		auto it = local.emplace(_name, no()).first;
 		any_a<> result = no();
 		auto const for_range = _range.operate(local_shoal, list);
-		if (!check<range_a<>>(for_range))
+		if (!check<list_a<>>(for_range))
 		{
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_for_range::operate expression returned non-range");
 		}
 		auto read_lock = check<collection_a<>>(for_range) ? fast<collection_a<>>(for_range).read_lock_() : no();
 		try
 		{
-			for (auto const& for_thing : fast<range_a<> const>(for_range))
+			for (auto const& for_thing : fast<list_a<> const>(for_range))
 			{
 				if (!for_thing.kinds_().has_(kind))
 				{

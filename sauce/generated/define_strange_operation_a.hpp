@@ -12,7 +12,7 @@ template <typename _1>
 class operation_a : public any_a<>
 {
 public:
-	inline any_a<> pure__(range_a<> const& ___arguments___) const;
+	inline any_a<> pure__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> pure_() const;
 
@@ -22,7 +22,7 @@ public:
 
 	inline void assign(operation_a < > const & operation );
 
-	inline any_a<> names__(range_a<> const& ___arguments___) const;
+	inline any_a<> names__(list_a<> const& ___arguments___) const;
 
 	inline flock_a<> names_() const;
 
@@ -272,7 +272,7 @@ template <typename _1>
 class operation_d : public any_a<>
 {
 public:
-	inline any_a<> pure__(range_a<> const& arguments) const
+	inline any_a<> pure__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("pure_");
@@ -303,7 +303,7 @@ public:
 	inline void assign(operation_a < > const & operation )
 	{ throw dis("dynamic operation_d::assign(operation) not available"); }
 
-	inline any_a<> names__(range_a<> const& arguments) const
+	inline any_a<> names__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("names_");

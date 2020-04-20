@@ -3,10 +3,10 @@ namespace strange
 {
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::has__(range_a<> const& ___arguments___) const
+inline any_a<> collection_a<_key, _value, _element>::has__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("collection_a::has_ passed short range");
@@ -34,10 +34,10 @@ inline bool collection_a<_key, _value, _element>::___collection_a_handle___<___T
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.has(key); }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::at__(range_a<> const& ___arguments___) const
+inline any_a<> collection_a<_key, _value, _element>::at__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("collection_a::at_ passed short range");
@@ -56,10 +56,10 @@ inline _value collection_a<_key, _value, _element>::___collection_a_handle___<__
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.at_(key); }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::update__(range_a<> const& ___arguments___)
+inline any_a<> collection_a<_key, _value, _element>::update__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("collection_a::update_ passed short range");
@@ -92,10 +92,10 @@ inline void collection_a<_key, _value, _element>::___collection_a_handle___<___T
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.update(key, value); }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::insert__(range_a<> const& ___arguments___)
+inline any_a<> collection_a<_key, _value, _element>::insert__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("collection_a::insert_ passed short range");
@@ -128,10 +128,10 @@ inline bool collection_a<_key, _value, _element>::___collection_a_handle___<___T
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.insert(key, value); }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::erase__(range_a<> const& ___arguments___)
+inline any_a<> collection_a<_key, _value, _element>::erase__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("collection_a::erase_ passed short range");
@@ -159,7 +159,7 @@ inline bool collection_a<_key, _value, _element>::___collection_a_handle___<___T
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.erase(key); }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::clear__(range_a<> const& ___arguments___)
+inline any_a<> collection_a<_key, _value, _element>::clear__(list_a<> const& ___arguments___)
 {
 	return clear_();
 }
@@ -183,7 +183,7 @@ inline void collection_a<_key, _value, _element>::___collection_a_handle___<___T
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.clear(); }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::size__(range_a<> const& ___arguments___) const
+inline any_a<> collection_a<_key, _value, _element>::size__(list_a<> const& ___arguments___) const
 {
 	return size_();
 }
@@ -207,7 +207,7 @@ inline int64_t collection_a<_key, _value, _element>::___collection_a_handle___<_
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.size(); }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::empty__(range_a<> const& ___arguments___) const
+inline any_a<> collection_a<_key, _value, _element>::empty__(list_a<> const& ___arguments___) const
 {
 	return empty_();
 }
@@ -231,10 +231,10 @@ inline bool collection_a<_key, _value, _element>::___collection_a_handle___<___T
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.empty(); }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::push_front__(range_a<> const& ___arguments___)
+inline any_a<> collection_a<_key, _value, _element>::push_front__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("collection_a::push_front_ passed short range");
@@ -262,7 +262,7 @@ inline void collection_a<_key, _value, _element>::___collection_a_handle___<___T
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.push_front(thing); }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::pop_front__(range_a<> const& ___arguments___)
+inline any_a<> collection_a<_key, _value, _element>::pop_front__(list_a<> const& ___arguments___)
 {
 	return pop_front_();
 }
@@ -277,10 +277,10 @@ inline _element collection_a<_key, _value, _element>::___collection_a_handle___<
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.pop_front_(); }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::push_back__(range_a<> const& ___arguments___)
+inline any_a<> collection_a<_key, _value, _element>::push_back__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("collection_a::push_back_ passed short range");
@@ -308,7 +308,7 @@ inline void collection_a<_key, _value, _element>::___collection_a_handle___<___T
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.push_back(thing); }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::pop_back__(range_a<> const& ___arguments___)
+inline any_a<> collection_a<_key, _value, _element>::pop_back__(list_a<> const& ___arguments___)
 {
 	return pop_back_();
 }
@@ -323,10 +323,10 @@ inline _element collection_a<_key, _value, _element>::___collection_a_handle___<
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.pop_back_(); }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::self_assign__(range_a<> const& ___arguments___)
+inline any_a<> collection_a<_key, _value, _element>::self_assign__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("collection_a::self_assign_ passed short range");
@@ -349,10 +349,10 @@ inline void collection_a<_key, _value, _element>::___collection_a_handle___<___T
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_assign_(range); }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::self_add__(range_a<> const& ___arguments___)
+inline any_a<> collection_a<_key, _value, _element>::self_add__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("collection_a::self_add_ passed short range");
@@ -383,10 +383,10 @@ inline void collection_a<_key, _value, _element>::___collection_a_handle___<___T
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(range); }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::add__(range_a<> const& ___arguments___) const
+inline any_a<> collection_a<_key, _value, _element>::add__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("collection_a::add_ passed short range");
@@ -409,10 +409,10 @@ inline collection_a< _key , _value , _element > collection_a<_key, _value, _elem
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(range); }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::self_subtract__(range_a<> const& ___arguments___)
+inline any_a<> collection_a<_key, _value, _element>::self_subtract__(list_a<> const& ___arguments___)
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("collection_a::self_subtract_ passed short range");
@@ -443,10 +443,10 @@ inline void collection_a<_key, _value, _element>::___collection_a_handle___<___T
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(range); }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::subtract__(range_a<> const& ___arguments___) const
+inline any_a<> collection_a<_key, _value, _element>::subtract__(list_a<> const& ___arguments___) const
 {
-	auto ___it___ = ___arguments___.extract_begin_();
-	auto ___end___ = ___arguments___.extract_end_();
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
 		throw dis("collection_a::subtract_ passed short range");
@@ -469,7 +469,7 @@ inline collection_a< _key , _value , _element > collection_a<_key, _value, _elem
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract_(range); }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::read_lock__(range_a<> const& ___arguments___) const
+inline any_a<> collection_a<_key, _value, _element>::read_lock__(list_a<> const& ___arguments___) const
 {
 	return read_lock_();
 }
@@ -484,7 +484,7 @@ inline any_a<> collection_a<_key, _value, _element>::___collection_a_handle___<_
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.read_lock_(); }
 
 template <typename _key, typename _value, typename _element>
-inline any_a<> collection_a<_key, _value, _element>::write_lock__(range_a<> const& ___arguments___) const
+inline any_a<> collection_a<_key, _value, _element>::write_lock__(list_a<> const& ___arguments___) const
 {
 	return write_lock_();
 }

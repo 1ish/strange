@@ -9,7 +9,7 @@ class it_t : public thing_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const&)
+	static inline any_a<> create__(list_a<> const&)
 	{
 		return create_();
 	}

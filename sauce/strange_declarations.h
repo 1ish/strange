@@ -128,7 +128,7 @@ class list_t;
 template <typename _element = any_a<>, typename ___ego___ = range_a<_element>>
 class range_t;
 
-template <typename ___ego___ = range_a<>>
+template <typename ___ego___ = list_a<>>
 class range_operator_t;
 
 template <typename _element = any_a<>, bool _concurrent_ = false, typename ___ego___ = flock_a<_element>>
@@ -279,21 +279,21 @@ template <typename F>
 inline misunderstanding_a<> dis(F&& s);
 
 // native function
-using native_function_pointer = any_a<>(*)(range_a<> const&);
+using native_function_pointer = any_a<>(*)(list_a<> const&);
 
 template <typename... Args>
 inline operation_a<> native_function_create(native_function_pointer const fun, Args&&... args);
 
 // native extraction
 template <typename _abstraction_>
-using native_const_member_pointer = any_a<>(_abstraction_::*)(range_a<> const&) const;
+using native_const_member_pointer = any_a<>(_abstraction_::*)(list_a<> const&) const;
 
 template <typename _abstraction_, typename... Args>
 inline operation_a<> native_extraction_create(native_const_member_pointer<_abstraction_> const fun, Args&&... args);
 
 // native mutation
 template <typename _abstraction_>
-using native_member_pointer = any_a<>(_abstraction_::*)(range_a<> const&);
+using native_member_pointer = any_a<>(_abstraction_::*)(list_a<> const&);
 
 template <typename _abstraction_, typename... Args>
 inline operation_a<> native_mutation_create(native_member_pointer<_abstraction_> const fun, Args&&... args);
@@ -318,7 +318,7 @@ template <typename _element = any_a<>>
 inline range_a<_element> range_create(forward_extractor_a<_element> const& begin, forward_extractor_a<_element> const& end);
 
 // range operator
-inline range_a<> range_operator_create(range_a<> const& list, any_a<>& thing_ref, range_a<> const& list_ref);
+inline list_a<> range_operator_create(list_a<> const& list, any_a<>& thing_ref, list_a<> const& list_ref);
 
 // flock
 template <typename _element = any_a<>, bool _concurrent_ = false>

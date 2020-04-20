@@ -10,7 +10,7 @@ class expression_invoke_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& list)
+	static inline any_a<> create__(list_a<> const& list)
 	{
 		return expression_t<___ego___>::template create_expression<expression_invoke_t<___ego___>>(list);
 	}
@@ -41,11 +41,11 @@ public:
 			throw dis(token.report() + "strange::expression_invoke::create passed short range");
 		}
 		auto list = *it;
-		if (!check<range_a<>>(list))
+		if (!check<list_a<>>(list))
 		{
 			throw dis(token.report() + "strange::expression_invoke::create passed non-list");
 		}
-		return expression_substitute_t<expression_invoke_t<>>::create(expression_invoke_t<>(token, terms, fast<expression_a<>>(expression), fast<symbol_a<>>(member), fast<range_a<>>(list)));
+		return expression_substitute_t<expression_invoke_t<>>::create(expression_invoke_t<>(token, terms, fast<expression_a<>>(expression), fast<symbol_a<>>(member), fast<list_a<>>(list)));
 	}
 
 	// reflection
@@ -61,7 +61,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
+	inline any_a<> operate(any_a<>& thing, list_a<> const& list) const
 	{
 		auto expression_thing = _expression.operate(thing, list);
 		return thing_t<>::invoke_member(expression_thing, _member, range_operator_t<>::create_(_list, thing, list));
@@ -169,11 +169,11 @@ protected:
 	flock_a<> const _terms;
 	expression_a<> const _expression;
 	symbol_a<> const _member;
-	range_a<> const _list;
+	list_a<> const _list;
 
 	friend class any_a<>;
 
-	inline expression_invoke_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& expression, symbol_a<> const& member, range_a<> const& list)
+	inline expression_invoke_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& expression, symbol_a<> const& member, list_a<> const& list)
 		: expression_t<___ego___>(token, is_pure_literal(token, expression, member, list))
 		, _terms{ terms }
 		, _expression{ expression }
@@ -181,7 +181,7 @@ protected:
 		, _list{ list }
 	{}
 
-	static inline std_pair<bool, bool> is_pure_literal(token_a<> const& token, expression_a<> const& expression, symbol_a<> const& member, range_a<> const& list)
+	static inline std_pair<bool, bool> is_pure_literal(token_a<> const& token, expression_a<> const& expression, symbol_a<> const& member, list_a<> const& list)
 	{
 		std_pair<bool, bool> pure_literal(false, false); //TODO pure literal
 		return pure_literal;

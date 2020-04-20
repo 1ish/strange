@@ -16,49 +16,49 @@ public:
 
 	inline forward_extractor_data_a < any_a < > , std_istreambuf_iterator < char > > extract_end() const;
 
-	inline any_a<> to_lake__(range_a<> const& ___arguments___);
+	inline any_a<> to_lake__(list_a<> const& ___arguments___);
 
 	inline lake_int8_a<> to_lake_();
 
 	inline std_string to_string();
 
-	inline any_a<> get_char__(range_a<> const& ___arguments___);
+	inline any_a<> get_char__(list_a<> const& ___arguments___);
 
 	inline number_data_int8_a<> get_char_();
 
 	inline int8_t get_char();
 
-	inline any_a<> peek_char__(range_a<> const& ___arguments___);
+	inline any_a<> peek_char__(list_a<> const& ___arguments___);
 
 	inline number_data_int8_a<> peek_char_();
 
 	inline int8_t peek_char();
 
-	inline any_a<> unget_char__(range_a<> const& ___arguments___);
+	inline any_a<> unget_char__(list_a<> const& ___arguments___);
 
 	inline river_a<> unget_char_();
 
 	inline void unget_char();
 
-	inline any_a<> put_back_char__(range_a<> const& ___arguments___);
+	inline any_a<> put_back_char__(list_a<> const& ___arguments___);
 
 	inline river_a<> put_back_char_(number_data_int8_a<> const& int_8);
 
 	inline void put_back_char(int8_t int_8 );
 
-	inline any_a<> get_line__(range_a<> const& ___arguments___);
+	inline any_a<> get_line__(list_a<> const& ___arguments___);
 
 	inline lake_int8_a<> get_line_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter);
 
 	inline std_vector < int8_t > get_line(int64_t count , int8_t delimiter );
 
-	inline any_a<> ignore__(range_a<> const& ___arguments___);
+	inline any_a<> ignore__(list_a<> const& ___arguments___);
 
 	inline river_a<> ignore_(number_data_int64_a<> const& count);
 
 	inline void ignore(int64_t count );
 
-	inline any_a<> read__(range_a<> const& ___arguments___);
+	inline any_a<> read__(list_a<> const& ___arguments___);
 
 	inline lake_int8_a<> read_(number_data_int64_a<> const& count);
 
@@ -66,43 +66,43 @@ public:
 
 	inline std_string read_string(int64_t count );
 
-	inline any_a<> tellg__(range_a<> const& ___arguments___) const;
+	inline any_a<> tellg__(list_a<> const& ___arguments___) const;
 
 	inline number_data_int64_a<> tellg_() const;
 
 	inline int64_t tellg() const;
 
-	inline any_a<> seekg_beg__(range_a<> const& ___arguments___);
+	inline any_a<> seekg_beg__(list_a<> const& ___arguments___);
 
 	inline river_a<> seekg_beg_(number_data_int64_a<> const& offset);
 
 	inline void seekg_beg(int64_t offset );
 
-	inline any_a<> seekg_end__(range_a<> const& ___arguments___);
+	inline any_a<> seekg_end__(list_a<> const& ___arguments___);
 
 	inline river_a<> seekg_end_(number_data_int64_a<> const& offset);
 
 	inline void seekg_end(int64_t offset );
 
-	inline any_a<> seekg_cur__(range_a<> const& ___arguments___);
+	inline any_a<> seekg_cur__(list_a<> const& ___arguments___);
 
 	inline river_a<> seekg_cur_(number_data_int64_a<> const& offset);
 
 	inline void seekg_cur(int64_t offset );
 
-	inline any_a<> sync__(range_a<> const& ___arguments___);
+	inline any_a<> sync__(list_a<> const& ___arguments___);
 
 	inline any_a<> sync_();
 
 	inline bool sync();
 
-	inline any_a<> put_char__(range_a<> const& ___arguments___);
+	inline any_a<> put_char__(list_a<> const& ___arguments___);
 
 	inline river_a<> put_char_(number_data_int8_a<> const& int_8);
 
 	inline void put_char(int8_t int_8 );
 
-	inline any_a<> write__(range_a<> const& ___arguments___);
+	inline any_a<> write__(list_a<> const& ___arguments___);
 
 	inline river_a<> write_(lake_int8_a<> const& lake);
 
@@ -110,97 +110,97 @@ public:
 
 	inline void write_string(std_string const & str );
 
-	inline any_a<> tellp__(range_a<> const& ___arguments___) const;
+	inline any_a<> tellp__(list_a<> const& ___arguments___) const;
 
 	inline number_data_int64_a<> tellp_() const;
 
 	inline int64_t tellp() const;
 
-	inline any_a<> seekp_beg__(range_a<> const& ___arguments___);
+	inline any_a<> seekp_beg__(list_a<> const& ___arguments___);
 
 	inline river_a<> seekp_beg_(number_data_int64_a<> const& offset);
 
 	inline void seekp_beg(int64_t offset );
 
-	inline any_a<> seekp_end__(range_a<> const& ___arguments___);
+	inline any_a<> seekp_end__(list_a<> const& ___arguments___);
 
 	inline river_a<> seekp_end_(number_data_int64_a<> const& offset);
 
 	inline void seekp_end(int64_t offset );
 
-	inline any_a<> seekp_cur__(range_a<> const& ___arguments___);
+	inline any_a<> seekp_cur__(list_a<> const& ___arguments___);
 
 	inline river_a<> seekp_cur_(number_data_int64_a<> const& offset);
 
 	inline void seekp_cur(int64_t offset );
 
-	inline any_a<> flush__(range_a<> const& ___arguments___);
+	inline any_a<> flush__(list_a<> const& ___arguments___);
 
 	inline river_a<> flush_();
 
 	inline void flush();
 
-	inline any_a<> good__(range_a<> const& ___arguments___) const;
+	inline any_a<> good__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> good_() const;
 
 	inline bool good() const;
 
-	inline any_a<> eof__(range_a<> const& ___arguments___) const;
+	inline any_a<> eof__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> eof_() const;
 
 	inline bool eof() const;
 
-	inline any_a<> fail__(range_a<> const& ___arguments___) const;
+	inline any_a<> fail__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> fail_() const;
 
 	inline bool fail() const;
 
-	inline any_a<> bad__(range_a<> const& ___arguments___) const;
+	inline any_a<> bad__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> bad_() const;
 
 	inline bool bad() const;
 
-	inline any_a<> set_good__(range_a<> const& ___arguments___);
+	inline any_a<> set_good__(list_a<> const& ___arguments___);
 
 	inline river_a<> set_good_(any_a<> const& value);
 
 	inline void set_good(bool value );
 
-	inline any_a<> set_eof__(range_a<> const& ___arguments___);
+	inline any_a<> set_eof__(list_a<> const& ___arguments___);
 
 	inline river_a<> set_eof_(any_a<> const& value);
 
 	inline void set_eof(bool value );
 
-	inline any_a<> set_fail__(range_a<> const& ___arguments___);
+	inline any_a<> set_fail__(list_a<> const& ___arguments___);
 
 	inline river_a<> set_fail_(any_a<> const& value);
 
 	inline void set_fail(bool value );
 
-	inline any_a<> set_bad__(range_a<> const& ___arguments___);
+	inline any_a<> set_bad__(list_a<> const& ___arguments___);
 
 	inline river_a<> set_bad_(any_a<> const& value);
 
 	inline void set_bad(bool value );
 
-	inline any_a<> filename__(range_a<> const& ___arguments___) const;
+	inline any_a<> filename__(list_a<> const& ___arguments___) const;
 
 	inline lake_int8_a<> filename_() const;
 
 	inline std_string filename() const;
 
-	inline any_a<> close__(range_a<> const& ___arguments___);
+	inline any_a<> close__(list_a<> const& ___arguments___);
 
 	inline any_a<> close_();
 
 	inline void close();
 
-	inline any_a<> closed__(range_a<> const& ___arguments___) const;
+	inline any_a<> closed__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> closed_() const;
 
@@ -641,7 +641,7 @@ public:
 	inline forward_extractor_data_a < any_a < > , std_istreambuf_iterator < char > > extract_end() const
 	{ throw dis("dynamic river_d::extract_end() not available"); }
 
-	inline any_a<> to_lake__(range_a<> const& arguments)
+	inline any_a<> to_lake__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("to_lake_");
@@ -666,7 +666,7 @@ public:
 	inline std_string to_string()
 	{ return lake_to_string(to_lake_()); }
 
-	inline any_a<> get_char__(range_a<> const& arguments)
+	inline any_a<> get_char__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("get_char_");
@@ -691,7 +691,7 @@ public:
 	inline int8_t get_char()
 	{ return get_char_().extract_primitive(); }
 
-	inline any_a<> peek_char__(range_a<> const& arguments)
+	inline any_a<> peek_char__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("peek_char_");
@@ -716,7 +716,7 @@ public:
 	inline int8_t peek_char()
 	{ return peek_char_().extract_primitive(); }
 
-	inline any_a<> unget_char__(range_a<> const& arguments)
+	inline any_a<> unget_char__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("unget_char_");
@@ -741,7 +741,7 @@ public:
 	inline void unget_char()
 	{ unget_char_(); }
 
-	inline any_a<> put_back_char__(range_a<> const& arguments)
+	inline any_a<> put_back_char__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("put_back_char_");
@@ -766,7 +766,7 @@ public:
 	inline void put_back_char(int8_t int_8 )
 	{ put_back_char_(num(int_8)); }
 
-	inline any_a<> get_line__(range_a<> const& arguments)
+	inline any_a<> get_line__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("get_line_");
@@ -791,7 +791,7 @@ public:
 	inline std_vector < int8_t > get_line(int64_t count , int8_t delimiter )
 	{ return get_line_(num(count), num(delimiter)).extract_vector(); }
 
-	inline any_a<> ignore__(range_a<> const& arguments)
+	inline any_a<> ignore__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("ignore_");
@@ -816,7 +816,7 @@ public:
 	inline void ignore(int64_t count )
 	{ ignore_(num(count)); }
 
-	inline any_a<> read__(range_a<> const& arguments)
+	inline any_a<> read__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("read_");
@@ -844,7 +844,7 @@ public:
 	inline std_string read_string(int64_t count )
 	{ return lake_to_string(read_(num(count))); }
 
-	inline any_a<> tellg__(range_a<> const& arguments) const
+	inline any_a<> tellg__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("tellg_");
@@ -869,7 +869,7 @@ public:
 	inline int64_t tellg() const
 	{ return tellg_().extract_primitive(); }
 
-	inline any_a<> seekg_beg__(range_a<> const& arguments)
+	inline any_a<> seekg_beg__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("seekg_beg_");
@@ -894,7 +894,7 @@ public:
 	inline void seekg_beg(int64_t offset )
 	{ seekg_beg_(num(offset)); }
 
-	inline any_a<> seekg_end__(range_a<> const& arguments)
+	inline any_a<> seekg_end__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("seekg_end_");
@@ -919,7 +919,7 @@ public:
 	inline void seekg_end(int64_t offset )
 	{ seekg_end_(num(offset)); }
 
-	inline any_a<> seekg_cur__(range_a<> const& arguments)
+	inline any_a<> seekg_cur__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("seekg_cur_");
@@ -944,7 +944,7 @@ public:
 	inline void seekg_cur(int64_t offset )
 	{ seekg_cur_(num(offset)); }
 
-	inline any_a<> sync__(range_a<> const& arguments)
+	inline any_a<> sync__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("sync_");
@@ -969,7 +969,7 @@ public:
 	inline bool sync()
 	{ return sync_(); }
 
-	inline any_a<> put_char__(range_a<> const& arguments)
+	inline any_a<> put_char__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("put_char_");
@@ -994,7 +994,7 @@ public:
 	inline void put_char(int8_t int_8 )
 	{ put_char_(num(int_8)); }
 
-	inline any_a<> write__(range_a<> const& arguments)
+	inline any_a<> write__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("write_");
@@ -1022,7 +1022,7 @@ public:
 	inline void write_string(std_string const & str )
 	{ write_(lake_from_string(str)); }
 
-	inline any_a<> tellp__(range_a<> const& arguments) const
+	inline any_a<> tellp__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("tellp_");
@@ -1047,7 +1047,7 @@ public:
 	inline int64_t tellp() const
 	{ return tellp_().extract_primitive(); }
 
-	inline any_a<> seekp_beg__(range_a<> const& arguments)
+	inline any_a<> seekp_beg__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("seekp_beg_");
@@ -1072,7 +1072,7 @@ public:
 	inline void seekp_beg(int64_t offset )
 	{ seekp_beg_(num(offset)); }
 
-	inline any_a<> seekp_end__(range_a<> const& arguments)
+	inline any_a<> seekp_end__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("seekp_end_");
@@ -1097,7 +1097,7 @@ public:
 	inline void seekp_end(int64_t offset )
 	{ seekp_end_(num(offset)); }
 
-	inline any_a<> seekp_cur__(range_a<> const& arguments)
+	inline any_a<> seekp_cur__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("seekp_cur_");
@@ -1122,7 +1122,7 @@ public:
 	inline void seekp_cur(int64_t offset )
 	{ seekp_cur_(num(offset)); }
 
-	inline any_a<> flush__(range_a<> const& arguments)
+	inline any_a<> flush__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("flush_");
@@ -1147,7 +1147,7 @@ public:
 	inline void flush()
 	{ flush_(); }
 
-	inline any_a<> good__(range_a<> const& arguments) const
+	inline any_a<> good__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("good_");
@@ -1172,7 +1172,7 @@ public:
 	inline bool good() const
 	{ return good_(); }
 
-	inline any_a<> eof__(range_a<> const& arguments) const
+	inline any_a<> eof__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("eof_");
@@ -1197,7 +1197,7 @@ public:
 	inline bool eof() const
 	{ return eof_(); }
 
-	inline any_a<> fail__(range_a<> const& arguments) const
+	inline any_a<> fail__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("fail_");
@@ -1222,7 +1222,7 @@ public:
 	inline bool fail() const
 	{ return fail_(); }
 
-	inline any_a<> bad__(range_a<> const& arguments) const
+	inline any_a<> bad__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("bad_");
@@ -1247,7 +1247,7 @@ public:
 	inline bool bad() const
 	{ return bad_(); }
 
-	inline any_a<> set_good__(range_a<> const& arguments)
+	inline any_a<> set_good__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("set_good_");
@@ -1272,7 +1272,7 @@ public:
 	inline void set_good(bool value )
 	{ set_good_(boole(value)); }
 
-	inline any_a<> set_eof__(range_a<> const& arguments)
+	inline any_a<> set_eof__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("set_eof_");
@@ -1297,7 +1297,7 @@ public:
 	inline void set_eof(bool value )
 	{ set_eof_(boole(value)); }
 
-	inline any_a<> set_fail__(range_a<> const& arguments)
+	inline any_a<> set_fail__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("set_fail_");
@@ -1322,7 +1322,7 @@ public:
 	inline void set_fail(bool value )
 	{ set_fail_(boole(value)); }
 
-	inline any_a<> set_bad__(range_a<> const& arguments)
+	inline any_a<> set_bad__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("set_bad_");
@@ -1347,7 +1347,7 @@ public:
 	inline void set_bad(bool value )
 	{ set_bad_(boole(value)); }
 
-	inline any_a<> filename__(range_a<> const& arguments) const
+	inline any_a<> filename__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("filename_");
@@ -1372,7 +1372,7 @@ public:
 	inline std_string filename() const
 	{ return lake_to_string(filename_()); }
 
-	inline any_a<> close__(range_a<> const& arguments)
+	inline any_a<> close__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("close_");
@@ -1397,7 +1397,7 @@ public:
 	inline void close()
 	{ close_(); }
 
-	inline any_a<> closed__(range_a<> const& arguments) const
+	inline any_a<> closed__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
 		auto const op = any_a<>::operation("closed_");
