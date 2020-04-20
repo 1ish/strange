@@ -13,6 +13,7 @@
 #include "strange_nothing_t.h"
 #include "strange_it_t.h"
 #include "strange_symbol_t.h"
+#include "strange_list_t.h"
 #include "strange_range_t.h"
 #include "strange_misunderstanding_t.h"
 #include "strange_disagreement_t.h"

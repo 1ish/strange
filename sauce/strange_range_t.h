@@ -13,25 +13,26 @@ public:
 	static inline any_a<> create__(range_a<> const& range)
 	{
 		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto end = range.extract_end_();
+		if (it == end)
 		{
 			return create_();
 		}
-		any_a<> begin = *it;
-		if (!check<forward_extractor_a<_element>>(begin))
+		any_a<> beginning = *it;
+		if (!check<forward_extractor_a<_element>>(beginning))
 		{
-			throw dis("strange::range::create passed non-mutator begin");
+			throw dis("strange::range::create passed non-extractor begin");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			throw dis("strange::range::create passed short range");
 		}
-		any_a<> end = *it;
-		if (!check<forward_extractor_a<_element>>(end))
+		any_a<> ending = *it;
+		if (!check<forward_extractor_a<_element>>(ending))
 		{
-			throw dis("strange::range::create passed non-mutator end");
+			throw dis("strange::range::create passed non-extractor end");
 		}
-		return create_(fast<forward_extractor_a<_element>>(begin), fast<forward_extractor_a<_element>>(end));
+		return create_(fast<forward_extractor_a<_element>>(beginning), fast<forward_extractor_a<_element>>(ending));
 	}
 
 	static inline range_a<_element> create_()

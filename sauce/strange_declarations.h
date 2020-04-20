@@ -122,6 +122,9 @@ class native_extraction_t;
 template <typename _abstraction_, typename ___ego___ = operation_a<>>
 class native_mutation_t;
 
+template <typename ___ego___ = list_a<>>
+class list_t;
+
 template <typename _element = any_a<>, typename ___ego___ = range_a<_element>>
 class range_t;
 
@@ -301,6 +304,11 @@ inline number_data_a<double> float_64_from_string(std_string const& str);
 
 template <typename _primitive_, typename _result_ = number_data_a<_primitive_>>
 inline _result_ num(_primitive_ primitive);
+
+// list
+inline list_a<> list_create();
+
+inline list_a<> list_create(forward_extractor_a<any_a<>> const& begin, forward_extractor_a<any_a<>> const& end);
 
 // range
 template <typename _element = any_a<>>
