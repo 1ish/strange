@@ -5,7 +5,7 @@ false &&
 			(	// parent
 				$$<>[],
 				{	// parser
-					parse_ := (tokenizer :<range>#, <expression>), //TODO <range[<token>]>
+					parse_ := (tokenizer :<range[<>]>#, <expression>), //TODO <range[<token>]>
 				}
 			)
 		)

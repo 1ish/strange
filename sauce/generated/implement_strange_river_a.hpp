@@ -905,7 +905,7 @@ inline ___unordered_shoal_a___ river_a<_1>::___operations___()
 {
 	static ___unordered_shoal_a___ OPERATIONS = []()
 	{
-		___unordered_shoal_a___ operations = range_a<>::template ___operations___<___unordered_shoal_a___>();
+		___unordered_shoal_a___ operations = range_a< any_a<> >::template ___operations___<___unordered_shoal_a___>();
 		operations.update(sym("to_lake_"), native_mutation_t<river_a>::create(&river_a::to_lake__));
 		operations.update(sym("get_char_"), native_mutation_t<river_a>::create(&river_a::get_char__));
 		operations.update(sym("peek_char_"), native_mutation_t<river_a>::create(&river_a::peek_char__));

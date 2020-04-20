@@ -176,7 +176,7 @@ public:
 		return river_a<>::create<river_t<>>(stream.get(), stream.get(), stream, name);
 	}
 
-	static inline any_a<> in__(range_a<> const& _)
+	static inline any_a<> in__(range_a<> const&)
 	{
 		return in_();
 	}
@@ -186,7 +186,7 @@ public:
 		return river_a<>::create<river_t<>>(&standard_in());
 	}
 
-	static inline any_a<> out__(range_a<> const& _)
+	static inline any_a<> out__(range_a<> const&)
 	{
 		return out_();
 	}
@@ -196,7 +196,7 @@ public:
 		return river_a<>::create<river_t<>>(nullptr, &standard_out());
 	}
 
-	static inline any_a<> err__(range_a<> const& _)
+	static inline any_a<> err__(range_a<> const&)
 	{
 		return err_();
 	}

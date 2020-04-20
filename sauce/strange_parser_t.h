@@ -27,7 +27,7 @@ public:
 	}
 
 	// parser
-	inline expression_a<> parse_(range_a<> const& tokenizer)
+	inline expression_a<> parse_(range_a<any_a<>> const& tokenizer)
 	{
 		_tokenizer = tokenizer;
 		_it = _tokenizer.extract_begin_();
@@ -66,7 +66,7 @@ protected:
 	}
 
 private:
-	range_a<> _tokenizer;
+	range_a<any_a<>> _tokenizer;
 	forward_extractor_a<any_a<>> _it;
 	forward_extractor_a<any_a<>> _end;
 	token_a<> _previous;

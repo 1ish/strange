@@ -9,7 +9,7 @@ template <typename _1 = void>
 inline river_d<_1> ___river_dynamic___(any_a<> const& thing); 
 
 template <typename _1>
-class river_a : public range_a<>
+class river_a : public range_a< any_a<> >
 {
 public:
 	inline forward_extractor_data_a < any_a < > , std_istreambuf_iterator < char > > extract_begin() const;
@@ -207,7 +207,7 @@ public:
 	inline bool closed();
 
 protected:
-	struct ___river_a_handle_base___ : range_a<>::___range_a_handle_base___
+	struct ___river_a_handle_base___ : range_a< any_a<> >::___range_a_handle_base___
 	{
 		virtual forward_extractor_data_a < any_a < > , std_istreambuf_iterator < char > > extract_begin() const = 0;
 		virtual forward_extractor_data_a < any_a < > , std_istreambuf_iterator < char > > extract_end() const = 0;
@@ -278,21 +278,21 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___river_a_handle_base___>
-	struct ___river_a_handle___ : range_a<>::template ___range_a_handle___<___TTT___, ___DHB___>
+	struct ___river_a_handle___ : range_a< any_a<> >::template ___range_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___river_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: range_a<>::template ___range_a_handle___<___TTT___, ___DHB___>{ value }
+			: range_a< any_a<> >::template ___range_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___river_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: range_a<>::template ___range_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: range_a< any_a<> >::template ___range_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
 		inline ___river_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
-			: range_a<>::template ___range_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
+			: range_a< any_a<> >::template ___range_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline forward_extractor_data_a < any_a < > , std_istreambuf_iterator < char > > extract_begin() const final;
@@ -507,37 +507,37 @@ public:
 	inline river_a() = default;
 
 	inline river_a(river_a& other, any_a<>::___reference_tag___) noexcept
-		: range_a<>(other, any_a<>::___reference_tag___{})
+		: range_a< any_a<> >(other, any_a<>::___reference_tag___{})
 	{}
 
 	inline river_a(river_a& other, any_a<>::___duplicate_tag___) noexcept
-		: range_a<>(other, any_a<>::___duplicate_tag___{})
+		: range_a< any_a<> >(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline river_a(std_shared_ptr<___TTT___> const& handle) noexcept
-		: range_a<>{ handle }
+		: range_a< any_a<> >{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___river_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
 	explicit inline river_a(std_shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
-		: range_a<>(handle, any_a<>::___reference_tag___{})
+		: range_a< any_a<> >(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___river_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<river_a, std::decay_t<___TTT___>>::value>>
 	explicit inline river_a(___TTT___ value) noexcept
-		: range_a<>{ std_make_shared<___river_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: range_a< any_a<> >{ std_make_shared<___river_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
 	explicit inline river_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
-		: range_a<>{ std_make_shared<___river_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
+		: range_a< any_a<> >{ std_make_shared<___river_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
@@ -595,7 +595,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = range_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = range_a< any_a<> >::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -614,7 +614,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = range_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = range_a< any_a<> >::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -632,7 +632,7 @@ public:
 }; // class river_a
 
 template <typename _1>
-class river_d : public range_d<>
+class river_d : public range_d< any_a<> >
 {
 public:
 	inline forward_extractor_data_a < any_a < > , std_istreambuf_iterator < char > > extract_begin() const
@@ -1425,15 +1425,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit river_d(any_a<> const& thing)
-		: range_d<>{ thing }
+		: range_d< any_a<> >{ thing }
 	{}
 
 	explicit river_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: range_d<>{ thing, any_a<>::___reference_tag___{} }
+		: range_d< any_a<> >{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit river_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: range_d<>{ thing, any_a<>::___duplicate_tag___{} }
+		: range_d< any_a<> >{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

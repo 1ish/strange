@@ -3,7 +3,7 @@ false &&
 	{	<river> :: abstraction
 		(	// no dimensions
 			(	// parent
-				$$<range>[], //TODO $$<range>[<number_data_int8>]
+				$$<range>[<>], //TODO $$<range>[<number_data_int8>]
 				{	// river input
 					extract_begin : "forward_extractor_data_a<any_a<>, std_istreambuf_iterator<char>> () const",
 					extract_end : "forward_extractor_data_a<any_a<>, std_istreambuf_iterator<char>> () const",
