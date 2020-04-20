@@ -553,12 +553,12 @@ public:
 	// list
 	inline forward_extractor_a<any_a<>> begin_() const
 	{
-		return extractor_t<any_a<>>, typename std_deque_primitive::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cbegin());
+		return extractor_t<any_a<>, typename std_deque_primitive::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cbegin());
 	}
 
 	inline forward_extractor_a<any_a<>> end_() const
 	{
-		return extractor_t<any_a<>>, typename std_deque_primitive::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cend());
+		return extractor_t<any_a<>, typename std_deque_primitive::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cend());
 	}
 
 	// range

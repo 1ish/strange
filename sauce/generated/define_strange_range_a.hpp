@@ -9,7 +9,7 @@ template <typename _element = any_a<> >
 inline range_d<_element> ___range_dynamic___(any_a<> const& thing); 
 
 template <typename _element>
-class range_a : public any_a<>
+class range_a : public list_a<>
 {
 public:
 	inline any_a<> extract_begin__(range_a<> const& ___arguments___) const;
@@ -21,28 +21,28 @@ public:
 	inline forward_extractor_a< _element > extract_end_() const;
 
 protected:
-	struct ___range_a_handle_base___ : any_a<>::___any_a_handle_base___
+	struct ___range_a_handle_base___ : list_a<>::___list_a_handle_base___
 	{
 		virtual forward_extractor_a< _element > extract_begin_() const = 0;
 		virtual forward_extractor_a< _element > extract_end_() const = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___range_a_handle_base___>
-	struct ___range_a_handle___ : any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>
+	struct ___range_a_handle___ : list_a<>::template ___list_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___range_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>{ value }
+			: list_a<>::template ___list_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___range_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
+			: list_a<>::template ___list_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		template <typename... Args>
 		inline ___range_a_handle___(any_a<>::___variadic_tag___, Args&&... args)
-			: any_a<>::template ___any_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
+			: list_a<>::template ___list_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline forward_extractor_a< _element > extract_begin_() const final;
@@ -129,37 +129,37 @@ public:
 	inline range_a() = default;
 
 	inline range_a(range_a& other, any_a<>::___reference_tag___) noexcept
-		: any_a<>(other, any_a<>::___reference_tag___{})
+		: list_a<>(other, any_a<>::___reference_tag___{})
 	{}
 
 	inline range_a(range_a& other, any_a<>::___duplicate_tag___) noexcept
-		: any_a<>(other, any_a<>::___duplicate_tag___{})
+		: list_a<>(other, any_a<>::___duplicate_tag___{})
 	{}
 
 	template <typename ___TTT___>
 	explicit inline range_a(std_shared_ptr<___TTT___> const& handle) noexcept
-		: any_a<>{ handle }
+		: list_a<>{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___range_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
 	explicit inline range_a(std_shared_ptr<___TTT___>& handle, any_a<>::___reference_tag___) noexcept
-		: any_a<>(handle, any_a<>::___reference_tag___{})
+		: list_a<>(handle, any_a<>::___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___range_a_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<range_a, std::decay_t<___TTT___>>::value>>
 	explicit inline range_a(___TTT___ value) noexcept
-		: any_a<>{ std_make_shared<___range_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
+		: list_a<>{ std_make_shared<___range_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
 	explicit inline range_a(any_a<>::___variadic_tag___, ___TTT___*, Args&&... args)
-		: any_a<>{ std_make_shared<___range_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
+		: list_a<>{ std_make_shared<___range_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		any_a<>::___handle___->___weak___(any_a<>::___handle___);
 	}
@@ -217,7 +217,7 @@ public:
 	{
 		static ___unordered_herd_a___ CATS = []()
 		{
-			auto cats = any_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto cats = list_a<>::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return cats;
 		}();
@@ -236,7 +236,7 @@ public:
 	{
 		static ___unordered_herd_a___ KINDS = []()
 		{
-			auto kinds = any_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			auto kinds = list_a<>::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
 			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
 			return kinds;
 		}();
@@ -254,7 +254,7 @@ public:
 }; // class range_a
 
 template <typename _element>
-class range_d : public any_a<>
+class range_d : public list_d<>
 {
 public:
 	inline any_a<> extract_begin__(range_a<> const& arguments) const
@@ -304,15 +304,15 @@ public:
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 
 	explicit range_d(any_a<> const& thing)
-		: any_a<>{ thing }
+		: list_d<>{ thing }
 	{}
 
 	explicit range_d(any_a<>& thing, any_a<>::___reference_tag___)
-		: any_a<>{ thing, any_a<>::___reference_tag___{} }
+		: list_d<>{ thing, any_a<>::___reference_tag___{} }
 	{}
 
 	explicit range_d(any_a<>& thing, any_a<>::___duplicate_tag___)
-		: any_a<>{ thing, any_a<>::___duplicate_tag___{} }
+		: list_d<>{ thing, any_a<>::___duplicate_tag___{} }
 	{}
 };
 

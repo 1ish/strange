@@ -38,7 +38,7 @@ inline ___unordered_shoal_a___ range_a<_element>::___operations___()
 {
 	static ___unordered_shoal_a___ OPERATIONS = []()
 	{
-		___unordered_shoal_a___ operations = any_a<>::template ___operations___<___unordered_shoal_a___>();
+		___unordered_shoal_a___ operations = list_a<>::template ___operations___<___unordered_shoal_a___>();
 		operations.update(sym("extract_begin_"), native_extraction_t<range_a>::create(&range_a::extract_begin__));
 		operations.update(sym("extract_end_"), native_extraction_t<range_a>::create(&range_a::extract_end__));
 		return operations;
