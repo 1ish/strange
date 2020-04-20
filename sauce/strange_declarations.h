@@ -72,6 +72,7 @@ using lake_int8_a = lake_a<int8_t>;
 }
 
 #include "generated/declare_strange_misunderstanding_a.hpp"
+#include "generated/declare_strange_list_a.hpp"
 #include "generated/declare_strange_range_a.hpp"
 #include "generated/declare_strange_collection_a.hpp"
 #include "generated/declare_strange_inventory_a.hpp"

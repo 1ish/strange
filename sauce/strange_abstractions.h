@@ -41,6 +41,7 @@ namespace strange
 #include "generated/define_strange_random_access_extractor_data_a.hpp"
 #include "generated/define_strange_random_access_mutator_a.hpp"
 #include "generated/define_strange_random_access_mutator_data_a.hpp"
+#include "generated/define_strange_list_a.hpp"
 #include "generated/define_strange_range_a.hpp"
 #include "generated/define_strange_data_a.hpp"
 #include "generated/define_strange_number_a.hpp"
@@ -69,6 +70,7 @@ namespace strange
 
 #include "generated/implement_strange_any_a.hpp"
 #include "generated/implement_strange_misunderstanding_a.hpp"
+#include "generated/implement_strange_list_a.hpp"
 #include "generated/implement_strange_range_a.hpp"
 #include "generated/implement_strange_data_a.hpp"
 #include "generated/implement_strange_number_a.hpp"

@@ -1,0 +1,14 @@
+false &&
+{	strange :
+	{	<list> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<>[],
+				{	// range
+					begin_ :# (<forward_extractor[<>]>),
+					end_ :# (<forward_extractor[<>]>),
+				}
+			)
+		)
+	}
+}
