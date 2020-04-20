@@ -368,6 +368,17 @@ public:
 		return std::hash<std_string>{}(std_string{ reinterpret_cast<char const*>(bytes.data()), bytes.size() });
 	}
 
+	// list
+	inline forward_extractor_a<any_a<>> begin_() const
+	{
+		return extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cbegin());
+	}
+
+	inline forward_extractor_a<any_a<>> end_() const
+	{
+		return extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend());
+	}
+
 	// range
 	inline bidirectional_extractor_a<any_a<>> keys_begin_() const
 	{
@@ -407,13 +418,6 @@ public:
 	inline bidirectional_extractor_data_a<parcel_a<>, typename dart_packet::iterator> extract_end() const
 	{
 		return extractor_t<parcel_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend());
-	}
-
-	inline range_a<> to_range_any_() const
-	{
-		return range_t<>::create_(
-			extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cbegin()),
-			extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend()));
 	}
 
 	// collection / parcel

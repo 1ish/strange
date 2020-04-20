@@ -175,6 +175,17 @@ public:
 		shoal.update(sym("strange::range_operator::create"), native_function_create(&range_operator_t<>::create__));
 	}
 
+	// list
+	inline forward_extractor_a<any_a<>> begin_() const
+	{
+		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_range, _range.extract_begin_(), _thing_ref, _range_ref);
+	}
+
+	inline forward_extractor_a<any_a<>> end_() const
+	{
+		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_range, _range.extract_end_(), _thing_ref, _range_ref);
+	}
+
 	// range
 	inline forward_extractor_a<any_a<>> extract_begin_() const
 	{
@@ -194,11 +205,6 @@ public:
 	inline forward_extractor_data_a<any_a<>, forward_extractor_a<any_a<>>> extract_end() const
 	{
 		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_range, _range.extract_end_(), _thing_ref, _range_ref);
-	}
-
-	inline range_a<> to_range_any_() const
-	{
-		return range_t<>::create_(extract_begin_(), extract_end_());
 	}
 
 protected:

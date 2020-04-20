@@ -327,6 +327,17 @@ public:
 		return seed;
 	}
 
+	// list
+	inline forward_extractor_a<any_a<>> begin_() const
+	{
+		return extractor_t<any_a<>, typename std_unordered_map_key_value::const_iterator>::create(thing_t<___ego___>::me_(), _map.cbegin());
+	}
+
+	inline forward_extractor_a<any_a<>> end_() const
+	{
+		return extractor_t<any_a<>, typename std_unordered_map_key_value::const_iterator>::create(thing_t<___ego___>::me_(), _map.cend());
+	}
+
 	// range
 	inline forward_extractor_a<flock_a<>> extract_begin_() const
 	{
@@ -366,13 +377,6 @@ public:
 	inline forward_mutator_data_a<flock_a<>, typename std_unordered_map_key_value::iterator> mutate_end()
 	{
 		return mutator_t<flock_a<>, typename std_unordered_map_key_value::iterator>::create(_map.end());
-	}
-
-	inline range_a<> to_range_any_() const
-	{
-		return range_t<>::create_(
-			extractor_t<any_a<>, typename std_unordered_map_key_value::const_iterator>::create(thing_t<___ego___>::me_(), _map.cbegin()),
-			extractor_t<any_a<>, typename std_unordered_map_key_value::const_iterator>::create(thing_t<___ego___>::me_(), _map.cend()));
 	}
 
 	// collection

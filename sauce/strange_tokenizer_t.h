@@ -561,6 +561,17 @@ public:
 		shoal.update(sym("strange::tokenizer::create"), native_function_create(&tokenizer_t<>::create__));
 	}
 
+	// list
+	inline forward_extractor_a<any_a<>> begin_() const
+	{
+		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_river, _river.extract_begin_());
+	}
+
+	inline forward_extractor_a<any_a<>> end_() const
+	{
+		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_river, _river.extract_end_());
+	}
+
 	// range
 	inline forward_extractor_a<any_a<>> extract_begin_() const
 	{
@@ -570,13 +581,6 @@ public:
 	inline forward_extractor_a<any_a<>> extract_end_() const
 	{
 		return extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_river, _river.extract_end_());
-	}
-
-	inline range_a<> to_range_any_() const
-	{
-		return range_t<>::create_(
-			extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_river, _river.extract_begin_()),
-			extractor_t<any_a<>, forward_extractor_a<any_a<>>>::create(_river, _river.extract_end_()));
 	}
 
 protected:

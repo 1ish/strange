@@ -58,6 +58,17 @@ public:
 		shoal.update(sym(type_().to_string() + "::create"), native_function_create(&range_t<_element>::create__));
 	}
 
+	// list
+	inline forward_extractor_a<any_a<>> begin_() const
+	{
+		return _begin.to_extractor_any_();
+	}
+
+	inline forward_extractor_a<any_a<>> end_() const
+	{
+		return _end.to_extractor_any_();
+	}
+
 	// range
 	inline forward_extractor_a<_element> extract_begin_() const
 	{
@@ -67,11 +78,6 @@ public:
 	inline forward_extractor_a<_element> extract_end_() const
 	{
 		return _end;
-	}
-
-	inline range_a<> to_range_any_() const
-	{
-		return range_t<>::create_(_begin.to_extractor_any_(), _end.to_extractor_any_());
 	}
 
 protected:

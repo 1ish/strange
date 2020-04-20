@@ -545,6 +545,17 @@ public:
 		return _deque >= squad.extract_deque();
 	}
 
+	// list
+	inline forward_extractor_a<any_a<>> begin_() const
+	{
+		return extractor_t<any_a<>, typename std_deque_element::const_iterator>::create(thing_t<___ego___>::me_(), _deque.cbegin());
+	}
+
+	inline forward_extractor_a<any_a<>> end_() const
+	{
+		return extractor_t<any_a<>, typename std_deque_element::const_iterator>::create(thing_t<___ego___>::me_(), _deque.cend());
+	}
+
 	// range
 	inline random_access_extractor_a<_element> extract_begin_() const
 	{
@@ -584,13 +595,6 @@ public:
 	inline random_access_mutator_data_a<_element, typename std_deque_element::iterator> mutate_end()
 	{
 		return mutator_t<_element, typename std_deque_element::iterator>::create(_deque.end());
-	}
-
-	inline range_a<> to_range_any_() const
-	{
-		return range_t<>::create_(
-			extractor_t<any_a<>, typename std_deque_element::const_iterator>::create(thing_t<___ego___>::me_(), _deque.cbegin()),
-			extractor_t<any_a<>, typename std_deque_element::const_iterator>::create(thing_t<___ego___>::me_(), _deque.cend()));
 	}
 
 	// collection

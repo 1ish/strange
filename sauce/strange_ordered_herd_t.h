@@ -296,6 +296,17 @@ public:
 		return _set >= herd.extract_set();
 	}
 
+	// list
+	inline forward_extractor_a<any_a<>> begin_() const
+	{
+		return extractor_t<any_a<>, typename std_set_element::const_iterator>::create(thing_t<___ego___>::me_(), _set.cbegin());
+	}
+
+	inline forward_extractor_a<any_a<>> end_() const
+	{
+		return extractor_t<any_a<>, typename std_set_element::const_iterator>::create(thing_t<___ego___>::me_(), _set.cend());
+	}
+
 	// range
 	inline bidirectional_extractor_a<_element> extract_begin_() const
 	{
@@ -315,13 +326,6 @@ public:
 	inline bidirectional_extractor_data_a<_element, typename std_set_element::const_iterator> extract_end() const
 	{
 		return extractor_t<_element, typename std_set_element::const_iterator>::create(thing_t<___ego___>::me_(), _set.cend());
-	}
-
-	inline range_a<> to_range_any_() const
-	{
-		return range_t<>::create_(
-			extractor_t<any_a<>, typename std_set_element::const_iterator>::create(thing_t<___ego___>::me_(), _set.cbegin()),
-			extractor_t<any_a<>, typename std_set_element::const_iterator>::create(thing_t<___ego___>::me_(), _set.cend()));
 	}
 
 	// collection / herd

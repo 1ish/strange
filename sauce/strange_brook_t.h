@@ -550,6 +550,17 @@ public:
 		return _deque >= brook.extract_deque();
 	}
 
+	// list
+	inline forward_extractor_a<any_a<>> begin_() const
+	{
+		return extractor_t<any_a<>>, typename std_deque_primitive::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cbegin());
+	}
+
+	inline forward_extractor_a<any_a<>> end_() const
+	{
+		return extractor_t<any_a<>>, typename std_deque_primitive::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cend());
+	}
+
 	// range
 	inline random_access_extractor_a<number_data_a<_primitive_>> extract_begin_() const
 	{
@@ -589,13 +600,6 @@ public:
 	inline random_access_mutator_data_a<number_data_a<_primitive_>, typename std_deque_primitive::iterator> mutate_end()
 	{
 		return mutator_t<number_data_a<_primitive_>, typename std_deque_primitive::iterator>::create(*this, _deque.end());
-	}
-
-	inline range_a<> to_range_any_() const
-	{
-		return range_t<>::create_(
-			extractor_t<any_a<>, typename std_deque_primitive::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cbegin()),
-			extractor_t<any_a<>, typename std_deque_primitive::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cend()));
 	}
 
 	// collection

@@ -221,6 +221,21 @@ public:
 		shoal.update(sym("strange::river::err"), native_function_create(&river_t<>::err__));
 	}
 
+	// list
+	inline forward_extractor_a<any_a<>> begin_() const
+	{
+		if (!_istream)
+		{
+			throw dis("strange::river::begin can only be called on input rivers");
+		}
+		return extractor_t<any_a<>, std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{ *_istream });
+	}
+
+	inline forward_extractor_a<any_a<>> end_() const
+	{
+		return extractor_t<any_a<>, std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{});
+	}
+
 	// range
 	inline forward_extractor_a<any_a<>> extract_begin_() const
 	{
@@ -248,17 +263,6 @@ public:
 	inline forward_extractor_data_a<any_a<>, std_istreambuf_iterator_char> extract_end() const
 	{
 		return extractor_t<any_a<>, std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{});
-	}
-
-	inline range_a<> to_range_any_() const
-	{
-		if (!_istream)
-		{
-			throw dis("strange::river::to_range_any can only be called on input rivers");
-		}
-		return range_t<>::create_(
-			extractor_t<any_a<>, std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{ *_istream }),
-			extractor_t<any_a<>, std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{}));
 	}
 
 	// river input

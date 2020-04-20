@@ -20,16 +20,11 @@ public:
 
 	inline forward_extractor_a< _element > extract_end_() const;
 
-	inline any_a<> to_range_any__(range_a<> const& ___arguments___) const;
-
-	inline range_a<> to_range_any_() const;
-
 protected:
 	struct ___range_a_handle_base___ : any_a<>::___any_a_handle_base___
 	{
 		virtual forward_extractor_a< _element > extract_begin_() const = 0;
 		virtual forward_extractor_a< _element > extract_end_() const = 0;
-		virtual range_a<> to_range_any_() const = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___range_a_handle_base___>
@@ -53,8 +48,6 @@ protected:
 		virtual inline forward_extractor_a< _element > extract_begin_() const final;
 
 		virtual inline forward_extractor_a< _element > extract_end_() const final;
-
-		virtual inline range_a<> to_range_any_() const final;
 
 	};
 
@@ -306,28 +299,6 @@ public:
 			throw dis("dynamic range_d::extract_end_ passed non-existent member");
 		}
 		return cast<forward_extractor_a< _element >>(variadic_operate(op, *const_cast<range_d*>(this)));
-	}
-
-	inline any_a<> to_range_any__(range_a<> const& arguments) const
-	{
-		assert(any_a<>::___handle___); 
-		auto const op = any_a<>::operation("to_range_any_");
-		if (!op)
-		{
-			throw dis("dynamic range_d::to_range_any_ passed non-existent member");
-		}
-		return op.operate(*const_cast<range_d*>(this), arguments);
-	}
-
-	inline range_a<> to_range_any_() const
-	{
-		assert(any_a<>::___handle___);
-		auto const op = any_a<>::operation("to_range_any_");
-		if (!op)
-		{
-			throw dis("dynamic range_d::to_range_any_ passed non-existent member");
-		}
-		return cast<range_a<>>(variadic_operate(op, *const_cast<range_d*>(this)));
 	}
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
