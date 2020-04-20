@@ -9,10 +9,11 @@ class abstraction_t : public operation_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto it = list.begin_();
+		auto end = list.end_();
+		if (it == end)
 		{
 			throw dis("strange::abstraction::create passed empty range");
 		}
@@ -21,7 +22,7 @@ public:
 		{
 			throw dis("strange::abstraction::create passed non-token");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			throw dis("strange::abstraction::create passed short range");
 		}
@@ -30,7 +31,7 @@ public:
 		{
 			throw dis(fast<token_a<>>(token).report() + "strange::abstraction::create passed non-symbol scope");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			throw dis("strange::abstraction::create passed short range");
 		}
@@ -39,7 +40,7 @@ public:
 		{
 			throw dis(fast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock dimension names");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			throw dis("strange::abstraction::create passed short range");
 		}
@@ -48,7 +49,7 @@ public:
 		{
 			throw dis(fast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock dimension kinds");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			throw dis("strange::abstraction::create passed short range");
 		}
@@ -57,7 +58,7 @@ public:
 		{
 			throw dis(fast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock dimension defaults");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			throw dis("strange::abstraction::create passed short range");
 		}
@@ -87,14 +88,15 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>&, range_a<> const& range) const
+	inline any_a<> operate(any_a<>&, range_a<> const& list) const
 	{
 		//TODO cache range -> child
 		auto aspects_shoal = unordered_shoal_t<>::create_();
 		auto& aspects = aspects_shoal.mutate_map();
 		auto local_shoal = unordered_shoal_t<>::create_();
 		auto& local = local_shoal.mutate_map();
-		auto ait = range.extract_begin_();
+		auto ait = list.begin_();
+		auto aend = list.end_();
 		auto nit = _names.extract_vector().cbegin();
 		auto kit = _dimension_kinds.extract_vector().cbegin();
 		for (auto const& def : _dimension_defaults.extract_vector())
@@ -104,7 +106,7 @@ public:
 			{
 				try
 				{
-					any_kind = fast<expression_a<>>(any_kind).operate(local_shoal, range);
+					any_kind = fast<expression_a<>>(any_kind).operate(local_shoal, list);
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
@@ -118,7 +120,7 @@ public:
 			auto const kind = fast<kind_a<>>(any_kind);
 
 			auto const name = *nit++;
-			if (ait != range.extract_end_())
+			if (ait != aend)
 			{
 				auto const argument = *ait;
 				++ait;
@@ -149,7 +151,7 @@ public:
 			any_a<> parent;
 			try
 			{
-				parent = expression.operate(local_shoal, range);
+				parent = expression.operate(local_shoal, list);
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{

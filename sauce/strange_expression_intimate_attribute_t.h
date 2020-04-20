@@ -10,9 +10,9 @@ class expression_intimate_attribute_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		return expression_t<___ego___>::template create_expression<expression_intimate_attribute_t<___ego___>>(range);
+		return expression_t<___ego___>::template create_expression<expression_intimate_attribute_t<___ego___>>(list);
 	}
 
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
@@ -61,7 +61,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
 	{
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
@@ -82,14 +82,14 @@ public:
 			{
 				try
 				{
-					kind = fast<expression_a<>>(kind).operate(thing, range);
+					kind = fast<expression_a<>>(kind).operate(thing, list);
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
 					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_attribute::operate kind expression evaluation error") + misunderstanding;
 				}
 			}
-			auto const value = _expression.operate(thing, range);
+			auto const value = _expression.operate(thing, list);
 			if (!value.kinds_().has(kind))
 			{
 				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_attribute::operate returned wrong kind of thing");

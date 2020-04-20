@@ -10,9 +10,9 @@ class expression_kind_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		return expression_t<___ego___>::template create_expression<expression_kind_t<___ego___>>(range);
+		return expression_t<___ego___>::template create_expression<expression_kind_t<___ego___>>(list);
 	}
 
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
@@ -182,7 +182,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
 	{
 		if (_count <= 2)
 		{
@@ -190,7 +190,7 @@ public:
 		}
 		if (_count == 10)
 		{
-			auto const any_kind = _expression.operate(thing, range);
+			auto const any_kind = _expression.operate(thing, list);
 			if (!check<kind_a<>>(any_kind))
 			{
 				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::operate expression did not return a kind");
@@ -198,7 +198,7 @@ public:
 			auto const kind = fast<kind_a<>>(any_kind);
 			return kind_t<>::create_(number_int_64_t<>::create(kind.order() + _order.extract_primitive()), kind.name_(), kind.dimensions_(), kind.aspects_(), kind.parameters_(), kind.result_(), _fixed, _reference, _optional);
 		}
-		auto const dimensions = _dimensions.operate(thing, range);
+		auto const dimensions = _dimensions.operate(thing, list);
 		if (!check<flock_a<>>(dimensions))
 		{
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::operate dimensions are not a flock");
@@ -207,7 +207,7 @@ public:
 		{
 			return kind_t<>::create_(_order, _name, fast<flock_a<>>(dimensions));
 		}
-		auto const aspects = _aspects.operate(thing, range);
+		auto const aspects = _aspects.operate(thing, list);
 		if (!check<flock_a<>>(aspects))
 		{
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::operate aspects are not a flock");
@@ -216,7 +216,7 @@ public:
 		{
 			return kind_t<>::create_(_order, _name, fast<flock_a<>>(dimensions), fast<flock_a<>>(aspects));
 		}
-		auto const parameters = _parameters.operate(thing, range);
+		auto const parameters = _parameters.operate(thing, list);
 		if (!check<flock_a<>>(parameters))
 		{
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::operate parameters are not a flock");
@@ -225,7 +225,7 @@ public:
 		{
 			return kind_t<>::create_(_order, _name, fast<flock_a<>>(dimensions), fast<flock_a<>>(aspects), fast<flock_a<>>(parameters));
 		}
-		auto const result = _result.operate(thing, range);
+		auto const result = _result.operate(thing, list);
 		if (!check<symbol_a<>>(result))
 		{
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::operate result is not a symbol");

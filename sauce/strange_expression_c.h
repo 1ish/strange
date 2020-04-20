@@ -10,12 +10,12 @@ class expression_c : public operation_c<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> animate__(range_a<> const& range)
+	static inline any_a<> animate__(range_a<> const& list)
 	{
-		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto it = list.extract_begin_();
+		if (it == list.extract_end_())
 		{
-			throw dis("<strange::expression>::animate passed empty range");
+			throw dis("<strange::expression>::animate passed empty list");
 		}
 		any_a<> conception = *it;
 		if (!check<shoal_a<>>(conception))
@@ -31,13 +31,13 @@ public:
 	}
 
 	// reflection
-	inline any_a<> type__(range_a<> const& range) const
+	inline any_a<> type__(range_a<> const& list) const
 	{
 		auto const op = operation_c<___ego___>::_operations.at_(sym("type"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
-			return op.operate(thing, range);
+			return op.operate(thing, list);
 		}
 		static symbol_a<> TYPE = sym("<strange::expression>");
 		return TYPE;
@@ -60,13 +60,13 @@ public:
 		return TYPE;
 	}
 
-	inline any_a<> shared__(range_a<> const& range) const
+	inline any_a<> shared__(range_a<> const& list) const
 	{
 		auto const op = operation_c<___ego___>::_operations.at_(sym("shared"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
-			return op.operate(thing, range);
+			return op.operate(thing, list);
 		}
 		unordered_shoal_a<> shoal = unordered_shoal_t<>::create_();
 		share(shoal);
@@ -107,13 +107,13 @@ public:
 		return operation_c<___ego___>::me_(); //TODO?
 	}
 
-	inline any_a<> literal__(range_a<> const& range) const
+	inline any_a<> literal__(range_a<> const& list) const
 	{
 		auto const op = operation_c<___ego___>::_operations.at_(sym("literal"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
-			return op.operate(thing, range);
+			return op.operate(thing, list);
 		}
 		return no();
 	}
@@ -140,13 +140,13 @@ public:
 		return false;
 	}
 
-	inline any_a<> evaluate__(range_a<> const& range) const
+	inline any_a<> evaluate__(range_a<> const& list) const
 	{
 		auto const op = operation_c<___ego___>::_operations.at_(sym("evaluate"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
-			return op.operate(thing, range);
+			return op.operate(thing, list);
 		}
 		auto local = unordered_shoal_t<>::create_();
 		local.insert(sym("$"), unordered_shoal_t<any_a<>, any_a<>, true>::create_());
@@ -166,13 +166,13 @@ public:
 		return operation_c<___ego___>::operate(local, range_t<>::create_());
 	}
 
-	inline any_a<> token__(range_a<> const& range) const
+	inline any_a<> token__(range_a<> const& list) const
 	{
 		auto const op = operation_c<___ego___>::_operations.at_(sym("token"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
-			return op.operate(thing, range);
+			return op.operate(thing, list);
 		}
 		return token_t<>::create_punctuation_();
 	}
@@ -193,13 +193,13 @@ public:
 		return token_t<>::create_punctuation_();
 	}
 
-	inline any_a<> terms__(range_a<> const& range) const
+	inline any_a<> terms__(range_a<> const& list) const
 	{
 		auto const op = operation_c<___ego___>::_operations.at_(sym("terms"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
-			return op.operate(thing, range);
+			return op.operate(thing, list);
 		}
 		return flock_t<>::create_();
 	}
@@ -220,36 +220,36 @@ public:
 		return flock_t<>::create_();
 	}
 
-	inline any_a<> generate__(range_a<> const& range) const
+	inline any_a<> generate__(range_a<> const& list) const
 	{
 		auto const op = operation_c<___ego___>::_operations.at_(sym("generate"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
-			return op.operate(thing, range);
+			return op.operate(thing, list);
 		}
-		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto it = list.extract_begin_();
+		if (it == list.extract_end_())
 		{
-			throw dis("<strange::expression>::generate passed empty range");
+			throw dis("<strange::expression>::generate passed empty list");
 		}
 		any_a<> version = *it;
 		if (!check<number_data_a<int64_t>>(version))
 		{
 			throw dis("<strange::expression>::generate passed non-int-64 version");
 		}
-		if (++it == range.extract_end_())
+		if (++it == list.extract_end_())
 		{
-			throw dis("<strange::expression>::generate passed short range");
+			throw dis("<strange::expression>::generate passed short list");
 		}
 		any_a<> indent = *it;
 		if (!check<number_data_a<int64_t>>(indent))
 		{
 			throw dis("<strange::expression>::generate passed non-int-64 indent");
 		}
-		if (++it == range.extract_end_())
+		if (++it == list.extract_end_())
 		{
-			throw dis("<strange::expression>::generate passed short range");
+			throw dis("<strange::expression>::generate passed short list");
 		}
 		any_a<> river = fast_dup(*it);
 		if (!check<river_a<>>(river))
@@ -280,36 +280,36 @@ public:
 		}
 	}
 
-	inline any_a<> generate_cpp__(range_a<> const& range) const
+	inline any_a<> generate_cpp__(range_a<> const& list) const
 	{
 		auto const op = operation_c<___ego___>::_operations.at_(sym("generate_cpp"));
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
-			return op.operate(thing, range);
+			return op.operate(thing, list);
 		}
-		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto it = list.extract_begin_();
+		if (it == list.extract_end_())
 		{
-			throw dis("<strange::expression>::generate_cpp passed empty range");
+			throw dis("<strange::expression>::generate_cpp passed empty list");
 		}
 		any_a<> version = *it;
 		if (!check<number_data_a<int64_t>>(version))
 		{
 			throw dis("<strange::expression>::generate_cpp passed non-int-64 version");
 		}
-		if (++it == range.extract_end_())
+		if (++it == list.extract_end_())
 		{
-			throw dis("<strange::expression>::generate_cpp passed short range");
+			throw dis("<strange::expression>::generate_cpp passed short list");
 		}
 		any_a<> indent = *it;
 		if (!check<number_data_a<int64_t>>(indent))
 		{
 			throw dis("<strange::expression>::generate_cpp passed non-int-64 indent");
 		}
-		if (++it == range.extract_end_())
+		if (++it == list.extract_end_())
 		{
-			throw dis("<strange::expression>::generate_cpp passed short range");
+			throw dis("<strange::expression>::generate_cpp passed short list");
 		}
 		any_a<> river = fast_dup(*it);
 		if (!check<river_a<>>(river))

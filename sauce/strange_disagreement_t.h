@@ -9,10 +9,10 @@ class disagreement_t : public nothing_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto it = list.extract_begin_();
+		if (it == list.extract_end_())
 		{
 			return create_();
 		}

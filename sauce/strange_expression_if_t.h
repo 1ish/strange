@@ -9,9 +9,9 @@ class expression_if_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		return expression_t<___ego___>::template create_expression<expression_if_t<___ego___>>(range);
+		return expression_t<___ego___>::template create_expression<expression_if_t<___ego___>>(list);
 	}
 
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
@@ -70,14 +70,14 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
 	{
 		any_a<> local = any_a<>::val(thing); // new block scope
-		if (_condition.operate(local, range))
+		if (_condition.operate(local, list))
 		{
-			return _yay.operate(local, range);
+			return _yay.operate(local, list);
 		}
-		return _nay.operate(local, range);
+		return _nay.operate(local, list);
 	}
 
 	// expression

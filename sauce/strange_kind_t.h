@@ -10,10 +10,11 @@ class kind_t : public cat_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto it = list.extract_begin_();
+		auto end = list.extract_end_();
+		if (it == end)
 		{
 			return create_();
 		}
@@ -22,7 +23,7 @@ public:
 		{
 			throw dis("strange::kind::create passed non-int-64 order");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			return create_(fast<number_data_a<int64_t>>(order));
 		}
@@ -31,7 +32,7 @@ public:
 		{
 			throw dis("strange::kind::create passed non-symbol name");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name));
 		}
@@ -40,7 +41,7 @@ public:
 		{
 			throw dis("strange::kind::create passed non-flock dimensions");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions));
 		}
@@ -49,7 +50,7 @@ public:
 		{
 			throw dis("strange::kind::create passed non-flock aspects");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions), fast<flock_a<>>(aspects));
 		}
@@ -58,7 +59,7 @@ public:
 		{
 			throw dis("strange::kind::create passed non-flock parameters");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions), fast<flock_a<>>(aspects), fast<flock_a<>>(parameters));
 		}
@@ -67,17 +68,17 @@ public:
 		{
 			throw dis("strange::kind::create passed non-symbol result");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions), fast<flock_a<>>(aspects), fast<flock_a<>>(parameters), fast<symbol_a<>>(result));
 		}
 		any_a<> fixed = *it;
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions), fast<flock_a<>>(aspects), fast<flock_a<>>(parameters), fast<symbol_a<>>(result), fixed);
 		}
 		any_a<> reference = *it;
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions), fast<flock_a<>>(aspects), fast<flock_a<>>(parameters), fast<symbol_a<>>(result), fixed, reference);
 		}

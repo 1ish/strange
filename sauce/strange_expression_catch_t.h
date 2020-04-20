@@ -9,9 +9,9 @@ class expression_catch_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		return expression_t<___ego___>::template create_expression<expression_catch_t<___ego___>>(range);
+		return expression_t<___ego___>::template create_expression<expression_catch_t<___ego___>>(list);
 	}
 
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
@@ -100,7 +100,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
 	{
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
@@ -110,7 +110,7 @@ public:
 #endif
 		try
 		{
-			return _try_expression.operate(thing, range);
+			return _try_expression.operate(thing, list);
 		}
 		catch (any_a<>& exception)
 		{
@@ -123,7 +123,7 @@ public:
 				{
 					try
 					{
-						kind = fast<expression_a<>>(kind).operate(thing, range);
+						kind = fast<expression_a<>>(kind).operate(thing, list);
 					}
 					catch (misunderstanding_a<>& misunderstanding)
 					{
@@ -133,7 +133,7 @@ public:
 				if (exception.kinds_().has_(kind))
 				{
 					fast<unordered_shoal_a<>>(thing).update_(name, exception);
-					return eit->operate(thing, range);
+					return eit->operate(thing, list);
 				}
 				++eit;
 			}

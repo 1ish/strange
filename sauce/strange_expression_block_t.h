@@ -10,9 +10,9 @@ class expression_block_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		return expression_t<___ego___>::template create_expression<expression_block_t<___ego___>>(range);
+		return expression_t<___ego___>::template create_expression<expression_block_t<___ego___>>(list);
 	}
 
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
@@ -33,13 +33,14 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
 	{
 		auto thing_val = any_a<>::val(thing); // new block scope
-		auto result_range = range_operator_t<>::create_(_terms, thing_val, range);
-		auto it = result_range.extract_begin_();
+		auto result_range = range_operator_t<>::create_(_terms, thing_val, list);
+		auto it = result_range.begin_();
+		auto end = result_range.end_();
 		auto result = no();
-		while (it != result_range.extract_end_())
+		while (it != end)
 		{
 			result = *it;
 			++it;

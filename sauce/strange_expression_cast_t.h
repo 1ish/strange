@@ -9,9 +9,9 @@ class expression_cast_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		return expression_t<___ego___>::template create_expression<expression_cast_t<___ego___>>(range);
+		return expression_t<___ego___>::template create_expression<expression_cast_t<___ego___>>(list);
 	}
 
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
@@ -61,10 +61,10 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
 	{
-		auto const evaluated = _thing.operate(thing, range);
-		auto const abstraction = _abstraction.operate(thing, range);
+		auto const evaluated = _thing.operate(thing, list);
+		auto const abstraction = _abstraction.operate(thing, list);
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!evaluated.kinds_().has_(abstraction))
 		{

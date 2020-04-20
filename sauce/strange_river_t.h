@@ -131,29 +131,30 @@ public:
 		return river_a<>::create<river_t<>>(stream.get(), stream.get(), stream);
 	}
 
-	static inline any_a<> file__(range_a<> const& range)
+	static inline any_a<> file__(range_a<> const& list)
 	{
-		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto it = list.extract_begin_();
+		auto end = list.extract_end_();
+		if (it == end)
 		{
-			throw dis("strange::river::file passed empty range");
+			throw dis("strange::river::file passed empty list");
 		}
 		any_a<> const name = *it;
 		if (!check<lake_a<int8_t>>(name))
 		{
 			throw dis("strange::river::file passed non-lake-int-8");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			return file_(fast<lake_a<int8_t>>(name));
 		}
 		any_a<> const in = *it;
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			return file_(fast<lake_a<int8_t>>(name), in);
 		}
 		any_a<> const out = *it;
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			return file_(fast<lake_a<int8_t>>(name), in, out);
 		}

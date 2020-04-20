@@ -256,16 +256,16 @@ class parcel_t : public thing_t<___ego___>
 
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
 		auto result = create_();
-		if (check<range_a<parcel_a<>>>(range))
+		if (check<range_a<parcel_a<>>>(list))
 		{
-			result += fast<range_a<parcel_a<>>>(range);
+			result += fast<range_a<parcel_a<>>>(list);
 		}
 		else
 		{
-			for (auto const& thing : range)
+			for (auto const& thing : list)
 			{
 				result.push_back(thing.to_parcel_());
 			}

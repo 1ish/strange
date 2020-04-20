@@ -9,9 +9,9 @@ class expression_for_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		return expression_t<___ego___>::template create_expression<expression_for_t<___ego___>>(range);
+		return expression_t<___ego___>::template create_expression<expression_for_t<___ego___>>(list);
 	}
 
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
@@ -79,18 +79,18 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
 	{
 		any_a<> local = any_a<>::val(thing); // new block scope
 		any_a<> result = no();
 		try
 		{
-			for (_initialize.operate(local, range); _condition.operate(local, range); _next.operate(local, range))
+			for (_initialize.operate(local, list); _condition.operate(local, list); _next.operate(local, list))
 			{
 				try
 				{
 					auto thing = any_a<>::val(local); // new scope each time round the loop
-					result = _loop.operate(thing, range);
+					result = _loop.operate(thing, list);
 				}
 				catch (typename expression_t<___ego___>::continue_i&)
 				{}

@@ -5,6 +5,16 @@
 
 namespace strange
 {
+	inline forward_extractor_a<any_a<>> begin(list_a<> const& list)
+	{
+		return list.begin_();
+	}
+
+	inline forward_extractor_a<any_a<>> end(list_a<> const& list)
+	{
+		return list.end_();
+	}
+
 	template <typename _element>
 	inline forward_extractor_a<_element> begin(range_a<_element> const& range)
 	{

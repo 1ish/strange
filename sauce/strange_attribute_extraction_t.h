@@ -25,11 +25,11 @@ public:
 	{}
 
 	// function
-	inline any_a<> operate(any_a<>&, range_a<> const& range) const
+	inline any_a<> operate(any_a<>&, range_a<> const& list) const
 	{
-		if (range.extract_begin_() != range.extract_end_()) //TODO check when parsing instead
+		if (list.extract_begin_() != list.extract_end_()) //TODO check when parsing instead
 		{
-			throw dis("strange::attribute_extraction passed non-empty range");
+			throw dis("strange::attribute_extraction passed non-empty list");
 		}
 		return _thing;
 	}

@@ -25,27 +25,29 @@ public:
 	{}
 
 	// function
-	inline any_a<> operate(any_a<>&, range_a<> const& range) const
+	inline any_a<> operate(any_a<>&, range_a<> const& list) const
 	{
 		auto local_shoal = check<unordered_shoal_a<>>(_aspects)
 			? fast<unordered_shoal_a<>>(_aspects)
 			: unordered_shoal_t<>::create_();
 		auto& local = local_shoal.mutate_map();
 		local.emplace(sym("$"), _shared);
-		auto ait = range.extract_begin_();
+		auto abegin = list.extract_begin_();
+		auto aend = list.extract_end_();
+		auto ait = abegin;
 		auto nit = operation_t<___ego___>::_names.extract_vector().cbegin();
 		auto kit = _kinds.extract_vector().cbegin();
 		for (auto const& def : _defaults.extract_vector())
 		{
 			if (nit->is("&"))
 			{
-				if (ait == range.extract_begin_())
+				if (ait == abegin)
 				{
-					local.emplace(*nit, range);
+					local.emplace(*nit, list);
 				}
 				else
 				{
-					local.emplace(*nit, range_t<>::create_(ait, range.extract_end_()));
+					local.emplace(*nit, range_t<>::create_(ait, aend));
 				}
 				break;
 			}
@@ -55,7 +57,7 @@ public:
 			{
 				try
 				{
-					any_kind = fast<expression_a<>>(any_kind).operate(local_shoal, range);
+					any_kind = fast<expression_a<>>(any_kind).operate(local_shoal, list);
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
@@ -68,7 +70,7 @@ public:
 			}
 			auto const kind = fast<kind_a<>>(any_kind);
 
-			if (ait != range.extract_end_())
+			if (ait != aend)
 			{
 				if (kind.fixed() || kind.reference())
 				{
@@ -106,7 +108,7 @@ public:
 		}
 		try
 		{
-			return _expression.operate(local_shoal, range);
+			return _expression.operate(local_shoal, list);
 		}
 		catch (typename expression_t<>::return_i& ret)
 		{

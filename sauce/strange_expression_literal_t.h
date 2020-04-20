@@ -10,9 +10,9 @@ class expression_literal_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		return expression_t<___ego___>::template create_expression<expression_literal_t<___ego___>>(range);
+		return expression_t<___ego___>::template create_expression<expression_literal_t<___ego___>>(list);
 	}
 
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
@@ -31,12 +31,12 @@ public:
 	}
 
 	// validation
-	static inline any_a<> validate__(range_a<> const& range)
+	static inline any_a<> validate__(range_a<> const& list)
 	{
-		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto it = list.extract_begin_();
+		if (it == list.extract_end_())
 		{
-			throw dis("strange::expression_literal::validate passed empty range");
+			throw dis("strange::expression_literal::validate passed empty list");
 		}
 		return validate_(*it);
 	}

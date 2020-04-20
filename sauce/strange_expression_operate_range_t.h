@@ -10,9 +10,9 @@ class expression_operate_range_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		return expression_t<___ego___>::template create_expression<expression_operate_range_t<___ego___>>(range);
+		return expression_t<___ego___>::template create_expression<expression_operate_range_t<___ego___>>(list);
 	}
 
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
@@ -31,12 +31,12 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_operate_range::create passed short range");
 		}
-		auto range = *it;
-		if (!check<expression_a<>>(range))
+		auto list = *it;
+		if (!check<expression_a<>>(list))
 		{
-			throw dis(token.report() + "strange::expression_operate_range::create passed non-expression range term");
+			throw dis(token.report() + "strange::expression_operate_range::create passed non-expression list term");
 		}
-		return expression_substitute_t<expression_operate_range_t<>>::create(expression_operate_range_t<>(token, terms, fast<expression_a<>>(thing), fast<expression_a<>>(range)));
+		return expression_substitute_t<expression_operate_range_t<>>::create(expression_operate_range_t<>(token, terms, fast<expression_a<>>(thing), fast<expression_a<>>(list)));
 	}
 
 	// reflection
@@ -52,10 +52,10 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
 	{
-		auto thing_term = _thing.operate(thing, range);
-		auto const range_term = _range.operate(thing, range);
+		auto thing_term = _thing.operate(thing, list);
+		auto const range_term = _list.operate(thing, list);
 		if (!check<range_a<>>(range_term))
 		{
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate_range::operate with non-range term");
@@ -91,7 +91,7 @@ public:
 	{
 		_thing.generate(version, indent, river);
 		river.write_string(".perform");
-		_range.generate(version, indent, river);
+		_list.generate(version, indent, river);
 	}
 
 	inline any_a<> generate_cpp_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = no()) const
@@ -105,7 +105,7 @@ public:
 		if (declare || define)
 		{
 			_thing.generate(version, indent, river);
-			_range.generate(version, indent, river);
+			_list.generate(version, indent, river);
 			return;
 		}
 		if (type)
@@ -114,22 +114,22 @@ public:
 		}
 		_thing.generate(version, indent, river);
 		river.write_string("(");
-		_range.generate(version, indent, river);
+		_list.generate(version, indent, river);
 		river.write_string(") ");
 	}
 
 protected:
 	flock_a<> const _terms;
 	expression_a<> const _thing;
-	expression_a<> const _range;
+	expression_a<> const _list;
 
 	friend class any_a<>;
 
-	inline expression_operate_range_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& thing, expression_a<> const& range)
-		: expression_t<___ego___>(token, is_pure_literal(token, thing, range))
+	inline expression_operate_range_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& thing, expression_a<> const& list)
+		: expression_t<___ego___>(token, is_pure_literal(token, thing, list))
 		, _terms{ terms }
 		, _thing{ thing }
-		, _range{ range }
+		, _list{ list }
 	{}
 
 	static inline std_pair<bool, bool> is_pure_literal(token_a<> const& token, expression_a<> const& thing_expression, expression_a<> const& range_expression)

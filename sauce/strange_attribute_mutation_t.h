@@ -25,10 +25,10 @@ public:
 	{}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
 	{
-		auto const it = range.extract_begin_();
-		if (it != range.extract_end_()) // assign
+		auto const it = list.extract_begin_();
+		if (it != list.extract_end_()) // assign
 		{
 			auto const value = *it;
 			if (!_thing.identical(value))

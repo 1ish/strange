@@ -10,9 +10,9 @@ class expression_xor_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		return expression_t<___ego___>::template create_expression<expression_xor_t<___ego___>>(range);
+		return expression_t<___ego___>::template create_expression<expression_xor_t<___ego___>>(list);
 	}
 
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
@@ -52,10 +52,10 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
 	{
-		auto const left = _left.operate(thing, range);
-		return boole(!left != !_right.operate(thing, range));
+		auto const left = _left.operate(thing, list);
+		return boole(!left != !_right.operate(thing, list));
 	}
 
 	// expression

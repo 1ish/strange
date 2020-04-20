@@ -38,27 +38,28 @@ public:
 	};
 
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		return create_expression<expression_t<___ego___>>(range);
+		return create_expression<expression_t<___ego___>>(list);
 	}
 	
 	template <typename _expression_>
-	static inline any_a<> create_expression(range_a<> const& range)
+	static inline any_a<> create_expression(range_a<> const& list)
 	{
-		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto it = list.extract_begin_();
+		auto end = list.extract_end_();
+		if (it == end)
 		{
-			throw dis("[expression] create passed empty range");
+			throw dis("[expression] create passed empty list");
 		}
 		any_a<> token = *it;
 		if (!check<token_a<>>(token))
 		{
 			throw dis("[expression] create passed non-token");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
-			throw dis("[expression] create passed short range");
+			throw dis("[expression] create passed short list");
 		}
 		any_a<> terms = *it;
 		if (!check<flock_a<>>(terms))

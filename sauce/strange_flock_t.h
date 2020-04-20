@@ -366,16 +366,16 @@ public:
 	using std_vector_element = std_vector<_element>;
 
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
 		auto result = create_();
-		if (check<range_a<_element>>(range))
+		if (check<range_a<_element>>(list))
 		{
-			result += fast<range_a<_element>>(range);
+			result += fast<range_a<_element>>(list);
 		}
 		else
 		{
-			for (auto const& thing : range)
+			for (auto const& thing : list)
 			{
 				result.push_back(cast<_element>(thing));
 			}

@@ -10,9 +10,9 @@ class expression_invoke_attribute_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		return expression_t<___ego___>::template create_expression<expression_invoke_attribute_t<___ego___>>(range);
+		return expression_t<___ego___>::template create_expression<expression_invoke_attribute_t<___ego___>>(list);
 	}
 
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
@@ -61,12 +61,12 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
 	{
-		auto thing_term = _thing.operate(thing, range);
+		auto thing_term = _thing.operate(thing, list);
 		if (_assign)
 		{
-			return thing_t<>::invoke_member(thing_term, _member, flock_t<>::create_(_value.operate(thing, range)));
+			return thing_t<>::invoke_member(thing_term, _member, flock_t<>::create_(_value.operate(thing, list)));
 		}
 		return thing_t<>::invoke_member(thing_term, _member, flock_t<>::create_());
 	}

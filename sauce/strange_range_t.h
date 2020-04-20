@@ -10,10 +10,10 @@ class range_t : public thing_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		auto it = range.extract_begin_();
-		auto end = range.extract_end_();
+		auto it = list.extract_begin_();
+		auto end = list.extract_end_();
 		if (it == end)
 		{
 			return create_();
@@ -25,7 +25,7 @@ public:
 		}
 		if (++it == end)
 		{
-			throw dis("strange::range::create passed short range");
+			throw dis("strange::range::create passed short list");
 		}
 		any_a<> ending = *it;
 		if (!check<forward_extractor_a<_element>>(ending))

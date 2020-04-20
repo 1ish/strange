@@ -387,16 +387,16 @@ public:
 	using std_deque_primitive = std_deque<_primitive_>;
 
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
 		auto result = create_();
-		if (check<range_a<number_data_a<_primitive_>>>(range))
+		if (check<range_a<number_data_a<_primitive_>>>(list))
 		{
-			result += fast<range_a<number_data_a<_primitive_>>>(range);
+			result += fast<range_a<number_data_a<_primitive_>>>(list);
 		}
 		else
 		{
-			for (auto const& thing : range)
+			for (auto const& thing : list)
 			{
 				result.push_back(cast<number_data_a<_primitive_>>(thing));
 			}

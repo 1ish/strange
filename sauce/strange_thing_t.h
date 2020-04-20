@@ -64,64 +64,64 @@ public:
 	}
 
 	// function
-	static inline any_a<> invoke__(range_a<> const& range)
+	static inline any_a<> invoke__(range_a<> const& list)
 	{
-		auto it = range.extract_begin_();
-		auto end = range.extract_end_();
+		auto it = list.extract_begin_();
+		auto end = list.extract_end_();
 		if (it == end)
 		{
-			throw dis("strange::thing::invoke passed empty range");
+			throw dis("strange::thing::invoke passed empty list");
 		}
 		any_a<> thing = fast_dup(*it);
 		if (++it == end)
 		{
-			throw dis("strange::thing::invoke passed short range");
+			throw dis("strange::thing::invoke passed short list");
 		}
 		any_a<> member = *it;
 		return invoke_member(thing, member, range_create(++it, end));
 	}
 
-	static inline any_a<> invoke(any_a<>& thing, range_a<> const& range)
+	static inline any_a<> invoke(any_a<>& thing, range_a<> const& list)
 	{
-		auto it = range.extract_begin_();
-		auto end = range.extract_end_();
+		auto it = list.extract_begin_();
+		auto end = list.extract_end_();
 		if (it == end)
 		{
-			throw dis("strange::thing::invoke passed short range");
+			throw dis("strange::thing::invoke passed short list");
 		}
 		any_a<> member = *it;
 		return invoke_member(thing, member, range_create(++it, end));
 	}
 
-	static inline any_a<> invoke_member(any_a<>& thing, any_a<> const& member, range_a<> const& range)
+	static inline any_a<> invoke_member(any_a<>& thing, any_a<> const& member, range_a<> const& list)
 	{
 		auto const op = thing.operations_().at_(member);
 		if (!op)
 		{
 			throw dis("strange::thing::invoke passed non-existent member");
 		}
-		return op.operate(thing, range);
+		return op.operate(thing, list);
 	}
 
-	static inline any_a<> operate__(range_a<> const& range)
+	static inline any_a<> operate__(range_a<> const& list)
 	{
-		auto it = range.extract_begin_();
-		auto end = range.extract_end_();
+		auto it = list.extract_begin_();
+		auto end = list.extract_end_();
 		if (it == end)
 		{
-			throw dis("strange::thing::operate passed empty range");
+			throw dis("strange::thing::operate passed empty list");
 		}
 		any_a<> thing = fast_dup(*it);
 		return thing.operate(thing, range_create(++it, end));
 	}
 
-	static inline any_a<> operate(any_a<>& thing, range_a<> const& range)
+	static inline any_a<> operate(any_a<>& thing, range_a<> const& list)
 	{
-		auto it = range.extract_begin_();
-		auto end = range.extract_end_();
+		auto it = list.extract_begin_();
+		auto end = list.extract_end_();
 		if (it == end)
 		{
-			throw dis("strange::thing::operate passed short range");
+			throw dis("strange::thing::operate passed short list");
 		}
 		any_a<> operation = *it;
 		return operation.operate(thing, range_create(++it, end));

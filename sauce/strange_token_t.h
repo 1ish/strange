@@ -11,60 +11,61 @@ class token_t : public thing_t<___ego___>
 
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto it = list.extract_begin_();
+		auto end = list.extract_end_();
+		if (it == end)
 		{
-			throw dis("strange::token::create passed empty range");
+			throw dis("strange::token::create passed empty list");
 		}
 		any_a<> filename = *it;
 		if (!check<symbol_a<>>(filename))
 		{
 			throw dis("strange::token::create passed non-symbol filename");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
-			throw dis("strange::token::create passed short range");
+			throw dis("strange::token::create passed short list");
 		}
 		any_a<> line = *it;
 		if (!check<number_data_a<int64_t>>(line))
 		{
 			throw dis("strange::token::create passed non-number-int-64 line");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
-			throw dis("strange::token::create passed short range");
+			throw dis("strange::token::create passed short list");
 		}
 		any_a<> position = *it;
 		if (!check<number_data_a<int64_t>>(position))
 		{
 			throw dis("strange::token::create passed non-number-int-64 position");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
-			throw dis("strange::token::create passed short range");
+			throw dis("strange::token::create passed short list");
 		}
 		any_a<> tag = *it;
 		if (!check<symbol_a<>>(tag))
 		{
 			throw dis("strange::token::create passed non-symbol tag");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
-			throw dis("strange::token::create passed short range");
+			throw dis("strange::token::create passed short list");
 		}
 		any_a<> symbol = *it;
 		if (!check<symbol_a<>>(symbol))
 		{
 			throw dis("strange::token::create passed non-symbol symbol");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			return create_(fast<symbol_a<>>(filename), fast<number_data_a<int64_t>>(line), fast<number_data_a<int64_t>>(position), fast<symbol_a<>>(tag), fast<symbol_a<>>(symbol));
 		}
 		any_a<> literal = *it;
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			return create_(fast<symbol_a<>>(filename), fast<number_data_a<int64_t>>(line), fast<number_data_a<int64_t>>(position), fast<symbol_a<>>(tag), fast<symbol_a<>>(symbol), literal);
 		}
@@ -91,46 +92,47 @@ public:
 		return token_a<>::create<token_t<>>(filename, line, position, tag, symbol, literal, precedence);
 	}
 
-	static inline token_a<> create(std_string const& tag, range_a<> const& range, create_member member)
+	static inline token_a<> create(std_string const& tag, range_a<> const& list, create_member member)
 	{
-		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto it = list.extract_begin_();
+		auto end = list.extract_end_();
+		if (it == end)
 		{
-			throw dis("strange::token::create_" + tag + " passed empty range");
+			throw dis("strange::token::create_" + tag + " passed empty list");
 		}
 		auto const filename = *it;
 		if (!check<symbol_a<>>(filename))
 		{
 			throw dis("strange::token::create_" + tag + " passed non-symbol filename");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
-			throw dis("strange::token::create_" + tag + "passed short range");
+			throw dis("strange::token::create_" + tag + "passed short list");
 		}
 		auto const line = *it;
 		if (!check<number_data_a<int64_t>>(line))
 		{
 			throw dis("strange::token::create_" + tag + " passed non-number-int-64 line");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
-			throw dis("strange::token::create_" + tag + " passed short range");
+			throw dis("strange::token::create_" + tag + " passed short list");
 		}
 		auto const position = *it;
 		if (!check<number_data_a<int64_t>>(position))
 		{
 			throw dis("strange::token::create_" + tag + " passed non-number-int-64 position");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
-			throw dis("strange::token::create_" + tag + " passed short range");
+			throw dis("strange::token::create_" + tag + " passed short list");
 		}
 		auto const symbol = *it;
 		if (!check<symbol_a<>>(symbol))
 		{
 			throw dis("strange::token::create_" + tag + " passed non-symbol symbol");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			return member(fast<symbol_a<>>(filename), fast<number_data_a<int64_t>>(line), fast<number_data_a<int64_t>>(position), fast<symbol_a<>>(symbol), number_int_64_t<>::create(-1));
 		}
@@ -142,9 +144,9 @@ public:
 		return member(fast<symbol_a<>>(filename), fast<number_data_a<int64_t>>(line), fast<number_data_a<int64_t>>(position), fast<symbol_a<>>(symbol), fast<number_data_a<int64_t>>(precedence));
 	}
 
-	static inline any_a<> create_symbol__(range_a<> const& range)
+	static inline any_a<> create_symbol__(range_a<> const& list)
 	{
-		return create("symbol", range, &create_symbol_);
+		return create("symbol", list, &create_symbol_);
 	}
 	
 	static inline token_a<> create_symbol_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol, number_data_a<int64_t> const& = number_int_64_t<>::create_())
@@ -157,9 +159,9 @@ public:
 		return create_symbol_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol));
 	}
 
-	static inline any_a<> create_lake__(range_a<> const& range)
+	static inline any_a<> create_lake__(range_a<> const& list)
 	{
-		return create("lake", range, &create_lake_);
+		return create("lake", list, &create_lake_);
 	}
 
 	static inline token_a<> create_lake_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol, number_data_a<int64_t> const& = number_int_64_t<>::create_())
@@ -172,9 +174,9 @@ public:
 		return create_lake_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol));
 	}
 
-	static inline any_a<> create_int__(range_a<> const& range)
+	static inline any_a<> create_int__(range_a<> const& list)
 	{
-		return create("int", range, &create_int_);
+		return create("int", list, &create_int_);
 	}
 
 	static inline token_a<> create_int_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol, number_data_a<int64_t> const& = number_int_64_t<>::create_())
@@ -187,9 +189,9 @@ public:
 		return create_int_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol));
 	}
 
-	static inline any_a<> create_float__(range_a<> const& range)
+	static inline any_a<> create_float__(range_a<> const& list)
 	{
-		return create("float", range, &create_float_);
+		return create("float", list, &create_float_);
 	}
 
 	static inline token_a<> create_float_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol, number_data_a<int64_t> const& = number_int_64_t<>::create_())
@@ -202,9 +204,9 @@ public:
 		return create_float_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol));
 	}
 
-	static inline any_a<> create_name__(range_a<> const& range)
+	static inline any_a<> create_name__(range_a<> const& list)
 	{
-		return create("name", range, &create_name_);
+		return create("name", list, &create_name_);
 	}
 
 	static inline token_a<> create_name_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol, number_data_a<int64_t> const& = number_int_64_t<>::create_())
@@ -217,9 +219,9 @@ public:
 		return create_name_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol));
 	}
 
-	static inline any_a<> create_punctuation__(range_a<> const& range)
+	static inline any_a<> create_punctuation__(range_a<> const& list)
 	{
-		return create("punctuation", range, &create_punctuation_);
+		return create("punctuation", list, &create_punctuation_);
 	}
 
 	static inline token_a<> create_punctuation_()
@@ -237,9 +239,9 @@ public:
 		return create_punctuation_(sym(filename), number_int_64_t<>::create(line), number_int_64_t<>::create(position), sym(symbol), number_int_64_t<>::create(precedence));
 	}
 
-	static inline any_a<> create_error__(range_a<> const& range)
+	static inline any_a<> create_error__(range_a<> const& list)
 	{
-		return create("error", range, &create_error_);
+		return create("error", list, &create_error_);
 	}
 
 	static inline token_a<> create_error_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol, number_data_a<int64_t> const& = number_int_64_t<>::create_())

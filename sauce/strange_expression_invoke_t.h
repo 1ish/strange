@@ -10,9 +10,9 @@ class expression_invoke_t : public expression_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		return expression_t<___ego___>::template create_expression<expression_invoke_t<___ego___>>(range);
+		return expression_t<___ego___>::template create_expression<expression_invoke_t<___ego___>>(list);
 	}
 
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
@@ -40,12 +40,12 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_invoke::create passed short range");
 		}
-		auto range = *it;
-		if (!check<range_a<>>(range))
+		auto list = *it;
+		if (!check<range_a<>>(list))
 		{
-			throw dis(token.report() + "strange::expression_invoke::create passed non-range");
+			throw dis(token.report() + "strange::expression_invoke::create passed non-list");
 		}
-		return expression_substitute_t<expression_invoke_t<>>::create(expression_invoke_t<>(token, terms, fast<expression_a<>>(expression), fast<symbol_a<>>(member), fast<range_a<>>(range)));
+		return expression_substitute_t<expression_invoke_t<>>::create(expression_invoke_t<>(token, terms, fast<expression_a<>>(expression), fast<symbol_a<>>(member), fast<range_a<>>(list)));
 	}
 
 	// reflection
@@ -61,10 +61,10 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& list) const
 	{
-		auto expression_thing = _expression.operate(thing, range);
-		return thing_t<>::invoke_member(expression_thing, _member, range_operator_t<>::create_(_range, thing, range));
+		auto expression_thing = _expression.operate(thing, list);
+		return thing_t<>::invoke_member(expression_thing, _member, range_operator_t<>::create_(_list, thing, list));
 	}
 
 	// expression
@@ -98,7 +98,7 @@ public:
 		_expression.generate(version, indent, river);
 		river.write_string("." + _member.to_string() + "[");
 		bool first = true;
-		for (auto const& expression : _range)
+		for (auto const& expression : _list)
 		{
 			if (first)
 			{
@@ -110,7 +110,7 @@ public:
 			}
 			if (!check<expression_a<>>(expression))
 			{
-				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_invoke::generate with non-expression range term");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_invoke::generate with non-expression list term");
 			}
 			fast<expression_a<>>(expression).generate(version, indent, river);
 		}
@@ -128,7 +128,7 @@ public:
 		if (declare || define)
 		{
 			_expression.generate_cpp(version, indent, river, declare, define);
-			for (auto const& expression : _range)
+			for (auto const& expression : _list)
 			{
 				if (!check<expression_a<>>(expression))
 				{
@@ -146,7 +146,7 @@ public:
 		_expression.generate_cpp(version, indent, river, declare, define);
 		river.write_string("[flock_t<>::create_(" + _member.to_string() + ",");
 		bool first = true;
-		for (auto const& expression : _range)
+		for (auto const& expression : _list)
 		{
 			if (first)
 			{
@@ -158,7 +158,7 @@ public:
 			}
 			if (!check<expression_a<>>(expression))
 			{
-				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_invoke::generate with non-expression range term");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_invoke::generate with non-expression list term");
 			}
 			fast<expression_a<>>(expression).generate_cpp(version, indent, river, declare, define);
 		}
@@ -169,19 +169,19 @@ protected:
 	flock_a<> const _terms;
 	expression_a<> const _expression;
 	symbol_a<> const _member;
-	range_a<> const _range;
+	range_a<> const _list;
 
 	friend class any_a<>;
 
-	inline expression_invoke_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& expression, symbol_a<> const& member, range_a<> const& range)
-		: expression_t<___ego___>(token, is_pure_literal(token, expression, member, range))
+	inline expression_invoke_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& expression, symbol_a<> const& member, range_a<> const& list)
+		: expression_t<___ego___>(token, is_pure_literal(token, expression, member, list))
 		, _terms{ terms }
 		, _expression{ expression }
 		, _member{ member }
-		, _range{ range }
+		, _list{ list }
 	{}
 
-	static inline std_pair<bool, bool> is_pure_literal(token_a<> const& token, expression_a<> const& expression, symbol_a<> const& member, range_a<> const& range)
+	static inline std_pair<bool, bool> is_pure_literal(token_a<> const& token, expression_a<> const& expression, symbol_a<> const& member, range_a<> const& list)
 	{
 		std_pair<bool, bool> pure_literal(false, false); //TODO pure literal
 		return pure_literal;

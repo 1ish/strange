@@ -529,12 +529,12 @@ class tokenizer_t : public thing_t<___ego___>
 
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto it = list.extract_begin_();
+		if (it == list.extract_end_())
 		{
-			throw dis("strange::tokenizer::create passed empty range");
+			throw dis("strange::tokenizer::create passed empty list");
 		}
 		any_a<> river = *it;
 		if (!check<river_a<>>(river))

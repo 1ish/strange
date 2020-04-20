@@ -9,10 +9,11 @@ class cat_t : public symbol_t<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& list)
 	{
-		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto it = list.extract_begin_();
+		auto end = list.extract_end_();
+		if (it == end)
 		{
 			return create_();
 		}
@@ -21,7 +22,7 @@ public:
 		{
 			throw dis("strange::cat::create passed non-int-64 order");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			return create_(fast<number_data_a<int64_t>>(order));
 		}
@@ -30,7 +31,7 @@ public:
 		{
 			throw dis("strange::cat::create passed non-symbol name");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name));
 		}
@@ -39,7 +40,7 @@ public:
 		{
 			throw dis("strange::cat::create passed non-flock dimensions");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions));
 		}
@@ -48,7 +49,7 @@ public:
 		{
 			throw dis("strange::cat::create passed non-flock parameters");
 		}
-		if (++it == range.extract_end_())
+		if (++it == end)
 		{
 			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions), fast<flock_a<>>(parameters));
 		}

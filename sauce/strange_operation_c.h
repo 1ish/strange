@@ -10,12 +10,12 @@ class operation_c : public any_c<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> animate__(range_a<> const& range)
+	static inline any_a<> animate__(range_a<> const& list)
 	{
-		auto it = range.extract_begin_();
-		if (it == range.extract_end_())
+		auto it = list.extract_begin_();
+		if (it == list.extract_end_())
 		{
-			throw dis("<strange::operation>::animate passed empty range");
+			throw dis("<strange::operation>::animate passed empty list");
 		}
 		any_a<> conception = *it;
 		if (!check<shoal_a<>>(conception))
@@ -31,13 +31,13 @@ public:
 	}
 
 	// reflection
-	inline any_a<> type__(range_a<> const& range) const
+	inline any_a<> type__(range_a<> const& list) const
 	{
 		auto const op = any_c<___ego___>::_operations.at_(sym("type"));
 		if (op)
 		{
 			any_a<> thing = any_c<___ego___>::me_();
-			return op.operate(thing, range);
+			return op.operate(thing, list);
 		}
 		static symbol_a<> TYPE = sym("<strange::operation>");
 		return TYPE;
@@ -60,13 +60,13 @@ public:
 		return TYPE;
 	}
 
-	inline any_a<> shared__(range_a<> const& range) const
+	inline any_a<> shared__(range_a<> const& list) const
 	{
 		auto const op = any_c<___ego___>::_operations.at_(sym("shared"));
 		if (op)
 		{
 			any_a<> thing = any_c<___ego___>::me_();
-			return op.operate(thing, range);
+			return op.operate(thing, list);
 		}
 		unordered_shoal_a<> shoal = unordered_shoal_t<>::create_();
 		share(shoal);
@@ -97,13 +97,13 @@ public:
 	}
 
 	// operation
-	inline any_a<> pure__(range_a<> const& range) const
+	inline any_a<> pure__(range_a<> const& list) const
 	{
 		auto const op = any_c<___ego___>::_operations.at_(sym("pure"));
 		if (op)
 		{
 			any_a<> thing = any_c<___ego___>::me_();
-			return op.operate(thing, range);
+			return op.operate(thing, list);
 		}
 		auto const oper = any_c<___ego___>::_operations.at_(sym("operate"));
 		if (check<operation_a<>>(oper))
@@ -151,13 +151,13 @@ public:
 	static inline void assign(operation_a<> const&)
 	{}
 
-	inline any_a<> names__(range_a<> const& range) const
+	inline any_a<> names__(range_a<> const& list) const
 	{
 		auto const op = any_c<___ego___>::_operations.at_(sym("names"));
 		if (op)
 		{
 			any_a<> thing = any_c<___ego___>::me_();
-			return op.operate(thing, range);
+			return op.operate(thing, list);
 		}
 		return flock_t<>::create_();
 	}
