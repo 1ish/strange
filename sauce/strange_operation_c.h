@@ -49,7 +49,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = any_c<___ego___>::me_();
-			auto const result = op.operate(thing, range_t<>::create_());
+			auto const result = op.operate(thing, list_create());
 			if (!check<symbol_a<>>(result))
 			{
 				throw dis("<strange::operation>::type returned non-symbol");
@@ -79,7 +79,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = any_c<___ego___>::me_();
-			auto const result = op.operate(thing, range_t<>::create_());
+			auto const result = op.operate(thing, list_create());
 			if (!check<unordered_shoal_a<>>(result))
 			{
 				throw dis("<strange::operation>::shared returned non-unordered-shoal");
@@ -119,7 +119,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = any_c<___ego___>::me_();
-			return op.operate(thing, range_t<>::create_());
+			return op.operate(thing, list_create());
 		}
 		auto const oper = any_c<___ego___>::_operations.at_(sym("operate"));
 		if (check<operation_a<>>(oper))
@@ -135,7 +135,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = any_c<___ego___>::me_();
-			return op.operate(thing, range_t<>::create_());
+			return op.operate(thing, list_create());
 		}
 		auto const oper = any_c<___ego___>::_operations.at_(sym("operate"));
 		if (check<operation_a<>>(oper))
@@ -168,7 +168,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = any_c<___ego___>::me_();
-			auto const result = op.operate(thing, range_t<>::create_());
+			auto const result = op.operate(thing, list_create());
 			if (!check<flock_a<>>(result))
 			{
 				throw dis("<strange::operation>::names returned non-flock");

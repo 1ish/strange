@@ -93,7 +93,7 @@ public:
 	{
 		auto local = unordered_shoal_create();
 		local.insert(sym("$"), unordered_shoal_create<any_a<>, any_a<>, true>());
-		return operate(local, range_create());
+		return operate(local, list_create());
 	}
 
 	inline flock_a<> terms_() const

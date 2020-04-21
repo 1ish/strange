@@ -56,7 +56,7 @@ public:
 		else
 		{
 			auto _ = no();
-			auto const type_any = type_op.operate(_, range_t<>::create_());
+			auto const type_any = type_op.operate(_, list_create());
 			if (!check<symbol_a<>>(type_any))
 			{
 				throw dis("strange::conception::create merge parent type returned non-symbol");
@@ -73,7 +73,7 @@ public:
 		else
 		{
 			auto _ = no();
-			auto const cat_any = cat_op.operate(_, range_t<>::create_());
+			auto const cat_any = cat_op.operate(_, list_create());
 			if (!check<cat_a<>>(cat_any))
 			{
 				throw dis("strange::conception::create merge parent cat returned non-cat");
@@ -87,7 +87,7 @@ public:
 		if (cats_op)
 		{
 			auto _ = no();
-			cats_any = cats_op.operate(_, range_t<>::create_());
+			cats_any = cats_op.operate(_, list_create());
 			if (!check<unordered_herd_a<>>(cats_any))
 			{
 				throw dis("strange::conception::create merge parent cats returned non-unordered-herd");
@@ -103,7 +103,7 @@ public:
 		else
 		{
 			auto _ = no();
-			auto const kind_any = kind_op.operate(_, range_t<>::create_());
+			auto const kind_any = kind_op.operate(_, list_create());
 			if (!check<kind_a<>>(kind_any))
 			{
 				throw dis("strange::conception::create merge parent kind returned non-kind");
@@ -123,7 +123,7 @@ public:
 		else
 		{
 			auto _ = no();
-			auto const kinds_any = kinds_op.operate(_, range_t<>::create_());
+			auto const kinds_any = kinds_op.operate(_, list_create());
 			if (!check<unordered_herd_a<>>(kinds_any))
 			{
 				throw dis("strange::conception::create merge parent kinds returned non-unordered-herd");

@@ -60,7 +60,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = me_();
-			auto const result = op.operate(thing, range_t<>::create_());
+			auto const result = op.operate(thing, list_create());
 			if (!check<symbol_a<>>(result))
 			{
 				throw dis("<strange::any>::type returned non-symbol");
@@ -90,7 +90,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = me_();
-			auto const result = op.operate(thing, range_t<>::create_());
+			auto const result = op.operate(thing, list_create());
 			if (!check<unordered_shoal_a<>>(result))
 			{
 				throw dis("<strange::any>::shared returned non-unordered-shoal");
@@ -124,7 +124,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = me_();
-			auto const result = op.operate(thing, range_t<>::create_());
+			auto const result = op.operate(thing, list_create());
 			if (!check<cat_a<>>(result))
 			{
 				throw dis("<strange::any>::cat returned non-cat");
@@ -151,7 +151,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = me_();
-			auto const result = op.operate(thing, range_t<>::create_());
+			auto const result = op.operate(thing, list_create());
 			if (!check<unordered_herd_a<>>(result))
 			{
 				throw dis("<strange::any>::cats returned non-unordered-herd");
@@ -178,7 +178,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = me_();
-			auto const result = op.operate(thing, range_t<>::create_());
+			auto const result = op.operate(thing, list_create());
 			if (!check<kind_a<>>(result))
 			{
 				throw dis("<strange::any>::kind returned non-kind");
@@ -205,7 +205,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = me_();
-			auto const result = op.operate(thing, range_t<>::create_());
+			auto const result = op.operate(thing, list_create());
 			if (!check<unordered_herd_a<>>(result))
 			{
 				throw dis("<strange::any>::kinds returned non-unordered-herd");
@@ -395,7 +395,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = me_();
-			auto const result = op.operate(thing, range_t<>::create_());
+			auto const result = op.operate(thing, list_create());
 			if (!check<number_data_a<uint64_t>>(result))
 			{
 				throw dis("<strange::any>::hash returned non-number-uint64");
@@ -411,7 +411,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = me_();
-			auto const result = op.operate(thing, range_t<>::create_());
+			auto const result = op.operate(thing, list_create());
 			if (!check<number_data_a<uint64_t>>(result))
 			{
 				throw dis("<strange::any>::hash returned non-number-uint64");

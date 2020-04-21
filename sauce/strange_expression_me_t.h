@@ -65,7 +65,7 @@ public:
 	{
 		auto local = unordered_shoal_create();
 		local.insert(sym("$"), unordered_shoal_create<any_a<>, any_a<>, true>());
-		return operate(local, range_create());
+		return operate(local, list_create());
 	}
 
 	inline any_a<> generate_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
