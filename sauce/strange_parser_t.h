@@ -490,7 +490,7 @@ private:
 		if (!non_instruction)
 		{
 			auto kind = context->kind.at_(name);
-			bool fixed = context->fixed.has(name);
+			bool fixed = context->fixed.has(name); //TODO extract this from context->kind instead of context->fixed?
 			bool insert = false;
 			bool update = false;
 			bool reference = false;

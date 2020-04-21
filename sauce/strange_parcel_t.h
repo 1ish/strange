@@ -296,6 +296,57 @@ public:
 		return create(variadic_u<parcel_a<>>::vector_dup(std::forward<Args>(args)...));
 	}
 
+	static inline parcel_a<> create_null_()
+	{
+		return create(dart_packet::make_null());
+	}
+
+	static inline parcel_a<> create_boolean_(any_a<> const& thing)
+	{
+		return create(dart_packet::make_boolean(bool{ thing }));
+	}
+
+	static inline parcel_a<> create_number_(number_a<> const& number)
+	{
+		if (number.is_int())
+		{
+			return create(dart_packet::make_integer(number.to_int_64()));
+		}
+		return create(dart_packet::make_decimal(number.to_float_64()));
+	}
+
+	static inline parcel_a<> create_int_64_(number_data_a<int64_t> const& number)
+	{
+		return create(dart_packet::make_integer(number.extract_primitive()));
+	}
+
+	static inline parcel_a<> create_float_64_(number_data_a<double> const& number)
+	{
+		return create(dart_packet::make_decimal(number.extract_primitive()));
+	}
+
+	static inline parcel_a<> create_lake_(lake_a<int8_t> const& lake)
+	{
+		return create(dart_packet::make_string(lake_to_string(lake)));
+	}
+
+	static inline parcel_a<> create_symbol_(symbol_a<> const& symbol)
+	{
+		return create(dart_packet::make_string(symbol.to_string()));
+	}
+
+	template <typename... Args>
+	static inline parcel_a<> create_inventory_(Args&&... args)
+	{
+		return create(dart_packet::make_array(std::forward<Args>(args)...));
+	}
+
+	template <typename... Args>
+	static inline parcel_a<> create_shoal_(Args&&... args)
+	{
+		return create(dart_packet::make_object(std::forward<Args>(args)...));
+	}
+
 	template <typename F>
 	static inline parcel_a<> create(F&& init)
 	{
@@ -908,6 +959,53 @@ template <typename... Args>
 inline parcel_a<> parcel_dups(Args&&... args)
 {
 	return parcel_t<>::create_dups_(std::forward<Args>(args)...);
+}
+
+inline parcel_a<> parcel_create_null()
+{
+	return parcel_t<>::create_null_();
+}
+
+inline parcel_a<> parcel_create_boolean(any_a<> const& thing)
+{
+	return parcel_t<>::create_boolean_(thing);
+}
+
+inline parcel_a<> parcel_create_number(number_a<> const& number)
+{
+	return parcel_t<>::create_number_(number);
+}
+
+inline parcel_a<> parcel_create_int_64(number_data_a<int64_t> const& number)
+{
+	return parcel_t<>::create_int_64_(number);
+}
+
+inline parcel_a<> parcel_create_float_64(number_data_a<double> const& number)
+{
+	return parcel_t<>::create_float_64_(number);
+}
+
+inline parcel_a<> parcel_create_lake(lake_a<int8_t> const& lake)
+{
+	return parcel_t<>::create_lake_(lake);
+}
+
+inline parcel_a<> parcel_create_symbol(symbol_a<> const& symbol)
+{
+	return parcel_t<>::create_symbol_(symbol);
+}
+
+template <typename... Args>
+inline parcel_a<> parcel_create_inventory(Args&&... args)
+{
+	return parcel_t<>::create_inventory_(dart_packet::make_array(std::forward<Args>(args)...));
+}
+
+template <typename... Args>
+inline parcel_a<> parcel_create_shoal(Args&&... args)
+{
+	return parcel_t<>::create_shoal_(dart_packet::make_object(std::forward<Args>(args)...));
 }
 
 } // namespace strange

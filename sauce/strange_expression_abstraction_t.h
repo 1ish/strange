@@ -1490,6 +1490,21 @@ protected:
 				(extraction ? "___read___()." : "___write___().") +
 				name + arguments + "; }\n\n");
 		}
+		else if (name == "to_parcel_" || name == "to_parcel_unique_")
+		{
+			river.write_string(
+				"inline " + result + " " + class_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("::" + name + parameters + constness + "\n"
+				"{\n"
+				"\tif (!" + (root ? "" : "any_a<>::") + "___handle___)\n"
+				"\t{\n"
+				"\t\treturn parcel_create_null();\n"
+				"\t}\n"
+				"\treturn " + (extraction ? "___read___()." : "___write___().") +
+					name + arguments + ";\n"
+				"}\n\n");
+		}
 		else
 		{
 			river.write_string(

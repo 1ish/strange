@@ -445,7 +445,13 @@ inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::to_parcel__(lis
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
 inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::to_parcel_() const
-{ assert(___handle___); return ___read___().to_parcel_(); }
+{
+	if (!___handle___)
+	{
+		return parcel_create_null();
+	}
+	return ___read___().to_parcel_();
+}
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
 template <typename ___TTT___, typename ___BHB___>
@@ -467,7 +473,13 @@ inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::to_parcel_uniqu
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
 inline parcel_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::to_parcel_unique_(herd_a< _number_data_uint64 > & unique_herd) const
-{ assert(___handle___); return ___read___().to_parcel_unique_(unique_herd); }
+{
+	if (!___handle___)
+	{
+		return parcel_create_null();
+	}
+	return ___read___().to_parcel_unique_(unique_herd);
+}
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
 template <typename ___TTT___, typename ___BHB___>

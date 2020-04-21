@@ -379,6 +379,26 @@ inline parcel_a<> parcel_refs(Args&&... args);
 template <typename... Args>
 inline parcel_a<> parcel_dups(Args&&... args);
 
+inline parcel_a<> parcel_create_null();
+
+inline parcel_a<> parcel_create_boolean(any_a<> const& thing);
+
+inline parcel_a<> parcel_create_number(number_a<> const& number);
+
+inline parcel_a<> parcel_create_int_64(number_data_a<int64_t> const& number);
+
+inline parcel_a<> parcel_create_float_64(number_data_a<double> const& number);
+
+inline parcel_a<> parcel_create_lake(lake_a<int8_t> const& lake);
+
+inline parcel_a<> parcel_create_symbol(symbol_a<> const& symbol);
+
+template <typename... Args>
+inline parcel_a<> parcel_create_inventory(Args&&... args);
+
+template <typename... Args>
+inline parcel_a<> parcel_create_shoal(Args&&... args);
+
 // squad
 template <typename _element = any_a<>, bool _concurrent_ = false>
 inline squad_a<_element> squad_create();
