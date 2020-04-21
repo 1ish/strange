@@ -265,7 +265,7 @@ public:
 		{
 			throw dis("<strange::any>::invoke passed non-existent member");
 		}
-		return thing.operations_().at_(member).operate(thing, range_t<>::create_(++it, list.end_()));
+		return thing.operations_().at_(member).operate(thing, list_create(++it, list.end_()));
 	}
 
 	inline any_a<> operate(any_a<>& thing, list_a<> const& list) const
@@ -286,7 +286,7 @@ public:
 			throw dis("<strange::any>::operate passed short list");
 		}
 		any_a<> operation = *it;
-		return operation.operate(thing, range_t<>::create_(++it, list.end_()));
+		return operation.operate(thing, list_create(++it, list.end_()));
 	}
 
 	// identification
@@ -435,7 +435,7 @@ public:
 			throw dis("<strange::any>::intimate passed short list");
 		}
 		any_a<> member = *it;
-		return intimate(thing, member, range_t<>::create_(++it, list.end_()));
+		return intimate(thing, member, list_create(++it, list.end_()));
 	}
 
 	static inline any_a<> intimate_(any_a<>& thing, list_a<> const& list)
@@ -446,7 +446,7 @@ public:
 			throw dis("<strange::any>::intimate passed short list");
 		}
 		any_a<> member = *it;
-		return intimate(thing, member, range_t<>::create_(++it, list.end_()));
+		return intimate(thing, member, list_create(++it, list.end_()));
 	}
 
 	static inline any_a<> intimate(any_a<>& thing, any_a<> const& member, list_a<> const& list)

@@ -49,7 +49,7 @@ public:
 				}
 				else
 				{
-					local.emplace(*nit, range_t<>::create_(ait, aend));
+					local.emplace(*nit, list_create(ait, aend));
 				}
 				break;
 			}
