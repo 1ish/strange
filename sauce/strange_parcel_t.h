@@ -296,6 +296,28 @@ public:
 		return create(variadic_u<parcel_a<>>::vector_dup(std::forward<Args>(args)...));
 	}
 
+//TODO requires sajson
+/*
+	static inline parcel_a<> from_json_(lake_a<int8_t> const& lake)
+	{
+		return from_json(lake_to_string(lake));
+	}
+
+	static inline parcel_a<> from_json(std_string const& str)
+	{
+		return create(dart_packet::from_json(str));
+	}
+*/
+	static inline parcel_a<> from_binary_(lake_a<int8_t> const& lake)
+	{
+		return create(dart_packet_from_vector(lake.extract_vector()));
+	}
+
+	static inline parcel_a<> from_binary(std_string const& str)
+	{
+		return create(dart_packet_from_string(str));
+	}
+
 	static inline parcel_a<> create_null_()
 	{
 		return create(dart_packet::make_null());
@@ -959,6 +981,28 @@ template <typename... Args>
 inline parcel_a<> parcel_dups(Args&&... args)
 {
 	return parcel_t<>::create_dups_(std::forward<Args>(args)...);
+}
+
+//TODO requires sajson
+/*
+inline parcel_a<> parcel_from_json(lake_a<int8_t> const& lake)
+{
+	return parcel_t<>::from_json_(lake);
+}
+
+inline parcel_a<> parcel_from_json(std_string const& str)
+{
+	return parcel_t<>::from_json(str);
+}
+*/
+inline parcel_a<> parcel_from_binary(lake_a<int8_t> const& lake)
+{
+	return parcel_t<>::from_binary_(lake);
+}
+
+inline parcel_a<> parcel_from_binary(std_string const& str)
+{
+	return parcel_t<>::from_binary(str);
 }
 
 inline parcel_a<> parcel_create_null()

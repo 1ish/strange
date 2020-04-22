@@ -379,6 +379,14 @@ inline parcel_a<> parcel_refs(Args&&... args);
 template <typename... Args>
 inline parcel_a<> parcel_dups(Args&&... args);
 
+//TODO requires sajson
+/*
+inline parcel_a<> parcel_from_json(lake_a<int8_t> const& lake);
+inline parcel_a<> parcel_from_json(std_string const& str);
+*/
+inline parcel_a<> parcel_from_binary(lake_a<int8_t> const& lake);
+inline parcel_a<> parcel_from_binary(std_string const& str);
+
 inline parcel_a<> parcel_create_null();
 
 inline parcel_a<> parcel_create_boolean(any_a<> const& thing);

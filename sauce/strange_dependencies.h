@@ -104,6 +104,9 @@ namespace strange
 	using std_runtime_error = std::runtime_error;
 
 	using dart_packet = dart::packet;
+
+	inline dart_packet dart_packet_from_vector(std_vector<int8_t> const& binary) { return dart_packet{ gsl::make_span(reinterpret_cast<gsl::byte const*>(binary.data()), binary.size()) }; }
+	inline dart_packet dart_packet_from_string(std_string const& binary) { return dart_packet{ gsl::make_span(reinterpret_cast<gsl::byte const*>(binary.data()), binary.size()) }; }
 }
 
 #endif
