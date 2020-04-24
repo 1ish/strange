@@ -39,21 +39,21 @@ inline bidirectional_extractor_data_a < any_a < > , _iterator > container_data_a
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.keys_end(); }
 
 template <typename _type, typename _iterator>
-inline bidirectional_extractor_data_a < container_data_a < _type , _iterator > , _iterator > container_data_a<_type, _iterator>::extract_begin() const
+inline bidirectional_extractor_data_a < container_a < > , _iterator > container_data_a<_type, _iterator>::extract_begin() const
 { assert(any_a<>::___handle___); return ___read___().extract_begin(); }
 
 template <typename _type, typename _iterator>
 template <typename ___TTT___, typename ___DHB___>
-inline bidirectional_extractor_data_a < container_data_a < _type , _iterator > , _iterator > container_data_a<_type, _iterator>::___container_data_a_handle___<___TTT___, ___DHB___>::extract_begin() const
+inline bidirectional_extractor_data_a < container_a < > , _iterator > container_data_a<_type, _iterator>::___container_data_a_handle___<___TTT___, ___DHB___>::extract_begin() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
 
 template <typename _type, typename _iterator>
-inline bidirectional_extractor_data_a < container_data_a < _type , _iterator > , _iterator > container_data_a<_type, _iterator>::extract_end() const
+inline bidirectional_extractor_data_a < container_a < > , _iterator > container_data_a<_type, _iterator>::extract_end() const
 { assert(any_a<>::___handle___); return ___read___().extract_end(); }
 
 template <typename _type, typename _iterator>
 template <typename ___TTT___, typename ___DHB___>
-inline bidirectional_extractor_data_a < container_data_a < _type , _iterator > , _iterator > container_data_a<_type, _iterator>::___container_data_a_handle___<___TTT___, ___DHB___>::extract_end() const
+inline bidirectional_extractor_data_a < container_a < > , _iterator > container_data_a<_type, _iterator>::___container_data_a_handle___<___TTT___, ___DHB___>::extract_end() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
 
 template <typename _type, typename _iterator>

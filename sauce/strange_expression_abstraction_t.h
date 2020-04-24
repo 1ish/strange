@@ -1490,7 +1490,7 @@ protected:
 				(extraction ? "___read___()." : "___write___().") +
 				name + arguments + "; }\n\n");
 		}
-		else if (name == "to_parcel_" || name == "to_parcel_unique_")
+		else if (name == "contain_" || name == "contain_unique_")
 		{
 			river.write_string(
 				"inline " + result + " " + class_name);
@@ -1499,7 +1499,7 @@ protected:
 				"{\n"
 				"\tif (!" + (root ? "" : "any_a<>::") + "___handle___)\n"
 				"\t{\n"
-				"\t\treturn parcel_create_null();\n"
+				"\t\treturn yes();\n"
 				"\t}\n"
 				"\treturn " + (extraction ? "___read___()." : "___write___().") +
 					name + arguments + ";\n"

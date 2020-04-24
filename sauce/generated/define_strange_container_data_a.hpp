@@ -20,9 +20,9 @@ public:
 
 	inline bidirectional_extractor_data_a < any_a < > , _iterator > keys_end() const;
 
-	inline bidirectional_extractor_data_a < container_data_a < _type , _iterator > , _iterator > extract_begin() const;
+	inline bidirectional_extractor_data_a < container_a < > , _iterator > extract_begin() const;
 
-	inline bidirectional_extractor_data_a < container_data_a < _type , _iterator > , _iterator > extract_end() const;
+	inline bidirectional_extractor_data_a < container_a < > , _iterator > extract_end() const;
 
 	inline _type const & extract_packet() const;
 
@@ -35,8 +35,8 @@ protected:
 		virtual bool operator!=(container_data_a < _type , _iterator > const & container ) const = 0;
 		virtual bidirectional_extractor_data_a < any_a < > , _iterator > keys_begin() const = 0;
 		virtual bidirectional_extractor_data_a < any_a < > , _iterator > keys_end() const = 0;
-		virtual bidirectional_extractor_data_a < container_data_a < _type , _iterator > , _iterator > extract_begin() const = 0;
-		virtual bidirectional_extractor_data_a < container_data_a < _type , _iterator > , _iterator > extract_end() const = 0;
+		virtual bidirectional_extractor_data_a < container_a < > , _iterator > extract_begin() const = 0;
+		virtual bidirectional_extractor_data_a < container_a < > , _iterator > extract_end() const = 0;
 		virtual _type const & extract_packet() const = 0;
 		virtual _type & mutate_packet() = 0;
 	};
@@ -67,9 +67,9 @@ protected:
 
 		virtual inline bidirectional_extractor_data_a < any_a < > , _iterator > keys_end() const final;
 
-		virtual inline bidirectional_extractor_data_a < container_data_a < _type , _iterator > , _iterator > extract_begin() const final;
+		virtual inline bidirectional_extractor_data_a < container_a < > , _iterator > extract_begin() const final;
 
-		virtual inline bidirectional_extractor_data_a < container_data_a < _type , _iterator > , _iterator > extract_end() const final;
+		virtual inline bidirectional_extractor_data_a < container_a < > , _iterator > extract_end() const final;
 
 		virtual inline _type const & extract_packet() const final;
 
@@ -295,10 +295,10 @@ public:
 	inline bidirectional_extractor_data_a < any_a < > , _iterator > keys_end() const
 	{ throw dis("dynamic container_data_d::keys_end() not available"); }
 
-	inline bidirectional_extractor_data_a < container_data_a < _type , _iterator > , _iterator > extract_begin() const
+	inline bidirectional_extractor_data_a < container_a < > , _iterator > extract_begin() const
 	{ throw dis("dynamic container_data_d::extract_begin() not available"); }
 
-	inline bidirectional_extractor_data_a < container_data_a < _type , _iterator > , _iterator > extract_end() const
+	inline bidirectional_extractor_data_a < container_a < > , _iterator > extract_end() const
 	{ throw dis("dynamic container_data_d::extract_end() not available"); }
 
 	inline _type const & extract_packet() const

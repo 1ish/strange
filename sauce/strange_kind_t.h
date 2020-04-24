@@ -694,6 +694,12 @@ inline kind_a<> kind_of<std_deque<double>::iterator>()
 }
 
 template <>
+inline kind_a<> kind_of<dart_packet>()
+{
+	return kind_create(1, "\"dart_packet\"");
+}
+
+template <>
 inline kind_a<> kind_of<dart_packet::iterator>()
 {
 	return kind_create(1, "\"dart_packet::iterator\"");

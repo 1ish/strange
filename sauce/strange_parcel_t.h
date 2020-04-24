@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <bool _concurrent_ = false, typename ___ego___ = parcel_a<>>
+template <bool _concurrent_ = false, typename ___ego___ = container_data_a<dart_packet, dart_packet::iterator>>
 class parcel_t : public thing_t<___ego___>
 {
 	template <typename _element_it, typename _iterator_, typename ___ego_it___ = bidirectional_extractor_data_a<_element_it, _iterator_>>
@@ -13,9 +13,9 @@ class parcel_t : public thing_t<___ego___>
 	public:
 		// construction
 		template <typename F>
-		static inline bidirectional_extractor_data_a<_element_it, _iterator_> create(parcel_a<> const& parcel, parcel_t const& parcel_thing, F&& it)
+		static inline bidirectional_extractor_data_a<_element_it, _iterator_> create(container_a<> const& container, parcel_t const& parcel_thing, F&& it)
 		{
-			return bidirectional_extractor_data_a<_element_it, _iterator_>::template create<key_extractor_t<_element_it, _iterator_>>(parcel, parcel_thing, std::forward<F>(it));
+			return bidirectional_extractor_data_a<_element_it, _iterator_>::template create<key_extractor_t<_element_it, _iterator_>>(container, parcel_thing, std::forward<F>(it));
 		}
 
 		// reflection
@@ -82,7 +82,7 @@ class parcel_t : public thing_t<___ego___>
 
 		inline forward_extractor_a<any_a<>> to_extractor_any_() const
 		{
-			return bidirectional_extractor_data_a<any_a<>, _iterator_>::template create<key_extractor_t<any_a<>, _iterator_>>(_parcel, _parcel_thing, _it, _pos);
+			return bidirectional_extractor_data_a<any_a<>, _iterator_>::template create<key_extractor_t<any_a<>, _iterator_>>(_container, _parcel_thing, _it, _pos);
 		}
 
 		// bidirectional extractor
@@ -105,26 +105,26 @@ class parcel_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		parcel_a<> const _parcel;
+		container_a<> const _container;
 		parcel_t const& _parcel_thing;
 		int64_t _pos;
 
 		friend class any_a<>;
 
 		template <typename F>
-		inline key_extractor_t(parcel_a<> const& parcel, parcel_t const& parcel_thing, F&& it)
+		inline key_extractor_t(container_a<> const& container, parcel_t const& parcel_thing, F&& it)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
-			, _parcel{ parcel }
+			, _container{ container }
 			, _parcel_thing{ parcel_thing }
 			, _pos{ _it == parcel_thing._packet.key_begin() ? 0 : parcel_thing.size() }
 		{}
 
 		template <typename F>
-		inline key_extractor_t(parcel_a<> const& parcel, parcel_t const& parcel_thing, F&& it, int64_t pos)
+		inline key_extractor_t(container_a<> const& container, parcel_t const& parcel_thing, F&& it, int64_t pos)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
-			, _parcel{ parcel }
+			, _container{ container }
 			, _parcel_thing{ parcel_thing }
 			, _pos{ pos }
 		{}
@@ -136,9 +136,9 @@ class parcel_t : public thing_t<___ego___>
 	public:
 		// construction
 		template <typename F>
-		static inline bidirectional_extractor_data_a<_element_it, _iterator_> create(parcel_a<> const& parcel, parcel_t const& parcel_thing, F&& it)
+		static inline bidirectional_extractor_data_a<_element_it, _iterator_> create(container_a<> const& container, parcel_t const& parcel_thing, F&& it)
 		{
-			return bidirectional_extractor_data_a<_element_it, _iterator_>::template create<extractor_t<_element_it, _iterator_>>(parcel, parcel_thing, std::forward<F>(it));
+			return bidirectional_extractor_data_a<_element_it, _iterator_>::template create<extractor_t<_element_it, _iterator_>>(container, parcel_thing, std::forward<F>(it));
 		}
 
 		// reflection
@@ -206,7 +206,7 @@ class parcel_t : public thing_t<___ego___>
 
 		inline forward_extractor_a<any_a<>> to_extractor_any_() const
 		{
-			return bidirectional_extractor_data_a<any_a<>, _iterator_>::template create<extractor_t<any_a<>, _iterator_>>(_parcel, _parcel_thing, _it, _pos);
+			return bidirectional_extractor_data_a<any_a<>, _iterator_>::template create<extractor_t<any_a<>, _iterator_>>(_container, _parcel_thing, _it, _pos);
 		}
 
 		// bidirectional extractor
@@ -229,26 +229,26 @@ class parcel_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		parcel_a<> const _parcel;
+		container_a<> const _container;
 		parcel_t const& _parcel_thing;
 		int64_t _pos;
 
 		friend class any_a<>;
 
 		template <typename F>
-		inline extractor_t(parcel_a<> const& parcel, parcel_t const& parcel_thing, F&& it)
+		inline extractor_t(container_a<> const& container, parcel_t const& parcel_thing, F&& it)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
-			, _parcel{ parcel }
+			, _container{ container }
 			, _parcel_thing{ parcel_thing }
 			, _pos{ _it == parcel_thing._packet.cbegin() ? 0 : parcel_thing.size() }
 		{}
 
 		template <typename F>
-		inline extractor_t(parcel_a<> const& parcel, parcel_t const& parcel_thing, F&& it, int64_t pos)
+		inline extractor_t(container_a<> const& container, parcel_t const& parcel_thing, F&& it, int64_t pos)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
-			, _parcel{ parcel }
+			, _container{ container }
 			, _parcel_thing{ parcel_thing }
 			, _pos{ pos }
 		{}
@@ -259,76 +259,78 @@ public:
 	static inline any_a<> create__(list_a<> const& list)
 	{
 		auto result = create_();
-		if (check<range_a<parcel_a<>>>(list))
+		if (check<range_a<container_a<>>>(list))
 		{
-			result += fast<range_a<parcel_a<>>>(list);
+			result += fast<range_a<container_a<>>>(list);
 		}
 		else
 		{
 			for (auto const& thing : list)
 			{
-				result.push_back(thing.to_parcel_());
+				auto container = create_();
+				thing.contain_(container);
+				result.push_back(container);
 			}
 		}
 		return result;
 	}
 
-	static inline parcel_a<> create_()
-	{
-		return create(dart_packet{});
-	}
-
-	template <typename... Args>
-	static inline parcel_a<> create_(Args&&... args)
-	{
-		return create(variadic_u<parcel_a<>>::vector(std::forward<Args>(args)...));
-	}
-
-	template <typename... Args>
-	static inline parcel_a<> create_refs_(Args&&... args)
-	{
-		return create(variadic_u<parcel_a<>>::vector_ref(std::forward<Args>(args)...));
-	}
-
-	template <typename... Args>
-	static inline parcel_a<> create_dups_(Args&&... args)
-	{
-		return create(variadic_u<parcel_a<>>::vector_dup(std::forward<Args>(args)...));
-	}
-
-//TODO requires sajson
-/*
-	static inline parcel_a<> from_json_(lake_a<int8_t> const& lake)
-	{
-		return from_json(lake_to_string(lake));
-	}
-
-	static inline parcel_a<> from_json(std_string const& str)
-	{
-		return create(dart_packet::from_json(str));
-	}
-*/
-	static inline parcel_a<> from_binary_(lake_a<int8_t> const& lake)
-	{
-		return create(dart_packet_from_vector(lake.extract_vector()));
-	}
-
-	static inline parcel_a<> from_binary(std_string const& str)
-	{
-		return create(dart_packet_from_string(str));
-	}
-
-	static inline parcel_a<> create_null_()
+	static inline container_data_a<dart_packet, dart_packet::iterator> create_()
 	{
 		return create(dart_packet::make_null());
 	}
 
-	static inline parcel_a<> create_boolean_(any_a<> const& thing)
+	template <typename... Args>
+	static inline container_data_a<dart_packet, dart_packet::iterator> create_(Args&&... args)
+	{
+		return create(variadic_u<container_a<>>::vector(std::forward<Args>(args)...));
+	}
+
+	template <typename... Args>
+	static inline container_data_a<dart_packet, dart_packet::iterator> create_refs_(Args&&... args)
+	{
+		return create(variadic_u<container_a<>>::vector_ref(std::forward<Args>(args)...));
+	}
+
+	template <typename... Args>
+	static inline container_data_a<dart_packet, dart_packet::iterator> create_dups_(Args&&... args)
+	{
+		return create(variadic_u<container_a<>>::vector_dup(std::forward<Args>(args)...));
+	}
+
+//TODO requires sajson
+/*
+	static inline container_data_a<dart_packet, dart_packet::iterator> from_json_(lake_a<int8_t> const& lake)
+	{
+		return from_json(lake_to_string(lake));
+	}
+
+	static inline container_data_a<dart_packet, dart_packet::iterator> from_json(std_string const& str)
+	{
+		return create(dart_packet::from_json(str));
+	}
+*/
+	static inline container_data_a<dart_packet, dart_packet::iterator> from_binary_(lake_a<int8_t> const& lake)
+	{
+		return create(dart_packet_from_vector(lake.extract_vector()));
+	}
+
+	static inline container_data_a<dart_packet, dart_packet::iterator> from_binary(std_string const& str)
+	{
+		return create(dart_packet_from_string(str));
+	}
+
+	static inline container_data_a<dart_packet, dart_packet::iterator> create_null_()
+	{
+		return create(dart_packet::make_null());
+	}
+
+	static inline container_data_a<dart_packet, dart_packet::iterator> create_boolean_(any_a<> const& thing)
 	{
 		return create(dart_packet::make_boolean(bool{ thing }));
 	}
 
-	static inline parcel_a<> create_number_(number_a<> const& number)
+	static inline container_data_a<dart_packet, dart_packet::iterator> create_number_(number_a<> const& number)
 	{
 		if (number.is_int())
 		{
@@ -337,42 +339,42 @@ public:
 		return create(dart_packet::make_decimal(number.to_float_64()));
 	}
 
-	static inline parcel_a<> create_int_64_(number_data_a<int64_t> const& number)
+	static inline container_data_a<dart_packet, dart_packet::iterator> create_int_64_(number_data_a<int64_t> const& number)
 	{
 		return create(dart_packet::make_integer(number.extract_primitive()));
 	}
 
-	static inline parcel_a<> create_float_64_(number_data_a<double> const& number)
+	static inline container_data_a<dart_packet, dart_packet::iterator> create_float_64_(number_data_a<double> const& number)
 	{
 		return create(dart_packet::make_decimal(number.extract_primitive()));
 	}
 
-	static inline parcel_a<> create_lake_(lake_a<int8_t> const& lake)
+	static inline container_data_a<dart_packet, dart_packet::iterator> create_lake_(lake_a<int8_t> const& lake)
 	{
 		return create(dart_packet::make_string(lake_to_string(lake)));
 	}
 
-	static inline parcel_a<> create_symbol_(symbol_a<> const& symbol)
+	static inline container_data_a<dart_packet, dart_packet::iterator> create_symbol_(symbol_a<> const& symbol)
 	{
 		return create(dart_packet::make_string(symbol.to_string()));
 	}
 
 	template <typename... Args>
-	static inline parcel_a<> create_inventory_(Args&&... args)
+	static inline container_data_a<dart_packet, dart_packet::iterator> create_inventory_(Args&&... args)
 	{
 		return create(dart_packet::make_array(std::forward<Args>(args)...));
 	}
 
 	template <typename... Args>
-	static inline parcel_a<> create_shoal_(Args&&... args)
+	static inline container_data_a<dart_packet, dart_packet::iterator> create_shoal_(Args&&... args)
 	{
 		return create(dart_packet::make_object(std::forward<Args>(args)...));
 	}
 
 	template <typename F>
-	static inline parcel_a<> create(F&& init)
+	static inline container_data_a<dart_packet, dart_packet::iterator> create(F&& init)
 	{
-		return parcel_a<>::template create<parcel_t<_concurrent_>>(std::forward<F>(init));
+		return container_data_a<dart_packet, dart_packet::iterator>::template create<parcel_t<_concurrent_>>(std::forward<F>(init));
 	}
 
 	// reflection
@@ -409,21 +411,21 @@ public:
 	// comparison
 	inline bool same_(any_a<> const& thing) const
 	{
-		if (!check<parcel_a<>>(thing))
+		if (!check<container_data_a<dart_packet, dart_packet::iterator>>(thing))
 		{
 			return false;
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _packet == fast<parcel_a<>>(thing).extract_packet();
+		return _packet == fast<container_data_a<dart_packet, dart_packet::iterator>>(thing).extract_packet();
 	}
 
-	inline bool operator==(parcel_a<> const& parcel) const
+	inline bool operator==(container_data_a<dart_packet, dart_packet::iterator> const& parcel) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _packet == parcel.extract_packet();
 	}
 
-	inline bool operator!=(parcel_a<> const& parcel) const
+	inline bool operator!=(container_data_a<dart_packet, dart_packet::iterator> const& parcel) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _packet != parcel.extract_packet();
@@ -473,24 +475,24 @@ public:
 		return key_extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.key_end());
 	}
 
-	inline bidirectional_extractor_a<parcel_a<>> extract_begin_() const
+	inline bidirectional_extractor_a<container_a<>> extract_begin_() const
 	{
-		return extractor_t<parcel_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cbegin());
+		return extractor_t<container_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cbegin());
 	}
 
-	inline bidirectional_extractor_data_a<parcel_a<>, typename dart_packet::iterator> extract_begin() const
+	inline bidirectional_extractor_data_a<container_a<>, typename dart_packet::iterator> extract_begin() const
 	{
-		return extractor_t<parcel_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cbegin());
+		return extractor_t<container_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cbegin());
 	}
 
-	inline bidirectional_extractor_a<parcel_a<>> extract_end_() const
+	inline bidirectional_extractor_a<container_a<>> extract_end_() const
 	{
-		return extractor_t<parcel_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend());
+		return extractor_t<container_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend());
 	}
 
-	inline bidirectional_extractor_data_a<parcel_a<>, typename dart_packet::iterator> extract_end() const
+	inline bidirectional_extractor_data_a<container_a<>, typename dart_packet::iterator> extract_end() const
 	{
-		return extractor_t<parcel_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend());
+		return extractor_t<container_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend());
 	}
 
 	// collection / parcel
@@ -514,7 +516,7 @@ public:
 		throw dis("strange::parcel::has passed wrong type of key");
 	}
 
-	inline parcel_a<> at_(any_a<> const& key) const
+	inline container_a<> at_(any_a<> const& key) const
 	{
 		if (check<symbol_a<>>(key))
 		{
@@ -529,34 +531,42 @@ public:
 		throw dis("strange::parcel::at passed wrong type of key");
 	}
 
-	inline parcel_a<> update_(any_a<> const& key, parcel_a<> const& value)
+	inline container_a<> update_(any_a<> const& key, container_a<> const& value)
 	{
 		update(key, value);
 		return value;
 	}
 
-	inline void update(any_a<> const& key, parcel_a<> const& value)
+	inline void update(any_a<> const& key, container_a<> const& value)
 	{
+		if (!check<container_data_a<dart_packet, dart_packet::iterator>>(value))
+		{
+			throw dis("strange::parcel::update passed wrong type of value");
+		}
 		if (check<symbol_a<>>(key))
 		{
 			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			_packet.set(fast<symbol_a<>>(key).to_string(), value.extract_packet());
+			_packet.set(fast<symbol_a<>>(key).to_string(), fast<container_data_a<dart_packet, dart_packet::iterator>>(value).extract_packet());
 		}
 		if (check<number_a<>>(key))
 		{
 			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			_packet.set(fast<number_a<>>(key).to_uint_64(), value.extract_packet());
+			_packet.set(fast<number_a<>>(key).to_uint_64(), fast<container_data_a<dart_packet, dart_packet::iterator>>(value).extract_packet());
 		}
 		throw dis("strange::parcel::update passed wrong type of key");
 	}
 
-	inline any_a<> insert_(any_a<> const& key, parcel_a<> const& value)
+	inline any_a<> insert_(any_a<> const& key, container_a<> const& value)
 	{
 		return boole(insert(key, value));
 	}
 
-	inline bool insert(any_a<> const& key, parcel_a<> const& value)
+	inline bool insert(any_a<> const& key, container_a<> const& value)
 	{
+		if (!check<container_data_a<dart_packet, dart_packet::iterator>>(value))
+		{
+			throw dis("strange::parcel::insert passed wrong type of value");
+		}
 		if (check<symbol_a<>>(key))
 		{
 			auto const key_string = fast<symbol_a<>>(key).to_string();
@@ -564,7 +574,7 @@ public:
 			bool const result = !_packet.has_key(key_string);
 			if (result)
 			{
-				_packet.insert(key_string, value.extract_packet());
+				_packet.insert(key_string, fast<container_data_a<dart_packet, dart_packet::iterator>>(value).extract_packet());
 			}
 			return result;
 		}
@@ -575,7 +585,7 @@ public:
 			bool const result = index <= _packet.size();
 			if (result)
 			{
-				_packet.insert(index, value.extract_packet());
+				_packet.insert(index, fast<container_data_a<dart_packet, dart_packet::iterator>>(value).extract_packet());
 			}
 			return result;
 		}
@@ -648,72 +658,84 @@ public:
 		return _packet.empty();
 	}
 
-	inline ___ego___ push_front_(parcel_a<> const& value)
+	inline ___ego___ push_front_(container_a<> const& value)
 	{
 		push_front(value);
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void push_front(parcel_a<> const& thing)
+	inline void push_front(container_a<> const& thing)
 	{
+		if (!check<container_data_a<dart_packet, dart_packet::iterator>>(thing))
+		{
+			throw dis("strange::parcel::push_front passed wrong type of thing");
+		}
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		_packet.push_front(thing.extract_packet());
+		_packet.push_front(fast<container_data_a<dart_packet, dart_packet::iterator>>(thing).extract_packet());
 	}
 
-	inline parcel_a<> pop_front_()
+	inline container_a<> pop_front_()
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		parcel_a<> result = create(_packet.front());
+		container_a<> result = create(_packet.front());
 		_packet.pop_front();
 		return result;
 	}
 
-	inline ___ego___ push_back_(parcel_a<> const& value)
+	inline ___ego___ push_back_(container_a<> const& value)
 	{
 		push_back(value);
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void push_back(parcel_a<> const& thing)
+	inline void push_back(container_a<> const& thing)
 	{
+		if (!check<container_data_a<dart_packet, dart_packet::iterator>>(thing))
+		{
+			throw dis("strange::parcel::push_back passed wrong type of thing");
+		}
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		_packet.push_back(thing.extract_packet());
+		_packet.push_back(fast<container_data_a<dart_packet, dart_packet::iterator>>(thing).extract_packet());
 	}
 
-	inline parcel_a<> pop_back_()
+	inline container_a<> pop_back_()
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		parcel_a<> result = create(_packet.back());
+		container_a<> result = create(_packet.back());
 		_packet.pop_back();
 		return result;
 	}
 
-	inline void self_assign_(range_a<parcel_a<>> const& range)
+	inline void self_assign_(range_a<container_a<>> const& range)
 	{
-		if (check<parcel_a<>>(range))
+		if (check<container_data_a<dart_packet, dart_packet::iterator>>(range))
 		{
-			auto const other = fast<parcel_a<>>(range);
+			auto const other = fast<container_data_a<dart_packet, dart_packet::iterator>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_packet = other.extract_packet();
 		}
 		else
 		{
-			auto read_lock = check<collection_a<parcel_a<>>>(range) ? fast<collection_a<parcel_a<>>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<container_a<>>>(range) ? fast<collection_a<container_a<>>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_packet.clear();
 			for (auto const& thing : range)
 			{
-				_packet.push_back(thing.extract_packet());
+				if (!check<container_data_a<dart_packet, dart_packet::iterator>>(thing))
+				{
+					throw dis("strange::parcel::self_assign passed wrong type of thing");
+				}
+				_packet.push_back(fast<container_data_a<dart_packet, dart_packet::iterator>>(thing).extract_packet());
 			}
 		}
 	}
 
-	inline void self_add_(range_a<parcel_a<>> const& range)
+	inline void self_add_(range_a<container_a<>> const& range)
 	{
-		if (check<parcel_a<>>(range))
+		if (check<container_data_a<dart_packet, dart_packet::iterator>>(range))
 		{
-			auto const other = fast<parcel_a<>>(range);
+			auto const other = fast<container_data_a<dart_packet, dart_packet::iterator>>(range);
 			auto read_lock = other.read_lock_();
 			auto const& other_packet = other.extract_packet();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
@@ -724,27 +746,31 @@ public:
 		}
 		else
 		{
-			auto read_lock = check<collection_a<parcel_a<>>>(range) ? fast<collection_a<parcel_a<>>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<container_a<>>>(range) ? fast<collection_a<container_a<>>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			for (auto const& thing : range)
 			{
-				_packet.push_back(thing.extract_packet());
+				if (!check<container_data_a<dart_packet, dart_packet::iterator>>(thing))
+				{
+					throw dis("strange::parcel::self_add passed wrong type of thing");
+				}
+				_packet.push_back(fast<container_data_a<dart_packet, dart_packet::iterator>>(thing).extract_packet());
 			}
 		}
 	}
 
-	inline ___ego___ add_(range_a<parcel_a<>> const& range) const
+	inline ___ego___ add_(range_a<container_a<>> const& range) const
 	{
 		auto result = thing_t<___ego___>::me_();
 		result += range;
 		return result;
 	}
 
-	inline void self_subtract_(range_a<parcel_a<>> const& range)
+	inline void self_subtract_(range_a<container_a<>> const& range)
 	{
-		if (check<parcel_a<>>(range))
+		if (check<container_data_a<dart_packet, dart_packet::iterator>>(range))
 		{
-			auto const other = fast<parcel_a<>>(range);
+			auto const other = fast<container_data_a<dart_packet, dart_packet::iterator>>(range);
 			auto read_lock = other.read_lock_();
 			auto const& other_packet = other.extract_packet();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
@@ -755,16 +781,20 @@ public:
 		}
 		else
 		{
-			auto read_lock = check<collection_a<parcel_a<>>>(range) ? fast<collection_a<parcel_a<>>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<container_a<>>>(range) ? fast<collection_a<container_a<>>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			for (auto const& thing : range)
 			{
-				_packet.erase(thing.extract_packet());
+				if (!check<container_data_a<dart_packet, dart_packet::iterator>>(thing))
+				{
+					throw dis("strange::parcel::self_subtract passed wrong type of thing");
+				}
+				_packet.erase(fast<container_data_a<dart_packet, dart_packet::iterator>>(thing).extract_packet());
 			}
 		}
 	}
 
-	inline ___ego___ subtract_(range_a<parcel_a<>> const& range) const
+	inline ___ego___ subtract_(range_a<container_a<>> const& range) const
 	{
 		auto result = thing_t<___ego___>::me_();
 		result -= range;
@@ -781,7 +811,7 @@ public:
 		return data_t<write_lock_ptr<_concurrent_>>::create(make_write_lock_ptr<_concurrent_>(_mutex));
 	}
 
-	// parcel
+	// container
 	inline any_a<> release_(shoal_a<> const& shared_shoal) const
 	{
 		auto no_shoal = no();
@@ -900,7 +930,7 @@ protected:
 	typename concurrent_u<_concurrent_>::mutex mutable _mutex;
 	dart_packet _packet;
 	std_vector<any_a<>> mutable _shadow_keys;
-	std_vector<parcel_a<>> mutable _shadow_values;
+	std_vector<container_a<>> mutable _shadow_values;
 
 	friend class any_a<>;
 
@@ -954,100 +984,100 @@ class ___parcel_t_share___
 
 // template <bool _concurrent_ = false>
 template <bool _concurrent_>
-inline parcel_a<> parcel_create()
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create()
 {
 	return parcel_t<_concurrent_>::create_();
 }
 
 template <typename F>
-inline parcel_a<> parcel_create(F&& init)
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create(F&& init)
 {
 	return parcel_t<>::create(std::forward<F>(init));
 }
 
 template <typename... Args>
-inline parcel_a<> parcel_vals(Args&&... args)
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_vals(Args&&... args)
 {
 	return parcel_t<>::create_(std::forward<Args>(args)...);
 }
 
 template <typename... Args>
-inline parcel_a<> parcel_refs(Args&&... args)
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_refs(Args&&... args)
 {
 	return parcel_t<>::create_refs_(std::forward<Args>(args)...);
 }
 
 template <typename... Args>
-inline parcel_a<> parcel_dups(Args&&... args)
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_dups(Args&&... args)
 {
 	return parcel_t<>::create_dups_(std::forward<Args>(args)...);
 }
 
 //TODO requires sajson
 /*
-inline parcel_a<> parcel_from_json(lake_a<int8_t> const& lake)
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_from_json(lake_a<int8_t> const& lake)
 {
 	return parcel_t<>::from_json_(lake);
 }
 
-inline parcel_a<> parcel_from_json(std_string const& str)
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_from_json(std_string const& str)
 {
 	return parcel_t<>::from_json(str);
 }
 */
-inline parcel_a<> parcel_from_binary(lake_a<int8_t> const& lake)
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_from_binary(lake_a<int8_t> const& lake)
 {
 	return parcel_t<>::from_binary_(lake);
 }
 
-inline parcel_a<> parcel_from_binary(std_string const& str)
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_from_binary(std_string const& str)
 {
 	return parcel_t<>::from_binary(str);
 }
 
-inline parcel_a<> parcel_create_null()
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_null()
 {
 	return parcel_t<>::create_null_();
 }
 
-inline parcel_a<> parcel_create_boolean(any_a<> const& thing)
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_boolean(any_a<> const& thing)
 {
 	return parcel_t<>::create_boolean_(thing);
 }
 
-inline parcel_a<> parcel_create_number(number_a<> const& number)
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_number(number_a<> const& number)
 {
 	return parcel_t<>::create_number_(number);
 }
 
-inline parcel_a<> parcel_create_int_64(number_data_a<int64_t> const& number)
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_int_64(number_data_a<int64_t> const& number)
 {
 	return parcel_t<>::create_int_64_(number);
 }
 
-inline parcel_a<> parcel_create_float_64(number_data_a<double> const& number)
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_float_64(number_data_a<double> const& number)
 {
 	return parcel_t<>::create_float_64_(number);
 }
 
-inline parcel_a<> parcel_create_lake(lake_a<int8_t> const& lake)
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_lake(lake_a<int8_t> const& lake)
 {
 	return parcel_t<>::create_lake_(lake);
 }
 
-inline parcel_a<> parcel_create_symbol(symbol_a<> const& symbol)
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_symbol(symbol_a<> const& symbol)
 {
 	return parcel_t<>::create_symbol_(symbol);
 }
 
 template <typename... Args>
-inline parcel_a<> parcel_create_inventory(Args&&... args)
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_inventory(Args&&... args)
 {
 	return parcel_t<>::create_inventory_(dart_packet::make_array(std::forward<Args>(args)...));
 }
 
 template <typename... Args>
-inline parcel_a<> parcel_create_shoal(Args&&... args)
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_shoal(Args&&... args)
 {
 	return parcel_t<>::create_shoal_(dart_packet::make_object(std::forward<Args>(args)...));
 }

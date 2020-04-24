@@ -92,14 +92,14 @@ public:
 		return identity() >= thing.identity();
 	}
 
-	inline parcel_a<> to_parcel_() const
+	inline any_a<> contain_(container_a<>& container) const
 	{
-		return parcel_a<>{};
+		return no();
 	}
 
-	inline parcel_a<> to_parcel_unique_(herd_a<number_data_a<uint64_t>>& unique_herd) const
+	inline any_a<> contain_unique_(container_a<>& container, herd_a<number_data_a<uint64_t>>& unique_herd) const
 	{
-		return parcel_a<>{};
+		return no();
 	}
 
 protected:

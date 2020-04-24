@@ -84,14 +84,6 @@ using lake_int8_a = lake_a<int8_t>;
 #include "generated/declare_strange_shoal_a.hpp"
 #include "generated/declare_strange_ordered_shoal_a.hpp"
 #include "generated/declare_strange_unordered_shoal_a.hpp"
-#include "generated/declare_strange_parcel_a.hpp"
-template <> struct std::hash<strange::parcel_a<>>
-{
-	inline strange::std_size_t operator()(strange::parcel_a<> const& thing) const
-	{
-		return strange::hash_of(thing);
-	}
-};
 #include "generated/declare_strange_container_a.hpp"
 template <> struct std::hash<strange::container_a<>>
 {
@@ -374,47 +366,47 @@ inline ordered_shoal_a<> ordered_shoal_vals(Args&&... args);
 
 // parcel
 template <bool _concurrent_ = false>
-inline parcel_a<> parcel_create();
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create();
 
 template <typename F>
-inline parcel_a<> parcel_create(F&& init);
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create(F&& init);
 
 template <typename... Args>
-inline parcel_a<> parcel_vals(Args&&... args);
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_vals(Args&&... args);
 
 template <typename... Args>
-inline parcel_a<> parcel_refs(Args&&... args);
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_refs(Args&&... args);
 
 template <typename... Args>
-inline parcel_a<> parcel_dups(Args&&... args);
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_dups(Args&&... args);
 
 //TODO requires sajson
 /*
-inline parcel_a<> parcel_from_json(lake_a<int8_t> const& lake);
-inline parcel_a<> parcel_from_json(std_string const& str);
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_from_json(lake_a<int8_t> const& lake);
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_from_json(std_string const& str);
 */
-inline parcel_a<> parcel_from_binary(lake_a<int8_t> const& lake);
-inline parcel_a<> parcel_from_binary(std_string const& str);
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_from_binary(lake_a<int8_t> const& lake);
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_from_binary(std_string const& str);
 
-inline parcel_a<> parcel_create_null();
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_null();
 
-inline parcel_a<> parcel_create_boolean(any_a<> const& thing);
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_boolean(any_a<> const& thing);
 
-inline parcel_a<> parcel_create_number(number_a<> const& number);
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_number(number_a<> const& number);
 
-inline parcel_a<> parcel_create_int_64(number_data_a<int64_t> const& number);
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_int_64(number_data_a<int64_t> const& number);
 
-inline parcel_a<> parcel_create_float_64(number_data_a<double> const& number);
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_float_64(number_data_a<double> const& number);
 
-inline parcel_a<> parcel_create_lake(lake_a<int8_t> const& lake);
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_lake(lake_a<int8_t> const& lake);
 
-inline parcel_a<> parcel_create_symbol(symbol_a<> const& symbol);
-
-template <typename... Args>
-inline parcel_a<> parcel_create_inventory(Args&&... args);
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_symbol(symbol_a<> const& symbol);
 
 template <typename... Args>
-inline parcel_a<> parcel_create_shoal(Args&&... args);
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_inventory(Args&&... args);
+
+template <typename... Args>
+inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_shoal(Args&&... args);
 
 // squad
 template <typename _element = any_a<>, bool _concurrent_ = false>
