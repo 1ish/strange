@@ -15,64 +15,51 @@ false &&
 
 					from_json_ := (lake :<lake_int8>#, <parcel>),
 					from_json : "void (std_string const& json) { from_json_(lake_from_string(json)); }",
-
 					to_json_ :# (<lake_int8>),
 					to_json : "std_string () const { return lake_to_string(to_json_()); }",
-					export_json_ :# (json :<lake_int8>&, <>),
 
+					from_binary_ := (lake :<lake_int8>#, <parcel>),
+					from_binary : "void (std_string const& str) { from_binary_(lake_from_string(str)); }",
 					to_binary_ :# (<lake_int8>),
 					to_binary : "std_string () const { return lake_to_string(to_binary_()); }",
-					export_binary_ :# (binary :<lake_int8>&, <>),
 
+					from_null_ := (<parcel>),
 					is_null_ :# (<>),
 
+					from_boolean_ := (boolean :<>#, <parcel>),
 					is_boolean_ :# (<>),
 					to_boolean_ :# (<>),
 
+					from_number_ := (number :<number>#, <parcel>),
 					is_number_ :# (<>),
 					to_number_ :# (<number>),
-					export_number_ :# (number :<number>&, <>),
 
+					from_int_64_ := (number :<number_data_int64>#, <parcel>),
 					is_int_64_ :# (<>),
 					to_int_64_ :# (<number_data_int64>),
-					export_int_64_ :# (number :<number_data_int64>&, <>),
 
+					from_float_64_ := (number :<number_data_double>#, <parcel>),
 					is_float_64_ :# (<>),
 					to_float_64_ :# (<number_data_double>),
-					export_float_64_ :# (number :<number_data_double>&, <>),
 
+					from_lake_ := (lake :<lake_int8>#, <parcel>),
 					is_lake_ :# (<>),
 					to_lake_ :# (<lake_int8>),
-					export_lake_ :# (lake :<lake_int8>&, <>),
 
+					from_symbol_ := (symbol :<symbol>#, <parcel>),
 					to_symbol_ :# (<symbol>),
 
+					from_inventory_ := (inventory :<inventory>#, <parcel>),
 					is_inventory_ :# (<>),
-					export_inventory_ :# (inventory :<inventory[<parcel>]>&, <>),
+					as_inventory_ :# (inventory :<inventory[<parcel>]>&, <>),
 
-					to_flock_ :# (<flock[<parcel>]>),
-					export_flock_ :# (flock :<flock[<parcel>]>&, <>),
-
-					to_squad_ :# (<squad[<parcel>]>),
-					export_squad_ :# (squad :<squad[<parcel>]>&, <>),
-
+					from_herd_ := (herd :<herd>#, <parcel>),
 					is_herd_ :# (<>),
-					export_herd_ :# (herd :<herd[<parcel>]>&, <>),
+					as_herd_ :# (herd :<herd[<parcel>]>&, <>),
 
-					to_ordered_herd_ :# (<ordered_herd[<parcel>]>),
-					export_ordered_herd_ :# (herd :<ordered_herd[<parcel>]>&, <>),
-
-					to_unordered_herd_ :# (<unordered_herd[<parcel>]>),
-					export_unordered_herd_ :# (herd :<unordered_herd[<parcel>]>&, <>),
-
+					from_shoal_ := (shoal :<shoal>#, <parcel>),
 					is_shoal_ :# (<>),
-					export_shoal_ :# (shoal :<shoal[<>, <parcel>]>&, <>),
-
-					to_ordered_shoal_ :# (<ordered_shoal[<>, <parcel>]>),
-					export_ordered_shoal_ :# (shoal :<ordered_shoal[<>, <parcel>]>&, <>),
-
-					to_unordered_shoal_ :# (<unordered_shoal[<>, <parcel>]>),
-					export_unordered_shoal_ :# (shoal :<unordered_shoal[<>, <parcel>]>&, <>),
+					as_shoal_ :# (shoal :<shoal[<>, <parcel>]>&, <>),
 */
 					'operator==' : "bool (parcel_a<> const& parcel) const",
 					'operator!=' : "bool (parcel_a<> const& parcel) const",
