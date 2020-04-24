@@ -5,9 +5,9 @@ false &&
 			(	// parent
 				$$<collection>[<>, <parcel>, <parcel>],
 				{	// parcel
-					unwrap_ :# (shared_shoal :<shoal>#, <>), //TODO release_
-					unwrap_unique_ :# (shared_shoal :<shoal>#, unique_shoal :<shoal[<number_data_uint64>, <>]>&, <>), //TODO release_unique_
-					unwrap : "any_a<> (shoal_a<> const& shared_shoal, any_a<>& unique_shoal) const", //TODO release
+					release_ :# (shared_shoal :<shoal>#, <>),
+					release_unique_ :# (shared_shoal :<shoal>#, unique_shoal :<shoal[<number_data_uint64>, <>]>&, <>),
+					release : "any_a<> (shoal_a<> const& shared_shoal, any_a<>& unique_shoal) const",
 /*
 					close_ := (<>),
 					closed_ :# (<>),

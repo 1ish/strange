@@ -124,12 +124,12 @@ namespace dart
 			template <class Packet>
 			strange::any_a<> from_dart(Packet const& pkt)
 			{
-				return strange::parcel_create(pkt).unwrap_(strange::shared());
+				return strange::parcel_create(pkt).release_(strange::shared());
 			}
 			template <class Packet>
 			bool compare(Packet const& pkt, strange::any_a<> const& thing)
 			{
-				return strange::parcel_create(pkt).unwrap_(strange::shared()) == thing;
+				return strange::parcel_create(pkt).release_(strange::shared()) == thing;
 			}
 		};
 	}

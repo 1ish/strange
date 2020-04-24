@@ -3,62 +3,62 @@ namespace strange
 {
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::unwrap__(list_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::release__(list_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.begin_();
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("parcel_a::unwrap_ passed short range");
+		throw dis("parcel_a::release_ passed short range");
 	}
 	auto shared_shoal = cast<shoal_a<>>(*___it___);
-	return unwrap_(shared_shoal);
+	return release_(shared_shoal);
 }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::unwrap_(shoal_a<> const& shared_shoal) const
-{ assert(any_a<>::___handle___); return ___read___().unwrap_(shared_shoal); }
+inline any_a<> parcel_a<_1>::release_(shoal_a<> const& shared_shoal) const
+{ assert(any_a<>::___handle___); return ___read___().release_(shared_shoal); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unwrap_(shoal_a<> const& shared_shoal) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unwrap_(shared_shoal); }
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::release_(shoal_a<> const& shared_shoal) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.release_(shared_shoal); }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::unwrap_unique__(list_a<> const& ___arguments___) const
+inline any_a<> parcel_a<_1>::release_unique__(list_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.begin_();
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("parcel_a::unwrap_unique_ passed short range");
+		throw dis("parcel_a::release_unique_ passed short range");
 	}
 	auto shared_shoal = cast<shoal_a<>>(*___it___);
 	if (++___it___ == ___end___)
 	{
-		throw dis("parcel_a::unwrap_unique_ passed short range");
+		throw dis("parcel_a::release_unique_ passed short range");
 	}
 	auto unique_shoal = cast_dup<shoal_a<number_data_uint64_a<>, strange::any_a<>>>(*___it___);
-	return unwrap_unique_(shared_shoal, unique_shoal);
+	return release_unique_(shared_shoal, unique_shoal);
 }
 
 template <typename _1>
-inline any_a<> parcel_a<_1>::unwrap_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_uint64_a<>, strange::any_a<>> & unique_shoal) const
-{ assert(any_a<>::___handle___); return ___read___().unwrap_unique_(shared_shoal, unique_shoal); }
+inline any_a<> parcel_a<_1>::release_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_uint64_a<>, strange::any_a<>> & unique_shoal) const
+{ assert(any_a<>::___handle___); return ___read___().release_unique_(shared_shoal, unique_shoal); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unwrap_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_uint64_a<>, strange::any_a<>> & unique_shoal) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unwrap_unique_(shared_shoal, unique_shoal); }
+inline any_a<> parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::release_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_uint64_a<>, strange::any_a<>> & unique_shoal) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.release_unique_(shared_shoal, unique_shoal); }
 
 template <typename _1>
-inline any_a < > parcel_a<_1>::unwrap(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const
-{ assert(any_a<>::___handle___); return ___read___().unwrap(shared_shoal, unique_shoal); }
+inline any_a < > parcel_a<_1>::release(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const
+{ assert(any_a<>::___handle___); return ___read___().release(shared_shoal, unique_shoal); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
-inline any_a < > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::unwrap(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.unwrap(shared_shoal, unique_shoal); }
+inline any_a < > parcel_a<_1>::___parcel_a_handle___<___TTT___, ___DHB___>::release(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.release(shared_shoal, unique_shoal); }
 
 template <typename _1>
 inline bool parcel_a<_1>::operator==(parcel_a < > const & parcel ) const
@@ -169,8 +169,8 @@ inline ___unordered_shoal_a___ parcel_a<_1>::___operations___()
 	static ___unordered_shoal_a___ OPERATIONS = []()
 	{
 		___unordered_shoal_a___ operations = collection_a< any_a<> , parcel_a<> , parcel_a<> >::template ___operations___<___unordered_shoal_a___>();
-		operations.update(sym("unwrap_"), native_extraction_t<parcel_a>::create(&parcel_a::unwrap__));
-		operations.update(sym("unwrap_unique_"), native_extraction_t<parcel_a>::create(&parcel_a::unwrap_unique__));
+		operations.update(sym("release_"), native_extraction_t<parcel_a>::create(&parcel_a::release__));
+		operations.update(sym("release_unique_"), native_extraction_t<parcel_a>::create(&parcel_a::release_unique__));
 		operations.update(sym("keys_begin_"), native_extraction_t<parcel_a>::create(&parcel_a::keys_begin__));
 		operations.update(sym("keys_end_"), native_extraction_t<parcel_a>::create(&parcel_a::keys_end__));
 		return operations;
