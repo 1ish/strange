@@ -17,13 +17,13 @@ false &&
 
 					cat_ :# (<#cat>),
 
-					cats_ :# (<unordered_herd>), //TODO <unordered_herd[<#cat>]>
+					cats_ :# (<unordered_herd>), //TODO <herd[<#cat>]>
 
 					kind_ :# (<#kind>),
 
-					kinds_ :# (<unordered_herd>), //TODO <unordered_herd[<#kind>]>
+					kinds_ :# (<unordered_herd>), //TODO <herd[<#kind>]>
 
-					operations_ :# (<unordered_shoal>), //TODO <unordered_shoal[<#symbol>, <operation>]>
+					operations_ :# (<unordered_shoal>), //TODO <shoal[<#symbol>, <operation>]>
 
 					// visitor
 					visit_ :# (arguments :<inventory>&, <any>),
@@ -64,8 +64,8 @@ false &&
 					is : "bool (std_string const& s) const",
 
 					// serialization
-					to_parcel_ :# (<parcel>),
-					to_parcel_unique_ :# (unique_herd :<herd[<#number_data_uint64>]>&, <parcel>),
+					to_parcel_ :# (<parcel>), //TODO contain_ :# (container :<container>&, <>)
+					to_parcel_unique_ :# (unique_herd :<herd[<#number_data_uint64>]>&, <parcel>), //TODO contain_unique_
 				}
 			)
 		)

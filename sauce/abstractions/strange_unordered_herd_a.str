@@ -1,6 +1,6 @@
 false &&
 {	strange :
-	{	<unordered_herd> :: abstraction
+	{	<unordered_herd> :: abstraction //TODO herd_data_a<_element, std_unordered_set<_element>>
 		(	// dimensions
 			#element :<<>># <>,
 			(	// parent

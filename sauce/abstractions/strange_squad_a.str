@@ -1,6 +1,6 @@
 false &&
 {	strange :
-	{	<squad> :: abstraction
+	{	<squad> :: abstraction //TODO inventory_data_a<_element, std_deque<_element>>
 		(	// dimensions
 			#element :<<>># <>,
 			(	// parent

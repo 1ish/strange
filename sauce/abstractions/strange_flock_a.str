@@ -1,6 +1,6 @@
 false &&
 {	strange :
-	{	<flock> :: abstraction
+	{	<flock> :: abstraction //TODO inventory_data_a<_element, std_vector<_element>>
 		(	// dimensions
 			#element :<<>># <>,
 			(	// parent

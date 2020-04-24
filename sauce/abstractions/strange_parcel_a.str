@@ -1,25 +1,28 @@
 false &&
 {	strange :
-	{	<parcel> :: abstraction
+	{	<parcel> :: abstraction //TODO container_data_a<dart_packet>
 		(	// no dimensions
 			(	// parent
 				$$<collection>[<>, <parcel>, <parcel>],
 				{	// parcel
-					unwrap_ :# (shared_shoal :<shoal>#, <>),
-					unwrap_unique_ :# (shared_shoal :<shoal>#, unique_shoal :<shoal[<number_data_uint64>, <>]>&, <>),
-					unwrap : "any_a<> (shoal_a<> const& shared_shoal, any_a<>& unique_shoal) const",
+					unwrap_ :# (shared_shoal :<shoal>#, <>), //TODO release_
+					unwrap_unique_ :# (shared_shoal :<shoal>#, unique_shoal :<shoal[<number_data_uint64>, <>]>&, <>), //TODO release_unique_
+					unwrap : "any_a<> (shoal_a<> const& shared_shoal, any_a<>& unique_shoal) const", //TODO release
 /*
 					close_ := (<>),
 					closed_ :# (<>),
 					reopen_ := (<>),
 
+					from_json_ := (lake :<lake_int8>#, <parcel>),
+					from_json : "void (std_string const& json) { from_json_(lake_from_string(json)); }",
+
 					to_json_ :# (<lake_int8>),
 					to_json : "std_string () const { return lake_to_string(to_json_()); }",
-					set_json_ :# (json :<lake_int8>&, <>),
+					export_json_ :# (json :<lake_int8>&, <>),
 
 					to_binary_ :# (<lake_int8>),
 					to_binary : "std_string () const { return lake_to_string(to_binary_()); }",
-					set_binary_ :# (binary :<lake_int8>&, <>),
+					export_binary_ :# (binary :<lake_int8>&, <>),
 
 					is_null_ :# (<>),
 
@@ -28,48 +31,48 @@ false &&
 
 					is_number_ :# (<>),
 					to_number_ :# (<number>),
-					set_number_ :# (number :<number>&, <>),
+					export_number_ :# (number :<number>&, <>),
 
 					is_int_64_ :# (<>),
 					to_int_64_ :# (<number_data_int64>),
-					set_int_64_ :# (number :<number_data_int64>&, <>),
+					export_int_64_ :# (number :<number_data_int64>&, <>),
 
 					is_float_64_ :# (<>),
 					to_float_64_ :# (<number_data_double>),
-					set_float_64_ :# (number :<number_data_double>&, <>),
+					export_float_64_ :# (number :<number_data_double>&, <>),
 
 					is_lake_ :# (<>),
 					to_lake_ :# (<lake_int8>),
-					set_lake_ :# (lake :<lake_int8>&, <>),
+					export_lake_ :# (lake :<lake_int8>&, <>),
 
 					to_symbol_ :# (<symbol>),
 
 					is_inventory_ :# (<>),
-					set_inventory_ :# (inventory :<inventory[<parcel>]>&, <>),
+					export_inventory_ :# (inventory :<inventory[<parcel>]>&, <>),
 
 					to_flock_ :# (<flock[<parcel>]>),
-					set_flock_ :# (flock :<flock[<parcel>]>&, <>),
+					export_flock_ :# (flock :<flock[<parcel>]>&, <>),
 
 					to_squad_ :# (<squad[<parcel>]>),
-					set_squad_ :# (squad :<squad[<parcel>]>&, <>),
+					export_squad_ :# (squad :<squad[<parcel>]>&, <>),
 
 					is_herd_ :# (<>),
-					set_herd_ :# (herd :<herd[<parcel>]>&, <>),
+					export_herd_ :# (herd :<herd[<parcel>]>&, <>),
 
 					to_ordered_herd_ :# (<ordered_herd[<parcel>]>),
-					set_ordered_herd_ :# (herd :<ordered_herd[<parcel>]>&, <>),
+					export_ordered_herd_ :# (herd :<ordered_herd[<parcel>]>&, <>),
 
 					to_unordered_herd_ :# (<unordered_herd[<parcel>]>),
-					set_unordered_herd_ :# (herd :<unordered_herd[<parcel>]>&, <>),
+					export_unordered_herd_ :# (herd :<unordered_herd[<parcel>]>&, <>),
 
 					is_shoal_ :# (<>),
-					set_shoal_ :# (shoal :<shoal[<>, <parcel>]>&, <>),
+					export_shoal_ :# (shoal :<shoal[<>, <parcel>]>&, <>),
 
 					to_ordered_shoal_ :# (<ordered_shoal[<>, <parcel>]>),
-					set_ordered_shoal_ :# (shoal :<ordered_shoal[<>, <parcel>]>&, <>),
+					export_ordered_shoal_ :# (shoal :<ordered_shoal[<>, <parcel>]>&, <>),
 
 					to_unordered_shoal_ :# (<unordered_shoal[<>, <parcel>]>),
-					set_unordered_shoal_ :# (shoal :<unordered_shoal[<>, <parcel>]>&, <>),
+					export_unordered_shoal_ :# (shoal :<unordered_shoal[<>, <parcel>]>&, <>),
 */
 					'operator==' : "bool (parcel_a<> const& parcel) const",
 					'operator!=' : "bool (parcel_a<> const& parcel) const",

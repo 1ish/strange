@@ -14,7 +14,7 @@ false &&
 
 					token_ :# (<token>),
 
-					terms_ :# (<flock>),
+					terms_ :# (<flock>), //TODO <inventory>
 
 					generate_ :# (version :<number_data_int64>#, indent :<number_data_int64>#, river :<river>&, <>),
 					generate : "void (int64_t version, int64_t indent, river_a<>& river) const { generate_(num(version), num(indent), river); }",

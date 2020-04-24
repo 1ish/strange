@@ -8,10 +8,10 @@ false &&
 					pure_ :# (<>),
 					pure : "bool () const { return pure_(); }",
 
-					aspects : "void (unordered_shoal_a<> const& shoal)",
+					aspects : "void (unordered_shoal_a<> const& shoal)", //TODO shoal_a<symbol_a<>, any_a<>>
 					assign : "void (operation_a<> const& operation)",
 
-					names_ :# (<flock>), //TODO <flock[<symbol>]>
+					names_ :# (<flock>), //TODO <inventory[<symbol>]>
 				}
 			)
 		)

@@ -1,6 +1,6 @@
 false &&
 {	strange :
-	{	<ordered_shoal> :: abstraction
+	{	<ordered_shoal> :: abstraction //TODO shoal_data_a<_key, _value>, std_map<_key, _value>>
 		(	// dimensions
 			#key :<<>># <>,
 			#value :<<>># <>,
