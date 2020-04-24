@@ -438,65 +438,67 @@ inline bool any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___
 { return ___value___.is(s); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::contain__(list_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::pack__(list_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.begin_();
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("any_a::contain_ passed short range");
+		throw dis("any_a::pack_ passed short range");
 	}
 	auto container = cast_dup<container_a<>>(*___it___);
-	return contain_(container);
+	return pack_(container);
 }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::contain_(container_a<> & container) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::pack_(container_a<> & container) const
 {
 	if (!___handle___)
 	{
+		//TODO container.from_null_();
 		return yes();
 	}
-	return ___read___().contain_(container);
+	return ___read___().pack_(container);
 }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
 template <typename ___TTT___, typename ___BHB___>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::contain_(container_a<> & container) const
-{ return ___value___.contain_(container); }
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::pack_(container_a<> & container) const
+{ return ___value___.pack_(container); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::contain_unique__(list_a<> const& ___arguments___) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::pack_unique__(list_a<> const& ___arguments___) const
 {
 	auto ___it___ = ___arguments___.begin_();
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("any_a::contain_unique_ passed short range");
+		throw dis("any_a::pack_unique_ passed short range");
 	}
 	auto container = cast_dup<container_a<>>(*___it___);
 	if (++___it___ == ___end___)
 	{
-		throw dis("any_a::contain_unique_ passed short range");
+		throw dis("any_a::pack_unique_ passed short range");
 	}
 	auto unique_herd = cast_dup< herd_a< _number_data_uint64 > >(*___it___);
-	return contain_unique_(container, unique_herd);
+	return pack_unique_(container, unique_herd);
 }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::contain_unique_(container_a<> & container, herd_a< _number_data_uint64 > & unique_herd) const
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::pack_unique_(container_a<> & container, herd_a< _number_data_uint64 > & unique_herd) const
 {
 	if (!___handle___)
 	{
+		//TODO container.from_null_();
 		return yes();
 	}
-	return ___read___().contain_unique_(container, unique_herd);
+	return ___read___().pack_unique_(container, unique_herd);
 }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
 template <typename ___TTT___, typename ___BHB___>
-inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::contain_unique_(container_a<> & container, herd_a< _number_data_uint64 > & unique_herd) const
-{ return ___value___.contain_unique_(container, unique_herd); }
+inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::___any_a_handle___<___TTT___, ___BHB___>::pack_unique_(container_a<> & container, herd_a< _number_data_uint64 > & unique_herd) const
+{ return ___value___.pack_unique_(container, unique_herd); }
 
 template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
 inline any_a<> any_a<_symbol, _cat, _kind, _number_data_uint64>::operation(std_string const& name) const
@@ -531,8 +533,8 @@ inline ___unordered_shoal_a___ any_a<_symbol, _cat, _kind, _number_data_uint64>:
 		operations.update(sym("less_or_equal_"), native_extraction_t<any_a>::create(&any_a::less_or_equal__));
 		operations.update(sym("greater_or_equal_"), native_extraction_t<any_a>::create(&any_a::greater_or_equal__));
 		operations.update(sym("hash_"), native_extraction_t<any_a>::create(&any_a::hash__));
-		operations.update(sym("contain_"), native_extraction_t<any_a>::create(&any_a::contain__));
-		operations.update(sym("contain_unique_"), native_extraction_t<any_a>::create(&any_a::contain_unique__));
+		operations.update(sym("pack_"), native_extraction_t<any_a>::create(&any_a::pack__));
+		operations.update(sym("pack_unique_"), native_extraction_t<any_a>::create(&any_a::pack_unique__));
 		return operations;
 	}();
 	return OPERATIONS;

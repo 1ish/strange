@@ -147,13 +147,13 @@ public:
 
 	inline bool is(std_string const & s ) const;
 
-	inline any_a<> contain__(list_a<> const& ___arguments___) const;
+	inline any_a<> pack__(list_a<> const& ___arguments___) const;
 
-	inline any_a<> contain_(container_a<> & container) const;
+	inline any_a<> pack_(container_a<> & container) const;
 
-	inline any_a<> contain_unique__(list_a<> const& ___arguments___) const;
+	inline any_a<> pack_unique__(list_a<> const& ___arguments___) const;
 
-	inline any_a<> contain_unique_(container_a<> & container, herd_a< _number_data_uint64 > & unique_herd) const;
+	inline any_a<> pack_unique_(container_a<> & container, herd_a< _number_data_uint64 > & unique_herd) const;
 
 protected:
 	struct ___any_a_handle_base___
@@ -194,8 +194,8 @@ protected:
 		virtual _number_data_uint64 hash_() const = 0;
 		virtual std_size_t hash() const = 0;
 		virtual bool is(std_string const & s ) const = 0;
-		virtual any_a<> contain_(container_a<> & container) const = 0;
-		virtual any_a<> contain_unique_(container_a<> & container, herd_a< _number_data_uint64 > & unique_herd) const = 0;
+		virtual any_a<> pack_(container_a<> & container) const = 0;
+		virtual any_a<> pack_unique_(container_a<> & container, herd_a< _number_data_uint64 > & unique_herd) const = 0;
 	};
 
 	template <typename ___TTT___, typename ___BHB___ = ___any_a_handle_base___>
@@ -280,9 +280,9 @@ protected:
 
 		virtual inline bool is(std_string const & s ) const final;
 
-		virtual inline any_a<> contain_(container_a<> & container) const final;
+		virtual inline any_a<> pack_(container_a<> & container) const final;
 
-		virtual inline any_a<> contain_unique_(container_a<> & container, herd_a< _number_data_uint64 > & unique_herd) const final;
+		virtual inline any_a<> pack_unique_(container_a<> & container, herd_a< _number_data_uint64 > & unique_herd) const final;
 
 		___TTT___ ___value___;
 	};

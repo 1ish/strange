@@ -92,12 +92,12 @@ public:
 		return identity() >= thing.identity();
 	}
 
-	inline any_a<> contain_(container_a<>& container) const
+	inline any_a<> pack_(container_a<>& container) const
 	{
 		return no();
 	}
 
-	inline any_a<> contain_unique_(container_a<>& container, herd_a<number_data_a<uint64_t>>& unique_herd) const
+	inline any_a<> pack_unique_(container_a<>& container, herd_a<number_data_a<uint64_t>>& unique_herd) const
 	{
 		return no();
 	}

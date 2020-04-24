@@ -12,15 +12,15 @@ template <typename _1>
 class container_a : public collection_a< any_a<> , container_a<> , container_a<> >
 {
 public:
-	inline any_a<> release__(list_a<> const& ___arguments___) const;
+	inline any_a<> unpack__(list_a<> const& ___arguments___) const;
 
-	inline any_a<> release_(shoal_a<> const& shared_shoal) const;
+	inline any_a<> unpack_(shoal_a<> const& shared_shoal) const;
 
-	inline any_a<> release_unique__(list_a<> const& ___arguments___) const;
+	inline any_a<> unpack_unique__(list_a<> const& ___arguments___) const;
 
-	inline any_a<> release_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_uint64_a<>, strange::any_a<>> & unique_shoal) const;
+	inline any_a<> unpack_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_uint64_a<>, strange::any_a<>> & unique_shoal) const;
 
-	inline any_a < > release(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const;
+	inline any_a < > unpack(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const;
 
 	inline any_a<> keys_begin__(list_a<> const& ___arguments___) const;
 
@@ -33,9 +33,9 @@ public:
 protected:
 	struct ___container_a_handle_base___ : collection_a< any_a<> , container_a<> , container_a<> >::___collection_a_handle_base___
 	{
-		virtual any_a<> release_(shoal_a<> const& shared_shoal) const = 0;
-		virtual any_a<> release_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_uint64_a<>, strange::any_a<>> & unique_shoal) const = 0;
-		virtual any_a < > release(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const = 0;
+		virtual any_a<> unpack_(shoal_a<> const& shared_shoal) const = 0;
+		virtual any_a<> unpack_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_uint64_a<>, strange::any_a<>> & unique_shoal) const = 0;
+		virtual any_a < > unpack(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const = 0;
 		virtual bidirectional_extractor_a< any_a<> > keys_begin_() const = 0;
 		virtual bidirectional_extractor_a< any_a<> > keys_end_() const = 0;
 	};
@@ -58,11 +58,11 @@ protected:
 			: collection_a< any_a<> , container_a<> , container_a<> >::template ___collection_a_handle___<___TTT___, ___DHB___>(any_a<>::___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> release_(shoal_a<> const& shared_shoal) const final;
+		virtual inline any_a<> unpack_(shoal_a<> const& shared_shoal) const final;
 
-		virtual inline any_a<> release_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_uint64_a<>, strange::any_a<>> & unique_shoal) const final;
+		virtual inline any_a<> unpack_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_uint64_a<>, strange::any_a<>> & unique_shoal) const final;
 
-		virtual inline any_a < > release(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const final;
+		virtual inline any_a < > unpack(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const final;
 
 		virtual inline bidirectional_extractor_a< any_a<> > keys_begin_() const final;
 
@@ -276,52 +276,52 @@ template <typename _1>
 class container_d : public collection_d< any_a<> , container_a<> , container_a<> >
 {
 public:
-	inline any_a<> release__(list_a<> const& arguments) const
+	inline any_a<> unpack__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = any_a<>::operation("release_");
+		auto const op = any_a<>::operation("unpack_");
 		if (!op)
 		{
-			throw dis("dynamic container_d::release_ passed non-existent member");
+			throw dis("dynamic container_d::unpack_ passed non-existent member");
 		}
 		return op.operate(*const_cast<container_d*>(this), arguments);
 	}
 
-	inline any_a<> release_(shoal_a<> const& shared_shoal) const
+	inline any_a<> unpack_(shoal_a<> const& shared_shoal) const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = any_a<>::operation("release_");
+		auto const op = any_a<>::operation("unpack_");
 		if (!op)
 		{
-			throw dis("dynamic container_d::release_ passed non-existent member");
+			throw dis("dynamic container_d::unpack_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this), shared_shoal));
 	}
 
-	inline any_a<> release_unique__(list_a<> const& arguments) const
+	inline any_a<> unpack_unique__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___); 
-		auto const op = any_a<>::operation("release_unique_");
+		auto const op = any_a<>::operation("unpack_unique_");
 		if (!op)
 		{
-			throw dis("dynamic container_d::release_unique_ passed non-existent member");
+			throw dis("dynamic container_d::unpack_unique_ passed non-existent member");
 		}
 		return op.operate(*const_cast<container_d*>(this), arguments);
 	}
 
-	inline any_a<> release_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_uint64_a<>, strange::any_a<>> & unique_shoal) const
+	inline any_a<> unpack_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_uint64_a<>, strange::any_a<>> & unique_shoal) const
 	{
 		assert(any_a<>::___handle___);
-		auto const op = any_a<>::operation("release_unique_");
+		auto const op = any_a<>::operation("unpack_unique_");
 		if (!op)
 		{
-			throw dis("dynamic container_d::release_unique_ passed non-existent member");
+			throw dis("dynamic container_d::unpack_unique_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this), shared_shoal, unique_shoal));
 	}
 
-	inline any_a < > release(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const
-	{ throw dis("dynamic container_d::release(shared_shoal, unique_shoal) not available"); }
+	inline any_a < > unpack(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const
+	{ throw dis("dynamic container_d::unpack(shared_shoal, unique_shoal) not available"); }
 
 	inline any_a<> keys_begin__(list_a<> const& arguments) const
 	{

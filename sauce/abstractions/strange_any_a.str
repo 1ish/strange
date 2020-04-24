@@ -64,8 +64,8 @@ false &&
 					is : "bool (std_string const& s) const",
 
 					// serialization
-					contain_ :# (container :<container>&, <>),
-					contain_unique_ :# (container :<container>&, unique_herd :<herd[<#number_data_uint64>]>&, <>),
+					pack_ :# (container :<container>&, <>),
+					pack_unique_ :# (container :<container>&, unique_herd :<herd[<#number_data_uint64>]>&, <>),
 				}
 			)
 		)

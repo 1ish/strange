@@ -1490,7 +1490,7 @@ protected:
 				(extraction ? "___read___()." : "___write___().") +
 				name + arguments + "; }\n\n");
 		}
-		else if (name == "contain_" || name == "contain_unique_")
+		else if (name == "pack_" || name == "pack_unique_")
 		{
 			river.write_string(
 				"inline " + result + " " + class_name);
@@ -1499,6 +1499,7 @@ protected:
 				"{\n"
 				"\tif (!" + (root ? "" : "any_a<>::") + "___handle___)\n"
 				"\t{\n"
+				"\t\t//TODO container.from_null_();\n"
 				"\t\treturn yes();\n"
 				"\t}\n"
 				"\treturn " + (extraction ? "___read___()." : "___write___().") +

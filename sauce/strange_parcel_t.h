@@ -268,7 +268,7 @@ public:
 			for (auto const& thing : list)
 			{
 				auto container = create_();
-				thing.contain_(container);
+				thing.pack_(container);
 				result.push_back(container);
 			}
 		}
@@ -812,18 +812,18 @@ public:
 	}
 
 	// container
-	inline any_a<> release_(shoal_a<> const& shared_shoal) const
+	inline any_a<> unpack_(shoal_a<> const& shared_shoal) const
 	{
 		auto no_shoal = no();
-		return release(shared_shoal, no_shoal);
+		return unpack(shared_shoal, no_shoal);
 	}
 
-	inline any_a<> release_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_a<uint64_t>, any_a<>>& unique_shoal) const
+	inline any_a<> unpack_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_a<uint64_t>, any_a<>>& unique_shoal) const
 	{
-		return release(shared_shoal, unique_shoal);
+		return unpack(shared_shoal, unique_shoal);
 	}
 
-	inline any_a<> release(shoal_a<> const& shared_shoal, any_a<>& unique_shoal) const
+	inline any_a<> unpack(shoal_a<> const& shared_shoal, any_a<>& unique_shoal) const
 	{
 		switch (_packet.get_type())
 		{
@@ -838,39 +838,39 @@ public:
 			auto unique = it->boolean();
 			if (++it == end)
 			{
-				throw dis("strange::parcel::release called for array with initial boolean and nothing else");
+				throw dis("strange::parcel::unpack called for array with initial boolean and nothing else");
 			}
 			number_data_a<uint64_t> id;
 			if (unique)
 			{
 				if (!it->is_integer())
 				{
-					throw dis("strange::parcel::release called for array with unique true but no reference id");
+					throw dis("strange::parcel::unpack called for array with unique true but no reference id");
 				}
 				id = num(static_cast<uint64_t>(it->integer()));
 				if (++it == end)
 				{
 					if (!check<shoal_a<number_data_a<uint64_t>, any_a<>>>(unique_shoal))
 					{
-						throw dis("strange::parcel::release called for array with reference id but no shoal");
+						throw dis("strange::parcel::unpack called for array with reference id but no shoal");
 					}
 					auto shoal = fast<shoal_a<number_data_a<uint64_t>, any_a<>>>(unique_shoal);
 					if (!shoal.has(id))
 					{
-						throw dis("strange::parcel::release called for array with unknown reference id");
+						throw dis("strange::parcel::unpack called for array with unknown reference id");
 					}
 					return shoal.at_(id);
 				}
 			}
 			if (!it->is_str())
 			{
-				throw dis("strange::parcel::release called for array with no name");
+				throw dis("strange::parcel::unpack called for array with no name");
 			}
 			auto name = sym(it->str());
 			auto function = shared_shoal.at_(name);
 			if (!function)
 			{
-				throw dis("strange::parcel::release called for array with unrecognised function name: " + name.to_string());
+				throw dis("strange::parcel::unpack called for array with unrecognised function name: " + name.to_string());
 			}
 			auto flock = flock_t<>::create_();
 			int64_t const remaining = _packet.size() - (unique ? 3 : 2);
@@ -880,7 +880,7 @@ public:
 				vector.reserve(remaining);
 				while (++it != end)
 				{
-					vector.push_back(create(*it).release(shared_shoal, unique_shoal));
+					vector.push_back(create(*it).unpack(shared_shoal, unique_shoal));
 				}
 			}
 			auto result = function.operate(function, flock);
@@ -888,7 +888,7 @@ public:
 				check<shoal_a<number_data_a<uint64_t>, any_a<>>>(unique_shoal) &&
 				!fast<shoal_a<number_data_a<uint64_t>, any_a<>>>(unique_shoal).insert(id, result))
 			{
-				throw dis("strange::parcel::release called for array with duplicate reference id");
+				throw dis("strange::parcel::unpack called for array with duplicate reference id");
 			}
 			return result;
 		}

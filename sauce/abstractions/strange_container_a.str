@@ -5,9 +5,9 @@ false &&
 			(	// parent
 				$$<collection>[<>, <container>, <container>],
 				{	// container
-					release_ :# (shared_shoal :<shoal>#, <>),
-					release_unique_ :# (shared_shoal :<shoal>#, unique_shoal :<shoal[<number_data_uint64>, <>]>&, <>),
-					release : "any_a<> (shoal_a<> const& shared_shoal, any_a<>& unique_shoal) const",
+					unpack_ :# (shared_shoal :<shoal>#, <>),
+					unpack_unique_ :# (shared_shoal :<shoal>#, unique_shoal :<shoal[<number_data_uint64>, <>]>&, <>),
+					unpack : "any_a<> (shoal_a<> const& shared_shoal, any_a<>& unique_shoal) const",
 /*
 					close_ := (<>),
 					closed_ :# (<>),

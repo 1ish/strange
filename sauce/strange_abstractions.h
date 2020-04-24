@@ -118,20 +118,22 @@ namespace dart
 		template <>
 		struct conversion_traits<strange::any_a<>>
 		{
-			template <class Packet>
-			Packet to_dart(strange::any_a<> const& thing)
+			template <class _packet>
+			_packet to_dart(strange::any_a<> const& thing)
 			{
-				return thing.to_parcel_().extract_packet();
+				auto parcel = strange::parcel_create();
+				thing.pack_(parcel);
+				return parcel.extract_packet();
 			}
-			template <class Packet>
-			strange::any_a<> from_dart(Packet const& pkt)
+			template <class _packet>
+			strange::any_a<> from_dart(_packet const& pkt)
 			{
-				return strange::parcel_create(pkt).release_(strange::shared());
+				return strange::parcel_create(pkt).unpack_(strange::shared());
 			}
-			template <class Packet>
-			bool compare(Packet const& pkt, strange::any_a<> const& thing)
+			template <class _packet>
+			bool compare(_packet const& pkt, strange::any_a<> const& thing)
 			{
-				return strange::parcel_create(pkt).release_(strange::shared()) == thing;
+				return strange::parcel_create(pkt).unpack_(strange::shared()) == thing;
 			}
 		};
 	}
