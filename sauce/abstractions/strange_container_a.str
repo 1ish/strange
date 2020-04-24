@@ -1,0 +1,70 @@
+false &&
+{	strange :
+	{	<container> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<collection>[<>, <container>, <container>],
+				{	// container
+					release_ :# (shared_shoal :<shoal>#, <>),
+					release_unique_ :# (shared_shoal :<shoal>#, unique_shoal :<shoal[<number_data_uint64>, <>]>&, <>),
+					release : "any_a<> (shoal_a<> const& shared_shoal, any_a<>& unique_shoal) const",
+/*
+					close_ := (<>),
+					closed_ :# (<>),
+					reopen_ := (<>),
+
+					from_json_ := (lake :<lake_int8>#, <container>),
+					from_json : "void (std_string const& json) { from_json_(lake_from_string(json)); }",
+					to_json_ :# (<lake_int8>),
+					to_json : "std_string () const { return lake_to_string(to_json_()); }",
+
+					from_binary_ := (lake :<lake_int8>#, <container>),
+					from_binary : "void (std_string const& str) { from_binary_(lake_from_string(str)); }",
+					to_binary_ :# (<lake_int8>),
+					to_binary : "std_string () const { return lake_to_string(to_binary_()); }",
+
+					from_null_ := (<container>),
+					is_null_ :# (<>),
+
+					from_boolean_ := (boolean :<>#, <container>),
+					is_boolean_ :# (<>),
+					to_boolean_ :# (<>),
+
+					from_number_ := (number :<number>#, <container>),
+					is_number_ :# (<>),
+					to_number_ :# (<number>),
+
+					from_int_64_ := (number :<number_data_int64>#, <container>),
+					is_int_64_ :# (<>),
+					to_int_64_ :# (<number_data_int64>),
+
+					from_float_64_ := (number :<number_data_double>#, <container>),
+					is_float_64_ :# (<>),
+					to_float_64_ :# (<number_data_double>),
+
+					from_lake_ := (lake :<lake_int8>#, <container>),
+					is_lake_ :# (<>),
+					to_lake_ :# (<lake_int8>),
+
+					from_symbol_ := (symbol :<symbol>#, <container>),
+					to_symbol_ :# (<symbol>),
+
+					from_inventory_ := (inventory :<inventory>#, <container>),
+					is_inventory_ :# (<>),
+					as_inventory_ :# (inventory :<inventory[<container>]>&, <>),
+
+					from_herd_ := (herd :<herd>#, <container>),
+					is_herd_ :# (<>),
+					as_herd_ :# (herd :<herd[<container>]>&, <>),
+
+					from_shoal_ := (shoal :<shoal>#, <container>),
+					is_shoal_ :# (<>),
+					as_shoal_ :# (shoal :<shoal[<>, <container>]>&, <>),
+*/
+					keys_begin_ :# (<bidirectional_extractor[<>]>),
+					keys_end_ :# (<bidirectional_extractor[<>]>),
+				}
+			)
+		)
+	}
+}

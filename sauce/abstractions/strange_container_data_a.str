@@ -1,0 +1,25 @@
+false &&
+{	strange :
+	{	<container_data> :: abstraction
+		(	// dimensions
+			#type :<<>>#,
+			#iterator :<<>>#,
+			(	// parent
+				$$<container>[],
+				{	// container data
+					'operator==' : "bool (container_data_a<_type, _iterator> const& container) const",
+					'operator!=' : "bool (container_data_a<_type, _iterator> const& container) const",
+
+					keys_begin : "bidirectional_extractor_data_a<any_a<>, _iterator> () const",
+					keys_end : "bidirectional_extractor_data_a<any_a<>, _iterator> () const",
+
+					extract_begin : "bidirectional_extractor_data_a<container_data_a<_type, _iterator>, _iterator> () const",
+					extract_end : "bidirectional_extractor_data_a<container_data_a<_type, _iterator>, _iterator> () const",
+
+					extract_packet : "_type const& () const",
+					mutate_packet : "_type& ()",
+				}
+			)
+		)
+	}
+}

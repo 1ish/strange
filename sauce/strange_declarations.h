@@ -92,6 +92,15 @@ template <> struct std::hash<strange::parcel_a<>>
 		return strange::hash_of(thing);
 	}
 };
+#include "generated/declare_strange_container_a.hpp"
+template <> struct std::hash<strange::container_a<>>
+{
+	inline strange::std_size_t operator()(strange::container_a<> const& thing) const
+	{
+		return strange::hash_of(thing);
+	}
+};
+#include "generated/declare_strange_container_data_a.hpp"
 #include "generated/declare_strange_data_a.hpp"
 #include "generated/declare_strange_number_a.hpp"
 #include "generated/declare_strange_river_a.hpp"
