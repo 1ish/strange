@@ -73,7 +73,9 @@ public:
 
 	inline any_a<> visit__(list_a<> const& ___arguments___) const;
 
-	inline any_a<> visit_(inventory_a<> & arguments) const;
+	inline any_a<> visit_(inventory_a<> & arguments, number_data_int64_a<> const& index) const;
+
+	inline bool visit(inventory_a < > & arguments , int64_t index ) const;
 
 	inline any_a < > invoke(any_a < > & thing , list_a < > const & arguments ) const;
 
@@ -175,7 +177,8 @@ protected:
 		virtual kind_a<> kind_() const = 0;
 		virtual unordered_herd_a<> kinds_() const = 0;
 		virtual unordered_shoal_a<> operations_() const = 0;
-		virtual any_a<> visit_(inventory_a<> & arguments) const = 0;
+		virtual any_a<> visit_(inventory_a<> & arguments, number_data_int64_a<> const& index) const = 0;
+		virtual bool visit(inventory_a < > & arguments , int64_t index ) const = 0;
 		virtual any_a < > invoke(any_a < > & thing , list_a < > const & arguments ) const = 0;
 		virtual any_a < > operate(any_a < > & thing , list_a < > const & arguments ) const = 0;
 		virtual number_data_uint64_a<> identity_() const = 0;
@@ -242,7 +245,9 @@ protected:
 
 		virtual inline unordered_shoal_a<> operations_() const final;
 
-		virtual inline any_a<> visit_(inventory_a<> & arguments) const final;
+		virtual inline any_a<> visit_(inventory_a<> & arguments, number_data_int64_a<> const& index) const final;
+
+		virtual inline bool visit(inventory_a < > & arguments , int64_t index ) const final;
 
 		virtual inline any_a < > invoke(any_a < > & thing , list_a < > const & arguments ) const final;
 

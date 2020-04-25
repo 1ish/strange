@@ -427,17 +427,38 @@ public:
 	}
 
 	// visitor pattern
-	inline any_a<> visit_(inventory_a<>& inventory) const
+	inline any_a<> visit_(inventory_a<>& arguments, number_data_int64_a<> const& index) const
 	{
-		auto result = thing_t<>::visit_(inventory);
+		auto result = thing_t<>::operate__(arguments);
 		if (result)
 		{
-			auto last = inventory.size() - 1;
+			auto ind = index.extract_primitive();
 			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 			for (auto const& visited : _vector)
 			{
-				inventory.update_index(last, visited);
-				visited.visit_(inventory);
+				arguments.update_index(ind, visited);
+				if (!visited.visit(arguments, ind))
+				{
+					return no();
+				}
+			}
+		}
+		return result;
+	}
+
+	inline bool visit(inventory_a<>& arguments, int64_t index) const
+	{
+		auto result = bool{ thing_t<>::operate__(arguments) };
+		if (result)
+		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+			for (auto const& visited : _vector)
+			{
+				arguments.update_index(index, visited);
+				if (!visited.visit(arguments, index))
+				{
+					return false;
+				}
 			}
 		}
 		return result;

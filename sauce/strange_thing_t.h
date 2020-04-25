@@ -58,9 +58,14 @@ public:
 	}
 
 	// visitor pattern
-	static inline any_a<> visit_(inventory_a<>& inventory)
+	static inline any_a<> visit_(inventory_a<>& arguments, number_data_int64_a<> const&)
 	{
-		return operate__(inventory);
+		return operate__(arguments);
+	}
+
+	static inline bool visit(inventory_a<>& arguments, int64_t)
+	{
+		return operate__(arguments);
 	}
 
 	// function

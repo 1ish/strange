@@ -263,19 +263,48 @@ public:
 	}
 
 	// visitor pattern
-	inline any_a<> visit_(inventory_a<>& inventory) const
+	inline any_a<> visit_(inventory_a<>& arguments, number_data_int64_a<> const& index) const
 	{
-		auto result = thing_t<>::visit_(inventory);
+		auto result = thing_t<>::operate__(arguments);
 		if (result)
 		{
-			auto last = inventory.size() - 1;
+			auto ind = index.extract_primitive();
 			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 			for (auto const& visited : _map)
 			{
-				inventory.update_index(last, visited.first);
-				visited.first.visit_(inventory);
-				inventory.update_index(last, visited.second);
-				visited.second.visit_(inventory);
+				arguments.update_index(ind, visited.first);
+				if (!visited.first.visit(arguments, ind))
+				{
+					return no();
+				}
+				arguments.update_index(ind, visited.second);
+				if (!visited.second.visit(arguments, ind))
+				{
+					return no();
+				}
+			}
+		}
+		return result;
+	}
+
+	inline bool visit(inventory_a<>& arguments, int64_t index) const
+	{
+		auto result = bool{ thing_t<>::operate__(arguments) };
+		if (result)
+		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+			for (auto const& visited : _map)
+			{
+				arguments.update_index(index, visited.first);
+				if (!visited.first.visit(arguments, index))
+				{
+					return false;
+				}
+				arguments.update_index(index, visited.second);
+				if (!visited.second.visit(arguments, index))
+				{
+					return false;
+				}
 			}
 		}
 		return result;

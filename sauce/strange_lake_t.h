@@ -447,6 +447,46 @@ public:
 		shoal.update(sym(type_().to_string() + "::create"), native_function_create(&lake_t<_primitive_, _concurrent_>::create__));
 	}
 
+	// visitor pattern
+	inline any_a<> visit_(inventory_a<>& arguments, number_data_int64_a<> const& index) const
+	{
+		auto result = thing_t<>::operate__(arguments);
+		if (result)
+		{
+			auto ind = index.extract_primitive();
+			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+			for (auto const& number : _vector)
+			{
+				auto visited = num(number);
+				arguments.update_index(ind, visited);
+				if (!visited.visit(arguments, ind))
+				{
+					return no();
+				}
+			}
+		}
+		return result;
+	}
+
+	inline bool visit(inventory_a<>& arguments, int64_t index) const
+	{
+		auto result = bool{ thing_t<>::operate__(arguments) };
+		if (result)
+		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+			for (auto const& number : _vector)
+			{
+				auto visited = num(number);
+				arguments.update_index(index, visited);
+				if (!visited.visit(arguments, index))
+				{
+					return false;
+				}
+			}
+		}
+		return result;
+	}
+
 	// comparison
 	inline bool same_(any_a<> const& thing) const
 	{

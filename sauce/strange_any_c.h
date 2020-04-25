@@ -234,12 +234,34 @@ public:
 			any_a<> thing = me_();
 			return op.operate(thing, list);
 		}
-		return thing_t<>::operate__(list); //TODO
+		auto it = list.begin_();
+		if (it == list.end_())
+		{
+			throw dis("<strange::any>::visit passed empty list");
+		}
+		return thing_t<>::operate__(cast_dup<inventory_a<>>(*it));
 	}
 
-	inline any_a<> visit_(inventory_a<>& inventory) const
+	inline any_a<> visit_(inventory_a<>& arguments, number_data_int64_a<> const& index) const
 	{
-		return visit__(inventory); //TODO
+		auto const op = _operations.at_(sym("visit"));
+		if (op)
+		{
+			any_a<> thing = me_();
+			return op.operate(thing, flock_t<>::create_dups_(arguments, index));
+		}
+		return thing_t<>::operate__(arguments);
+	}
+
+	inline bool visit(inventory_a<>& arguments, int64_t index) const
+	{
+		auto const op = _operations.at_(sym("visit"));
+		if (op)
+		{
+			any_a<> thing = me_();
+			return op.operate(thing, flock_t<>::create_dups_(arguments, num(index)));
+		}
+		return thing_t<>::operate__(arguments);
 	}
 
 	// function

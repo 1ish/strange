@@ -120,17 +120,31 @@ inline any_a<> any_a<_1>::visit__(list_a<> const& ___arguments___) const
 		throw dis("any_a::visit_ passed short range");
 	}
 	auto arguments = cast_dup<inventory_a<>>(*___it___);
-	return visit_(arguments);
+	if (++___it___ == ___end___)
+	{
+		throw dis("any_a::visit_ passed short range");
+	}
+	auto index = cast<number_data_int64_a<>>(*___it___);
+	return visit_(arguments, index);
 }
 
 template <typename _1>
-inline any_a<> any_a<_1>::visit_(inventory_a<> & arguments) const
-{ assert(___handle___); return ___read___().visit_(arguments); }
+inline any_a<> any_a<_1>::visit_(inventory_a<> & arguments, number_data_int64_a<> const& index) const
+{ assert(___handle___); return ___read___().visit_(arguments, index); }
 
 template <typename _1>
 template <typename ___TTT___, typename ___BHB___>
-inline any_a<> any_a<_1>::___any_a_handle___<___TTT___, ___BHB___>::visit_(inventory_a<> & arguments) const
-{ return ___value___.visit_(arguments); }
+inline any_a<> any_a<_1>::___any_a_handle___<___TTT___, ___BHB___>::visit_(inventory_a<> & arguments, number_data_int64_a<> const& index) const
+{ return ___value___.visit_(arguments, index); }
+
+template <typename _1>
+inline bool any_a<_1>::visit(inventory_a < > & arguments , int64_t index ) const
+{ assert(___handle___); return ___read___().visit(arguments, index); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___BHB___>
+inline bool any_a<_1>::___any_a_handle___<___TTT___, ___BHB___>::visit(inventory_a < > & arguments , int64_t index ) const
+{ return ___value___.visit(arguments, index); }
 
 template <typename _1>
 inline any_a < > any_a<_1>::invoke(any_a < > & thing , list_a < > const & arguments ) const
