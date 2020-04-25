@@ -2126,15 +2126,8 @@ protected:
 			: scope.substr(0, pos + 2);
 
 		// ___cat___()
-		if (root)
-		{
-			river.write_string("\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = _kind>\n");
-		}
-		else
-		{
-			river.write_string("\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>\n");
-		}
 		river.write_string(
+			"\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>\n"
 			"\tstatic inline ___cat_a___ ___cat___()\n"
 			"\t{\n"
 			"\t\tstatic ___cat_a___ CAT = cat_create<___cat_a___>(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\"");
@@ -2160,15 +2153,8 @@ protected:
 			"\t}\n\n");
 
 		// ___cats___()
-		if (root)
-		{
-			river.write_string("\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = _kind, typename ___unordered_herd_a___ = unordered_herd_a<>>\n");
-		}
-		else
-		{
-			river.write_string("\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>, typename ___unordered_herd_a___ = unordered_herd_a<>>\n");
-		}
 		river.write_string(
+			"\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>, typename ___unordered_herd_a___ = unordered_herd_a<>>\n"
 			"\tstatic inline ___unordered_herd_a___ ___cats___()\n"
 			"\t{\n"
 			"\t\tstatic ___unordered_herd_a___ CATS = ");
@@ -2190,15 +2176,8 @@ protected:
 			"\t}\n\n");
 
 		// ___kind___()
-		if (root)
-		{
-			river.write_string("\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = _kind>\n");
-		}
-		else
-		{
-			river.write_string("\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>\n");
-		}
 		river.write_string(
+			"\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>\n"
 			"\tstatic inline ___kind_a___ ___kind___()\n"
 			"\t{\n"
 			"\t\tstatic ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>()");
@@ -2230,15 +2209,8 @@ protected:
 			"\t}\n\n");
 
 		// ___kinds___()
-		if (root)
-		{
-			river.write_string("\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = _kind, typename ___unordered_herd_a___ = unordered_herd_a<>>\n");
-		}
-		else
-		{
-			river.write_string("\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>, typename ___unordered_herd_a___ = unordered_herd_a<>>\n");
-		}
 		river.write_string(
+			"\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>, typename ___unordered_herd_a___ = unordered_herd_a<>>\n"
 			"\tstatic inline ___unordered_herd_a___ ___kinds___()\n"
 			"\t{\n"
 			"\t\tstatic ___unordered_herd_a___ KINDS = ");

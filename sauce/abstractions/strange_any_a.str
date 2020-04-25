@@ -1,8 +1,7 @@
 false &&
 {	strange :
 	{	<any> :: abstraction
-		(	// dimensions
-			#kind :<<kind>># <kind>,
+		(	// no dimensions
 			(	// no parent
 				{
 					// exposure
@@ -16,9 +15,9 @@ false &&
 
 					cats_ :# (<unordered_herd>), //TODO <herd[<cat>]>
 
-					kind_ :# (<#kind>),
+					kind_ :# (<kind>),
 
-					kinds_ :# (<unordered_herd>), //TODO <herd[<#kind>]>
+					kinds_ :# (<unordered_herd>), //TODO <herd[<kind>]>
 
 					operations_ :# (<unordered_shoal>), //TODO <shoal[<symbol>, <operation>]>
 

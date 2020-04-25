@@ -2,7 +2,7 @@
 namespace strange
 {
 
-template <typename _kind>
+template <typename _1>
 class any_a
 {
 protected:
@@ -61,7 +61,7 @@ public:
 
 	inline any_a<> kind__(list_a<> const& ___arguments___) const;
 
-	inline _kind kind_() const;
+	inline kind_a<> kind_() const;
 
 	inline any_a<> kinds__(list_a<> const& ___arguments___) const;
 
@@ -172,7 +172,7 @@ protected:
 		virtual symbol_a<> type_() const = 0;
 		virtual cat_a<> cat_() const = 0;
 		virtual unordered_herd_a<> cats_() const = 0;
-		virtual _kind kind_() const = 0;
+		virtual kind_a<> kind_() const = 0;
 		virtual unordered_herd_a<> kinds_() const = 0;
 		virtual unordered_shoal_a<> operations_() const = 0;
 		virtual any_a<> visit_(inventory_a<> & arguments) const = 0;
@@ -236,7 +236,7 @@ protected:
 
 		virtual inline unordered_herd_a<> cats_() const final;
 
-		virtual inline _kind kind_() const final;
+		virtual inline kind_a<> kind_() const final;
 
 		virtual inline unordered_herd_a<> kinds_() const final;
 
@@ -471,28 +471,28 @@ public:
 		return any_a<>(thing, ___reference_tag___{});
 	}
 
-	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = _kind>
+	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	static inline ___cat_a___ ___cat___()
 	{
 		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::any");
 		return CAT;
 	}
 
-	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = _kind, typename ___unordered_herd_a___ = unordered_herd_a<>>
+	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>, typename ___unordered_herd_a___ = unordered_herd_a<>>
 	static inline ___unordered_herd_a___ ___cats___()
 	{
 		static ___unordered_herd_a___ CATS = unordered_herd_vals(___cat___<___cat_a___, ___kind_a___>());
 		return CATS;
 	}
 
-	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = _kind>
+	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	static inline ___kind_a___ ___kind___()
 	{
 		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>());
 		return KIND;
 	}
 
-	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = _kind, typename ___unordered_herd_a___ = unordered_herd_a<>>
+	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>, typename ___unordered_herd_a___ = unordered_herd_a<>>
 	static inline ___unordered_herd_a___ ___kinds___()
 	{
 		static ___unordered_herd_a___ KINDS = unordered_herd_vals(___kind___<___cat_a___, ___kind_a___>());
