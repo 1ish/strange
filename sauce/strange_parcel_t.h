@@ -279,58 +279,7 @@ public:
 	{
 		return create(dart_packet::make_null());
 	}
-/*
-	static inline parcel_a<> create_null_()
-	{
-		return create(dart_packet::make_null());
-	}
 
-	static inline parcel_a<> create_boolean_(any_a<> const& thing)
-	{
-		return create(dart_packet::make_boolean(bool{ thing }));
-	}
-
-	static inline parcel_a<> create_number_(number_a<> const& number)
-	{
-		if (number.is_int())
-		{
-			return create(dart_packet::make_integer(number.to_int_64()));
-		}
-		return create(dart_packet::make_decimal(number.to_float_64()));
-	}
-
-	static inline parcel_a<> create_int_64_(number_data_a<int64_t> const& number)
-	{
-		return create(dart_packet::make_integer(number.extract_primitive()));
-	}
-
-	static inline parcel_a<> create_float_64_(number_data_a<double> const& number)
-	{
-		return create(dart_packet::make_decimal(number.extract_primitive()));
-	}
-
-	static inline parcel_a<> create_lake_(lake_a<int8_t> const& lake)
-	{
-		return create(dart_packet::make_string(lake_to_string(lake)));
-	}
-
-	static inline parcel_a<> create_symbol_(symbol_a<> const& symbol)
-	{
-		return create(dart_packet::make_string(symbol.to_string()));
-	}
-
-	template <typename... Args>
-	static inline parcel_a<> create_inventory_(Args&&... args)
-	{
-		return create(dart_packet::make_array(std::forward<Args>(args)...));
-	}
-
-	template <typename... Args>
-	static inline parcel_a<> create_shoal_(Args&&... args)
-	{
-		return create(dart_packet::make_object(std::forward<Args>(args)...));
-	}
-*/
 	template <typename F>
 	static inline parcel_a<> create(F&& init)
 	{
@@ -985,6 +934,264 @@ public:
 		}
 		auto buffer = _packet.get_bytes();
 		return std_string(reinterpret_cast<char const*>(buffer.data()), buffer.size());
+	}
+
+	inline container_a<> from_null_()
+	{
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = dart_packet::make_null();
+		return thing_t<___ego___>::me_();
+	}
+
+	inline any_a<> is_null_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return boole(_packet.is_null());
+	}
+
+	inline container_a<> from_boolean_(any_a<> const& boolean)
+	{
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = dart_packet::make_boolean(boolean);
+		return thing_t<___ego___>::me_();
+	}
+
+	inline any_a<> is_boolean_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return boole(_packet.is_boolean());
+	}
+
+	inline any_a<> to_boolean_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		if (!_packet.is_boolean())
+		{
+			throw dis("strange::parcel::to_boolean called on parcel that does not contain a boolean");
+		}
+		return boole(_packet.boolean());
+	}
+
+	inline container_a<> from_number_(number_a<> const& number)
+	{
+		if (number.is_int())
+		{
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			_packet = dart_packet::make_integer(number.to_int_64());
+		}
+		else
+		{
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			_packet = dart_packet::make_decimal(number.to_float_64());
+		}
+		return thing_t<___ego___>::me_();
+	}
+
+	inline any_a<> is_number_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return boole(_packet.is_numeric());
+	}
+
+	inline number_a<> to_number_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		if (_packet.is_integer())
+		{
+			return num(_packet.integer());
+		}
+		if (_packet.is_decimal())
+		{
+			return num(_packet.decimal());
+		}
+		throw dis("strange::parcel::to_number called on parcel that does not contain a number");
+	}
+
+	inline container_a<> from_int_64_(number_data_int64_a<> const& number)
+	{
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = dart_packet::make_integer(number.extract_primitive());
+		return thing_t<___ego___>::me_();
+	}
+
+	inline any_a<> is_int_64_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return boole(_packet.is_integer());
+	}
+
+	inline number_data_int64_a<> to_int_64_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		if (!_packet.is_integer())
+		{
+			throw dis("strange::parcel::to_int_64 called on parcel that does not contain an integer");
+		}
+		return num(_packet.integer());
+	}
+
+	inline container_a<> from_float_64_(number_data_double_a<> const& number)
+	{
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = dart_packet::make_decimal(number.extract_primitive());
+		return thing_t<___ego___>::me_();
+	}
+
+	inline any_a<> is_float_64_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return boole(_packet.is_decimal());
+	}
+
+	inline number_data_double_a<> to_float_64_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		if (!_packet.is_decimal())
+		{
+			throw dis("strange::parcel::to_float_64 called on parcel that does not contain a float");
+		}
+		return num(_packet.decimal());
+	}
+
+	inline container_a<> from_lake_(lake_int8_a<> const& lake)
+	{
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = dart_packet::make_string(lake_to_string(lake));
+		return thing_t<___ego___>::me_();
+	}
+
+	inline any_a<> is_lake_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return boole(_packet.is_str());
+	}
+
+	inline lake_int8_a<> to_lake_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		if (!_packet.is_str())
+		{
+			throw dis("strange::parcel::to_lake called on parcel that does not contain a lake");
+		}
+		return lake_from_string(_packet.str());
+	}
+
+	inline container_a<> from_symbol_(symbol_a<> const& symbol)
+	{
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = dart_packet::make_string(symbol.to_string());
+		return thing_t<___ego___>::me_();
+	}
+
+	inline symbol_a<> to_symbol_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		if (!_packet.is_str())
+		{
+			throw dis("strange::parcel::to_symbol called on parcel that does not contain a symbol");
+		}
+		return sym(_packet.str());
+	}
+
+	inline container_a<> from_inventory_(inventory_a<container_a<>> const& inventory)
+	{
+		auto packet = dart_packet::make_array();
+		for (auto const& container : inventory)
+		{
+			packet.push_back(cast<parcel_a<>>(container).extract_packet());
+		}
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = packet;
+		return thing_t<___ego___>::me_();
+	}
+
+	inline any_a<> is_inventory_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return boole(_packet.is_array());
+	}
+
+	inline any_a<> as_inventory_(inventory_a<container_a<>>& inventory) const
+	{
+		inventory.clear();
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		if (!_packet.is_array())
+		{
+			throw dis("strange::parcel::as_inventory called on parcel that does not contain an inventory");
+		}
+		for (auto const& packet : _packet)
+		{
+			inventory.push_back(create(packet));
+		}
+		return yes();
+	}
+
+	inline container_a<> from_herd_(herd_a<symbol_a<>> const& herd)
+	{
+		auto packet = dart_packet::make_object();
+		for (auto const& symbol : herd)
+		{
+			packet.insert(symbol.to_string(), dart_packet::make_null());
+		}
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = packet;
+		return thing_t<___ego___>::me_();
+	}
+
+	inline any_a<> is_herd_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return boole(_packet.is_object());
+	}
+
+	inline any_a<> as_herd_(herd_a<symbol_a<>>& herd) const
+	{
+		herd.clear();
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		if (!_packet.is_object())
+		{
+			throw dis("strange::parcel::as_herd called on parcel that does not contain a herd");
+		}
+		for (auto const& key : _packet.keys())
+		{
+			herd.insert_thing(sym(key.str()));
+		}
+		return yes();
+	}
+
+	inline container_a<> from_shoal_(shoal_a<symbol_a<>, container_a<>> const& shoal)
+	{
+		auto packet = dart_packet::make_object();
+		for (auto const& flock : shoal)
+		{
+			packet.insert(fast<symbol_a<>>(flock.at_index(0)).to_string(), cast<parcel_a<>>(flock.at_index(1)).extract_packet());
+		}
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = packet;
+		return thing_t<___ego___>::me_();
+	}
+
+	inline any_a<> is_shoal_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return boole(_packet.is_object());
+	}
+
+	inline any_a<> as_shoal_(shoal_a<symbol_a<>, container_a<>>& shoal) const
+	{
+		shoal.clear();
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		if (!_packet.is_object())
+		{
+			throw dis("strange::parcel::as_shoal called on parcel that does not contain a shoal");
+		}
+		auto vit = _packet.cbegin();
+		for (auto const& key : _packet.keys())
+		{
+			shoal.insert(sym(key.str()), create(*vit));
+			++vit;
+		}
+		return yes();
 	}
 
 	// data

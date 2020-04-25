@@ -1618,7 +1618,7 @@ protected:
 				"{\n"
 				"\tif (!" + (root ? "" : "any_a<>::") + "___handle___)\n"
 				"\t{\n"
-				"\t\t//TODO container.from_null_();\n"
+				"\t\tcontainer.from_null_();\n"
 				"\t\treturn yes();\n"
 				"\t}\n"
 				"\treturn " + (extraction ? "___read___()." : "___write___().") +

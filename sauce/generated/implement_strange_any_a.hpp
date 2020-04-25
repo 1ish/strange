@@ -469,7 +469,7 @@ inline any_a<> any_a<_1>::pack_(container_a<> & container) const
 {
 	if (!___handle___)
 	{
-		//TODO container.from_null_();
+		container.from_null_();
 		return yes();
 	}
 	return ___read___().pack_(container);
@@ -503,7 +503,7 @@ inline any_a<> any_a<_1>::pack_unique_(container_a<> & container, herd_a<number_
 {
 	if (!___handle___)
 	{
-		//TODO container.from_null_();
+		container.from_null_();
 		return yes();
 	}
 	return ___read___().pack_unique_(container, unique_herd);

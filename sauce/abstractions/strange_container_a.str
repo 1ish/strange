@@ -22,7 +22,7 @@ false &&
 					from_binary : "void (std_string const& str) { from_binary_(lake_from_string(str)); }",
 					to_binary_ :# (<lake_int8>),
 					to_binary : "std_string () const { return lake_to_string(to_binary_()); }",
-/*
+
 					from_null_ := (<container>),
 					is_null_ :# (<>),
 
@@ -49,18 +49,18 @@ false &&
 					from_symbol_ := (symbol :<symbol>#, <container>),
 					to_symbol_ :# (<symbol>),
 
-					from_inventory_ := (inventory :<inventory>#, <container>),
+					from_inventory_ := (inventory :<inventory[<container>]>#, <container>),
 					is_inventory_ :# (<>),
 					as_inventory_ :# (inventory :<inventory[<container>]>&, <>),
 
-					from_herd_ := (herd :<herd>#, <container>),
+					from_herd_ := (herd :<herd[<symbol>]>#, <container>),
 					is_herd_ :# (<>),
-					as_herd_ :# (herd :<herd[<container>]>&, <>),
+					as_herd_ :# (herd :<herd[<symbol>]>&, <>),
 
-					from_shoal_ := (shoal :<shoal>#, <container>),
+					from_shoal_ := (shoal :<shoal[<symbol>, <container>]>#, <container>),
 					is_shoal_ :# (<>),
-					as_shoal_ :# (shoal :<shoal[<>, <container>]>&, <>),
-*/
+					as_shoal_ :# (shoal :<shoal[<symbol>, <container>]>&, <>),
+
 					keys_begin_ :# (<bidirectional_extractor[<>]>),
 					keys_end_ :# (<bidirectional_extractor[<>]>),
 				}

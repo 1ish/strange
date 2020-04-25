@@ -58,6 +58,118 @@ public:
 
 	inline std_string to_binary() const;
 
+	inline any_a<> from_null__(list_a<> const& ___arguments___);
+
+	inline container_a<> from_null_();
+
+	inline any_a<> is_null__(list_a<> const& ___arguments___) const;
+
+	inline any_a<> is_null_() const;
+
+	inline any_a<> from_boolean__(list_a<> const& ___arguments___);
+
+	inline container_a<> from_boolean_(any_a<> const& boolean);
+
+	inline any_a<> is_boolean__(list_a<> const& ___arguments___) const;
+
+	inline any_a<> is_boolean_() const;
+
+	inline any_a<> to_boolean__(list_a<> const& ___arguments___) const;
+
+	inline any_a<> to_boolean_() const;
+
+	inline any_a<> from_number__(list_a<> const& ___arguments___);
+
+	inline container_a<> from_number_(number_a<> const& number);
+
+	inline any_a<> is_number__(list_a<> const& ___arguments___) const;
+
+	inline any_a<> is_number_() const;
+
+	inline any_a<> to_number__(list_a<> const& ___arguments___) const;
+
+	inline number_a<> to_number_() const;
+
+	inline any_a<> from_int_64__(list_a<> const& ___arguments___);
+
+	inline container_a<> from_int_64_(number_data_int64_a<> const& number);
+
+	inline any_a<> is_int_64__(list_a<> const& ___arguments___) const;
+
+	inline any_a<> is_int_64_() const;
+
+	inline any_a<> to_int_64__(list_a<> const& ___arguments___) const;
+
+	inline number_data_int64_a<> to_int_64_() const;
+
+	inline any_a<> from_float_64__(list_a<> const& ___arguments___);
+
+	inline container_a<> from_float_64_(number_data_double_a<> const& number);
+
+	inline any_a<> is_float_64__(list_a<> const& ___arguments___) const;
+
+	inline any_a<> is_float_64_() const;
+
+	inline any_a<> to_float_64__(list_a<> const& ___arguments___) const;
+
+	inline number_data_double_a<> to_float_64_() const;
+
+	inline any_a<> from_lake__(list_a<> const& ___arguments___);
+
+	inline container_a<> from_lake_(lake_int8_a<> const& lake);
+
+	inline any_a<> is_lake__(list_a<> const& ___arguments___) const;
+
+	inline any_a<> is_lake_() const;
+
+	inline any_a<> to_lake__(list_a<> const& ___arguments___) const;
+
+	inline lake_int8_a<> to_lake_() const;
+
+	inline any_a<> from_symbol__(list_a<> const& ___arguments___);
+
+	inline container_a<> from_symbol_(symbol_a<> const& symbol);
+
+	inline any_a<> to_symbol__(list_a<> const& ___arguments___) const;
+
+	inline symbol_a<> to_symbol_() const;
+
+	inline any_a<> from_inventory__(list_a<> const& ___arguments___);
+
+	inline container_a<> from_inventory_(inventory_a<container_a<>> const& inventory);
+
+	inline any_a<> is_inventory__(list_a<> const& ___arguments___) const;
+
+	inline any_a<> is_inventory_() const;
+
+	inline any_a<> as_inventory__(list_a<> const& ___arguments___) const;
+
+	inline any_a<> as_inventory_(inventory_a<container_a<>> & inventory) const;
+
+	inline any_a<> from_herd__(list_a<> const& ___arguments___);
+
+	inline container_a<> from_herd_(herd_a<symbol_a<>> const& herd);
+
+	inline any_a<> is_herd__(list_a<> const& ___arguments___) const;
+
+	inline any_a<> is_herd_() const;
+
+	inline any_a<> as_herd__(list_a<> const& ___arguments___) const;
+
+	inline any_a<> as_herd_(herd_a<symbol_a<>> & herd) const;
+
+	inline any_a<> from_shoal__(list_a<> const& ___arguments___);
+
+	inline container_a<> from_shoal_(shoal_a<symbol_a<>, container_a<>> const& shoal);
+
+	inline any_a<> is_shoal__(list_a<> const& ___arguments___) const;
+
+	inline any_a<> is_shoal_() const;
+
+	inline any_a<> as_shoal__(list_a<> const& ___arguments___) const;
+
+	inline any_a<> as_shoal_(shoal_a<symbol_a<>, container_a<>> & shoal) const;
+
 	inline any_a<> keys_begin__(list_a<> const& ___arguments___) const;
 
 	inline bidirectional_extractor_a< any_a<> > keys_begin_() const;
@@ -83,6 +195,34 @@ protected:
 		virtual void from_binary(std_string const & str ) = 0;
 		virtual lake_int8_a<> to_binary_() const = 0;
 		virtual std_string to_binary() const = 0;
+		virtual container_a<> from_null_() = 0;
+		virtual any_a<> is_null_() const = 0;
+		virtual container_a<> from_boolean_(any_a<> const& boolean) = 0;
+		virtual any_a<> is_boolean_() const = 0;
+		virtual any_a<> to_boolean_() const = 0;
+		virtual container_a<> from_number_(number_a<> const& number) = 0;
+		virtual any_a<> is_number_() const = 0;
+		virtual number_a<> to_number_() const = 0;
+		virtual container_a<> from_int_64_(number_data_int64_a<> const& number) = 0;
+		virtual any_a<> is_int_64_() const = 0;
+		virtual number_data_int64_a<> to_int_64_() const = 0;
+		virtual container_a<> from_float_64_(number_data_double_a<> const& number) = 0;
+		virtual any_a<> is_float_64_() const = 0;
+		virtual number_data_double_a<> to_float_64_() const = 0;
+		virtual container_a<> from_lake_(lake_int8_a<> const& lake) = 0;
+		virtual any_a<> is_lake_() const = 0;
+		virtual lake_int8_a<> to_lake_() const = 0;
+		virtual container_a<> from_symbol_(symbol_a<> const& symbol) = 0;
+		virtual symbol_a<> to_symbol_() const = 0;
+		virtual container_a<> from_inventory_(inventory_a<container_a<>> const& inventory) = 0;
+		virtual any_a<> is_inventory_() const = 0;
+		virtual any_a<> as_inventory_(inventory_a<container_a<>> & inventory) const = 0;
+		virtual container_a<> from_herd_(herd_a<symbol_a<>> const& herd) = 0;
+		virtual any_a<> is_herd_() const = 0;
+		virtual any_a<> as_herd_(herd_a<symbol_a<>> & herd) const = 0;
+		virtual container_a<> from_shoal_(shoal_a<symbol_a<>, container_a<>> const& shoal) = 0;
+		virtual any_a<> is_shoal_() const = 0;
+		virtual any_a<> as_shoal_(shoal_a<symbol_a<>, container_a<>> & shoal) const = 0;
 		virtual bidirectional_extractor_a< any_a<> > keys_begin_() const = 0;
 		virtual bidirectional_extractor_a< any_a<> > keys_end_() const = 0;
 	};
@@ -132,6 +272,62 @@ protected:
 		virtual inline lake_int8_a<> to_binary_() const final;
 
 		virtual inline std_string to_binary() const final;
+
+		virtual inline container_a<> from_null_() final;
+
+		virtual inline any_a<> is_null_() const final;
+
+		virtual inline container_a<> from_boolean_(any_a<> const& boolean) final;
+
+		virtual inline any_a<> is_boolean_() const final;
+
+		virtual inline any_a<> to_boolean_() const final;
+
+		virtual inline container_a<> from_number_(number_a<> const& number) final;
+
+		virtual inline any_a<> is_number_() const final;
+
+		virtual inline number_a<> to_number_() const final;
+
+		virtual inline container_a<> from_int_64_(number_data_int64_a<> const& number) final;
+
+		virtual inline any_a<> is_int_64_() const final;
+
+		virtual inline number_data_int64_a<> to_int_64_() const final;
+
+		virtual inline container_a<> from_float_64_(number_data_double_a<> const& number) final;
+
+		virtual inline any_a<> is_float_64_() const final;
+
+		virtual inline number_data_double_a<> to_float_64_() const final;
+
+		virtual inline container_a<> from_lake_(lake_int8_a<> const& lake) final;
+
+		virtual inline any_a<> is_lake_() const final;
+
+		virtual inline lake_int8_a<> to_lake_() const final;
+
+		virtual inline container_a<> from_symbol_(symbol_a<> const& symbol) final;
+
+		virtual inline symbol_a<> to_symbol_() const final;
+
+		virtual inline container_a<> from_inventory_(inventory_a<container_a<>> const& inventory) final;
+
+		virtual inline any_a<> is_inventory_() const final;
+
+		virtual inline any_a<> as_inventory_(inventory_a<container_a<>> & inventory) const final;
+
+		virtual inline container_a<> from_herd_(herd_a<symbol_a<>> const& herd) final;
+
+		virtual inline any_a<> is_herd_() const final;
+
+		virtual inline any_a<> as_herd_(herd_a<symbol_a<>> & herd) const final;
+
+		virtual inline container_a<> from_shoal_(shoal_a<symbol_a<>, container_a<>> const& shoal) final;
+
+		virtual inline any_a<> is_shoal_() const final;
+
+		virtual inline any_a<> as_shoal_(shoal_a<symbol_a<>, container_a<>> & shoal) const final;
 
 		virtual inline bidirectional_extractor_a< any_a<> > keys_begin_() const final;
 
@@ -526,6 +722,622 @@ public:
 
 	inline std_string to_binary() const
 	{ return lake_to_string(to_binary_()); }
+
+	inline any_a<> from_null__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_null_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_null_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline container_a<> from_null_()
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_null_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_null_ passed non-existent member");
+		}
+		return cast<container_a<>>(variadic_operate(op, *this));
+	}
+
+	inline any_a<> is_null__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_null_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::is_null_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline any_a<> is_null_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_null_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::is_null_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline any_a<> from_boolean__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_boolean_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_boolean_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline container_a<> from_boolean_(any_a<> const& boolean)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_boolean_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_boolean_ passed non-existent member");
+		}
+		return cast<container_a<>>(variadic_operate(op, *this, boolean));
+	}
+
+	inline any_a<> is_boolean__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_boolean_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::is_boolean_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline any_a<> is_boolean_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_boolean_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::is_boolean_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline any_a<> to_boolean__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_boolean_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::to_boolean_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline any_a<> to_boolean_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_boolean_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::to_boolean_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline any_a<> from_number__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_number_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_number_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline container_a<> from_number_(number_a<> const& number)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_number_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_number_ passed non-existent member");
+		}
+		return cast<container_a<>>(variadic_operate(op, *this, number));
+	}
+
+	inline any_a<> is_number__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_number_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::is_number_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline any_a<> is_number_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_number_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::is_number_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline any_a<> to_number__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_number_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::to_number_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline number_a<> to_number_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_number_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::to_number_ passed non-existent member");
+		}
+		return cast<number_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline any_a<> from_int_64__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_int_64_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_int_64_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline container_a<> from_int_64_(number_data_int64_a<> const& number)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_int_64_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_int_64_ passed non-existent member");
+		}
+		return cast<container_a<>>(variadic_operate(op, *this, number));
+	}
+
+	inline any_a<> is_int_64__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_int_64_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::is_int_64_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline any_a<> is_int_64_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_int_64_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::is_int_64_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline any_a<> to_int_64__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_int_64_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::to_int_64_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline number_data_int64_a<> to_int_64_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_int_64_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::to_int_64_ passed non-existent member");
+		}
+		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline any_a<> from_float_64__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_float_64_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_float_64_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline container_a<> from_float_64_(number_data_double_a<> const& number)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_float_64_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_float_64_ passed non-existent member");
+		}
+		return cast<container_a<>>(variadic_operate(op, *this, number));
+	}
+
+	inline any_a<> is_float_64__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_float_64_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::is_float_64_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline any_a<> is_float_64_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_float_64_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::is_float_64_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline any_a<> to_float_64__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_float_64_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::to_float_64_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline number_data_double_a<> to_float_64_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_float_64_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::to_float_64_ passed non-existent member");
+		}
+		return cast<number_data_double_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline any_a<> from_lake__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_lake_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_lake_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline container_a<> from_lake_(lake_int8_a<> const& lake)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_lake_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_lake_ passed non-existent member");
+		}
+		return cast<container_a<>>(variadic_operate(op, *this, lake));
+	}
+
+	inline any_a<> is_lake__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_lake_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::is_lake_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline any_a<> is_lake_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_lake_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::is_lake_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline any_a<> to_lake__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_lake_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::to_lake_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline lake_int8_a<> to_lake_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_lake_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::to_lake_ passed non-existent member");
+		}
+		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline any_a<> from_symbol__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_symbol_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_symbol_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline container_a<> from_symbol_(symbol_a<> const& symbol)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_symbol_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_symbol_ passed non-existent member");
+		}
+		return cast<container_a<>>(variadic_operate(op, *this, symbol));
+	}
+
+	inline any_a<> to_symbol__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_symbol_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::to_symbol_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline symbol_a<> to_symbol_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_symbol_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::to_symbol_ passed non-existent member");
+		}
+		return cast<symbol_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline any_a<> from_inventory__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_inventory_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_inventory_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline container_a<> from_inventory_(inventory_a<container_a<>> const& inventory)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_inventory_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_inventory_ passed non-existent member");
+		}
+		return cast<container_a<>>(variadic_operate(op, *this, inventory));
+	}
+
+	inline any_a<> is_inventory__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_inventory_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::is_inventory_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline any_a<> is_inventory_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_inventory_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::is_inventory_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline any_a<> as_inventory__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("as_inventory_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::as_inventory_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline any_a<> as_inventory_(inventory_a<container_a<>> & inventory) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("as_inventory_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::as_inventory_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this), inventory));
+	}
+
+	inline any_a<> from_herd__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_herd_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_herd_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline container_a<> from_herd_(herd_a<symbol_a<>> const& herd)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_herd_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_herd_ passed non-existent member");
+		}
+		return cast<container_a<>>(variadic_operate(op, *this, herd));
+	}
+
+	inline any_a<> is_herd__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_herd_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::is_herd_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline any_a<> is_herd_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_herd_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::is_herd_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline any_a<> as_herd__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("as_herd_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::as_herd_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline any_a<> as_herd_(herd_a<symbol_a<>> & herd) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("as_herd_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::as_herd_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this), herd));
+	}
+
+	inline any_a<> from_shoal__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_shoal_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_shoal_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline container_a<> from_shoal_(shoal_a<symbol_a<>, container_a<>> const& shoal)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_shoal_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_shoal_ passed non-existent member");
+		}
+		return cast<container_a<>>(variadic_operate(op, *this, shoal));
+	}
+
+	inline any_a<> is_shoal__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_shoal_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::is_shoal_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline any_a<> is_shoal_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_shoal_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::is_shoal_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline any_a<> as_shoal__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("as_shoal_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::as_shoal_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline any_a<> as_shoal_(shoal_a<symbol_a<>, container_a<>> & shoal) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("as_shoal_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::as_shoal_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this), shoal));
+	}
 
 	inline any_a<> keys_begin__(list_a<> const& arguments) const
 	{
