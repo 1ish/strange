@@ -279,47 +279,7 @@ public:
 	{
 		return create(dart_packet::make_null());
 	}
-
-	template <typename... Args>
-	static inline container_data_a<dart_packet, dart_packet::iterator> create_(Args&&... args)
-	{
-		return create(variadic_u<container_a<>>::vector(std::forward<Args>(args)...));
-	}
-
-	template <typename... Args>
-	static inline container_data_a<dart_packet, dart_packet::iterator> create_refs_(Args&&... args)
-	{
-		return create(variadic_u<container_a<>>::vector_ref(std::forward<Args>(args)...));
-	}
-
-	template <typename... Args>
-	static inline container_data_a<dart_packet, dart_packet::iterator> create_dups_(Args&&... args)
-	{
-		return create(variadic_u<container_a<>>::vector_dup(std::forward<Args>(args)...));
-	}
-
-//TODO requires sajson
 /*
-	static inline container_data_a<dart_packet, dart_packet::iterator> from_json_(lake_a<int8_t> const& lake)
-	{
-		return from_json(lake_to_string(lake));
-	}
-
-	static inline container_data_a<dart_packet, dart_packet::iterator> from_json(std_string const& str)
-	{
-		return create(dart_packet::from_json(str));
-	}
-*/
-	static inline container_data_a<dart_packet, dart_packet::iterator> from_binary_(lake_a<int8_t> const& lake)
-	{
-		return create(dart_packet_from_vector(lake.extract_vector()));
-	}
-
-	static inline container_data_a<dart_packet, dart_packet::iterator> from_binary(std_string const& str)
-	{
-		return create(dart_packet_from_string(str));
-	}
-
 	static inline container_data_a<dart_packet, dart_packet::iterator> create_null_()
 	{
 		return create(dart_packet::make_null());
@@ -370,7 +330,7 @@ public:
 	{
 		return create(dart_packet::make_object(std::forward<Args>(args)...));
 	}
-
+*/
 	template <typename F>
 	static inline container_data_a<dart_packet, dart_packet::iterator> create(F&& init)
 	{
@@ -825,6 +785,7 @@ public:
 
 	inline any_a<> unpack(shoal_a<> const& shared_shoal, any_a<>& unique_shoal) const
 	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		switch (_packet.get_type())
 		{
 		case dart_packet::type::array:
@@ -915,6 +876,95 @@ public:
 		return thing_t<___ego___>::me_();
 	}
 
+	inline any_a<> close_()
+	{
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		if (!_packet.is_finalized())
+		{
+			_packet.finalize();
+			return yes();
+		}
+		return no();
+	}
+
+	inline any_a<> closed_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return boole(_packet.is_finalized());
+	}
+
+	inline any_a<> reopen_()
+	{
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		if (_packet.is_finalized())
+		{
+			_packet.definalize();
+			return yes();
+		}
+		return no();
+	}
+
+	inline container_a<> from_json_(lake_int8_a<> const& lake)
+	{
+		from_json(lake_to_string(lake));
+		return thing_t<___ego___>::me_();
+	}
+
+	inline void from_json(std_string const& str)
+	{
+		throw dis("strange::parcel::from_json requires sajson"); //TODO
+		/*
+		auto packet = dart_packet::from_json(str);
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = packet;
+		*/
+	}
+
+	inline lake_int8_a<> to_json_() const
+	{
+		return lake_from_string(to_json());
+	}
+
+	inline std_string to_json() const
+	{
+		throw dis("strange::parcel::to_json requires rapidjson"); //TODO
+		/*
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _packet.to_json();
+		*/
+	}
+
+	inline container_a<> from_binary_(lake_int8_a<> const& lake)
+	{
+		auto packet = dart_packet_from_vector(lake.extract_vector());
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = packet;
+		return thing_t<___ego___>::me_();
+	}
+
+	inline void from_binary(std_string const& str)
+	{
+		auto packet = dart_packet_from_string(str);
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = packet;
+	}
+
+	inline lake_int8_a<> to_binary_() const
+	{
+		return lake_from_string(to_binary());
+	}
+
+	inline std_string to_binary() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		if (!_packet.is_finalized())
+		{
+			throw dis("strange::parcel::to_binary called on parcel that has not been closed");
+		}
+		auto buffer = _packet.get_bytes();
+		return std_string(reinterpret_cast<char const*>(buffer.data()), buffer.size());
+	}
+
 	// data
 	inline dart_packet const& extract_packet() const
 	{
@@ -993,93 +1043,6 @@ template <typename F>
 inline container_data_a<dart_packet, dart_packet::iterator> parcel_create(F&& init)
 {
 	return parcel_t<>::create(std::forward<F>(init));
-}
-
-template <typename... Args>
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_vals(Args&&... args)
-{
-	return parcel_t<>::create_(std::forward<Args>(args)...);
-}
-
-template <typename... Args>
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_refs(Args&&... args)
-{
-	return parcel_t<>::create_refs_(std::forward<Args>(args)...);
-}
-
-template <typename... Args>
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_dups(Args&&... args)
-{
-	return parcel_t<>::create_dups_(std::forward<Args>(args)...);
-}
-
-//TODO requires sajson
-/*
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_from_json(lake_a<int8_t> const& lake)
-{
-	return parcel_t<>::from_json_(lake);
-}
-
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_from_json(std_string const& str)
-{
-	return parcel_t<>::from_json(str);
-}
-*/
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_from_binary(lake_a<int8_t> const& lake)
-{
-	return parcel_t<>::from_binary_(lake);
-}
-
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_from_binary(std_string const& str)
-{
-	return parcel_t<>::from_binary(str);
-}
-
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_null()
-{
-	return parcel_t<>::create_null_();
-}
-
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_boolean(any_a<> const& thing)
-{
-	return parcel_t<>::create_boolean_(thing);
-}
-
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_number(number_a<> const& number)
-{
-	return parcel_t<>::create_number_(number);
-}
-
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_int_64(number_data_a<int64_t> const& number)
-{
-	return parcel_t<>::create_int_64_(number);
-}
-
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_float_64(number_data_a<double> const& number)
-{
-	return parcel_t<>::create_float_64_(number);
-}
-
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_lake(lake_a<int8_t> const& lake)
-{
-	return parcel_t<>::create_lake_(lake);
-}
-
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_symbol(symbol_a<> const& symbol)
-{
-	return parcel_t<>::create_symbol_(symbol);
-}
-
-template <typename... Args>
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_inventory(Args&&... args)
-{
-	return parcel_t<>::create_inventory_(dart_packet::make_array(std::forward<Args>(args)...));
-}
-
-template <typename... Args>
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_shoal(Args&&... args)
-{
-	return parcel_t<>::create_shoal_(dart_packet::make_object(std::forward<Args>(args)...));
 }
 
 } // namespace strange

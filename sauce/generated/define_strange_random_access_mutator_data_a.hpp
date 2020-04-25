@@ -6,7 +6,7 @@ template <typename _element, typename _type>
 class random_access_mutator_data_d;
 
 template <typename _element, typename _type>
-inline random_access_mutator_data_d<_element, _type> ___random_access_mutator_data_dynamic___(any_a<> const& thing); 
+inline random_access_mutator_data_d<_element, _type> ___random_access_mutator_data_dynamic___(any_a<> const& thing);
 
 template <typename _element, typename _type>
 class random_access_mutator_data_a : public random_access_mutator_a< _element >

@@ -6,7 +6,7 @@ template <typename _1 = void>
 class list_d;
 
 template <typename _1 = void>
-inline list_d<_1> ___list_dynamic___(any_a<> const& thing); 
+inline list_d<_1> ___list_dynamic___(any_a<> const& thing);
 
 template <typename _1>
 class list_a : public any_a<>
@@ -259,7 +259,7 @@ class list_d : public any_a<>
 public:
 	inline any_a<> begin__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("begin_");
 		if (!op)
 		{
@@ -281,7 +281,7 @@ public:
 
 	inline any_a<> end__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("end_");
 		if (!op)
 		{

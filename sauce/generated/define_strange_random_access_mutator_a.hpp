@@ -6,7 +6,7 @@ template <typename _element>
 class random_access_mutator_d;
 
 template <typename _element>
-inline random_access_mutator_d<_element> ___random_access_mutator_dynamic___(any_a<> const& thing); 
+inline random_access_mutator_d<_element> ___random_access_mutator_dynamic___(any_a<> const& thing);
 
 template <typename _element>
 class random_access_mutator_a : public bidirectional_mutator_a< _element >
@@ -281,7 +281,7 @@ class random_access_mutator_d : public bidirectional_mutator_d< _element >
 public:
 	inline any_a<> self_add__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("self_add_");
 		if (!op)
 		{
@@ -303,7 +303,7 @@ public:
 
 	inline any_a<> add__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
@@ -325,7 +325,7 @@ public:
 
 	inline any_a<> self_subtract__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("self_subtract_");
 		if (!op)
 		{
@@ -347,7 +347,7 @@ public:
 
 	inline any_a<> subtract__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("subtract_");
 		if (!op)
 		{

@@ -6,7 +6,7 @@ template <typename _element = any_a<> >
 class range_d;
 
 template <typename _element = any_a<> >
-inline range_d<_element> ___range_dynamic___(any_a<> const& thing); 
+inline range_d<_element> ___range_dynamic___(any_a<> const& thing);
 
 template <typename _element>
 class range_a : public list_a<>
@@ -259,7 +259,7 @@ class range_d : public list_d<>
 public:
 	inline any_a<> extract_begin__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("extract_begin_");
 		if (!op)
 		{
@@ -281,7 +281,7 @@ public:
 
 	inline any_a<> extract_end__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("extract_end_");
 		if (!op)
 		{

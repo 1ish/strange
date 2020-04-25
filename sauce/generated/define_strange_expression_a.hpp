@@ -6,7 +6,7 @@ template <typename _1 = void>
 class expression_d;
 
 template <typename _1 = void>
-inline expression_d<_1> ___expression_dynamic___(any_a<> const& thing); 
+inline expression_d<_1> ___expression_dynamic___(any_a<> const& thing);
 
 template <typename _1>
 class expression_a : public operation_a<>
@@ -309,7 +309,7 @@ class expression_d : public operation_d<>
 public:
 	inline any_a<> recreate__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("recreate_");
 		if (!op)
 		{
@@ -331,7 +331,7 @@ public:
 
 	inline any_a<> literal__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("literal_");
 		if (!op)
 		{
@@ -356,7 +356,7 @@ public:
 
 	inline any_a<> evaluate__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("evaluate_");
 		if (!op)
 		{
@@ -378,7 +378,7 @@ public:
 
 	inline any_a<> token__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("token_");
 		if (!op)
 		{
@@ -400,7 +400,7 @@ public:
 
 	inline any_a<> terms__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("terms_");
 		if (!op)
 		{
@@ -422,7 +422,7 @@ public:
 
 	inline any_a<> generate__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("generate_");
 		if (!op)
 		{
@@ -447,7 +447,7 @@ public:
 
 	inline any_a<> generate_cpp__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("generate_cpp_");
 		if (!op)
 		{

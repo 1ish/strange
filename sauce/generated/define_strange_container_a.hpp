@@ -6,7 +6,7 @@ template <typename _1 = void>
 class container_d;
 
 template <typename _1 = void>
-inline container_d<_1> ___container_dynamic___(any_a<> const& thing); 
+inline container_d<_1> ___container_dynamic___(any_a<> const& thing);
 
 template <typename _1>
 class container_a : public collection_a< any_a<> , container_a<> , container_a<> >
@@ -22,6 +22,42 @@ public:
 
 	inline any_a < > unpack(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const;
 
+	inline any_a<> close__(list_a<> const& ___arguments___);
+
+	inline any_a<> close_();
+
+	inline any_a<> closed__(list_a<> const& ___arguments___) const;
+
+	inline any_a<> closed_() const;
+
+	inline any_a<> reopen__(list_a<> const& ___arguments___);
+
+	inline any_a<> reopen_();
+
+	inline any_a<> from_json__(list_a<> const& ___arguments___);
+
+	inline container_a<> from_json_(lake_int8_a<> const& lake);
+
+	inline void from_json(std_string const & str );
+
+	inline any_a<> to_json__(list_a<> const& ___arguments___) const;
+
+	inline lake_int8_a<> to_json_() const;
+
+	inline std_string to_json() const;
+
+	inline any_a<> from_binary__(list_a<> const& ___arguments___);
+
+	inline container_a<> from_binary_(lake_int8_a<> const& lake);
+
+	inline void from_binary(std_string const & str );
+
+	inline any_a<> to_binary__(list_a<> const& ___arguments___) const;
+
+	inline lake_int8_a<> to_binary_() const;
+
+	inline std_string to_binary() const;
+
 	inline any_a<> keys_begin__(list_a<> const& ___arguments___) const;
 
 	inline bidirectional_extractor_a< any_a<> > keys_begin_() const;
@@ -36,6 +72,17 @@ protected:
 		virtual any_a<> unpack_(shoal_a<> const& shared_shoal) const = 0;
 		virtual any_a<> unpack_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_uint64_a<>, strange::any_a<>> & unique_shoal) const = 0;
 		virtual any_a < > unpack(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const = 0;
+		virtual any_a<> close_() = 0;
+		virtual any_a<> closed_() const = 0;
+		virtual any_a<> reopen_() = 0;
+		virtual container_a<> from_json_(lake_int8_a<> const& lake) = 0;
+		virtual void from_json(std_string const & str ) = 0;
+		virtual lake_int8_a<> to_json_() const = 0;
+		virtual std_string to_json() const = 0;
+		virtual container_a<> from_binary_(lake_int8_a<> const& lake) = 0;
+		virtual void from_binary(std_string const & str ) = 0;
+		virtual lake_int8_a<> to_binary_() const = 0;
+		virtual std_string to_binary() const = 0;
 		virtual bidirectional_extractor_a< any_a<> > keys_begin_() const = 0;
 		virtual bidirectional_extractor_a< any_a<> > keys_end_() const = 0;
 	};
@@ -63,6 +110,28 @@ protected:
 		virtual inline any_a<> unpack_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_uint64_a<>, strange::any_a<>> & unique_shoal) const final;
 
 		virtual inline any_a < > unpack(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const final;
+
+		virtual inline any_a<> close_() final;
+
+		virtual inline any_a<> closed_() const final;
+
+		virtual inline any_a<> reopen_() final;
+
+		virtual inline container_a<> from_json_(lake_int8_a<> const& lake) final;
+
+		virtual inline void from_json(std_string const & str ) final;
+
+		virtual inline lake_int8_a<> to_json_() const final;
+
+		virtual inline std_string to_json() const final;
+
+		virtual inline container_a<> from_binary_(lake_int8_a<> const& lake) final;
+
+		virtual inline void from_binary(std_string const & str ) final;
+
+		virtual inline lake_int8_a<> to_binary_() const final;
+
+		virtual inline std_string to_binary() const final;
 
 		virtual inline bidirectional_extractor_a< any_a<> > keys_begin_() const final;
 
@@ -278,7 +347,7 @@ class container_d : public collection_d< any_a<> , container_a<> , container_a<>
 public:
 	inline any_a<> unpack__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("unpack_");
 		if (!op)
 		{
@@ -300,7 +369,7 @@ public:
 
 	inline any_a<> unpack_unique__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("unpack_unique_");
 		if (!op)
 		{
@@ -323,9 +392,175 @@ public:
 	inline any_a < > unpack(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const
 	{ throw dis("dynamic container_d::unpack(shared_shoal, unique_shoal) not available"); }
 
+	inline any_a<> close__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("close_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::close_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline any_a<> close_()
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("close_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::close_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *this));
+	}
+
+	inline any_a<> closed__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("closed_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::closed_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline any_a<> closed_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("closed_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::closed_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline any_a<> reopen__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("reopen_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::reopen_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline any_a<> reopen_()
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("reopen_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::reopen_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *this));
+	}
+
+	inline any_a<> from_json__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_json_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_json_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline container_a<> from_json_(lake_int8_a<> const& lake)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_json_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_json_ passed non-existent member");
+		}
+		return cast<container_a<>>(variadic_operate(op, *this, lake));
+	}
+
+	inline void from_json(std_string const & str )
+	{ from_json_(lake_from_string(str)); }
+
+	inline any_a<> to_json__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_json_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::to_json_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline lake_int8_a<> to_json_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_json_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::to_json_ passed non-existent member");
+		}
+		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline std_string to_json() const
+	{ return lake_to_string(to_json_()); }
+
+	inline any_a<> from_binary__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_binary_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_binary_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline container_a<> from_binary_(lake_int8_a<> const& lake)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_binary_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::from_binary_ passed non-existent member");
+		}
+		return cast<container_a<>>(variadic_operate(op, *this, lake));
+	}
+
+	inline void from_binary(std_string const & str )
+	{ from_binary_(lake_from_string(str)); }
+
+	inline any_a<> to_binary__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_binary_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::to_binary_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline lake_int8_a<> to_binary_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("to_binary_");
+		if (!op)
+		{
+			throw dis("dynamic container_d::to_binary_ passed non-existent member");
+		}
+		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline std_string to_binary() const
+	{ return lake_to_string(to_binary_()); }
+
 	inline any_a<> keys_begin__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("keys_begin_");
 		if (!op)
 		{
@@ -347,7 +582,7 @@ public:
 
 	inline any_a<> keys_end__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("keys_end_");
 		if (!op)
 		{

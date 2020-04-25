@@ -6,7 +6,7 @@ template <typename _type, typename _iterator>
 class container_data_d;
 
 template <typename _type, typename _iterator>
-inline container_data_d<_type, _iterator> ___container_data_dynamic___(any_a<> const& thing); 
+inline container_data_d<_type, _iterator> ___container_data_dynamic___(any_a<> const& thing);
 
 template <typename _type, typename _iterator>
 class container_data_a : public container_a<>

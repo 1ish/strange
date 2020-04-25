@@ -6,7 +6,7 @@ template <typename _element>
 class forward_mutator_d;
 
 template <typename _element>
-inline forward_mutator_d<_element> ___forward_mutator_dynamic___(any_a<> const& thing); 
+inline forward_mutator_d<_element> ___forward_mutator_dynamic___(any_a<> const& thing);
 
 template <typename _element>
 class forward_mutator_a : public any_a<>
@@ -282,7 +282,7 @@ class forward_mutator_d : public any_a<>
 public:
 	inline any_a<> get__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("get_");
 		if (!op)
 		{
@@ -304,7 +304,7 @@ public:
 
 	inline any_a<> set__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("set_");
 		if (!op)
 		{
@@ -332,7 +332,7 @@ public:
 
 	inline any_a<> increment__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("increment_");
 		if (!op)
 		{

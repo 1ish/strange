@@ -6,7 +6,7 @@ template <typename _number_data_int64 = number_data_int64_a<> , typename _number
 class number_d;
 
 template <typename _number_data_int64 = number_data_int64_a<> , typename _number_data_uint64 = number_data_uint64_a<> , typename _number_data_double = number_data_double_a<> >
-inline number_d<_number_data_int64, _number_data_uint64, _number_data_double> ___number_dynamic___(any_a<> const& thing); 
+inline number_d<_number_data_int64, _number_data_uint64, _number_data_double> ___number_dynamic___(any_a<> const& thing);
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 class number_a : public any_a<>
@@ -536,7 +536,7 @@ class number_d : public any_a<>
 public:
 	inline any_a<> increment__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("increment_");
 		if (!op)
 		{
@@ -558,7 +558,7 @@ public:
 
 	inline any_a<> decrement__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("decrement_");
 		if (!op)
 		{
@@ -580,7 +580,7 @@ public:
 
 	inline any_a<> self_assign__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("self_assign_");
 		if (!op)
 		{
@@ -602,7 +602,7 @@ public:
 
 	inline any_a<> self_add__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("self_add_");
 		if (!op)
 		{
@@ -624,7 +624,7 @@ public:
 
 	inline any_a<> add__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
@@ -646,7 +646,7 @@ public:
 
 	inline any_a<> self_subtract__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("self_subtract_");
 		if (!op)
 		{
@@ -668,7 +668,7 @@ public:
 
 	inline any_a<> subtract__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("subtract_");
 		if (!op)
 		{
@@ -690,7 +690,7 @@ public:
 
 	inline any_a<> self_multiply__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("self_multiply_");
 		if (!op)
 		{
@@ -712,7 +712,7 @@ public:
 
 	inline any_a<> multiply__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("multiply_");
 		if (!op)
 		{
@@ -734,7 +734,7 @@ public:
 
 	inline any_a<> self_divide__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("self_divide_");
 		if (!op)
 		{
@@ -756,7 +756,7 @@ public:
 
 	inline any_a<> divide__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("divide_");
 		if (!op)
 		{
@@ -778,7 +778,7 @@ public:
 
 	inline any_a<> self_modulo__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("self_modulo_");
 		if (!op)
 		{
@@ -800,7 +800,7 @@ public:
 
 	inline any_a<> modulo__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("modulo_");
 		if (!op)
 		{
@@ -822,7 +822,7 @@ public:
 
 	inline any_a<> to_int_64__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("to_int_64_");
 		if (!op)
 		{
@@ -847,7 +847,7 @@ public:
 
 	inline any_a<> from_int_64__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("from_int_64_");
 		if (!op)
 		{
@@ -872,7 +872,7 @@ public:
 
 	inline any_a<> to_uint_64__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("to_uint_64_");
 		if (!op)
 		{
@@ -897,7 +897,7 @@ public:
 
 	inline any_a<> from_uint_64__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("from_uint_64_");
 		if (!op)
 		{
@@ -922,7 +922,7 @@ public:
 
 	inline any_a<> to_float_64__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("to_float_64_");
 		if (!op)
 		{
@@ -947,7 +947,7 @@ public:
 
 	inline any_a<> from_float_64__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("from_float_64_");
 		if (!op)
 		{
@@ -972,7 +972,7 @@ public:
 
 	inline any_a<> byte_size__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("byte_size_");
 		if (!op)
 		{
@@ -997,7 +997,7 @@ public:
 
 	inline any_a<> is_int__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("is_int_");
 		if (!op)
 		{
@@ -1022,7 +1022,7 @@ public:
 
 	inline any_a<> is_signed__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("is_signed_");
 		if (!op)
 		{
@@ -1047,7 +1047,7 @@ public:
 
 	inline any_a<> is_nan__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("is_nan_");
 		if (!op)
 		{
@@ -1072,7 +1072,7 @@ public:
 
 	inline any_a<> is_inf__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("is_inf_");
 		if (!op)
 		{
@@ -1097,7 +1097,7 @@ public:
 
 	inline any_a<> is_finite__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("is_finite_");
 		if (!op)
 		{
@@ -1122,7 +1122,7 @@ public:
 
 	inline any_a<> is_normal__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("is_normal_");
 		if (!op)
 		{
@@ -1147,7 +1147,7 @@ public:
 
 	inline any_a<> little_endian__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("little_endian_");
 		if (!op)
 		{

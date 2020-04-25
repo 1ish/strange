@@ -289,7 +289,7 @@ protected:
 				river.write_string(
 					"inline " + dynamic_name);
 				_declare_and_define_template_(version, indent, river, false, false);
-				river.write_string(" ___" + dynamic_name + "ynamic___(any_a<> const& thing); \n\n");
+				river.write_string(" ___" + dynamic_name + "ynamic___(any_a<> const& thing);\n\n");
 			}
 		}
 		_declare_and_define_template_(version, indent, river, declare, define);
@@ -737,7 +737,7 @@ protected:
 		river.write_string(
 			"\tinline any_a<> " + name + "_(list_a<> const& arguments)" + constness + "\n"
 			"\t{\n"
-			"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___); \n"
+			"\t\tassert(" + (root ? "" : "any_a<>::") + "___handle___);\n"
 			"\t\tauto const op = " + (root ? "" : "any_a<>::") + "operation(\"" + name + "\");\n"
 			"\t\tif (!op)\n"
 			"\t\t{\n"

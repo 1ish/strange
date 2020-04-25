@@ -6,7 +6,7 @@ template <typename _element, typename _type>
 class forward_extractor_data_d;
 
 template <typename _element, typename _type>
-inline forward_extractor_data_d<_element, _type> ___forward_extractor_data_dynamic___(any_a<> const& thing); 
+inline forward_extractor_data_d<_element, _type> ___forward_extractor_data_dynamic___(any_a<> const& thing);
 
 template <typename _element, typename _type>
 class forward_extractor_data_a : public forward_extractor_a< _element >

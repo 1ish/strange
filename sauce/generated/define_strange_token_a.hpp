@@ -6,7 +6,7 @@ template <typename _1 = void>
 class token_d;
 
 template <typename _1 = void>
-inline token_d<_1> ___token_dynamic___(any_a<> const& thing); 
+inline token_d<_1> ___token_dynamic___(any_a<> const& thing);
 
 template <typename _1>
 class token_a : public any_a<>
@@ -341,7 +341,7 @@ class token_d : public any_a<>
 public:
 	inline any_a<> filename__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("filename_");
 		if (!op)
 		{
@@ -366,7 +366,7 @@ public:
 
 	inline any_a<> line__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("line_");
 		if (!op)
 		{
@@ -391,7 +391,7 @@ public:
 
 	inline any_a<> position__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("position_");
 		if (!op)
 		{
@@ -416,7 +416,7 @@ public:
 
 	inline any_a<> tag__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("tag_");
 		if (!op)
 		{
@@ -441,7 +441,7 @@ public:
 
 	inline any_a<> symbol__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("symbol_");
 		if (!op)
 		{
@@ -466,7 +466,7 @@ public:
 
 	inline any_a<> literal__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("literal_");
 		if (!op)
 		{
@@ -491,7 +491,7 @@ public:
 
 	inline any_a<> precedence__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("precedence_");
 		if (!op)
 		{
@@ -516,7 +516,7 @@ public:
 
 	inline any_a<> report__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("report_");
 		if (!op)
 		{

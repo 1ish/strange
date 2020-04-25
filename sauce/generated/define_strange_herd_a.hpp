@@ -6,7 +6,7 @@ template <typename _element = any_a<> >
 class herd_d;
 
 template <typename _element = any_a<> >
-inline herd_d<_element> ___herd_dynamic___(any_a<> const& thing); 
+inline herd_d<_element> ___herd_dynamic___(any_a<> const& thing);
 
 template <typename _element>
 class herd_a : public collection_a< _element , _element , _element >
@@ -269,7 +269,7 @@ class herd_d : public collection_d< _element , _element , _element >
 public:
 	inline any_a<> update_thing__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("update_thing_");
 		if (!op)
 		{
@@ -294,7 +294,7 @@ public:
 
 	inline any_a<> insert_thing__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("insert_thing_");
 		if (!op)
 		{

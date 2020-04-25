@@ -6,7 +6,7 @@ template <typename _1 = void>
 class kind_d;
 
 template <typename _1 = void>
-inline kind_d<_1> ___kind_dynamic___(any_a<> const& thing); 
+inline kind_d<_1> ___kind_dynamic___(any_a<> const& thing);
 
 template <typename _1>
 class kind_a : public cat_a<>
@@ -288,7 +288,7 @@ class kind_d : public cat_d<>
 public:
 	inline any_a<> aspects__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("aspects_");
 		if (!op)
 		{
@@ -310,7 +310,7 @@ public:
 
 	inline any_a<> fixed__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("fixed_");
 		if (!op)
 		{
@@ -335,7 +335,7 @@ public:
 
 	inline any_a<> reference__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("reference_");
 		if (!op)
 		{
@@ -360,7 +360,7 @@ public:
 
 	inline any_a<> optional__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("optional_");
 		if (!op)
 		{

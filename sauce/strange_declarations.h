@@ -371,43 +371,6 @@ inline container_data_a<dart_packet, dart_packet::iterator> parcel_create();
 template <typename F>
 inline container_data_a<dart_packet, dart_packet::iterator> parcel_create(F&& init);
 
-template <typename... Args>
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_vals(Args&&... args);
-
-template <typename... Args>
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_refs(Args&&... args);
-
-template <typename... Args>
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_dups(Args&&... args);
-
-//TODO requires sajson
-/*
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_from_json(lake_a<int8_t> const& lake);
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_from_json(std_string const& str);
-*/
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_from_binary(lake_a<int8_t> const& lake);
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_from_binary(std_string const& str);
-
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_null();
-
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_boolean(any_a<> const& thing);
-
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_number(number_a<> const& number);
-
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_int_64(number_data_a<int64_t> const& number);
-
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_float_64(number_data_a<double> const& number);
-
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_lake(lake_a<int8_t> const& lake);
-
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_symbol(symbol_a<> const& symbol);
-
-template <typename... Args>
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_inventory(Args&&... args);
-
-template <typename... Args>
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create_shoal(Args&&... args);
-
 // squad
 template <typename _element = any_a<>, bool _concurrent_ = false>
 inline squad_a<_element> squad_create();

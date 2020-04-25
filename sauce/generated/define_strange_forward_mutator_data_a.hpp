@@ -6,7 +6,7 @@ template <typename _element, typename _type>
 class forward_mutator_data_d;
 
 template <typename _element, typename _type>
-inline forward_mutator_data_d<_element, _type> ___forward_mutator_data_dynamic___(any_a<> const& thing); 
+inline forward_mutator_data_d<_element, _type> ___forward_mutator_data_dynamic___(any_a<> const& thing);
 
 template <typename _element, typename _type>
 class forward_mutator_data_a : public forward_mutator_a< _element >

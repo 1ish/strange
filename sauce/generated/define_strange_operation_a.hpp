@@ -6,7 +6,7 @@ template <typename _1 = void>
 class operation_d;
 
 template <typename _1 = void>
-inline operation_d<_1> ___operation_dynamic___(any_a<> const& thing); 
+inline operation_d<_1> ___operation_dynamic___(any_a<> const& thing);
 
 template <typename _1>
 class operation_a : public any_a<>
@@ -274,7 +274,7 @@ class operation_d : public any_a<>
 public:
 	inline any_a<> pure__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("pure_");
 		if (!op)
 		{
@@ -305,7 +305,7 @@ public:
 
 	inline any_a<> names__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("names_");
 		if (!op)
 		{

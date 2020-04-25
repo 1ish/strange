@@ -6,7 +6,7 @@ template <typename _primitive>
 class brook_d;
 
 template <typename _primitive>
-inline brook_d<_primitive> ___brook_dynamic___(any_a<> const& thing); 
+inline brook_d<_primitive> ___brook_dynamic___(any_a<> const& thing);
 
 template <typename _primitive>
 class brook_a : public inventory_a< number_data_a< _primitive > >

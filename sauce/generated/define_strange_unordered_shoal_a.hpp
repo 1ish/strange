@@ -6,7 +6,7 @@ template <typename _key = any_a<> , typename _value = any_a<> >
 class unordered_shoal_d;
 
 template <typename _key = any_a<> , typename _value = any_a<> >
-inline unordered_shoal_d<_key, _value> ___unordered_shoal_dynamic___(any_a<> const& thing); 
+inline unordered_shoal_d<_key, _value> ___unordered_shoal_dynamic___(any_a<> const& thing);
 
 template <typename _key, typename _value>
 class unordered_shoal_a : public shoal_a< _key , _value >

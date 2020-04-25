@@ -6,7 +6,7 @@ template <typename _1 = void>
 class river_d;
 
 template <typename _1 = void>
-inline river_d<_1> ___river_dynamic___(any_a<> const& thing); 
+inline river_d<_1> ___river_dynamic___(any_a<> const& thing);
 
 template <typename _1>
 class river_a : public range_a< any_a<> >
@@ -643,7 +643,7 @@ public:
 
 	inline any_a<> to_lake__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("to_lake_");
 		if (!op)
 		{
@@ -668,7 +668,7 @@ public:
 
 	inline any_a<> get_char__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("get_char_");
 		if (!op)
 		{
@@ -693,7 +693,7 @@ public:
 
 	inline any_a<> peek_char__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("peek_char_");
 		if (!op)
 		{
@@ -718,7 +718,7 @@ public:
 
 	inline any_a<> unget_char__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("unget_char_");
 		if (!op)
 		{
@@ -743,7 +743,7 @@ public:
 
 	inline any_a<> put_back_char__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("put_back_char_");
 		if (!op)
 		{
@@ -768,7 +768,7 @@ public:
 
 	inline any_a<> get_line__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("get_line_");
 		if (!op)
 		{
@@ -793,7 +793,7 @@ public:
 
 	inline any_a<> ignore__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("ignore_");
 		if (!op)
 		{
@@ -818,7 +818,7 @@ public:
 
 	inline any_a<> read__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("read_");
 		if (!op)
 		{
@@ -846,7 +846,7 @@ public:
 
 	inline any_a<> tellg__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("tellg_");
 		if (!op)
 		{
@@ -871,7 +871,7 @@ public:
 
 	inline any_a<> seekg_beg__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("seekg_beg_");
 		if (!op)
 		{
@@ -896,7 +896,7 @@ public:
 
 	inline any_a<> seekg_end__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("seekg_end_");
 		if (!op)
 		{
@@ -921,7 +921,7 @@ public:
 
 	inline any_a<> seekg_cur__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("seekg_cur_");
 		if (!op)
 		{
@@ -946,7 +946,7 @@ public:
 
 	inline any_a<> sync__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("sync_");
 		if (!op)
 		{
@@ -971,7 +971,7 @@ public:
 
 	inline any_a<> put_char__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("put_char_");
 		if (!op)
 		{
@@ -996,7 +996,7 @@ public:
 
 	inline any_a<> write__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("write_");
 		if (!op)
 		{
@@ -1024,7 +1024,7 @@ public:
 
 	inline any_a<> tellp__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("tellp_");
 		if (!op)
 		{
@@ -1049,7 +1049,7 @@ public:
 
 	inline any_a<> seekp_beg__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("seekp_beg_");
 		if (!op)
 		{
@@ -1074,7 +1074,7 @@ public:
 
 	inline any_a<> seekp_end__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("seekp_end_");
 		if (!op)
 		{
@@ -1099,7 +1099,7 @@ public:
 
 	inline any_a<> seekp_cur__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("seekp_cur_");
 		if (!op)
 		{
@@ -1124,7 +1124,7 @@ public:
 
 	inline any_a<> flush__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("flush_");
 		if (!op)
 		{
@@ -1149,7 +1149,7 @@ public:
 
 	inline any_a<> good__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("good_");
 		if (!op)
 		{
@@ -1174,7 +1174,7 @@ public:
 
 	inline any_a<> eof__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("eof_");
 		if (!op)
 		{
@@ -1199,7 +1199,7 @@ public:
 
 	inline any_a<> fail__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("fail_");
 		if (!op)
 		{
@@ -1224,7 +1224,7 @@ public:
 
 	inline any_a<> bad__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("bad_");
 		if (!op)
 		{
@@ -1249,7 +1249,7 @@ public:
 
 	inline any_a<> set_good__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("set_good_");
 		if (!op)
 		{
@@ -1274,7 +1274,7 @@ public:
 
 	inline any_a<> set_eof__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("set_eof_");
 		if (!op)
 		{
@@ -1299,7 +1299,7 @@ public:
 
 	inline any_a<> set_fail__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("set_fail_");
 		if (!op)
 		{
@@ -1324,7 +1324,7 @@ public:
 
 	inline any_a<> set_bad__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("set_bad_");
 		if (!op)
 		{
@@ -1349,7 +1349,7 @@ public:
 
 	inline any_a<> filename__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("filename_");
 		if (!op)
 		{
@@ -1374,7 +1374,7 @@ public:
 
 	inline any_a<> close__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("close_");
 		if (!op)
 		{
@@ -1399,7 +1399,7 @@ public:
 
 	inline any_a<> closed__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("closed_");
 		if (!op)
 		{

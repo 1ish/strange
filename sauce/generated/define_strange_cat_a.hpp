@@ -6,7 +6,7 @@ template <typename _1 = void>
 class cat_d;
 
 template <typename _1 = void>
-inline cat_d<_1> ___cat_dynamic___(any_a<> const& thing); 
+inline cat_d<_1> ___cat_dynamic___(any_a<> const& thing);
 
 template <typename _1>
 class cat_a : public symbol_a<>
@@ -314,7 +314,7 @@ class cat_d : public symbol_d<>
 public:
 	inline any_a<> symbolic__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("symbolic_");
 		if (!op)
 		{
@@ -339,7 +339,7 @@ public:
 
 	inline any_a<> order__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("order_");
 		if (!op)
 		{
@@ -364,7 +364,7 @@ public:
 
 	inline any_a<> name__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("name_");
 		if (!op)
 		{
@@ -389,7 +389,7 @@ public:
 
 	inline any_a<> dimensions__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("dimensions_");
 		if (!op)
 		{
@@ -411,7 +411,7 @@ public:
 
 	inline any_a<> parameters__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("parameters_");
 		if (!op)
 		{
@@ -433,7 +433,7 @@ public:
 
 	inline any_a<> result__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("result_");
 		if (!op)
 		{
@@ -455,7 +455,7 @@ public:
 
 	inline any_a<> code__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("code_");
 		if (!op)
 		{

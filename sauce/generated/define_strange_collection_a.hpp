@@ -6,7 +6,7 @@ template <typename _key = any_a<> , typename _value = any_a<> , typename _elemen
 class collection_d;
 
 template <typename _key = any_a<> , typename _value = any_a<> , typename _element = any_a<> >
-inline collection_d<_key, _value, _element> ___collection_dynamic___(any_a<> const& thing); 
+inline collection_d<_key, _value, _element> ___collection_dynamic___(any_a<> const& thing);
 
 template <typename _key, typename _value, typename _element>
 class collection_a : public range_a< _element >
@@ -431,7 +431,7 @@ class collection_d : public range_d< _element >
 public:
 	inline any_a<> has__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("has_");
 		if (!op)
 		{
@@ -456,7 +456,7 @@ public:
 
 	inline any_a<> at__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("at_");
 		if (!op)
 		{
@@ -478,7 +478,7 @@ public:
 
 	inline any_a<> update__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("update_");
 		if (!op)
 		{
@@ -503,7 +503,7 @@ public:
 
 	inline any_a<> insert__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("insert_");
 		if (!op)
 		{
@@ -528,7 +528,7 @@ public:
 
 	inline any_a<> erase__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("erase_");
 		if (!op)
 		{
@@ -553,7 +553,7 @@ public:
 
 	inline any_a<> clear__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("clear_");
 		if (!op)
 		{
@@ -578,7 +578,7 @@ public:
 
 	inline any_a<> size__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("size_");
 		if (!op)
 		{
@@ -603,7 +603,7 @@ public:
 
 	inline any_a<> empty__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("empty_");
 		if (!op)
 		{
@@ -628,7 +628,7 @@ public:
 
 	inline any_a<> push_front__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("push_front_");
 		if (!op)
 		{
@@ -653,7 +653,7 @@ public:
 
 	inline any_a<> pop_front__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("pop_front_");
 		if (!op)
 		{
@@ -675,7 +675,7 @@ public:
 
 	inline any_a<> push_back__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("push_back_");
 		if (!op)
 		{
@@ -700,7 +700,7 @@ public:
 
 	inline any_a<> pop_back__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("pop_back_");
 		if (!op)
 		{
@@ -722,7 +722,7 @@ public:
 
 	inline any_a<> self_assign__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("self_assign_");
 		if (!op)
 		{
@@ -744,7 +744,7 @@ public:
 
 	inline any_a<> self_add__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("self_add_");
 		if (!op)
 		{
@@ -766,7 +766,7 @@ public:
 
 	inline any_a<> add__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
@@ -788,7 +788,7 @@ public:
 
 	inline any_a<> self_subtract__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("self_subtract_");
 		if (!op)
 		{
@@ -810,7 +810,7 @@ public:
 
 	inline any_a<> subtract__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("subtract_");
 		if (!op)
 		{
@@ -832,7 +832,7 @@ public:
 
 	inline any_a<> read_lock__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("read_lock_");
 		if (!op)
 		{
@@ -854,7 +854,7 @@ public:
 
 	inline any_a<> write_lock__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("write_lock_");
 		if (!op)
 		{

@@ -6,7 +6,7 @@ template <typename _type>
 class data_d;
 
 template <typename _type>
-inline data_d<_type> ___data_dynamic___(any_a<> const& thing); 
+inline data_d<_type> ___data_dynamic___(any_a<> const& thing);
 
 template <typename _type>
 class data_a : public any_a<>

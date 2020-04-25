@@ -6,7 +6,7 @@ template <typename _element = any_a<> >
 class flock_d;
 
 template <typename _element = any_a<> >
-inline flock_d<_element> ___flock_dynamic___(any_a<> const& thing); 
+inline flock_d<_element> ___flock_dynamic___(any_a<> const& thing);
 
 template <typename _element>
 class flock_a : public inventory_a< _element >

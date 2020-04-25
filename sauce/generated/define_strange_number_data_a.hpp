@@ -6,7 +6,7 @@ template <typename _primitive>
 class number_data_d;
 
 template <typename _primitive>
-inline number_data_d<_primitive> ___number_data_dynamic___(any_a<> const& thing); 
+inline number_data_d<_primitive> ___number_data_dynamic___(any_a<> const& thing);
 
 template <typename _primitive>
 class number_data_a : public number_a<>

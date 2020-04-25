@@ -6,7 +6,7 @@ template <typename _primitive>
 class lake_d;
 
 template <typename _primitive>
-inline lake_d<_primitive> ___lake_dynamic___(any_a<> const& thing); 
+inline lake_d<_primitive> ___lake_dynamic___(any_a<> const& thing);
 
 template <typename _primitive>
 class lake_a : public inventory_a< number_data_a< _primitive > >

@@ -6,7 +6,7 @@ template <typename _element>
 class bidirectional_extractor_d;
 
 template <typename _element>
-inline bidirectional_extractor_d<_element> ___bidirectional_extractor_dynamic___(any_a<> const& thing); 
+inline bidirectional_extractor_d<_element> ___bidirectional_extractor_dynamic___(any_a<> const& thing);
 
 template <typename _element>
 class bidirectional_extractor_a : public forward_extractor_a< _element >
@@ -258,7 +258,7 @@ class bidirectional_extractor_d : public forward_extractor_d< _element >
 public:
 	inline any_a<> decrement__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("decrement_");
 		if (!op)
 		{

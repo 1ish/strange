@@ -6,7 +6,7 @@ template <typename _1 = void>
 class parser_d;
 
 template <typename _1 = void>
-inline parser_d<_1> ___parser_dynamic___(any_a<> const& thing); 
+inline parser_d<_1> ___parser_dynamic___(any_a<> const& thing);
 
 template <typename _1>
 class parser_a : public any_a<>
@@ -252,7 +252,7 @@ class parser_d : public any_a<>
 public:
 	inline any_a<> parse__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("parse_");
 		if (!op)
 		{

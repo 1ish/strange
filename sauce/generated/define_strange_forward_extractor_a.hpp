@@ -6,7 +6,7 @@ template <typename _element>
 class forward_extractor_d;
 
 template <typename _element>
-inline forward_extractor_d<_element> ___forward_extractor_dynamic___(any_a<> const& thing); 
+inline forward_extractor_d<_element> ___forward_extractor_dynamic___(any_a<> const& thing);
 
 template <typename _element>
 class forward_extractor_a : public any_a<>
@@ -282,7 +282,7 @@ class forward_extractor_d : public any_a<>
 public:
 	inline any_a<> get__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("get_");
 		if (!op)
 		{
@@ -310,7 +310,7 @@ public:
 
 	inline any_a<> increment__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("increment_");
 		if (!op)
 		{
@@ -332,7 +332,7 @@ public:
 
 	inline any_a<> to_extractor_any__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("to_extractor_any_");
 		if (!op)
 		{

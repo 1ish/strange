@@ -6,7 +6,7 @@ template <typename _lake_int8 = lake_int8_a<> >
 class misunderstanding_d;
 
 template <typename _lake_int8 = lake_int8_a<> >
-inline misunderstanding_d<_lake_int8> ___misunderstanding_dynamic___(any_a<> const& thing); 
+inline misunderstanding_d<_lake_int8> ___misunderstanding_dynamic___(any_a<> const& thing);
 
 template <typename _lake_int8>
 class misunderstanding_a : public any_a<>
@@ -266,7 +266,7 @@ class misunderstanding_d : public any_a<>
 public:
 	inline any_a<> to_lake__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("to_lake_");
 		if (!op)
 		{
@@ -291,7 +291,7 @@ public:
 
 	inline any_a<> add__(list_a<> const& arguments) const
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{

@@ -6,7 +6,7 @@ template <typename _element = any_a<> >
 class inventory_d;
 
 template <typename _element = any_a<> >
-inline inventory_d<_element> ___inventory_dynamic___(any_a<> const& thing); 
+inline inventory_d<_element> ___inventory_dynamic___(any_a<> const& thing);
 
 template <typename _element>
 class inventory_a : public collection_a< number_data_int64_a<> , _element , _element >
@@ -299,7 +299,7 @@ public:
 
 	inline any_a<> mutate_begin__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("mutate_begin_");
 		if (!op)
 		{
@@ -321,7 +321,7 @@ public:
 
 	inline any_a<> mutate_end__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("mutate_end_");
 		if (!op)
 		{

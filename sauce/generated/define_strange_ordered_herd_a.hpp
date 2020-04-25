@@ -6,7 +6,7 @@ template <typename _element = any_a<> >
 class ordered_herd_d;
 
 template <typename _element = any_a<> >
-inline ordered_herd_d<_element> ___ordered_herd_dynamic___(any_a<> const& thing); 
+inline ordered_herd_d<_element> ___ordered_herd_dynamic___(any_a<> const& thing);
 
 template <typename _element>
 class ordered_herd_a : public herd_a< _element >

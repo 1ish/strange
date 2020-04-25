@@ -6,7 +6,7 @@ template <typename _element>
 class bidirectional_mutator_d;
 
 template <typename _element>
-inline bidirectional_mutator_d<_element> ___bidirectional_mutator_dynamic___(any_a<> const& thing); 
+inline bidirectional_mutator_d<_element> ___bidirectional_mutator_dynamic___(any_a<> const& thing);
 
 template <typename _element>
 class bidirectional_mutator_a : public forward_mutator_a< _element >
@@ -258,7 +258,7 @@ class bidirectional_mutator_d : public forward_mutator_d< _element >
 public:
 	inline any_a<> decrement__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("decrement_");
 		if (!op)
 		{

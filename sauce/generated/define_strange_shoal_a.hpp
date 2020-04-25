@@ -6,7 +6,7 @@ template <typename _key = any_a<> , typename _value = any_a<> >
 class shoal_d;
 
 template <typename _key = any_a<> , typename _value = any_a<> >
-inline shoal_d<_key, _value> ___shoal_dynamic___(any_a<> const& thing); 
+inline shoal_d<_key, _value> ___shoal_dynamic___(any_a<> const& thing);
 
 template <typename _key, typename _value>
 class shoal_a : public collection_a< _key , _value , flock_a<> >
@@ -259,7 +259,7 @@ class shoal_d : public collection_d< _key , _value , flock_a<> >
 public:
 	inline any_a<> mutate_begin__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("mutate_begin_");
 		if (!op)
 		{
@@ -281,7 +281,7 @@ public:
 
 	inline any_a<> mutate_end__(list_a<> const& arguments)
 	{
-		assert(any_a<>::___handle___); 
+		assert(any_a<>::___handle___);
 		auto const op = any_a<>::operation("mutate_end_");
 		if (!op)
 		{

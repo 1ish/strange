@@ -6,7 +6,7 @@ template <typename _element, typename _type>
 class bidirectional_extractor_data_d;
 
 template <typename _element, typename _type>
-inline bidirectional_extractor_data_d<_element, _type> ___bidirectional_extractor_data_dynamic___(any_a<> const& thing); 
+inline bidirectional_extractor_data_d<_element, _type> ___bidirectional_extractor_data_dynamic___(any_a<> const& thing);
 
 template <typename _element, typename _type>
 class bidirectional_extractor_data_a : public bidirectional_extractor_a< _element >

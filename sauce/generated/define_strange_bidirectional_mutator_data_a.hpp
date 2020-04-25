@@ -6,7 +6,7 @@ template <typename _element, typename _type>
 class bidirectional_mutator_data_d;
 
 template <typename _element, typename _type>
-inline bidirectional_mutator_data_d<_element, _type> ___bidirectional_mutator_data_dynamic___(any_a<> const& thing); 
+inline bidirectional_mutator_data_d<_element, _type> ___bidirectional_mutator_data_dynamic___(any_a<> const& thing);
 
 template <typename _element, typename _type>
 class bidirectional_mutator_data_a : public bidirectional_mutator_a< _element >
