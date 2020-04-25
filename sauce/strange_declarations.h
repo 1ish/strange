@@ -63,8 +63,8 @@ template <> struct std::hash<strange::any_a<>>
 		return strange::hash_of(thing);
 	}
 };
-#include "generated/declare_strange_lake_a.hpp"
 
+#include "generated/declare_strange_lake_a.hpp"
 namespace strange
 {
 template <typename _1_ = void>
@@ -92,7 +92,14 @@ template <> struct std::hash<strange::container_a<>>
 		return strange::hash_of(thing);
 	}
 };
+
 #include "generated/declare_strange_container_data_a.hpp"
+namespace strange
+{
+template <typename _1 = void>
+using parcel_a = container_data_a<dart_packet, dart_packet::iterator>;
+}
+
 #include "generated/declare_strange_data_a.hpp"
 #include "generated/declare_strange_number_a.hpp"
 #include "generated/declare_strange_river_a.hpp"
@@ -366,10 +373,10 @@ inline ordered_shoal_a<> ordered_shoal_vals(Args&&... args);
 
 // parcel
 template <bool _concurrent_ = false>
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create();
+inline parcel_a<> parcel_create();
 
 template <typename F>
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create(F&& init);
+inline parcel_a<> parcel_create(F&& init);
 
 // squad
 template <typename _element = any_a<>, bool _concurrent_ = false>

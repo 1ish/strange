@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <bool _concurrent_ = false, typename ___ego___ = container_data_a<dart_packet, dart_packet::iterator>>
+template <bool _concurrent_ = false, typename ___ego___ = parcel_a<>>
 class parcel_t : public thing_t<___ego___>
 {
 	template <typename _element_it, typename _iterator_, typename ___ego_it___ = bidirectional_extractor_data_a<_element_it, _iterator_>>
@@ -275,22 +275,22 @@ public:
 		return result;
 	}
 
-	static inline container_data_a<dart_packet, dart_packet::iterator> create_()
+	static inline parcel_a<> create_()
 	{
 		return create(dart_packet::make_null());
 	}
 /*
-	static inline container_data_a<dart_packet, dart_packet::iterator> create_null_()
+	static inline parcel_a<> create_null_()
 	{
 		return create(dart_packet::make_null());
 	}
 
-	static inline container_data_a<dart_packet, dart_packet::iterator> create_boolean_(any_a<> const& thing)
+	static inline parcel_a<> create_boolean_(any_a<> const& thing)
 	{
 		return create(dart_packet::make_boolean(bool{ thing }));
 	}
 
-	static inline container_data_a<dart_packet, dart_packet::iterator> create_number_(number_a<> const& number)
+	static inline parcel_a<> create_number_(number_a<> const& number)
 	{
 		if (number.is_int())
 		{
@@ -299,42 +299,42 @@ public:
 		return create(dart_packet::make_decimal(number.to_float_64()));
 	}
 
-	static inline container_data_a<dart_packet, dart_packet::iterator> create_int_64_(number_data_a<int64_t> const& number)
+	static inline parcel_a<> create_int_64_(number_data_a<int64_t> const& number)
 	{
 		return create(dart_packet::make_integer(number.extract_primitive()));
 	}
 
-	static inline container_data_a<dart_packet, dart_packet::iterator> create_float_64_(number_data_a<double> const& number)
+	static inline parcel_a<> create_float_64_(number_data_a<double> const& number)
 	{
 		return create(dart_packet::make_decimal(number.extract_primitive()));
 	}
 
-	static inline container_data_a<dart_packet, dart_packet::iterator> create_lake_(lake_a<int8_t> const& lake)
+	static inline parcel_a<> create_lake_(lake_a<int8_t> const& lake)
 	{
 		return create(dart_packet::make_string(lake_to_string(lake)));
 	}
 
-	static inline container_data_a<dart_packet, dart_packet::iterator> create_symbol_(symbol_a<> const& symbol)
+	static inline parcel_a<> create_symbol_(symbol_a<> const& symbol)
 	{
 		return create(dart_packet::make_string(symbol.to_string()));
 	}
 
 	template <typename... Args>
-	static inline container_data_a<dart_packet, dart_packet::iterator> create_inventory_(Args&&... args)
+	static inline parcel_a<> create_inventory_(Args&&... args)
 	{
 		return create(dart_packet::make_array(std::forward<Args>(args)...));
 	}
 
 	template <typename... Args>
-	static inline container_data_a<dart_packet, dart_packet::iterator> create_shoal_(Args&&... args)
+	static inline parcel_a<> create_shoal_(Args&&... args)
 	{
 		return create(dart_packet::make_object(std::forward<Args>(args)...));
 	}
 */
 	template <typename F>
-	static inline container_data_a<dart_packet, dart_packet::iterator> create(F&& init)
+	static inline parcel_a<> create(F&& init)
 	{
-		return container_data_a<dart_packet, dart_packet::iterator>::template create<parcel_t<_concurrent_>>(std::forward<F>(init));
+		return parcel_a<>::template create<parcel_t<_concurrent_>>(std::forward<F>(init));
 	}
 
 	// reflection
@@ -371,21 +371,21 @@ public:
 	// comparison
 	inline bool same_(any_a<> const& thing) const
 	{
-		if (!check<container_data_a<dart_packet, dart_packet::iterator>>(thing))
+		if (!check<parcel_a<>>(thing))
 		{
 			return false;
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _packet == fast<container_data_a<dart_packet, dart_packet::iterator>>(thing).extract_packet();
+		return _packet == fast<parcel_a<>>(thing).extract_packet();
 	}
 
-	inline bool operator==(container_data_a<dart_packet, dart_packet::iterator> const& parcel) const
+	inline bool operator==(parcel_a<> const& parcel) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _packet == parcel.extract_packet();
 	}
 
-	inline bool operator!=(container_data_a<dart_packet, dart_packet::iterator> const& parcel) const
+	inline bool operator!=(parcel_a<> const& parcel) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _packet != parcel.extract_packet();
@@ -499,19 +499,19 @@ public:
 
 	inline void update(any_a<> const& key, container_a<> const& value)
 	{
-		if (!check<container_data_a<dart_packet, dart_packet::iterator>>(value))
+		if (!check<parcel_a<>>(value))
 		{
 			throw dis("strange::parcel::update passed wrong type of value");
 		}
 		if (check<symbol_a<>>(key))
 		{
 			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			_packet.set(fast<symbol_a<>>(key).to_string(), fast<container_data_a<dart_packet, dart_packet::iterator>>(value).extract_packet());
+			_packet.set(fast<symbol_a<>>(key).to_string(), fast<parcel_a<>>(value).extract_packet());
 		}
 		if (check<number_a<>>(key))
 		{
 			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			_packet.set(fast<number_a<>>(key).to_uint_64(), fast<container_data_a<dart_packet, dart_packet::iterator>>(value).extract_packet());
+			_packet.set(fast<number_a<>>(key).to_uint_64(), fast<parcel_a<>>(value).extract_packet());
 		}
 		throw dis("strange::parcel::update passed wrong type of key");
 	}
@@ -523,7 +523,7 @@ public:
 
 	inline bool insert(any_a<> const& key, container_a<> const& value)
 	{
-		if (!check<container_data_a<dart_packet, dart_packet::iterator>>(value))
+		if (!check<parcel_a<>>(value))
 		{
 			throw dis("strange::parcel::insert passed wrong type of value");
 		}
@@ -534,7 +534,7 @@ public:
 			bool const result = !_packet.has_key(key_string);
 			if (result)
 			{
-				_packet.insert(key_string, fast<container_data_a<dart_packet, dart_packet::iterator>>(value).extract_packet());
+				_packet.insert(key_string, fast<parcel_a<>>(value).extract_packet());
 			}
 			return result;
 		}
@@ -545,7 +545,7 @@ public:
 			bool const result = index <= _packet.size();
 			if (result)
 			{
-				_packet.insert(index, fast<container_data_a<dart_packet, dart_packet::iterator>>(value).extract_packet());
+				_packet.insert(index, fast<parcel_a<>>(value).extract_packet());
 			}
 			return result;
 		}
@@ -626,12 +626,12 @@ public:
 
 	inline void push_front(container_a<> const& thing)
 	{
-		if (!check<container_data_a<dart_packet, dart_packet::iterator>>(thing))
+		if (!check<parcel_a<>>(thing))
 		{
 			throw dis("strange::parcel::push_front passed wrong type of thing");
 		}
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		_packet.push_front(fast<container_data_a<dart_packet, dart_packet::iterator>>(thing).extract_packet());
+		_packet.push_front(fast<parcel_a<>>(thing).extract_packet());
 	}
 
 	inline container_a<> pop_front_()
@@ -650,12 +650,12 @@ public:
 
 	inline void push_back(container_a<> const& thing)
 	{
-		if (!check<container_data_a<dart_packet, dart_packet::iterator>>(thing))
+		if (!check<parcel_a<>>(thing))
 		{
 			throw dis("strange::parcel::push_back passed wrong type of thing");
 		}
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		_packet.push_back(fast<container_data_a<dart_packet, dart_packet::iterator>>(thing).extract_packet());
+		_packet.push_back(fast<parcel_a<>>(thing).extract_packet());
 	}
 
 	inline container_a<> pop_back_()
@@ -668,9 +668,9 @@ public:
 
 	inline void self_assign_(range_a<container_a<>> const& range)
 	{
-		if (check<container_data_a<dart_packet, dart_packet::iterator>>(range))
+		if (check<parcel_a<>>(range))
 		{
-			auto const other = fast<container_data_a<dart_packet, dart_packet::iterator>>(range);
+			auto const other = fast<parcel_a<>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_packet = other.extract_packet();
@@ -682,20 +682,20 @@ public:
 			_packet.clear();
 			for (auto const& thing : range)
 			{
-				if (!check<container_data_a<dart_packet, dart_packet::iterator>>(thing))
+				if (!check<parcel_a<>>(thing))
 				{
 					throw dis("strange::parcel::self_assign passed wrong type of thing");
 				}
-				_packet.push_back(fast<container_data_a<dart_packet, dart_packet::iterator>>(thing).extract_packet());
+				_packet.push_back(fast<parcel_a<>>(thing).extract_packet());
 			}
 		}
 	}
 
 	inline void self_add_(range_a<container_a<>> const& range)
 	{
-		if (check<container_data_a<dart_packet, dart_packet::iterator>>(range))
+		if (check<parcel_a<>>(range))
 		{
-			auto const other = fast<container_data_a<dart_packet, dart_packet::iterator>>(range);
+			auto const other = fast<parcel_a<>>(range);
 			auto read_lock = other.read_lock_();
 			auto const& other_packet = other.extract_packet();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
@@ -710,11 +710,11 @@ public:
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			for (auto const& thing : range)
 			{
-				if (!check<container_data_a<dart_packet, dart_packet::iterator>>(thing))
+				if (!check<parcel_a<>>(thing))
 				{
 					throw dis("strange::parcel::self_add passed wrong type of thing");
 				}
-				_packet.push_back(fast<container_data_a<dart_packet, dart_packet::iterator>>(thing).extract_packet());
+				_packet.push_back(fast<parcel_a<>>(thing).extract_packet());
 			}
 		}
 	}
@@ -728,9 +728,9 @@ public:
 
 	inline void self_subtract_(range_a<container_a<>> const& range)
 	{
-		if (check<container_data_a<dart_packet, dart_packet::iterator>>(range))
+		if (check<parcel_a<>>(range))
 		{
-			auto const other = fast<container_data_a<dart_packet, dart_packet::iterator>>(range);
+			auto const other = fast<parcel_a<>>(range);
 			auto read_lock = other.read_lock_();
 			auto const& other_packet = other.extract_packet();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
@@ -745,11 +745,11 @@ public:
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			for (auto const& thing : range)
 			{
-				if (!check<container_data_a<dart_packet, dart_packet::iterator>>(thing))
+				if (!check<parcel_a<>>(thing))
 				{
 					throw dis("strange::parcel::self_subtract passed wrong type of thing");
 				}
-				_packet.erase(fast<container_data_a<dart_packet, dart_packet::iterator>>(thing).extract_packet());
+				_packet.erase(fast<parcel_a<>>(thing).extract_packet());
 			}
 		}
 	}
@@ -1034,13 +1034,13 @@ class ___parcel_t_share___
 
 // template <bool _concurrent_ = false>
 template <bool _concurrent_>
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create()
+inline parcel_a<> parcel_create()
 {
 	return parcel_t<_concurrent_>::create_();
 }
 
 template <typename F>
-inline container_data_a<dart_packet, dart_packet::iterator> parcel_create(F&& init)
+inline parcel_a<> parcel_create(F&& init)
 {
 	return parcel_t<>::create(std::forward<F>(init));
 }
