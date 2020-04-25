@@ -111,12 +111,49 @@ inline std_vector < _primitive > & lake_a<_primitive>::___lake_a_handle___<___TT
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_vector(); }
 
 template <typename _primitive>
-template <typename ___unordered_shoal_a___>
-inline ___unordered_shoal_a___ lake_a<_primitive>::___operations___()
+inline cat_a<> lake_a<_primitive>::___cat___()
 {
-	static ___unordered_shoal_a___ OPERATIONS = []()
+	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::lake", flock_vals(kind_create<kind_a<>>(2, "")));
+	return CAT;
+}
+
+template <typename _primitive>
+inline unordered_herd_a<> lake_a<_primitive>::___cats___()
+{
+	static unordered_herd_a<> CATS = []()
 	{
-		___unordered_shoal_a___ operations = inventory_a< number_data_a< _primitive > >::template ___operations___<___unordered_shoal_a___>();
+		auto cats = inventory_a< number_data_a< _primitive > >::___cats___();
+		cats.update_thing(___cat___());
+		return cats;
+	}();
+	return CATS;
+}
+
+template <typename _primitive>
+inline kind_a<> lake_a<_primitive>::___kind___()
+{
+	static kind_a<> KIND = kind_from_cat(___cat___(), flock_vals(kind_of<_primitive>()));
+	return KIND;
+}
+
+template <typename _primitive>
+inline unordered_herd_a<> lake_a<_primitive>::___kinds___()
+{
+	static unordered_herd_a<> KINDS = []()
+	{
+		auto kinds = inventory_a< number_data_a< _primitive > >::___kinds___();
+		kinds.update_thing(___cat___());
+		return kinds;
+	}();
+	return KINDS;
+}
+
+template <typename _primitive>
+inline unordered_shoal_a<> lake_a<_primitive>::___operations___()
+{
+	static unordered_shoal_a<> OPERATIONS = []()
+	{
+		unordered_shoal_a<> operations = inventory_a< number_data_a< _primitive > >::___operations___();
 		return operations;
 	}();
 	return OPERATIONS;

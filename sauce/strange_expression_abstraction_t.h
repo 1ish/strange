@@ -986,26 +986,145 @@ protected:
 				"}\n\n");
 		}
 
+		std_string scope = _scope.to_string();
+		std_size_t const pos = scope.rfind("::");
+		scope = pos == std_string::npos
+			? std_string{}
+			: scope.substr(0, pos + 2);
+
+		// ___cat___()
+		_declare_and_define_template_(version, 0, river, true, true);
+		river.write_string(
+			"inline cat_a<> " + class_name);
+		_declare_and_define_template_(version, 0, river, false, false);
+		river.write_string("::___cat___()\n"
+			"{\n"							// TODO:
+			"\tstatic cat_a<> CAT = cat_create<cat_a<>>(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\"");
+		// dimensions
+		int64_t count = _dimension_kinds.size();
+		while (count)
+		{
+			--count;
+			auto const name = _dimension_names.at_index(count);
+			auto const kind = _dimension_kinds.at_index(count);
+			auto const def = _dimension_defaults.at_index(count);
+			if (!check<kind_a<>>(kind) || !check<kind_a<>>(def) ||
+				sym("#") + fast<kind_a<>>(kind).name_() != name ||
+				sym("#") + fast<kind_a<>>(def).name_() != name)
+			{
+				++count;
+				break;
+			}
+		}
+		_define_class_relfection_dimensions_(count, _dimension_kinds, version, river);
+		river.write_string(");\n"
+			"\treturn CAT;\n"
+			"}\n\n");
+
+		// ___cats___()
+		_declare_and_define_template_(version, 0, river, true, true);
+		river.write_string(
+			"inline unordered_herd_a<> " + class_name);
+		_declare_and_define_template_(version, 0, river, false, false);
+		river.write_string("::___cats___()\n"
+			"{\n"
+			"\tstatic unordered_herd_a<> CATS = ");
+		if (root)
+		{
+			river.write_string("unordered_herd_vals(___cat___());\n");
+		}
+		else
+		{
+			river.write_string("[]()\n"
+				"\t{\n"
+				"\t\tauto cats = " + base_name + base_aspects + "::___cats___();\n"
+				"\t\tcats.update_thing(___cat___());\n"
+				"\t\treturn cats;\n"
+				"\t}();\n");
+		}
+		river.write_string(
+			"\treturn CATS;\n"
+			"}\n\n");
+
+		// ___kind___()
+		_declare_and_define_template_(version, 0, river, true, true);
+		river.write_string(
+			"inline kind_a<> " + class_name);
+		_declare_and_define_template_(version, 0, river, false, false);
+		river.write_string("::___kind___()\n"
+			"{\n"
+			"\tstatic kind_a<> KIND = kind_from_cat(___cat___()");
+		// aspects
+		if (count)
+		{
+			river.write_string(", flock_vals(");
+			bool first = true;
+			for (auto const& dimension_name : _dimension_names.extract_vector())
+			{
+				if (first)
+				{
+					first = false;
+				}
+				else
+				{
+					river.write_string(", ");
+				}
+				river.write_string("kind_of<_" + fast<symbol_a<>>(dimension_name).to_string().substr(1) + ">()");
+				if (!--count)
+				{
+					break;
+				}
+			}
+			river.write_string(")");
+		}
+		river.write_string(");\n"
+			"\treturn KIND;\n"
+			"}\n\n");
+
+		// ___kinds___()
+		_declare_and_define_template_(version, 0, river, true, true);
+		river.write_string(
+			"inline unordered_herd_a<> " + class_name);
+		_declare_and_define_template_(version, 0, river, false, false);
+		river.write_string("::___kinds___()\n"
+			"{\n"
+			"\tstatic unordered_herd_a<> KINDS = ");
+		if (root)
+		{
+			river.write_string("unordered_herd_vals(___kind___());\n");
+		}
+		else
+		{
+			river.write_string("[]()\n"
+				"\t{\n"
+				"\t\tauto kinds = " + base_name + base_aspects + "::___kinds___();\n"
+				"\t\tkinds.update_thing(___cat___());\n"
+				"\t\treturn kinds;\n"
+				"\t}();\n");
+		}
+		river.write_string(
+			"\treturn KINDS;\n"
+			"}\n\n");
+
 		// ___operations___()
 		_declare_and_define_template_(version, 0, river, true, true);
 		river.write_string(
-			"template <typename ___unordered_shoal_a___>\n"
-			"inline ___unordered_shoal_a___ " + class_name);
+			"inline unordered_shoal_a<> " + class_name);
 		_declare_and_define_template_(version, 0, river, false, false);
 		river.write_string("::___operations___()\n"
 			"{\n"
-			"\tstatic ___unordered_shoal_a___ OPERATIONS = []()\n"
+			"\tstatic unordered_shoal_a<> OPERATIONS = []()\n"
 			"\t{\n"
-			"\t\t___unordered_shoal_a___ operations = ");
+			"\t\tunordered_shoal_a<> operations = ");
 		if (root)
-		{
-			river.write_string("unordered_shoal_create<any_a<>, any_a<>, false, ___unordered_shoal_a___>();\n"
+		{											// TODO:
+			river.write_string("unordered_shoal_create<any_a<>, any_a<>, false, unordered_shoal_a<>>();\n"
 				"\t\toperations.update(sym(\"call_\"), native_mutation_t<any_a>::create(&any_a::operator[]));\n"
 				"\t\toperations.update(sym(\"perform_\"), native_mutation_t<any_a>::create(&any_a::operator()));\n");
 		}
 		else
 		{
-			river.write_string(base_name + base_aspects + "::template ___operations___<___unordered_shoal_a___>();\n");
+			river.write_string(base_name + base_aspects + "::___operations___();\n");
 		}
 		_define_class_members_(root, class_name, class_expression_terms, version, indent, river,
 			&expression_abstraction_t::_define_class_operation_,
@@ -2107,7 +2226,7 @@ protected:
 				"\t}\n\n");
 		}
 
-		_define_class_relfection_(root, class_name, base_name, base_aspects, class_expression_terms, version, indent, river);
+		_define_class_relfection_(version, indent, river);
 
 		river.write_string(
 			"\ttemplate <typename ___TTT___, typename... Args>\n"
@@ -2117,124 +2236,27 @@ protected:
 			"\t}\n");
 	}
 
-	inline void _define_class_relfection_(bool root, std_string const& class_name, std_string const& base_name, std_string const& base_aspects, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
+	inline void _define_class_relfection_(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		std_string scope = _scope.to_string();
-		std_size_t const pos = scope.rfind("::");
-		scope = pos == std_string::npos
-			? std_string{}
-			: scope.substr(0, pos + 2);
-
 		// ___cat___()
 		river.write_string(
-			"\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>\n"
-			"\tstatic inline ___cat_a___ ___cat___()\n"
-			"\t{\n"
-			"\t\tstatic ___cat_a___ CAT = cat_create<___cat_a___>(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\"");
-		// dimensions
-		int64_t count = _dimension_kinds.size();
-		while (count)
-		{
-			--count;
-			auto const name = _dimension_names.at_index(count);
-			auto const kind = _dimension_kinds.at_index(count);
-			auto const def = _dimension_defaults.at_index(count);
-			if (!check<kind_a<>>(kind) || !check<kind_a<>>(def) ||
-				sym("#") + fast<kind_a<>>(kind).name_() != name ||
-				sym("#") + fast<kind_a<>>(def).name_() != name)
-			{
-				++count;
-				break;
-			}
-		}
-		_define_class_relfection_dimensions_(count, _dimension_kinds, version, river);
-		river.write_string(");\n"
-			"\t\treturn CAT;\n"
-			"\t}\n\n");
+			"\tstatic inline cat_a<> ___cat___();\n\n");
 
 		// ___cats___()
 		river.write_string(
-			"\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>, typename ___unordered_herd_a___ = unordered_herd_a<>>\n"
-			"\tstatic inline ___unordered_herd_a___ ___cats___()\n"
-			"\t{\n"
-			"\t\tstatic ___unordered_herd_a___ CATS = ");
-		if (root)
-		{
-			river.write_string("unordered_herd_vals(___cat___<___cat_a___, ___kind_a___>());\n");
-		}
-		else
-		{
-			river.write_string("[]()\n"
-				"\t\t{\n"
-				"\t\t\tauto cats = " + base_name + base_aspects + "::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();\n"
-				"\t\t\tcats.update_thing(___cat___<___cat_a___, ___kind_a___>());\n"
-				"\t\t\treturn cats;\n"
-				"\t\t}();\n");
-		}
-		river.write_string(
-			"\t\treturn CATS;\n"
-			"\t}\n\n");
+			"\tstatic inline unordered_herd_a<> ___cats___();\n\n");
 
 		// ___kind___()
 		river.write_string(
-			"\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>\n"
-			"\tstatic inline ___kind_a___ ___kind___()\n"
-			"\t{\n"
-			"\t\tstatic ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>()");
-		// aspects
-		if (count)
-		{
-			river.write_string(", flock_vals(");
-			bool first = true;
-			for (auto const& dimension_name : _dimension_names.extract_vector())
-			{
-				if (first)
-				{
-					first = false;
-				}
-				else
-				{
-					river.write_string(", ");
-				}
-				river.write_string("kind_of<_" + fast<symbol_a<>>(dimension_name).to_string().substr(1) + ">()");
-				if (!--count)
-				{
-					break;
-				}
-			}
-			river.write_string(")");
-		}
-		river.write_string(");\n"
-			"\t\treturn KIND;\n"
-			"\t}\n\n");
+			"\tstatic inline kind_a<> ___kind___();\n\n");
 
 		// ___kinds___()
 		river.write_string(
-			"\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>, typename ___unordered_herd_a___ = unordered_herd_a<>>\n"
-			"\tstatic inline ___unordered_herd_a___ ___kinds___()\n"
-			"\t{\n"
-			"\t\tstatic ___unordered_herd_a___ KINDS = ");
-		if (root)
-		{
-			river.write_string("unordered_herd_vals(___kind___<___cat_a___, ___kind_a___>());\n");
-		}
-		else
-		{
-			river.write_string("[]()\n"
-				"\t\t{\n"
-				"\t\t\tauto kinds = " + base_name + base_aspects + "::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();\n"
-				"\t\t\tkinds.update_thing(___cat___<___cat_a___, ___kind_a___>());\n"
-				"\t\t\treturn kinds;\n"
-				"\t\t}();\n");
-		}
-		river.write_string(
-			"\t\treturn KINDS;\n"
-			"\t}\n\n");
+			"\tstatic inline unordered_herd_a<> ___kinds___();\n\n");
 
 		// ___operations___()
 		river.write_string(
-			"\ttemplate <typename ___unordered_shoal_a___ = unordered_shoal_a<>>\n"
-			"\tstatic inline ___unordered_shoal_a___ ___operations___();\n\n");
+			"\tstatic inline unordered_shoal_a<> ___operations___();\n\n");
 	}
 
 	inline void _define_class_relfection_dimensions_(int64_t count, flock_a<> const& dimension_kinds, int64_t version, river_a<>& river) const
@@ -2259,7 +2281,7 @@ protected:
 			if (check<kind_a<>>(dimension_kind))
 			{
 				auto const kind = fast<kind_a<>>(dimension_kind);
-				river.write_string("kind_create<___kind_a___>(" +
+				river.write_string("kind_create<kind_a<>>(" +
 					std_to_string(kind.order()) + ", \"" +
 					kind.name_().to_string() + "\"");
 				if (kind != ANY_KIND)

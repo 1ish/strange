@@ -89,12 +89,49 @@ inline forward_extractor_a< any_a<> > forward_extractor_a<_element>::___forward_
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_extractor_any_(); }
 
 template <typename _element>
-template <typename ___unordered_shoal_a___>
-inline ___unordered_shoal_a___ forward_extractor_a<_element>::___operations___()
+inline cat_a<> forward_extractor_a<_element>::___cat___()
 {
-	static ___unordered_shoal_a___ OPERATIONS = []()
+	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::forward_extractor", flock_vals(kind_create<kind_a<>>(2, "")));
+	return CAT;
+}
+
+template <typename _element>
+inline unordered_herd_a<> forward_extractor_a<_element>::___cats___()
+{
+	static unordered_herd_a<> CATS = []()
 	{
-		___unordered_shoal_a___ operations = any_a<>::template ___operations___<___unordered_shoal_a___>();
+		auto cats = any_a<>::___cats___();
+		cats.update_thing(___cat___());
+		return cats;
+	}();
+	return CATS;
+}
+
+template <typename _element>
+inline kind_a<> forward_extractor_a<_element>::___kind___()
+{
+	static kind_a<> KIND = kind_from_cat(___cat___(), flock_vals(kind_of<_element>()));
+	return KIND;
+}
+
+template <typename _element>
+inline unordered_herd_a<> forward_extractor_a<_element>::___kinds___()
+{
+	static unordered_herd_a<> KINDS = []()
+	{
+		auto kinds = any_a<>::___kinds___();
+		kinds.update_thing(___cat___());
+		return kinds;
+	}();
+	return KINDS;
+}
+
+template <typename _element>
+inline unordered_shoal_a<> forward_extractor_a<_element>::___operations___()
+{
+	static unordered_shoal_a<> OPERATIONS = []()
+	{
+		unordered_shoal_a<> operations = any_a<>::___operations___();
 		operations.update(sym("get_"), native_extraction_t<forward_extractor_a>::create(&forward_extractor_a::get__));
 		operations.update(sym("increment_"), native_mutation_t<forward_extractor_a>::create(&forward_extractor_a::increment__));
 		operations.update(sym("to_extractor_any_"), native_extraction_t<forward_extractor_a>::create(&forward_extractor_a::to_extractor_any__));

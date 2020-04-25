@@ -499,12 +499,49 @@ inline any_a<> collection_a<_key, _value, _element>::___collection_a_handle___<_
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.write_lock_(); }
 
 template <typename _key, typename _value, typename _element>
-template <typename ___unordered_shoal_a___>
-inline ___unordered_shoal_a___ collection_a<_key, _value, _element>::___operations___()
+inline cat_a<> collection_a<_key, _value, _element>::___cat___()
 {
-	static ___unordered_shoal_a___ OPERATIONS = []()
+	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::collection");
+	return CAT;
+}
+
+template <typename _key, typename _value, typename _element>
+inline unordered_herd_a<> collection_a<_key, _value, _element>::___cats___()
+{
+	static unordered_herd_a<> CATS = []()
 	{
-		___unordered_shoal_a___ operations = range_a< _element >::template ___operations___<___unordered_shoal_a___>();
+		auto cats = range_a< _element >::___cats___();
+		cats.update_thing(___cat___());
+		return cats;
+	}();
+	return CATS;
+}
+
+template <typename _key, typename _value, typename _element>
+inline kind_a<> collection_a<_key, _value, _element>::___kind___()
+{
+	static kind_a<> KIND = kind_from_cat(___cat___());
+	return KIND;
+}
+
+template <typename _key, typename _value, typename _element>
+inline unordered_herd_a<> collection_a<_key, _value, _element>::___kinds___()
+{
+	static unordered_herd_a<> KINDS = []()
+	{
+		auto kinds = range_a< _element >::___kinds___();
+		kinds.update_thing(___cat___());
+		return kinds;
+	}();
+	return KINDS;
+}
+
+template <typename _key, typename _value, typename _element>
+inline unordered_shoal_a<> collection_a<_key, _value, _element>::___operations___()
+{
+	static unordered_shoal_a<> OPERATIONS = []()
+	{
+		unordered_shoal_a<> operations = range_a< _element >::___operations___();
 		operations.update(sym("has_"), native_extraction_t<collection_a>::create(&collection_a::has__));
 		operations.update(sym("at_"), native_extraction_t<collection_a>::create(&collection_a::at__));
 		operations.update(sym("update_"), native_mutation_t<collection_a>::create(&collection_a::update__));

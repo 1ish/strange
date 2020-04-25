@@ -251,46 +251,15 @@ public:
 		return flock_a{ flock_d<_element>(thing, any_a<>::___reference_tag___{}) };
 	}
 
-	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
-	static inline ___cat_a___ ___cat___()
-	{
-		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::flock");
-		return CAT;
-	}
+	static inline cat_a<> ___cat___();
 
-	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>, typename ___unordered_herd_a___ = unordered_herd_a<>>
-	static inline ___unordered_herd_a___ ___cats___()
-	{
-		static ___unordered_herd_a___ CATS = []()
-		{
-			auto cats = inventory_a< _element >::template ___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
-			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
-			return cats;
-		}();
-		return CATS;
-	}
+	static inline unordered_herd_a<> ___cats___();
 
-	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
-	static inline ___kind_a___ ___kind___()
-	{
-		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>());
-		return KIND;
-	}
+	static inline kind_a<> ___kind___();
 
-	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>, typename ___unordered_herd_a___ = unordered_herd_a<>>
-	static inline ___unordered_herd_a___ ___kinds___()
-	{
-		static ___unordered_herd_a___ KINDS = []()
-		{
-			auto kinds = inventory_a< _element >::template ___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
-			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
-			return kinds;
-		}();
-		return KINDS;
-	}
+	static inline unordered_herd_a<> ___kinds___();
 
-	template <typename ___unordered_shoal_a___ = unordered_shoal_a<>>
-	static inline ___unordered_shoal_a___ ___operations___();
+	static inline unordered_shoal_a<> ___operations___();
 
 	template <typename ___TTT___, typename... Args>
 	static inline flock_a create(Args&&... args)

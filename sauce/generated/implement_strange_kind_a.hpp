@@ -90,12 +90,49 @@ inline bool kind_a<_1>::___kind_a_handle___<___TTT___, ___DHB___>::optional() co
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.optional(); }
 
 template <typename _1>
-template <typename ___unordered_shoal_a___>
-inline ___unordered_shoal_a___ kind_a<_1>::___operations___()
+inline cat_a<> kind_a<_1>::___cat___()
 {
-	static ___unordered_shoal_a___ OPERATIONS = []()
+	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::kind");
+	return CAT;
+}
+
+template <typename _1>
+inline unordered_herd_a<> kind_a<_1>::___cats___()
+{
+	static unordered_herd_a<> CATS = []()
 	{
-		___unordered_shoal_a___ operations = cat_a<>::template ___operations___<___unordered_shoal_a___>();
+		auto cats = cat_a<>::___cats___();
+		cats.update_thing(___cat___());
+		return cats;
+	}();
+	return CATS;
+}
+
+template <typename _1>
+inline kind_a<> kind_a<_1>::___kind___()
+{
+	static kind_a<> KIND = kind_from_cat(___cat___());
+	return KIND;
+}
+
+template <typename _1>
+inline unordered_herd_a<> kind_a<_1>::___kinds___()
+{
+	static unordered_herd_a<> KINDS = []()
+	{
+		auto kinds = cat_a<>::___kinds___();
+		kinds.update_thing(___cat___());
+		return kinds;
+	}();
+	return KINDS;
+}
+
+template <typename _1>
+inline unordered_shoal_a<> kind_a<_1>::___operations___()
+{
+	static unordered_shoal_a<> OPERATIONS = []()
+	{
+		unordered_shoal_a<> operations = cat_a<>::___operations___();
 		operations.update(sym("aspects_"), native_extraction_t<kind_a>::create(&kind_a::aspects__));
 		operations.update(sym("fixed_"), native_extraction_t<kind_a>::create(&kind_a::fixed__));
 		operations.update(sym("reference_"), native_extraction_t<kind_a>::create(&kind_a::reference__));

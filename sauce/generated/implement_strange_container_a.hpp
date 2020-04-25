@@ -246,12 +246,49 @@ inline bidirectional_extractor_a< any_a<> > container_a<_1>::___container_a_hand
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.keys_end_(); }
 
 template <typename _1>
-template <typename ___unordered_shoal_a___>
-inline ___unordered_shoal_a___ container_a<_1>::___operations___()
+inline cat_a<> container_a<_1>::___cat___()
 {
-	static ___unordered_shoal_a___ OPERATIONS = []()
+	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::container");
+	return CAT;
+}
+
+template <typename _1>
+inline unordered_herd_a<> container_a<_1>::___cats___()
+{
+	static unordered_herd_a<> CATS = []()
 	{
-		___unordered_shoal_a___ operations = collection_a< any_a<> , container_a<> , container_a<> >::template ___operations___<___unordered_shoal_a___>();
+		auto cats = collection_a< any_a<> , container_a<> , container_a<> >::___cats___();
+		cats.update_thing(___cat___());
+		return cats;
+	}();
+	return CATS;
+}
+
+template <typename _1>
+inline kind_a<> container_a<_1>::___kind___()
+{
+	static kind_a<> KIND = kind_from_cat(___cat___());
+	return KIND;
+}
+
+template <typename _1>
+inline unordered_herd_a<> container_a<_1>::___kinds___()
+{
+	static unordered_herd_a<> KINDS = []()
+	{
+		auto kinds = collection_a< any_a<> , container_a<> , container_a<> >::___kinds___();
+		kinds.update_thing(___cat___());
+		return kinds;
+	}();
+	return KINDS;
+}
+
+template <typename _1>
+inline unordered_shoal_a<> container_a<_1>::___operations___()
+{
+	static unordered_shoal_a<> OPERATIONS = []()
+	{
+		unordered_shoal_a<> operations = collection_a< any_a<> , container_a<> , container_a<> >::___operations___();
 		operations.update(sym("unpack_"), native_extraction_t<container_a>::create(&container_a::unpack__));
 		operations.update(sym("unpack_unique_"), native_extraction_t<container_a>::create(&container_a::unpack_unique__));
 		operations.update(sym("close_"), native_mutation_t<container_a>::create(&container_a::close__));

@@ -111,12 +111,49 @@ inline std_map < _key , _value > & ordered_shoal_a<_key, _value>::___ordered_sho
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_map(); }
 
 template <typename _key, typename _value>
-template <typename ___unordered_shoal_a___>
-inline ___unordered_shoal_a___ ordered_shoal_a<_key, _value>::___operations___()
+inline cat_a<> ordered_shoal_a<_key, _value>::___cat___()
 {
-	static ___unordered_shoal_a___ OPERATIONS = []()
+	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::ordered_shoal");
+	return CAT;
+}
+
+template <typename _key, typename _value>
+inline unordered_herd_a<> ordered_shoal_a<_key, _value>::___cats___()
+{
+	static unordered_herd_a<> CATS = []()
 	{
-		___unordered_shoal_a___ operations = shoal_a< _key , _value >::template ___operations___<___unordered_shoal_a___>();
+		auto cats = shoal_a< _key , _value >::___cats___();
+		cats.update_thing(___cat___());
+		return cats;
+	}();
+	return CATS;
+}
+
+template <typename _key, typename _value>
+inline kind_a<> ordered_shoal_a<_key, _value>::___kind___()
+{
+	static kind_a<> KIND = kind_from_cat(___cat___());
+	return KIND;
+}
+
+template <typename _key, typename _value>
+inline unordered_herd_a<> ordered_shoal_a<_key, _value>::___kinds___()
+{
+	static unordered_herd_a<> KINDS = []()
+	{
+		auto kinds = shoal_a< _key , _value >::___kinds___();
+		kinds.update_thing(___cat___());
+		return kinds;
+	}();
+	return KINDS;
+}
+
+template <typename _key, typename _value>
+inline unordered_shoal_a<> ordered_shoal_a<_key, _value>::___operations___()
+{
+	static unordered_shoal_a<> OPERATIONS = []()
+	{
+		unordered_shoal_a<> operations = shoal_a< _key , _value >::___operations___();
 		return operations;
 	}();
 	return OPERATIONS;

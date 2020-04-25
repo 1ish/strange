@@ -762,12 +762,49 @@ inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.little_endian(); }
 
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
-template <typename ___unordered_shoal_a___>
-inline ___unordered_shoal_a___ number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___operations___()
+inline cat_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___cat___()
 {
-	static ___unordered_shoal_a___ OPERATIONS = []()
+	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::number");
+	return CAT;
+}
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline unordered_herd_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___cats___()
+{
+	static unordered_herd_a<> CATS = []()
 	{
-		___unordered_shoal_a___ operations = any_a<>::template ___operations___<___unordered_shoal_a___>();
+		auto cats = any_a<>::___cats___();
+		cats.update_thing(___cat___());
+		return cats;
+	}();
+	return CATS;
+}
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline kind_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___kind___()
+{
+	static kind_a<> KIND = kind_from_cat(___cat___());
+	return KIND;
+}
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline unordered_herd_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___kinds___()
+{
+	static unordered_herd_a<> KINDS = []()
+	{
+		auto kinds = any_a<>::___kinds___();
+		kinds.update_thing(___cat___());
+		return kinds;
+	}();
+	return KINDS;
+}
+
+template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
+inline unordered_shoal_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___operations___()
+{
+	static unordered_shoal_a<> OPERATIONS = []()
+	{
+		unordered_shoal_a<> operations = any_a<>::___operations___();
 		operations.update(sym("increment_"), native_mutation_t<number_a>::create(&number_a::increment__));
 		operations.update(sym("decrement_"), native_mutation_t<number_a>::create(&number_a::decrement__));
 		operations.update(sym("self_assign_"), native_mutation_t<number_a>::create(&number_a::self_assign__));

@@ -33,12 +33,49 @@ inline forward_extractor_a< any_a<> > list_a<_1>::___list_a_handle___<___TTT___,
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.end_(); }
 
 template <typename _1>
-template <typename ___unordered_shoal_a___>
-inline ___unordered_shoal_a___ list_a<_1>::___operations___()
+inline cat_a<> list_a<_1>::___cat___()
 {
-	static ___unordered_shoal_a___ OPERATIONS = []()
+	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::list");
+	return CAT;
+}
+
+template <typename _1>
+inline unordered_herd_a<> list_a<_1>::___cats___()
+{
+	static unordered_herd_a<> CATS = []()
 	{
-		___unordered_shoal_a___ operations = any_a<>::template ___operations___<___unordered_shoal_a___>();
+		auto cats = any_a<>::___cats___();
+		cats.update_thing(___cat___());
+		return cats;
+	}();
+	return CATS;
+}
+
+template <typename _1>
+inline kind_a<> list_a<_1>::___kind___()
+{
+	static kind_a<> KIND = kind_from_cat(___cat___());
+	return KIND;
+}
+
+template <typename _1>
+inline unordered_herd_a<> list_a<_1>::___kinds___()
+{
+	static unordered_herd_a<> KINDS = []()
+	{
+		auto kinds = any_a<>::___kinds___();
+		kinds.update_thing(___cat___());
+		return kinds;
+	}();
+	return KINDS;
+}
+
+template <typename _1>
+inline unordered_shoal_a<> list_a<_1>::___operations___()
+{
+	static unordered_shoal_a<> OPERATIONS = []()
+	{
+		unordered_shoal_a<> operations = any_a<>::___operations___();
 		operations.update(sym("begin_"), native_extraction_t<list_a>::create(&list_a::begin__));
 		operations.update(sym("end_"), native_extraction_t<list_a>::create(&list_a::end__));
 		return operations;

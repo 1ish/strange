@@ -78,12 +78,49 @@ inline random_access_mutator_a< _element > inventory_a<_element>::___inventory_a
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end_(); }
 
 template <typename _element>
-template <typename ___unordered_shoal_a___>
-inline ___unordered_shoal_a___ inventory_a<_element>::___operations___()
+inline cat_a<> inventory_a<_element>::___cat___()
 {
-	static ___unordered_shoal_a___ OPERATIONS = []()
+	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::inventory");
+	return CAT;
+}
+
+template <typename _element>
+inline unordered_herd_a<> inventory_a<_element>::___cats___()
+{
+	static unordered_herd_a<> CATS = []()
 	{
-		___unordered_shoal_a___ operations = collection_a< number_data_int64_a<> , _element , _element >::template ___operations___<___unordered_shoal_a___>();
+		auto cats = collection_a< number_data_int64_a<> , _element , _element >::___cats___();
+		cats.update_thing(___cat___());
+		return cats;
+	}();
+	return CATS;
+}
+
+template <typename _element>
+inline kind_a<> inventory_a<_element>::___kind___()
+{
+	static kind_a<> KIND = kind_from_cat(___cat___());
+	return KIND;
+}
+
+template <typename _element>
+inline unordered_herd_a<> inventory_a<_element>::___kinds___()
+{
+	static unordered_herd_a<> KINDS = []()
+	{
+		auto kinds = collection_a< number_data_int64_a<> , _element , _element >::___kinds___();
+		kinds.update_thing(___cat___());
+		return kinds;
+	}();
+	return KINDS;
+}
+
+template <typename _element>
+inline unordered_shoal_a<> inventory_a<_element>::___operations___()
+{
+	static unordered_shoal_a<> OPERATIONS = []()
+	{
+		unordered_shoal_a<> operations = collection_a< number_data_int64_a<> , _element , _element >::___operations___();
 		operations.update(sym("mutate_begin_"), native_mutation_t<inventory_a>::create(&inventory_a::mutate_begin__));
 		operations.update(sym("mutate_end_"), native_mutation_t<inventory_a>::create(&inventory_a::mutate_end__));
 		return operations;

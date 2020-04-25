@@ -75,12 +75,49 @@ inline _type & random_access_extractor_data_a<_element, _type>::___random_access
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_it(); }
 
 template <typename _element, typename _type>
-template <typename ___unordered_shoal_a___>
-inline ___unordered_shoal_a___ random_access_extractor_data_a<_element, _type>::___operations___()
+inline cat_a<> random_access_extractor_data_a<_element, _type>::___cat___()
 {
-	static ___unordered_shoal_a___ OPERATIONS = []()
+	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::random_access_extractor_data", flock_vals(kind_create<kind_a<>>(2, ""), kind_create<kind_a<>>(2, "")));
+	return CAT;
+}
+
+template <typename _element, typename _type>
+inline unordered_herd_a<> random_access_extractor_data_a<_element, _type>::___cats___()
+{
+	static unordered_herd_a<> CATS = []()
 	{
-		___unordered_shoal_a___ operations = random_access_extractor_a< _element >::template ___operations___<___unordered_shoal_a___>();
+		auto cats = random_access_extractor_a< _element >::___cats___();
+		cats.update_thing(___cat___());
+		return cats;
+	}();
+	return CATS;
+}
+
+template <typename _element, typename _type>
+inline kind_a<> random_access_extractor_data_a<_element, _type>::___kind___()
+{
+	static kind_a<> KIND = kind_from_cat(___cat___(), flock_vals(kind_of<_element>(), kind_of<_type>()));
+	return KIND;
+}
+
+template <typename _element, typename _type>
+inline unordered_herd_a<> random_access_extractor_data_a<_element, _type>::___kinds___()
+{
+	static unordered_herd_a<> KINDS = []()
+	{
+		auto kinds = random_access_extractor_a< _element >::___kinds___();
+		kinds.update_thing(___cat___());
+		return kinds;
+	}();
+	return KINDS;
+}
+
+template <typename _element, typename _type>
+inline unordered_shoal_a<> random_access_extractor_data_a<_element, _type>::___operations___()
+{
+	static unordered_shoal_a<> OPERATIONS = []()
+	{
+		unordered_shoal_a<> operations = random_access_extractor_a< _element >::___operations___();
 		return operations;
 	}();
 	return OPERATIONS;

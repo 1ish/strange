@@ -507,12 +507,39 @@ inline any_a<> any_a<_1>::operation(std_string const& name) const
 }
 
 template <typename _1>
-template <typename ___unordered_shoal_a___>
-inline ___unordered_shoal_a___ any_a<_1>::___operations___()
+inline cat_a<> any_a<_1>::___cat___()
 {
-	static ___unordered_shoal_a___ OPERATIONS = []()
+	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::any");
+	return CAT;
+}
+
+template <typename _1>
+inline unordered_herd_a<> any_a<_1>::___cats___()
+{
+	static unordered_herd_a<> CATS = unordered_herd_vals(___cat___());
+	return CATS;
+}
+
+template <typename _1>
+inline kind_a<> any_a<_1>::___kind___()
+{
+	static kind_a<> KIND = kind_from_cat(___cat___());
+	return KIND;
+}
+
+template <typename _1>
+inline unordered_herd_a<> any_a<_1>::___kinds___()
+{
+	static unordered_herd_a<> KINDS = unordered_herd_vals(___kind___());
+	return KINDS;
+}
+
+template <typename _1>
+inline unordered_shoal_a<> any_a<_1>::___operations___()
+{
+	static unordered_shoal_a<> OPERATIONS = []()
 	{
-		___unordered_shoal_a___ operations = unordered_shoal_create<any_a<>, any_a<>, false, ___unordered_shoal_a___>();
+		unordered_shoal_a<> operations = unordered_shoal_create<any_a<>, any_a<>, false, unordered_shoal_a<>>();
 		operations.update(sym("call_"), native_mutation_t<any_a>::create(&any_a::operator[]));
 		operations.update(sym("perform_"), native_mutation_t<any_a>::create(&any_a::operator()));
 		operations.update(sym("type_"), native_extraction_t<any_a>::create(&any_a::type__));
