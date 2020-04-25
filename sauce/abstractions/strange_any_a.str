@@ -5,7 +5,6 @@ false &&
 			#symbol :<<symbol>># <symbol>,
 			#cat :<<cat>># <cat>,
 			#kind :<<kind>># <kind>,
-			#number_data_uint64 :<<number_data_uint64>># <number_data_uint64>,
 			(	// no parent
 				{
 					// exposure
@@ -35,7 +34,7 @@ false &&
 					operate : "any_a<> (any_a<>& thing, list_a<> const& arguments) const",
 
 					// identification
-					identity_ :# (<#number_data_uint64>),
+					identity_ :# (<number_data_uint64>),
 					identity : "void const* () const",
 
 					identical_ :# (thing :#, <>),
@@ -60,14 +59,14 @@ false &&
 
 					greater_or_equal_ :# (thing :#, <>),
 
-					hash_ :# (<#number_data_uint64>),
+					hash_ :# (<number_data_uint64>),
 					hash : "std_size_t () const",
 
 					is : "bool (std_string const& s) const",
 
 					// serialization
 					pack_ :# (container :<container>&, <>),
-					pack_unique_ :# (container :<container>&, unique_herd :<herd[<#number_data_uint64>]>&, <>),
+					pack_unique_ :# (container :<container>&, unique_herd :<herd[<number_data_uint64>]>&, <>),
 				}
 			)
 		)

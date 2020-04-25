@@ -2,7 +2,7 @@
 namespace strange
 {
 
-template <typename _symbol, typename _cat, typename _kind, typename _number_data_uint64>
+template <typename _symbol, typename _cat, typename _kind>
 class any_a
 {
 protected:
@@ -81,7 +81,7 @@ public:
 
 	inline any_a<> identity__(list_a<> const& ___arguments___) const;
 
-	inline _number_data_uint64 identity_() const;
+	inline number_data_uint64_a<> identity_() const;
 
 	inline void const * identity() const;
 
@@ -141,7 +141,7 @@ public:
 
 	inline any_a<> hash__(list_a<> const& ___arguments___) const;
 
-	inline _number_data_uint64 hash_() const;
+	inline number_data_uint64_a<> hash_() const;
 
 	inline std_size_t hash() const;
 
@@ -153,7 +153,7 @@ public:
 
 	inline any_a<> pack_unique__(list_a<> const& ___arguments___) const;
 
-	inline any_a<> pack_unique_(container_a<> & container, herd_a< _number_data_uint64 > & unique_herd) const;
+	inline any_a<> pack_unique_(container_a<> & container, herd_a<number_data_uint64_a<>> & unique_herd) const;
 
 protected:
 	struct ___any_a_handle_base___
@@ -178,7 +178,7 @@ protected:
 		virtual any_a<> visit_(inventory_a<> & arguments) const = 0;
 		virtual any_a < > invoke(any_a < > & thing , list_a < > const & arguments ) const = 0;
 		virtual any_a < > operate(any_a < > & thing , list_a < > const & arguments ) const = 0;
-		virtual _number_data_uint64 identity_() const = 0;
+		virtual number_data_uint64_a<> identity_() const = 0;
 		virtual void const * identity() const = 0;
 		virtual any_a<> identical_(any_a<> const& thing) const = 0;
 		virtual bool identical(any_a < > const & thing ) const = 0;
@@ -191,11 +191,11 @@ protected:
 		virtual bool greater_than_(any_a<> const& thing) const = 0;
 		virtual bool less_or_equal_(any_a<> const& thing) const = 0;
 		virtual bool greater_or_equal_(any_a<> const& thing) const = 0;
-		virtual _number_data_uint64 hash_() const = 0;
+		virtual number_data_uint64_a<> hash_() const = 0;
 		virtual std_size_t hash() const = 0;
 		virtual bool is(std_string const & s ) const = 0;
 		virtual any_a<> pack_(container_a<> & container) const = 0;
-		virtual any_a<> pack_unique_(container_a<> & container, herd_a< _number_data_uint64 > & unique_herd) const = 0;
+		virtual any_a<> pack_unique_(container_a<> & container, herd_a<number_data_uint64_a<>> & unique_herd) const = 0;
 	};
 
 	template <typename ___TTT___, typename ___BHB___ = ___any_a_handle_base___>
@@ -248,7 +248,7 @@ protected:
 
 		virtual inline any_a < > operate(any_a < > & thing , list_a < > const & arguments ) const final;
 
-		virtual inline _number_data_uint64 identity_() const final;
+		virtual inline number_data_uint64_a<> identity_() const final;
 
 		virtual inline void const * identity() const final;
 
@@ -274,7 +274,7 @@ protected:
 
 		virtual inline bool greater_or_equal_(any_a<> const& thing) const final;
 
-		virtual inline _number_data_uint64 hash_() const final;
+		virtual inline number_data_uint64_a<> hash_() const final;
 
 		virtual inline std_size_t hash() const final;
 
@@ -282,7 +282,7 @@ protected:
 
 		virtual inline any_a<> pack_(container_a<> & container) const final;
 
-		virtual inline any_a<> pack_unique_(container_a<> & container, herd_a< _number_data_uint64 > & unique_herd) const final;
+		virtual inline any_a<> pack_unique_(container_a<> & container, herd_a<number_data_uint64_a<>> & unique_herd) const final;
 
 		___TTT___ ___value___;
 	};
