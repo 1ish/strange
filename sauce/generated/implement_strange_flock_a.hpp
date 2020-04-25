@@ -113,7 +113,7 @@ inline std_vector < _element > & flock_a<_element>::___flock_a_handle___<___TTT_
 template <typename _element>
 inline cat_a<> flock_a<_element>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::flock");
+	static cat_a<> CAT = cat_create(1, "strange::flock");
 	return CAT;
 }
 

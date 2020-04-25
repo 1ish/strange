@@ -249,33 +249,28 @@ class ___kind_t_share___
 };
 
 //inline kind_a<> kind_create(int64_t order = 1, std_string const& name = "");
-template <typename ___kind_a___>
-inline ___kind_a___ kind_create(int64_t order, std_string const& name)
+inline kind_a<> kind_create(int64_t order, std_string const& name)
 {
 	return kind_t<>::create(order, name);
 }
 
-template <typename ___kind_a___>
-inline ___kind_a___ kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions)
+inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions)
 {
 	return kind_t<>::create(order, name, dimensions);
 }
 
-template <typename ___kind_a___>
-inline ___kind_a___ kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects)
+inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects)
 {
 	return kind_t<>::create(order, name, dimensions, aspects);
 }
 
-template <typename ___kind_a___>
-inline ___kind_a___ kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters)
+inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters)
 {
 	return kind_t<>::create(order, name, dimensions, aspects, parameters);
 }
 
 //inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false);
-template <typename ___kind_a___>
-inline ___kind_a___ kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed, bool reference, bool optional)
+inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed, bool reference, bool optional)
 {
 	return kind_t<>::create(order, name, dimensions, aspects, parameters, result, fixed, reference, optional);
 }

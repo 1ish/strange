@@ -59,7 +59,7 @@ inline std_unordered_set < _element > & unordered_herd_a<_element>::___unordered
 template <typename _element>
 inline cat_a<> unordered_herd_a<_element>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::unordered_herd");
+	static cat_a<> CAT = cat_create(1, "strange::unordered_herd");
 	return CAT;
 }
 

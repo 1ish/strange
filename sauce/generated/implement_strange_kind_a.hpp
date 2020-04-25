@@ -92,7 +92,7 @@ inline bool kind_a<_1>::___kind_a_handle___<___TTT___, ___DHB___>::optional() co
 template <typename _1>
 inline cat_a<> kind_a<_1>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::kind");
+	static cat_a<> CAT = cat_create(1, "strange::kind");
 	return CAT;
 }
 

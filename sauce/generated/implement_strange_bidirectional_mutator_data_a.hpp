@@ -41,7 +41,7 @@ inline _type & bidirectional_mutator_data_a<_element, _type>::___bidirectional_m
 template <typename _element, typename _type>
 inline cat_a<> bidirectional_mutator_data_a<_element, _type>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::bidirectional_mutator_data", flock_vals(kind_create<kind_a<>>(2, ""), kind_create<kind_a<>>(2, "")));
+	static cat_a<> CAT = cat_create(1, "strange::bidirectional_mutator_data", flock_vals(kind_create(2, ""), kind_create(2, "")));
 	return CAT;
 }
 

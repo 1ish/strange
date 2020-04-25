@@ -95,7 +95,7 @@ inline std_set < _element > & ordered_herd_a<_element>::___ordered_herd_a_handle
 template <typename _element>
 inline cat_a<> ordered_herd_a<_element>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::ordered_herd");
+	static cat_a<> CAT = cat_create(1, "strange::ordered_herd");
 	return CAT;
 }
 

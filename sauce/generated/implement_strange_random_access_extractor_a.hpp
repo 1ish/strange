@@ -125,7 +125,7 @@ inline random_access_extractor_a< _element > random_access_extractor_a<_element>
 template <typename _element>
 inline cat_a<> random_access_extractor_a<_element>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::random_access_extractor", flock_vals(kind_create<kind_a<>>(2, "")));
+	static cat_a<> CAT = cat_create(1, "strange::random_access_extractor", flock_vals(kind_create(2, "")));
 	return CAT;
 }
 

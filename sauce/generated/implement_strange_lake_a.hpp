@@ -113,7 +113,7 @@ inline std_vector < _primitive > & lake_a<_primitive>::___lake_a_handle___<___TT
 template <typename _primitive>
 inline cat_a<> lake_a<_primitive>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::lake", flock_vals(kind_create<kind_a<>>(2, "")));
+	static cat_a<> CAT = cat_create(1, "strange::lake", flock_vals(kind_create(2, "")));
 	return CAT;
 }
 

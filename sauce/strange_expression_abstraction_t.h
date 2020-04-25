@@ -998,8 +998,8 @@ protected:
 			"inline cat_a<> " + class_name);
 		_declare_and_define_template_(version, 0, river, false, false);
 		river.write_string("::___cat___()\n"
-			"{\n"							// TODO:
-			"\tstatic cat_a<> CAT = cat_create<cat_a<>>(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\"");
+			"{\n"
+			"\tstatic cat_a<> CAT = cat_create(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\"");
 		// dimensions
 		int64_t count = _dimension_kinds.size();
 		while (count)
@@ -1117,8 +1117,8 @@ protected:
 			"\t{\n"
 			"\t\tunordered_shoal_a<> operations = ");
 		if (root)
-		{											// TODO:
-			river.write_string("unordered_shoal_create<any_a<>, any_a<>, false, unordered_shoal_a<>>();\n"
+		{
+			river.write_string("unordered_shoal_create();\n"
 				"\t\toperations.update(sym(\"call_\"), native_mutation_t<any_a>::create(&any_a::operator[]));\n"
 				"\t\toperations.update(sym(\"perform_\"), native_mutation_t<any_a>::create(&any_a::operator()));\n");
 		}
@@ -2281,7 +2281,7 @@ protected:
 			if (check<kind_a<>>(dimension_kind))
 			{
 				auto const kind = fast<kind_a<>>(dimension_kind);
-				river.write_string("kind_create<kind_a<>>(" +
+				river.write_string("kind_create(" +
 					std_to_string(kind.order()) + ", \"" +
 					kind.name_().to_string() + "\"");
 				if (kind != ANY_KIND)

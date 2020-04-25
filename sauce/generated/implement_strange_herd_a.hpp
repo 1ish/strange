@@ -67,7 +67,7 @@ inline bool herd_a<_element>::___herd_a_handle___<___TTT___, ___DHB___>::insert_
 template <typename _element>
 inline cat_a<> herd_a<_element>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::herd");
+	static cat_a<> CAT = cat_create(1, "strange::herd");
 	return CAT;
 }
 

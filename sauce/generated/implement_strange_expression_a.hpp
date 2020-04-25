@@ -186,7 +186,7 @@ inline void expression_a<_1>::___expression_a_handle___<___TTT___, ___DHB___>::g
 template <typename _1>
 inline cat_a<> expression_a<_1>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::expression");
+	static cat_a<> CAT = cat_create(1, "strange::expression");
 	return CAT;
 }
 

@@ -27,7 +27,7 @@ inline expression_a<> parser_a<_1>::___parser_a_handle___<___TTT___, ___DHB___>:
 template <typename _1>
 inline cat_a<> parser_a<_1>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::parser");
+	static cat_a<> CAT = cat_create(1, "strange::parser");
 	return CAT;
 }
 

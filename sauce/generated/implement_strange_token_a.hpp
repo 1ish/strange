@@ -197,7 +197,7 @@ inline std_string token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::repor
 template <typename _1>
 inline cat_a<> token_a<_1>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::token");
+	static cat_a<> CAT = cat_create(1, "strange::token");
 	return CAT;
 }
 

@@ -43,7 +43,7 @@ inline void bidirectional_extractor_a<_element>::___bidirectional_extractor_a_ha
 template <typename _element>
 inline cat_a<> bidirectional_extractor_a<_element>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::bidirectional_extractor", flock_vals(kind_create<kind_a<>>(2, "")));
+	static cat_a<> CAT = cat_create(1, "strange::bidirectional_extractor", flock_vals(kind_create(2, "")));
 	return CAT;
 }
 

@@ -509,7 +509,7 @@ inline any_a<> any_a<_1>::operation(std_string const& name) const
 template <typename _1>
 inline cat_a<> any_a<_1>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::any");
+	static cat_a<> CAT = cat_create(1, "strange::any");
 	return CAT;
 }
 
@@ -539,7 +539,7 @@ inline unordered_shoal_a<> any_a<_1>::___operations___()
 {
 	static unordered_shoal_a<> OPERATIONS = []()
 	{
-		unordered_shoal_a<> operations = unordered_shoal_create<any_a<>, any_a<>, false, unordered_shoal_a<>>();
+		unordered_shoal_a<> operations = unordered_shoal_create();
 		operations.update(sym("call_"), native_mutation_t<any_a>::create(&any_a::operator[]));
 		operations.update(sym("perform_"), native_mutation_t<any_a>::create(&any_a::operator()));
 		operations.update(sym("type_"), native_extraction_t<any_a>::create(&any_a::type__));

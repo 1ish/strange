@@ -35,7 +35,7 @@ inline forward_extractor_a< _element > range_a<_element>::___range_a_handle___<_
 template <typename _element>
 inline cat_a<> range_a<_element>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::range");
+	static cat_a<> CAT = cat_create(1, "strange::range");
 	return CAT;
 }
 

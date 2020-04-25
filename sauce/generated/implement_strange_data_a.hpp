@@ -41,7 +41,7 @@ inline _type & data_a<_type>::___data_a_handle___<___TTT___, ___DHB___>::mutate_
 template <typename _type>
 inline cat_a<> data_a<_type>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::data", flock_vals(kind_create<kind_a<>>(2, "")));
+	static cat_a<> CAT = cat_create(1, "strange::data", flock_vals(kind_create(2, "")));
 	return CAT;
 }
 

@@ -374,20 +374,17 @@ class ___cat_t_share___
 	}
 };
 
-template <typename ___cat_a___>
-inline ___cat_a___ cat_create(int64_t order, std_string const& name)
+inline cat_a<> cat_create(int64_t order, std_string const& name)
 {
 	return cat_t<>::create(order, name);
 }
 
-template <typename ___cat_a___>
-inline ___cat_a___ cat_create(int64_t order, std_string const& name, flock_a<> const& dimensions)
+inline cat_a<> cat_create(int64_t order, std_string const& name, flock_a<> const& dimensions)
 {
 	return cat_t<>::create(order, name, dimensions);
 }
 
-template <typename ___cat_a___>
-inline ___cat_a___ cat_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& parameters, symbol_a<> const& result)
+inline cat_a<> cat_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& parameters, symbol_a<> const& result)
 {
 	return cat_t<>::create(order, name, dimensions, parameters, result);
 }

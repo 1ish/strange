@@ -91,7 +91,7 @@ inline forward_extractor_a< any_a<> > forward_extractor_a<_element>::___forward_
 template <typename _element>
 inline cat_a<> forward_extractor_a<_element>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::forward_extractor", flock_vals(kind_create<kind_a<>>(2, "")));
+	static cat_a<> CAT = cat_create(1, "strange::forward_extractor", flock_vals(kind_create(2, "")));
 	return CAT;
 }
 

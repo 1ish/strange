@@ -80,7 +80,7 @@ inline random_access_mutator_a< _element > inventory_a<_element>::___inventory_a
 template <typename _element>
 inline cat_a<> inventory_a<_element>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::inventory");
+	static cat_a<> CAT = cat_create(1, "strange::inventory");
 	return CAT;
 }
 

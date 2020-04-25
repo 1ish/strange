@@ -35,7 +35,7 @@ inline forward_mutator_a< flock_a<> > shoal_a<_key, _value>::___shoal_a_handle__
 template <typename _key, typename _value>
 inline cat_a<> shoal_a<_key, _value>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::shoal");
+	static cat_a<> CAT = cat_create(1, "strange::shoal");
 	return CAT;
 }
 

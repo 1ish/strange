@@ -501,7 +501,7 @@ inline any_a<> collection_a<_key, _value, _element>::___collection_a_handle___<_
 template <typename _key, typename _value, typename _element>
 inline cat_a<> collection_a<_key, _value, _element>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::collection");
+	static cat_a<> CAT = cat_create(1, "strange::collection");
 	return CAT;
 }
 

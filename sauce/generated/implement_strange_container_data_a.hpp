@@ -77,7 +77,7 @@ inline _type & container_data_a<_type, _iterator>::___container_data_a_handle___
 template <typename _type, typename _iterator>
 inline cat_a<> container_data_a<_type, _iterator>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::container_data", flock_vals(kind_create<kind_a<>>(2, ""), kind_create<kind_a<>>(2, "")));
+	static cat_a<> CAT = cat_create(1, "strange::container_data", flock_vals(kind_create(2, ""), kind_create(2, "")));
 	return CAT;
 }
 

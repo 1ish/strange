@@ -403,30 +403,22 @@ template <typename... Args>
 inline unordered_shoal_a<> unordered_shoal_vals(Args&&... args);
 
 // cat
-template <typename ___cat_a___ = cat_a<>>
-inline ___cat_a___ cat_create(int64_t order = 1, std_string const& name = "");
+inline cat_a<> cat_create(int64_t order = 1, std_string const& name = "");
 
-template <typename ___cat_a___ = cat_a<>>
-inline ___cat_a___ cat_create(int64_t order, std_string const& name, flock_a<> const& dimensions);
+inline cat_a<> cat_create(int64_t order, std_string const& name, flock_a<> const& dimensions);
 
-template <typename ___cat_a___ = cat_a<>>
-inline ___cat_a___ cat_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& parameters, symbol_a<> const& result);
+inline cat_a<> cat_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& parameters, symbol_a<> const& result);
 
 // kind
-template <typename ___kind_a___ = kind_a<>>
-inline ___kind_a___ kind_create(int64_t order = 1, std_string const& name = "");
+inline kind_a<> kind_create(int64_t order = 1, std_string const& name = "");
 
-template <typename ___kind_a___ = kind_a<>>
-inline ___kind_a___ kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions);
+inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions);
 
-template <typename ___kind_a___ = kind_a<>>
-inline ___kind_a___ kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects);
+inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects);
 
-template <typename ___kind_a___ = kind_a<>>
-inline ___kind_a___ kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters);
+inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters);
 
-template <typename ___kind_a___ = kind_a<>>
-inline ___kind_a___ kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false);
+inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false);
 
 inline kind_a<> kind_from_cat(cat_a<> const& cat);
 inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects);

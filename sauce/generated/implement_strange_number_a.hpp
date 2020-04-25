@@ -764,7 +764,7 @@ inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline cat_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::number");
+	static cat_a<> CAT = cat_create(1, "strange::number");
 	return CAT;
 }
 

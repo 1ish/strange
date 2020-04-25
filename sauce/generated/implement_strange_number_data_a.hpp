@@ -77,7 +77,7 @@ inline _primitive & number_data_a<_primitive>::___number_data_a_handle___<___TTT
 template <typename _primitive>
 inline cat_a<> number_data_a<_primitive>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::number_data", flock_vals(kind_create<kind_a<>>(2, "")));
+	static cat_a<> CAT = cat_create(1, "strange::number_data", flock_vals(kind_create(2, "")));
 	return CAT;
 }
 

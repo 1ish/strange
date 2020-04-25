@@ -55,7 +55,7 @@ inline misunderstanding_a<> misunderstanding_a<_lake_int8>::___misunderstanding_
 template <typename _lake_int8>
 inline cat_a<> misunderstanding_a<_lake_int8>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::misunderstanding");
+	static cat_a<> CAT = cat_create(1, "strange::misunderstanding");
 	return CAT;
 }
 

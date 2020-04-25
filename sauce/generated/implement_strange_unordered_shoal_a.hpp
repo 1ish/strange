@@ -77,7 +77,7 @@ inline std_unordered_map < _key , _value > & unordered_shoal_a<_key, _value>::__
 template <typename _key, typename _value>
 inline cat_a<> unordered_shoal_a<_key, _value>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::unordered_shoal");
+	static cat_a<> CAT = cat_create(1, "strange::unordered_shoal");
 	return CAT;
 }
 

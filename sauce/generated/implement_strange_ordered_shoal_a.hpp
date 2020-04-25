@@ -113,7 +113,7 @@ inline std_map < _key , _value > & ordered_shoal_a<_key, _value>::___ordered_sho
 template <typename _key, typename _value>
 inline cat_a<> ordered_shoal_a<_key, _value>::___cat___()
 {
-	static cat_a<> CAT = cat_create<cat_a<>>(1, "strange::ordered_shoal");
+	static cat_a<> CAT = cat_create(1, "strange::ordered_shoal");
 	return CAT;
 }
 
