@@ -2,7 +2,6 @@ false &&
 {	strange :
 	{	<any> :: abstraction
 		(	// dimensions
-			#symbol :<<symbol>># <symbol>,
 			#cat :<<cat>># <cat>,
 			#kind :<<kind>># <kind>,
 			(	// no parent
@@ -12,7 +11,7 @@ false &&
 					mutate_thing : "one_t& ()",
 
 					// reflection
-					type_ :# (<#symbol>),
+					type_ :# (<symbol>),
 
 					cat_ :# (<#cat>),
 
@@ -22,7 +21,7 @@ false &&
 
 					kinds_ :# (<unordered_herd>), //TODO <herd[<#kind>]>
 
-					operations_ :# (<unordered_shoal>), //TODO <shoal[<#symbol>, <operation>]>
+					operations_ :# (<unordered_shoal>), //TODO <shoal[<symbol>, <operation>]>
 
 					// visitor
 					//visit_ :# (arguments :<inventory>&, index :<number_data_int64>#, <>),

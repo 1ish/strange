@@ -2,7 +2,7 @@
 namespace strange
 {
 
-template <typename _symbol, typename _cat, typename _kind>
+template <typename _cat, typename _kind>
 class any_a
 {
 protected:
@@ -49,7 +49,7 @@ public:
 
 	inline any_a<> type__(list_a<> const& ___arguments___) const;
 
-	inline _symbol type_() const;
+	inline symbol_a<> type_() const;
 
 	inline any_a<> cat__(list_a<> const& ___arguments___) const;
 
@@ -169,7 +169,7 @@ protected:
 		virtual operator bool() const = 0;
 		virtual one_t const & extract_thing() const = 0;
 		virtual one_t & mutate_thing() = 0;
-		virtual _symbol type_() const = 0;
+		virtual symbol_a<> type_() const = 0;
 		virtual _cat cat_() const = 0;
 		virtual unordered_herd_a<> cats_() const = 0;
 		virtual _kind kind_() const = 0;
@@ -230,7 +230,7 @@ protected:
 
 		virtual inline one_t & mutate_thing() final;
 
-		virtual inline _symbol type_() const final;
+		virtual inline symbol_a<> type_() const final;
 
 		virtual inline _cat cat_() const final;
 
