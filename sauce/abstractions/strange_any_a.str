@@ -26,7 +26,9 @@ false &&
 					operations_ :# (<unordered_shoal>), //TODO <shoal[<#symbol>, <operation>]>
 
 					// visitor
-					visit_ :# (arguments :<inventory>&, <any>),
+					//visit_ :# (arguments :<inventory>&, index :<number_data_int64>#, <>),
+					//visit : "void (inventory_a<>& arguments, int64_t index) const",
+					visit_ :# (arguments :<inventory>&, <>),
 
 					// function
 					invoke : "any_a<> (any_a<>& thing, list_a<> const& arguments) const",
@@ -36,27 +38,27 @@ false &&
 					identity_ :# (<#number_data_uint64>),
 					identity : "void const* () const",
 
-					identical_ :# (thing :<any>#, <any>),
+					identical_ :# (thing :#, <>),
 					identical : "bool (any_a<> const& thing) const",
 
 					// comparison
-					nothing_ :# (<any>),
+					nothing_ :# (<>),
 					nothing : "bool () const",
 
-					something_ :# (<any>),
+					something_ :# (<>),
 					something : "bool () const",
 
-					same_ :# (thing :<any>#, <any>),
+					same_ :# (thing :#, <>),
 
-					different_ :# (thing :<any>#, <any>),
+					different_ :# (thing :#, <>),
 
-					less_than_ :# (thing :<any>#, <any>),
+					less_than_ :# (thing :#, <>),
 
-					greater_than_ :# (thing :<any>#, <any>),
+					greater_than_ :# (thing :#, <>),
 
-					less_or_equal_ :# (thing :<any>#, <any>),
+					less_or_equal_ :# (thing :#, <>),
 
-					greater_or_equal_ :# (thing :<any>#, <any>),
+					greater_or_equal_ :# (thing :#, <>),
 
 					hash_ :# (<#number_data_uint64>),
 					hash : "std_size_t () const",
