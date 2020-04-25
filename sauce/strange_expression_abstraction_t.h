@@ -2128,7 +2128,7 @@ protected:
 		// ___cat___()
 		if (root)
 		{
-			river.write_string("\ttemplate <typename ___cat_a___ = _cat, typename ___kind_a___ = _kind>\n");
+			river.write_string("\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = _kind>\n");
 		}
 		else
 		{
@@ -2162,7 +2162,7 @@ protected:
 		// ___cats___()
 		if (root)
 		{
-			river.write_string("\ttemplate <typename ___cat_a___ = _cat, typename ___kind_a___ = _kind, typename ___unordered_herd_a___ = unordered_herd_a<>>\n");
+			river.write_string("\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = _kind, typename ___unordered_herd_a___ = unordered_herd_a<>>\n");
 		}
 		else
 		{
@@ -2192,7 +2192,7 @@ protected:
 		// ___kind___()
 		if (root)
 		{
-			river.write_string("\ttemplate <typename ___cat_a___ = _cat, typename ___kind_a___ = _kind>\n");
+			river.write_string("\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = _kind>\n");
 		}
 		else
 		{
@@ -2232,7 +2232,7 @@ protected:
 		// ___kinds___()
 		if (root)
 		{
-			river.write_string("\ttemplate <typename ___cat_a___ = _cat, typename ___kind_a___ = _kind, typename ___unordered_herd_a___ = unordered_herd_a<>>\n");
+			river.write_string("\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = _kind, typename ___unordered_herd_a___ = unordered_herd_a<>>\n");
 		}
 		else
 		{

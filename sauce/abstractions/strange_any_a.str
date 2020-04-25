@@ -2,7 +2,6 @@ false &&
 {	strange :
 	{	<any> :: abstraction
 		(	// dimensions
-			#cat :<<cat>># <cat>,
 			#kind :<<kind>># <kind>,
 			(	// no parent
 				{
@@ -13,9 +12,9 @@ false &&
 					// reflection
 					type_ :# (<symbol>),
 
-					cat_ :# (<#cat>),
+					cat_ :# (<cat>),
 
-					cats_ :# (<unordered_herd>), //TODO <herd[<#cat>]>
+					cats_ :# (<unordered_herd>), //TODO <herd[<cat>]>
 
 					kind_ :# (<#kind>),
 
