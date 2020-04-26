@@ -20,21 +20,21 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_shared_insert::create not passed any terms");
+			throw dis(token.report() + "strange::expression_shared_insert::create not passed any terms");
 		}
 		any_a<> key = *it;
 		if (!check<symbol_a<>>(key))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_shared_insert::create passed non-symbol key");
+			throw dis(token.report() + "strange::expression_shared_insert::create passed non-symbol key");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_shared_insert::create not passed sufficient terms");
+			throw dis(token.report() + "strange::expression_shared_insert::create not passed sufficient terms");
 		}
 		any_a<> kind = *it;
 		if (!check<kind_a<>>(kind) && !check<expression_a<>>(kind))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_shared_insert::create passed non-kind/expression");
+			throw dis(token.report() + "strange::expression_shared_insert::create passed non-kind/expression");
 		}
 		if (++it == terms.extract_end_())
 		{
@@ -43,7 +43,7 @@ public:
 		any_a<> expression = *it;
 		if (!check<expression_a<>>(expression))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_shared_insert::create passed non-expression");
+			throw dis(token.report() + "strange::expression_shared_insert::create passed non-expression");
 		}
 		return expression_a<>::create<expression_shared_insert_t<>>(token, terms, fast<symbol_a<>>(key), kind, fast<expression_a<>>(expression));
 	}
@@ -66,19 +66,19 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_shared_insert::operate passed non-unordered-shoal local");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_insert::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto& local = static_cast<unordered_shoal_a<>&>(thing).mutate_map();
 		auto lit = local.find(sym("$"));
 		if (lit == local.end())
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_shared_insert::operate $ not found");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_insert::operate $ not found");
 		}
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(lit->second))
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_shared_insert::operate passed non-unordered-shoal shared");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_insert::operate passed non-unordered-shoal shared");
 		}
 #endif
 		auto& shared = static_cast<unordered_shoal_a<>&>(lit->second);
@@ -106,13 +106,13 @@ public:
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
-				throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_shared_insert::operate kind expression evaluation error") + misunderstanding;
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_insert::operate kind expression evaluation error") + misunderstanding;
 			}
 		}
 		auto value = any_a<>::val(_expression.operate(thing, list));
 		if (!value.kinds_().has_(kind))
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_shared_insert::operate kind does not include value");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_insert::operate kind does not include value");
 		}
 		unordered_map.emplace(_key, value);
 		return value;
@@ -163,7 +163,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_shared_insert::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_insert::generate_cpp called for wrong type of expression");
 		}
 		//TODO remove $ prefix
 		// river.write_string(" static " + _kind.code() + " " + fast<symbol_a<>>(_key).to_string() + " =");

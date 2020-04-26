@@ -25,7 +25,7 @@ public:
 		auto const order = *it;
 		if (!check<number_data_a<int64_t>>(order))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_kind::create passed non-int-64 order");
+			throw dis(token.report() + "strange::expression_kind::create passed non-int-64 order");
 		}
 		if (++it == terms.extract_end_())
 		{
@@ -34,7 +34,7 @@ public:
 		auto const name = *it;
 		if (!check<symbol_a<>>(name))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_kind::create passed non-symbol name");
+			throw dis(token.report() + "strange::expression_kind::create passed non-symbol name");
 		}
 		if (++it == terms.extract_end_())
 		{
@@ -43,7 +43,7 @@ public:
 		auto const dimensions = *it;
 		if (!check<expression_a<>>(dimensions))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_kind::create passed non-expression dimensions");
+			throw dis(token.report() + "strange::expression_kind::create passed non-expression dimensions");
 		}
 		if (++it == terms.extract_end_())
 		{
@@ -52,7 +52,7 @@ public:
 		auto const aspects = *it;
 		if (!check<expression_a<>>(aspects))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_kind::create passed non-expression aspects");
+			throw dis(token.report() + "strange::expression_kind::create passed non-expression aspects");
 		}
 		if (++it == terms.extract_end_())
 		{
@@ -61,7 +61,7 @@ public:
 		auto const parameters = *it;
 		if (!check<expression_a<>>(parameters))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_kind::create passed non-expression parameters");
+			throw dis(token.report() + "strange::expression_kind::create passed non-expression parameters");
 		}
 		if (++it == terms.extract_end_())
 		{
@@ -70,7 +70,7 @@ public:
 		auto const result = *it;
 		if (!check<expression_a<>>(result))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_kind::create passed non-expression result");
+			throw dis(token.report() + "strange::expression_kind::create passed non-expression result");
 		}
 		if (++it == terms.extract_end_())
 		{
@@ -124,7 +124,7 @@ public:
 		auto const expression = *it;
 		if (!check<expression_a<>>(expression))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_kind::create passed non-expression");
+			throw dis(token.report() + "strange::expression_kind::create passed non-expression");
 		}
 		return create(token, terms,
 			fast<number_data_a<int64_t>>(order),
@@ -193,7 +193,7 @@ public:
 			auto const any_kind = _expression.operate(thing, list);
 			if (!check<kind_a<>>(any_kind))
 			{
-				throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_kind::operate expression did not return a kind");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::operate expression did not return a kind");
 			}
 			auto const kind = fast<kind_a<>>(any_kind);
 			return kind_t<>::create_(number_int_64_t<>::create(kind.order() + _order.extract_primitive()), kind.name_(), kind.dimensions_(), kind.aspects_(), kind.parameters_(), kind.result_(), _fixed, _reference, _optional);
@@ -201,7 +201,7 @@ public:
 		auto const dimensions = _dimensions.operate(thing, list);
 		if (!check<flock_a<>>(dimensions))
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_kind::operate dimensions are not a flock");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::operate dimensions are not a flock");
 		}
 		if (_count == 3)
 		{
@@ -210,7 +210,7 @@ public:
 		auto const aspects = _aspects.operate(thing, list);
 		if (!check<flock_a<>>(aspects))
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_kind::operate aspects are not a flock");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::operate aspects are not a flock");
 		}
 		if (_count == 4)
 		{
@@ -219,7 +219,7 @@ public:
 		auto const parameters = _parameters.operate(thing, list);
 		if (!check<flock_a<>>(parameters))
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_kind::operate parameters are not a flock");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::operate parameters are not a flock");
 		}
 		if (_count == 5)
 		{
@@ -228,7 +228,7 @@ public:
 		auto const result = _result.operate(thing, list);
 		if (!check<symbol_a<>>(result))
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_kind::operate result is not a symbol");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::operate result is not a symbol");
 		}
 		return kind_t<>::create_(_order, _name, fast<flock_a<>>(dimensions), fast<flock_a<>>(aspects), fast<flock_a<>>(parameters), fast<symbol_a<>>(result), _fixed, _reference, _optional);
 	}
@@ -363,7 +363,7 @@ public:
 		if (_count == 10)
 		{
 			//TODO _count == 10 : _expression
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_kind::generate_cpp expression kind expression not implemented yet");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::generate_cpp expression kind expression not implemented yet");
 		}
 		river.write_string(" strange::kind_t<>::create(\"" + std_to_string(_order) + ", " + _name.to_string() + "\"");
 		if (_count >= 3)

@@ -20,21 +20,21 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_intimate::create passed empty range");
+			throw dis(token.report() + "strange::expression_intimate::create passed empty range");
 		}
 		auto member = *it;
 		if (!check<symbol_a<>>(member))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_intimate::create passed non-symbol member term");
+			throw dis(token.report() + "strange::expression_intimate::create passed non-symbol member term");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_intimate::create passed short range");
+			throw dis(token.report() + "strange::expression_intimate::create passed short range");
 		}
 		auto arguments = *it;
 		if (!check<flock_a<>>(arguments))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_intimate::create passed non-flock arguments");
+			throw dis(token.report() + "strange::expression_intimate::create passed non-flock arguments");
 		}
 		return expression_substitute_t<expression_intimate_t<>>::create(expression_intimate_t<>(token, terms, fast<symbol_a<>>(member), fast<flock_a<>>(arguments)));
 	}
@@ -57,14 +57,14 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_intimate::operate passed non-unordered-shoal local");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto& local = const_cast<std_unordered_map<any_a<>, any_a<>>&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
 		auto it = local.find(sym("^"));
 		if (it == local.end())
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_intimate::operate ^ not found");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate::operate ^ not found");
 		}
 		return any_c<>::intimate(it->second, _member, range_operator_t<>::create_(_arguments, thing, list));
 	}
@@ -112,7 +112,7 @@ public:
 			{
 				if (!check<expression_a<>>(argument))
 				{
-					throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_intimate::generate_cpp with non-expression argument");
+					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate::generate_cpp with non-expression argument");
 				}
 				fast<expression_a<>>(argument).generate_cpp(version, indent, river, declare, define);
 			}
@@ -120,7 +120,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_intimate::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" intimate ");
 	}

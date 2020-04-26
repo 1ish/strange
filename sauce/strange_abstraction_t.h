@@ -110,12 +110,12 @@ public:
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
-					throw dis(__FILE__, __LINE__, _token.report() + "strange::abstraction::operate kind expression evaluation error") + misunderstanding;
+					throw dis(_token.report() + "strange::abstraction::operate kind expression evaluation error") + misunderstanding;
 				}
 			}
 			if (!check<kind_a<>>(any_kind))
 			{
-				throw dis(__FILE__, __LINE__, _token.report() + "strange::abstraction::operate non-kind dimension kind");
+				throw dis(_token.report() + "strange::abstraction::operate non-kind dimension kind");
 			}
 			auto const kind = fast<kind_a<>>(any_kind);
 
@@ -126,20 +126,20 @@ public:
 				++ait;
 				if (!argument.kinds_().has_(kind))
 				{
-					throw dis(__FILE__, __LINE__, _token.report() + "strange::abstraction::operate kind does not include argument");
+					throw dis(_token.report() + "strange::abstraction::operate kind does not include argument");
 				}
 				aspects.emplace(name, argument);
 				local.emplace(name, argument);
 			}
 			else if (!kind.optional())
 			{
-				throw dis(__FILE__, __LINE__, _token.report() + "strange::abstraction::operate not passed enough arguments");
+				throw dis(_token.report() + "strange::abstraction::operate not passed enough arguments");
 			}
 			else
 			{
 				if (!def.kinds_().has_(kind))
 				{
-					throw dis(__FILE__, __LINE__, _token.report() + "strange::abstraction::operate kind does not include argument");
+					throw dis(_token.report() + "strange::abstraction::operate kind does not include argument");
 				}
 				aspects.emplace(name, def);
 				local.emplace(name, def);
@@ -173,7 +173,7 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (operation.type_() != type_())
 		{
-			throw dis(__FILE__, __LINE__, _token.report() + "strange::abstraction::assign passed non-abstraction operation");
+			throw dis(_token.report() + "strange::abstraction::assign passed non-abstraction operation");
 		}
 #endif
 		auto const& other = static_cast<abstraction_t<> const&>(operation.extract_thing());

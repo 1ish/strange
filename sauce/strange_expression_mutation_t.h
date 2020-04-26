@@ -21,12 +21,12 @@ public:
 		auto end = terms.extract_end_();
 		if (it == end)
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_mutation::create not passed any terms");
+			throw dis(token.report() + "strange::expression_mutation::create not passed any terms");
 		}
 		auto const scope = *it;
 		if (!check<symbol_a<>>(scope))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_mutation::create passed non-symbol scope");
+			throw dis(token.report() + "strange::expression_mutation::create passed non-symbol scope");
 		}
 		auto names = flock_t<>::create_();
 		auto kinds = flock_t<>::create_();
@@ -40,7 +40,7 @@ public:
 			at_end = ++it == end;
 			if (!check<expression_a<>>(term))
 			{
-				throw dis(__FILE__, __LINE__, token.report() + "strange::expression_mutation::create passed non-expression term");
+				throw dis(token.report() + "strange::expression_mutation::create passed non-expression term");
 			}
 			if (at_end) // expression
 			{
@@ -51,14 +51,14 @@ public:
 			if (!term.type_().is("strange::expression_local_at") &&
 				!term.type_().is("strange::expression_local_insert"))
 			{
-				throw dis(__FILE__, __LINE__, token.report() + "strange::expression_mutation::create passed invalid parameter term");
+				throw dis(token.report() + "strange::expression_mutation::create passed invalid parameter term");
 			}
 			auto const subterms = fast<expression_a<>>(term).terms_();
 			int64_t const count = subterms.size();
 			auto const name = subterms.at_index(0);
 			if (!check<symbol_a<>>(name))
 			{
-				throw dis(__FILE__, __LINE__, token.report() + "strange::expression_mutation::create passed non-symbol parameter name");
+				throw dis(token.report() + "strange::expression_mutation::create passed non-symbol parameter name");
 			}
 			names.push_back(name);
 			if (count == 1)
@@ -70,7 +70,7 @@ public:
 				auto const kind = subterms.at_index(1);
 				if (!check<kind_a<>>(kind) && !check<expression_a<>>(kind))
 				{
-					throw dis(__FILE__, __LINE__, token.report() + "strange::expression_mutation::create passed non-kind/expression parameter kind");
+					throw dis(token.report() + "strange::expression_mutation::create passed non-kind/expression parameter kind");
 				}
 				kinds.push_back(kind);
 			}
@@ -79,7 +79,7 @@ public:
 				expression = subterms.at_index(2);
 				if (!check<expression_a<>>(expression))
 				{
-					throw dis(__FILE__, __LINE__, token.report() + "strange::expression_mutation::create passed non-expression parameter default");
+					throw dis(token.report() + "strange::expression_mutation::create passed non-expression parameter default");
 				}
 			}
 			else
@@ -174,7 +174,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_mutation::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_mutation::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" [](");
 		auto nit = _names.extract_vector().cbegin();
@@ -207,7 +207,7 @@ public:
 	{
 		if (_expression.type_() != expression_kind_t<>::type_())
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_mutation::abstraction called with wrong type of result expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_mutation::abstraction called with wrong type of result expression");
 		}
 		auto river = river_t<>::create();
 		_expression.generate_cpp(version, 0, river, false, false, true);
@@ -244,7 +244,7 @@ public:
 			}
 			else if (!check<kind_a<>>(any_kind))
 			{
-				throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_mutation::abstraction non-kind parameter kind");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_mutation::abstraction non-kind parameter kind");
 			}
 			else
 			{
@@ -324,7 +324,7 @@ public:
 			}
 			else if (!check<kind_a<>>(any_kind))
 			{
-				throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_extraction::abstraction_arguments non-kind parameter kind");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_extraction::abstraction_arguments non-kind parameter kind");
 			}
 			else
 			{

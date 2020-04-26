@@ -20,30 +20,30 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_invoke::create passed empty range");
+			throw dis(token.report() + "strange::expression_invoke::create passed empty range");
 		}
 		auto expression = *it;
 		if (!check<expression_a<>>(expression))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_invoke::create passed non-expression");
+			throw dis(token.report() + "strange::expression_invoke::create passed non-expression");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_invoke::create passed short range");
+			throw dis(token.report() + "strange::expression_invoke::create passed short range");
 		}
 		auto member = *it;
 		if (!check<symbol_a<>>(member))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_invoke::create passed non-symbol member");
+			throw dis(token.report() + "strange::expression_invoke::create passed non-symbol member");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_invoke::create passed short range");
+			throw dis(token.report() + "strange::expression_invoke::create passed short range");
 		}
 		auto list = *it;
 		if (!check<list_a<>>(list))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_invoke::create passed non-list");
+			throw dis(token.report() + "strange::expression_invoke::create passed non-list");
 		}
 		return expression_substitute_t<expression_invoke_t<>>::create(expression_invoke_t<>(token, terms, fast<expression_a<>>(expression), fast<symbol_a<>>(member), fast<list_a<>>(list)));
 	}
@@ -110,7 +110,7 @@ public:
 			}
 			if (!check<expression_a<>>(expression))
 			{
-				throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_invoke::generate with non-expression list term");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_invoke::generate with non-expression list term");
 			}
 			fast<expression_a<>>(expression).generate(version, indent, river);
 		}
@@ -132,7 +132,7 @@ public:
 			{
 				if (!check<expression_a<>>(expression))
 				{
-					throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_invoke::generate_cpp with non-expression argument");
+					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_invoke::generate_cpp with non-expression argument");
 				}
 				fast<expression_a<>>(expression).generate_cpp(version, indent, river, declare, define);
 			}
@@ -140,7 +140,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_invoke::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_invoke::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" (");
 		_expression.generate_cpp(version, indent, river, declare, define);
@@ -158,7 +158,7 @@ public:
 			}
 			if (!check<expression_a<>>(expression))
 			{
-				throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_invoke::generate with non-expression list term");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_invoke::generate with non-expression list term");
 			}
 			fast<expression_a<>>(expression).generate_cpp(version, indent, river, declare, define);
 		}

@@ -43,14 +43,14 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_me::operate passed non-unordered-shoal local");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_me::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto const& local = static_cast<unordered_shoal_a<>&>(thing).extract_map();
 		auto it = local.find(sym("^"));
 		if (it == local.cend())
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_me::operate ^ not found");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_me::operate ^ not found");
 		}
 		return it->second;
 	}
@@ -93,7 +93,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_me::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_me::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" me_() ");
 	}

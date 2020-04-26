@@ -20,21 +20,21 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_member::create passed empty range");
+			throw dis(token.report() + "strange::expression_member::create passed empty range");
 		}
 		auto thing = *it;
 		if (!check<expression_a<>>(thing))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_member::create passed non-expression thing term");
+			throw dis(token.report() + "strange::expression_member::create passed non-expression thing term");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_member::create passed short range");
+			throw dis(token.report() + "strange::expression_member::create passed short range");
 		}
 		auto member = *it;
 		if (!check<symbol_a<>>(member))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_member::create passed non-expression member term");
+			throw dis(token.report() + "strange::expression_member::create passed non-expression member term");
 		}
 		return expression_substitute_t<expression_member_t<>>::create(expression_member_t<>(token, terms, fast<expression_a<>>(thing), fast<symbol_a<>>(member)));
 	}
@@ -57,7 +57,7 @@ public:
 		auto const member = _thing.operate(thing, list).operations_().at_(_member);
 		if (!check<operation_a<>>(member))
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_member::operate with non-existent or non-operaton member");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_member::operate with non-existent or non-operaton member");
 		}
 		return member;
 	}
@@ -107,7 +107,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_member::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_member::generate_cpp called for wrong type of expression");
 		}
 		_thing.generate_cpp(version, indent, river, declare, define);
 		river.write_string(":." + _member.to_string());

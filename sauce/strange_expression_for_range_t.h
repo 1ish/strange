@@ -19,54 +19,54 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_for_range::create not passed any terms");
+			throw dis(token.report() + "strange::expression_for_range::create not passed any terms");
 		}
 		any_a<> scope = *it;
 		if (!check<symbol_a<>>(scope))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_for_range::create passed non-symbol scope");
+			throw dis(token.report() + "strange::expression_for_range::create passed non-symbol scope");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_for_range::create passed too few terms");
+			throw dis(token.report() + "strange::expression_for_range::create passed too few terms");
 		}
 		any_a<> term = *it;
 		if (!check<expression_a<>>(term))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_for_range::create passed non-expression term");
+			throw dis(token.report() + "strange::expression_for_range::create passed non-expression term");
 		}
 		if (!term.type_().is("strange::expression_local_insert"))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_for_range::create passed invalid parameter term");
+			throw dis(token.report() + "strange::expression_for_range::create passed invalid parameter term");
 		}
 		auto const subterms = fast<expression_a<>>(term).terms_();
 		if (subterms.size() != 3)
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_for_range::create passed invalid parameter term");
+			throw dis(token.report() + "strange::expression_for_range::create passed invalid parameter term");
 		}
 		auto const name = subterms.at_index(0);
 		if (!check<symbol_a<>>(name))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_for_range::create passed non-symbol parameter name");
+			throw dis(token.report() + "strange::expression_for_range::create passed non-symbol parameter name");
 		}
 		auto const kind = subterms.at_index(1);
 		if (!check<kind_a<>>(kind) && !check<expression_a<>>(kind))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_for_range::create passed non-kind/expression parameter kind");
+			throw dis(token.report() + "strange::expression_for_range::create passed non-kind/expression parameter kind");
 		}
 		auto const range = subterms.at_index(2);
 		if (!check<expression_a<>>(range))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_for_range::create passed non-expression parameter default");
+			throw dis(token.report() + "strange::expression_for_range::create passed non-expression parameter default");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_for_range::create not passed sufficient terms");
+			throw dis(token.report() + "strange::expression_for_range::create not passed sufficient terms");
 		}
 		auto const loop = *it;
 		if (!check<expression_a<>>(loop))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_for_range::create passed non-expression loop");
+			throw dis(token.report() + "strange::expression_for_range::create passed non-expression loop");
 		}
 		return expression_a<>::create<expression_for_range_t<>>(token, terms, fast<symbol_a<>>(name), kind, fast<expression_a<>>(range), fast<expression_a<>>(loop));
 	}
@@ -90,7 +90,7 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_for_range::operate passed non-unordered-shoal local");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_for_range::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto local_shoal = fast<unordered_shoal_a<>>(thing); // new block scope
@@ -104,19 +104,19 @@ public:
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
-				throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_for_range::operate kind expression evaluation error") + misunderstanding;
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_for_range::operate kind expression evaluation error") + misunderstanding;
 			}
 		}
 		if (!check<kind_a<>>(kind))
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_for_range::operate non-kind parameter kind");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_for_range::operate non-kind parameter kind");
 		}
 		auto it = local.emplace(_name, no()).first;
 		any_a<> result = no();
 		auto const for_range = _range.operate(local_shoal, list);
 		if (!check<list_a<>>(for_range))
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_for_range::operate expression returned non-range");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_for_range::operate expression returned non-range");
 		}
 		auto read_lock = check<collection_a<>>(for_range) ? fast<collection_a<>>(for_range).read_lock_() : no();
 		try
@@ -125,7 +125,7 @@ public:
 			{
 				if (!for_thing.kinds_().has_(kind))
 				{
-					throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_for_range::operate kind does not include value");
+					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_for_range::operate kind does not include value");
 				}
 				it->second = for_thing;
 				try
@@ -200,7 +200,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_for_range::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_for_range::generate_cpp called for wrong type of expression");
 		}
 		//river.write_string(" for(" + _kind.code() + " const& " + _name.to_string() + " : ");
 		_range.generate_cpp(version, indent, river, declare, define);

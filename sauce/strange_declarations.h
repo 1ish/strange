@@ -284,6 +284,9 @@ inline misunderstanding_a<> mis(F&& s);
 
 // disagreement
 template <typename F>
+inline misunderstanding_a<> dis(F&& s);
+
+template <typename F>
 inline misunderstanding_a<> dis(char const* file, int64_t line, F&& s);
 
 // native function

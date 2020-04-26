@@ -63,12 +63,12 @@ public:
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
-					throw dis(__FILE__, __LINE__, _token.report() + "strange::mutation::operate kind expression evaluation error") + misunderstanding;
+					throw dis(_token.report() + "strange::mutation::operate kind expression evaluation error") + misunderstanding;
 				}
 			}
 			if (!check<kind_a<>>(any_kind))
 			{
-				throw dis(__FILE__, __LINE__, _token.report() + "strange::mutation::operate non-kind parameter kind");
+				throw dis(_token.report() + "strange::mutation::operate non-kind parameter kind");
 			}
 			auto const kind = fast<kind_a<>>(any_kind);
 
@@ -80,7 +80,7 @@ public:
 					++ait;
 					if (!argument.kinds_().has_(kind))
 					{
-						throw dis(__FILE__, __LINE__, _token.report() + "strange::mutation::operate kind does not include argument");
+						throw dis(_token.report() + "strange::mutation::operate kind does not include argument");
 					}
 					local.emplace(*nit++, argument);
 				}
@@ -90,20 +90,20 @@ public:
 					++ait;
 					if (!argument.kinds_().has_(kind))
 					{
-						throw dis(__FILE__, __LINE__, _token.report() + "strange::mutation::operate kind does not include argument");
+						throw dis(_token.report() + "strange::mutation::operate kind does not include argument");
 					}
 					local.emplace(*nit++, argument);
 				}
 			}
 			else if (!kind.optional())
 			{
-				throw dis(__FILE__, __LINE__, _token.report() + "strange::mutation::operate not passed enough arguments");
+				throw dis(_token.report() + "strange::mutation::operate not passed enough arguments");
 			}
 			else
 			{
 				if (!def.kinds_().has_(kind))
 				{
-					throw dis(__FILE__, __LINE__, _token.report() + "strange::mutation::operate kind does not include default");
+					throw dis(_token.report() + "strange::mutation::operate kind does not include default");
 				}
 				local.emplace(*nit++, def);
 			}
@@ -129,7 +129,7 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (operation.type_() != type_())
 		{
-			throw dis(__FILE__, __LINE__, _token.report() + "strange::mutation::assign passed non-mutation operation");
+			throw dis(_token.report() + "strange::mutation::assign passed non-mutation operation");
 		}
 #endif
 		auto const& other = static_cast<mutation_t<> const&>(operation.extract_thing());

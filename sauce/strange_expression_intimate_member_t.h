@@ -20,12 +20,12 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_intimate_member_range::create passed empty range");
+			throw dis(token.report() + "strange::expression_intimate_member_range::create passed empty range");
 		}
 		auto member = *it;
 		if (!check<symbol_a<>>(member))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_intimate_member_range::create passed non-symbol member term");
+			throw dis(token.report() + "strange::expression_intimate_member_range::create passed non-symbol member term");
 		}
 		return expression_substitute_t<expression_intimate_member_t<>>::create(expression_intimate_member_t<>(token, terms, fast<symbol_a<>>(member)));
 	}
@@ -48,14 +48,14 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_intimate_member::operate passed non-unordered-shoal local");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_member::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto& local = const_cast<std_unordered_map<any_a<>, any_a<>>&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
 		auto it = local.find(sym("^"));
 		if (it == local.end())
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_intimate_member::operate ^ not found");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_member::operate ^ not found");
 		}
 		return any_c<>::intimate_member(it->second, _member);
 	}
@@ -103,7 +103,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_intimate_member::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_member::generate_cpp called for wrong type of expression");
 		}
 		river.write_string("." + _member.to_string());
 	}

@@ -20,12 +20,12 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_shared_at::create not passed any terms");
+			throw dis(token.report() + "strange::expression_shared_at::create not passed any terms");
 		}
 		any_a<> key = *it;
 		if (!check<symbol_a<>>(key))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_shared_at::create passed non-symbol key");
+			throw dis(token.report() + "strange::expression_shared_at::create passed non-symbol key");
 		}
 		return expression_a<>::create<expression_shared_at_t<>>(token, terms, fast<symbol_a<>>(key));
 	}
@@ -48,19 +48,19 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_shared_at::operate passed non-unordered-shoal local");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_at::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto& local = const_cast<std_unordered_map<any_a<>, any_a<>>&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
 		auto lit = local.find(sym("$"));
 		if (lit == local.end())
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_shared_at::operate $ not found");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_at::operate $ not found");
 		}
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(lit->second))
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_shared_at::operate passed non-unordered-shoal shared");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_at::operate passed non-unordered-shoal shared");
 		}
 #endif
 		auto& shared = static_cast<unordered_shoal_a<>&>(lit->second);
@@ -69,7 +69,7 @@ public:
 		auto it = map.find(_key);
 		if (it == map.end())
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_shared_at::operate key not found");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_at::operate key not found");
 		}
 		return any_a<>::ref(it->second);
 	}
@@ -117,7 +117,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_shared_at::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_at::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" " + fast<symbol_a<>>(_key).to_string() + " "); //TODO remove $ prefix
 	}

@@ -76,7 +76,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_break::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_break::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" break; ");
 	}

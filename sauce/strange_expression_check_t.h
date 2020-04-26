@@ -19,21 +19,21 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_check::create not passed any terms");
+			throw dis(token.report() + "strange::expression_check::create not passed any terms");
 		}
 		any_a<> scope = *it;
 		if (!check<symbol_a<>>(scope))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_check::create passed non-symbol scope");
+			throw dis(token.report() + "strange::expression_check::create passed non-symbol scope");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_check::create passed too few terms");
+			throw dis(token.report() + "strange::expression_check::create passed too few terms");
 		}
 		any_a<> thing = *it;
 		if (!check<expression_a<>>(thing))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_check::create passed non-expression thing term");
+			throw dis(token.report() + "strange::expression_check::create passed non-expression thing term");
 		}
 		if (++it == terms.extract_end_())
 		{
@@ -42,7 +42,7 @@ public:
 		any_a<> abstraction = *it;
 		if (!check<expression_a<>>(abstraction))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_check::create passed non-expression abstraction term");
+			throw dis(token.report() + "strange::expression_check::create passed non-expression abstraction term");
 		}
 		return expression_a<>::create<expression_check_t<>>(token, terms, fast<expression_a<>>(thing), fast<expression_a<>>(abstraction));
 	}
@@ -116,7 +116,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_check::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_check::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" strange::check<");
 		_abstraction.generate_cpp(version, indent, river, declare, define, true); // type

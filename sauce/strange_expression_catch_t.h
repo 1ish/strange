@@ -19,21 +19,21 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_catch::create not passed any terms");
+			throw dis(token.report() + "strange::expression_catch::create not passed any terms");
 		}
 		any_a<> scope = *it;
 		if (!check<symbol_a<>>(scope))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_catch::create passed non-symbol scope");
+			throw dis(token.report() + "strange::expression_catch::create passed non-symbol scope");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_catch::create passed too few terms");
+			throw dis(token.report() + "strange::expression_catch::create passed too few terms");
 		}
 		any_a<> try_expression = *it;
 		if (!check<expression_a<>>(try_expression))
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_catch::create passed non-expression try");
+			throw dis(token.report() + "strange::expression_catch::create passed non-expression try");
 		}
 		auto names = flock_t<>::create_();
 		auto kinds = flock_t<>::create_();
@@ -43,29 +43,29 @@ public:
 			auto const& term = *it;
 			if (!check<expression_a<>>(term))
 			{
-				throw dis(__FILE__, __LINE__, token.report() + "strange::expression_catch::create passed non-expression catch");
+				throw dis(token.report() + "strange::expression_catch::create passed non-expression catch");
 			}
 			if (!term.type_().is("strange::expression_local_insert"))
 			{
-				throw dis(__FILE__, __LINE__, token.report() + "strange::expression_catch::create passed invalid catch term");
+				throw dis(token.report() + "strange::expression_catch::create passed invalid catch term");
 			}
 			auto subterms = fast<expression_a<>>(term).terms_();
 			if (subterms.size() != 3)
 			{
-				throw dis(__FILE__, __LINE__, token.report() + "strange::expression_catch::create passed wrong number of subterms");
+				throw dis(token.report() + "strange::expression_catch::create passed wrong number of subterms");
 			}
 
 			auto name = subterms.at_index(0);
 			if (!check<symbol_a<>>(name))
 			{
-				throw dis(__FILE__, __LINE__, token.report() + "strange::expression_catch::create passed non-symbol");
+				throw dis(token.report() + "strange::expression_catch::create passed non-symbol");
 			}
 			names.push_back(name);
 
 			auto kind = subterms.at_index(1);
 			if (!check<kind_a<>>(kind) && !check<expression_a<>>(kind))
 			{
-				throw dis(__FILE__, __LINE__, token.report() + "strange::expression_catch::create passed non-kind/expression");
+				throw dis(token.report() + "strange::expression_catch::create passed non-kind/expression");
 			}
 			kinds.push_back(kind);
 
@@ -74,7 +74,7 @@ public:
 				auto const expression = subterms.at_index(2);
 				if (!check<expression_a<>>(expression))
 				{
-					throw dis(__FILE__, __LINE__, token.report() + "strange::expression_catch::create passed non-expression");
+					throw dis(token.report() + "strange::expression_catch::create passed non-expression");
 				}
 				expressions.push_back(expression);
 			}
@@ -105,7 +105,7 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_catch::operate passed non-unordered-shoal local");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_catch::operate passed non-unordered-shoal local");
 		}
 #endif
 		try
@@ -127,7 +127,7 @@ public:
 					}
 					catch (misunderstanding_a<>& misunderstanding)
 					{
-						throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_catch::operate kind expression returned non-kind") + misunderstanding;
+						throw dis(expression_t<___ego___>::_token.report() + "strange::expression_catch::operate kind expression returned non-kind") + misunderstanding;
 					}
 				}
 				if (exception.kinds_().has_(kind))
@@ -206,7 +206,7 @@ public:
 			{
 				if (!check<expression_a<>>(expression))
 				{
-					throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_catch::generate_cpp with non-expression");
+					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_catch::generate_cpp with non-expression");
 				}
 				fast<expression_a<>>(expression).generate_cpp(version, indent, river, declare, define);
 			}
@@ -214,7 +214,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_catch::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_catch::generate_cpp called for wrong type of expression");
 		}
 		river.write_string("try\n{\n");
 		_try_expression.generate_cpp(version, indent, river, declare, define);

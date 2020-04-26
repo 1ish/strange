@@ -162,7 +162,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(__FILE__, __LINE__, _token.report() + "strange::expression::generate_cpp called for wrong type of expression");
+			throw dis(_token.report() + "strange::expression::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" strange::no() ");
 	}

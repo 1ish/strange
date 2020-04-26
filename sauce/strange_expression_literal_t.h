@@ -20,7 +20,7 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_literal::create not passed any terms");
+			throw dis(token.report() + "strange::expression_literal::create not passed any terms");
 		}
 		return create(token, terms, *it);
 	}
@@ -175,7 +175,7 @@ public:
 		}
 		else
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_literal::generate with invalid thing");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_literal::generate with invalid thing");
 		}
 	}
 
@@ -193,7 +193,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_literal::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_literal::generate_cpp called for wrong type of expression");
 		}
 		if (!check<any_a<>>(_thing))
 		{
@@ -271,7 +271,7 @@ public:
 		}
 		else
 		{
-			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_literal::generate_cpp with invalid thing");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_literal::generate_cpp with invalid thing");
 		}
 	}
 

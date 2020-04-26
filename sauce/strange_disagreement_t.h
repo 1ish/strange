@@ -122,6 +122,12 @@ class ___disagreement_t_share___
 };
 
 template <typename F>
+inline misunderstanding_a<> dis(F&& s)
+{
+	return disagreement_t<>::create(std::forward<F>(s));
+}
+
+template <typename F>
 inline misunderstanding_a<> dis(char const* file, int64_t line, F&& s)
 {
 	return disagreement_t<>::create(file, line, std::forward<F>(s));
