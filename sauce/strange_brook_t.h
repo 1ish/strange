@@ -1015,9 +1015,9 @@ public:
 	{
 		item.from_string(type_().to_string() + "::unpack");
 		container.push_back(item); // unpack
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		if (number_u<_primitive_>::is_int())
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 			for (auto const& primitive : _deque)
 			{
 				item.from_int_64(number_u<_primitive_>::to_int_64(primitive));
@@ -1026,7 +1026,6 @@ public:
 		}
 		else
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 			for (auto const& primitive : _deque)
 			{
 				item.from_float_64(number_u<_primitive_>::to_float_64(primitive));

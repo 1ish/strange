@@ -1087,30 +1087,45 @@ public:
 
 	inline any_a<> close_()
 	{
+		return boole(close());
+	}
+
+	inline bool close()
+	{
 		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 		if (!_packet.is_finalized())
 		{
 			_packet.finalize();
-			return yes();
+			return true;
 		}
-		return no();
+		return false;
 	}
 
 	inline any_a<> closed_() const
 	{
+		return boole(closed());
+	}
+
+	inline bool closed() const
+	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return boole(_packet.is_finalized());
+		return _packet.is_finalized();
 	}
 
 	inline any_a<> reopen_()
+	{
+		return boole(reopen());
+	}
+
+	inline bool reopen()
 	{
 		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 		if (_packet.is_finalized())
 		{
 			_packet.definalize();
-			return yes();
+			return true;
 		}
-		return no();
+		return false;
 	}
 
 	inline container_a<> from_json_(lake_int8_a<> const& lake)
@@ -1274,14 +1289,13 @@ public:
 
 	inline void from_number(number_a<> const& number)
 	{
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 		if (number.is_int())
 		{
-			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_packet = dart_packet::make_integer(number.to_int_64());
 		}
 		else
 		{
-			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_packet = dart_packet::make_decimal(number.to_float_64());
 		}
 	}
@@ -1524,10 +1538,10 @@ public:
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		try
 		{
-		for (auto const& packet : _packet)
-		{
-			inventory.push_back(create(packet));
-		}
+			for (auto const& packet : _packet)
+			{
+				inventory.push_back(create(packet));
+			}
 		}
 		catch (std_exception& exception)
 		{

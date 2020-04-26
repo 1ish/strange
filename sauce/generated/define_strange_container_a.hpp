@@ -26,13 +26,19 @@ public:
 
 	inline any_a<> close_();
 
+	inline bool close();
+
 	inline any_a<> closed__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> closed_() const;
 
+	inline bool closed() const;
+
 	inline any_a<> reopen__(list_a<> const& ___arguments___);
 
 	inline any_a<> reopen_();
+
+	inline bool reopen();
 
 	inline any_a<> from_json__(list_a<> const& ___arguments___);
 
@@ -257,8 +263,11 @@ protected:
 		virtual any_a<> unpack_unique_(shoal_a<> const& shared_shoal, shoal_a<number_data_uint64_a<>, strange::any_a<>> & unique_shoal) const = 0;
 		virtual any_a < > unpack(shoal_a < > const & shared_shoal , any_a < > & unique_shoal ) const = 0;
 		virtual any_a<> close_() = 0;
+		virtual bool close() = 0;
 		virtual any_a<> closed_() const = 0;
+		virtual bool closed() const = 0;
 		virtual any_a<> reopen_() = 0;
+		virtual bool reopen() = 0;
 		virtual container_a<> from_json_(lake_int8_a<> const& lake) = 0;
 		virtual void from_json(std_string const & str ) = 0;
 		virtual lake_int8_a<> to_json_() const = 0;
@@ -358,9 +367,15 @@ protected:
 
 		virtual inline any_a<> close_() final;
 
+		virtual inline bool close() final;
+
 		virtual inline any_a<> closed_() const final;
 
+		virtual inline bool closed() const final;
+
 		virtual inline any_a<> reopen_() final;
+
+		virtual inline bool reopen() final;
 
 		virtual inline container_a<> from_json_(lake_int8_a<> const& lake) final;
 
@@ -750,6 +765,9 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *this));
 	}
 
+	inline bool close()
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::close() not available"); }
+
 	inline any_a<> closed__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___);
@@ -772,6 +790,9 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
 	}
 
+	inline bool closed() const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::closed() not available"); }
+
 	inline any_a<> reopen__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___);
@@ -793,6 +814,9 @@ public:
 		}
 		return cast<any_a<>>(variadic_operate(op, *this));
 	}
+
+	inline bool reopen()
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::reopen() not available"); }
 
 	inline any_a<> from_json__(list_a<> const& arguments)
 	{

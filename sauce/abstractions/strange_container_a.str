@@ -10,8 +10,11 @@ false &&
 					unpack : "any_a<> (shoal_a<> const& shared_shoal, any_a<>& unique_shoal) const",
 
 					close_ := (<>),
+					close : "bool ()",
 					closed_ :# (<>),
+					closed : "bool () const",
 					reopen_ := (<>),
+					reopen : "bool ()",
 
 					from_json_ := (lake :<lake_int8>#, <container>),
 					from_json : "void (std_string const& str) { from_json_(lake_from_string(str)); }",
