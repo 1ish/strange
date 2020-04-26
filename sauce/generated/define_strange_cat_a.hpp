@@ -287,7 +287,7 @@ public:
 		auto const op = any_a<>::operation("symbolic_");
 		if (!op)
 		{
-			throw dis("dynamic cat_d::symbolic_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic cat_d::symbolic_ passed non-existent member");
 		}
 		return op.operate(*const_cast<cat_d*>(this), arguments);
 	}
@@ -298,7 +298,7 @@ public:
 		auto const op = any_a<>::operation("symbolic_");
 		if (!op)
 		{
-			throw dis("dynamic cat_d::symbolic_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic cat_d::symbolic_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
@@ -312,7 +312,7 @@ public:
 		auto const op = any_a<>::operation("order_");
 		if (!op)
 		{
-			throw dis("dynamic cat_d::order_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic cat_d::order_ passed non-existent member");
 		}
 		return op.operate(*const_cast<cat_d*>(this), arguments);
 	}
@@ -323,7 +323,7 @@ public:
 		auto const op = any_a<>::operation("order_");
 		if (!op)
 		{
-			throw dis("dynamic cat_d::order_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic cat_d::order_ passed non-existent member");
 		}
 		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
@@ -337,7 +337,7 @@ public:
 		auto const op = any_a<>::operation("name_");
 		if (!op)
 		{
-			throw dis("dynamic cat_d::name_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic cat_d::name_ passed non-existent member");
 		}
 		return op.operate(*const_cast<cat_d*>(this), arguments);
 	}
@@ -348,7 +348,7 @@ public:
 		auto const op = any_a<>::operation("name_");
 		if (!op)
 		{
-			throw dis("dynamic cat_d::name_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic cat_d::name_ passed non-existent member");
 		}
 		return cast<symbol_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
@@ -362,7 +362,7 @@ public:
 		auto const op = any_a<>::operation("dimensions_");
 		if (!op)
 		{
-			throw dis("dynamic cat_d::dimensions_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic cat_d::dimensions_ passed non-existent member");
 		}
 		return op.operate(*const_cast<cat_d*>(this), arguments);
 	}
@@ -373,7 +373,7 @@ public:
 		auto const op = any_a<>::operation("dimensions_");
 		if (!op)
 		{
-			throw dis("dynamic cat_d::dimensions_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic cat_d::dimensions_ passed non-existent member");
 		}
 		return cast<flock_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
@@ -384,7 +384,7 @@ public:
 		auto const op = any_a<>::operation("parameters_");
 		if (!op)
 		{
-			throw dis("dynamic cat_d::parameters_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic cat_d::parameters_ passed non-existent member");
 		}
 		return op.operate(*const_cast<cat_d*>(this), arguments);
 	}
@@ -395,7 +395,7 @@ public:
 		auto const op = any_a<>::operation("parameters_");
 		if (!op)
 		{
-			throw dis("dynamic cat_d::parameters_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic cat_d::parameters_ passed non-existent member");
 		}
 		return cast<flock_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
@@ -406,7 +406,7 @@ public:
 		auto const op = any_a<>::operation("result_");
 		if (!op)
 		{
-			throw dis("dynamic cat_d::result_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic cat_d::result_ passed non-existent member");
 		}
 		return op.operate(*const_cast<cat_d*>(this), arguments);
 	}
@@ -417,7 +417,7 @@ public:
 		auto const op = any_a<>::operation("result_");
 		if (!op)
 		{
-			throw dis("dynamic cat_d::result_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic cat_d::result_ passed non-existent member");
 		}
 		return cast<cat_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
@@ -428,7 +428,7 @@ public:
 		auto const op = any_a<>::operation("code_");
 		if (!op)
 		{
-			throw dis("dynamic cat_d::code_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic cat_d::code_ passed non-existent member");
 		}
 		return op.operate(*const_cast<cat_d*>(this), arguments);
 	}
@@ -439,7 +439,7 @@ public:
 		auto const op = any_a<>::operation("code_");
 		if (!op)
 		{
-			throw dis("dynamic cat_d::code_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic cat_d::code_ passed non-existent member");
 		}
 		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}

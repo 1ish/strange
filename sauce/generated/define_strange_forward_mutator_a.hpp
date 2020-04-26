@@ -255,7 +255,7 @@ public:
 		auto const op = any_a<>::operation("get_");
 		if (!op)
 		{
-			throw dis("dynamic forward_mutator_d::get_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic forward_mutator_d::get_ passed non-existent member");
 		}
 		return op.operate(*const_cast<forward_mutator_d*>(this), arguments);
 	}
@@ -266,7 +266,7 @@ public:
 		auto const op = any_a<>::operation("get_");
 		if (!op)
 		{
-			throw dis("dynamic forward_mutator_d::get_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic forward_mutator_d::get_ passed non-existent member");
 		}
 		return cast<_element>(variadic_operate(op, *const_cast<forward_mutator_d*>(this)));
 	}
@@ -277,7 +277,7 @@ public:
 		auto const op = any_a<>::operation("set_");
 		if (!op)
 		{
-			throw dis("dynamic forward_mutator_d::set_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic forward_mutator_d::set_ passed non-existent member");
 		}
 		return op.operate(*const_cast<forward_mutator_d*>(this), arguments);
 	}
@@ -288,16 +288,16 @@ public:
 		auto const op = any_a<>::operation("set_");
 		if (!op)
 		{
-			throw dis("dynamic forward_mutator_d::set_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic forward_mutator_d::set_ passed non-existent member");
 		}
 		return cast<_element>(variadic_operate(op, *const_cast<forward_mutator_d*>(this), thing));
 	}
 
 	inline _element & operator*() const
-	{ throw dis("dynamic forward_mutator_d::operator*() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic forward_mutator_d::operator*() not available"); }
 
 	inline _element * operator->() const
-	{ throw dis("dynamic forward_mutator_d::operator->() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic forward_mutator_d::operator->() not available"); }
 
 	inline any_a<> increment__(list_a<> const& arguments)
 	{
@@ -305,7 +305,7 @@ public:
 		auto const op = any_a<>::operation("increment_");
 		if (!op)
 		{
-			throw dis("dynamic forward_mutator_d::increment_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic forward_mutator_d::increment_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -316,7 +316,7 @@ public:
 		auto const op = any_a<>::operation("increment_");
 		if (!op)
 		{
-			throw dis("dynamic forward_mutator_d::increment_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic forward_mutator_d::increment_ passed non-existent member");
 		}
 		return cast<forward_mutator_a< _element >>(variadic_operate(op, *this));
 	}

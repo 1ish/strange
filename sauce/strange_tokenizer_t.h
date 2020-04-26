@@ -534,12 +534,12 @@ public:
 		auto it = list.begin_();
 		if (it == list.end_())
 		{
-			throw dis("strange::tokenizer::create passed empty list");
+			throw dis(__FILE__, __LINE__, "strange::tokenizer::create passed empty list");
 		}
 		any_a<> river = *it;
 		if (!check<river_a<>>(river))
 		{
-			throw dis("strange::tokenizer::create passed non-river");
+			throw dis(__FILE__, __LINE__, "strange::tokenizer::create passed non-river");
 		}
 		return create_(fast<river_a<>>(river));
 	}

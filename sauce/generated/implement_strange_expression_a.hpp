@@ -93,17 +93,17 @@ inline any_a<> expression_a<_1>::generate__(list_a<> const& ___arguments___) con
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("expression_a::generate_ passed short range");
+		throw dis(__FILE__, __LINE__, "expression_a::generate_ passed short range");
 	}
 	auto version = cast<number_data_int64_a<>>(*___it___);
 	if (++___it___ == ___end___)
 	{
-		throw dis("expression_a::generate_ passed short range");
+		throw dis(__FILE__, __LINE__, "expression_a::generate_ passed short range");
 	}
 	auto indent = cast<number_data_int64_a<>>(*___it___);
 	if (++___it___ == ___end___)
 	{
-		throw dis("expression_a::generate_ passed short range");
+		throw dis(__FILE__, __LINE__, "expression_a::generate_ passed short range");
 	}
 	auto river = cast_dup<river_a<>>(*___it___);
 	return generate_(version, indent, river);
@@ -134,27 +134,27 @@ inline any_a<> expression_a<_1>::generate_cpp__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("expression_a::generate_cpp_ passed short range");
+		throw dis(__FILE__, __LINE__, "expression_a::generate_cpp_ passed short range");
 	}
 	auto version = cast<number_data_int64_a<>>(*___it___);
 	if (++___it___ == ___end___)
 	{
-		throw dis("expression_a::generate_cpp_ passed short range");
+		throw dis(__FILE__, __LINE__, "expression_a::generate_cpp_ passed short range");
 	}
 	auto indent = cast<number_data_int64_a<>>(*___it___);
 	if (++___it___ == ___end___)
 	{
-		throw dis("expression_a::generate_cpp_ passed short range");
+		throw dis(__FILE__, __LINE__, "expression_a::generate_cpp_ passed short range");
 	}
 	auto river = cast_dup<river_a<>>(*___it___);
 	if (++___it___ == ___end___)
 	{
-		throw dis("expression_a::generate_cpp_ passed short range");
+		throw dis(__FILE__, __LINE__, "expression_a::generate_cpp_ passed short range");
 	}
 	auto declare = cast<any_a<>>(*___it___);
 	if (++___it___ == ___end___)
 	{
-		throw dis("expression_a::generate_cpp_ passed short range");
+		throw dis(__FILE__, __LINE__, "expression_a::generate_cpp_ passed short range");
 	}
 	auto define = cast<any_a<>>(*___it___);
 	if (++___it___ == ___end___)

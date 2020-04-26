@@ -225,7 +225,7 @@ public:
 		auto const op = any_a<>::operation("parse_");
 		if (!op)
 		{
-			throw dis("dynamic parser_d::parse_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic parser_d::parse_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -236,7 +236,7 @@ public:
 		auto const op = any_a<>::operation("parse_");
 		if (!op)
 		{
-			throw dis("dynamic parser_d::parse_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic parser_d::parse_ passed non-existent member");
 		}
 		return cast<expression_a<>>(variadic_operate(op, *this, tokenizer));
 	}

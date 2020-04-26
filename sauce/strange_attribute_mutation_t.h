@@ -37,7 +37,7 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 				if (thing.type_().to_string().length() < 9 || thing.type_().to_string().substr(thing.type_().to_string().length() - 9) != "_creature")
 				{
-					throw dis("strange::attribute_mutation::operate passed non-creature thing");
+					throw dis(__FILE__, __LINE__, "strange::attribute_mutation::operate passed non-creature thing");
 				}
 #endif
 				auto& mut = static_cast<any_c<>&>(thing.mutate_thing());
@@ -48,7 +48,7 @@ public:
 				}
 				if (!value.kinds_().has(_kind))
 				{
-					throw dis("strange::attribute_mutation::operate passed wrong kind of thing");
+					throw dis(__FILE__, __LINE__, "strange::attribute_mutation::operate passed wrong kind of thing");
 				}
 				_thing = value;
 			}

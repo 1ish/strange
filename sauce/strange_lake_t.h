@@ -860,7 +860,7 @@ public:
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		if (_vector.empty())
 		{
-			throw dis("strange::lake::pop_back called on empty lake");
+			throw dis(__FILE__, __LINE__, "strange::lake::pop_back called on empty lake");
 		}
 		_primitive_ number = _vector.back();
 		_vector.pop_back();

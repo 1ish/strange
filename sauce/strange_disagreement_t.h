@@ -30,6 +30,12 @@ public:
 		return misunderstanding_a<>::create<disagreement_t<>>(std::forward<F>(s));
 	}
 
+	template <typename F>
+	static inline misunderstanding_a<> create(char const* file, int64_t line, F&& s)
+	{
+		return misunderstanding_a<>::create<disagreement_t<>>(file, line, std::forward<F>(s));
+	}
+
 	// reflection
 	static inline symbol_a<> type_()
 	{
@@ -86,6 +92,14 @@ protected:
 		, _string{ std::forward<F>(s) }
 	{}
 
+	template <typename F>
+	inline disagreement_t(char const* file, int64_t line, F&& s)
+		: nothing_t<___ego___>{}
+		, _string{ file
+			? ("[" + std_string(file) + ":" + std_to_string(line) + "]\n" + std_string(std::forward<F>(s)))
+			: std_string(std::forward<F>(s)) }
+	{}
+
 private:
 	static bool const ___share___;
 	friend class ___disagreement_t_share___;
@@ -108,19 +122,9 @@ class ___disagreement_t_share___
 };
 
 template <typename F>
-inline misunderstanding_a<> dis(F&& s)
+inline misunderstanding_a<> dis(char const* file, int64_t line, F&& s)
 {
-	return disagreement_t<>::create(std::forward<F>(s));
-}
-
-inline misunderstanding_a<> operator+(std_exception const& e, misunderstanding_a<> const& m)
-{
-	return dis(e.what()) + m;
-}
-
-inline misunderstanding_a<> operator+(misunderstanding_a<> const& m, std_exception const& e)
-{
-	return m + mis(e.what());
+	return disagreement_t<>::create(file, line, std::forward<F>(s));
 }
 
 } // namespace strange

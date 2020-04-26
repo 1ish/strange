@@ -273,40 +273,40 @@ class ordered_shoal_d : public shoal_d< _key , _value >
 {
 public:
 	inline bool operator==(ordered_shoal_a < _key , _value > const & shoal ) const
-	{ throw dis("dynamic ordered_shoal_d::operator==(shoal) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_shoal_d::operator==(shoal) not available"); }
 
 	inline bool operator!=(ordered_shoal_a < _key , _value > const & shoal ) const
-	{ throw dis("dynamic ordered_shoal_d::operator!=(shoal) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_shoal_d::operator!=(shoal) not available"); }
 
 	inline bool operator<(ordered_shoal_a < _key , _value > const & shoal ) const
-	{ throw dis("dynamic ordered_shoal_d::operator<(shoal) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_shoal_d::operator<(shoal) not available"); }
 
 	inline bool operator>(ordered_shoal_a < _key , _value > const & shoal ) const
-	{ throw dis("dynamic ordered_shoal_d::operator>(shoal) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_shoal_d::operator>(shoal) not available"); }
 
 	inline bool operator<=(ordered_shoal_a < _key , _value > const & shoal ) const
-	{ throw dis("dynamic ordered_shoal_d::operator<=(shoal) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_shoal_d::operator<=(shoal) not available"); }
 
 	inline bool operator>=(ordered_shoal_a < _key , _value > const & shoal ) const
-	{ throw dis("dynamic ordered_shoal_d::operator>=(shoal) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_shoal_d::operator>=(shoal) not available"); }
 
 	inline bidirectional_extractor_data_a < flock_a < > , typename std_map < _key , _value > :: const_iterator > extract_begin() const
-	{ throw dis("dynamic ordered_shoal_d::extract_begin() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_shoal_d::extract_begin() not available"); }
 
 	inline bidirectional_extractor_data_a < flock_a < > , typename std_map < _key , _value > :: const_iterator > extract_end() const
-	{ throw dis("dynamic ordered_shoal_d::extract_end() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_shoal_d::extract_end() not available"); }
 
 	inline bidirectional_mutator_data_a < flock_a < > , typename std_map < _key , _value > :: iterator > mutate_begin()
-	{ throw dis("dynamic ordered_shoal_d::mutate_begin() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_shoal_d::mutate_begin() not available"); }
 
 	inline bidirectional_mutator_data_a < flock_a < > , typename std_map < _key , _value > :: iterator > mutate_end()
-	{ throw dis("dynamic ordered_shoal_d::mutate_end() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_shoal_d::mutate_end() not available"); }
 
 	inline std_map < _key , _value > const & extract_map() const
-	{ throw dis("dynamic ordered_shoal_d::extract_map() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_shoal_d::extract_map() not available"); }
 
 	inline std_map < _key , _value > & mutate_map()
-	{ throw dis("dynamic ordered_shoal_d::mutate_map() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_shoal_d::mutate_map() not available"); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 

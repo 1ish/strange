@@ -282,7 +282,7 @@ public:
 		auto const op = any_a<>::operation("recreate_");
 		if (!op)
 		{
-			throw dis("dynamic expression_d::recreate_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic expression_d::recreate_ passed non-existent member");
 		}
 		return op.operate(*const_cast<expression_d*>(this), arguments);
 	}
@@ -293,7 +293,7 @@ public:
 		auto const op = any_a<>::operation("recreate_");
 		if (!op)
 		{
-			throw dis("dynamic expression_d::recreate_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic expression_d::recreate_ passed non-existent member");
 		}
 		return cast<expression_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
@@ -304,7 +304,7 @@ public:
 		auto const op = any_a<>::operation("literal_");
 		if (!op)
 		{
-			throw dis("dynamic expression_d::literal_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic expression_d::literal_ passed non-existent member");
 		}
 		return op.operate(*const_cast<expression_d*>(this), arguments);
 	}
@@ -315,7 +315,7 @@ public:
 		auto const op = any_a<>::operation("literal_");
 		if (!op)
 		{
-			throw dis("dynamic expression_d::literal_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic expression_d::literal_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
@@ -329,7 +329,7 @@ public:
 		auto const op = any_a<>::operation("evaluate_");
 		if (!op)
 		{
-			throw dis("dynamic expression_d::evaluate_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic expression_d::evaluate_ passed non-existent member");
 		}
 		return op.operate(*const_cast<expression_d*>(this), arguments);
 	}
@@ -340,7 +340,7 @@ public:
 		auto const op = any_a<>::operation("evaluate_");
 		if (!op)
 		{
-			throw dis("dynamic expression_d::evaluate_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic expression_d::evaluate_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
@@ -351,7 +351,7 @@ public:
 		auto const op = any_a<>::operation("token_");
 		if (!op)
 		{
-			throw dis("dynamic expression_d::token_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic expression_d::token_ passed non-existent member");
 		}
 		return op.operate(*const_cast<expression_d*>(this), arguments);
 	}
@@ -362,7 +362,7 @@ public:
 		auto const op = any_a<>::operation("token_");
 		if (!op)
 		{
-			throw dis("dynamic expression_d::token_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic expression_d::token_ passed non-existent member");
 		}
 		return cast<token_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
@@ -373,7 +373,7 @@ public:
 		auto const op = any_a<>::operation("terms_");
 		if (!op)
 		{
-			throw dis("dynamic expression_d::terms_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic expression_d::terms_ passed non-existent member");
 		}
 		return op.operate(*const_cast<expression_d*>(this), arguments);
 	}
@@ -384,7 +384,7 @@ public:
 		auto const op = any_a<>::operation("terms_");
 		if (!op)
 		{
-			throw dis("dynamic expression_d::terms_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic expression_d::terms_ passed non-existent member");
 		}
 		return cast<flock_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
@@ -395,7 +395,7 @@ public:
 		auto const op = any_a<>::operation("generate_");
 		if (!op)
 		{
-			throw dis("dynamic expression_d::generate_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic expression_d::generate_ passed non-existent member");
 		}
 		return op.operate(*const_cast<expression_d*>(this), arguments);
 	}
@@ -406,7 +406,7 @@ public:
 		auto const op = any_a<>::operation("generate_");
 		if (!op)
 		{
-			throw dis("dynamic expression_d::generate_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic expression_d::generate_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<expression_d*>(this), version, indent, river));
 	}
@@ -420,7 +420,7 @@ public:
 		auto const op = any_a<>::operation("generate_cpp_");
 		if (!op)
 		{
-			throw dis("dynamic expression_d::generate_cpp_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic expression_d::generate_cpp_ passed non-existent member");
 		}
 		return op.operate(*const_cast<expression_d*>(this), arguments);
 	}
@@ -431,7 +431,7 @@ public:
 		auto const op = any_a<>::operation("generate_cpp_");
 		if (!op)
 		{
-			throw dis("dynamic expression_d::generate_cpp_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic expression_d::generate_cpp_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<expression_d*>(this), version, indent, river, declare, define, type));
 	}

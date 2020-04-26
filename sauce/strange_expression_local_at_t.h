@@ -20,12 +20,12 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_local_at::create not passed any terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_local_at::create not passed any terms");
 		}
 		auto key = *it;
 		if (!check<symbol_a<>>(key))
 		{
-			throw dis(token.report() + "strange::expression_local_at::create passed non-symbol key");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_local_at::create passed non-symbol key");
 		}
 		return expression_a<>::create<expression_local_at_t<>>(token, terms, fast<symbol_a<>>(key));
 	}
@@ -48,14 +48,14 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_local_at::operate passed non-unordered-shoal local");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_local_at::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto& local = const_cast<std_unordered_map<any_a<>, any_a<>>&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
 		auto it = local.find(_key);
 		if (it == local.end())
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_local_at::operate key not found");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_local_at::operate key not found");
 		}
 		return any_a<>::ref(it->second);
 	}
@@ -103,7 +103,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_local_at::generate_cpp called for wrong type of expression");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_local_at::generate_cpp called for wrong type of expression");
 		}
 		auto const name = fast<symbol_a<>>(_key);
 		if (name.first_character() == '#')

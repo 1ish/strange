@@ -284,7 +284,7 @@ inline misunderstanding_a<> mis(F&& s);
 
 // disagreement
 template <typename F>
-inline misunderstanding_a<> dis(F&& s);
+inline misunderstanding_a<> dis(char const* file, int64_t line, F&& s);
 
 // native function
 using native_function_pointer = any_a<>(*)(list_a<> const&);

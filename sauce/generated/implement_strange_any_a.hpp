@@ -117,12 +117,12 @@ inline any_a<> any_a<_1>::visit__(list_a<> const& ___arguments___) const
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("any_a::visit_ passed short range");
+		throw dis(__FILE__, __LINE__, "any_a::visit_ passed short range");
 	}
 	auto arguments = cast_dup<inventory_a<>>(*___it___);
 	if (++___it___ == ___end___)
 	{
-		throw dis("any_a::visit_ passed short range");
+		throw dis(__FILE__, __LINE__, "any_a::visit_ passed short range");
 	}
 	auto index = cast<number_data_int64_a<>>(*___it___);
 	return visit_(arguments, index);
@@ -195,7 +195,7 @@ inline any_a<> any_a<_1>::identical__(list_a<> const& ___arguments___) const
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("any_a::identical_ passed short range");
+		throw dis(__FILE__, __LINE__, "any_a::identical_ passed short range");
 	}
 	auto thing = cast<any_a<>>(*___it___);
 	return identical_(thing);
@@ -274,7 +274,7 @@ inline any_a<> any_a<_1>::same__(list_a<> const& ___arguments___) const
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("any_a::same_ passed short range");
+		throw dis(__FILE__, __LINE__, "any_a::same_ passed short range");
 	}
 	auto thing = cast<any_a<>>(*___it___);
 	return same_(thing);
@@ -300,7 +300,7 @@ inline any_a<> any_a<_1>::different__(list_a<> const& ___arguments___) const
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("any_a::different_ passed short range");
+		throw dis(__FILE__, __LINE__, "any_a::different_ passed short range");
 	}
 	auto thing = cast<any_a<>>(*___it___);
 	return different_(thing);
@@ -321,7 +321,7 @@ inline any_a<> any_a<_1>::less_than__(list_a<> const& ___arguments___) const
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("any_a::less_than_ passed short range");
+		throw dis(__FILE__, __LINE__, "any_a::less_than_ passed short range");
 	}
 	auto thing = cast<any_a<>>(*___it___);
 	return less_than_(thing);
@@ -347,7 +347,7 @@ inline any_a<> any_a<_1>::greater_than__(list_a<> const& ___arguments___) const
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("any_a::greater_than_ passed short range");
+		throw dis(__FILE__, __LINE__, "any_a::greater_than_ passed short range");
 	}
 	auto thing = cast<any_a<>>(*___it___);
 	return greater_than_(thing);
@@ -373,7 +373,7 @@ inline any_a<> any_a<_1>::less_or_equal__(list_a<> const& ___arguments___) const
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("any_a::less_or_equal_ passed short range");
+		throw dis(__FILE__, __LINE__, "any_a::less_or_equal_ passed short range");
 	}
 	auto thing = cast<any_a<>>(*___it___);
 	return less_or_equal_(thing);
@@ -399,7 +399,7 @@ inline any_a<> any_a<_1>::greater_or_equal__(list_a<> const& ___arguments___) co
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("any_a::greater_or_equal_ passed short range");
+		throw dis(__FILE__, __LINE__, "any_a::greater_or_equal_ passed short range");
 	}
 	auto thing = cast<any_a<>>(*___it___);
 	return greater_or_equal_(thing);
@@ -458,7 +458,7 @@ inline any_a<> any_a<_1>::pack__(list_a<> const& ___arguments___) const
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("any_a::pack_ passed short range");
+		throw dis(__FILE__, __LINE__, "any_a::pack_ passed short range");
 	}
 	auto container = cast_dup<container_a<>>(*___it___);
 	return pack_(container);
@@ -487,12 +487,12 @@ inline any_a<> any_a<_1>::pack_unique__(list_a<> const& ___arguments___) const
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("any_a::pack_unique_ passed short range");
+		throw dis(__FILE__, __LINE__, "any_a::pack_unique_ passed short range");
 	}
 	auto container = cast_dup<container_a<>>(*___it___);
 	if (++___it___ == ___end___)
 	{
-		throw dis("any_a::pack_unique_ passed short range");
+		throw dis(__FILE__, __LINE__, "any_a::pack_unique_ passed short range");
 	}
 	auto unique_herd = cast_dup<herd_a<number_data_uint64_a<>>>(*___it___);
 	return pack_unique_(container, unique_herd);

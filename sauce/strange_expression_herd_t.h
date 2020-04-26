@@ -78,7 +78,7 @@ public:
 			}
 			if (!check<expression_a<>>(term))
 			{
-				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_herd::generate with non-expression term");
+				throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_herd::generate with non-expression term");
 			}
 			fast<expression_a<>>(term).generate(version, indent, river);
 		}
@@ -99,7 +99,7 @@ public:
 			{
 				if (!check<expression_a<>>(term))
 				{
-					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_flock::generate_cpp with non-expression term");
+					throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_flock::generate_cpp with non-expression term");
 				}
 				fast<expression_a<>>(term).generate_cpp(version, indent, river, declare, define);
 			}
@@ -107,7 +107,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_herd::generate_cpp called for wrong type of expression");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_herd::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" unordered_herd_t<>::create_(");
 		bool first = true;
@@ -123,7 +123,7 @@ public:
 			}
 			if (!check<expression_a<>>(term))
 			{
-				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_herd::generate_cpp with non-expression term");
+				throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_herd::generate_cpp with non-expression term");
 			}
 			fast<expression_a<>>(term).generate_cpp(version, indent, river, declare, define);
 		}

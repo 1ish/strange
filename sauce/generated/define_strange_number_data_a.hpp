@@ -271,10 +271,10 @@ public:
 	{ return greater_or_equal_(number); }
 
 	inline _primitive const & extract_primitive() const
-	{ throw dis("dynamic number_data_d::extract_primitive() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic number_data_d::extract_primitive() not available"); }
 
 	inline _primitive & mutate_primitive()
-	{ throw dis("dynamic number_data_d::mutate_primitive() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic number_data_d::mutate_primitive() not available"); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 

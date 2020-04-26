@@ -82,14 +82,14 @@ public:
 			}
 			if (!check<expression_a<>>(term))
 			{
-				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate::generate with non-expression term");
+				throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_operate::generate with non-expression term");
 			}
 			fast<expression_a<>>(term).generate(version, indent, river);
 			++count;
 		}
 		if (!count)
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate::generate with no terms");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_operate::generate with no terms");
 		}
 		else if (count == 1)
 		{
@@ -115,7 +115,7 @@ public:
 			{
 				if (!check<expression_a<>>(term))
 				{
-					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate::generate_cpp with non-expression term");
+					throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_operate::generate_cpp with non-expression term");
 				}
 				fast<expression_a<>>(term).generate_cpp(version, indent, river, declare, define);
 			}
@@ -123,7 +123,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate::generate_cpp called for wrong type of expression");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_operate::generate_cpp called for wrong type of expression");
 		}
 		int64_t count = 0;
 		for (auto const& term : _terms.extract_vector())
@@ -138,7 +138,7 @@ public:
 			}
 			if (!check<expression_a<>>(term))
 			{
-				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate::generate_cpp with non-expression term");
+				throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_operate::generate_cpp with non-expression term");
 			}
 			fast<expression_a<>>(term).generate_cpp(version, indent, river, declare, define);
 			++count;
@@ -162,12 +162,12 @@ protected:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_operate::create passed no terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_operate::create passed no terms");
 		}
 		auto any_thing = *it;
 		if (!check<expression_a<>>(any_thing))
 		{
-			throw dis(token.report() + "strange::expression_operate::create passed non-expression thing");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_operate::create passed non-expression thing");
 		}
 		auto expression_thing = fast<expression_a<>>(any_thing);
 		if (!expression_thing.literal())
@@ -178,12 +178,12 @@ protected:
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_operate::create passed too few terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_operate::create passed too few terms");
 		}
 		auto any_operation = *it;
 		if (!check<expression_a<>>(any_operation))
 		{
-			throw dis(token.report() + "strange::expression_operate::create passed non-expression operation");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_operate::create passed non-expression operation");
 		}
 		auto expression_operation = fast<expression_a<>>(any_operation);
 		if (!expression_operation.literal())

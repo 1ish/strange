@@ -273,40 +273,40 @@ class lake_d : public inventory_d< number_data_a< _primitive > >
 {
 public:
 	inline bool operator==(lake_a < _primitive > const & lake ) const
-	{ throw dis("dynamic lake_d::operator==(lake) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic lake_d::operator==(lake) not available"); }
 
 	inline bool operator!=(lake_a < _primitive > const & lake ) const
-	{ throw dis("dynamic lake_d::operator!=(lake) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic lake_d::operator!=(lake) not available"); }
 
 	inline bool operator<(lake_a < _primitive > const & lake ) const
-	{ throw dis("dynamic lake_d::operator<(lake) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic lake_d::operator<(lake) not available"); }
 
 	inline bool operator>(lake_a < _primitive > const & lake ) const
-	{ throw dis("dynamic lake_d::operator>(lake) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic lake_d::operator>(lake) not available"); }
 
 	inline bool operator<=(lake_a < _primitive > const & lake ) const
-	{ throw dis("dynamic lake_d::operator<=(lake) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic lake_d::operator<=(lake) not available"); }
 
 	inline bool operator>=(lake_a < _primitive > const & lake ) const
-	{ throw dis("dynamic lake_d::operator>=(lake) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic lake_d::operator>=(lake) not available"); }
 
 	inline random_access_extractor_data_a < number_data_a < _primitive > , typename std_vector < _primitive > :: const_iterator > extract_begin() const
-	{ throw dis("dynamic lake_d::extract_begin() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic lake_d::extract_begin() not available"); }
 
 	inline random_access_extractor_data_a < number_data_a < _primitive > , typename std_vector < _primitive > :: const_iterator > extract_end() const
-	{ throw dis("dynamic lake_d::extract_end() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic lake_d::extract_end() not available"); }
 
 	inline random_access_mutator_data_a < number_data_a < _primitive > , typename std_vector < _primitive > :: iterator > mutate_begin()
-	{ throw dis("dynamic lake_d::mutate_begin() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic lake_d::mutate_begin() not available"); }
 
 	inline random_access_mutator_data_a < number_data_a < _primitive > , typename std_vector < _primitive > :: iterator > mutate_end()
-	{ throw dis("dynamic lake_d::mutate_end() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic lake_d::mutate_end() not available"); }
 
 	inline std_vector < _primitive > const & extract_vector() const
-	{ throw dis("dynamic lake_d::extract_vector() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic lake_d::extract_vector() not available"); }
 
 	inline std_vector < _primitive > & mutate_vector()
-	{ throw dis("dynamic lake_d::mutate_vector() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic lake_d::mutate_vector() not available"); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 

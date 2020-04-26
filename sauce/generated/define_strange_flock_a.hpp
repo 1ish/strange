@@ -273,40 +273,40 @@ class flock_d : public inventory_d< _element >
 {
 public:
 	inline bool operator==(flock_a < _element > const & flock ) const
-	{ throw dis("dynamic flock_d::operator==(flock) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic flock_d::operator==(flock) not available"); }
 
 	inline bool operator!=(flock_a < _element > const & flock ) const
-	{ throw dis("dynamic flock_d::operator!=(flock) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic flock_d::operator!=(flock) not available"); }
 
 	inline bool operator<(flock_a < _element > const & flock ) const
-	{ throw dis("dynamic flock_d::operator<(flock) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic flock_d::operator<(flock) not available"); }
 
 	inline bool operator>(flock_a < _element > const & flock ) const
-	{ throw dis("dynamic flock_d::operator>(flock) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic flock_d::operator>(flock) not available"); }
 
 	inline bool operator<=(flock_a < _element > const & flock ) const
-	{ throw dis("dynamic flock_d::operator<=(flock) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic flock_d::operator<=(flock) not available"); }
 
 	inline bool operator>=(flock_a < _element > const & flock ) const
-	{ throw dis("dynamic flock_d::operator>=(flock) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic flock_d::operator>=(flock) not available"); }
 
 	inline random_access_extractor_data_a < _element , typename std_vector < _element > :: const_iterator > extract_begin() const
-	{ throw dis("dynamic flock_d::extract_begin() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic flock_d::extract_begin() not available"); }
 
 	inline random_access_extractor_data_a < _element , typename std_vector < _element > :: const_iterator > extract_end() const
-	{ throw dis("dynamic flock_d::extract_end() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic flock_d::extract_end() not available"); }
 
 	inline random_access_mutator_data_a < _element , typename std_vector < _element > :: iterator > mutate_begin()
-	{ throw dis("dynamic flock_d::mutate_begin() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic flock_d::mutate_begin() not available"); }
 
 	inline random_access_mutator_data_a < _element , typename std_vector < _element > :: iterator > mutate_end()
-	{ throw dis("dynamic flock_d::mutate_end() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic flock_d::mutate_end() not available"); }
 
 	inline std_vector < _element > const & extract_vector() const
-	{ throw dis("dynamic flock_d::extract_vector() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic flock_d::extract_vector() not available"); }
 
 	inline std_vector < _element > & mutate_vector()
-	{ throw dis("dynamic flock_d::mutate_vector() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic flock_d::mutate_vector() not available"); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 

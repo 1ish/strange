@@ -163,7 +163,7 @@ public:
 		_primitive_ num = number_u<_primitive_>::from_number(number);
 		if (num == 0)
 		{
-			throw dis("strange::number self_divide division by zero");
+			throw dis(__FILE__, __LINE__, "strange::number self_divide division by zero");
 		}
 		_number /= num;
 	}
@@ -173,7 +173,7 @@ public:
 		_primitive_ num = number_u<_primitive_>::from_number(number);
 		if (num == 0)
 		{
-			throw dis("strange::number / division by zero");
+			throw dis(__FILE__, __LINE__, "strange::number / division by zero");
 		}
 		return create(_number / num);
 	}
@@ -183,7 +183,7 @@ public:
 		_primitive_ num = number_u<_primitive_>::from_number(number);
 		if (num == 0)
 		{
-			throw dis("strange::number self_modulo division by zero");
+			throw dis(__FILE__, __LINE__, "strange::number self_modulo division by zero");
 		}
 		_number = number_u<_primitive_>::modulo(_number, num);
 	}
@@ -193,7 +193,7 @@ public:
 		_primitive_ num = number_u<_primitive_>::from_number(number);
 		if (num == 0)
 		{
-			throw dis("strange::number % division by zero");
+			throw dis(__FILE__, __LINE__, "strange::number % division by zero");
 		}
 		return create(number_u<_primitive_>::modulo(_number, num));
 	}

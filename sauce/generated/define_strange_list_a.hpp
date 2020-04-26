@@ -232,7 +232,7 @@ public:
 		auto const op = any_a<>::operation("begin_");
 		if (!op)
 		{
-			throw dis("dynamic list_d::begin_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic list_d::begin_ passed non-existent member");
 		}
 		return op.operate(*const_cast<list_d*>(this), arguments);
 	}
@@ -243,7 +243,7 @@ public:
 		auto const op = any_a<>::operation("begin_");
 		if (!op)
 		{
-			throw dis("dynamic list_d::begin_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic list_d::begin_ passed non-existent member");
 		}
 		return cast<forward_extractor_a< any_a<> >>(variadic_operate(op, *const_cast<list_d*>(this)));
 	}
@@ -254,7 +254,7 @@ public:
 		auto const op = any_a<>::operation("end_");
 		if (!op)
 		{
-			throw dis("dynamic list_d::end_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic list_d::end_ passed non-existent member");
 		}
 		return op.operate(*const_cast<list_d*>(this), arguments);
 	}
@@ -265,7 +265,7 @@ public:
 		auto const op = any_a<>::operation("end_");
 		if (!op)
 		{
-			throw dis("dynamic list_d::end_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic list_d::end_ passed non-existent member");
 		}
 		return cast<forward_extractor_a< any_a<> >>(variadic_operate(op, *const_cast<list_d*>(this)));
 	}

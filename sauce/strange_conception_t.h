@@ -59,7 +59,7 @@ public:
 			auto const type_any = type_op.operate(_, list_create());
 			if (!check<symbol_a<>>(type_any))
 			{
-				throw dis("strange::conception::create merge parent type returned non-symbol");
+				throw dis(__FILE__, __LINE__, "strange::conception::create merge parent type returned non-symbol");
 			}
 			type = fast<symbol_a<>>(type_any);
 		}
@@ -76,7 +76,7 @@ public:
 			auto const cat_any = cat_op.operate(_, list_create());
 			if (!check<cat_a<>>(cat_any))
 			{
-				throw dis("strange::conception::create merge parent cat returned non-cat");
+				throw dis(__FILE__, __LINE__, "strange::conception::create merge parent cat returned non-cat");
 			}
 			cat = fast<cat_a<>>(cat_any);
 		}
@@ -90,7 +90,7 @@ public:
 			cats_any = cats_op.operate(_, list_create());
 			if (!check<unordered_herd_a<>>(cats_any))
 			{
-				throw dis("strange::conception::create merge parent cats returned non-unordered-herd");
+				throw dis(__FILE__, __LINE__, "strange::conception::create merge parent cats returned non-unordered-herd");
 			}
 			cats += fast<unordered_herd_a<>>(cats_any);
 		}
@@ -106,7 +106,7 @@ public:
 			auto const kind_any = kind_op.operate(_, list_create());
 			if (!check<kind_a<>>(kind_any))
 			{
-				throw dis("strange::conception::create merge parent kind returned non-kind");
+				throw dis(__FILE__, __LINE__, "strange::conception::create merge parent kind returned non-kind");
 			}
 			kind = fast<kind_a<>>(kind_any);
 		}
@@ -126,7 +126,7 @@ public:
 			auto const kinds_any = kinds_op.operate(_, list_create());
 			if (!check<unordered_herd_a<>>(kinds_any))
 			{
-				throw dis("strange::conception::create merge parent kinds returned non-unordered-herd");
+				throw dis(__FILE__, __LINE__, "strange::conception::create merge parent kinds returned non-unordered-herd");
 			}
 			kinds += fast<unordered_herd_a<>>(kinds_any);
 		}
@@ -135,7 +135,7 @@ public:
 		{
 			if (!check<symbol_a<>>(member.first))
 			{
-				throw dis("strange::conception::create merge passed non-symbol key");
+				throw dis(__FILE__, __LINE__, "strange::conception::create merge passed non-symbol key");
 			}
 			auto key = fast<symbol_a<>>(member.first);
 			bool const intimate = key.first_character() == '_';
@@ -153,7 +153,7 @@ public:
 				// check overrides
 				if (intimate || !member.second.kinds_().has_(it->second.kind_()))
 				{
-					throw dis("strange::conception::create merge invalid override");
+					throw dis(__FILE__, __LINE__, "strange::conception::create merge invalid override");
 				}
 				it->second = member.second;
 			}
@@ -180,7 +180,7 @@ protected:
 		{
 			if (!check<unordered_shoal_a<>>(parent))
 			{
-				throw dis("strange::conception::create passed non-unordered-shoal parent");
+				throw dis(__FILE__, __LINE__, "strange::conception::create passed non-unordered-shoal parent");
 			}
 			merge(fast<unordered_shoal_a<>>(parent), type, cat, cats, kind, kinds);
 		}

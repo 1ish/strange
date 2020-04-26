@@ -19,12 +19,12 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_throw::create not passed any terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_throw::create not passed any terms");
 		}
 		any_a<> scope = *it;
 		if (!check<symbol_a<>>(scope))
 		{
-			throw dis(token.report() + "strange::expression_throw::create passed non-symbol scope");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_throw::create passed non-symbol scope");
 		}
 		if (++it == terms.extract_end_())
 		{
@@ -33,7 +33,7 @@ public:
 		any_a<> exception = *it;
 		if (!check<expression_a<>>(exception))
 		{
-			throw dis("strange::expression_throw::create passed non-expression exception");
+			throw dis(__FILE__, __LINE__, "strange::expression_throw::create passed non-expression exception");
 		}
 		return create(token, terms, fast<expression_a<>>(exception));
 	}
@@ -113,7 +113,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_throw::generate_cpp called for wrong type of expression");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_throw::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" throw(");
 		_exception.generate_cpp(version, indent, river, declare, define);

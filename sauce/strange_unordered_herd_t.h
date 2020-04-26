@@ -428,7 +428,7 @@ public:
 		typename std_unordered_set_element::const_iterator const it = _set.cbegin();
 		if (it == _set.cend())
 		{
-			throw dis("strange::unordered_herd::pop_back called on empty flock");
+			throw dis(__FILE__, __LINE__, "strange::unordered_herd::pop_back called on empty flock");
 		}
 		_element result = *it;
 		_set.erase(it);

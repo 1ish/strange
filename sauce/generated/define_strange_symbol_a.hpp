@@ -297,7 +297,7 @@ public:
 		auto const op = any_a<>::operation("to_lake_");
 		if (!op)
 		{
-			throw dis("dynamic symbol_d::to_lake_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic symbol_d::to_lake_ passed non-existent member");
 		}
 		return op.operate(*const_cast<symbol_d*>(this), arguments);
 	}
@@ -308,7 +308,7 @@ public:
 		auto const op = any_a<>::operation("to_lake_");
 		if (!op)
 		{
-			throw dis("dynamic symbol_d::to_lake_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic symbol_d::to_lake_ passed non-existent member");
 		}
 		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<symbol_d*>(this)));
 	}
@@ -328,7 +328,7 @@ public:
 		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
-			throw dis("dynamic symbol_d::add_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic symbol_d::add_ passed non-existent member");
 		}
 		return op.operate(*const_cast<symbol_d*>(this), arguments);
 	}
@@ -339,7 +339,7 @@ public:
 		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
-			throw dis("dynamic symbol_d::add_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic symbol_d::add_ passed non-existent member");
 		}
 		return cast<symbol_a<>>(variadic_operate(op, *const_cast<symbol_d*>(this), symbol));
 	}

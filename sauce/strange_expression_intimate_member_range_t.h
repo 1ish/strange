@@ -20,21 +20,21 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_intimate_member_range::create passed empty range");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_intimate_member_range::create passed empty range");
 		}
 		auto member = *it;
 		if (!check<symbol_a<>>(member))
 		{
-			throw dis(token.report() + "strange::expression_intimate_member_range::create passed non-symbol member term");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_intimate_member_range::create passed non-symbol member term");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_intimate_member_range::create passed short range");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_intimate_member_range::create passed short range");
 		}
 		auto range = *it;
 		if (!check<expression_a<>>(range))
 		{
-			throw dis(token.report() + "strange::expression_intimate_member_range::create passed non-expression range term");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_intimate_member_range::create passed non-expression range term");
 		}
 		return expression_substitute_t<expression_intimate_member_range_t<>>::create(expression_intimate_member_range_t<>(token, terms, fast<symbol_a<>>(member), fast<expression_a<>>(range)));
 	}
@@ -57,19 +57,19 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_member_range::operate passed non-unordered-shoal local");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_intimate_member_range::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto& local = const_cast<std_unordered_map<any_a<>, any_a<>>&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
 		auto it = local.find(sym("^"));
 		if (it == local.end())
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_member_range::operate ^ not found");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_intimate_member_range::operate ^ not found");
 		}
 		auto const range_term = _range.operate(thing, list);
 		if (!check<list_a<>>(range_term))
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_member_range::operate with non-range term");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_intimate_member_range::operate with non-range term");
 		}
 		return any_c<>::intimate(it->second, _member, fast<list_a<>>(range_term));
 	}
@@ -119,7 +119,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_member_range::generate_cpp called for wrong type of expression");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_intimate_member_range::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" me." + _member.to_string());
 		_range.generate_cpp(version, indent, river, declare, define);

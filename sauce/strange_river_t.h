@@ -137,12 +137,12 @@ public:
 		auto end = list.end_();
 		if (it == end)
 		{
-			throw dis("strange::river::file passed empty list");
+			throw dis(__FILE__, __LINE__, "strange::river::file passed empty list");
 		}
 		any_a<> const name = *it;
 		if (!check<lake_a<int8_t>>(name))
 		{
-			throw dis("strange::river::file passed non-lake-int-8");
+			throw dis(__FILE__, __LINE__, "strange::river::file passed non-lake-int-8");
 		}
 		if (++it == end)
 		{
@@ -227,7 +227,7 @@ public:
 	{
 		if (!_istream)
 		{
-			throw dis("strange::river::begin can only be called on input rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::begin can only be called on input rivers");
 		}
 		return extractor_t<any_a<>, std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{ *_istream });
 	}
@@ -242,7 +242,7 @@ public:
 	{
 		if (!_istream)
 		{
-			throw dis("strange::river::extract_begin can only be called on input rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::extract_begin can only be called on input rivers");
 		}
 		return extractor_t<any_a<>, std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{ *_istream });
 	}
@@ -251,7 +251,7 @@ public:
 	{
 		if (!_istream)
 		{
-			throw dis("strange::river::extract_begin can only be called on input rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::extract_begin can only be called on input rivers");
 		}
 		return extractor_t<any_a<>, std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{ *_istream });
 	}
@@ -296,7 +296,7 @@ public:
 	{
 		if (!_istream)
 		{
-			throw dis("strange::river::get can only be called on input rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::get can only be called on input rivers");
 		}
 		return int8_t(_istream->get());
 	}
@@ -310,7 +310,7 @@ public:
 	{
 		if (!_istream)
 		{
-			throw dis("strange::river::peek can only be called on input rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::peek can only be called on input rivers");
 		}
 		return int8_t(_istream->peek());
 	}
@@ -325,7 +325,7 @@ public:
 	{
 		if (!_istream)
 		{
-			throw dis("strange::river::unget can only be called on input rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::unget can only be called on input rivers");
 		}
 		_istream->unget();
 	}
@@ -340,7 +340,7 @@ public:
 	{
 		if (!_istream)
 		{
-			throw dis("strange::river::unget can only be called on input rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::unget can only be called on input rivers");
 		}
 		_istream->putback(char(int_8));
 	}
@@ -358,7 +358,7 @@ public:
 		}
 		if (!_istream)
 		{
-			throw dis("strange::river::getline can only be called on input rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::getline can only be called on input rivers");
 		}
 		if (count < 0)
 		{
@@ -382,7 +382,7 @@ public:
 	{
 		if (!_istream)
 		{
-			throw dis("strange::river::ignore can only be called on input rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::ignore can only be called on input rivers");
 		}
 		_istream->ignore(count);
 	}
@@ -400,7 +400,7 @@ public:
 		}
 		if (!_istream)
 		{
-			throw dis("strange::river::read can only be called on input rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::read can only be called on input rivers");
 		}
 		if (count < 0)
 		{
@@ -420,7 +420,7 @@ public:
 		}
 		if (!_istream)
 		{
-			throw dis("strange::river::read_string can only be called on input rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::read_string can only be called on input rivers");
 		}
 		if (count < 0)
 		{
@@ -441,7 +441,7 @@ public:
 	{
 		if (!_istream)
 		{
-			throw dis("strange::river::tellg can only be called on input rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::tellg can only be called on input rivers");
 		}
 		return _istream->tellg();
 	}
@@ -456,7 +456,7 @@ public:
 	{
 		if (!_istream)
 		{
-			throw dis("strange::river::seekg_beg can only be called on input rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::seekg_beg can only be called on input rivers");
 		}
 		_istream->seekg(offset, std_ios_base::beg);
 	}
@@ -471,7 +471,7 @@ public:
 	{
 		if (!_istream)
 		{
-			throw dis("strange::river::seekg_end can only be called on input rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::seekg_end can only be called on input rivers");
 		}
 		_istream->seekg(offset, std_ios_base::end);
 	}
@@ -486,7 +486,7 @@ public:
 	{
 		if (!_istream)
 		{
-			throw dis("strange::river::seekg_cur can only be called on input rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::seekg_cur can only be called on input rivers");
 		}
 		_istream->seekg(offset, std_ios_base::cur);
 	}
@@ -500,7 +500,7 @@ public:
 	{
 		if (!_istream)
 		{
-			throw dis("strange::river::sync can only be called on input rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::sync can only be called on input rivers");
 		}
 		return !_istream->sync();
 	}
@@ -516,7 +516,7 @@ public:
 	{
 		if (!_ostream)
 		{
-			throw dis("strange::river::put can only be called on output rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::put can only be called on output rivers");
 		}
 		_ostream->put(char(int_8));
 	}
@@ -535,7 +535,7 @@ public:
 		}
 		if (!_ostream)
 		{
-			throw dis("strange::river::write can only be called on output rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::write can only be called on output rivers");
 		}
 		_ostream->write(reinterpret_cast<char const*>(&lake[0]), int64_t(lake.size()));
 	}
@@ -548,7 +548,7 @@ public:
 		}
 		if (!_ostream)
 		{
-			throw dis("strange::river::write_string can only be called on output rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::write_string can only be called on output rivers");
 		}
 		_ostream->write(&str[0], int64_t(str.length()));
 	}
@@ -562,7 +562,7 @@ public:
 	{
 		if (!_ostream)
 		{
-			throw dis("strange::river::tellp can only be called on output rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::tellp can only be called on output rivers");
 		}
 		return _ostream->tellp();
 	}
@@ -577,7 +577,7 @@ public:
 	{
 		if (!_ostream)
 		{
-			throw dis("strange::river::seekp_beg can only be called on output rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::seekp_beg can only be called on output rivers");
 		}
 		_ostream->seekp(offset, std_ios_base::beg);
 	}
@@ -592,7 +592,7 @@ public:
 	{
 		if (!_ostream)
 		{
-			throw dis("strange::river::seekp_end can only be called on output rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::seekp_end can only be called on output rivers");
 		}
 		_ostream->seekp(offset, std_ios_base::end);
 	}
@@ -607,7 +607,7 @@ public:
 	{
 		if (!_ostream)
 		{
-			throw dis("strange::river::seekp_cur can only be called on output rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::seekp_cur can only be called on output rivers");
 		}
 		_ostream->seekp(offset, std_ios_base::cur);
 	}
@@ -622,7 +622,7 @@ public:
 	{
 		if (!_ostream)
 		{
-			throw dis("strange::river::flush can only be called on output rivers");
+			throw dis(__FILE__, __LINE__, "strange::river::flush can only be called on output rivers");
 		}
 		_ostream->flush();
 	}

@@ -231,7 +231,7 @@ public:
 		auto const op = any_a<>::operation("decrement_");
 		if (!op)
 		{
-			throw dis("dynamic bidirectional_mutator_d::decrement_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic bidirectional_mutator_d::decrement_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -242,7 +242,7 @@ public:
 		auto const op = any_a<>::operation("decrement_");
 		if (!op)
 		{
-			throw dis("dynamic bidirectional_mutator_d::decrement_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic bidirectional_mutator_d::decrement_ passed non-existent member");
 		}
 		return cast<bidirectional_mutator_a< _element >>(variadic_operate(op, *this));
 	}

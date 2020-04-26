@@ -272,7 +272,7 @@ public:
 		auto const op = any_a<>::operation("mutate_begin_");
 		if (!op)
 		{
-			throw dis("dynamic inventory_d::mutate_begin_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic inventory_d::mutate_begin_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -283,7 +283,7 @@ public:
 		auto const op = any_a<>::operation("mutate_begin_");
 		if (!op)
 		{
-			throw dis("dynamic inventory_d::mutate_begin_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic inventory_d::mutate_begin_ passed non-existent member");
 		}
 		return cast<random_access_mutator_a< _element >>(variadic_operate(op, *this));
 	}
@@ -294,7 +294,7 @@ public:
 		auto const op = any_a<>::operation("mutate_end_");
 		if (!op)
 		{
-			throw dis("dynamic inventory_d::mutate_end_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic inventory_d::mutate_end_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -305,7 +305,7 @@ public:
 		auto const op = any_a<>::operation("mutate_end_");
 		if (!op)
 		{
-			throw dis("dynamic inventory_d::mutate_end_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic inventory_d::mutate_end_ passed non-existent member");
 		}
 		return cast<random_access_mutator_a< _element >>(variadic_operate(op, *this));
 	}

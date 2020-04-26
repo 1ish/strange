@@ -47,7 +47,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>&, list_a<> const&) const
 	{
-		throw dis("strange::description::operate should not be called");
+		throw dis(__FILE__, __LINE__, "strange::description::operate should not be called");
 	}
 
 protected:

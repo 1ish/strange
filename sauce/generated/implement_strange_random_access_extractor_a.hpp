@@ -9,7 +9,7 @@ inline any_a<> random_access_extractor_a<_element>::self_add__(list_a<> const& _
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("random_access_extractor_a::self_add_ passed short range");
+		throw dis(__FILE__, __LINE__, "random_access_extractor_a::self_add_ passed short range");
 	}
 	auto number = cast<number_a<>>(*___it___);
 	return self_add_(number);
@@ -43,7 +43,7 @@ inline any_a<> random_access_extractor_a<_element>::add__(list_a<> const& ___arg
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("random_access_extractor_a::add_ passed short range");
+		throw dis(__FILE__, __LINE__, "random_access_extractor_a::add_ passed short range");
 	}
 	auto number = cast<number_a<>>(*___it___);
 	return add_(number);
@@ -69,7 +69,7 @@ inline any_a<> random_access_extractor_a<_element>::self_subtract__(list_a<> con
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("random_access_extractor_a::self_subtract_ passed short range");
+		throw dis(__FILE__, __LINE__, "random_access_extractor_a::self_subtract_ passed short range");
 	}
 	auto number = cast<number_a<>>(*___it___);
 	return self_subtract_(number);
@@ -103,7 +103,7 @@ inline any_a<> random_access_extractor_a<_element>::subtract__(list_a<> const& _
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("random_access_extractor_a::subtract_ passed short range");
+		throw dis(__FILE__, __LINE__, "random_access_extractor_a::subtract_ passed short range");
 	}
 	auto number = cast<number_a<>>(*___it___);
 	return subtract_(number);

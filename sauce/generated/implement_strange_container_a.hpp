@@ -9,7 +9,7 @@ inline any_a<> container_a<_1>::unpack__(list_a<> const& ___arguments___) const
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("container_a::unpack_ passed short range");
+		throw dis(__FILE__, __LINE__, "container_a::unpack_ passed short range");
 	}
 	auto shared_shoal = cast<shoal_a<>>(*___it___);
 	return unpack_(shared_shoal);
@@ -31,12 +31,12 @@ inline any_a<> container_a<_1>::unpack_unique__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("container_a::unpack_unique_ passed short range");
+		throw dis(__FILE__, __LINE__, "container_a::unpack_unique_ passed short range");
 	}
 	auto shared_shoal = cast<shoal_a<>>(*___it___);
 	if (++___it___ == ___end___)
 	{
-		throw dis("container_a::unpack_unique_ passed short range");
+		throw dis(__FILE__, __LINE__, "container_a::unpack_unique_ passed short range");
 	}
 	auto unique_shoal = cast_dup<shoal_a<number_data_uint64_a<>, strange::any_a<>>>(*___it___);
 	return unpack_unique_(shared_shoal, unique_shoal);
@@ -112,7 +112,7 @@ inline any_a<> container_a<_1>::from_json__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("container_a::from_json_ passed short range");
+		throw dis(__FILE__, __LINE__, "container_a::from_json_ passed short range");
 	}
 	auto lake = cast<lake_int8_a<>>(*___it___);
 	return from_json_(lake);
@@ -167,7 +167,7 @@ inline any_a<> container_a<_1>::from_binary__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("container_a::from_binary_ passed short range");
+		throw dis(__FILE__, __LINE__, "container_a::from_binary_ passed short range");
 	}
 	auto lake = cast<lake_int8_a<>>(*___it___);
 	return from_binary_(lake);
@@ -252,7 +252,7 @@ inline any_a<> container_a<_1>::from_boolean__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("container_a::from_boolean_ passed short range");
+		throw dis(__FILE__, __LINE__, "container_a::from_boolean_ passed short range");
 	}
 	auto boolean = cast<any_a<>>(*___it___);
 	return from_boolean_(boolean);
@@ -304,7 +304,7 @@ inline any_a<> container_a<_1>::from_number__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("container_a::from_number_ passed short range");
+		throw dis(__FILE__, __LINE__, "container_a::from_number_ passed short range");
 	}
 	auto number = cast<number_a<>>(*___it___);
 	return from_number_(number);
@@ -356,7 +356,7 @@ inline any_a<> container_a<_1>::from_int_64__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("container_a::from_int_64_ passed short range");
+		throw dis(__FILE__, __LINE__, "container_a::from_int_64_ passed short range");
 	}
 	auto number = cast<number_data_int64_a<>>(*___it___);
 	return from_int_64_(number);
@@ -408,7 +408,7 @@ inline any_a<> container_a<_1>::from_float_64__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("container_a::from_float_64_ passed short range");
+		throw dis(__FILE__, __LINE__, "container_a::from_float_64_ passed short range");
 	}
 	auto number = cast<number_data_double_a<>>(*___it___);
 	return from_float_64_(number);
@@ -460,7 +460,7 @@ inline any_a<> container_a<_1>::from_lake__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("container_a::from_lake_ passed short range");
+		throw dis(__FILE__, __LINE__, "container_a::from_lake_ passed short range");
 	}
 	auto lake = cast<lake_int8_a<>>(*___it___);
 	return from_lake_(lake);
@@ -512,7 +512,7 @@ inline any_a<> container_a<_1>::from_symbol__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("container_a::from_symbol_ passed short range");
+		throw dis(__FILE__, __LINE__, "container_a::from_symbol_ passed short range");
 	}
 	auto symbol = cast<symbol_a<>>(*___it___);
 	return from_symbol_(symbol);
@@ -549,7 +549,7 @@ inline any_a<> container_a<_1>::from_inventory__(list_a<> const& ___arguments___
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("container_a::from_inventory_ passed short range");
+		throw dis(__FILE__, __LINE__, "container_a::from_inventory_ passed short range");
 	}
 	auto inventory = cast<inventory_a<container_a<>>>(*___it___);
 	return from_inventory_(inventory);
@@ -586,7 +586,7 @@ inline any_a<> container_a<_1>::as_inventory__(list_a<> const& ___arguments___) 
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("container_a::as_inventory_ passed short range");
+		throw dis(__FILE__, __LINE__, "container_a::as_inventory_ passed short range");
 	}
 	auto inventory = cast_dup<inventory_a<container_a<>>>(*___it___);
 	return as_inventory_(inventory);
@@ -608,7 +608,7 @@ inline any_a<> container_a<_1>::from_herd__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("container_a::from_herd_ passed short range");
+		throw dis(__FILE__, __LINE__, "container_a::from_herd_ passed short range");
 	}
 	auto herd = cast<herd_a<symbol_a<>>>(*___it___);
 	return from_herd_(herd);
@@ -645,7 +645,7 @@ inline any_a<> container_a<_1>::as_herd__(list_a<> const& ___arguments___) const
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("container_a::as_herd_ passed short range");
+		throw dis(__FILE__, __LINE__, "container_a::as_herd_ passed short range");
 	}
 	auto herd = cast_dup<herd_a<symbol_a<>>>(*___it___);
 	return as_herd_(herd);
@@ -667,7 +667,7 @@ inline any_a<> container_a<_1>::from_shoal__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("container_a::from_shoal_ passed short range");
+		throw dis(__FILE__, __LINE__, "container_a::from_shoal_ passed short range");
 	}
 	auto shoal = cast<shoal_a<symbol_a<>, container_a<>>>(*___it___);
 	return from_shoal_(shoal);
@@ -704,7 +704,7 @@ inline any_a<> container_a<_1>::as_shoal__(list_a<> const& ___arguments___) cons
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("container_a::as_shoal_ passed short range");
+		throw dis(__FILE__, __LINE__, "container_a::as_shoal_ passed short range");
 	}
 	auto shoal = cast_dup<shoal_a<symbol_a<>, container_a<>>>(*___it___);
 	return as_shoal_(shoal);

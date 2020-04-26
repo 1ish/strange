@@ -807,7 +807,7 @@ public:
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		if (_vector.empty())
 		{
-			throw dis("strange::flock::pop_back called on empty flock");
+			throw dis(__FILE__, __LINE__, "strange::flock::pop_back called on empty flock");
 		}
 		_element result = _vector.back();
 		_vector.pop_back();

@@ -261,7 +261,7 @@ public:
 		auto const op = any_a<>::operation("aspects_");
 		if (!op)
 		{
-			throw dis("dynamic kind_d::aspects_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic kind_d::aspects_ passed non-existent member");
 		}
 		return op.operate(*const_cast<kind_d*>(this), arguments);
 	}
@@ -272,7 +272,7 @@ public:
 		auto const op = any_a<>::operation("aspects_");
 		if (!op)
 		{
-			throw dis("dynamic kind_d::aspects_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic kind_d::aspects_ passed non-existent member");
 		}
 		return cast<flock_a<>>(variadic_operate(op, *const_cast<kind_d*>(this)));
 	}
@@ -283,7 +283,7 @@ public:
 		auto const op = any_a<>::operation("fixed_");
 		if (!op)
 		{
-			throw dis("dynamic kind_d::fixed_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic kind_d::fixed_ passed non-existent member");
 		}
 		return op.operate(*const_cast<kind_d*>(this), arguments);
 	}
@@ -294,7 +294,7 @@ public:
 		auto const op = any_a<>::operation("fixed_");
 		if (!op)
 		{
-			throw dis("dynamic kind_d::fixed_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic kind_d::fixed_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<kind_d*>(this)));
 	}
@@ -308,7 +308,7 @@ public:
 		auto const op = any_a<>::operation("reference_");
 		if (!op)
 		{
-			throw dis("dynamic kind_d::reference_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic kind_d::reference_ passed non-existent member");
 		}
 		return op.operate(*const_cast<kind_d*>(this), arguments);
 	}
@@ -319,7 +319,7 @@ public:
 		auto const op = any_a<>::operation("reference_");
 		if (!op)
 		{
-			throw dis("dynamic kind_d::reference_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic kind_d::reference_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<kind_d*>(this)));
 	}
@@ -333,7 +333,7 @@ public:
 		auto const op = any_a<>::operation("optional_");
 		if (!op)
 		{
-			throw dis("dynamic kind_d::optional_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic kind_d::optional_ passed non-existent member");
 		}
 		return op.operate(*const_cast<kind_d*>(this), arguments);
 	}
@@ -344,7 +344,7 @@ public:
 		auto const op = any_a<>::operation("optional_");
 		if (!op)
 		{
-			throw dis("dynamic kind_d::optional_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic kind_d::optional_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<kind_d*>(this)));
 	}

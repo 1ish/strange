@@ -29,7 +29,7 @@ public:
 	{
 		if (list.begin_() != list.end_()) //TODO check when parsing instead
 		{
-			throw dis("strange::attribute_extraction passed non-empty list");
+			throw dis(__FILE__, __LINE__, "strange::attribute_extraction passed non-empty list");
 		}
 		return _thing;
 	}

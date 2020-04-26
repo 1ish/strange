@@ -509,7 +509,7 @@ public:
 		auto const op = any_a<>::operation("increment_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::increment_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::increment_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -520,7 +520,7 @@ public:
 		auto const op = any_a<>::operation("increment_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::increment_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::increment_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *this));
 	}
@@ -531,7 +531,7 @@ public:
 		auto const op = any_a<>::operation("decrement_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::decrement_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::decrement_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -542,7 +542,7 @@ public:
 		auto const op = any_a<>::operation("decrement_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::decrement_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::decrement_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *this));
 	}
@@ -553,7 +553,7 @@ public:
 		auto const op = any_a<>::operation("self_assign_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::self_assign_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::self_assign_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -564,7 +564,7 @@ public:
 		auto const op = any_a<>::operation("self_assign_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::self_assign_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::self_assign_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *this, number));
 	}
@@ -575,7 +575,7 @@ public:
 		auto const op = any_a<>::operation("self_add_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::self_add_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::self_add_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -586,7 +586,7 @@ public:
 		auto const op = any_a<>::operation("self_add_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::self_add_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::self_add_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *this, number));
 	}
@@ -597,7 +597,7 @@ public:
 		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::add_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::add_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -608,7 +608,7 @@ public:
 		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::add_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::add_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
@@ -619,7 +619,7 @@ public:
 		auto const op = any_a<>::operation("self_subtract_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::self_subtract_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::self_subtract_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -630,7 +630,7 @@ public:
 		auto const op = any_a<>::operation("self_subtract_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::self_subtract_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::self_subtract_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *this, number));
 	}
@@ -641,7 +641,7 @@ public:
 		auto const op = any_a<>::operation("subtract_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::subtract_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::subtract_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -652,7 +652,7 @@ public:
 		auto const op = any_a<>::operation("subtract_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::subtract_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::subtract_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
@@ -663,7 +663,7 @@ public:
 		auto const op = any_a<>::operation("self_multiply_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::self_multiply_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::self_multiply_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -674,7 +674,7 @@ public:
 		auto const op = any_a<>::operation("self_multiply_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::self_multiply_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::self_multiply_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *this, number));
 	}
@@ -685,7 +685,7 @@ public:
 		auto const op = any_a<>::operation("multiply_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::multiply_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::multiply_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -696,7 +696,7 @@ public:
 		auto const op = any_a<>::operation("multiply_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::multiply_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::multiply_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
@@ -707,7 +707,7 @@ public:
 		auto const op = any_a<>::operation("self_divide_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::self_divide_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::self_divide_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -718,7 +718,7 @@ public:
 		auto const op = any_a<>::operation("self_divide_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::self_divide_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::self_divide_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *this, number));
 	}
@@ -729,7 +729,7 @@ public:
 		auto const op = any_a<>::operation("divide_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::divide_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::divide_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -740,7 +740,7 @@ public:
 		auto const op = any_a<>::operation("divide_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::divide_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::divide_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
@@ -751,7 +751,7 @@ public:
 		auto const op = any_a<>::operation("self_modulo_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::self_modulo_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::self_modulo_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -762,7 +762,7 @@ public:
 		auto const op = any_a<>::operation("self_modulo_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::self_modulo_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::self_modulo_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *this, number));
 	}
@@ -773,7 +773,7 @@ public:
 		auto const op = any_a<>::operation("modulo_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::modulo_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::modulo_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -784,7 +784,7 @@ public:
 		auto const op = any_a<>::operation("modulo_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::modulo_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::modulo_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
@@ -795,7 +795,7 @@ public:
 		auto const op = any_a<>::operation("to_int_64_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::to_int_64_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::to_int_64_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -806,7 +806,7 @@ public:
 		auto const op = any_a<>::operation("to_int_64_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::to_int_64_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::to_int_64_ passed non-existent member");
 		}
 		return cast<_number_data_int64>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -820,7 +820,7 @@ public:
 		auto const op = any_a<>::operation("from_int_64_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::from_int_64_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::from_int_64_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -831,7 +831,7 @@ public:
 		auto const op = any_a<>::operation("from_int_64_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::from_int_64_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::from_int_64_ passed non-existent member");
 		}
 		return cast<number_a< _number_data_int64 , _number_data_uint64 , _number_data_double >>(variadic_operate(op, *this, int_64));
 	}
@@ -845,7 +845,7 @@ public:
 		auto const op = any_a<>::operation("to_uint_64_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::to_uint_64_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::to_uint_64_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -856,7 +856,7 @@ public:
 		auto const op = any_a<>::operation("to_uint_64_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::to_uint_64_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::to_uint_64_ passed non-existent member");
 		}
 		return cast<_number_data_uint64>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -870,7 +870,7 @@ public:
 		auto const op = any_a<>::operation("from_uint_64_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::from_uint_64_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::from_uint_64_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -881,7 +881,7 @@ public:
 		auto const op = any_a<>::operation("from_uint_64_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::from_uint_64_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::from_uint_64_ passed non-existent member");
 		}
 		return cast<number_a< _number_data_int64 , _number_data_uint64 , _number_data_double >>(variadic_operate(op, *this, uint_64));
 	}
@@ -895,7 +895,7 @@ public:
 		auto const op = any_a<>::operation("to_float_64_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::to_float_64_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::to_float_64_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -906,7 +906,7 @@ public:
 		auto const op = any_a<>::operation("to_float_64_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::to_float_64_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::to_float_64_ passed non-existent member");
 		}
 		return cast<_number_data_double>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -920,7 +920,7 @@ public:
 		auto const op = any_a<>::operation("from_float_64_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::from_float_64_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::from_float_64_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -931,7 +931,7 @@ public:
 		auto const op = any_a<>::operation("from_float_64_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::from_float_64_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::from_float_64_ passed non-existent member");
 		}
 		return cast<number_a< _number_data_int64 , _number_data_uint64 , _number_data_double >>(variadic_operate(op, *this, float_64));
 	}
@@ -945,7 +945,7 @@ public:
 		auto const op = any_a<>::operation("byte_size_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::byte_size_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::byte_size_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -956,7 +956,7 @@ public:
 		auto const op = any_a<>::operation("byte_size_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::byte_size_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::byte_size_ passed non-existent member");
 		}
 		return cast<_number_data_int64>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -970,7 +970,7 @@ public:
 		auto const op = any_a<>::operation("is_int_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::is_int_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::is_int_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -981,7 +981,7 @@ public:
 		auto const op = any_a<>::operation("is_int_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::is_int_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::is_int_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -995,7 +995,7 @@ public:
 		auto const op = any_a<>::operation("is_signed_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::is_signed_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::is_signed_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1006,7 +1006,7 @@ public:
 		auto const op = any_a<>::operation("is_signed_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::is_signed_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::is_signed_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -1020,7 +1020,7 @@ public:
 		auto const op = any_a<>::operation("is_nan_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::is_nan_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::is_nan_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1031,7 +1031,7 @@ public:
 		auto const op = any_a<>::operation("is_nan_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::is_nan_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::is_nan_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -1045,7 +1045,7 @@ public:
 		auto const op = any_a<>::operation("is_inf_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::is_inf_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::is_inf_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1056,7 +1056,7 @@ public:
 		auto const op = any_a<>::operation("is_inf_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::is_inf_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::is_inf_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -1070,7 +1070,7 @@ public:
 		auto const op = any_a<>::operation("is_finite_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::is_finite_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::is_finite_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1081,7 +1081,7 @@ public:
 		auto const op = any_a<>::operation("is_finite_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::is_finite_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::is_finite_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -1095,7 +1095,7 @@ public:
 		auto const op = any_a<>::operation("is_normal_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::is_normal_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::is_normal_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1106,7 +1106,7 @@ public:
 		auto const op = any_a<>::operation("is_normal_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::is_normal_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::is_normal_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -1120,7 +1120,7 @@ public:
 		auto const op = any_a<>::operation("little_endian_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::little_endian_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::little_endian_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1131,7 +1131,7 @@ public:
 		auto const op = any_a<>::operation("little_endian_");
 		if (!op)
 		{
-			throw dis("dynamic number_d::little_endian_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic number_d::little_endian_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}

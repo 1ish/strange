@@ -253,28 +253,28 @@ class random_access_extractor_data_d : public random_access_extractor_d< _elemen
 {
 public:
 	inline bool operator==(random_access_extractor_data_a < _element , _type > const & it ) const
-	{ throw dis("dynamic random_access_extractor_data_d::operator==(it) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic random_access_extractor_data_d::operator==(it) not available"); }
 
 	inline bool operator!=(random_access_extractor_data_a < _element , _type > const & it ) const
-	{ throw dis("dynamic random_access_extractor_data_d::operator!=(it) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic random_access_extractor_data_d::operator!=(it) not available"); }
 
 	inline bool operator<(random_access_extractor_data_a < _element , _type > const & it ) const
-	{ throw dis("dynamic random_access_extractor_data_d::operator<(it) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic random_access_extractor_data_d::operator<(it) not available"); }
 
 	inline bool operator>(random_access_extractor_data_a < _element , _type > const & it ) const
-	{ throw dis("dynamic random_access_extractor_data_d::operator>(it) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic random_access_extractor_data_d::operator>(it) not available"); }
 
 	inline bool operator<=(random_access_extractor_data_a < _element , _type > const & it ) const
-	{ throw dis("dynamic random_access_extractor_data_d::operator<=(it) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic random_access_extractor_data_d::operator<=(it) not available"); }
 
 	inline bool operator>=(random_access_extractor_data_a < _element , _type > const & it ) const
-	{ throw dis("dynamic random_access_extractor_data_d::operator>=(it) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic random_access_extractor_data_d::operator>=(it) not available"); }
 
 	inline _type const & extract_it() const
-	{ throw dis("dynamic random_access_extractor_data_d::extract_it() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic random_access_extractor_data_d::extract_it() not available"); }
 
 	inline _type & mutate_it()
-	{ throw dis("dynamic random_access_extractor_data_d::mutate_it() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic random_access_extractor_data_d::mutate_it() not available"); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 

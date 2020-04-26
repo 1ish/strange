@@ -9,7 +9,7 @@ inline any_a<> herd_a<_element>::update_thing__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("herd_a::update_thing_ passed short range");
+		throw dis(__FILE__, __LINE__, "herd_a::update_thing_ passed short range");
 	}
 	auto thing = cast< _element >(*___it___);
 	return update_thing_(thing);
@@ -40,7 +40,7 @@ inline any_a<> herd_a<_element>::insert_thing__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("herd_a::insert_thing_ passed short range");
+		throw dis(__FILE__, __LINE__, "herd_a::insert_thing_ passed short range");
 	}
 	auto thing = cast< _element >(*___it___);
 	return insert_thing_(thing);

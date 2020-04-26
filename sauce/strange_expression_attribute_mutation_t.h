@@ -20,33 +20,33 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_attribute_mutation::create passed no terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_attribute_mutation::create passed no terms");
 		}
 
 		auto const name = *it;
 		if (!check<symbol_a<>>(name))
 		{
-			throw dis(token.report() + "strange::expression_attribute_mutation::create passed non-symbol name");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_attribute_mutation::create passed non-symbol name");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_attribute_mutation::create passed too few terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_attribute_mutation::create passed too few terms");
 		}
 
 		auto const kind = *it;
 		if (!check<kind_a<>>(kind) && !check<expression_a<>>(kind))
 		{
-			throw dis(token.report() + "strange::expression_attribute_mutation::create passed non-kind/expression");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_attribute_mutation::create passed non-kind/expression");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_attribute_mutation::create passed too few terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_attribute_mutation::create passed too few terms");
 		}
 
 		auto const expression = *it;
 		if (!check<expression_a<>>(expression))
 		{
-			throw dis(token.report() + "strange::expression_attribute_mutation::create passed non-expression value");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_attribute_mutation::create passed non-expression value");
 		}
 		return expression_substitute_t<expression_attribute_mutation_t<>>::create(expression_attribute_mutation_t<>(token, terms, fast<symbol_a<>>(name), kind, fast<expression_a<>>(expression)));
 	}
@@ -72,13 +72,13 @@ public:
 			auto const value = _expression.operate(thing, list);
 			if (!value.kinds_().has(kind))
 			{
-				throw dis("wrong kind of thing");
+				throw dis(__FILE__, __LINE__, "wrong kind of thing");
 			}
 			return attribute_mutation_create(_name, kind, value);
 		}
 		catch (misunderstanding_a<>& misunderstanding)
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_attribute_mutation::operate value evaluation error") + misunderstanding;
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_attribute_mutation::operate value evaluation error") + misunderstanding;
 		}
 	}
 
@@ -128,7 +128,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_attribute_mutation::generate_cpp called for wrong type of expression");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_attribute_mutation::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" [](");
 		river.write_string(")\n{\n");

@@ -20,7 +20,7 @@ public:
 		any_a<> order = *it;
 		if (!check<number_data_a<int64_t>>(order))
 		{
-			throw dis("strange::cat::create passed non-int-64 order");
+			throw dis(__FILE__, __LINE__, "strange::cat::create passed non-int-64 order");
 		}
 		if (++it == end)
 		{
@@ -29,7 +29,7 @@ public:
 		any_a<> name = *it;
 		if (!check<symbol_a<>>(name))
 		{
-			throw dis("strange::cat::create passed non-symbol name");
+			throw dis(__FILE__, __LINE__, "strange::cat::create passed non-symbol name");
 		}
 		if (++it == end)
 		{
@@ -38,7 +38,7 @@ public:
 		any_a<> dimensions = *it;
 		if (!check<flock_a<>>(dimensions))
 		{
-			throw dis("strange::cat::create passed non-flock dimensions");
+			throw dis(__FILE__, __LINE__, "strange::cat::create passed non-flock dimensions");
 		}
 		if (++it == end)
 		{
@@ -47,7 +47,7 @@ public:
 		any_a<> parameters = *it;
 		if (!check<flock_a<>>(parameters))
 		{
-			throw dis("strange::cat::create passed non-flock parameters");
+			throw dis(__FILE__, __LINE__, "strange::cat::create passed non-flock parameters");
 		}
 		if (++it == end)
 		{
@@ -56,7 +56,7 @@ public:
 		any_a<> result = *it;
 		if (!check<symbol_a<>>(result))
 		{
-			throw dis("strange::cat::create passed non-symbol result");
+			throw dis(__FILE__, __LINE__, "strange::cat::create passed non-symbol result");
 		}
 		return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions), fast<flock_a<>>(parameters), fast<symbol_a<>>(result));
 	}

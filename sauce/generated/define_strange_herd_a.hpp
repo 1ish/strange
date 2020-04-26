@@ -242,7 +242,7 @@ public:
 		auto const op = any_a<>::operation("update_thing_");
 		if (!op)
 		{
-			throw dis("dynamic herd_d::update_thing_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic herd_d::update_thing_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -253,7 +253,7 @@ public:
 		auto const op = any_a<>::operation("update_thing_");
 		if (!op)
 		{
-			throw dis("dynamic herd_d::update_thing_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic herd_d::update_thing_ passed non-existent member");
 		}
 		return cast<_element>(variadic_operate(op, *this, thing));
 	}
@@ -267,7 +267,7 @@ public:
 		auto const op = any_a<>::operation("insert_thing_");
 		if (!op)
 		{
-			throw dis("dynamic herd_d::insert_thing_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic herd_d::insert_thing_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -278,7 +278,7 @@ public:
 		auto const op = any_a<>::operation("insert_thing_");
 		if (!op)
 		{
-			throw dis("dynamic herd_d::insert_thing_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic herd_d::insert_thing_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, thing));
 	}

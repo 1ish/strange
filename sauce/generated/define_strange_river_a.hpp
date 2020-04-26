@@ -605,10 +605,10 @@ class river_d : public range_d< any_a<> >
 {
 public:
 	inline forward_extractor_data_a < any_a < > , std_istreambuf_iterator < char > > extract_begin() const
-	{ throw dis("dynamic river_d::extract_begin() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic river_d::extract_begin() not available"); }
 
 	inline forward_extractor_data_a < any_a < > , std_istreambuf_iterator < char > > extract_end() const
-	{ throw dis("dynamic river_d::extract_end() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic river_d::extract_end() not available"); }
 
 	inline any_a<> to_lake__(list_a<> const& arguments)
 	{
@@ -616,7 +616,7 @@ public:
 		auto const op = any_a<>::operation("to_lake_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::to_lake_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::to_lake_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -627,7 +627,7 @@ public:
 		auto const op = any_a<>::operation("to_lake_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::to_lake_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::to_lake_ passed non-existent member");
 		}
 		return cast<lake_int8_a<>>(variadic_operate(op, *this));
 	}
@@ -641,7 +641,7 @@ public:
 		auto const op = any_a<>::operation("get_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::get_char_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::get_char_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -652,7 +652,7 @@ public:
 		auto const op = any_a<>::operation("get_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::get_char_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::get_char_ passed non-existent member");
 		}
 		return cast<number_data_int8_a<>>(variadic_operate(op, *this));
 	}
@@ -666,7 +666,7 @@ public:
 		auto const op = any_a<>::operation("peek_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::peek_char_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::peek_char_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -677,7 +677,7 @@ public:
 		auto const op = any_a<>::operation("peek_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::peek_char_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::peek_char_ passed non-existent member");
 		}
 		return cast<number_data_int8_a<>>(variadic_operate(op, *this));
 	}
@@ -691,7 +691,7 @@ public:
 		auto const op = any_a<>::operation("unget_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::unget_char_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::unget_char_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -702,7 +702,7 @@ public:
 		auto const op = any_a<>::operation("unget_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::unget_char_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::unget_char_ passed non-existent member");
 		}
 		return cast<river_a<>>(variadic_operate(op, *this));
 	}
@@ -716,7 +716,7 @@ public:
 		auto const op = any_a<>::operation("put_back_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::put_back_char_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::put_back_char_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -727,7 +727,7 @@ public:
 		auto const op = any_a<>::operation("put_back_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::put_back_char_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::put_back_char_ passed non-existent member");
 		}
 		return cast<river_a<>>(variadic_operate(op, *this, int_8));
 	}
@@ -741,7 +741,7 @@ public:
 		auto const op = any_a<>::operation("get_line_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::get_line_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::get_line_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -752,7 +752,7 @@ public:
 		auto const op = any_a<>::operation("get_line_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::get_line_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::get_line_ passed non-existent member");
 		}
 		return cast<lake_int8_a<>>(variadic_operate(op, *this, count, delimiter));
 	}
@@ -766,7 +766,7 @@ public:
 		auto const op = any_a<>::operation("ignore_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::ignore_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::ignore_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -777,7 +777,7 @@ public:
 		auto const op = any_a<>::operation("ignore_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::ignore_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::ignore_ passed non-existent member");
 		}
 		return cast<river_a<>>(variadic_operate(op, *this, count));
 	}
@@ -791,7 +791,7 @@ public:
 		auto const op = any_a<>::operation("read_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::read_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::read_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -802,7 +802,7 @@ public:
 		auto const op = any_a<>::operation("read_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::read_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::read_ passed non-existent member");
 		}
 		return cast<lake_int8_a<>>(variadic_operate(op, *this, count));
 	}
@@ -819,7 +819,7 @@ public:
 		auto const op = any_a<>::operation("tellg_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::tellg_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::tellg_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -830,7 +830,7 @@ public:
 		auto const op = any_a<>::operation("tellg_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::tellg_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::tellg_ passed non-existent member");
 		}
 		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -844,7 +844,7 @@ public:
 		auto const op = any_a<>::operation("seekg_beg_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekg_beg_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::seekg_beg_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -855,7 +855,7 @@ public:
 		auto const op = any_a<>::operation("seekg_beg_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekg_beg_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::seekg_beg_ passed non-existent member");
 		}
 		return cast<river_a<>>(variadic_operate(op, *this, offset));
 	}
@@ -869,7 +869,7 @@ public:
 		auto const op = any_a<>::operation("seekg_end_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekg_end_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::seekg_end_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -880,7 +880,7 @@ public:
 		auto const op = any_a<>::operation("seekg_end_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekg_end_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::seekg_end_ passed non-existent member");
 		}
 		return cast<river_a<>>(variadic_operate(op, *this, offset));
 	}
@@ -894,7 +894,7 @@ public:
 		auto const op = any_a<>::operation("seekg_cur_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekg_cur_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::seekg_cur_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -905,7 +905,7 @@ public:
 		auto const op = any_a<>::operation("seekg_cur_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekg_cur_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::seekg_cur_ passed non-existent member");
 		}
 		return cast<river_a<>>(variadic_operate(op, *this, offset));
 	}
@@ -919,7 +919,7 @@ public:
 		auto const op = any_a<>::operation("sync_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::sync_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::sync_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -930,7 +930,7 @@ public:
 		auto const op = any_a<>::operation("sync_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::sync_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::sync_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this));
 	}
@@ -944,7 +944,7 @@ public:
 		auto const op = any_a<>::operation("put_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::put_char_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::put_char_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -955,7 +955,7 @@ public:
 		auto const op = any_a<>::operation("put_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::put_char_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::put_char_ passed non-existent member");
 		}
 		return cast<river_a<>>(variadic_operate(op, *this, int_8));
 	}
@@ -969,7 +969,7 @@ public:
 		auto const op = any_a<>::operation("write_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::write_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::write_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -980,7 +980,7 @@ public:
 		auto const op = any_a<>::operation("write_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::write_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::write_ passed non-existent member");
 		}
 		return cast<river_a<>>(variadic_operate(op, *this, lake));
 	}
@@ -997,7 +997,7 @@ public:
 		auto const op = any_a<>::operation("tellp_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::tellp_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::tellp_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1008,7 +1008,7 @@ public:
 		auto const op = any_a<>::operation("tellp_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::tellp_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::tellp_ passed non-existent member");
 		}
 		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -1022,7 +1022,7 @@ public:
 		auto const op = any_a<>::operation("seekp_beg_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekp_beg_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::seekp_beg_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1033,7 +1033,7 @@ public:
 		auto const op = any_a<>::operation("seekp_beg_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekp_beg_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::seekp_beg_ passed non-existent member");
 		}
 		return cast<river_a<>>(variadic_operate(op, *this, offset));
 	}
@@ -1047,7 +1047,7 @@ public:
 		auto const op = any_a<>::operation("seekp_end_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekp_end_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::seekp_end_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1058,7 +1058,7 @@ public:
 		auto const op = any_a<>::operation("seekp_end_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekp_end_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::seekp_end_ passed non-existent member");
 		}
 		return cast<river_a<>>(variadic_operate(op, *this, offset));
 	}
@@ -1072,7 +1072,7 @@ public:
 		auto const op = any_a<>::operation("seekp_cur_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekp_cur_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::seekp_cur_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1083,7 +1083,7 @@ public:
 		auto const op = any_a<>::operation("seekp_cur_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekp_cur_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::seekp_cur_ passed non-existent member");
 		}
 		return cast<river_a<>>(variadic_operate(op, *this, offset));
 	}
@@ -1097,7 +1097,7 @@ public:
 		auto const op = any_a<>::operation("flush_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::flush_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::flush_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1108,7 +1108,7 @@ public:
 		auto const op = any_a<>::operation("flush_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::flush_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::flush_ passed non-existent member");
 		}
 		return cast<river_a<>>(variadic_operate(op, *this));
 	}
@@ -1122,7 +1122,7 @@ public:
 		auto const op = any_a<>::operation("good_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::good_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::good_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1133,7 +1133,7 @@ public:
 		auto const op = any_a<>::operation("good_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::good_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::good_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -1147,7 +1147,7 @@ public:
 		auto const op = any_a<>::operation("eof_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::eof_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::eof_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1158,7 +1158,7 @@ public:
 		auto const op = any_a<>::operation("eof_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::eof_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::eof_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -1172,7 +1172,7 @@ public:
 		auto const op = any_a<>::operation("fail_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::fail_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::fail_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1183,7 +1183,7 @@ public:
 		auto const op = any_a<>::operation("fail_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::fail_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::fail_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -1197,7 +1197,7 @@ public:
 		auto const op = any_a<>::operation("bad_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::bad_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::bad_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1208,7 +1208,7 @@ public:
 		auto const op = any_a<>::operation("bad_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::bad_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::bad_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -1222,7 +1222,7 @@ public:
 		auto const op = any_a<>::operation("set_good_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::set_good_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::set_good_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1233,7 +1233,7 @@ public:
 		auto const op = any_a<>::operation("set_good_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::set_good_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::set_good_ passed non-existent member");
 		}
 		return cast<river_a<>>(variadic_operate(op, *this, value));
 	}
@@ -1247,7 +1247,7 @@ public:
 		auto const op = any_a<>::operation("set_eof_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::set_eof_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::set_eof_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1258,7 +1258,7 @@ public:
 		auto const op = any_a<>::operation("set_eof_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::set_eof_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::set_eof_ passed non-existent member");
 		}
 		return cast<river_a<>>(variadic_operate(op, *this, value));
 	}
@@ -1272,7 +1272,7 @@ public:
 		auto const op = any_a<>::operation("set_fail_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::set_fail_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::set_fail_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1283,7 +1283,7 @@ public:
 		auto const op = any_a<>::operation("set_fail_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::set_fail_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::set_fail_ passed non-existent member");
 		}
 		return cast<river_a<>>(variadic_operate(op, *this, value));
 	}
@@ -1297,7 +1297,7 @@ public:
 		auto const op = any_a<>::operation("set_bad_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::set_bad_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::set_bad_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1308,7 +1308,7 @@ public:
 		auto const op = any_a<>::operation("set_bad_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::set_bad_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::set_bad_ passed non-existent member");
 		}
 		return cast<river_a<>>(variadic_operate(op, *this, value));
 	}
@@ -1322,7 +1322,7 @@ public:
 		auto const op = any_a<>::operation("filename_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::filename_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::filename_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1333,7 +1333,7 @@ public:
 		auto const op = any_a<>::operation("filename_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::filename_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::filename_ passed non-existent member");
 		}
 		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -1347,7 +1347,7 @@ public:
 		auto const op = any_a<>::operation("close_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::close_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::close_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1358,7 +1358,7 @@ public:
 		auto const op = any_a<>::operation("close_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::close_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::close_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this));
 	}
@@ -1372,7 +1372,7 @@ public:
 		auto const op = any_a<>::operation("closed_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::closed_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::closed_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1383,7 +1383,7 @@ public:
 		auto const op = any_a<>::operation("closed_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::closed_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic river_d::closed_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}

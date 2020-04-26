@@ -15,12 +15,12 @@ public:
 		auto it = list.begin_();
 		if (it == list.end_())
 		{
-			throw dis("<strange::any>::animate passed empty list");
+			throw dis(__FILE__, __LINE__, "<strange::any>::animate passed empty list");
 		}
 		any_a<> conception = *it;
 		if (!check<shoal_a<>>(conception))
 		{
-			throw dis("<strange::any>::animate passed non-shoal conception");
+			throw dis(__FILE__, __LINE__, "<strange::any>::animate passed non-shoal conception");
 		}
 		return animate_(fast<shoal_a<>>(conception));
 	}
@@ -63,7 +63,7 @@ public:
 			auto const result = op.operate(thing, list_create());
 			if (!check<symbol_a<>>(result))
 			{
-				throw dis("<strange::any>::type returned non-symbol");
+				throw dis(__FILE__, __LINE__, "<strange::any>::type returned non-symbol");
 			}
 			return fast<symbol_a<>>(result);
 		}
@@ -93,7 +93,7 @@ public:
 			auto const result = op.operate(thing, list_create());
 			if (!check<unordered_shoal_a<>>(result))
 			{
-				throw dis("<strange::any>::shared returned non-unordered-shoal");
+				throw dis(__FILE__, __LINE__, "<strange::any>::shared returned non-unordered-shoal");
 			}
 			return fast<unordered_shoal_a<>>(result);
 		}
@@ -127,7 +127,7 @@ public:
 			auto const result = op.operate(thing, list_create());
 			if (!check<cat_a<>>(result))
 			{
-				throw dis("<strange::any>::cat returned non-cat");
+				throw dis(__FILE__, __LINE__, "<strange::any>::cat returned non-cat");
 			}
 			return fast<cat_a<>>(result);
 		}
@@ -154,7 +154,7 @@ public:
 			auto const result = op.operate(thing, list_create());
 			if (!check<unordered_herd_a<>>(result))
 			{
-				throw dis("<strange::any>::cats returned non-unordered-herd");
+				throw dis(__FILE__, __LINE__, "<strange::any>::cats returned non-unordered-herd");
 			}
 			return fast<unordered_herd_a<>>(result);
 		}
@@ -181,7 +181,7 @@ public:
 			auto const result = op.operate(thing, list_create());
 			if (!check<kind_a<>>(result))
 			{
-				throw dis("<strange::any>::kind returned non-kind");
+				throw dis(__FILE__, __LINE__, "<strange::any>::kind returned non-kind");
 			}
 			return fast<kind_a<>>(result);
 		}
@@ -208,7 +208,7 @@ public:
 			auto const result = op.operate(thing, list_create());
 			if (!check<unordered_herd_a<>>(result))
 			{
-				throw dis("<strange::any>::kinds returned non-unordered-herd");
+				throw dis(__FILE__, __LINE__, "<strange::any>::kinds returned non-unordered-herd");
 			}
 			return fast<unordered_herd_a<>>(result);
 		}
@@ -237,7 +237,7 @@ public:
 		auto it = list.begin_();
 		if (it == list.end_())
 		{
-			throw dis("<strange::any>::visit passed empty list");
+			throw dis(__FILE__, __LINE__, "<strange::any>::visit passed empty list");
 		}
 		return thing_t<>::operate__(cast_dup<inventory_a<>>(*it));
 	}
@@ -280,12 +280,12 @@ public:
 		auto it = list.begin_();
 		if (it == list.end_())
 		{
-			throw dis("<strange::any>::invoke passed short list");
+			throw dis(__FILE__, __LINE__, "<strange::any>::invoke passed short list");
 		}
 		any_a<> member = *it;
 		if (!thing.operations_().has_(member))
 		{
-			throw dis("<strange::any>::invoke passed non-existent member");
+			throw dis(__FILE__, __LINE__, "<strange::any>::invoke passed non-existent member");
 		}
 		return thing.operations_().at_(member).operate(thing, list_create(++it, list.end_()));
 	}
@@ -305,7 +305,7 @@ public:
 		auto it = list.begin_();
 		if (it == list.end_())
 		{
-			throw dis("<strange::any>::operate passed short list");
+			throw dis(__FILE__, __LINE__, "<strange::any>::operate passed short list");
 		}
 		any_a<> operation = *it;
 		return operation.operate(thing, list_create(++it, list.end_()));
@@ -327,7 +327,7 @@ public:
 		auto it = list.begin_();
 		if (it == list.end_())
 		{
-			throw dis("<strange::any>::identical passed empty list");
+			throw dis(__FILE__, __LINE__, "<strange::any>::identical passed empty list");
 		}
 		return identical_(*it);
 	}
@@ -369,7 +369,7 @@ public:
 		auto it = list.begin_();
 		if (it == list.end_())
 		{
-			throw dis("<strange::any>::same passed empty list");
+			throw dis(__FILE__, __LINE__, "<strange::any>::same passed empty list");
 		}
 		return identical_(*it);
 	}
@@ -390,7 +390,7 @@ public:
 		auto it = list.begin_();
 		if (it == list.end_())
 		{
-			throw dis("<strange::any>::different passed empty list");
+			throw dis(__FILE__, __LINE__, "<strange::any>::different passed empty list");
 		}
 		return boole(different_(*it));
 	}
@@ -420,7 +420,7 @@ public:
 			auto const result = op.operate(thing, list_create());
 			if (!check<number_data_a<uint64_t>>(result))
 			{
-				throw dis("<strange::any>::hash returned non-number-uint64");
+				throw dis(__FILE__, __LINE__, "<strange::any>::hash returned non-number-uint64");
 			}
 			return fast<number_data_a<uint64_t>>(result);
 		}
@@ -436,7 +436,7 @@ public:
 			auto const result = op.operate(thing, list_create());
 			if (!check<number_data_a<uint64_t>>(result))
 			{
-				throw dis("<strange::any>::hash returned non-number-uint64");
+				throw dis(__FILE__, __LINE__, "<strange::any>::hash returned non-number-uint64");
 			}
 			return fast<number_data_a<uint64_t>>(result).extract_primitive();
 		}
@@ -449,12 +449,12 @@ public:
 		auto it = list.begin_();
 		if (it == list.end_())
 		{
-			throw dis("<strange::any>::intimate passed empty list");
+			throw dis(__FILE__, __LINE__, "<strange::any>::intimate passed empty list");
 		}
 		any_a<> thing = fast_dup(*it);
 		if (++it == list.end_())
 		{
-			throw dis("<strange::any>::intimate passed short list");
+			throw dis(__FILE__, __LINE__, "<strange::any>::intimate passed short list");
 		}
 		any_a<> member = *it;
 		return intimate(thing, member, list_create(++it, list.end_()));
@@ -465,7 +465,7 @@ public:
 		auto it = list.begin_();
 		if (it == list.end_())
 		{
-			throw dis("<strange::any>::intimate passed short list");
+			throw dis(__FILE__, __LINE__, "<strange::any>::intimate passed short list");
 		}
 		any_a<> member = *it;
 		return intimate(thing, member, list_create(++it, list.end_()));
@@ -476,7 +476,7 @@ public:
 		auto const& conception = static_cast<any_c<> const&>(thing.extract_thing())._conception;
 		if (!conception.has_(member))
 		{
-			throw dis("<strange::any>::intimate passed non-existent member");
+			throw dis(__FILE__, __LINE__, "<strange::any>::intimate passed non-existent member");
 		}
 		return conception.at_(member).operate(thing, list);
 	}
@@ -486,7 +486,7 @@ public:
 		auto const& conception = static_cast<any_c<> const&>(thing.extract_thing())._conception;
 		if (!conception.has_(member))
 		{
-			throw dis("<strange::any>::intimate_member passed non-existent member");
+			throw dis(__FILE__, __LINE__, "<strange::any>::intimate_member passed non-existent member");
 		}
 		return conception.at_(member);
 	}
@@ -520,7 +520,7 @@ protected:
 			auto const key = flop.at_index(0);
 			if (!check<symbol_a<>>(key))
 			{
-				throw dis("<strange::any>::animate passed conception with non-symbol key");
+				throw dis(__FILE__, __LINE__, "<strange::any>::animate passed conception with non-symbol key");
 			}
 			if (fast<symbol_a<>>(key).first_character() == '_')
 			{

@@ -834,7 +834,7 @@ public:
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		if (_deque.empty())
 		{
-			throw dis("strange::brook::pop_front called on empty brook");
+			throw dis(__FILE__, __LINE__, "strange::brook::pop_front called on empty brook");
 		}
 		_primitive_ number = _deque.front();
 		_deque.pop_front();
@@ -871,7 +871,7 @@ public:
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		if (_deque.empty())
 		{
-			throw dis("strange::brook::pop_back called on empty brook");
+			throw dis(__FILE__, __LINE__, "strange::brook::pop_back called on empty brook");
 		}
 		_primitive_ number = _deque.back();
 		_deque.pop_back();

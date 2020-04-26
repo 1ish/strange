@@ -253,28 +253,28 @@ class container_data_d : public container_d<>
 {
 public:
 	inline bool operator==(container_data_a < _type , _iterator > const & container ) const
-	{ throw dis("dynamic container_data_d::operator==(container) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic container_data_d::operator==(container) not available"); }
 
 	inline bool operator!=(container_data_a < _type , _iterator > const & container ) const
-	{ throw dis("dynamic container_data_d::operator!=(container) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic container_data_d::operator!=(container) not available"); }
 
 	inline bidirectional_extractor_data_a < any_a < > , _iterator > keys_begin() const
-	{ throw dis("dynamic container_data_d::keys_begin() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic container_data_d::keys_begin() not available"); }
 
 	inline bidirectional_extractor_data_a < any_a < > , _iterator > keys_end() const
-	{ throw dis("dynamic container_data_d::keys_end() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic container_data_d::keys_end() not available"); }
 
 	inline bidirectional_extractor_data_a < container_a < > , _iterator > extract_begin() const
-	{ throw dis("dynamic container_data_d::extract_begin() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic container_data_d::extract_begin() not available"); }
 
 	inline bidirectional_extractor_data_a < container_a < > , _iterator > extract_end() const
-	{ throw dis("dynamic container_data_d::extract_end() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic container_data_d::extract_end() not available"); }
 
 	inline _type const & extract_packet() const
-	{ throw dis("dynamic container_data_d::extract_packet() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic container_data_d::extract_packet() not available"); }
 
 	inline _type & mutate_packet()
-	{ throw dis("dynamic container_data_d::mutate_packet() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic container_data_d::mutate_packet() not available"); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 

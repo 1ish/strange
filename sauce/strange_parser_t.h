@@ -40,12 +40,12 @@ public:
 		_token = fast<token_a<>>(*_it);
 		if (_token.tag() == "error")
 		{
-			throw dis("strange::parser tokenizer error:") + _token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser tokenizer error:") + _token.report_();
 		}
 		auto const result = _initial(0, std_make_shared<context_struct>());
 		if (_it != _end)
 		{
-			throw dis("strange::parser unparsed tokens:") + _token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser unparsed tokens:") + _token.report_();
 		}
 		return result.recreate_();
 	}
@@ -129,7 +129,7 @@ private:
 		_token = fast<token_a<>>(*_it);
 		if (_token.tag() == "error")
 		{
-			throw dis("strange::parser tokenizer error:") + _token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser tokenizer error:") + _token.report_();
 		}
 		return true;
 	}
@@ -244,12 +244,12 @@ private:
 			}
 			else
 			{
-				throw dis("strange::parser unexpected punctuation:") + token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser unexpected punctuation:") + token.report_();
 			}
 		}
 		else
 		{
-			throw dis("strange::parser unexpected token tag:") + _token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser unexpected token tag:") + _token.report_();
 		}
 		return _subsequent(min_precedence, initial, context);
 	}
@@ -288,7 +288,7 @@ private:
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
-				throw dis("strange::parser meta evaluation error:") + token.report_() + misunderstanding;
+				throw dis(__FILE__, __LINE__, "strange::parser meta evaluation error:") + token.report_() + misunderstanding;
 			}
 			if (check<expression_a<>>(result))
 			{
@@ -306,7 +306,7 @@ private:
 		auto const token = _token;
 		if (!context->emit)
 		{
-			throw dis("strange::parser " + token.symbol() + " without corresponding ~> preceding it:") + token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser " + token.symbol() + " without corresponding ~> preceding it:") + token.report_();
 		}
 		if (token.symbol() == "(~")
 		{
@@ -328,11 +328,11 @@ private:
 		auto const token = _token;
 		if (!_next())
 		{
-			throw dis("strange::parser ^. with nothing following it:") + token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser ^. with nothing following it:") + token.report_();
 		}
 		if (_token.tag() != "name")
 		{
-			throw dis("strange::parser ^. with non-name following it:") + token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser ^. with non-name following it:") + token.report_();
 		}
 		if (_token.symbol_().last_character() == '_')
 		{
@@ -346,16 +346,16 @@ private:
 		auto const token = _token;
 		if (!_next())
 		{
-			throw dis("strange::parser ^:. with nothing following it:") + token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser ^:. with nothing following it:") + token.report_();
 		}
 		if (_token.tag() != "name")
 		{
-			throw dis("strange::parser ^:. with non-name following it:") + token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser ^:. with non-name following it:") + token.report_();
 		}
 		auto const name = _token.symbol_();
 		if (name.last_character() != '_')
 		{
-			throw dis("strange::parser ^:. with attribute name following it:") + token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser ^:. with attribute name following it:") + token.report_();
 		}
 		_next();
 		auto const terms = flock_t<>::create_(_identifier(context->scope, name)); // me:._name / me:._scope_name
@@ -372,7 +372,7 @@ private:
 		{
 			if (_token.symbol() == ":#")
 			{
-				throw dis("strange::parser attribute cannot be immutably assigned:") + token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser attribute cannot be immutably assigned:") + token.report_();
 			}
 			bool optional = true;
 			if (_token.symbol() == ":=")
@@ -385,7 +385,7 @@ private:
 				auto const kind = _kind(context);
 				if (kind.terms_().at_index(6)) // fixed
 				{
-					throw dis("strange::parser attribute cannot be immutably assigned:") + token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser attribute cannot be immutably assigned:") + token.report_();
 				}
 				optional = kind.terms_().at_index(8);
 				any_a<> any_kind = kind;
@@ -401,7 +401,7 @@ private:
 			{
 				if (_it == _end)
 				{
-					throw dis("strange::parser attribute assignment with nothing following it:") + token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser attribute assignment with nothing following it:") + token.report_();
 				}
 				terms.push_back(_initial(0, context)); // assignment
 			}
@@ -415,7 +415,7 @@ private:
 		auto terms = flock_t<>::create_(_identifier(context->scope, token.symbol_())); // _name_ / _scope_name_
 		if (!_next())
 		{
-			throw dis("strange::parser intimate operation with no arguments:") + token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser intimate operation with no arguments:") + token.report_();
 		}
 		if (_token.tag() == "punctuation" && _token.symbol() == "[")
 		{
@@ -453,11 +453,11 @@ private:
 		auto const instruction = _shared.at_(sym(token.symbol() + "!"));
 		if (!instruction)
 		{
-			throw dis("strange::parser instruction not recognised:") + token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser instruction not recognised:") + token.report_();
 		}
 		if (_token.tag() != "punctuation" || _token.symbol() != "(")
 		{
-			throw dis("strange::parser instruction with no arguments:") + token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser instruction with no arguments:") + token.report_();
 		}
 		auto terms = flock_t<>::create_(context->scope);
 		terms += _elements(context);
@@ -465,7 +465,7 @@ private:
 		auto const expression = instruction.operate(_, flock_t<>::create_(token, terms));
 		if (!check<expression_a<>>(expression))
 		{
-			throw dis("strange::parser instruction returned non-expression:") + token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser instruction returned non-expression:") + token.report_();
 		}
 		return fast<expression_a<>>(expression);
 	}
@@ -478,12 +478,12 @@ private:
 		auto const prefix = punctuation ? _token.symbol_() : sym("");
 		if (punctuation && !_next())
 		{
-			throw dis("strange::parser " + _token.symbol() + " with nothing following it:") + _token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser " + _token.symbol() + " with nothing following it:") + _token.report_();
 		}
 		auto const token = _token;
 		if (token.tag() != "name")
 		{
-			throw dis("strange::parser shared local/dimension without name:") + _token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser shared local/dimension without name:") + _token.report_();
 		}
 		auto const name = punctuation ? prefix + token.symbol_() : token.symbol_();
 		bool non_instruction = !_next() || _token.tag() != "punctuation";
@@ -502,32 +502,32 @@ private:
 				{
 					if (fixed)
 					{
-						throw dis("strange::parser cannot reassign fixed variable:") + _token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser cannot reassign fixed variable:") + _token.report_();
 					}
 					if ((check<kind_a<>>(kind) && fast<kind_a<>>(kind).reference()) ||
 						(check<expression_a<>>(kind) && fast<expression_a<>>(kind).terms_().at_index(7)))
 					{
-						throw dis("strange::parser cannot reassign referenced variable:") + _token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser cannot reassign referenced variable:") + _token.report_();
 					}
 					update = true;
 					_next();
 				}
 				else if (op == ":#")
 				{
-					throw dis("strange::parser cannot reassign variable with fixed:") + _token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser cannot reassign variable with fixed:") + _token.report_();
 				}
 				else if (op == ":&")
 				{
-					throw dis("strange::parser cannot reassign variable with reference:") + _token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser cannot reassign variable with reference:") + _token.report_();
 				}
 				else if (op == ":<" || op == ":(")
 				{
-					throw dis("strange::parser cannot reassign variable kind:") + _token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser cannot reassign variable kind:") + _token.report_();
 				}
 			}
 			else if (fixed)
 			{
-				throw dis("strange::parser recursive variable definition:") + _token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser recursive variable definition:") + _token.report_();
 			}
 			else
 			{
@@ -560,7 +560,7 @@ private:
 			{
 				if (_it == _end)
 				{
-					throw dis("strange::parser local assignment with no right-hand side:") + token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser local assignment with no right-hand side:") + token.report_();
 				}
 				context->fixed.insert_thing(name);
 				any_a<> const rhs = optional
@@ -605,7 +605,7 @@ private:
 		{
 			if (!context->kind.has(name))
 			{
-				throw dis("strange::parser unrecognised shared variable:") + token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser unrecognised shared variable:") + token.report_();
 			}
 			return expression_shared_at_t<>::create_(token, flock_t<>::create_(name));
 		}
@@ -615,7 +615,7 @@ private:
 		}
 		if (!context->kind.has(name))
 		{
-			throw dis("strange::parser unrecognised local variable:") + token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser unrecognised local variable:") + token.report_();
 		}
 		return expression_local_at_t<>::create_(token, flock_t<>::create_(name));
 	}
@@ -624,7 +624,7 @@ private:
 	{
 		if (!_next())
 		{
-			throw dis("strange::parser $$ with nothing following it:") + _token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser $$ with nothing following it:") + _token.report_();
 		}
 		auto const token = _token;
 		if (token.tag() == "punctuation" && token.symbol() == "<")
@@ -635,7 +635,7 @@ private:
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
-				throw dis("strange::parser shared scope kind evaluation error:") + token.report_() + misunderstanding;
+				throw dis(__FILE__, __LINE__, "strange::parser shared scope kind evaluation error:") + token.report_() + misunderstanding;
 			}
 		}
 		else if (token.tag() == "name")
@@ -644,7 +644,7 @@ private:
 		}
 		else
 		{
-			throw dis("strange::parser $$ with invalid token following it:") + _token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser $$ with invalid token following it:") + _token.report_();
 		}
 	}
 
@@ -659,7 +659,7 @@ private:
 				{
 					break;
 				}
-				throw dis("strange::parser :: with non-name following it:") + _token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser :: with non-name following it:") + _token.report_();
 			}
 			scope += _token.symbol();
 			if (!_next() || _token.tag() != "punctuation" || _token.symbol() != "::")
@@ -669,7 +669,7 @@ private:
 			scope += "::";
 			if (!_next())
 			{
-				throw dis("strange::parser :: with nothing following it:") + _token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser :: with nothing following it:") + _token.report_();
 			}
 		}
 		return sym(scope);
@@ -680,7 +680,7 @@ private:
 		auto const token = _token;
 		if (!_next())
 		{
-			throw dis("strange::parser " + token.symbol() + " with nothing following it:") + token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser " + token.symbol() + " with nothing following it:") + token.report_();
 		}
 		bool const tilda = token.symbol() == "{~";
 		auto flock = flock_t<>::create_();
@@ -697,7 +697,7 @@ private:
 			{
 				if (!_next() || (!tilda && _token.symbol() != "}") || (tilda && _token.symbol() != "~}"))
 				{
-					throw dis("strange::parser {! without } immediately following it:") + token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser {! without } immediately following it:") + token.report_();
 				}
 				herd = true;
 			}
@@ -712,7 +712,7 @@ private:
 					emissions += _meta_emissions(context);
 					if (_it == _end)
 					{
-						throw dis("strange::parser meta element with nothing following it:") + _token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser meta element with nothing following it:") + _token.report_();
 					}
 					continue;
 				}
@@ -755,7 +755,7 @@ private:
 				}
 				if (shoal && !emissions.empty())
 				{
-					throw dis("strange::parser invalid shoal meta emissions:") + _token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser invalid shoal meta emissions:") + _token.report_();
 				}
 			}
 			if (emissions.empty())
@@ -764,35 +764,35 @@ private:
 				{
 					if (shoal)
 					{
-						throw dis("strange::parser shoal key with nothing following it:") + _token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser shoal key with nothing following it:") + _token.report_();
 					}
-					throw dis("strange::parser element with nothing following it:") + _token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser element with nothing following it:") + _token.report_();
 				}
 				if (_token.tag() != "punctuation")
 				{
 					if (shoal)
 					{
-						throw dis("strange::parser shoal key with non-punctuation following it:") + _token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser shoal key with non-punctuation following it:") + _token.report_();
 					}
-					throw dis("strange::parser element with non-punctuation following it:") + _token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser element with non-punctuation following it:") + _token.report_();
 				}
 				bool const comma = _token.symbol() == ",";
 				if (comma)
 				{
 					if (shoal)
 					{
-						throw dis("strange::parser shoal key without a corresponding value:") + _token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser shoal key without a corresponding value:") + _token.report_();
 					}
 					if (!_next())
 					{
-						throw dis("strange::parser , with nothing following it:") + _token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser , with nothing following it:") + _token.report_();
 					}
 				}
 				if ((!tilda && _token.symbol() == "}") || (tilda && _token.symbol() == "~}"))
 				{
 					if (shoal)
 					{
-						throw dis("strange::parser shoal key without a corresponding value:") + _token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser shoal key without a corresponding value:") + _token.report_();
 					}
 					_next();
 					herd = true;
@@ -807,7 +807,7 @@ private:
 				}
 				if (herd)
 				{
-					throw dis("strange::parser herd element with unexpected punctuation following it:") + _token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser herd element with unexpected punctuation following it:") + _token.report_();
 				}
 				shoal = true;
 			}
@@ -822,7 +822,7 @@ private:
 			auto const operator_token = _token;
 			if (!_next())
 			{
-				throw dis("strange::parser shoal " + operator_token.symbol() + " with nothing following it:") + operator_token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser shoal " + operator_token.symbol() + " with nothing following it:") + operator_token.report_();
 			}
 			any_a<> key_symbol;
 			try
@@ -873,11 +873,11 @@ private:
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
-					throw dis("strange::parser shoal :: value evaluation error:") + _token.report_() + misunderstanding;
+					throw dis(__FILE__, __LINE__, "strange::parser shoal :: value evaluation error:") + _token.report_() + misunderstanding;
 				}
 				if (clash)
 				{
-					throw dis("strange::parser shoal :: redefinition of shared name:") + _token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser shoal :: redefinition of shared name:") + _token.report_();
 				}
 			}
 			else if (check<symbol_a<>>(key_symbol) && fast<symbol_a<>>(key_symbol).last_character() == '_' &&
@@ -890,21 +890,21 @@ private:
 				{
 					if (_token.tag() != "name")
 					{
-						throw dis("strange::parser shoal member instruction without name following it:") + _token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser shoal member instruction without name following it:") + _token.report_();
 					}
 					instruction = _shared.at_(sym(_token.symbol() + "!"));
 					if (!instruction)
 					{
-						throw dis("strange::parser shoal member instruction not recognised:") + _token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser shoal member instruction not recognised:") + _token.report_();
 					}
 					if (!_next() || _token.tag() != "punctuation" || _token.symbol() != "(")
 					{
-						throw dis("strange::parser shoal member instruction with no arguments:") + _token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser shoal member instruction with no arguments:") + _token.report_();
 					}
 				}
 				else if (_token.tag() != "punctuation" || _token.symbol() != "(")
 				{
-					throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token.report_();
 				}
 				// reference/extraction/mutation
 				auto terms = flock_t<>::create_(new_scope_symbol);
@@ -923,7 +923,7 @@ private:
 					auto const expression = instruction.operate(_, flock_t<>::create_(operator_token, terms));
 					if (!check<expression_a<>>(expression))
 					{
-						throw dis("strange::parser shoal member instruction returned non-expression:") + operator_token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser shoal member instruction returned non-expression:") + operator_token.report_();
 					}
 					value = fast<expression_a<>>(expression);
 				}
@@ -941,7 +941,7 @@ private:
 			{
 				if (!check<symbol_a<>>(key_symbol))
 				{
-					throw dis("strange::parser shoal " + operator_token.symbol() + " with non-symbol key:") + operator_token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser shoal " + operator_token.symbol() + " with non-symbol key:") + operator_token.report_();
 				}
 				any_a<> kind;
 				bool fixed = (operator_token.symbol() == ":#");
@@ -962,16 +962,16 @@ private:
 				{
 					if (_token.tag() != "name")
 					{
-						throw dis("strange::parser shoal attribute instruction without name following it:") + _token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser shoal attribute instruction without name following it:") + _token.report_();
 					}
 					instruction = _shared.at_(sym(_token.symbol() + "!"));
 					if (!instruction)
 					{
-						throw dis("strange::parser shoal attribute instruction not recognised:") + _token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser shoal attribute instruction not recognised:") + _token.report_();
 					}
 					if (!_next())
 					{
-						throw dis("strange::parser shoal attribute instruction with no arguments:") + _token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser shoal attribute instruction with no arguments:") + _token.report_();
 					}
 				}
 				// attribute reference/extraction/mutation
@@ -991,7 +991,7 @@ private:
 					auto const expression = instruction.operate(_, flock_t<>::create_(operator_token, terms));
 					if (!check<expression_a<>>(expression))
 					{
-						throw dis("strange::parser shoal attribute instruction returned non-expression:") + operator_token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser shoal attribute instruction returned non-expression:") + operator_token.report_();
 					}
 					value = fast<expression_a<>>(expression);
 				}
@@ -1006,21 +1006,21 @@ private:
 			}
 			else
 			{
-				throw dis("strange::parser shoal key with unexpected punctuation following it:") + _token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser shoal key with unexpected punctuation following it:") + _token.report_();
 			}
 			if (_it == _end)
 			{
-				throw dis("strange::parser shoal value with nothing following it:") + _token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser shoal value with nothing following it:") + _token.report_();
 			}
 			flock.push_back(expression_flock_t<>::create_(operator_token, flock_t<>::create_(key, value)));
 			if (_token.tag() != "punctuation")
 			{
-				throw dis("strange::parser shoal value with non-punctuation following it:") + _token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser shoal value with non-punctuation following it:") + _token.report_();
 			}
 			bool const comma = _token.symbol() == ",";
 			if (comma && !_next())
 			{
-				throw dis("strange::parser shoal , with nothing following it:") + _token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser shoal , with nothing following it:") + _token.report_();
 			}
 			if ((!tilda && _token.symbol() == "}") || (tilda && _token.symbol() == "~}"))
 			{
@@ -1029,7 +1029,7 @@ private:
 			}
 			if (!comma)
 			{
-				throw dis("strange::parser shoal value with unexpected punctuation following it:") + _token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser shoal value with unexpected punctuation following it:") + _token.report_();
 			}
 		}
 		if (herd)
@@ -1077,7 +1077,7 @@ private:
 		{
 			if (!_next())
 			{
-				throw dis("strange::parser kind :( with nothing following it:") + token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser kind :( with nothing following it:") + token.report_();
 			}
 			expression = _initial(100, context);
 		}
@@ -1093,7 +1093,7 @@ private:
 				++order;
 				if (!_next())
 				{
-					throw dis("strange::parser kind < with nothing following it:") + token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser kind < with nothing following it:") + token.report_();
 				}
 			}
 		}
@@ -1103,7 +1103,7 @@ private:
 		bool const dimension = !parenthesis && _token.tag() == "punctuation" && _token.symbol() == "#";
 		if (dimension && (!_next() || _token.tag() != "name"))
 		{
-			throw dis("strange::parser kind # with no name following it:") + token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser kind # with no name following it:") + token.report_();
 		}
 		bool const name = !parenthesis && _token.tag() == "name";
 		if (name)
@@ -1121,7 +1121,7 @@ private:
 			}
 			if (_it == _end)
 			{
-				throw dis("strange::parser kind name with nothing following it:") + token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser kind name with nothing following it:") + token.report_();
 			}
 		}
 		else
@@ -1136,7 +1136,7 @@ private:
 			terms.push_back(expression_flock_t<>::create_(token, _elements(context)));
 			if (_it == _end)
 			{
-				throw dis("strange::parser kind } with nothing following it:") + token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser kind } with nothing following it:") + token.report_();
 			}
 		}
 		else
@@ -1151,7 +1151,7 @@ private:
 			terms.push_back(expression_flock_t<>::create_(token, _elements(context)));
 			if (_it == _end)
 			{
-				throw dis("strange::parser kind ] with nothing following it:") + token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser kind ] with nothing following it:") + token.report_();
 			}
 		}
 		else
@@ -1166,7 +1166,7 @@ private:
 			terms.push_back(expression_flock_t<>::create_(token, _elements(context)));
 			if (_it == _end)
 			{
-				throw dis("strange::parser kind ) with nothing following it:") + token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser kind ) with nothing following it:") + token.report_();
 			}
 		}
 		else
@@ -1182,7 +1182,7 @@ private:
 			terms.push_back(_kind(context)); // recurse for result
 			if (_it == _end)
 			{
-				throw dis("strange::parser kind result with nothing following it:") + token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser kind result with nothing following it:") + token.report_();
 			}
 		}
 		else
@@ -1199,13 +1199,13 @@ private:
 		}
 		if (order)
 		{
-			throw dis("strange::parser mismatched kind < and > pair:") + token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser mismatched kind < and > pair:") + token.report_();
 		}
 		if (parenthesis)
 		{
 			if (_it == _end || _token.tag() != "punctuation" || _token.symbol() != ")")
 			{
-				throw dis("strange::parser mismatched kind :( and ) pair:") + _token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser mismatched kind :( and ) pair:") + _token.report_();
 			}
 			_next();
 		}
@@ -1305,7 +1305,7 @@ private:
 				// invoke member
 				if (!_next())
 				{
-					throw dis("strange::parser . with nothing following it:") + token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser . with nothing following it:") + token.report_();
 				}
 				return _subsequent_dot(min_precedence, initial, context);
 			}
@@ -1314,7 +1314,7 @@ private:
 				// operate
 				if (!_next())
 				{
-					throw dis("strange::parser .: with nothing following it:") + token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser .: with nothing following it:") + token.report_();
 				}
 				return _subsequent_dot_colon(min_precedence, initial, context);
 			}
@@ -1323,7 +1323,7 @@ private:
 				// member
 				if (!_next())
 				{
-					throw dis("strange::parser :. with nothing following it:") + token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser :. with nothing following it:") + token.report_();
 				}
 				return _subsequent_colon_dot(min_precedence, initial, context);
 			}
@@ -1344,7 +1344,7 @@ private:
 					// pipe / logic operator
 					if (!_next())
 					{
-						throw dis("strange::parser pipe / logic operator with nothing following it:") + token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser pipe / logic operator with nothing following it:") + token.report_();
 					}
 					auto const terms = flock_t<>::create_(
 						initial,
@@ -1517,7 +1517,7 @@ private:
 				}
 				else
 				{
-					throw dis("strange::parser unexpected operator:") + token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser unexpected operator:") + token.report_();
 				}
 				if (count == 1)
 				{
@@ -1531,7 +1531,7 @@ private:
 					// invoke binary operator
 					if (!_next())
 					{
-						throw dis("strange::parser binary operator with nothing following it:") + token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser binary operator with nothing following it:") + token.report_();
 					}
 					auto const terms = flock_t<>::create_(
 						initial,
@@ -1544,7 +1544,7 @@ private:
 					// invoke ternary operator
 					if (!_next())
 					{
-						throw dis("strange::parser ternary operator with nothing following it:") + token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser ternary operator with nothing following it:") + token.report_();
 					}
 					auto const second = _initial(precedence + (right_to_left ? 0 : 1), context);
 					if (_token.tag() != "punctuation" || _token.symbol() != ":")
@@ -1554,7 +1554,7 @@ private:
 					}
 					if (!_next())
 					{
-						throw dis("strange::parser ternary operator with nothing following the delimiter:") + token.report_();
+						throw dis(__FILE__, __LINE__, "strange::parser ternary operator with nothing following the delimiter:") + token.report_();
 					}
 					auto const terms = flock_t<>::create_(
 						initial,
@@ -1597,7 +1597,7 @@ private:
 			context->emit);
 		if (!_next())
 		{
-			throw dis("strange::parser " + _token.symbol() + " with nothing following it:") + _token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser " + _token.symbol() + " with nothing following it:") + _token.report_();
 		}
 		auto flock = flock_t<>::create_();
 		if (_token.tag() == "punctuation" &&
@@ -1621,16 +1621,16 @@ private:
 			}
 			if (_it == _end)
 			{
-				throw dis("strange::parser element with nothing following it:") + _token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser element with nothing following it:") + _token.report_();
 			}
 			if (_token.tag() != "punctuation")
 			{
-				throw dis("strange::parser element with non-punctuation following it:") + _token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser element with non-punctuation following it:") + _token.report_();
 			}
 			bool const comma = _token.symbol() == ",";
 			if (comma && !_next())
 			{
-				throw dis("strange::parser , with nothing following it:") + _token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser , with nothing following it:") + _token.report_();
 			}
 			if ((square && !tilda && _token.symbol() == "]") ||
 				(round && !tilda && _token.symbol() == ")") ||
@@ -1643,7 +1643,7 @@ private:
 			}
 			if (!comma)
 			{
-				throw dis("strange::parser element with unexpected punctuation following it:") + _token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser element with unexpected punctuation following it:") + _token.report_();
 			}
 		}
 		return flock;
@@ -1657,7 +1657,7 @@ private:
 		auto const token = _token;
 		if (token.tag() != "name")
 		{
-			throw dis("strange::parser . with non-name following it:") + token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser . with non-name following it:") + token.report_();
 		}
 		auto terms = flock_t<>::create_(initial, token.symbol_());
 		if (token.symbol_().last_character() != '_')
@@ -1667,7 +1667,7 @@ private:
 			{
 				if (!_next())
 				{
-					throw dis("strange::parser attribute assignment with nothing following it:") + token.report_();
+					throw dis(__FILE__, __LINE__, "strange::parser attribute assignment with nothing following it:") + token.report_();
 				}
 				terms.push_back(_initial(0, context)); // assignment
 			}
@@ -1675,7 +1675,7 @@ private:
 		}
 		if (!_next())
 		{
-			throw dis("strange::parser . with nothing following member name:") + token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser . with nothing following member name:") + token.report_();
 		}
 		if (_token.tag() == "punctuation" && _token.symbol() == "[")
 		{
@@ -1698,14 +1698,14 @@ private:
 			// member
 			if (!_next())
 			{
-				throw dis("strange::parser :. with nothing following it:") + token.report_();
+				throw dis(__FILE__, __LINE__, "strange::parser :. with nothing following it:") + token.report_();
 			}
 			second = _subsequent_colon_dot(100, second, context);
 		}
 		auto terms = flock_t<>::create_(initial, second);
 		if (_it == _end)
 		{
-			throw dis("strange::parser .: with nothing following its operation:") + token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser .: with nothing following its operation:") + token.report_();
 		}
 		if (_token.tag() == "punctuation" && _token.symbol() == "[")
 		{
@@ -1724,7 +1724,7 @@ private:
 		auto const token = _token;
 		if (token.tag() != "name")
 		{
-			throw dis("strange::parser :. with non-name following it:") + token.report_();
+			throw dis(__FILE__, __LINE__, "strange::parser :. with non-name following it:") + token.report_();
 		}
 		_next();
 		auto const terms = flock_t<>::create_(initial, token.symbol_());

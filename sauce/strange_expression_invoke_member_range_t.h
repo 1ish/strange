@@ -20,30 +20,30 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_invoke_member_range::create passed empty range");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_invoke_member_range::create passed empty range");
 		}
 		auto thing = *it;
 		if (!check<expression_a<>>(thing))
 		{
-			throw dis(token.report() + "strange::expression_invoke_member_range::create passed non-expression thing term");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_invoke_member_range::create passed non-expression thing term");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_invoke_member_range::create passed short range");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_invoke_member_range::create passed short range");
 		}
 		auto member = *it;
 		if (!check<symbol_a<>>(member))
 		{
-			throw dis(token.report() + "strange::expression_invoke_member_range::create passed non-symbol member term");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_invoke_member_range::create passed non-symbol member term");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_invoke_member_range::create passed short range");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_invoke_member_range::create passed short range");
 		}
 		auto range = *it;
 		if (!check<expression_a<>>(range))
 		{
-			throw dis(token.report() + "strange::expression_invoke_member_range::create passed non-expression range term");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_invoke_member_range::create passed non-expression range term");
 		}
 		return expression_substitute_t<expression_invoke_member_range_t<>>::create(expression_invoke_member_range_t<>(token, terms, fast<expression_a<>>(thing), fast<symbol_a<>>(member), fast<expression_a<>>(range)));
 	}
@@ -67,7 +67,7 @@ public:
 		auto const range_term = _range.operate(thing, list);
 		if (!check<list_a<>>(range_term))
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_invoke_member_range::operate with non-range term");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_invoke_member_range::operate with non-range term");
 		}
 		return thing_t<>::invoke_member(thing_term, _member, fast<list_a<>>(range_term));
 	}
@@ -119,7 +119,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_invoke_member_range::generate_cpp called for wrong type of expression");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_invoke_member_range::generate_cpp called for wrong type of expression");
 		}
 		_thing.generate_cpp(version, indent, river, declare, define);
 		river.write_string("." + _member.to_string());

@@ -273,40 +273,40 @@ class squad_d : public inventory_d< _element >
 {
 public:
 	inline bool operator==(squad_a < _element > const & squad ) const
-	{ throw dis("dynamic squad_d::operator==(squad) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic squad_d::operator==(squad) not available"); }
 
 	inline bool operator!=(squad_a < _element > const & squad ) const
-	{ throw dis("dynamic squad_d::operator!=(squad) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic squad_d::operator!=(squad) not available"); }
 
 	inline bool operator<(squad_a < _element > const & squad ) const
-	{ throw dis("dynamic squad_d::operator<(squad) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic squad_d::operator<(squad) not available"); }
 
 	inline bool operator>(squad_a < _element > const & squad ) const
-	{ throw dis("dynamic squad_d::operator>(squad) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic squad_d::operator>(squad) not available"); }
 
 	inline bool operator<=(squad_a < _element > const & squad ) const
-	{ throw dis("dynamic squad_d::operator<=(squad) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic squad_d::operator<=(squad) not available"); }
 
 	inline bool operator>=(squad_a < _element > const & squad ) const
-	{ throw dis("dynamic squad_d::operator>=(squad) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic squad_d::operator>=(squad) not available"); }
 
 	inline random_access_extractor_data_a < _element , typename std_deque < _element > :: const_iterator > extract_begin() const
-	{ throw dis("dynamic squad_d::extract_begin() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic squad_d::extract_begin() not available"); }
 
 	inline random_access_extractor_data_a < _element , typename std_deque < _element > :: const_iterator > extract_end() const
-	{ throw dis("dynamic squad_d::extract_end() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic squad_d::extract_end() not available"); }
 
 	inline random_access_mutator_data_a < _element , typename std_deque < _element > :: iterator > mutate_begin()
-	{ throw dis("dynamic squad_d::mutate_begin() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic squad_d::mutate_begin() not available"); }
 
 	inline random_access_mutator_data_a < _element , typename std_deque < _element > :: iterator > mutate_end()
-	{ throw dis("dynamic squad_d::mutate_end() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic squad_d::mutate_end() not available"); }
 
 	inline std_deque < _element > const & extract_deque() const
-	{ throw dis("dynamic squad_d::extract_deque() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic squad_d::extract_deque() not available"); }
 
 	inline std_deque < _element > & mutate_deque()
-	{ throw dis("dynamic squad_d::mutate_deque() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic squad_d::mutate_deque() not available"); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 

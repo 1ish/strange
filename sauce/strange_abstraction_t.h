@@ -15,57 +15,57 @@ public:
 		auto end = list.end_();
 		if (it == end)
 		{
-			throw dis("strange::abstraction::create passed empty range");
+			throw dis(__FILE__, __LINE__, "strange::abstraction::create passed empty range");
 		}
 		auto const token = *it;
 		if (!check<token_a<>>(token))
 		{
-			throw dis("strange::abstraction::create passed non-token");
+			throw dis(__FILE__, __LINE__, "strange::abstraction::create passed non-token");
 		}
 		if (++it == end)
 		{
-			throw dis("strange::abstraction::create passed short range");
+			throw dis(__FILE__, __LINE__, "strange::abstraction::create passed short range");
 		}
 		auto const scope = *it;
 		if (!check<symbol_a<>>(scope))
 		{
-			throw dis(fast<token_a<>>(token).report() + "strange::abstraction::create passed non-symbol scope");
+			throw dis(__FILE__, __LINE__, fast<token_a<>>(token).report() + "strange::abstraction::create passed non-symbol scope");
 		}
 		if (++it == end)
 		{
-			throw dis("strange::abstraction::create passed short range");
+			throw dis(__FILE__, __LINE__, "strange::abstraction::create passed short range");
 		}
 		auto const names = *it;
 		if (!check<flock_a<>>(names))
 		{
-			throw dis(fast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock dimension names");
+			throw dis(__FILE__, __LINE__, fast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock dimension names");
 		}
 		if (++it == end)
 		{
-			throw dis("strange::abstraction::create passed short range");
+			throw dis(__FILE__, __LINE__, "strange::abstraction::create passed short range");
 		}
 		auto const dimension_kinds = *it;
 		if (!check<flock_a<>>(dimension_kinds))
 		{
-			throw dis(fast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock dimension kinds");
+			throw dis(__FILE__, __LINE__, fast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock dimension kinds");
 		}
 		if (++it == end)
 		{
-			throw dis("strange::abstraction::create passed short range");
+			throw dis(__FILE__, __LINE__, "strange::abstraction::create passed short range");
 		}
 		auto const dimension_defaults = *it;
 		if (!check<flock_a<>>(dimension_defaults))
 		{
-			throw dis(fast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock dimension defaults");
+			throw dis(__FILE__, __LINE__, fast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock dimension defaults");
 		}
 		if (++it == end)
 		{
-			throw dis("strange::abstraction::create passed short range");
+			throw dis(__FILE__, __LINE__, "strange::abstraction::create passed short range");
 		}
 		auto const parent_expressions = *it;
 		if (!check<flock_a<>>(parent_expressions))
 		{
-			throw dis(fast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock parent expressions");
+			throw dis(__FILE__, __LINE__, fast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock parent expressions");
 		}
 		return create_(fast<token_a<>>(token), fast<symbol_a<>>(scope), fast<flock_a<>>(names), fast<flock_a<>>(dimension_kinds), fast<flock_a<>>(dimension_defaults), fast<flock_a<>>(parent_expressions));
 	}
@@ -110,12 +110,12 @@ public:
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
-					throw dis(_token.report() + "strange::abstraction::operate kind expression evaluation error") + misunderstanding;
+					throw dis(__FILE__, __LINE__, _token.report() + "strange::abstraction::operate kind expression evaluation error") + misunderstanding;
 				}
 			}
 			if (!check<kind_a<>>(any_kind))
 			{
-				throw dis(_token.report() + "strange::abstraction::operate non-kind dimension kind");
+				throw dis(__FILE__, __LINE__, _token.report() + "strange::abstraction::operate non-kind dimension kind");
 			}
 			auto const kind = fast<kind_a<>>(any_kind);
 
@@ -126,20 +126,20 @@ public:
 				++ait;
 				if (!argument.kinds_().has_(kind))
 				{
-					throw dis(_token.report() + "strange::abstraction::operate kind does not include argument");
+					throw dis(__FILE__, __LINE__, _token.report() + "strange::abstraction::operate kind does not include argument");
 				}
 				aspects.emplace(name, argument);
 				local.emplace(name, argument);
 			}
 			else if (!kind.optional())
 			{
-				throw dis(_token.report() + "strange::abstraction::operate not passed enough arguments");
+				throw dis(__FILE__, __LINE__, _token.report() + "strange::abstraction::operate not passed enough arguments");
 			}
 			else
 			{
 				if (!def.kinds_().has_(kind))
 				{
-					throw dis(_token.report() + "strange::abstraction::operate kind does not include argument");
+					throw dis(__FILE__, __LINE__, _token.report() + "strange::abstraction::operate kind does not include argument");
 				}
 				aspects.emplace(name, def);
 				local.emplace(name, def);
@@ -155,11 +155,11 @@ public:
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
-				throw dis("strange::abstraction::operate parent shoal evaluation error:") + _token.report_() + misunderstanding;
+				throw dis(__FILE__, __LINE__, "strange::abstraction::operate parent shoal evaluation error:") + _token.report_() + misunderstanding;
 			}
 			if (!check<unordered_shoal_a<>>(parent))
 			{
-				throw dis("strange::abstraction::operate parent expression returned non-unordered-shoal");
+				throw dis(__FILE__, __LINE__, "strange::abstraction::operate parent expression returned non-unordered-shoal");
 			}
 			_merge(fast<unordered_shoal_a<>>(parent), child, aspects_shoal);
 		}
@@ -173,7 +173,7 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (operation.type_() != type_())
 		{
-			throw dis(_token.report() + "strange::abstraction::assign passed non-abstraction operation");
+			throw dis(__FILE__, __LINE__, _token.report() + "strange::abstraction::assign passed non-abstraction operation");
 		}
 #endif
 		auto const& other = static_cast<abstraction_t<> const&>(operation.extract_thing());
@@ -218,7 +218,7 @@ protected:
 			if (map.find(member.first) != map.cend())
 			{
 				// no overrides
-				throw dis("strange::abstraction::create merge invalid override");
+				throw dis(__FILE__, __LINE__, "strange::abstraction::create merge invalid override");
 			}
 			if (aspects_unordered_shoal && check<operation_a<>>(member.second))
 			{

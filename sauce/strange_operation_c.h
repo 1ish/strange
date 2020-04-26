@@ -15,12 +15,12 @@ public:
 		auto it = list.begin_();
 		if (it == list.end_())
 		{
-			throw dis("<strange::operation>::animate passed empty list");
+			throw dis(__FILE__, __LINE__, "<strange::operation>::animate passed empty list");
 		}
 		any_a<> conception = *it;
 		if (!check<shoal_a<>>(conception))
 		{
-			throw dis("<strange::operation>::animate passed non-shoal conception");
+			throw dis(__FILE__, __LINE__, "<strange::operation>::animate passed non-shoal conception");
 		}
 		return animate_(fast<shoal_a<>>(conception));
 	}
@@ -52,7 +52,7 @@ public:
 			auto const result = op.operate(thing, list_create());
 			if (!check<symbol_a<>>(result))
 			{
-				throw dis("<strange::operation>::type returned non-symbol");
+				throw dis(__FILE__, __LINE__, "<strange::operation>::type returned non-symbol");
 			}
 			return fast<symbol_a<>>(result);
 		}
@@ -82,7 +82,7 @@ public:
 			auto const result = op.operate(thing, list_create());
 			if (!check<unordered_shoal_a<>>(result))
 			{
-				throw dis("<strange::operation>::shared returned non-unordered-shoal");
+				throw dis(__FILE__, __LINE__, "<strange::operation>::shared returned non-unordered-shoal");
 			}
 			return fast<unordered_shoal_a<>>(result);
 		}
@@ -171,7 +171,7 @@ public:
 			auto const result = op.operate(thing, list_create());
 			if (!check<flock_a<>>(result))
 			{
-				throw dis("<strange::operation>::names returned non-flock");
+				throw dis(__FILE__, __LINE__, "<strange::operation>::names returned non-flock");
 			}
 			return fast<flock_a<>>(result);
 		}

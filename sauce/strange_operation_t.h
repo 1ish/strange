@@ -57,7 +57,7 @@ protected:
 		auto kind = *it;
 		if (!check<kind_a<>>(kind))
 		{
-			throw dis("strange::operation::kind_names_params passed non-kind result");
+			throw dis(__FILE__, __LINE__, "strange::operation::kind_names_params passed non-kind result");
 		}
 		auto kind_result = fast<kind_a<>>(kind);
 		auto kind_params = flock_create();
@@ -66,13 +66,13 @@ protected:
 			auto name = *it;
 			if (!check<symbol_a<>>(name))
 			{
-				throw dis("strange::operation::kind_names_params passed non-symbol name");
+				throw dis(__FILE__, __LINE__, "strange::operation::kind_names_params passed non-symbol name");
 			}
 			bool const end = (++it == params.extract_end_());
 			kind = end ? any_a<>::val(kind_create()) : *it;
 			if (!end && !check<kind_a<>>(kind))
 			{
-				throw dis("strange::operation::kind_names_params passed non-kind param");
+				throw dis(__FILE__, __LINE__, "strange::operation::kind_names_params passed non-kind param");
 			}
 			kind_names.second.push_back(name);
 			kind_params.push_back(kind);

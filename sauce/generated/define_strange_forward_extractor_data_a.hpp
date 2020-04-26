@@ -233,16 +233,16 @@ class forward_extractor_data_d : public forward_extractor_d< _element >
 {
 public:
 	inline bool operator==(forward_extractor_data_a < _element , _type > const & it ) const
-	{ throw dis("dynamic forward_extractor_data_d::operator==(it) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic forward_extractor_data_d::operator==(it) not available"); }
 
 	inline bool operator!=(forward_extractor_data_a < _element , _type > const & it ) const
-	{ throw dis("dynamic forward_extractor_data_d::operator!=(it) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic forward_extractor_data_d::operator!=(it) not available"); }
 
 	inline _type const & extract_it() const
-	{ throw dis("dynamic forward_extractor_data_d::extract_it() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic forward_extractor_data_d::extract_it() not available"); }
 
 	inline _type & mutate_it()
-	{ throw dis("dynamic forward_extractor_data_d::mutate_it() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic forward_extractor_data_d::mutate_it() not available"); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 

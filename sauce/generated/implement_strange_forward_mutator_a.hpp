@@ -24,7 +24,7 @@ inline any_a<> forward_mutator_a<_element>::set__(list_a<> const& ___arguments__
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("forward_mutator_a::set_ passed short range");
+		throw dis(__FILE__, __LINE__, "forward_mutator_a::set_ passed short range");
 	}
 	auto thing = cast< _element >(*___it___);
 	return set_(thing);

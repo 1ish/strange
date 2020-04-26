@@ -254,7 +254,7 @@ public:
 		auto const op = any_a<>::operation("self_add_");
 		if (!op)
 		{
-			throw dis("dynamic random_access_extractor_d::self_add_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic random_access_extractor_d::self_add_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -265,7 +265,7 @@ public:
 		auto const op = any_a<>::operation("self_add_");
 		if (!op)
 		{
-			throw dis("dynamic random_access_extractor_d::self_add_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic random_access_extractor_d::self_add_ passed non-existent member");
 		}
 		return cast<random_access_extractor_a< _element >>(variadic_operate(op, *this, number));
 	}
@@ -276,7 +276,7 @@ public:
 		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
-			throw dis("dynamic random_access_extractor_d::add_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic random_access_extractor_d::add_ passed non-existent member");
 		}
 		return op.operate(*const_cast<random_access_extractor_d*>(this), arguments);
 	}
@@ -287,7 +287,7 @@ public:
 		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
-			throw dis("dynamic random_access_extractor_d::add_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic random_access_extractor_d::add_ passed non-existent member");
 		}
 		return cast<random_access_extractor_a< _element >>(variadic_operate(op, *const_cast<random_access_extractor_d*>(this), number));
 	}
@@ -298,7 +298,7 @@ public:
 		auto const op = any_a<>::operation("self_subtract_");
 		if (!op)
 		{
-			throw dis("dynamic random_access_extractor_d::self_subtract_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic random_access_extractor_d::self_subtract_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -309,7 +309,7 @@ public:
 		auto const op = any_a<>::operation("self_subtract_");
 		if (!op)
 		{
-			throw dis("dynamic random_access_extractor_d::self_subtract_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic random_access_extractor_d::self_subtract_ passed non-existent member");
 		}
 		return cast<random_access_extractor_a< _element >>(variadic_operate(op, *this, number));
 	}
@@ -320,7 +320,7 @@ public:
 		auto const op = any_a<>::operation("subtract_");
 		if (!op)
 		{
-			throw dis("dynamic random_access_extractor_d::subtract_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic random_access_extractor_d::subtract_ passed non-existent member");
 		}
 		return op.operate(*const_cast<random_access_extractor_d*>(this), arguments);
 	}
@@ -331,7 +331,7 @@ public:
 		auto const op = any_a<>::operation("subtract_");
 		if (!op)
 		{
-			throw dis("dynamic random_access_extractor_d::subtract_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic random_access_extractor_d::subtract_ passed non-existent member");
 		}
 		return cast<random_access_extractor_a< _element >>(variadic_operate(op, *const_cast<random_access_extractor_d*>(this), number));
 	}

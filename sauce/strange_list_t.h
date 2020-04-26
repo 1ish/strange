@@ -21,16 +21,16 @@ public:
 		any_a<> beginning = *it;
 		if (!check<forward_extractor_a<any_a<>>>(beginning))
 		{
-			throw dis("strange::list::create passed non-extractor begin");
+			throw dis(__FILE__, __LINE__, "strange::list::create passed non-extractor begin");
 		}
 		if (++it == end)
 		{
-			throw dis("strange::list::create passed short list");
+			throw dis(__FILE__, __LINE__, "strange::list::create passed short list");
 		}
 		any_a<> ending = *it;
 		if (!check<forward_extractor_a<any_a<>>>(ending))
 		{
-			throw dis("strange::list::create passed non-extractor end");
+			throw dis(__FILE__, __LINE__, "strange::list::create passed non-extractor end");
 		}
 		return create_(fast<forward_extractor_a<any_a<>>>(beginning), fast<forward_extractor_a<any_a<>>>(ending));
 	}

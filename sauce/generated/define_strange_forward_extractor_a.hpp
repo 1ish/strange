@@ -255,7 +255,7 @@ public:
 		auto const op = any_a<>::operation("get_");
 		if (!op)
 		{
-			throw dis("dynamic forward_extractor_d::get_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic forward_extractor_d::get_ passed non-existent member");
 		}
 		return op.operate(*const_cast<forward_extractor_d*>(this), arguments);
 	}
@@ -266,16 +266,16 @@ public:
 		auto const op = any_a<>::operation("get_");
 		if (!op)
 		{
-			throw dis("dynamic forward_extractor_d::get_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic forward_extractor_d::get_ passed non-existent member");
 		}
 		return cast<_element>(variadic_operate(op, *const_cast<forward_extractor_d*>(this)));
 	}
 
 	inline _element const & operator*() const
-	{ throw dis("dynamic forward_extractor_d::operator*() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic forward_extractor_d::operator*() not available"); }
 
 	inline _element const * operator->() const
-	{ throw dis("dynamic forward_extractor_d::operator->() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic forward_extractor_d::operator->() not available"); }
 
 	inline any_a<> increment__(list_a<> const& arguments)
 	{
@@ -283,7 +283,7 @@ public:
 		auto const op = any_a<>::operation("increment_");
 		if (!op)
 		{
-			throw dis("dynamic forward_extractor_d::increment_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic forward_extractor_d::increment_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -294,7 +294,7 @@ public:
 		auto const op = any_a<>::operation("increment_");
 		if (!op)
 		{
-			throw dis("dynamic forward_extractor_d::increment_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic forward_extractor_d::increment_ passed non-existent member");
 		}
 		return cast<forward_extractor_a< _element >>(variadic_operate(op, *this));
 	}
@@ -305,7 +305,7 @@ public:
 		auto const op = any_a<>::operation("to_extractor_any_");
 		if (!op)
 		{
-			throw dis("dynamic forward_extractor_d::to_extractor_any_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic forward_extractor_d::to_extractor_any_ passed non-existent member");
 		}
 		return op.operate(*const_cast<forward_extractor_d*>(this), arguments);
 	}
@@ -316,7 +316,7 @@ public:
 		auto const op = any_a<>::operation("to_extractor_any_");
 		if (!op)
 		{
-			throw dis("dynamic forward_extractor_d::to_extractor_any_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic forward_extractor_d::to_extractor_any_ passed non-existent member");
 		}
 		return cast<forward_extractor_a< any_a<> >>(variadic_operate(op, *const_cast<forward_extractor_d*>(this)));
 	}

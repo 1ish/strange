@@ -37,21 +37,21 @@ public:
 		auto end = list.end_();
 		if (it == end)
 		{
-			throw dis("[expression] create passed empty list");
+			throw dis(__FILE__, __LINE__, "[expression] create passed empty list");
 		}
 		any_a<> token = *it;
 		if (!check<token_a<>>(token))
 		{
-			throw dis("[expression] create passed non-token");
+			throw dis(__FILE__, __LINE__, "[expression] create passed non-token");
 		}
 		if (++it == end)
 		{
-			throw dis("[expression] create passed short list");
+			throw dis(__FILE__, __LINE__, "[expression] create passed short list");
 		}
 		any_a<> terms = *it;
 		if (!check<flock_a<>>(terms))
 		{
-			throw dis("[expression] create passed non-flock terms");
+			throw dis(__FILE__, __LINE__, "[expression] create passed non-flock terms");
 		}
 		return _expression_::create_(fast<token_a<>>(token), fast<flock_a<>>(terms));
 	}
@@ -162,7 +162,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression::generate_cpp called for wrong type of expression");
+			throw dis(__FILE__, __LINE__, _token.report() + "strange::expression::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" strange::no() ");
 	}

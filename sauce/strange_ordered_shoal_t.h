@@ -588,7 +588,7 @@ public:
 		typename std_map_key_value::const_iterator const it = _map.cbegin();
 		if (it == _map.cend())
 		{
-			throw dis("strange::ordered_shoal::pop_front called on empty ordered_shoal");
+			throw dis(__FILE__, __LINE__, "strange::ordered_shoal::pop_front called on empty ordered_shoal");
 		}
 		auto result = flock_vals(it->first, it->second);
 		_map.erase(it);
@@ -613,7 +613,7 @@ public:
 		typename std_map_key_value::const_iterator it = _map.cend();
 		if (it == _map.cbegin())
 		{
-			throw dis("strange::ordered_shoal::pop_back called on empty ordered_shoal");
+			throw dis(__FILE__, __LINE__, "strange::ordered_shoal::pop_back called on empty ordered_shoal");
 		}
 		auto result = flock_vals(it->first, it->second);
 		_map.erase(it);
@@ -647,7 +647,7 @@ public:
 			{
 				if (pair.size() != 2)
 				{
-					throw dis("strange::ordered_shoal self_assign passed range containing flock of wrong size");
+					throw dis(__FILE__, __LINE__, "strange::ordered_shoal self_assign passed range containing flock of wrong size");
 				}
 				_map.emplace(cast<_key>(pair.at_index(0)), cast<_value>(pair.at_index(1)));
 			}
@@ -680,7 +680,7 @@ public:
 			{
 				if (pair.size() != 2)
 				{
-					throw dis("strange::ordered_shoal += passed range containing flock of wrong size");
+					throw dis(__FILE__, __LINE__, "strange::ordered_shoal += passed range containing flock of wrong size");
 				}
 				_map.emplace(cast<_key>(pair.at_index(0)), cast<_value>(pair.at_index(1)));
 			}
@@ -724,7 +724,7 @@ public:
 			{
 				if (pair.empty())
 				{
-					throw dis("strange::ordered_shoal -= passed range containing empty flock");
+					throw dis(__FILE__, __LINE__, "strange::ordered_shoal -= passed range containing empty flock");
 				}
 				_map.erase(cast<_key>(pair.at_index(0)));
 			}

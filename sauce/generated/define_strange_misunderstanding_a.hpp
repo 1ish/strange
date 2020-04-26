@@ -239,7 +239,7 @@ public:
 		auto const op = any_a<>::operation("to_lake_");
 		if (!op)
 		{
-			throw dis("dynamic misunderstanding_d::to_lake_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic misunderstanding_d::to_lake_ passed non-existent member");
 		}
 		return op.operate(*const_cast<misunderstanding_d*>(this), arguments);
 	}
@@ -250,7 +250,7 @@ public:
 		auto const op = any_a<>::operation("to_lake_");
 		if (!op)
 		{
-			throw dis("dynamic misunderstanding_d::to_lake_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic misunderstanding_d::to_lake_ passed non-existent member");
 		}
 		return cast<_lake_int8>(variadic_operate(op, *const_cast<misunderstanding_d*>(this)));
 	}
@@ -264,7 +264,7 @@ public:
 		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
-			throw dis("dynamic misunderstanding_d::add_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic misunderstanding_d::add_ passed non-existent member");
 		}
 		return op.operate(*const_cast<misunderstanding_d*>(this), arguments);
 	}
@@ -275,7 +275,7 @@ public:
 		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
-			throw dis("dynamic misunderstanding_d::add_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic misunderstanding_d::add_ passed non-existent member");
 		}
 		return cast<misunderstanding_a<>>(variadic_operate(op, *const_cast<misunderstanding_d*>(this), misunderstanding));
 	}

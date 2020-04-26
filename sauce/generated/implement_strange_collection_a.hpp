@@ -9,7 +9,7 @@ inline any_a<> collection_a<_key, _value, _element>::has__(list_a<> const& ___ar
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("collection_a::has_ passed short range");
+		throw dis(__FILE__, __LINE__, "collection_a::has_ passed short range");
 	}
 	auto key = cast< _key >(*___it___);
 	return has_(key);
@@ -40,7 +40,7 @@ inline any_a<> collection_a<_key, _value, _element>::at__(list_a<> const& ___arg
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("collection_a::at_ passed short range");
+		throw dis(__FILE__, __LINE__, "collection_a::at_ passed short range");
 	}
 	auto key = cast< _key >(*___it___);
 	return at_(key);
@@ -62,12 +62,12 @@ inline any_a<> collection_a<_key, _value, _element>::update__(list_a<> const& __
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("collection_a::update_ passed short range");
+		throw dis(__FILE__, __LINE__, "collection_a::update_ passed short range");
 	}
 	auto key = cast< _key >(*___it___);
 	if (++___it___ == ___end___)
 	{
-		throw dis("collection_a::update_ passed short range");
+		throw dis(__FILE__, __LINE__, "collection_a::update_ passed short range");
 	}
 	auto value = cast< _value >(*___it___);
 	return update_(key, value);
@@ -98,12 +98,12 @@ inline any_a<> collection_a<_key, _value, _element>::insert__(list_a<> const& __
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("collection_a::insert_ passed short range");
+		throw dis(__FILE__, __LINE__, "collection_a::insert_ passed short range");
 	}
 	auto key = cast< _key >(*___it___);
 	if (++___it___ == ___end___)
 	{
-		throw dis("collection_a::insert_ passed short range");
+		throw dis(__FILE__, __LINE__, "collection_a::insert_ passed short range");
 	}
 	auto value = cast< _value >(*___it___);
 	return insert_(key, value);
@@ -134,7 +134,7 @@ inline any_a<> collection_a<_key, _value, _element>::erase__(list_a<> const& ___
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("collection_a::erase_ passed short range");
+		throw dis(__FILE__, __LINE__, "collection_a::erase_ passed short range");
 	}
 	auto key = cast< _key >(*___it___);
 	return erase_(key);
@@ -237,7 +237,7 @@ inline any_a<> collection_a<_key, _value, _element>::push_front__(list_a<> const
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("collection_a::push_front_ passed short range");
+		throw dis(__FILE__, __LINE__, "collection_a::push_front_ passed short range");
 	}
 	auto thing = cast< _element >(*___it___);
 	return push_front_(thing);
@@ -283,7 +283,7 @@ inline any_a<> collection_a<_key, _value, _element>::push_back__(list_a<> const&
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("collection_a::push_back_ passed short range");
+		throw dis(__FILE__, __LINE__, "collection_a::push_back_ passed short range");
 	}
 	auto thing = cast< _element >(*___it___);
 	return push_back_(thing);
@@ -329,7 +329,7 @@ inline any_a<> collection_a<_key, _value, _element>::self_assign__(list_a<> cons
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("collection_a::self_assign_ passed short range");
+		throw dis(__FILE__, __LINE__, "collection_a::self_assign_ passed short range");
 	}
 	auto range = cast< range_a< _element > >(*___it___);
 	return self_assign_(range);
@@ -355,7 +355,7 @@ inline any_a<> collection_a<_key, _value, _element>::self_add__(list_a<> const& 
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("collection_a::self_add_ passed short range");
+		throw dis(__FILE__, __LINE__, "collection_a::self_add_ passed short range");
 	}
 	auto range = cast< range_a< _element > >(*___it___);
 	return self_add_(range);
@@ -389,7 +389,7 @@ inline any_a<> collection_a<_key, _value, _element>::add__(list_a<> const& ___ar
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("collection_a::add_ passed short range");
+		throw dis(__FILE__, __LINE__, "collection_a::add_ passed short range");
 	}
 	auto range = cast< range_a< _element > >(*___it___);
 	return add_(range);
@@ -415,7 +415,7 @@ inline any_a<> collection_a<_key, _value, _element>::self_subtract__(list_a<> co
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("collection_a::self_subtract_ passed short range");
+		throw dis(__FILE__, __LINE__, "collection_a::self_subtract_ passed short range");
 	}
 	auto range = cast< range_a< _element > >(*___it___);
 	return self_subtract_(range);
@@ -449,7 +449,7 @@ inline any_a<> collection_a<_key, _value, _element>::subtract__(list_a<> const& 
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("collection_a::subtract_ passed short range");
+		throw dis(__FILE__, __LINE__, "collection_a::subtract_ passed short range");
 	}
 	auto range = cast< range_a< _element > >(*___it___);
 	return subtract_(range);

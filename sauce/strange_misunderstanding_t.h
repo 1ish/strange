@@ -112,6 +112,16 @@ inline misunderstanding_a<> mis(F&& s)
 	return misunderstanding_t<>::create(std::forward<F>(s));
 }
 
+inline misunderstanding_a<> operator+(std_exception const& e, misunderstanding_a<> const& m)
+{
+	return mis(e.what()) + m;
+}
+
+inline misunderstanding_a<> operator+(misunderstanding_a<> const& m, std_exception const& e)
+{
+	return m + mis(e.what());
+}
+
 } // namespace strange
 
 #endif

@@ -233,16 +233,16 @@ class data_d : public any_a<>
 {
 public:
 	inline bool operator==(data_a < _type > const & data ) const
-	{ throw dis("dynamic data_d::operator==(data) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic data_d::operator==(data) not available"); }
 
 	inline bool operator!=(data_a < _type > const & data ) const
-	{ throw dis("dynamic data_d::operator!=(data) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic data_d::operator!=(data) not available"); }
 
 	inline _type const & extract_data() const
-	{ throw dis("dynamic data_d::extract_data() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic data_d::extract_data() not available"); }
 
 	inline _type & mutate_data()
-	{ throw dis("dynamic data_d::mutate_data() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic data_d::mutate_data() not available"); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 

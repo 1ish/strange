@@ -105,7 +105,7 @@ inline any_a<> symbol_a<_1>::add__(list_a<> const& ___arguments___) const
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("symbol_a::add_ passed short range");
+		throw dis(__FILE__, __LINE__, "symbol_a::add_ passed short range");
 	}
 	auto symbol = cast<symbol_a<>>(*___it___);
 	return add_(symbol);

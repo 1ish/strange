@@ -232,7 +232,7 @@ public:
 		auto const op = any_a<>::operation("extract_begin_");
 		if (!op)
 		{
-			throw dis("dynamic range_d::extract_begin_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic range_d::extract_begin_ passed non-existent member");
 		}
 		return op.operate(*const_cast<range_d*>(this), arguments);
 	}
@@ -243,7 +243,7 @@ public:
 		auto const op = any_a<>::operation("extract_begin_");
 		if (!op)
 		{
-			throw dis("dynamic range_d::extract_begin_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic range_d::extract_begin_ passed non-existent member");
 		}
 		return cast<forward_extractor_a< _element >>(variadic_operate(op, *const_cast<range_d*>(this)));
 	}
@@ -254,7 +254,7 @@ public:
 		auto const op = any_a<>::operation("extract_end_");
 		if (!op)
 		{
-			throw dis("dynamic range_d::extract_end_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic range_d::extract_end_ passed non-existent member");
 		}
 		return op.operate(*const_cast<range_d*>(this), arguments);
 	}
@@ -265,7 +265,7 @@ public:
 		auto const op = any_a<>::operation("extract_end_");
 		if (!op)
 		{
-			throw dis("dynamic range_d::extract_end_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic range_d::extract_end_ passed non-existent member");
 		}
 		return cast<forward_extractor_a< _element >>(variadic_operate(op, *const_cast<range_d*>(this)));
 	}

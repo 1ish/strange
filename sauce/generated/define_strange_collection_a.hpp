@@ -404,7 +404,7 @@ public:
 		auto const op = any_a<>::operation("has_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::has_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::has_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -415,7 +415,7 @@ public:
 		auto const op = any_a<>::operation("has_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::has_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::has_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this), key));
 	}
@@ -429,7 +429,7 @@ public:
 		auto const op = any_a<>::operation("at_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::at_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::at_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -440,7 +440,7 @@ public:
 		auto const op = any_a<>::operation("at_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::at_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::at_ passed non-existent member");
 		}
 		return cast<_value>(variadic_operate(op, *const_cast<collection_d*>(this), key));
 	}
@@ -451,7 +451,7 @@ public:
 		auto const op = any_a<>::operation("update_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::update_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::update_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -462,7 +462,7 @@ public:
 		auto const op = any_a<>::operation("update_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::update_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::update_ passed non-existent member");
 		}
 		return cast<_value>(variadic_operate(op, *this, key, value));
 	}
@@ -476,7 +476,7 @@ public:
 		auto const op = any_a<>::operation("insert_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::insert_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::insert_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -487,7 +487,7 @@ public:
 		auto const op = any_a<>::operation("insert_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::insert_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::insert_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, key, value));
 	}
@@ -501,7 +501,7 @@ public:
 		auto const op = any_a<>::operation("erase_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::erase_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::erase_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -512,7 +512,7 @@ public:
 		auto const op = any_a<>::operation("erase_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::erase_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::erase_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, key));
 	}
@@ -526,7 +526,7 @@ public:
 		auto const op = any_a<>::operation("clear_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::clear_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::clear_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -537,7 +537,7 @@ public:
 		auto const op = any_a<>::operation("clear_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::clear_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::clear_ passed non-existent member");
 		}
 		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *this));
 	}
@@ -551,7 +551,7 @@ public:
 		auto const op = any_a<>::operation("size_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::size_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::size_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -562,7 +562,7 @@ public:
 		auto const op = any_a<>::operation("size_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::size_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::size_ passed non-existent member");
 		}
 		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<collection_d*>(this)));
 	}
@@ -576,7 +576,7 @@ public:
 		auto const op = any_a<>::operation("empty_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::empty_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::empty_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -587,7 +587,7 @@ public:
 		auto const op = any_a<>::operation("empty_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::empty_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::empty_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this)));
 	}
@@ -601,7 +601,7 @@ public:
 		auto const op = any_a<>::operation("push_front_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::push_front_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::push_front_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -612,7 +612,7 @@ public:
 		auto const op = any_a<>::operation("push_front_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::push_front_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::push_front_ passed non-existent member");
 		}
 		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *this, thing));
 	}
@@ -626,7 +626,7 @@ public:
 		auto const op = any_a<>::operation("pop_front_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::pop_front_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::pop_front_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -637,7 +637,7 @@ public:
 		auto const op = any_a<>::operation("pop_front_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::pop_front_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::pop_front_ passed non-existent member");
 		}
 		return cast<_element>(variadic_operate(op, *this));
 	}
@@ -648,7 +648,7 @@ public:
 		auto const op = any_a<>::operation("push_back_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::push_back_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::push_back_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -659,7 +659,7 @@ public:
 		auto const op = any_a<>::operation("push_back_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::push_back_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::push_back_ passed non-existent member");
 		}
 		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *this, thing));
 	}
@@ -673,7 +673,7 @@ public:
 		auto const op = any_a<>::operation("pop_back_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::pop_back_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::pop_back_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -684,7 +684,7 @@ public:
 		auto const op = any_a<>::operation("pop_back_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::pop_back_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::pop_back_ passed non-existent member");
 		}
 		return cast<_element>(variadic_operate(op, *this));
 	}
@@ -695,7 +695,7 @@ public:
 		auto const op = any_a<>::operation("self_assign_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::self_assign_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::self_assign_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -706,7 +706,7 @@ public:
 		auto const op = any_a<>::operation("self_assign_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::self_assign_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::self_assign_ passed non-existent member");
 		}
 		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *this, range));
 	}
@@ -717,7 +717,7 @@ public:
 		auto const op = any_a<>::operation("self_add_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::self_add_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::self_add_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -728,7 +728,7 @@ public:
 		auto const op = any_a<>::operation("self_add_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::self_add_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::self_add_ passed non-existent member");
 		}
 		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *this, range));
 	}
@@ -739,7 +739,7 @@ public:
 		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::add_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::add_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -750,7 +750,7 @@ public:
 		auto const op = any_a<>::operation("add_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::add_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::add_ passed non-existent member");
 		}
 		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *const_cast<collection_d*>(this), range));
 	}
@@ -761,7 +761,7 @@ public:
 		auto const op = any_a<>::operation("self_subtract_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::self_subtract_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::self_subtract_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -772,7 +772,7 @@ public:
 		auto const op = any_a<>::operation("self_subtract_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::self_subtract_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::self_subtract_ passed non-existent member");
 		}
 		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *this, range));
 	}
@@ -783,7 +783,7 @@ public:
 		auto const op = any_a<>::operation("subtract_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::subtract_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::subtract_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -794,7 +794,7 @@ public:
 		auto const op = any_a<>::operation("subtract_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::subtract_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::subtract_ passed non-existent member");
 		}
 		return cast<collection_a< _key , _value , _element >>(variadic_operate(op, *const_cast<collection_d*>(this), range));
 	}
@@ -805,7 +805,7 @@ public:
 		auto const op = any_a<>::operation("read_lock_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::read_lock_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::read_lock_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -816,7 +816,7 @@ public:
 		auto const op = any_a<>::operation("read_lock_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::read_lock_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::read_lock_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this)));
 	}
@@ -827,7 +827,7 @@ public:
 		auto const op = any_a<>::operation("write_lock_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::write_lock_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::write_lock_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -838,7 +838,7 @@ public:
 		auto const op = any_a<>::operation("write_lock_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::write_lock_ passed non-existent member");
+			throw dis(__FILE__, __LINE__, "dynamic collection_d::write_lock_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this)));
 	}

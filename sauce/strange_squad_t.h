@@ -790,7 +790,7 @@ public:
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		if (_deque.empty())
 		{
-			throw dis("strange::squad::pop_front called on empty squad");
+			throw dis(__FILE__, __LINE__, "strange::squad::pop_front called on empty squad");
 		}
 		_element result = _deque.front();
 		_deque.pop_front();
@@ -814,7 +814,7 @@ public:
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		if (_deque.empty())
 		{
-			throw dis("strange::squad::pop_back called on empty squad");
+			throw dis(__FILE__, __LINE__, "strange::squad::pop_back called on empty squad");
 		}
 		_element result = _deque.back();
 		_deque.pop_back();

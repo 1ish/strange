@@ -20,12 +20,12 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_intimate_attribute::create passed empty range");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_intimate_attribute::create passed empty range");
 		}
 		auto const member = *it;
 		if (!check<symbol_a<>>(member))
 		{
-			throw dis(token.report() + "strange::expression_intimate_attribute::create passed non-symbol member term");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_intimate_attribute::create passed non-symbol member term");
 		}
 		if (++it == terms.extract_end_())
 		{
@@ -34,7 +34,7 @@ public:
 		auto const kind = *it;
 		if (!check<kind_a<>>(kind) && !check<expression_a<>>(kind))
 		{
-			throw dis(token.report() + "strange::expression_intimate_attribute::create passed non-kind/expression term");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_intimate_attribute::create passed non-kind/expression term");
 		}
 		if (++it == terms.extract_end_())
 		{
@@ -43,7 +43,7 @@ public:
 		auto const expression = *it;
 		if (!check<expression_a<>>(expression))
 		{
-			throw dis(token.report() + "strange::expression_intimate_attribute::create passed non-expression value term");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_intimate_attribute::create passed non-expression value term");
 		}
 		return expression_substitute_t<expression_intimate_attribute_t<>>::create(expression_intimate_attribute_t<>(token, terms, fast<symbol_a<>>(member), kind, fast<expression_a<>>(expression)));
 	}
@@ -66,14 +66,14 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_attribute::operate passed non-unordered-shoal local");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_intimate_attribute::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto& local = const_cast<std_unordered_map<any_a<>, any_a<>>&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
 		auto it = local.find(sym("^"));
 		if (it == local.end())
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_attribute::operate ^ not found");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_intimate_attribute::operate ^ not found");
 		}
 		if (_assign)
 		{
@@ -86,13 +86,13 @@ public:
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
-					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_attribute::operate kind expression evaluation error") + misunderstanding;
+					throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_intimate_attribute::operate kind expression evaluation error") + misunderstanding;
 				}
 			}
 			auto const value = _expression.operate(thing, list);
 			if (!value.kinds_().has(kind))
 			{
-				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_attribute::operate returned wrong kind of thing");
+				throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_intimate_attribute::operate returned wrong kind of thing");
 			}
 			return any_c<>::intimate(it->second, _member, flock_t<>::create_(value));
 		}
@@ -144,7 +144,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_attribute::generate_cpp called for wrong type of expression");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_intimate_attribute::generate_cpp called for wrong type of expression");
 		}
 		river.write_string("." + _member.to_string());
 		_expression.generate_cpp(version, indent, river, declare, define);

@@ -123,7 +123,7 @@ inline any_a<> river_a<_1>::put_back_char__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("river_a::put_back_char_ passed short range");
+		throw dis(__FILE__, __LINE__, "river_a::put_back_char_ passed short range");
 	}
 	auto int_8 = cast<number_data_int8_a<>>(*___it___);
 	return put_back_char_(int_8);
@@ -154,12 +154,12 @@ inline any_a<> river_a<_1>::get_line__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("river_a::get_line_ passed short range");
+		throw dis(__FILE__, __LINE__, "river_a::get_line_ passed short range");
 	}
 	auto count = cast<number_data_int64_a<>>(*___it___);
 	if (++___it___ == ___end___)
 	{
-		throw dis("river_a::get_line_ passed short range");
+		throw dis(__FILE__, __LINE__, "river_a::get_line_ passed short range");
 	}
 	auto delimiter = cast<number_data_int8_a<>>(*___it___);
 	return get_line_(count, delimiter);
@@ -190,7 +190,7 @@ inline any_a<> river_a<_1>::ignore__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("river_a::ignore_ passed short range");
+		throw dis(__FILE__, __LINE__, "river_a::ignore_ passed short range");
 	}
 	auto count = cast<number_data_int64_a<>>(*___it___);
 	return ignore_(count);
@@ -221,7 +221,7 @@ inline any_a<> river_a<_1>::read__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("river_a::read_ passed short range");
+		throw dis(__FILE__, __LINE__, "river_a::read_ passed short range");
 	}
 	auto count = cast<number_data_int64_a<>>(*___it___);
 	return read_(count);
@@ -285,7 +285,7 @@ inline any_a<> river_a<_1>::seekg_beg__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("river_a::seekg_beg_ passed short range");
+		throw dis(__FILE__, __LINE__, "river_a::seekg_beg_ passed short range");
 	}
 	auto offset = cast<number_data_int64_a<>>(*___it___);
 	return seekg_beg_(offset);
@@ -316,7 +316,7 @@ inline any_a<> river_a<_1>::seekg_end__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("river_a::seekg_end_ passed short range");
+		throw dis(__FILE__, __LINE__, "river_a::seekg_end_ passed short range");
 	}
 	auto offset = cast<number_data_int64_a<>>(*___it___);
 	return seekg_end_(offset);
@@ -347,7 +347,7 @@ inline any_a<> river_a<_1>::seekg_cur__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("river_a::seekg_cur_ passed short range");
+		throw dis(__FILE__, __LINE__, "river_a::seekg_cur_ passed short range");
 	}
 	auto offset = cast<number_data_int64_a<>>(*___it___);
 	return seekg_cur_(offset);
@@ -402,7 +402,7 @@ inline any_a<> river_a<_1>::put_char__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("river_a::put_char_ passed short range");
+		throw dis(__FILE__, __LINE__, "river_a::put_char_ passed short range");
 	}
 	auto int_8 = cast<number_data_int8_a<>>(*___it___);
 	return put_char_(int_8);
@@ -433,7 +433,7 @@ inline any_a<> river_a<_1>::write__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("river_a::write_ passed short range");
+		throw dis(__FILE__, __LINE__, "river_a::write_ passed short range");
 	}
 	auto lake = cast<lake_int8_a<>>(*___it___);
 	return write_(lake);
@@ -497,7 +497,7 @@ inline any_a<> river_a<_1>::seekp_beg__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("river_a::seekp_beg_ passed short range");
+		throw dis(__FILE__, __LINE__, "river_a::seekp_beg_ passed short range");
 	}
 	auto offset = cast<number_data_int64_a<>>(*___it___);
 	return seekp_beg_(offset);
@@ -528,7 +528,7 @@ inline any_a<> river_a<_1>::seekp_end__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("river_a::seekp_end_ passed short range");
+		throw dis(__FILE__, __LINE__, "river_a::seekp_end_ passed short range");
 	}
 	auto offset = cast<number_data_int64_a<>>(*___it___);
 	return seekp_end_(offset);
@@ -559,7 +559,7 @@ inline any_a<> river_a<_1>::seekp_cur__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("river_a::seekp_cur_ passed short range");
+		throw dis(__FILE__, __LINE__, "river_a::seekp_cur_ passed short range");
 	}
 	auto offset = cast<number_data_int64_a<>>(*___it___);
 	return seekp_cur_(offset);
@@ -710,7 +710,7 @@ inline any_a<> river_a<_1>::set_good__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("river_a::set_good_ passed short range");
+		throw dis(__FILE__, __LINE__, "river_a::set_good_ passed short range");
 	}
 	auto value = cast<any_a<>>(*___it___);
 	return set_good_(value);
@@ -741,7 +741,7 @@ inline any_a<> river_a<_1>::set_eof__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("river_a::set_eof_ passed short range");
+		throw dis(__FILE__, __LINE__, "river_a::set_eof_ passed short range");
 	}
 	auto value = cast<any_a<>>(*___it___);
 	return set_eof_(value);
@@ -772,7 +772,7 @@ inline any_a<> river_a<_1>::set_fail__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("river_a::set_fail_ passed short range");
+		throw dis(__FILE__, __LINE__, "river_a::set_fail_ passed short range");
 	}
 	auto value = cast<any_a<>>(*___it___);
 	return set_fail_(value);
@@ -803,7 +803,7 @@ inline any_a<> river_a<_1>::set_bad__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("river_a::set_bad_ passed short range");
+		throw dis(__FILE__, __LINE__, "river_a::set_bad_ passed short range");
 	}
 	auto value = cast<any_a<>>(*___it___);
 	return set_bad_(value);

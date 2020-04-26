@@ -35,7 +35,7 @@ public:
 		{
 			if (!check<symbol_a<>>(name))
 			{
-				throw dis("strange::incarnation::create passed non-symbol dimension name");
+				throw dis(__FILE__, __LINE__, "strange::incarnation::create passed non-symbol dimension name");
 			}
 			if (aspect == aspects.extract_end_())
 			{

@@ -4,9 +4,6 @@
 namespace strange
 {
 
-template <typename F>
-inline misunderstanding_a<> dis(F&& s);
-
 template <typename _primitive_>
 class number_u
 {

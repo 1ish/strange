@@ -85,7 +85,7 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("number_a::self_assign_ passed short range");
+		throw dis(__FILE__, __LINE__, "number_a::self_assign_ passed short range");
 	}
 	auto number = cast<number_a<>>(*___it___);
 	return self_assign_(number);
@@ -111,7 +111,7 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("number_a::self_add_ passed short range");
+		throw dis(__FILE__, __LINE__, "number_a::self_add_ passed short range");
 	}
 	auto number = cast<number_a<>>(*___it___);
 	return self_add_(number);
@@ -145,7 +145,7 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("number_a::add_ passed short range");
+		throw dis(__FILE__, __LINE__, "number_a::add_ passed short range");
 	}
 	auto number = cast<number_a<>>(*___it___);
 	return add_(number);
@@ -171,7 +171,7 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("number_a::self_subtract_ passed short range");
+		throw dis(__FILE__, __LINE__, "number_a::self_subtract_ passed short range");
 	}
 	auto number = cast<number_a<>>(*___it___);
 	return self_subtract_(number);
@@ -205,7 +205,7 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("number_a::subtract_ passed short range");
+		throw dis(__FILE__, __LINE__, "number_a::subtract_ passed short range");
 	}
 	auto number = cast<number_a<>>(*___it___);
 	return subtract_(number);
@@ -231,7 +231,7 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("number_a::self_multiply_ passed short range");
+		throw dis(__FILE__, __LINE__, "number_a::self_multiply_ passed short range");
 	}
 	auto number = cast<number_a<>>(*___it___);
 	return self_multiply_(number);
@@ -265,7 +265,7 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("number_a::multiply_ passed short range");
+		throw dis(__FILE__, __LINE__, "number_a::multiply_ passed short range");
 	}
 	auto number = cast<number_a<>>(*___it___);
 	return multiply_(number);
@@ -291,7 +291,7 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("number_a::self_divide_ passed short range");
+		throw dis(__FILE__, __LINE__, "number_a::self_divide_ passed short range");
 	}
 	auto number = cast<number_a<>>(*___it___);
 	return self_divide_(number);
@@ -325,7 +325,7 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("number_a::divide_ passed short range");
+		throw dis(__FILE__, __LINE__, "number_a::divide_ passed short range");
 	}
 	auto number = cast<number_a<>>(*___it___);
 	return divide_(number);
@@ -351,7 +351,7 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("number_a::self_modulo_ passed short range");
+		throw dis(__FILE__, __LINE__, "number_a::self_modulo_ passed short range");
 	}
 	auto number = cast<number_a<>>(*___it___);
 	return self_modulo_(number);
@@ -385,7 +385,7 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("number_a::modulo_ passed short range");
+		throw dis(__FILE__, __LINE__, "number_a::modulo_ passed short range");
 	}
 	auto number = cast<number_a<>>(*___it___);
 	return modulo_(number);
@@ -435,7 +435,7 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("number_a::from_int_64_ passed short range");
+		throw dis(__FILE__, __LINE__, "number_a::from_int_64_ passed short range");
 	}
 	auto int_64 = cast< _number_data_int64 >(*___it___);
 	return from_int_64_(int_64);
@@ -490,7 +490,7 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("number_a::from_uint_64_ passed short range");
+		throw dis(__FILE__, __LINE__, "number_a::from_uint_64_ passed short range");
 	}
 	auto uint_64 = cast< _number_data_uint64 >(*___it___);
 	return from_uint_64_(uint_64);
@@ -545,7 +545,7 @@ inline any_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_do
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("number_a::from_float_64_ passed short range");
+		throw dis(__FILE__, __LINE__, "number_a::from_float_64_ passed short range");
 	}
 	auto float_64 = cast< _number_data_double >(*___it___);
 	return from_float_64_(float_64);

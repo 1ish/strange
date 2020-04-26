@@ -20,21 +20,21 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_operate_range::create passed empty range");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_operate_range::create passed empty range");
 		}
 		auto thing = *it;
 		if (!check<expression_a<>>(thing))
 		{
-			throw dis(token.report() + "strange::expression_operate_range::create passed non-expression thing term");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_operate_range::create passed non-expression thing term");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_operate_range::create passed short range");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_operate_range::create passed short range");
 		}
 		auto list = *it;
 		if (!check<expression_a<>>(list))
 		{
-			throw dis(token.report() + "strange::expression_operate_range::create passed non-expression list term");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_operate_range::create passed non-expression list term");
 		}
 		return expression_substitute_t<expression_operate_range_t<>>::create(expression_operate_range_t<>(token, terms, fast<expression_a<>>(thing), fast<expression_a<>>(list)));
 	}
@@ -58,7 +58,7 @@ public:
 		auto const range_term = _list.operate(thing, list);
 		if (!check<list_a<>>(range_term))
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate_range::operate with non-range term");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_operate_range::operate with non-range term");
 		}
 		return thing_term.operate(thing_term, fast<list_a<>>(range_term));
 	}
@@ -110,7 +110,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate_range::generate_cpp called for wrong type of expression");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_operate_range::generate_cpp called for wrong type of expression");
 		}
 		_thing.generate(version, indent, river);
 		river.write_string("(");

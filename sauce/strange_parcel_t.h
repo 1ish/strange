@@ -321,7 +321,7 @@ public:
 			}
 			catch (std_exception& exception)
 			{
-				throw dis("strange::parcel::visit exception: ") + exception;
+				throw dis(__FILE__, __LINE__, "strange::parcel::visit exception: ") + exception;
 			}
 		}
 		return result;
@@ -347,7 +347,7 @@ public:
 			}
 			catch (std_exception& exception)
 			{
-				throw dis("strange::parcel::visit exception: ") + exception;
+				throw dis(__FILE__, __LINE__, "strange::parcel::visit exception: ") + exception;
 			}
 		}
 		return result;
@@ -397,7 +397,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::begin exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::begin exception: ") + exception;
 		}
 	}
 
@@ -409,7 +409,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::end exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::end exception: ") + exception;
 		}
 	}
 
@@ -422,7 +422,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::keys_begin exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::keys_begin exception: ") + exception;
 		}
 	}
 
@@ -434,7 +434,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::keys_begin exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::keys_begin exception: ") + exception;
 		}
 	}
 
@@ -446,7 +446,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::keys_end exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::keys_end exception: ") + exception;
 		}
 	}
 
@@ -458,7 +458,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::keys_end exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::keys_end exception: ") + exception;
 		}
 	}
 
@@ -470,7 +470,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::extract_begin exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::extract_begin exception: ") + exception;
 		}
 	}
 
@@ -482,7 +482,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::extract_begin exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::extract_begin exception: ") + exception;
 		}
 	}
 
@@ -494,7 +494,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::extract_end exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::extract_end exception: ") + exception;
 		}
 	}
 
@@ -506,7 +506,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::extract_end exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::extract_end exception: ") + exception;
 		}
 	}
 
@@ -527,7 +527,7 @@ public:
 			}
 			catch (std_exception& exception)
 			{
-				throw dis("strange::parcel::has exception: ") + exception;
+				throw dis(__FILE__, __LINE__, "strange::parcel::has exception: ") + exception;
 			}
 		}
 		if (check<number_a<>>(key))
@@ -539,10 +539,10 @@ public:
 			}
 			catch (std_exception& exception)
 			{
-				throw dis("strange::parcel::has exception: ") + exception;
+				throw dis(__FILE__, __LINE__, "strange::parcel::has exception: ") + exception;
 			}
 		}
-		throw dis("strange::parcel::has passed wrong type of key");
+		throw dis(__FILE__, __LINE__, "strange::parcel::has passed wrong type of key");
 	}
 
 	inline container_a<> at_(any_a<> const& key) const
@@ -556,7 +556,7 @@ public:
 			}
 			catch (std_exception& exception)
 			{
-				throw dis("strange::parcel::at exception: ") + exception;
+				throw dis(__FILE__, __LINE__, "strange::parcel::at exception: ") + exception;
 			}
 		}
 		if (check<number_a<>>(key))
@@ -568,10 +568,10 @@ public:
 			}
 			catch (std_exception& exception)
 			{
-				throw dis("strange::parcel::at exception: ") + exception;
+				throw dis(__FILE__, __LINE__, "strange::parcel::at exception: ") + exception;
 			}
 		}
-		throw dis("strange::parcel::at passed wrong type of key");
+		throw dis(__FILE__, __LINE__, "strange::parcel::at passed wrong type of key");
 	}
 
 	inline container_a<> update_(any_a<> const& key, container_a<> const& value)
@@ -584,7 +584,7 @@ public:
 	{
 		if (!check<parcel_a<>>(value))
 		{
-			throw dis("strange::parcel::update passed wrong type of value");
+			throw dis(__FILE__, __LINE__, "strange::parcel::update passed wrong type of value");
 		}
 		if (check<symbol_a<>>(key))
 		{
@@ -595,7 +595,7 @@ public:
 			}
 			catch (std_exception& exception)
 			{
-				throw dis("strange::parcel::update exception: ") + exception;
+				throw dis(__FILE__, __LINE__, "strange::parcel::update exception: ") + exception;
 			}
 		}
 		if (check<number_a<>>(key))
@@ -607,10 +607,10 @@ public:
 			}
 			catch (std_exception& exception)
 			{
-				throw dis("strange::parcel::update exception: ") + exception;
+				throw dis(__FILE__, __LINE__, "strange::parcel::update exception: ") + exception;
 			}
 		}
-		throw dis("strange::parcel::update passed wrong type of key");
+		throw dis(__FILE__, __LINE__, "strange::parcel::update passed wrong type of key");
 	}
 
 	inline any_a<> insert_(any_a<> const& key, container_a<> const& value)
@@ -622,7 +622,7 @@ public:
 	{
 		if (!check<parcel_a<>>(value))
 		{
-			throw dis("strange::parcel::insert passed wrong type of value");
+			throw dis(__FILE__, __LINE__, "strange::parcel::insert passed wrong type of value");
 		}
 		if (check<symbol_a<>>(key))
 		{
@@ -639,7 +639,7 @@ public:
 			}
 			catch (std_exception& exception)
 			{
-				throw dis("strange::parcel::insert exception: ") + exception;
+				throw dis(__FILE__, __LINE__, "strange::parcel::insert exception: ") + exception;
 			}
 		}
 		if (check<number_a<>>(key))
@@ -657,10 +657,10 @@ public:
 			}
 			catch (std_exception& exception)
 			{
-				throw dis("strange::parcel::insert exception: ") + exception;
+				throw dis(__FILE__, __LINE__, "strange::parcel::insert exception: ") + exception;
 			}
 		}
-		throw dis("strange::parcel::insert passed wrong type of key");
+		throw dis(__FILE__, __LINE__, "strange::parcel::insert passed wrong type of key");
 	}
 
 	inline any_a<> erase_(any_a<> const& key)
@@ -685,7 +685,7 @@ public:
 			}
 			catch (std_exception& exception)
 			{
-				throw dis("strange::parcel::erase exception: ") + exception;
+				throw dis(__FILE__, __LINE__, "strange::parcel::erase exception: ") + exception;
 			}
 		}
 		if (check<number_a<>>(key))
@@ -703,10 +703,10 @@ public:
 			}
 			catch (std_exception& exception)
 			{
-				throw dis("strange::parcel::erase exception: ") + exception;
+				throw dis(__FILE__, __LINE__, "strange::parcel::erase exception: ") + exception;
 			}
 		}
-		throw dis("strange::parcel::erase passed wrong type of key");
+		throw dis(__FILE__, __LINE__, "strange::parcel::erase passed wrong type of key");
 	}
 
 	inline ___ego___ clear_()
@@ -724,7 +724,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::clear exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::clear exception: ") + exception;
 		}
 	}
 
@@ -742,7 +742,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::size exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::size exception: ") + exception;
 		}
 	}
 
@@ -760,7 +760,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::empty exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::empty exception: ") + exception;
 		}
 	}
 
@@ -774,7 +774,7 @@ public:
 	{
 		if (!check<parcel_a<>>(thing))
 		{
-			throw dis("strange::parcel::push_front passed wrong type of thing");
+			throw dis(__FILE__, __LINE__, "strange::parcel::push_front passed wrong type of thing");
 		}
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		try
@@ -783,7 +783,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::push_front exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::push_front exception: ") + exception;
 		}
 	}
 
@@ -798,7 +798,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::pop_front exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::pop_front exception: ") + exception;
 		}
 	}
 
@@ -812,7 +812,7 @@ public:
 	{
 		if (!check<parcel_a<>>(thing))
 		{
-			throw dis("strange::parcel::push_back passed wrong type of thing");
+			throw dis(__FILE__, __LINE__, "strange::parcel::push_back passed wrong type of thing");
 		}
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		try
@@ -821,7 +821,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::push_back exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::push_back exception: ") + exception;
 		}
 	}
 
@@ -836,7 +836,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::pop_back exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::pop_back exception: ") + exception;
 		}
 	}
 
@@ -860,14 +860,14 @@ public:
 				{
 					if (!check<parcel_a<>>(thing))
 					{
-						throw dis("strange::parcel::self_assign passed wrong type of thing");
+						throw dis(__FILE__, __LINE__, "strange::parcel::self_assign passed wrong type of thing");
 					}
 					_packet.push_back(fast<parcel_a<>>(thing).extract_packet());
 				}
 			}
 			catch (std_exception& exception)
 			{
-				throw dis("strange::parcel::self_assign exception: ") + exception;
+				throw dis(__FILE__, __LINE__, "strange::parcel::self_assign exception: ") + exception;
 			}
 		}
 	}
@@ -889,7 +889,7 @@ public:
 			}
 			catch (std_exception& exception)
 			{
-				throw dis("strange::parcel::self_add exception: ") + exception;
+				throw dis(__FILE__, __LINE__, "strange::parcel::self_add exception: ") + exception;
 			}
 		}
 		else
@@ -902,14 +902,14 @@ public:
 				{
 					if (!check<parcel_a<>>(thing))
 					{
-						throw dis("strange::parcel::self_add passed wrong type of thing");
+						throw dis(__FILE__, __LINE__, "strange::parcel::self_add passed wrong type of thing");
 					}
 					_packet.push_back(fast<parcel_a<>>(thing).extract_packet());
 				}
 			}
 			catch (std_exception& exception)
 			{
-				throw dis("strange::parcel::self_add exception: ") + exception;
+				throw dis(__FILE__, __LINE__, "strange::parcel::self_add exception: ") + exception;
 			}
 		}
 	}
@@ -938,7 +938,7 @@ public:
 			}
 			catch (std_exception& exception)
 			{
-				throw dis("strange::parcel::self_subtract exception: ") + exception;
+				throw dis(__FILE__, __LINE__, "strange::parcel::self_subtract exception: ") + exception;
 			}
 		}
 		else
@@ -951,14 +951,14 @@ public:
 				{
 					if (!check<parcel_a<>>(thing))
 					{
-						throw dis("strange::parcel::self_subtract passed wrong type of thing");
+						throw dis(__FILE__, __LINE__, "strange::parcel::self_subtract passed wrong type of thing");
 					}
 					_packet.erase(fast<parcel_a<>>(thing).extract_packet());
 				}
 			}
 			catch (std_exception& exception)
 			{
-				throw dis("strange::parcel::self_subtract exception: ") + exception;
+				throw dis(__FILE__, __LINE__, "strange::parcel::self_subtract exception: ") + exception;
 			}
 		}
 	}
@@ -1008,39 +1008,39 @@ public:
 			auto unique = it->boolean();
 			if (++it == end)
 			{
-				throw dis("strange::parcel::unpack called for array with initial boolean and nothing else");
+				throw dis(__FILE__, __LINE__, "strange::parcel::unpack called for array with initial boolean and nothing else");
 			}
 			number_data_a<uint64_t> id;
 			if (unique)
 			{
 				if (!it->is_integer())
 				{
-					throw dis("strange::parcel::unpack called for array with unique true but no reference id");
+					throw dis(__FILE__, __LINE__, "strange::parcel::unpack called for array with unique true but no reference id");
 				}
 				id = num(number_u<uint64_t>::from_int_64(it->integer()));
 				if (++it == end)
 				{
 					if (!check<shoal_a<number_data_a<uint64_t>, any_a<>>>(unique_shoal))
 					{
-						throw dis("strange::parcel::unpack called for array with reference id but no shoal");
+						throw dis(__FILE__, __LINE__, "strange::parcel::unpack called for array with reference id but no shoal");
 					}
 					auto shoal = fast<shoal_a<number_data_a<uint64_t>, any_a<>>>(unique_shoal);
 					if (!shoal.has(id))
 					{
-						throw dis("strange::parcel::unpack called for array with unknown reference id");
+						throw dis(__FILE__, __LINE__, "strange::parcel::unpack called for array with unknown reference id");
 					}
 					return shoal.at_(id);
 				}
 			}
 			if (!it->is_str())
 			{
-				throw dis("strange::parcel::unpack called for array with no name");
+				throw dis(__FILE__, __LINE__, "strange::parcel::unpack called for array with no name");
 			}
 			auto name = sym(it->str());
 			auto function = shared_shoal.at_(name);
 			if (!function)
 			{
-				throw dis("strange::parcel::unpack called for array with unrecognised function name: " + name.to_string());
+				throw dis(__FILE__, __LINE__, "strange::parcel::unpack called for array with unrecognised function name: " + name.to_string());
 			}
 			auto flock = flock_t<>::create_();
 			int64_t const remaining = _packet.size() - (unique ? 3 : 2);
@@ -1058,7 +1058,7 @@ public:
 				check<shoal_a<number_data_a<uint64_t>, any_a<>>>(unique_shoal) &&
 				!fast<shoal_a<number_data_a<uint64_t>, any_a<>>>(unique_shoal).insert(id, result))
 			{
-				throw dis("strange::parcel::unpack called for array with duplicate reference id");
+				throw dis(__FILE__, __LINE__, "strange::parcel::unpack called for array with duplicate reference id");
 			}
 			return result;
 		}
@@ -1121,7 +1121,7 @@ public:
 
 	inline void from_json(std_string const& str)
 	{
-		throw dis("strange::parcel::from_json requires sajson"); //TODO
+		throw dis(__FILE__, __LINE__, "strange::parcel::from_json requires sajson"); //TODO
 		/*
 		try
 		{
@@ -1131,7 +1131,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::from_json exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::from_json exception: ") + exception;
 		}
 		*/
 	}
@@ -1143,7 +1143,7 @@ public:
 
 	inline std_string to_json() const
 	{
-		throw dis("strange::parcel::to_json requires rapidjson"); //TODO
+		throw dis(__FILE__, __LINE__, "strange::parcel::to_json requires rapidjson"); //TODO
 		/*
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		try
@@ -1152,7 +1152,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::to_json exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::to_json exception: ") + exception;
 		}
 		*/
 	}
@@ -1168,7 +1168,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::from_binary exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::from_binary exception: ") + exception;
 		}
 	}
 
@@ -1182,7 +1182,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::from_binary exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::from_binary exception: ") + exception;
 		}
 	}
 
@@ -1196,7 +1196,7 @@ public:
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		if (!_packet.is_finalized())
 		{
-			throw dis("strange::parcel::to_binary called on parcel that has not been closed");
+			throw dis(__FILE__, __LINE__, "strange::parcel::to_binary called on parcel that has not been closed");
 		}
 		auto buffer = _packet.get_bytes();
 		return std_string(reinterpret_cast<char const*>(buffer.data()), buffer.size());
@@ -1237,7 +1237,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::to_boolean exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::to_boolean exception: ") + exception;
 		}
 	}
 
@@ -1273,7 +1273,7 @@ public:
 		{
 			return num(_packet.decimal());
 		}
-		throw dis("strange::parcel::to_number called on parcel that does not contain a number");
+		throw dis(__FILE__, __LINE__, "strange::parcel::to_number called on parcel that does not contain a number");
 	}
 
 	inline container_a<> from_int_64_(number_data_int64_a<> const& number)
@@ -1298,7 +1298,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::to_int_64 exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::to_int_64 exception: ") + exception;
 		}
 	}
 
@@ -1324,7 +1324,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::to_float_64 exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::to_float_64 exception: ") + exception;
 		}
 	}
 
@@ -1350,7 +1350,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::to_lake exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::to_lake exception: ") + exception;
 		}
 	}
 
@@ -1370,7 +1370,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::to_symbol exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::to_symbol exception: ") + exception;
 		}
 	}
 
@@ -1405,7 +1405,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::as_inventory exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::as_inventory exception: ") + exception;
 		}
 		return yes();
 	}
@@ -1441,7 +1441,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::as_herd exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::as_herd exception: ") + exception;
 		}
 		return yes();
 	}
@@ -1479,7 +1479,7 @@ public:
 		}
 		catch (std_exception& exception)
 		{
-			throw dis("strange::parcel::as_shoal exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::as_shoal exception: ") + exception;
 		}
 		return yes();
 	}

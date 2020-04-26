@@ -20,21 +20,21 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_local_insert::create not passed any terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_local_insert::create not passed any terms");
 		}
 		any_a<> key = *it;
 		if (!check<symbol_a<>>(key))
 		{
-			throw dis(token.report() + "strange::expression_local_insert::create passed non-symbol key");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_local_insert::create passed non-symbol key");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_local_insert::create not passed sufficient terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_local_insert::create not passed sufficient terms");
 		}
 		any_a<> kind = *it;
 		if (!check<kind_a<>>(kind) && !check<expression_a<>>(kind))
 		{
-			throw dis(token.report() + "strange::expression_local_insert::create passed non-kind/expression");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_local_insert::create passed non-kind/expression");
 		}
 		if (++it == terms.extract_end_())
 		{
@@ -43,7 +43,7 @@ public:
 		any_a<> expression = *it;
 		if (!check<expression_a<>>(expression))
 		{
-			throw dis(token.report() + "strange::expression_local_insert::create passed non-expression");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_local_insert::create passed non-expression");
 		}
 		return expression_a<>::create<expression_local_insert_t<>>(token, terms, fast<symbol_a<>>(key), kind, fast<expression_a<>>(expression));
 	}
@@ -66,7 +66,7 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_local_insert::operate passed non-unordered-shoal local");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_local_insert::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto& local = static_cast<unordered_shoal_a<>&>(thing).mutate_map();
@@ -79,17 +79,17 @@ public:
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
-				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_local_insert::operate kind expression evaluation error") + misunderstanding;
+				throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_local_insert::operate kind expression evaluation error") + misunderstanding;
 			}
 		}
 		auto value = any_a<>::val(_expression.operate(thing, list));
 		if (!value.kinds_().has_(kind))
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_local_insert::operate kind does not include value");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_local_insert::operate kind does not include value");
 		}
 		if (!local.emplace(_key, value).second)
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_local_insert::operate key exists");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_local_insert::operate key exists");
 		}
 		return value;
 	}
@@ -139,7 +139,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_local_insert::generate_cpp called for wrong type of expression");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_local_insert::generate_cpp called for wrong type of expression");
 		}
 		// river.write_string(" " + _kind.code() + " " + fast<symbol_a<>>(_key).to_string() + " =");
 		_expression.generate_cpp(version, indent, river, declare, define);

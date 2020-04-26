@@ -20,22 +20,22 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_shared_scope::create not passed any terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_shared_scope::create not passed any terms");
 		}
 		any_a<> shared = *it;
 		if (!check<shoal_a<>>(shared))
 		{
-			throw dis(token.report() + "strange::expression_shared_scope::create passed non-shoal shared");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_shared_scope::create passed non-shoal shared");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_shared_scope::create passed too few terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_shared_scope::create passed too few terms");
 		}
 		auto shared_shoal = fast<shoal_a<>>(shared);
 		auto key = *it;
 		if (!check<symbol_a<>>(key))
 		{
-			throw dis(token.report() + "strange::expression_shared_scope::create passed non-symbol key");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_shared_scope::create passed non-symbol key");
 		}
 		auto value = shared_shoal.at_(key);
 		if (value)
@@ -65,7 +65,7 @@ public:
 		auto value = _shared.at_(_key);
 		if (!value)
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_scope::operate key not found");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_shared_scope::operate key not found");
 		}
 		return value;
 	}
@@ -112,7 +112,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_scope::generate_cpp called for wrong type of expression");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_shared_scope::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" " + fast<symbol_a<>>(_key).to_string() + " ");
 	}

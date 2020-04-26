@@ -19,30 +19,30 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_if::create not passed any terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_if::create not passed any terms");
 		}
 		any_a<> scope = *it;
 		if (!check<symbol_a<>>(scope))
 		{
-			throw dis(token.report() + "strange::expression_if::create passed non-symbol scope");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_if::create passed non-symbol scope");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_if::create passed too few terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_if::create passed too few terms");
 		}
 		any_a<> condition = *it;
 		if (!check<expression_a<>>(condition))
 		{
-			throw dis(token.report() + "strange::expression_if::create passed non-expression condition");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_if::create passed non-expression condition");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_if::create not passed sufficient terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_if::create not passed sufficient terms");
 		}
 		any_a<> yay = *it;
 		if (!check<expression_a<>>(yay))
 		{
-			throw dis(token.report() + "strange::expression_if::create passed non-expression");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_if::create passed non-expression");
 		}
 		if (++it == terms.extract_end_())
 		{
@@ -51,7 +51,7 @@ public:
 		any_a<> nay = *it;
 		if (!check<expression_a<>>(nay))
 		{
-			throw dis(token.report() + "strange::expression_if::create passed non-expression");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_if::create passed non-expression");
 		}
 		return expression_a<>::create<expression_if_t<>>(token, terms, fast<expression_a<>>(condition), fast<expression_a<>>(yay), fast<expression_a<>>(nay));
 	}
@@ -132,7 +132,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_if::generate_cpp called for wrong type of expression");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_if::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" (");
 		_condition.generate_cpp(version, indent, river, declare, define);

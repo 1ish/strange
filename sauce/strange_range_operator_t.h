@@ -135,26 +135,26 @@ public:
 		auto end = list.end_();
 		if (it == end)
 		{
-			throw dis("strange::range_operator::create passed empty list");
+			throw dis(__FILE__, __LINE__, "strange::range_operator::create passed empty list");
 		}
 		any_a<> the_list = *it;
 		if (!check<list_a<>>(the_list))
 		{
-			throw dis("strange::range_operator::create passed non-list");
+			throw dis(__FILE__, __LINE__, "strange::range_operator::create passed non-list");
 		}
 		if (++it == end)
 		{
-			throw dis("strange::range_operator::create passed short list");
+			throw dis(__FILE__, __LINE__, "strange::range_operator::create passed short list");
 		}
 		any_a<> thing_ref = fast_dup(*it);
 		if (++it == end)
 		{
-			throw dis("strange::range_operator::create passed short list");
+			throw dis(__FILE__, __LINE__, "strange::range_operator::create passed short list");
 		}
 		any_a<> list_ref = fast_dup(*it);
 		if (!check<list_a<>>(list_ref))
 		{
-			throw dis("strange::range_operator::create passed non-list list ref");
+			throw dis(__FILE__, __LINE__, "strange::range_operator::create passed non-list list ref");
 		}
 		return create_(fast<list_a<>>(the_list), thing_ref, fast_dup<list_a<>>(list_ref));
 	}

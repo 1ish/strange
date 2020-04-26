@@ -15,12 +15,12 @@ public:
 		auto it = list.begin_();
 		if (it == list.end_())
 		{
-			throw dis("<strange::expression>::animate passed empty list");
+			throw dis(__FILE__, __LINE__, "<strange::expression>::animate passed empty list");
 		}
 		any_a<> conception = *it;
 		if (!check<shoal_a<>>(conception))
 		{
-			throw dis("<strange::expression>::animate passed non-shoal conception");
+			throw dis(__FILE__, __LINE__, "<strange::expression>::animate passed non-shoal conception");
 		}
 		return animate_(fast<shoal_a<>>(conception));
 	}
@@ -52,7 +52,7 @@ public:
 			auto const result = op.operate(thing, list_create());
 			if (!check<symbol_a<>>(result))
 			{
-				throw dis("<strange::expression>::type returned non-symbol");
+				throw dis(__FILE__, __LINE__, "<strange::expression>::type returned non-symbol");
 			}
 			return fast<symbol_a<>>(result);
 		}
@@ -82,7 +82,7 @@ public:
 			auto const result = op.operate(thing, list_create());
 			if (!check<unordered_shoal_a<>>(result))
 			{
-				throw dis("<strange::expression>::shared returned non-unordered-shoal");
+				throw dis(__FILE__, __LINE__, "<strange::expression>::shared returned non-unordered-shoal");
 			}
 			return fast<unordered_shoal_a<>>(result);
 		}
@@ -186,7 +186,7 @@ public:
 			auto const result = op.operate(thing, list_create());
 			if (!check<token_a<>>(result))
 			{
-				throw dis("<strange::expression>::token returned non-token");
+				throw dis(__FILE__, __LINE__, "<strange::expression>::token returned non-token");
 			}
 			return fast<token_a<>>(result);
 		}
@@ -213,7 +213,7 @@ public:
 			auto const result = op.operate(thing, list_create());
 			if (!check<flock_a<>>(result))
 			{
-				throw dis("<strange::expression>::terms returned non-flock");
+				throw dis(__FILE__, __LINE__, "<strange::expression>::terms returned non-flock");
 			}
 			return fast<flock_a<>>(result);
 		}
@@ -231,30 +231,30 @@ public:
 		auto it = list.begin_();
 		if (it == list.end_())
 		{
-			throw dis("<strange::expression>::generate passed empty list");
+			throw dis(__FILE__, __LINE__, "<strange::expression>::generate passed empty list");
 		}
 		any_a<> version = *it;
 		if (!check<number_data_a<int64_t>>(version))
 		{
-			throw dis("<strange::expression>::generate passed non-int-64 version");
+			throw dis(__FILE__, __LINE__, "<strange::expression>::generate passed non-int-64 version");
 		}
 		if (++it == list.end_())
 		{
-			throw dis("<strange::expression>::generate passed short list");
+			throw dis(__FILE__, __LINE__, "<strange::expression>::generate passed short list");
 		}
 		any_a<> indent = *it;
 		if (!check<number_data_a<int64_t>>(indent))
 		{
-			throw dis("<strange::expression>::generate passed non-int-64 indent");
+			throw dis(__FILE__, __LINE__, "<strange::expression>::generate passed non-int-64 indent");
 		}
 		if (++it == list.end_())
 		{
-			throw dis("<strange::expression>::generate passed short list");
+			throw dis(__FILE__, __LINE__, "<strange::expression>::generate passed short list");
 		}
 		any_a<> river = fast_dup(*it);
 		if (!check<river_a<>>(river))
 		{
-			throw dis("<strange::expression>::generate passed non-river");
+			throw dis(__FILE__, __LINE__, "<strange::expression>::generate passed non-river");
 		}
 		return river;
 	}
@@ -291,30 +291,30 @@ public:
 		auto it = list.begin_();
 		if (it == list.end_())
 		{
-			throw dis("<strange::expression>::generate_cpp passed empty list");
+			throw dis(__FILE__, __LINE__, "<strange::expression>::generate_cpp passed empty list");
 		}
 		any_a<> version = *it;
 		if (!check<number_data_a<int64_t>>(version))
 		{
-			throw dis("<strange::expression>::generate_cpp passed non-int-64 version");
+			throw dis(__FILE__, __LINE__, "<strange::expression>::generate_cpp passed non-int-64 version");
 		}
 		if (++it == list.end_())
 		{
-			throw dis("<strange::expression>::generate_cpp passed short list");
+			throw dis(__FILE__, __LINE__, "<strange::expression>::generate_cpp passed short list");
 		}
 		any_a<> indent = *it;
 		if (!check<number_data_a<int64_t>>(indent))
 		{
-			throw dis("<strange::expression>::generate_cpp passed non-int-64 indent");
+			throw dis(__FILE__, __LINE__, "<strange::expression>::generate_cpp passed non-int-64 indent");
 		}
 		if (++it == list.end_())
 		{
-			throw dis("<strange::expression>::generate_cpp passed short list");
+			throw dis(__FILE__, __LINE__, "<strange::expression>::generate_cpp passed short list");
 		}
 		any_a<> river = fast_dup(*it);
 		if (!check<river_a<>>(river))
 		{
-			throw dis("<strange::expression>::generate_cpp passed non-river");
+			throw dis(__FILE__, __LINE__, "<strange::expression>::generate_cpp passed non-river");
 		}
 		return river;
 	}

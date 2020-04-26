@@ -19,7 +19,7 @@ public:
 		any_a<> const lake = *it;
 		if (!check<lake_a<int8_t>>(lake))
 		{
-			throw dis("strange::symbol::create passed non-lake-int-8");
+			throw dis(__FILE__, __LINE__, "strange::symbol::create passed non-lake-int-8");
 		}
 		return create_(fast<lake_a<int8_t>>(lake));
 	}

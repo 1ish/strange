@@ -9,7 +9,7 @@ inline any_a<> parser_a<_1>::parse__(list_a<> const& ___arguments___)
 	auto ___end___ = ___arguments___.end_();
 	if (___it___ == ___end___)
 	{
-		throw dis("parser_a::parse_ passed short range");
+		throw dis(__FILE__, __LINE__, "parser_a::parse_ passed short range");
 	}
 	auto tokenizer = cast<range_a<strange::any_a<>>>(*___it___);
 	return parse_(tokenizer);

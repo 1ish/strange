@@ -20,21 +20,21 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_and::create not passed any terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_and::create not passed any terms");
 		}
 		any_a<> left = *it;
 		if (!check<expression_a<>>(left))
 		{
-			throw dis(token.report() + "strange::expression_and::create passed non-expression left-hand term");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_and::create passed non-expression left-hand term");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_and::create not passed sufficient terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_and::create not passed sufficient terms");
 		}
 		any_a<> right = *it;
 		if (!check<expression_a<>>(right))
 		{
-			throw dis(token.report() + "strange::expression_and::create passed non-expression right-hand term");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_and::create passed non-expression right-hand term");
 		}
 		return expression_a<>::create<expression_and_t>(token, terms, fast<expression_a<>>(left), fast<expression_a<>>(right));
 	}
@@ -107,7 +107,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_and::generate_cpp called for wrong type of expression");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_and::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" (");
 		_left.generate_cpp(version, indent, river, declare, define);

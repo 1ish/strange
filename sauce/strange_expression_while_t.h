@@ -19,30 +19,30 @@ public:
 		auto it = terms.extract_begin_();
 		if (it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_while::create not passed any terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_while::create not passed any terms");
 		}
 		any_a<> scope = *it;
 		if (!check<symbol_a<>>(scope))
 		{
-			throw dis(token.report() + "strange::expression_while::create passed non-symbol scope");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_while::create passed non-symbol scope");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_while::create passed too few terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_while::create passed too few terms");
 		}
 		any_a<> condition = *it;
 		if (!check<expression_a<>>(condition))
 		{
-			throw dis(token.report() + "strange::expression_while::create passed non-expression condition");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_while::create passed non-expression condition");
 		}
 		if (++it == terms.extract_end_())
 		{
-			throw dis(token.report() + "strange::expression_while::create not passed sufficient terms");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_while::create not passed sufficient terms");
 		}
 		any_a<> loop = *it;
 		if (!check<expression_a<>>(loop))
 		{
-			throw dis(token.report() + "strange::expression_while::create passed non-expression loop");
+			throw dis(__FILE__, __LINE__, token.report() + "strange::expression_while::create passed non-expression loop");
 		}
 		return expression_a<>::create<expression_while_t<>>(token, terms, fast<expression_a<>>(condition), fast<expression_a<>>(loop));
 	}
@@ -133,7 +133,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_while::generate_cpp called for wrong type of expression");
+			throw dis(__FILE__, __LINE__, expression_t<___ego___>::_token.report() + "strange::expression_while::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" while(");
 		_condition.generate_cpp(version, indent, river, declare, define);

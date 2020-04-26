@@ -481,7 +481,7 @@ public:
 		typename std_set_element::const_iterator const it = _set.cbegin();
 		if (it == _set.cend())
 		{
-			throw dis("strange::ordered_herd::pop_back called on empty flock");
+			throw dis(__FILE__, __LINE__, "strange::ordered_herd::pop_back called on empty flock");
 		}
 		_element result = *it;
 		_set.erase(it);
@@ -506,7 +506,7 @@ public:
 		typename std_set_element::const_iterator it = _set.cend();
 		if (it == _set.cbegin())
 		{
-			throw dis("strange::ordered_herd::pop_back called on empty flock");
+			throw dis(__FILE__, __LINE__, "strange::ordered_herd::pop_back called on empty flock");
 		}
 		_element result = *--it;
 		_set.erase(it);

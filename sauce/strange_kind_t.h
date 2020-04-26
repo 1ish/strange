@@ -21,7 +21,7 @@ public:
 		any_a<> order = *it;
 		if (!check<number_data_a<int64_t>>(order))
 		{
-			throw dis("strange::kind::create passed non-int-64 order");
+			throw dis(__FILE__, __LINE__, "strange::kind::create passed non-int-64 order");
 		}
 		if (++it == end)
 		{
@@ -30,7 +30,7 @@ public:
 		any_a<> name = *it;
 		if (!check<symbol_a<>>(name))
 		{
-			throw dis("strange::kind::create passed non-symbol name");
+			throw dis(__FILE__, __LINE__, "strange::kind::create passed non-symbol name");
 		}
 		if (++it == end)
 		{
@@ -39,7 +39,7 @@ public:
 		any_a<> dimensions = *it;
 		if (!check<flock_a<>>(dimensions))
 		{
-			throw dis("strange::kind::create passed non-flock dimensions");
+			throw dis(__FILE__, __LINE__, "strange::kind::create passed non-flock dimensions");
 		}
 		if (++it == end)
 		{
@@ -48,7 +48,7 @@ public:
 		any_a<> aspects = *it;
 		if (!check<flock_a<>>(aspects))
 		{
-			throw dis("strange::kind::create passed non-flock aspects");
+			throw dis(__FILE__, __LINE__, "strange::kind::create passed non-flock aspects");
 		}
 		if (++it == end)
 		{
@@ -57,7 +57,7 @@ public:
 		any_a<> parameters = *it;
 		if (!check<flock_a<>>(parameters))
 		{
-			throw dis("strange::kind::create passed non-flock parameters");
+			throw dis(__FILE__, __LINE__, "strange::kind::create passed non-flock parameters");
 		}
 		if (++it == end)
 		{
@@ -66,7 +66,7 @@ public:
 		any_a<> result = *it;
 		if (!check<symbol_a<>>(result))
 		{
-			throw dis("strange::kind::create passed non-symbol result");
+			throw dis(__FILE__, __LINE__, "strange::kind::create passed non-symbol result");
 		}
 		if (++it == end)
 		{
@@ -298,7 +298,7 @@ inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats)
 	{
 		if (!check<cat_a<>>(cat))
 		{
-			throw dis("strange::kinds_from_cats passed non-cat");
+			throw dis(__FILE__, __LINE__, "strange::kinds_from_cats passed non-cat");
 		}
 		result.insert_thing(kind_from_cat(fast<cat_a<>>(cat)));
 	}
@@ -312,7 +312,7 @@ inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_
 	{
 		if (!check<cat_a<>>(cat))
 		{
-			throw dis("strange::kinds_from_cats passed non-cat");
+			throw dis(__FILE__, __LINE__, "strange::kinds_from_cats passed non-cat");
 		}
 		result.insert_thing(kind_from_cat(fast<cat_a<>>(cat), aspects, fixed, reference, optional));
 	}
@@ -326,7 +326,7 @@ inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_
 	{
 		if (!check<cat_a<>>(cat))
 		{
-			throw dis("strange::kinds_from_cats passed non-cat");
+			throw dis(__FILE__, __LINE__, "strange::kinds_from_cats passed non-cat");
 		}
 		result.insert_thing(kind_from_cat(fast<cat_a<>>(cat), aspects));
 	}
@@ -345,7 +345,7 @@ inline unordered_herd_a<> kinds_to_cats(unordered_herd_a<> const& kinds)
 	{
 		if (!check<kind_a<>>(kind))
 		{
-			throw dis("strange::kinds_to_cats passed non-kind");
+			throw dis(__FILE__, __LINE__, "strange::kinds_to_cats passed non-kind");
 		}
 		result.insert_thing(kind_to_cat(fast<kind_a<>>(kind)));
 	}

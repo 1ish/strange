@@ -75,12 +75,12 @@ public:
 		auto end = list.end_();
 		if (it == end)
 		{
-			throw dis("strange::thing::invoke passed empty list");
+			throw dis(__FILE__, __LINE__, "strange::thing::invoke passed empty list");
 		}
 		any_a<> thing = fast_dup(*it);
 		if (++it == end)
 		{
-			throw dis("strange::thing::invoke passed short list");
+			throw dis(__FILE__, __LINE__, "strange::thing::invoke passed short list");
 		}
 		any_a<> member = *it;
 		return invoke_member(thing, member, list_create(++it, end));
@@ -92,7 +92,7 @@ public:
 		auto end = list.end_();
 		if (it == end)
 		{
-			throw dis("strange::thing::invoke passed short list");
+			throw dis(__FILE__, __LINE__, "strange::thing::invoke passed short list");
 		}
 		any_a<> member = *it;
 		return invoke_member(thing, member, list_create(++it, end));
@@ -103,7 +103,7 @@ public:
 		auto const op = thing.operations_().at_(member);
 		if (!op)
 		{
-			throw dis("strange::thing::invoke passed non-existent member");
+			throw dis(__FILE__, __LINE__, "strange::thing::invoke passed non-existent member");
 		}
 		return op.operate(thing, list);
 	}
@@ -114,7 +114,7 @@ public:
 		auto end = list.end_();
 		if (it == end)
 		{
-			throw dis("strange::thing::operate passed empty list");
+			throw dis(__FILE__, __LINE__, "strange::thing::operate passed empty list");
 		}
 		any_a<> thing = fast_dup(*it);
 		return thing.operate(thing, list_create(++it, end));
@@ -126,7 +126,7 @@ public:
 		auto end = list.end_();
 		if (it == end)
 		{
-			throw dis("strange::thing::operate passed short list");
+			throw dis(__FILE__, __LINE__, "strange::thing::operate passed short list");
 		}
 		any_a<> operation = *it;
 		return operation.operate(thing, list_create(++it, end));

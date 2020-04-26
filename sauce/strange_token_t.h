@@ -17,48 +17,48 @@ public:
 		auto end = list.end_();
 		if (it == end)
 		{
-			throw dis("strange::token::create passed empty list");
+			throw dis(__FILE__, __LINE__, "strange::token::create passed empty list");
 		}
 		any_a<> filename = *it;
 		if (!check<symbol_a<>>(filename))
 		{
-			throw dis("strange::token::create passed non-symbol filename");
+			throw dis(__FILE__, __LINE__, "strange::token::create passed non-symbol filename");
 		}
 		if (++it == end)
 		{
-			throw dis("strange::token::create passed short list");
+			throw dis(__FILE__, __LINE__, "strange::token::create passed short list");
 		}
 		any_a<> line = *it;
 		if (!check<number_data_a<int64_t>>(line))
 		{
-			throw dis("strange::token::create passed non-number-int-64 line");
+			throw dis(__FILE__, __LINE__, "strange::token::create passed non-number-int-64 line");
 		}
 		if (++it == end)
 		{
-			throw dis("strange::token::create passed short list");
+			throw dis(__FILE__, __LINE__, "strange::token::create passed short list");
 		}
 		any_a<> position = *it;
 		if (!check<number_data_a<int64_t>>(position))
 		{
-			throw dis("strange::token::create passed non-number-int-64 position");
+			throw dis(__FILE__, __LINE__, "strange::token::create passed non-number-int-64 position");
 		}
 		if (++it == end)
 		{
-			throw dis("strange::token::create passed short list");
+			throw dis(__FILE__, __LINE__, "strange::token::create passed short list");
 		}
 		any_a<> tag = *it;
 		if (!check<symbol_a<>>(tag))
 		{
-			throw dis("strange::token::create passed non-symbol tag");
+			throw dis(__FILE__, __LINE__, "strange::token::create passed non-symbol tag");
 		}
 		if (++it == end)
 		{
-			throw dis("strange::token::create passed short list");
+			throw dis(__FILE__, __LINE__, "strange::token::create passed short list");
 		}
 		any_a<> symbol = *it;
 		if (!check<symbol_a<>>(symbol))
 		{
-			throw dis("strange::token::create passed non-symbol symbol");
+			throw dis(__FILE__, __LINE__, "strange::token::create passed non-symbol symbol");
 		}
 		if (++it == end)
 		{
@@ -72,7 +72,7 @@ public:
 		any_a<> precedence = *it;
 		if (!check<number_data_a<int64_t>>(precedence))
 		{
-			throw dis("strange::token::create passed non-int-64 precedence");
+			throw dis(__FILE__, __LINE__, "strange::token::create passed non-int-64 precedence");
 		}
 		return create_(fast<symbol_a<>>(filename), fast<number_data_a<int64_t>>(line), fast<number_data_a<int64_t>>(position), fast<symbol_a<>>(tag), fast<symbol_a<>>(symbol), literal, fast<number_data_a<int64_t>>(precedence));
 	}
@@ -98,39 +98,39 @@ public:
 		auto end = list.end_();
 		if (it == end)
 		{
-			throw dis("strange::token::create_" + tag + " passed empty list");
+			throw dis(__FILE__, __LINE__, "strange::token::create_" + tag + " passed empty list");
 		}
 		auto const filename = *it;
 		if (!check<symbol_a<>>(filename))
 		{
-			throw dis("strange::token::create_" + tag + " passed non-symbol filename");
+			throw dis(__FILE__, __LINE__, "strange::token::create_" + tag + " passed non-symbol filename");
 		}
 		if (++it == end)
 		{
-			throw dis("strange::token::create_" + tag + "passed short list");
+			throw dis(__FILE__, __LINE__, "strange::token::create_" + tag + "passed short list");
 		}
 		auto const line = *it;
 		if (!check<number_data_a<int64_t>>(line))
 		{
-			throw dis("strange::token::create_" + tag + " passed non-number-int-64 line");
+			throw dis(__FILE__, __LINE__, "strange::token::create_" + tag + " passed non-number-int-64 line");
 		}
 		if (++it == end)
 		{
-			throw dis("strange::token::create_" + tag + " passed short list");
+			throw dis(__FILE__, __LINE__, "strange::token::create_" + tag + " passed short list");
 		}
 		auto const position = *it;
 		if (!check<number_data_a<int64_t>>(position))
 		{
-			throw dis("strange::token::create_" + tag + " passed non-number-int-64 position");
+			throw dis(__FILE__, __LINE__, "strange::token::create_" + tag + " passed non-number-int-64 position");
 		}
 		if (++it == end)
 		{
-			throw dis("strange::token::create_" + tag + " passed short list");
+			throw dis(__FILE__, __LINE__, "strange::token::create_" + tag + " passed short list");
 		}
 		auto const symbol = *it;
 		if (!check<symbol_a<>>(symbol))
 		{
-			throw dis("strange::token::create_" + tag + " passed non-symbol symbol");
+			throw dis(__FILE__, __LINE__, "strange::token::create_" + tag + " passed non-symbol symbol");
 		}
 		if (++it == end)
 		{
@@ -139,7 +139,7 @@ public:
 		auto const precedence = *it;
 		if (!check<number_data_a<int64_t>>(precedence))
 		{
-			throw dis("strange::token::create_" + tag + " passed non-int-64 precedence");
+			throw dis(__FILE__, __LINE__, "strange::token::create_" + tag + " passed non-int-64 precedence");
 		}
 		return member(fast<symbol_a<>>(filename), fast<number_data_a<int64_t>>(line), fast<number_data_a<int64_t>>(position), fast<symbol_a<>>(symbol), fast<number_data_a<int64_t>>(precedence));
 	}

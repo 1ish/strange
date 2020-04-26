@@ -273,40 +273,40 @@ class brook_d : public inventory_d< number_data_a< _primitive > >
 {
 public:
 	inline bool operator==(brook_a < _primitive > const & brook ) const
-	{ throw dis("dynamic brook_d::operator==(brook) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic brook_d::operator==(brook) not available"); }
 
 	inline bool operator!=(brook_a < _primitive > const & brook ) const
-	{ throw dis("dynamic brook_d::operator!=(brook) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic brook_d::operator!=(brook) not available"); }
 
 	inline bool operator<(brook_a < _primitive > const & brook ) const
-	{ throw dis("dynamic brook_d::operator<(brook) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic brook_d::operator<(brook) not available"); }
 
 	inline bool operator>(brook_a < _primitive > const & brook ) const
-	{ throw dis("dynamic brook_d::operator>(brook) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic brook_d::operator>(brook) not available"); }
 
 	inline bool operator<=(brook_a < _primitive > const & brook ) const
-	{ throw dis("dynamic brook_d::operator<=(brook) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic brook_d::operator<=(brook) not available"); }
 
 	inline bool operator>=(brook_a < _primitive > const & brook ) const
-	{ throw dis("dynamic brook_d::operator>=(brook) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic brook_d::operator>=(brook) not available"); }
 
 	inline random_access_extractor_data_a < number_data_a < _primitive > , typename std_deque < _primitive > :: const_iterator > extract_begin() const
-	{ throw dis("dynamic brook_d::extract_begin() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic brook_d::extract_begin() not available"); }
 
 	inline random_access_extractor_data_a < number_data_a < _primitive > , typename std_deque < _primitive > :: const_iterator > extract_end() const
-	{ throw dis("dynamic brook_d::extract_end() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic brook_d::extract_end() not available"); }
 
 	inline random_access_mutator_data_a < number_data_a < _primitive > , typename std_deque < _primitive > :: iterator > mutate_begin()
-	{ throw dis("dynamic brook_d::mutate_begin() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic brook_d::mutate_begin() not available"); }
 
 	inline random_access_mutator_data_a < number_data_a < _primitive > , typename std_deque < _primitive > :: iterator > mutate_end()
-	{ throw dis("dynamic brook_d::mutate_end() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic brook_d::mutate_end() not available"); }
 
 	inline std_deque < _primitive > const & extract_deque() const
-	{ throw dis("dynamic brook_d::extract_deque() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic brook_d::extract_deque() not available"); }
 
 	inline std_deque < _primitive > & mutate_deque()
-	{ throw dis("dynamic brook_d::mutate_deque() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic brook_d::mutate_deque() not available"); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 

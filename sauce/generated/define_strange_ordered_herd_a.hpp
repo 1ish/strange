@@ -263,34 +263,34 @@ class ordered_herd_d : public herd_d< _element >
 {
 public:
 	inline bool operator==(ordered_herd_a < _element > const & herd ) const
-	{ throw dis("dynamic ordered_herd_d::operator==(herd) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_herd_d::operator==(herd) not available"); }
 
 	inline bool operator!=(ordered_herd_a < _element > const & herd ) const
-	{ throw dis("dynamic ordered_herd_d::operator!=(herd) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_herd_d::operator!=(herd) not available"); }
 
 	inline bool operator<(ordered_herd_a < _element > const & herd ) const
-	{ throw dis("dynamic ordered_herd_d::operator<(herd) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_herd_d::operator<(herd) not available"); }
 
 	inline bool operator>(ordered_herd_a < _element > const & herd ) const
-	{ throw dis("dynamic ordered_herd_d::operator>(herd) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_herd_d::operator>(herd) not available"); }
 
 	inline bool operator<=(ordered_herd_a < _element > const & herd ) const
-	{ throw dis("dynamic ordered_herd_d::operator<=(herd) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_herd_d::operator<=(herd) not available"); }
 
 	inline bool operator>=(ordered_herd_a < _element > const & herd ) const
-	{ throw dis("dynamic ordered_herd_d::operator>=(herd) not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_herd_d::operator>=(herd) not available"); }
 
 	inline bidirectional_extractor_data_a < _element , typename std_set < _element > :: const_iterator > extract_begin() const
-	{ throw dis("dynamic ordered_herd_d::extract_begin() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_herd_d::extract_begin() not available"); }
 
 	inline bidirectional_extractor_data_a < _element , typename std_set < _element > :: const_iterator > extract_end() const
-	{ throw dis("dynamic ordered_herd_d::extract_end() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_herd_d::extract_end() not available"); }
 
 	inline std_set < _element > const & extract_set() const
-	{ throw dis("dynamic ordered_herd_d::extract_set() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_herd_d::extract_set() not available"); }
 
 	inline std_set < _element > & mutate_set()
-	{ throw dis("dynamic ordered_herd_d::mutate_set() not available"); }
+	{ throw dis(__FILE__, __LINE__, "dynamic ordered_herd_d::mutate_set() not available"); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 

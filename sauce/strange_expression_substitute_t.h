@@ -26,7 +26,7 @@ public:
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
-				throw dis("strange::expression_substitute::create thing evaluation error:") + substituted.token_().report_() + misunderstanding;
+				throw dis(__FILE__, __LINE__, "strange::expression_substitute::create thing evaluation error:") + substituted.token_().report_() + misunderstanding;
 			}
 		}
 		return expression_a<>{ std::move(substituted) };
