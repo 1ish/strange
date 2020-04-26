@@ -231,6 +231,15 @@ inline container_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_null_(); }
 
 template <typename _1>
+inline void container_a<_1>::from_null()
+{ assert(any_a<>::___handle___); ___write___().from_null(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_null()
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_null(); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::is_null__(list_a<> const& ___arguments___) const
 {
 	return is_null_();
@@ -244,6 +253,15 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::is_null_() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_null_(); }
+
+template <typename _1>
+inline bool container_a<_1>::is_null() const
+{ assert(any_a<>::___handle___); return ___read___().is_null(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::is_null() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_null(); }
 
 template <typename _1>
 inline any_a<> container_a<_1>::from_boolean__(list_a<> const& ___arguments___)
@@ -268,6 +286,15 @@ inline container_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_boolean_(boolean); }
 
 template <typename _1>
+inline void container_a<_1>::from_boolean(bool boolean )
+{ assert(any_a<>::___handle___); ___write___().from_boolean(boolean); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_boolean(bool boolean )
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_boolean(boolean); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::is_boolean__(list_a<> const& ___arguments___) const
 {
 	return is_boolean_();
@@ -283,6 +310,15 @@ inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_boolean_(); }
 
 template <typename _1>
+inline bool container_a<_1>::is_boolean() const
+{ assert(any_a<>::___handle___); return ___read___().is_boolean(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::is_boolean() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_boolean(); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::to_boolean__(list_a<> const& ___arguments___) const
 {
 	return to_boolean_();
@@ -296,6 +332,15 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::to_boolean_() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_boolean_(); }
+
+template <typename _1>
+inline bool container_a<_1>::to_boolean() const
+{ assert(any_a<>::___handle___); return ___read___().to_boolean(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::to_boolean() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_boolean(); }
 
 template <typename _1>
 inline any_a<> container_a<_1>::from_number__(list_a<> const& ___arguments___)
@@ -320,6 +365,15 @@ inline container_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_number_(number); }
 
 template <typename _1>
+inline void container_a<_1>::from_number(number_a < > const & number )
+{ assert(any_a<>::___handle___); ___write___().from_number(number); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_number(number_a < > const & number )
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_number(number); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::is_number__(list_a<> const& ___arguments___) const
 {
 	return is_number_();
@@ -333,6 +387,15 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::is_number_() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_number_(); }
+
+template <typename _1>
+inline bool container_a<_1>::is_number() const
+{ assert(any_a<>::___handle___); return ___read___().is_number(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::is_number() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_number(); }
 
 template <typename _1>
 inline any_a<> container_a<_1>::to_number__(list_a<> const& ___arguments___) const
@@ -372,6 +435,15 @@ inline container_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_int_64_(number); }
 
 template <typename _1>
+inline void container_a<_1>::from_int_64(int64_t number )
+{ assert(any_a<>::___handle___); ___write___().from_int_64(number); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_int_64(int64_t number )
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_int_64(number); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::is_int_64__(list_a<> const& ___arguments___) const
 {
 	return is_int_64_();
@@ -387,6 +459,15 @@ inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_int_64_(); }
 
 template <typename _1>
+inline bool container_a<_1>::is_int_64() const
+{ assert(any_a<>::___handle___); return ___read___().is_int_64(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::is_int_64() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_int_64(); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::to_int_64__(list_a<> const& ___arguments___) const
 {
 	return to_int_64_();
@@ -400,6 +481,15 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline number_data_int64_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::to_int_64_() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_int_64_(); }
+
+template <typename _1>
+inline int64_t container_a<_1>::to_int_64() const
+{ assert(any_a<>::___handle___); return ___read___().to_int_64(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline int64_t container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::to_int_64() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_int_64(); }
 
 template <typename _1>
 inline any_a<> container_a<_1>::from_float_64__(list_a<> const& ___arguments___)
@@ -424,6 +514,15 @@ inline container_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_float_64_(number); }
 
 template <typename _1>
+inline void container_a<_1>::from_float_64(double number )
+{ assert(any_a<>::___handle___); ___write___().from_float_64(number); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_float_64(double number )
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_float_64(number); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::is_float_64__(list_a<> const& ___arguments___) const
 {
 	return is_float_64_();
@@ -439,6 +538,15 @@ inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_float_64_(); }
 
 template <typename _1>
+inline bool container_a<_1>::is_float_64() const
+{ assert(any_a<>::___handle___); return ___read___().is_float_64(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::is_float_64() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_float_64(); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::to_float_64__(list_a<> const& ___arguments___) const
 {
 	return to_float_64_();
@@ -452,6 +560,15 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline number_data_double_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::to_float_64_() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_float_64_(); }
+
+template <typename _1>
+inline double container_a<_1>::to_float_64() const
+{ assert(any_a<>::___handle___); return ___read___().to_float_64(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline double container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::to_float_64() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_float_64(); }
 
 template <typename _1>
 inline any_a<> container_a<_1>::from_lake__(list_a<> const& ___arguments___)
@@ -476,6 +593,24 @@ inline container_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_lake_(lake); }
 
 template <typename _1>
+inline void container_a<_1>::from_lake(lake_int8_a < > const & lake )
+{ assert(any_a<>::___handle___); ___write___().from_lake(lake); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_lake(lake_int8_a < > const & lake )
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_lake(lake); }
+
+template <typename _1>
+inline void container_a<_1>::from_string(std_string const & str )
+{ assert(any_a<>::___handle___); ___write___().from_string(str); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_string(std_string const & str )
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_string(str); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::is_lake__(list_a<> const& ___arguments___) const
 {
 	return is_lake_();
@@ -491,6 +626,15 @@ inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_lake_(); }
 
 template <typename _1>
+inline bool container_a<_1>::is_lake() const
+{ assert(any_a<>::___handle___); return ___read___().is_lake(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::is_lake() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_lake(); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::to_lake__(list_a<> const& ___arguments___) const
 {
 	return to_lake_();
@@ -504,6 +648,15 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline lake_int8_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::to_lake_() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake_(); }
+
+template <typename _1>
+inline std_string container_a<_1>::to_string() const
+{ assert(any_a<>::___handle___); return ___read___().to_string(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline std_string container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::to_string() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
 
 template <typename _1>
 inline any_a<> container_a<_1>::from_symbol__(list_a<> const& ___arguments___)
@@ -526,6 +679,15 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline container_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_symbol_(symbol_a<> const& symbol)
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_symbol_(symbol); }
+
+template <typename _1>
+inline void container_a<_1>::from_symbol(symbol_a < > const & symbol )
+{ assert(any_a<>::___handle___); ___write___().from_symbol(symbol); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_symbol(symbol_a < > const & symbol )
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_symbol(symbol); }
 
 template <typename _1>
 inline any_a<> container_a<_1>::to_symbol__(list_a<> const& ___arguments___) const
@@ -558,6 +720,15 @@ inline container_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.make_inventory_(); }
 
 template <typename _1>
+inline void container_a<_1>::make_inventory()
+{ assert(any_a<>::___handle___); ___write___().make_inventory(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::make_inventory()
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.make_inventory(); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::from_inventory__(list_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.begin_();
@@ -580,6 +751,15 @@ inline container_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_inventory_(inventory); }
 
 template <typename _1>
+inline void container_a<_1>::from_inventory(inventory_a < container_a < > > const & inventory )
+{ assert(any_a<>::___handle___); ___write___().from_inventory(inventory); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_inventory(inventory_a < container_a < > > const & inventory )
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_inventory(inventory); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::is_inventory__(list_a<> const& ___arguments___) const
 {
 	return is_inventory_();
@@ -593,6 +773,15 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::is_inventory_() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_inventory_(); }
+
+template <typename _1>
+inline bool container_a<_1>::is_inventory() const
+{ assert(any_a<>::___handle___); return ___read___().is_inventory(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::is_inventory() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_inventory(); }
 
 template <typename _1>
 inline any_a<> container_a<_1>::as_inventory__(list_a<> const& ___arguments___) const
@@ -617,6 +806,15 @@ inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.as_inventory_(inventory); }
 
 template <typename _1>
+inline void container_a<_1>::as_inventory(inventory_a < container_a < > > & inventory ) const
+{ assert(any_a<>::___handle___); ___read___().as_inventory(inventory); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::as_inventory(inventory_a < container_a < > > & inventory ) const
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.as_inventory(inventory); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::make_herd__(list_a<> const& ___arguments___)
 {
 	return make_herd_();
@@ -630,6 +828,15 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline container_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::make_herd_()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.make_herd_(); }
+
+template <typename _1>
+inline void container_a<_1>::make_herd()
+{ assert(any_a<>::___handle___); ___write___().make_herd(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::make_herd()
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.make_herd(); }
 
 template <typename _1>
 inline any_a<> container_a<_1>::from_herd__(list_a<> const& ___arguments___)
@@ -654,6 +861,15 @@ inline container_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_herd_(herd); }
 
 template <typename _1>
+inline void container_a<_1>::from_herd(herd_a < symbol_a < > > const & herd )
+{ assert(any_a<>::___handle___); ___write___().from_herd(herd); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_herd(herd_a < symbol_a < > > const & herd )
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_herd(herd); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::is_herd__(list_a<> const& ___arguments___) const
 {
 	return is_herd_();
@@ -667,6 +883,15 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::is_herd_() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_herd_(); }
+
+template <typename _1>
+inline bool container_a<_1>::is_herd() const
+{ assert(any_a<>::___handle___); return ___read___().is_herd(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::is_herd() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_herd(); }
 
 template <typename _1>
 inline any_a<> container_a<_1>::as_herd__(list_a<> const& ___arguments___) const
@@ -691,6 +916,15 @@ inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.as_herd_(herd); }
 
 template <typename _1>
+inline void container_a<_1>::as_herd(herd_a < symbol_a < > > & herd ) const
+{ assert(any_a<>::___handle___); ___read___().as_herd(herd); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::as_herd(herd_a < symbol_a < > > & herd ) const
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.as_herd(herd); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::make_shoal__(list_a<> const& ___arguments___)
 {
 	return make_shoal_();
@@ -704,6 +938,15 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline container_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::make_shoal_()
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.make_shoal_(); }
+
+template <typename _1>
+inline void container_a<_1>::make_shoal()
+{ assert(any_a<>::___handle___); ___write___().make_shoal(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::make_shoal()
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.make_shoal(); }
 
 template <typename _1>
 inline any_a<> container_a<_1>::from_shoal__(list_a<> const& ___arguments___)
@@ -728,6 +971,15 @@ inline container_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_shoal_(shoal); }
 
 template <typename _1>
+inline void container_a<_1>::from_shoal(shoal_a < symbol_a < > , container_a < > > const & shoal )
+{ assert(any_a<>::___handle___); ___write___().from_shoal(shoal); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_shoal(shoal_a < symbol_a < > , container_a < > > const & shoal )
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_shoal(shoal); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::is_shoal__(list_a<> const& ___arguments___) const
 {
 	return is_shoal_();
@@ -741,6 +993,15 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::is_shoal_() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_shoal_(); }
+
+template <typename _1>
+inline bool container_a<_1>::is_shoal() const
+{ assert(any_a<>::___handle___); return ___read___().is_shoal(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::is_shoal() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_shoal(); }
 
 template <typename _1>
 inline any_a<> container_a<_1>::as_shoal__(list_a<> const& ___arguments___) const
@@ -763,6 +1024,15 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::as_shoal_(shoal_a<symbol_a<>, container_a<>> & shoal) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.as_shoal_(shoal); }
+
+template <typename _1>
+inline void container_a<_1>::as_shoal(shoal_a < symbol_a < > , container_a < > > & shoal ) const
+{ assert(any_a<>::___handle___); ___read___().as_shoal(shoal); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::as_shoal(shoal_a < symbol_a < > , container_a < > > & shoal ) const
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.as_shoal(shoal); }
 
 template <typename _1>
 inline any_a<> container_a<_1>::keys_begin__(list_a<> const& ___arguments___) const

@@ -62,29 +62,43 @@ public:
 
 	inline container_a<> from_null_();
 
+	inline void from_null();
+
 	inline any_a<> is_null__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> is_null_() const;
+
+	inline bool is_null() const;
 
 	inline any_a<> from_boolean__(list_a<> const& ___arguments___);
 
 	inline container_a<> from_boolean_(any_a<> const& boolean);
 
+	inline void from_boolean(bool boolean );
+
 	inline any_a<> is_boolean__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> is_boolean_() const;
+
+	inline bool is_boolean() const;
 
 	inline any_a<> to_boolean__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> to_boolean_() const;
 
+	inline bool to_boolean() const;
+
 	inline any_a<> from_number__(list_a<> const& ___arguments___);
 
 	inline container_a<> from_number_(number_a<> const& number);
 
+	inline void from_number(number_a < > const & number );
+
 	inline any_a<> is_number__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> is_number_() const;
+
+	inline bool is_number() const;
 
 	inline any_a<> to_number__(list_a<> const& ___arguments___) const;
 
@@ -94,41 +108,63 @@ public:
 
 	inline container_a<> from_int_64_(number_data_int64_a<> const& number);
 
+	inline void from_int_64(int64_t number );
+
 	inline any_a<> is_int_64__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> is_int_64_() const;
+
+	inline bool is_int_64() const;
 
 	inline any_a<> to_int_64__(list_a<> const& ___arguments___) const;
 
 	inline number_data_int64_a<> to_int_64_() const;
 
+	inline int64_t to_int_64() const;
+
 	inline any_a<> from_float_64__(list_a<> const& ___arguments___);
 
 	inline container_a<> from_float_64_(number_data_double_a<> const& number);
+
+	inline void from_float_64(double number );
 
 	inline any_a<> is_float_64__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> is_float_64_() const;
 
+	inline bool is_float_64() const;
+
 	inline any_a<> to_float_64__(list_a<> const& ___arguments___) const;
 
 	inline number_data_double_a<> to_float_64_() const;
+
+	inline double to_float_64() const;
 
 	inline any_a<> from_lake__(list_a<> const& ___arguments___);
 
 	inline container_a<> from_lake_(lake_int8_a<> const& lake);
 
+	inline void from_lake(lake_int8_a < > const & lake );
+
+	inline void from_string(std_string const & str );
+
 	inline any_a<> is_lake__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> is_lake_() const;
+
+	inline bool is_lake() const;
 
 	inline any_a<> to_lake__(list_a<> const& ___arguments___) const;
 
 	inline lake_int8_a<> to_lake_() const;
 
+	inline std_string to_string() const;
+
 	inline any_a<> from_symbol__(list_a<> const& ___arguments___);
 
 	inline container_a<> from_symbol_(symbol_a<> const& symbol);
+
+	inline void from_symbol(symbol_a < > const & symbol );
 
 	inline any_a<> to_symbol__(list_a<> const& ___arguments___) const;
 
@@ -138,49 +174,73 @@ public:
 
 	inline container_a<> make_inventory_();
 
+	inline void make_inventory();
+
 	inline any_a<> from_inventory__(list_a<> const& ___arguments___);
 
 	inline container_a<> from_inventory_(inventory_a<container_a<>> const& inventory);
+
+	inline void from_inventory(inventory_a < container_a < > > const & inventory );
 
 	inline any_a<> is_inventory__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> is_inventory_() const;
 
+	inline bool is_inventory() const;
+
 	inline any_a<> as_inventory__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> as_inventory_(inventory_a<container_a<>> & inventory) const;
+
+	inline void as_inventory(inventory_a < container_a < > > & inventory ) const;
 
 	inline any_a<> make_herd__(list_a<> const& ___arguments___);
 
 	inline container_a<> make_herd_();
 
+	inline void make_herd();
+
 	inline any_a<> from_herd__(list_a<> const& ___arguments___);
 
 	inline container_a<> from_herd_(herd_a<symbol_a<>> const& herd);
+
+	inline void from_herd(herd_a < symbol_a < > > const & herd );
 
 	inline any_a<> is_herd__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> is_herd_() const;
 
+	inline bool is_herd() const;
+
 	inline any_a<> as_herd__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> as_herd_(herd_a<symbol_a<>> & herd) const;
+
+	inline void as_herd(herd_a < symbol_a < > > & herd ) const;
 
 	inline any_a<> make_shoal__(list_a<> const& ___arguments___);
 
 	inline container_a<> make_shoal_();
 
+	inline void make_shoal();
+
 	inline any_a<> from_shoal__(list_a<> const& ___arguments___);
 
 	inline container_a<> from_shoal_(shoal_a<symbol_a<>, container_a<>> const& shoal);
+
+	inline void from_shoal(shoal_a < symbol_a < > , container_a < > > const & shoal );
 
 	inline any_a<> is_shoal__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> is_shoal_() const;
 
+	inline bool is_shoal() const;
+
 	inline any_a<> as_shoal__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> as_shoal_(shoal_a<symbol_a<>, container_a<>> & shoal) const;
+
+	inline void as_shoal(shoal_a < symbol_a < > , container_a < > > & shoal ) const;
 
 	inline any_a<> keys_begin__(list_a<> const& ___arguments___) const;
 
@@ -208,36 +268,66 @@ protected:
 		virtual lake_int8_a<> to_binary_() const = 0;
 		virtual std_string to_binary() const = 0;
 		virtual container_a<> from_null_() = 0;
+		virtual void from_null() = 0;
 		virtual any_a<> is_null_() const = 0;
+		virtual bool is_null() const = 0;
 		virtual container_a<> from_boolean_(any_a<> const& boolean) = 0;
+		virtual void from_boolean(bool boolean ) = 0;
 		virtual any_a<> is_boolean_() const = 0;
+		virtual bool is_boolean() const = 0;
 		virtual any_a<> to_boolean_() const = 0;
+		virtual bool to_boolean() const = 0;
 		virtual container_a<> from_number_(number_a<> const& number) = 0;
+		virtual void from_number(number_a < > const & number ) = 0;
 		virtual any_a<> is_number_() const = 0;
+		virtual bool is_number() const = 0;
 		virtual number_a<> to_number_() const = 0;
 		virtual container_a<> from_int_64_(number_data_int64_a<> const& number) = 0;
+		virtual void from_int_64(int64_t number ) = 0;
 		virtual any_a<> is_int_64_() const = 0;
+		virtual bool is_int_64() const = 0;
 		virtual number_data_int64_a<> to_int_64_() const = 0;
+		virtual int64_t to_int_64() const = 0;
 		virtual container_a<> from_float_64_(number_data_double_a<> const& number) = 0;
+		virtual void from_float_64(double number ) = 0;
 		virtual any_a<> is_float_64_() const = 0;
+		virtual bool is_float_64() const = 0;
 		virtual number_data_double_a<> to_float_64_() const = 0;
+		virtual double to_float_64() const = 0;
 		virtual container_a<> from_lake_(lake_int8_a<> const& lake) = 0;
+		virtual void from_lake(lake_int8_a < > const & lake ) = 0;
+		virtual void from_string(std_string const & str ) = 0;
 		virtual any_a<> is_lake_() const = 0;
+		virtual bool is_lake() const = 0;
 		virtual lake_int8_a<> to_lake_() const = 0;
+		virtual std_string to_string() const = 0;
 		virtual container_a<> from_symbol_(symbol_a<> const& symbol) = 0;
+		virtual void from_symbol(symbol_a < > const & symbol ) = 0;
 		virtual symbol_a<> to_symbol_() const = 0;
 		virtual container_a<> make_inventory_() = 0;
+		virtual void make_inventory() = 0;
 		virtual container_a<> from_inventory_(inventory_a<container_a<>> const& inventory) = 0;
+		virtual void from_inventory(inventory_a < container_a < > > const & inventory ) = 0;
 		virtual any_a<> is_inventory_() const = 0;
+		virtual bool is_inventory() const = 0;
 		virtual any_a<> as_inventory_(inventory_a<container_a<>> & inventory) const = 0;
+		virtual void as_inventory(inventory_a < container_a < > > & inventory ) const = 0;
 		virtual container_a<> make_herd_() = 0;
+		virtual void make_herd() = 0;
 		virtual container_a<> from_herd_(herd_a<symbol_a<>> const& herd) = 0;
+		virtual void from_herd(herd_a < symbol_a < > > const & herd ) = 0;
 		virtual any_a<> is_herd_() const = 0;
+		virtual bool is_herd() const = 0;
 		virtual any_a<> as_herd_(herd_a<symbol_a<>> & herd) const = 0;
+		virtual void as_herd(herd_a < symbol_a < > > & herd ) const = 0;
 		virtual container_a<> make_shoal_() = 0;
+		virtual void make_shoal() = 0;
 		virtual container_a<> from_shoal_(shoal_a<symbol_a<>, container_a<>> const& shoal) = 0;
+		virtual void from_shoal(shoal_a < symbol_a < > , container_a < > > const & shoal ) = 0;
 		virtual any_a<> is_shoal_() const = 0;
+		virtual bool is_shoal() const = 0;
 		virtual any_a<> as_shoal_(shoal_a<symbol_a<>, container_a<>> & shoal) const = 0;
+		virtual void as_shoal(shoal_a < symbol_a < > , container_a < > > & shoal ) const = 0;
 		virtual bidirectional_extractor_a< any_a<> > keys_begin_() const = 0;
 		virtual bidirectional_extractor_a< any_a<> > keys_end_() const = 0;
 	};
@@ -290,65 +380,125 @@ protected:
 
 		virtual inline container_a<> from_null_() final;
 
+		virtual inline void from_null() final;
+
 		virtual inline any_a<> is_null_() const final;
+
+		virtual inline bool is_null() const final;
 
 		virtual inline container_a<> from_boolean_(any_a<> const& boolean) final;
 
+		virtual inline void from_boolean(bool boolean ) final;
+
 		virtual inline any_a<> is_boolean_() const final;
+
+		virtual inline bool is_boolean() const final;
 
 		virtual inline any_a<> to_boolean_() const final;
 
+		virtual inline bool to_boolean() const final;
+
 		virtual inline container_a<> from_number_(number_a<> const& number) final;
 
+		virtual inline void from_number(number_a < > const & number ) final;
+
 		virtual inline any_a<> is_number_() const final;
+
+		virtual inline bool is_number() const final;
 
 		virtual inline number_a<> to_number_() const final;
 
 		virtual inline container_a<> from_int_64_(number_data_int64_a<> const& number) final;
 
+		virtual inline void from_int_64(int64_t number ) final;
+
 		virtual inline any_a<> is_int_64_() const final;
+
+		virtual inline bool is_int_64() const final;
 
 		virtual inline number_data_int64_a<> to_int_64_() const final;
 
+		virtual inline int64_t to_int_64() const final;
+
 		virtual inline container_a<> from_float_64_(number_data_double_a<> const& number) final;
+
+		virtual inline void from_float_64(double number ) final;
 
 		virtual inline any_a<> is_float_64_() const final;
 
+		virtual inline bool is_float_64() const final;
+
 		virtual inline number_data_double_a<> to_float_64_() const final;
+
+		virtual inline double to_float_64() const final;
 
 		virtual inline container_a<> from_lake_(lake_int8_a<> const& lake) final;
 
+		virtual inline void from_lake(lake_int8_a < > const & lake ) final;
+
+		virtual inline void from_string(std_string const & str ) final;
+
 		virtual inline any_a<> is_lake_() const final;
+
+		virtual inline bool is_lake() const final;
 
 		virtual inline lake_int8_a<> to_lake_() const final;
 
+		virtual inline std_string to_string() const final;
+
 		virtual inline container_a<> from_symbol_(symbol_a<> const& symbol) final;
+
+		virtual inline void from_symbol(symbol_a < > const & symbol ) final;
 
 		virtual inline symbol_a<> to_symbol_() const final;
 
 		virtual inline container_a<> make_inventory_() final;
 
+		virtual inline void make_inventory() final;
+
 		virtual inline container_a<> from_inventory_(inventory_a<container_a<>> const& inventory) final;
+
+		virtual inline void from_inventory(inventory_a < container_a < > > const & inventory ) final;
 
 		virtual inline any_a<> is_inventory_() const final;
 
+		virtual inline bool is_inventory() const final;
+
 		virtual inline any_a<> as_inventory_(inventory_a<container_a<>> & inventory) const final;
+
+		virtual inline void as_inventory(inventory_a < container_a < > > & inventory ) const final;
 
 		virtual inline container_a<> make_herd_() final;
 
+		virtual inline void make_herd() final;
+
 		virtual inline container_a<> from_herd_(herd_a<symbol_a<>> const& herd) final;
+
+		virtual inline void from_herd(herd_a < symbol_a < > > const & herd ) final;
 
 		virtual inline any_a<> is_herd_() const final;
 
+		virtual inline bool is_herd() const final;
+
 		virtual inline any_a<> as_herd_(herd_a<symbol_a<>> & herd) const final;
+
+		virtual inline void as_herd(herd_a < symbol_a < > > & herd ) const final;
 
 		virtual inline container_a<> make_shoal_() final;
 
+		virtual inline void make_shoal() final;
+
 		virtual inline container_a<> from_shoal_(shoal_a<symbol_a<>, container_a<>> const& shoal) final;
+
+		virtual inline void from_shoal(shoal_a < symbol_a < > , container_a < > > const & shoal ) final;
 
 		virtual inline any_a<> is_shoal_() const final;
 
+		virtual inline bool is_shoal() const final;
+
 		virtual inline any_a<> as_shoal_(shoal_a<symbol_a<>, container_a<>> & shoal) const final;
+
+		virtual inline void as_shoal(shoal_a < symbol_a < > , container_a < > > & shoal ) const final;
 
 		virtual inline bidirectional_extractor_a< any_a<> > keys_begin_() const final;
 
@@ -766,6 +916,9 @@ public:
 		return cast<container_a<>>(variadic_operate(op, *this));
 	}
 
+	inline void from_null()
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::from_null() not available"); }
+
 	inline any_a<> is_null__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___);
@@ -787,6 +940,9 @@ public:
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
 	}
+
+	inline bool is_null() const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::is_null() not available"); }
 
 	inline any_a<> from_boolean__(list_a<> const& arguments)
 	{
@@ -810,6 +966,9 @@ public:
 		return cast<container_a<>>(variadic_operate(op, *this, boolean));
 	}
 
+	inline void from_boolean(bool boolean )
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::from_boolean(boolean) not available"); }
+
 	inline any_a<> is_boolean__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___);
@@ -831,6 +990,9 @@ public:
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
 	}
+
+	inline bool is_boolean() const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::is_boolean() not available"); }
 
 	inline any_a<> to_boolean__(list_a<> const& arguments) const
 	{
@@ -854,6 +1016,9 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
 	}
 
+	inline bool to_boolean() const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::to_boolean() not available"); }
+
 	inline any_a<> from_number__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___);
@@ -876,6 +1041,9 @@ public:
 		return cast<container_a<>>(variadic_operate(op, *this, number));
 	}
 
+	inline void from_number(number_a < > const & number )
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::from_number(number) not available"); }
+
 	inline any_a<> is_number__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___);
@@ -897,6 +1065,9 @@ public:
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
 	}
+
+	inline bool is_number() const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::is_number() not available"); }
 
 	inline any_a<> to_number__(list_a<> const& arguments) const
 	{
@@ -942,6 +1113,9 @@ public:
 		return cast<container_a<>>(variadic_operate(op, *this, number));
 	}
 
+	inline void from_int_64(int64_t number )
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::from_int_64(number) not available"); }
+
 	inline any_a<> is_int_64__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___);
@@ -963,6 +1137,9 @@ public:
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
 	}
+
+	inline bool is_int_64() const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::is_int_64() not available"); }
 
 	inline any_a<> to_int_64__(list_a<> const& arguments) const
 	{
@@ -986,6 +1163,9 @@ public:
 		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
 	}
 
+	inline int64_t to_int_64() const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::to_int_64() not available"); }
+
 	inline any_a<> from_float_64__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___);
@@ -1007,6 +1187,9 @@ public:
 		}
 		return cast<container_a<>>(variadic_operate(op, *this, number));
 	}
+
+	inline void from_float_64(double number )
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::from_float_64(number) not available"); }
 
 	inline any_a<> is_float_64__(list_a<> const& arguments) const
 	{
@@ -1030,6 +1213,9 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
 	}
 
+	inline bool is_float_64() const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::is_float_64() not available"); }
+
 	inline any_a<> to_float_64__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___);
@@ -1051,6 +1237,9 @@ public:
 		}
 		return cast<number_data_double_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
 	}
+
+	inline double to_float_64() const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::to_float_64() not available"); }
 
 	inline any_a<> from_lake__(list_a<> const& arguments)
 	{
@@ -1074,6 +1263,12 @@ public:
 		return cast<container_a<>>(variadic_operate(op, *this, lake));
 	}
 
+	inline void from_lake(lake_int8_a < > const & lake )
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::from_lake(lake) not available"); }
+
+	inline void from_string(std_string const & str )
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::from_string(str) not available"); }
+
 	inline any_a<> is_lake__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___);
@@ -1095,6 +1290,9 @@ public:
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
 	}
+
+	inline bool is_lake() const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::is_lake() not available"); }
 
 	inline any_a<> to_lake__(list_a<> const& arguments) const
 	{
@@ -1118,6 +1316,9 @@ public:
 		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
 	}
 
+	inline std_string to_string() const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::to_string() not available"); }
+
 	inline any_a<> from_symbol__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___);
@@ -1139,6 +1340,9 @@ public:
 		}
 		return cast<container_a<>>(variadic_operate(op, *this, symbol));
 	}
+
+	inline void from_symbol(symbol_a < > const & symbol )
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::from_symbol(symbol) not available"); }
 
 	inline any_a<> to_symbol__(list_a<> const& arguments) const
 	{
@@ -1184,6 +1388,9 @@ public:
 		return cast<container_a<>>(variadic_operate(op, *this));
 	}
 
+	inline void make_inventory()
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::make_inventory() not available"); }
+
 	inline any_a<> from_inventory__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___);
@@ -1205,6 +1412,9 @@ public:
 		}
 		return cast<container_a<>>(variadic_operate(op, *this, inventory));
 	}
+
+	inline void from_inventory(inventory_a < container_a < > > const & inventory )
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::from_inventory(inventory) not available"); }
 
 	inline any_a<> is_inventory__(list_a<> const& arguments) const
 	{
@@ -1228,6 +1438,9 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
 	}
 
+	inline bool is_inventory() const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::is_inventory() not available"); }
+
 	inline any_a<> as_inventory__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___);
@@ -1249,6 +1462,9 @@ public:
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this), inventory));
 	}
+
+	inline void as_inventory(inventory_a < container_a < > > & inventory ) const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::as_inventory(inventory) not available"); }
 
 	inline any_a<> make_herd__(list_a<> const& arguments)
 	{
@@ -1272,6 +1488,9 @@ public:
 		return cast<container_a<>>(variadic_operate(op, *this));
 	}
 
+	inline void make_herd()
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::make_herd() not available"); }
+
 	inline any_a<> from_herd__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___);
@@ -1293,6 +1512,9 @@ public:
 		}
 		return cast<container_a<>>(variadic_operate(op, *this, herd));
 	}
+
+	inline void from_herd(herd_a < symbol_a < > > const & herd )
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::from_herd(herd) not available"); }
 
 	inline any_a<> is_herd__(list_a<> const& arguments) const
 	{
@@ -1316,6 +1538,9 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
 	}
 
+	inline bool is_herd() const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::is_herd() not available"); }
+
 	inline any_a<> as_herd__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___);
@@ -1337,6 +1562,9 @@ public:
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this), herd));
 	}
+
+	inline void as_herd(herd_a < symbol_a < > > & herd ) const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::as_herd(herd) not available"); }
 
 	inline any_a<> make_shoal__(list_a<> const& arguments)
 	{
@@ -1360,6 +1588,9 @@ public:
 		return cast<container_a<>>(variadic_operate(op, *this));
 	}
 
+	inline void make_shoal()
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::make_shoal() not available"); }
+
 	inline any_a<> from_shoal__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___);
@@ -1381,6 +1612,9 @@ public:
 		}
 		return cast<container_a<>>(variadic_operate(op, *this, shoal));
 	}
+
+	inline void from_shoal(shoal_a < symbol_a < > , container_a < > > const & shoal )
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::from_shoal(shoal) not available"); }
 
 	inline any_a<> is_shoal__(list_a<> const& arguments) const
 	{
@@ -1404,6 +1638,9 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
 	}
 
+	inline bool is_shoal() const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::is_shoal() not available"); }
+
 	inline any_a<> as_shoal__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___);
@@ -1425,6 +1662,9 @@ public:
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this), shoal));
 	}
+
+	inline void as_shoal(shoal_a < symbol_a < > , container_a < > > & shoal ) const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::as_shoal(shoal) not available"); }
 
 	inline any_a<> keys_begin__(list_a<> const& arguments) const
 	{

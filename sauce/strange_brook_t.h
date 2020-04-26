@@ -988,8 +988,9 @@ public:
 	inline any_a<> pack_(container_a<>& container) const
 	{
 		auto item = container;
-		container.make_inventory_();
-		container.push_back(item.from_boolean_(no())); // unique
+		container.make_inventory();
+		item.from_boolean(false);
+		container.push_back(item); // unique
 		pack(container, item);
 		return yes();
 	}
@@ -997,10 +998,12 @@ public:
 	inline any_a<> pack_unique_(container_a<>& container, herd_a<number_data_a<uint64_t>>& unique_herd) const
 	{
 		auto item = container;
-		container.make_inventory_();
-		container.push_back(item.from_boolean_(yes())); // unique
+		container.make_inventory();
+		item.from_boolean(true);
+		container.push_back(item); // unique
 		auto id = thing_t<___ego___>::identity_();
-		container.push_back(item.from_int_64_(id.to_int_64_())); // id
+		item.from_int_64(id.to_int_64());
+		container.push_back(item); // id
 		if (unique_herd.insert_thing(id))
 		{
 			pack(container, item);
@@ -1010,10 +1013,23 @@ public:
 
 	inline void pack(container_a<>& container, container_a<>& item) const
 	{
-		container.push_back(item.from_symbol_(sym(type_().to_string() + "::unpack"))); // unpack
-		for (auto const& primitive : _deque)
+		item.from_string(type_().to_string() + "::unpack");
+		container.push_back(item); // unpack
+		if (number_u<_primitive_>::is_int())
 		{
-			container.push_back(item.from_number_(num(primitive))); // primitive
+			for (auto const& primitive : _deque)
+			{
+				item.from_int_64(number_u<_primitive_>::to_int_64(primitive));
+				container.push_back(item); // primitive
+			}
+		}
+		else
+		{
+			for (auto const& primitive : _deque)
+			{
+				item.from_float_64(number_u<_primitive_>::to_float_64(primitive));
+				container.push_back(item); // primitive
+			}
 		}
 	}
 
@@ -1021,9 +1037,19 @@ public:
 	{
 		auto result = create_();
 		auto& deque = result.mutate_deque();
-		for (auto const& item : list)
+		if (number_u<_primitive_>::is_int())
 		{
-			deque.push_back(number_u<_primitive_>::from_number(fast<number_a<>>(item))); // primitive
+			for (auto const& item : list)
+			{
+				deque.push_back(number_u<_primitive_>::from_int_64(fast<number_data_int64_a<>>(item).extract_primitive())); // primitive
+			}
+		}
+		else
+		{
+			for (auto const& item : list)
+			{
+				deque.push_back(number_u<_primitive_>::from_float_64(fast<number_data_double_a<>>(item).extract_primitive())); // primitive
+			}
 		}
 		return result;
 	}

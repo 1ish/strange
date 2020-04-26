@@ -1204,36 +1204,61 @@ public:
 
 	inline container_a<> from_null_()
 	{
+		from_null();
+		return thing_t<___ego___>::me_();
+	}
+
+	inline void from_null()
+	{
 		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 		_packet = dart_packet::make_null();
-		return thing_t<___ego___>::me_();
 	}
 
 	inline any_a<> is_null_() const
 	{
+		return boole(is_null());
+	}
+
+	inline bool is_null() const
+	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return boole(_packet.is_null());
+		return _packet.is_null();
 	}
 
 	inline container_a<> from_boolean_(any_a<> const& boolean)
 	{
+		from_boolean(boolean);
+		return thing_t<___ego___>::me_();
+	}
+
+	inline void from_boolean(bool boolean)
+	{
 		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 		_packet = dart_packet::make_boolean(boolean);
-		return thing_t<___ego___>::me_();
 	}
 
 	inline any_a<> is_boolean_() const
 	{
+		return boole(is_boolean());
+	}
+
+	inline bool is_boolean() const
+	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return boole(_packet.is_boolean());
+		return _packet.is_boolean();
 	}
 
 	inline any_a<> to_boolean_() const
 	{
+		return boole(to_boolean());
+	}
+
+	inline bool to_boolean() const
+	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		try
 		{
-			return boole(_packet.boolean());
+			return _packet.boolean();
 		}
 		catch (std_exception& exception)
 		{
@@ -1242,6 +1267,12 @@ public:
 	}
 
 	inline container_a<> from_number_(number_a<> const& number)
+	{
+		from_number(number);
+		return thing_t<___ego___>::me_();
+	}
+
+	inline void from_number(number_a<> const& number)
 	{
 		if (number.is_int())
 		{
@@ -1253,13 +1284,17 @@ public:
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_packet = dart_packet::make_decimal(number.to_float_64());
 		}
-		return thing_t<___ego___>::me_();
 	}
 
 	inline any_a<> is_number_() const
 	{
+		return boole(is_number());
+	}
+
+	inline bool is_number() const
+	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return boole(_packet.is_numeric());
+		return _packet.is_numeric();
 	}
 
 	inline number_a<> to_number_() const
@@ -1278,23 +1313,38 @@ public:
 
 	inline container_a<> from_int_64_(number_data_int64_a<> const& number)
 	{
-		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-		_packet = dart_packet::make_integer(number.extract_primitive());
+		from_int_64(number.extract_primitive());
 		return thing_t<___ego___>::me_();
+	}
+
+	inline void from_int_64(int64_t number)
+	{
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = dart_packet::make_integer(number);
 	}
 
 	inline any_a<> is_int_64_() const
 	{
+		return boole(is_int_64());
+	}
+
+	inline bool is_int_64() const
+	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return boole(_packet.is_integer());
+		return _packet.is_integer();
 	}
 
 	inline number_data_int64_a<> to_int_64_() const
 	{
+		return num(to_int_64());
+	}
+
+	inline int64_t to_int_64() const
+	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		try
 		{
-			return num(_packet.integer());
+			return _packet.integer();
 		}
 		catch (std_exception& exception)
 		{
@@ -1304,23 +1354,38 @@ public:
 
 	inline container_a<> from_float_64_(number_data_double_a<> const& number)
 	{
-		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-		_packet = dart_packet::make_decimal(number.extract_primitive());
+		from_float_64(number.extract_primitive());
 		return thing_t<___ego___>::me_();
+	}
+
+	inline void from_float_64(double number)
+	{
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = dart_packet::make_decimal(number);
 	}
 
 	inline any_a<> is_float_64_() const
 	{
+		return boole(is_float_64());
+	}
+
+	inline bool is_float_64() const
+	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return boole(_packet.is_decimal());
+		return _packet.is_decimal();
 	}
 
 	inline number_data_double_a<> to_float_64_() const
 	{
+		return num(to_float_64());
+	}
+
+	inline double to_float_64() const
+	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		try
 		{
-			return num(_packet.decimal());
+			return _packet.decimal();
 		}
 		catch (std_exception& exception)
 		{
@@ -1330,15 +1395,30 @@ public:
 
 	inline container_a<> from_lake_(lake_int8_a<> const& lake)
 	{
-		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-		_packet = dart_packet::make_string(lake_to_string(lake));
+		from_lake(lake);
 		return thing_t<___ego___>::me_();
+	}
+
+	inline void from_lake(lake_int8_a<> const& lake)
+	{
+		from_string(lake_to_string(lake));
+	}
+
+	inline void from_string(std_string const& str)
+	{
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = dart_packet::make_string(str);
 	}
 
 	inline any_a<> is_lake_() const
 	{
+		return boole(is_lake());
+	}
+
+	inline bool is_lake() const
+	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return boole(_packet.is_str());
+		return _packet.is_str();
 	}
 
 	inline lake_int8_a<> to_lake_() const
@@ -1354,11 +1434,29 @@ public:
 		}
 	}
 
+	inline std_string to_string() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		try
+		{
+			return _packet.str();
+		}
+		catch (std_exception& exception)
+		{
+			throw dis(__FILE__, __LINE__, "strange::parcel::to_string exception: ") + exception;
+		}
+	}
+
 	inline container_a<> from_symbol_(symbol_a<> const& symbol)
+	{
+		from_symbol(symbol);
+		return thing_t<___ego___>::me_();
+	}
+
+	inline void from_symbol(symbol_a<> const& symbol)
 	{
 		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 		_packet = dart_packet::make_string(symbol.to_string());
-		return thing_t<___ego___>::me_();
 	}
 
 	inline symbol_a<> to_symbol_() const
@@ -1376,12 +1474,23 @@ public:
 
 	inline container_a<> make_inventory_()
 	{
-		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-		_packet = dart_packet::make_array();
+		make_inventory();
 		return thing_t<___ego___>::me_();
 	}
 
+	inline void make_inventory()
+	{
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = dart_packet::make_array();
+	}
+
 	inline container_a<> from_inventory_(inventory_a<container_a<>> const& inventory)
+	{
+		from_inventory(inventory);
+		return thing_t<___ego___>::me_();
+	}
+
+	inline void from_inventory(inventory_a<container_a<>> const& inventory)
 	{
 		auto packet = dart_packet::make_array();
 		for (auto const& container : inventory)
@@ -1390,41 +1499,61 @@ public:
 		}
 		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 		_packet = packet;
-		return thing_t<___ego___>::me_();
 	}
 
 	inline any_a<> is_inventory_() const
 	{
+		return boole(is_inventory());
+	}
+
+	inline bool is_inventory() const
+	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return boole(_packet.is_array());
+		return _packet.is_array();
 	}
 
 	inline any_a<> as_inventory_(inventory_a<container_a<>>& inventory) const
+	{
+		as_inventory(inventory);
+		return yes();
+	}
+
+	inline void as_inventory(inventory_a<container_a<>>& inventory) const
 	{
 		inventory.clear();
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		try
 		{
-			for (auto const& packet : _packet)
-			{
-				inventory.push_back(create(packet));
-			}
+		for (auto const& packet : _packet)
+		{
+			inventory.push_back(create(packet));
+		}
 		}
 		catch (std_exception& exception)
 		{
 			throw dis(__FILE__, __LINE__, "strange::parcel::as_inventory exception: ") + exception;
 		}
-		return yes();
 	}
 
 	inline container_a<> make_herd_()
 	{
-		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-		_packet = dart_packet::make_object();
+		make_herd();
 		return thing_t<___ego___>::me_();
 	}
 
+	inline void make_herd()
+	{
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = dart_packet::make_object();
+	}
+
 	inline container_a<> from_herd_(herd_a<symbol_a<>> const& herd)
+	{
+		from_herd(herd);
+		return thing_t<___ego___>::me_();
+	}
+
+	inline void from_herd(herd_a<symbol_a<>> const& herd)
 	{
 		auto packet = dart_packet::make_object();
 		for (auto const& symbol : herd)
@@ -1433,16 +1562,26 @@ public:
 		}
 		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 		_packet = packet;
-		return thing_t<___ego___>::me_();
 	}
 
 	inline any_a<> is_herd_() const
 	{
+		return boole(is_herd());
+	}
+
+	inline bool is_herd() const
+	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return boole(_packet.is_object());
+		return _packet.is_object();
 	}
 
 	inline any_a<> as_herd_(herd_a<symbol_a<>>& herd) const
+	{
+		as_herd(herd);
+		return yes();
+	}
+
+	inline void as_herd(herd_a<symbol_a<>>& herd) const
 	{
 		herd.clear();
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
@@ -1457,17 +1596,27 @@ public:
 		{
 			throw dis(__FILE__, __LINE__, "strange::parcel::as_herd exception: ") + exception;
 		}
-		return yes();
 	}
 
 	inline container_a<> make_shoal_()
 	{
-		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-		_packet = dart_packet::make_object();
+		make_shoal();
 		return thing_t<___ego___>::me_();
 	}
 
+	inline void make_shoal()
+	{
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = dart_packet::make_object();
+	}
+
 	inline container_a<> from_shoal_(shoal_a<symbol_a<>, container_a<>> const& shoal)
+	{
+		from_shoal(shoal);
+		return thing_t<___ego___>::me_();
+	}
+
+	inline void from_shoal(shoal_a<symbol_a<>, container_a<>> const& shoal)
 	{
 		auto packet = dart_packet::make_object();
 		for (auto const& flock : shoal)
@@ -1476,16 +1625,26 @@ public:
 		}
 		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 		_packet = packet;
-		return thing_t<___ego___>::me_();
 	}
 
 	inline any_a<> is_shoal_() const
 	{
+		return boole(is_shoal());
+	}
+
+	inline bool is_shoal() const
+	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return boole(_packet.is_object());
+		return _packet.is_object();
 	}
 
 	inline any_a<> as_shoal_(shoal_a<symbol_a<>, container_a<>>& shoal) const
+	{
+		as_shoal(shoal);
+		return yes();
+	}
+
+	inline void as_shoal(shoal_a<symbol_a<>, container_a<>>& shoal) const
 	{
 		shoal.clear();
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
@@ -1502,7 +1661,6 @@ public:
 		{
 			throw dis(__FILE__, __LINE__, "strange::parcel::as_shoal exception: ") + exception;
 		}
-		return yes();
 	}
 
 	// data
