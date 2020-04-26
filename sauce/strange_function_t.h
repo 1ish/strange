@@ -110,15 +110,15 @@ public:
 		{
 			return _expression.operate(local_shoal, list);
 		}
-		catch (typename expression_t<>::return_i& ret)
+		catch (typename expression_t<>::return_e& ret)
 		{
 			return ret.result;
 		}
-		catch (typename expression_t<>::break_i&)
+		catch (typename expression_t<>::break_e&)
 		{
 			throw dis(_token.report() + "strange::function::operate break caught trying to escape");
 		}
-		catch (typename expression_t<>::continue_i&)
+		catch (typename expression_t<>::continue_e&)
 		{
 			throw dis(_token.report() + "strange::function::operate continue caught trying to escape");
 		}

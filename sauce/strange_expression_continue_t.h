@@ -35,7 +35,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>&, list_a<> const&) const
 	{
-		throw typename expression_t<___ego___>::continue_i{};
+		throw typename expression_t<___ego___>::continue_e{};
 	}
 
 	// expression

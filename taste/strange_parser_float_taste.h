@@ -7,7 +7,7 @@ TEST_CASE("strange river create input float", "[river_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -24,7 +24,7 @@ TEST_CASE("strange tokenize float", "[tokenizer_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -40,7 +40,7 @@ TEST_CASE("strange parse and generate float", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -56,7 +56,7 @@ TEST_CASE("strange parse and evaluate float", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -88,6 +88,6 @@ TEST_CASE("strange parse and evaluate floats", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }

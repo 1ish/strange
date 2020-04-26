@@ -779,7 +779,7 @@ public:
 				{
 					throw dis("strange::parcel::unpack called for array with unique true but no reference id");
 				}
-				id = num(static_cast<uint64_t>(it->integer()));
+				id = num(number_u<uint64_t>::from_int_64(it->integer()));
 				if (++it == end)
 				{
 					if (!check<shoal_a<number_data_a<uint64_t>, any_a<>>>(unique_shoal))

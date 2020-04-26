@@ -74,11 +74,11 @@ public:
 					auto thing = any_a<>::val(local); // new scope each time round the loop
 					result = _loop.operate(thing, list);
 				}
-				catch (typename expression_t<___ego___>::continue_i&)
+				catch (typename expression_t<___ego___>::continue_e&)
 				{}
 			} while (_condition.operate(local, list));
 		}
-		catch (typename expression_t<___ego___>::break_i&)
+		catch (typename expression_t<___ego___>::break_e&)
 		{}
 		return result;
 	}

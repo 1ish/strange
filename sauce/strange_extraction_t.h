@@ -111,7 +111,7 @@ public:
 		{
 			return _expression.operate(local_shoal, list);
 		}
-		catch (typename expression_t<>::return_i& ret)
+		catch (typename expression_t<>::return_e& ret)
 		{
 			return ret.result;
 		}

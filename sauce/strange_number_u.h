@@ -39,22 +39,22 @@ public:
 
 	static inline int8_t from_number(number_a<> const& other)
 	{
-		return int8_t(other.to_int_64());
+		return static_cast<int8_t>(other.to_int_64());
 	}
 
 	static inline int8_t from_int_64(int64_t other)
 	{
-		return int8_t(other);
+		return static_cast<int8_t>(other);
 	}
 
 	static inline int8_t from_uint_64(uint64_t other)
 	{
-		return int8_t(other);
+		return static_cast<int8_t>(other);
 	}
 
 	static inline int8_t from_float_64(double other)
 	{
-		return int8_t(std::llround(other));
+		return static_cast<int8_t>(std_llround(other));
 	}
 
 	static inline int64_t to_int_64(int8_t other)
@@ -64,23 +64,17 @@ public:
 
 	static inline uint64_t to_uint_64(int8_t other)
 	{
-#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
-		if (other < 0)
-		{
-			throw dis("conversion of negative number to unsigned integer");
-		}
-#endif
-		return uint64_t(other);
+		return static_cast<uint64_t>(other);
 	}
 
 	static inline double to_float_64(int8_t other)
 	{
-		return double(other);
+		return static_cast<double>(other);
 	}
 
 	static inline int8_t modulo(int8_t x, int8_t y)
 	{
-		return int8_t(x % y);
+		return static_cast<int8_t>(x % y);
 	}
 
 	static inline bool is_int()
@@ -125,37 +119,22 @@ public:
 
 	static inline uint8_t from_number(number_a<> const& other)
 	{
-		return uint8_t(other.to_uint_64());
+		return static_cast<uint8_t>(other.to_uint_64());
 	}
 
 	static inline uint8_t from_int_64(int64_t other)
 	{
-#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
-		if (other < 0)
-		{
-			throw dis("conversion of negative number to unsigned integer");
-		}
-#endif
-		return uint8_t(other);
+		return static_cast<uint8_t>(other);
 	}
 
 	static inline uint8_t from_uint_64(uint64_t other)
 	{
-		return uint8_t(other);
+		return static_cast<uint8_t>(other);
 	}
 
 	static inline uint8_t from_float_64(double other)
 	{
-#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
-		auto r = std::llround(other);
-		if (r < 0)
-		{
-			throw dis("conversion of negative number to unsigned integer");
-		}
-		return uint8_t(r);
-#else
-		return uint8_t(std::llround(other));
-#endif
+		return static_cast<uint8_t>(std_llround(other));
 	}
 
 	static inline int64_t to_int_64(uint8_t other)
@@ -170,12 +149,12 @@ public:
 
 	static inline double to_float_64(uint8_t other)
 	{
-		return double(other);
+		return static_cast<double>(other);
 	}
 
 	static inline uint8_t modulo(uint8_t x, uint8_t y)
 	{
-		return uint8_t(x % y);
+		return static_cast<uint8_t>(x % y);
 	}
 
 	static inline bool is_int()
@@ -220,22 +199,22 @@ public:
 
 	static inline int16_t from_number(number_a<> const& other)
 	{
-		return int16_t(other.to_int_64());
+		return static_cast<int16_t>(other.to_int_64());
 	}
 
 	static inline int16_t from_int_64(int64_t other)
 	{
-		return int16_t(other);
+		return static_cast<int16_t>(other);
 	}
 
 	static inline int16_t from_uint_64(uint64_t other)
 	{
-		return int16_t(other);
+		return static_cast<int16_t>(other);
 	}
 
 	static inline int16_t from_float_64(double other)
 	{
-		return int16_t(std::llround(other));
+		return static_cast<int16_t>(std_llround(other));
 	}
 
 	static inline int64_t to_int_64(int16_t other)
@@ -245,23 +224,17 @@ public:
 
 	static inline uint64_t to_uint_64(int16_t other)
 	{
-#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
-		if (other < 0)
-		{
-			throw dis("conversion of negative number to unsigned integer");
-		}
-#endif
-		return uint64_t(other);
+		return static_cast<uint64_t>(other);
 	}
 
 	static inline double to_float_64(int16_t other)
 	{
-		return double(other);
+		return static_cast<double>(other);
 	}
 
 	static inline int16_t modulo(int16_t x, int16_t y)
 	{
-		return int16_t(x % y);
+		return static_cast<int16_t>(x % y);
 	}
 
 	static inline bool is_int()
@@ -306,37 +279,22 @@ public:
 
 	static inline uint16_t from_number(number_a<> const& other)
 	{
-		return uint16_t(other.to_uint_64());
+		return static_cast<uint16_t>(other.to_uint_64());
 	}
 
 	static inline uint16_t from_int_64(int64_t other)
 	{
-#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
-		if (other < 0)
-		{
-			throw dis("conversion of negative number to unsigned integer");
-		}
-#endif
-		return uint16_t(other);
+		return static_cast<uint16_t>(other);
 	}
 
 	static inline uint16_t from_uint_64(uint64_t other)
 	{
-		return uint16_t(other);
+		return static_cast<uint16_t>(other);
 	}
 
 	static inline uint16_t from_float_64(double other)
 	{
-#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
-		auto r = std::llround(other);
-		if (r < 0)
-		{
-			throw dis("conversion of negative number to unsigned integer");
-		}
-		return uint16_t(r);
-#else
-		return uint16_t(std::llround(other));
-#endif
+		return static_cast<uint16_t>(std_llround(other));
 	}
 
 	static inline int64_t to_int_64(uint16_t other)
@@ -351,12 +309,12 @@ public:
 
 	static inline double to_float_64(uint16_t other)
 	{
-		return double(other);
+		return static_cast<double>(other);
 	}
 
 	static inline uint16_t modulo(uint16_t x, uint16_t y)
 	{
-		return uint16_t(x % y);
+		return static_cast<uint16_t>(x % y);
 	}
 
 	static inline bool is_int()
@@ -401,22 +359,22 @@ public:
 
 	static inline int32_t from_number(number_a<> const& other)
 	{
-		return int32_t(other.to_int_64());
+		return static_cast<int32_t>(other.to_int_64());
 	}
 
 	static inline int32_t from_int_64(int64_t other)
 	{
-		return int32_t(other);
+		return static_cast<int32_t>(other);
 	}
 
 	static inline int32_t from_uint_64(uint64_t other)
 	{
-		return int32_t(other);
+		return static_cast<int32_t>(other);
 	}
 
 	static inline int32_t from_float_64(double other)
 	{
-		return int32_t(std::llround(other));
+		return static_cast<int32_t>(std_llround(other));
 	}
 
 	static inline int64_t to_int_64(int32_t other)
@@ -426,23 +384,17 @@ public:
 
 	static inline uint64_t to_uint_64(int32_t other)
 	{
-#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
-		if (other < 0)
-		{
-			throw dis("conversion of negative number to unsigned integer");
-		}
-#endif
-		return uint64_t(other);
+		return static_cast<uint64_t>(other);
 	}
 
 	static inline double to_float_64(int32_t other)
 	{
-		return double(other);
+		return static_cast<double>(other);
 	}
 
 	static inline int32_t modulo(int32_t x, int32_t y)
 	{
-		return int32_t(x % y);
+		return static_cast<int32_t>(x % y);
 	}
 
 	static inline bool is_int()
@@ -487,37 +439,22 @@ public:
 
 	static inline uint32_t from_number(number_a<> const& other)
 	{
-		return uint32_t(other.to_uint_64());
+		return static_cast<uint32_t>(other.to_uint_64());
 	}
 
 	static inline uint32_t from_int_64(int64_t other)
 	{
-#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
-		if (other < 0)
-		{
-			throw dis("conversion of negative number to unsigned integer");
-		}
-#endif
-		return uint32_t(other);
+		return static_cast<uint32_t>(other);
 	}
 
 	static inline uint32_t from_uint_64(uint64_t other)
 	{
-		return uint32_t(other);
+		return static_cast<uint32_t>(other);
 	}
 
 	static inline uint32_t from_float_64(double other)
 	{
-#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
-		auto r = std::llround(other);
-		if (r < 0)
-		{
-			throw dis("conversion of negative number to unsigned integer");
-		}
-		return uint32_t(r);
-#else
-		return uint32_t(std::llround(other));
-#endif
+		return static_cast<uint32_t>(std_llround(other));
 	}
 
 	static inline int64_t to_int_64(uint32_t other)
@@ -532,12 +469,12 @@ public:
 
 	static inline double to_float_64(uint32_t other)
 	{
-		return double(other);
+		return static_cast<double>(other);
 	}
 
 	static inline uint32_t modulo(uint32_t x, uint32_t y)
 	{
-		return uint32_t(x % y);
+		return static_cast<uint32_t>(x % y);
 	}
 
 	static inline bool is_int()
@@ -592,12 +529,12 @@ public:
 
 	static inline int64_t from_uint_64(uint64_t other)
 	{
-		return int64_t(other);
+		return static_cast<int64_t>(other);
 	}
 
 	static inline int64_t from_float_64(double other)
 	{
-		return int64_t(std::llround(other));
+		return static_cast<int64_t>(std_llround(other));
 	}
 
 	static inline int64_t to_int_64(int64_t other)
@@ -607,23 +544,17 @@ public:
 
 	static inline uint64_t to_uint_64(int64_t other)
 	{
-#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
-		if (other < 0)
-		{
-			throw dis("conversion of negative number to unsigned integer");
-		}
-#endif
-		return uint64_t(other);
+		return static_cast<uint64_t>(other);
 	}
 
 	static inline double to_float_64(int64_t other)
 	{
-		return double(other);
+		return static_cast<double>(other);
 	}
 
 	static inline int64_t modulo(int64_t x, int64_t y)
 	{
-		return int64_t(x % y);
+		return static_cast<int64_t>(x % y);
 	}
 
 	static inline bool is_int()
@@ -673,13 +604,7 @@ public:
 
 	static inline uint64_t from_int_64(int64_t other)
 	{
-#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
-		if (other < 0)
-		{
-			throw dis("conversion of negative number to unsigned integer");
-		}
-#endif
-		return uint64_t(other);
+		return static_cast<uint64_t>(other);
 	}
 
 	static inline uint64_t from_uint_64(uint64_t other)
@@ -689,21 +614,12 @@ public:
 
 	static inline uint64_t from_float_64(double other)
 	{
-#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
-		auto r = std::llround(other);
-		if (r < 0)
-		{
-			throw dis("conversion of negative number to unsigned integer");
-		}
-		return uint64_t(r);
-#else
-		return uint64_t(std::llround(other));
-#endif
+		return static_cast<uint64_t>(std_llround(other));
 	}
 
 	static inline int64_t to_int_64(uint64_t other)
 	{
-		return int64_t(other);
+		return static_cast<int64_t>(other);
 	}
 
 	static inline uint64_t to_uint_64(uint64_t other)
@@ -713,12 +629,12 @@ public:
 
 	static inline double to_float_64(uint64_t other)
 	{
-		return double(other);
+		return static_cast<double>(other);
 	}
 
 	static inline uint64_t modulo(uint64_t x, uint64_t y)
 	{
-		return uint64_t(x % y);
+		return static_cast<uint64_t>(x % y);
 	}
 
 	static inline bool is_int()
@@ -763,41 +679,32 @@ public:
 
 	static inline float from_number(number_a<> const& other)
 	{
-		return float(other.to_float_64());
+		return static_cast<float>(other.to_float_64());
 	}
 
 	static inline float from_int_64(int64_t other)
 	{
-		return float(other);
+		return static_cast<float>(other);
 	}
 
 	static inline float from_uint_64(uint64_t other)
 	{
-		return float(other);
+		return static_cast<float>(other);
 	}
 
 	static inline float from_float_64(double other)
 	{
-		return float(other);
+		return static_cast<float>(other);
 	}
 
 	static inline int64_t to_int_64(float other)
 	{
-		return std::llround(other);
+		return std_llround(other);
 	}
 
 	static inline uint64_t to_uint_64(float other)
 	{
-#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
-		auto r = std::llround(other);
-		if (r < 0)
-		{
-			throw dis("conversion of negative number to unsigned integer");
-		}
-		return uint64_t(r);
-#else
-		return uint64_t(std::llround(other));
-#endif
+		return static_cast<uint64_t>(std_llround(other));
 	}
 
 	static inline double to_float_64(float other)
@@ -857,12 +764,12 @@ public:
 
 	static inline double from_int_64(int64_t other)
 	{
-		return double(other);
+		return static_cast<double>(other);
 	}
 
 	static inline double from_uint_64(uint64_t other)
 	{
-		return double(other);
+		return static_cast<double>(other);
 	}
 
 	static inline double from_float_64(double other)
@@ -872,21 +779,12 @@ public:
 
 	static inline int64_t to_int_64(double other)
 	{
-		return std::llround(other);
+		return std_llround(other);
 	}
 
 	static inline uint64_t to_uint_64(double other)
 	{
-#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
-		auto r = std::llround(other);
-		if (r < 0)
-		{
-			throw dis("conversion of negative number to unsigned integer");
-		}
-		return uint64_t(r);
-#else
-		return uint64_t(std::llround(other));
-#endif
+		return static_cast<uint64_t>(std_llround(other));
 	}
 
 	static inline double to_float_64(double other)

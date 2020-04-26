@@ -44,6 +44,7 @@ namespace strange
 
 	inline int64_t std_stoll(std_string const& _str, std_size_t* _pos = nullptr, int _base = 10) { return std::stoll(_str, _pos, _base); }
 	inline double std_stod(std_string const& _str, std_size_t* _pos = nullptr) { return std::stod(_str, _pos); }
+	inline int64_t std_llround(double number) { return std::llround(number); }
 
 	using std_stringstream = std::stringstream;
 
@@ -101,7 +102,6 @@ namespace strange
 	using std_ios_base = std::ios_base;
 
 	using std_exception = std::exception;
-	using std_runtime_error = std::runtime_error;
 
 	using dart_packet = dart::packet;
 

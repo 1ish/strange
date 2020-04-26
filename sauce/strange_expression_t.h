@@ -9,31 +9,18 @@ template <typename ___ego___>
 class expression_t : public operation_t<___ego___>
 {
 public:
-	// instructions
-	class break_i : public std_runtime_error
-	{
-	public:
-		break_i()
-			: std_runtime_error("strange::expression::break escaped")
-		{}
-	};
+	// exceptions
+	class break_e {};
 
-	class continue_i : public std_runtime_error
-	{
-	public:
-		continue_i()
-			: std_runtime_error("strange::expression::continue escaped")
-		{}
-	};
+	class continue_e {};
 
-	class return_i : public std_runtime_error
+	class return_e
 	{
 	public:
 		any_a<> const result;
 
-		return_i(any_a<> const& thing = no())
-			: std_runtime_error("strange::expression::return escaped")
-			, result{ thing }
+		return_e(any_a<> const& thing = no())
+			: result{ thing }
 		{}
 	};
 

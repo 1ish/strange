@@ -7,7 +7,7 @@ TEST_CASE("strange river create_file input hello world", "[river_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -29,7 +29,7 @@ TEST_CASE("strange river read hello world mutator", "[river_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -49,7 +49,7 @@ TEST_CASE("strange river read hello world get", "[river_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -65,7 +65,7 @@ TEST_CASE("strange tokenize hello world", "[tokenizer_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -81,7 +81,7 @@ TEST_CASE("strange parse and generate hello world", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -95,6 +95,6 @@ TEST_CASE("strange parse and evaluate hello world", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }

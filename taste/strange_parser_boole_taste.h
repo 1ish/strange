@@ -7,7 +7,7 @@ TEST_CASE("strange river create input boole", "[river_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -24,7 +24,7 @@ TEST_CASE("strange tokenize boole", "[tokenizer_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -54,7 +54,7 @@ TEST_CASE("strange parse and generate boole", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -69,7 +69,7 @@ TEST_CASE("strange parse and evaluate boole", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -107,6 +107,6 @@ TEST_CASE("strange parse and evaluate booles", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }

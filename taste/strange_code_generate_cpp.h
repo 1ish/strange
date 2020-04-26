@@ -21,7 +21,7 @@ TEST_CASE("strange parse and generate cpp abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -44,7 +44,7 @@ TEST_CASE("strange parse and generate cpp file any abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -67,7 +67,7 @@ TEST_CASE("strange parse and generate cpp file cat abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -90,7 +90,7 @@ TEST_CASE("strange parse and generate cpp file data abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -113,7 +113,7 @@ TEST_CASE("strange parse and generate cpp file expression abstraction", "[parse_
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -136,7 +136,7 @@ TEST_CASE("strange parse and generate cpp file kind abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -159,7 +159,7 @@ TEST_CASE("strange parse and generate cpp file misunderstanding abstraction", "[
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -182,7 +182,7 @@ TEST_CASE("strange parse and generate cpp file number abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -205,7 +205,7 @@ TEST_CASE("strange parse and generate cpp file number_data abstraction", "[parse
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -228,7 +228,7 @@ TEST_CASE("strange parse and generate cpp file operation abstraction", "[parse_t
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -251,7 +251,7 @@ TEST_CASE("strange parse and generate cpp file parser abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -274,7 +274,7 @@ TEST_CASE("strange parse and generate cpp file range abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -297,7 +297,7 @@ TEST_CASE("strange parse and generate cpp file river abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -320,7 +320,7 @@ TEST_CASE("strange parse and generate cpp file symbol abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -343,6 +343,6 @@ TEST_CASE("strange parse and generate cpp file token abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }

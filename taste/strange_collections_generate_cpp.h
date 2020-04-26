@@ -21,7 +21,7 @@ TEST_CASE("strange parse and generate cpp brook", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 */
@@ -44,7 +44,7 @@ TEST_CASE("strange parse and generate cpp file brook abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -67,7 +67,7 @@ TEST_CASE("strange parse and generate cpp file collection abstraction", "[parse_
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -90,7 +90,7 @@ TEST_CASE("strange parse and generate cpp file container abstraction", "[parse_t
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -113,7 +113,7 @@ TEST_CASE("strange parse and generate cpp file container_data abstraction", "[pa
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -136,7 +136,7 @@ TEST_CASE("strange parse and generate cpp file flock abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -159,7 +159,7 @@ TEST_CASE("strange parse and generate cpp file herd abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -182,7 +182,7 @@ TEST_CASE("strange parse and generate cpp file inventory abstraction", "[parse_t
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -205,7 +205,7 @@ TEST_CASE("strange parse and generate cpp file lake abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -228,7 +228,7 @@ TEST_CASE("strange parse and generate cpp file list abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -251,7 +251,7 @@ TEST_CASE("strange parse and generate cpp file ordered_herd abstraction", "[pars
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -274,7 +274,7 @@ TEST_CASE("strange parse and generate cpp file ordered_shoal abstraction", "[par
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -297,7 +297,7 @@ TEST_CASE("strange parse and generate cpp file shoal abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -320,7 +320,7 @@ TEST_CASE("strange parse and generate cpp file squad abstraction", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -343,7 +343,7 @@ TEST_CASE("strange parse and generate cpp file unordered_herd abstraction", "[pa
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -366,6 +366,6 @@ TEST_CASE("strange parse and generate cpp file unordered_shoal abstraction", "[p
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		throw std_runtime_error(m.to_string());
+		throw std::runtime_error(m.to_string());
 	}
 }
