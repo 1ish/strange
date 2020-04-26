@@ -543,6 +543,21 @@ inline symbol_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_symbol_(); }
 
 template <typename _1>
+inline any_a<> container_a<_1>::make_inventory__(list_a<> const& ___arguments___)
+{
+	return make_inventory_();
+}
+
+template <typename _1>
+inline container_a<> container_a<_1>::make_inventory_()
+{ assert(any_a<>::___handle___); return ___write___().make_inventory_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline container_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::make_inventory_()
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.make_inventory_(); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::from_inventory__(list_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.begin_();
@@ -602,6 +617,21 @@ inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.as_inventory_(inventory); }
 
 template <typename _1>
+inline any_a<> container_a<_1>::make_herd__(list_a<> const& ___arguments___)
+{
+	return make_herd_();
+}
+
+template <typename _1>
+inline container_a<> container_a<_1>::make_herd_()
+{ assert(any_a<>::___handle___); return ___write___().make_herd_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline container_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::make_herd_()
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.make_herd_(); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::from_herd__(list_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.begin_();
@@ -659,6 +689,21 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::as_herd_(herd_a<symbol_a<>> & herd) const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.as_herd_(herd); }
+
+template <typename _1>
+inline any_a<> container_a<_1>::make_shoal__(list_a<> const& ___arguments___)
+{
+	return make_shoal_();
+}
+
+template <typename _1>
+inline container_a<> container_a<_1>::make_shoal_()
+{ assert(any_a<>::___handle___); return ___write___().make_shoal_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline container_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::make_shoal_()
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.make_shoal_(); }
 
 template <typename _1>
 inline any_a<> container_a<_1>::from_shoal__(list_a<> const& ___arguments___)
@@ -821,12 +866,15 @@ inline unordered_shoal_a<> container_a<_1>::___operations___()
 		operations.update(sym("to_lake_"), native_extraction_t<container_a>::create(&container_a::to_lake__));
 		operations.update(sym("from_symbol_"), native_mutation_t<container_a>::create(&container_a::from_symbol__));
 		operations.update(sym("to_symbol_"), native_extraction_t<container_a>::create(&container_a::to_symbol__));
+		operations.update(sym("make_inventory_"), native_mutation_t<container_a>::create(&container_a::make_inventory__));
 		operations.update(sym("from_inventory_"), native_mutation_t<container_a>::create(&container_a::from_inventory__));
 		operations.update(sym("is_inventory_"), native_extraction_t<container_a>::create(&container_a::is_inventory__));
 		operations.update(sym("as_inventory_"), native_extraction_t<container_a>::create(&container_a::as_inventory__));
+		operations.update(sym("make_herd_"), native_mutation_t<container_a>::create(&container_a::make_herd__));
 		operations.update(sym("from_herd_"), native_mutation_t<container_a>::create(&container_a::from_herd__));
 		operations.update(sym("is_herd_"), native_extraction_t<container_a>::create(&container_a::is_herd__));
 		operations.update(sym("as_herd_"), native_extraction_t<container_a>::create(&container_a::as_herd__));
+		operations.update(sym("make_shoal_"), native_mutation_t<container_a>::create(&container_a::make_shoal__));
 		operations.update(sym("from_shoal_"), native_mutation_t<container_a>::create(&container_a::from_shoal__));
 		operations.update(sym("is_shoal_"), native_extraction_t<container_a>::create(&container_a::is_shoal__));
 		operations.update(sym("as_shoal_"), native_extraction_t<container_a>::create(&container_a::as_shoal__));

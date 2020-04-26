@@ -49,14 +49,17 @@ false &&
 					from_symbol_ := (symbol :<symbol>#, <container>),
 					to_symbol_ :# (<symbol>),
 
+					make_inventory_ := (<container>),
 					from_inventory_ := (inventory :<inventory[<container>]>#, <container>),
 					is_inventory_ :# (<>),
 					as_inventory_ :# (inventory :<inventory[<container>]>&, <>),
 
+					make_herd_ := (<container>),
 					from_herd_ := (herd :<herd[<symbol>]>#, <container>),
 					is_herd_ :# (<>),
 					as_herd_ :# (herd :<herd[<symbol>]>&, <>),
 
+					make_shoal_ := (<container>),
 					from_shoal_ := (shoal :<shoal[<symbol>, <container>]>#, <container>),
 					is_shoal_ :# (<>),
 					as_shoal_ :# (shoal :<shoal[<symbol>, <container>]>&, <>),

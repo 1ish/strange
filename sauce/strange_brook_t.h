@@ -445,6 +445,7 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{
 		shoal.update(sym(type_().to_string() + "::create"), native_function_create(&brook_t<_primitive_, _concurrent_>::create__));
+		shoal.update(sym(type_().to_string() + "::unpack"), native_function_create(&brook_t<_primitive_, _concurrent_>::unpack__));
 	}
 
 	// visitor pattern
@@ -981,6 +982,50 @@ public:
 	inline std_deque_primitive& mutate_deque()
 	{
 		return _deque;
+	}
+
+	// serialization
+	inline any_a<> pack_(container_a<>& container) const
+	{
+		auto item = container;
+		container.make_inventory_();
+		container.push_back(item.from_boolean_(no())); // unique
+		pack(container, item);
+		return yes();
+	}
+
+	inline any_a<> pack_unique_(container_a<>& container, herd_a<number_data_a<uint64_t>>& unique_herd) const
+	{
+		auto item = container;
+		container.make_inventory_();
+		container.push_back(item.from_boolean_(yes())); // unique
+		auto id = thing_t<___ego___>::identity_();
+		container.push_back(item.from_int_64_(id.to_int_64_())); // id
+		if (unique_herd.insert_thing(id))
+		{
+			pack(container, item);
+		}
+		return yes();
+	}
+
+	inline void pack(container_a<>& container, container_a<>& item) const
+	{
+		container.push_back(item.from_symbol_(sym(type_().to_string() + "::unpack"))); // unpack
+		for (auto const& primitive : _deque)
+		{
+			container.push_back(item.from_number_(num(primitive))); // primitive
+		}
+	}
+
+	static inline any_a<> unpack__(list_a<> const& list)
+	{
+		auto result = create_();
+		auto& deque = result.mutate_deque();
+		for (auto const& item : list)
+		{
+			deque.push_back(number_u<_primitive_>::from_number(fast<number_a<>>(item))); // primitive
+		}
+		return result;
 	}
 
 protected:

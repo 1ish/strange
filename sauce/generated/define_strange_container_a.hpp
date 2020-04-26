@@ -134,6 +134,10 @@ public:
 
 	inline symbol_a<> to_symbol_() const;
 
+	inline any_a<> make_inventory__(list_a<> const& ___arguments___);
+
+	inline container_a<> make_inventory_();
+
 	inline any_a<> from_inventory__(list_a<> const& ___arguments___);
 
 	inline container_a<> from_inventory_(inventory_a<container_a<>> const& inventory);
@@ -146,6 +150,10 @@ public:
 
 	inline any_a<> as_inventory_(inventory_a<container_a<>> & inventory) const;
 
+	inline any_a<> make_herd__(list_a<> const& ___arguments___);
+
+	inline container_a<> make_herd_();
+
 	inline any_a<> from_herd__(list_a<> const& ___arguments___);
 
 	inline container_a<> from_herd_(herd_a<symbol_a<>> const& herd);
@@ -157,6 +165,10 @@ public:
 	inline any_a<> as_herd__(list_a<> const& ___arguments___) const;
 
 	inline any_a<> as_herd_(herd_a<symbol_a<>> & herd) const;
+
+	inline any_a<> make_shoal__(list_a<> const& ___arguments___);
+
+	inline container_a<> make_shoal_();
 
 	inline any_a<> from_shoal__(list_a<> const& ___arguments___);
 
@@ -214,12 +226,15 @@ protected:
 		virtual lake_int8_a<> to_lake_() const = 0;
 		virtual container_a<> from_symbol_(symbol_a<> const& symbol) = 0;
 		virtual symbol_a<> to_symbol_() const = 0;
+		virtual container_a<> make_inventory_() = 0;
 		virtual container_a<> from_inventory_(inventory_a<container_a<>> const& inventory) = 0;
 		virtual any_a<> is_inventory_() const = 0;
 		virtual any_a<> as_inventory_(inventory_a<container_a<>> & inventory) const = 0;
+		virtual container_a<> make_herd_() = 0;
 		virtual container_a<> from_herd_(herd_a<symbol_a<>> const& herd) = 0;
 		virtual any_a<> is_herd_() const = 0;
 		virtual any_a<> as_herd_(herd_a<symbol_a<>> & herd) const = 0;
+		virtual container_a<> make_shoal_() = 0;
 		virtual container_a<> from_shoal_(shoal_a<symbol_a<>, container_a<>> const& shoal) = 0;
 		virtual any_a<> is_shoal_() const = 0;
 		virtual any_a<> as_shoal_(shoal_a<symbol_a<>, container_a<>> & shoal) const = 0;
@@ -311,17 +326,23 @@ protected:
 
 		virtual inline symbol_a<> to_symbol_() const final;
 
+		virtual inline container_a<> make_inventory_() final;
+
 		virtual inline container_a<> from_inventory_(inventory_a<container_a<>> const& inventory) final;
 
 		virtual inline any_a<> is_inventory_() const final;
 
 		virtual inline any_a<> as_inventory_(inventory_a<container_a<>> & inventory) const final;
 
+		virtual inline container_a<> make_herd_() final;
+
 		virtual inline container_a<> from_herd_(herd_a<symbol_a<>> const& herd) final;
 
 		virtual inline any_a<> is_herd_() const final;
 
 		virtual inline any_a<> as_herd_(herd_a<symbol_a<>> & herd) const final;
+
+		virtual inline container_a<> make_shoal_() final;
 
 		virtual inline container_a<> from_shoal_(shoal_a<symbol_a<>, container_a<>> const& shoal) final;
 
@@ -1141,6 +1162,28 @@ public:
 		return cast<symbol_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
 	}
 
+	inline any_a<> make_inventory__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("make_inventory_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::make_inventory_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline container_a<> make_inventory_()
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("make_inventory_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::make_inventory_ passed non-existent member");
+		}
+		return cast<container_a<>>(variadic_operate(op, *this));
+	}
+
 	inline any_a<> from_inventory__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___);
@@ -1207,6 +1250,28 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this), inventory));
 	}
 
+	inline any_a<> make_herd__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("make_herd_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::make_herd_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline container_a<> make_herd_()
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("make_herd_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::make_herd_ passed non-existent member");
+		}
+		return cast<container_a<>>(variadic_operate(op, *this));
+	}
+
 	inline any_a<> from_herd__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___);
@@ -1271,6 +1336,28 @@ public:
 			throw dis(__FILE__, __LINE__, "dynamic container_d::as_herd_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this), herd));
+	}
+
+	inline any_a<> make_shoal__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("make_shoal_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::make_shoal_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline container_a<> make_shoal_()
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("make_shoal_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::make_shoal_ passed non-existent member");
+		}
+		return cast<container_a<>>(variadic_operate(op, *this));
 	}
 
 	inline any_a<> from_shoal__(list_a<> const& arguments)

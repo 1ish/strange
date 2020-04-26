@@ -1374,6 +1374,13 @@ public:
 		}
 	}
 
+	inline container_a<> make_inventory_()
+	{
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = dart_packet::make_array();
+		return thing_t<___ego___>::me_();
+	}
+
 	inline container_a<> from_inventory_(inventory_a<container_a<>> const& inventory)
 	{
 		auto packet = dart_packet::make_array();
@@ -1410,6 +1417,13 @@ public:
 		return yes();
 	}
 
+	inline container_a<> make_herd_()
+	{
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = dart_packet::make_object();
+		return thing_t<___ego___>::me_();
+	}
+
 	inline container_a<> from_herd_(herd_a<symbol_a<>> const& herd)
 	{
 		auto packet = dart_packet::make_object();
@@ -1444,6 +1458,13 @@ public:
 			throw dis(__FILE__, __LINE__, "strange::parcel::as_herd exception: ") + exception;
 		}
 		return yes();
+	}
+
+	inline container_a<> make_shoal_()
+	{
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = dart_packet::make_object();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline container_a<> from_shoal_(shoal_a<symbol_a<>, container_a<>> const& shoal)
