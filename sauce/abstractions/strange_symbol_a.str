@@ -14,6 +14,7 @@ false &&
 
 					to_lake_ :# (<lake_int8>),
 					to_string : "std_string () const { return lake_to_string(to_lake_()); }",
+					to_c_string : "char const* () const { return to_string().c_str(); }",
 
 					first_character : "int8_t () const { return to_lake_().extract_vector()[0]; }",
 					last_character : "int8_t () const { auto const lake = to_lake_(); return lake.extract_vector()[lake.size() - 1]; }",

@@ -143,6 +143,11 @@ public:
 		return _string;
 	}
 
+	inline char const* to_c_string() const
+	{
+		return _string.c_str();
+	}
+
 	inline int8_t first_character() const
 	{
 		return _string.empty() ? 0 : _string[0];

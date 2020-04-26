@@ -30,6 +30,8 @@ public:
 
 	inline std_string to_string() const;
 
+	inline char const * to_c_string() const;
+
 	inline int8_t first_character() const;
 
 	inline int8_t last_character() const;
@@ -51,6 +53,7 @@ protected:
 		virtual bool operator>=(symbol_a < > const & symbol ) const = 0;
 		virtual lake_int8_a<> to_lake_() const = 0;
 		virtual std_string to_string() const = 0;
+		virtual char const * to_c_string() const = 0;
 		virtual int8_t first_character() const = 0;
 		virtual int8_t last_character() const = 0;
 		virtual symbol_a<> add_(symbol_a<> const& symbol) const = 0;
@@ -89,6 +92,8 @@ protected:
 		virtual inline lake_int8_a<> to_lake_() const final;
 
 		virtual inline std_string to_string() const final;
+
+		virtual inline char const * to_c_string() const final;
 
 		virtual inline int8_t first_character() const final;
 
@@ -315,6 +320,9 @@ public:
 
 	inline std_string to_string() const
 	{ return lake_to_string(to_lake_()); }
+
+	inline char const * to_c_string() const
+	{ return to_string().c_str(); }
 
 	inline int8_t first_character() const
 	{ return to_lake_().extract_vector()[0]; }

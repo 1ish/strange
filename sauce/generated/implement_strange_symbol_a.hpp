@@ -81,6 +81,15 @@ inline std_string symbol_a<_1>::___symbol_a_handle___<___TTT___, ___DHB___>::to_
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
 
 template <typename _1>
+inline char const * symbol_a<_1>::to_c_string() const
+{ assert(any_a<>::___handle___); return ___read___().to_c_string(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline char const * symbol_a<_1>::___symbol_a_handle___<___TTT___, ___DHB___>::to_c_string() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_c_string(); }
+
+template <typename _1>
 inline int8_t symbol_a<_1>::first_character() const
 { assert(any_a<>::___handle___); return ___read___().first_character(); }
 
