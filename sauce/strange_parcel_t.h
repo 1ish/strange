@@ -307,14 +307,21 @@ public:
 		{
 			auto ind = index.extract_primitive();
 			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-			for (auto const& packet : _packet)
+			try
 			{
-				auto visited = create(packet);
-				arguments.update_index(ind, visited);
-				if (!visited.visit(arguments, ind))
+				for (auto const& packet : _packet)
 				{
-					return no();
+					auto visited = create(packet);
+					arguments.update_index(ind, visited);
+					if (!visited.visit(arguments, ind))
+					{
+						return no();
+					}
 				}
+			}
+			catch (std_exception& exception)
+			{
+				throw dis("strange::parcel::visit exception: ") + exception;
 			}
 		}
 		return result;
@@ -326,14 +333,21 @@ public:
 		if (result)
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-			for (auto const& packet : _packet)
+			try
 			{
-				auto visited = create(packet);
-				arguments.update_index(index, visited);
-				if (!visited.visit(arguments, index))
+				for (auto const& packet : _packet)
 				{
-					return false;
+					auto visited = create(packet);
+					arguments.update_index(index, visited);
+					if (!visited.visit(arguments, index))
+					{
+						return false;
+					}
 				}
+			}
+			catch (std_exception& exception)
+			{
+				throw dis("strange::parcel::visit exception: ") + exception;
 			}
 		}
 		return result;
@@ -377,53 +391,123 @@ public:
 	// list
 	inline forward_extractor_a<any_a<>> begin_() const
 	{
-		return extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cbegin());
+		try
+		{
+			return extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cbegin());
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::begin exception: ") + exception;
+		}
 	}
 
 	inline forward_extractor_a<any_a<>> end_() const
 	{
-		return extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend());
+		try
+		{
+			return extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend());
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::end exception: ") + exception;
+		}
 	}
 
 	// range
 	inline bidirectional_extractor_a<any_a<>> keys_begin_() const
 	{
-		return key_extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.key_begin());
+		try
+		{
+			return key_extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.key_begin());
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::keys_begin exception: ") + exception;
+		}
 	}
 
 	inline bidirectional_extractor_data_a<any_a<>, typename dart_packet::iterator> keys_begin() const
 	{
-		return key_extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.key_begin());
+		try
+		{
+			return key_extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.key_begin());
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::keys_begin exception: ") + exception;
+		}
 	}
 
 	inline bidirectional_extractor_a<any_a<>> keys_end_() const
 	{
-		return key_extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.key_end());
+		try
+		{
+			return key_extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.key_end());
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::keys_end exception: ") + exception;
+		}
 	}
 
 	inline bidirectional_extractor_data_a<any_a<>, typename dart_packet::iterator> keys_end() const
 	{
-		return key_extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.key_end());
+		try
+		{
+			return key_extractor_t<any_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.key_end());
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::keys_end exception: ") + exception;
+		}
 	}
 
 	inline bidirectional_extractor_a<container_a<>> extract_begin_() const
 	{
-		return extractor_t<container_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cbegin());
+		try
+		{
+			return extractor_t<container_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cbegin());
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::extract_begin exception: ") + exception;
+		}
 	}
 
 	inline bidirectional_extractor_data_a<container_a<>, typename dart_packet::iterator> extract_begin() const
 	{
-		return extractor_t<container_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cbegin());
+		try
+		{
+			return extractor_t<container_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cbegin());
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::extract_begin exception: ") + exception;
+		}
 	}
 
 	inline bidirectional_extractor_a<container_a<>> extract_end_() const
 	{
-		return extractor_t<container_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend());
+		try
+		{
+			return extractor_t<container_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend());
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::extract_end exception: ") + exception;
+		}
 	}
 
 	inline bidirectional_extractor_data_a<container_a<>, typename dart_packet::iterator> extract_end() const
 	{
-		return extractor_t<container_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend());
+		try
+		{
+			return extractor_t<container_a<>, typename dart_packet::iterator>::create(thing_t<___ego___>::me_(), *this, _packet.cend());
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::extract_end exception: ") + exception;
+		}
 	}
 
 	// collection / parcel
@@ -437,12 +521,26 @@ public:
 		if (check<symbol_a<>>(key))
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-			return _packet.has_key(fast<symbol_a<>>(key).to_string());
+			try
+			{
+				return _packet.has_key(fast<symbol_a<>>(key).to_string());
+			}
+			catch (std_exception& exception)
+			{
+				throw dis("strange::parcel::has exception: ") + exception;
+			}
 		}
 		if (check<number_a<>>(key))
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-			return fast<number_a<>>(key).to_uint_64() < _packet.size();
+			try
+			{
+				return fast<number_a<>>(key).to_uint_64() < _packet.size();
+			}
+			catch (std_exception& exception)
+			{
+				throw dis("strange::parcel::has exception: ") + exception;
+			}
 		}
 		throw dis("strange::parcel::has passed wrong type of key");
 	}
@@ -452,12 +550,26 @@ public:
 		if (check<symbol_a<>>(key))
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-			return create(_packet.at(fast<symbol_a<>>(key).to_string()));
+			try
+			{
+				return create(_packet.at(fast<symbol_a<>>(key).to_string()));
+			}
+			catch (std_exception& exception)
+			{
+				throw dis("strange::parcel::at exception: ") + exception;
+			}
 		}
 		if (check<number_a<>>(key))
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-			return create(_packet.at(fast<number_a<>>(key).to_uint_64()));
+			try
+			{
+				return create(_packet.at(fast<number_a<>>(key).to_uint_64()));
+			}
+			catch (std_exception& exception)
+			{
+				throw dis("strange::parcel::at exception: ") + exception;
+			}
 		}
 		throw dis("strange::parcel::at passed wrong type of key");
 	}
@@ -477,12 +589,26 @@ public:
 		if (check<symbol_a<>>(key))
 		{
 			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			_packet.set(fast<symbol_a<>>(key).to_string(), fast<parcel_a<>>(value).extract_packet());
+			try
+			{
+				_packet.set(fast<symbol_a<>>(key).to_string(), fast<parcel_a<>>(value).extract_packet());
+			}
+			catch (std_exception& exception)
+			{
+				throw dis("strange::parcel::update exception: ") + exception;
+			}
 		}
 		if (check<number_a<>>(key))
 		{
 			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			_packet.set(fast<number_a<>>(key).to_uint_64(), fast<parcel_a<>>(value).extract_packet());
+			try
+			{
+				_packet.set(fast<number_a<>>(key).to_uint_64(), fast<parcel_a<>>(value).extract_packet());
+			}
+			catch (std_exception& exception)
+			{
+				throw dis("strange::parcel::update exception: ") + exception;
+			}
 		}
 		throw dis("strange::parcel::update passed wrong type of key");
 	}
@@ -502,23 +628,37 @@ public:
 		{
 			auto const key_string = fast<symbol_a<>>(key).to_string();
 			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			bool const result = !_packet.has_key(key_string);
-			if (result)
+			try
 			{
-				_packet.insert(key_string, fast<parcel_a<>>(value).extract_packet());
+				bool const result = !_packet.has_key(key_string);
+				if (result)
+				{
+					_packet.insert(key_string, fast<parcel_a<>>(value).extract_packet());
+				}
+				return result;
 			}
-			return result;
+			catch (std_exception& exception)
+			{
+				throw dis("strange::parcel::insert exception: ") + exception;
+			}
 		}
 		if (check<number_a<>>(key))
 		{
 			auto const index = fast<number_a<>>(key).to_uint_64();
 			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			bool const result = index <= _packet.size();
-			if (result)
+			try
 			{
-				_packet.insert(index, fast<parcel_a<>>(value).extract_packet());
+				bool const result = index <= _packet.size();
+				if (result)
+				{
+					_packet.insert(index, fast<parcel_a<>>(value).extract_packet());
+				}
+				return result;
 			}
-			return result;
+			catch (std_exception& exception)
+			{
+				throw dis("strange::parcel::insert exception: ") + exception;
+			}
 		}
 		throw dis("strange::parcel::insert passed wrong type of key");
 	}
@@ -534,23 +674,37 @@ public:
 		{
 			auto const key_string = fast<symbol_a<>>(key).to_string();
 			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			bool const result = _packet.has_key(key_string);
-			if (result)
+			try
 			{
-				_packet.erase(key_string);
+				bool const result = _packet.has_key(key_string);
+				if (result)
+				{
+					_packet.erase(key_string);
+				}
+				return result;
 			}
-			return result;
+			catch (std_exception& exception)
+			{
+				throw dis("strange::parcel::erase exception: ") + exception;
+			}
 		}
 		if (check<number_a<>>(key))
 		{
 			auto const index = fast<number_a<>>(key).to_uint_64();
 			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			bool const result = index < _packet.size();
-			if (result)
+			try
 			{
-				_packet.erase(index);
+				bool const result = index < _packet.size();
+				if (result)
+				{
+					_packet.erase(index);
+				}
+				return result;
 			}
-			return result;
+			catch (std_exception& exception)
+			{
+				throw dis("strange::parcel::erase exception: ") + exception;
+			}
 		}
 		throw dis("strange::parcel::erase passed wrong type of key");
 	}
@@ -564,7 +718,14 @@ public:
 	inline void clear()
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		_packet.clear();
+		try
+		{
+			_packet.clear();
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::clear exception: ") + exception;
+		}
 	}
 
 	inline number_data_a<int64_t> size_() const
@@ -575,7 +736,14 @@ public:
 	inline int64_t size() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return int64_t(_packet.size());
+		try
+		{
+			return int64_t(_packet.size());
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::size exception: ") + exception;
+		}
 	}
 
 	inline any_a<> empty_() const
@@ -586,7 +754,14 @@ public:
 	inline bool empty() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _packet.empty();
+		try
+		{
+			return _packet.empty();
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::empty exception: ") + exception;
+		}
 	}
 
 	inline ___ego___ push_front_(container_a<> const& value)
@@ -602,15 +777,29 @@ public:
 			throw dis("strange::parcel::push_front passed wrong type of thing");
 		}
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		_packet.push_front(fast<parcel_a<>>(thing).extract_packet());
+		try
+		{
+			_packet.push_front(fast<parcel_a<>>(thing).extract_packet());
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::push_front exception: ") + exception;
+		}
 	}
 
 	inline container_a<> pop_front_()
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		container_a<> result = create(_packet.front());
-		_packet.pop_front();
-		return result;
+		try
+		{
+			container_a<> result = create(_packet.front());
+			_packet.pop_front();
+			return result;
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::pop_front exception: ") + exception;
+		}
 	}
 
 	inline ___ego___ push_back_(container_a<> const& value)
@@ -626,15 +815,29 @@ public:
 			throw dis("strange::parcel::push_back passed wrong type of thing");
 		}
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		_packet.push_back(fast<parcel_a<>>(thing).extract_packet());
+		try
+		{
+			_packet.push_back(fast<parcel_a<>>(thing).extract_packet());
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::push_back exception: ") + exception;
+		}
 	}
 
 	inline container_a<> pop_back_()
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		container_a<> result = create(_packet.back());
-		_packet.pop_back();
-		return result;
+		try
+		{
+			container_a<> result = create(_packet.back());
+			_packet.pop_back();
+			return result;
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::pop_back exception: ") + exception;
+		}
 	}
 
 	inline void self_assign_(range_a<container_a<>> const& range)
@@ -650,14 +853,21 @@ public:
 		{
 			auto read_lock = check<collection_a<container_a<>>>(range) ? fast<collection_a<container_a<>>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			_packet.clear();
-			for (auto const& thing : range)
+			try
 			{
-				if (!check<parcel_a<>>(thing))
+				_packet.clear();
+				for (auto const& thing : range)
 				{
-					throw dis("strange::parcel::self_assign passed wrong type of thing");
+					if (!check<parcel_a<>>(thing))
+					{
+						throw dis("strange::parcel::self_assign passed wrong type of thing");
+					}
+					_packet.push_back(fast<parcel_a<>>(thing).extract_packet());
 				}
-				_packet.push_back(fast<parcel_a<>>(thing).extract_packet());
+			}
+			catch (std_exception& exception)
+			{
+				throw dis("strange::parcel::self_assign exception: ") + exception;
 			}
 		}
 	}
@@ -670,22 +880,36 @@ public:
 			auto read_lock = other.read_lock_();
 			auto const& other_packet = other.extract_packet();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			for (auto const& packet : other_packet)
+			try
 			{
-				_packet.push_back(packet);
+				for (auto const& packet : other_packet)
+				{
+					_packet.push_back(packet);
+				}
+			}
+			catch (std_exception& exception)
+			{
+				throw dis("strange::parcel::self_add exception: ") + exception;
 			}
 		}
 		else
 		{
 			auto read_lock = check<collection_a<container_a<>>>(range) ? fast<collection_a<container_a<>>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			for (auto const& thing : range)
+			try
 			{
-				if (!check<parcel_a<>>(thing))
+				for (auto const& thing : range)
 				{
-					throw dis("strange::parcel::self_add passed wrong type of thing");
+					if (!check<parcel_a<>>(thing))
+					{
+						throw dis("strange::parcel::self_add passed wrong type of thing");
+					}
+					_packet.push_back(fast<parcel_a<>>(thing).extract_packet());
 				}
-				_packet.push_back(fast<parcel_a<>>(thing).extract_packet());
+			}
+			catch (std_exception& exception)
+			{
+				throw dis("strange::parcel::self_add exception: ") + exception;
 			}
 		}
 	}
@@ -705,22 +929,36 @@ public:
 			auto read_lock = other.read_lock_();
 			auto const& other_packet = other.extract_packet();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			for (auto const& packet : other_packet)
+			try
 			{
-				_packet.erase(packet);
+				for (auto const& packet : other_packet)
+				{
+					_packet.erase(packet);
+				}
+			}
+			catch (std_exception& exception)
+			{
+				throw dis("strange::parcel::self_subtract exception: ") + exception;
 			}
 		}
 		else
 		{
 			auto read_lock = check<collection_a<container_a<>>>(range) ? fast<collection_a<container_a<>>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			for (auto const& thing : range)
+			try
 			{
-				if (!check<parcel_a<>>(thing))
+				for (auto const& thing : range)
 				{
-					throw dis("strange::parcel::self_subtract passed wrong type of thing");
+					if (!check<parcel_a<>>(thing))
+					{
+						throw dis("strange::parcel::self_subtract passed wrong type of thing");
+					}
+					_packet.erase(fast<parcel_a<>>(thing).extract_packet());
 				}
-				_packet.erase(fast<parcel_a<>>(thing).extract_packet());
+			}
+			catch (std_exception& exception)
+			{
+				throw dis("strange::parcel::self_subtract exception: ") + exception;
 			}
 		}
 	}
@@ -885,9 +1123,16 @@ public:
 	{
 		throw dis("strange::parcel::from_json requires sajson"); //TODO
 		/*
-		auto packet = dart_packet::from_json(str);
-		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-		_packet = packet;
+		try
+		{
+			auto packet = dart_packet::from_json(str);
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			_packet = packet;
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::from_json exception: ") + exception;
+		}
 		*/
 	}
 
@@ -901,23 +1146,44 @@ public:
 		throw dis("strange::parcel::to_json requires rapidjson"); //TODO
 		/*
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _packet.to_json();
+		try
+		{
+			return _packet.to_json();
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::to_json exception: ") + exception;
+		}
 		*/
 	}
 
 	inline container_a<> from_binary_(lake_int8_a<> const& lake)
 	{
-		auto packet = dart_packet_from_vector(lake.extract_vector());
-		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-		_packet = packet;
-		return thing_t<___ego___>::me_();
+		try
+		{
+			auto packet = dart_packet_from_vector(lake.extract_vector());
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			_packet = packet;
+			return thing_t<___ego___>::me_();
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::from_binary exception: ") + exception;
+		}
 	}
 
 	inline void from_binary(std_string const& str)
 	{
-		auto packet = dart_packet_from_string(str);
-		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-		_packet = packet;
+		try
+		{
+			auto packet = dart_packet_from_string(str);
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			_packet = packet;
+		}
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::from_binary exception: ") + exception;
+		}
 	}
 
 	inline lake_int8_a<> to_binary_() const
@@ -965,11 +1231,14 @@ public:
 	inline any_a<> to_boolean_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		if (!_packet.is_boolean())
+		try
 		{
-			throw dis("strange::parcel::to_boolean called on parcel that does not contain a boolean");
+			return boole(_packet.boolean());
 		}
-		return boole(_packet.boolean());
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::to_boolean exception: ") + exception;
+		}
 	}
 
 	inline container_a<> from_number_(number_a<> const& number)
@@ -1023,11 +1292,14 @@ public:
 	inline number_data_int64_a<> to_int_64_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		if (!_packet.is_integer())
+		try
 		{
-			throw dis("strange::parcel::to_int_64 called on parcel that does not contain an integer");
+			return num(_packet.integer());
 		}
-		return num(_packet.integer());
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::to_int_64 exception: ") + exception;
+		}
 	}
 
 	inline container_a<> from_float_64_(number_data_double_a<> const& number)
@@ -1046,11 +1318,14 @@ public:
 	inline number_data_double_a<> to_float_64_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		if (!_packet.is_decimal())
+		try
 		{
-			throw dis("strange::parcel::to_float_64 called on parcel that does not contain a float");
+			return num(_packet.decimal());
 		}
-		return num(_packet.decimal());
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::to_float_64 exception: ") + exception;
+		}
 	}
 
 	inline container_a<> from_lake_(lake_int8_a<> const& lake)
@@ -1069,11 +1344,14 @@ public:
 	inline lake_int8_a<> to_lake_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		if (!_packet.is_str())
+		try
 		{
-			throw dis("strange::parcel::to_lake called on parcel that does not contain a lake");
+			return lake_from_string(_packet.str());
 		}
-		return lake_from_string(_packet.str());
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::to_lake exception: ") + exception;
+		}
 	}
 
 	inline container_a<> from_symbol_(symbol_a<> const& symbol)
@@ -1086,11 +1364,14 @@ public:
 	inline symbol_a<> to_symbol_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		if (!_packet.is_str())
+		try
 		{
-			throw dis("strange::parcel::to_symbol called on parcel that does not contain a symbol");
+			return sym(_packet.str());
 		}
-		return sym(_packet.str());
+		catch (std_exception& exception)
+		{
+			throw dis("strange::parcel::to_symbol exception: ") + exception;
+		}
 	}
 
 	inline container_a<> from_inventory_(inventory_a<container_a<>> const& inventory)
@@ -1115,13 +1396,16 @@ public:
 	{
 		inventory.clear();
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		if (!_packet.is_array())
+		try
 		{
-			throw dis("strange::parcel::as_inventory called on parcel that does not contain an inventory");
+			for (auto const& packet : _packet)
+			{
+				inventory.push_back(create(packet));
+			}
 		}
-		for (auto const& packet : _packet)
+		catch (std_exception& exception)
 		{
-			inventory.push_back(create(packet));
+			throw dis("strange::parcel::as_inventory exception: ") + exception;
 		}
 		return yes();
 	}
@@ -1148,13 +1432,16 @@ public:
 	{
 		herd.clear();
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		if (!_packet.is_object())
+		try
 		{
-			throw dis("strange::parcel::as_herd called on parcel that does not contain a herd");
+			for (auto const& key : _packet.keys())
+			{
+				herd.insert_thing(sym(key.str()));
+			}
 		}
-		for (auto const& key : _packet.keys())
+		catch (std_exception& exception)
 		{
-			herd.insert_thing(sym(key.str()));
+			throw dis("strange::parcel::as_herd exception: ") + exception;
 		}
 		return yes();
 	}
@@ -1181,15 +1468,18 @@ public:
 	{
 		shoal.clear();
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		if (!_packet.is_object())
+		try
 		{
-			throw dis("strange::parcel::as_shoal called on parcel that does not contain a shoal");
+			auto vit = _packet.cbegin();
+			for (auto const& key : _packet.keys())
+			{
+				shoal.insert(sym(key.str()), create(*vit));
+				++vit;
+			}
 		}
-		auto vit = _packet.cbegin();
-		for (auto const& key : _packet.keys())
+		catch (std_exception& exception)
 		{
-			shoal.insert(sym(key.str()), create(*vit));
-			++vit;
+			throw dis("strange::parcel::as_shoal exception: ") + exception;
 		}
 		return yes();
 	}
