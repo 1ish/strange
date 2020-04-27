@@ -1016,7 +1016,11 @@ public:
 		item.from_string(type_().to_string() + "::unpack");
 		container.push_back(item); // unpack
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		if (number_u<_primitive_>::is_int())
+		if (item.from_data(thing_t<___ego___>::me_()))
+		{
+			container.push_back(item); // deque
+		}
+		else if (number_u<_primitive_>::is_int())
 		{
 			for (auto const& primitive : _deque)
 			{
@@ -1037,19 +1041,32 @@ public:
 	static inline any_a<> unpack__(list_a<> const& list)
 	{
 		auto result = create_();
-		auto& deque = result.mutate_deque();
-		if (number_u<_primitive_>::is_int())
+		auto it = list.begin_();
+		if (it != list.end_())
 		{
-			for (auto const& item : list)
+			auto first = *it;
+			if (check<container_a<>>(first))
 			{
-				deque.push_back(number_u<_primitive_>::from_int_64(fast<number_data_int64_a<>>(item).extract_primitive())); // primitive
+				if (!fast<container_a<>>(first).as_data(result))
+				{
+					throw dis(__FILE__, __LINE__, "strange::brook::unpack failed to unpack container as data");
+				}
 			}
-		}
-		else
-		{
-			for (auto const& item : list)
+			else if (number_u<_primitive_>::is_int())
 			{
-				deque.push_back(number_u<_primitive_>::from_float_64(fast<number_data_double_a<>>(item).extract_primitive())); // primitive
+				auto& deque = result.mutate_deque();
+				for (auto const& item : list)
+				{
+					deque.push_back(number_u<_primitive_>::from_int_64(fast<number_data_int64_a<>>(item).extract_primitive())); // primitive
+				}
+			}
+			else
+			{
+				auto& deque = result.mutate_deque();
+				for (auto const& item : list)
+				{
+					deque.push_back(number_u<_primitive_>::from_float_64(fast<number_data_double_a<>>(item).extract_primitive())); // primitive
+				}
 			}
 		}
 		return result;

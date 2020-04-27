@@ -1062,6 +1062,68 @@ inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::as_
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.as_shoal(shoal); }
 
 template <typename _1>
+inline any_a<> container_a<_1>::from_data__(list_a<> const& ___arguments___)
+{
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
+	if (___it___ == ___end___)
+	{
+		throw dis(__FILE__, __LINE__, "container_a::from_data_ passed short range");
+	}
+	auto data = cast<any_a<>>(*___it___);
+	return from_data_(data);
+}
+
+template <typename _1>
+inline any_a<> container_a<_1>::from_data_(any_a<> const& data)
+{ assert(any_a<>::___handle___); return ___write___().from_data_(data); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_data_(any_a<> const& data)
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_data_(data); }
+
+template <typename _1>
+inline bool container_a<_1>::from_data(any_a < > const & data )
+{ assert(any_a<>::___handle___); return ___write___().from_data(data); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_data(any_a < > const & data )
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_data(data); }
+
+template <typename _1>
+inline any_a<> container_a<_1>::as_data__(list_a<> const& ___arguments___) const
+{
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
+	if (___it___ == ___end___)
+	{
+		throw dis(__FILE__, __LINE__, "container_a::as_data_ passed short range");
+	}
+	auto data = cast_dup<any_a<>>(*___it___);
+	return as_data_(data);
+}
+
+template <typename _1>
+inline any_a<> container_a<_1>::as_data_(any_a<> & data) const
+{ assert(any_a<>::___handle___); return ___read___().as_data_(data); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::as_data_(any_a<> & data) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.as_data_(data); }
+
+template <typename _1>
+inline bool container_a<_1>::as_data(any_a < > & data ) const
+{ assert(any_a<>::___handle___); return ___read___().as_data(data); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::as_data(any_a < > & data ) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.as_data(data); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::keys_begin__(list_a<> const& ___arguments___) const
 {
 	return keys_begin_();
@@ -1175,6 +1237,8 @@ inline unordered_shoal_a<> container_a<_1>::___operations___()
 		operations.update(sym("from_shoal_"), native_mutation_t<container_a>::create(&container_a::from_shoal__));
 		operations.update(sym("is_shoal_"), native_extraction_t<container_a>::create(&container_a::is_shoal__));
 		operations.update(sym("as_shoal_"), native_extraction_t<container_a>::create(&container_a::as_shoal__));
+		operations.update(sym("from_data_"), native_mutation_t<container_a>::create(&container_a::from_data__));
+		operations.update(sym("as_data_"), native_extraction_t<container_a>::create(&container_a::as_data__));
 		operations.update(sym("keys_begin_"), native_extraction_t<container_a>::create(&container_a::keys_begin__));
 		operations.update(sym("keys_end_"), native_extraction_t<container_a>::create(&container_a::keys_end__));
 		return operations;

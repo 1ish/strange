@@ -1677,6 +1677,53 @@ public:
 		}
 	}
 
+	inline any_a<> from_data_(any_a<> const& data)
+	{
+		return boole(from_data(data));
+	}
+
+	inline bool from_data(any_a<> const& data)
+	{
+		dart_packet packet;
+		if (check<brook_a<int8_t>>(data))
+		{
+			packet = fast<brook_a<int8_t>>(data).extract_deque();
+		}
+		else
+		{
+			return false;
+		}
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = packet;
+		return true;
+	}
+
+	inline any_a<> as_data_(any_a<>& data) const
+	{
+		return boole(as_data(data));
+	}
+
+	inline bool as_data(any_a<>& data) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		try
+		{
+			if (check<brook_a<int8_t>>(data))
+			{
+				_packet.as<std_deque<int8_t>>().swap(fast<brook_a<int8_t>>(data).mutate_deque());
+			}
+			else
+			{
+				return false;
+			}
+			return true;
+		}
+		catch (std_exception& exception)
+		{
+			throw dis(__FILE__, __LINE__, "strange::parcel::as_data exception: ") + exception;
+		}
+	}
+
 	// data
 	inline dart_packet const& extract_packet() const
 	{

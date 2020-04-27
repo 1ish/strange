@@ -248,6 +248,18 @@ public:
 
 	inline void as_shoal(shoal_a < symbol_a < > , container_a < > > & shoal ) const;
 
+	inline any_a<> from_data__(list_a<> const& ___arguments___);
+
+	inline any_a<> from_data_(any_a<> const& data);
+
+	inline bool from_data(any_a < > const & data );
+
+	inline any_a<> as_data__(list_a<> const& ___arguments___) const;
+
+	inline any_a<> as_data_(any_a<> & data) const;
+
+	inline bool as_data(any_a < > & data ) const;
+
 	inline any_a<> keys_begin__(list_a<> const& ___arguments___) const;
 
 	inline bidirectional_extractor_a< any_a<> > keys_begin_() const;
@@ -337,6 +349,10 @@ protected:
 		virtual bool is_shoal() const = 0;
 		virtual any_a<> as_shoal_(shoal_a<symbol_a<>, container_a<>> & shoal) const = 0;
 		virtual void as_shoal(shoal_a < symbol_a < > , container_a < > > & shoal ) const = 0;
+		virtual any_a<> from_data_(any_a<> const& data) = 0;
+		virtual bool from_data(any_a < > const & data ) = 0;
+		virtual any_a<> as_data_(any_a<> & data) const = 0;
+		virtual bool as_data(any_a < > & data ) const = 0;
 		virtual bidirectional_extractor_a< any_a<> > keys_begin_() const = 0;
 		virtual bidirectional_extractor_a< any_a<> > keys_end_() const = 0;
 	};
@@ -514,6 +530,14 @@ protected:
 		virtual inline any_a<> as_shoal_(shoal_a<symbol_a<>, container_a<>> & shoal) const final;
 
 		virtual inline void as_shoal(shoal_a < symbol_a < > , container_a < > > & shoal ) const final;
+
+		virtual inline any_a<> from_data_(any_a<> const& data) final;
+
+		virtual inline bool from_data(any_a < > const & data ) final;
+
+		virtual inline any_a<> as_data_(any_a<> & data) const final;
+
+		virtual inline bool as_data(any_a < > & data ) const final;
 
 		virtual inline bidirectional_extractor_a< any_a<> > keys_begin_() const final;
 
@@ -1689,6 +1713,56 @@ public:
 
 	inline void as_shoal(shoal_a < symbol_a < > , container_a < > > & shoal ) const
 	{ throw dis(__FILE__, __LINE__, "dynamic container_d::as_shoal(shoal) not available"); }
+
+	inline any_a<> from_data__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_data_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::from_data_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline any_a<> from_data_(any_a<> const& data)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_data_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::from_data_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *this, data));
+	}
+
+	inline bool from_data(any_a < > const & data )
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::from_data(data) not available"); }
+
+	inline any_a<> as_data__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("as_data_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::as_data_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline any_a<> as_data_(any_a<> & data) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("as_data_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::as_data_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this), data));
+	}
+
+	inline bool as_data(any_a < > & data ) const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::as_data(data) not available"); }
 
 	inline any_a<> keys_begin__(list_a<> const& arguments) const
 	{

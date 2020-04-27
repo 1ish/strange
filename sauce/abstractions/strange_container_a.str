@@ -97,6 +97,11 @@ false &&
 					as_shoal_ :# (shoal :<shoal[<symbol>, <container>]>&, <>),
 					as_shoal : "void (shoal_a<symbol_a<>, container_a<>>& shoal) const",
 
+					from_data_ := (data :#, <>),
+					from_data : "bool (any_a<> const& data)",
+					as_data_ :# (data :&, <>),
+					as_data : "bool (any_a<>& data) const",
+
 					keys_begin_ :# (<bidirectional_extractor[<>]>),
 					keys_end_ :# (<bidirectional_extractor[<>]>),
 				}
