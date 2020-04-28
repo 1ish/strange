@@ -146,35 +146,25 @@ public:
 
 	inline double to_float_64() const;
 
-	inline any_a<> from_lake__(list_a<> const& ___arguments___);
-
-	inline container_a<> from_lake_(lake_int8_a<> const& lake);
-
-	inline void from_lake(lake_int8_a < > const & lake );
-
-	inline void from_string(std_string const & str );
-
-	inline any_a<> is_lake__(list_a<> const& ___arguments___) const;
-
-	inline any_a<> is_lake_() const;
-
-	inline bool is_lake() const;
-
-	inline any_a<> to_lake__(list_a<> const& ___arguments___) const;
-
-	inline lake_int8_a<> to_lake_() const;
-
-	inline std_string to_string() const;
-
 	inline any_a<> from_symbol__(list_a<> const& ___arguments___);
 
 	inline container_a<> from_symbol_(symbol_a<> const& symbol);
 
 	inline void from_symbol(symbol_a < > const & symbol );
 
+	inline void from_string(std_string const & str );
+
+	inline any_a<> is_symbol__(list_a<> const& ___arguments___) const;
+
+	inline any_a<> is_symbol_() const;
+
+	inline bool is_symbol() const;
+
 	inline any_a<> to_symbol__(list_a<> const& ___arguments___) const;
 
 	inline symbol_a<> to_symbol_() const;
+
+	inline std_string to_string() const;
 
 	inline any_a<> make_inventory__(list_a<> const& ___arguments___);
 
@@ -248,6 +238,30 @@ public:
 
 	inline void as_shoal(shoal_a < symbol_a < > , container_a < > > & shoal ) const;
 
+	inline any_a<> from_brook__(list_a<> const& ___arguments___);
+
+	inline any_a<> from_brook_(any_a<> const& brook);
+
+	inline bool from_brook(any_a < > const & brook );
+
+	inline any_a<> as_brook__(list_a<> const& ___arguments___) const;
+
+	inline any_a<> as_brook_(any_a<> & brook) const;
+
+	inline bool as_brook(any_a < > & brook ) const;
+
+	inline any_a<> from_lake__(list_a<> const& ___arguments___);
+
+	inline any_a<> from_lake_(any_a<> const& lake);
+
+	inline bool from_lake(any_a < > const & lake );
+
+	inline any_a<> as_lake__(list_a<> const& ___arguments___) const;
+
+	inline any_a<> as_lake_(any_a<> & lake) const;
+
+	inline bool as_lake(any_a < > & lake ) const;
+
 	inline any_a<> from_data__(list_a<> const& ___arguments___);
 
 	inline any_a<> from_data_(any_a<> const& data);
@@ -315,16 +329,13 @@ protected:
 		virtual bool is_float_64() const = 0;
 		virtual number_data_double_a<> to_float_64_() const = 0;
 		virtual double to_float_64() const = 0;
-		virtual container_a<> from_lake_(lake_int8_a<> const& lake) = 0;
-		virtual void from_lake(lake_int8_a < > const & lake ) = 0;
-		virtual void from_string(std_string const & str ) = 0;
-		virtual any_a<> is_lake_() const = 0;
-		virtual bool is_lake() const = 0;
-		virtual lake_int8_a<> to_lake_() const = 0;
-		virtual std_string to_string() const = 0;
 		virtual container_a<> from_symbol_(symbol_a<> const& symbol) = 0;
 		virtual void from_symbol(symbol_a < > const & symbol ) = 0;
+		virtual void from_string(std_string const & str ) = 0;
+		virtual any_a<> is_symbol_() const = 0;
+		virtual bool is_symbol() const = 0;
 		virtual symbol_a<> to_symbol_() const = 0;
+		virtual std_string to_string() const = 0;
 		virtual container_a<> make_inventory_() = 0;
 		virtual void make_inventory() = 0;
 		virtual container_a<> from_inventory_(inventory_a<container_a<>> const& inventory) = 0;
@@ -349,6 +360,14 @@ protected:
 		virtual bool is_shoal() const = 0;
 		virtual any_a<> as_shoal_(shoal_a<symbol_a<>, container_a<>> & shoal) const = 0;
 		virtual void as_shoal(shoal_a < symbol_a < > , container_a < > > & shoal ) const = 0;
+		virtual any_a<> from_brook_(any_a<> const& brook) = 0;
+		virtual bool from_brook(any_a < > const & brook ) = 0;
+		virtual any_a<> as_brook_(any_a<> & brook) const = 0;
+		virtual bool as_brook(any_a < > & brook ) const = 0;
+		virtual any_a<> from_lake_(any_a<> const& lake) = 0;
+		virtual bool from_lake(any_a < > const & lake ) = 0;
+		virtual any_a<> as_lake_(any_a<> & lake) const = 0;
+		virtual bool as_lake(any_a < > & lake ) const = 0;
 		virtual any_a<> from_data_(any_a<> const& data) = 0;
 		virtual bool from_data(any_a < > const & data ) = 0;
 		virtual any_a<> as_data_(any_a<> & data) const = 0;
@@ -463,25 +482,19 @@ protected:
 
 		virtual inline double to_float_64() const final;
 
-		virtual inline container_a<> from_lake_(lake_int8_a<> const& lake) final;
-
-		virtual inline void from_lake(lake_int8_a < > const & lake ) final;
-
-		virtual inline void from_string(std_string const & str ) final;
-
-		virtual inline any_a<> is_lake_() const final;
-
-		virtual inline bool is_lake() const final;
-
-		virtual inline lake_int8_a<> to_lake_() const final;
-
-		virtual inline std_string to_string() const final;
-
 		virtual inline container_a<> from_symbol_(symbol_a<> const& symbol) final;
 
 		virtual inline void from_symbol(symbol_a < > const & symbol ) final;
 
+		virtual inline void from_string(std_string const & str ) final;
+
+		virtual inline any_a<> is_symbol_() const final;
+
+		virtual inline bool is_symbol() const final;
+
 		virtual inline symbol_a<> to_symbol_() const final;
+
+		virtual inline std_string to_string() const final;
 
 		virtual inline container_a<> make_inventory_() final;
 
@@ -530,6 +543,22 @@ protected:
 		virtual inline any_a<> as_shoal_(shoal_a<symbol_a<>, container_a<>> & shoal) const final;
 
 		virtual inline void as_shoal(shoal_a < symbol_a < > , container_a < > > & shoal ) const final;
+
+		virtual inline any_a<> from_brook_(any_a<> const& brook) final;
+
+		virtual inline bool from_brook(any_a < > const & brook ) final;
+
+		virtual inline any_a<> as_brook_(any_a<> & brook) const final;
+
+		virtual inline bool as_brook(any_a < > & brook ) const final;
+
+		virtual inline any_a<> from_lake_(any_a<> const& lake) final;
+
+		virtual inline bool from_lake(any_a < > const & lake ) final;
+
+		virtual inline any_a<> as_lake_(any_a<> & lake) const final;
+
+		virtual inline bool as_lake(any_a < > & lake ) const final;
 
 		virtual inline any_a<> from_data_(any_a<> const& data) final;
 
@@ -1289,84 +1318,6 @@ public:
 	inline double to_float_64() const
 	{ throw dis(__FILE__, __LINE__, "dynamic container_d::to_float_64() not available"); }
 
-	inline any_a<> from_lake__(list_a<> const& arguments)
-	{
-		assert(any_a<>::___handle___);
-		auto const op = any_a<>::operation("from_lake_");
-		if (!op)
-		{
-			throw dis(__FILE__, __LINE__, "dynamic container_d::from_lake_ passed non-existent member");
-		}
-		return op.operate(*this, arguments);
-	}
-
-	inline container_a<> from_lake_(lake_int8_a<> const& lake)
-	{
-		assert(any_a<>::___handle___);
-		auto const op = any_a<>::operation("from_lake_");
-		if (!op)
-		{
-			throw dis(__FILE__, __LINE__, "dynamic container_d::from_lake_ passed non-existent member");
-		}
-		return cast<container_a<>>(variadic_operate(op, *this, lake));
-	}
-
-	inline void from_lake(lake_int8_a < > const & lake )
-	{ throw dis(__FILE__, __LINE__, "dynamic container_d::from_lake(lake) not available"); }
-
-	inline void from_string(std_string const & str )
-	{ throw dis(__FILE__, __LINE__, "dynamic container_d::from_string(str) not available"); }
-
-	inline any_a<> is_lake__(list_a<> const& arguments) const
-	{
-		assert(any_a<>::___handle___);
-		auto const op = any_a<>::operation("is_lake_");
-		if (!op)
-		{
-			throw dis(__FILE__, __LINE__, "dynamic container_d::is_lake_ passed non-existent member");
-		}
-		return op.operate(*const_cast<container_d*>(this), arguments);
-	}
-
-	inline any_a<> is_lake_() const
-	{
-		assert(any_a<>::___handle___);
-		auto const op = any_a<>::operation("is_lake_");
-		if (!op)
-		{
-			throw dis(__FILE__, __LINE__, "dynamic container_d::is_lake_ passed non-existent member");
-		}
-		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
-	}
-
-	inline bool is_lake() const
-	{ throw dis(__FILE__, __LINE__, "dynamic container_d::is_lake() not available"); }
-
-	inline any_a<> to_lake__(list_a<> const& arguments) const
-	{
-		assert(any_a<>::___handle___);
-		auto const op = any_a<>::operation("to_lake_");
-		if (!op)
-		{
-			throw dis(__FILE__, __LINE__, "dynamic container_d::to_lake_ passed non-existent member");
-		}
-		return op.operate(*const_cast<container_d*>(this), arguments);
-	}
-
-	inline lake_int8_a<> to_lake_() const
-	{
-		assert(any_a<>::___handle___);
-		auto const op = any_a<>::operation("to_lake_");
-		if (!op)
-		{
-			throw dis(__FILE__, __LINE__, "dynamic container_d::to_lake_ passed non-existent member");
-		}
-		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
-	}
-
-	inline std_string to_string() const
-	{ throw dis(__FILE__, __LINE__, "dynamic container_d::to_string() not available"); }
-
 	inline any_a<> from_symbol__(list_a<> const& arguments)
 	{
 		assert(any_a<>::___handle___);
@@ -1392,6 +1343,34 @@ public:
 	inline void from_symbol(symbol_a < > const & symbol )
 	{ throw dis(__FILE__, __LINE__, "dynamic container_d::from_symbol(symbol) not available"); }
 
+	inline void from_string(std_string const & str )
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::from_string(str) not available"); }
+
+	inline any_a<> is_symbol__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_symbol_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::is_symbol_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline any_a<> is_symbol_() const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("is_symbol_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::is_symbol_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
+	}
+
+	inline bool is_symbol() const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::is_symbol() not available"); }
+
 	inline any_a<> to_symbol__(list_a<> const& arguments) const
 	{
 		assert(any_a<>::___handle___);
@@ -1413,6 +1392,9 @@ public:
 		}
 		return cast<symbol_a<>>(variadic_operate(op, *const_cast<container_d*>(this)));
 	}
+
+	inline std_string to_string() const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::to_string() not available"); }
 
 	inline any_a<> make_inventory__(list_a<> const& arguments)
 	{
@@ -1713,6 +1695,106 @@ public:
 
 	inline void as_shoal(shoal_a < symbol_a < > , container_a < > > & shoal ) const
 	{ throw dis(__FILE__, __LINE__, "dynamic container_d::as_shoal(shoal) not available"); }
+
+	inline any_a<> from_brook__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_brook_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::from_brook_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline any_a<> from_brook_(any_a<> const& brook)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_brook_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::from_brook_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *this, brook));
+	}
+
+	inline bool from_brook(any_a < > const & brook )
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::from_brook(brook) not available"); }
+
+	inline any_a<> as_brook__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("as_brook_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::as_brook_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline any_a<> as_brook_(any_a<> & brook) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("as_brook_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::as_brook_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this), brook));
+	}
+
+	inline bool as_brook(any_a < > & brook ) const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::as_brook(brook) not available"); }
+
+	inline any_a<> from_lake__(list_a<> const& arguments)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_lake_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::from_lake_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline any_a<> from_lake_(any_a<> const& lake)
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("from_lake_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::from_lake_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *this, lake));
+	}
+
+	inline bool from_lake(any_a < > const & lake )
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::from_lake(lake) not available"); }
+
+	inline any_a<> as_lake__(list_a<> const& arguments) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("as_lake_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::as_lake_ passed non-existent member");
+		}
+		return op.operate(*const_cast<container_d*>(this), arguments);
+	}
+
+	inline any_a<> as_lake_(any_a<> & lake) const
+	{
+		assert(any_a<>::___handle___);
+		auto const op = any_a<>::operation("as_lake_");
+		if (!op)
+		{
+			throw dis(__FILE__, __LINE__, "dynamic container_d::as_lake_ passed non-existent member");
+		}
+		return cast<any_a<>>(variadic_operate(op, *const_cast<container_d*>(this), lake));
+	}
+
+	inline bool as_lake(any_a < > & lake ) const
+	{ throw dis(__FILE__, __LINE__, "dynamic container_d::as_lake(lake) not available"); }
 
 	inline any_a<> from_data__(list_a<> const& arguments)
 	{

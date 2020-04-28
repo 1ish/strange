@@ -598,94 +598,6 @@ inline double container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::t
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_float_64(); }
 
 template <typename _1>
-inline any_a<> container_a<_1>::from_lake__(list_a<> const& ___arguments___)
-{
-	auto ___it___ = ___arguments___.begin_();
-	auto ___end___ = ___arguments___.end_();
-	if (___it___ == ___end___)
-	{
-		throw dis(__FILE__, __LINE__, "container_a::from_lake_ passed short range");
-	}
-	auto lake = cast<lake_int8_a<>>(*___it___);
-	return from_lake_(lake);
-}
-
-template <typename _1>
-inline container_a<> container_a<_1>::from_lake_(lake_int8_a<> const& lake)
-{ assert(any_a<>::___handle___); return ___write___().from_lake_(lake); }
-
-template <typename _1>
-template <typename ___TTT___, typename ___DHB___>
-inline container_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_lake_(lake_int8_a<> const& lake)
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_lake_(lake); }
-
-template <typename _1>
-inline void container_a<_1>::from_lake(lake_int8_a < > const & lake )
-{ assert(any_a<>::___handle___); ___write___().from_lake(lake); }
-
-template <typename _1>
-template <typename ___TTT___, typename ___DHB___>
-inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_lake(lake_int8_a < > const & lake )
-{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_lake(lake); }
-
-template <typename _1>
-inline void container_a<_1>::from_string(std_string const & str )
-{ assert(any_a<>::___handle___); ___write___().from_string(str); }
-
-template <typename _1>
-template <typename ___TTT___, typename ___DHB___>
-inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_string(std_string const & str )
-{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_string(str); }
-
-template <typename _1>
-inline any_a<> container_a<_1>::is_lake__(list_a<> const& ___arguments___) const
-{
-	return is_lake_();
-}
-
-template <typename _1>
-inline any_a<> container_a<_1>::is_lake_() const
-{ assert(any_a<>::___handle___); return ___read___().is_lake_(); }
-
-template <typename _1>
-template <typename ___TTT___, typename ___DHB___>
-inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::is_lake_() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_lake_(); }
-
-template <typename _1>
-inline bool container_a<_1>::is_lake() const
-{ assert(any_a<>::___handle___); return ___read___().is_lake(); }
-
-template <typename _1>
-template <typename ___TTT___, typename ___DHB___>
-inline bool container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::is_lake() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_lake(); }
-
-template <typename _1>
-inline any_a<> container_a<_1>::to_lake__(list_a<> const& ___arguments___) const
-{
-	return to_lake_();
-}
-
-template <typename _1>
-inline lake_int8_a<> container_a<_1>::to_lake_() const
-{ assert(any_a<>::___handle___); return ___read___().to_lake_(); }
-
-template <typename _1>
-template <typename ___TTT___, typename ___DHB___>
-inline lake_int8_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::to_lake_() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake_(); }
-
-template <typename _1>
-inline std_string container_a<_1>::to_string() const
-{ assert(any_a<>::___handle___); return ___read___().to_string(); }
-
-template <typename _1>
-template <typename ___TTT___, typename ___DHB___>
-inline std_string container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::to_string() const
-{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
-
-template <typename _1>
 inline any_a<> container_a<_1>::from_symbol__(list_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.begin_();
@@ -717,6 +629,39 @@ inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::fro
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_symbol(symbol); }
 
 template <typename _1>
+inline void container_a<_1>::from_string(std_string const & str )
+{ assert(any_a<>::___handle___); ___write___().from_string(str); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_string(std_string const & str )
+{ any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_string(str); }
+
+template <typename _1>
+inline any_a<> container_a<_1>::is_symbol__(list_a<> const& ___arguments___) const
+{
+	return is_symbol_();
+}
+
+template <typename _1>
+inline any_a<> container_a<_1>::is_symbol_() const
+{ assert(any_a<>::___handle___); return ___read___().is_symbol_(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::is_symbol_() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_symbol_(); }
+
+template <typename _1>
+inline bool container_a<_1>::is_symbol() const
+{ assert(any_a<>::___handle___); return ___read___().is_symbol(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::is_symbol() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.is_symbol(); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::to_symbol__(list_a<> const& ___arguments___) const
 {
 	return to_symbol_();
@@ -730,6 +675,15 @@ template <typename _1>
 template <typename ___TTT___, typename ___DHB___>
 inline symbol_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::to_symbol_() const
 { return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_symbol_(); }
+
+template <typename _1>
+inline std_string container_a<_1>::to_string() const
+{ assert(any_a<>::___handle___); return ___read___().to_string(); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline std_string container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::to_string() const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
 
 template <typename _1>
 inline any_a<> container_a<_1>::make_inventory__(list_a<> const& ___arguments___)
@@ -1062,6 +1016,130 @@ inline void container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::as_
 { any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.as_shoal(shoal); }
 
 template <typename _1>
+inline any_a<> container_a<_1>::from_brook__(list_a<> const& ___arguments___)
+{
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
+	if (___it___ == ___end___)
+	{
+		throw dis(__FILE__, __LINE__, "container_a::from_brook_ passed short range");
+	}
+	auto brook = cast<any_a<>>(*___it___);
+	return from_brook_(brook);
+}
+
+template <typename _1>
+inline any_a<> container_a<_1>::from_brook_(any_a<> const& brook)
+{ assert(any_a<>::___handle___); return ___write___().from_brook_(brook); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_brook_(any_a<> const& brook)
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_brook_(brook); }
+
+template <typename _1>
+inline bool container_a<_1>::from_brook(any_a < > const & brook )
+{ assert(any_a<>::___handle___); return ___write___().from_brook(brook); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_brook(any_a < > const & brook )
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_brook(brook); }
+
+template <typename _1>
+inline any_a<> container_a<_1>::as_brook__(list_a<> const& ___arguments___) const
+{
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
+	if (___it___ == ___end___)
+	{
+		throw dis(__FILE__, __LINE__, "container_a::as_brook_ passed short range");
+	}
+	auto brook = cast_dup<any_a<>>(*___it___);
+	return as_brook_(brook);
+}
+
+template <typename _1>
+inline any_a<> container_a<_1>::as_brook_(any_a<> & brook) const
+{ assert(any_a<>::___handle___); return ___read___().as_brook_(brook); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::as_brook_(any_a<> & brook) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.as_brook_(brook); }
+
+template <typename _1>
+inline bool container_a<_1>::as_brook(any_a < > & brook ) const
+{ assert(any_a<>::___handle___); return ___read___().as_brook(brook); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::as_brook(any_a < > & brook ) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.as_brook(brook); }
+
+template <typename _1>
+inline any_a<> container_a<_1>::from_lake__(list_a<> const& ___arguments___)
+{
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
+	if (___it___ == ___end___)
+	{
+		throw dis(__FILE__, __LINE__, "container_a::from_lake_ passed short range");
+	}
+	auto lake = cast<any_a<>>(*___it___);
+	return from_lake_(lake);
+}
+
+template <typename _1>
+inline any_a<> container_a<_1>::from_lake_(any_a<> const& lake)
+{ assert(any_a<>::___handle___); return ___write___().from_lake_(lake); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_lake_(any_a<> const& lake)
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_lake_(lake); }
+
+template <typename _1>
+inline bool container_a<_1>::from_lake(any_a < > const & lake )
+{ assert(any_a<>::___handle___); return ___write___().from_lake(lake); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::from_lake(any_a < > const & lake )
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.from_lake(lake); }
+
+template <typename _1>
+inline any_a<> container_a<_1>::as_lake__(list_a<> const& ___arguments___) const
+{
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
+	if (___it___ == ___end___)
+	{
+		throw dis(__FILE__, __LINE__, "container_a::as_lake_ passed short range");
+	}
+	auto lake = cast_dup<any_a<>>(*___it___);
+	return as_lake_(lake);
+}
+
+template <typename _1>
+inline any_a<> container_a<_1>::as_lake_(any_a<> & lake) const
+{ assert(any_a<>::___handle___); return ___read___().as_lake_(lake); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline any_a<> container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::as_lake_(any_a<> & lake) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.as_lake_(lake); }
+
+template <typename _1>
+inline bool container_a<_1>::as_lake(any_a < > & lake ) const
+{ assert(any_a<>::___handle___); return ___read___().as_lake(lake); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___DHB___>
+inline bool container_a<_1>::___container_a_handle___<___TTT___, ___DHB___>::as_lake(any_a < > & lake ) const
+{ return any_a<>::___any_a_handle___<___TTT___, ___DHB___>::___value___.as_lake(lake); }
+
+template <typename _1>
 inline any_a<> container_a<_1>::from_data__(list_a<> const& ___arguments___)
 {
 	auto ___it___ = ___arguments___.begin_();
@@ -1220,10 +1298,8 @@ inline unordered_shoal_a<> container_a<_1>::___operations___()
 		operations.update(sym("from_float_64_"), native_mutation_t<container_a>::create(&container_a::from_float_64__));
 		operations.update(sym("is_float_64_"), native_extraction_t<container_a>::create(&container_a::is_float_64__));
 		operations.update(sym("to_float_64_"), native_extraction_t<container_a>::create(&container_a::to_float_64__));
-		operations.update(sym("from_lake_"), native_mutation_t<container_a>::create(&container_a::from_lake__));
-		operations.update(sym("is_lake_"), native_extraction_t<container_a>::create(&container_a::is_lake__));
-		operations.update(sym("to_lake_"), native_extraction_t<container_a>::create(&container_a::to_lake__));
 		operations.update(sym("from_symbol_"), native_mutation_t<container_a>::create(&container_a::from_symbol__));
+		operations.update(sym("is_symbol_"), native_extraction_t<container_a>::create(&container_a::is_symbol__));
 		operations.update(sym("to_symbol_"), native_extraction_t<container_a>::create(&container_a::to_symbol__));
 		operations.update(sym("make_inventory_"), native_mutation_t<container_a>::create(&container_a::make_inventory__));
 		operations.update(sym("from_inventory_"), native_mutation_t<container_a>::create(&container_a::from_inventory__));
@@ -1237,6 +1313,10 @@ inline unordered_shoal_a<> container_a<_1>::___operations___()
 		operations.update(sym("from_shoal_"), native_mutation_t<container_a>::create(&container_a::from_shoal__));
 		operations.update(sym("is_shoal_"), native_extraction_t<container_a>::create(&container_a::is_shoal__));
 		operations.update(sym("as_shoal_"), native_extraction_t<container_a>::create(&container_a::as_shoal__));
+		operations.update(sym("from_brook_"), native_mutation_t<container_a>::create(&container_a::from_brook__));
+		operations.update(sym("as_brook_"), native_extraction_t<container_a>::create(&container_a::as_brook__));
+		operations.update(sym("from_lake_"), native_mutation_t<container_a>::create(&container_a::from_lake__));
+		operations.update(sym("as_lake_"), native_extraction_t<container_a>::create(&container_a::as_lake__));
 		operations.update(sym("from_data_"), native_mutation_t<container_a>::create(&container_a::from_data__));
 		operations.update(sym("as_data_"), native_extraction_t<container_a>::create(&container_a::as_data__));
 		operations.update(sym("keys_begin_"), native_extraction_t<container_a>::create(&container_a::keys_begin__));

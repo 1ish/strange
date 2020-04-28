@@ -976,7 +976,7 @@ public:
 		item.from_string(type_().to_string() + "::unpack");
 		container.push_back(item); // unpack
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		if (item.from_data(thing_t<___ego___>::me_()))
+		if (item.from_brook(thing_t<___ego___>::me_()))
 		{
 			container.push_back(item); // deque
 		}
@@ -1007,9 +1007,9 @@ public:
 			auto first = *it;
 			if (check<container_a<>>(first))
 			{
-				if (!fast<container_a<>>(first).as_data(result))
+				if (!fast<container_a<>>(first).as_brook(result))
 				{
-					throw dis(__FILE__, __LINE__, "strange::brook::unpack failed to unpack container as data");
+					throw dis(__FILE__, __LINE__, "strange::brook::unpack failed to unpack container as brook");
 				}
 			}
 			else if (number_u<_primitive_>::is_int())

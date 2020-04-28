@@ -58,17 +58,13 @@ false &&
 					to_float_64_ :# (<number_data_double>),
 					to_float_64 : "double () const",
 
-					from_lake_ := (lake :<lake_int8>#, <container>),
-					from_lake : "void (lake_int8_a<> const& lake)",
-					from_string : "void (std_string const& str)",
-					is_lake_ :# (<>),
-					is_lake : "bool () const",
-					to_lake_ :# (<lake_int8>),
-					to_string : "std_string () const",
-
 					from_symbol_ := (symbol :<symbol>#, <container>),
 					from_symbol : "void (symbol_a<> const& symbol)",
+					from_string : "void (std_string const& str)",
+					is_symbol_ :# (<>),
+					is_symbol : "bool () const",
 					to_symbol_ :# (<symbol>),
+					to_string : "std_string () const",
 
 					make_inventory_ := (<container>),
 					make_inventory : "void ()",
@@ -96,6 +92,16 @@ false &&
 					is_shoal : "bool () const",
 					as_shoal_ :# (shoal :<shoal[<symbol>, <container>]>&, <>),
 					as_shoal : "void (shoal_a<symbol_a<>, container_a<>>& shoal) const",
+
+					from_brook_ := (brook :#, <>),
+					from_brook : "bool (any_a<> const& brook)",
+					as_brook_ :# (brook :&, <>),
+					as_brook : "bool (any_a<>& brook) const",
+
+					from_lake_ := (lake :#, <>),
+					from_lake : "bool (any_a<> const& lake)",
+					as_lake_ :# (lake :&, <>),
+					as_lake : "bool (any_a<>& lake) const",
 
 					from_data_ := (data :#, <>),
 					from_data : "bool (any_a<> const& data)",

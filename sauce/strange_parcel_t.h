@@ -1353,15 +1353,16 @@ public:
 		}
 	}
 
-	inline container_a<> from_lake_(lake_int8_a<> const& lake)
+	inline container_a<> from_symbol_(symbol_a<> const& symbol)
 	{
-		from_lake(lake);
+		from_symbol(symbol);
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void from_lake(lake_int8_a<> const& lake)
+	inline void from_symbol(symbol_a<> const& symbol)
 	{
-		from_string(lake_to_string(lake));
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = dart_packet::make_string(symbol.to_string());
 	}
 
 	inline void from_string(std_string const& str)
@@ -1370,27 +1371,27 @@ public:
 		_packet = dart_packet::make_string(str);
 	}
 
-	inline any_a<> is_lake_() const
+	inline any_a<> is_symbol_() const
 	{
-		return boole(is_lake());
+		return boole(is_symbol());
 	}
 
-	inline bool is_lake() const
+	inline bool is_symbol() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _packet.is_str();
 	}
 
-	inline lake_int8_a<> to_lake_() const
+	inline symbol_a<> to_symbol_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		try
 		{
-			return lake_from_string(_packet.str());
+			return sym(_packet.str());
 		}
 		catch (std_exception& exception)
 		{
-			throw dis(__FILE__, __LINE__, "strange::parcel::to_lake exception: ") + exception;
+			throw dis(__FILE__, __LINE__, "strange::parcel::to_symbol exception: ") + exception;
 		}
 	}
 
@@ -1404,31 +1405,6 @@ public:
 		catch (std_exception& exception)
 		{
 			throw dis(__FILE__, __LINE__, "strange::parcel::to_string exception: ") + exception;
-		}
-	}
-
-	inline container_a<> from_symbol_(symbol_a<> const& symbol)
-	{
-		from_symbol(symbol);
-		return thing_t<___ego___>::me_();
-	}
-
-	inline void from_symbol(symbol_a<> const& symbol)
-	{
-		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-		_packet = dart_packet::make_string(symbol.to_string());
-	}
-
-	inline symbol_a<> to_symbol_() const
-	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		try
-		{
-			return sym(_packet.str());
-		}
-		catch (std_exception& exception)
-		{
-			throw dis(__FILE__, __LINE__, "strange::parcel::to_symbol exception: ") + exception;
 		}
 	}
 
@@ -1620,6 +1596,244 @@ public:
 		catch (std_exception& exception)
 		{
 			throw dis(__FILE__, __LINE__, "strange::parcel::as_shoal exception: ") + exception;
+		}
+	}
+
+	inline any_a<> from_brook_(any_a<> const& brook)
+	{
+		return boole(from_brook(brook));
+	}
+
+	inline bool from_brook(any_a<> const& brook)
+	{
+		dart_packet packet;
+		if (check<brook_a<double>>(brook))
+		{
+			packet = fast<brook_a<double>>(brook).extract_deque();
+		}
+		else if (check<brook_a<float>>(brook))
+		{
+			packet = fast<brook_a<float>>(brook).extract_deque();
+		}
+		else if (check<brook_a<uint64_t>>(brook))
+		{
+			packet = fast<brook_a<uint64_t>>(brook).extract_deque();
+		}
+		else if (check<brook_a<int64_t>>(brook))
+		{
+			packet = fast<brook_a<int64_t>>(brook).extract_deque();
+		}
+		else if (check<brook_a<uint32_t>>(brook))
+		{
+			packet = fast<brook_a<uint32_t>>(brook).extract_deque();
+		}
+		else if (check<brook_a<int32_t>>(brook))
+		{
+			packet = fast<brook_a<int32_t>>(brook).extract_deque();
+		}
+		else if (check<brook_a<uint16_t>>(brook))
+		{
+			packet = fast<brook_a<uint16_t>>(brook).extract_deque();
+		}
+		else if (check<brook_a<int16_t>>(brook))
+		{
+			packet = fast<brook_a<int16_t>>(brook).extract_deque();
+		}
+		else if (check<brook_a<uint8_t>>(brook))
+		{
+			packet = fast<brook_a<uint8_t>>(brook).extract_deque();
+		}
+		else if (check<brook_a<int8_t>>(brook))
+		{
+			packet = fast<brook_a<int8_t>>(brook).extract_deque();
+		}
+		else
+		{
+			return false;
+		}
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = packet;
+		return true;
+	}
+
+	inline any_a<> as_brook_(any_a<>& brook) const
+	{
+		return boole(as_brook(brook));
+	}
+
+	inline bool as_brook(any_a<>& brook) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		try
+		{
+			if (check<brook_a<double>>(brook))
+			{
+				_packet.as<std_deque<double>>().swap(fast<brook_a<double>>(brook).mutate_deque());
+			}
+			else if (check<brook_a<float>>(brook))
+			{
+				_packet.as<std_deque<float>>().swap(fast<brook_a<float>>(brook).mutate_deque());
+			}
+			else if (check<brook_a<uint64_t>>(brook))
+			{
+				_packet.as<std_deque<uint64_t>>().swap(fast<brook_a<uint64_t>>(brook).mutate_deque());
+			}
+			else if (check<brook_a<int64_t>>(brook))
+			{
+				_packet.as<std_deque<int64_t>>().swap(fast<brook_a<int64_t>>(brook).mutate_deque());
+			}
+			else if (check<brook_a<uint32_t>>(brook))
+			{
+				_packet.as<std_deque<uint32_t>>().swap(fast<brook_a<uint32_t>>(brook).mutate_deque());
+			}
+			else if (check<brook_a<int32_t>>(brook))
+			{
+				_packet.as<std_deque<int32_t>>().swap(fast<brook_a<int32_t>>(brook).mutate_deque());
+			}
+			else if (check<brook_a<uint16_t>>(brook))
+			{
+				_packet.as<std_deque<uint16_t>>().swap(fast<brook_a<uint16_t>>(brook).mutate_deque());
+			}
+			else if (check<brook_a<int16_t>>(brook))
+			{
+				_packet.as<std_deque<int16_t>>().swap(fast<brook_a<int16_t>>(brook).mutate_deque());
+			}
+			else if (check<brook_a<uint8_t>>(brook))
+			{
+				_packet.as<std_deque<uint8_t>>().swap(fast<brook_a<uint8_t>>(brook).mutate_deque());
+			}
+			else if (check<brook_a<int8_t>>(brook))
+			{
+				_packet.as<std_deque<int8_t>>().swap(fast<brook_a<int8_t>>(brook).mutate_deque());
+			}
+			else
+			{
+				return false;
+			}
+			return true;
+		}
+		catch (std_exception& exception)
+		{
+			throw dis(__FILE__, __LINE__, "strange::parcel::as_brook exception: ") + exception;
+		}
+	}
+
+	inline any_a<> from_lake_(any_a<> const& lake)
+	{
+		return boole(from_lake(lake));
+	}
+
+	inline bool from_lake(any_a<> const& lake)
+	{
+		dart_packet packet;
+		if (check<lake_a<int8_t>>(lake))
+		{
+			packet = fast<lake_a<int8_t>>(lake).extract_vector();
+		}
+		else if (check<lake_a<uint8_t>>(lake))
+		{
+			packet = fast<lake_a<uint8_t>>(lake).extract_vector();
+		}
+		else if (check<lake_a<int16_t>>(lake))
+		{
+			packet = fast<lake_a<int16_t>>(lake).extract_vector();
+		}
+		else if (check<lake_a<uint16_t>>(lake))
+		{
+			packet = fast<lake_a<uint16_t>>(lake).extract_vector();
+		}
+		else if (check<lake_a<int32_t>>(lake))
+		{
+			packet = fast<lake_a<int32_t>>(lake).extract_vector();
+		}
+		else if (check<lake_a<uint32_t>>(lake))
+		{
+			packet = fast<lake_a<uint32_t>>(lake).extract_vector();
+		}
+		else if (check<lake_a<int64_t>>(lake))
+		{
+			packet = fast<lake_a<int64_t>>(lake).extract_vector();
+		}
+		else if (check<lake_a<uint64_t>>(lake))
+		{
+			packet = fast<lake_a<uint64_t>>(lake).extract_vector();
+		}
+		else if (check<lake_a<float>>(lake))
+		{
+			packet = fast<lake_a<float>>(lake).extract_vector();
+		}
+		else if (check<lake_a<double>>(lake))
+		{
+			packet = fast<lake_a<double>>(lake).extract_vector();
+		}
+		else
+		{
+			return false;
+		}
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+		_packet = packet;
+		return true;
+	}
+
+	inline any_a<> as_lake_(any_a<>& lake) const
+	{
+		return boole(as_lake(lake));
+	}
+
+	inline bool as_lake(any_a<>& lake) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		try
+		{
+			if (check<lake_a<int8_t>>(lake))
+			{
+				_packet.as<std_vector<int8_t>>().swap(fast<lake_a<int8_t>>(lake).mutate_vector());
+			}
+			else if (check<lake_a<uint8_t>>(lake))
+			{
+				_packet.as<std_vector<uint8_t>>().swap(fast<lake_a<uint8_t>>(lake).mutate_vector());
+			}
+			else if (check<lake_a<int16_t>>(lake))
+			{
+				_packet.as<std_vector<int16_t>>().swap(fast<lake_a<int16_t>>(lake).mutate_vector());
+			}
+			else if (check<lake_a<uint16_t>>(lake))
+			{
+				_packet.as<std_vector<uint16_t>>().swap(fast<lake_a<uint16_t>>(lake).mutate_vector());
+			}
+			else if (check<lake_a<int32_t>>(lake))
+			{
+				_packet.as<std_vector<int32_t>>().swap(fast<lake_a<int32_t>>(lake).mutate_vector());
+			}
+			else if (check<lake_a<uint32_t>>(lake))
+			{
+				_packet.as<std_vector<uint32_t>>().swap(fast<lake_a<uint32_t>>(lake).mutate_vector());
+			}
+			else if (check<lake_a<int64_t>>(lake))
+			{
+				_packet.as<std_vector<int64_t>>().swap(fast<lake_a<int64_t>>(lake).mutate_vector());
+			}
+			else if (check<lake_a<uint64_t>>(lake))
+			{
+				_packet.as<std_vector<uint64_t>>().swap(fast<lake_a<uint64_t>>(lake).mutate_vector());
+			}
+			else if (check<lake_a<float>>(lake))
+			{
+				_packet.as<std_vector<float>>().swap(fast<lake_a<float>>(lake).mutate_vector());
+			}
+			else if (check<lake_a<double>>(lake))
+			{
+				_packet.as<std_vector<double>>().swap(fast<lake_a<double>>(lake).mutate_vector());
+			}
+			else
+			{
+				return false;
+			}
+			return true;
+		}
+		catch (std_exception& exception)
+		{
+			throw dis(__FILE__, __LINE__, "strange::parcel::as_lake exception: ") + exception;
 		}
 	}
 
