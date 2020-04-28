@@ -313,10 +313,7 @@ public:
 				{
 					auto visited = create(packet);
 					arguments.update_index(ind, visited);
-					if (!visited.visit(arguments, ind))
-					{
-						return no();
-					}
+					visited.visit(arguments, ind);
 				}
 			}
 			catch (std_exception& exception)
@@ -339,15 +336,65 @@ public:
 				{
 					auto visited = create(packet);
 					arguments.update_index(index, visited);
-					if (!visited.visit(arguments, index))
-					{
-						return false;
-					}
+					visited.visit(arguments, index);
 				}
 			}
 			catch (std_exception& exception)
 			{
 				throw dis(__FILE__, __LINE__, "strange::parcel::visit exception: ") + exception;
+			}
+		}
+		return result;
+	}
+
+	inline any_a<> search_(inventory_a<>& arguments, number_data_int64_a<> const& index) const
+	{
+		auto result = thing_t<>::operate__(arguments);
+		if (!result)
+		{
+			auto ind = index.extract_primitive();
+			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+			try
+			{
+				for (auto const& packet : _packet)
+				{
+					auto searched = create(packet);
+					arguments.update_index(ind, searched);
+					if (searched.search(arguments, ind))
+					{
+						return yes();
+					}
+				}
+			}
+			catch (std_exception& exception)
+			{
+				throw dis(__FILE__, __LINE__, "strange::parcel::search exception: ") + exception;
+			}
+		}
+		return result;
+	}
+
+	inline bool search(inventory_a<>& arguments, int64_t index) const
+	{
+		auto result = bool{ thing_t<>::operate__(arguments) };
+		if (!result)
+		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+			try
+			{
+				for (auto const& packet : _packet)
+				{
+					auto searched = create(packet);
+					arguments.update_index(index, searched);
+					if (searched.search(arguments, index))
+					{
+						return true;
+					}
+				}
+			}
+			catch (std_exception& exception)
+			{
+				throw dis(__FILE__, __LINE__, "strange::parcel::search exception: ") + exception;
 			}
 		}
 		return result;

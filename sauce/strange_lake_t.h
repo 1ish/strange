@@ -459,10 +459,7 @@ public:
 			{
 				auto visited = num(number);
 				arguments.update_index(ind, visited);
-				if (!visited.visit(arguments, ind))
-				{
-					return no();
-				}
+				visited.visit(arguments, ind);
 			}
 		}
 		return result;
@@ -478,9 +475,45 @@ public:
 			{
 				auto visited = num(number);
 				arguments.update_index(index, visited);
-				if (!visited.visit(arguments, index))
+				visited.visit(arguments, index);
+			}
+		}
+		return result;
+	}
+
+	inline any_a<> search_(inventory_a<>& arguments, number_data_int64_a<> const& index) const
+	{
+		auto result = thing_t<>::operate__(arguments);
+		if (!result)
+		{
+			auto ind = index.extract_primitive();
+			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+			for (auto const& number : _vector)
+			{
+				auto searched = num(number);
+				arguments.update_index(ind, searched);
+				if (searched.search(arguments, ind))
 				{
-					return false;
+					return yes();
+				}
+			}
+		}
+		return result;
+	}
+
+	inline bool search(inventory_a<>& arguments, int64_t index) const
+	{
+		auto result = bool{ thing_t<>::operate__(arguments) };
+		if (!result)
+		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+			for (auto const& number : _vector)
+			{
+				auto searched = num(number);
+				arguments.update_index(index, searched);
+				if (searched.search(arguments, index))
+				{
+					return true;
 				}
 			}
 		}

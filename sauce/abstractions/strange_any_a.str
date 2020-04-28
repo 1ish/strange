@@ -7,23 +7,27 @@ false &&
 					// exposure
 					extract_thing : "one_t const& () const",
 					mutate_thing : "one_t& ()",
+					//TODO mutate : "void ()",
 
 					// reflection
 					type_ :# (<symbol>),
 
 					cat_ :# (<cat>),
 
-					cats_ :# (<unordered_herd>), //TODO <herd[<cat>]>
+					cats_ :# (<unordered_herd>), //TODO <herd[<cat>]>?
 
 					kind_ :# (<kind>),
 
-					kinds_ :# (<unordered_herd>), //TODO <herd[<kind>]>
+					kinds_ :# (<unordered_herd>), //TODO <herd[<kind>]>?
 
-					operations_ :# (<unordered_shoal>), //TODO <shoal[<symbol>, <operation>]>
+					operations_ :# (<unordered_shoal>), //TODO <shoal[<symbol>, <operation>]>?
 
 					// visitor
 					visit_ :# (arguments :<inventory>&, index :<number_data_int64>#, <>),
 					visit : "bool (inventory_a<>& arguments, int64_t index) const",
+
+					search_ :# (arguments :<inventory>&, index :<number_data_int64>#, <>),
+					search : "bool (inventory_a<>& arguments, int64_t index) const",
 
 					// function
 					invoke : "any_a<> (any_a<>& thing, list_a<> const& arguments) const",

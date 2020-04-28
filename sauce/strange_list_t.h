@@ -68,10 +68,7 @@ public:
 			for (auto const& visited : create_(_begin, _end))
 			{
 				arguments.update_index(ind, visited);
-				if (!visited.visit(arguments, ind))
-				{
-					return no();
-				}
+				visited.visit(arguments, ind);
 			}
 		}
 		return result;
@@ -85,9 +82,41 @@ public:
 			for (auto const& visited : create_(_begin, _end))
 			{
 				arguments.update_index(index, visited);
-				if (!visited.visit(arguments, index))
+				visited.visit(arguments, index);
+			}
+		}
+		return result;
+	}
+
+	inline any_a<> search_(inventory_a<>& arguments, number_data_int64_a<> const& index) const
+	{
+		auto result = thing_t<>::operate__(arguments);
+		if (!result)
+		{
+			auto ind = index.extract_primitive();
+			for (auto const& searched : create_(_begin, _end))
+			{
+				arguments.update_index(ind, searched);
+				if (searched.search(arguments, ind))
 				{
-					return false;
+					return yes();
+				}
+			}
+		}
+		return result;
+	}
+
+	inline bool search(inventory_a<>& arguments, int64_t index) const
+	{
+		auto result = bool{ thing_t<>::operate__(arguments) };
+		if (!result)
+		{
+			for (auto const& searched : create_(_begin, _end))
+			{
+				arguments.update_index(index, searched);
+				if (searched.search(arguments, index))
+				{
+					return true;
 				}
 			}
 		}

@@ -273,15 +273,9 @@ public:
 			for (auto const& visited : _map)
 			{
 				arguments.update_index(ind, visited.first);
-				if (!visited.first.visit(arguments, ind))
-				{
-					return no();
-				}
+				visited.first.visit(arguments, ind);
 				arguments.update_index(ind, visited.second);
-				if (!visited.second.visit(arguments, ind))
-				{
-					return no();
-				}
+				visited.second.visit(arguments, ind);
 			}
 		}
 		return result;
@@ -296,14 +290,55 @@ public:
 			for (auto const& visited : _map)
 			{
 				arguments.update_index(index, visited.first);
-				if (!visited.first.visit(arguments, index))
-				{
-					return false;
-				}
+				visited.first.visit(arguments, index);
 				arguments.update_index(index, visited.second);
-				if (!visited.second.visit(arguments, index))
+				visited.second.visit(arguments, index);
+			}
+		}
+		return result;
+	}
+
+	inline any_a<> search_(inventory_a<>& arguments, number_data_int64_a<> const& index) const
+	{
+		auto result = thing_t<>::operate__(arguments);
+		if (!result)
+		{
+			auto ind = index.extract_primitive();
+			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+			for (auto const& searched : _map)
+			{
+				arguments.update_index(ind, searched.first);
+				if (searched.first.search(arguments, ind))
 				{
-					return false;
+					return yes();
+				}
+				arguments.update_index(ind, searched.second);
+				if (searched.second.search(arguments, ind))
+				{
+					return yes();
+				}
+			}
+		}
+		return result;
+	}
+
+	inline bool search(inventory_a<>& arguments, int64_t index) const
+	{
+		auto result = bool{ thing_t<>::operate__(arguments) };
+		if (!result)
+		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+			for (auto const& searched : _map)
+			{
+				arguments.update_index(index, searched.first);
+				if (searched.first.search(arguments, index))
+				{
+					return true;
+				}
+				arguments.update_index(index, searched.second);
+				if (searched.second.search(arguments, index))
+				{
+					return true;
 				}
 			}
 		}

@@ -68,6 +68,16 @@ public:
 		return operate__(arguments);
 	}
 
+	static inline any_a<> search_(inventory_a<>& arguments, number_data_int64_a<> const&)
+	{
+		return operate__(arguments);
+	}
+
+	static inline bool search(inventory_a<>& arguments, int64_t)
+	{
+		return operate__(arguments);
+	}
+
 	// function
 	static inline any_a<> invoke__(list_a<> const& list)
 	{

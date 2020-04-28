@@ -264,6 +264,44 @@ public:
 		return thing_t<>::operate__(arguments);
 	}
 
+	inline any_a<> search__(list_a<> const& list) const
+	{
+		auto const op = _operations.at_(sym("search"));
+		if (op)
+		{
+			any_a<> thing = me_();
+			return op.operate(thing, list);
+		}
+		auto it = list.begin_();
+		if (it == list.end_())
+		{
+			throw dis(__FILE__, __LINE__, "<strange::any>::visit passed empty list");
+		}
+		return thing_t<>::operate__(cast_dup<inventory_a<>>(*it));
+	}
+
+	inline any_a<> search_(inventory_a<>& arguments, number_data_int64_a<> const& index) const
+	{
+		auto const op = _operations.at_(sym("search"));
+		if (op)
+		{
+			any_a<> thing = me_();
+			return op.operate(thing, flock_t<>::create_dups_(arguments, index));
+		}
+		return thing_t<>::operate__(arguments);
+	}
+
+	inline bool search(inventory_a<>& arguments, int64_t index) const
+	{
+		auto const op = _operations.at_(sym("search"));
+		if (op)
+		{
+			any_a<> thing = me_();
+			return op.operate(thing, flock_t<>::create_dups_(arguments, num(index)));
+		}
+		return thing_t<>::operate__(arguments);
+	}
+
 	// function
 	inline any_a<> invoke(any_a<>& thing, list_a<> const& list) const
 	{

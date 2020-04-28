@@ -147,6 +147,42 @@ inline bool any_a<_1>::___any_a_handle___<___TTT___, ___BHB___>::visit(inventory
 { return ___value___.visit(arguments, index); }
 
 template <typename _1>
+inline any_a<> any_a<_1>::search__(list_a<> const& ___arguments___) const
+{
+	auto ___it___ = ___arguments___.begin_();
+	auto ___end___ = ___arguments___.end_();
+	if (___it___ == ___end___)
+	{
+		throw dis(__FILE__, __LINE__, "any_a::search_ passed short range");
+	}
+	auto arguments = cast_dup<inventory_a<>>(*___it___);
+	if (++___it___ == ___end___)
+	{
+		throw dis(__FILE__, __LINE__, "any_a::search_ passed short range");
+	}
+	auto index = cast<number_data_int64_a<>>(*___it___);
+	return search_(arguments, index);
+}
+
+template <typename _1>
+inline any_a<> any_a<_1>::search_(inventory_a<> & arguments, number_data_int64_a<> const& index) const
+{ assert(___handle___); return ___read___().search_(arguments, index); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___BHB___>
+inline any_a<> any_a<_1>::___any_a_handle___<___TTT___, ___BHB___>::search_(inventory_a<> & arguments, number_data_int64_a<> const& index) const
+{ return ___value___.search_(arguments, index); }
+
+template <typename _1>
+inline bool any_a<_1>::search(inventory_a < > & arguments , int64_t index ) const
+{ assert(___handle___); return ___read___().search(arguments, index); }
+
+template <typename _1>
+template <typename ___TTT___, typename ___BHB___>
+inline bool any_a<_1>::___any_a_handle___<___TTT___, ___BHB___>::search(inventory_a < > & arguments , int64_t index ) const
+{ return ___value___.search(arguments, index); }
+
+template <typename _1>
 inline any_a < > any_a<_1>::invoke(any_a < > & thing , list_a < > const & arguments ) const
 { assert(___handle___); return ___read___().invoke(thing, arguments); }
 
@@ -563,6 +599,7 @@ inline unordered_shoal_a<> any_a<_1>::___operations___()
 		operations.update(sym("kinds_"), native_extraction_t<any_a>::create(&any_a::kinds__));
 		operations.update(sym("operations_"), native_extraction_t<any_a>::create(&any_a::operations__));
 		operations.update(sym("visit_"), native_extraction_t<any_a>::create(&any_a::visit__));
+		operations.update(sym("search_"), native_extraction_t<any_a>::create(&any_a::search__));
 		operations.update(sym("identity_"), native_extraction_t<any_a>::create(&any_a::identity__));
 		operations.update(sym("identical_"), native_extraction_t<any_a>::create(&any_a::identical__));
 		operations.update(sym("nothing_"), native_extraction_t<any_a>::create(&any_a::nothing__));
