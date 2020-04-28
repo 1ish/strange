@@ -18,9 +18,9 @@ A make(char const*const label)
 	return A{ label };
 }
 
-void fun(A& a, A& b)
+void func(A& a, A& b)
 {
-	std__cout << "fun " << a.label << b.label << std::endl;
+	std__cout << "func " << a.label << b.label << std::endl;
 }
 
 TEST_CASE("first", "[first]")
@@ -29,7 +29,7 @@ TEST_CASE("first", "[first]")
 	A a{ "a" };
 	auto x = make("1");
 	auto y = make("2");
-	fun(x, y);
+	func(x, y);
 	A b{ "b" };
 	auto const brook = brook_t<int64_t>::create_();
 	for (auto const& b : brook)

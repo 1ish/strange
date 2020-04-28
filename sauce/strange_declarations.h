@@ -583,6 +583,14 @@ inline ___TTT___ cast_ref(any_a<> const& value) noexcept;
 
 template <typename ___TTT___ = any_a<>>
 inline ___TTT___ cast_dup(any_a<> const& value) noexcept;
+
+namespace fun
+{
+	// visitor
+	bool visit(inventory_a<>& arguments, int64_t index);
+	bool search(inventory_a<>& arguments, int64_t index);
+}
+
 }
 
 #endif

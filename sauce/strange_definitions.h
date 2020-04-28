@@ -116,6 +116,50 @@ inline ___TTT___ cast_dup(any_a<> const& value) noexcept
 	return ___TTT___::___cast___(value);
 }
 
+namespace fun
+{
+	// visitor
+
+	bool visit(inventory_a<>& arguments, int64_t index)
+	{
+		bool result = thing_t<>::operate__(arguments);
+		if (result)
+		{
+			auto thing = arguments.at_index(index);
+			if (check<list_a<>>(thing))
+			{
+				for (auto const& item : fast<list_a<>>(thing))
+				{
+					arguments.update_index(index, item);
+					visit(arguments, index);
+				}
+			}
+		}
+		return result;
+	}
+
+	bool search(inventory_a<>& arguments, int64_t index)
+	{
+		bool result = thing_t<>::operate__(arguments);
+		if (!result)
+		{
+			auto thing = arguments.at_index(index);
+			if (check<list_a<>>(thing))
+			{
+				for (auto const& item : fast<list_a<>>(thing))
+				{
+					arguments.update_index(index, item);
+					if (search(arguments, index))
+					{
+						return true;
+					}
+				}
+			}
+		}
+		return result;
+	}
+}
+
 }
 
 #endif

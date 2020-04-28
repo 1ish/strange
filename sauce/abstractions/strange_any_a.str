@@ -22,13 +22,6 @@ false &&
 
 					operations_ :# (<unordered_shoal>), //TODO <shoal[<symbol>, <operation>]>?
 
-					// visitor
-					visit_ :# (arguments :<inventory>&, index :<number_data_int64>#, <>),
-					visit : "bool (inventory_a<>& arguments, int64_t index) const",
-
-					search_ :# (arguments :<inventory>&, index :<number_data_int64>#, <>),
-					search : "bool (inventory_a<>& arguments, int64_t index) const",
-
 					// function
 					invoke : "any_a<> (any_a<>& thing, list_a<> const& arguments) const",
 					operate : "any_a<> (any_a<>& thing, list_a<> const& arguments) const",
