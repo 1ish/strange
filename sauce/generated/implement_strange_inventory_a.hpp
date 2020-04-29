@@ -121,8 +121,8 @@ inline unordered_shoal_a<> inventory_a<_element>::___operations___()
 	static unordered_shoal_a<> OPERATIONS = []()
 	{
 		unordered_shoal_a<> operations = collection_a< number_data_int64_a<> , _element , _element >::___operations___();
-		operations.update(sym("mutate_begin_"), native_mutation_t<inventory_a>::create(&inventory_a::mutate_begin__));
-		operations.update(sym("mutate_end_"), native_mutation_t<inventory_a>::create(&inventory_a::mutate_end__));
+		operations.update(sym("mutate_begin_"), native_mutation::create(&inventory_a::mutate_begin__));
+		operations.update(sym("mutate_end_"), native_mutation::create(&inventory_a::mutate_end__));
 		return operations;
 	}();
 	return OPERATIONS;

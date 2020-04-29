@@ -139,9 +139,9 @@ inline unordered_shoal_a<> forward_mutator_a<_element>::___operations___()
 	static unordered_shoal_a<> OPERATIONS = []()
 	{
 		unordered_shoal_a<> operations = any_a<>::___operations___();
-		operations.update(sym("get_"), native_extraction_t<forward_mutator_a>::create(&forward_mutator_a::get__));
-		operations.update(sym("set_"), native_extraction_t<forward_mutator_a>::create(&forward_mutator_a::set__));
-		operations.update(sym("increment_"), native_mutation_t<forward_mutator_a>::create(&forward_mutator_a::increment__));
+		operations.update(sym("get_"), native_extraction::create(&forward_mutator_a::get__));
+		operations.update(sym("set_"), native_extraction::create(&forward_mutator_a::set__));
+		operations.update(sym("increment_"), native_mutation::create(&forward_mutator_a::increment__));
 		return operations;
 	}();
 	return OPERATIONS;

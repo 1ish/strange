@@ -177,8 +177,8 @@ inline unordered_shoal_a<> symbol_a<_1>::___operations___()
 	static unordered_shoal_a<> OPERATIONS = []()
 	{
 		unordered_shoal_a<> operations = any_a<>::___operations___();
-		operations.update(sym("to_lake_"), native_extraction_t<symbol_a>::create(&symbol_a::to_lake__));
-		operations.update(sym("add_"), native_extraction_t<symbol_a>::create(&symbol_a::add__));
+		operations.update(sym("to_lake_"), native_extraction::create(&symbol_a::to_lake__));
+		operations.update(sym("add_"), native_extraction::create(&symbol_a::add__));
 		return operations;
 	}();
 	return OPERATIONS;

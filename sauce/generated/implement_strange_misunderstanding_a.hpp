@@ -96,8 +96,8 @@ inline unordered_shoal_a<> misunderstanding_a<_lake_int8>::___operations___()
 	static unordered_shoal_a<> OPERATIONS = []()
 	{
 		unordered_shoal_a<> operations = any_a<>::___operations___();
-		operations.update(sym("to_lake_"), native_extraction_t<misunderstanding_a>::create(&misunderstanding_a::to_lake__));
-		operations.update(sym("add_"), native_extraction_t<misunderstanding_a>::create(&misunderstanding_a::add__));
+		operations.update(sym("to_lake_"), native_extraction::create(&misunderstanding_a::to_lake__));
+		operations.update(sym("add_"), native_extraction::create(&misunderstanding_a::add__));
 		return operations;
 	}();
 	return OPERATIONS;

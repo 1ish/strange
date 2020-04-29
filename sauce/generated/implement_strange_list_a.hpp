@@ -76,8 +76,8 @@ inline unordered_shoal_a<> list_a<_1>::___operations___()
 	static unordered_shoal_a<> OPERATIONS = []()
 	{
 		unordered_shoal_a<> operations = any_a<>::___operations___();
-		operations.update(sym("begin_"), native_extraction_t<list_a>::create(&list_a::begin__));
-		operations.update(sym("end_"), native_extraction_t<list_a>::create(&list_a::end__));
+		operations.update(sym("begin_"), native_extraction::create(&list_a::begin__));
+		operations.update(sym("end_"), native_extraction::create(&list_a::end__));
 		return operations;
 	}();
 	return OPERATIONS;

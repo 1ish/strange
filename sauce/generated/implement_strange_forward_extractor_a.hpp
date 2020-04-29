@@ -132,9 +132,9 @@ inline unordered_shoal_a<> forward_extractor_a<_element>::___operations___()
 	static unordered_shoal_a<> OPERATIONS = []()
 	{
 		unordered_shoal_a<> operations = any_a<>::___operations___();
-		operations.update(sym("get_"), native_extraction_t<forward_extractor_a>::create(&forward_extractor_a::get__));
-		operations.update(sym("increment_"), native_mutation_t<forward_extractor_a>::create(&forward_extractor_a::increment__));
-		operations.update(sym("to_extractor_any_"), native_extraction_t<forward_extractor_a>::create(&forward_extractor_a::to_extractor_any__));
+		operations.update(sym("get_"), native_extraction::create(&forward_extractor_a::get__));
+		operations.update(sym("increment_"), native_mutation::create(&forward_extractor_a::increment__));
+		operations.update(sym("to_extractor_any_"), native_extraction::create(&forward_extractor_a::to_extractor_any__));
 		return operations;
 	}();
 	return OPERATIONS;

@@ -227,13 +227,13 @@ inline unordered_shoal_a<> expression_a<_1>::___operations___()
 	static unordered_shoal_a<> OPERATIONS = []()
 	{
 		unordered_shoal_a<> operations = operation_a<>::___operations___();
-		operations.update(sym("recreate_"), native_extraction_t<expression_a>::create(&expression_a::recreate__));
-		operations.update(sym("literal_"), native_extraction_t<expression_a>::create(&expression_a::literal__));
-		operations.update(sym("evaluate_"), native_extraction_t<expression_a>::create(&expression_a::evaluate__));
-		operations.update(sym("token_"), native_extraction_t<expression_a>::create(&expression_a::token__));
-		operations.update(sym("terms_"), native_extraction_t<expression_a>::create(&expression_a::terms__));
-		operations.update(sym("generate_"), native_extraction_t<expression_a>::create(&expression_a::generate__));
-		operations.update(sym("generate_cpp_"), native_extraction_t<expression_a>::create(&expression_a::generate_cpp__));
+		operations.update(sym("recreate_"), native_extraction::create(&expression_a::recreate__));
+		operations.update(sym("literal_"), native_extraction::create(&expression_a::literal__));
+		operations.update(sym("evaluate_"), native_extraction::create(&expression_a::evaluate__));
+		operations.update(sym("token_"), native_extraction::create(&expression_a::token__));
+		operations.update(sym("terms_"), native_extraction::create(&expression_a::terms__));
+		operations.update(sym("generate_"), native_extraction::create(&expression_a::generate__));
+		operations.update(sym("generate_cpp_"), native_extraction::create(&expression_a::generate_cpp__));
 		return operations;
 	}();
 	return OPERATIONS;

@@ -166,10 +166,10 @@ inline unordered_shoal_a<> random_access_mutator_a<_element>::___operations___()
 	static unordered_shoal_a<> OPERATIONS = []()
 	{
 		unordered_shoal_a<> operations = bidirectional_mutator_a< _element >::___operations___();
-		operations.update(sym("self_add_"), native_mutation_t<random_access_mutator_a>::create(&random_access_mutator_a::self_add__));
-		operations.update(sym("add_"), native_extraction_t<random_access_mutator_a>::create(&random_access_mutator_a::add__));
-		operations.update(sym("self_subtract_"), native_mutation_t<random_access_mutator_a>::create(&random_access_mutator_a::self_subtract__));
-		operations.update(sym("subtract_"), native_extraction_t<random_access_mutator_a>::create(&random_access_mutator_a::subtract__));
+		operations.update(sym("self_add_"), native_mutation::create(&random_access_mutator_a::self_add__));
+		operations.update(sym("add_"), native_extraction::create(&random_access_mutator_a::add__));
+		operations.update(sym("self_subtract_"), native_mutation::create(&random_access_mutator_a::self_subtract__));
+		operations.update(sym("subtract_"), native_extraction::create(&random_access_mutator_a::subtract__));
 		return operations;
 	}();
 	return OPERATIONS;

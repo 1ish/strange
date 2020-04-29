@@ -84,7 +84,7 @@ inline unordered_shoal_a<> bidirectional_mutator_a<_element>::___operations___()
 	static unordered_shoal_a<> OPERATIONS = []()
 	{
 		unordered_shoal_a<> operations = forward_mutator_a< _element >::___operations___();
-		operations.update(sym("decrement_"), native_mutation_t<bidirectional_mutator_a>::create(&bidirectional_mutator_a::decrement__));
+		operations.update(sym("decrement_"), native_mutation::create(&bidirectional_mutator_a::decrement__));
 		return operations;
 	}();
 	return OPERATIONS;

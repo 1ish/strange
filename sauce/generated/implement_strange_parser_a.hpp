@@ -68,7 +68,7 @@ inline unordered_shoal_a<> parser_a<_1>::___operations___()
 	static unordered_shoal_a<> OPERATIONS = []()
 	{
 		unordered_shoal_a<> operations = any_a<>::___operations___();
-		operations.update(sym("parse_"), native_mutation_t<parser_a>::create(&parser_a::parse__));
+		operations.update(sym("parse_"), native_mutation::create(&parser_a::parse__));
 		return operations;
 	}();
 	return OPERATIONS;

@@ -103,8 +103,8 @@ inline unordered_shoal_a<> operation_a<_1>::___operations___()
 	static unordered_shoal_a<> OPERATIONS = []()
 	{
 		unordered_shoal_a<> operations = any_a<>::___operations___();
-		operations.update(sym("pure_"), native_extraction_t<operation_a>::create(&operation_a::pure__));
-		operations.update(sym("names_"), native_extraction_t<operation_a>::create(&operation_a::names__));
+		operations.update(sym("pure_"), native_extraction::create(&operation_a::pure__));
+		operations.update(sym("names_"), native_extraction::create(&operation_a::names__));
 		return operations;
 	}();
 	return OPERATIONS;

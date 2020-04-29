@@ -76,8 +76,8 @@ inline unordered_shoal_a<> shoal_a<_key, _value>::___operations___()
 	static unordered_shoal_a<> OPERATIONS = []()
 	{
 		unordered_shoal_a<> operations = collection_a< _key , _value , flock_a<> >::___operations___();
-		operations.update(sym("mutate_begin_"), native_mutation_t<shoal_a>::create(&shoal_a::mutate_begin__));
-		operations.update(sym("mutate_end_"), native_mutation_t<shoal_a>::create(&shoal_a::mutate_end__));
+		operations.update(sym("mutate_begin_"), native_mutation::create(&shoal_a::mutate_begin__));
+		operations.update(sym("mutate_end_"), native_mutation::create(&shoal_a::mutate_end__));
 		return operations;
 	}();
 	return OPERATIONS;

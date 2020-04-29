@@ -238,14 +238,14 @@ inline unordered_shoal_a<> token_a<_1>::___operations___()
 	static unordered_shoal_a<> OPERATIONS = []()
 	{
 		unordered_shoal_a<> operations = any_a<>::___operations___();
-		operations.update(sym("filename_"), native_extraction_t<token_a>::create(&token_a::filename__));
-		operations.update(sym("line_"), native_extraction_t<token_a>::create(&token_a::line__));
-		operations.update(sym("position_"), native_extraction_t<token_a>::create(&token_a::position__));
-		operations.update(sym("tag_"), native_extraction_t<token_a>::create(&token_a::tag__));
-		operations.update(sym("symbol_"), native_extraction_t<token_a>::create(&token_a::symbol__));
-		operations.update(sym("literal_"), native_extraction_t<token_a>::create(&token_a::literal__));
-		operations.update(sym("precedence_"), native_extraction_t<token_a>::create(&token_a::precedence__));
-		operations.update(sym("report_"), native_extraction_t<token_a>::create(&token_a::report__));
+		operations.update(sym("filename_"), native_extraction::create(&token_a::filename__));
+		operations.update(sym("line_"), native_extraction::create(&token_a::line__));
+		operations.update(sym("position_"), native_extraction::create(&token_a::position__));
+		operations.update(sym("tag_"), native_extraction::create(&token_a::tag__));
+		operations.update(sym("symbol_"), native_extraction::create(&token_a::symbol__));
+		operations.update(sym("literal_"), native_extraction::create(&token_a::literal__));
+		operations.update(sym("precedence_"), native_extraction::create(&token_a::precedence__));
+		operations.update(sym("report_"), native_extraction::create(&token_a::report__));
 		return operations;
 	}();
 	return OPERATIONS;

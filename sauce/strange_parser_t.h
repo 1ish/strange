@@ -23,7 +23,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		//TODO shoal.update(sym("strange::parser::create"), native_function_t<>::create(&parser_t<>::create__));
+		//TODO shoal.update(sym("strange::parser::create"), native_function::create(&parser_t<>::create__));
 	}
 
 	// parser

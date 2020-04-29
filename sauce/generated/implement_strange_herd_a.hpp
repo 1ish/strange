@@ -108,8 +108,8 @@ inline unordered_shoal_a<> herd_a<_element>::___operations___()
 	static unordered_shoal_a<> OPERATIONS = []()
 	{
 		unordered_shoal_a<> operations = collection_a< _element , _element , _element >::___operations___();
-		operations.update(sym("update_thing_"), native_mutation_t<herd_a>::create(&herd_a::update_thing__));
-		operations.update(sym("insert_thing_"), native_mutation_t<herd_a>::create(&herd_a::insert_thing__));
+		operations.update(sym("update_thing_"), native_mutation::create(&herd_a::update_thing__));
+		operations.update(sym("insert_thing_"), native_mutation::create(&herd_a::insert_thing__));
 		return operations;
 	}();
 	return OPERATIONS;

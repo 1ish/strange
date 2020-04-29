@@ -133,10 +133,10 @@ inline unordered_shoal_a<> kind_a<_1>::___operations___()
 	static unordered_shoal_a<> OPERATIONS = []()
 	{
 		unordered_shoal_a<> operations = cat_a<>::___operations___();
-		operations.update(sym("aspects_"), native_extraction_t<kind_a>::create(&kind_a::aspects__));
-		operations.update(sym("fixed_"), native_extraction_t<kind_a>::create(&kind_a::fixed__));
-		operations.update(sym("reference_"), native_extraction_t<kind_a>::create(&kind_a::reference__));
-		operations.update(sym("optional_"), native_extraction_t<kind_a>::create(&kind_a::optional__));
+		operations.update(sym("aspects_"), native_extraction::create(&kind_a::aspects__));
+		operations.update(sym("fixed_"), native_extraction::create(&kind_a::fixed__));
+		operations.update(sym("reference_"), native_extraction::create(&kind_a::reference__));
+		operations.update(sym("optional_"), native_extraction::create(&kind_a::optional__));
 		return operations;
 	}();
 	return OPERATIONS;

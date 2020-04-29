@@ -187,13 +187,13 @@ inline unordered_shoal_a<> cat_a<_1>::___operations___()
 	static unordered_shoal_a<> OPERATIONS = []()
 	{
 		unordered_shoal_a<> operations = symbol_a<>::___operations___();
-		operations.update(sym("symbolic_"), native_extraction_t<cat_a>::create(&cat_a::symbolic__));
-		operations.update(sym("order_"), native_extraction_t<cat_a>::create(&cat_a::order__));
-		operations.update(sym("name_"), native_extraction_t<cat_a>::create(&cat_a::name__));
-		operations.update(sym("dimensions_"), native_extraction_t<cat_a>::create(&cat_a::dimensions__));
-		operations.update(sym("parameters_"), native_extraction_t<cat_a>::create(&cat_a::parameters__));
-		operations.update(sym("result_"), native_extraction_t<cat_a>::create(&cat_a::result__));
-		operations.update(sym("code_"), native_extraction_t<cat_a>::create(&cat_a::code__));
+		operations.update(sym("symbolic_"), native_extraction::create(&cat_a::symbolic__));
+		operations.update(sym("order_"), native_extraction::create(&cat_a::order__));
+		operations.update(sym("name_"), native_extraction::create(&cat_a::name__));
+		operations.update(sym("dimensions_"), native_extraction::create(&cat_a::dimensions__));
+		operations.update(sym("parameters_"), native_extraction::create(&cat_a::parameters__));
+		operations.update(sym("result_"), native_extraction::create(&cat_a::result__));
+		operations.update(sym("code_"), native_extraction::create(&cat_a::code__));
 		return operations;
 	}();
 	return OPERATIONS;

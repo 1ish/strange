@@ -1119,8 +1119,8 @@ protected:
 		if (root)
 		{
 			river.write_string("unordered_shoal_create();\n"
-				"\t\toperations.update(sym(\"call_\"), native_mutation_t<any_a>::create(&any_a::operator[]));\n"
-				"\t\toperations.update(sym(\"perform_\"), native_mutation_t<any_a>::create(&any_a::operator()));\n");
+				"\t\toperations.update(sym(\"call_\"), native_mutation::create(&any_a::operator[]));\n"
+				"\t\toperations.update(sym(\"perform_\"), native_mutation::create(&any_a::operator()));\n");
 		}
 		else
 		{
@@ -2313,8 +2313,8 @@ protected:
 
 		river.write_string(
 			"\t\toperations.update(sym(\"" + name + "\"), " +
-			(extraction ? "native_extraction_t<" : "native_mutation_t<") +
-			class_name + ">::create(&" + class_name + "::" + name + "_));\n");
+			std_string(extraction ? "native_extraction" : "native_mutation") +
+			"::create(&" + class_name + "::" + name + "_));\n");
 	}
 
 	inline void _define_class_operation_native_(bool root, std_string const& class_name, std_string const& name, std_string const& value, int64_t version, river_a<>& river) const
