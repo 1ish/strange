@@ -329,9 +329,12 @@ template <typename _primitive_, typename _result_ = number_data_a<_primitive_>>
 inline _result_ num(_primitive_ primitive);
 
 // list
-inline list_a<> list_create();
+namespace list
+{
+	inline list_a<> create();
 
-inline list_a<> list_create(forward_extractor_a<any_a<>> const& begin, forward_extractor_a<any_a<>> const& end);
+	inline list_a<> create(forward_extractor_a<any_a<>> const& begin, forward_extractor_a<any_a<>> const& end);
+}
 
 // range
 template <typename _element = any_a<>>

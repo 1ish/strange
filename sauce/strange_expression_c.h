@@ -49,7 +49,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
-			auto const result = op.operate(thing, list_create());
+			auto const result = op.operate(thing, list::create());
 			if (!check<symbol_a<>>(result))
 			{
 				throw dis(__FILE__, __LINE__, "<strange::expression>::type returned non-symbol");
@@ -79,7 +79,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
-			auto const result = op.operate(thing, list_create());
+			auto const result = op.operate(thing, list::create());
 			if (!check<unordered_shoal_a<>>(result))
 			{
 				throw dis(__FILE__, __LINE__, "<strange::expression>::shared returned non-unordered-shoal");
@@ -124,7 +124,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
-			return op.operate(thing, list_create());
+			return op.operate(thing, list::create());
 		}
 		return no();
 	}
@@ -135,7 +135,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
-			return op.operate(thing, list_create());
+			return op.operate(thing, list::create());
 		}
 		return false;
 	}
@@ -150,7 +150,7 @@ public:
 		}
 		auto local = unordered_shoal_t<>::create_();
 		local.insert(sym("$"), unordered_shoal_t<any_a<>, any_a<>, true>::create_());
-		return operation_c<___ego___>::operate(local, list_create());
+		return operation_c<___ego___>::operate(local, list::create());
 	}
 
 	inline any_a<> evaluate_() const
@@ -159,11 +159,11 @@ public:
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
-			return op.operate(thing, list_create());
+			return op.operate(thing, list::create());
 		}
 		auto local = unordered_shoal_t<>::create_();
 		local.insert(sym("$"), unordered_shoal_t<any_a<>, any_a<>, true>::create_());
-		return operation_c<___ego___>::operate(local, list_create());
+		return operation_c<___ego___>::operate(local, list::create());
 	}
 
 	inline any_a<> token__(list_a<> const& list) const
@@ -183,7 +183,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
-			auto const result = op.operate(thing, list_create());
+			auto const result = op.operate(thing, list::create());
 			if (!check<token_a<>>(result))
 			{
 				throw dis(__FILE__, __LINE__, "<strange::expression>::token returned non-token");
@@ -210,7 +210,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = operation_c<___ego___>::me_();
-			auto const result = op.operate(thing, list_create());
+			auto const result = op.operate(thing, list::create());
 			if (!check<flock_a<>>(result))
 			{
 				throw dis(__FILE__, __LINE__, "<strange::expression>::terms returned non-flock");

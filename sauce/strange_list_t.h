@@ -102,14 +102,17 @@ class ___list_t_share___
 	}
 };
 
-inline list_a<> list_create()
+namespace list
 {
-	return list_t<>::create_();
-}
+	inline list_a<> create()
+	{
+		return list_t<>::create_();
+	}
 
-inline list_a<> list_create(forward_extractor_a<any_a<>> const& begin, forward_extractor_a<any_a<>> const& end)
-{
-	return list_t<>::create_(begin, end);
+	inline list_a<> create(forward_extractor_a<any_a<>> const& begin, forward_extractor_a<any_a<>> const& end)
+	{
+		return list_t<>::create_(begin, end);
+	}
 }
 
 } // namespace strange

@@ -72,7 +72,7 @@ public:
 			throw dis(__FILE__, __LINE__, "strange::thing::invoke passed short list");
 		}
 		any_a<> member = *it;
-		return invoke_member(thing, member, list_create(++it, end));
+		return invoke_member(thing, member, list::create(++it, end));
 	}
 
 	static inline any_a<> invoke(any_a<>& thing, list_a<> const& list)
@@ -84,7 +84,7 @@ public:
 			throw dis(__FILE__, __LINE__, "strange::thing::invoke passed short list");
 		}
 		any_a<> member = *it;
-		return invoke_member(thing, member, list_create(++it, end));
+		return invoke_member(thing, member, list::create(++it, end));
 	}
 
 	static inline any_a<> invoke_member(any_a<>& thing, any_a<> const& member, list_a<> const& list)
@@ -106,7 +106,7 @@ public:
 			throw dis(__FILE__, __LINE__, "strange::thing::operate passed empty list");
 		}
 		any_a<> thing = fast_dup(*it);
-		return thing.operate(thing, list_create(++it, end));
+		return thing.operate(thing, list::create(++it, end));
 	}
 
 	static inline any_a<> operate(any_a<>& thing, list_a<> const& list)
@@ -118,7 +118,7 @@ public:
 			throw dis(__FILE__, __LINE__, "strange::thing::operate passed short list");
 		}
 		any_a<> operation = *it;
-		return operation.operate(thing, list_create(++it, end));
+		return operation.operate(thing, list::create(++it, end));
 	}
 
 	// identification

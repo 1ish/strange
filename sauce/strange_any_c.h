@@ -60,7 +60,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = me_();
-			auto const result = op.operate(thing, list_create());
+			auto const result = op.operate(thing, list::create());
 			if (!check<symbol_a<>>(result))
 			{
 				throw dis(__FILE__, __LINE__, "<strange::any>::type returned non-symbol");
@@ -90,7 +90,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = me_();
-			auto const result = op.operate(thing, list_create());
+			auto const result = op.operate(thing, list::create());
 			if (!check<unordered_shoal_a<>>(result))
 			{
 				throw dis(__FILE__, __LINE__, "<strange::any>::shared returned non-unordered-shoal");
@@ -124,7 +124,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = me_();
-			auto const result = op.operate(thing, list_create());
+			auto const result = op.operate(thing, list::create());
 			if (!check<cat_a<>>(result))
 			{
 				throw dis(__FILE__, __LINE__, "<strange::any>::cat returned non-cat");
@@ -151,7 +151,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = me_();
-			auto const result = op.operate(thing, list_create());
+			auto const result = op.operate(thing, list::create());
 			if (!check<unordered_herd_a<>>(result))
 			{
 				throw dis(__FILE__, __LINE__, "<strange::any>::cats returned non-unordered-herd");
@@ -178,7 +178,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = me_();
-			auto const result = op.operate(thing, list_create());
+			auto const result = op.operate(thing, list::create());
 			if (!check<kind_a<>>(result))
 			{
 				throw dis(__FILE__, __LINE__, "<strange::any>::kind returned non-kind");
@@ -205,7 +205,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = me_();
-			auto const result = op.operate(thing, list_create());
+			auto const result = op.operate(thing, list::create());
 			if (!check<unordered_herd_a<>>(result))
 			{
 				throw dis(__FILE__, __LINE__, "<strange::any>::kinds returned non-unordered-herd");
@@ -248,7 +248,7 @@ public:
 		{
 			throw dis(__FILE__, __LINE__, "<strange::any>::invoke passed non-existent member");
 		}
-		return thing.operations_().at_(member).operate(thing, list_create(++it, list.end_()));
+		return thing.operations_().at_(member).operate(thing, list::create(++it, list.end_()));
 	}
 
 	inline any_a<> operate(any_a<>& thing, list_a<> const& list) const
@@ -269,7 +269,7 @@ public:
 			throw dis(__FILE__, __LINE__, "<strange::any>::operate passed short list");
 		}
 		any_a<> operation = *it;
-		return operation.operate(thing, list_create(++it, list.end_()));
+		return operation.operate(thing, list::create(++it, list.end_()));
 	}
 
 	// identification
@@ -378,7 +378,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = me_();
-			auto const result = op.operate(thing, list_create());
+			auto const result = op.operate(thing, list::create());
 			if (!check<number_data_a<uint64_t>>(result))
 			{
 				throw dis(__FILE__, __LINE__, "<strange::any>::hash returned non-number-uint64");
@@ -394,7 +394,7 @@ public:
 		if (op)
 		{
 			any_a<> thing = me_();
-			auto const result = op.operate(thing, list_create());
+			auto const result = op.operate(thing, list::create());
 			if (!check<number_data_a<uint64_t>>(result))
 			{
 				throw dis(__FILE__, __LINE__, "<strange::any>::hash returned non-number-uint64");
@@ -418,7 +418,7 @@ public:
 			throw dis(__FILE__, __LINE__, "<strange::any>::intimate passed short list");
 		}
 		any_a<> member = *it;
-		return intimate(thing, member, list_create(++it, list.end_()));
+		return intimate(thing, member, list::create(++it, list.end_()));
 	}
 
 	static inline any_a<> intimate_(any_a<>& thing, list_a<> const& list)
@@ -429,7 +429,7 @@ public:
 			throw dis(__FILE__, __LINE__, "<strange::any>::intimate passed short list");
 		}
 		any_a<> member = *it;
-		return intimate(thing, member, list_create(++it, list.end_()));
+		return intimate(thing, member, list::create(++it, list.end_()));
 	}
 
 	static inline any_a<> intimate(any_a<>& thing, any_a<> const& member, list_a<> const& list)
