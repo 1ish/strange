@@ -34,7 +34,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		// nope: shoal.update(sym(type_().to_string() + "::create"), native_function_create(&data_t<std_shared_ptr<strange::concurrent_u<false>::read_lock>>::create__));
+		// nope: shoal.update(sym(type_().to_string() + "::create"), native_function::create(&data_t<std_shared_ptr<strange::concurrent_u<false>::read_lock>>::create__));
 	}
 
 	// comparison

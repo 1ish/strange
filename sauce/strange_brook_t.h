@@ -444,8 +444,8 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update(sym(type_().to_string() + "::create"), native_function_create(&brook_t<_primitive_, _concurrent_>::create__));
-		shoal.update(sym(type_().to_string() + "::unpack"), native_function_create(&brook_t<_primitive_, _concurrent_>::unpack__));
+		shoal.update(sym(type_().to_string() + "::create"), native_function::create(&brook_t<_primitive_, _concurrent_>::create__));
+		shoal.update(sym(type_().to_string() + "::unpack"), native_function::create(&brook_t<_primitive_, _concurrent_>::unpack__));
 	}
 
 	// comparison

@@ -558,7 +558,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update(sym("strange::tokenizer::create"), native_function_create(&tokenizer_t<>::create__));
+		shoal.update(sym("strange::tokenizer::create"), native_function::create(&tokenizer_t<>::create__));
 	}
 
 	// list

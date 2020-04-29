@@ -28,8 +28,8 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update(sym("strange::thing::invoke"), native_function_create(&thing_t<>::invoke__));
-		shoal.update(sym("strange::thing::operate"), native_function_create(&thing_t<>::operate__));
+		shoal.update(sym("strange::thing::invoke"), native_function::create(&thing_t<>::invoke__));
+		shoal.update(sym("strange::thing::operate"), native_function::create(&thing_t<>::operate__));
 	}
 
 	static inline cat_a<> cat_()

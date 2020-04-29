@@ -55,7 +55,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update(sym("strange::list::create"), native_function_create(&list_t<>::create__));
+		shoal.update(sym("strange::list::create"), native_function::create(&list_t<>::create__));
 	}
 
 	// list

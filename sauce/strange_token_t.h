@@ -263,14 +263,14 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update(sym("strange::token::create"), native_function_create(&token_t<>::create__));
-		shoal.update(sym("strange::token::create_symbol"), native_function_create(&token_t<>::create_symbol__));
-		shoal.update(sym("strange::token::create_lake"), native_function_create(&token_t<>::create_lake__));
-		shoal.update(sym("strange::token::create_int"), native_function_create(&token_t<>::create_int__));
-		shoal.update(sym("strange::token::create_float"), native_function_create(&token_t<>::create_float__));
-		shoal.update(sym("strange::token::create_name"), native_function_create(&token_t<>::create_name__));
-		shoal.update(sym("strange::token::create_punctuation"), native_function_create(&token_t<>::create_punctuation__));
-		shoal.update(sym("strange::token::create_error"), native_function_create(&token_t<>::create_error__));
+		shoal.update(sym("strange::token::create"), native_function::create(&token_t<>::create__));
+		shoal.update(sym("strange::token::create_symbol"), native_function::create(&token_t<>::create_symbol__));
+		shoal.update(sym("strange::token::create_lake"), native_function::create(&token_t<>::create_lake__));
+		shoal.update(sym("strange::token::create_int"), native_function::create(&token_t<>::create_int__));
+		shoal.update(sym("strange::token::create_float"), native_function::create(&token_t<>::create_float__));
+		shoal.update(sym("strange::token::create_name"), native_function::create(&token_t<>::create_name__));
+		shoal.update(sym("strange::token::create_punctuation"), native_function::create(&token_t<>::create_punctuation__));
+		shoal.update(sym("strange::token::create_error"), native_function::create(&token_t<>::create_error__));
 	}
 
 	// token

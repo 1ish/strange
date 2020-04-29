@@ -95,8 +95,8 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update(sym("strange::expression_catch::create"), native_function_create(&expression_catch_t<>::create__));
-		shoal.update(sym("catch!"), native_function_create(&expression_catch_t<>::create__));
+		shoal.update(sym("strange::expression_catch::create"), native_function::create(&expression_catch_t<>::create__));
+		shoal.update(sym("catch!"), native_function::create(&expression_catch_t<>::create__));
 	}
 
 	// function

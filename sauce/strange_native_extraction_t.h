@@ -11,12 +11,12 @@ class native_extraction_t : public operation_t<___ego___>
 public:
 	// construction
 	template <typename... Args>
-	static inline operation_a<> create(native_const_member_pointer<_abstraction_> const fun, Args&&... args)
+	static inline operation_a<> create(native_extraction::const_member_ptr<_abstraction_> const ptr, Args&&... args)
 	{
 		std_vector<any_a<>> v;
 		v.reserve(sizeof...(Args));
 		variadic_u<>::variadic(v, std::forward<Args>(args)...);
-		return operation_a<>::create<native_extraction_t<_abstraction_>>(fun,
+		return operation_a<>::create<native_extraction_t<_abstraction_>>(ptr,
 			operation_t<___ego___>::kind_names_params(flock_create(std::move(v))));
 	}
 
@@ -58,7 +58,7 @@ public:
 	}
 
 protected:
-	native_const_member_pointer<_abstraction_> const _function;
+	native_extraction::const_member_ptr<_abstraction_> const _function;
 	kind_a<> const _kind;
 	unordered_herd_a<> const _kinds;
 	cat_a<> const _cat;
@@ -66,9 +66,9 @@ protected:
 
 	friend class any_a<>;
 
-	inline native_extraction_t(native_const_member_pointer<_abstraction_> const fun, std_pair<kind_a<>, flock_a<>> const& kind_names)
+	inline native_extraction_t(native_extraction::const_member_ptr<_abstraction_> const ptr, std_pair<kind_a<>, flock_a<>> const& kind_names)
 		: operation_t<___ego___>{ false, kind_names.second } //TODO pure
-		, _function{ fun }
+		, _function{ ptr }
 		, _kind{ kind_names.first }
 		, _kinds{ operation_t<___ego___>::kinds(_kind) }
 		, _cat{ kind_to_cat(_kind) }
@@ -76,10 +76,13 @@ protected:
 	{}
 };
 
-template <typename _abstraction_, typename... Args>
-inline operation_a<> native_extraction_create(native_const_member_pointer<_abstraction_> const fun, Args&&... args)
+namespace native_extraction
 {
-	return native_extraction_t<_abstraction_>::create(fun, std::forward<Args>(args)...);
+	template <typename _abstraction_, typename... Args>
+	inline operation_a<> create(const_member_ptr<_abstraction_> const ptr, Args&&... args)
+	{
+		return native_extraction_t<_abstraction_>::create(ptr, std::forward<Args>(args)...);
+	}
 }
 
 } // namespace strange

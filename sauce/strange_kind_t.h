@@ -118,7 +118,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update(sym("strange::kind::create"), native_function_create(&kind_t<>::create__));
+		shoal.update(sym("strange::kind::create"), native_function::create(&kind_t<>::create__));
 	}
 
 	// comparison

@@ -50,7 +50,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update(sym("strange::symbol::create"), native_function_create(&symbol_t<>::create__));
+		shoal.update(sym("strange::symbol::create"), native_function::create(&symbol_t<>::create__));
 	}
 
 	// comparison

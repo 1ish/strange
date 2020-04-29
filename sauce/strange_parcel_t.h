@@ -296,7 +296,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update(sym(type_().to_string() + "::create"), native_function_create(&parcel_t<_concurrent_>::create__));
+		shoal.update(sym(type_().to_string() + "::create"), native_function::create(&parcel_t<_concurrent_>::create__));
 	}
 
 	// comparison

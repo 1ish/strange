@@ -290,24 +290,33 @@ template <typename F>
 inline misunderstanding_a<> dis(char const* file, int64_t line, F&& s);
 
 // native function
-using native_function_pointer = any_a<>(*)(list_a<> const&);
+namespace native_function
+{
+	using function_ptr = any_a<>(*)(list_a<> const&);
 
-template <typename... Args>
-inline operation_a<> native_function_create(native_function_pointer const fun, Args&&... args);
+	template <typename... Args>
+	inline operation_a<> create(function_ptr const ptr, Args&&... args);
+}
 
 // native extraction
-template <typename _abstraction_>
-using native_const_member_pointer = any_a<>(_abstraction_::*)(list_a<> const&) const;
+namespace native_extraction
+{
+	template <typename _abstraction_>
+	using const_member_ptr = any_a<>(_abstraction_::*)(list_a<> const&) const;
 
-template <typename _abstraction_, typename... Args>
-inline operation_a<> native_extraction_create(native_const_member_pointer<_abstraction_> const fun, Args&&... args);
+	template <typename _abstraction_, typename... Args>
+	inline operation_a<> create(const_member_ptr<_abstraction_> const ptr, Args&&... args);
+}
 
 // native mutation
-template <typename _abstraction_>
-using native_member_pointer = any_a<>(_abstraction_::*)(list_a<> const&);
+namespace native_mutation
+{
+	template <typename _abstraction_>
+	using member_ptr = any_a<>(_abstraction_::*)(list_a<> const&);
 
-template <typename _abstraction_, typename... Args>
-inline operation_a<> native_mutation_create(native_member_pointer<_abstraction_> const fun, Args&&... args);
+	template <typename _abstraction_, typename... Args>
+	inline operation_a<> create(member_ptr<_abstraction_> const ptr, Args&&... args);
+}
 
 // number
 inline number_data_a<int64_t> int_64_from_string(std_string const& str);

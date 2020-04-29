@@ -100,7 +100,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update(sym("strange::cat::create"), native_function_create(&cat_t<>::create__));
+		shoal.update(sym("strange::cat::create"), native_function::create(&cat_t<>::create__));
 	}
 
 	// comparison

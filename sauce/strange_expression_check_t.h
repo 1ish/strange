@@ -56,8 +56,8 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update(sym("strange::expression_check::create"), native_function_create(&expression_check_t<>::create__));
-		shoal.update(sym("check!"), native_function_create(&expression_check_t<>::create__));
+		shoal.update(sym("strange::expression_check::create"), native_function::create(&expression_check_t<>::create__));
+		shoal.update(sym("check!"), native_function::create(&expression_check_t<>::create__));
 	}
 
 	// function

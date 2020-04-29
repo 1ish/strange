@@ -34,7 +34,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update(sym(type_().to_string() + "::create"), native_function_create(&number_t<_primitive_>::create__));
+		shoal.update(sym(type_().to_string() + "::create"), native_function::create(&number_t<_primitive_>::create__));
 	}
 
 	// comparison

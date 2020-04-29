@@ -11,12 +11,12 @@ class native_function_t : public operation_t<___ego___>
 public:
 	// construction
 	template <typename... Args>
-	static inline operation_a<> create(native_function_pointer const fun, Args&&... args)
+	static inline operation_a<> create(native_function::function_ptr const ptr, Args&&... args)
 	{
 		std_vector<any_a<>> v;
 		v.reserve(sizeof...(Args));
 		variadic_u<>::variadic(v, std::forward<Args>(args)...);
-		return operation_a<>::create<native_function_t<>>(fun,
+		return operation_a<>::create<native_function_t<>>(ptr,
 			operation_t<___ego___>::kind_names_params(flock_create(std::move(v))));
 	}
 
@@ -57,7 +57,7 @@ public:
 	}
 
 protected:
-	native_function_pointer const _function;
+	native_function::function_ptr const _function;
 	kind_a<> const _kind;
 	unordered_herd_a<> const _kinds;
 	cat_a<> const _cat;
@@ -65,9 +65,9 @@ protected:
 
 	friend class any_a<>;
 
-	inline native_function_t(native_function_pointer const fun, std_pair<kind_a<>, flock_a<>> const& kind_names)
+	inline native_function_t(native_function::function_ptr const ptr, std_pair<kind_a<>, flock_a<>> const& kind_names)
 		: operation_t<___ego___>{ false, kind_names.second } //TODO pure
-		, _function{ fun }
+		, _function{ ptr }
 		, _kind{ kind_names.first }
 		, _kinds{ operation_t<___ego___>::kinds(_kind) }
 		, _cat{ kind_to_cat(_kind) }
@@ -75,10 +75,13 @@ protected:
 	{}
 };
 
-template <typename... Args>
-inline operation_a<> native_function_create(native_function_pointer const fun, Args&&... args)
+namespace native_function
 {
-	return native_function_t<>::create(fun, std::forward<Args>(args)...);
+	template <typename... Args>
+	inline operation_a<> create(function_ptr const ptr, Args&&... args)
+	{
+		return native_function_t<>::create(ptr, std::forward<Args>(args)...);
+	}
 }
 
 } // namespace strange

@@ -422,7 +422,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update(sym(type_().to_string() + "::create"), native_function_create(&squad_t<_element, _concurrent_>::create__));
+		shoal.update(sym(type_().to_string() + "::create"), native_function::create(&squad_t<_element, _concurrent_>::create__));
 	}
 
 	// comparison
