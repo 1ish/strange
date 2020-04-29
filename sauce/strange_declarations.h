@@ -319,8 +319,11 @@ namespace native_mutation
 }
 
 // number
-inline number_data_a<int64_t> int_64_from_string(std_string const& str);
-inline number_data_a<double> float_64_from_string(std_string const& str);
+namespace number
+{
+	inline number_data_a<int64_t> int_64_from_string(std_string const& str);
+	inline number_data_a<double> float_64_from_string(std_string const& str);
+}
 
 template <typename _primitive_, typename _result_ = number_data_a<_primitive_>>
 inline _result_ num(_primitive_ primitive);

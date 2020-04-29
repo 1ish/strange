@@ -181,7 +181,7 @@ public:
 
 	static inline token_a<> create_int_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol, number_data_a<int64_t> const& = number_int_64_t<>::create_())
 	{
-		return create_(filename, line, position, sym("int"), symbol, int_64_from_string(symbol.to_string()));
+		return create_(filename, line, position, sym("int"), symbol, number::int_64_from_string(symbol.to_string()));
 	}
 
 	static inline token_a<> create_int(std_string const& filename, int64_t line, int64_t position, std_string const& symbol)
@@ -196,7 +196,7 @@ public:
 
 	static inline token_a<> create_float_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol, number_data_a<int64_t> const& = number_int_64_t<>::create_())
 	{
-		return create_(filename, line, position, sym("float"), symbol, float_64_from_string(symbol.to_string()));
+		return create_(filename, line, position, sym("float"), symbol, number::float_64_from_string(symbol.to_string()));
 	}
 
 	static inline token_a<> create_float(std_string const& filename, int64_t line, int64_t position, std_string const& symbol)
