@@ -35,7 +35,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, list_a<> const& list) const
 	{
-		return thing_t<>::operate__(range_operator_t<>::create_(_terms, thing, list));
+		return thing_t<>::operate__(list_operator::create(_terms, thing, list));
 	}
 
 	// expression

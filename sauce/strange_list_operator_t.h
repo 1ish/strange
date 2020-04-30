@@ -1,12 +1,12 @@
-#ifndef COM_ONEISH_STRANGE_RANGE_OPERATOR_T_H
-#define COM_ONEISH_STRANGE_RANGE_OPERATOR_T_H
+#ifndef COM_ONEISH_STRANGE_LIST_OPERATOR_T_H
+#define COM_ONEISH_STRANGE_LIST_OPERATOR_T_H
 
 namespace strange
 {
 
 // template <typename ___ego___ = list_a<>>
 template <typename ___ego___>
-class range_operator_t : public thing_t<___ego___>
+class list_operator_t : public thing_t<___ego___>
 {
 	template <typename _element, typename _iterator_, typename ___ego_it___ = forward_extractor_data_a<_element, _iterator_>>
 	class extractor_t : public thing_t<___ego_it___>
@@ -22,7 +22,7 @@ class range_operator_t : public thing_t<___ego___>
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym("strange::range_operator::extractor");
+			static symbol_a<> TYPE = sym("strange::list_operator::extractor");
 			return TYPE;
 		}
 
@@ -135,45 +135,45 @@ public:
 		auto end = list.end_();
 		if (it == end)
 		{
-			throw dis(__FILE__, __LINE__, "strange::range_operator::create passed empty list");
+			throw dis(__FILE__, __LINE__, "strange::list_operator::create passed empty list");
 		}
 		any_a<> the_list = *it;
 		if (!check<list_a<>>(the_list))
 		{
-			throw dis(__FILE__, __LINE__, "strange::range_operator::create passed non-list");
+			throw dis(__FILE__, __LINE__, "strange::list_operator::create passed non-list");
 		}
 		if (++it == end)
 		{
-			throw dis(__FILE__, __LINE__, "strange::range_operator::create passed short list");
+			throw dis(__FILE__, __LINE__, "strange::list_operator::create passed short list");
 		}
 		any_a<> thing_ref = fast_dup(*it);
 		if (++it == end)
 		{
-			throw dis(__FILE__, __LINE__, "strange::range_operator::create passed short list");
+			throw dis(__FILE__, __LINE__, "strange::list_operator::create passed short list");
 		}
 		any_a<> list_ref = fast_dup(*it);
 		if (!check<list_a<>>(list_ref))
 		{
-			throw dis(__FILE__, __LINE__, "strange::range_operator::create passed non-list list ref");
+			throw dis(__FILE__, __LINE__, "strange::list_operator::create passed non-list list ref");
 		}
 		return create_(fast<list_a<>>(the_list), thing_ref, fast_dup<list_a<>>(list_ref));
 	}
 
 	static inline list_a<> create_(list_a<> const& list, any_a<>& thing_ref, list_a<> const& list_ref)
 	{
-		return list_a<>::create<range_operator_t<>>(list, thing_ref, list_ref);
+		return list_a<>::create<list_operator_t<>>(list, thing_ref, list_ref);
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym("strange::range_operator");
+		static symbol_a<> TYPE = sym("strange::list_operator");
 		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update(sym("strange::range_operator::create"), native_function::create(&range_operator_t<>::create__));
+		shoal.update(sym("strange::list_operator::create"), native_function::create(&list_operator_t<>::create__));
 	}
 
 	// list
@@ -215,7 +215,7 @@ protected:
 
 	friend class any_a<>;
 
-	inline range_operator_t(list_a<> const& list, any_a<>& thing_ref, list_a<> const& list_ref)
+	inline list_operator_t(list_a<> const& list, any_a<>& thing_ref, list_a<> const& list_ref)
 		: thing_t<___ego___>{}
 		, _list(list)
 		, _thing_ref(thing_ref)
@@ -224,28 +224,31 @@ protected:
 
 private:
 	static bool const ___share___;
-	friend class ___range_operator_t_share___;
+	friend class ___list_operator_t_share___;
 };
 
 template <typename ___ego___>
-bool const range_operator_t<___ego___>::___share___ = []()
+bool const list_operator_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
-	range_operator_t<___ego___>::share(shoal);
+	list_operator_t<___ego___>::share(shoal);
 	return shoal;
 }();
 
-class ___range_operator_t_share___
+class ___list_operator_t_share___
 {
 	static inline bool ___share___()
 	{
-		return range_operator_t<>::___share___;
+		return list_operator_t<>::___share___;
 	}
 };
 
-inline list_a<> range_operator_create(list_a<> const& list, any_a<>& thing_ref, list_a<> const& list_ref)
+namespace list_operator
 {
-	return range_operator_t<>::create_(list, thing_ref, list_ref);
+	inline list_a<> create(list_a<> const& list, any_a<>& thing_ref, list_a<> const& list_ref)
+	{
+		return list_operator_t<>::create_(list, thing_ref, list_ref);
+	}
 }
 
 } // namespace strange

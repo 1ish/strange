@@ -137,7 +137,7 @@ template <typename _element = any_a<>, typename ___ego___ = range_a<_element>>
 class range_t;
 
 template <typename ___ego___ = list_a<>>
-class range_operator_t;
+class list_operator_t;
 
 template <typename _element = any_a<>, bool _concurrent_ = false, typename ___ego___ = flock_a<_element>>
 class flock_t;
@@ -337,14 +337,20 @@ namespace list
 }
 
 // range
-template <typename _element = any_a<>>
-inline range_a<_element> range_create();
+namespace range
+{
+	template <typename _element = any_a<>>
+	inline range_a<_element> create();
 
-template <typename _element = any_a<>>
-inline range_a<_element> range_create(forward_extractor_a<_element> const& begin, forward_extractor_a<_element> const& end);
+	template <typename _element = any_a<>>
+	inline range_a<_element> create(forward_extractor_a<_element> const& begin, forward_extractor_a<_element> const& end);
+}
 
-// range operator
-inline list_a<> range_operator_create(list_a<> const& list, any_a<>& thing_ref, list_a<> const& list_ref);
+// list operator
+namespace list_operator
+{
+	inline list_a<> create(list_a<> const& list, any_a<>& thing_ref, list_a<> const& list_ref);
+}
 
 // flock
 template <typename _element = any_a<>, bool _concurrent_ = false>

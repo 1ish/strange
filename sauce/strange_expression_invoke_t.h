@@ -64,7 +64,7 @@ public:
 	inline any_a<> operate(any_a<>& thing, list_a<> const& list) const
 	{
 		auto expression_thing = _expression.operate(thing, list);
-		return thing_t<>::invoke_member(expression_thing, _member, range_operator_t<>::create_(_list, thing, list));
+		return thing_t<>::invoke_member(expression_thing, _member, list_operator::create(_list, thing, list));
 	}
 
 	// expression

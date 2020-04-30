@@ -40,7 +40,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, list_a<> const& list) const
 	{
-		return flock_t<>::create__(range_operator_t<>::create_(_terms, thing, list));
+		return flock_t<>::create__(list_operator::create(_terms, thing, list));
 	}
 
 	// expression

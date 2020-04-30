@@ -66,7 +66,7 @@ public:
 		{
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate::operate ^ not found");
 		}
-		return any_c<>::intimate(it->second, _member, range_operator_t<>::create_(_arguments, thing, list));
+		return any_c<>::intimate(it->second, _member, list_operator::create(_arguments, thing, list));
 	}
 
 	// expression

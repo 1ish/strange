@@ -114,18 +114,21 @@ class ___range_t_share___
 	}
 };
 
-// template <typename _element = any_a<>>
-template <typename _element>
-inline range_a<_element> range_create()
+namespace range
 {
-	return range_t<_element>::create_();
-}
+	// template <typename _element = any_a<>>
+	template <typename _element>
+	inline range_a<_element> create()
+	{
+		return range_t<_element>::create_();
+	}
 
-// template <typename _element = any_a<>>
-template <typename _element>
-inline range_a<_element> range_create(forward_extractor_a<_element> const& begin, forward_extractor_a<_element> const& end)
-{
-	return range_t<_element>::create_(begin, end);
+	// template <typename _element = any_a<>>
+	template <typename _element>
+	inline range_a<_element> create(forward_extractor_a<_element> const& begin, forward_extractor_a<_element> const& end)
+	{
+		return range_t<_element>::create_(begin, end);
+	}
 }
 
 } // namespace strange

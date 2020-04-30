@@ -36,7 +36,7 @@ public:
 	inline any_a<> operate(any_a<>& thing, list_a<> const& list) const
 	{
 		auto thing_val = any_a<>::val(thing); // new block scope
-		auto result_range = range_operator_t<>::create_(_terms, thing_val, list);
+		auto result_range = list_operator::create(_terms, thing_val, list);
 		auto it = result_range.begin_();
 		auto end = result_range.end_();
 		auto result = no();
