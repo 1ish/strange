@@ -1057,7 +1057,7 @@ protected:
 		// aspects
 		if (count)
 		{
-			river.write_string(", flock_vals(");
+			river.write_string(", flock::create_vals(");
 			bool first = true;
 			for (auto const& dimension_name : _dimension_names.extract_vector())
 			{
@@ -2266,7 +2266,7 @@ protected:
 		{
 			return;
 		}
-		river.write_string(", flock_vals(");
+		river.write_string(", flock::create_vals(");
 		bool first = true;
 		for (auto const& dimension_kind : dimension_kinds.extract_vector())
 		{

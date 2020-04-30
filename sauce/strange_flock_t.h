@@ -921,35 +921,38 @@ class ___flock_t_share___
 	}
 };
 
-// template <typename _element = any_a<>, bool _concurrent_ = false>
-template <typename _element, bool _concurrent_>
-inline flock_a<_element> flock_create()
+namespace flock
 {
-	return flock_t<_element, _concurrent_>::create_();
-}
+	// template <typename _element = any_a<>, bool _concurrent_ = false>
+	template <typename _element, bool _concurrent_>
+	inline flock_a<_element> create()
+	{
+		return flock_t<_element, _concurrent_>::create_();
+	}
 
-template <typename F>
-inline flock_a<> flock_create(F&& init)
-{
-	return flock_t<>::create(std::forward<F>(init));
-}
+	template <typename F>
+	inline flock_a<> create(F&& init)
+	{
+		return flock_t<>::create(std::forward<F>(init));
+	}
 
-template <typename... Args>
-inline flock_a<> flock_vals(Args&&... args)
-{
-	return flock_t<>::create_(std::forward<Args>(args)...);
-}
+	template <typename... Args>
+	inline flock_a<> create_vals(Args&&... args)
+	{
+		return flock_t<>::create_(std::forward<Args>(args)...);
+	}
 
-template <typename... Args>
-inline flock_a<> flock_refs(Args&&... args)
-{
-	return flock_t<>::create_refs_(std::forward<Args>(args)...);
-}
+	template <typename... Args>
+	inline flock_a<> create_refs(Args&&... args)
+	{
+		return flock_t<>::create_refs_(std::forward<Args>(args)...);
+	}
 
-template <typename... Args>
-inline flock_a<> flock_dups(Args&&... args)
-{
-	return flock_t<>::create_dups_(std::forward<Args>(args)...);
+	template <typename... Args>
+	inline flock_a<> create_dups(Args&&... args)
+	{
+		return flock_t<>::create_dups_(std::forward<Args>(args)...);
+	}
 }
 
 } // namespace strange

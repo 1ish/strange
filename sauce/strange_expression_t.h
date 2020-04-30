@@ -94,7 +94,7 @@ public:
 	static inline expression_a<> recreate_expression(expression_a<> const& expression)
 	{
 		std_vector<any_a<>> const& vector = expression.terms_().extract_vector();
-		auto recreated_terms = flock_create();
+		auto recreated_terms = flock::create();
 		std_vector<any_a<>>& recreated_vector = recreated_terms.mutate_vector();
 		recreated_vector.reserve(vector.size());
 		for (auto const& term : vector)

@@ -77,7 +77,7 @@ inline _primitive & number_data_a<_primitive>::___number_data_a_handle___<___TTT
 template <typename _primitive>
 inline cat_a<> number_data_a<_primitive>::___cat___()
 {
-	static cat_a<> CAT = cat_create(1, "strange::number_data", flock_vals(kind_create(2, "")));
+	static cat_a<> CAT = cat_create(1, "strange::number_data", flock::create_vals(kind_create(2, "")));
 	return CAT;
 }
 
@@ -96,7 +96,7 @@ inline unordered_herd_a<> number_data_a<_primitive>::___cats___()
 template <typename _primitive>
 inline kind_a<> number_data_a<_primitive>::___kind___()
 {
-	static kind_a<> KIND = kind_from_cat(___cat___(), flock_vals(kind_of<_primitive>()));
+	static kind_a<> KIND = kind_from_cat(___cat___(), flock::create_vals(kind_of<_primitive>()));
 	return KIND;
 }
 

@@ -91,7 +91,7 @@ public:
 		return VAL;
 	}
 
-	static inline kind_a<> create_(number_data_a<int64_t> const& order, symbol_a<> const& name = sym(""), flock_a<> const& dimensions = flock_create(), flock_a<> const& aspects = flock_create(), flock_a<> const& parameters = flock_create(), symbol_a<> const& result = cat_t<___ego___>::any_sym(), any_a<> const& fixed = no(), any_a<> const& reference = no(), any_a<> const& optional = no())
+	static inline kind_a<> create_(number_data_a<int64_t> const& order, symbol_a<> const& name = sym(""), flock_a<> const& dimensions = flock::create(), flock_a<> const& aspects = flock::create(), flock_a<> const& parameters = flock::create(), symbol_a<> const& result = cat_t<___ego___>::any_sym(), any_a<> const& fixed = no(), any_a<> const& reference = no(), any_a<> const& optional = no())
 	{
 		if (name.is("strange::any"))
 		{
@@ -100,7 +100,7 @@ public:
 		return kind_a<>::create<kind_t<>>(order.extract_primitive(), name, dimensions, aspects, parameters, result, fixed, reference, optional);
 	}
 
-	static inline kind_a<> create(int64_t order, std_string const& name = "", flock_a<> const& dimensions = flock_create(), flock_a<> const& aspects = flock_create(), flock_a<> const& parameters = flock_create(), symbol_a<> const& result = cat_t<___ego___>::any_sym(), bool fixed = false, bool reference = false, bool optional = false)
+	static inline kind_a<> create(int64_t order, std_string const& name = "", flock_a<> const& dimensions = flock::create(), flock_a<> const& aspects = flock::create(), flock_a<> const& parameters = flock::create(), symbol_a<> const& result = cat_t<___ego___>::any_sym(), bool fixed = false, bool reference = false, bool optional = false)
 	{
 		if (name == "strange::any")
 		{

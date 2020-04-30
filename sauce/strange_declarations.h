@@ -353,20 +353,23 @@ namespace list_operator
 }
 
 // flock
-template <typename _element = any_a<>, bool _concurrent_ = false>
-inline flock_a<_element> flock_create();
+namespace flock
+{
+	template <typename _element = any_a<>, bool _concurrent_ = false>
+	inline flock_a<_element> create();
 
-template <typename F>
-inline flock_a<> flock_create(F&& init);
+	template <typename F>
+	inline flock_a<> create(F&& init);
 
-template <typename... Args>
-inline flock_a<> flock_vals(Args&&... args);
+	template <typename... Args>
+	inline flock_a<> create_vals(Args&&... args);
 
-template <typename... Args>
-inline flock_a<> flock_refs(Args&&... args);
+	template <typename... Args>
+	inline flock_a<> create_refs(Args&&... args);
 
-template <typename... Args>
-inline flock_a<> flock_dups(Args&&... args);
+	template <typename... Args>
+	inline flock_a<> create_dups(Args&&... args);
+}
 
 // lake
 inline lake_a<int8_t> lake_from_string(std_string const& str);

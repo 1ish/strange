@@ -125,7 +125,7 @@ inline random_access_extractor_a< _element > random_access_extractor_a<_element>
 template <typename _element>
 inline cat_a<> random_access_extractor_a<_element>::___cat___()
 {
-	static cat_a<> CAT = cat_create(1, "strange::random_access_extractor", flock_vals(kind_create(2, "")));
+	static cat_a<> CAT = cat_create(1, "strange::random_access_extractor", flock::create_vals(kind_create(2, "")));
 	return CAT;
 }
 
@@ -144,7 +144,7 @@ inline unordered_herd_a<> random_access_extractor_a<_element>::___cats___()
 template <typename _element>
 inline kind_a<> random_access_extractor_a<_element>::___kind___()
 {
-	static kind_a<> KIND = kind_from_cat(___cat___(), flock_vals(kind_of<_element>()));
+	static kind_a<> KIND = kind_from_cat(___cat___(), flock::create_vals(kind_of<_element>()));
 	return KIND;
 }
 

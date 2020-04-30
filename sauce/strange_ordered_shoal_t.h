@@ -113,7 +113,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 		inline mutator_t(F&& it)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
-			, _pair{ flock_create() }
+			, _pair{ flock::create() }
 		{}
 	};
 
@@ -224,7 +224,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _ordered_shoal{ ordered_shoal }
-			, _pair{ flock_create() }
+			, _pair{ flock::create() }
 		{}
 	};
 
@@ -542,7 +542,7 @@ public:
 		{
 			throw dis(__FILE__, __LINE__, "strange::ordered_shoal::pop_front called on empty ordered_shoal");
 		}
-		auto result = flock_vals(it->first, it->second);
+		auto result = flock::create_vals(it->first, it->second);
 		_map.erase(it);
 		return result;
 	}
@@ -567,7 +567,7 @@ public:
 		{
 			throw dis(__FILE__, __LINE__, "strange::ordered_shoal::pop_back called on empty ordered_shoal");
 		}
-		auto result = flock_vals(it->first, it->second);
+		auto result = flock::create_vals(it->first, it->second);
 		_map.erase(it);
 		return result;
 	}

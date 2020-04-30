@@ -37,7 +37,7 @@ protected:
 	inline operation_t(bool pure = false)
 		: thing_t<___ego___>{}
 		, _pure(pure)
-		, _names(flock_create())
+		, _names(flock::create())
 	{}
 
 	inline operation_t(bool pure, flock_a<> const& names)
@@ -48,7 +48,7 @@ protected:
 
 	static inline std_pair<kind_a<>, flock_a<>> kind_names_params(flock_a<> const& params)
 	{
-		std_pair<kind_a<>, flock_a<>> kind_names(kind_create(), flock_create());
+		std_pair<kind_a<>, flock_a<>> kind_names(kind_create(), flock::create());
 		auto it = params.extract_begin_();
 		if (it == params.extract_end_())
 		{
@@ -60,7 +60,7 @@ protected:
 			throw dis(__FILE__, __LINE__, "strange::operation::kind_names_params passed non-kind result");
 		}
 		auto kind_result = fast<kind_a<>>(kind);
-		auto kind_params = flock_create();
+		auto kind_params = flock::create();
 		while (++it != params.extract_end_())
 		{
 			auto name = *it;
@@ -81,7 +81,7 @@ protected:
 				break;
 			}
 		}
-		kind_names.first = kind_create(1, "", flock_create(), flock_create(), kind_params, kind_result);
+		kind_names.first = kind_create(1, "", flock::create(), flock::create(), kind_params, kind_result);
 		return kind_names;
 	}
 

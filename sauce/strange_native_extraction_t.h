@@ -17,7 +17,7 @@ public:
 		v.reserve(sizeof...(Args));
 		variadic_u<>::variadic(v, std::forward<Args>(args)...);
 		return operation_a<>::create<native_extraction_t<_abstraction_>>(ptr,
-			operation_t<___ego___>::kind_names_params(flock_create(std::move(v))));
+			operation_t<___ego___>::kind_names_params(flock::create(std::move(v))));
 	}
 
 	// reflection
