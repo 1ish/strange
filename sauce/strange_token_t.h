@@ -166,7 +166,7 @@ public:
 
 	static inline token_a<> create_lake_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol, number_data_a<int64_t> const& = number_int_64_t<>::create_())
 	{
-		return create_(filename, line, position, sym("lake"), symbol, lake_from_string(symbol.to_string()));
+		return create_(filename, line, position, sym("lake"), symbol, lake::from_string(symbol.to_string()));
 	}
 
 	static inline token_a<> create_lake(std_string const& filename, int64_t line, int64_t position, std_string const& symbol)

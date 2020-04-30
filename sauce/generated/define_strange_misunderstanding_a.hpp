@@ -256,7 +256,7 @@ public:
 	}
 
 	inline std_string to_string() const
-	{ return lake_to_string(to_lake_()); }
+	{ return lake::to_string(to_lake_()); }
 
 	inline any_a<> add__(list_a<> const& arguments) const
 	{

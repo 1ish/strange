@@ -633,7 +633,7 @@ public:
 	}
 
 	inline std_string to_string()
-	{ return lake_to_string(to_lake_()); }
+	{ return lake::to_string(to_lake_()); }
 
 	inline any_a<> get_char__(list_a<> const& arguments)
 	{
@@ -811,7 +811,7 @@ public:
 	{ return read_(num(count)).extract_vector(); }
 
 	inline std_string read_string(int64_t count )
-	{ return lake_to_string(read_(num(count))); }
+	{ return lake::to_string(read_(num(count))); }
 
 	inline any_a<> tellg__(list_a<> const& arguments) const
 	{
@@ -986,10 +986,10 @@ public:
 	}
 
 	inline void write(std_vector < int8_t > const & lake )
-	{ write_(lake_int8_create(lake)); }
+	{ write_(lake::create<int8_t>(lake)); }
 
 	inline void write_string(std_string const & str )
-	{ write_(lake_from_string(str)); }
+	{ write_(lake::from_string(str)); }
 
 	inline any_a<> tellp__(list_a<> const& arguments) const
 	{
@@ -1339,7 +1339,7 @@ public:
 	}
 
 	inline std_string filename() const
-	{ return lake_to_string(filename_()); }
+	{ return lake::to_string(filename_()); }
 
 	inline any_a<> close__(list_a<> const& arguments)
 	{

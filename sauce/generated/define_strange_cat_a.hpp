@@ -445,7 +445,7 @@ public:
 	}
 
 	inline std_string code() const
-	{ return lake_to_string(code_()); }
+	{ return lake::to_string(code_()); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 

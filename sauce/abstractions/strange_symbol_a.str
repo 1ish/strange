@@ -13,7 +13,7 @@ false &&
 					'operator>=' : "bool (symbol_a<> const& symbol) const { return greater_or_equal_(symbol); }",
 
 					to_lake_ :# (<lake_int8>),
-					to_string : "std_string () const { return lake_to_string(to_lake_()); }",
+					to_string : "std_string () const { return lake::to_string(to_lake_()); }",
 					to_c_string : "char const* () const { return to_string().c_str(); }",
 
 					first_character : "int8_t () const { return to_lake_().extract_vector()[0]; }",

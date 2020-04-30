@@ -319,7 +319,7 @@ public:
 	}
 
 	inline std_string to_string() const
-	{ return lake_to_string(to_lake_()); }
+	{ return lake::to_string(to_lake_()); }
 
 	inline char const * to_c_string() const
 	{ return to_string().c_str(); }

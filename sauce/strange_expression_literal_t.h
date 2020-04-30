@@ -127,7 +127,7 @@ public:
 		}
 		else if (_thing.type_() == lake_int_8_t<>::type_())
 		{
-			river.write_string(" \"" + lake_to_string(fast<lake_a<int8_t>>(_thing)) + "\" ");
+			river.write_string(" \"" + lake::to_string(fast<lake_a<int8_t>>(_thing)) + "\" ");
 		}
 		else if (expression_t<___ego___>::_token.literal_() == _thing)
 		{
@@ -213,7 +213,7 @@ public:
 		}
 		else if (_thing.type_() == lake_int_8_t<>::type_())
 		{
-			river.write_string(" strange::lake_from_string(\"" + lake_to_string(fast<lake_a<int8_t>>(_thing)) + "\") ");
+			river.write_string(" strange::lake::from_string(\"" + lake::to_string(fast<lake_a<int8_t>>(_thing)) + "\") ");
 		}
 		else if (_thing.type_() == number_int_8_t<>::type_())
 		{

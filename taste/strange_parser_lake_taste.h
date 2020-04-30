@@ -52,7 +52,7 @@ TEST_CASE("strange parse and evaluate lake", "[parse_t]")
 		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::create("\"Lake Atitlan\"")));
 		auto result = expression.evaluate_();
 		REQUIRE(check<lake_a<int8_t>>(result));
-		REQUIRE(lake_to_string(cast<lake_a<int8_t>>(result)) == "Lake Atitlan");
+		REQUIRE(lake::to_string(cast<lake_a<int8_t>>(result)) == "Lake Atitlan");
 	}
 	catch (misunderstanding_a<>& m)
 	{

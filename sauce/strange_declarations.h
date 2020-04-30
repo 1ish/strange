@@ -372,11 +372,14 @@ namespace flock
 }
 
 // lake
-inline lake_a<int8_t> lake_from_string(std_string const& str);
-inline std_string lake_to_string(lake_a<int8_t> const& lake);
+namespace lake
+{
+	inline lake_a<int8_t> from_string(std_string const& str);
+	inline std_string to_string(lake_a<int8_t> const& lake);
 
-template <typename F>
-inline lake_a<int8_t> lake_int8_create(F&& init);
+	template <typename _primitive, typename F>
+	inline lake_a<_primitive> create(F&& init);
+}
 
 // ordered herd
 template <typename _element = any_a<>, bool _concurrent_ = false>

@@ -17,14 +17,14 @@ false &&
 					reopen : "bool ()",
 
 					from_json_ := (lake :<lake_int8>#, <container>),
-					from_json : "void (std_string const& str) { from_json_(lake_from_string(str)); }",
+					from_json : "void (std_string const& str) { from_json_(lake::from_string(str)); }",
 					to_json_ :# (<lake_int8>),
-					to_json : "std_string () const { return lake_to_string(to_json_()); }",
+					to_json : "std_string () const { return lake::to_string(to_json_()); }",
 
 					from_binary_ := (lake :<lake_int8>#, <container>),
-					from_binary : "void (std_string const& str) { from_binary_(lake_from_string(str)); }",
+					from_binary : "void (std_string const& str) { from_binary_(lake::from_string(str)); }",
 					to_binary_ :# (<lake_int8>),
-					to_binary : "std_string () const { return lake_to_string(to_binary_()); }",
+					to_binary : "std_string () const { return lake::to_string(to_binary_()); }",
 
 					from_null_ := (<container>),
 					from_null : "void ()",

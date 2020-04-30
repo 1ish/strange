@@ -709,7 +709,7 @@ protected:
 				auto const value = value_expression.terms_().at_index(0);
 				if (check<lake_a<int8_t>>(value))
 				{
-					(this->*define_native_member_p)(root, class_name, name.to_string(), lake_to_string(fast<lake_a<int8_t>>(value)), version, river);
+					(this->*define_native_member_p)(root, class_name, name.to_string(), lake::to_string(fast<lake_a<int8_t>>(value)), version, river);
 				}
 			}
 			else

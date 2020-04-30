@@ -894,7 +894,7 @@ public:
 	}
 
 	inline void from_json(std_string const & str )
-	{ from_json_(lake_from_string(str)); }
+	{ from_json_(lake::from_string(str)); }
 
 	inline any_a<> to_json__(list_a<> const& arguments) const
 	{
@@ -919,7 +919,7 @@ public:
 	}
 
 	inline std_string to_json() const
-	{ return lake_to_string(to_json_()); }
+	{ return lake::to_string(to_json_()); }
 
 	inline any_a<> from_binary__(list_a<> const& arguments)
 	{
@@ -944,7 +944,7 @@ public:
 	}
 
 	inline void from_binary(std_string const & str )
-	{ from_binary_(lake_from_string(str)); }
+	{ from_binary_(lake::from_string(str)); }
 
 	inline any_a<> to_binary__(list_a<> const& arguments) const
 	{
@@ -969,7 +969,7 @@ public:
 	}
 
 	inline std_string to_binary() const
-	{ return lake_to_string(to_binary_()); }
+	{ return lake::to_string(to_binary_()); }
 
 	inline any_a<> from_null__(list_a<> const& arguments)
 	{

@@ -171,7 +171,7 @@ public:
 
 	inline lake_a<int8_t> code_() const
 	{
-		return lake_from_string(code());
+		return lake::from_string(code());
 	}
 
 	inline std_string code() const

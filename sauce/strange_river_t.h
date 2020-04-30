@@ -163,7 +163,7 @@ public:
 
 	static inline river_a<> file_(lake_a<int8_t> const& name, any_a<> const& in = yes(), any_a<> const& out = no(), any_a<> const& trunc = no())
 	{
-		return file(lake_to_string(name));
+		return file(lake::to_string(name));
 	}
 
 	static inline river_a<> file(std_string const& name, bool in = true, bool out = false, bool trunc = false)
@@ -746,7 +746,7 @@ public:
 
 	inline lake_a<int8_t> filename_() const
 	{
-		return lake_from_string(_filename);
+		return lake::from_string(_filename);
 	}
 
 	inline std_string filename() const

@@ -68,7 +68,7 @@ public:
 	// misunderstanding
 	inline lake_a<int8_t> to_lake_() const
 	{
-		return lake_from_string(_string);
+		return lake::from_string(_string);
 	}
 
 	inline std_string to_string() const

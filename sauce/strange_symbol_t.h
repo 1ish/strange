@@ -32,7 +32,7 @@ public:
 
 	static inline symbol_a<> create_(lake_a<int8_t> const& lake)
 	{
-		return symbol_a<>::create<symbol_t<>>(lake_to_string(lake));
+		return symbol_a<>::create<symbol_t<>>(lake::to_string(lake));
 	}
 
 	template <typename F>
@@ -135,7 +135,7 @@ public:
 	// symbol
 	inline lake_a<int8_t> to_lake_() const
 	{
-		return lake_from_string(_string);
+		return lake::from_string(_string);
 	}
 
 	inline std_string to_string() const

@@ -1032,21 +1032,24 @@ class ___lake_t_share___
 	}
 };
 
-inline lake_a<int8_t> lake_from_string(std_string const& str)
+namespace lake
 {
-	return lake_int_8_t<>::create(lake_int_8_t<>::std_vector_primitive(str.cbegin(), str.cend()));
-}
+	inline lake_a<int8_t> from_string(std_string const& str)
+	{
+		return lake_int_8_t<>::create(lake_int_8_t<>::std_vector_primitive(str.cbegin(), str.cend()));
+	}
 
-inline std_string lake_to_string(lake_a<int8_t> const& lake)
-{
-	auto const& v = lake.extract_vector();
-	return std_string(v.cbegin(), v.cend());
-}
+	inline std_string to_string(lake_a<int8_t> const& lake)
+	{
+		auto const& v = lake.extract_vector();
+		return std_string(v.cbegin(), v.cend());
+	}
 
-template <typename F>
-inline lake_a<int8_t> lake_int8_create(F&& init)
-{
-	return lake_int_8_t<>::create(std::forward<F>(init));
+	template <typename _primitive, typename F>
+	inline lake_a<_primitive> create(F&& init)
+	{
+		return lake_t<_primitive>::create(std::forward<F>(init));
+	}
 }
 
 } // namespace strange

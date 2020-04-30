@@ -1076,7 +1076,7 @@ public:
 
 	inline container_a<> from_json_(lake_int8_a<> const& lake)
 	{
-		from_json(lake_to_string(lake));
+		from_json(lake::to_string(lake));
 		return thing_t<___ego___>::me_();
 	}
 
@@ -1099,7 +1099,7 @@ public:
 
 	inline lake_int8_a<> to_json_() const
 	{
-		return lake_from_string(to_json());
+		return lake::from_string(to_json());
 	}
 
 	inline std_string to_json() const
@@ -1149,7 +1149,7 @@ public:
 
 	inline lake_int8_a<> to_binary_() const
 	{
-		return lake_from_string(to_binary());
+		return lake::from_string(to_binary());
 	}
 
 	inline std_string to_binary() const
