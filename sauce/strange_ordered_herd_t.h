@@ -627,29 +627,32 @@ class ___ordered_herd_t_share___
 	}
 };
 
-// template <typename _element = any_a<>, bool _concurrent_ = false>
-template <typename _element, bool _concurrent_>
-inline ordered_herd_a<_element> ordered_herd_create()
+namespace ordered_herd
 {
-	return ordered_herd_t<_element, _concurrent_>::create_();
-}
+	// template <typename _element = any_a<>, bool _concurrent_ = false>
+	template <typename _element, bool _concurrent_>
+	inline ordered_herd_a<_element> create()
+	{
+		return ordered_herd_t<_element, _concurrent_>::create_();
+	}
 
-template <typename... Args>
-inline ordered_herd_a<> ordered_herd_vals(Args&&... args)
-{
-	return ordered_herd_t<>::create_(std::forward<Args>(args)...);
-}
+	template <typename... Args>
+	inline ordered_herd_a<> create_vals(Args&&... args)
+	{
+		return ordered_herd_t<>::create_(std::forward<Args>(args)...);
+	}
 
-template <typename... Args>
-inline ordered_herd_a<> ordered_herd_refs(Args&&... args)
-{
-	return ordered_herd_t<>::create_refs_(std::forward<Args>(args)...);
-}
+	template <typename... Args>
+	inline ordered_herd_a<> create_refs(Args&&... args)
+	{
+		return ordered_herd_t<>::create_refs_(std::forward<Args>(args)...);
+	}
 
-template <typename... Args>
-inline ordered_herd_a<> ordered_herd_dups(Args&&... args)
-{
-	return ordered_herd_t<>::create_dups_(std::forward<Args>(args)...);
+	template <typename... Args>
+	inline ordered_herd_a<> create_dups(Args&&... args)
+	{
+		return ordered_herd_t<>::create_dups_(std::forward<Args>(args)...);
+	}
 }
 
 } // namespace strange

@@ -382,17 +382,20 @@ namespace lake
 }
 
 // ordered herd
-template <typename _element = any_a<>, bool _concurrent_ = false>
-inline ordered_herd_a<_element> ordered_herd_create();
+namespace ordered_herd
+{
+	template <typename _element = any_a<>, bool _concurrent_ = false>
+	inline ordered_herd_a<_element> create();
 
-template <typename... Args>
-inline ordered_herd_a<> ordered_herd_vals(Args&&... args);
+	template <typename... Args>
+	inline ordered_herd_a<> create_vals(Args&&... args);
 
-template <typename... Args>
-inline ordered_herd_a<> ordered_herd_refs(Args&&... args);
+	template <typename... Args>
+	inline ordered_herd_a<> create_refs(Args&&... args);
 
-template <typename... Args>
-inline ordered_herd_a<> ordered_herd_dups(Args&&... args);
+	template <typename... Args>
+	inline ordered_herd_a<> create_dups(Args&&... args);
+}
 
 // ordered shoal
 template <typename _key = any_a<>, typename _value = any_a<>, bool _concurrent_ = false>
