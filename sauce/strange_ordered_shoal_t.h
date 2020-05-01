@@ -759,17 +759,20 @@ class ___ordered_shoal_t_share___
 	}
 };
 
-// template <typename _key = any_a<>, typename _value = any_a<>, bool _concurrent_ = false>
-template <typename _key, typename _value, bool _concurrent_>
-inline ordered_shoal_a<_key, _value> ordered_shoal_create()
+namespace ordered_shoal
 {
-	return ordered_shoal_t<_key, _value, _concurrent_>::create_();
-}
+	// template <typename _key = any_a<>, typename _value = any_a<>, bool _concurrent_ = false>
+	template <typename _key, typename _value, bool _concurrent_>
+	inline ordered_shoal_a<_key, _value> create()
+	{
+		return ordered_shoal_t<_key, _value, _concurrent_>::create_();
+	}
 
-template <typename... Args>
-inline ordered_shoal_a<> ordered_shoal_vals(Args&&... args)
-{
-	return ordered_shoal_t<>::create_(std::forward<Args>(args)...);
+	template <typename... Args>
+	inline ordered_shoal_a<> create_vals(Args&&... args)
+	{
+		return ordered_shoal_t<>::create_(std::forward<Args>(args)...);
+	}
 }
 
 } // namespace strange

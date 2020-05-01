@@ -182,7 +182,7 @@ class parcel_t : public thing_t<___ego___>
 		// forward extractor
 		inline _element_it get_() const
 		{
-			return parcel_create(*_it);
+			return parcel::create(*_it);
 		}
 
 		inline _element_it const* operator->() const
@@ -1951,17 +1951,20 @@ class ___parcel_t_share___
 	}
 };
 
-// template <bool _concurrent_ = false>
-template <bool _concurrent_>
-inline parcel_a<> parcel_create()
+namespace parcel
 {
-	return parcel_t<_concurrent_>::create_();
-}
+	// template <bool _concurrent_ = false>
+	template <bool _concurrent_>
+	inline parcel_a<> create()
+	{
+		return parcel_t<_concurrent_>::create_();
+	}
 
-template <typename F>
-inline parcel_a<> parcel_create(F&& init)
-{
-	return parcel_t<>::create(std::forward<F>(init));
+	template <typename F>
+	inline parcel_a<> create(F&& init)
+	{
+		return parcel_t<>::create(std::forward<F>(init));
+	}
 }
 
 } // namespace strange

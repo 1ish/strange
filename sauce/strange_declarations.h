@@ -398,18 +398,24 @@ namespace ordered_herd
 }
 
 // ordered shoal
-template <typename _key = any_a<>, typename _value = any_a<>, bool _concurrent_ = false>
-inline ordered_shoal_a<_key, _value> ordered_shoal_create();
+namespace ordered_shoal
+{
+	template <typename _key = any_a<>, typename _value = any_a<>, bool _concurrent_ = false>
+	inline ordered_shoal_a<_key, _value> create();
 
-template <typename... Args>
-inline ordered_shoal_a<> ordered_shoal_vals(Args&&... args);
+	template <typename... Args>
+	inline ordered_shoal_a<> create_vals(Args&&... args);
+}
 
 // parcel
-template <bool _concurrent_ = false>
-inline parcel_a<> parcel_create();
+namespace parcel
+{
+	template <bool _concurrent_ = false>
+	inline parcel_a<> create();
 
-template <typename F>
-inline parcel_a<> parcel_create(F&& init);
+	template <typename F>
+	inline parcel_a<> create(F&& init);
+}
 
 // squad
 template <typename _element = any_a<>, bool _concurrent_ = false>
