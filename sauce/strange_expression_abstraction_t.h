@@ -1031,7 +1031,7 @@ protected:
 			"\tstatic unordered_herd_a<> CATS = ");
 		if (root)
 		{
-			river.write_string("unordered_herd_vals(___cat___());\n");
+			river.write_string("unordered_herd::create_vals(___cat___());\n");
 		}
 		else
 		{
@@ -1091,7 +1091,7 @@ protected:
 			"\tstatic unordered_herd_a<> KINDS = ");
 		if (root)
 		{
-			river.write_string("unordered_herd_vals(___kind___());\n");
+			river.write_string("unordered_herd::create_vals(___kind___());\n");
 		}
 		else
 		{

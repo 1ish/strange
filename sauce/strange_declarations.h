@@ -418,21 +418,27 @@ namespace parcel
 }
 
 // squad
-template <typename _element = any_a<>, bool _concurrent_ = false>
-inline squad_a<_element> squad_create();
+namespace squad
+{
+	template <typename _element = any_a<>, bool _concurrent_ = false>
+	inline squad_a<_element> create();
+}
 
 // unordered herd
-template <typename _element = any_a<>, bool _concurrent_ = false>
-inline unordered_herd_a<_element> unordered_herd_create();
+namespace unordered_herd
+{
+	template <typename _element = any_a<>, bool _concurrent_ = false>
+	inline unordered_herd_a<_element> create();
 
-template <typename... Args>
-inline unordered_herd_a<> unordered_herd_vals(Args&&... args);
+	template <typename... Args>
+	inline unordered_herd_a<> create_vals(Args&&... args);
 
-template <typename... Args>
-inline unordered_herd_a<> unordered_herd_refs(Args&&... args);
+	template <typename... Args>
+	inline unordered_herd_a<> create_refs(Args&&... args);
 
-template <typename... Args>
-inline unordered_herd_a<> unordered_herd_dups(Args&&... args);
+	template <typename... Args>
+	inline unordered_herd_a<> create_dups(Args&&... args);
+}
 
 // unordered shoal
 template <typename _key = any_a<>, typename _value = any_a<>, bool _concurrent_ = false, typename ___unordered_shoal_a___ = unordered_shoal_a<_key, _value>>

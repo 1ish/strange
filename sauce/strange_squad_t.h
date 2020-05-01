@@ -928,11 +928,14 @@ class ___squad_t_share___
 	}
 };
 
-// template <typename _element = any_a<>, bool _concurrent_ = false>
-template <typename _element, bool _concurrent_>
-inline squad_a<_element> squad_create()
+namespace squad
 {
-	return squad_t<_element, _concurrent_>::create_();
+	// template <typename _element = any_a<>, bool _concurrent_ = false>
+	template <typename _element, bool _concurrent_>
+	inline squad_a<_element> create()
+	{
+		return squad_t<_element, _concurrent_>::create_();
+	}
 }
 
 } // namespace strange

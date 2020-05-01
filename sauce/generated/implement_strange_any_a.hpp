@@ -494,7 +494,7 @@ inline cat_a<> any_a<_1>::___cat___()
 template <typename _1>
 inline unordered_herd_a<> any_a<_1>::___cats___()
 {
-	static unordered_herd_a<> CATS = unordered_herd_vals(___cat___());
+	static unordered_herd_a<> CATS = unordered_herd::create_vals(___cat___());
 	return CATS;
 }
 
@@ -508,7 +508,7 @@ inline kind_a<> any_a<_1>::___kind___()
 template <typename _1>
 inline unordered_herd_a<> any_a<_1>::___kinds___()
 {
-	static unordered_herd_a<> KINDS = unordered_herd_vals(___kind___());
+	static unordered_herd_a<> KINDS = unordered_herd::create_vals(___kind___());
 	return KINDS;
 }
 
