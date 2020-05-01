@@ -272,7 +272,7 @@ namespace kind
 	}
 
 	//inline kind_a<> create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false);
-	inline kind_a<> kind::create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed, bool reference, bool optional)
+	inline kind_a<> create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed, bool reference, bool optional)
 	{
 		return kind_t<>::create(order, name, dimensions, aspects, parameters, result, fixed, reference, optional);
 	}
