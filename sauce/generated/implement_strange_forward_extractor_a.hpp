@@ -91,7 +91,7 @@ inline forward_extractor_a< any_a<> > forward_extractor_a<_element>::___forward_
 template <typename _element>
 inline cat_a<> forward_extractor_a<_element>::___cat___()
 {
-	static cat_a<> CAT = cat_create(1, "strange::forward_extractor", flock::create_vals(kind_create(2, "")));
+	static cat_a<> CAT = cat::create(1, "strange::forward_extractor", flock::create_vals(kind::create(2, "")));
 	return CAT;
 }
 
@@ -110,7 +110,7 @@ inline unordered_herd_a<> forward_extractor_a<_element>::___cats___()
 template <typename _element>
 inline kind_a<> forward_extractor_a<_element>::___kind___()
 {
-	static kind_a<> KIND = kind_from_cat(___cat___(), flock::create_vals(kind_of<_element>()));
+	static kind_a<> KIND = kind::from_cat(___cat___(), flock::create_vals(kind_of<_element>()));
 	return KIND;
 }
 

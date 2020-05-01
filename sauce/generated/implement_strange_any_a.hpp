@@ -487,7 +487,7 @@ inline any_a<> any_a<_1>::operation(std_string const& name) const
 template <typename _1>
 inline cat_a<> any_a<_1>::___cat___()
 {
-	static cat_a<> CAT = cat_create(1, "strange::any");
+	static cat_a<> CAT = cat::create(1, "strange::any");
 	return CAT;
 }
 
@@ -501,7 +501,7 @@ inline unordered_herd_a<> any_a<_1>::___cats___()
 template <typename _1>
 inline kind_a<> any_a<_1>::___kind___()
 {
-	static kind_a<> KIND = kind_from_cat(___cat___());
+	static kind_a<> KIND = kind::from_cat(___cat___());
 	return KIND;
 }
 

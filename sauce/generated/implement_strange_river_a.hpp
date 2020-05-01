@@ -902,7 +902,7 @@ inline bool river_a<_1>::___river_a_handle___<___TTT___, ___DHB___>::closed()
 template <typename _1>
 inline cat_a<> river_a<_1>::___cat___()
 {
-	static cat_a<> CAT = cat_create(1, "strange::river");
+	static cat_a<> CAT = cat::create(1, "strange::river");
 	return CAT;
 }
 
@@ -921,7 +921,7 @@ inline unordered_herd_a<> river_a<_1>::___cats___()
 template <typename _1>
 inline kind_a<> river_a<_1>::___kind___()
 {
-	static kind_a<> KIND = kind_from_cat(___cat___());
+	static kind_a<> KIND = kind::from_cat(___cat___());
 	return KIND;
 }
 

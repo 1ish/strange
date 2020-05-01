@@ -70,7 +70,7 @@ protected:
 		, _function{ ptr }
 		, _kind{ kind_names.first }
 		, _kinds{ operation_t<___ego___>::kinds(_kind) }
-		, _cat{ kind_to_cat(_kind) }
+		, _cat{ kind::to_cat(_kind) }
 		, _cats{ operation_t<___ego___>::cats(_cat) }
 	{}
 };

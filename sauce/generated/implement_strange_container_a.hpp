@@ -1234,7 +1234,7 @@ inline bidirectional_extractor_a< any_a<> > container_a<_1>::___container_a_hand
 template <typename _1>
 inline cat_a<> container_a<_1>::___cat___()
 {
-	static cat_a<> CAT = cat_create(1, "strange::container");
+	static cat_a<> CAT = cat::create(1, "strange::container");
 	return CAT;
 }
 
@@ -1253,7 +1253,7 @@ inline unordered_herd_a<> container_a<_1>::___cats___()
 template <typename _1>
 inline kind_a<> container_a<_1>::___kind___()
 {
-	static kind_a<> KIND = kind_from_cat(___cat___());
+	static kind_a<> KIND = kind::from_cat(___cat___());
 	return KIND;
 }
 

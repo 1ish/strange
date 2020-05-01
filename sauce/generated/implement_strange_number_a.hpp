@@ -764,7 +764,7 @@ inline bool number_a<_number_data_int64, _number_data_uint64, _number_data_doubl
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline cat_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___cat___()
 {
-	static cat_a<> CAT = cat_create(1, "strange::number");
+	static cat_a<> CAT = cat::create(1, "strange::number");
 	return CAT;
 }
 
@@ -783,7 +783,7 @@ inline unordered_herd_a<> number_a<_number_data_int64, _number_data_uint64, _num
 template <typename _number_data_int64, typename _number_data_uint64, typename _number_data_double>
 inline kind_a<> number_a<_number_data_int64, _number_data_uint64, _number_data_double>::___kind___()
 {
-	static kind_a<> KIND = kind_from_cat(___cat___());
+	static kind_a<> KIND = kind::from_cat(___cat___());
 	return KIND;
 }
 

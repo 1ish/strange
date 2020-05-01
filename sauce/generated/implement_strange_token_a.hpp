@@ -197,7 +197,7 @@ inline std_string token_a<_1>::___token_a_handle___<___TTT___, ___DHB___>::repor
 template <typename _1>
 inline cat_a<> token_a<_1>::___cat___()
 {
-	static cat_a<> CAT = cat_create(1, "strange::token");
+	static cat_a<> CAT = cat::create(1, "strange::token");
 	return CAT;
 }
 
@@ -216,7 +216,7 @@ inline unordered_herd_a<> token_a<_1>::___cats___()
 template <typename _1>
 inline kind_a<> token_a<_1>::___kind___()
 {
-	static kind_a<> KIND = kind_from_cat(___cat___());
+	static kind_a<> KIND = kind::from_cat(___cat___());
 	return KIND;
 }
 

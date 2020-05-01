@@ -48,7 +48,7 @@ protected:
 
 	static inline std_pair<kind_a<>, flock_a<>> kind_names_params(flock_a<> const& params)
 	{
-		std_pair<kind_a<>, flock_a<>> kind_names(kind_create(), flock::create());
+		std_pair<kind_a<>, flock_a<>> kind_names(kind::create(), flock::create());
 		auto it = params.extract_begin_();
 		if (it == params.extract_end_())
 		{
@@ -69,7 +69,7 @@ protected:
 				throw dis(__FILE__, __LINE__, "strange::operation::kind_names_params passed non-symbol name");
 			}
 			bool const end = (++it == params.extract_end_());
-			kind = end ? any_a<>::val(kind_create()) : *it;
+			kind = end ? any_a<>::val(kind::create()) : *it;
 			if (!end && !check<kind_a<>>(kind))
 			{
 				throw dis(__FILE__, __LINE__, "strange::operation::kind_names_params passed non-kind param");
@@ -81,7 +81,7 @@ protected:
 				break;
 			}
 		}
-		kind_names.first = kind_create(1, "", flock::create(), flock::create(), kind_params, kind_result);
+		kind_names.first = kind::create(1, "", flock::create(), flock::create(), kind_params, kind_result);
 		return kind_names;
 	}
 

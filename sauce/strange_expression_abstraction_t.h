@@ -999,7 +999,7 @@ protected:
 		_declare_and_define_template_(version, 0, river, false, false);
 		river.write_string("::___cat___()\n"
 			"{\n"
-			"\tstatic cat_a<> CAT = cat_create(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\"");
+			"\tstatic cat_a<> CAT = cat::create(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\"");
 		// dimensions
 		int64_t count = _dimension_kinds.size();
 		while (count)
@@ -1053,7 +1053,7 @@ protected:
 		_declare_and_define_template_(version, 0, river, false, false);
 		river.write_string("::___kind___()\n"
 			"{\n"
-			"\tstatic kind_a<> KIND = kind_from_cat(___cat___()");
+			"\tstatic kind_a<> KIND = kind::from_cat(___cat___()");
 		// aspects
 		if (count)
 		{
@@ -2261,7 +2261,7 @@ protected:
 
 	inline void _define_class_relfection_dimensions_(int64_t count, flock_a<> const& dimension_kinds, int64_t version, river_a<>& river) const
 	{
-		static kind_a<> ANY_KIND = kind_create();
+		static kind_a<> ANY_KIND = kind::create();
 		if (!count)
 		{
 			return;
@@ -2281,7 +2281,7 @@ protected:
 			if (check<kind_a<>>(dimension_kind))
 			{
 				auto const kind = fast<kind_a<>>(dimension_kind);
-				river.write_string("kind_create(" +
+				river.write_string("kind::create(" +
 					std_to_string(kind.order()) + ", \"" +
 					kind.name_().to_string() + "\"");
 				if (kind != ANY_KIND)

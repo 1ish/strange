@@ -113,7 +113,7 @@ inline std_map < _key , _value > & ordered_shoal_a<_key, _value>::___ordered_sho
 template <typename _key, typename _value>
 inline cat_a<> ordered_shoal_a<_key, _value>::___cat___()
 {
-	static cat_a<> CAT = cat_create(1, "strange::ordered_shoal");
+	static cat_a<> CAT = cat::create(1, "strange::ordered_shoal");
 	return CAT;
 }
 
@@ -132,7 +132,7 @@ inline unordered_herd_a<> ordered_shoal_a<_key, _value>::___cats___()
 template <typename _key, typename _value>
 inline kind_a<> ordered_shoal_a<_key, _value>::___kind___()
 {
-	static kind_a<> KIND = kind_from_cat(___cat___());
+	static kind_a<> KIND = kind::from_cat(___cat___());
 	return KIND;
 }
 

@@ -136,7 +136,7 @@ inline symbol_a<> symbol_a<_1>::___symbol_a_handle___<___TTT___, ___DHB___>::add
 template <typename _1>
 inline cat_a<> symbol_a<_1>::___cat___()
 {
-	static cat_a<> CAT = cat_create(1, "strange::symbol");
+	static cat_a<> CAT = cat::create(1, "strange::symbol");
 	return CAT;
 }
 
@@ -155,7 +155,7 @@ inline unordered_herd_a<> symbol_a<_1>::___cats___()
 template <typename _1>
 inline kind_a<> symbol_a<_1>::___kind___()
 {
-	static kind_a<> KIND = kind_from_cat(___cat___());
+	static kind_a<> KIND = kind::from_cat(___cat___());
 	return KIND;
 }
 

@@ -80,7 +80,7 @@ inline random_access_mutator_a< _element > inventory_a<_element>::___inventory_a
 template <typename _element>
 inline cat_a<> inventory_a<_element>::___cat___()
 {
-	static cat_a<> CAT = cat_create(1, "strange::inventory");
+	static cat_a<> CAT = cat::create(1, "strange::inventory");
 	return CAT;
 }
 
@@ -99,7 +99,7 @@ inline unordered_herd_a<> inventory_a<_element>::___cats___()
 template <typename _element>
 inline kind_a<> inventory_a<_element>::___kind___()
 {
-	static kind_a<> KIND = kind_from_cat(___cat___());
+	static kind_a<> KIND = kind::from_cat(___cat___());
 	return KIND;
 }
 

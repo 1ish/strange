@@ -55,7 +55,7 @@ inline misunderstanding_a<> misunderstanding_a<_lake_int8>::___misunderstanding_
 template <typename _lake_int8>
 inline cat_a<> misunderstanding_a<_lake_int8>::___cat___()
 {
-	static cat_a<> CAT = cat_create(1, "strange::misunderstanding");
+	static cat_a<> CAT = cat::create(1, "strange::misunderstanding");
 	return CAT;
 }
 
@@ -74,7 +74,7 @@ inline unordered_herd_a<> misunderstanding_a<_lake_int8>::___cats___()
 template <typename _lake_int8>
 inline kind_a<> misunderstanding_a<_lake_int8>::___kind___()
 {
-	static kind_a<> KIND = kind_from_cat(___cat___());
+	static kind_a<> KIND = kind::from_cat(___cat___());
 	return KIND;
 }
 

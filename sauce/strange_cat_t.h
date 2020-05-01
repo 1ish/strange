@@ -374,19 +374,22 @@ class ___cat_t_share___
 	}
 };
 
-inline cat_a<> cat_create(int64_t order, std_string const& name)
+namespace cat
 {
-	return cat_t<>::create(order, name);
-}
+	inline cat_a<> create(int64_t order, std_string const& name)
+	{
+		return cat_t<>::create(order, name);
+	}
 
-inline cat_a<> cat_create(int64_t order, std_string const& name, flock_a<> const& dimensions)
-{
-	return cat_t<>::create(order, name, dimensions);
-}
+	inline cat_a<> create(int64_t order, std_string const& name, flock_a<> const& dimensions)
+	{
+		return cat_t<>::create(order, name, dimensions);
+	}
 
-inline cat_a<> cat_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& parameters, symbol_a<> const& result)
-{
-	return cat_t<>::create(order, name, dimensions, parameters, result);
+	inline cat_a<> create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& parameters, symbol_a<> const& result)
+	{
+		return cat_t<>::create(order, name, dimensions, parameters, result);
+	}
 }
 
 } // namespace strange

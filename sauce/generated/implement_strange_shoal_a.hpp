@@ -35,7 +35,7 @@ inline forward_mutator_a< flock_a<> > shoal_a<_key, _value>::___shoal_a_handle__
 template <typename _key, typename _value>
 inline cat_a<> shoal_a<_key, _value>::___cat___()
 {
-	static cat_a<> CAT = cat_create(1, "strange::shoal");
+	static cat_a<> CAT = cat::create(1, "strange::shoal");
 	return CAT;
 }
 
@@ -54,7 +54,7 @@ inline unordered_herd_a<> shoal_a<_key, _value>::___cats___()
 template <typename _key, typename _value>
 inline kind_a<> shoal_a<_key, _value>::___kind___()
 {
-	static kind_a<> KIND = kind_from_cat(___cat___());
+	static kind_a<> KIND = kind::from_cat(___cat___());
 	return KIND;
 }
 

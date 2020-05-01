@@ -98,7 +98,7 @@ public:
 		auto const kind_op = parent.at_(sym("kind"));
 		if (!kind_op)
 		{
-			kind = cat_op ? kind_from_cat(cat) : kind_t<>::create_();
+			kind = cat_op ? kind::from_cat(cat) : kind_t<>::create_();
 		}
 		else
 		{
@@ -117,7 +117,7 @@ public:
 		{
 			if (check<unordered_herd_a<>>(cats_any))
 			{
-				kinds += kinds_from_cats(fast<unordered_herd_a<>>(cats_any));
+				kinds += kind::kinds_from_cats(fast<unordered_herd_a<>>(cats_any));
 			}
 		}
 		else

@@ -248,108 +248,111 @@ class ___kind_t_share___
 	}
 };
 
-//inline kind_a<> kind_create(int64_t order = 1, std_string const& name = "");
-inline kind_a<> kind_create(int64_t order, std_string const& name)
+namespace kind
 {
-	return kind_t<>::create(order, name);
-}
-
-inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions)
-{
-	return kind_t<>::create(order, name, dimensions);
-}
-
-inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects)
-{
-	return kind_t<>::create(order, name, dimensions, aspects);
-}
-
-inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters)
-{
-	return kind_t<>::create(order, name, dimensions, aspects, parameters);
-}
-
-//inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false);
-inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed, bool reference, bool optional)
-{
-	return kind_t<>::create(order, name, dimensions, aspects, parameters, result, fixed, reference, optional);
-}
-
-// cat conversion
-inline kind_a<> kind_from_cat(cat_a<> const& cat)
-{
-	return kind_t<>::create_(cat.order_(), cat.name_(), cat.dimensions_(), flock_t<>::create_(), cat.parameters_(), cat.result_(), no(), no(), no());
-}
-
-inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects)
-{
-	return kind_t<>::create_(cat.order_(), cat.name_(), cat.dimensions_(), aspects, cat.parameters_(), cat.result_(), no(), no(), no());
-}
-
-inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional)
-{
-	return kind_t<>::create_(cat.order_(), cat.name_(), cat.dimensions_(), aspects, cat.parameters_(), cat.result_(), fixed, reference, optional);
-}
-
-inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats)
-{
-	auto result = unordered_herd_t<>::create_();
-	for (auto const& cat : cats)
+	//inline kind_a<> create(int64_t order = 1, std_string const& name = "");
+	inline kind_a<> create(int64_t order, std_string const& name)
 	{
-		if (!check<cat_a<>>(cat))
-		{
-			throw dis(__FILE__, __LINE__, "strange::kinds_from_cats passed non-cat");
-		}
-		result.insert_thing(kind_from_cat(fast<cat_a<>>(cat)));
+		return kind_t<>::create(order, name);
 	}
-	return result;
-}
 
-inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional)
-{
-	auto result = unordered_herd_t<>::create_();
-	for (auto const& cat : cats)
+	inline kind_a<> create(int64_t order, std_string const& name, flock_a<> const& dimensions)
 	{
-		if (!check<cat_a<>>(cat))
-		{
-			throw dis(__FILE__, __LINE__, "strange::kinds_from_cats passed non-cat");
-		}
-		result.insert_thing(kind_from_cat(fast<cat_a<>>(cat), aspects, fixed, reference, optional));
+		return kind_t<>::create(order, name, dimensions);
 	}
-	return result;
-}
 
-inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects)
-{
-	auto result = unordered_herd_t<>::create_();
-	for (auto const& cat : cats)
+	inline kind_a<> create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects)
 	{
-		if (!check<cat_a<>>(cat))
-		{
-			throw dis(__FILE__, __LINE__, "strange::kinds_from_cats passed non-cat");
-		}
-		result.insert_thing(kind_from_cat(fast<cat_a<>>(cat), aspects));
+		return kind_t<>::create(order, name, dimensions, aspects);
 	}
-	return result;
-}
 
-inline cat_a<> kind_to_cat(kind_a<> const& kind)
-{
-	return cat_t<>::create_(kind.order_(), kind.name_(), kind.dimensions_(), kind.parameters_(), kind.result_());
-}
-
-inline unordered_herd_a<> kinds_to_cats(unordered_herd_a<> const& kinds)
-{
-	auto result = unordered_herd_t<>::create_();
-	for (auto const& kind : kinds)
+	inline kind_a<> create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters)
 	{
-		if (!check<kind_a<>>(kind))
-		{
-			throw dis(__FILE__, __LINE__, "strange::kinds_to_cats passed non-kind");
-		}
-		result.insert_thing(kind_to_cat(fast<kind_a<>>(kind)));
+		return kind_t<>::create(order, name, dimensions, aspects, parameters);
 	}
-	return result;
+
+	//inline kind_a<> create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false);
+	inline kind_a<> kind::create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed, bool reference, bool optional)
+	{
+		return kind_t<>::create(order, name, dimensions, aspects, parameters, result, fixed, reference, optional);
+	}
+
+	// cat conversion
+	inline kind_a<> from_cat(cat_a<> const& cat)
+	{
+		return kind_t<>::create_(cat.order_(), cat.name_(), cat.dimensions_(), flock_t<>::create_(), cat.parameters_(), cat.result_(), no(), no(), no());
+	}
+
+	inline kind_a<> from_cat(cat_a<> const& cat, flock_a<> const& aspects)
+	{
+		return kind_t<>::create_(cat.order_(), cat.name_(), cat.dimensions_(), aspects, cat.parameters_(), cat.result_(), no(), no(), no());
+	}
+
+	inline kind_a<> from_cat(cat_a<> const& cat, flock_a<> const& aspects, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional)
+	{
+		return kind_t<>::create_(cat.order_(), cat.name_(), cat.dimensions_(), aspects, cat.parameters_(), cat.result_(), fixed, reference, optional);
+	}
+
+	inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats)
+	{
+		auto result = unordered_herd_t<>::create_();
+		for (auto const& cat : cats)
+		{
+			if (!check<cat_a<>>(cat))
+			{
+				throw dis(__FILE__, __LINE__, "strange::kind::kinds_from_cats passed non-cat");
+			}
+			result.insert_thing(kind::from_cat(fast<cat_a<>>(cat)));
+		}
+		return result;
+	}
+
+	inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional)
+	{
+		auto result = unordered_herd_t<>::create_();
+		for (auto const& cat : cats)
+		{
+			if (!check<cat_a<>>(cat))
+			{
+				throw dis(__FILE__, __LINE__, "strange::kind::kinds_from_cats passed non-cat");
+			}
+			result.insert_thing(kind::from_cat(fast<cat_a<>>(cat), aspects, fixed, reference, optional));
+		}
+		return result;
+	}
+
+	inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects)
+	{
+		auto result = unordered_herd_t<>::create_();
+		for (auto const& cat : cats)
+		{
+			if (!check<cat_a<>>(cat))
+			{
+				throw dis(__FILE__, __LINE__, "strange::kind::kinds_from_cats passed non-cat");
+			}
+			result.insert_thing(kind::from_cat(fast<cat_a<>>(cat), aspects));
+		}
+		return result;
+	}
+
+	inline cat_a<> to_cat(kind_a<> const& kind)
+	{
+		return cat_t<>::create_(kind.order_(), kind.name_(), kind.dimensions_(), kind.parameters_(), kind.result_());
+	}
+
+	inline unordered_herd_a<> kinds_to_cats(unordered_herd_a<> const& kinds)
+	{
+		auto result = unordered_herd_t<>::create_();
+		for (auto const& kind : kinds)
+		{
+			if (!check<kind_a<>>(kind))
+			{
+				throw dis(__FILE__, __LINE__, "strange::kind::kinds_to_cats passed non-kind");
+			}
+			result.insert_thing(kind::to_cat(fast<kind_a<>>(kind)));
+		}
+		return result;
+	}
 }
 
 template <typename ___TTT___>
@@ -361,403 +364,403 @@ inline kind_a<> kind_of()
 template <>
 inline kind_a<> kind_of<int8_t>()
 {
-	return kind_create(1, "\"int8_t\"");
+	return kind::create(1, "\"int8_t\"");
 }
 
 template <>
 inline kind_a<> kind_of<uint8_t>()
 {
-	return kind_create(1, "\"uint8_t\"");
+	return kind::create(1, "\"uint8_t\"");
 }
 
 template <>
 inline kind_a<> kind_of<int16_t>()
 {
-	return kind_create(1, "\"int16_t\"");
+	return kind::create(1, "\"int16_t\"");
 }
 
 template <>
 inline kind_a<> kind_of<uint16_t>()
 {
-	return kind_create(1, "\"uint16_t\"");
+	return kind::create(1, "\"uint16_t\"");
 }
 
 template <>
 inline kind_a<> kind_of<int32_t>()
 {
-	return kind_create(1, "\"int32_t\"");
+	return kind::create(1, "\"int32_t\"");
 }
 
 template <>
 inline kind_a<> kind_of<uint32_t>()
 {
-	return kind_create(1, "\"uint32_t\"");
+	return kind::create(1, "\"uint32_t\"");
 }
 
 template <>
 inline kind_a<> kind_of<int64_t>()
 {
-	return kind_create(1, "\"int64_t\"");
+	return kind::create(1, "\"int64_t\"");
 }
 
 template <>
 inline kind_a<> kind_of<uint64_t>()
 {
-	return kind_create(1, "\"uint64_t\"");
+	return kind::create(1, "\"uint64_t\"");
 }
 
 template <>
 inline kind_a<> kind_of<float>()
 {
-	return kind_create(1, "\"float\"");
+	return kind::create(1, "\"float\"");
 }
 
 template <>
 inline kind_a<> kind_of<double>()
 {
-	return kind_create(1, "\"double\"");
+	return kind::create(1, "\"double\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_shared_ptr<strange::concurrent_u<false>::read_lock>>()
 {
-	return kind_create(1, "\"std_shared_ptr<strange::concurrent_u<false>::read_lock>\"");
+	return kind::create(1, "\"std_shared_ptr<strange::concurrent_u<false>::read_lock>\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_shared_ptr<strange::concurrent_u<false>::write_lock>>()
 {
-	return kind_create(1, "\"std_shared_ptr<strange::concurrent_u<false>::write_lock>\"");
+	return kind::create(1, "\"std_shared_ptr<strange::concurrent_u<false>::write_lock>\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_shared_ptr<strange::concurrent_u<true>::read_lock>>()
 {
-	return kind_create(1, "\"std_shared_ptr<strange::concurrent_u<true>::read_lock>\"");
+	return kind::create(1, "\"std_shared_ptr<strange::concurrent_u<true>::read_lock>\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_shared_ptr<strange::concurrent_u<true>::write_lock>>()
 {
-	return kind_create(1, "\"std_shared_ptr<strange::concurrent_u<true>::write_lock>\"");
+	return kind::create(1, "\"std_shared_ptr<strange::concurrent_u<true>::write_lock>\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_istreambuf_iterator<char>>()
 {
-	return kind_create(1, "\"std_istreambuf_iterator<char>\"");
+	return kind::create(1, "\"std_istreambuf_iterator<char>\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<int8_t>::const_iterator>()
 {
-	return kind_create(1, "\"std_vector<int8_t>::const_iterator\"");
+	return kind::create(1, "\"std_vector<int8_t>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<int8_t>::const_iterator>()
 {
-	return kind_create(1, "\"std_deque<int8_t>::const_iterator\"");
+	return kind::create(1, "\"std_deque<int8_t>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<uint8_t>::const_iterator>()
 {
-	return kind_create(1, "\"std_vector<uint8_t>::const_iterator\"");
+	return kind::create(1, "\"std_vector<uint8_t>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<uint8_t>::const_iterator>()
 {
-	return kind_create(1, "\"std_deque<uint8_t>::const_iterator\"");
+	return kind::create(1, "\"std_deque<uint8_t>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<int16_t>::const_iterator>()
 {
-	return kind_create(1, "\"std_vector<int16_t>::const_iterator\"");
+	return kind::create(1, "\"std_vector<int16_t>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<int16_t>::const_iterator>()
 {
-	return kind_create(1, "\"std_deque<int16_t>::const_iterator\"");
+	return kind::create(1, "\"std_deque<int16_t>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<uint16_t>::const_iterator>()
 {
-	return kind_create(1, "\"std_vector<uint16_t>::const_iterator\"");
+	return kind::create(1, "\"std_vector<uint16_t>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<uint16_t>::const_iterator>()
 {
-	return kind_create(1, "\"std_deque<uint16_t>::const_iterator\"");
+	return kind::create(1, "\"std_deque<uint16_t>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<int32_t>::const_iterator>()
 {
-	return kind_create(1, "\"std_vector<int32_t>::const_iterator\"");
+	return kind::create(1, "\"std_vector<int32_t>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<int32_t>::const_iterator>()
 {
-	return kind_create(1, "\"std_deque<int32_t>::const_iterator\"");
+	return kind::create(1, "\"std_deque<int32_t>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<uint32_t>::const_iterator>()
 {
-	return kind_create(1, "\"std_vector<uint32_t>::const_iterator\"");
+	return kind::create(1, "\"std_vector<uint32_t>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<uint32_t>::const_iterator>()
 {
-	return kind_create(1, "\"std_deque<uint32_t>::const_iterator\"");
+	return kind::create(1, "\"std_deque<uint32_t>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<int64_t>::const_iterator>()
 {
-	return kind_create(1, "\"std_vector<int64_t>::const_iterator\"");
+	return kind::create(1, "\"std_vector<int64_t>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<int64_t>::const_iterator>()
 {
-	return kind_create(1, "\"std_deque<int64_t>::const_iterator\"");
+	return kind::create(1, "\"std_deque<int64_t>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<uint64_t>::const_iterator>()
 {
-	return kind_create(1, "\"std_vector<uint64_t>::const_iterator\"");
+	return kind::create(1, "\"std_vector<uint64_t>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<uint64_t>::const_iterator>()
 {
-	return kind_create(1, "\"std_deque<uint64_t>::const_iterator\"");
+	return kind::create(1, "\"std_deque<uint64_t>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<float>::const_iterator>()
 {
-	return kind_create(1, "\"std_vector<float>::const_iterator\"");
+	return kind::create(1, "\"std_vector<float>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<float>::const_iterator>()
 {
-	return kind_create(1, "\"std_deque<float>::const_iterator\"");
+	return kind::create(1, "\"std_deque<float>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<double>::const_iterator>()
 {
-	return kind_create(1, "\"std_vector<double>::const_iterator\"");
+	return kind::create(1, "\"std_vector<double>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<double>::const_iterator>()
 {
-	return kind_create(1, "\"std_deque<double>::const_iterator\"");
+	return kind::create(1, "\"std_deque<double>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<int8_t>::iterator>()
 {
-	return kind_create(1, "\"std_vector<int8_t>::iterator\"");
+	return kind::create(1, "\"std_vector<int8_t>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<int8_t>::iterator>()
 {
-	return kind_create(1, "\"std_deque<int8_t>::iterator\"");
+	return kind::create(1, "\"std_deque<int8_t>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<uint8_t>::iterator>()
 {
-	return kind_create(1, "\"std_vector<uint8_t>::iterator\"");
+	return kind::create(1, "\"std_vector<uint8_t>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<uint8_t>::iterator>()
 {
-	return kind_create(1, "\"std_deque<uint8_t>::iterator\"");
+	return kind::create(1, "\"std_deque<uint8_t>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<int16_t>::iterator>()
 {
-	return kind_create(1, "\"std_vector<int16_t>::iterator\"");
+	return kind::create(1, "\"std_vector<int16_t>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<int16_t>::iterator>()
 {
-	return kind_create(1, "\"std_deque<int16_t>::iterator\"");
+	return kind::create(1, "\"std_deque<int16_t>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<uint16_t>::iterator>()
 {
-	return kind_create(1, "\"std_vector<uint16_t>::iterator\"");
+	return kind::create(1, "\"std_vector<uint16_t>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<uint16_t>::iterator>()
 {
-	return kind_create(1, "\"std_deque<uint16_t>::iterator\"");
+	return kind::create(1, "\"std_deque<uint16_t>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<int32_t>::iterator>()
 {
-	return kind_create(1, "\"std_vector<int32_t>::iterator\"");
+	return kind::create(1, "\"std_vector<int32_t>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<int32_t>::iterator>()
 {
-	return kind_create(1, "\"std_deque<int32_t>::iterator\"");
+	return kind::create(1, "\"std_deque<int32_t>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<uint32_t>::iterator>()
 {
-	return kind_create(1, "\"std_vector<uint32_t>::iterator\"");
+	return kind::create(1, "\"std_vector<uint32_t>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<uint32_t>::iterator>()
 {
-	return kind_create(1, "\"std_deque<uint32_t>::iterator\"");
+	return kind::create(1, "\"std_deque<uint32_t>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<int64_t>::iterator>()
 {
-	return kind_create(1, "\"std_vector<int64_t>::iterator\"");
+	return kind::create(1, "\"std_vector<int64_t>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<int64_t>::iterator>()
 {
-	return kind_create(1, "\"std_deque<int64_t>::iterator\"");
+	return kind::create(1, "\"std_deque<int64_t>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<uint64_t>::iterator>()
 {
-	return kind_create(1, "\"std_vector<uint64_t>::iterator\"");
+	return kind::create(1, "\"std_vector<uint64_t>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<uint64_t>::iterator>()
 {
-	return kind_create(1, "\"std_deque<uint64_t>::iterator\"");
+	return kind::create(1, "\"std_deque<uint64_t>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<float>::iterator>()
 {
-	return kind_create(1, "\"std_vector<float>::iterator\"");
+	return kind::create(1, "\"std_vector<float>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<float>::iterator>()
 {
-	return kind_create(1, "\"std_deque<float>::iterator\"");
+	return kind::create(1, "\"std_deque<float>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<double>::iterator>()
 {
-	return kind_create(1, "\"std_vector<double>::iterator\"");
+	return kind::create(1, "\"std_vector<double>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<double>::iterator>()
 {
-	return kind_create(1, "\"std_deque<double>::iterator\"");
+	return kind::create(1, "\"std_deque<double>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<dart_packet>()
 {
-	return kind_create(1, "\"dart_packet\"");
+	return kind::create(1, "\"dart_packet\"");
 }
 
 template <>
 inline kind_a<> kind_of<dart_packet::iterator>()
 {
-	return kind_create(1, "\"dart_packet::iterator\"");
+	return kind::create(1, "\"dart_packet::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_set<any_a<>>::const_iterator>()
 {
-	return kind_create(1, "\"std_set<any_a<>>::const_iterator\"");
+	return kind::create(1, "\"std_set<any_a<>>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_map<any_a<>, any_a<>>::const_iterator>()
 {
-	return kind_create(1, "\"std_map<any_a<>, any_a<>>::const_iterator\"");
+	return kind::create(1, "\"std_map<any_a<>, any_a<>>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_map<any_a<>, any_a<>>::iterator>()
 {
-	return kind_create(1, "\"std_map<any_a<>, any_a<>>::iterator\"");
+	return kind::create(1, "\"std_map<any_a<>, any_a<>>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_unordered_set<any_a<>>::const_iterator>()
 {
-	return kind_create(1, "\"std_unordered_set<any_a<>>::const_iterator\"");
+	return kind::create(1, "\"std_unordered_set<any_a<>>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_unordered_map<any_a<>, any_a<>>::const_iterator>()
 {
-	return kind_create(1, "\"std_unordered_map<any_a<>, any_a<>>::const_iterator\"");
+	return kind::create(1, "\"std_unordered_map<any_a<>, any_a<>>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_unordered_map<any_a<>, any_a<>>::iterator>()
 {
-	return kind_create(1, "\"std_unordered_map<any_a<>, any_a<>>::iterator\"");
+	return kind::create(1, "\"std_unordered_map<any_a<>, any_a<>>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<any_a<>>::const_iterator>()
 {
-	return kind_create(1, "\"std_vector<any_a<>>::const_iterator\"");
+	return kind::create(1, "\"std_vector<any_a<>>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<any_a<>>::const_iterator>()
 {
-	return kind_create(1, "\"<std_deque<any_a<>>::const_iterator\"");
+	return kind::create(1, "\"<std_deque<any_a<>>::const_iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_vector<any_a<>>::iterator>()
 {
-	return kind_create(1, "\"std_vector<any_a<>>::iterator\"");
+	return kind::create(1, "\"std_vector<any_a<>>::iterator\"");
 }
 
 template <>
 inline kind_a<> kind_of<std_deque<any_a<>>::iterator>()
 {
-	return kind_create(1, "\"std_deque<any_a<>>::iterator\"");
+	return kind::create(1, "\"std_deque<any_a<>>::iterator\"");
 }
 
 } // namespace strange

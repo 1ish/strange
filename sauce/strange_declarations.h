@@ -451,31 +451,37 @@ namespace unordered_shoal
 }
 
 // cat
-inline cat_a<> cat_create(int64_t order = 1, std_string const& name = "");
+namespace cat
+{
+	inline cat_a<> create(int64_t order = 1, std_string const& name = "");
 
-inline cat_a<> cat_create(int64_t order, std_string const& name, flock_a<> const& dimensions);
+	inline cat_a<> create(int64_t order, std_string const& name, flock_a<> const& dimensions);
 
-inline cat_a<> cat_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& parameters, symbol_a<> const& result);
+	inline cat_a<> create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& parameters, symbol_a<> const& result);
+}
 
 // kind
-inline kind_a<> kind_create(int64_t order = 1, std_string const& name = "");
+namespace kind
+{
+	inline kind_a<> create(int64_t order = 1, std_string const& name = "");
 
-inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions);
+	inline kind_a<> create(int64_t order, std_string const& name, flock_a<> const& dimensions);
 
-inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects);
+	inline kind_a<> create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects);
 
-inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters);
+	inline kind_a<> create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters);
 
-inline kind_a<> kind_create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false);
+	inline kind_a<> create(int64_t order, std_string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false);
 
-inline kind_a<> kind_from_cat(cat_a<> const& cat);
-inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects);
-inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional);
-inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats);
-inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects);
-inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional);
-inline cat_a<> kind_to_cat(kind_a<> const& kind);
-inline unordered_herd_a<> kinds_to_cats(unordered_herd_a<> const& kinds);
+	inline kind_a<> from_cat(cat_a<> const& cat);
+	inline kind_a<> from_cat(cat_a<> const& cat, flock_a<> const& aspects);
+	inline kind_a<> from_cat(cat_a<> const& cat, flock_a<> const& aspects, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional);
+	inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats);
+	inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects);
+	inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional);
+	inline cat_a<> to_cat(kind_a<> const& kind);
+	inline unordered_herd_a<> kinds_to_cats(unordered_herd_a<> const& kinds);
+}
 
 template <typename ___TTT___>
 inline kind_a<> kind_of();

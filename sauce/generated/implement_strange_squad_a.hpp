@@ -113,7 +113,7 @@ inline std_deque < _element > & squad_a<_element>::___squad_a_handle___<___TTT__
 template <typename _element>
 inline cat_a<> squad_a<_element>::___cat___()
 {
-	static cat_a<> CAT = cat_create(1, "strange::squad");
+	static cat_a<> CAT = cat::create(1, "strange::squad");
 	return CAT;
 }
 
@@ -132,7 +132,7 @@ inline unordered_herd_a<> squad_a<_element>::___cats___()
 template <typename _element>
 inline kind_a<> squad_a<_element>::___kind___()
 {
-	static kind_a<> KIND = kind_from_cat(___cat___());
+	static kind_a<> KIND = kind::from_cat(___cat___());
 	return KIND;
 }
 

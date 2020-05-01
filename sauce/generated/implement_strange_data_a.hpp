@@ -41,7 +41,7 @@ inline _type & data_a<_type>::___data_a_handle___<___TTT___, ___DHB___>::mutate_
 template <typename _type>
 inline cat_a<> data_a<_type>::___cat___()
 {
-	static cat_a<> CAT = cat_create(1, "strange::data", flock::create_vals(kind_create(2, "")));
+	static cat_a<> CAT = cat::create(1, "strange::data", flock::create_vals(kind::create(2, "")));
 	return CAT;
 }
 
@@ -60,7 +60,7 @@ inline unordered_herd_a<> data_a<_type>::___cats___()
 template <typename _type>
 inline kind_a<> data_a<_type>::___kind___()
 {
-	static kind_a<> KIND = kind_from_cat(___cat___(), flock::create_vals(kind_of<_type>()));
+	static kind_a<> KIND = kind::from_cat(___cat___(), flock::create_vals(kind_of<_type>()));
 	return KIND;
 }
 

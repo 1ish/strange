@@ -62,7 +62,7 @@ inline flock_a<> operation_a<_1>::___operation_a_handle___<___TTT___, ___DHB___>
 template <typename _1>
 inline cat_a<> operation_a<_1>::___cat___()
 {
-	static cat_a<> CAT = cat_create(1, "strange::operation");
+	static cat_a<> CAT = cat::create(1, "strange::operation");
 	return CAT;
 }
 
@@ -81,7 +81,7 @@ inline unordered_herd_a<> operation_a<_1>::___cats___()
 template <typename _1>
 inline kind_a<> operation_a<_1>::___kind___()
 {
-	static kind_a<> KIND = kind_from_cat(___cat___());
+	static kind_a<> KIND = kind::from_cat(___cat___());
 	return KIND;
 }
 

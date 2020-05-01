@@ -501,7 +501,7 @@ inline any_a<> collection_a<_key, _value, _element>::___collection_a_handle___<_
 template <typename _key, typename _value, typename _element>
 inline cat_a<> collection_a<_key, _value, _element>::___cat___()
 {
-	static cat_a<> CAT = cat_create(1, "strange::collection");
+	static cat_a<> CAT = cat::create(1, "strange::collection");
 	return CAT;
 }
 
@@ -520,7 +520,7 @@ inline unordered_herd_a<> collection_a<_key, _value, _element>::___cats___()
 template <typename _key, typename _value, typename _element>
 inline kind_a<> collection_a<_key, _value, _element>::___kind___()
 {
-	static kind_a<> KIND = kind_from_cat(___cat___());
+	static kind_a<> KIND = kind::from_cat(___cat___());
 	return KIND;
 }
 
