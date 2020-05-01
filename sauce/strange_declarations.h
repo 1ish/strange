@@ -441,11 +441,14 @@ namespace unordered_herd
 }
 
 // unordered shoal
-template <typename _key = any_a<>, typename _value = any_a<>, bool _concurrent_ = false, typename ___unordered_shoal_a___ = unordered_shoal_a<_key, _value>>
-inline ___unordered_shoal_a___ unordered_shoal_create();
+namespace unordered_shoal
+{
+	template <typename _key = any_a<>, typename _value = any_a<>, bool _concurrent_ = false, typename ___unordered_shoal_a___ = unordered_shoal_a<_key, _value>>
+	inline ___unordered_shoal_a___ create();
 
-template <typename... Args>
-inline unordered_shoal_a<> unordered_shoal_vals(Args&&... args);
+	template <typename... Args>
+	inline unordered_shoal_a<> create_vals(Args&&... args);
+}
 
 // cat
 inline cat_a<> cat_create(int64_t order = 1, std_string const& name = "");

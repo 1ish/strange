@@ -680,17 +680,20 @@ class ___unordered_shoal_t_share___
 	}
 };
 
-// template <typename _key = any_a<>, typename _value = any_a<>, bool _concurrent_ = false, typename ___unordered_shoal_a___ = unordered_shoal_a<_key, _value>>
-template <typename _key, typename _value, bool _concurrent_, typename ___unordered_shoal_a___>
-inline ___unordered_shoal_a___ unordered_shoal_create()
+namespace unordered_shoal
 {
-	return unordered_shoal_t<_key, _value, _concurrent_>::create_();
-}
+	// template <typename _key = any_a<>, typename _value = any_a<>, bool _concurrent_ = false, typename ___unordered_shoal_a___ = unordered_shoal_a<_key, _value>>
+	template <typename _key, typename _value, bool _concurrent_, typename ___unordered_shoal_a___>
+	inline ___unordered_shoal_a___ create()
+	{
+		return unordered_shoal_t<_key, _value, _concurrent_>::create_();
+	}
 
-template <typename... Args>
-inline unordered_shoal_a<> unordered_shoal_vals(Args&&... args)
-{
-	return unordered_shoal_t<>::create_(std::forward<Args>(args)...);
+	template <typename... Args>
+	inline unordered_shoal_a<> create_vals(Args&&... args)
+	{
+		return unordered_shoal_t<>::create_(std::forward<Args>(args)...);
+	}
 }
 
 } // namespace strange

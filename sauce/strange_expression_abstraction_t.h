@@ -1118,7 +1118,7 @@ protected:
 			"\t\tunordered_shoal_a<> operations = ");
 		if (root)
 		{
-			river.write_string("unordered_shoal_create();\n"
+			river.write_string("unordered_shoal::create();\n"
 				"\t\toperations.update(sym(\"call_\"), native_mutation::create(&any_a::operator[]));\n"
 				"\t\toperations.update(sym(\"perform_\"), native_mutation::create(&any_a::operator()));\n");
 		}

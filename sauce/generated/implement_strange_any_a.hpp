@@ -517,7 +517,7 @@ inline unordered_shoal_a<> any_a<_1>::___operations___()
 {
 	static unordered_shoal_a<> OPERATIONS = []()
 	{
-		unordered_shoal_a<> operations = unordered_shoal_create();
+		unordered_shoal_a<> operations = unordered_shoal::create();
 		operations.update(sym("call_"), native_mutation::create(&any_a::operator[]));
 		operations.update(sym("perform_"), native_mutation::create(&any_a::operator()));
 		operations.update(sym("type_"), native_extraction::create(&any_a::type__));
