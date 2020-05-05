@@ -13,8 +13,8 @@ using namespace strange;
 namespace
 {
 	std_string const taste_dir = "../../strange/taste/";
-	std_string const abstractions_dir = "../../strange/sauce/abstractions/";
-	std_string const generate_cpp_dir = "../../strange/sauce/generated/";
+	std_string const abstractions_dir = "../../strange/sauce/";
+	std_string const generate_cpp_dir = "../../strange/sauce/";
 }
 
 #ifdef STRANGE_TASTE_DEBUG
