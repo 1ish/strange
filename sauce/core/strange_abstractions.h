@@ -2,7 +2,7 @@
 #define COM_ONEISH_STRANGE_ABSTRACTIONS_H
 
 // abstractions
-#include "generated/define_strange_any_a.hpp"
+#include "fundamentals/abstractions/generated/definitions/define_strange_any_a.hpp"
 
 namespace strange
 {

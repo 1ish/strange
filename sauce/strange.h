@@ -2,27 +2,27 @@
 #define COM_ONEISH_STRANGE_H
 
 // dependenicies
-#include "strange_dependencies.h"
+#include "core/strange_dependencies.h"
 
 // options
-#include "strange_options.h"
+#include "core/strange_options.h"
 
 // forward declarations
-#include "strange_declarations.h"
+#include "core/strange_declarations.h"
 
 // abstractions
-#include "strange_abstractions.h"
+#include "core/strange_abstractions.h"
 
 // ranges
-#include "strange_ranges.h"
+#include "core/collections/strange_ranges.h"
 
 // utilities
-#include "strange_utilities.h"
+#include "core/utilities/strange_utilities.h"
 
 // things
-#include "strange_things.h"
+#include "core/strange_things.h"
 
 // definitions
-#include "strange_definitions.h"
+#include "core/strange_definitions.h"
 
 #endif

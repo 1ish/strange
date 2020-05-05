@@ -1,7 +1,7 @@
 #ifndef COM_ONEISH_STRANGE_DECLARATIONS_H
 #define COM_ONEISH_STRANGE_DECLARATIONS_H
 
-#include "strange_concurrent_u.h"
+#include "utilities/strange_concurrent_u.h"
 
 // forward declarations
 
@@ -16,22 +16,22 @@ inline std_size_t hash_of(___ego___ const& thing);
 }
 
 // abstractions
-#include "generated/declare_strange_forward_extractor_a.hpp"
-#include "generated/declare_strange_forward_extractor_data_a.hpp"
-#include "generated/declare_strange_forward_mutator_a.hpp"
-#include "generated/declare_strange_forward_mutator_data_a.hpp"
-#include "generated/declare_strange_bidirectional_extractor_a.hpp"
-#include "generated/declare_strange_bidirectional_extractor_data_a.hpp"
-#include "generated/declare_strange_bidirectional_mutator_a.hpp"
-#include "generated/declare_strange_bidirectional_mutator_data_a.hpp"
-#include "generated/declare_strange_random_access_extractor_a.hpp"
-#include "generated/declare_strange_random_access_extractor_data_a.hpp"
-#include "generated/declare_strange_random_access_mutator_a.hpp"
-#include "generated/declare_strange_random_access_mutator_data_a.hpp"
-#include "generated/declare_strange_symbol_a.hpp"
-#include "generated/declare_strange_cat_a.hpp"
-#include "generated/declare_strange_kind_a.hpp"
-#include "generated/declare_strange_number_data_a.hpp"
+#include "collections/iterators/abstractions/generated/declarations/declare_strange_forward_extractor_a.hpp"
+#include "collections/iterators/abstractions/generated/declarations/declare_strange_forward_extractor_data_a.hpp"
+#include "collections/iterators/abstractions/generated/declarations/declare_strange_forward_mutator_a.hpp"
+#include "collections/iterators/abstractions/generated/declarations/declare_strange_forward_mutator_data_a.hpp"
+#include "collections/iterators/abstractions/generated/declarations/declare_strange_bidirectional_extractor_a.hpp"
+#include "collections/iterators/abstractions/generated/declarations/declare_strange_bidirectional_extractor_data_a.hpp"
+#include "collections/iterators/abstractions/generated/declarations/declare_strange_bidirectional_mutator_a.hpp"
+#include "collections/iterators/abstractions/generated/declarations/declare_strange_bidirectional_mutator_data_a.hpp"
+#include "collections/iterators/abstractions/generated/declarations/declare_strange_random_access_extractor_a.hpp"
+#include "collections/iterators/abstractions/generated/declarations/declare_strange_random_access_extractor_data_a.hpp"
+#include "collections/iterators/abstractions/generated/declarations/declare_strange_random_access_mutator_a.hpp"
+#include "collections/iterators/abstractions/generated/declarations/declare_strange_random_access_mutator_data_a.hpp"
+#include "fundamentals/abstractions/generated/declarations/declare_strange_symbol_a.hpp"
+#include "fundamentals/abstractions/generated/declarations/declare_strange_cat_a.hpp"
+#include "fundamentals/abstractions/generated/declarations/declare_strange_kind_a.hpp"
+#include "fundamentals/abstractions/generated/declarations/declare_strange_number_data_a.hpp"
 template <> struct std::hash<strange::number_data_a<uint64_t>>
 {
 	inline strange::std_size_t operator()(strange::number_data_a<uint64_t> const& thing) const
@@ -55,7 +55,7 @@ template <typename _1_ = void>
 using number_data_double_a = number_data_a<double>;
 }
 
-#include "generated/declare_strange_any_a.hpp"
+#include "fundamentals/abstractions/generated/declarations/declare_strange_any_a.hpp"
 template <> struct std::hash<strange::any_a<>>
 {
 	inline strange::std_size_t operator()(strange::any_a<> const& thing) const
@@ -64,27 +64,27 @@ template <> struct std::hash<strange::any_a<>>
 	}
 };
 
-#include "generated/declare_strange_lake_a.hpp"
+#include "collections/abstractions/generated/declarations/declare_strange_lake_a.hpp"
 namespace strange
 {
 template <typename _1_ = void>
 using lake_int8_a = lake_a<int8_t>;
 }
 
-#include "generated/declare_strange_misunderstanding_a.hpp"
-#include "generated/declare_strange_list_a.hpp"
-#include "generated/declare_strange_range_a.hpp"
-#include "generated/declare_strange_collection_a.hpp"
-#include "generated/declare_strange_inventory_a.hpp"
-#include "generated/declare_strange_flock_a.hpp"
-#include "generated/declare_strange_squad_a.hpp"
-#include "generated/declare_strange_herd_a.hpp"
-#include "generated/declare_strange_ordered_herd_a.hpp"
-#include "generated/declare_strange_unordered_herd_a.hpp"
-#include "generated/declare_strange_shoal_a.hpp"
-#include "generated/declare_strange_ordered_shoal_a.hpp"
-#include "generated/declare_strange_unordered_shoal_a.hpp"
-#include "generated/declare_strange_container_a.hpp"
+#include "fundamentals/abstractions/generated/declarations/declare_strange_misunderstanding_a.hpp"
+#include "collections/abstractions/generated/declarations/declare_strange_list_a.hpp"
+#include "collections/abstractions/generated/declarations/declare_strange_range_a.hpp"
+#include "collections/abstractions/generated/declarations/declare_strange_collection_a.hpp"
+#include "collections/abstractions/generated/declarations/declare_strange_inventory_a.hpp"
+#include "collections/abstractions/generated/declarations/declare_strange_flock_a.hpp"
+#include "collections/abstractions/generated/declarations/declare_strange_squad_a.hpp"
+#include "collections/abstractions/generated/declarations/declare_strange_herd_a.hpp"
+#include "collections/abstractions/generated/declarations/declare_strange_ordered_herd_a.hpp"
+#include "collections/abstractions/generated/declarations/declare_strange_unordered_herd_a.hpp"
+#include "collections/abstractions/generated/declarations/declare_strange_shoal_a.hpp"
+#include "collections/abstractions/generated/declarations/declare_strange_ordered_shoal_a.hpp"
+#include "collections/abstractions/generated/declarations/declare_strange_unordered_shoal_a.hpp"
+#include "collections/abstractions/generated/declarations/declare_strange_container_a.hpp"
 template <> struct std::hash<strange::container_a<>>
 {
 	inline strange::std_size_t operator()(strange::container_a<> const& thing) const
@@ -93,21 +93,21 @@ template <> struct std::hash<strange::container_a<>>
 	}
 };
 
-#include "generated/declare_strange_container_data_a.hpp"
+#include "collections/abstractions/generated/declarations/declare_strange_container_data_a.hpp"
 namespace strange
 {
 template <typename _1 = void>
 using parcel_a = container_data_a<dart_packet, dart_packet::iterator>;
 }
 
-#include "generated/declare_strange_data_a.hpp"
-#include "generated/declare_strange_number_a.hpp"
-#include "generated/declare_strange_river_a.hpp"
-#include "generated/declare_strange_brook_a.hpp"
-#include "generated/declare_strange_token_a.hpp"
-#include "generated/declare_strange_operation_a.hpp"
-#include "generated/declare_strange_expression_a.hpp"
-#include "generated/declare_strange_parser_a.hpp"
+#include "fundamentals/abstractions/generated/declarations/declare_strange_data_a.hpp"
+#include "fundamentals/abstractions/generated/declarations/declare_strange_number_a.hpp"
+#include "fundamentals/abstractions/generated/declarations/declare_strange_river_a.hpp"
+#include "collections/abstractions/generated/declarations/declare_strange_brook_a.hpp"
+#include "../units/interpretations/parser/abstractions/generated/declarations/declare_strange_token_a.hpp"
+#include "fundamentals/abstractions/generated/declarations/declare_strange_operation_a.hpp"
+#include "../units/interpretations/parser/expressions/abstractions/generated/declarations/declare_strange_expression_a.hpp"
+#include "../units/interpretations/parser/abstractions/generated/declarations/declare_strange_parser_a.hpp"
 
 namespace strange
 {
