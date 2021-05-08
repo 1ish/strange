@@ -13,10 +13,22 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\sauce">
+      <UniqueIdentifier>{12b1be54-2ff2-4942-bba3-8ebff301680a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\taste">
+      <UniqueIdentifier>{a34e02e3-d5f4-4ee0-865d-384391004846}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sauce">
+      <UniqueIdentifier>{88bb7aa5-c748-478a-8310-8d921f6595ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\taste">
+      <UniqueIdentifier>{59d12954-a5d3-4d4e-bfc4-99731e488424}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="strange.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\..\taste\strange_taste.cpp">
+      <Filter>Source Files\taste</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
