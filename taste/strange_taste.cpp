@@ -6,8 +6,6 @@
 
 #define STRANGE_TASTE_DEBUG 1
 
-#include "../sauce/strange.h"
-
 namespace
 {
 	char const* const taste_dir = "../../strange/taste/";
@@ -21,3 +19,10 @@ std::ostream& std__cout = std::cout;
 std_stringstream discard;
 std::ostream& std__cout = discard;
 #endif
+
+#include "../sauce/strange.h"
+#include "../sauce/core/utilities/strange__value_c.hpp"
+
+#include <iostream>
+
+#include "core/fundamentals/taste__strange__thing_t.hpp"

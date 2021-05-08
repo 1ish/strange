@@ -139,7 +139,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__symbol_t.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__thing_t.cpp" />
     <ClCompile Include="..\..\..\taste\strange_taste.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__any_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__symbol_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__symbol_t.h" />
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__thing_t.h" />
+    <ClInclude Include="..\..\..\sauce\core\strange__core.h" />
+    <ClInclude Include="..\..\..\sauce\core\utilities\strange__value_c.hpp" />
+    <ClInclude Include="..\..\..\sauce\strange.h" />
+    <ClInclude Include="..\..\..\taste\core\fundamentals\taste__strange__thing_t.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

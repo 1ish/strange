@@ -25,10 +25,72 @@
     <Filter Include="Header Files\taste">
       <UniqueIdentifier>{59d12954-a5d3-4d4e-bfc4-99731e488424}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\sauce\core">
+      <UniqueIdentifier>{27ba41a6-dd2b-4f83-8f93-552bd2fb0661}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sauce\core\fundamentals">
+      <UniqueIdentifier>{44d58196-d2d8-4318-9eaa-bb19387302db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sauce\core\fundamentals\abstractions">
+      <UniqueIdentifier>{5a72128d-0293-44d9-8da4-984592a9f17d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sauce\core\utilities">
+      <UniqueIdentifier>{0487065c-7e0f-4bf2-81ca-f540fc0f7519}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sauce\core\fundamentals\things">
+      <UniqueIdentifier>{91c87579-134e-437f-b7be-5c7e780c6174}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sauce\core">
+      <UniqueIdentifier>{e38bdeb3-2136-4bb7-832f-ee3292de7ac8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sauce\core\fundamentals">
+      <UniqueIdentifier>{dbffa1b1-426e-441d-8c0f-8554c918dff4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sauce\core\fundamentals\things">
+      <UniqueIdentifier>{34882c71-e795-4742-a6b2-2b0d382ee874}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\taste\core">
+      <UniqueIdentifier>{2dd63c52-79a9-4391-9a8e-60dc27d9d9dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\taste\core\fundamentals">
+      <UniqueIdentifier>{123d105a-6021-4b25-baa8-f123abb9ff38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\taste\strange_taste.cpp">
       <Filter>Source Files\taste</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__thing_t.cpp">
+      <Filter>Source Files\sauce\core\fundamentals\things</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__symbol_t.cpp">
+      <Filter>Source Files\sauce\core\fundamentals\things</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\sauce\strange.h">
+      <Filter>Header Files\sauce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__any_a.h">
+      <Filter>Header Files\sauce\core\fundamentals\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\strange__core.h">
+      <Filter>Header Files\sauce\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__symbol_a.h">
+      <Filter>Header Files\sauce\core\fundamentals\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\utilities\strange__value_c.hpp">
+      <Filter>Header Files\sauce\core\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__thing_t.h">
+      <Filter>Header Files\sauce\core\fundamentals\things</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__symbol_t.h">
+      <Filter>Header Files\sauce\core\fundamentals\things</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\taste\core\fundamentals\taste__strange__thing_t.hpp">
+      <Filter>Source Files\taste\core\fundamentals</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

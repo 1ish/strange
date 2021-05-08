@@ -1,4 +1,6 @@
-#ifndef COM_ONEISH_STRANGE_H
-#define COM_ONEISH_STRANGE_H
+#ifndef COM_ONEISH__STRANGE_H
+#define COM_ONEISH__STRANGE_H
+
+#include "core/strange__core.h"
 
 #endif
