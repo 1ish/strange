@@ -3,6 +3,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <utility>
 
 extern "C"
 {
@@ -19,16 +20,16 @@ extern "C"
 		return &o;
 	}
 
+	static strange__any_o strange__nothing_o_s()
+	{
+		strange__any_o o = *strange__thing_o_f();
+		std::swap(o.something, o.nothing);
+		return o;
+	}
+
 	strange__any_o const* strange__nothing_o_f()
 	{
-		static strange__any_o o =
-		{
-			strange__thing_free_f,
-			strange__thing_copy_f,
-			strange__thing_type_f,
-			strange__thing_something_f,
-			strange__thing_nothing_f
-		};
+		static strange__any_o o = strange__nothing_o_s();
 		return &o;
 	}
 
@@ -38,9 +39,9 @@ extern "C"
 
 	void strange__thing_copy_f(void const* const me, void* const cp)
 	{
-		strange__any_a const* const ma = (strange__any_a const* const)(me);
-		strange__any_a* const ca = (strange__any_a* const)(cp);
-		ca->d = (strange__thing_d*)(std::malloc(sizeof(strange__thing_d)));
+		// redundant: auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const ca = reinterpret_cast<strange__any_a* const>(cp);
+		ca->d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__thing_d)));
 		if (!ca->d)
 		{
 			std::exit(1);
@@ -72,7 +73,7 @@ extern "C"
 
 	void mutate(void* const me)
 	{
-		strange__any_a* const ma = (strange__any_a* const)(me);
+		auto const ma = reinterpret_cast<strange__any_a* const>(me);
 		if (ma->d->refs > 1)
 		{
 			strange__any_a cp = *ma;
@@ -85,7 +86,7 @@ extern "C"
 	static strange__any_a nothing_s()
 	{
 		strange__any_a r;
-		r.d = (strange__thing_d* const)(std::malloc(sizeof(strange__thing_d))); std::cout << "malloc\n";
+		r.d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__thing_d))); std::cout << "malloc\n";
 		if (!r.d)
 		{
 			std::exit(1);
@@ -104,7 +105,7 @@ extern "C"
 	static strange__any_a something_s()
 	{
 		strange__any_a r;
-		r.d = (strange__thing_d* const)(std::malloc(sizeof(strange__thing_d))); std::cout << "malloc\n";
+		r.d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__thing_d))); std::cout << "malloc\n";
 		if (!r.d)
 		{
 			std::exit(1);

@@ -25,17 +25,17 @@ extern "C"
 
 	void strange__symbol_free_f(void const* const me)
 	{
-		strange__symbol_a const* const ma = (strange__symbol_a const* const)(me);
-		strange__symbol_d* const md = (strange__symbol_d* const)(ma->d);
+		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
+		auto const md = reinterpret_cast<strange__symbol_d* const>(ma->d);
 		std::free(md->symbol); std::cout << "free\n";
 		strange__thing_free_f(me);
 	}
 
 	void strange__symbol_copy_f(void const* const me, void* const cp)
 	{
-		strange__symbol_a const* const ma = (strange__symbol_a const* const)(me);
-		strange__symbol_a* const ca = (strange__symbol_a* const)(cp);
-		ca->d = (strange__thing_d*)(std::malloc(sizeof(strange__symbol_d)));
+		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
+		auto const ca = reinterpret_cast<strange__symbol_a* const>(cp);
+		ca->d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__symbol_d)));
 		if (!ca->d)
 		{
 			std::exit(1);
@@ -48,11 +48,11 @@ extern "C"
 	void strange__symbol_clone_f(void const* const me, void* const cp)
 	{
 		// redundant: strange__thing_clone_f(me, cp);
-		strange__symbol_a const* const ma = (strange__symbol_a const* const)(me);
-		strange__symbol_d const* const md = (strange__symbol_d const* const)(ma->d);
-		strange__symbol_a* const ca = (strange__symbol_a* const)(cp);
-		strange__symbol_d* const cd = (strange__symbol_d* const)(ca->d);
-		cd->symbol = (char*)(std::malloc(cd->length + 1)); std::cout << "malloc\n";
+		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
+		auto const md = reinterpret_cast<strange__symbol_d const* const>(ma->d);
+		auto const ca = reinterpret_cast<strange__symbol_a* const>(cp);
+		auto const cd = reinterpret_cast<strange__symbol_d* const>(ca->d);
+		cd->symbol = reinterpret_cast<char*>(std::malloc(cd->length + 1)); std::cout << "malloc\n";
 		if (!cd->symbol)
 		{
 			std::exit(1);
@@ -69,10 +69,10 @@ extern "C"
 	strange__symbol_a strange__symbol_add_f(void const* const me, void const* const symbol)
 	{
 		// cannot assume symbol has a symbol_d, only that it implements symbol_a
-		strange__symbol_a const* const ma = (strange__symbol_a const* const)(me);
-		strange__symbol_d* const md = (strange__symbol_d* const)(ma->d);
-		strange__symbol_a const* const sa = (strange__symbol_a const* const)(symbol);
-		strange__symbol_d* const rd = (strange__symbol_d* const)(std::malloc(sizeof(strange__symbol_d))); std::cout << "malloc\n";
+		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
+		auto const md = reinterpret_cast<strange__symbol_d* const>(ma->d);
+		auto const sa = reinterpret_cast<strange__symbol_a const* const>(symbol);
+		auto const rd = reinterpret_cast<strange__symbol_d* const>(std::malloc(sizeof(strange__symbol_d))); std::cout << "malloc\n";
 		if (!rd)
 		{
 			std::exit(1);
@@ -81,7 +81,7 @@ extern "C"
 
 		size_t const symbol_length = sa->o->length(sa);
 		rd->length = md->length + symbol_length;
-		rd->symbol = (char*)(std::malloc(rd->length + 1)); std::cout << "malloc\n";
+		rd->symbol = reinterpret_cast<char*>(std::malloc(rd->length + 1)); std::cout << "malloc\n";
 		if (!rd->symbol)
 		{
 			std::exit(1);
@@ -90,7 +90,7 @@ extern "C"
 		std::memcpy(rd->symbol + md->length, sa->o->to_c_string(sa), symbol_length + 1);
 
 		strange__symbol_a r;
-		r.d = (strange__thing_d*)(rd);
+		r.d = reinterpret_cast<strange__thing_d*>(rd);
 		r.o = strange__symbol_o_f();
 
 		return r;
@@ -98,21 +98,21 @@ extern "C"
 
 	char const* strange__symbol_to_c_string_f(void const* const me)
 	{
-		strange__symbol_a const* const ma = (strange__symbol_a const* const)(me);
-		strange__symbol_d* const md = (strange__symbol_d* const)(ma->d);
+		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
+		auto const md = reinterpret_cast<strange__symbol_d* const>(ma->d);
 		return md->symbol;
 	}
 
 	size_t strange__symbol_length_f(void const* const me)
 	{
-		strange__symbol_a const* const ma = (strange__symbol_a const* const)(me);
-		strange__symbol_d* const md = (strange__symbol_d* const)(ma->d);
+		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
+		auto const md = reinterpret_cast<strange__symbol_d* const>(ma->d);
 		return md->length;
 	}
 
 	strange__symbol_a sym(char const* const s)
 	{
-		strange__symbol_d* const rd = (strange__symbol_d* const)(std::malloc(sizeof(strange__symbol_d))); std::cout << "malloc\n";
+		auto const rd = reinterpret_cast<strange__symbol_d* const>(std::malloc(sizeof(strange__symbol_d))); std::cout << "malloc\n";
 		if (!rd)
 		{
 			std::exit(1);
@@ -120,7 +120,7 @@ extern "C"
 		rd->refs = 1;
 
 		rd->length = std::strlen(s);
-		rd->symbol = (char*)(std::malloc(rd->length + 1)); std::cout << "malloc\n";
+		rd->symbol = reinterpret_cast<char*>(std::malloc(rd->length + 1)); std::cout << "malloc\n";
 		if (!rd->symbol)
 		{
 			std::exit(1);
@@ -128,7 +128,7 @@ extern "C"
 		std::memcpy(rd->symbol, s, rd->length + 1);
 
 		strange__symbol_a r;
-		r.d = (strange__thing_d*)(rd);
+		r.d = reinterpret_cast<strange__thing_d*>(rd);
 		r.o = strange__symbol_o_f();
 		
 		return r;
