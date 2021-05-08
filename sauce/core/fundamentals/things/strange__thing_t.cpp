@@ -20,6 +20,19 @@ extern "C"
 		return &o;
 	}
 
+	static strange__any_o strange__thing_p_s()
+	{
+		strange__any_o o = *strange__thing_o_f();
+		o.copy = strange__thing_no_copy_f;
+		return o;
+	}
+
+	strange__any_o const* strange__thing_p_f()
+	{
+		static strange__any_o o = strange__thing_p_s();
+		return &o;
+	}
+
 	static strange__any_o strange__nothing_o_s()
 	{
 		strange__any_o o = *strange__thing_o_f();
@@ -33,26 +46,38 @@ extern "C"
 		return &o;
 	}
 
+	static strange__any_o strange__nothing_p_s()
+	{
+		strange__any_o o = *strange__nothing_o_f();
+		o.copy = strange__thing_no_copy_f;
+		return o;
+	}
+
+	strange__any_o const* strange__nothing_p_f()
+	{
+		static strange__any_o o = strange__nothing_p_s();
+		return &o;
+	}
+
 	void strange__thing_free_f(void const* const me)
 	{
 	}
 
 	void strange__thing_copy_f(void const* const me, void* const cp)
 	{
-		// redundant: auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const ca = reinterpret_cast<strange__any_a* const>(cp);
 		ca->d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__thing_d)));
 		if (!ca->d)
 		{
 			std::exit(1);
 		}
-		// redundant: std::memcpy(ca->d, ma->d, sizeof(strange__thing_d));
 		ca->d->refs = 1;
-		// redundant: strange__thing_clone_f(me, cp);
 	}
 
-	void strange__thing_clone_f(void const* const me, void* const cp)
+	void strange__thing_no_copy_f(void const* const me, void* const cp)
 	{
+		auto const ca = reinterpret_cast<strange__any_a* const>(cp);
+		++(ca->d->refs);
 	}
 
 	strange__symbol_a strange__thing_type_f(void const* const me)

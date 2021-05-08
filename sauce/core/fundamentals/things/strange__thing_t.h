@@ -12,9 +12,12 @@ extern "C"
 	};
 
 	strange__any_o const* strange__thing_o_f();
+	strange__any_o const* strange__thing_p_f();
+	strange__any_o const* strange__nothing_o_f();
+	strange__any_o const* strange__nothing_p_f();
 	void strange__thing_free_f(void const* const me);
 	void strange__thing_copy_f(void const* const me, void* const cp);
-	void strange__thing_clone_f(void const* const me, void* const cp);
+	void strange__thing_no_copy_f(void const* const me, void* const cp);
 	strange__symbol_a strange__thing_type_f(void const* const me);
 	bool strange__thing_nothing_f(void const* const me);
 	bool strange__thing_something_f(void const* const me);

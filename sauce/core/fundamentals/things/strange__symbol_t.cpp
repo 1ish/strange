@@ -47,7 +47,6 @@ extern "C"
 
 	void strange__symbol_clone_f(void const* const me, void* const cp)
 	{
-		// redundant: strange__thing_clone_f(me, cp);
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d const* const>(ma->d);
 		auto const ca = reinterpret_cast<strange__symbol_a* const>(cp);

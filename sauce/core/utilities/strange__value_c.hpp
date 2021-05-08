@@ -7,7 +7,9 @@
 template <typename A>
 struct strange__value_c
 {
-    explicit inline strange__value_c(A const& abstraction) :a(abstraction) {}
+    explicit inline strange__value_c(A const& abstraction) :a(abstraction)
+    {
+    }
 
     inline ~strange__value_c()
     {
