@@ -8,13 +8,11 @@
 
 #include "../sauce/strange.h"
 
-using namespace strange;
-
 namespace
 {
-	std_string const taste_dir = "../../strange/taste/";
-	std_string const abstractions_dir = "../../strange/sauce/";
-	std_string const generate_cpp_dir = "../../strange/sauce/";
+	char const* const taste_dir = "../../strange/taste/";
+	char const* const abstractions_dir = "../../strange/sauce/";
+	char const* const generate_cpp_dir = "../../strange/sauce/";
 }
 
 #ifdef STRANGE_TASTE_DEBUG
