@@ -1,6 +1,0 @@
-#ifndef COM_ONEISH_STRANGE_PARSER_H
-#define COM_ONEISH_STRANGE_PARSER_H
-
-
-
-#endif

@@ -23,19 +23,3 @@ std::ostream& std__cout = std::cout;
 std_stringstream discard;
 std::ostream& std__cout = discard;
 #endif
-
-#include "core/fundamentals/strange_first_taste.h"
-#include "core/fundamentals/strange_any_taste.h"
-#include "core/collections/strange_range_taste.h"
-#include "units/interpretations/parser/strange_parser_hello_world_taste.h"
-#include "units/interpretations/parser/strange_parser_symbol_taste.h"
-#include "units/interpretations/parser/strange_parser_lake_taste.h"
-#include "units/interpretations/parser/strange_parser_int_taste.h"
-#include "units/interpretations/parser/strange_parser_float_taste.h"
-#include "units/interpretations/parser/strange_parser_boole_taste.h"
-#include "units/interpretations/parser/strange_parser_loop_taste.h"
-#include "units/interpretations/parser/strange_parser_code_taste.h"
-#include "core/fundamentals/strange_code_generate.h"
-#include "core/fundamentals/strange_code_generate_cpp.h"
-#include "core/collections/strange_collections_generate_cpp.h"
-#include "core/collections/iterators/strange_iterators_generate_cpp.h"
