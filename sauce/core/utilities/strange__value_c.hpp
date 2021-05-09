@@ -56,8 +56,8 @@ struct strange__value_c
     {
         if (!--(a.d->refs))
         {
-            a.o->free(&a); std::cout << "free\n";
-            std::free(a.d);
+            a.o->free(&a);
+            std::free(a.d); std::cout << "free\n";
         }
     }
 

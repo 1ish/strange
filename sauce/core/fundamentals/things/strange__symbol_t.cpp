@@ -11,7 +11,6 @@ extern "C"
 	{
 		static strange__symbol_o o =
 		{
-			STRANGE__NO_ERROR,
 			strange__symbol_free_f,
 			strange__symbol_copy_f,
 			strange__symbol_type_f,
@@ -30,6 +29,17 @@ extern "C"
 		{
 			strange__symbol_o o = *strange__symbol_o_f();
 			o.copy = strange__thing_no_copy_f;
+			return o;
+		}();
+		return &o;
+	}
+
+	strange__symbol_o const* strange__symbol_n_f()
+	{
+		static strange__symbol_o o = []()
+		{
+			strange__symbol_o o = *strange__symbol_o_f();
+			std::swap(o.something, o.nothing);
 			return o;
 		}();
 		return &o;

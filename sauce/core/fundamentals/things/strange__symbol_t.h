@@ -15,6 +15,7 @@ extern "C"
 
 	strange__symbol_o const* strange__symbol_o_f();
 	strange__symbol_o const* strange__symbol_p_f();
+	strange__symbol_o const* strange__symbol_n_f();
 	void strange__symbol_free_f(void const* const me);
 	void strange__symbol_copy_f(void const* const me, void* const cp);
 	void strange__symbol_clone_f(void const* const me, void* const cp);

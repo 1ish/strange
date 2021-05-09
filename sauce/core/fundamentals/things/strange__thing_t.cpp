@@ -11,7 +11,6 @@ extern "C"
 	{
 		static strange__any_o o =
 		{
-			STRANGE__NO_ERROR,
 			strange__thing_free_f,
 			strange__thing_copy_f,
 			strange__thing_type_f,
@@ -23,24 +22,24 @@ extern "C"
 
 	strange__any_o const* strange__thing_p_f()
 	{
-		static strange__any_o o = []()
+		static strange__any_o p = []()
 		{
-			strange__any_o o = *strange__thing_o_f();
-			o.copy = strange__thing_no_copy_f;
-			return o;
+			strange__any_o p = *strange__thing_o_f();
+			p.copy = strange__thing_no_copy_f;
+			return p;
 		}();
-		return &o;
+		return &p;
 	}
 
-	strange__any_o const* strange__no_thing_o_f(strange__error_d error)
+	strange__any_o const* strange__thing_n_f()
 	{
-		static strange__any_o o = []()
+		static strange__any_o n = []()
 		{
-			strange__any_o o = *strange__thing_o_f();
-			std::swap(o.something, o.nothing);
-			return o;
+			strange__any_o n = *strange__thing_o_f();
+			std::swap(n.something, n.nothing);
+			return n;
 		}();
-		return &o;
+		return &n;
 	}
 
 	void strange__thing_free_f(void const* const me)
@@ -103,7 +102,7 @@ extern "C"
 				std::exit(1);
 			}
 			r.d->refs = 1;
-			r.o = strange__no_thing_o_f();
+			r.o = strange__thing_n_f();
 			return r;
 		}());
 		return r.ret();
