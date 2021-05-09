@@ -1,7 +1,10 @@
 #ifndef COM_ONEISH__STRANGE__ANY_A_H
 #define COM_ONEISH__STRANGE__ANY_A_H
 
+#define STRANGE__NO_ERROR {0,0,0}
+
 #define STRANGE__ANY_O \
+		strange__error_d error; \
 		void (*free)(void const* const me); \
 		void (*copy)(void const* const me, void* const cp); \
 		strange__symbol_a (*type)(void const* const me); \
@@ -10,6 +13,13 @@
 
 extern "C"
 {
+	struct strange__error_d
+	{
+		char const* file;
+		int64_t line;
+		char const* text;
+	};
+
 	struct strange__any_o
 	{
 		STRANGE__ANY_O

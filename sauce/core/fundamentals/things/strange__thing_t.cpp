@@ -11,6 +11,7 @@ extern "C"
 	{
 		static strange__any_o o =
 		{
+			STRANGE__NO_ERROR,
 			strange__thing_free_f,
 			strange__thing_copy_f,
 			strange__thing_type_f,
@@ -20,42 +21,25 @@ extern "C"
 		return &o;
 	}
 
-	static strange__any_o strange__thing_p_s()
-	{
-		strange__any_o o = *strange__thing_o_f();
-		o.copy = strange__thing_no_copy_f;
-		return o;
-	}
-
 	strange__any_o const* strange__thing_p_f()
 	{
-		static strange__any_o o = strange__thing_p_s();
+		static strange__any_o o = []()
+		{
+			strange__any_o o = *strange__thing_o_f();
+			o.copy = strange__thing_no_copy_f;
+			return o;
+		}();
 		return &o;
 	}
 
-	static strange__any_o strange__nothing_o_s()
+	strange__any_o const* strange__no_thing_o_f(strange__error_d error)
 	{
-		strange__any_o o = *strange__thing_o_f();
-		std::swap(o.something, o.nothing);
-		return o;
-	}
-
-	strange__any_o const* strange__nothing_o_f()
-	{
-		static strange__any_o o = strange__nothing_o_s();
-		return &o;
-	}
-
-	static strange__any_o strange__nothing_p_s()
-	{
-		strange__any_o o = *strange__nothing_o_f();
-		o.copy = strange__thing_no_copy_f;
-		return o;
-	}
-
-	strange__any_o const* strange__nothing_p_f()
-	{
-		static strange__any_o o = strange__nothing_p_s();
+		static strange__any_o o = []()
+		{
+			strange__any_o o = *strange__thing_o_f();
+			std::swap(o.something, o.nothing);
+			return o;
+		}();
 		return &o;
 	}
 
@@ -108,41 +92,37 @@ extern "C"
 		}
 	}
 
-	static strange__any_a nothing_s()
-	{
-		strange__any_a r;
-		r.d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__thing_d))); std::cout << "malloc\n";
-		if (!r.d)
-		{
-			std::exit(1);
-		}
-		r.d->refs = 1;
-		r.o = strange__nothing_o_f();
-		return r;
-	}
-
 	strange__any_a nothing()
 	{
-		static auto r = var(nothing_s());
-		return r.ret();
-	}
-
-	static strange__any_a something_s()
-	{
-		strange__any_a r;
-		r.d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__thing_d))); std::cout << "malloc\n";
-		if (!r.d)
+		static auto r = var([]()
 		{
-			std::exit(1);
-		}
-		r.d->refs = 1;
-		r.o = strange__thing_o_f();
-		return r;
+			strange__any_a r;
+			r.d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__thing_d))); std::cout << "malloc\n";
+			if (!r.d)
+			{
+				std::exit(1);
+			}
+			r.d->refs = 1;
+			r.o = strange__no_thing_o_f();
+			return r;
+		}());
+		return r.ret();
 	}
 
 	strange__any_a something()
 	{
-		static auto r = var(something_s());
+		static auto r = var([]()
+		{
+			strange__any_a r;
+			r.d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__thing_d))); std::cout << "malloc\n";
+			if (!r.d)
+			{
+				std::exit(1);
+			}
+			r.d->refs = 1;
+			r.o = strange__thing_o_f();
+			return r;
+		}());
 		return r.ret();
 	}
 }

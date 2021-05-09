@@ -11,6 +11,7 @@ extern "C"
 	{
 		static strange__symbol_o o =
 		{
+			STRANGE__NO_ERROR,
 			strange__symbol_free_f,
 			strange__symbol_copy_f,
 			strange__symbol_type_f,
@@ -20,6 +21,17 @@ extern "C"
 			strange__symbol_to_c_string_f,
 			strange__symbol_length_f
 		};
+		return &o;
+	}
+
+	strange__symbol_o const* strange__symbol_p_f()
+	{
+		static strange__symbol_o o = []()
+		{
+			strange__symbol_o o = *strange__symbol_o_f();
+			o.copy = strange__thing_no_copy_f;
+			return o;
+		}();
 		return &o;
 	}
 
