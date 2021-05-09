@@ -14,8 +14,8 @@ extern "C"
 			strange__thing_free_f,
 			strange__thing_copy_f,
 			strange__thing_type_f,
-			strange__thing_nothing_f,
-			strange__thing_something_f
+			strange__thing_something_f,
+			strange__thing_nothing_f
 		};
 		return &o;
 	}
@@ -69,14 +69,14 @@ extern "C"
 		return r.ret();
 	}
 
-	bool strange__thing_nothing_f(void const* const me)
-	{
-		return false;
-	}
-
 	bool strange__thing_something_f(void const* const me)
 	{
 		return true;
+	}
+
+	bool strange__thing_nothing_f(void const* const me)
+	{
+		return false;
 	}
 
 	void mutate(void* const me)
@@ -91,23 +91,6 @@ extern "C"
 		}
 	}
 
-	strange__any_a nothing()
-	{
-		static auto r = var([]()
-		{
-			strange__any_a r;
-			r.d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__thing_d))); std::cout << "malloc\n";
-			if (!r.d)
-			{
-				std::exit(1);
-			}
-			r.d->refs = 1;
-			r.o = strange__thing_n_f();
-			return r;
-		}());
-		return r.ret();
-	}
-
 	strange__any_a something()
 	{
 		static auto r = var([]()
@@ -120,6 +103,23 @@ extern "C"
 			}
 			r.d->refs = 1;
 			r.o = strange__thing_o_f();
+			return r;
+		}());
+		return r.ret();
+	}
+
+	strange__any_a nothing()
+	{
+		static auto r = var([]()
+		{
+			strange__any_a r;
+			r.d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__thing_d))); std::cout << "malloc\n";
+			if (!r.d)
+			{
+				std::exit(1);
+			}
+			r.d->refs = 1;
+			r.o = strange__thing_n_f();
 			return r;
 		}());
 		return r.ret();

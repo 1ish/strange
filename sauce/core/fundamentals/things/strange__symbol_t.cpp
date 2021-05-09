@@ -14,8 +14,9 @@ extern "C"
 			strange__symbol_free_f,
 			strange__symbol_copy_f,
 			strange__symbol_type_f,
-			strange__thing_nothing_f,
 			strange__thing_something_f,
+			strange__thing_nothing_f,
+
 			strange__symbol_add_f,
 			strange__symbol_to_c_string_f,
 			strange__symbol_length_f

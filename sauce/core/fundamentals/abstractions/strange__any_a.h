@@ -5,8 +5,8 @@
 		void (*free)(void const* const me); \
 		void (*copy)(void const* const me, void* const cp); \
 		strange__symbol_a (*type)(void const* const me); \
-		bool (*nothing)(void const* const me); \
 		bool (*something)(void const* const me); \
+		bool (*nothing)(void const* const me); \
 
 extern "C"
 {
