@@ -66,9 +66,11 @@ extern "C"
 		++(ca->d->refs);
 	}
 
-	bool strange__thing_is_f(void const* const me, void* const at)
+	bool strange__thing_is_f(void const* const me, void const* const at)
 	{
-		return false;
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const aa = reinterpret_cast<strange__any_a const* const>(at);
+		return ma->o->cat(ma).d == aa->o->cat(aa).d;
 	}
 
 	bool strange__thing_as_f(void const* const me, void* const at)
