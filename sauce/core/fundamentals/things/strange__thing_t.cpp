@@ -11,8 +11,11 @@ extern "C"
 	{
 		static strange__any_o o =
 		{
+			strange__any_cat_f,
 			strange__thing_free_f,
 			strange__thing_copy_f,
+			strange__thing_is_f,
+			strange__thing_as_f,
 			strange__thing_type_f,
 			strange__thing_something_f,
 			strange__thing_nothing_f
@@ -61,6 +64,16 @@ extern "C"
 	{
 		auto const ca = reinterpret_cast<strange__any_a* const>(cp);
 		++(ca->d->refs);
+	}
+
+	bool strange__thing_is_f(void const* const me, void* const at)
+	{
+		return false;
+	}
+
+	bool strange__thing_as_f(void const* const me, void* const at)
+	{
+		return false;
 	}
 
 	strange__symbol_a strange__thing_type_f(void const* const me)

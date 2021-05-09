@@ -55,6 +55,9 @@
     <Filter Include="Source Files\taste\core\fundamentals">
       <UniqueIdentifier>{123d105a-6021-4b25-baa8-f123abb9ff38}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\sauce\core\fundamentals\abstractions">
+      <UniqueIdentifier>{3baffcb4-9633-4bbe-8752-ed14421d48b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\taste\strange_taste.cpp">
@@ -65,6 +68,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__symbol_t.cpp">
       <Filter>Source Files\sauce\core\fundamentals\things</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__any_a.cpp">
+      <Filter>Source Files\sauce\core\fundamentals\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__symbol_a.cpp">
+      <Filter>Source Files\sauce\core\fundamentals\abstractions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

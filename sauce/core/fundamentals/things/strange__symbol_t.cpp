@@ -11,8 +11,11 @@ extern "C"
 	{
 		static strange__symbol_o o =
 		{
+			strange__symbol_cat_f,
 			strange__symbol_free_f,
 			strange__symbol_copy_f,
+			strange__thing_is_f,
+			strange__thing_as_f,
 			strange__symbol_type_f,
 			strange__thing_something_f,
 			strange__thing_nothing_f,
