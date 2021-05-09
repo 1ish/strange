@@ -70,12 +70,29 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const aa = reinterpret_cast<strange__any_a const* const>(at);
-		return ma->o->cat(ma).d == aa->o->cat(aa).d;
+		return ma->d == aa->d || ma->o->cat(ma).d == aa->o->cat(aa).d;
 	}
 
 	bool strange__thing_as_f(void const* const me, void* const at)
 	{
-		return false;
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const aa = reinterpret_cast<strange__any_a* const>(at);
+		if (ma->d == aa->d)
+		{
+			return true;
+		}
+		if (ma->o->cat(ma).d != aa->o->cat(aa).d)
+		{
+			return false;
+		}
+		if (!--(aa->d->refs))
+		{
+			aa->o->free(aa);
+			std::free(aa->d); std::cout << "free\n";
+		}
+		aa->d = ma->d;
+		++(aa->d->refs);
+		return true;
 	}
 
 	strange__symbol_a strange__thing_type_f(void const* const me)
