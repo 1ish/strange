@@ -70,29 +70,26 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const aa = reinterpret_cast<strange__any_a const* const>(at);
-		return ma->d == aa->d || ma->o->cat(ma).d == aa->o->cat(aa).d; //TODO at.cat in me.cats
+		// at.cat in me.cats
+		static strange__thing_d* const mat = strange__any_cat_f(me).d;
+		return aa->d == ma->d ||
+			aa->o->cat(aa).d == mat;
 	}
 
 	bool strange__thing_as_f(void const* const me, void* const at)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const aa = reinterpret_cast<strange__any_a* const>(at);
-		if (ma->d == aa->d)
+		if (aa->d != ma->d)
 		{
-			return true;
+			if (!--(aa->d->refs))
+			{
+				aa->o->free(aa);
+				std::free(aa->d); std::cout << "free\n";
+			}
+			*aa = *ma;
+			++(ma->d->refs);
 		}
-		if (ma->o->cat(ma).d != aa->o->cat(aa).d) //TODO at.cat not in me.cats
-		{
-			return false;
-		}
-		if (!--(aa->d->refs))
-		{
-			aa->o->free(aa);
-			std::free(aa->d); std::cout << "free\n";
-		}
-		aa->d = ma->d;
-		aa->o = ma->o;
-		++(aa->d->refs);
 		return true;
 	}
 

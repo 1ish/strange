@@ -14,8 +14,8 @@ extern "C"
 			strange__symbol_cat_f,
 			strange__symbol_free_f,
 			strange__symbol_copy_f,
-			strange__thing_is_f,
-			strange__thing_as_f,
+			strange__symbol_is_f,
+			strange__symbol_as_f,
 			strange__symbol_type_f,
 			strange__thing_something_f,
 			strange__thing_nothing_f,
@@ -83,6 +83,38 @@ extern "C"
 			std::exit(1);
 		}
 		std::memcpy(cd->symbol, md->symbol, cd->length + 1);
+	}
+
+	bool strange__symbol_is_f(void const* const me, void const* const at)
+	{
+		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
+		auto const aa = reinterpret_cast<strange__symbol_a const* const>(at);
+		if (aa->d == ma->d)
+		{
+			return true;
+		}
+		auto const ac = aa->o->cat(aa).d;
+		// at.cat in me.cats
+		static strange__thing_d* mats[] = { strange__any_cat_f(me).d, strange__symbol_cat_f(me).d };
+		return ac == mats[0] ||
+			ac == mats[1];
+	}
+
+	bool strange__symbol_as_f(void const* const me, void* const at)
+	{
+		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
+		auto const aa = reinterpret_cast<strange__symbol_a* const>(at);
+		if (aa->d != ma->d)
+		{
+			if (!--(aa->d->refs))
+			{
+				aa->o->free(aa);
+				std::free(aa->d); std::cout << "free\n";
+			}
+			*aa = *ma;
+			++(ma->d->refs);
+		}
+		return true;
 	}
 
 	strange__symbol_a strange__symbol_type_f(void const* const me)
