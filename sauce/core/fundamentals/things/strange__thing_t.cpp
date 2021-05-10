@@ -18,7 +18,13 @@ extern "C"
 			strange__thing__as_f,
 			strange__thing__type_f,
 			strange__thing__something_f,
-			strange__thing__nothing_f
+			strange__thing__nothing_f,
+			strange__thing__equal_f,
+			strange__thing__not_equal_f,
+			strange__thing__less_f,
+			strange__thing__greater_f,
+			strange__thing__less_or_equal_f,
+			strange__thing__greater_or_equal_f
 		};
 		return &o;
 	}
@@ -105,6 +111,48 @@ extern "C"
 	bool strange__thing__nothing_f(void const* const me)
 	{
 		return false;
+	}
+
+	bool strange__thing__equal_f(void const* const me, void const* const other)
+	{
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
+		return ma->d == oa->d;
+	}
+
+	bool strange__thing__not_equal_f(void const* const me, void const* const other)
+	{
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
+		return ma->d != oa->d;
+	}
+
+	bool strange__thing__less_f(void const* const me, void const* const other)
+	{
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
+		return ma->d < oa->d;
+	}
+
+	bool strange__thing__greater_f(void const* const me, void const* const other)
+	{
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
+		return ma->d > oa->d;
+	}
+
+	bool strange__thing__less_or_equal_f(void const* const me, void const* const other)
+	{
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
+		return ma->d <= oa->d;
+	}
+
+	bool strange__thing__greater_or_equal_f(void const* const me, void const* const other)
+	{
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
+		return ma->d >= oa->d;
 	}
 
 	void mutate(void* const me)

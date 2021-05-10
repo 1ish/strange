@@ -22,6 +22,13 @@ extern "C"
 	bool strange__symbol__is_f(void const* const me, void const* const ab);
 	void strange__symbol__as_f(void const* const me, void* const ab);
 	strange__symbol_a strange__symbol__type_f(void const* const me);
+	bool strange__symbol__equal_f(void const* const me, void const* const other);
+	bool strange__symbol__not_equal_f(void const* const me, void const* const other);
+	bool strange__symbol__less_f(void const* const me, void const* const other);
+	bool strange__symbol__greater_f(void const* const me, void const* const other);
+	bool strange__symbol__less_or_equal_f(void const* const me, void const* const other);
+	bool strange__symbol__greater_or_equal_f(void const* const me, void const* const other);
+
 	strange__symbol_a strange__symbol__add_f(void const* const me, void const* const symbol);
 	char const* strange__symbol___to_char_star_f(void const* const me);
 	size_t strange__symbol__length_f(void const* const me);

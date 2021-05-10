@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
+#include <algorithm>
 
 extern "C"
 {
@@ -19,6 +20,12 @@ extern "C"
 			strange__symbol__type_f,
 			strange__thing__something_f,
 			strange__thing__nothing_f,
+			strange__symbol__equal_f,
+			strange__symbol__not_equal_f,
+			strange__symbol__less_f,
+			strange__symbol__greater_f,
+			strange__symbol__less_or_equal_f,
+			strange__symbol__greater_or_equal_f,
 
 			strange__symbol__add_f,
 			strange__symbol___to_char_star_f,
@@ -93,10 +100,10 @@ extern "C"
 		{
 			return true;
 		}
-		auto const ac = aa->o->cat(aa).d;
+		auto const abc = aa->o->cat(aa).d;
 		// ab.cat in me.cats
 		static strange__thing_d* mats[] = { strange__any__cat_f(me).d, strange__symbol__cat_f(me).d };
-		return ac == mats[0] || ac == mats[1];
+		return abc == mats[0] || abc == mats[1];
 	}
 
 	void strange__symbol__as_f(void const* const me, void* const ab)
@@ -119,6 +126,96 @@ extern "C"
 	{
 		static auto r = var(sym("strange::symbol"));
 		return r.ret();
+	}
+
+	bool strange__symbol__equal_f(void const* const me, void const* const other)
+	{
+		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
+		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
+		auto os = var(no_sym());
+		if (oa->o->is(oa, os))
+		{
+			oa->o->as(oa, os);
+			auto const md = reinterpret_cast<strange__symbol_d const* const>(ma->d);
+			return std::strncmp(md->symbol, os.a.o->_to_char_star(os),
+				std::max(md->length, os.a.o->length(os))) == 0;
+		}
+		return ma->d == oa->d;
+	}
+
+	bool strange__symbol__not_equal_f(void const* const me, void const* const other)
+	{
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
+		auto os = var(no_sym());
+		if (oa->o->is(oa, os))
+		{
+			oa->o->as(oa, os);
+			auto const md = reinterpret_cast<strange__symbol_d const* const>(ma->d);
+			return std::strncmp(md->symbol, os.a.o->_to_char_star(os),
+				std::max(md->length, os.a.o->length(os))) != 0;
+		}
+		return ma->d != oa->d;
+	}
+
+	bool strange__symbol__less_f(void const* const me, void const* const other)
+	{
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
+		auto os = var(no_sym());
+		if (oa->o->is(oa, os))
+		{
+			oa->o->as(oa, os);
+			auto const md = reinterpret_cast<strange__symbol_d const* const>(ma->d);
+			return std::strncmp(md->symbol, os.a.o->_to_char_star(os),
+				std::max(md->length, os.a.o->length(os))) < 0;
+		}
+		return ma->d < oa->d;
+	}
+
+	bool strange__symbol__greater_f(void const* const me, void const* const other)
+	{
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
+		auto os = var(no_sym());
+		if (oa->o->is(oa, os))
+		{
+			oa->o->as(oa, os);
+			auto const md = reinterpret_cast<strange__symbol_d const* const>(ma->d);
+			return std::strncmp(md->symbol, os.a.o->_to_char_star(os),
+				std::max(md->length, os.a.o->length(os))) > 0;
+		}
+		return ma->d > oa->d;
+	}
+
+	bool strange__symbol__less_or_equal_f(void const* const me, void const* const other)
+	{
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
+		auto os = var(no_sym());
+		if (oa->o->is(oa, os))
+		{
+			oa->o->as(oa, os);
+			auto const md = reinterpret_cast<strange__symbol_d const* const>(ma->d);
+			return std::strncmp(md->symbol, os.a.o->_to_char_star(os),
+				std::max(md->length, os.a.o->length(os))) <= 0;
+		}
+		return ma->d <= oa->d;
+	}
+
+	bool strange__symbol__greater_or_equal_f(void const* const me, void const* const other)
+	{
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
+		auto os = var(no_sym());
+		if (oa->o->is(oa, os))
+		{
+			oa->o->as(oa, os);
+			auto const md = reinterpret_cast<strange__symbol_d const* const>(ma->d);
+			return std::strncmp(md->symbol, os.a.o->_to_char_star(os),
+				std::max(md->length, os.a.o->length(os))) >= 0;
+		}
+		return ma->d >= oa->d;
 	}
 
 	strange__symbol_a strange__symbol__add_f(void const* const me, void const* const symbol)

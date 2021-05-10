@@ -10,6 +10,12 @@
 		strange__symbol_a (*type)(void const* const me); \
 		bool (*something)(void const* const me); \
 		bool (*nothing)(void const* const me); \
+		bool (*equal)(void const* const me, void const* const other); \
+		bool (*not_equal)(void const* const me, void const* const other); \
+		bool (*less)(void const* const me, void const* const other); \
+		bool (*greater)(void const* const me, void const* const other); \
+		bool (*less_or_equal)(void const* const me, void const* const other); \
+		bool (*greater_or_equal)(void const* const me, void const* const other); \
 
 extern "C"
 {

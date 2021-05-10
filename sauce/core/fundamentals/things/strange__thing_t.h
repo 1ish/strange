@@ -22,6 +22,12 @@ extern "C"
 	strange__symbol_a strange__thing__type_f(void const* const me);
 	bool strange__thing__something_f(void const* const me);
 	bool strange__thing__nothing_f(void const* const me);
+	bool strange__thing__equal_f(void const* const me, void const* const other);
+	bool strange__thing__not_equal_f(void const* const me, void const* const other);
+	bool strange__thing__less_f(void const* const me, void const* const other);
+	bool strange__thing__greater_f(void const* const me, void const* const other);
+	bool strange__thing__less_or_equal_f(void const* const me, void const* const other);
+	bool strange__thing__greater_or_equal_f(void const* const me, void const* const other);
 
 	void mutate(void* const me);
 	strange__any_a something();
