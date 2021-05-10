@@ -12,8 +12,8 @@ extern "C"
 		static strange__any_o o =
 		{
 			strange__any_cat_f,
-			strange__thing_free_f,
-			strange__thing_copy_f,
+			strange__thing__free_f,
+			strange__thing__copy_f,
 			strange__thing_is_f,
 			strange__thing_as_f,
 			strange__thing_type_f,
@@ -28,7 +28,7 @@ extern "C"
 		static strange__any_o p = []()
 		{
 			strange__any_o p = *strange__thing_o_f();
-			p.copy = strange__thing_no_copy_f;
+			p._copy = strange__thing__no_copy_f;
 			return p;
 		}();
 		return &p;
@@ -45,11 +45,11 @@ extern "C"
 		return &n;
 	}
 
-	void strange__thing_free_f(void const* const me)
+	void strange__thing__free_f(void const* const me)
 	{
 	}
 
-	void strange__thing_copy_f(void const* const me, void* const cp)
+	void strange__thing__copy_f(void const* const me, void* const cp)
 	{
 		auto const ca = reinterpret_cast<strange__any_a* const>(cp);
 		ca->d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__thing_d)));
@@ -60,7 +60,7 @@ extern "C"
 		ca->d->refs = 1;
 	}
 
-	void strange__thing_no_copy_f(void const* const me, void* const cp)
+	void strange__thing__no_copy_f(void const* const me, void* const cp)
 	{
 		auto const ca = reinterpret_cast<strange__any_a* const>(cp);
 		++(ca->d->refs);
@@ -83,7 +83,7 @@ extern "C"
 		{
 			if (!--(aa->d->refs))
 			{
-				aa->o->free(aa);
+				aa->o->_free(aa);
 				std::free(aa->d); std::cout << "free\n";
 			}
 			*aa = *ma;
@@ -113,7 +113,7 @@ extern "C"
 		if (ma->d->refs > 1)
 		{
 			strange__any_a cp = *ma;
-			ma->o->copy(me, &cp);
+			ma->o->_copy(me, &cp);
 			--(ma->d->refs);
 			*ma = cp;
 		}

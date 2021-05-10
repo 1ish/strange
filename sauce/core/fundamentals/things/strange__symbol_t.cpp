@@ -12,8 +12,8 @@ extern "C"
 		static strange__symbol_o o =
 		{
 			strange__symbol_cat_f,
-			strange__symbol_free_f,
-			strange__symbol_copy_f,
+			strange__symbol__free_f,
+			strange__symbol__copy_f,
 			strange__symbol_is_f,
 			strange__symbol_as_f,
 			strange__symbol_type_f,
@@ -21,7 +21,7 @@ extern "C"
 			strange__thing_nothing_f,
 
 			strange__symbol_add_f,
-			strange__symbol_to_char_star_f,
+			strange__symbol__to_char_star_f,
 			strange__symbol_length_f
 		};
 		return &o;
@@ -32,7 +32,7 @@ extern "C"
 		static strange__symbol_o o = []()
 		{
 			strange__symbol_o o = *strange__symbol_o_f();
-			o.copy = strange__thing_no_copy_f;
+			o._copy = strange__thing__no_copy_f;
 			return o;
 		}();
 		return &o;
@@ -49,15 +49,15 @@ extern "C"
 		return &o;
 	}
 
-	void strange__symbol_free_f(void const* const me)
+	void strange__symbol__free_f(void const* const me)
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d* const>(ma->d);
 		std::free(md->symbol); std::cout << "free\n";
-		strange__thing_free_f(me);
+		strange__thing__free_f(me);
 	}
 
-	void strange__symbol_copy_f(void const* const me, void* const cp)
+	void strange__symbol__copy_f(void const* const me, void* const cp)
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const ca = reinterpret_cast<strange__symbol_a* const>(cp);
@@ -68,10 +68,10 @@ extern "C"
 		}
 		std::memcpy(ca->d, ma->d, sizeof(strange__symbol_d));
 		ca->d->refs = 1;
-		strange__symbol_clone_f(me, cp);
+		strange__symbol__clone_f(me, cp);
 	}
 
-	void strange__symbol_clone_f(void const* const me, void* const cp)
+	void strange__symbol__clone_f(void const* const me, void* const cp)
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d const* const>(ma->d);
@@ -107,7 +107,7 @@ extern "C"
 		{
 			if (!--(aa->d->refs))
 			{
-				aa->o->free(aa);
+				aa->o->_free(aa);
 				std::free(aa->d); std::cout << "free\n";
 			}
 			*aa = *ma;
@@ -142,7 +142,7 @@ extern "C"
 			std::exit(1);
 		}
 		std::memcpy(rd->symbol, md->symbol, md->length);
-		std::memcpy(rd->symbol + md->length, sa->o->to_char_star(sa), symbol_length + 1);
+		std::memcpy(rd->symbol + md->length, sa->o->_to_char_star(sa), symbol_length + 1);
 
 		strange__symbol_a r;
 		r.d = reinterpret_cast<strange__thing_d*>(rd);
@@ -151,7 +151,7 @@ extern "C"
 		return r;
 	}
 
-	char const* strange__symbol_to_char_star_f(void const* const me)
+	char const* strange__symbol__to_char_star_f(void const* const me)
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d* const>(ma->d);

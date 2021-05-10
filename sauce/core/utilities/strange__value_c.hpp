@@ -11,14 +11,14 @@ struct strange__value_c
     {
     }
 
-    inline ~strange__value_c()
-    {
-        rel();
-    }
-
     inline strange__value_c(strange__value_c const& original) :a(original.a)
     {
         ref();
+    }
+
+    inline ~strange__value_c()
+    {
+        rel();
     }
 
     inline strange__value_c& operator=(strange__value_c const& original)
@@ -56,7 +56,7 @@ struct strange__value_c
     {
         if (!--(a.d->refs))
         {
-            a.o->free(&a);
+            a.o->_free(&a);
             std::free(a.d); std::cout << "free\n";
         }
     }

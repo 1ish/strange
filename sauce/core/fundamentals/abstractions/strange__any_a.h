@@ -3,8 +3,8 @@
 
 #define STRANGE__ANY_O \
 		strange__symbol_a (*cat)(void const* const me); \
-		void (*free)(void const* const me); /* non-standard */ \
-		void (*copy)(void const* const me, void* const cp); /* non-standard */ \
+		void (*_free)(void const* const me); \
+		void (*_copy)(void const* const me, void* const cp); \
 		bool (*is)(void const* const me, void const* const ab); \
 		void (*as)(void const* const me, void* const ab); \
 		strange__symbol_a (*type)(void const* const me); \
