@@ -27,6 +27,7 @@ extern "C"
 	size_t strange__symbol_length_f(void const* const me);
 
 	strange__symbol_a sym(char const* const s);
+	strange__symbol_a no_sym();
 }
 
 #endif

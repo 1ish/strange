@@ -188,4 +188,28 @@ extern "C"
 		
 		return r;
 	}
+
+	strange__symbol_a no_sym()
+	{
+		auto const rd = reinterpret_cast<strange__symbol_d* const>(std::malloc(sizeof(strange__symbol_d))); std::cout << "malloc\n";
+		if (!rd)
+		{
+			std::exit(1);
+		}
+		rd->refs = 1;
+
+		rd->length = 0;
+		rd->symbol = reinterpret_cast<char*>(std::malloc(1)); std::cout << "malloc\n";
+		if (!rd->symbol)
+		{
+			std::exit(1);
+		}
+		*(rd->symbol) = 0;
+
+		strange__symbol_a r;
+		r.d = reinterpret_cast<strange__thing_d*>(rd);
+		r.o = strange__symbol_n_f();
+
+		return r;
+	}
 }
