@@ -1,1 +1,1 @@
-g++ -std=c++14 strange_taste.cpp -lpthread -I../../GSL/include
+g++ -std=c++14 strange_taste.cpp ../sauce/core/fundamentals/abstractions/strange__any_a.cpp ../sauce/core/fundamentals/abstractions/strange__symbol_a.cpp ../sauce/core/fundamentals/things/strange__symbol_t.cpp ../sauce/core/fundamentals/things/strange__thing_t.cpp -lpthread -I../../GSL/include

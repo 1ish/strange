@@ -2,6 +2,7 @@
 #define COM_ONEISH__STRANGE__CORE_H
 
 #include <cstdint>
+#include <cstddef>
 
 extern "C"
 {
