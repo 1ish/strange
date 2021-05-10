@@ -11,18 +11,18 @@ extern "C"
 	{
 		static strange__symbol_o o =
 		{
-			strange__symbol_cat_f,
-			strange__symbol__free_f,
-			strange__symbol__copy_f,
-			strange__symbol_is_f,
-			strange__symbol_as_f,
-			strange__symbol_type_f,
-			strange__thing_something_f,
-			strange__thing_nothing_f,
+			strange__symbol__cat_f,
+			strange__symbol___free_f,
+			strange__symbol___copy_f,
+			strange__symbol__is_f,
+			strange__symbol__as_f,
+			strange__symbol__type_f,
+			strange__thing__something_f,
+			strange__thing__nothing_f,
 
-			strange__symbol_add_f,
-			strange__symbol__to_char_star_f,
-			strange__symbol_length_f
+			strange__symbol__add_f,
+			strange__symbol___to_char_star_f,
+			strange__symbol__length_f
 		};
 		return &o;
 	}
@@ -32,7 +32,7 @@ extern "C"
 		static strange__symbol_o o = []()
 		{
 			strange__symbol_o o = *strange__symbol_o_f();
-			o._copy = strange__thing__no_copy_f;
+			o._copy = strange__thing___no_copy_f;
 			return o;
 		}();
 		return &o;
@@ -49,15 +49,15 @@ extern "C"
 		return &o;
 	}
 
-	void strange__symbol__free_f(void const* const me)
+	void strange__symbol___free_f(void const* const me)
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d* const>(ma->d);
 		std::free(md->symbol); std::cout << "free\n";
-		strange__thing__free_f(me);
+		strange__thing___free_f(me);
 	}
 
-	void strange__symbol__copy_f(void const* const me, void* const cp)
+	void strange__symbol___copy_f(void const* const me, void* const cp)
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const ca = reinterpret_cast<strange__symbol_a* const>(cp);
@@ -68,10 +68,10 @@ extern "C"
 		}
 		std::memcpy(ca->d, ma->d, sizeof(strange__symbol_d));
 		ca->d->refs = 1;
-		strange__symbol__clone_f(me, cp);
+		strange__symbol___clone_f(me, cp);
 	}
 
-	void strange__symbol__clone_f(void const* const me, void* const cp)
+	void strange__symbol___clone_f(void const* const me, void* const cp)
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d const* const>(ma->d);
@@ -85,7 +85,7 @@ extern "C"
 		std::memcpy(cd->symbol, md->symbol, cd->length + 1);
 	}
 
-	bool strange__symbol_is_f(void const* const me, void const* const ab)
+	bool strange__symbol__is_f(void const* const me, void const* const ab)
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const aa = reinterpret_cast<strange__symbol_a const* const>(ab);
@@ -95,11 +95,11 @@ extern "C"
 		}
 		auto const ac = aa->o->cat(aa).d;
 		// ab.cat in me.cats
-		static strange__thing_d* mats[] = { strange__any_cat_f(me).d, strange__symbol_cat_f(me).d };
+		static strange__thing_d* mats[] = { strange__any__cat_f(me).d, strange__symbol__cat_f(me).d };
 		return ac == mats[0] || ac == mats[1];
 	}
 
-	void strange__symbol_as_f(void const* const me, void* const ab)
+	void strange__symbol__as_f(void const* const me, void* const ab)
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const aa = reinterpret_cast<strange__symbol_a* const>(ab);
@@ -115,13 +115,13 @@ extern "C"
 		}
 	}
 
-	strange__symbol_a strange__symbol_type_f(void const* const me)
+	strange__symbol_a strange__symbol__type_f(void const* const me)
 	{
-		static auto r = var(sym("strange__symbol"));
+		static auto r = var(sym("strange::symbol"));
 		return r.ret();
 	}
 
-	strange__symbol_a strange__symbol_add_f(void const* const me, void const* const symbol)
+	strange__symbol_a strange__symbol__add_f(void const* const me, void const* const symbol)
 	{
 		// cannot assume symbol has a symbol_d, only that it implements symbol_a
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
@@ -151,14 +151,14 @@ extern "C"
 		return r;
 	}
 
-	char const* strange__symbol__to_char_star_f(void const* const me)
+	char const* strange__symbol___to_char_star_f(void const* const me)
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d* const>(ma->d);
 		return md->symbol;
 	}
 
-	size_t strange__symbol_length_f(void const* const me)
+	size_t strange__symbol__length_f(void const* const me)
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d* const>(ma->d);

@@ -16,15 +16,15 @@ extern "C"
 	strange__symbol_o const* strange__symbol_o_f();
 	strange__symbol_o const* strange__symbol_p_f();
 	strange__symbol_o const* strange__symbol_n_f();
-	void strange__symbol__free_f(void const* const me);
-	void strange__symbol__copy_f(void const* const me, void* const cp);
-	void strange__symbol__clone_f(void const* const me, void* const cp);
-	bool strange__symbol_is_f(void const* const me, void const* const ab);
-	void strange__symbol_as_f(void const* const me, void* const ab);
-	strange__symbol_a strange__symbol_type_f(void const* const me);
-	strange__symbol_a strange__symbol_add_f(void const* const me, void const* const symbol);
-	char const* strange__symbol__to_char_star_f(void const* const me);
-	size_t strange__symbol_length_f(void const* const me);
+	void strange__symbol___free_f(void const* const me);
+	void strange__symbol___copy_f(void const* const me, void* const cp);
+	void strange__symbol___clone_f(void const* const me, void* const cp);
+	bool strange__symbol__is_f(void const* const me, void const* const ab);
+	void strange__symbol__as_f(void const* const me, void* const ab);
+	strange__symbol_a strange__symbol__type_f(void const* const me);
+	strange__symbol_a strange__symbol__add_f(void const* const me, void const* const symbol);
+	char const* strange__symbol___to_char_star_f(void const* const me);
+	size_t strange__symbol__length_f(void const* const me);
 
 	strange__symbol_a sym(char const* const s);
 	strange__symbol_a no_sym();

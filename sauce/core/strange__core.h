@@ -20,8 +20,8 @@ extern "C"
 
 extern "C"
 {
-	strange__symbol_a strange__any_cat_f(void const* const me);
-	strange__symbol_a strange__symbol_cat_f(void const* const me);
+	strange__symbol_a strange__any__cat_f(void const* const me);
+	strange__symbol_a strange__symbol__cat_f(void const* const me);
 }
 
 #endif

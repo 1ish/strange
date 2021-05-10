@@ -11,14 +11,14 @@ extern "C"
 	{
 		static strange__any_o o =
 		{
-			strange__any_cat_f,
-			strange__thing__free_f,
-			strange__thing__copy_f,
-			strange__thing_is_f,
-			strange__thing_as_f,
-			strange__thing_type_f,
-			strange__thing_something_f,
-			strange__thing_nothing_f
+			strange__any__cat_f,
+			strange__thing___free_f,
+			strange__thing___copy_f,
+			strange__thing__is_f,
+			strange__thing__as_f,
+			strange__thing__type_f,
+			strange__thing__something_f,
+			strange__thing__nothing_f
 		};
 		return &o;
 	}
@@ -28,7 +28,7 @@ extern "C"
 		static strange__any_o p = []()
 		{
 			strange__any_o p = *strange__thing_o_f();
-			p._copy = strange__thing__no_copy_f;
+			p._copy = strange__thing___no_copy_f;
 			return p;
 		}();
 		return &p;
@@ -45,11 +45,11 @@ extern "C"
 		return &n;
 	}
 
-	void strange__thing__free_f(void const* const me)
+	void strange__thing___free_f(void const* const me)
 	{
 	}
 
-	void strange__thing__copy_f(void const* const me, void* const cp)
+	void strange__thing___copy_f(void const* const me, void* const cp)
 	{
 		auto const ca = reinterpret_cast<strange__any_a* const>(cp);
 		ca->d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__thing_d)));
@@ -60,22 +60,22 @@ extern "C"
 		ca->d->refs = 1;
 	}
 
-	void strange__thing__no_copy_f(void const* const me, void* const cp)
+	void strange__thing___no_copy_f(void const* const me, void* const cp)
 	{
 		auto const ca = reinterpret_cast<strange__any_a* const>(cp);
 		++(ca->d->refs);
 	}
 
-	bool strange__thing_is_f(void const* const me, void const* const ab)
+	bool strange__thing__is_f(void const* const me, void const* const ab)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const aa = reinterpret_cast<strange__any_a const* const>(ab);
 		// ab.cat in me.cats
-		static strange__thing_d* const mat = strange__any_cat_f(me).d;
+		static strange__thing_d* const mat = strange__any__cat_f(me).d;
 		return aa->d == ma->d || aa->o->cat(aa).d == mat;
 	}
 
-	void strange__thing_as_f(void const* const me, void* const ab)
+	void strange__thing__as_f(void const* const me, void* const ab)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const aa = reinterpret_cast<strange__any_a* const>(ab);
@@ -91,18 +91,18 @@ extern "C"
 		}
 	}
 
-	strange__symbol_a strange__thing_type_f(void const* const me)
+	strange__symbol_a strange__thing__type_f(void const* const me)
 	{
-		static auto r = var(sym("strange__thing"));
+		static auto r = var(sym("strange::thing"));
 		return r.ret();
 	}
 
-	bool strange__thing_something_f(void const* const me)
+	bool strange__thing__something_f(void const* const me)
 	{
 		return true;
 	}
 
-	bool strange__thing_nothing_f(void const* const me)
+	bool strange__thing__nothing_f(void const* const me)
 	{
 		return false;
 	}

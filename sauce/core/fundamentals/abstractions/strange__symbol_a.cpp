@@ -3,9 +3,9 @@
 
 extern "C"
 {
-	strange__symbol_a strange__symbol_cat_f(void const* const me)
+	strange__symbol_a strange__symbol__cat_f(void const* const me)
 	{
-		static auto r = var(sym("strange__symbol"));
+		static auto r = var(sym("<strange::symbol>"));
 		return r.ret();
 	}
 }
