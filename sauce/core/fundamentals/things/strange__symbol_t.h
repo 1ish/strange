@@ -23,21 +23,35 @@ extern "C"
 		void* const cp /* <symbol>= */);
 	bool strange__symbol__is_f(void const* const me /* <symbol># */,
 		void const* const ab /* <any># */);
-	void strange__symbol__as_f(void const* const me /* <symbol># */,
+	bool strange__symbol__as_f(void const* const me /* <symbol># */,
+		void* const ab /* <any>= */);
+	void strange__symbol___as_f(void const* const me /* <symbol># */,
 		void* const ab /* <any>= */);
 	strange__symbol_a strange__symbol__type_f(void const* const me /* <symbol># */);
 	bool strange__symbol__equal_f(void const* const me /* <symbol># */,
 		void const* const other /* <any># */);
+	bool strange__symbol___equal_f(void const* const me /* <symbol># */,
+		void const* const other /* <symbol># */);
 	bool strange__symbol__not_equal_f(void const* const me /* <symbol># */,
 		void const* const other /* <any># */);
+	bool strange__symbol___not_equal_f(void const* const me /* <symbol># */,
+		void const* const other /* <symbol># */);
 	bool strange__symbol__less_f(void const* const me /* <symbol># */,
 		void const* const other /* <any># */);
+	bool strange__symbol___less_f(void const* const me /* <symbol># */,
+		void const* const other /* <symbol># */);
 	bool strange__symbol__greater_f(void const* const me /* <symbol># */,
 		void const* const other /* <any># */);
+	bool strange__symbol___greater_f(void const* const me /* <symbol># */,
+		void const* const other /* <symbol># */);
 	bool strange__symbol__less_or_equal_f(void const* const me /* <symbol># */,
 		void const* const other /* <any># */);
+	bool strange__symbol___less_or_equal_f(void const* const me /* <symbol># */,
+		void const* const other /* <symbol># */);
 	bool strange__symbol__greater_or_equal_f(void const* const me /* <symbol># */,
 		void const* const other /* <any># */);
+	bool strange__symbol___greater_or_equal_f(void const* const me /* <symbol># */,
+		void const* const other /* <symbol># */);
 
 	strange__symbol_a strange__symbol__add_f(void const* const me /* <symbol># */,
 		void const* const symbol /* <symbol># */);

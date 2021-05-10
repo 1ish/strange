@@ -8,22 +8,36 @@
 			void* const cp /* <any>= */); \
 		bool (*is)(void const* const me /* <any># */, \
 			void const* const ab /* <any># */); \
-		void (*as)(void const* const me /* <any># */, \
+		bool (*as)(void const* const me /* <any># */, \
+			void* const ab /* <any>= */); \
+		void (*_as)(void const* const me /* <any># */, \
 			void* const ab /* <any>= */); \
 		strange__symbol_a (*type)(void const* const me /* <any># */); \
 		bool (*something)(void const* const me /* <any># */); \
 		bool (*nothing)(void const* const me /* <any># */); \
 		bool (*equal)(void const* const me /* <any># */, \
 			void const* const other /* <any># */); \
+		bool (*_equal)(void const* const me /* <any># */, \
+			void const* const other /* <any># */); \
 		bool (*not_equal)(void const* const me /* <any># */, \
+			void const* const other /* <any># */); \
+		bool (*_not_equal)(void const* const me /* <any># */, \
 			void const* const other /* <any># */); \
 		bool (*less)(void const* const me /* <any># */, \
 			void const* const other /* <any># */); \
+		bool (*_less)(void const* const me /* <any># */, \
+			void const* const other /* <any># */); \
 		bool (*greater)(void const* const me /* <any># */, \
+			void const* const other /* <any># */); \
+		bool (*_greater)(void const* const me /* <any># */, \
 			void const* const other /* <any># */); \
 		bool (*less_or_equal)(void const* const me /* <any># */, \
 			void const* const other /* <any># */); \
+		bool (*_less_or_equal)(void const* const me /* <any># */, \
+			void const* const other /* <any># */); \
 		bool (*greater_or_equal)(void const* const me /* <any># */, \
+			void const* const other /* <any># */); \
+		bool (*_greater_or_equal)(void const* const me /* <any># */, \
 			void const* const other /* <any># */); \
 
 extern "C"
