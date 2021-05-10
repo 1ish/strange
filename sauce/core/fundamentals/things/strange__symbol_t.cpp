@@ -149,7 +149,7 @@ extern "C"
 			return std::strncmp(md->symbol, os.a.o->_to_char_star(os),
 				std::max(md->length, os.a.o->length(os))) == 0;
 		}
-		return ma->d == oa->d;
+		return ma->d == oa->d; // strange__thing__equal_f(me, other)
 	}
 
 	bool strange__symbol__not_equal_f(void const* const me /* <symbol># */,
@@ -165,7 +165,7 @@ extern "C"
 			return std::strncmp(md->symbol, os.a.o->_to_char_star(os),
 				std::max(md->length, os.a.o->length(os))) != 0;
 		}
-		return ma->d != oa->d;
+		return ma->d != oa->d; // strange__thing__not_equal_f(me, other)
 	}
 
 	bool strange__symbol__less_f(void const* const me /* <symbol># */,
@@ -181,7 +181,7 @@ extern "C"
 			return std::strncmp(md->symbol, os.a.o->_to_char_star(os),
 				std::max(md->length, os.a.o->length(os))) < 0;
 		}
-		return ma->d < oa->d;
+		return ma->d < oa->d; // strange__thing__less_f(me, other)
 	}
 
 	bool strange__symbol__greater_f(void const* const me /* <symbol># */,
@@ -197,7 +197,7 @@ extern "C"
 			return std::strncmp(md->symbol, os.a.o->_to_char_star(os),
 				std::max(md->length, os.a.o->length(os))) > 0;
 		}
-		return ma->d > oa->d;
+		return ma->d > oa->d; // strange__thing__greater_f(me, other)
 	}
 
 	bool strange__symbol__less_or_equal_f(void const* const me /* <symbol># */,
@@ -213,7 +213,7 @@ extern "C"
 			return std::strncmp(md->symbol, os.a.o->_to_char_star(os),
 				std::max(md->length, os.a.o->length(os))) <= 0;
 		}
-		return ma->d <= oa->d;
+		return ma->d <= oa->d; // strange__thing__less_or_equal_f(me, other)
 	}
 
 	bool strange__symbol__greater_or_equal_f(void const* const me /* <symbol># */,
@@ -229,7 +229,7 @@ extern "C"
 			return std::strncmp(md->symbol, os.a.o->_to_char_star(os),
 				std::max(md->length, os.a.o->length(os))) >= 0;
 		}
-		return ma->d >= oa->d;
+		return ma->d >= oa->d; // strange__thing__greater_or_equal_f(me, other)
 	}
 
 	strange__symbol_a strange__symbol__add_f(void const* const me /* <symbol># */,
