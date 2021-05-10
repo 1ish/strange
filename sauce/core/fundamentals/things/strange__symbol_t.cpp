@@ -105,7 +105,11 @@ extern "C"
 		}
 		auto const abc = aa->o->cat(aa).d;
 		// ab.cat in me.cats
-		static strange__thing_d* mats[] = { strange__any__cat_f(me).d, strange__symbol__cat_f(me).d };
+		static strange__thing_d* mats[] =
+		{
+			strange__any__cat_f(me).d,
+			strange__symbol__cat_f(me).d
+		};
 		return abc == mats[0] || abc == mats[1];
 	}
 
