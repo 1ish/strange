@@ -2,20 +2,29 @@
 #define COM_ONEISH__STRANGE__ANY_A_H
 
 #define STRANGE__ANY_O \
-		strange__symbol_a (*cat)(void const* const me); \
-		void (*_free)(void const* const me); \
-		void (*_copy)(void const* const me, void* const cp); \
-		bool (*is)(void const* const me, void const* const ab); \
-		void (*as)(void const* const me, void* const ab); \
-		strange__symbol_a (*type)(void const* const me); \
-		bool (*something)(void const* const me); \
-		bool (*nothing)(void const* const me); \
-		bool (*equal)(void const* const me, void const* const other); \
-		bool (*not_equal)(void const* const me, void const* const other); \
-		bool (*less)(void const* const me, void const* const other); \
-		bool (*greater)(void const* const me, void const* const other); \
-		bool (*less_or_equal)(void const* const me, void const* const other); \
-		bool (*greater_or_equal)(void const* const me, void const* const other); \
+		strange__symbol_a (*cat)(void const* const me /* <any># */); \
+		void (*_free)(void const* const me /* <any># */); \
+		void (*_copy)(void const* const me /* <any># */, \
+			void* const cp /* <any>= */); \
+		bool (*is)(void const* const me /* <any># */, \
+			void const* const ab /* <any># */); \
+		void (*as)(void const* const me /* <any># */, \
+			void* const ab /* <any>= */); \
+		strange__symbol_a (*type)(void const* const me /* <any># */); \
+		bool (*something)(void const* const me /* <any># */); \
+		bool (*nothing)(void const* const me /* <any># */); \
+		bool (*equal)(void const* const me /* <any># */, \
+			void const* const other /* <any># */); \
+		bool (*not_equal)(void const* const me /* <any># */, \
+			void const* const other /* <any># */); \
+		bool (*less)(void const* const me /* <any># */, \
+			void const* const other /* <any># */); \
+		bool (*greater)(void const* const me /* <any># */, \
+			void const* const other /* <any># */); \
+		bool (*less_or_equal)(void const* const me /* <any># */, \
+			void const* const other /* <any># */); \
+		bool (*greater_or_equal)(void const* const me /* <any># */, \
+			void const* const other /* <any># */); \
 
 extern "C"
 {

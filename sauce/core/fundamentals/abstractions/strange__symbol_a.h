@@ -3,9 +3,10 @@
 
 #define STRANGE__SYMBOL_O \
 		STRANGE__ANY_O \
-		strange__symbol_a (*add)(void const* const me, void const* const symbol); \
-		char const* (*_to_char_star)(void const* const me); \
-		size_t (*length)(void const* const me); \
+		strange__symbol_a (*add)(void const* const me /* <symbol># */, \
+			void const* const symbol /* <symbol># */); \
+		char const* (*_to_char_star)(void const* const me /* <symbol># */); \
+		size_t (*length)(void const* const me /* <symbol># */); \
 
 extern "C"
 {

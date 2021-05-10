@@ -16,22 +16,33 @@ extern "C"
 	strange__symbol_o const* strange__symbol_o_f();
 	strange__symbol_o const* strange__symbol_p_f();
 	strange__symbol_o const* strange__symbol_n_f();
-	void strange__symbol___free_f(void const* const me);
-	void strange__symbol___copy_f(void const* const me, void* const cp);
-	void strange__symbol___clone_f(void const* const me, void* const cp);
-	bool strange__symbol__is_f(void const* const me, void const* const ab);
-	void strange__symbol__as_f(void const* const me, void* const ab);
-	strange__symbol_a strange__symbol__type_f(void const* const me);
-	bool strange__symbol__equal_f(void const* const me, void const* const other);
-	bool strange__symbol__not_equal_f(void const* const me, void const* const other);
-	bool strange__symbol__less_f(void const* const me, void const* const other);
-	bool strange__symbol__greater_f(void const* const me, void const* const other);
-	bool strange__symbol__less_or_equal_f(void const* const me, void const* const other);
-	bool strange__symbol__greater_or_equal_f(void const* const me, void const* const other);
+	void strange__symbol___free_f(void const* const me /* <symbol># */);
+	void strange__symbol___copy_f(void const* const me /* <symbol># */,
+		void* const cp /* <symbol>= */);
+	void strange__symbol___clone_f(void const* const me /* <symbol># */,
+		void* const cp /* <symbol>= */);
+	bool strange__symbol__is_f(void const* const me /* <symbol># */,
+		void const* const ab /* <any># */);
+	void strange__symbol__as_f(void const* const me /* <symbol># */,
+		void* const ab /* <any>= */);
+	strange__symbol_a strange__symbol__type_f(void const* const me /* <symbol># */);
+	bool strange__symbol__equal_f(void const* const me /* <symbol># */,
+		void const* const other /* <any># */);
+	bool strange__symbol__not_equal_f(void const* const me /* <symbol># */,
+		void const* const other /* <any># */);
+	bool strange__symbol__less_f(void const* const me /* <symbol># */,
+		void const* const other /* <any># */);
+	bool strange__symbol__greater_f(void const* const me /* <symbol># */,
+		void const* const other /* <any># */);
+	bool strange__symbol__less_or_equal_f(void const* const me /* <symbol># */,
+		void const* const other /* <any># */);
+	bool strange__symbol__greater_or_equal_f(void const* const me /* <symbol># */,
+		void const* const other /* <any># */);
 
-	strange__symbol_a strange__symbol__add_f(void const* const me, void const* const symbol);
-	char const* strange__symbol___to_char_star_f(void const* const me);
-	size_t strange__symbol__length_f(void const* const me);
+	strange__symbol_a strange__symbol__add_f(void const* const me /* <symbol># */,
+		void const* const symbol /* <symbol># */);
+	char const* strange__symbol___to_char_star_f(void const* const me /* <symbol># */);
+	size_t strange__symbol__length_f(void const* const me /* <symbol># */);
 
 	strange__symbol_a sym(char const* const s);
 	strange__symbol_a no_sym();

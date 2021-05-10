@@ -51,11 +51,12 @@ extern "C"
 		return &n;
 	}
 
-	void strange__thing___free_f(void const* const me)
+	void strange__thing___free_f(void const* const me /* <any># */)
 	{
 	}
 
-	void strange__thing___copy_f(void const* const me, void* const cp)
+	void strange__thing___copy_f(void const* const me /* <any># */,
+		void* const cp /* <any>= */)
 	{
 		auto const ca = reinterpret_cast<strange__any_a* const>(cp);
 		ca->d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__thing_d)));
@@ -66,13 +67,15 @@ extern "C"
 		ca->d->refs = 1;
 	}
 
-	void strange__thing___no_copy_f(void const* const me, void* const cp)
+	void strange__thing___no_copy_f(void const* const me /* <any># */,
+		void* const cp /* <any>= */)
 	{
 		auto const ca = reinterpret_cast<strange__any_a* const>(cp);
 		++(ca->d->refs);
 	}
 
-	bool strange__thing__is_f(void const* const me, void const* const ab)
+	bool strange__thing__is_f(void const* const me /* <any># */,
+		void const* const ab /* <any># */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const aa = reinterpret_cast<strange__any_a const* const>(ab);
@@ -81,7 +84,8 @@ extern "C"
 		return aa->d == ma->d || aa->o->cat(aa).d == mat;
 	}
 
-	void strange__thing__as_f(void const* const me, void* const ab)
+	void strange__thing__as_f(void const* const me /* <any># */,
+		void* const ab /* <any>= */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const aa = reinterpret_cast<strange__any_a* const>(ab);
@@ -97,65 +101,71 @@ extern "C"
 		}
 	}
 
-	strange__symbol_a strange__thing__type_f(void const* const me)
+	strange__symbol_a strange__thing__type_f(void const* const me /* <any># */)
 	{
 		static auto r = var(sym("strange::thing"));
 		return r.ret();
 	}
 
-	bool strange__thing__something_f(void const* const me)
+	bool strange__thing__something_f(void const* const me /* <any># */)
 	{
 		return true;
 	}
 
-	bool strange__thing__nothing_f(void const* const me)
+	bool strange__thing__nothing_f(void const* const me /* <any># */)
 	{
 		return false;
 	}
 
-	bool strange__thing__equal_f(void const* const me, void const* const other)
+	bool strange__thing__equal_f(void const* const me /* <any># */,
+		void const* const other /* <any># */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
 		return ma->d == oa->d;
 	}
 
-	bool strange__thing__not_equal_f(void const* const me, void const* const other)
+	bool strange__thing__not_equal_f(void const* const me /* <any># */,
+		void const* const other /* <any># */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
 		return ma->d != oa->d;
 	}
 
-	bool strange__thing__less_f(void const* const me, void const* const other)
+	bool strange__thing__less_f(void const* const me /* <any># */,
+		void const* const other /* <any># */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
 		return ma->d < oa->d;
 	}
 
-	bool strange__thing__greater_f(void const* const me, void const* const other)
+	bool strange__thing__greater_f(void const* const me /* <any># */,
+		void const* const other /* <any># */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
 		return ma->d > oa->d;
 	}
 
-	bool strange__thing__less_or_equal_f(void const* const me, void const* const other)
+	bool strange__thing__less_or_equal_f(void const* const me /* <any># */,
+		void const* const other /* <any># */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
 		return ma->d <= oa->d;
 	}
 
-	bool strange__thing__greater_or_equal_f(void const* const me, void const* const other)
+	bool strange__thing__greater_or_equal_f(void const* const me /* <any># */,
+		void const* const other /* <any># */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
 		return ma->d >= oa->d;
 	}
 
-	void mutate(void* const me)
+	void mutate(void* const me /* <any>= */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a* const>(me);
 		if (ma->d->refs > 1)
