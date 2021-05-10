@@ -21,7 +21,7 @@ extern "C"
 			strange__thing_nothing_f,
 
 			strange__symbol_add_f,
-			strange__symbol_to_c_string_f,
+			strange__symbol_to_char_star_f,
 			strange__symbol_length_f
 		};
 		return &o;
@@ -85,25 +85,24 @@ extern "C"
 		std::memcpy(cd->symbol, md->symbol, cd->length + 1);
 	}
 
-	bool strange__symbol_is_f(void const* const me, void const* const at)
+	bool strange__symbol_is_f(void const* const me, void const* const ab)
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
-		auto const aa = reinterpret_cast<strange__symbol_a const* const>(at);
+		auto const aa = reinterpret_cast<strange__symbol_a const* const>(ab);
 		if (aa->d == ma->d)
 		{
 			return true;
 		}
 		auto const ac = aa->o->cat(aa).d;
-		// at.cat in me.cats
+		// ab.cat in me.cats
 		static strange__thing_d* mats[] = { strange__any_cat_f(me).d, strange__symbol_cat_f(me).d };
-		return ac == mats[0] ||
-			ac == mats[1];
+		return ac == mats[0] || ac == mats[1];
 	}
 
-	bool strange__symbol_as_f(void const* const me, void* const at)
+	void strange__symbol_as_f(void const* const me, void* const ab)
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
-		auto const aa = reinterpret_cast<strange__symbol_a* const>(at);
+		auto const aa = reinterpret_cast<strange__symbol_a* const>(ab);
 		if (aa->d != ma->d)
 		{
 			if (!--(aa->d->refs))
@@ -114,7 +113,6 @@ extern "C"
 			*aa = *ma;
 			++(ma->d->refs);
 		}
-		return true;
 	}
 
 	strange__symbol_a strange__symbol_type_f(void const* const me)
@@ -144,7 +142,7 @@ extern "C"
 			std::exit(1);
 		}
 		std::memcpy(rd->symbol, md->symbol, md->length);
-		std::memcpy(rd->symbol + md->length, sa->o->to_c_string(sa), symbol_length + 1);
+		std::memcpy(rd->symbol + md->length, sa->o->to_char_star(sa), symbol_length + 1);
 
 		strange__symbol_a r;
 		r.d = reinterpret_cast<strange__thing_d*>(rd);
@@ -153,7 +151,7 @@ extern "C"
 		return r;
 	}
 
-	char const* strange__symbol_to_c_string_f(void const* const me)
+	char const* strange__symbol_to_char_star_f(void const* const me)
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d* const>(ma->d);

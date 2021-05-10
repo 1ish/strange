@@ -4,7 +4,7 @@
 #define STRANGE__SYMBOL_O \
 		STRANGE__ANY_O \
 		strange__symbol_a (*add)(void const* const me, void const* const symbol); \
-		char const* (*to_c_string)(void const* const me); \
+		char const* (*to_char_star)(void const* const me); /* non-standard */ \
 		size_t (*length)(void const* const me); \
 
 extern "C"

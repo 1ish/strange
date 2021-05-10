@@ -66,20 +66,19 @@ extern "C"
 		++(ca->d->refs);
 	}
 
-	bool strange__thing_is_f(void const* const me, void const* const at)
+	bool strange__thing_is_f(void const* const me, void const* const ab)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
-		auto const aa = reinterpret_cast<strange__any_a const* const>(at);
-		// at.cat in me.cats
+		auto const aa = reinterpret_cast<strange__any_a const* const>(ab);
+		// ab.cat in me.cats
 		static strange__thing_d* const mat = strange__any_cat_f(me).d;
-		return aa->d == ma->d ||
-			aa->o->cat(aa).d == mat;
+		return aa->d == ma->d || aa->o->cat(aa).d == mat;
 	}
 
-	bool strange__thing_as_f(void const* const me, void* const at)
+	void strange__thing_as_f(void const* const me, void* const ab)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
-		auto const aa = reinterpret_cast<strange__any_a* const>(at);
+		auto const aa = reinterpret_cast<strange__any_a* const>(ab);
 		if (aa->d != ma->d)
 		{
 			if (!--(aa->d->refs))
@@ -90,7 +89,6 @@ extern "C"
 			*aa = *ma;
 			++(ma->d->refs);
 		}
-		return true;
 	}
 
 	strange__symbol_a strange__thing_type_f(void const* const me)
