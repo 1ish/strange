@@ -132,7 +132,7 @@ extern "C"
 
 	strange__symbol_a strange__thing__type_f(void const* const me /* <any># */)
 	{
-		static auto r = var(sym("strange::thing"));
+		static auto r = var(strange__symbol("strange::thing"));
 		return r.ret();
 	}
 

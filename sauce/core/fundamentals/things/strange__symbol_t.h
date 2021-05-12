@@ -83,8 +83,8 @@ extern "C"
 	size_t strange__symbol__length_f(void const* const me /* <symbol># */);
 
 	// constructors
-	strange__symbol_a sym(char const* const s);
-	strange__symbol_a no_sym();
+	strange__symbol_a strange__symbol(char const* const s);
+	strange__symbol_a strange__no_symbol();
 }
 
 #endif

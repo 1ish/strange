@@ -161,7 +161,7 @@ extern "C"
 
 	strange__symbol_a strange__symbol__type_f(void const* const me /* <symbol># */)
 	{
-		static auto r = var(sym("strange::symbol"));
+		static auto r = var(strange__symbol("strange::symbol"));
 		return r.ret();
 	}
 
@@ -170,7 +170,7 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
-		auto os = var(no_sym());
+		auto os = var(strange__no_symbol());
 		if (oa->o->is(oa, os))
 		{
 			oa->o->as(oa, os);
@@ -196,7 +196,7 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
-		auto os = var(no_sym());
+		auto os = var(strange__no_symbol());
 		if (oa->o->is(oa, os))
 		{
 			oa->o->as(oa, os);
@@ -222,7 +222,7 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
-		auto os = var(no_sym());
+		auto os = var(strange__no_symbol());
 		if (oa->o->is(oa, os))
 		{
 			oa->o->as(oa, os);
@@ -248,7 +248,7 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
-		auto os = var(no_sym());
+		auto os = var(strange__no_symbol());
 		if (oa->o->is(oa, os))
 		{
 			oa->o->as(oa, os);
@@ -274,7 +274,7 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
-		auto os = var(no_sym());
+		auto os = var(strange__no_symbol());
 		if (oa->o->is(oa, os))
 		{
 			oa->o->as(oa, os);
@@ -300,7 +300,7 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
-		auto os = var(no_sym());
+		auto os = var(strange__no_symbol());
 		if (oa->o->is(oa, os))
 		{
 			oa->o->as(oa, os);
@@ -366,7 +366,7 @@ extern "C"
 		return md->length;
 	}
 
-	strange__symbol_a sym(char const* const s)
+	strange__symbol_a strange__symbol(char const* const s)
 	{
 		auto const rd = reinterpret_cast<strange__symbol_d* const>(std::malloc(sizeof(strange__symbol_d))); std::cout << "malloc\n";
 		if (!rd)
@@ -390,7 +390,7 @@ extern "C"
 		return r;
 	}
 
-	strange__symbol_a no_sym()
+	strange__symbol_a strange__no_symbol()
 	{
 		auto const rd = reinterpret_cast<strange__symbol_d* const>(std::malloc(sizeof(strange__symbol_d))); std::cout << "malloc\n";
 		if (!rd)

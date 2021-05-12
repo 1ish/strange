@@ -10,14 +10,14 @@ extern "C"
 
     void test()
     {
-        auto v = var(sym("auto"));
+        auto v = var(strange__symbol("auto"));
         testp(v);
         auto tv = var(v.a.o->type(v));
         tv = v;
-        auto s = val(sym("test"));
+        auto s = val(strange__symbol("test"));
         auto t = val(s.a.o->type(s));
         auto u = val(s.a.o->add(s, t));
-        val(u.a.o->add(u, val(sym("y"))));
+        val(u.a.o->add(u, val(strange__symbol("y"))));
 
         std__cout << ((strange__symbol_d*)(u.a.d))->symbol << "\n";
     }
