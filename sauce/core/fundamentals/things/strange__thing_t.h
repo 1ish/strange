@@ -76,8 +76,6 @@ extern "C"
 	bool strange__thing___greater_or_equal_f(void const* const me /* <any># */,
 		void const* const other /* <any># */);
 
-	void mutate(void* const me /* <any># */);
-
 	// constructors
 	strange__any_a strange__something();
 	strange__any_a strange__nothing();

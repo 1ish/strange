@@ -85,6 +85,18 @@ inline strange__value_c<A> var(A const& a)
     return strange__value_c<A>(a);
 }
 
+inline void mut(void* const me /* <any>= */)
+{
+    auto const ma = reinterpret_cast<strange__any_a* const>(me);
+    if (ma->d->refs > 1)
+    {
+        strange__any_a cp = *ma;
+        ma->o->_copy(me, &cp);
+        --(ma->d->refs);
+        *ma = cp;
+    }
+}
+
 }
 
 #endif

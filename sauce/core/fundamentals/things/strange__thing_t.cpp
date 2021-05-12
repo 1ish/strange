@@ -242,18 +242,6 @@ extern "C"
 		return ma->d >= oa->d;
 	}
 
-	void mutate(void* const me /* <any>= */)
-	{
-		auto const ma = reinterpret_cast<strange__any_a* const>(me);
-		if (ma->d->refs > 1)
-		{
-			strange__any_a cp = *ma;
-			ma->o->_copy(me, &cp);
-			--(ma->d->refs);
-			*ma = cp;
-		}
-	}
-
 	strange__any_a strange__something()
 	{
 		static auto r = strange::var([]()
