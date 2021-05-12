@@ -335,7 +335,7 @@ extern "C"
 		}
 		rd->refs = 1;
 
-		size_t const symbol_length = sa->o->length(sa);
+		int64_t const symbol_length = sa->o->length(sa);
 		rd->length = md->length + symbol_length;
 		rd->symbol = reinterpret_cast<char*>(std::malloc(rd->length + 1)); std::cout << "malloc\n";
 		if (!rd->symbol)
@@ -359,7 +359,7 @@ extern "C"
 		return md->symbol;
 	}
 
-	size_t strange__symbol__length_f(void const* const me /* <symbol># */)
+	int64_t strange__symbol__length_f(void const* const me /* <symbol># */)
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d* const>(ma->d);

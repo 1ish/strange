@@ -4,7 +4,7 @@
 #define STRANGE__SYMBOL_D \
 		STRANGE__THING_D \
 		char* symbol; \
-		size_t length; \
+		int64_t length; \
 
 extern "C"
 {
@@ -80,7 +80,7 @@ extern "C"
 
 	char const* strange__symbol___to_char_star_f(void const* const me /* <symbol># */);
 
-	size_t strange__symbol__length_f(void const* const me /* <symbol># */);
+	int64_t strange__symbol__length_f(void const* const me /* <symbol># */);
 
 	// constructors
 	strange__symbol_a strange__symbol(char const* const s);

@@ -6,7 +6,7 @@
 		strange__symbol_a (*add)(void const* const me /* <symbol># */, \
 			void const* const symbol /* <symbol># */); \
 		char const* (*_to_char_star)(void const* const me /* <symbol># */); \
-		size_t (*length)(void const* const me /* <symbol># */); \
+		int64_t (*length)(void const* const me /* <symbol># */); \
 
 extern "C"
 {

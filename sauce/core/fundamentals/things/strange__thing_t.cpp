@@ -254,7 +254,7 @@ extern "C"
 		}
 	}
 
-	strange__any_a something()
+	strange__any_a strange__something()
 	{
 		static auto r = var([]()
 		{
@@ -271,7 +271,7 @@ extern "C"
 		return r.ret();
 	}
 
-	strange__any_a nothing()
+	strange__any_a strange__nothing()
 	{
 		static auto r = var([]()
 		{

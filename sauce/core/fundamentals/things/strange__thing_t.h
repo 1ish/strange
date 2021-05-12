@@ -79,8 +79,8 @@ extern "C"
 	void mutate(void* const me /* <any># */);
 
 	// constructors
-	strange__any_a something();
-	strange__any_a nothing();
+	strange__any_a strange__something();
+	strange__any_a strange__nothing();
 }
 
 #endif
