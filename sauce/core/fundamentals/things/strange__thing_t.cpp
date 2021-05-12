@@ -132,7 +132,7 @@ extern "C"
 
 	strange__symbol_a strange__thing__type_f(void const* const me /* <any># */)
 	{
-		static auto r = var(strange__symbol("strange::thing"));
+		static auto r = strange::var(strange__symbol("strange::thing"));
 		return r.ret();
 	}
 
@@ -256,7 +256,7 @@ extern "C"
 
 	strange__any_a strange__something()
 	{
-		static auto r = var([]()
+		static auto r = strange::var([]()
 		{
 			strange__any_a r;
 			r.d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__thing_d))); std::cout << "malloc\n";
@@ -273,7 +273,7 @@ extern "C"
 
 	strange__any_a strange__nothing()
 	{
-		static auto r = var([]()
+		static auto r = strange::var([]()
 		{
 			strange__any_a r;
 			r.d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__thing_d))); std::cout << "malloc\n";

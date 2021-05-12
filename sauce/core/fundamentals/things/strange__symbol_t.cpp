@@ -161,7 +161,7 @@ extern "C"
 
 	strange__symbol_a strange__symbol__type_f(void const* const me /* <symbol># */)
 	{
-		static auto r = var(strange__symbol("strange::symbol"));
+		static auto r = strange::var(strange__symbol("strange::symbol"));
 		return r.ret();
 	}
 
@@ -170,7 +170,7 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
-		auto os = var(strange__no_symbol());
+		auto os = strange::var(strange__no_symbol());
 		if (oa->o->is(oa, os))
 		{
 			oa->o->as(oa, os);
@@ -196,7 +196,7 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
-		auto os = var(strange__no_symbol());
+		auto os = strange::var(strange__no_symbol());
 		if (oa->o->is(oa, os))
 		{
 			oa->o->as(oa, os);
@@ -222,7 +222,7 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
-		auto os = var(strange__no_symbol());
+		auto os = strange::var(strange__no_symbol());
 		if (oa->o->is(oa, os))
 		{
 			oa->o->as(oa, os);
@@ -248,7 +248,7 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
-		auto os = var(strange__no_symbol());
+		auto os = strange::var(strange__no_symbol());
 		if (oa->o->is(oa, os))
 		{
 			oa->o->as(oa, os);
@@ -274,7 +274,7 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
-		auto os = var(strange__no_symbol());
+		auto os = strange::var(strange__no_symbol());
 		if (oa->o->is(oa, os))
 		{
 			oa->o->as(oa, os);
@@ -300,7 +300,7 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
-		auto os = var(strange__no_symbol());
+		auto os = strange::var(strange__no_symbol());
 		if (oa->o->is(oa, os))
 		{
 			oa->o->as(oa, os);

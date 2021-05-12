@@ -4,6 +4,9 @@
 #include <cstdlib>
 #include <iostream>
 
+namespace strange
+{
+
 template <typename A>
 struct strange__value_c
 {
@@ -80,6 +83,8 @@ template <typename A>
 inline strange__value_c<A> var(A const& a)
 {
     return strange__value_c<A>(a);
+}
+
 }
 
 #endif

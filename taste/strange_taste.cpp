@@ -25,4 +25,6 @@ std::ostream& std__cout = discard;
 
 #include <iostream>
 
+using namespace strange;
+
 #include "core/fundamentals/taste__strange__thing_t.hpp"
