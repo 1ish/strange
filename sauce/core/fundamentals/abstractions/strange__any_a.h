@@ -13,8 +13,12 @@
 		void (*_as)(void const* const me /* <any># */, \
 			void* const ab /* <any>= */); \
 		strange__symbol_a (*type)(void const* const me /* <any># */); \
+		void (*set_something)(void* const me /* <any>= */, \
+			bool something); \
 		bool (*something)(void const* const me /* <any># */); \
-		bool (*nothing)(void const* const me /* <any># */); \
+		void (*set_error)(void* const me /* <any>= */, \
+			void const* const error /* <any># */); \
+		strange__any_a (*error)(void const* const me /* <any># */); \
 		bool (*equal)(void const* const me /* <any># */, \
 			void const* const other /* <any># */); \
 		bool (*_equal)(void const* const me /* <any># */, \

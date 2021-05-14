@@ -2,6 +2,7 @@
 #include "../../utilities/strange__value_c.hpp"
 
 #include <cstdlib>
+#include <cstring>
 #include <iostream>
 #include <utility>
 
@@ -11,6 +12,7 @@ extern "C"
 	{
 		static strange__any_o o =
 		{
+			// any_a
 			strange__any__cat_f,
 			strange__thing___free_f,
 			strange__thing___copy_f,
@@ -18,8 +20,10 @@ extern "C"
 			strange__thing__as_f,
 			strange__thing___as_f,
 			strange__thing__type_f,
+			strange__thing__set_something_f,
 			strange__thing__something_f,
-			strange__thing__nothing_f,
+			strange__thing__set_error_f,
+			strange__thing__error_f,
 			strange__thing__equal_f,
 			strange__thing___equal_f,
 			strange__thing__not_equal_f,
@@ -47,38 +51,44 @@ extern "C"
 		return &p;
 	}
 
-	strange__any_o const* strange__thing_n_f()
-	{
-		static strange__any_o n = []()
-		{
-			strange__any_o n = *strange__thing_o_f();
-			std::swap(n.something, n.nothing);
-			return n;
-		}();
-		return &n;
-	}
-
 	void strange__thing___free_f(void const* const me /* <any># */)
 	{
+		if (!strange__thing__something_f(me))
+		{
+			auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+			strange::rel(&(ma->d->error));
+		}
 	}
 
 	void strange__thing___copy_f(void const* const me /* <any># */,
 		void* const cp /* <any>= */)
 	{
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const ca = reinterpret_cast<strange__any_a* const>(cp);
 		ca->d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__thing_d)));
 		if (!ca->d)
 		{
-			std::exit(1);
+			std::abort();
 		}
-		ca->d->refs = 1;
+		std::memcpy(ca->d, ma->d, sizeof(strange__thing_d));
+		strange__thing___clone_f(me, cp);
+	}
+
+	void strange__thing___clone_f(void const* const me /* <any># */,
+		void* const cp /* <any>= */)
+	{
+		auto const ca = reinterpret_cast<strange__any_a* const>(cp);
+		strange::one(ca);
+		if (!strange__thing__something_f(ca))
+		{
+			strange::ref(&(ca->d->error));
+		}
 	}
 
 	void strange__thing___no_copy_f(void const* const me /* <any># */,
 		void* const cp /* <any>= */)
 	{
-		auto const ca = reinterpret_cast<strange__any_a* const>(cp);
-		++(ca->d->refs);
+		strange::ref(cp);
 	}
 
 	bool strange__thing__is_f(void const* const me /* <any># */,
@@ -109,13 +119,9 @@ extern "C"
 		auto const aa = reinterpret_cast<strange__any_a* const>(ab);
 		if (aa->d != ma->d)
 		{
-			if (!--(aa->d->refs))
-			{
-				aa->o->_free(aa);
-				std::free(aa->d); std::cout << "free\n";
-			}
+			strange::rel(aa);
 			*aa = *ma;
-			++(ma->d->refs);
+			strange::ref(aa);
 		}
 	}
 
@@ -125,14 +131,64 @@ extern "C"
 		return r.ret();
 	}
 
-	bool strange__thing__something_f(void const* const me /* <any># */)
+	void strange__thing__set_something_f(void* const me /* <any>= */,
+		bool something)
 	{
-		return true;
+		if (something == strange__thing__something_f(me))
+		{
+			return;
+		}
+		strange::mut(me);
+		auto const ma = reinterpret_cast<strange__any_a* const>(me);
+		if (something)
+		{
+			strange::rel(&(ma->d->error));
+			ma->d->error.d = 0;
+			ma->d->error.o = 0;
+		}
+		else
+		{
+			ma->d->error = strange__thing();
+		}
 	}
 
-	bool strange__thing__nothing_f(void const* const me /* <any># */)
+	bool strange__thing__something_f(void const* const me /* <any># */)
 	{
-		return false;
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		return !ma->d->error.d;
+	}
+
+	void strange__thing__set_error_f(void* const me /* <any>= */,
+		void const* const error /* <any># */)
+	{
+		auto const ma = reinterpret_cast<strange__any_a* const>(me);
+		auto const ea = reinterpret_cast<strange__any_a const* const>(error);
+		if (ea->d == ma->d->error.d)
+		{
+			return;
+		}
+		auto const nothing = strange::val(strange__nothing());
+		if (ea->d == nothing.a.d) // no error
+		{
+			strange__thing__set_something_f(me, true);
+		}
+		else
+		{
+			strange::mut(me);
+			ma->d->error = *ea;
+			strange::ref(ea);
+		}
+	}
+
+	strange__any_a strange__thing__error_f(void const* const me /* <any># */)
+	{
+		if (strange__thing__something_f(me))
+		{
+			return strange__nothing();
+		}
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		strange::ref(&(ma->d->error));
+		return ma->d->error;
 	}
 
 	bool strange__thing__equal_f(void const* const me /* <any># */,
@@ -219,7 +275,7 @@ extern "C"
 		return ma->d >= oa->d;
 	}
 
-	strange__any_a strange__something()
+	strange__any_a strange__thing()
 	{
 		static auto r = strange::var([]()
 		{
@@ -227,9 +283,11 @@ extern "C"
 			r.d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__thing_d))); std::cout << "malloc\n";
 			if (!r.d)
 			{
-				std::exit(1);
+				std::abort();
 			}
-			r.d->refs = 1;
+			strange::one(&r);
+			r.d->error.d = 0;
+			r.d->error.o = 0;
 			r.o = strange__thing_o_f();
 			return r;
 		}());
@@ -244,10 +302,11 @@ extern "C"
 			r.d = reinterpret_cast<strange__thing_d*>(std::malloc(sizeof(strange__thing_d))); std::cout << "malloc\n";
 			if (!r.d)
 			{
-				std::exit(1);
+				std::abort();
 			}
-			r.d->refs = 1;
-			r.o = strange__thing_n_f();
+			strange::one(&r);
+			r.d->error = strange__thing();
+			r.o = strange__thing_o_f();
 			return r;
 		}());
 		return r.ret();

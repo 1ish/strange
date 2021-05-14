@@ -3,6 +3,7 @@
 
 #define STRANGE__THING_D \
 		int64_t refs; \
+		strange__any_a error; \
 
 extern "C"
 {
@@ -14,12 +15,14 @@ extern "C"
 	// any_o
 	strange__any_o const* strange__thing_o_f();
 	strange__any_o const* strange__thing_p_f();
-	strange__any_o const* strange__thing_n_f();
 
 	// any_a
 	void strange__thing___free_f(void const* const me /* <any># */);
 
 	void strange__thing___copy_f(void const* const me /* <any># */,
+		void* const cp /* <any>= */);
+
+	void strange__thing___clone_f(void const* const me /* <any># */,
 		void* const cp /* <any>= */);
 
 	void strange__thing___no_copy_f(void const* const me /* <any># */,
@@ -36,9 +39,15 @@ extern "C"
 
 	strange__symbol_a strange__thing__type_f(void const* const me /* <any># */);
 
+	void strange__thing__set_something_f(void* const me /* <any>= */,
+		bool something);
+
 	bool strange__thing__something_f(void const* const me /* <any># */);
 
-	bool strange__thing__nothing_f(void const* const me /* <any># */);
+	void strange__thing__set_error_f(void* const me /* <any>= */,
+		void const* const error /* <any># */);
+
+	strange__any_a strange__thing__error_f(void const* const me /* <any># */);
 
 	bool strange__thing__equal_f(void const* const me /* <any># */,
 		void const* const other /* <any># */);
@@ -76,8 +85,9 @@ extern "C"
 	bool strange__thing___greater_or_equal_f(void const* const me /* <any># */,
 		void const* const other /* <any># */);
 
+	//TODO need to factor out base class constructor
 	// constructors
-	strange__any_a strange__something();
+	strange__any_a strange__thing();
 	strange__any_a strange__nothing();
 }
 

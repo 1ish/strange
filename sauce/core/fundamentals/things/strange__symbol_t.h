@@ -16,7 +16,6 @@ extern "C"
 	// symbol_o
 	strange__symbol_o const* strange__symbol_o_f();
 	strange__symbol_o const* strange__symbol_p_f();
-	strange__symbol_o const* strange__symbol_n_f();
 
 	// any_a
 	void strange__symbol___free_f(void const* const me /* <symbol># */);
@@ -84,7 +83,7 @@ extern "C"
 
 	// constructors
 	strange__symbol_a strange__symbol(char const* const s);
-	strange__symbol_a strange__no_symbol();
+	strange__symbol_a strange__symbol_empty();
 }
 
 #endif
