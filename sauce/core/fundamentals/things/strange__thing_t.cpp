@@ -51,7 +51,7 @@ extern "C"
 		return &p;
 	}
 
-	void strange__thing___free_f(void const* const me /* <any># */)
+	void strange__thing___free_f(void const* const me /* :<any># */)
 	{
 		if (!strange__thing__something_f(me))
 		{
@@ -60,8 +60,8 @@ extern "C"
 		}
 	}
 
-	void strange__thing___copy_f(void const* const me /* <any># */,
-		void* const cp /* <any>= */)
+	void strange__thing___copy_f(void const* const me /* :<any># */,
+		void* const cp /* :<any>= */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const ca = reinterpret_cast<strange__any_a* const>(cp);
@@ -74,8 +74,8 @@ extern "C"
 		strange__thing___clone_f(me, cp);
 	}
 
-	void strange__thing___clone_f(void const* const me /* <any># */,
-		void* const cp /* <any>= */)
+	void strange__thing___clone_f(void const* const me /* :<any># */,
+		void* const cp /* :<any>= */)
 	{
 		auto const ca = reinterpret_cast<strange__any_a* const>(cp);
 		strange::one(ca);
@@ -85,14 +85,14 @@ extern "C"
 		}
 	}
 
-	void strange__thing___no_copy_f(void const* const me /* <any># */,
-		void* const cp /* <any>= */)
+	void strange__thing___no_copy_f(void const* const me /* :<any># */,
+		void* const cp /* :<any>= */)
 	{
 		strange::ref(cp);
 	}
 
-	bool strange__thing__is_f(void const* const me /* <any># */,
-		void const* const ab /* <any># */)
+	bool strange__thing__is_f(void const* const me /* :<any># */,
+		void const* const ab /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const aa = reinterpret_cast<strange__any_a const* const>(ab);
@@ -101,8 +101,8 @@ extern "C"
 		return aa->d == ma->d || aa->o->cat(aa).d == mat;
 	}
 
-	bool strange__thing__as_f(void const* const me /* <any># */,
-		void* const ab /* <any>= */)
+	bool strange__thing__as_f(void const* const me /* :<any># */,
+		void* const ab /* :<any>= */)
 	{
 		if (!strange__thing__is_f(me, ab))
 		{
@@ -112,8 +112,8 @@ extern "C"
 		return true;
 	}
 
-	void strange__thing___as_f(void const* const me /* <any># */,
-		void* const ab /* <any>= */)
+	void strange__thing___as_f(void const* const me /* :<any># */,
+		void* const ab /* :<any>= */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const aa = reinterpret_cast<strange__any_a* const>(ab);
@@ -125,14 +125,14 @@ extern "C"
 		}
 	}
 
-	strange__symbol_a strange__thing__type_f(void const* const me /* <any># */)
+	strange__symbol_a strange__thing__type_f(void const* const me /* :<any># */)
 	{
 		static auto r = strange::var(strange__symbol("strange::thing"));
 		return r.ret();
 	}
 
-	void strange__thing__set_something_f(void* const me /* <any>= */,
-		bool something)
+	void strange__thing__set_something_f(void* const me /* :<any>= */,
+		bool something /* :<_bool># */)
 	{
 		if (something == strange__thing__something_f(me))
 		{
@@ -152,14 +152,14 @@ extern "C"
 		}
 	}
 
-	bool strange__thing__something_f(void const* const me /* <any># */)
+	bool strange__thing__something_f(void const* const me /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		return !ma->d->error.d;
 	}
 
-	void strange__thing__set_error_f(void* const me /* <any>= */,
-		void const* const error /* <any># */)
+	void strange__thing__set_error_f(void* const me /* :<any>= */,
+		void const* const error /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a* const>(me);
 		auto const ea = reinterpret_cast<strange__any_a const* const>(error);
@@ -180,7 +180,7 @@ extern "C"
 		}
 	}
 
-	strange__any_a strange__thing__error_f(void const* const me /* <any># */)
+	strange__any_a strange__thing__error_f(void const* const me /* :<any># */)
 	{
 		if (strange__thing__something_f(me))
 		{
@@ -191,84 +191,84 @@ extern "C"
 		return ma->d->error;
 	}
 
-	bool strange__thing__equal_f(void const* const me /* <any># */,
-		void const* const other /* <any># */)
+	bool strange__thing__equal_f(void const* const me /* :<any># */,
+		void const* const other /* :<any># */)
 	{
 		return strange__thing___equal_f(me, other);
 	}
 
-	bool strange__thing___equal_f(void const* const me /* <any># */,
-		void const* const other /* <any># */)
+	bool strange__thing___equal_f(void const* const me /* :<any># */,
+		void const* const other /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
 		return ma->d == oa->d;
 	}
 
-	bool strange__thing__not_equal_f(void const* const me /* <any># */,
-		void const* const other /* <any># */)
+	bool strange__thing__not_equal_f(void const* const me /* :<any># */,
+		void const* const other /* :<any># */)
 	{
 		return strange__thing___not_equal_f(me, other);
 	}
 
-	bool strange__thing___not_equal_f(void const* const me /* <any># */,
-		void const* const other /* <any># */)
+	bool strange__thing___not_equal_f(void const* const me /* :<any># */,
+		void const* const other /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
 		return ma->d != oa->d;
 	}
 
-	bool strange__thing__less_f(void const* const me /* <any># */,
-		void const* const other /* <any># */)
+	bool strange__thing__less_f(void const* const me /* :<any># */,
+		void const* const other /* :<any># */)
 	{
 		return strange__thing___less_f(me, other);
 	}
 
-	bool strange__thing___less_f(void const* const me /* <any># */,
-		void const* const other /* <any># */)
+	bool strange__thing___less_f(void const* const me /* :<any># */,
+		void const* const other /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
 		return ma->d < oa->d;
 	}
 
-	bool strange__thing__greater_f(void const* const me /* <any># */,
-		void const* const other /* <any># */)
+	bool strange__thing__greater_f(void const* const me /* :<any># */,
+		void const* const other /* :<any># */)
 	{
 		return strange__thing___greater_f(me, other);
 	}
 
-	bool strange__thing___greater_f(void const* const me /* <any># */,
-		void const* const other /* <any># */)
+	bool strange__thing___greater_f(void const* const me /* :<any># */,
+		void const* const other /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
 		return ma->d > oa->d;
 	}
 
-	bool strange__thing__less_or_equal_f(void const* const me /* <any># */,
-		void const* const other /* <any># */)
+	bool strange__thing__less_or_equal_f(void const* const me /* :<any># */,
+		void const* const other /* :<any># */)
 	{
 		return strange__thing___less_or_equal_f(me, other);
 	}
 
-	bool strange__thing___less_or_equal_f(void const* const me /* <any># */,
-		void const* const other /* <any># */)
+	bool strange__thing___less_or_equal_f(void const* const me /* :<any># */,
+		void const* const other /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
 		return ma->d <= oa->d;
 	}
 
-	bool strange__thing__greater_or_equal_f(void const* const me /* <any># */,
-		void const* const other /* <any># */)
+	bool strange__thing__greater_or_equal_f(void const* const me /* :<any># */,
+		void const* const other /* :<any># */)
 	{
 		return strange__thing___greater_or_equal_f(me, other);
 	}
 
-	bool strange__thing___greater_or_equal_f(void const* const me /* <any># */,
-		void const* const other /* <any># */)
+	bool strange__thing___greater_or_equal_f(void const* const me /* :<any># */,
+		void const* const other /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
