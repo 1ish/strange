@@ -42,8 +42,13 @@ extern "C"
 
 	strange__symbol_a strange__thing__type_f(void const* const me /* :<any># */);
 
+	void strange__thing___set_pointer_f(void* const me /* :<any>= */,
+		bool is_pointer /* :_bool_# */);
+
+	bool strange__thing___pointer_f(void const* const me /* :<any># */);
+
 	void strange__thing__set_something_f(void* const me /* :<any>= */,
-		bool something /* :<_bool># */);
+		bool is_something /* :_bool_# */);
 
 	bool strange__thing__something_f(void const* const me /* :<any># */);
 

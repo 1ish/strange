@@ -20,8 +20,13 @@
 \
 		strange__symbol_a (*type)(void const* const me /* :<any># */); \
 \
+		void (*_set_pointer)(void* const me /* :<any>= */, \
+			bool is_pointer /* :_bool_# */ ); \
+\
+		bool (*_pointer)(void const* const me /* :<any># */); \
+\
 		void (*set_something)(void* const me /* :<any>= */, \
-			bool something /* :<_bool># */); \
+			bool is_something /* :_bool_# */); \
 \
 		bool (*something)(void const* const me /* :<any># */); \
 \

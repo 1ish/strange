@@ -21,6 +21,8 @@ extern "C"
 			strange__thing__as_f,
 			strange__thing___as_f,
 			strange__thing__type_f,
+			strange__thing___set_pointer_f,
+			strange__thing___pointer_f,
 			strange__thing__set_something_f,
 			strange__thing__something_f,
 			strange__thing__set_error_f,
@@ -143,16 +145,36 @@ extern "C"
 		return r.ret();
 	}
 
-	void strange__thing__set_something_f(void* const me /* :<any>= */,
-		bool something /* :<_bool># */)
+	void strange__thing___set_pointer_f(void* const me /* :<any>= */,
+		bool is_pointer /* :_bool_# */)
 	{
-		if (something == strange__thing__something_f(me))
+		auto const ma = reinterpret_cast<strange__any_a* const>(me);
+		if (is_pointer)
+		{
+			ma->o = strange__thing_p_f();
+		}
+		else
+		{
+			ma->o = strange__thing_o_f();
+		}
+	}
+
+	bool strange__thing___pointer_f(void const* const me /* :<any># */)
+	{
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		return ma->o == strange__thing_p_f();
+	}
+
+	void strange__thing__set_something_f(void* const me /* :<any>= */,
+		bool is_something /* :_bool_# */)
+	{
+		if (is_something == strange__thing__something_f(me))
 		{
 			return;
 		}
 		strange::mut(me);
 		auto const ma = reinterpret_cast<strange__any_a* const>(me);
-		if (something)
+		if (is_something)
 		{
 			strange::rel(&(ma->d->error));
 			ma->d->error.d = 0;

@@ -19,7 +19,7 @@ extern "C"
 
 	// init
 	void strange__symbol_init_f(void* const me /* :<symbol>= */,
-		char const* const s /* :<_char_star># */);
+		char const* const s /* :_char_star_# */);
 
 	// any_a
 	void strange__symbol___free_f(void const* const me /* :<symbol># */);
@@ -40,6 +40,11 @@ extern "C"
 		void* const ab /* :<any>= */);
 
 	strange__symbol_a strange__symbol__type_f(void const* const me /* :<symbol># */);
+
+	void strange__symbol___set_pointer_f(void* const me /* :<symbol>= */,
+		bool is_pointer /* :_bool_# */);
+
+	bool strange__symbol___pointer_f(void const* const me /* :<symbol># */);
 
 	bool strange__symbol__equal_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<any># */);
@@ -79,14 +84,14 @@ extern "C"
 
 	// symbol_a
 	strange__symbol_a strange__symbol__add_f(void const* const me /* :<symbol># */,
-		void const* const symbol /* :<symbol># */);
+		void const* const suffix /* :<symbol># */);
 
-	char const* strange__symbol___to_char_star_f(void const* const me /* :<symbol># */);
+	char const* strange__symbol__to_char_star_f(void const* const me /* :<symbol># */);
 
 	int64_t strange__symbol__length_f(void const* const me /* :<symbol># */);
 
 	// constructors
-	strange__symbol_a strange__symbol(char const* const s /* :<_char_star># */);
+	strange__symbol_a strange__symbol(char const* const s /* :_char_star_# */);
 	strange__symbol_a strange__symbol_empty();
 }
 

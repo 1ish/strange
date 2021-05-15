@@ -4,9 +4,9 @@
 #define STRANGE__SYMBOL_O \
 		STRANGE__ANY_O \
 		strange__symbol_a (*add)(void const* const me /* :<symbol># */, \
-			void const* const symbol /* :<symbol># */); \
+			void const* const suffix /* :<symbol># */); \
 \
-		char const* (*_to_char_star)(void const* const me /* :<symbol># */); \
+		char const* (*to_char_star)(void const* const me /* :<symbol># */); \
 \
 		int64_t (*length)(void const* const me /* :<symbol># */); \
 
