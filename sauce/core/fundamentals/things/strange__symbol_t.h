@@ -17,6 +17,10 @@ extern "C"
 	strange__symbol_o const* strange__symbol_o_f();
 	strange__symbol_o const* strange__symbol_p_f();
 
+	// init
+	void strange__symbol_init_f(void* const me /* :<symbol>= */,
+		char const* const s /* :<_char_star># */);
+
 	// any_a
 	void strange__symbol___free_f(void const* const me /* :<symbol># */);
 
@@ -81,7 +85,6 @@ extern "C"
 
 	int64_t strange__symbol__length_f(void const* const me /* :<symbol># */);
 
-	//TODO need to factor out base class constructor
 	// constructors
 	strange__symbol_a strange__symbol(char const* const s /* :<_char_star># */);
 	strange__symbol_a strange__symbol_empty();

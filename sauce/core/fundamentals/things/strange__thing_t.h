@@ -16,6 +16,9 @@ extern "C"
 	strange__any_o const* strange__thing_o_f();
 	strange__any_o const* strange__thing_p_f();
 
+	// init
+	void strange__thing_init_f(void* const me /* :<any>= */);
+
 	// any_a
 	void strange__thing___free_f(void const* const me /* :<any># */);
 
@@ -85,7 +88,6 @@ extern "C"
 	bool strange__thing___greater_or_equal_f(void const* const me /* :<any># */,
 		void const* const other /* :<any># */);
 
-	//TODO need to factor out base class constructor
 	// constructors
 	strange__any_a strange__thing();
 	strange__any_a strange__nothing();

@@ -8,6 +8,7 @@
 
 extern "C"
 {
+	// any_o
 	strange__any_o const* strange__thing_o_f()
 	{
 		static strange__any_o o =
@@ -51,6 +52,17 @@ extern "C"
 		return &p;
 	}
 
+	// init
+	void strange__thing_init_f(void* const me /* :<any>= */)
+	{
+		auto const ma = reinterpret_cast<strange__any_a* const>(me);
+		strange::one(ma);
+		ma->d->error.d = 0;
+		ma->d->error.o = 0;
+		ma->o = strange__thing_o_f();
+	}
+
+	// any_a
 	void strange__thing___free_f(void const* const me /* :<any># */)
 	{
 		if (!strange__thing__something_f(me))
@@ -275,6 +287,7 @@ extern "C"
 		return ma->d >= oa->d;
 	}
 
+	// constructors
 	strange__any_a strange__thing()
 	{
 		static auto r = strange::var([]()
@@ -285,10 +298,7 @@ extern "C"
 			{
 				std::abort();
 			}
-			strange::one(&r);
-			r.d->error.d = 0;
-			r.d->error.o = 0;
-			r.o = strange__thing_o_f();
+			strange__thing_init_f(&r);
 			return r;
 		}());
 		return r.ret();
@@ -304,9 +314,8 @@ extern "C"
 			{
 				std::abort();
 			}
-			strange::one(&r);
+			strange__thing_init_f(&r);
 			r.d->error = strange__thing();
-			r.o = strange__thing_o_f();
 			return r;
 		}());
 		return r.ret();

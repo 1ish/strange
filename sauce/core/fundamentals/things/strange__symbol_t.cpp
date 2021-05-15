@@ -8,6 +8,7 @@
 
 extern "C"
 {
+	// symbol_o
 	strange__symbol_o const* strange__symbol_o_f()
 	{
 		static strange__symbol_o o =
@@ -55,12 +56,33 @@ extern "C"
 		return &o;
 	}
 
+	// init
+	void strange__symbol_init_f(void* const me /* :<symbol>= */,
+		char const* const s /* :<_char_star># */)
+	{
+		auto const ma = reinterpret_cast<strange__symbol_a* const>(me);
+		auto const md = reinterpret_cast<strange__symbol_d* const>(ma->d);
+		strange__thing_init_f(ma);
+		if (s)
+		{
+			md->length = std::strlen(s);
+			md->symbol = reinterpret_cast<char*>(std::malloc(md->length + 1)); std::cout << "malloc\n";
+			if (!md->symbol)
+			{
+				std::abort();
+			}
+			std::memcpy(md->symbol, s, md->length + 1);
+		}
+		ma->o = strange__symbol_o_f();
+	}
+
+	// any_a
 	void strange__symbol___free_f(void const* const me /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d* const>(ma->d);
 		std::free(md->symbol); std::cout << "free\n";
-		strange__thing___free_f(me);
+		strange__thing___free_f(ma);
 	}
 
 	void strange__symbol___copy_f(void const* const me /* :<symbol># */,
@@ -74,17 +96,17 @@ extern "C"
 			std::abort();
 		}
 		std::memcpy(ca->d, ma->d, sizeof(strange__symbol_d));
-		strange__symbol___clone_f(me, cp);
+		strange__symbol___clone_f(ma, ca);
 	}
 
 	void strange__symbol___clone_f(void const* const me /* :<symbol># */,
 		void* const cp /* :<symbol>= */)
 	{
-		strange__thing___clone_f(me, cp);
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d const* const>(ma->d);
 		auto const ca = reinterpret_cast<strange__symbol_a* const>(cp);
 		auto const cd = reinterpret_cast<strange__symbol_d* const>(ca->d);
+		strange__thing___clone_f(ma, ca);
 		cd->symbol = reinterpret_cast<char*>(std::malloc(cd->length + 1)); std::cout << "malloc\n";
 		if (!cd->symbol)
 		{
@@ -147,9 +169,8 @@ extern "C"
 	{
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
 		auto os = strange::var(strange__symbol_empty());
-		if (oa->o->is(oa, os))
+		if (oa->o->as(oa, os))
 		{
-			oa->o->as(oa, os);
 			return strange__symbol___equal_f(me, os);
 		}
 		return strange__thing__equal_f(me, other);
@@ -158,7 +179,7 @@ extern "C"
 	bool strange__symbol___equal_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<symbol># */)
 	{
-		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d const* const>(ma->d);
 		auto const os = reinterpret_cast<strange__symbol_a const* const>(other);
 		return std::strncmp(md->symbol, os->o->_to_char_star(os),
@@ -170,9 +191,8 @@ extern "C"
 	{
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
 		auto os = strange::var(strange__symbol_empty());
-		if (oa->o->is(oa, os))
+		if (oa->o->as(oa, os))
 		{
-			oa->o->as(oa, os);
 			return strange__symbol___not_equal_f(me, os);
 		}
 		return strange__thing__not_equal_f(me, other);
@@ -181,7 +201,7 @@ extern "C"
 	bool strange__symbol___not_equal_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<symbol># */)
 	{
-		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d const* const>(ma->d);
 		auto const os = reinterpret_cast<strange__symbol_a const* const>(other);
 		return std::strncmp(md->symbol, os->o->_to_char_star(os),
@@ -193,9 +213,8 @@ extern "C"
 	{
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
 		auto os = strange::var(strange__symbol_empty());
-		if (oa->o->is(oa, os))
+		if (oa->o->as(oa, os))
 		{
-			oa->o->as(oa, os);
 			return strange__symbol___less_f(me, os);
 		}
 		return strange__thing__less_f(me, other);
@@ -204,7 +223,7 @@ extern "C"
 	bool strange__symbol___less_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<symbol># */)
 	{
-		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d const* const>(ma->d);
 		auto const os = reinterpret_cast<strange__symbol_a const* const>(other);
 		return std::strncmp(md->symbol, os->o->_to_char_star(os),
@@ -216,9 +235,8 @@ extern "C"
 	{
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
 		auto os = strange::var(strange__symbol_empty());
-		if (oa->o->is(oa, os))
+		if (oa->o->as(oa, os))
 		{
-			oa->o->as(oa, os);
 			return strange__symbol___greater_f(me, os);
 		}
 		return strange__thing__greater_f(me, other);
@@ -227,7 +245,7 @@ extern "C"
 	bool strange__symbol___greater_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<symbol># */)
 	{
-		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d const* const>(ma->d);
 		auto const os = reinterpret_cast<strange__symbol_a const* const>(other);
 		return std::strncmp(md->symbol, os->o->_to_char_star(os),
@@ -239,9 +257,8 @@ extern "C"
 	{
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
 		auto os = strange::var(strange__symbol_empty());
-		if (oa->o->is(oa, os))
+		if (oa->o->as(oa, os))
 		{
-			oa->o->as(oa, os);
 			return strange__symbol___less_or_equal_f(me, os);
 		}
 		return strange__thing__less_or_equal_f(me, other);
@@ -250,7 +267,7 @@ extern "C"
 	bool strange__symbol___less_or_equal_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<symbol># */)
 	{
-		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d const* const>(ma->d);
 		auto const os = reinterpret_cast<strange__symbol_a const* const>(other);
 		return std::strncmp(md->symbol, os->o->_to_char_star(os),
@@ -262,9 +279,8 @@ extern "C"
 	{
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
 		auto os = strange::var(strange__symbol_empty());
-		if (oa->o->is(oa, os))
+		if (oa->o->as(oa, os))
 		{
-			oa->o->as(oa, os);
 			return strange__symbol___greater_or_equal_f(me, os);
 		}
 		return strange__thing__greater_or_equal_f(me, other);
@@ -273,13 +289,14 @@ extern "C"
 	bool strange__symbol___greater_or_equal_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<symbol># */)
 	{
-		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d const* const>(ma->d);
 		auto const os = reinterpret_cast<strange__symbol_a const* const>(other);
 		return std::strncmp(md->symbol, os->o->_to_char_star(os),
 			std::max(md->length, os->o->length(os))) >= 0;
 	}
 
+	// symbol_a
 	strange__symbol_a strange__symbol__add_f(void const* const me /* :<symbol># */,
 		void const* const symbol /* :<symbol># */)
 	{
@@ -294,11 +311,7 @@ extern "C"
 		}
 		strange__symbol_a r;
 		r.d = reinterpret_cast<strange__thing_d*>(rd);
-
-		strange::one(&r);
-		rd->error.d = 0;
-		rd->error.o = 0;
-
+		strange__symbol_init_f(&r, 0);
 		int64_t const symbol_length = sa->o->length(sa);
 		rd->length = md->length + symbol_length;
 		rd->symbol = reinterpret_cast<char*>(std::malloc(rd->length + 1)); std::cout << "malloc\n";
@@ -308,9 +321,6 @@ extern "C"
 		}
 		std::memcpy(rd->symbol, md->symbol, md->length);
 		std::memcpy(rd->symbol + md->length, sa->o->_to_char_star(sa), symbol_length + 1);
-
-		r.o = strange__symbol_o_f();
-
 		return r;
 	}
 
@@ -328,6 +338,7 @@ extern "C"
 		return md->length;
 	}
 
+	// constructors
 	strange__symbol_a strange__symbol(char const* const s /* :<_char_star># */)
 	{
 		auto const rd = reinterpret_cast<strange__symbol_d* const>(std::malloc(sizeof(strange__symbol_d))); std::cout << "malloc\n";
@@ -337,21 +348,7 @@ extern "C"
 		}
 		strange__symbol_a r;
 		r.d = reinterpret_cast<strange__thing_d*>(rd);
-
-		strange::one(&r);
-		rd->error.d = 0;
-		rd->error.o = 0;
-
-		rd->length = std::strlen(s);
-		rd->symbol = reinterpret_cast<char*>(std::malloc(rd->length + 1)); std::cout << "malloc\n";
-		if (!rd->symbol)
-		{
-			std::abort();
-		}
-		std::memcpy(rd->symbol, s, rd->length + 1);
-
-		r.o = strange__symbol_o_f();
-		
+		strange__symbol_init_f(&r, s);
 		return r;
 	}
 
