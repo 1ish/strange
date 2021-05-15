@@ -110,6 +110,10 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const aa = reinterpret_cast<strange__any_a const* const>(ab);
+		if (aa->o->_pointer(aa) != ma->o->_pointer(ma))
+		{
+			return false;
+		}
 		// ab.cat in me.cats
 		static strange__thing_d* const mat = strange__any__cat_f(me).d;
 		return aa->d == ma->d || aa->o->cat(aa).d == mat;

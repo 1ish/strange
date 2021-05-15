@@ -122,6 +122,10 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const aa = reinterpret_cast<strange__symbol_a const* const>(ab);
+		if (aa->o->_pointer(aa) != ma->o->_pointer(ma))
+		{
+			return false;
+		}
 		if (aa->d == ma->d)
 		{
 			return true;

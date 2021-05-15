@@ -3,9 +3,9 @@
 
 extern "C"
 {
-    void testp(void const* const symbol)
+    void testp(void* const symbol)
     {
-        auto const param = reinterpret_cast<strange__symbol_a const* const>(symbol);
+        auto const param = reinterpret_cast<strange__symbol_a* const>(symbol);
     }
 
     void test()
@@ -20,6 +20,16 @@ extern "C"
         val(u.a.o->add(u, val(strange__symbol("y"))));
 
         std__cout << ((strange__symbol_d*)(u.a.d))->symbol << "\n";
+
+        auto p = ptr(strange__symbol("pointer"));
+        auto q = ptr(strange__symbol("q"));
+        p = q;
+        testp(p);
+        testp(q);
+
+        tv = s;
+        //NO s = v;
+        //NO s = t;
     }
 }
 

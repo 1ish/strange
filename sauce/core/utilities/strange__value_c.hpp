@@ -58,7 +58,57 @@ struct strange__value_c
         rel();
     }
 
-    inline strange__value_c& operator=(strange__value_c const& original)
+    inline operator A const* () const
+    {
+        return &a;
+    }
+
+    inline void ref() const
+    {
+        ++(a.d->refs);
+    }
+
+    inline void rel() const
+    {
+        if (!--(a.d->refs))
+        {
+            a.o->_free(&a);
+            std::free(a.d); std::cout << "free\n";
+        }
+    }
+
+    inline A const ret() const
+    {
+        ++(a.d->refs);
+        return a;
+    }
+
+    A const a;
+};
+
+template <typename A>
+struct strange__variable_c
+{
+    explicit inline strange__variable_c(A const& abstraction) :a(abstraction)
+    {
+    }
+
+    inline strange__variable_c(strange__variable_c const& original) : a(original.a)
+    {
+        ref();
+    }
+
+    inline strange__variable_c(strange__value_c<A const> const& original) : a(original.a)
+    {
+        ref();
+    }
+
+    inline ~strange__variable_c()
+    {
+        rel();
+    }
+
+    inline strange__variable_c& operator=(strange__variable_c const& original)
     {
         if (a.d != original.a.d)
         {
@@ -69,7 +119,18 @@ struct strange__value_c
         return *this;
     }
 
-    inline strange__value_c& operator=(A const& abstraction)
+    inline strange__variable_c& operator=(strange__value_c<A const> const& original)
+    {
+        if (a.d != original.a.d)
+        {
+            rel();
+            a = original.a;
+            ref();
+        }
+        return *this;
+    }
+
+    inline strange__variable_c& operator=(A const& abstraction)
     {
         if (a.d != abstraction.d)
         {
@@ -84,12 +145,17 @@ struct strange__value_c
         return &a;
     }
 
-    inline void ref()
+    inline operator A const* () const
+    {
+        return &a;
+    }
+
+    inline void ref() const
     {
         ++(a.d->refs);
     }
 
-    inline void rel()
+    inline void rel() const
     {
         if (!--(a.d->refs))
         {
@@ -98,7 +164,80 @@ struct strange__value_c
         }
     }
 
-    inline A ret()
+    inline A ret() const
+    {
+        ++(a.d->refs);
+        return a;
+    }
+
+    A a;
+};
+
+template <typename A>
+struct strange__pointer_c
+{
+    explicit inline strange__pointer_c(A const& abstraction) :a(abstraction)
+    {
+        a.o->_set_pointer(&a, true);
+    }
+
+    inline strange__pointer_c(strange__pointer_c const& original) : a(original.a)
+    {
+        ref();
+    }
+
+    inline ~strange__pointer_c()
+    {
+        rel();
+    }
+
+    inline strange__pointer_c& operator=(strange__pointer_c const& original)
+    {
+        if (a.d != original.a.d)
+        {
+            rel();
+            a = original.a;
+            ref();
+        }
+        return *this;
+    }
+
+    inline strange__pointer_c& operator=(A const& abstraction)
+    {
+        if (a.d != abstraction.d)
+        {
+            rel();
+            a = abstraction;
+            a.o->_set_pointer(&a, true);
+        }
+        return *this;
+    }
+
+    inline operator A* ()
+    {
+        return &a;
+    }
+
+    inline operator A const* () const
+    {
+        return &a;
+    }
+
+    inline void ref() const
+    {
+        ++(a.d->refs);
+    }
+
+    inline void rel() const
+    {
+        if (!--(a.d->refs))
+        {
+            a.o->_free(&a);
+            std::free(a.d); std::cout << "free\n";
+        }
+    }
+
+    inline A ret() const
     {
         ++(a.d->refs);
         return a;
@@ -114,9 +253,15 @@ inline strange__value_c<A const> val(A const& a)
 }
 
 template <typename A>
-inline strange__value_c<A> var(A const& a)
+inline strange__variable_c<A> var(A const& a)
 {
-    return strange__value_c<A>(a);
+    return strange__variable_c<A>(a);
+}
+
+template <typename A>
+inline strange__pointer_c<A> ptr(A const& a)
+{
+    return strange__pointer_c<A>(a);
 }
 
 }
