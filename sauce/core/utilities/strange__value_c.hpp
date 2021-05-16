@@ -3,23 +3,28 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <atomic>
 
 namespace strange
 {
 
 inline void one(strange__any_a const* const abstraction /* :<any># */)
 {
-	abstraction->d->refs = 1;
+	static_assert(sizeof(std::atomic_int64_t) == sizeof(int64_t), "required: sizeof(std::atomic_int64_t) == sizeof(int64_t)");
+	auto const refs = new(&(abstraction->d->refs)) std::atomic_int64_t;
+	*refs = 1;
 }
 
 inline void ref(strange__any_a const* const abstraction /* :<any># */)
 {
-	++(abstraction->d->refs);
+	auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(abstraction->d->refs));
+	++*refs;
 }
 
 inline void rel(strange__any_a const* const abstraction /* :<any># */)
 {
-	if (!--(abstraction->d->refs))
+	auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(abstraction->d->refs));
+	if (!--*refs)
 	{
 		abstraction->o->_free(abstraction);
 		std::free(abstraction->d); std::cout << "free\n";
@@ -29,11 +34,12 @@ inline void rel(strange__any_a const* const abstraction /* :<any># */)
 inline void mut(void* const me /* :<any>= */)
 {
 	auto const ma = reinterpret_cast<strange__any_a* const>(me);
-	if (ma->d->refs > 1)
+	auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(ma->d->refs));
+	if (*refs > 1)
 	{
 		strange__any_a cp = *ma;
 		ma->o->_copy(ma, &cp);
-		--(ma->d->refs);
+		--*refs;
 		*ma = cp;
 	}
 }
@@ -104,12 +110,14 @@ struct strange__value_c
 
 	inline void ref() const
 	{
-		++(a.d->refs);
+		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+		++*refs;
 	}
 
 	inline void rel() const
 	{
-		if (!--(a.d->refs))
+		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+		if (!--*refs)
 		{
 			a.o->_free(&a);
 			std::free(a.d); std::cout << "free\n";
@@ -118,17 +126,19 @@ struct strange__value_c
 
 	inline A const ret() const
 	{
-		++(a.d->refs);
+		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+		++*refs;
 		return a;
 	}
 
 	inline void mut()
 	{
-		if (a.d->refs > 1)
+		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+		if (*refs > 1)
 		{
 			auto cp = a;
 			a.o->_copy(&a, &cp);
-			--(a.d->refs);
+			--*refs;
 			a = cp;
 		}
 	}
@@ -241,12 +251,14 @@ struct strange__variable_c
 
 	inline void ref() const
 	{
-		++(a.d->refs);
+		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+		++*refs;
 	}
 
 	inline void rel() const
 	{
-		if (!--(a.d->refs))
+		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+		if (!--*refs)
 		{
 			a.o->_free(&a);
 			std::free(a.d); std::cout << "free\n";
@@ -255,17 +267,19 @@ struct strange__variable_c
 
 	inline A ret() const
 	{
-		++(a.d->refs);
+		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+		++*refs;
 		return a;
 	}
 
 	inline void mut()
 	{
-		if (a.d->refs > 1)
+		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+		if (*refs > 1)
 		{
 			auto cp = a;
 			a.o->_copy(&a, &cp);
-			--(a.d->refs);
+			--*refs;
 			a = cp;
 		}
 	}
@@ -382,12 +396,14 @@ struct strange__pointer_c
 
 	inline void ref() const
 	{
-		++(a.d->refs);
+		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+		++*refs;
 	}
 
 	inline void rel() const
 	{
-		if (!--(a.d->refs))
+		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+		if (!--*refs)
 		{
 			a.o->_free(&a);
 			std::free(a.d); std::cout << "free\n";
@@ -396,17 +412,19 @@ struct strange__pointer_c
 
 	inline A ret() const
 	{
-		++(a.d->refs);
+		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+		++*refs;
 		return a;
 	}
 
 	inline void mut()
 	{
-		if (a.d->refs > 1)
+		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+		if (*refs > 1)
 		{
 			auto cp = a;
 			a.o->_copy(&a, &cp);
-			--(a.d->refs);
+			--*refs;
 			a = cp;
 		}
 	}
