@@ -94,9 +94,9 @@ extern "C"
 
 	char strange__symbol__last_char_f(void const* const me /* :<symbol># */);
 
-	// constructors
-	strange__symbol_a strange__symbol(char const* const s /* :_char_star_# */);
-	strange__symbol_a strange__symbol_empty();
+	// creators
+	strange__symbol_a strange__symbol__create_f(char const* const s /* :_char_star_# */);
+	strange__symbol_a strange__symbol__create_empty_f();
 }
 
 #endif

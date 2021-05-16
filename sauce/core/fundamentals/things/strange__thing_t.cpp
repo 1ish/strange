@@ -152,7 +152,7 @@ extern "C"
 
 	strange__symbol_a strange__thing__type_f(void const* const me /* :<any># */)
 	{
-		static auto r = strange::var(strange__symbol("strange::thing"));
+		static auto r = strange::val("strange::thing");
 		return r.ret();
 	}
 
@@ -193,7 +193,7 @@ extern "C"
 		}
 		else
 		{
-			ma->d->error = strange__thing();
+			ma->d->error = strange__thing__create_f();
 		}
 	}
 
@@ -212,7 +212,7 @@ extern "C"
 		{
 			return;
 		}
-		auto const nothing = strange::val(strange__nothing());
+		auto const nothing = strange::val(strange__thing__create_nothing_f());
 		if (ea->d == nothing.a.d) // no error
 		{
 			strange__thing__set_something_f(me, true);
@@ -229,7 +229,7 @@ extern "C"
 	{
 		if (strange__thing__something_f(me))
 		{
-			return strange__nothing();
+			return strange__thing__create_nothing_f();
 		}
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		strange::ref(&(ma->d->error));
@@ -326,8 +326,8 @@ extern "C"
 		return ma->d >= oa->d;
 	}
 
-	// constructors
-	strange__any_a strange__thing()
+	// creators
+	strange__any_a strange__thing__create_f()
 	{
 		static auto r = strange::var([]()
 		{
@@ -343,7 +343,7 @@ extern "C"
 		return r.ret();
 	}
 
-	strange__any_a strange__nothing()
+	strange__any_a strange__thing__create_nothing_f()
 	{
 		static auto r = strange::var([]()
 		{
@@ -354,7 +354,7 @@ extern "C"
 				std::abort();
 			}
 			strange__thing_init_f(&r);
-			r.d->error = strange__thing();
+			r.d->error = strange__thing__create_f();
 			return r;
 		}());
 		return r.ret();

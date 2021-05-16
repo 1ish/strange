@@ -95,9 +95,9 @@ extern "C"
 	bool strange__thing___greater_or_equal_f(void const* const me /* :<any># */,
 		void const* const other /* :<any># */);
 
-	// constructors
-	strange__any_a strange__thing();
-	strange__any_a strange__nothing();
+	// creators
+	strange__any_a strange__thing__create_f();
+	strange__any_a strange__thing__create_nothing_f();
 }
 
 #endif

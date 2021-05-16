@@ -155,7 +155,7 @@ extern "C"
 
 	strange__symbol_a strange__symbol__type_f(void const* const me /* :<symbol># */)
 	{
-		static auto r = strange::var(strange__symbol("strange::symbol"));
+		static auto r = strange::val("strange::symbol");
 		return r.ret();
 	}
 
@@ -190,7 +190,7 @@ extern "C"
 		void const* const other /* :<any># */)
 	{
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
-		auto os = strange::var(strange__symbol_empty());
+		auto os = strange::var(strange__symbol__create_empty_f());
 		if (oa->o->as(oa, os))
 		{
 			return strange__symbol___equal_f(me, os);
@@ -212,7 +212,7 @@ extern "C"
 		void const* const other /* :<any># */)
 	{
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
-		auto os = strange::var(strange__symbol_empty());
+		auto os = strange::var(strange__symbol__create_empty_f());
 		if (oa->o->as(oa, os))
 		{
 			return strange__symbol___not_equal_f(me, os);
@@ -234,7 +234,7 @@ extern "C"
 		void const* const other /* :<any># */)
 	{
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
-		auto os = strange::var(strange__symbol_empty());
+		auto os = strange::var(strange__symbol__create_empty_f());
 		if (oa->o->as(oa, os))
 		{
 			return strange__symbol___less_f(me, os);
@@ -256,7 +256,7 @@ extern "C"
 		void const* const other /* :<any># */)
 	{
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
-		auto os = strange::var(strange__symbol_empty());
+		auto os = strange::var(strange__symbol__create_empty_f());
 		if (oa->o->as(oa, os))
 		{
 			return strange__symbol___greater_f(me, os);
@@ -278,7 +278,7 @@ extern "C"
 		void const* const other /* :<any># */)
 	{
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
-		auto os = strange::var(strange__symbol_empty());
+		auto os = strange::var(strange__symbol__create_empty_f());
 		if (oa->o->as(oa, os))
 		{
 			return strange__symbol___less_or_equal_f(me, os);
@@ -300,7 +300,7 @@ extern "C"
 		void const* const other /* :<any># */)
 	{
 		auto const oa = reinterpret_cast<strange__any_a const* const>(other);
-		auto os = strange::var(strange__symbol_empty());
+		auto os = strange::var(strange__symbol__create_empty_f());
 		if (oa->o->as(oa, os))
 		{
 			return strange__symbol___greater_or_equal_f(me, os);
@@ -375,8 +375,8 @@ extern "C"
 		return (md->symbol)[std::max(0LL, md->length - 1)];
 	}
 
-	// constructors
-	strange__symbol_a strange__symbol(char const* const s /* :_char_star_# */)
+	// creators
+	strange__symbol_a strange__symbol__create_f(char const* const s /* :_char_star_# */)
 	{
 		auto const rd = reinterpret_cast<strange__symbol_d* const>(std::malloc(sizeof(strange__symbol_d))); std::cout << "malloc\n";
 		if (!rd)
@@ -389,9 +389,9 @@ extern "C"
 		return r;
 	}
 
-	strange__symbol_a strange__symbol_empty()
+	strange__symbol_a strange__symbol__create_empty_f()
 	{
-		static auto r = strange::var(strange__symbol(""));
+		static auto r = strange::var(strange__symbol__create_f(""));
 		return r.ret();
 	}
 }
