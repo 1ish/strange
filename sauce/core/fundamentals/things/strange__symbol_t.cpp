@@ -5,6 +5,8 @@
 #include <cstring>
 #include <iostream>
 #include <algorithm>
+#include <functional>
+#include <string_view>
 
 extern "C"
 {
@@ -27,7 +29,7 @@ extern "C"
 			strange__thing__something_f,
 			strange__thing__set_error_f,
 			strange__thing__error_f,
-			strange__thing__hash_f,
+			strange__symbol__hash_f,
 			strange__symbol__equal_f,
 			strange__symbol___equal_f,
 			strange__symbol__not_equal_f,
@@ -75,6 +77,7 @@ extern "C"
 				std::abort();
 			}
 			std::memcpy(md->symbol, s, md->length + 1);
+			md->hash = std::hash<std::string_view>{}(std::string_view{ md->symbol, static_cast<uint64_t>(md->length) });
 		}
 		ma->o = strange__symbol_o_f();
 	}
@@ -172,6 +175,13 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		return ma->o == strange__symbol_p_f();
+	}
+
+	uint64_t strange__symbol__hash_f(void const* const me /* :<symbol># */)
+	{
+		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
+		auto const md = reinterpret_cast<strange__symbol_d const* const>(ma->d);
+		return md->hash;
 	}
 
 	bool strange__symbol__equal_f(void const* const me /* :<symbol># */,
@@ -331,6 +341,7 @@ extern "C"
 		}
 		std::memcpy(rd->symbol, md->symbol, md->length);
 		std::memcpy(rd->symbol + md->length, sa->o->to_char_star(sa), symbol_length + 1);
+		rd->hash = std::hash<std::string_view>{}(std::string_view{ rd->symbol, static_cast<uint64_t>(rd->length) });
 		return r;
 	}
 

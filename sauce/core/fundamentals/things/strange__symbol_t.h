@@ -5,6 +5,7 @@
 		STRANGE__THING_D \
 		char* symbol; \
 		int64_t length; \
+		uint64_t hash; \
 
 extern "C"
 {
@@ -42,6 +43,8 @@ extern "C"
 		bool is_pointer /* :_bool_# */);
 
 	bool strange__symbol___pointer_f(void const* const me /* :<symbol># */);
+
+	uint64_t strange__symbol__hash_f(void const* const me /* :<symbol># */);
 
 	bool strange__symbol__equal_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<any># */);
