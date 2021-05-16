@@ -35,6 +35,8 @@
 \
 		strange__any_a (*error)(void const* const me /* :<any># */); \
 \
+		uint64_t (*hash)(void const* const me /* :<any># */); \
+\
 		bool (*equal)(void const* const me /* :<any># */, \
 			void const* const other /* :<any># */); \
 \

@@ -57,6 +57,8 @@ extern "C"
 
 	strange__any_a strange__thing__error_f(void const* const me /* :<any># */);
 
+	uint64_t strange__thing__hash_f(void const* const me /* :<any># */);
+
 	bool strange__thing__equal_f(void const* const me /* :<any># */,
 		void const* const other /* :<any># */);
 

@@ -5,6 +5,7 @@
 #include <cstring>
 #include <iostream>
 #include <utility>
+#include <functional>
 
 extern "C"
 {
@@ -27,6 +28,7 @@ extern "C"
 			strange__thing__something_f,
 			strange__thing__set_error_f,
 			strange__thing__error_f,
+			strange__thing__hash_f,
 			strange__thing__equal_f,
 			strange__thing___equal_f,
 			strange__thing__not_equal_f,
@@ -232,6 +234,12 @@ extern "C"
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		strange::ref(&(ma->d->error));
 		return ma->d->error;
+	}
+
+	uint64_t strange__thing__hash_f(void const* const me /* :<any># */)
+	{
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		return std::hash<void const*>{}(ma->d);
 	}
 
 	bool strange__thing__equal_f(void const* const me /* :<any># */,

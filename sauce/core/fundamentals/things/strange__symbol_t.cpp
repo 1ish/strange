@@ -27,6 +27,7 @@ extern "C"
 			strange__thing__something_f,
 			strange__thing__set_error_f,
 			strange__thing__error_f,
+			strange__thing__hash_f,
 			strange__symbol__equal_f,
 			strange__symbol___equal_f,
 			strange__symbol__not_equal_f,
