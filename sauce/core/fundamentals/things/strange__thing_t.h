@@ -17,7 +17,7 @@ extern "C"
 	strange__any_o const* strange__thing_p_f();
 
 	// init
-	void strange__thing_init_f(void* const me /* :<any>= */);
+	void strange__thing__init_f(void* const me /* :<any>= */);
 
 	// any_a
 	void strange__thing___free_f(void const* const me /* :<any># */);

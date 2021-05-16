@@ -57,7 +57,7 @@ extern "C"
 	}
 
 	// init
-	void strange__thing_init_f(void* const me /* :<any>= */)
+	void strange__thing__init_f(void* const me /* :<any>= */)
 	{
 		auto const ma = reinterpret_cast<strange__any_a* const>(me);
 		strange::one(ma);
@@ -337,7 +337,7 @@ extern "C"
 			{
 				std::abort();
 			}
-			strange__thing_init_f(&r);
+			strange__thing__init_f(&r);
 			return r;
 		}());
 		return r.ret();
@@ -353,7 +353,7 @@ extern "C"
 			{
 				std::abort();
 			}
-			strange__thing_init_f(&r);
+			strange__thing__init_f(&r);
 			r.d->error = strange__thing__create_f();
 			return r;
 		}());

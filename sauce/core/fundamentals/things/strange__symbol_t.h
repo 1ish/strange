@@ -19,7 +19,7 @@ extern "C"
 	strange__symbol_o const* strange__symbol_p_f();
 
 	// init
-	void strange__symbol_init_f(void* const me /* :<symbol>= */,
+	void strange__symbol__init_f(void* const me /* :<symbol>= */,
 		char const* const s /* :_char_star_# */);
 
 	// any_a

@@ -64,12 +64,12 @@ extern "C"
 	}
 
 	// init
-	void strange__symbol_init_f(void* const me /* :<symbol>= */,
+	void strange__symbol__init_f(void* const me /* :<symbol>= */,
 		char const* const s /* :_char_star_# */)
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d* const>(ma->d);
-		strange__thing_init_f(ma);
+		strange__thing__init_f(ma);
 		if (s)
 		{
 			md->length = std::strlen(s);
@@ -333,7 +333,7 @@ extern "C"
 		}
 		strange__symbol_a r;
 		r.d = reinterpret_cast<strange__thing_d*>(rd);
-		strange__symbol_init_f(&r, 0);
+		strange__symbol__init_f(&r, 0);
 		int64_t const symbol_length = sa->o->length(sa);
 		rd->length = md->length + symbol_length;
 		rd->symbol = reinterpret_cast<char*>(std::malloc(rd->length + 1)); std::cout << "malloc\n";
@@ -385,7 +385,7 @@ extern "C"
 		}
 		strange__symbol_a r;
 		r.d = reinterpret_cast<strange__thing_d*>(rd);
-		strange__symbol_init_f(&r, s);
+		strange__symbol__init_f(&r, s);
 		return r;
 	}
 
