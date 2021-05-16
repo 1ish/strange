@@ -120,16 +120,7 @@ extern "C"
 	bool strange__symbol__is_f(void const* const me /* :<symbol># */,
 		void const* const ab /* :<any># */)
 	{
-		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const aa = reinterpret_cast<strange__symbol_a const* const>(ab);
-		if (aa->o->_pointer(aa) != ma->o->_pointer(ma))
-		{
-			return false;
-		}
-		if (aa->d == ma->d)
-		{
-			return true;
-		}
 		auto const abc = aa->o->cat(aa).d;
 		// ab.cat in me.cats
 		static strange__thing_d* mats[] =
@@ -156,11 +147,30 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const aa = reinterpret_cast<strange__symbol_a* const>(ab);
+		bool const mp = ma->o->_pointer(ma);
+		bool const ap = aa->o->_pointer(aa);
 		if (aa->d != ma->d)
 		{
 			strange::rel(aa);
 			*aa = *ma;
 			strange::ref(aa);
+		}
+		else
+		{
+			aa->o = ma->o;
+		}
+		if (ap != mp)
+		{
+			if (ap)
+			{
+				strange::mut(aa);
+				aa->o->_set_pointer(aa, true);
+			}
+			else
+			{
+				aa->o->_set_pointer(aa, false);
+				strange::mut(aa);
+			}
 		}
 	}
 

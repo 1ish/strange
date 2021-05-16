@@ -108,15 +108,10 @@ extern "C"
 	bool strange__thing__is_f(void const* const me /* :<any># */,
 		void const* const ab /* :<any># */)
 	{
-		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const aa = reinterpret_cast<strange__any_a const* const>(ab);
-		if (aa->o->_pointer(aa) != ma->o->_pointer(ma))
-		{
-			return false;
-		}
 		// ab.cat in me.cats
 		static strange__thing_d* const mat = strange__any__cat_f(me).d;
-		return aa->d == ma->d || aa->o->cat(aa).d == mat;
+		return aa->o->cat(aa).d == mat;
 	}
 
 	bool strange__thing__as_f(void const* const me /* :<any># */,
@@ -135,11 +130,30 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const aa = reinterpret_cast<strange__any_a* const>(ab);
+		bool const mp = ma->o->_pointer(ma);
+		bool const ap = aa->o->_pointer(aa);
 		if (aa->d != ma->d)
 		{
 			strange::rel(aa);
 			*aa = *ma;
 			strange::ref(aa);
+		}
+		else
+		{
+			aa->o = ma->o;
+		}
+		if (ap != mp)
+		{
+			if (ap)
+			{
+				strange::mut(aa);
+				aa->o->_set_pointer(aa, true);
+			}
+			else
+			{
+				aa->o->_set_pointer(aa, false);
+				strange::mut(aa);
+			}
 		}
 	}
 
