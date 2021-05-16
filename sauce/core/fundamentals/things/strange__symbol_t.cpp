@@ -19,7 +19,7 @@ extern "C"
 			strange__symbol___copy_f,
 			strange__symbol__is_f,
 			strange__symbol__as_f,
-			strange__symbol___as_f,
+			strange__thing___as_f,
 			strange__symbol__type_f,
 			strange__symbol___set_pointer_f,
 			strange__symbol___pointer_f,
@@ -138,40 +138,13 @@ extern "C"
 		{
 			return false;
 		}
-		strange__symbol___as_f(me, ab);
-		return true;
-	}
-
-	void strange__symbol___as_f(void const* const me /* :<symbol># */,
-		void* const ab /* :<any>= */)
-	{
-		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
-		auto const aa = reinterpret_cast<strange__symbol_a* const>(ab);
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const aa = reinterpret_cast<strange__any_a* const>(ab);
 		bool const mp = ma->o->_pointer(ma);
 		bool const ap = aa->o->_pointer(aa);
-		if (aa->d != ma->d)
-		{
-			strange::rel(aa);
-			*aa = *ma;
-			strange::ref(aa);
-		}
-		else
-		{
-			aa->o = ma->o;
-		}
-		if (ap != mp)
-		{
-			if (ap)
-			{
-				strange::mut(aa);
-				aa->o->_set_pointer(aa, true);
-			}
-			else
-			{
-				aa->o->_set_pointer(aa, false);
-				strange::mut(aa);
-			}
-		}
+		strange__thing___as_f(me, ab);
+		strange::rep(aa, mp, ap);
+		return true;
 	}
 
 	strange__symbol_a strange__symbol__type_f(void const* const me /* :<symbol># */)

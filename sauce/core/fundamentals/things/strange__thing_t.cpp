@@ -102,7 +102,8 @@ extern "C"
 	void strange__thing___no_copy_f(void const* const me /* :<any># */,
 		void* const cp /* :<any>= */)
 	{
-		strange::ref(cp);
+		auto const ca = reinterpret_cast<strange__any_a* const>(cp);
+		strange::ref(ca);
 	}
 
 	bool strange__thing__is_f(void const* const me /* :<any># */,
@@ -121,7 +122,12 @@ extern "C"
 		{
 			return false;
 		}
+		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
+		auto const aa = reinterpret_cast<strange__any_a* const>(ab);
+		bool const mp = ma->o->_pointer(ma);
+		bool const ap = aa->o->_pointer(aa);
 		strange__thing___as_f(me, ab);
+		strange::rep(aa, mp, ap);
 		return true;
 	}
 
@@ -130,8 +136,6 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__any_a const* const>(me);
 		auto const aa = reinterpret_cast<strange__any_a* const>(ab);
-		bool const mp = ma->o->_pointer(ma);
-		bool const ap = aa->o->_pointer(aa);
 		if (aa->d != ma->d)
 		{
 			strange::rel(aa);
@@ -141,19 +145,6 @@ extern "C"
 		else
 		{
 			aa->o = ma->o;
-		}
-		if (ap != mp)
-		{
-			if (ap)
-			{
-				strange::mut(aa);
-				aa->o->_set_pointer(aa, true);
-			}
-			else
-			{
-				aa->o->_set_pointer(aa, false);
-				strange::mut(aa);
-			}
 		}
 	}
 

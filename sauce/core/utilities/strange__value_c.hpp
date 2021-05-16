@@ -7,25 +7,22 @@
 namespace strange
 {
 
-inline void one(void const* const me /* :<any># */)
+inline void one(strange__any_a const* const abstraction /* :<any># */)
 {
-	auto const ma = reinterpret_cast<strange__any_a const* const>(me);
-	ma->d->refs = 1;
+	abstraction->d->refs = 1;
 }
 
-inline void ref(void const* const me /* :<any># */)
+inline void ref(strange__any_a const* const abstraction /* :<any># */)
 {
-	auto const ma = reinterpret_cast<strange__any_a const* const>(me);
-	++(ma->d->refs);
+	++(abstraction->d->refs);
 }
 
-inline void rel(void const* const me /* :<any># */)
+inline void rel(strange__any_a const* const abstraction /* :<any># */)
 {
-	auto const ma = reinterpret_cast<strange__any_a const* const>(me);
-	if (!--(ma->d->refs))
+	if (!--(abstraction->d->refs))
 	{
-		ma->o->_free(ma);
-		std::free(ma->d); std::cout << "free\n";
+		abstraction->o->_free(abstraction);
+		std::free(abstraction->d); std::cout << "free\n";
 	}
 }
 
@@ -38,6 +35,25 @@ inline void mut(void* const me /* :<any>= */)
 		ma->o->_copy(ma, &cp);
 		--(ma->d->refs);
 		*ma = cp;
+	}
+}
+
+inline void rep(strange__any_a* const after /* :<any>= */,
+	bool pointer_before /* :_bool_# */,
+	bool pointer_after /* :_bool_# */)
+{
+	if (pointer_after != pointer_before)
+	{
+		if (pointer_after)
+		{
+			strange::mut(after);
+			after->o->_set_pointer(after, true);
+		}
+		else
+		{
+			after->o->_set_pointer(after, false);
+			strange::mut(after);
+		}
 	}
 }
 

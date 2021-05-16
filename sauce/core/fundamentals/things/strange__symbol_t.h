@@ -36,9 +36,6 @@ extern "C"
 	bool strange__symbol__as_f(void const* const me /* :<symbol># */,
 		void* const ab /* :<any>= */);
 
-	void strange__symbol___as_f(void const* const me /* :<symbol># */,
-		void* const ab /* :<any>= */);
-
 	strange__symbol_a strange__symbol__type_f(void const* const me /* :<symbol># */);
 
 	void strange__symbol___set_pointer_f(void* const me /* :<symbol>= */,
