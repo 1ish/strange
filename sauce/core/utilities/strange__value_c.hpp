@@ -451,6 +451,11 @@ inline strange__pointer_c<A> ptr(A const& a)
 	return strange__pointer_c<A>(a);
 }
 
+inline strange__value_c<strange__symbol_a const> val(char const* const s)
+{
+	return strange__value_c<strange__symbol_a const>(strange__symbol(s));
+}
+
 }
 
 #endif

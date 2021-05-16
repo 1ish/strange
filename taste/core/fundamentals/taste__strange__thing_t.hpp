@@ -14,7 +14,7 @@ extern "C"
 		testp(v);
 		auto tv = var(v.a.o->type(v));
 		tv = v;
-		auto s = val(strange__symbol("test"));
+		auto s = val("test");
 		auto t = val(s.a.o->type(s));
 		auto u = val(s.a.o->add(s, t));
 		val(u.a.o->add(u, val(strange__symbol("y"))));
