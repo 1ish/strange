@@ -45,7 +45,9 @@ extern "C"
 			// symbol_a
 			strange__symbol__add_f,
 			strange__symbol__to_char_star_f,
-			strange__symbol__length_f
+			strange__symbol__length_f,
+			strange__symbol__first_char_f,
+			strange__symbol__last_char_f
 		};
 		return &o;
 	}
@@ -357,6 +359,20 @@ extern "C"
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d* const>(ma->d);
 		return md->length;
+	}
+
+	char strange__symbol__first_char_f(void const* const me /* :<symbol># */)
+	{
+		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
+		auto const md = reinterpret_cast<strange__symbol_d* const>(ma->d);
+		return (md->symbol)[0];
+	}
+
+	char strange__symbol__last_char_f(void const* const me /* :<symbol># */)
+	{
+		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
+		auto const md = reinterpret_cast<strange__symbol_d* const>(ma->d);
+		return (md->symbol)[std::max(0LL, md->length - 1)];
 	}
 
 	// constructors

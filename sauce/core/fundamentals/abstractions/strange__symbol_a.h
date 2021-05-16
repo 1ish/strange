@@ -9,6 +9,10 @@
 		char const* (*to_char_star)(void const* const me /* :<symbol># */); \
 \
 		int64_t (*length)(void const* const me /* :<symbol># */); \
+\
+		char (*first_char)(void const* const me /* :<symbol># */); \
+\
+		char (*last_char)(void const* const me /* :<symbol># */); \
 
 extern "C"
 {

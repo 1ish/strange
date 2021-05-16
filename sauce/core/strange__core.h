@@ -21,8 +21,8 @@ extern "C"
 
 extern "C"
 {
-	strange__symbol_a strange__any__cat_f(void const* const me /* <any># */);
-	strange__symbol_a strange__symbol__cat_f(void const* const me /* <symbol># */);
+	strange__symbol_a strange__any__cat_f(void const* const me /* :<any># */);
+	strange__symbol_a strange__symbol__cat_f(void const* const me /* :<symbol># */);
 }
 
 #endif

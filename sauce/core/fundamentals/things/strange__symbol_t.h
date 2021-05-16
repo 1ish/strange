@@ -90,6 +90,10 @@ extern "C"
 
 	int64_t strange__symbol__length_f(void const* const me /* :<symbol># */);
 
+	char strange__symbol__first_char_f(void const* const me /* :<symbol># */);
+
+	char strange__symbol__last_char_f(void const* const me /* :<symbol># */);
+
 	// constructors
 	strange__symbol_a strange__symbol(char const* const s /* :_char_star_# */);
 	strange__symbol_a strange__symbol_empty();
