@@ -8,9 +8,10 @@
 namespace strange
 {
 
+static_assert(sizeof(std::atomic_int64_t) == sizeof(int64_t), "required to be true: sizeof(std::atomic_int64_t) == sizeof(int64_t)");
+
 inline void one(strange__any_a const* const abstraction /* :<any># */)
 {
-	static_assert(sizeof(std::atomic_int64_t) == sizeof(int64_t), "required: sizeof(std::atomic_int64_t) == sizeof(int64_t)");
 	auto const refs = new(&(abstraction->d->refs)) std::atomic_int64_t;
 	*refs = 1;
 }
