@@ -1,7 +1,7 @@
 #ifndef COM_ONEISH__STRANGE__SYMBOL_A_H
 #define COM_ONEISH__STRANGE__SYMBOL_A_H
 
-extern "C"
+namespace strange
 {
 	struct strange__symbol_o : strange__any_o
 	{

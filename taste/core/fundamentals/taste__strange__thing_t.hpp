@@ -1,7 +1,7 @@
 #ifndef COM_ONEISH__TASTE__STRANGE__THING_T_H
 #define COM_ONEISH__TASTE__STRANGE__THING_T_H
 
-extern "C"
+namespace taste
 {
 	void testp(void* const symbol)
 	{
@@ -36,7 +36,7 @@ extern "C"
 TEST_CASE("strange thing", "[memory]")
 {
 	std__cout << "\nbefore test\n";
-	test();
+	taste::test();
 	std__cout << "\nafter test\n";
 }
 

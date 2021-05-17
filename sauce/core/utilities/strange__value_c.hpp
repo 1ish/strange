@@ -8,453 +8,453 @@
 namespace strange
 {
 
-static_assert(sizeof(std::atomic_int64_t) == sizeof(int64_t), "required to be true: sizeof(std::atomic_int64_t) == sizeof(int64_t)");
+	static_assert(sizeof(std::atomic_int64_t) == sizeof(int64_t), "required to be true: sizeof(std::atomic_int64_t) == sizeof(int64_t)");
 
-inline void one(strange__any_a const* const abstraction /* :<any># */)
-{
-	auto const refs = new(&(abstraction->d->refs)) std::atomic_int64_t;
-	*refs = 1;
-}
-
-inline void ref(strange__any_a const* const abstraction /* :<any># */)
-{
-	auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(abstraction->d->refs));
-	++*refs;
-}
-
-inline void rel(strange__any_a const* const abstraction /* :<any># */)
-{
-	auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(abstraction->d->refs));
-	if (!--*refs)
+	inline void one(strange__any_a const* const abstraction /* :<any># */)
 	{
-		abstraction->o->_free(abstraction);
-		std::free(abstraction->d); std::cout << "free\n";
-	}
-}
-
-inline void mut(void* const me /* :<any>= */)
-{
-	auto const ma = reinterpret_cast<strange__any_a* const>(me);
-	auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(ma->d->refs));
-	if (*refs > 1)
-	{
-		strange__any_a cp = *ma;
-		ma->o->_copy(ma, &cp);
-		--*refs;
-		*ma = cp;
-	}
-}
-
-inline void rep(strange__any_a* const after /* :<any>= */,
-	bool pointer_before /* :_bool_# */,
-	bool pointer_after /* :_bool_# */)
-{
-	if (pointer_after != pointer_before)
-	{
-		if (pointer_after)
-		{
-			strange::mut(after);
-			after->o->_set_pointer(after, true);
-		}
-		else
-		{
-			after->o->_set_pointer(after, false);
-			strange::mut(after);
-		}
-	}
-}
-
-template <typename A>
-struct strange__variable_c;
-
-template <typename A>
-struct strange__pointer_c;
-
-template <typename A>
-struct strange__value_c
-{
-	explicit inline strange__value_c(A const& abstraction) :a(abstraction)
-	{
-		if (a.o->_pointer(&a))
-		{
-			a.o->_set_pointer(&a, false);
-			mut();
-		}
+		auto const refs = new(&(abstraction->d->refs)) std::atomic_int64_t;
+		*refs = 1;
 	}
 
-	inline strange__value_c(strange__value_c const& original) :a(original.a)
+	inline void ref(strange__any_a const* const abstraction /* :<any># */)
 	{
-		ref();
-	}
-
-	explicit inline strange__value_c(strange__variable_c<typename std::remove_const_t<A>> const& original) : a(original.a)
-	{
-		ref();
-	}
-
-	explicit inline strange__value_c(strange__pointer_c<typename std::remove_const_t<A>> const& original) : a(original.a)
-	{
-		ref();
-		a.o->_set_pointer(&a, false);
-		mut();
-	}
-
-	inline ~strange__value_c()
-	{
-		rel();
-	}
-
-	inline operator A const* () const
-	{
-		return &a;
-	}
-
-	inline void ref() const
-	{
-		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(abstraction->d->refs));
 		++*refs;
 	}
 
-	inline void rel() const
+	inline void rel(strange__any_a const* const abstraction /* :<any># */)
 	{
-		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(abstraction->d->refs));
 		if (!--*refs)
 		{
-			a.o->_free(&a);
-			std::free(a.d); std::cout << "free\n";
+			abstraction->o->_free(abstraction);
+			std::free(abstraction->d); std::cout << "free\n";
 		}
 	}
 
-	inline A const ret() const
+	inline void mut(void* const me /* :<any>= */)
 	{
-		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
-		++*refs;
-		return a;
-	}
-
-	inline void mut()
-	{
-		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+		auto const ma = reinterpret_cast<strange__any_a* const>(me);
+		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(ma->d->refs));
 		if (*refs > 1)
 		{
-			auto cp = a;
-			a.o->_copy(&a, &cp);
+			strange__any_a cp = *ma;
+			ma->o->_copy(ma, &cp);
 			--*refs;
-			a = cp;
+			*ma = cp;
 		}
 	}
 
-	typename std::remove_const_t<A> a;
-};
-
-template <typename A>
-struct strange__variable_c
-{
-	explicit inline strange__variable_c(A const& abstraction) :a(abstraction)
+	inline void rep(strange__any_a* const after /* :<any>= */,
+		bool pointer_before /* :_bool_# */,
+		bool pointer_after /* :_bool_# */)
 	{
-		if (a.o->_pointer(&a))
+		if (pointer_after != pointer_before)
 		{
+			if (pointer_after)
+			{
+				strange::mut(after);
+				after->o->_set_pointer(after, true);
+			}
+			else
+			{
+				after->o->_set_pointer(after, false);
+				strange::mut(after);
+			}
+		}
+	}
+
+	template <typename A>
+	struct strange__variable_c;
+
+	template <typename A>
+	struct strange__pointer_c;
+
+	template <typename A>
+	struct strange__value_c
+	{
+		explicit inline strange__value_c(A const& abstraction) :a(abstraction)
+		{
+			if (a.o->_pointer(&a))
+			{
+				a.o->_set_pointer(&a, false);
+				mut();
+			}
+		}
+
+		inline strange__value_c(strange__value_c const& original) :a(original.a)
+		{
+			ref();
+		}
+
+		explicit inline strange__value_c(strange__variable_c<typename std::remove_const_t<A>> const& original) : a(original.a)
+		{
+			ref();
+		}
+
+		explicit inline strange__value_c(strange__pointer_c<typename std::remove_const_t<A>> const& original) : a(original.a)
+		{
+			ref();
 			a.o->_set_pointer(&a, false);
 			mut();
 		}
-	}
 
-	explicit inline strange__variable_c(strange__value_c<A const> const& original) : a(original.a)
-	{
-		ref();
-	}
-
-	inline strange__variable_c(strange__variable_c const& original) : a(original.a)
-	{
-		ref();
-	}
-
-	explicit inline strange__variable_c(strange__pointer_c<A> const& original) : a(original.a)
-	{
-		ref();
-		a.o->_set_pointer(&a, false);
-		mut();
-	}
-
-	inline ~strange__variable_c()
-	{
-		rel();
-	}
-
-	inline strange__variable_c& operator=(A const& abstraction)
-	{
-		rel();
-		a = abstraction;
-		if (a.o->_pointer(&a))
+		inline ~strange__value_c()
 		{
+			rel();
+		}
+
+		inline operator A const* () const
+		{
+			return &a;
+		}
+
+		inline void ref() const
+		{
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			++*refs;
+		}
+
+		inline void rel() const
+		{
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			if (!--*refs)
+			{
+				a.o->_free(&a);
+				std::free(a.d); std::cout << "free\n";
+			}
+		}
+
+		inline A const ret() const
+		{
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			++*refs;
+			return a;
+		}
+
+		inline void mut()
+		{
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			if (*refs > 1)
+			{
+				auto cp = a;
+				a.o->_copy(&a, &cp);
+				--*refs;
+				a = cp;
+			}
+		}
+
+		typename std::remove_const_t<A> a;
+	};
+
+	template <typename A>
+	struct strange__variable_c
+	{
+		explicit inline strange__variable_c(A const& abstraction) :a(abstraction)
+		{
+			if (a.o->_pointer(&a))
+			{
+				a.o->_set_pointer(&a, false);
+				mut();
+			}
+		}
+
+		explicit inline strange__variable_c(strange__value_c<A const> const& original) : a(original.a)
+		{
+			ref();
+		}
+
+		inline strange__variable_c(strange__variable_c const& original) : a(original.a)
+		{
+			ref();
+		}
+
+		explicit inline strange__variable_c(strange__pointer_c<A> const& original) : a(original.a)
+		{
+			ref();
 			a.o->_set_pointer(&a, false);
 			mut();
 		}
-		return *this;
-	}
 
-	inline strange__variable_c& operator=(strange__value_c<A const> const& original)
-	{
-		if (a.d != original.a.d)
+		inline ~strange__variable_c()
 		{
 			rel();
-			a = original.a;
-			ref();
 		}
-		else
-		{
-			a.o = original.a.o;
-		}
-		return *this;
-	}
 
-	inline strange__variable_c& operator=(strange__variable_c const& original)
-	{
-		if (a.d != original.a.d)
+		inline strange__variable_c& operator=(A const& abstraction)
 		{
 			rel();
-			a = original.a;
+			a = abstraction;
+			if (a.o->_pointer(&a))
+			{
+				a.o->_set_pointer(&a, false);
+				mut();
+			}
+			return *this;
+		}
+
+		inline strange__variable_c& operator=(strange__value_c<A const> const& original)
+		{
+			if (a.d != original.a.d)
+			{
+				rel();
+				a = original.a;
+				ref();
+			}
+			else
+			{
+				a.o = original.a.o;
+			}
+			return *this;
+		}
+
+		inline strange__variable_c& operator=(strange__variable_c const& original)
+		{
+			if (a.d != original.a.d)
+			{
+				rel();
+				a = original.a;
+				ref();
+			}
+			else
+			{
+				a.o = original.a.o;
+			}
+			return *this;
+		}
+
+		inline strange__variable_c& operator=(strange__pointer_c<A> const& original)
+		{
+			if (a.d != original.a.d)
+			{
+				rel();
+				a = original.a;
+				ref();
+			}
+			else
+			{
+				a.o = original.a.o;
+			}
+			a.o->_set_pointer(&a, false);
+			mut();
+			return *this;
+		}
+
+		inline operator A* ()
+		{
+			return &a;
+		}
+
+		inline operator A const* () const
+		{
+			return &a;
+		}
+
+		inline void ref() const
+		{
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			++*refs;
+		}
+
+		inline void rel() const
+		{
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			if (!--*refs)
+			{
+				a.o->_free(&a);
+				std::free(a.d); std::cout << "free\n";
+			}
+		}
+
+		inline A ret() const
+		{
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			++*refs;
+			return a;
+		}
+
+		inline void mut()
+		{
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			if (*refs > 1)
+			{
+				auto cp = a;
+				a.o->_copy(&a, &cp);
+				--*refs;
+				a = cp;
+			}
+		}
+
+		A a;
+	};
+
+	template <typename A>
+	struct strange__pointer_c
+	{
+		explicit inline strange__pointer_c(A const& abstraction) :a(abstraction)
+		{
+			if (!a.o->_pointer(&a))
+			{
+				mut();
+				a.o->_set_pointer(&a, true);
+			}
+		}
+
+		explicit inline strange__pointer_c(strange__value_c<A const> const& original) : a(original.a)
+		{
 			ref();
-		}
-		else
-		{
-			a.o = original.a.o;
-		}
-		return *this;
-	}
-
-	inline strange__variable_c& operator=(strange__pointer_c<A> const& original)
-	{
-		if (a.d != original.a.d)
-		{
-			rel();
-			a = original.a;
-			ref();
-		}
-		else
-		{
-			a.o = original.a.o;
-		}
-		a.o->_set_pointer(&a, false);
-		mut();
-		return *this;
-	}
-
-	inline operator A* ()
-	{
-		return &a;
-	}
-
-	inline operator A const* () const
-	{
-		return &a;
-	}
-
-	inline void ref() const
-	{
-		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
-		++*refs;
-	}
-
-	inline void rel() const
-	{
-		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
-		if (!--*refs)
-		{
-			a.o->_free(&a);
-			std::free(a.d); std::cout << "free\n";
-		}
-	}
-
-	inline A ret() const
-	{
-		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
-		++*refs;
-		return a;
-	}
-
-	inline void mut()
-	{
-		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
-		if (*refs > 1)
-		{
-			auto cp = a;
-			a.o->_copy(&a, &cp);
-			--*refs;
-			a = cp;
-		}
-	}
-
-	A a;
-};
-
-template <typename A>
-struct strange__pointer_c
-{
-	explicit inline strange__pointer_c(A const& abstraction) :a(abstraction)
-	{
-		if (!a.o->_pointer(&a))
-		{
 			mut();
 			a.o->_set_pointer(&a, true);
 		}
-	}
 
-	explicit inline strange__pointer_c(strange__value_c<A const> const& original) : a(original.a)
-	{
-		ref();
-		mut();
-		a.o->_set_pointer(&a, true);
-	}
-
-	explicit inline strange__pointer_c(strange__variable_c<A> const& original) : a(original.a)
-	{
-		ref();
-		mut();
-		a.o->_set_pointer(&a, true);
-	}
-
-	inline strange__pointer_c(strange__pointer_c const& original) : a(original.a)
-	{
-		ref();
-	}
-
-	inline ~strange__pointer_c()
-	{
-		rel();
-	}
-
-	inline strange__pointer_c& operator=(A const& abstraction)
-	{
-		rel();
-		a = abstraction;
-		if (!a.o->_pointer(&a))
+		explicit inline strange__pointer_c(strange__variable_c<A> const& original) : a(original.a)
 		{
+			ref();
 			mut();
 			a.o->_set_pointer(&a, true);
 		}
-		return *this;
-	}
 
-	inline strange__pointer_c& operator=(strange__value_c<A const> const& original)
-	{
-		if (a.d != original.a.d)
+		inline strange__pointer_c(strange__pointer_c const& original) : a(original.a)
 		{
-			rel();
-			a = original.a;
 			ref();
 		}
-		else
-		{
-			a.o = original.a.o;
-		}
-		mut();
-		a.o->_set_pointer(&a, true);
-		return *this;
-	}
 
-	inline strange__pointer_c& operator=(strange__variable_c<A> const& original)
-	{
-		if (a.d != original.a.d)
+		inline ~strange__pointer_c()
 		{
 			rel();
-			a = original.a;
-			ref();
 		}
-		else
-		{
-			a.o = original.a.o;
-		}
-		mut();
-		a.o->_set_pointer(&a, true);
-		return *this;
-	}
 
-	inline strange__pointer_c& operator=(strange__pointer_c const& original)
-	{
-		if (a.d != original.a.d)
+		inline strange__pointer_c& operator=(A const& abstraction)
 		{
 			rel();
-			a = original.a;
-			ref();
+			a = abstraction;
+			if (!a.o->_pointer(&a))
+			{
+				mut();
+				a.o->_set_pointer(&a, true);
+			}
+			return *this;
 		}
-		else
+
+		inline strange__pointer_c& operator=(strange__value_c<A const> const& original)
 		{
-			a.o = original.a.o;
+			if (a.d != original.a.d)
+			{
+				rel();
+				a = original.a;
+				ref();
+			}
+			else
+			{
+				a.o = original.a.o;
+			}
+			mut();
+			a.o->_set_pointer(&a, true);
+			return *this;
 		}
-		return *this;
-	}
 
-	inline operator A* ()
-	{
-		return &a;
-	}
-
-	inline operator A const* () const
-	{
-		return &a;
-	}
-
-	inline void ref() const
-	{
-		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
-		++*refs;
-	}
-
-	inline void rel() const
-	{
-		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
-		if (!--*refs)
+		inline strange__pointer_c& operator=(strange__variable_c<A> const& original)
 		{
-			a.o->_free(&a);
-			std::free(a.d); std::cout << "free\n";
+			if (a.d != original.a.d)
+			{
+				rel();
+				a = original.a;
+				ref();
+			}
+			else
+			{
+				a.o = original.a.o;
+			}
+			mut();
+			a.o->_set_pointer(&a, true);
+			return *this;
 		}
-	}
 
-	inline A ret() const
-	{
-		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
-		++*refs;
-		return a;
-	}
-
-	inline void mut()
-	{
-		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
-		if (*refs > 1)
+		inline strange__pointer_c& operator=(strange__pointer_c const& original)
 		{
-			auto cp = a;
-			a.o->_copy(&a, &cp);
-			--*refs;
-			a = cp;
+			if (a.d != original.a.d)
+			{
+				rel();
+				a = original.a;
+				ref();
+			}
+			else
+			{
+				a.o = original.a.o;
+			}
+			return *this;
 		}
+
+		inline operator A* ()
+		{
+			return &a;
+		}
+
+		inline operator A const* () const
+		{
+			return &a;
+		}
+
+		inline void ref() const
+		{
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			++*refs;
+		}
+
+		inline void rel() const
+		{
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			if (!--*refs)
+			{
+				a.o->_free(&a);
+				std::free(a.d); std::cout << "free\n";
+			}
+		}
+
+		inline A ret() const
+		{
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			++*refs;
+			return a;
+		}
+
+		inline void mut()
+		{
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			if (*refs > 1)
+			{
+				auto cp = a;
+				a.o->_copy(&a, &cp);
+				--*refs;
+				a = cp;
+			}
+		}
+
+		A a;
+	};
+
+	template <typename A>
+	inline strange__value_c<A const> val(A const& a)
+	{
+		return strange__value_c<A const>(a);
 	}
 
-	A a;
-};
+	template <typename A>
+	inline strange__variable_c<A> var(A const& a)
+	{
+		return strange__variable_c<A>(a);
+	}
 
-template <typename A>
-inline strange__value_c<A const> val(A const& a)
-{
-	return strange__value_c<A const>(a);
-}
+	template <typename A>
+	inline strange__pointer_c<A> ptr(A const& a)
+	{
+		return strange__pointer_c<A>(a);
+	}
 
-template <typename A>
-inline strange__variable_c<A> var(A const& a)
-{
-	return strange__variable_c<A>(a);
-}
-
-template <typename A>
-inline strange__pointer_c<A> ptr(A const& a)
-{
-	return strange__pointer_c<A>(a);
-}
-
-inline strange__value_c<strange__symbol_a const> val(char const* const s)
-{
-	return strange__value_c<strange__symbol_a const>(strange__symbol__create_f(s));
-}
+	inline strange__value_c<strange__symbol_a const> val(char const* const s)
+	{
+		return strange__value_c<strange__symbol_a const>(strange__symbol__create_f(s));
+	}
 
 }
 

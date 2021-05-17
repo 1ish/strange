@@ -8,7 +8,7 @@
 #include <functional>
 #include <string_view>
 
-extern "C"
+namespace strange
 {
 	// symbol_o
 	strange__symbol_o const* strange__symbol_o_f()

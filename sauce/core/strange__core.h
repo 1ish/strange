@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <cstddef>
 
-extern "C"
+namespace strange
 {
 	struct strange__any_a;
 	struct strange__symbol_a;
@@ -19,7 +19,7 @@ extern "C"
 #include "fundamentals/things/strange__thing_t.h"
 #include "fundamentals/things/strange__symbol_t.h"
 
-extern "C"
+namespace strange
 {
 	strange__symbol_a strange__any__cat_f(void const* const me /* :<any># */);
 	strange__symbol_a strange__symbol__cat_f(void const* const me /* :<symbol># */);

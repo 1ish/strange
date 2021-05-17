@@ -1,7 +1,7 @@
 #include "../../../strange.h"
 #include "../../utilities/strange__value_c.hpp"
 
-extern "C"
+namespace strange
 {
 	strange__symbol_a strange__symbol__cat_f(void const* const me /* :<symbol># */)
 	{

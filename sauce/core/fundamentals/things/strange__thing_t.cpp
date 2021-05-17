@@ -7,7 +7,7 @@
 #include <utility>
 #include <functional>
 
-extern "C"
+namespace strange
 {
 	// any_o
 	strange__any_o const* strange__thing_o_f()
