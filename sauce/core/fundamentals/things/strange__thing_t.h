@@ -1,15 +1,12 @@
 #ifndef COM_ONEISH__STRANGE__THING_T_H
 #define COM_ONEISH__STRANGE__THING_T_H
 
-#define STRANGE__THING_D \
-		int64_t refs; \
-		strange__any_a error; \
-
 extern "C"
 {
 	struct strange__thing_d
 	{
-		STRANGE__THING_D
+		int64_t refs;
+		strange__any_a error;
 	};
 
 	// any_o

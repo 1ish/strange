@@ -1,17 +1,13 @@
 #ifndef COM_ONEISH__STRANGE__SYMBOL_T_H
 #define COM_ONEISH__STRANGE__SYMBOL_T_H
 
-#define STRANGE__SYMBOL_D \
-		STRANGE__THING_D \
-		char* symbol; \
-		int64_t length; \
-		uint64_t hash; \
-
 extern "C"
 {
-	struct strange__symbol_d
+	struct strange__symbol_d : strange__thing_d
 	{
-		STRANGE__SYMBOL_D
+		char* symbol;
+		int64_t length;
+		uint64_t hash;
 	};
 
 	// symbol_o
