@@ -3,9 +3,9 @@
 
 namespace strange
 {
-	struct strange__symbol_o : strange__any_o
+	struct symbol_o : any_o
 	{
-		strange__symbol_a (*add)(void const* const me /* :<symbol># */,
+		symbol_a (*add)(void const* const me /* :<symbol># */,
 			void const* const suffix /* :<symbol># */);
 
 		char const* (*to_char_star)(void const* const me /* :<symbol># */);
@@ -17,10 +17,10 @@ namespace strange
 		char (*last_char)(void const* const me /* :<symbol># */);
 	};
 
-	struct strange__symbol_a
+	struct symbol_a
 	{
-		strange__thing_d* d;
-		strange__symbol_o const* o;
+		thing_d* d;
+		symbol_o const* o;
 	};
 }
 

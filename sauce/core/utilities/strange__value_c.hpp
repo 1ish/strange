@@ -10,19 +10,19 @@ namespace strange
 
 	static_assert(sizeof(std::atomic_int64_t) == sizeof(int64_t), "required to be true: sizeof(std::atomic_int64_t) == sizeof(int64_t)");
 
-	inline void one(strange__any_a const* const abstraction /* :<any># */)
+	inline void one(any_a const* const abstraction /* :<any># */)
 	{
 		auto const refs = new(&(abstraction->d->refs)) std::atomic_int64_t;
 		*refs = 1;
 	}
 
-	inline void ref(strange__any_a const* const abstraction /* :<any># */)
+	inline void ref(any_a const* const abstraction /* :<any># */)
 	{
 		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(abstraction->d->refs));
 		++*refs;
 	}
 
-	inline void rel(strange__any_a const* const abstraction /* :<any># */)
+	inline void rel(any_a const* const abstraction /* :<any># */)
 	{
 		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(abstraction->d->refs));
 		if (!--*refs)
@@ -34,18 +34,18 @@ namespace strange
 
 	inline void mut(void* const me /* :<any>= */)
 	{
-		auto const ma = reinterpret_cast<strange__any_a* const>(me);
+		auto const ma = reinterpret_cast<any_a* const>(me);
 		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(ma->d->refs));
 		if (*refs > 1)
 		{
-			strange__any_a cp = *ma;
+			any_a cp = *ma;
 			ma->o->_copy(ma, &cp);
 			--*refs;
 			*ma = cp;
 		}
 	}
 
-	inline void rep(strange__any_a* const after /* :<any>= */,
+	inline void rep(any_a* const after /* :<any>= */,
 		bool pointer_before /* :_bool_# */,
 		bool pointer_after /* :_bool_# */)
 	{
@@ -451,9 +451,9 @@ namespace strange
 		return strange__pointer_c<A>(a);
 	}
 
-	inline strange__value_c<strange__symbol_a const> val(char const* const s)
+	inline strange__value_c<symbol_a const> val(char const* const s)
 	{
-		return strange__value_c<strange__symbol_a const>(strange__symbol__create_f(s));
+		return strange__value_c<symbol_a const>(symbol__create_f(s));
 	}
 
 }

@@ -5,12 +5,12 @@ namespace taste
 {
 	void testp(void* const symbol)
 	{
-		auto const param = reinterpret_cast<strange__symbol_a* const>(symbol);
+		auto const param = reinterpret_cast<symbol_a* const>(symbol);
 	}
 
 	void test()
 	{
-		auto v = var(strange__symbol__create_f("auto"));
+		auto v = var(symbol__create_f("auto"));
 		testp(v);
 		auto tv = var(v.a.o->type(v));
 		tv = v;
@@ -19,10 +19,10 @@ namespace taste
 		auto u = val(s.a.o->add(s, t));
 		val(u.a.o->add(u, val("y")));
 
-		std__cout << ((strange__symbol_d*)(u.a.d))->symbol << "\n";
+		std__cout << ((symbol_d*)(u.a.d))->symbol << "\n";
 
-		auto p = ptr(strange__symbol__create_f("pointer"));
-		auto q = ptr(strange__symbol__create_f("q"));
+		auto p = ptr(symbol__create_f("pointer"));
+		auto q = ptr(symbol__create_f("q"));
 		p = q;
 		testp(p);
 		testp(q);

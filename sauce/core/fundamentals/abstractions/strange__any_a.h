@@ -3,9 +3,9 @@
 
 namespace strange
 {
-	struct strange__any_o
+	struct any_o
 	{
-		strange__symbol_a (*cat)(void const* const me /* :<any># */);
+		symbol_a (*cat)(void const* const me /* :<any># */);
 
 		void (*_free)(void const* const me /* :<any># */);
 
@@ -21,7 +21,7 @@ namespace strange
 		void (*_as)(void const* const me /* :<any># */,
 			void* const ab /* :<any>= */);
 
-		strange__symbol_a (*type)(void const* const me /* :<any># */);
+		symbol_a (*type)(void const* const me /* :<any># */);
 
 		void (*_set_pointer)(void* const me /* :<any>= */,
 			bool is_pointer /* :_bool_# */ );
@@ -36,7 +36,7 @@ namespace strange
 		void (*set_error)(void* const me /* :<any>= */,
 			void const* const error /* :<any># */);
 
-		strange__any_a (*error)(void const* const me /* :<any># */);
+		any_a (*error)(void const* const me /* :<any># */);
 
 		uint64_t (*hash)(void const* const me /* :<any># */);
 
@@ -77,10 +77,10 @@ namespace strange
 			void const* const other /* :<any># */);
 	};
 
-	struct strange__any_a
+	struct any_a
 	{
-		strange__thing_d* d;
-		strange__any_o const* o;
+		thing_d* d;
+		any_o const* o;
 	};
 }
 

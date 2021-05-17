@@ -3,9 +3,9 @@
 
 namespace strange
 {
-	strange__symbol_a strange__symbol__cat_f(void const* const me /* :<symbol># */)
+	symbol_a symbol__cat_f(void const* const me /* :<symbol># */)
 	{
-		static auto r = strange::val(strange__symbol__create_f("<strange::symbol>")); //TODO cat
+		static auto r = strange::val(symbol__create_f("<strange::symbol>")); //TODO cat
 		return r.ret();
 	}
 }

@@ -6,11 +6,11 @@
 
 namespace strange
 {
-	struct strange__any_a;
-	struct strange__symbol_a;
+	struct any_a;
+	struct symbol_a;
 
-	struct strange__thing_d;
-	struct strange__symbol_d;
+	struct thing_d;
+	struct symbol_d;
 }
 
 #include "fundamentals/abstractions/strange__any_a.h"
@@ -21,8 +21,8 @@ namespace strange
 
 namespace strange
 {
-	strange__symbol_a strange__any__cat_f(void const* const me /* :<any># */);
-	strange__symbol_a strange__symbol__cat_f(void const* const me /* :<symbol># */);
+	symbol_a any__cat_f(void const* const me /* :<any># */);
+	symbol_a symbol__cat_f(void const* const me /* :<symbol># */);
 }
 
 #endif
