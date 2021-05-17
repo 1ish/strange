@@ -372,7 +372,7 @@ extern "C"
 	{
 		auto const ma = reinterpret_cast<strange__symbol_a const* const>(me);
 		auto const md = reinterpret_cast<strange__symbol_d* const>(ma->d);
-		return (md->symbol)[std::max(0LL, md->length - 1)];
+		return (md->symbol)[std::max(int64_t{ 0 }, md->length - 1)];
 	}
 
 	// creators
