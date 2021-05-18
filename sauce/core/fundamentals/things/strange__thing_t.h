@@ -1,11 +1,13 @@
 #ifndef COM_ONEISH__STRANGE__THING_T_H
 #define COM_ONEISH__STRANGE__THING_T_H
 
+#include <atomic>
+
 namespace strange
 {
 	struct thing_t
 	{
-		int64_t refs;
+		std::atomic_int64_t refs;
 		any_a error;
 
 		thing_t();

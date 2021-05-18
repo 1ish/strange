@@ -3,7 +3,6 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <atomic>
 
 namespace strange
 {
@@ -11,20 +10,17 @@ namespace strange
 
 	inline void one(thing_t* const t)
 	{
-		auto const refs = new(&(t->refs)) std::atomic_int64_t;
-		*refs = 1;
+		t->refs = 1;
 	}
 
 	inline void ref(any_a const* const abstraction /* :<any># */)
 	{
-		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(abstraction->t->refs));
-		++*refs;
+		++(abstraction->t->refs);
 	}
 
 	inline void rel(any_a const* const abstraction /* :<any># */)
 	{
-		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(abstraction->t->refs));
-		if (!--*refs)
+		if (!--(abstraction->t->refs))
 		{
 			abstraction->o->_free(abstraction);
 			delete abstraction->t;
@@ -34,12 +30,11 @@ namespace strange
 	inline void mut(void* const me /* :<any>= */)
 	{
 		auto const ma = reinterpret_cast<any_a* const>(me);
-		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(ma->t->refs));
-		if (*refs > 1)
+		if (ma->t->refs > 1)
 		{
 			any_a cp = *ma;
 			ma->o->_copy(ma, &cp);
-			--*refs;
+			--(ma->t->refs);
 			*ma = cp;
 		}
 	}
@@ -110,14 +105,12 @@ namespace strange
 
 		inline void ref() const
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
-			++*refs;
+			++(a.t->refs);
 		}
 
 		inline void rel() const
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
-			if (!--*refs)
+			if (!--(a.t->refs))
 			{
 				a.o->_free(&a);
 				delete a.t;
@@ -126,19 +119,17 @@ namespace strange
 
 		inline A const ret() const
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
-			++*refs;
+			++(a.t->refs);
 			return a;
 		}
 
 		inline void mut()
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
-			if (*refs > 1)
+			if (a.t->refs > 1)
 			{
 				auto cp = a;
 				a.o->_copy(&a, &cp);
-				--*refs;
+				--(a.t->refs);
 				a = cp;
 			}
 		}
@@ -251,14 +242,12 @@ namespace strange
 
 		inline void ref() const
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
-			++*refs;
+			++(a.t->refs);
 		}
 
 		inline void rel() const
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
-			if (!--*refs)
+			if (!--(a.t->refs))
 			{
 				a.o->_free(&a);
 				delete a.t;
@@ -267,19 +256,17 @@ namespace strange
 
 		inline A ret() const
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
-			++*refs;
+			++(a.t->refs);
 			return a;
 		}
 
 		inline void mut()
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
-			if (*refs > 1)
+			if (a.t->refs > 1)
 			{
 				auto cp = a;
 				a.o->_copy(&a, &cp);
-				--*refs;
+				--(a.t->refs);
 				a = cp;
 			}
 		}
@@ -396,14 +383,12 @@ namespace strange
 
 		inline void ref() const
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
-			++*refs;
+			++(a.t->refs);
 		}
 
 		inline void rel() const
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
-			if (!--*refs)
+			if (!--(a.t->refs))
 			{
 				a.o->_free(&a);
 				delete a.t;
@@ -412,19 +397,17 @@ namespace strange
 
 		inline A ret() const
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
-			++*refs;
+			++(a.t->refs);
 			return a;
 		}
 
 		inline void mut()
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
-			if (*refs > 1)
+			if (a.t->refs > 1)
 			{
 				auto cp = a;
 				a.o->_copy(&a, &cp);
-				--*refs;
+				--(a.t->refs);
 				a = cp;
 			}
 		}
