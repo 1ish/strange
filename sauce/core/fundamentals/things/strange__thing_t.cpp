@@ -9,6 +9,24 @@
 
 namespace strange
 {
+	thing_t::thing_t()
+		:	refs{ 0 }
+		,	error { 0, 0 }
+	{
+		strange::one(this);
+	}
+
+	thing_t::thing_t(thing_t const& original)
+		:	refs{ 0 }
+		,	error { original.error }
+	{
+		strange::one(this);
+		if (error.t)
+		{
+			strange::ref(&error);
+		}
+	}
+
 	thing_t::~thing_t()
 	{
 		if (error.t)
@@ -69,10 +87,6 @@ namespace strange
 	{
 		auto const ma = reinterpret_cast<any_a* const>(me);
 		ma->o = thing_t::operations_f();
-
-		strange::one(ma);
-		ma->t->error.t = 0;
-		ma->t->error.o = 0;
 	}
 
 	// any_a
@@ -92,12 +106,9 @@ namespace strange
 	void thing_t::_clone_f(void const* const me /* :<any># */,
 		void* const cp /* :<any>= */)
 	{
+		auto const ma = reinterpret_cast<any_a const* const>(me);
 		auto const ca = reinterpret_cast<any_a* const>(cp);
-		strange::one(ca);
-		if (!thing_t::something_f(ca))
-		{
-			strange::ref(&(ca->t->error));
-		}
+		ca->o = ma->o;
 	}
 
 	void thing_t::_no_copy_f(void const* const me /* :<any># */,

@@ -8,6 +8,8 @@ namespace strange
 		int64_t refs;
 		any_a error;
 
+		thing_t();
+		thing_t(thing_t const& original);
 		virtual ~thing_t();
 
 		// any_o

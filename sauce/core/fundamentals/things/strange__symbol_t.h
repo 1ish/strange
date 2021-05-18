@@ -9,6 +9,8 @@ namespace strange
 		int64_t length;
 		uint64_t hash;
 
+		symbol_t(char const* const s /* :_char_star_# */);
+		symbol_t(symbol_t const& original);
 		virtual ~symbol_t();
 
 		// symbol_o
@@ -16,8 +18,7 @@ namespace strange
 		static symbol_o const* pointer_operations_f();
 
 		// init
-		static void init_f(void* const me /* :<symbol>= */,
-			char const* const s /* :_char_star_# */);
+		static void init_f(void* const me /* :<symbol>= */);
 
 		// any_a
 		static void _copy_f(void const* const me /* :<symbol># */,

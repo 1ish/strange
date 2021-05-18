@@ -10,6 +10,30 @@
 
 namespace strange
 {
+	symbol_t::symbol_t(char const* const s /* :_char_star_# */)
+		:	thing_t{}
+		,	symbol{ 0 }
+		,	length{ 0 }
+		,	hash{ 0 }
+	{
+		if (s)
+		{
+			length = std::strlen(s);
+			symbol = new char[length + 1];
+			std::memcpy(symbol, s, length + 1);
+			hash = std::hash<std::string_view>{}(std::string_view{ symbol, static_cast<uint64_t>(length) });
+		}
+	}
+
+	symbol_t::symbol_t(symbol_t const& original)
+		:	thing_t{ original }
+		,	symbol{ new char[original.length + 1] }
+		,	length{ original.length }
+		,	hash{ original.hash }
+	{
+		std::memcpy(symbol, original.symbol, length + 1);
+	}
+
 	symbol_t::~symbol_t()
 	{
 		delete[] symbol;
@@ -69,21 +93,11 @@ namespace strange
 	}
 
 	// init
-	void symbol_t::init_f(void* const me /* :<symbol>= */,
-		char const* const s /* :_char_star_# */)
+	void symbol_t::init_f(void* const me /* :<symbol>= */)
 	{
 		auto const ma = reinterpret_cast<symbol_a* const>(me);
 		thing_t::init_f(ma);
 		ma->o = symbol_t::operations_f();
-
-		if (s)
-		{
-			auto const md = reinterpret_cast<symbol_t* const>(ma->t);
-			md->length = std::strlen(s);
-			md->symbol = new char[md->length + 1];
-			std::memcpy(md->symbol, s, md->length + 1);
-			md->hash = std::hash<std::string_view>{}(std::string_view{ md->symbol, static_cast<uint64_t>(md->length) });
-		}
 	}
 
 	// any_a
@@ -100,13 +114,7 @@ namespace strange
 	void symbol_t::_clone_f(void const* const me /* :<symbol># */,
 		void* const cp /* :<symbol>= */)
 	{
-		auto const ma = reinterpret_cast<symbol_a const* const>(me);
-		auto const md = reinterpret_cast<symbol_t const* const>(ma->t);
-		auto const ca = reinterpret_cast<symbol_a* const>(cp);
-		auto const cd = reinterpret_cast<symbol_t* const>(ca->t);
-		thing_t::_clone_f(ma, ca);
-		cd->symbol = new char[cd->length + 1];
-		std::memcpy(cd->symbol, md->symbol, cd->length + 1);
+		thing_t::_clone_f(me, cp);
 	}
 
 	bool symbol_t::is_f(void const* const me /* :<symbol># */,
@@ -312,10 +320,10 @@ namespace strange
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
 		auto const md = reinterpret_cast<symbol_t* const>(ma->t);
 		auto const sa = reinterpret_cast<symbol_a const* const>(suffix);
-		auto const rd = new symbol_t;
+		auto const rd = new symbol_t{ 0 };
 		symbol_a r;
 		r.t = reinterpret_cast<thing_t*>(rd);
-		symbol_t::init_f(&r, 0);
+		symbol_t::init_f(&r);
 		int64_t const symbol_length = sa->o->length(sa);
 		rd->length = md->length + symbol_length;
 		rd->symbol = new char[rd->length + 1];
@@ -356,10 +364,10 @@ namespace strange
 	// creators
 	symbol_a symbol_t::create_f(char const* const s /* :_char_star_# */)
 	{
-		auto const rd = new symbol_t;
+		auto const rd = new symbol_t{ s };
 		symbol_a r;
 		r.t = reinterpret_cast<thing_t*>(rd);
-		symbol_t::init_f(&r, s);
+		symbol_t::init_f(&r);
 		return r;
 	}
 
