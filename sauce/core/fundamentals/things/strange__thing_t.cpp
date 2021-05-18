@@ -223,7 +223,7 @@ namespace strange
 			return;
 		}
 		auto const nothing = strange::val(thing_t::create_nothing_f());
-		if (ea->t == nothing.a.t) // no error
+		if (ea->t == nothing.t) // no error
 		{
 			thing_t::set_something_f(me, true);
 		}

@@ -12,14 +12,14 @@ namespace taste
 	{
 		auto v = var(symbol_t::create_f("auto"));
 		testp(v);
-		auto tv = var(v.a.o->type(v));
+		auto tv = var(v.o->type(v));
 		tv = v;
 		auto s = val("test");
-		auto t = val(s.a.o->type(s));
-		auto u = val(s.a.o->add(s, t));
-		val(u.a.o->add(u, val("y")));
+		auto t = val(s.o->type(s));
+		auto u = val(s.o->add(s, t));
+		val(u.o->add(u, val("y")));
 
-		std__cout << ((symbol_t*)(u.a.t))->symbol << "\n";
+		std__cout << ((symbol_t*)(u.t))->symbol << "\n";
 
 		auto p = ptr(symbol_t::create_f("pointer"));
 		auto q = ptr(symbol_t::create_f("q"));

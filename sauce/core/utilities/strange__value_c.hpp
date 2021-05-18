@@ -59,37 +59,37 @@ namespace strange
 	}
 
 	template <typename A>
-	struct strange__variable_c; //TODO inherit from A
+	struct strange__variable_c;
 
 	template <typename A>
-	struct strange__pointer_c; //TODO inherit from A
+	struct strange__pointer_c;
 
 	template <typename A>
-	struct strange__value_c //TODO inherit from A
+	struct strange__value_c : A
 	{
-		explicit inline strange__value_c(A const& abstraction) :a(abstraction)
+		explicit inline strange__value_c(A const& abstraction) : A{ abstraction }
 		{
-			if (a.o->_pointer(&a))
+			if (A::o->_pointer(this))
 			{
-				a.o->_set_pointer(&a, false);
+				A::o->_set_pointer(this, false);
 				mut();
 			}
 		}
 
-		inline strange__value_c(strange__value_c const& original) :a(original.a)
+		inline strange__value_c(strange__value_c const& original) : A{ original }
 		{
 			ref();
 		}
 
-		explicit inline strange__value_c(strange__variable_c<typename std::remove_const_t<A>> const& original) : a(original.a)
+		explicit inline strange__value_c(strange__variable_c<typename std::remove_const_t<A>> const& original) : A{ original }
 		{
 			ref();
 		}
 
-		explicit inline strange__value_c(strange__pointer_c<typename std::remove_const_t<A>> const& original) : a(original.a)
+		explicit inline strange__value_c(strange__pointer_c<typename std::remove_const_t<A>> const& original) : A{ original }
 		{
 			ref();
-			a.o->_set_pointer(&a, false);
+			A::o->_set_pointer(this, false);
 			mut();
 		}
 
@@ -100,69 +100,68 @@ namespace strange
 
 		inline operator A const* () const
 		{
-			return &a;
+			return this;
 		}
 
 		inline void ref() const
 		{
-			++(a.t->refs);
+			++(A::t->refs);
 		}
 
 		inline void rel() const
 		{
-			if (!--(a.t->refs))
+			if (!--(A::t->refs))
 			{
-				a.o->_free(&a);
-				delete a.t;
+				A::o->_free(this);
+				delete A::t;
 			}
 		}
 
 		inline A const ret() const
 		{
-			++(a.t->refs);
-			return a;
+			++(A::t->refs);
+			return *this;
 		}
 
 		inline void mut()
 		{
-			if (a.t->refs > 1)
+			if (A::t->refs > 1)
 			{
-				auto cp = a;
-				a.o->_copy(&a, &cp);
-				--(a.t->refs);
-				a = cp;
+				typename std::remove_const_t<A> cp = { A::t, A::o };
+				A::o->_copy(this, &cp);
+				--(A::t->refs);
+				A::t = cp.t;
+				A::o = cp.o;
 			}
 		}
-
-		typename std::remove_const_t<A> a;
 	};
 
 	template <typename A>
-	struct strange__variable_c
+	struct strange__variable_c : A
 	{
-		explicit inline strange__variable_c(A const& abstraction) :a(abstraction)
+		explicit inline strange__variable_c(A const& abstraction) :A { abstraction }
 		{
-			if (a.o->_pointer(&a))
+			if (A::o->_pointer(this))
 			{
-				a.o->_set_pointer(&a, false);
+				A::o->_set_pointer(this, false);
 				mut();
 			}
 		}
 
-		explicit inline strange__variable_c(strange__value_c<A const> const& original) : a(original.a)
+		explicit inline strange__variable_c(strange__value_c<A const> const& original) : A{ original }
 		{
 			ref();
 		}
 
-		inline strange__variable_c(strange__variable_c const& original) : a(original.a)
+		inline strange__variable_c(strange__variable_c const& original) : A{ original }
 		{
 			ref();
 		}
 
-		explicit inline strange__variable_c(strange__pointer_c<A> const& original) : a(original.a)
+		explicit inline strange__variable_c(strange__pointer_c<A> const& original) : A{ original }
 		{
 			ref();
-			a.o->_set_pointer(&a, false);
+			A::o->_set_pointer(this, false);
 			mut();
 		}
 
@@ -174,10 +173,11 @@ namespace strange
 		inline strange__variable_c& operator=(A const& abstraction)
 		{
 			rel();
-			a = abstraction;
-			if (a.o->_pointer(&a))
+			A::t = abstraction.t;
+			A::o = abstraction.o;
+			if (A::o->_pointer(this))
 			{
-				a.o->_set_pointer(&a, false);
+				A::o->_set_pointer(this, false);
 				mut();
 			}
 			return *this;
@@ -185,122 +185,124 @@ namespace strange
 
 		inline strange__variable_c& operator=(strange__value_c<A const> const& original)
 		{
-			if (a.t != original.a.t)
+			if (A::t != original.t)
 			{
 				rel();
-				a = original.a;
+				A::t = original.t;
+				A::o = original.o;
 				ref();
 			}
 			else
 			{
-				a.o = original.a.o;
+				A::o = original.o;
 			}
 			return *this;
 		}
 
 		inline strange__variable_c& operator=(strange__variable_c const& original)
 		{
-			if (a.t != original.a.t)
+			if (A::t != original.t)
 			{
 				rel();
-				a = original.a;
+				A::t = original.t;
+				A::o = original.o;
 				ref();
 			}
 			else
 			{
-				a.o = original.a.o;
+				A::o = original.o;
 			}
 			return *this;
 		}
 
 		inline strange__variable_c& operator=(strange__pointer_c<A> const& original)
 		{
-			if (a.t != original.a.t)
+			if (A::t != original.t)
 			{
 				rel();
-				a = original.a;
+				A::t = original.t;
+				A::o = original.o;
 				ref();
 			}
 			else
 			{
-				a.o = original.a.o;
+				A::o = original.o;
 			}
-			a.o->_set_pointer(&a, false);
+			A::o->_set_pointer(this, false);
 			mut();
 			return *this;
 		}
 
 		inline operator A* ()
 		{
-			return &a;
+			return this;
 		}
 
 		inline operator A const* () const
 		{
-			return &a;
+			return this;
 		}
 
 		inline void ref() const
 		{
-			++(a.t->refs);
+			++(A::t->refs);
 		}
 
 		inline void rel() const
 		{
-			if (!--(a.t->refs))
+			if (!--(A::t->refs))
 			{
-				a.o->_free(&a);
-				delete a.t;
+				A::o->_free(this);
+				delete A::t;
 			}
 		}
 
 		inline A ret() const
 		{
-			++(a.t->refs);
-			return a;
+			++(A::t->refs);
+			return *this;
 		}
 
 		inline void mut()
 		{
-			if (a.t->refs > 1)
+			if (A::t->refs > 1)
 			{
-				auto cp = a;
-				a.o->_copy(&a, &cp);
-				--(a.t->refs);
-				a = cp;
+				A cp = { A::t, A::o };
+				A::o->_copy(this, &cp);
+				--(A::t->refs);
+				A::t = cp.t;
+				A::o = cp.o;
 			}
 		}
-
-		A a;
 	};
 
 	template <typename A>
-	struct strange__pointer_c
+	struct strange__pointer_c : A
 	{
-		explicit inline strange__pointer_c(A const& abstraction) :a(abstraction)
+		explicit inline strange__pointer_c(A const& abstraction) :A{ abstraction }
 		{
-			if (!a.o->_pointer(&a))
+			if (!A::o->_pointer(this))
 			{
 				mut();
-				a.o->_set_pointer(&a, true);
+				A::o->_set_pointer(this, true);
 			}
 		}
 
-		explicit inline strange__pointer_c(strange__value_c<A const> const& original) : a(original.a)
+		explicit inline strange__pointer_c(strange__value_c<A const> const& original) : A{ original }
 		{
 			ref();
 			mut();
-			a.o->_set_pointer(&a, true);
+			A::o->_set_pointer(this, true);
 		}
 
-		explicit inline strange__pointer_c(strange__variable_c<A> const& original) : a(original.a)
+		explicit inline strange__pointer_c(strange__variable_c<A> const& original) : A{ original }
 		{
 			ref();
 			mut();
-			a.o->_set_pointer(&a, true);
+			A::o->_set_pointer(this, true);
 		}
 
-		inline strange__pointer_c(strange__pointer_c const& original) : a(original.a)
+		inline strange__pointer_c(strange__pointer_c const& original) : A{ original }
 		{
 			ref();
 		}
@@ -313,106 +315,109 @@ namespace strange
 		inline strange__pointer_c& operator=(A const& abstraction)
 		{
 			rel();
-			a = abstraction;
-			if (!a.o->_pointer(&a))
+			A::t = abstraction.t;
+			A::o = abstraction.o;
+			if (!A::o->_pointer(this))
 			{
 				mut();
-				a.o->_set_pointer(&a, true);
+				A::o->_set_pointer(this, true);
 			}
 			return *this;
 		}
 
 		inline strange__pointer_c& operator=(strange__value_c<A const> const& original)
 		{
-			if (a.t != original.a.t)
+			if (A::t != original.t)
 			{
 				rel();
-				a = original.a;
+				A::t = original.t;
+				A::o = original.o;
 				ref();
 			}
 			else
 			{
-				a.o = original.a.o;
+				A::o = original.o;
 			}
 			mut();
-			a.o->_set_pointer(&a, true);
+			A::o->_set_pointer(this, true);
 			return *this;
 		}
 
 		inline strange__pointer_c& operator=(strange__variable_c<A> const& original)
 		{
-			if (a.t != original.a.t)
+			if (A::t != original.t)
 			{
 				rel();
-				a = original.a;
+				A::t = original.t;
+				A::o = original.o;
 				ref();
 			}
 			else
 			{
-				a.o = original.a.o;
+				A::o = original.o;
 			}
 			mut();
-			a.o->_set_pointer(&a, true);
+			A::o->_set_pointer(this, true);
 			return *this;
 		}
 
 		inline strange__pointer_c& operator=(strange__pointer_c const& original)
 		{
-			if (a.t != original.a.t)
+			if (A::t != original.t)
 			{
 				rel();
-				a = original.a;
+				A::t = original.t;
+				A::o = original.o;
 				ref();
 			}
 			else
 			{
-				a.o = original.a.o;
+				A::o = original.o;
 			}
 			return *this;
 		}
 
 		inline operator A* ()
 		{
-			return &a;
+			return this;
 		}
 
 		inline operator A const* () const
 		{
-			return &a;
+			return this;
 		}
 
 		inline void ref() const
 		{
-			++(a.t->refs);
+			++(A::t->refs);
 		}
 
 		inline void rel() const
 		{
-			if (!--(a.t->refs))
+			if (!--(A::t->refs))
 			{
-				a.o->_free(&a);
-				delete a.t;
+				A::o->_free(this);
+				delete A::t;
 			}
 		}
 
 		inline A ret() const
 		{
-			++(a.t->refs);
-			return a;
+			++(A::t->refs);
+			return *this;
 		}
 
 		inline void mut()
 		{
-			if (a.t->refs > 1)
+			if (A::t->refs > 1)
 			{
-				auto cp = a;
-				a.o->_copy(&a, &cp);
-				--(a.t->refs);
-				a = cp;
+				A cp = { A::t, A::o };
+				A::o->_copy(this, &cp);
+				--(A::t->refs);
+				A::t = cp.t;
+				A::o = cp.o;
 			}
 		}
-
-		A a;
 	};
 
 	template <typename A>
