@@ -68,10 +68,11 @@ namespace strange
 	void thing_t::init_f(void* const me /* :<any>= */)
 	{
 		auto const ma = reinterpret_cast<any_a* const>(me);
+		ma->o = thing_t::operations_f();
+
 		strange::one(ma);
 		ma->t->error.t = 0;
 		ma->t->error.o = 0;
-		ma->o = thing_t::operations_f();
 	}
 
 	// any_a

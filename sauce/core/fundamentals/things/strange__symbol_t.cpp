@@ -73,16 +73,17 @@ namespace strange
 		char const* const s /* :_char_star_# */)
 	{
 		auto const ma = reinterpret_cast<symbol_a* const>(me);
-		auto const md = reinterpret_cast<symbol_t* const>(ma->t);
 		thing_t::init_f(ma);
+		ma->o = symbol_t::operations_f();
+
 		if (s)
 		{
+			auto const md = reinterpret_cast<symbol_t* const>(ma->t);
 			md->length = std::strlen(s);
 			md->symbol = new char[md->length + 1];
 			std::memcpy(md->symbol, s, md->length + 1);
 			md->hash = std::hash<std::string_view>{}(std::string_view{ md->symbol, static_cast<uint64_t>(md->length) });
 		}
-		ma->o = symbol_t::operations_f();
 	}
 
 	// any_a
