@@ -64,13 +64,13 @@ namespace strange
 	}
 
 	template <typename A>
-	struct strange__variable_c;
+	struct strange__variable_c; //TODO inherit from A
 
 	template <typename A>
-	struct strange__pointer_c;
+	struct strange__pointer_c; //TODO inherit from A
 
 	template <typename A>
-	struct strange__value_c
+	struct strange__value_c //TODO inherit from A
 	{
 		explicit inline strange__value_c(A const& abstraction) :a(abstraction)
 		{
