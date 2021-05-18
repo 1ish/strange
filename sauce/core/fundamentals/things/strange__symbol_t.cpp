@@ -26,14 +26,14 @@ namespace strange
 			symbol_t::_copy_f,
 			symbol_t::is_f,
 			symbol_t::as_f,
-			thing_t::_as_f,
+			symbol_t::_as_f,
 			symbol_t::type_f,
 			symbol_t::_set_pointer_f,
 			symbol_t::_pointer_f,
-			thing_t::set_something_f,
-			thing_t::something_f,
-			thing_t::set_error_f,
-			thing_t::error_f,
+			symbol_t::set_something_f,
+			symbol_t::something_f,
+			symbol_t::set_error_f,
+			symbol_t::error_f,
 			symbol_t::hash_f,
 			symbol_t::equal_f,
 			symbol_t::_equal_f,
@@ -86,11 +86,6 @@ namespace strange
 	}
 
 	// any_a
-	void symbol_t::_free_f(void const* const me /* :<symbol># */)
-	{
-		thing_t::_free_f(me);
-	}
-
 	void symbol_t::_copy_f(void const* const me /* :<symbol># */,
 		void* const cp /* :<symbol>= */)
 	{

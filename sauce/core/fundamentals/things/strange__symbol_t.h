@@ -20,8 +20,6 @@ namespace strange
 			char const* const s /* :_char_star_# */);
 
 		// any_a
-		static void _free_f(void const* const me /* :<symbol># */);
-
 		static void _copy_f(void const* const me /* :<symbol># */,
 			void* const cp /* :<symbol>= */);
 
