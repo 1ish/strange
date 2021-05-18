@@ -15,7 +15,7 @@ namespace strange
 		static any_o o =
 		{
 			// any_a
-			any__cat_f,
+			any_a::any__cat_f,
 			thing___free_f,
 			thing___copy_f,
 			thing__is_f,
@@ -113,7 +113,7 @@ namespace strange
 	{
 		auto const aa = reinterpret_cast<any_a const* const>(ab);
 		// ab.cat in me.cats
-		static thing_t* const mat = any__cat_f(me).d;
+		static thing_t* const mat = any_a::any__cat_f(me).d;
 		return aa->o->cat(aa).d == mat;
 	}
 

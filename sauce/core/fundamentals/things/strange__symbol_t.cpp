@@ -16,7 +16,7 @@ namespace strange
 		static symbol_o o =
 		{
 			// any_a
-			symbol__cat_f,
+			symbol_a::symbol__cat_f,
 			symbol___free_f,
 			symbol___copy_f,
 			symbol__is_f,
@@ -131,8 +131,8 @@ namespace strange
 		// ab.cat in me.cats
 		static thing_t* mats[] =
 		{
-			any__cat_f(me).d,
-			symbol__cat_f(me).d
+			any_a::any__cat_f(me).d,
+			symbol_a::symbol__cat_f(me).d
 		};
 		return abc == mats[0] || abc == mats[1];
 	}

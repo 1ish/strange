@@ -19,10 +19,4 @@ namespace strange
 #include "fundamentals/things/strange__thing_t.h"
 #include "fundamentals/things/strange__symbol_t.h"
 
-namespace strange
-{
-	symbol_a any__cat_f(void const* const me /* :<any># */);
-	symbol_a symbol__cat_f(void const* const me /* :<symbol># */);
-}
-
 #endif
