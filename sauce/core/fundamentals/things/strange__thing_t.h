@@ -9,8 +9,8 @@ namespace strange
 		any_a error;
 
 		// any_o
-		static any_o const* thing_o_f();
-		static any_o const* thing_p_f();
+		static any_o const* operations_f();
+		static any_o const* pointer_operations_f();
 
 		// init
 		static void init_f(void* const me /* :<any>= */);

@@ -10,9 +10,9 @@
 namespace strange
 {
 	// any_o
-	any_o const* thing_t::thing_o_f()
+	any_o const* thing_t::operations_f()
 	{
-		static any_o o =
+		static any_o operations =
 		{
 			// any_a
 			any_a::cat_f,
@@ -42,18 +42,18 @@ namespace strange
 			thing_t::greater_or_equal_f,
 			thing_t::_greater_or_equal_f
 		};
-		return &o;
+		return &operations;
 	}
 
-	any_o const* thing_t::thing_p_f()
+	any_o const* thing_t::pointer_operations_f()
 	{
-		static any_o p = []()
+		static any_o operations = []()
 		{
-			any_o p = *thing_t::thing_o_f();
-			p._copy = thing_t::_no_copy_f;
-			return p;
+			any_o operations = *thing_t::operations_f();
+			operations._copy = thing_t::_no_copy_f;
+			return operations;
 		}();
-		return &p;
+		return &operations;
 	}
 
 	// init
@@ -63,7 +63,7 @@ namespace strange
 		strange::one(ma);
 		ma->t->error.t = 0;
 		ma->t->error.o = 0;
-		ma->o = thing_t::thing_o_f();
+		ma->o = thing_t::operations_f();
 	}
 
 	// any_a
@@ -162,18 +162,18 @@ namespace strange
 		auto const ma = reinterpret_cast<any_a* const>(me);
 		if (is_pointer)
 		{
-			ma->o = thing_t::thing_p_f();
+			ma->o = thing_t::pointer_operations_f();
 		}
 		else
 		{
-			ma->o = thing_t::thing_o_f();
+			ma->o = thing_t::operations_f();
 		}
 	}
 
 	bool thing_t::_pointer_f(void const* const me /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<any_a const* const>(me);
-		return ma->o == thing_t::thing_p_f();
+		return ma->o == thing_t::pointer_operations_f();
 	}
 
 	void thing_t::set_something_f(void* const me /* :<any>= */,

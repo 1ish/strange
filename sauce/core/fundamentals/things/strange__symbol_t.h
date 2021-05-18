@@ -10,8 +10,8 @@ namespace strange
 		uint64_t hash;
 
 		// symbol_o
-		static symbol_o const* symbol_o_f();
-		static symbol_o const* symbol_p_f();
+		static symbol_o const* operations_f();
+		static symbol_o const* pointer_operations_f();
 
 		// init
 		static void init_f(void* const me /* :<symbol>= */,

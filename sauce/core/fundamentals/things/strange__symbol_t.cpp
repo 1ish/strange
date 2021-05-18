@@ -11,9 +11,9 @@
 namespace strange
 {
 	// symbol_o
-	symbol_o const* symbol_t::symbol_o_f()
+	symbol_o const* symbol_t::operations_f()
 	{
-		static symbol_o o =
+		static symbol_o operations =
 		{
 			// any_a
 			symbol_a::cat_f,
@@ -49,18 +49,18 @@ namespace strange
 			symbol_t::first_char_f,
 			symbol_t::last_char_f
 		};
-		return &o;
+		return &operations;
 	}
 
-	symbol_o const* symbol_t::symbol_p_f()
+	symbol_o const* symbol_t::pointer_operations_f()
 	{
-		static symbol_o o = []()
+		static symbol_o operations = []()
 		{
-			symbol_o o = *symbol_t::symbol_o_f();
-			o._copy = thing_t::_no_copy_f;
-			return o;
+			symbol_o operations = *symbol_t::operations_f();
+			operations._copy = thing_t::_no_copy_f;
+			return operations;
 		}();
-		return &o;
+		return &operations;
 	}
 
 	// init
@@ -81,7 +81,7 @@ namespace strange
 			std::memcpy(md->symbol, s, md->length + 1);
 			md->hash = std::hash<std::string_view>{}(std::string_view{ md->symbol, static_cast<uint64_t>(md->length) });
 		}
-		ma->o = symbol_t::symbol_o_f();
+		ma->o = symbol_t::operations_f();
 	}
 
 	// any_a
@@ -165,18 +165,18 @@ namespace strange
 		auto const ma = reinterpret_cast<symbol_a* const>(me);
 		if (is_pointer)
 		{
-			ma->o = symbol_t::symbol_p_f();
+			ma->o = symbol_t::pointer_operations_f();
 		}
 		else
 		{
-			ma->o = symbol_t::symbol_o_f();
+			ma->o = symbol_t::operations_f();
 		}
 	}
 
 	bool symbol_t::_pointer_f(void const* const me /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
-		return ma->o == symbol_t::symbol_p_f();
+		return ma->o == symbol_t::pointer_operations_f();
 	}
 
 	uint64_t symbol_t::hash_f(void const* const me /* :<symbol># */)
