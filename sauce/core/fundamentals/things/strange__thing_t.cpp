@@ -16,31 +16,31 @@ namespace strange
 		{
 			// any_a
 			any_a::any__cat_f,
-			thing___free_f,
-			thing___copy_f,
-			thing__is_f,
-			thing__as_f,
-			thing___as_f,
-			thing__type_f,
-			thing___set_pointer_f,
-			thing___pointer_f,
-			thing__set_something_f,
-			thing__something_f,
-			thing__set_error_f,
-			thing__error_f,
-			thing__hash_f,
-			thing__equal_f,
-			thing___equal_f,
-			thing__not_equal_f,
-			thing___not_equal_f,
-			thing__less_f,
-			thing___less_f,
-			thing__greater_f,
-			thing___greater_f,
-			thing__less_or_equal_f,
-			thing___less_or_equal_f,
-			thing__greater_or_equal_f,
-			thing___greater_or_equal_f
+			thing_t::thing___free_f,
+			thing_t::thing___copy_f,
+			thing_t::thing__is_f,
+			thing_t::thing__as_f,
+			thing_t::thing___as_f,
+			thing_t::thing__type_f,
+			thing_t::thing___set_pointer_f,
+			thing_t::thing___pointer_f,
+			thing_t::thing__set_something_f,
+			thing_t::thing__something_f,
+			thing_t::thing__set_error_f,
+			thing_t::thing__error_f,
+			thing_t::thing__hash_f,
+			thing_t::thing__equal_f,
+			thing_t::thing___equal_f,
+			thing_t::thing__not_equal_f,
+			thing_t::thing___not_equal_f,
+			thing_t::thing__less_f,
+			thing_t::thing___less_f,
+			thing_t::thing__greater_f,
+			thing_t::thing___greater_f,
+			thing_t::thing__less_or_equal_f,
+			thing_t::thing___less_or_equal_f,
+			thing_t::thing__greater_or_equal_f,
+			thing_t::thing___greater_or_equal_f
 		};
 		return &o;
 	}
@@ -50,7 +50,7 @@ namespace strange
 		static any_o p = []()
 		{
 			any_o p = *thing_o_f();
-			p._copy = thing___no_copy_f;
+			p._copy = thing_t::thing___no_copy_f;
 			return p;
 		}();
 		return &p;
@@ -69,7 +69,7 @@ namespace strange
 	// any_a
 	void thing_t::thing___free_f(void const* const me /* :<any># */)
 	{
-		if (!thing__something_f(me))
+		if (!thing_t::thing__something_f(me))
 		{
 			auto const ma = reinterpret_cast<any_a const* const>(me);
 			strange::rel(&(ma->d->error));
@@ -87,7 +87,7 @@ namespace strange
 			std::abort();
 		}
 		std::memcpy(ca->d, ma->d, sizeof(thing_t));
-		thing___clone_f(me, cp);
+		thing_t::thing___clone_f(me, cp);
 	}
 
 	void thing_t::thing___clone_f(void const* const me /* :<any># */,
@@ -95,7 +95,7 @@ namespace strange
 	{
 		auto const ca = reinterpret_cast<any_a* const>(cp);
 		strange::one(ca);
-		if (!thing__something_f(ca))
+		if (!thing_t::thing__something_f(ca))
 		{
 			strange::ref(&(ca->d->error));
 		}
@@ -120,7 +120,7 @@ namespace strange
 	bool thing_t::thing__as_f(void const* const me /* :<any># */,
 		void* const ab /* :<any>= */)
 	{
-		if (!thing__is_f(me, ab))
+		if (!thing_t::thing__is_f(me, ab))
 		{
 			return false;
 		}
@@ -128,7 +128,7 @@ namespace strange
 		auto const aa = reinterpret_cast<any_a* const>(ab);
 		bool const mp = ma->o->_pointer(ma);
 		bool const ap = aa->o->_pointer(aa);
-		thing___as_f(me, ab);
+		thing_t::thing___as_f(me, ab);
 		strange::rep(aa, mp, ap);
 		return true;
 	}
@@ -179,7 +179,7 @@ namespace strange
 	void thing_t::thing__set_something_f(void* const me /* :<any>= */,
 		bool is_something /* :_bool_# */)
 	{
-		if (is_something == thing__something_f(me))
+		if (is_something == thing_t::thing__something_f(me))
 		{
 			return;
 		}
@@ -193,7 +193,7 @@ namespace strange
 		}
 		else
 		{
-			ma->d->error = thing__create_f();
+			ma->d->error = thing_t::thing__create_f();
 		}
 	}
 
@@ -212,10 +212,10 @@ namespace strange
 		{
 			return;
 		}
-		auto const nothing = strange::val(thing__create_nothing_f());
+		auto const nothing = strange::val(thing_t::thing__create_nothing_f());
 		if (ea->d == nothing.a.d) // no error
 		{
-			thing__set_something_f(me, true);
+			thing_t::thing__set_something_f(me, true);
 		}
 		else
 		{
@@ -227,9 +227,9 @@ namespace strange
 
 	any_a thing_t::thing__error_f(void const* const me /* :<any># */)
 	{
-		if (thing__something_f(me))
+		if (thing_t::thing__something_f(me))
 		{
-			return thing__create_nothing_f();
+			return thing_t::thing__create_nothing_f();
 		}
 		auto const ma = reinterpret_cast<any_a const* const>(me);
 		strange::ref(&(ma->d->error));
@@ -245,7 +245,7 @@ namespace strange
 	bool thing_t::thing__equal_f(void const* const me /* :<any># */,
 		void const* const other /* :<any># */)
 	{
-		return thing___equal_f(me, other);
+		return thing_t::thing___equal_f(me, other);
 	}
 
 	bool thing_t::thing___equal_f(void const* const me /* :<any># */,
@@ -259,7 +259,7 @@ namespace strange
 	bool thing_t::thing__not_equal_f(void const* const me /* :<any># */,
 		void const* const other /* :<any># */)
 	{
-		return thing___not_equal_f(me, other);
+		return thing_t::thing___not_equal_f(me, other);
 	}
 
 	bool thing_t::thing___not_equal_f(void const* const me /* :<any># */,
@@ -273,7 +273,7 @@ namespace strange
 	bool thing_t::thing__less_f(void const* const me /* :<any># */,
 		void const* const other /* :<any># */)
 	{
-		return thing___less_f(me, other);
+		return thing_t::thing___less_f(me, other);
 	}
 
 	bool thing_t::thing___less_f(void const* const me /* :<any># */,
@@ -287,7 +287,7 @@ namespace strange
 	bool thing_t::thing__greater_f(void const* const me /* :<any># */,
 		void const* const other /* :<any># */)
 	{
-		return thing___greater_f(me, other);
+		return thing_t::thing___greater_f(me, other);
 	}
 
 	bool thing_t::thing___greater_f(void const* const me /* :<any># */,
@@ -301,7 +301,7 @@ namespace strange
 	bool thing_t::thing__less_or_equal_f(void const* const me /* :<any># */,
 		void const* const other /* :<any># */)
 	{
-		return thing___less_or_equal_f(me, other);
+		return thing_t::thing___less_or_equal_f(me, other);
 	}
 
 	bool thing_t::thing___less_or_equal_f(void const* const me /* :<any># */,
@@ -315,7 +315,7 @@ namespace strange
 	bool thing_t::thing__greater_or_equal_f(void const* const me /* :<any># */,
 		void const* const other /* :<any># */)
 	{
-		return thing___greater_or_equal_f(me, other);
+		return thing_t::thing___greater_or_equal_f(me, other);
 	}
 
 	bool thing_t::thing___greater_or_equal_f(void const* const me /* :<any># */,
@@ -337,7 +337,7 @@ namespace strange
 			{
 				std::abort();
 			}
-			thing__init_f(&r);
+			thing_t::thing__init_f(&r);
 			return r;
 		}());
 		return r.ret();
@@ -353,8 +353,8 @@ namespace strange
 			{
 				std::abort();
 			}
-			thing__init_f(&r);
-			r.d->error = thing__create_f();
+			thing_t::thing__init_f(&r);
+			r.d->error = thing_t::thing__create_f();
 			return r;
 		}());
 		return r.ret();
