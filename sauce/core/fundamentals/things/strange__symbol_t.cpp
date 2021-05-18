@@ -10,6 +10,10 @@
 
 namespace strange
 {
+	symbol_t::~symbol_t()
+	{
+	}
+
 	// symbol_o
 	symbol_o const* symbol_t::operations_f()
 	{
@@ -85,7 +89,7 @@ namespace strange
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
 		auto const md = reinterpret_cast<symbol_t* const>(ma->t);
-		std::free(md->symbol); std::cout << "free\n";
+		delete[] md->symbol;
 		thing_t::_free_f(ma);
 	}
 

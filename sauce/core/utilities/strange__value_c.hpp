@@ -7,7 +7,6 @@
 
 namespace strange
 {
-
 	static_assert(sizeof(std::atomic_int64_t) == sizeof(int64_t), "required to be true: sizeof(std::atomic_int64_t) == sizeof(int64_t)");
 
 	inline void one(any_a const* const abstraction /* :<any># */)
@@ -28,7 +27,7 @@ namespace strange
 		if (!--*refs)
 		{
 			abstraction->o->_free(abstraction);
-			std::free(abstraction->t); std::cout << "free\n";
+			delete abstraction->t;
 		}
 	}
 
@@ -121,7 +120,7 @@ namespace strange
 			if (!--*refs)
 			{
 				a.o->_free(&a);
-				std::free(a.t); std::cout << "free\n";
+				delete a.t;
 			}
 		}
 
@@ -262,7 +261,7 @@ namespace strange
 			if (!--*refs)
 			{
 				a.o->_free(&a);
-				std::free(a.t); std::cout << "free\n";
+				delete a.t;
 			}
 		}
 
@@ -407,7 +406,7 @@ namespace strange
 			if (!--*refs)
 			{
 				a.o->_free(&a);
-				std::free(a.t); std::cout << "free\n";
+				delete a.t;
 			}
 		}
 
@@ -455,7 +454,6 @@ namespace strange
 	{
 		return strange__value_c<symbol_a const>(symbol_t::create_f(s));
 	}
-
 }
 
 #endif

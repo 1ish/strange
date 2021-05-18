@@ -9,6 +9,10 @@
 
 namespace strange
 {
+	thing_t::~thing_t()
+	{
+	}
+
 	// any_o
 	any_o const* thing_t::operations_f()
 	{

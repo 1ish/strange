@@ -9,6 +9,8 @@ namespace strange
 		int64_t length;
 		uint64_t hash;
 
+		virtual ~symbol_t();
+
 		// symbol_o
 		static symbol_o const* operations_f();
 		static symbol_o const* pointer_operations_f();

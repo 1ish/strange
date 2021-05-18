@@ -8,6 +8,8 @@ namespace strange
 		int64_t refs;
 		any_a error;
 
+		virtual ~thing_t();
+
 		// any_o
 		static any_o const* operations_f();
 		static any_o const* pointer_operations_f();
