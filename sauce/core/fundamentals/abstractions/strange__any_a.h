@@ -79,7 +79,7 @@ namespace strange
 
 	struct any_a
 	{
-		thing_t* d;
+		thing_t* t;
 		any_o const* o;
 
 		static symbol_a cat_f(void const* const me /* :<any># */);

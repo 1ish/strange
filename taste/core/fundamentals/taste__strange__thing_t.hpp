@@ -19,7 +19,7 @@ namespace taste
 		auto u = val(s.a.o->add(s, t));
 		val(u.a.o->add(u, val("y")));
 
-		std__cout << ((symbol_t*)(u.a.d))->symbol << "\n";
+		std__cout << ((symbol_t*)(u.a.t))->symbol << "\n";
 
 		auto p = ptr(symbol_t::create_f("pointer"));
 		auto q = ptr(symbol_t::create_f("q"));

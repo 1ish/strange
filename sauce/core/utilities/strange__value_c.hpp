@@ -12,30 +12,30 @@ namespace strange
 
 	inline void one(any_a const* const abstraction /* :<any># */)
 	{
-		auto const refs = new(&(abstraction->d->refs)) std::atomic_int64_t;
+		auto const refs = new(&(abstraction->t->refs)) std::atomic_int64_t;
 		*refs = 1;
 	}
 
 	inline void ref(any_a const* const abstraction /* :<any># */)
 	{
-		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(abstraction->d->refs));
+		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(abstraction->t->refs));
 		++*refs;
 	}
 
 	inline void rel(any_a const* const abstraction /* :<any># */)
 	{
-		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(abstraction->d->refs));
+		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(abstraction->t->refs));
 		if (!--*refs)
 		{
 			abstraction->o->_free(abstraction);
-			std::free(abstraction->d); std::cout << "free\n";
+			std::free(abstraction->t); std::cout << "free\n";
 		}
 	}
 
 	inline void mut(void* const me /* :<any>= */)
 	{
 		auto const ma = reinterpret_cast<any_a* const>(me);
-		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(ma->d->refs));
+		auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(ma->t->refs));
 		if (*refs > 1)
 		{
 			any_a cp = *ma;
@@ -111,30 +111,30 @@ namespace strange
 
 		inline void ref() const
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
 			++*refs;
 		}
 
 		inline void rel() const
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
 			if (!--*refs)
 			{
 				a.o->_free(&a);
-				std::free(a.d); std::cout << "free\n";
+				std::free(a.t); std::cout << "free\n";
 			}
 		}
 
 		inline A const ret() const
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
 			++*refs;
 			return a;
 		}
 
 		inline void mut()
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
 			if (*refs > 1)
 			{
 				auto cp = a;
@@ -195,7 +195,7 @@ namespace strange
 
 		inline strange__variable_c& operator=(strange__value_c<A const> const& original)
 		{
-			if (a.d != original.a.d)
+			if (a.t != original.a.t)
 			{
 				rel();
 				a = original.a;
@@ -210,7 +210,7 @@ namespace strange
 
 		inline strange__variable_c& operator=(strange__variable_c const& original)
 		{
-			if (a.d != original.a.d)
+			if (a.t != original.a.t)
 			{
 				rel();
 				a = original.a;
@@ -225,7 +225,7 @@ namespace strange
 
 		inline strange__variable_c& operator=(strange__pointer_c<A> const& original)
 		{
-			if (a.d != original.a.d)
+			if (a.t != original.a.t)
 			{
 				rel();
 				a = original.a;
@@ -252,30 +252,30 @@ namespace strange
 
 		inline void ref() const
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
 			++*refs;
 		}
 
 		inline void rel() const
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
 			if (!--*refs)
 			{
 				a.o->_free(&a);
-				std::free(a.d); std::cout << "free\n";
+				std::free(a.t); std::cout << "free\n";
 			}
 		}
 
 		inline A ret() const
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
 			++*refs;
 			return a;
 		}
 
 		inline void mut()
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
 			if (*refs > 1)
 			{
 				auto cp = a;
@@ -338,7 +338,7 @@ namespace strange
 
 		inline strange__pointer_c& operator=(strange__value_c<A const> const& original)
 		{
-			if (a.d != original.a.d)
+			if (a.t != original.a.t)
 			{
 				rel();
 				a = original.a;
@@ -355,7 +355,7 @@ namespace strange
 
 		inline strange__pointer_c& operator=(strange__variable_c<A> const& original)
 		{
-			if (a.d != original.a.d)
+			if (a.t != original.a.t)
 			{
 				rel();
 				a = original.a;
@@ -372,7 +372,7 @@ namespace strange
 
 		inline strange__pointer_c& operator=(strange__pointer_c const& original)
 		{
-			if (a.d != original.a.d)
+			if (a.t != original.a.t)
 			{
 				rel();
 				a = original.a;
@@ -397,30 +397,30 @@ namespace strange
 
 		inline void ref() const
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
 			++*refs;
 		}
 
 		inline void rel() const
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
 			if (!--*refs)
 			{
 				a.o->_free(&a);
-				std::free(a.d); std::cout << "free\n";
+				std::free(a.t); std::cout << "free\n";
 			}
 		}
 
 		inline A ret() const
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
 			++*refs;
 			return a;
 		}
 
 		inline void mut()
 		{
-			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.d->refs));
+			auto const refs = reinterpret_cast<std::atomic_int64_t* const>(&(a.t->refs));
 			if (*refs > 1)
 			{
 				auto cp = a;
