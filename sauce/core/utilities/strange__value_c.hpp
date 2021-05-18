@@ -453,7 +453,7 @@ namespace strange
 
 	inline strange__value_c<symbol_a const> val(char const* const s)
 	{
-		return strange__value_c<symbol_a const>(symbol__create_f(s));
+		return strange__value_c<symbol_a const>(symbol_d::symbol__create_f(s));
 	}
 
 }

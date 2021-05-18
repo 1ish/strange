@@ -10,7 +10,7 @@ namespace taste
 
 	void test()
 	{
-		auto v = var(symbol__create_f("auto"));
+		auto v = var(symbol_d::symbol__create_f("auto"));
 		testp(v);
 		auto tv = var(v.a.o->type(v));
 		tv = v;
@@ -21,8 +21,8 @@ namespace taste
 
 		std__cout << ((symbol_d*)(u.a.d))->symbol << "\n";
 
-		auto p = ptr(symbol__create_f("pointer"));
-		auto q = ptr(symbol__create_f("q"));
+		auto p = ptr(symbol_d::symbol__create_f("pointer"));
+		auto q = ptr(symbol_d::symbol__create_f("q"));
 		p = q;
 		testp(p);
 		testp(q);

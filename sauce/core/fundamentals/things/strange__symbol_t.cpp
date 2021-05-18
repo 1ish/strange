@@ -11,7 +11,7 @@
 namespace strange
 {
 	// symbol_o
-	symbol_o const* symbol_o_f()
+	symbol_o const* symbol_d::symbol_o_f()
 	{
 		static symbol_o o =
 		{
@@ -52,7 +52,7 @@ namespace strange
 		return &o;
 	}
 
-	symbol_o const* symbol_p_f()
+	symbol_o const* symbol_d::symbol_p_f()
 	{
 		static symbol_o o = []()
 		{
@@ -64,7 +64,7 @@ namespace strange
 	}
 
 	// init
-	void symbol__init_f(void* const me /* :<symbol>= */,
+	void symbol_d::symbol__init_f(void* const me /* :<symbol>= */,
 		char const* const s /* :_char_star_# */)
 	{
 		auto const ma = reinterpret_cast<symbol_a* const>(me);
@@ -85,7 +85,7 @@ namespace strange
 	}
 
 	// any_a
-	void symbol___free_f(void const* const me /* :<symbol># */)
+	void symbol_d::symbol___free_f(void const* const me /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
 		auto const md = reinterpret_cast<symbol_d* const>(ma->d);
@@ -93,7 +93,7 @@ namespace strange
 		thing___free_f(ma);
 	}
 
-	void symbol___copy_f(void const* const me /* :<symbol># */,
+	void symbol_d::symbol___copy_f(void const* const me /* :<symbol># */,
 		void* const cp /* :<symbol>= */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
@@ -107,7 +107,7 @@ namespace strange
 		symbol___clone_f(ma, ca);
 	}
 
-	void symbol___clone_f(void const* const me /* :<symbol># */,
+	void symbol_d::symbol___clone_f(void const* const me /* :<symbol># */,
 		void* const cp /* :<symbol>= */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
@@ -123,7 +123,7 @@ namespace strange
 		std::memcpy(cd->symbol, md->symbol, cd->length + 1);
 	}
 
-	bool symbol__is_f(void const* const me /* :<symbol># */,
+	bool symbol_d::symbol__is_f(void const* const me /* :<symbol># */,
 		void const* const ab /* :<any># */)
 	{
 		auto const aa = reinterpret_cast<symbol_a const* const>(ab);
@@ -137,7 +137,7 @@ namespace strange
 		return abc == mats[0] || abc == mats[1];
 	}
 
-	bool symbol__as_f(void const* const me /* :<symbol># */,
+	bool symbol_d::symbol__as_f(void const* const me /* :<symbol># */,
 		void* const ab /* :<any>= */)
 	{
 		if (!symbol__is_f(me, ab))
@@ -153,13 +153,13 @@ namespace strange
 		return true;
 	}
 
-	symbol_a symbol__type_f(void const* const me /* :<symbol># */)
+	symbol_a symbol_d::symbol__type_f(void const* const me /* :<symbol># */)
 	{
 		static auto r = strange::val("strange::symbol");
 		return r.ret();
 	}
 
-	void symbol___set_pointer_f(void* const me /* :<symbol>= */,
+	void symbol_d::symbol___set_pointer_f(void* const me /* :<symbol>= */,
 		bool is_pointer /* :_bool_# */)
 	{
 		auto const ma = reinterpret_cast<symbol_a* const>(me);
@@ -173,20 +173,20 @@ namespace strange
 		}
 	}
 
-	bool symbol___pointer_f(void const* const me /* :<symbol># */)
+	bool symbol_d::symbol___pointer_f(void const* const me /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
 		return ma->o == symbol_p_f();
 	}
 
-	uint64_t symbol__hash_f(void const* const me /* :<symbol># */)
+	uint64_t symbol_d::symbol__hash_f(void const* const me /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
 		auto const md = reinterpret_cast<symbol_d const* const>(ma->d);
 		return md->hash;
 	}
 
-	bool symbol__equal_f(void const* const me /* :<symbol># */,
+	bool symbol_d::symbol__equal_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<any># */)
 	{
 		auto const oa = reinterpret_cast<any_a const* const>(other);
@@ -198,7 +198,7 @@ namespace strange
 		return thing__equal_f(me, other);
 	}
 
-	bool symbol___equal_f(void const* const me /* :<symbol># */,
+	bool symbol_d::symbol___equal_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
@@ -208,7 +208,7 @@ namespace strange
 			std::max(md->length, os->o->length(os))) == 0;
 	}
 
-	bool symbol__not_equal_f(void const* const me /* :<symbol># */,
+	bool symbol_d::symbol__not_equal_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<any># */)
 	{
 		auto const oa = reinterpret_cast<any_a const* const>(other);
@@ -220,7 +220,7 @@ namespace strange
 		return thing__not_equal_f(me, other);
 	}
 
-	bool symbol___not_equal_f(void const* const me /* :<symbol># */,
+	bool symbol_d::symbol___not_equal_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
@@ -230,7 +230,7 @@ namespace strange
 			std::max(md->length, os->o->length(os))) != 0;
 	}
 
-	bool symbol__less_f(void const* const me /* :<symbol># */,
+	bool symbol_d::symbol__less_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<any># */)
 	{
 		auto const oa = reinterpret_cast<any_a const* const>(other);
@@ -242,7 +242,7 @@ namespace strange
 		return thing__less_f(me, other);
 	}
 
-	bool symbol___less_f(void const* const me /* :<symbol># */,
+	bool symbol_d::symbol___less_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
@@ -252,7 +252,7 @@ namespace strange
 			std::max(md->length, os->o->length(os))) < 0;
 	}
 
-	bool symbol__greater_f(void const* const me /* :<symbol># */,
+	bool symbol_d::symbol__greater_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<any># */)
 	{
 		auto const oa = reinterpret_cast<any_a const* const>(other);
@@ -264,7 +264,7 @@ namespace strange
 		return thing__greater_f(me, other);
 	}
 
-	bool symbol___greater_f(void const* const me /* :<symbol># */,
+	bool symbol_d::symbol___greater_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
@@ -274,7 +274,7 @@ namespace strange
 			std::max(md->length, os->o->length(os))) > 0;
 	}
 
-	bool symbol__less_or_equal_f(void const* const me /* :<symbol># */,
+	bool symbol_d::symbol__less_or_equal_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<any># */)
 	{
 		auto const oa = reinterpret_cast<any_a const* const>(other);
@@ -286,7 +286,7 @@ namespace strange
 		return thing__less_or_equal_f(me, other);
 	}
 
-	bool symbol___less_or_equal_f(void const* const me /* :<symbol># */,
+	bool symbol_d::symbol___less_or_equal_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
@@ -296,7 +296,7 @@ namespace strange
 			std::max(md->length, os->o->length(os))) <= 0;
 	}
 
-	bool symbol__greater_or_equal_f(void const* const me /* :<symbol># */,
+	bool symbol_d::symbol__greater_or_equal_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<any># */)
 	{
 		auto const oa = reinterpret_cast<any_a const* const>(other);
@@ -308,7 +308,7 @@ namespace strange
 		return thing__greater_or_equal_f(me, other);
 	}
 
-	bool symbol___greater_or_equal_f(void const* const me /* :<symbol># */,
+	bool symbol_d::symbol___greater_or_equal_f(void const* const me /* :<symbol># */,
 		void const* const other /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
@@ -319,7 +319,7 @@ namespace strange
 	}
 
 	// symbol_a
-	symbol_a symbol__add_f(void const* const me /* :<symbol># */,
+	symbol_a symbol_d::symbol__add_f(void const* const me /* :<symbol># */,
 		void const* const suffix /* :<symbol># */)
 	{
 		// cannot assume symbol has a symbol_d, only that it implements symbol_a
@@ -347,28 +347,28 @@ namespace strange
 		return r;
 	}
 
-	char const* symbol__to_char_star_f(void const* const me /* :<symbol># */)
+	char const* symbol_d::symbol__to_char_star_f(void const* const me /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
 		auto const md = reinterpret_cast<symbol_d* const>(ma->d);
 		return md->symbol;
 	}
 
-	int64_t symbol__length_f(void const* const me /* :<symbol># */)
+	int64_t symbol_d::symbol__length_f(void const* const me /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
 		auto const md = reinterpret_cast<symbol_d* const>(ma->d);
 		return md->length;
 	}
 
-	char symbol__first_char_f(void const* const me /* :<symbol># */)
+	char symbol_d::symbol__first_char_f(void const* const me /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
 		auto const md = reinterpret_cast<symbol_d* const>(ma->d);
 		return (md->symbol)[0];
 	}
 
-	char symbol__last_char_f(void const* const me /* :<symbol># */)
+	char symbol_d::symbol__last_char_f(void const* const me /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
 		auto const md = reinterpret_cast<symbol_d* const>(ma->d);
@@ -376,7 +376,7 @@ namespace strange
 	}
 
 	// creators
-	symbol_a symbol__create_f(char const* const s /* :_char_star_# */)
+	symbol_a symbol_d::symbol__create_f(char const* const s /* :_char_star_# */)
 	{
 		auto const rd = reinterpret_cast<symbol_d* const>(std::malloc(sizeof(symbol_d))); std::cout << "malloc\n";
 		if (!rd)
@@ -389,7 +389,7 @@ namespace strange
 		return r;
 	}
 
-	symbol_a symbol__create_empty_f()
+	symbol_a symbol_d::symbol__create_empty_f()
 	{
 		static auto r = strange::var(symbol__create_f(""));
 		return r.ret();

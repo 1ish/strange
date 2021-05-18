@@ -5,7 +5,7 @@ namespace strange
 {
 	symbol_a symbol__cat_f(void const* const me /* :<symbol># */)
 	{
-		static auto r = strange::val(symbol__create_f("<strange::symbol>")); //TODO cat
+		static auto r = strange::val(symbol_d::symbol__create_f("<strange::symbol>")); //TODO cat
 		return r.ret();
 	}
 }
