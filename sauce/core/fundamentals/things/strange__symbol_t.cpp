@@ -73,11 +73,7 @@ namespace strange
 		if (s)
 		{
 			md->length = std::strlen(s);
-			md->symbol = reinterpret_cast<char*>(std::malloc(md->length + 1)); std::cout << "malloc\n";
-			if (!md->symbol)
-			{
-				std::abort();
-			}
+			md->symbol = new char[md->length + 1];
 			std::memcpy(md->symbol, s, md->length + 1);
 			md->hash = std::hash<std::string_view>{}(std::string_view{ md->symbol, static_cast<uint64_t>(md->length) });
 		}
@@ -98,11 +94,7 @@ namespace strange
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
 		auto const ca = reinterpret_cast<symbol_a* const>(cp);
-		ca->t = reinterpret_cast<thing_t*>(std::malloc(sizeof(symbol_t)));
-		if (!ca->t)
-		{
-			std::abort();
-		}
+		ca->t = new symbol_t;
 		std::memcpy(ca->t, ma->t, sizeof(symbol_t));
 		symbol_t::_clone_f(ma, ca);
 	}
@@ -115,11 +107,7 @@ namespace strange
 		auto const ca = reinterpret_cast<symbol_a* const>(cp);
 		auto const cd = reinterpret_cast<symbol_t* const>(ca->t);
 		thing_t::_clone_f(ma, ca);
-		cd->symbol = reinterpret_cast<char*>(std::malloc(cd->length + 1)); std::cout << "malloc\n";
-		if (!cd->symbol)
-		{
-			std::abort();
-		}
+		cd->symbol = new char[cd->length + 1];
 		std::memcpy(cd->symbol, md->symbol, cd->length + 1);
 	}
 
@@ -326,21 +314,13 @@ namespace strange
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
 		auto const md = reinterpret_cast<symbol_t* const>(ma->t);
 		auto const sa = reinterpret_cast<symbol_a const* const>(suffix);
-		auto const rd = reinterpret_cast<symbol_t* const>(std::malloc(sizeof(symbol_t))); std::cout << "malloc\n";
-		if (!rd)
-		{
-			std::abort();
-		}
+		auto const rd = new symbol_t;
 		symbol_a r;
 		r.t = reinterpret_cast<thing_t*>(rd);
 		symbol_t::init_f(&r, 0);
 		int64_t const symbol_length = sa->o->length(sa);
 		rd->length = md->length + symbol_length;
-		rd->symbol = reinterpret_cast<char*>(std::malloc(rd->length + 1)); std::cout << "malloc\n";
-		if (!rd->symbol)
-		{
-			std::abort();
-		}
+		rd->symbol = new char[rd->length + 1];
 		std::memcpy(rd->symbol, md->symbol, md->length);
 		std::memcpy(rd->symbol + md->length, sa->o->to_char_star(sa), symbol_length + 1);
 		rd->hash = std::hash<std::string_view>{}(std::string_view{ rd->symbol, static_cast<uint64_t>(rd->length) });
@@ -378,11 +358,7 @@ namespace strange
 	// creators
 	symbol_a symbol_t::create_f(char const* const s /* :_char_star_# */)
 	{
-		auto const rd = reinterpret_cast<symbol_t* const>(std::malloc(sizeof(symbol_t))); std::cout << "malloc\n";
-		if (!rd)
-		{
-			std::abort();
-		}
+		auto const rd = new symbol_t;
 		symbol_a r;
 		r.t = reinterpret_cast<thing_t*>(rd);
 		symbol_t::init_f(&r, s);

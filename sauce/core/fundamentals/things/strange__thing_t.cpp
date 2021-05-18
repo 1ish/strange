@@ -81,11 +81,7 @@ namespace strange
 	{
 		auto const ma = reinterpret_cast<any_a const* const>(me);
 		auto const ca = reinterpret_cast<any_a* const>(cp);
-		ca->t = reinterpret_cast<thing_t*>(std::malloc(sizeof(thing_t)));
-		if (!ca->t)
-		{
-			std::abort();
-		}
+		ca->t = new thing_t;
 		std::memcpy(ca->t, ma->t, sizeof(thing_t));
 		thing_t::_clone_f(me, cp);
 	}
@@ -332,11 +328,7 @@ namespace strange
 		static auto r = strange::var([]()
 		{
 			any_a r;
-			r.t = reinterpret_cast<thing_t*>(std::malloc(sizeof(thing_t))); std::cout << "malloc\n";
-			if (!r.t)
-			{
-				std::abort();
-			}
+			r.t = new thing_t;
 			thing_t::init_f(&r);
 			return r;
 		}());
@@ -348,11 +340,7 @@ namespace strange
 		static auto r = strange::var([]()
 		{
 			any_a r;
-			r.t = reinterpret_cast<thing_t*>(std::malloc(sizeof(thing_t))); std::cout << "malloc\n";
-			if (!r.t)
-			{
-				std::abort();
-			}
+			r.t = new thing_t;
 			thing_t::init_f(&r);
 			r.t->error = thing_t::create_f();
 			return r;
