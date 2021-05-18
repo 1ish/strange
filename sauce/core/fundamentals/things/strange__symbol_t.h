@@ -3,7 +3,7 @@
 
 namespace strange
 {
-	struct symbol_d : thing_d
+	struct symbol_t : thing_t
 	{
 		char* symbol;
 		int64_t length;

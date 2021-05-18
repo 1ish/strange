@@ -9,8 +9,8 @@ namespace strange
 	struct any_a;
 	struct symbol_a;
 
-	struct thing_d;
-	struct symbol_d;
+	struct thing_t;
+	struct symbol_t;
 }
 
 #include "fundamentals/abstractions/strange__any_a.h"

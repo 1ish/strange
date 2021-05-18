@@ -3,7 +3,7 @@
 
 namespace strange
 {
-	struct thing_d
+	struct thing_t
 	{
 		int64_t refs;
 		any_a error;

@@ -19,7 +19,7 @@ namespace strange
 
 	struct symbol_a
 	{
-		thing_d* d;
+		thing_t* d;
 		symbol_o const* o;
 	};
 }

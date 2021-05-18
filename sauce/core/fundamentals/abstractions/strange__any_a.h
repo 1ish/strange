@@ -79,7 +79,7 @@ namespace strange
 
 	struct any_a
 	{
-		thing_d* d;
+		thing_t* d;
 		any_o const* o;
 	};
 }
