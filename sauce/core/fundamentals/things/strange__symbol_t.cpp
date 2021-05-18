@@ -90,9 +90,9 @@ namespace strange
 		void* const cp /* :<symbol>= */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
+		auto const md = reinterpret_cast<symbol_t const* const>(ma->t);
 		auto const ca = reinterpret_cast<symbol_a* const>(cp);
-		ca->t = new symbol_t;
-		std::memcpy(ca->t, ma->t, sizeof(symbol_t));
+		ca->t = new symbol_t{ *md };
 		symbol_t::_clone_f(ma, ca);
 	}
 

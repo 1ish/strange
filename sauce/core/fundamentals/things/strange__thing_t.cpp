@@ -84,8 +84,7 @@ namespace strange
 	{
 		auto const ma = reinterpret_cast<any_a const* const>(me);
 		auto const ca = reinterpret_cast<any_a* const>(cp);
-		ca->t = new thing_t;
-		std::memcpy(ca->t, ma->t, sizeof(thing_t));
+		ca->t = new thing_t{ *(ma->t) };
 		thing_t::_clone_f(me, cp);
 	}
 
