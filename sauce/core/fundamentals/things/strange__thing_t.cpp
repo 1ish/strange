@@ -11,6 +11,10 @@ namespace strange
 {
 	thing_t::~thing_t()
 	{
+		if (error.t)
+		{
+			strange::rel(&error);
+		}
 	}
 
 	// any_o
@@ -73,11 +77,6 @@ namespace strange
 	// any_a
 	void thing_t::_free_f(void const* const me /* :<any># */)
 	{
-		if (!thing_t::something_f(me))
-		{
-			auto const ma = reinterpret_cast<any_a const* const>(me);
-			strange::rel(&(ma->t->error));
-		}
 	}
 
 	void thing_t::_copy_f(void const* const me /* :<any># */,

@@ -12,6 +12,7 @@ namespace strange
 {
 	symbol_t::~symbol_t()
 	{
+		delete[] symbol;
 	}
 
 	// symbol_o
@@ -87,10 +88,7 @@ namespace strange
 	// any_a
 	void symbol_t::_free_f(void const* const me /* :<symbol># */)
 	{
-		auto const ma = reinterpret_cast<symbol_a const* const>(me);
-		auto const md = reinterpret_cast<symbol_t* const>(ma->t);
-		delete[] md->symbol;
-		thing_t::_free_f(ma);
+		thing_t::_free_f(me);
 	}
 
 	void symbol_t::_copy_f(void const* const me /* :<symbol># */,
