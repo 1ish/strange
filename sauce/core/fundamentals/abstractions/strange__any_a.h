@@ -5,7 +5,7 @@ namespace strange
 {
 	struct any_o
 	{
-		symbol_a (*cat)(void const* const me /* :<any># */);
+		val<symbol_a> (*cat)(void const* const me /* :<any># */);
 
 		void (*_free)(void const* const me /* :<any># */);
 
@@ -82,7 +82,7 @@ namespace strange
 		thing_t* t;
 		any_o const* o;
 
-		static symbol_a cat_f(void const* const me /* :<any># */);
+		static val<symbol_a> cat_f(void const* const me /* :<any># */);
 	};
 }
 

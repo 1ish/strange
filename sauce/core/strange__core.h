@@ -13,6 +13,8 @@ namespace strange
 	struct symbol_t;
 }
 
+#include "utilities/strange__val_u.hpp"
+
 #include "fundamentals/abstractions/strange__any_a.h"
 #include "fundamentals/abstractions/strange__symbol_a.h"
 

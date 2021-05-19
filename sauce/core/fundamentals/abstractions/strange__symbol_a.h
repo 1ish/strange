@@ -22,7 +22,7 @@ namespace strange
 		thing_t* t;
 		symbol_o const* o;
 
-		static symbol_a cat_f(void const* const me /* :<symbol># */);
+		static val<symbol_a> cat_f(void const* const me /* :<symbol># */);
 	};
 }
 
