@@ -14,10 +14,10 @@ namespace taste
 		testp(v);
 		auto tv = var(v.o->type(v));
 		tv = v;
-		auto s = val("test");
+		auto s = sym("test");
 		auto t = val(s.o->type(s));
 		auto u = val(s.o->add(s, t));
-		val(u.o->add(u, val("y")));
+		val(u.o->add(u, sym("y")));
 
 		std__cout << ((symbol_t*)(u.t))->symbol << "\n";
 
@@ -30,7 +30,7 @@ namespace taste
 		tv = s;
 		//NO s = v;
 		//NO s = t;
-		auto value = strange__value_c{ symbol_t::create_f("auto") };
+		auto value = val{ symbol_t::create_f("auto") };
 	}
 }
 

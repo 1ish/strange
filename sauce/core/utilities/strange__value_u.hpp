@@ -59,15 +59,15 @@ namespace strange
 	}
 
 	template <typename A>
-	struct strange__variable_c;
+	struct var;
 
 	template <typename A>
-	struct strange__pointer_c;
+	struct ptr;
 
 	template <typename A>
-	struct strange__value_c : A
+	struct val : A
 	{
-		explicit inline strange__value_c(A const& abstraction) : A{ abstraction }
+		explicit inline val(A const& abstraction) : A{ abstraction }
 		{
 			if (A::o->_pointer(this))
 			{
@@ -76,24 +76,24 @@ namespace strange
 			}
 		}
 
-		inline strange__value_c(strange__value_c const& original) : A{ original }
+		inline val(val const& original) : A{ original }
 		{
 			ref();
 		}
 
-		explicit inline strange__value_c(strange__variable_c<typename std::remove_const_t<A>> const& original) : A{ original }
+		explicit inline val(var<typename std::remove_const_t<A>> const& original) : A{ original }
 		{
 			ref();
 		}
 
-		explicit inline strange__value_c(strange__pointer_c<typename std::remove_const_t<A>> const& original) : A{ original }
+		explicit inline val(ptr<typename std::remove_const_t<A>> const& original) : A{ original }
 		{
 			ref();
 			A::o->_set_pointer(this, false);
 			mut();
 		}
 
-		inline ~strange__value_c()
+		inline ~val()
 		{
 			rel();
 		}
@@ -137,9 +137,9 @@ namespace strange
 	};
 
 	template <typename A>
-	struct strange__variable_c : A
+	struct var : A
 	{
-		explicit inline strange__variable_c(A const& abstraction) :A { abstraction }
+		explicit inline var(A const& abstraction) :A { abstraction }
 		{
 			if (A::o->_pointer(this))
 			{
@@ -148,29 +148,29 @@ namespace strange
 			}
 		}
 
-		explicit inline strange__variable_c(strange__value_c<A const> const& original) : A{ original }
+		explicit inline var(val<A const> const& original) : A{ original }
 		{
 			ref();
 		}
 
-		inline strange__variable_c(strange__variable_c const& original) : A{ original }
+		inline var(var const& original) : A{ original }
 		{
 			ref();
 		}
 
-		explicit inline strange__variable_c(strange__pointer_c<A> const& original) : A{ original }
+		explicit inline var(ptr<A> const& original) : A{ original }
 		{
 			ref();
 			A::o->_set_pointer(this, false);
 			mut();
 		}
 
-		inline ~strange__variable_c()
+		inline ~var()
 		{
 			rel();
 		}
 
-		inline strange__variable_c& operator=(A const& abstraction)
+		inline var& operator=(A const& abstraction)
 		{
 			rel();
 			A::t = abstraction.t;
@@ -183,7 +183,7 @@ namespace strange
 			return *this;
 		}
 
-		inline strange__variable_c& operator=(strange__value_c<A const> const& original)
+		inline var& operator=(val<A const> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -199,7 +199,7 @@ namespace strange
 			return *this;
 		}
 
-		inline strange__variable_c& operator=(strange__variable_c const& original)
+		inline var& operator=(var const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -215,7 +215,7 @@ namespace strange
 			return *this;
 		}
 
-		inline strange__variable_c& operator=(strange__pointer_c<A> const& original)
+		inline var& operator=(ptr<A> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -277,9 +277,9 @@ namespace strange
 	};
 
 	template <typename A>
-	struct strange__pointer_c : A
+	struct ptr : A
 	{
-		explicit inline strange__pointer_c(A const& abstraction) :A{ abstraction }
+		explicit inline ptr(A const& abstraction) :A{ abstraction }
 		{
 			if (!A::o->_pointer(this))
 			{
@@ -288,31 +288,31 @@ namespace strange
 			}
 		}
 
-		explicit inline strange__pointer_c(strange__value_c<A const> const& original) : A{ original }
+		explicit inline ptr(val<A const> const& original) : A{ original }
 		{
 			ref();
 			mut();
 			A::o->_set_pointer(this, true);
 		}
 
-		explicit inline strange__pointer_c(strange__variable_c<A> const& original) : A{ original }
+		explicit inline ptr(var<A> const& original) : A{ original }
 		{
 			ref();
 			mut();
 			A::o->_set_pointer(this, true);
 		}
 
-		inline strange__pointer_c(strange__pointer_c const& original) : A{ original }
+		inline ptr(ptr const& original) : A{ original }
 		{
 			ref();
 		}
 
-		inline ~strange__pointer_c()
+		inline ~ptr()
 		{
 			rel();
 		}
 
-		inline strange__pointer_c& operator=(A const& abstraction)
+		inline ptr& operator=(A const& abstraction)
 		{
 			rel();
 			A::t = abstraction.t;
@@ -325,7 +325,7 @@ namespace strange
 			return *this;
 		}
 
-		inline strange__pointer_c& operator=(strange__value_c<A const> const& original)
+		inline ptr& operator=(val<A const> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -343,7 +343,7 @@ namespace strange
 			return *this;
 		}
 
-		inline strange__pointer_c& operator=(strange__variable_c<A> const& original)
+		inline ptr& operator=(var<A> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -361,7 +361,7 @@ namespace strange
 			return *this;
 		}
 
-		inline strange__pointer_c& operator=(strange__pointer_c const& original)
+		inline ptr& operator=(ptr const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -420,27 +420,9 @@ namespace strange
 		}
 	};
 
-	template <typename A>
-	inline strange__value_c<A const> val(A const& a)
+	inline val<strange::symbol_a> sym(char const* const s)
 	{
-		return strange__value_c<A const>(a);
-	}
-
-	template <typename A>
-	inline strange__variable_c<A> var(A const& a)
-	{
-		return strange__variable_c<A>(a);
-	}
-
-	template <typename A>
-	inline strange__pointer_c<A> ptr(A const& a)
-	{
-		return strange__pointer_c<A>(a);
-	}
-
-	inline strange__value_c<symbol_a const> val(char const* const s)
-	{
-		return strange__value_c<symbol_a const>(symbol_t::create_f(s));
+		return val<strange::symbol_a>{ strange::symbol_t::create_f(s) };
 	}
 }
 

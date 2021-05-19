@@ -162,7 +162,7 @@ namespace strange
 
 	symbol_a thing_t::type_f(void const* const me /* :<any># */)
 	{
-		static auto r = strange::val("strange::thing");
+		static auto r = strange::sym("strange::thing");
 		return r.ret();
 	}
 
