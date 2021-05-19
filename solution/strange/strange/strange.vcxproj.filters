@@ -89,9 +89,6 @@
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__symbol_a.h">
       <Filter>Header Files\sauce\core\fundamentals\abstractions</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\sauce\core\utilities\strange__value_c.hpp">
-      <Filter>Header Files\sauce\core\utilities</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__thing_t.h">
       <Filter>Header Files\sauce\core\fundamentals\things</Filter>
     </ClInclude>
@@ -100,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\taste\core\fundamentals\taste__strange__thing_t.hpp">
       <Filter>Source Files\taste\core\fundamentals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\utilities\strange__value_u.hpp">
+      <Filter>Header Files\sauce\core\utilities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

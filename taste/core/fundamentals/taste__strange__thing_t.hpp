@@ -30,6 +30,7 @@ namespace taste
 		tv = s;
 		//NO s = v;
 		//NO s = t;
+		auto value = strange__value_c{ symbol_t::create_f("auto") };
 	}
 }
 
