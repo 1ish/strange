@@ -29,12 +29,12 @@ namespace strange
 			ref();
 		}
 
-		explicit inline val(var<typename std::remove_const_t<A>> const& original) : A{ original }
+		explicit inline val(var<A> const& original) : A{ original }
 		{
 			ref();
 		}
 
-		explicit inline val(ptr<typename std::remove_const_t<A>> const& original) : A{ original }
+		explicit inline val(ptr<A> const& original) : A{ original }
 		{
 			ref();
 			A::o->_set_pointer(this, false);
@@ -65,7 +65,7 @@ namespace strange
 			}
 		}
 
-		inline A const ret() const
+		inline A ret() const
 		{
 			++(A::t->refs);
 			return *this;
@@ -75,7 +75,7 @@ namespace strange
 		{
 			if (A::t->refs > 1)
 			{
-				typename std::remove_const_t<A> cp = { A::t, A::o };
+				A cp = { A::t, A::o };
 				A::o->_copy(this, &cp);
 				--(A::t->refs);
 				A::t = cp.t;
@@ -96,7 +96,7 @@ namespace strange
 			}
 		}
 
-		explicit inline var(val<A const> const& original) : A{ original }
+		explicit inline var(val<A> const& original) : A{ original }
 		{
 			ref();
 		}
@@ -131,7 +131,7 @@ namespace strange
 			return *this;
 		}
 
-		inline var& operator=(val<A const> const& original)
+		inline var& operator=(val<A> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -236,7 +236,7 @@ namespace strange
 			}
 		}
 
-		explicit inline ptr(val<A const> const& original) : A{ original }
+		explicit inline ptr(val<A> const& original) : A{ original }
 		{
 			ref();
 			mut();
@@ -273,7 +273,7 @@ namespace strange
 			return *this;
 		}
 
-		inline ptr& operator=(val<A const> const& original)
+		inline ptr& operator=(val<A> const& original)
 		{
 			if (A::t != original.t)
 			{
