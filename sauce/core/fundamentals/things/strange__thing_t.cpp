@@ -21,9 +21,9 @@ namespace strange
 	}
 
 	thing_t::thing_t(void* const me_ /* :<any>= */,
-		void const* const original /* :<any># */)
+		void const* const original_ /* :<any># */)
 	: refs{ 0 }
-	, error { reinterpret_cast<any_a const* const>(original)->t->error }
+	, error { reinterpret_cast<any_a const* const>(original_)->t->error }
 	{
 		auto const ma = reinterpret_cast<any_a* const>(me_);
 		ma->t = this;

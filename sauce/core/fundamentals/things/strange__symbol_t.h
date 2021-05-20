@@ -14,7 +14,7 @@ namespace strange
 			char const* const s /* :_char_star_# */);
 
 		symbol_t(void* const me_ /* :<symbol>= */,
-			void const* const original /* :<symbol># */);
+			void const* const original_ /* :<symbol># */);
 
 		virtual ~symbol_t();
 

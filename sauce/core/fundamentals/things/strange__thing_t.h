@@ -14,7 +14,7 @@ namespace strange
 		thing_t(void* const me_ /* :<any>= */);
 
 		thing_t(void* const me_ /* :<any>= */,
-			void const* const original /* :<any># */);
+			void const* const original_ /* :<any># */);
 
 		virtual ~thing_t();
 

@@ -30,8 +30,8 @@ namespace strange
 	}
 
 	symbol_t::symbol_t(void* const me_ /* :<symbol>= */,
-		void const* const original /* :<symbol># */)
-	: thing_t{ me_, original }
+		void const* const original_ /* :<symbol># */)
+	: thing_t{ me_, original_ }
 	, symbol{ nullptr }
 	, length{ 0 }
 	, hash{ 0 }
@@ -39,7 +39,7 @@ namespace strange
 		auto const ma = reinterpret_cast<symbol_a* const>(me_);
 		ma->o = symbol_t::operations_f();
 
-		auto const oa = reinterpret_cast<symbol_a const* const>(original);
+		auto const oa = reinterpret_cast<symbol_a const* const>(original_);
 		auto const ot = static_cast<symbol_t const* const>(oa->t);
 		length = ot->length;
 		symbol = new char[length + 1];
