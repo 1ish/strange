@@ -107,10 +107,10 @@ namespace strange
 
 	// any_a
 	void symbol_t::_copy_e(void const* const me_ /* :<symbol># */,
-		void* const cp /* :<symbol>= */)
+		void* const copy_ /* :<symbol>= */)
 	{
-		new symbol_t{ cp, me_ };
-		symbol_t::_clone_f(me_, cp);
+		new symbol_t{ copy_, me_ };
+		symbol_t::_clone_f(me_, copy_);
 	}
 
 	bool symbol_t::is_e(void const* const me_ /* :<symbol># */,

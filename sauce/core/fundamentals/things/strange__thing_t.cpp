@@ -102,16 +102,16 @@ namespace strange
 	}
 
 	void thing_t::_copy_e(void const* const me_ /* :<any># */,
-		void* const cp /* :<any>= */)
+		void* const copy_ /* :<any>= */)
 	{
-		new thing_t{ cp, me_ };
-		thing_t::_clone_f(me_, cp);
+		new thing_t{ copy_, me_ };
+		thing_t::_clone_f(me_, copy_);
 	}
 
 	void thing_t::_no_copy_e(void const* const me_ /* :<any># */,
-		void* const cp /* :<any>= */)
+		void* const copy_ /* :<any>= */)
 	{
-		auto const ca = reinterpret_cast<any_a* const>(cp);
+		auto const ca = reinterpret_cast<any_a* const>(copy_);
 		strange::ref(ca);
 	}
 

@@ -28,7 +28,7 @@ namespace strange
 		}
 
 		static inline void _clone_f(void const* const me_ /* :<any># */,
-			void* const cp /* :<any>= */)
+			void* const copy_ /* :<any>= */)
 		{
 		}
 
@@ -36,10 +36,10 @@ namespace strange
 		static void _free_m(void* const me_ /* :<any># */);
 
 		static void _copy_e(void const* const me_ /* :<any># */,
-			void* const cp /* :<any>= */);
+			void* const copy_ /* :<any>= */);
 
 		static void _no_copy_e(void const* const me_ /* :<any># */,
-			void* const cp /* :<any>= */);
+			void* const copy_ /* :<any>= */);
 
 		static bool is_e(void const* const me_ /* :<any># */,
 			void const* const ab /* :<any># */);

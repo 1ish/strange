@@ -24,7 +24,7 @@ namespace strange
 
 		// any_a
 		static void _copy_e(void const* const me_ /* :<symbol># */,
-			void* const cp /* :<symbol>= */);
+			void* const copy_ /* :<symbol>= */);
 
 		static bool is_e(void const* const me_ /* :<symbol># */,
 			void const* const ab /* :<any># */);

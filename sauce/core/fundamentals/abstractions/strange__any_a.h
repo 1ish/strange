@@ -10,7 +10,7 @@ namespace strange
 		void (*_free)(void* const me_ /* :<any># */);
 
 		void (*_copy)(void const* const me_ /* :<any># */,
-			void* const cp /* :<any>= */);
+			void* const copy_ /* :<any>= */);
 
 		bool (*is)(void const* const me_ /* :<any># */,
 			void const* const ab /* :<any># */);
