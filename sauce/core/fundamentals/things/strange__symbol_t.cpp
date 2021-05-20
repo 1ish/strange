@@ -310,12 +310,12 @@ namespace strange
 
 	// symbol_a
 	var<symbol_a> symbol_t::add_e(void const* const me_ /* :<symbol># */,
-		void const* const suffix /* :<symbol># */)
+		void const* const suffix_ /* :<symbol># */)
 	{
 		// cannot assume symbol has a symbol_t, only that it implements symbol_a
 		auto const ma = reinterpret_cast<symbol_a const* const>(me_);
 		auto const md = static_cast<symbol_t* const>(ma->t);
-		auto const sa = reinterpret_cast<symbol_a const* const>(suffix);
+		auto const sa = reinterpret_cast<symbol_a const* const>(suffix_);
 		symbol_a r;
 		auto const rd = new symbol_t{ &r, static_cast<const char* const>(nullptr) };
 		symbol_t::_init_f(&r);

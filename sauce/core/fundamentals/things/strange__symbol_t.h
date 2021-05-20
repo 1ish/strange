@@ -79,7 +79,7 @@ namespace strange
 
 		// symbol_a
 		static var<symbol_a> add_e(void const* const me_ /* :<symbol># */,
-			void const* const suffix /* :<symbol># */);
+			void const* const suffix_ /* :<symbol># */);
 
 		static char const* to_char_star_e(void const* const me_ /* :<symbol># */);
 
