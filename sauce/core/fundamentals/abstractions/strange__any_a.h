@@ -13,13 +13,13 @@ namespace strange
 			void* const copy_ /* :<any>= */);
 
 		bool (*is)(void const* const me_ /* :<any># */,
-			void const* const ab /* :<any># */);
+			void const* const abstraction_ /* :<any># */);
 
 		bool (*as)(void const* const me_ /* :<any># */,
-			void* const ab /* :<any>= */);
+			void* const abstraction_ /* :<any>= */);
 
 		void (*_as)(void const* const me_ /* :<any># */,
-			void* const ab /* :<any>= */);
+			void* const abstraction_ /* :<any>= */);
 
 		var<symbol_a> (*type)(void const* const me_ /* :<any># */);
 

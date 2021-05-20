@@ -116,35 +116,35 @@ namespace strange
 	}
 
 	bool thing_t::is_e(void const* const me_ /* :<any># */,
-		void const* const ab /* :<any># */)
+		void const* const abstraction_ /* :<any># */)
 	{
-		auto const aa = reinterpret_cast<any_a const* const>(ab);
-		// ab.cat in me_.cats
+		auto const aa = reinterpret_cast<any_a const* const>(abstraction_);
+		// abstraction_.cat in me_.cats
 		static thing_t* const mat = any_a::cat_e(me_).t;
 		return aa->o->cat(aa).t == mat;
 	}
 
 	bool thing_t::as_e(void const* const me_ /* :<any># */,
-		void* const ab /* :<any>= */)
+		void* const abstraction_ /* :<any>= */)
 	{
-		if (!thing_t::is_e(me_, ab))
+		if (!thing_t::is_e(me_, abstraction_))
 		{
 			return false;
 		}
 		auto const ma = reinterpret_cast<any_a const* const>(me_);
-		auto const aa = reinterpret_cast<any_a* const>(ab);
+		auto const aa = reinterpret_cast<any_a* const>(abstraction_);
 		bool const mp = ma->o->_pointer(ma);
 		bool const ap = aa->o->_pointer(aa);
-		thing_t::_as_e(me_, ab);
+		thing_t::_as_e(me_, abstraction_);
 		strange::rep(aa, mp, ap);
 		return true;
 	}
 
 	void thing_t::_as_e(void const* const me_ /* :<any># */,
-		void* const ab /* :<any>= */)
+		void* const abstraction_ /* :<any>= */)
 	{
 		auto const ma = reinterpret_cast<any_a const* const>(me_);
-		auto const aa = reinterpret_cast<any_a* const>(ab);
+		auto const aa = reinterpret_cast<any_a* const>(abstraction_);
 		if (aa->t != ma->t)
 		{
 			strange::rel(aa);

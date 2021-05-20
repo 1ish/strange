@@ -114,11 +114,11 @@ namespace strange
 	}
 
 	bool symbol_t::is_e(void const* const me_ /* :<symbol># */,
-		void const* const ab /* :<any># */)
+		void const* const abstraction_ /* :<any># */)
 	{
-		auto const aa = reinterpret_cast<symbol_a const* const>(ab);
+		auto const aa = reinterpret_cast<symbol_a const* const>(abstraction_);
 		auto const abc = aa->o->cat(aa).t;
-		// ab.cat in me_.cats
+		// abstraction_.cat in me_.cats
 		static thing_t* mats[] =
 		{
 			any_a::cat_e(me_).t,
@@ -128,17 +128,17 @@ namespace strange
 	}
 
 	bool symbol_t::as_e(void const* const me_ /* :<symbol># */,
-		void* const ab /* :<any>= */)
+		void* const abstraction_ /* :<any>= */)
 	{
-		if (!symbol_t::is_e(me_, ab))
+		if (!symbol_t::is_e(me_, abstraction_))
 		{
 			return false;
 		}
 		auto const ma = reinterpret_cast<any_a const* const>(me_);
-		auto const aa = reinterpret_cast<any_a* const>(ab);
+		auto const aa = reinterpret_cast<any_a* const>(abstraction_);
 		bool const mp = ma->o->_pointer(ma);
 		bool const ap = aa->o->_pointer(aa);
-		thing_t::_as_e(me_, ab);
+		thing_t::_as_e(me_, abstraction_);
 		strange::rep(aa, mp, ap);
 		return true;
 	}

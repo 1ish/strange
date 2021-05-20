@@ -27,10 +27,10 @@ namespace strange
 			void* const copy_ /* :<symbol>= */);
 
 		static bool is_e(void const* const me_ /* :<symbol># */,
-			void const* const ab /* :<any># */);
+			void const* const abstraction_ /* :<any># */);
 
 		static bool as_e(void const* const me_ /* :<symbol># */,
-			void* const ab /* :<any>= */);
+			void* const abstraction_ /* :<any>= */);
 
 		static var<symbol_a> type_e(void const* const me_ /* :<symbol># */);
 
