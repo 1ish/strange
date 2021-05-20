@@ -71,9 +71,10 @@ namespace strange
 			{
 				A cp = { A::t, A::o };
 				A::o->_copy(this, &cp);
-				--(A::t->refs);
+				rel();
 				A::t = cp.t;
 				A::o = cp.o;
+				ref();
 			}
 		}
 	};
@@ -206,9 +207,10 @@ namespace strange
 			{
 				A cp = { A::t, A::o };
 				A::o->_copy(this, &cp);
-				--(A::t->refs);
+				rel();
 				A::t = cp.t;
 				A::o = cp.o;
+				ref();
 			}
 		}
 	};
@@ -345,9 +347,10 @@ namespace strange
 			{
 				A cp = { A::t, A::o };
 				A::o->_copy(this, &cp);
-				--(A::t->refs);
+				rel();
 				A::t = cp.t;
 				A::o = cp.o;
+				ref();
 			}
 		}
 	};

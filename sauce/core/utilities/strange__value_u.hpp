@@ -30,8 +30,9 @@ namespace strange
 		{
 			any_a cp = *ma;
 			ma->o->_copy(ma, &cp);
-			--(ma->t->refs);
+			rel(ma);
 			*ma = cp;
+			ref(ma);
 		}
 	}
 

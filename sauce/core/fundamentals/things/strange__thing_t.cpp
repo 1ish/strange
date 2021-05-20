@@ -13,6 +13,7 @@ namespace strange
 		:	refs{ 0 }
 		,	error { 0, 0 }
 	{
+		std::cout << "new thing\n";
 	}
 
 	thing_t::thing_t(thing_t const& original)
@@ -23,6 +24,7 @@ namespace strange
 		{
 			strange::ref(&error);
 		}
+		std::cout << "copy thing\n";
 	}
 
 	thing_t::~thing_t()
@@ -31,6 +33,7 @@ namespace strange
 		{
 			strange::rel(&error);
 		}
+		std::cout << "delete thing\n";
 	}
 
 	// any_o
