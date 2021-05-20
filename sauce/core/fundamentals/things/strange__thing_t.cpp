@@ -213,10 +213,10 @@ namespace strange
 	}
 
 	void thing_t::set_error_m(void* const me_ /* :<any>= */,
-		void const* const error /* :<any># */)
+		void const* const error_ /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<any_a* const>(me_);
-		auto const ea = reinterpret_cast<any_a const* const>(error);
+		auto const ea = reinterpret_cast<any_a const* const>(error_);
 		if (ea->t == ma->t->error.t)
 		{
 			return;

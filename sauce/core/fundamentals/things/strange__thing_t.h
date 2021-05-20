@@ -63,7 +63,7 @@ namespace strange
 		static bool something_e(void const* const me_ /* :<any># */);
 
 		static void set_error_m(void* const me_ /* :<any>= */,
-			void const* const error /* :<any># */);
+			void const* const error_ /* :<any># */);
 
 		static var<any_a> error_e(void const* const me_ /* :<any># */);
 

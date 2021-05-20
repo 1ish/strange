@@ -34,7 +34,7 @@ namespace strange
 		bool (*something)(void const* const me_ /* :<any># */);
 
 		void (*set_error)(void* const me_ /* :<any>= */,
-			void const* const error /* :<any># */);
+			void const* const error_ /* :<any># */);
 
 		var<any_a> (*error)(void const* const me_ /* :<any># */);
 
