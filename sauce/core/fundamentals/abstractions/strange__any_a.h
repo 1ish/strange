@@ -5,75 +5,75 @@ namespace strange
 {
 	struct any_o
 	{
-		var<symbol_a> (*cat)(void const* const me /* :<any># */);
+		var<symbol_a> (*cat)(void const* const me_ /* :<any># */);
 
-		void (*_free)(void* const me /* :<any># */);
+		void (*_free)(void* const me_ /* :<any># */);
 
-		void (*_copy)(void const* const me /* :<any># */,
+		void (*_copy)(void const* const me_ /* :<any># */,
 			void* const cp /* :<any>= */);
 
-		bool (*is)(void const* const me /* :<any># */,
+		bool (*is)(void const* const me_ /* :<any># */,
 			void const* const ab /* :<any># */);
 
-		bool (*as)(void const* const me /* :<any># */,
+		bool (*as)(void const* const me_ /* :<any># */,
 			void* const ab /* :<any>= */);
 
-		void (*_as)(void const* const me /* :<any># */,
+		void (*_as)(void const* const me_ /* :<any># */,
 			void* const ab /* :<any>= */);
 
-		var<symbol_a> (*type)(void const* const me /* :<any># */);
+		var<symbol_a> (*type)(void const* const me_ /* :<any># */);
 
-		void (*_set_pointer)(void* const me /* :<any>= */,
+		void (*_set_pointer)(void* const me_ /* :<any>= */,
 			bool is_pointer /* :_bool_# */ );
 
-		bool (*_pointer)(void const* const me /* :<any># */);
+		bool (*_pointer)(void const* const me_ /* :<any># */);
 
-		void (*set_something)(void* const me /* :<any>= */,
+		void (*set_something)(void* const me_ /* :<any>= */,
 			bool is_something /* :_bool_# */);
 
-		bool (*something)(void const* const me /* :<any># */);
+		bool (*something)(void const* const me_ /* :<any># */);
 
-		void (*set_error)(void* const me /* :<any>= */,
+		void (*set_error)(void* const me_ /* :<any>= */,
 			void const* const error /* :<any># */);
 
-		var<any_a> (*error)(void const* const me /* :<any># */);
+		var<any_a> (*error)(void const* const me_ /* :<any># */);
 
-		uint64_t (*hash)(void const* const me /* :<any># */);
+		uint64_t (*hash)(void const* const me_ /* :<any># */);
 
-		bool (*equal)(void const* const me /* :<any># */,
+		bool (*equal)(void const* const me_ /* :<any># */,
 			void const* const other /* :<any># */);
 
-		bool (*_equal)(void const* const me /* :<any># */,
+		bool (*_equal)(void const* const me_ /* :<any># */,
 			void const* const other /* :<any># */);
 
-		bool (*not_equal)(void const* const me /* :<any># */,
+		bool (*not_equal)(void const* const me_ /* :<any># */,
 			void const* const other /* :<any># */);
 
-		bool (*_not_equal)(void const* const me /* :<any># */,
+		bool (*_not_equal)(void const* const me_ /* :<any># */,
 			void const* const other /* :<any># */);
 
-		bool (*less)(void const* const me /* :<any># */,
+		bool (*less)(void const* const me_ /* :<any># */,
 			void const* const other /* :<any># */);
 
-		bool (*_less)(void const* const me /* :<any># */,
+		bool (*_less)(void const* const me_ /* :<any># */,
 			void const* const other /* :<any># */);
 
-		bool (*greater)(void const* const me /* :<any># */,
+		bool (*greater)(void const* const me_ /* :<any># */,
 			void const* const other /* :<any># */);
 
-		bool (*_greater)(void const* const me /* :<any># */,
+		bool (*_greater)(void const* const me_ /* :<any># */,
 			void const* const other /* :<any># */);
 
-		bool (*less_or_equal)(void const* const me /* :<any># */,
+		bool (*less_or_equal)(void const* const me_ /* :<any># */,
 			void const* const other /* :<any># */);
 
-		bool (*_less_or_equal)(void const* const me /* :<any># */,
+		bool (*_less_or_equal)(void const* const me_ /* :<any># */,
 			void const* const other /* :<any># */);
 
-		bool (*greater_or_equal)(void const* const me /* :<any># */,
+		bool (*greater_or_equal)(void const* const me_ /* :<any># */,
 			void const* const other /* :<any># */);
 
-		bool (*_greater_or_equal)(void const* const me /* :<any># */,
+		bool (*_greater_or_equal)(void const* const me_ /* :<any># */,
 			void const* const other /* :<any># */);
 	};
 
@@ -82,7 +82,7 @@ namespace strange
 		thing_t* t;
 		any_o const* o;
 
-		static var<symbol_a> cat_e(void const* const me /* :<any># */);
+		static var<symbol_a> cat_e(void const* const me_ /* :<any># */);
 	};
 }
 

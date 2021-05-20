@@ -18,9 +18,9 @@ namespace strange
 		}
 	}
 
-	inline void mut(void* const me /* :<any>= */)
+	inline void mut(void* const me_ /* :<any>= */)
 	{
-		auto const ma = reinterpret_cast<any_a* const>(me);
+		auto const ma = reinterpret_cast<any_a* const>(me_);
 		if (ma->t->refs > 1)
 		{
 			any_a cp = *ma;
