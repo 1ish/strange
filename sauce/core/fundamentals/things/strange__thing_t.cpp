@@ -13,14 +13,12 @@ namespace strange
 		:	refs{ 0 }
 		,	error { 0, 0 }
 	{
-		strange::one(this);
 	}
 
 	thing_t::thing_t(thing_t const& original)
 		:	refs{ 0 }
 		,	error { original.error }
 	{
-		strange::one(this);
 		if (error.t)
 		{
 			strange::ref(&error);

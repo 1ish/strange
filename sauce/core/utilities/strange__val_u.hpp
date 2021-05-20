@@ -17,6 +17,7 @@ namespace strange
 	{
 		explicit inline val(A const& abstraction) : A{ abstraction }
 		{
+			ref();
 			if (A::o->_pointer(this))
 			{
 				A::o->_set_pointer(this, false);
@@ -82,6 +83,7 @@ namespace strange
 	{
 		explicit inline var(A const& abstraction) :A { abstraction }
 		{
+			ref();
 			if (A::o->_pointer(this))
 			{
 				A::o->_set_pointer(this, false);
@@ -116,6 +118,7 @@ namespace strange
 			rel();
 			A::t = abstraction.t;
 			A::o = abstraction.o;
+			ref();
 			if (A::o->_pointer(this))
 			{
 				A::o->_set_pointer(this, false);
@@ -215,6 +218,7 @@ namespace strange
 	{
 		explicit inline ptr(A const& abstraction) :A{ abstraction }
 		{
+			ref();
 			if (!A::o->_pointer(this))
 			{
 				mut();
@@ -251,6 +255,7 @@ namespace strange
 			rel();
 			A::t = abstraction.t;
 			A::o = abstraction.o;
+			ref();
 			if (!A::o->_pointer(this))
 			{
 				mut();
