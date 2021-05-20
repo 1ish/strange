@@ -92,6 +92,8 @@ namespace strange
 	// any_a
 	void thing_t::_free_f(void const* const me /* :<any># */)
 	{
+		auto const ma = reinterpret_cast<any_a const* const>(me);
+		delete ma->t;
 	}
 
 	void thing_t::_copy_f(void const* const me /* :<any># */,

@@ -25,7 +25,6 @@ namespace strange
 		if (!--(abstraction->t->refs))
 		{
 			abstraction->o->_free(abstraction);
-			delete abstraction->t;
 		}
 	}
 

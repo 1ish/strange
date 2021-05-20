@@ -61,7 +61,6 @@ namespace strange
 			if (!--(A::t->refs))
 			{
 				A::o->_free(this);
-				delete A::t;
 			}
 		}
 
@@ -195,7 +194,6 @@ namespace strange
 			if (!--(A::t->refs))
 			{
 				A::o->_free(this);
-				delete A::t;
 			}
 		}
 
@@ -333,7 +331,6 @@ namespace strange
 			if (!--(A::t->refs))
 			{
 				A::o->_free(this);
-				delete A::t;
 			}
 		}
 
