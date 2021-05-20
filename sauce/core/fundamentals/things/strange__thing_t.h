@@ -10,6 +10,7 @@ namespace strange
 		std::atomic_int64_t refs;
 		any_a error;
 
+	protected:
 		thing_t(void* const me /* :<any>= */);
 
 		thing_t(void* const me /* :<any>= */,
@@ -100,6 +101,7 @@ namespace strange
 		static bool _greater_or_equal_f(void const* const me /* :<any># */,
 			void const* const other /* :<any># */);
 
+	public:
 		// creators
 		static var<any_a> create_f();
 		static var<any_a> create_nothing_f();

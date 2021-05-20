@@ -9,6 +9,7 @@ namespace strange
 		int64_t length;
 		uint64_t hash;
 
+	protected:
 		symbol_t(void* const me /* :<symbol>= */,
 			char const* const s /* :_char_star_# */);
 
@@ -88,6 +89,7 @@ namespace strange
 
 		static char last_char_f(void const* const me /* :<symbol># */);
 
+	public:
 		// creators
 		static var<symbol_a> create_f(char const* const s /* :_char_star_# */);
 		static var<symbol_a> create_empty_f();
