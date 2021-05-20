@@ -42,7 +42,7 @@ namespace strange
 		static void _as_f(void const* const me /* :<any># */,
 			void* const ab /* :<any>= */);
 
-		static val<symbol_a> type_f(void const* const me /* :<any># */);
+		static var<symbol_a> type_f(void const* const me /* :<any># */);
 
 		static void _set_pointer_f(void* const me /* :<any>= */,
 			bool is_pointer /* :_bool_# */);
@@ -57,7 +57,7 @@ namespace strange
 		static void set_error_f(void* const me /* :<any>= */,
 			void const* const error /* :<any># */);
 
-		static val<any_a> error_f(void const* const me /* :<any># */);
+		static var<any_a> error_f(void const* const me /* :<any># */);
 
 		static uint64_t hash_f(void const* const me /* :<any># */);
 
@@ -98,8 +98,8 @@ namespace strange
 			void const* const other /* :<any># */);
 
 		// creators
-		static val<any_a> create_f();
-		static val<any_a> create_nothing_f();
+		static var<any_a> create_f();
+		static var<any_a> create_nothing_f();
 	};
 }
 

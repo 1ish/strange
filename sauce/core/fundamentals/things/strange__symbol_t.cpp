@@ -147,7 +147,7 @@ namespace strange
 		return true;
 	}
 
-	val<symbol_a> symbol_t::type_f(void const* const me /* :<symbol># */)
+	var<symbol_a> symbol_t::type_f(void const* const me /* :<symbol># */)
 	{
 		static auto r = strange::sym("strange::symbol");
 		return r;
@@ -184,7 +184,7 @@ namespace strange
 		void const* const other /* :<any># */)
 	{
 		auto const oa = reinterpret_cast<any_a const* const>(other);
-		auto os = strange::var(symbol_t::create_empty_f());
+		auto os = symbol_t::create_empty_f();
 		if (oa->o->as(oa, os))
 		{
 			return symbol_t::_equal_f(me, os);
@@ -206,7 +206,7 @@ namespace strange
 		void const* const other /* :<any># */)
 	{
 		auto const oa = reinterpret_cast<any_a const* const>(other);
-		auto os = strange::var(symbol_t::create_empty_f());
+		auto os = symbol_t::create_empty_f();
 		if (oa->o->as(oa, os))
 		{
 			return symbol_t::_not_equal_f(me, os);
@@ -228,7 +228,7 @@ namespace strange
 		void const* const other /* :<any># */)
 	{
 		auto const oa = reinterpret_cast<any_a const* const>(other);
-		auto os = strange::var(symbol_t::create_empty_f());
+		auto os = symbol_t::create_empty_f();
 		if (oa->o->as(oa, os))
 		{
 			return symbol_t::_less_f(me, os);
@@ -250,7 +250,7 @@ namespace strange
 		void const* const other /* :<any># */)
 	{
 		auto const oa = reinterpret_cast<any_a const* const>(other);
-		auto os = strange::var(symbol_t::create_empty_f());
+		auto os = symbol_t::create_empty_f();
 		if (oa->o->as(oa, os))
 		{
 			return symbol_t::_greater_f(me, os);
@@ -272,7 +272,7 @@ namespace strange
 		void const* const other /* :<any># */)
 	{
 		auto const oa = reinterpret_cast<any_a const* const>(other);
-		auto os = strange::var(symbol_t::create_empty_f());
+		auto os = symbol_t::create_empty_f();
 		if (oa->o->as(oa, os))
 		{
 			return symbol_t::_less_or_equal_f(me, os);
@@ -294,7 +294,7 @@ namespace strange
 		void const* const other /* :<any># */)
 	{
 		auto const oa = reinterpret_cast<any_a const* const>(other);
-		auto os = strange::var(symbol_t::create_empty_f());
+		auto os = symbol_t::create_empty_f();
 		if (oa->o->as(oa, os))
 		{
 			return symbol_t::_greater_or_equal_f(me, os);
@@ -313,7 +313,7 @@ namespace strange
 	}
 
 	// symbol_a
-	val<symbol_a> symbol_t::add_f(void const* const me /* :<symbol># */,
+	var<symbol_a> symbol_t::add_f(void const* const me /* :<symbol># */,
 		void const* const suffix /* :<symbol># */)
 	{
 		// cannot assume symbol has a symbol_t, only that it implements symbol_a
@@ -330,7 +330,7 @@ namespace strange
 		std::memcpy(rd->symbol, md->symbol, md->length);
 		std::memcpy(rd->symbol + md->length, sa->o->to_char_star(sa), symbol_length + 1);
 		rd->hash = std::hash<std::string_view>{}(std::string_view{ rd->symbol, static_cast<uint64_t>(rd->length) });
-		return val<symbol_a>{ r };
+		return var<symbol_a>{ r };
 	}
 
 	char const* symbol_t::to_char_star_f(void const* const me /* :<symbol># */)
@@ -362,16 +362,16 @@ namespace strange
 	}
 
 	// creators
-	val<symbol_a> symbol_t::create_f(char const* const s /* :_char_star_# */)
+	var<symbol_a> symbol_t::create_f(char const* const s /* :_char_star_# */)
 	{
 		auto const rd = new symbol_t{ s };
 		symbol_a r;
 		r.t = reinterpret_cast<thing_t*>(rd);
 		symbol_t::init_f(&r);
-		return val<symbol_a>{ r };
+		return var<symbol_a>{ r };
 	}
 
-	val<symbol_a> symbol_t::create_empty_f()
+	var<symbol_a> symbol_t::create_empty_f()
 	{
 		static auto r = symbol_t::create_f("");
 		return r;

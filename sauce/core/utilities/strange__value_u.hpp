@@ -60,7 +60,7 @@ namespace strange
 		}
 	}
 
-	inline val<strange::symbol_a> sym(char const* const s)
+	inline var<strange::symbol_a> sym(char const* const s)
 	{
 		return strange::symbol_t::create_f(s);
 	}

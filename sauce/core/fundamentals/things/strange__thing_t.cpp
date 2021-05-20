@@ -160,7 +160,7 @@ namespace strange
 		}
 	}
 
-	val<symbol_a> thing_t::type_f(void const* const me /* :<any># */)
+	var<symbol_a> thing_t::type_f(void const* const me /* :<any># */)
 	{
 		static auto r = strange::sym("strange::thing");
 		return r;
@@ -237,7 +237,7 @@ namespace strange
 		}
 	}
 
-	val<any_a> thing_t::error_f(void const* const me /* :<any># */)
+	var<any_a> thing_t::error_f(void const* const me /* :<any># */)
 	{
 		if (thing_t::something_f(me))
 		{
@@ -245,7 +245,7 @@ namespace strange
 		}
 		auto const ma = reinterpret_cast<any_a const* const>(me);
 		strange::ref(&(ma->t->error));
-		return val<any_a>{ ma->t->error };
+		return var<any_a>{ ma->t->error };
 	}
 
 	uint64_t thing_t::hash_f(void const* const me /* :<any># */)
@@ -339,9 +339,9 @@ namespace strange
 	}
 
 	// creators
-	val<any_a> thing_t::create_f()
+	var<any_a> thing_t::create_f()
 	{
-		static auto r = strange::val([]()
+		static auto r = strange::var([]()
 		{
 			any_a r;
 			r.t = new thing_t;
@@ -351,9 +351,9 @@ namespace strange
 		return r;
 	}
 
-	val<any_a> thing_t::create_nothing_f()
+	var<any_a> thing_t::create_nothing_f()
 	{
-		static auto r = strange::val([]()
+		static auto r = strange::var([]()
 		{
 			any_a r;
 			r.t = new thing_t;
