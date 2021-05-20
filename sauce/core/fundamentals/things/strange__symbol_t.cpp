@@ -12,10 +12,10 @@ namespace strange
 {
 	symbol_t::symbol_t(void* const me /* :<symbol>= */,
 		char const* const s /* :_char_star_# */)
-		:	thing_t{ me }
-		,	symbol{ 0 }
-		,	length{ 0 }
-		,	hash{ 0 }
+	: thing_t{ me }
+	, symbol{ nullptr }
+	, length{ 0 }
+	, hash{ 0 }
 	{
 		auto const ma = reinterpret_cast<symbol_a* const>(me);
 		ma->o = symbol_t::operations_f();
@@ -31,10 +31,10 @@ namespace strange
 
 	symbol_t::symbol_t(void* const me /* :<symbol>= */,
 		void const* const original /* :<symbol># */)
-		:	thing_t{ me, original }
-		,	symbol{ 0 }
-		,	length{ 0 }
-		,	hash{ 0 }
+	: thing_t{ me, original }
+	, symbol{ nullptr }
+	, length{ 0 }
+	, hash{ 0 }
 	{
 		auto const ma = reinterpret_cast<symbol_a* const>(me);
 		ma->o = symbol_t::operations_f();
@@ -317,7 +317,7 @@ namespace strange
 		auto const md = static_cast<symbol_t* const>(ma->t);
 		auto const sa = reinterpret_cast<symbol_a const* const>(suffix);
 		symbol_a r;
-		auto const rd = new symbol_t{ &r, static_cast<const char* const>(0) };
+		auto const rd = new symbol_t{ &r, static_cast<const char* const>(nullptr) };
 		symbol_t::_init_f(&r);
 		int64_t const symbol_length = sa->o->length(sa);
 		rd->length = md->length + symbol_length;

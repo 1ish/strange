@@ -10,8 +10,8 @@
 namespace strange
 {
 	thing_t::thing_t(void* const me /* :<any>= */)
-		:	refs{ 0 }
-		,	error { 0, 0 }
+	: refs{ 0 }
+	, error { nullptr, nullptr }
 	{
 		auto const ma = reinterpret_cast<any_a* const>(me);
 		ma->t = this;
@@ -22,8 +22,8 @@ namespace strange
 
 	thing_t::thing_t(void* const me /* :<any>= */,
 		void const* const original /* :<any># */)
-		:	refs{ 0 }
-		,	error { reinterpret_cast<any_a const* const>(original)->t->error }
+	: refs{ 0 }
+	, error { reinterpret_cast<any_a const* const>(original)->t->error }
 	{
 		auto const ma = reinterpret_cast<any_a* const>(me);
 		ma->t = this;
@@ -195,8 +195,8 @@ namespace strange
 		if (is_something)
 		{
 			strange::rel(&(ma->t->error));
-			ma->t->error.t = 0;
-			ma->t->error.o = 0;
+			ma->t->error.t = nullptr;
+			ma->t->error.o = nullptr;
 		}
 		else
 		{
