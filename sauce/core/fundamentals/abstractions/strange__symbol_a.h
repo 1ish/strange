@@ -5,7 +5,7 @@ namespace strange
 {
 	struct symbol_o : any_o
 	{
-		symbol_a (*add)(void const* const me /* :<symbol># */,
+		val<symbol_a>(*add)(void const* const me /* :<symbol># */,
 			void const* const suffix /* :<symbol># */);
 
 		char const* (*to_char_star)(void const* const me /* :<symbol># */);

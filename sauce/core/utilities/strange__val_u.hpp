@@ -65,12 +65,6 @@ namespace strange
 			}
 		}
 
-		inline A ret() const
-		{
-			++(A::t->refs);
-			return *this;
-		}
-
 		inline void mut()
 		{
 			if (A::t->refs > 1)
@@ -203,12 +197,6 @@ namespace strange
 				A::o->_free(this);
 				delete A::t;
 			}
-		}
-
-		inline A ret() const
-		{
-			++(A::t->refs);
-			return *this;
 		}
 
 		inline void mut()
@@ -347,12 +335,6 @@ namespace strange
 				A::o->_free(this);
 				delete A::t;
 			}
-		}
-
-		inline A ret() const
-		{
-			++(A::t->refs);
-			return *this;
 		}
 
 		inline void mut()

@@ -33,7 +33,7 @@ namespace strange
 		static bool as_f(void const* const me /* :<symbol># */,
 			void* const ab /* :<any>= */);
 
-		static symbol_a type_f(void const* const me /* :<symbol># */);
+		static val<symbol_a> type_f(void const* const me /* :<symbol># */);
 
 		static void _set_pointer_f(void* const me /* :<symbol>= */,
 			bool is_pointer /* :_bool_# */);
@@ -79,7 +79,7 @@ namespace strange
 			void const* const other /* :<symbol># */);
 
 		// symbol_a
-		static symbol_a add_f(void const* const me /* :<symbol># */,
+		static val<symbol_a> add_f(void const* const me /* :<symbol># */,
 			void const* const suffix /* :<symbol># */);
 
 		static char const* to_char_star_f(void const* const me /* :<symbol># */);
@@ -91,8 +91,8 @@ namespace strange
 		static char last_char_f(void const* const me /* :<symbol># */);
 
 		// creators
-		static symbol_a create_f(char const* const s /* :_char_star_# */);
-		static symbol_a create_empty_f();
+		static val<symbol_a> create_f(char const* const s /* :_char_star_# */);
+		static val<symbol_a> create_empty_f();
 	};
 }
 

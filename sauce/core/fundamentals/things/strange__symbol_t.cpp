@@ -147,10 +147,10 @@ namespace strange
 		return true;
 	}
 
-	symbol_a symbol_t::type_f(void const* const me /* :<symbol># */)
+	val<symbol_a> symbol_t::type_f(void const* const me /* :<symbol># */)
 	{
 		static auto r = strange::sym("strange::symbol");
-		return r.ret();
+		return r;
 	}
 
 	void symbol_t::_set_pointer_f(void* const me /* :<symbol>= */,
@@ -313,7 +313,7 @@ namespace strange
 	}
 
 	// symbol_a
-	symbol_a symbol_t::add_f(void const* const me /* :<symbol># */,
+	val<symbol_a> symbol_t::add_f(void const* const me /* :<symbol># */,
 		void const* const suffix /* :<symbol># */)
 	{
 		// cannot assume symbol has a symbol_t, only that it implements symbol_a
@@ -330,7 +330,7 @@ namespace strange
 		std::memcpy(rd->symbol, md->symbol, md->length);
 		std::memcpy(rd->symbol + md->length, sa->o->to_char_star(sa), symbol_length + 1);
 		rd->hash = std::hash<std::string_view>{}(std::string_view{ rd->symbol, static_cast<uint64_t>(rd->length) });
-		return r;
+		return val<symbol_a>{ r };
 	}
 
 	char const* symbol_t::to_char_star_f(void const* const me /* :<symbol># */)
@@ -362,18 +362,18 @@ namespace strange
 	}
 
 	// creators
-	symbol_a symbol_t::create_f(char const* const s /* :_char_star_# */)
+	val<symbol_a> symbol_t::create_f(char const* const s /* :_char_star_# */)
 	{
 		auto const rd = new symbol_t{ s };
 		symbol_a r;
 		r.t = reinterpret_cast<thing_t*>(rd);
 		symbol_t::init_f(&r);
-		return r;
+		return val<symbol_a>{ r };
 	}
 
-	symbol_a symbol_t::create_empty_f()
+	val<symbol_a> symbol_t::create_empty_f()
 	{
-		static auto r = strange::var(symbol_t::create_f(""));
-		return r.ret();
+		static auto r = symbol_t::create_f("");
+		return r;
 	}
 }

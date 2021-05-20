@@ -21,7 +21,7 @@ namespace strange
 		void (*_as)(void const* const me /* :<any># */,
 			void* const ab /* :<any>= */);
 
-		symbol_a (*type)(void const* const me /* :<any># */);
+		val<symbol_a> (*type)(void const* const me /* :<any># */);
 
 		void (*_set_pointer)(void* const me /* :<any>= */,
 			bool is_pointer /* :_bool_# */ );
@@ -36,7 +36,7 @@ namespace strange
 		void (*set_error)(void* const me /* :<any>= */,
 			void const* const error /* :<any># */);
 
-		any_a (*error)(void const* const me /* :<any># */);
+		val<any_a> (*error)(void const* const me /* :<any># */);
 
 		uint64_t (*hash)(void const* const me /* :<any># */);
 
