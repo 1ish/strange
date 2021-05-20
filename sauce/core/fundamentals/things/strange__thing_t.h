@@ -33,76 +33,76 @@ namespace strange
 		}
 
 		// any_a
-		static void _free_f(void* const me /* :<any># */);
+		static void _free_m(void* const me /* :<any># */);
 
-		static void _copy_f(void const* const me /* :<any># */,
+		static void _copy_e(void const* const me /* :<any># */,
 			void* const cp /* :<any>= */);
 
-		static void _no_copy_f(void const* const me /* :<any># */,
+		static void _no_copy_e(void const* const me /* :<any># */,
 			void* const cp /* :<any>= */);
 
-		static bool is_f(void const* const me /* :<any># */,
+		static bool is_e(void const* const me /* :<any># */,
 			void const* const ab /* :<any># */);
 
-		static bool as_f(void const* const me /* :<any># */,
+		static bool as_e(void const* const me /* :<any># */,
 			void* const ab /* :<any>= */);
 
-		static void _as_f(void const* const me /* :<any># */,
+		static void _as_e(void const* const me /* :<any># */,
 			void* const ab /* :<any>= */);
 
-		static var<symbol_a> type_f(void const* const me /* :<any># */);
+		static var<symbol_a> type_e(void const* const me /* :<any># */);
 
-		static void _set_pointer_f(void* const me /* :<any>= */,
+		static void _set_pointer_m(void* const me /* :<any>= */,
 			bool is_pointer /* :_bool_# */);
 
-		static bool _pointer_f(void const* const me /* :<any># */);
+		static bool _pointer_e(void const* const me /* :<any># */);
 
-		static void set_something_f(void* const me /* :<any>= */,
+		static void set_something_m(void* const me /* :<any>= */,
 			bool is_something /* :_bool_# */);
 
-		static bool something_f(void const* const me /* :<any># */);
+		static bool something_e(void const* const me /* :<any># */);
 
-		static void set_error_f(void* const me /* :<any>= */,
+		static void set_error_m(void* const me /* :<any>= */,
 			void const* const error /* :<any># */);
 
-		static var<any_a> error_f(void const* const me /* :<any># */);
+		static var<any_a> error_e(void const* const me /* :<any># */);
 
-		static uint64_t hash_f(void const* const me /* :<any># */);
+		static uint64_t hash_e(void const* const me /* :<any># */);
 
-		static bool equal_f(void const* const me /* :<any># */,
+		static bool equal_e(void const* const me /* :<any># */,
 			void const* const other /* :<any># */);
 
-		static bool _equal_f(void const* const me /* :<any># */,
+		static bool _equal_e(void const* const me /* :<any># */,
 			void const* const other /* :<any># */);
 
-		static bool not_equal_f(void const* const me /* :<any># */,
+		static bool not_equal_e(void const* const me /* :<any># */,
 			void const* const other /* :<any># */);
 
-		static bool _not_equal_f(void const* const me /* :<any># */,
+		static bool _not_equal_e(void const* const me /* :<any># */,
 			void const* const other /* :<any># */);
 
-		static bool less_f(void const* const me /* :<any># */,
+		static bool less_e(void const* const me /* :<any># */,
 			void const* const other /* :<any># */);
 
-		static bool _less_f(void const* const me /* :<any># */,
+		static bool _less_e(void const* const me /* :<any># */,
 			void const* const other /* :<any># */);
 
-		static bool greater_f(void const* const me /* :<any># */,
+		static bool greater_e(void const* const me /* :<any># */,
 			void const* const other /* :<any># */);
 
-		static bool _greater_f(void const* const me /* :<any># */,
+		static bool _greater_e(void const* const me /* :<any># */,
 			void const* const other /* :<any># */);
 
-		static bool less_or_equal_f(void const* const me /* :<any># */,
+		static bool less_or_equal_e(void const* const me /* :<any># */,
 			void const* const other /* :<any># */);
 
-		static bool _less_or_equal_f(void const* const me /* :<any># */,
+		static bool _less_or_equal_e(void const* const me /* :<any># */,
 			void const* const other /*: <any># */);
 
-		static bool greater_or_equal_f(void const* const me /* :<any># */,
+		static bool greater_or_equal_e(void const* const me /* :<any># */,
 			void const* const other /* :<any># */);
 
-		static bool _greater_or_equal_f(void const* const me /* :<any># */,
+		static bool _greater_or_equal_e(void const* const me /* :<any># */,
 			void const* const other /* :<any># */);
 
 	public:

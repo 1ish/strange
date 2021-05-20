@@ -82,7 +82,7 @@ namespace strange
 		thing_t* t;
 		any_o const* o;
 
-		static var<symbol_a> cat_f(void const* const me /* :<any># */);
+		static var<symbol_a> cat_e(void const* const me /* :<any># */);
 	};
 }
 
