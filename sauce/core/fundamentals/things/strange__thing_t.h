@@ -10,8 +10,11 @@ namespace strange
 		std::atomic_int64_t refs;
 		any_a error;
 
-		thing_t();
-		thing_t(thing_t const& original);
+		thing_t(void* const me /* :<any>= */);
+
+		thing_t(void* const me /* :<any>= */,
+			void const* const original /* :<any># */);
+
 		virtual ~thing_t();
 
 		// any_o

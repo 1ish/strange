@@ -10,12 +10,16 @@
 
 namespace strange
 {
-	symbol_t::symbol_t(char const* const s /* :_char_star_# */)
-		:	thing_t{}
+	symbol_t::symbol_t(void* const me /* :<symbol>= */,
+		char const* const s /* :_char_star_# */)
+		:	thing_t{ me }
 		,	symbol{ 0 }
 		,	length{ 0 }
 		,	hash{ 0 }
 	{
+		auto const ma = reinterpret_cast<symbol_a* const>(me);
+		ma->o = symbol_t::operations_f();
+
 		if (s)
 		{
 			length = std::strlen(s);
@@ -25,13 +29,22 @@ namespace strange
 		}
 	}
 
-	symbol_t::symbol_t(symbol_t const& original)
-		:	thing_t{ original }
-		,	symbol{ new char[original.length + 1] }
-		,	length{ original.length }
-		,	hash{ original.hash }
+	symbol_t::symbol_t(void* const me /* :<symbol>= */,
+		void const* const original /* :<symbol># */)
+		:	thing_t{ me, original }
+		,	symbol{ 0 }
+		,	length{ 0 }
+		,	hash{ 0 }
 	{
-		std::memcpy(symbol, original.symbol, length + 1);
+		auto const ma = reinterpret_cast<symbol_a* const>(me);
+		ma->o = symbol_t::operations_f();
+
+		auto const oa = reinterpret_cast<symbol_a const* const>(original);
+		auto const ot = static_cast<symbol_t const* const>(oa->t);
+		length = ot->length;
+		symbol = new char[length + 1];
+		std::memcpy(symbol, ot->symbol, length + 1);
+		hash = ot->hash;
 	}
 
 	symbol_t::~symbol_t()
@@ -92,29 +105,12 @@ namespace strange
 		return &operations;
 	}
 
-	// init
-	void symbol_t::init_f(void* const me /* :<symbol>= */)
-	{
-		auto const ma = reinterpret_cast<symbol_a* const>(me);
-		thing_t::init_f(ma);
-		ma->o = symbol_t::operations_f();
-	}
-
 	// any_a
 	void symbol_t::_copy_f(void const* const me /* :<symbol># */,
 		void* const cp /* :<symbol>= */)
 	{
-		auto const ma = reinterpret_cast<symbol_a const* const>(me);
-		auto const md = static_cast<symbol_t const* const>(ma->t);
-		auto const ca = reinterpret_cast<symbol_a* const>(cp);
-		ca->t = new symbol_t{ *md };
-		symbol_t::_clone_f(ma, ca);
-	}
-
-	void symbol_t::_clone_f(void const* const me /* :<symbol># */,
-		void* const cp /* :<symbol>= */)
-	{
-		thing_t::_clone_f(me, cp);
+		new symbol_t{ cp, me };
+		symbol_t::_clone_f(me, cp);
 	}
 
 	bool symbol_t::is_f(void const* const me /* :<symbol># */,
@@ -320,9 +316,8 @@ namespace strange
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
 		auto const md = static_cast<symbol_t* const>(ma->t);
 		auto const sa = reinterpret_cast<symbol_a const* const>(suffix);
-		auto const rd = new symbol_t{ 0 };
 		symbol_a r;
-		r.t = rd;
+		auto const rd = new symbol_t{ &r, static_cast<const char* const>(0) };
 		symbol_t::init_f(&r);
 		int64_t const symbol_length = sa->o->length(sa);
 		rd->length = md->length + symbol_length;
@@ -364,9 +359,8 @@ namespace strange
 	// creators
 	var<symbol_a> symbol_t::create_f(char const* const s /* :_char_star_# */)
 	{
-		auto const rd = new symbol_t{ s };
 		symbol_a r;
-		r.t = rd;
+		auto const rd = new symbol_t{ &r, s };
 		symbol_t::init_f(&r);
 		return var<symbol_a>{ r };
 	}

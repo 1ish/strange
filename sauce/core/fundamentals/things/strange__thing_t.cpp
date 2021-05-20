@@ -9,21 +9,31 @@
 
 namespace strange
 {
-	thing_t::thing_t()
+	thing_t::thing_t(void* const me /* :<any>= */)
 		:	refs{ 0 }
 		,	error { 0, 0 }
 	{
+		auto const ma = reinterpret_cast<any_a* const>(me);
+		ma->t = this;
+		ma->o = thing_t::operations_f();
+
 		std::cout << "new thing\n";
 	}
 
-	thing_t::thing_t(thing_t const& original)
+	thing_t::thing_t(void* const me /* :<any>= */,
+		void const* const original /* :<any># */)
 		:	refs{ 0 }
-		,	error { original.error }
+		,	error { reinterpret_cast<any_a const* const>(original)->t->error }
 	{
+		auto const ma = reinterpret_cast<any_a* const>(me);
+		ma->t = this;
+		ma->o = thing_t::operations_f();
+
 		if (error.t)
 		{
 			strange::ref(&error);
 		}
+
 		std::cout << "copy thing\n";
 	}
 
@@ -33,6 +43,7 @@ namespace strange
 		{
 			strange::rel(&error);
 		}
+
 		std::cout << "delete thing\n";
 	}
 
@@ -86,8 +97,6 @@ namespace strange
 	// init
 	void thing_t::init_f(void* const me /* :<any>= */)
 	{
-		auto const ma = reinterpret_cast<any_a* const>(me);
-		ma->o = thing_t::operations_f();
 	}
 
 	// any_a
@@ -100,18 +109,13 @@ namespace strange
 	void thing_t::_copy_f(void const* const me /* :<any># */,
 		void* const cp /* :<any>= */)
 	{
-		auto const ma = reinterpret_cast<any_a const* const>(me);
-		auto const ca = reinterpret_cast<any_a* const>(cp);
-		ca->t = new thing_t{ *(ma->t) };
+		new thing_t{ cp, me };
 		thing_t::_clone_f(me, cp);
 	}
 
 	void thing_t::_clone_f(void const* const me /* :<any># */,
 		void* const cp /* :<any>= */)
 	{
-		auto const ma = reinterpret_cast<any_a const* const>(me);
-		auto const ca = reinterpret_cast<any_a* const>(cp);
-		ca->o = ma->o;
 	}
 
 	void thing_t::_no_copy_f(void const* const me /* :<any># */,
@@ -347,7 +351,7 @@ namespace strange
 		static auto r = strange::var([]()
 		{
 			any_a r;
-			r.t = new thing_t;
+			new thing_t{ &r };
 			thing_t::init_f(&r);
 			return r;
 		}());
@@ -359,7 +363,7 @@ namespace strange
 		static auto r = strange::var([]()
 		{
 			any_a r;
-			r.t = new thing_t;
+			new thing_t{ &r };
 			thing_t::init_f(&r);
 			auto const err = thing_t::create_f();
 			err.ref();

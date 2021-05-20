@@ -9,22 +9,20 @@ namespace strange
 		int64_t length;
 		uint64_t hash;
 
-		symbol_t(char const* const s /* :_char_star_# */);
-		symbol_t(symbol_t const& original);
+		symbol_t(void* const me /* :<symbol>= */,
+			char const* const s /* :_char_star_# */);
+
+		symbol_t(void* const me /* :<symbol>= */,
+			void const* const original /* :<symbol># */);
+
 		virtual ~symbol_t();
 
 		// symbol_o
 		static symbol_o const* operations_f();
 		static symbol_o const* pointer_operations_f();
 
-		// init
-		static void init_f(void* const me /* :<symbol>= */);
-
 		// any_a
 		static void _copy_f(void const* const me /* :<symbol># */,
-			void* const cp /* :<symbol>= */);
-
-		static void _clone_f(void const* const me /* :<symbol># */,
 			void* const cp /* :<symbol>= */);
 
 		static bool is_f(void const* const me /* :<symbol># */,
