@@ -105,7 +105,7 @@ namespace strange
 		void* const cp /* :<symbol>= */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
-		auto const md = reinterpret_cast<symbol_t const* const>(ma->t);
+		auto const md = static_cast<symbol_t const* const>(ma->t);
 		auto const ca = reinterpret_cast<symbol_a* const>(cp);
 		ca->t = new symbol_t{ *md };
 		symbol_t::_clone_f(ma, ca);
@@ -176,7 +176,7 @@ namespace strange
 	uint64_t symbol_t::hash_f(void const* const me /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
-		auto const md = reinterpret_cast<symbol_t const* const>(ma->t);
+		auto const md = static_cast<symbol_t const* const>(ma->t);
 		return md->hash;
 	}
 
@@ -196,7 +196,7 @@ namespace strange
 		void const* const other /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
-		auto const md = reinterpret_cast<symbol_t const* const>(ma->t);
+		auto const md = static_cast<symbol_t const* const>(ma->t);
 		auto const os = reinterpret_cast<symbol_a const* const>(other);
 		return std::strncmp(md->symbol, os->o->to_char_star(os),
 			std::max(md->length, os->o->length(os))) == 0;
@@ -218,7 +218,7 @@ namespace strange
 		void const* const other /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
-		auto const md = reinterpret_cast<symbol_t const* const>(ma->t);
+		auto const md = static_cast<symbol_t const* const>(ma->t);
 		auto const os = reinterpret_cast<symbol_a const* const>(other);
 		return std::strncmp(md->symbol, os->o->to_char_star(os),
 			std::max(md->length, os->o->length(os))) != 0;
@@ -240,7 +240,7 @@ namespace strange
 		void const* const other /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
-		auto const md = reinterpret_cast<symbol_t const* const>(ma->t);
+		auto const md = static_cast<symbol_t const* const>(ma->t);
 		auto const os = reinterpret_cast<symbol_a const* const>(other);
 		return std::strncmp(md->symbol, os->o->to_char_star(os),
 			std::max(md->length, os->o->length(os))) < 0;
@@ -262,7 +262,7 @@ namespace strange
 		void const* const other /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
-		auto const md = reinterpret_cast<symbol_t const* const>(ma->t);
+		auto const md = static_cast<symbol_t const* const>(ma->t);
 		auto const os = reinterpret_cast<symbol_a const* const>(other);
 		return std::strncmp(md->symbol, os->o->to_char_star(os),
 			std::max(md->length, os->o->length(os))) > 0;
@@ -284,7 +284,7 @@ namespace strange
 		void const* const other /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
-		auto const md = reinterpret_cast<symbol_t const* const>(ma->t);
+		auto const md = static_cast<symbol_t const* const>(ma->t);
 		auto const os = reinterpret_cast<symbol_a const* const>(other);
 		return std::strncmp(md->symbol, os->o->to_char_star(os),
 			std::max(md->length, os->o->length(os))) <= 0;
@@ -306,7 +306,7 @@ namespace strange
 		void const* const other /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
-		auto const md = reinterpret_cast<symbol_t const* const>(ma->t);
+		auto const md = static_cast<symbol_t const* const>(ma->t);
 		auto const os = reinterpret_cast<symbol_a const* const>(other);
 		return std::strncmp(md->symbol, os->o->to_char_star(os),
 			std::max(md->length, os->o->length(os))) >= 0;
@@ -318,11 +318,11 @@ namespace strange
 	{
 		// cannot assume symbol has a symbol_t, only that it implements symbol_a
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
-		auto const md = reinterpret_cast<symbol_t* const>(ma->t);
+		auto const md = static_cast<symbol_t* const>(ma->t);
 		auto const sa = reinterpret_cast<symbol_a const* const>(suffix);
 		auto const rd = new symbol_t{ 0 };
 		symbol_a r;
-		r.t = reinterpret_cast<thing_t*>(rd);
+		r.t = rd;
 		symbol_t::init_f(&r);
 		int64_t const symbol_length = sa->o->length(sa);
 		rd->length = md->length + symbol_length;
@@ -336,28 +336,28 @@ namespace strange
 	char const* symbol_t::to_char_star_f(void const* const me /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
-		auto const md = reinterpret_cast<symbol_t* const>(ma->t);
+		auto const md = static_cast<symbol_t* const>(ma->t);
 		return md->symbol;
 	}
 
 	int64_t symbol_t::length_f(void const* const me /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
-		auto const md = reinterpret_cast<symbol_t* const>(ma->t);
+		auto const md = static_cast<symbol_t* const>(ma->t);
 		return md->length;
 	}
 
 	char symbol_t::first_char_f(void const* const me /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
-		auto const md = reinterpret_cast<symbol_t* const>(ma->t);
+		auto const md = static_cast<symbol_t* const>(ma->t);
 		return (md->symbol)[0];
 	}
 
 	char symbol_t::last_char_f(void const* const me /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me);
-		auto const md = reinterpret_cast<symbol_t* const>(ma->t);
+		auto const md = static_cast<symbol_t* const>(ma->t);
 		return (md->symbol)[std::max(int64_t{ 0 }, md->length - 1)];
 	}
 
@@ -366,7 +366,7 @@ namespace strange
 	{
 		auto const rd = new symbol_t{ s };
 		symbol_a r;
-		r.t = reinterpret_cast<thing_t*>(rd);
+		r.t = rd;
 		symbol_t::init_f(&r);
 		return var<symbol_a>{ r };
 	}
