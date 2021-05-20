@@ -94,11 +94,6 @@ namespace strange
 		return &operations;
 	}
 
-	// init
-	void thing_t::init_f(void* const me /* :<any>= */)
-	{
-	}
-
 	// any_a
 	void thing_t::_free_f(void* const me /* :<any># */)
 	{
@@ -111,11 +106,6 @@ namespace strange
 	{
 		new thing_t{ cp, me };
 		thing_t::_clone_f(me, cp);
-	}
-
-	void thing_t::_clone_f(void const* const me /* :<any># */,
-		void* const cp /* :<any>= */)
-	{
 	}
 
 	void thing_t::_no_copy_f(void const* const me /* :<any># */,
@@ -352,7 +342,7 @@ namespace strange
 		{
 			any_a r;
 			new thing_t{ &r };
-			thing_t::init_f(&r);
+			thing_t::_init_f(&r);
 			return r;
 		}());
 		return r;
@@ -364,7 +354,7 @@ namespace strange
 		{
 			any_a r;
 			new thing_t{ &r };
-			thing_t::init_f(&r);
+			thing_t::_init_f(&r);
 			auto const err = thing_t::create_f();
 			err.ref();
 			r.t->error = err;

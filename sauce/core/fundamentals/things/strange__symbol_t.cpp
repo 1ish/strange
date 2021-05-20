@@ -318,7 +318,7 @@ namespace strange
 		auto const sa = reinterpret_cast<symbol_a const* const>(suffix);
 		symbol_a r;
 		auto const rd = new symbol_t{ &r, static_cast<const char* const>(0) };
-		symbol_t::init_f(&r);
+		symbol_t::_init_f(&r);
 		int64_t const symbol_length = sa->o->length(sa);
 		rd->length = md->length + symbol_length;
 		rd->symbol = new char[rd->length + 1];
@@ -361,7 +361,7 @@ namespace strange
 	{
 		symbol_a r;
 		auto const rd = new symbol_t{ &r, s };
-		symbol_t::init_f(&r);
+		symbol_t::_init_f(&r);
 		return var<symbol_a>{ r };
 	}
 

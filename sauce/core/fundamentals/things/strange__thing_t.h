@@ -22,16 +22,20 @@ namespace strange
 		static any_o const* operations_f();
 		static any_o const* pointer_operations_f();
 
-		// init
-		static void init_f(void* const me /* :<any>= */);
+		// inline
+		static inline void _init_f(void* const me /* :<any>= */)
+		{
+		}
+
+		static inline void _clone_f(void const* const me /* :<any># */,
+			void* const cp /* :<any>= */)
+		{
+		}
 
 		// any_a
 		static void _free_f(void* const me /* :<any># */);
 
 		static void _copy_f(void const* const me /* :<any># */,
-			void* const cp /* :<any>= */);
-
-		static void _clone_f(void const* const me /* :<any># */,
 			void* const cp /* :<any>= */);
 
 		static void _no_copy_f(void const* const me /* :<any># */,
