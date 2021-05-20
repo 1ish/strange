@@ -57,7 +57,7 @@ namespace strange
 			++(A::t->refs);
 		}
 
-		inline void rel() const
+		inline void rel()
 		{
 			if (!--(A::t->refs))
 			{
@@ -193,7 +193,7 @@ namespace strange
 			++(A::t->refs);
 		}
 
-		inline void rel() const
+		inline void rel()
 		{
 			if (!--(A::t->refs))
 			{
@@ -333,7 +333,7 @@ namespace strange
 			++(A::t->refs);
 		}
 
-		inline void rel() const
+		inline void rel()
 		{
 			if (!--(A::t->refs))
 			{

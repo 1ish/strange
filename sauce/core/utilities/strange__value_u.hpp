@@ -15,7 +15,7 @@ namespace strange
 		++(abstraction->t->refs);
 	}
 
-	inline void rel(any_a const* const abstraction /* :<any># */)
+	inline void rel(any_a* const abstraction /* :<any># */)
 	{
 		if (!--(abstraction->t->refs))
 		{

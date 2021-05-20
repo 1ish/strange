@@ -22,7 +22,7 @@ namespace strange
 		static void init_f(void* const me /* :<any>= */);
 
 		// any_a
-		static void _free_f(void const* const me /* :<any># */);
+		static void _free_f(void* const me /* :<any># */);
 
 		static void _copy_f(void const* const me /* :<any># */,
 			void* const cp /* :<any>= */);

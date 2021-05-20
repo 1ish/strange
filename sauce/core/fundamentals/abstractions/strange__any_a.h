@@ -7,7 +7,7 @@ namespace strange
 	{
 		var<symbol_a> (*cat)(void const* const me /* :<any># */);
 
-		void (*_free)(void const* const me /* :<any># */);
+		void (*_free)(void* const me /* :<any># */);
 
 		void (*_copy)(void const* const me /* :<any># */,
 			void* const cp /* :<any>= */);
