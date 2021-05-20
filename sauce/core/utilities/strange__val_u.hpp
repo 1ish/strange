@@ -1,9 +1,6 @@
 #ifndef COM_ONEISH__STRANGE__VAL_C_H
 #define COM_ONEISH__STRANGE__VAL_C_H
 
-#include <cstdlib>
-#include <iostream>
-
 namespace strange
 {
 	template <typename A>

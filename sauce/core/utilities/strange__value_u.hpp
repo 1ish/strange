@@ -1,21 +1,16 @@
 #ifndef COM_ONEISH__STRANGE__VALUE_C_H
 #define COM_ONEISH__STRANGE__VALUE_C_H
 
-#include <cstdlib>
-#include <iostream>
-
 #include "strange__val_u.hpp"
 
 namespace strange
 {
-	static_assert(sizeof(std::atomic_int64_t) == sizeof(int64_t), "required to be true: sizeof(std::atomic_int64_t) == sizeof(int64_t)");
-
 	inline void ref(any_a const* const abstraction /* :<any># */)
 	{
 		++(abstraction->t->refs);
 	}
 
-	inline void rel(any_a* const abstraction /* :<any># */)
+	inline void rel(any_a* const abstraction /* :<any>= */)
 	{
 		if (!--(abstraction->t->refs))
 		{
@@ -44,20 +39,20 @@ namespace strange
 		{
 			if (pointer_after)
 			{
-				strange::mut(after);
+				mut(after);
 				after->o->_set_pointer(after, true);
 			}
 			else
 			{
 				after->o->_set_pointer(after, false);
-				strange::mut(after);
+				mut(after);
 			}
 		}
 	}
 
-	inline var<strange::symbol_a> sym(char const* const s)
+	inline var<symbol_a> sym(char const* const s /* :_char_star_# */)
 	{
-		return strange::symbol_t::create_f(s);
+		return symbol_t::create_f(s);
 	}
 }
 
