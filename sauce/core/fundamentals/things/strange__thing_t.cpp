@@ -252,86 +252,86 @@ namespace strange
 	}
 
 	bool thing_t::equal_e(void const* const me_ /* :<any># */,
-		void const* const other /* :<any># */)
+		void const* const other_ /* :<any># */)
 	{
-		return thing_t::_equal_e(me_, other);
+		return thing_t::_equal_e(me_, other_);
 	}
 
 	bool thing_t::_equal_e(void const* const me_ /* :<any># */,
-		void const* const other /* :<any># */)
+		void const* const other_ /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<any_a const* const>(me_);
-		auto const oa = reinterpret_cast<any_a const* const>(other);
+		auto const oa = reinterpret_cast<any_a const* const>(other_);
 		return ma->t == oa->t;
 	}
 
 	bool thing_t::not_equal_e(void const* const me_ /* :<any># */,
-		void const* const other /* :<any># */)
+		void const* const other_ /* :<any># */)
 	{
-		return thing_t::_not_equal_e(me_, other);
+		return thing_t::_not_equal_e(me_, other_);
 	}
 
 	bool thing_t::_not_equal_e(void const* const me_ /* :<any># */,
-		void const* const other /* :<any># */)
+		void const* const other_ /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<any_a const* const>(me_);
-		auto const oa = reinterpret_cast<any_a const* const>(other);
+		auto const oa = reinterpret_cast<any_a const* const>(other_);
 		return ma->t != oa->t;
 	}
 
 	bool thing_t::less_e(void const* const me_ /* :<any># */,
-		void const* const other /* :<any># */)
+		void const* const other_ /* :<any># */)
 	{
-		return thing_t::_less_e(me_, other);
+		return thing_t::_less_e(me_, other_);
 	}
 
 	bool thing_t::_less_e(void const* const me_ /* :<any># */,
-		void const* const other /* :<any># */)
+		void const* const other_ /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<any_a const* const>(me_);
-		auto const oa = reinterpret_cast<any_a const* const>(other);
+		auto const oa = reinterpret_cast<any_a const* const>(other_);
 		return ma->t < oa->t;
 	}
 
 	bool thing_t::greater_e(void const* const me_ /* :<any># */,
-		void const* const other /* :<any># */)
+		void const* const other_ /* :<any># */)
 	{
-		return thing_t::_greater_e(me_, other);
+		return thing_t::_greater_e(me_, other_);
 	}
 
 	bool thing_t::_greater_e(void const* const me_ /* :<any># */,
-		void const* const other /* :<any># */)
+		void const* const other_ /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<any_a const* const>(me_);
-		auto const oa = reinterpret_cast<any_a const* const>(other);
+		auto const oa = reinterpret_cast<any_a const* const>(other_);
 		return ma->t > oa->t;
 	}
 
 	bool thing_t::less_or_equal_e(void const* const me_ /* :<any># */,
-		void const* const other /* :<any># */)
+		void const* const other_ /* :<any># */)
 	{
-		return thing_t::_less_or_equal_e(me_, other);
+		return thing_t::_less_or_equal_e(me_, other_);
 	}
 
 	bool thing_t::_less_or_equal_e(void const* const me_ /* :<any># */,
-		void const* const other /* :<any># */)
+		void const* const other_ /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<any_a const* const>(me_);
-		auto const oa = reinterpret_cast<any_a const* const>(other);
+		auto const oa = reinterpret_cast<any_a const* const>(other_);
 		return ma->t <= oa->t;
 	}
 
 	bool thing_t::greater_or_equal_e(void const* const me_ /* :<any># */,
-		void const* const other /* :<any># */)
+		void const* const other_ /* :<any># */)
 	{
-		return thing_t::_greater_or_equal_e(me_, other);
+		return thing_t::_greater_or_equal_e(me_, other_);
 	}
 
 	bool thing_t::_greater_or_equal_e(void const* const me_ /* :<any># */,
-		void const* const other /* :<any># */)
+		void const* const other_ /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<any_a const* const>(me_);
-		auto const oa = reinterpret_cast<any_a const* const>(other);
+		auto const oa = reinterpret_cast<any_a const* const>(other_);
 		return ma->t >= oa->t;
 	}
 

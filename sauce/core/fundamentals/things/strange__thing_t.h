@@ -70,40 +70,40 @@ namespace strange
 		static uint64_t hash_e(void const* const me_ /* :<any># */);
 
 		static bool equal_e(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		static bool _equal_e(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		static bool not_equal_e(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		static bool _not_equal_e(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		static bool less_e(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		static bool _less_e(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		static bool greater_e(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		static bool _greater_e(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		static bool less_or_equal_e(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		static bool _less_or_equal_e(void const* const me_ /* :<any># */,
-			void const* const other /*: <any># */);
+			void const* const other_ /*: <any># */);
 
 		static bool greater_or_equal_e(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		static bool _greater_or_equal_e(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 	public:
 		// creators

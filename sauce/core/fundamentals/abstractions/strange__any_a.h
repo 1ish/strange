@@ -41,40 +41,40 @@ namespace strange
 		uint64_t (*hash)(void const* const me_ /* :<any># */);
 
 		bool (*equal)(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		bool (*_equal)(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		bool (*not_equal)(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		bool (*_not_equal)(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		bool (*less)(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		bool (*_less)(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		bool (*greater)(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		bool (*_greater)(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		bool (*less_or_equal)(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		bool (*_less_or_equal)(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		bool (*greater_or_equal)(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		bool (*_greater_or_equal)(void const* const me_ /* :<any># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 	};
 
 	struct any_a

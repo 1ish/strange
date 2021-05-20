@@ -42,40 +42,40 @@ namespace strange
 		static uint64_t hash_e(void const* const me_ /* :<symbol># */);
 
 		static bool equal_e(void const* const me_ /* :<symbol># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		static bool _equal_e(void const* const me_ /* :<symbol># */,
-			void const* const other /* :<symbol># */);
+			void const* const other_ /* :<symbol># */);
 
 		static bool not_equal_e(void const* const me_ /* :<symbol># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		static bool _not_equal_e(void const* const me_ /* :<symbol># */,
-			void const* const other /* :<symbol># */);
+			void const* const other_ /* :<symbol># */);
 
 		static bool less_e(void const* const me_ /* :<symbol># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		static bool _less_e(void const* const me_ /* :<symbol># */,
-			void const* const other /* :<symbol># */);
+			void const* const other_ /* :<symbol># */);
 
 		static bool greater_e(void const* const me_ /* :<symbol># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		static bool _greater_e(void const* const me_ /* :<symbol># */,
-			void const* const other /* :<symbol># */);
+			void const* const other_ /* :<symbol># */);
 
 		static bool less_or_equal_e(void const* const me_ /* :<symbol># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		static bool _less_or_equal_e(void const* const me_ /* :<symbol># */,
-			void const* const other /* :<symbol># */);
+			void const* const other_ /* :<symbol># */);
 
 		static bool greater_or_equal_e(void const* const me_ /* :<symbol># */,
-			void const* const other /* :<any># */);
+			void const* const other_ /* :<any># */);
 
 		static bool _greater_or_equal_e(void const* const me_ /* :<symbol># */,
-			void const* const other /* :<symbol># */);
+			void const* const other_ /* :<symbol># */);
 
 		// symbol_a
 		static var<symbol_a> add_e(void const* const me_ /* :<symbol># */,
