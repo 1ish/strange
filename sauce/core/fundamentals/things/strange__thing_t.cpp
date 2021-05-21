@@ -31,7 +31,7 @@ namespace strange
 
 		if (error.t)
 		{
-			strange::ref(&error);
+			thing_t::_reference_e(&error);
 		}
 
 		std::cout << "copy thing\n";
@@ -41,7 +41,7 @@ namespace strange
 	{
 		if (error.t)
 		{
-			strange::rel(&error);
+			thing_t::_release_m(&error);
 		}
 
 		std::cout << "delete thing\n";
@@ -105,14 +105,14 @@ namespace strange
 		void* const copy_ /* :<any>= */)
 	{
 		new thing_t{ copy_, me_ };
-		thing_t::_clone_f(me_, copy_);
+		thing_t::_clone_e(me_, copy_);
 	}
 
 	void thing_t::_no_copy_e(void const* const me_ /* :<any># */,
 		void* const copy_ /* :<any>= */)
 	{
 		auto const ca = reinterpret_cast<any_a* const>(copy_);
-		strange::ref(ca);
+		thing_t::_reference_e(ca);
 	}
 
 	bool thing_t::is_e(void const* const me_ /* :<any># */,
@@ -136,7 +136,7 @@ namespace strange
 		bool const mp = ma->o->_pointer(ma);
 		bool const ap = aa->o->_pointer(aa);
 		thing_t::_as_e(me_, abstraction_);
-		strange::rep(aa, mp, ap);
+		thing_t::_repoint_m(aa, mp, ap);
 		return true;
 	}
 
@@ -147,9 +147,9 @@ namespace strange
 		auto const aa = reinterpret_cast<any_a* const>(abstraction_);
 		if (aa->t != ma->t)
 		{
-			strange::rel(aa);
+			thing_t::_release_m(aa);
 			*aa = *ma;
-			strange::ref(aa);
+			thing_t::_reference_e(aa);
 		}
 		else
 		{
@@ -190,11 +190,11 @@ namespace strange
 		{
 			return;
 		}
-		strange::mut(me_);
+		thing_t::mutate_m(me_);
 		auto const ma = reinterpret_cast<any_a* const>(me_);
 		if (is_something)
 		{
-			strange::rel(&(ma->t->error));
+			thing_t::_release_m(&(ma->t->error));
 			ma->t->error.t = nullptr;
 			ma->t->error.o = nullptr;
 		}
@@ -228,9 +228,9 @@ namespace strange
 		}
 		else
 		{
-			strange::mut(me_);
+			thing_t::mutate_m(me_);
 			ma->t->error = *ea;
-			strange::ref(ea);
+			thing_t::_reference_e(ea);
 		}
 	}
 
@@ -241,7 +241,7 @@ namespace strange
 			return thing_t::create_nothing_f();
 		}
 		auto const ma = reinterpret_cast<any_a const* const>(me_);
-		strange::ref(&(ma->t->error));
+		thing_t::_reference_e(&(ma->t->error));
 		return var<any_a>{ ma->t->error };
 	}
 
@@ -342,7 +342,7 @@ namespace strange
 		{
 			any_a r;
 			new thing_t{ &r };
-			thing_t::_init_f(&r);
+			thing_t::_initialise_m(&r);
 			return r;
 		}());
 		return r;
@@ -354,7 +354,7 @@ namespace strange
 		{
 			any_a r;
 			new thing_t{ &r };
-			thing_t::_init_f(&r);
+			thing_t::_initialise_m(&r);
 			auto const err = thing_t::create_f();
 			err.ref();
 			r.t->error = err;

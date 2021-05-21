@@ -110,7 +110,7 @@ namespace strange
 		void* const copy_ /* :<symbol>= */)
 	{
 		new symbol_t{ copy_, me_ };
-		symbol_t::_clone_f(me_, copy_);
+		symbol_t::_clone_e(me_, copy_);
 	}
 
 	bool symbol_t::is_e(void const* const me_ /* :<symbol># */,
@@ -139,7 +139,7 @@ namespace strange
 		bool const mp = ma->o->_pointer(ma);
 		bool const ap = aa->o->_pointer(aa);
 		thing_t::_as_e(me_, abstraction_);
-		strange::rep(aa, mp, ap);
+		thing_t::_repoint_m(aa, mp, ap);
 		return true;
 	}
 
@@ -318,7 +318,7 @@ namespace strange
 		auto const sa = reinterpret_cast<symbol_a const* const>(suffix_);
 		symbol_a r;
 		auto const rd = new symbol_t{ &r, static_cast<const char* const>(nullptr) };
-		symbol_t::_init_f(&r);
+		symbol_t::_initialise_m(&r);
 		int64_t const symbol_length = sa->o->length(sa);
 		rd->length = md->length + symbol_length;
 		rd->symbol = new char[rd->length + 1];
@@ -361,7 +361,7 @@ namespace strange
 	{
 		symbol_a r;
 		auto const rd = new symbol_t{ &r, s };
-		symbol_t::_init_f(&r);
+		symbol_t::_initialise_m(&r);
 		return var<symbol_a>{ r };
 	}
 
