@@ -54,6 +54,45 @@ namespace strange
 	{
 		return symbol_t::create_f(s);
 	}
+
+	template <typename A>
+	inline var<A> nothing()
+	{
+		auto const n = thing_t::create_nothing_f();
+		static typename A::operations const ops =
+		{
+			A::cat_e,
+			n.o->_free,
+			n.o->_copy,
+			n.o->is,
+			n.o->as,
+			n.o->_as,
+			n.o->type,
+			n.o->_set_pointer,
+			n.o->_pointer,
+			n.o->set_something,
+			n.o->something,
+			n.o->set_error,
+			n.o->error,
+			n.o->hash,
+			n.o->equal,
+			n.o->_equal,
+			n.o->not_equal,
+			n.o->_not_equal,
+			n.o->less,
+			n.o->_less,
+			n.o->greater,
+			n.o->_greater,
+			n.o->less_or_equal,
+			n.o->_less_or_equal,
+			n.o->greater_or_equal,
+			n.o->_greater_or_equal,
+		};
+		A a;
+		a.t = n.t;
+		a.o = &ops;
+		return var<A>{ a };
+	}
 }
 
 #endif

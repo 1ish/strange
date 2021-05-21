@@ -79,8 +79,9 @@ namespace strange
 
 	struct any_a
 	{
+		using operations = any_o;
 		thing_t* t;
-		any_o const* o;
+		operations const* o;
 
 		static var<symbol_a> cat_e(void const* const me_ /* :<any># */);
 	};

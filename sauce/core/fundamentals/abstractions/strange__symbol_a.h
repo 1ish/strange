@@ -19,8 +19,9 @@ namespace strange
 
 	struct symbol_a
 	{
+		using operations = symbol_o;
 		thing_t* t;
-		symbol_o const* o;
+		operations const* o;
 
 		static var<symbol_a> cat_e(void const* const me_ /* :<symbol># */);
 	};

@@ -31,6 +31,8 @@ namespace taste
 		//NO s = v;
 		//NO s = t;
 		auto value = val{ symbol_t::create_f("auto") };
+
+		auto no = nothing<symbol_a>();
 	}
 }
 

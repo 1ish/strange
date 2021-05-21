@@ -89,7 +89,7 @@ namespace strange
 			to_char_star_e,
 			length_e,
 			first_char_e,
-			last_char_e
+			last_char_e,
 		};
 		return &operations;
 	}
