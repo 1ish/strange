@@ -103,7 +103,7 @@ namespace strange
 		{
 			if (A::t->refs > 1)
 			{
-				A cp = { A::t, A::o };
+				A cp;
 				A::o->_copy(this, &cp);
 				rel();
 				A::t = cp.t;
@@ -276,7 +276,7 @@ namespace strange
 		{
 			if (A::t->refs > 1)
 			{
-				A cp = { A::t, A::o };
+				A cp;
 				A::o->_copy(this, &cp);
 				rel();
 				A::t = cp.t;
@@ -455,7 +455,7 @@ namespace strange
 		{
 			if (A::t->refs > 1)
 			{
-				A cp = { A::t, A::o };
+				A cp;
 				A::o->_copy(this, &cp);
 				rel();
 				A::t = cp.t;
