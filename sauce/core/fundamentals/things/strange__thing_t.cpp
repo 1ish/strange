@@ -110,8 +110,10 @@ namespace strange
 	void thing_t::_no_copy_e(void const* const me_ /* :<any># */,
 		void* const copy_ /* :<any>= */)
 	{
+		auto const ma = reinterpret_cast<any_a const* const>(me_);
 		auto const ca = reinterpret_cast<any_a* const>(copy_);
-		thing_t::_reference_e(ca);
+		thing_t::_reference_e(ma);
+		*ca = *ma;
 	}
 
 	bool thing_t::is_e(void const* const me_ /* :<any># */,
