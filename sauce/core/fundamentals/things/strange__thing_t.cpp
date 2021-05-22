@@ -179,7 +179,7 @@ namespace strange
 	bool thing_t::_pointer_e(void const* const me_ /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<any_a const* const>(me_);
-		return ma->o == thing_t::pointer_operations_f();
+		return ma->o->_copy == thing_t::_no_copy_e;
 	}
 
 	void thing_t::set_something_m(void* const me_ /* :<any>= */,

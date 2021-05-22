@@ -162,12 +162,6 @@ namespace strange
 		}
 	}
 
-	bool symbol_t::_pointer_e(void const* const me_ /* :<symbol># */)
-	{
-		auto const ma = reinterpret_cast<symbol_a const* const>(me_);
-		return ma->o == symbol_t::pointer_operations_f();
-	}
-
 	uint64_t symbol_t::hash_e(void const* const me_ /* :<symbol># */)
 	{
 		auto const ma = reinterpret_cast<symbol_a const* const>(me_);

@@ -37,8 +37,6 @@ namespace strange
 		static void _set_pointer_m(void* const me_ /* :<symbol>= */,
 			bool is_pointer /* :_bool_# */);
 
-		static bool _pointer_e(void const* const me_ /* :<symbol># */);
-
 		static uint64_t hash_e(void const* const me_ /* :<symbol># */);
 
 		static bool equal_e(void const* const me_ /* :<symbol># */,
