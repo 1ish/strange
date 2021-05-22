@@ -50,7 +50,7 @@ namespace strange
 			auto const ma = reinterpret_cast<any_a* const>(me_);
 			if (ma->t->refs > 1)
 			{
-				any_a cp = *ma;
+				any_a cp;
 				ma->o->_copy(ma, &cp);
 				_release_m(ma);
 				*ma = cp;
