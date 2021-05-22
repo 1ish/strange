@@ -159,7 +159,7 @@ namespace strange
 
 	var<symbol_a> thing_t::type_e(void const* const me_ /* :<any># */)
 	{
-		static auto r = strange::sym("strange::thing");
+		static auto r = sym("strange::thing");
 		return r;
 	}
 
@@ -338,7 +338,7 @@ namespace strange
 	// creators
 	var<any_a> thing_t::create_f()
 	{
-		static auto r = strange::var([]()
+		static auto r = var([]()
 		{
 			any_a r;
 			new thing_t{ &r };
@@ -350,7 +350,7 @@ namespace strange
 
 	var<any_a> thing_t::create_nothing_f()
 	{
-		static auto r = strange::var([]()
+		static auto r = var([]()
 		{
 			any_a r;
 			new thing_t{ &r };

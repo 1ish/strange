@@ -145,7 +145,7 @@ namespace strange
 
 	var<symbol_a> symbol_t::type_e(void const* const me_ /* :<symbol># */)
 	{
-		static auto r = strange::sym("strange::symbol");
+		static auto r = sym("strange::symbol");
 		return r;
 	}
 

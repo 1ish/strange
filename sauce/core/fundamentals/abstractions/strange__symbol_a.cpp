@@ -5,7 +5,7 @@ namespace strange
 {
 	var<symbol_a> symbol_a::cat_e(void const* const me_ /* :<symbol># */)
 	{
-		static auto r = strange::sym("<strange::symbol>"); //TODO cat
+		static auto r = sym("<strange::symbol>"); //TODO cat
 		return r;
 	}
 }

@@ -32,7 +32,7 @@ namespace taste
 		//NO s = t;
 		auto value = val{ symbol_t::create_f("auto") };
 
-		auto n = no<symbol_a>();
+		auto n = val<symbol_a>();
 	}
 }
 
