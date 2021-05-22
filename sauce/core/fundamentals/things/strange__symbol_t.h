@@ -94,6 +94,11 @@ namespace strange
 		static var<symbol_a> create_f(char const* const s /* :_char_star_# */);
 		static var<symbol_a> create_empty_f();
 	};
+
+	inline var<symbol_a> sym(char const* const s /* :_char_star_# */)
+	{
+		return symbol_t::create_f(s);
+	}
 }
 
 #endif

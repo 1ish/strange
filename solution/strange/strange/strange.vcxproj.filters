@@ -98,9 +98,6 @@
     <ClInclude Include="..\..\..\taste\core\fundamentals\taste__strange__thing_t.hpp">
       <Filter>Source Files\taste\core\fundamentals</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\sauce\core\utilities\strange__value_u.hpp">
-      <Filter>Header Files\sauce\core\utilities</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\utilities\strange__val_u.hpp">
       <Filter>Header Files\sauce\core\utilities</Filter>
     </ClInclude>

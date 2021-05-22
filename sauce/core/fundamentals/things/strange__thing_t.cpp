@@ -1,5 +1,4 @@
 #include "../../../strange.h"
-#include "../../utilities/strange__value_u.hpp"
 
 #include <cstdlib>
 #include <cstring>

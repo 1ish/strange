@@ -1,5 +1,5 @@
-#ifndef COM_ONEISH__STRANGE__VAL_C_H
-#define COM_ONEISH__STRANGE__VAL_C_H
+#ifndef COM_ONEISH__STRANGE__VAL_U_H
+#define COM_ONEISH__STRANGE__VAL_U_H
 
 namespace strange
 {
@@ -14,7 +14,7 @@ namespace strange
 	{
 		inline val()
 		{
-			auto const n = thing_t::create_nothing_f();
+			auto const n = A::t->create_nothing_f();
 			static typename A::operations const ops =
 			{
 				A::cat_e,
@@ -118,7 +118,7 @@ namespace strange
 	{
 		inline var()
 		{
-			auto const n = thing_t::create_nothing_f();
+			auto const n = A::t->create_nothing_f();
 			static typename A::operations const ops =
 			{
 				A::cat_e,
@@ -291,7 +291,7 @@ namespace strange
 	{
 		inline ptr()
 		{
-			auto const n = thing_t::create_nothing_f();
+			auto const n = A::t->create_nothing_f();
 			n.o->_set_pointer(&n, true);
 			static typename A::operations const ops =
 			{

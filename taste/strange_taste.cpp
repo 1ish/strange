@@ -21,7 +21,6 @@ std::ostream& std__cout = discard;
 #endif
 
 #include "../sauce/strange.h"
-#include "../sauce/core/utilities/strange__value_u.hpp"
 
 #include <iostream>
 
