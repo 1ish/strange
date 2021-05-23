@@ -32,16 +32,16 @@ namespace strange
 		{
 		}
 
-		static inline void _reference_e(any_a const* const abstraction /* :<any># */)
+		static inline void _reference_e(any_a const* const abstraction_ /* :<any># */)
 		{
-			++(abstraction->t->refs);
+			++(abstraction_->t->refs);
 		}
 
-		static inline void _release_m(any_a* const abstraction /* :<any>= */)
+		static inline void _release_m(any_a* const abstraction_ /* :<any>= */)
 		{
-			if (!--(abstraction->t->refs))
+			if (!--(abstraction_->t->refs))
 			{
-				abstraction->o->_free(abstraction);
+				abstraction_->o->_free(abstraction_);
 			}
 		}
 
@@ -58,7 +58,7 @@ namespace strange
 			}
 		}
 
-		static inline void _repoint_m(any_a* const after /* :<any>= */,
+		static inline void _repoint_m(any_a* const after_ /* :<any>= */,
 			bool pointer_before /* :_bool_# */,
 			bool pointer_after /* :_bool_# */)
 		{
@@ -66,13 +66,13 @@ namespace strange
 			{
 				if (pointer_after)
 				{
-					mutate_m(after);
-					after->o->_set_pointer(after, true);
+					mutate_m(after_);
+					after_->o->_set_pointer(after_, true);
 				}
 				else
 				{
-					after->o->_set_pointer(after, false);
-					mutate_m(after);
+					after_->o->_set_pointer(after_, false);
+					mutate_m(after_);
 				}
 			}
 		}
