@@ -6,6 +6,7 @@ namespace taste
 	void testp(void* const symbol)
 	{
 		auto const param = reinterpret_cast<symbol_a* const>(symbol);
+		param->o->first_char(param);
 	}
 
 	void test()
@@ -33,6 +34,7 @@ namespace taste
 		auto value = val{ symbol_t::create_f("auto") };
 
 		auto n = val<symbol_a>();
+		auto no = val<any_a>();
 
 		auto const creator = symbol_a::creator_f("strange", "symbol", "create_empty");
 		auto const created = creator();
