@@ -193,17 +193,18 @@ namespace strange
 		}
 		thing_t::mutate_m(me_);
 		auto const ma = reinterpret_cast<any_a* const>(me_);
+		auto const mate = &(ma->t->error);
 		if (is_something)
 		{
-			thing_t::_release_m(&(ma->t->error));
-			ma->t->error.t = nullptr;
-			ma->t->error.o = nullptr;
+			thing_t::_release_m(mate);
+			mate->t = nullptr;
+			mate->o = nullptr;
 		}
 		else
 		{
 			auto const err = thing_t::create_f();
 			err.ref();
-			ma->t->error = err;
+			*mate = err;
 		}
 	}
 
@@ -217,25 +218,32 @@ namespace strange
 		void const* const error_ /* :<any># */)
 	{
 		auto const ma = reinterpret_cast<any_a* const>(me_);
+		auto const mate = &(ma->t->error);
 		auto const ea = reinterpret_cast<any_a const* const>(error_);
-		if (ea->t == ma->t->error.t)
+		if (mate->t != ea->t)
 		{
-			return;
-		}
-		auto const nothing = thing_t::create_nothing_f();
-		if (ea->t == nothing.t) // no error
-		{
-			thing_t::set_something_m(me_, true);
+			auto const nothing = thing_t::create_nothing_f();
+			if (ea->t == nothing.t)
+			{
+				thing_t::set_something_m(me_, true);
+				return;
+			}
+			thing_t::mutate_m(me_);
+			if (mate->t)
+			{
+				thing_t::_release_m(mate);
+			}
+			*mate = *ea;
+			thing_t::_reference_e(mate);
 		}
 		else
 		{
-			thing_t::mutate_m(me_);
-			if (ma->t->error.t)
-			{
-				thing_t::_release_m(&(ma->t->error));
-			}
-			thing_t::_reference_e(ea);
-			ma->t->error = *ea;
+			mate->o = ea->o;
+		}
+		if (mate->o && mate->o->_pointer(mate))
+		{
+			mate->o->_set_pointer(mate, false);
+			thing_t::mutate_m(mate);
 		}
 	}
 

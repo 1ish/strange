@@ -187,10 +187,17 @@ namespace strange
 
 		inline var& operator=(A const& abstraction)
 		{
-			rel();
-			A::t = abstraction.t;
-			A::o = abstraction.o;
-			ref();
+			if (A::t != abstraction.t)
+			{
+				rel();
+				A::t = abstraction.t;
+				A::o = abstraction.o;
+				ref();
+			}
+			else
+			{
+				A::o = abstraction.o;
+			}
 			if (A::o->_pointer(this))
 			{
 				A::o->_set_pointer(this, false);
@@ -364,10 +371,17 @@ namespace strange
 
 		inline ptr& operator=(A const& abstraction)
 		{
-			rel();
-			A::t = abstraction.t;
-			A::o = abstraction.o;
-			ref();
+			if (A::t != abstraction.t)
+			{
+				rel();
+				A::t = abstraction.t;
+				A::o = abstraction.o;
+				ref();
+			}
+			else
+			{
+				A::o = abstraction.o;
+			}
 			if (!A::o->_pointer(this))
 			{
 				mut();
