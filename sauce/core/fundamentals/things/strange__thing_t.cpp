@@ -1,9 +1,5 @@
 #include "../../../strange.h"
 
-#include <cstdlib>
-#include <cstring>
-#include <iostream>
-#include <utility>
 #include <functional>
 
 namespace strange
@@ -15,8 +11,6 @@ namespace strange
 		auto const ma = reinterpret_cast<any_a* const>(me_);
 		ma->t = this;
 		ma->o = thing_t::operations_f();
-
-		std::cout << "new thing\n";
 	}
 
 	thing_t::thing_t(void* const me_ /* :<any>= */,
@@ -32,8 +26,6 @@ namespace strange
 		{
 			thing_t::_reference_e(&error);
 		}
-
-		std::cout << "copy thing\n";
 	}
 
 	thing_t::~thing_t()
@@ -42,8 +34,6 @@ namespace strange
 		{
 			thing_t::_release_m(&error);
 		}
-
-		std::cout << "delete thing\n";
 	}
 
 	// any_o
