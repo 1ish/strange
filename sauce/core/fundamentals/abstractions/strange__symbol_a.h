@@ -28,7 +28,7 @@ namespace strange
 		using creator = var<symbol_a>(*)();
 		static creator creator_f(char const* const scope /* :_char_star_# */,
 			char const* const thing /* :_char_star_# */,
-			char const* const name /* :_char_star_# */);
+			char const* const function /* :_char_star_# */);
 	};
 }
 

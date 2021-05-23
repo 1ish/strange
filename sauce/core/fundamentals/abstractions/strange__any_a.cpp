@@ -10,20 +10,20 @@ namespace strange
 
 	any_a::creator any_a::creator_f(char const* const scope /* :_char_star_# */,
 		char const* const thing /* :_char_star_# */,
-		char const* const name /* :_char_star_# */)
+		char const* const function /* :_char_star_# */)
 	{
 		auto const s = sym(scope);
 		auto const t = sym(thing);
-		auto const n = sym(name);
+		auto const f = sym(function);
 		if (s.o->equal(s, sym("strange")))
 		{
 			if (t.o->equal(t, sym("thing")))
 			{
-				if (n.o->equal(n, sym("create")))
+				if (f.o->equal(f, sym("create")))
 				{
 					return thing_t::create_f;
 				}
-				else if (n.o->equal(n, sym("create_nothing")))
+				else if (f.o->equal(f, sym("create_nothing")))
 				{
 					return thing_t::create_nothing_f;
 				}
