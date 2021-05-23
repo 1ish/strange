@@ -86,9 +86,9 @@ namespace strange
 	{
 		static any_o operations = []()
 		{
-			any_o operations = *thing_t::operations_f();
-			operations._copy = thing_t::_no_copy_e;
-			return operations;
+			any_o ops = *thing_t::operations_f();
+			ops._copy = thing_t::_no_copy_e;
+			return ops;
 		}();
 		return &operations;
 	}
