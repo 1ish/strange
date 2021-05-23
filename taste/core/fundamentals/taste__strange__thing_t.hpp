@@ -33,6 +33,9 @@ namespace taste
 		auto value = val{ symbol_t::create_f("auto") };
 
 		auto n = val<symbol_a>();
+
+		auto const creator = symbol_a::creator_f("strange", "symbol", "create_empty");
+		auto const created = creator();
 	}
 }
 
