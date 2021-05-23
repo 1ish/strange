@@ -1,8 +1,8 @@
 #ifndef COM_ONEISH__STRANGE__CORE_H
 #define COM_ONEISH__STRANGE__CORE_H
 
+#include <atomic>
 #include <cstdint>
-#include <cstddef>
 
 namespace strange
 {

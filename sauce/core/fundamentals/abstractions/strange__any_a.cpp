@@ -1,4 +1,5 @@
 #include "../../../strange.h"
+#include <cstring>
 
 namespace strange
 {
@@ -12,18 +13,19 @@ namespace strange
 		char const* const thing /* :_char_star_# */,
 		char const* const function /* :_char_star_# */)
 	{
-		auto const s = sym(scope);
-		auto const t = sym(thing);
-		auto const f = sym(function);
-		if (s.o->equal(s, sym("strange")))
+		static char const strange_s[] = "strange";
+		if (std::strncmp(scope, strange_s, sizeof(strange_s)) == 0)
 		{
-			if (t.o->equal(t, sym("thing")))
+			static char const thing_s[] = "thing";
+			if (std::strncmp(thing, thing_s, sizeof(thing_s)) == 0)
 			{
-				if (f.o->equal(f, sym("create")))
+				static char const create_s[] = "create";
+				if (std::strncmp(function, create_s, sizeof(create_s)) == 0)
 				{
 					return thing_t::create_f;
 				}
-				else if (f.o->equal(f, sym("create_nothing")))
+				static char const create_nothing_s[] = "create_nothing";
+				if (std::strncmp(function, create_nothing_s, sizeof(create_nothing_s)) == 0)
 				{
 					return thing_t::create_nothing_f;
 				}
