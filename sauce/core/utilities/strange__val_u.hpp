@@ -15,37 +15,15 @@ namespace strange
 		inline val()
 		{
 			auto const n = A::t->create_nothing_f();
-			static typename A::operations const ops =
+			static typename A::operations const operations = [](void const* const nops, uint64_t const size)
 			{
-				A::cat_e,
-				n.o->_free,
-				n.o->_copy,
-				n.o->is,
-				n.o->as,
-				n.o->_as,
-				n.o->type,
-				n.o->_set_pointer,
-				n.o->_pointer,
-				n.o->set_something,
-				n.o->something,
-				n.o->set_error,
-				n.o->error,
-				n.o->hash,
-				n.o->equal,
-				n.o->_equal,
-				n.o->not_equal,
-				n.o->_not_equal,
-				n.o->less,
-				n.o->_less,
-				n.o->greater,
-				n.o->_greater,
-				n.o->less_or_equal,
-				n.o->_less_or_equal,
-				n.o->greater_or_equal,
-				n.o->_greater_or_equal,
-			};
+				typename A::operations ops = {};
+				std::memcpy(&ops, nops, size);
+				ops.cat = A::cat_e;
+				return ops;
+			}(n.o, sizeof(*(n.o)));
 			A::t = n.t;
-			A::o = &ops;
+			A::o = &operations;
 			ref();
 		}
 
@@ -119,37 +97,15 @@ namespace strange
 		inline var()
 		{
 			auto const n = A::t->create_nothing_f();
-			static typename A::operations const ops =
+			static typename A::operations const operations = [](void const* const nops, uint64_t const size)
 			{
-				A::cat_e,
-				n.o->_free,
-				n.o->_copy,
-				n.o->is,
-				n.o->as,
-				n.o->_as,
-				n.o->type,
-				n.o->_set_pointer,
-				n.o->_pointer,
-				n.o->set_something,
-				n.o->something,
-				n.o->set_error,
-				n.o->error,
-				n.o->hash,
-				n.o->equal,
-				n.o->_equal,
-				n.o->not_equal,
-				n.o->_not_equal,
-				n.o->less,
-				n.o->_less,
-				n.o->greater,
-				n.o->_greater,
-				n.o->less_or_equal,
-				n.o->_less_or_equal,
-				n.o->greater_or_equal,
-				n.o->_greater_or_equal,
-			};
+				typename A::operations ops = {};
+				std::memcpy(&ops, nops, size);
+				ops.cat = A::cat_e;
+				return ops;
+			}(n.o, sizeof(*(n.o)));
 			A::t = n.t;
-			A::o = &ops;
+			A::o = &operations;
 			ref();
 		}
 
@@ -300,37 +256,15 @@ namespace strange
 		{
 			auto const n = A::t->create_nothing_f();
 			n.o->_set_pointer(&n, true);
-			static typename A::operations const ops =
+			static typename A::operations const operations = [](void const* const nops, uint64_t const size)
 			{
-				A::cat_e,
-				n.o->_free,
-				n.o->_copy,
-				n.o->is,
-				n.o->as,
-				n.o->_as,
-				n.o->type,
-				n.o->_set_pointer,
-				n.o->_pointer,
-				n.o->set_something,
-				n.o->something,
-				n.o->set_error,
-				n.o->error,
-				n.o->hash,
-				n.o->equal,
-				n.o->_equal,
-				n.o->not_equal,
-				n.o->_not_equal,
-				n.o->less,
-				n.o->_less,
-				n.o->greater,
-				n.o->_greater,
-				n.o->less_or_equal,
-				n.o->_less_or_equal,
-				n.o->greater_or_equal,
-				n.o->_greater_or_equal,
-			};
+				typename A::operations ops = {};
+				std::memcpy(&ops, nops, size);
+				ops.cat = A::cat_e;
+				return ops;
+			}(n.o, sizeof(*(n.o)));
 			A::t = n.t;
-			A::o = &ops;
+			A::o = &operations;
 			ref();
 			mut();
 		}

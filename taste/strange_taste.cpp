@@ -8,9 +8,9 @@
 
 namespace
 {
-	char const* const taste_dir = "../../strange/taste/";
-	char const* const abstractions_dir = "../../strange/sauce/";
-	char const* const generate_cpp_dir = "../../strange/sauce/";
+//	char const* const taste_dir = "../../strange/taste/";
+//	char const* const abstractions_dir = "../../strange/sauce/";
+//	char const* const generate_cpp_dir = "../../strange/sauce/";
 }
 
 #ifdef STRANGE_TASTE_DEBUG

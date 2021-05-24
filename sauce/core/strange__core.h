@@ -3,6 +3,7 @@
 
 #include <atomic>
 #include <cstdint>
+#include <cstring>
 
 namespace strange
 {
