@@ -26,9 +26,9 @@ namespace strange
 		static var<symbol_a> cat_e(void const* const me_ /* :<symbol># */);
 
 		using creator = var<symbol_a>(*)();
-		static creator creator_f(char const* const scope /* :_char_star_# */,
-			char const* const thing /* :_char_star_# */,
-			char const* const function /* :_char_star_# */);
+		static creator creator_f(void const* const scope_ /* :<symbol># */,
+			void const* const thing_ /* :<symbol># */,
+			void const* const function_ /* :<symbol># */);
 	};
 }
 

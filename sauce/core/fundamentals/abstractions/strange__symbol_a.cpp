@@ -1,5 +1,4 @@
 #include "../../../strange.h"
-#include <cstring>
 
 namespace strange
 {
@@ -9,18 +8,21 @@ namespace strange
 		return r;
 	}
 
-	symbol_a::creator symbol_a::creator_f(char const* const scope /* :_char_star_# */,
-		char const* const thing /* :_char_star_# */,
-		char const* const function /* :_char_star_# */)
+	symbol_a::creator symbol_a::creator_f(void const* const scope_ /* :<symbol># */,
+		void const* const thing_ /* :<symbol># */,
+		void const* const function_ /* :<symbol># */)
 	{
-		static char const strange_s[] = "strange";
-		if (std::strncmp(scope, strange_s, sizeof(strange_s)) == 0)
+		auto const sa = reinterpret_cast<symbol_a const* const>(scope_);
+		auto const ta = reinterpret_cast<symbol_a const* const>(thing_);
+		auto const fa = reinterpret_cast<symbol_a const* const>(function_);
+		static auto const strange_s = sym("strange");
+		if (sa->o->equal(sa, strange_s))
 		{
-			static char const symbol_s[] = "symbol";
-			if (std::strncmp(thing, symbol_s, sizeof(symbol_s)) == 0)
+			static auto const symbol_s = sym("symbol");
+			if (ta->o->equal(ta, symbol_s))
 			{
-				static char const create_empty_s[] = "create_empty";
-				if (std::strncmp(function, create_empty_s, sizeof(create_empty_s)) == 0)
+				static auto const create_empty_s = sym("create_empty");
+				if (fa->o->equal(fa, create_empty_s))
 				{
 					return symbol_t::create_empty_f;
 				}
