@@ -136,10 +136,10 @@ namespace strange
 	bool symbol_t::equal_e(con<> const& me_ /* :<symbol># */,
 		con<> const& other_ /* :<any># */)
 	{
-		auto const os = other_.dynamic<con<symbol_a>>();
+		auto const os = other_.dyn<con<symbol_a>>();
 		if (thing_t::something_e(os))
 		{
-			return symbol_t::_equal_e(me_.reference<con<symbol_a>>(), os);
+			return symbol_t::_equal_e(me_.ref<con<symbol_a>>(), os);
 		}
 		return thing_t::equal_e(me_, other_);
 	}
@@ -147,10 +147,10 @@ namespace strange
 	bool symbol_t::not_equal_e(con<> const& me_ /* :<symbol># */,
 		con<> const& other_ /* :<any># */)
 	{
-		auto const os = other_.dynamic<con<symbol_a>>();
+		auto const os = other_.dyn<con<symbol_a>>();
 		if (thing_t::something_e(os))
 		{
-			return symbol_t::_not_equal_e(me_.reference<con<symbol_a>>(), os);
+			return symbol_t::_not_equal_e(me_.ref<con<symbol_a>>(), os);
 		}
 		return thing_t::not_equal_e(me_, other_);
 	}
@@ -158,10 +158,10 @@ namespace strange
 	bool symbol_t::less_e(con<> const& me_ /* :<symbol># */,
 		con<> const& other_ /* :<any># */)
 	{
-		auto const os = other_.dynamic<con<symbol_a>>();
+		auto const os = other_.dyn<con<symbol_a>>();
 		if (thing_t::something_e(os))
 		{
-			return symbol_t::_less_e(me_.reference<con<symbol_a>>(), os);
+			return symbol_t::_less_e(me_.ref<con<symbol_a>>(), os);
 		}
 		return thing_t::less_e(me_, other_);
 	}
@@ -169,10 +169,10 @@ namespace strange
 	bool symbol_t::greater_e(con<> const& me_ /* :<symbol># */,
 		con<> const& other_ /* :<any># */)
 	{
-		auto const os = other_.dynamic<con<symbol_a>>();
+		auto const os = other_.dyn<con<symbol_a>>();
 		if (thing_t::something_e(os))
 		{
-			return symbol_t::_greater_e(me_.reference<con<symbol_a>>(), os);
+			return symbol_t::_greater_e(me_.ref<con<symbol_a>>(), os);
 		}
 		return thing_t::greater_e(me_, other_);
 	}
@@ -180,10 +180,10 @@ namespace strange
 	bool symbol_t::less_or_equal_e(con<> const& me_ /* :<symbol># */,
 		con<> const& other_ /* :<any># */)
 	{
-		auto const os = other_.dynamic<con<symbol_a>>();
+		auto const os = other_.dyn<con<symbol_a>>();
 		if (thing_t::something_e(os))
 		{
-			return symbol_t::_less_or_equal_e(me_.reference<con<symbol_a>>(), os);
+			return symbol_t::_less_or_equal_e(me_.ref<con<symbol_a>>(), os);
 		}
 		return thing_t::less_or_equal_e(me_, other_);
 	}
@@ -191,10 +191,10 @@ namespace strange
 	bool symbol_t::greater_or_equal_e(con<> const& me_ /* :<symbol># */,
 		con<> const& other_ /* :<any># */)
 	{
-		auto const os = other_.dynamic<con<symbol_a>>();
+		auto const os = other_.dyn<con<symbol_a>>();
 		if (thing_t::something_e(os))
 		{
-			return symbol_t::_greater_or_equal_e(me_.reference<con<symbol_a>>(), os);
+			return symbol_t::_greater_or_equal_e(me_.ref<con<symbol_a>>(), os);
 		}
 		return thing_t::greater_or_equal_e(me_, other_);
 	}
