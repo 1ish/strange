@@ -181,28 +181,7 @@ namespace strange
 		{
 			rel();
 		}
-/*
-		inline var const& operator=(A const& abstraction)
-		{
-			if (A::t != abstraction.t)
-			{
-				rel();
-				A::t = abstraction.t;
-				A::o = abstraction.o;
-				ref();
-			}
-			else
-			{
-				A::o = abstraction.o;
-			}
-			if (A::o->_pointer(reinterpret_cast<val<> const&>(*this)))
-			{
-				A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
-				mut();
-			}
-			return *this;
-		}
-*/
+
 		inline var const& operator=(val<A> const& original)
 		{
 			if (A::t != original.t)
@@ -409,27 +388,7 @@ namespace strange
 		{
 			rel();
 		}
-/*
-		inline ptr const& operator=(A const& abstraction)
-		{
-			if (A::t != abstraction.t)
-			{
-				rel();
-				A::t = abstraction.t;
-				A::o = abstraction.o;
-				ref();
-			}
-			else
-			{
-				A::o = abstraction.o;
-			}
-			if (!A::o->_pointer(reinterpret_cast<val<> const&>(*this)))
-			{
-				mut();
-			}
-			return *this;
-		}
-*/
+
 		inline ptr const& operator=(val<A> const& original)
 		{
 			if (A::t != original.t)

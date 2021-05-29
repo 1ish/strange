@@ -204,41 +204,40 @@ namespace strange
 		val<symbol_a> const& suffix_ /* :<symbol># */)
 	{
 		// can assume suffix_ implements symbol_a, but not that is has a symbol_t
-		auto const mt = static_cast<symbol_t* const>(me_.t);
-		auto const sa = reinterpret_cast<val<symbol_a> const&>(suffix_);
+		auto const mt = static_cast<symbol_t const* const>(me_.t);
 		any_a r;
 		auto const rt = new symbol_t{ r, nullptr };
 		symbol_t::_initialise_m(r);
-		int64_t const suffix_length = sa.o->length(sa);
+		int64_t const suffix_length = suffix_.o->length(suffix_);
 		rt->length = mt->length + suffix_length;
 		rt->symbol = new char[rt->length + 1];
 		std::memcpy(rt->symbol, mt->symbol, mt->length);
-		std::memcpy(rt->symbol + mt->length, sa.o->to_char_star(sa), suffix_length + 1);
+		std::memcpy(rt->symbol + mt->length, suffix_.o->to_char_star(suffix_), suffix_length + 1);
 		rt->hash = std::hash<std::string_view>{}(std::string_view{ rt->symbol, static_cast<uint64_t>(rt->length) });
 		return var<symbol_a>{ reinterpret_cast<symbol_a&>(r) };
 	}
 
 	char const* symbol_t::to_char_star_e(val<symbol_a> const& me_ /* :<symbol># */)
 	{
-		auto const mt = static_cast<symbol_t* const>(me_.t);
+		auto const mt = static_cast<symbol_t const* const>(me_.t);
 		return mt->symbol;
 	}
 
 	int64_t symbol_t::length_e(val<symbol_a> const& me_ /* :<symbol># */)
 	{
-		auto const mt = static_cast<symbol_t* const>(me_.t);
+		auto const mt = static_cast<symbol_t const* const>(me_.t);
 		return mt->length;
 	}
 
 	char symbol_t::first_char_e(val<symbol_a> const& me_ /* :<symbol># */)
 	{
-		auto const mt = static_cast<symbol_t* const>(me_.t);
+		auto const mt = static_cast<symbol_t const* const>(me_.t);
 		return (mt->symbol)[0];
 	}
 
 	char symbol_t::last_char_e(val<symbol_a> const& me_ /* :<symbol># */)
 	{
-		auto const mt = static_cast<symbol_t* const>(me_.t);
+		auto const mt = static_cast<symbol_t const* const>(me_.t);
 		return (mt->symbol)[std::max(int64_t{ 0 }, mt->length - 1)];
 	}
 
