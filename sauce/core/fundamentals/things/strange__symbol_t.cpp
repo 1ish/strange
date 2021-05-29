@@ -1,21 +1,18 @@
 #include "../../../strange.h"
 
-#include <cstring>
-#include <algorithm>
 #include <functional>
 #include <string_view>
 
 namespace strange
 {
-	symbol_t::symbol_t(void* const me_ /* :<symbol>= */,
+	symbol_t::symbol_t(any_a& me_ /* :<symbol>= */,
 		char const* const s /* :_char_star_# */)
 	: thing_t{ me_ }
 	, symbol{ nullptr }
 	, length{ 0 }
 	, hash{ 0 }
 	{
-		auto const ma = reinterpret_cast<symbol_a* const>(me_);
-		ma->o = symbol_t::operations_f();
+		me_.o = symbol_t::operations_f();
 
 		if (s)
 		{
@@ -26,18 +23,16 @@ namespace strange
 		}
 	}
 
-	symbol_t::symbol_t(void* const me_ /* :<symbol>= */,
-		void const* const original_ /* :<symbol># */)
+	symbol_t::symbol_t(any_a& me_ /* :<symbol>= */,
+		any_a const& original_ /* :<symbol># */)
 	: thing_t{ me_, original_ }
 	, symbol{ nullptr }
 	, length{ 0 }
 	, hash{ 0 }
 	{
-		auto const ma = reinterpret_cast<symbol_a* const>(me_);
-		ma->o = symbol_t::operations_f();
+		me_.o = symbol_t::operations_f();
 
-		auto const oa = reinterpret_cast<symbol_a const* const>(original_);
-		auto const ot = static_cast<symbol_t const* const>(oa->t);
+		auto const ot = static_cast<symbol_t const* const>(original_.t);
 		length = ot->length;
 		symbol = new char[length + 1];
 		std::memcpy(symbol, ot->symbol, length + 1);
@@ -61,7 +56,6 @@ namespace strange
 				_copy_e,
 				is_e,
 				as_e,
-				_as_e,
 				type_e,
 				_set_pointer_m,
 				_pointer_e,
@@ -71,17 +65,11 @@ namespace strange
 				error_e,
 				hash_e,
 				equal_e,
-				_equal_e,
 				not_equal_e,
-				_not_equal_e,
 				less_e,
-				_less_e,
 				greater_e,
-				_greater_e,
 				less_or_equal_e,
-				_less_or_equal_e,
 				greater_or_equal_e,
-				_greater_or_equal_e,
 			},
 			// symbol_a
 			add_e,
@@ -105,257 +93,162 @@ namespace strange
 	}
 
 	// any_a
-	void symbol_t::_copy_e(void const* const me_ /* :<symbol># */,
-		void* const copy_ /* :<symbol>= */)
+	void symbol_t::_copy_e(any_a const& me_ /* :<symbol># */,
+		any_a& copy_ /* :<symbol>= */)
 	{
 		new symbol_t{ copy_, me_ };
 		symbol_t::_clone_e(me_, copy_);
 	}
 
-	bool symbol_t::is_e(void const* const me_ /* :<symbol># */,
-		void const* const abstraction_ /* :<any># */)
+	bool symbol_t::is_e(val<> const& me_ /* :<symbol># */,
+		val<> const& abstraction_ /* :<any># */)
 	{
-		auto const aa = reinterpret_cast<symbol_a const* const>(abstraction_);
-		auto const abc = aa->o->cat(aa).t;
 		// abstraction_.cat in me_.cats
-		static thing_t* mats[] =
-		{
-			any_a::cat_e(me_).t,
-			symbol_a::cat_e(me_).t,
-		};
-		return abc == mats[0] || abc == mats[1];
+		auto const abc = abstraction_.o->cat;
+		return abc == any_a::cat_e || abc == symbol_a::cat_e;
 	}
 
-	bool symbol_t::as_e(void const* const me_ /* :<symbol># */,
-		void* const abstraction_ /* :<any>= */)
-	{
-		if (!symbol_t::is_e(me_, abstraction_))
-		{
-			return false;
-		}
-		auto const ma = reinterpret_cast<any_a const* const>(me_);
-		auto const aa = reinterpret_cast<any_a* const>(abstraction_);
-		bool const mp = ma->o->_pointer(ma);
-		bool const ap = aa->o->_pointer(aa);
-		thing_t::_as_e(me_, abstraction_);
-		thing_t::_repoint_m(aa, mp, ap);
-		return true;
-	}
-
-	var<symbol_a> symbol_t::type_e(void const* const me_ /* :<symbol># */)
+	var<symbol_a> symbol_t::type_e(val<> const& me_ /* :<symbol># */)
 	{
 		static auto r = sym("strange::symbol");
 		return r;
 	}
 
-	void symbol_t::_set_pointer_m(void* const me_ /* :<symbol>= */,
+	void symbol_t::_set_pointer_m(var<> const& me_ /* :<symbol>= */,
 		bool is_pointer /* :_bool_# */)
 	{
-		auto const ma = reinterpret_cast<symbol_a* const>(me_);
 		if (is_pointer)
 		{
-			ma->o = symbol_t::pointer_operations_f();
+			me_.o = symbol_t::pointer_operations_f();
 		}
 		else
 		{
-			ma->o = symbol_t::operations_f();
+			me_.o = symbol_t::operations_f();
 		}
 	}
 
-	uint64_t symbol_t::hash_e(void const* const me_ /* :<symbol># */)
+	uint64_t symbol_t::hash_e(val<> const& me_ /* :<symbol># */)
 	{
-		auto const ma = reinterpret_cast<symbol_a const* const>(me_);
-		auto const mt = static_cast<symbol_t const* const>(ma->t);
+		auto const mt = static_cast<symbol_t const* const>(me_.t);
 		return mt->hash;
 	}
 
-	bool symbol_t::equal_e(void const* const me_ /* :<symbol># */,
-		void const* const other_ /* :<any># */)
+	bool symbol_t::equal_e(val<> const& me_ /* :<symbol># */,
+		val<> const& other_ /* :<any># */)
 	{
-		auto const oa = reinterpret_cast<any_a const* const>(other_);
-		val<symbol_a> os;
-		if (oa->o->as(oa, &os))
+		var<symbol_a> os;
+		if (other_.o->as(other_, os))
 		{
-			return symbol_t::_equal_e(me_, &os);
+			return symbol_t::_equal_e(reinterpret_cast<val<symbol_a> const&>(me_), os);
 		}
 		return thing_t::equal_e(me_, other_);
 	}
 
-	bool symbol_t::_equal_e(void const* const me_ /* :<symbol># */,
-		void const* const other_ /* :<symbol># */)
+	bool symbol_t::not_equal_e(val<> const& me_ /* :<symbol># */,
+		val<> const& other_ /* :<any># */)
 	{
-		auto const ma = reinterpret_cast<symbol_a const* const>(me_);
-		auto const mt = static_cast<symbol_t const* const>(ma->t);
-		auto const os = reinterpret_cast<symbol_a const* const>(other_);
-		return std::strncmp(mt->symbol, os->o->to_char_star(os),
-			std::max(mt->length, os->o->length(os))) == 0;
-	}
-
-	bool symbol_t::not_equal_e(void const* const me_ /* :<symbol># */,
-		void const* const other_ /* :<any># */)
-	{
-		auto const oa = reinterpret_cast<any_a const* const>(other_);
-		val<symbol_a> os;
-		if (oa->o->as(oa, &os))
+		var<symbol_a> os;
+		if (other_.o->as(other_, os))
 		{
-			return symbol_t::_not_equal_e(me_, &os);
+			return symbol_t::_not_equal_e(reinterpret_cast<val<symbol_a> const&>(me_), os);
 		}
 		return thing_t::not_equal_e(me_, other_);
 	}
 
-	bool symbol_t::_not_equal_e(void const* const me_ /* :<symbol># */,
-		void const* const other_ /* :<symbol># */)
+	bool symbol_t::less_e(val<> const& me_ /* :<symbol># */,
+		val<> const& other_ /* :<any># */)
 	{
-		auto const ma = reinterpret_cast<symbol_a const* const>(me_);
-		auto const mt = static_cast<symbol_t const* const>(ma->t);
-		auto const os = reinterpret_cast<symbol_a const* const>(other_);
-		return std::strncmp(mt->symbol, os->o->to_char_star(os),
-			std::max(mt->length, os->o->length(os))) != 0;
-	}
-
-	bool symbol_t::less_e(void const* const me_ /* :<symbol># */,
-		void const* const other_ /* :<any># */)
-	{
-		auto const oa = reinterpret_cast<any_a const* const>(other_);
-		val<symbol_a> os;
-		if (oa->o->as(oa, &os))
+		var<symbol_a> os;
+		if (other_.o->as(other_, os))
 		{
-			return symbol_t::_less_e(me_, &os);
+			return symbol_t::_less_e(reinterpret_cast<val<symbol_a> const&>(me_), os);
 		}
 		return thing_t::less_e(me_, other_);
 	}
 
-	bool symbol_t::_less_e(void const* const me_ /* :<symbol># */,
-		void const* const other_ /* :<symbol># */)
+	bool symbol_t::greater_e(val<> const& me_ /* :<symbol># */,
+		val<> const& other_ /* :<any># */)
 	{
-		auto const ma = reinterpret_cast<symbol_a const* const>(me_);
-		auto const mt = static_cast<symbol_t const* const>(ma->t);
-		auto const os = reinterpret_cast<symbol_a const* const>(other_);
-		return std::strncmp(mt->symbol, os->o->to_char_star(os),
-			std::max(mt->length, os->o->length(os))) < 0;
-	}
-
-	bool symbol_t::greater_e(void const* const me_ /* :<symbol># */,
-		void const* const other_ /* :<any># */)
-	{
-		auto const oa = reinterpret_cast<any_a const* const>(other_);
-		val<symbol_a> os;
-		if (oa->o->as(oa, &os))
+		var<symbol_a> os;
+		if (other_.o->as(other_, os))
 		{
-			return symbol_t::_greater_e(me_, &os);
+			return symbol_t::_greater_e(reinterpret_cast<val<symbol_a> const&>(me_), os);
 		}
 		return thing_t::greater_e(me_, other_);
 	}
 
-	bool symbol_t::_greater_e(void const* const me_ /* :<symbol># */,
-		void const* const other_ /* :<symbol># */)
+	bool symbol_t::less_or_equal_e(val<> const& me_ /* :<symbol># */,
+		val<> const& other_ /* :<any># */)
 	{
-		auto const ma = reinterpret_cast<symbol_a const* const>(me_);
-		auto const mt = static_cast<symbol_t const* const>(ma->t);
-		auto const os = reinterpret_cast<symbol_a const* const>(other_);
-		return std::strncmp(mt->symbol, os->o->to_char_star(os),
-			std::max(mt->length, os->o->length(os))) > 0;
-	}
-
-	bool symbol_t::less_or_equal_e(void const* const me_ /* :<symbol># */,
-		void const* const other_ /* :<any># */)
-	{
-		auto const oa = reinterpret_cast<any_a const* const>(other_);
-		val<symbol_a> os;
-		if (oa->o->as(oa, &os))
+		var<symbol_a> os;
+		if (other_.o->as(other_, os))
 		{
-			return symbol_t::_less_or_equal_e(me_, &os);
+			return symbol_t::_less_or_equal_e(reinterpret_cast<val<symbol_a> const&>(me_), os);
 		}
 		return thing_t::less_or_equal_e(me_, other_);
 	}
 
-	bool symbol_t::_less_or_equal_e(void const* const me_ /* :<symbol># */,
-		void const* const other_ /* :<symbol># */)
+	bool symbol_t::greater_or_equal_e(val<> const& me_ /* :<symbol># */,
+		val<> const& other_ /* :<any># */)
 	{
-		auto const ma = reinterpret_cast<symbol_a const* const>(me_);
-		auto const mt = static_cast<symbol_t const* const>(ma->t);
-		auto const os = reinterpret_cast<symbol_a const* const>(other_);
-		return std::strncmp(mt->symbol, os->o->to_char_star(os),
-			std::max(mt->length, os->o->length(os))) <= 0;
-	}
-
-	bool symbol_t::greater_or_equal_e(void const* const me_ /* :<symbol># */,
-		void const* const other_ /* :<any># */)
-	{
-		auto const oa = reinterpret_cast<any_a const* const>(other_);
-		val<symbol_a> os;
-		if (oa->o->as(oa, &os))
+		var<symbol_a> os;
+		if (other_.o->as(other_, os))
 		{
-			return symbol_t::_greater_or_equal_e(me_, &os);
+			return symbol_t::_greater_or_equal_e(reinterpret_cast<val<symbol_a> const&>(me_), os);
 		}
 		return thing_t::greater_or_equal_e(me_, other_);
 	}
 
-	bool symbol_t::_greater_or_equal_e(void const* const me_ /* :<symbol># */,
-		void const* const other_ /* :<symbol># */)
-	{
-		auto const ma = reinterpret_cast<symbol_a const* const>(me_);
-		auto const mt = static_cast<symbol_t const* const>(ma->t);
-		auto const os = reinterpret_cast<symbol_a const* const>(other_);
-		return std::strncmp(mt->symbol, os->o->to_char_star(os),
-			std::max(mt->length, os->o->length(os))) >= 0;
-	}
-
 	// symbol_a
-	var<symbol_a> symbol_t::add_e(void const* const me_ /* :<symbol># */,
-		void const* const suffix_ /* :<symbol># */)
+	var<symbol_a> symbol_t::add_e(val<symbol_a> const& me_ /* :<symbol># */,
+		val<symbol_a> const& suffix_ /* :<symbol># */)
 	{
 		// can assume suffix_ implements symbol_a, but not that is has a symbol_t
-		auto const ma = reinterpret_cast<symbol_a const* const>(me_);
-		auto const mt = static_cast<symbol_t* const>(ma->t);
-		auto const sa = reinterpret_cast<symbol_a const* const>(suffix_);
-		symbol_a r;
-		auto const rt = new symbol_t{ &r, static_cast<const char* const>(nullptr) };
-		symbol_t::_initialise_m(&r);
-		int64_t const suffix_length = sa->o->length(sa);
+		auto const mt = static_cast<symbol_t* const>(me_.t);
+		auto const sa = reinterpret_cast<val<symbol_a> const&>(suffix_);
+		any_a r;
+		auto const rt = new symbol_t{ r, nullptr };
+		symbol_t::_initialise_m(r);
+		int64_t const suffix_length = sa.o->length(sa);
 		rt->length = mt->length + suffix_length;
 		rt->symbol = new char[rt->length + 1];
 		std::memcpy(rt->symbol, mt->symbol, mt->length);
-		std::memcpy(rt->symbol + mt->length, sa->o->to_char_star(sa), suffix_length + 1);
+		std::memcpy(rt->symbol + mt->length, sa.o->to_char_star(sa), suffix_length + 1);
 		rt->hash = std::hash<std::string_view>{}(std::string_view{ rt->symbol, static_cast<uint64_t>(rt->length) });
-		return var<symbol_a>{ r };
+		return var<symbol_a>{ reinterpret_cast<symbol_a&>(r) };
 	}
 
-	char const* symbol_t::to_char_star_e(void const* const me_ /* :<symbol># */)
+	char const* symbol_t::to_char_star_e(val<symbol_a> const& me_ /* :<symbol># */)
 	{
-		auto const ma = reinterpret_cast<symbol_a const* const>(me_);
-		auto const mt = static_cast<symbol_t* const>(ma->t);
+		auto const mt = static_cast<symbol_t* const>(me_.t);
 		return mt->symbol;
 	}
 
-	int64_t symbol_t::length_e(void const* const me_ /* :<symbol># */)
+	int64_t symbol_t::length_e(val<symbol_a> const& me_ /* :<symbol># */)
 	{
-		auto const ma = reinterpret_cast<symbol_a const* const>(me_);
-		auto const mt = static_cast<symbol_t* const>(ma->t);
+		auto const mt = static_cast<symbol_t* const>(me_.t);
 		return mt->length;
 	}
 
-	char symbol_t::first_char_e(void const* const me_ /* :<symbol># */)
+	char symbol_t::first_char_e(val<symbol_a> const& me_ /* :<symbol># */)
 	{
-		auto const ma = reinterpret_cast<symbol_a const* const>(me_);
-		auto const mt = static_cast<symbol_t* const>(ma->t);
+		auto const mt = static_cast<symbol_t* const>(me_.t);
 		return (mt->symbol)[0];
 	}
 
-	char symbol_t::last_char_e(void const* const me_ /* :<symbol># */)
+	char symbol_t::last_char_e(val<symbol_a> const& me_ /* :<symbol># */)
 	{
-		auto const ma = reinterpret_cast<symbol_a const* const>(me_);
-		auto const mt = static_cast<symbol_t* const>(ma->t);
+		auto const mt = static_cast<symbol_t* const>(me_.t);
 		return (mt->symbol)[std::max(int64_t{ 0 }, mt->length - 1)];
 	}
 
 	// creators
 	var<symbol_a> symbol_t::create_f(char const* const s /* :_char_star_# */)
 	{
-		symbol_a r;
-		new symbol_t{ &r, s };
-		symbol_t::_initialise_m(&r);
-		return var<symbol_a>{ r };
+		any_a r;
+		new symbol_t{ r, s };
+		symbol_t::_initialise_m(r);
+		return var<symbol_a>{ reinterpret_cast<symbol_a&>(r) };
 	}
 
 	var<symbol_a> symbol_t::create_empty_f()

@@ -5,30 +5,31 @@ namespace strange
 {
 	struct symbol_o : any_o
 	{
-		var<symbol_a> (*add)(void const* const me_ /* :<symbol># */,
-			void const* const suffix_ /* :<symbol># */);
+		var<symbol_a> (*add)(val<symbol_a> const& me_,
+			val<symbol_a> const& suffix_);
 
-		char const* (*to_char_star)(void const* const me_ /* :<symbol># */);
+		char const* (*to_char_star)(val<symbol_a> const& me_);
 
-		int64_t (*length)(void const* const me_ /* :<symbol># */);
+		int64_t (*length)(val<symbol_a> const& me_);
 
-		char (*first_char)(void const* const me_ /* :<symbol># */);
+		char (*first_char)(val<symbol_a> const& me_);
 
-		char (*last_char)(void const* const me_ /* :<symbol># */);
+		char (*last_char)(val<symbol_a> const& me_);
 	};
 
 	struct symbol_a
 	{
 		using operations = symbol_o;
-		thing_t* t;
-		operations const* o;
-
-		static var<symbol_a> cat_e(void const* const me_ /* :<symbol># */);
-
 		using creator = var<symbol_a>(*)();
-		static creator creator_f(void const* const scope_ /* :<symbol># */,
-			void const* const thing_ /* :<symbol># */,
-			void const* const function_ /* :<symbol># */);
+
+		mutable thing_t* t;
+		mutable operations const* o;
+
+		static var<symbol_a> cat_e(val<> const& me_); //TODO cat
+
+		static creator creator_f(val<symbol_a> const& scope_,
+			val<symbol_a> const& thing_,
+			val<symbol_a> const& function_);
 	};
 }
 

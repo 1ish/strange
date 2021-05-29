@@ -5,90 +5,70 @@ namespace strange
 {
 	struct any_o
 	{
-		var<symbol_a> (*cat)(void const* const me_ /* :<any># */);
+		var<symbol_a> (*cat)(val<> const& me_); //TODO cat
 
-		void (*_free)(void* const me_ /* :<any># */);
+		void (*_free)(any_a& me_);
 
-		void (*_copy)(void const* const me_ /* :<any># */,
-			void* const copy_ /* :<any>= */);
+		void (*_copy)(any_a const& me_,
+			any_a& copy_);
 
-		bool (*is)(void const* const me_ /* :<any># */,
-			void const* const abstraction_ /* :<any># */);
+		bool (*is)(val<> const& me_,
+			val<> const& abstraction_);
 
-		bool (*as)(void const* const me_ /* :<any># */,
-			void* const abstraction_ /* :<any>= */);
+		bool (*as)(val<> const& me_,
+			var<> const& abstraction_);
 
-		void (*_as)(void const* const me_ /* :<any># */,
-			void* const abstraction_ /* :<any>= */);
+		var<symbol_a> (*type)(val<> const& me_);
 
-		var<symbol_a> (*type)(void const* const me_ /* :<any># */);
+		void (*_set_pointer)(var<> const& me_,
+			bool is_pointer);
 
-		void (*_set_pointer)(void* const me_ /* :<any>= */,
-			bool is_pointer /* :_bool_# */ );
+		bool (*_pointer)(val<> const& me_);
 
-		bool (*_pointer)(void const* const me_ /* :<any># */);
+		void (*set_something)(var<> const& me_,
+			bool is_something);
 
-		void (*set_something)(void* const me_ /* :<any>= */,
-			bool is_something /* :_bool_# */);
+		bool (*something)(val<> const& me_);
 
-		bool (*something)(void const* const me_ /* :<any># */);
+		void (*set_error)(var<> const& me_,
+			val<> const& error_);
 
-		void (*set_error)(void* const me_ /* :<any>= */,
-			void const* const error_ /* :<any># */);
+		var<> (*error)(val<> const& me_);
 
-		var<any_a> (*error)(void const* const me_ /* :<any># */);
+		uint64_t (*hash)(val<> const& me_);
 
-		uint64_t (*hash)(void const* const me_ /* :<any># */);
+		bool (*equal)(val<> const& me_,
+			val<> const& other_);
 
-		bool (*equal)(void const* const me_ /* :<any># */,
-			void const* const other_ /* :<any># */);
+		bool (*not_equal)(val<> const& me_,
+			val<> const& other_);
 
-		bool (*_equal)(void const* const me_ /* :<any># */,
-			void const* const other_ /* :<any># */);
+		bool (*less)(val<> const& me_,
+			val<> const& other_);
 
-		bool (*not_equal)(void const* const me_ /* :<any># */,
-			void const* const other_ /* :<any># */);
+		bool (*greater)(val<> const& me_,
+			val<> const& other_);
 
-		bool (*_not_equal)(void const* const me_ /* :<any># */,
-			void const* const other_ /* :<any># */);
+		bool (*less_or_equal)(val<> const& me_,
+			val<> const& other_);
 
-		bool (*less)(void const* const me_ /* :<any># */,
-			void const* const other_ /* :<any># */);
-
-		bool (*_less)(void const* const me_ /* :<any># */,
-			void const* const other_ /* :<any># */);
-
-		bool (*greater)(void const* const me_ /* :<any># */,
-			void const* const other_ /* :<any># */);
-
-		bool (*_greater)(void const* const me_ /* :<any># */,
-			void const* const other_ /* :<any># */);
-
-		bool (*less_or_equal)(void const* const me_ /* :<any># */,
-			void const* const other_ /* :<any># */);
-
-		bool (*_less_or_equal)(void const* const me_ /* :<any># */,
-			void const* const other_ /* :<any># */);
-
-		bool (*greater_or_equal)(void const* const me_ /* :<any># */,
-			void const* const other_ /* :<any># */);
-
-		bool (*_greater_or_equal)(void const* const me_ /* :<any># */,
-			void const* const other_ /* :<any># */);
+		bool (*greater_or_equal)(val<> const& me_,
+			val<> const& other_);
 	};
 
 	struct any_a
 	{
 		using operations = any_o;
-		thing_t* t;
-		operations const* o;
+		using creator = var<>(*)();
 
-		static var<symbol_a> cat_e(void const* const me_ /* :<any># */);
+		mutable thing_t* t;
+		mutable operations const* o;
 
-		using creator = var<any_a>(*)();
-		static creator creator_f(void const* const scope_ /* :<symbol># */,
-			void const* const thing_ /* :<symbol># */,
-			void const* const function_ /* :<symbol># */);
+		static var<symbol_a> cat_e(val<> const& me_); //TODO cat
+
+		static creator creator_f(val<symbol_a> const& scope_,
+			val<symbol_a> const& thing_,
+			val<symbol_a> const& function_);
 	};
 }
 

@@ -2,29 +2,26 @@
 
 namespace strange
 {
-	var<symbol_a> cat_a::cat_e(void const* const me_ /* :<cat># */)
+	var<symbol_a> cat_a::cat_e(val<> const& me_)
 	{
 		static auto r = sym("<strange::cat>"); //TODO cat
 		return r;
 	}
 
-	cat_a::creator cat_a::creator_f(void const* const scope_ /* :<symbol># */,
-		void const* const thing_ /* :<symbol># */,
-		void const* const function_ /* :<symbol># */)
+	cat_a::creator cat_a::creator_f(val<symbol_a> const& scope_,
+		val<symbol_a> const& thing_,
+		val<symbol_a> const& function_)
 	{
-		auto const sa = reinterpret_cast<symbol_a const* const>(scope_);
-		auto const ta = reinterpret_cast<symbol_a const* const>(thing_);
-		auto const fa = reinterpret_cast<symbol_a const* const>(function_);
 		static auto const strange_s = sym("strange");
-		if (sa->o->equal(sa, strange_s))
+		if (scope_.o->equal(scope_, strange_s))
 		{
 			static auto const cat_s = sym("cat");
-			if (ta->o->equal(ta, cat_s))
+			if (thing_.o->equal(thing_, cat_s))
 			{
 				static auto const create_s = sym("create");
-				if (fa->o->equal(fa, create_s))
+				if (function_.o->equal(function_, create_s))
 				{
-					// return cat_t::create_f;
+					//TODO return cat_t::create_f;
 				}
 			}
 		}
