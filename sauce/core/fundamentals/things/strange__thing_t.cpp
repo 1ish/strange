@@ -22,7 +22,7 @@ namespace strange
 
 		if (error.t)
 		{
-			reinterpret_cast<var<>&>(error).ref();
+			reinterpret_cast<var<>&>(error).inc();
 		}
 	}
 
@@ -30,7 +30,7 @@ namespace strange
 	{
 		if (error.t)
 		{
-			reinterpret_cast<var<>&>(error).rel();
+			reinterpret_cast<var<>&>(error).dec();
 		}
 	}
 
@@ -146,14 +146,14 @@ namespace strange
 		auto& mate = reinterpret_cast<var<>&>(me_.t->error);
 		if (is_something)
 		{
-			mate.rel();
+			mate.dec();
 			mate.t = nullptr;
 			mate.o = nullptr;
 		}
 		else
 		{
 			auto const err = thing_t::create_f();
-			err.ref();
+			err.inc();
 			mate.t = err.t;
 			mate.o = err.o;
 		}
@@ -179,11 +179,11 @@ namespace strange
 			me_.mut();
 			if (mate.t)
 			{
-				mate.rel();
+				mate.dec();
 			}
 			mate.t = error_.t;
 			mate.o = error_.o;
-			mate.ref();
+			mate.inc();
 		}
 		else
 		{
@@ -270,7 +270,7 @@ namespace strange
 			new thing_t{ r };
 			thing_t::_initialise_m(r);
 			auto const e = thing_t::create_f();
-			e.ref();
+			e.inc();
 			r.t->error = e;
 			return r;
 		}());

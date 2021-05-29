@@ -24,12 +24,12 @@ namespace strange
 			}(n.o, sizeof(*(n.o)));
 			A::t = n.t;
 			A::o = &operations;
-			ref();
+			inc();
 		}
 
 		explicit inline con(A const& abstraction) : A{ abstraction }
 		{
-			ref();
+			inc();
 			if (A::o->_pointer(reinterpret_cast<con<> const&>(*this)))
 			{
 				A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
@@ -39,17 +39,17 @@ namespace strange
 
 		inline con(con const& original) : A{ original }
 		{
-			ref();
+			inc();
 		}
 
 		inline con(var<A> const& original) : A{ original }
 		{
-			ref();
+			inc();
 		}
 
 		inline con(ptr<A> const& original) : A{ original }
 		{
-			ref();
+			inc();
 			A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
 			mut();
 		}
@@ -58,36 +58,36 @@ namespace strange
 			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline con(con<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
-			ref();
+			inc();
 		}
 
 		template <typename D,
 			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline con(var<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
-			ref();
+			inc();
 		}
 
 		template <typename D,
 			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline con(ptr<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
-			ref();
+			inc();
 			A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
 			mut();
 		}
 
 		inline ~con()
 		{
-			rel();
+			dec();
 		}
 
-		inline void ref() const
+		inline void inc() const
 		{
 			++(A::t->refs);
 		}
 
-		inline void rel()
+		inline void dec()
 		{
 			if (!--(A::t->refs))
 			{
@@ -101,10 +101,10 @@ namespace strange
 			{
 				A cp;
 				A::o->_copy(reinterpret_cast<any_a const&>(*this), reinterpret_cast<any_a&>(cp));
-				rel();
+				dec();
 				A::t = cp.t;
 				A::o = cp.o;
-				ref();
+				inc();
 			}
 		}
 
@@ -149,12 +149,12 @@ namespace strange
 			}(n.o, sizeof(*(n.o)));
 			A::t = n.t;
 			A::o = &operations;
-			ref();
+			inc();
 		}
 
 		explicit inline var(A const& abstraction) :A { abstraction }
 		{
-			ref();
+			inc();
 			if (A::o->_pointer(reinterpret_cast<con<> const&>(*this)))
 			{
 				A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
@@ -164,17 +164,17 @@ namespace strange
 
 		inline var(con<A> const& original) : A{ original }
 		{
-			ref();
+			inc();
 		}
 
 		inline var(var const& original) : A{ original }
 		{
-			ref();
+			inc();
 		}
 
 		inline var(ptr<A> const& original) : A{ original }
 		{
-			ref();
+			inc();
 			A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
 			mut();
 		}
@@ -183,38 +183,38 @@ namespace strange
 			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline var(con<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
-			ref();
+			inc();
 		}
 
 		template <typename D,
 			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline var(var<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
-			ref();
+			inc();
 		}
 
 		template <typename D,
 			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline var(ptr<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
-			ref();
+			inc();
 			A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
 			mut();
 		}
 
 		inline ~var()
 		{
-			rel();
+			dec();
 		}
 
 		inline var const& operator=(con<A> const& original)
 		{
 			if (A::t != original.t)
 			{
-				rel();
+				dec();
 				A::t = original.t;
 				A::o = original.o;
-				ref();
+				inc();
 			}
 			else
 			{
@@ -227,10 +227,10 @@ namespace strange
 		{
 			if (A::t != original.t)
 			{
-				rel();
+				dec();
 				A::t = original.t;
 				A::o = original.o;
-				ref();
+				inc();
 			}
 			else
 			{
@@ -243,10 +243,10 @@ namespace strange
 		{
 			if (A::t != original.t)
 			{
-				rel();
+				dec();
 				A::t = original.t;
 				A::o = original.o;
-				ref();
+				inc();
 			}
 			else
 			{
@@ -263,10 +263,10 @@ namespace strange
 		{
 			if (A::t != original.t)
 			{
-				rel();
+				dec();
 				A::t = original.t;
 				A::o = original.o;
-				ref();
+				inc();
 			}
 			else
 			{
@@ -281,10 +281,10 @@ namespace strange
 		{
 			if (A::t != original.t)
 			{
-				rel();
+				dec();
 				A::t = original.t;
 				A::o = original.o;
-				ref();
+				inc();
 			}
 			else
 			{
@@ -299,10 +299,10 @@ namespace strange
 		{
 			if (A::t != original.t)
 			{
-				rel();
+				dec();
 				A::t = original.t;
 				A::o = original.o;
-				ref();
+				inc();
 			}
 			else
 			{
@@ -313,12 +313,12 @@ namespace strange
 			return *this;
 		}
 
-		inline void ref() const
+		inline void inc() const
 		{
 			++(A::t->refs);
 		}
 
-		inline void rel()
+		inline void dec()
 		{
 			if (!--(A::t->refs))
 			{
@@ -332,10 +332,10 @@ namespace strange
 			{
 				A cp;
 				A::o->_copy(reinterpret_cast<any_a const&>(*this), reinterpret_cast<any_a&>(cp));
-				rel();
+				dec();
 				A::t = cp.t;
 				A::o = cp.o;
-				ref();
+				inc();
 			}
 		}
 
@@ -388,13 +388,13 @@ namespace strange
 			}(n.o, sizeof(*(n.o)));
 			A::t = n.t;
 			A::o = &operations;
-			ref();
+			inc();
 			mut();
 		}
 
 		explicit inline ptr(A const& abstraction) :A{ abstraction }
 		{
-			ref();
+			inc();
 			if (!A::o->_pointer(reinterpret_cast<con<> const&>(*this)))
 			{
 				mut();
@@ -403,26 +403,26 @@ namespace strange
 
 		inline ptr(con<A> const& original) : A{ original }
 		{
-			ref();
+			inc();
 			mut();
 		}
 
 		inline ptr(var<A> const& original) : A{ original }
 		{
-			ref();
+			inc();
 			mut();
 		}
 
 		inline ptr(ptr const& original) : A{ original }
 		{
-			ref();
+			inc();
 		}
 
 		template <typename D,
 			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline ptr(con<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
-			ref();
+			inc();
 			mut();
 		}
 
@@ -430,7 +430,7 @@ namespace strange
 			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline ptr(var<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
-			ref();
+			inc();
 			mut();
 		}
 
@@ -438,22 +438,22 @@ namespace strange
 			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline ptr(ptr<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
-			ref();
+			inc();
 		}
 
 		inline ~ptr()
 		{
-			rel();
+			dec();
 		}
 
 		inline ptr const& operator=(con<A> const& original)
 		{
 			if (A::t != original.t)
 			{
-				rel();
+				dec();
 				A::t = original.t;
 				A::o = original.o;
-				ref();
+				inc();
 			}
 			else
 			{
@@ -467,10 +467,10 @@ namespace strange
 		{
 			if (A::t != original.t)
 			{
-				rel();
+				dec();
 				A::t = original.t;
 				A::o = original.o;
-				ref();
+				inc();
 			}
 			else
 			{
@@ -484,10 +484,10 @@ namespace strange
 		{
 			if (A::t != original.t)
 			{
-				rel();
+				dec();
 				A::t = original.t;
 				A::o = original.o;
-				ref();
+				inc();
 			}
 			else
 			{
@@ -502,10 +502,10 @@ namespace strange
 		{
 			if (A::t != original.t)
 			{
-				rel();
+				dec();
 				A::t = original.t;
 				A::o = original.o;
-				ref();
+				inc();
 			}
 			else
 			{
@@ -521,10 +521,10 @@ namespace strange
 		{
 			if (A::t != original.t)
 			{
-				rel();
+				dec();
 				A::t = original.t;
 				A::o = original.o;
-				ref();
+				inc();
 			}
 			else
 			{
@@ -540,10 +540,10 @@ namespace strange
 		{
 			if (A::t != original.t)
 			{
-				rel();
+				dec();
 				A::t = original.t;
 				A::o = original.o;
-				ref();
+				inc();
 			}
 			else
 			{
@@ -552,12 +552,12 @@ namespace strange
 			return *this;
 		}
 
-		inline void ref() const
+		inline void inc() const
 		{
 			++(A::t->refs);
 		}
 
-		inline void rel()
+		inline void dec()
 		{
 			if (!--(A::t->refs))
 			{
@@ -571,10 +571,10 @@ namespace strange
 			{
 				A cp;
 				A::o->_copy(reinterpret_cast<any_a const&>(*this), reinterpret_cast<any_a&>(cp));
-				rel();
+				dec();
 				A::t = cp.t;
 				A::o = cp.o;
-				ref();
+				inc();
 				A::o->_set_pointer(reinterpret_cast<var<>&>(*this), true);
 			}
 		}
