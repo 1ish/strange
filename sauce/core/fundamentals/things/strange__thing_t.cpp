@@ -4,34 +4,6 @@
 
 namespace strange
 {
-	namespace
-	{
-		inline void _reference_e(any_a const& abstraction_ /* :<any># */)
-		{
-			++(abstraction_.t->refs);
-		}
-
-		inline void _release_m(any_a& abstraction_ /* :<any>= */)
-		{
-			if (!--(abstraction_.t->refs))
-			{
-				abstraction_.o->_free(abstraction_);
-			}
-		}
-
-		inline void _mutate_m(any_a& abstraction_ /* :<any>= */)
-		{
-			if (abstraction_.t->refs > 1)
-			{
-				any_a cp;
-				abstraction_.o->_copy(abstraction_, cp);
-				_release_m(abstraction_);
-				abstraction_ = cp;
-				_reference_e(abstraction_);
-			}
-		}
-	}
-
 	thing_t::thing_t(any_a& me_ /* :<any>= */)
 	: refs{ 0 }
 	, error { nullptr, nullptr }
@@ -50,7 +22,7 @@ namespace strange
 
 		if (error.t)
 		{
-			_reference_e(error);
+			reinterpret_cast<var<>&>(error).ref();
 		}
 	}
 
@@ -58,7 +30,7 @@ namespace strange
 	{
 		if (error.t)
 		{
-			_release_m(error);
+			reinterpret_cast<var<>&>(error).rel();
 		}
 	}
 
@@ -174,10 +146,10 @@ namespace strange
 			return;
 		}
 		me_.mut();
-		any_a& mate = me_.t->error;
+		auto& mate = reinterpret_cast<var<>&>(me_.t->error);
 		if (is_something)
 		{
-			_release_m(mate);
+			mate.rel();
 			mate.t = nullptr;
 			mate.o = nullptr;
 		}
@@ -185,7 +157,8 @@ namespace strange
 		{
 			auto const err = thing_t::create_f();
 			err.ref();
-			mate = err;
+			mate.t = err.t;
+			mate.o = err.o;
 		}
 	}
 
@@ -197,7 +170,7 @@ namespace strange
 	void thing_t::set_error_m(var<>& me_ /* :<any>= */,
 		val<> const& error_ /* :<any># */)
 	{
-		any_a& mate = me_.t->error;
+		auto& mate = reinterpret_cast<var<>&>(me_.t->error);
 		if (mate.t != error_.t)
 		{
 			auto const nothing = thing_t::create_nothing_f();
@@ -209,10 +182,11 @@ namespace strange
 			me_.mut();
 			if (mate.t)
 			{
-				_release_m(mate);
+				mate.rel();
 			}
-			mate = error_;
-			_reference_e(mate);
+			mate.t = error_.t;
+			mate.o = error_.o;
+			mate.ref();
 		}
 		else
 		{
@@ -220,10 +194,10 @@ namespace strange
 		}
 		if (mate.o)
 		{
-			if (mate.o->_pointer(reinterpret_cast<val<> const&>(mate)))
+			if (mate.o->_pointer(mate))
 			{
-				mate.o->_set_pointer(reinterpret_cast<var<>&>(mate), false);
-				_mutate_m(mate);
+				mate.o->_set_pointer(mate, false);
+				mate.mut();
 			}
 		}
 	}
