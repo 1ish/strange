@@ -107,6 +107,31 @@ namespace strange
 				ref();
 			}
 		}
+
+		using non_pointer = bool;
+
+		template <typename T>
+		inline T dynamic() const
+		{
+			static_assert(typename T::non_pointer{ true });
+			T t;
+			t.o->as(reinterpret_cast<val<> const&>(*this), reinterpret_cast<var<>&>(t));
+			return t;
+		}
+
+		template <typename T>
+		inline T value() const
+		{
+			static_assert(typename T::non_pointer{ true });
+			return T{ reinterpret_cast<T const&>(*this) };
+		}
+
+		template <typename T>
+		inline T const& reference() const
+		{
+			static_assert(typename T::non_pointer{ true });
+			return reinterpret_cast<T const&>(*this);
+		}
 	};
 
 	template <typename A>
@@ -312,6 +337,38 @@ namespace strange
 				A::o = cp.o;
 				ref();
 			}
+		}
+
+		using non_pointer = bool;
+
+		template <typename T>
+		inline T dynamic() const
+		{
+			static_assert(typename T::non_pointer{ true });
+			T t;
+			t.o->as(reinterpret_cast<val<> const&>(*this), reinterpret_cast<var<>&>(t));
+			return t;
+		}
+
+		template <typename T>
+		inline T value() const
+		{
+			static_assert(typename T::non_pointer{ true });
+			return T{ reinterpret_cast<T const&>(*this) };
+		}
+
+		template <typename T>
+		inline T const& reference() const
+		{
+			static_assert(typename T::non_pointer{ true });
+			return reinterpret_cast<T const&>(*this);
+		}
+
+		template <typename T>
+		inline T& reference()
+		{
+			static_assert(typename T::non_pointer{ true });
+			return reinterpret_cast<T&>(*this);
 		}
 	};
 
@@ -520,6 +577,38 @@ namespace strange
 				ref();
 				A::o->_set_pointer(reinterpret_cast<var<>&>(*this), true);
 			}
+		}
+
+		using is_pointer = bool;
+
+		template <typename T>
+		inline T dynamic() const
+		{
+			static_assert(typename T::is_pointer{ true });
+			T t;
+			t.o->as(reinterpret_cast<val<> const&>(*this), reinterpret_cast<var<>&>(t));
+			return t;
+		}
+
+		template <typename T>
+		inline T value() const
+		{
+			static_assert(typename T::is_pointer{ true });
+			return T{ reinterpret_cast<T const&>(*this) };
+		}
+
+		template <typename T>
+		inline T const& reference() const
+		{
+			static_assert(typename T::is_pointer{ true });
+			return reinterpret_cast<T const&>(*this);
+		}
+
+		template <typename T>
+		inline T& reference()
+		{
+			static_assert(typename T::is_pointer{ true });
+			return reinterpret_cast<T&>(*this);
 		}
 	};
 }

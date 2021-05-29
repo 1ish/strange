@@ -30,25 +30,6 @@ namespace strange
 		{
 		}
 
-		static inline void _repoint_m(var<>& after_ /* :<any>= */,
-			bool pointer_before /* :_bool_# */,
-			bool pointer_after /* :_bool_# */)
-		{
-			if (pointer_after != pointer_before)
-			{
-				if (pointer_after)
-				{
-					after_.mut();
-					after_.o->_set_pointer(after_, true);
-				}
-				else
-				{
-					after_.o->_set_pointer(after_, false);
-					after_.mut();
-				}
-			}
-		}
-
 		static inline bool _equal_e(val<> const& me_ /* :<any># */,
 			val<> const& other_ /* :<any># */)
 		{

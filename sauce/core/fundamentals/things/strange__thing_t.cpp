@@ -107,10 +107,7 @@ namespace strange
 		{
 			return false;
 		}
-		bool const mp = me_.o->_pointer(me_);
-		bool const ap = abstraction_.o->_pointer(abstraction_);
 		abstraction_ = me_;
-		thing_t::_repoint_m(abstraction_, mp, ap);
 		return true;
 	}
 

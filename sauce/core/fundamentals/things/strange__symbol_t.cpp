@@ -136,10 +136,10 @@ namespace strange
 	bool symbol_t::equal_e(val<> const& me_ /* :<symbol># */,
 		val<> const& other_ /* :<any># */)
 	{
-		var<> os = var<symbol_a>{};
-		if (other_.o->as(other_, os))
+		auto const os = other_.dynamic<val<symbol_a>>();
+		if (thing_t::something_e(os))
 		{
-			return symbol_t::_equal_e(reinterpret_cast<val<symbol_a> const&>(me_), reinterpret_cast<val<symbol_a> const&>(os));
+			return symbol_t::_equal_e(me_.reference<val<symbol_a>>(), os);
 		}
 		return thing_t::equal_e(me_, other_);
 	}
@@ -147,10 +147,10 @@ namespace strange
 	bool symbol_t::not_equal_e(val<> const& me_ /* :<symbol># */,
 		val<> const& other_ /* :<any># */)
 	{
-		var<> os = var<symbol_a>{};
-		if (other_.o->as(other_, os))
+		auto const os = other_.dynamic<val<symbol_a>>();
+		if (thing_t::something_e(os))
 		{
-			return symbol_t::_not_equal_e(reinterpret_cast<val<symbol_a> const&>(me_), reinterpret_cast<val<symbol_a> const&>(os));
+			return symbol_t::_not_equal_e(me_.reference<val<symbol_a>>(), os);
 		}
 		return thing_t::not_equal_e(me_, other_);
 	}
@@ -158,10 +158,10 @@ namespace strange
 	bool symbol_t::less_e(val<> const& me_ /* :<symbol># */,
 		val<> const& other_ /* :<any># */)
 	{
-		var<> os = var<symbol_a>{};
-		if (other_.o->as(other_, os))
+		auto const os = other_.dynamic<val<symbol_a>>();
+		if (thing_t::something_e(os))
 		{
-			return symbol_t::_less_e(reinterpret_cast<val<symbol_a> const&>(me_), reinterpret_cast<val<symbol_a> const&>(os));
+			return symbol_t::_less_e(me_.reference<val<symbol_a>>(), os);
 		}
 		return thing_t::less_e(me_, other_);
 	}
@@ -169,10 +169,10 @@ namespace strange
 	bool symbol_t::greater_e(val<> const& me_ /* :<symbol># */,
 		val<> const& other_ /* :<any># */)
 	{
-		var<> os = var<symbol_a>{};
-		if (other_.o->as(other_, os))
+		auto const os = other_.dynamic<val<symbol_a>>();
+		if (thing_t::something_e(os))
 		{
-			return symbol_t::_greater_e(reinterpret_cast<val<symbol_a> const&>(me_), reinterpret_cast<val<symbol_a> const&>(os));
+			return symbol_t::_greater_e(me_.reference<val<symbol_a>>(), os);
 		}
 		return thing_t::greater_e(me_, other_);
 	}
@@ -180,10 +180,10 @@ namespace strange
 	bool symbol_t::less_or_equal_e(val<> const& me_ /* :<symbol># */,
 		val<> const& other_ /* :<any># */)
 	{
-		var<> os = var<symbol_a>{};
-		if (other_.o->as(other_, os))
+		auto const os = other_.dynamic<val<symbol_a>>();
+		if (thing_t::something_e(os))
 		{
-			return symbol_t::_less_or_equal_e(reinterpret_cast<val<symbol_a> const&>(me_), reinterpret_cast<val<symbol_a> const&>(os));
+			return symbol_t::_less_or_equal_e(me_.reference<val<symbol_a>>(), os);
 		}
 		return thing_t::less_or_equal_e(me_, other_);
 	}
@@ -191,10 +191,10 @@ namespace strange
 	bool symbol_t::greater_or_equal_e(val<> const& me_ /* :<symbol># */,
 		val<> const& other_ /* :<any># */)
 	{
-		var<> os = var<symbol_a>{};
-		if (other_.o->as(other_, os))
+		auto const os = other_.dynamic<val<symbol_a>>();
+		if (thing_t::something_e(os))
 		{
-			return symbol_t::_greater_or_equal_e(reinterpret_cast<val<symbol_a> const&>(me_), reinterpret_cast<val<symbol_a> const&>(os));
+			return symbol_t::_greater_or_equal_e(me_.reference<val<symbol_a>>(), os);
 		}
 		return thing_t::greater_or_equal_e(me_, other_);
 	}
