@@ -3,20 +3,19 @@
 
 namespace taste
 {
-	void testp(var<symbol_a> const& symbol)
+	void testp(ptr<symbol_a>& symbol)
 	{
 		symbol.o->first_char(symbol);
 	}
 
-	var<symbol_a> testfun(val<symbol_a> const& ref, var<symbol_a> const& const_ref)
+	var<symbol_a> testfun(val<symbol_a> const& a, val<symbol_a> const& b)
 	{
-		return ref.o->add(ref, const_ref);
+		return a.o->add(a, b);
 	}
 
 	void test()
 	{
 		auto v = var(symbol_t::create_f("auto"));
-		testp(v);
 		auto tv = var(v.o->type(v));
 		tv = v;
 		auto s = sym("test");

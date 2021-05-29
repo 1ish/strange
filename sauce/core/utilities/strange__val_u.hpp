@@ -30,9 +30,9 @@ namespace strange
 		explicit inline val(A const& abstraction) : A{ abstraction }
 		{
 			ref();
-			if (A::o->_pointer(*this))
+			if (A::o->_pointer(reinterpret_cast<val<> const&>(*this)))
 			{
-				A::o->_set_pointer(*this, false);
+				A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
 				mut();
 			}
 		}
@@ -50,7 +50,7 @@ namespace strange
 		inline val(ptr<A> const& original) : A{ original }
 		{
 			ref();
-			A::o->_set_pointer(*this, false);
+			A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
 			mut();
 		}
 
@@ -73,7 +73,7 @@ namespace strange
 		inline val(ptr<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			ref();
-			A::o->_set_pointer(*this, false);
+			A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
 			mut();
 		}
 
@@ -130,9 +130,9 @@ namespace strange
 		explicit inline var(A const& abstraction) :A { abstraction }
 		{
 			ref();
-			if (A::o->_pointer(*this))
+			if (A::o->_pointer(reinterpret_cast<val<> const&>(*this)))
 			{
-				A::o->_set_pointer(*this, false);
+				A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
 				mut();
 			}
 		}
@@ -150,7 +150,7 @@ namespace strange
 		inline var(ptr<A> const& original) : A{ original }
 		{
 			ref();
-			A::o->_set_pointer(*this, false);
+			A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
 			mut();
 		}
 
@@ -173,7 +173,7 @@ namespace strange
 		inline var(ptr<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			ref();
-			A::o->_set_pointer(*this, false);
+			A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
 			mut();
 		}
 
@@ -195,9 +195,9 @@ namespace strange
 			{
 				A::o = abstraction.o;
 			}
-			if (A::o->_pointer(*this))
+			if (A::o->_pointer(reinterpret_cast<val<> const&>(*this)))
 			{
-				A::o->_set_pointer(*this, false);
+				A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
 				mut();
 			}
 			return *this;
@@ -248,7 +248,7 @@ namespace strange
 			{
 				A::o = original.o;
 			}
-			A::o->_set_pointer(*this, false);
+			A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
 			mut();
 			return *this;
 		}
@@ -304,7 +304,7 @@ namespace strange
 			{
 				A::o = original.o;
 			}
-			A::o->_set_pointer(*this, false);
+			A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
 			mut();
 			return *this;
 		}
@@ -341,7 +341,7 @@ namespace strange
 	{
 		inline ptr()
 		{
-			auto const n = A::t->create_nothing_f();
+			auto n = A::t->create_nothing_f();
 			n.o->_set_pointer(&n, true);
 			static typename A::operations const operations = [](void const* const nops, uint64_t const size)
 			{
@@ -359,7 +359,7 @@ namespace strange
 		explicit inline ptr(A const& abstraction) :A{ abstraction }
 		{
 			ref();
-			if (!A::o->_pointer(*this))
+			if (!A::o->_pointer(reinterpret_cast<val<> const&>(*this)))
 			{
 				mut();
 			}
@@ -423,7 +423,7 @@ namespace strange
 			{
 				A::o = abstraction.o;
 			}
-			if (!A::o->_pointer(*this))
+			if (!A::o->_pointer(reinterpret_cast<val<> const&>(*this)))
 			{
 				mut();
 			}
@@ -559,7 +559,7 @@ namespace strange
 				A::t = cp.t;
 				A::o = cp.o;
 				ref();
-				A::o->_set_pointer(*this, true);
+				A::o->_set_pointer(const_cast<var<>&>(reinterpret_cast<var<> const&>(*this)), true);
 			}
 		}
 	};

@@ -129,7 +129,7 @@ namespace strange
 	}
 
 	bool thing_t::as_e(val<> const& me_ /* :<any># */,
-		var<> const& abstraction_ /* :<any>= */)
+		var<>& abstraction_ /* :<any>= */)
 	{
 		if (!me_.o->is(me_, abstraction_))
 		{
@@ -148,7 +148,7 @@ namespace strange
 		return r;
 	}
 
-	void thing_t::_set_pointer_m(var<> const& me_ /* :<any>= */,
+	void thing_t::_set_pointer_m(var<>& me_ /* :<any>= */,
 		bool is_pointer /* :_bool_# */)
 	{
 		if (is_pointer)
@@ -166,7 +166,7 @@ namespace strange
 		return me_.o->_copy == thing_t::_no_copy_e;
 	}
 
-	void thing_t::set_something_m(var<> const& me_ /* :<any>= */,
+	void thing_t::set_something_m(var<>& me_ /* :<any>= */,
 		bool is_something /* :_bool_# */)
 	{
 		if (is_something == thing_t::something_e(me_))
@@ -194,7 +194,7 @@ namespace strange
 		return !me_.t->error.t;
 	}
 
-	void thing_t::set_error_m(var<> const& me_ /* :<any>= */,
+	void thing_t::set_error_m(var<>& me_ /* :<any>= */,
 		val<> const& error_ /* :<any># */)
 	{
 		any_a& mate = me_.t->error;
@@ -220,10 +220,9 @@ namespace strange
 		}
 		if (mate.o)
 		{
-			auto const vmate = val<>{ mate };
-			if (vmate.o->_pointer(vmate))
+			if (mate.o->_pointer(reinterpret_cast<val<> const&>(mate)))
 			{
-				vmate.o->_set_pointer(vmate, false);
+				mate.o->_set_pointer(reinterpret_cast<var<>&>(mate), false);
 				_mutate_m(mate);
 			}
 		}

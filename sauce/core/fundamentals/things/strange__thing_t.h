@@ -30,7 +30,7 @@ namespace strange
 		{
 		}
 
-		static inline void _repoint_m(var<> const& after_ /* :<any>= */,
+		static inline void _repoint_m(var<>& after_ /* :<any>= */,
 			bool pointer_before /* :_bool_# */,
 			bool pointer_after /* :_bool_# */)
 		{
@@ -98,21 +98,21 @@ namespace strange
 			val<> const& abstraction_ /* :<any># */);
 
 		static bool as_e(val<> const& me_ /* :<any># */,
-			var<> const& abstraction_ /* :<any>= */);
+			var<>& abstraction_ /* :<any>= */);
 
 		static var<symbol_a> type_e(val<> const& me_ /* :<any># */);
 
-		static void _set_pointer_m(var<> const& me_ /* :<any>= */,
+		static void _set_pointer_m(var<>& me_ /* :<any>= */,
 			bool is_pointer /* :_bool_# */);
 
 		static bool _pointer_e(val<> const& me_ /* :<any># */);
 
-		static void set_something_m(var<> const& me_ /* :<any>= */,
+		static void set_something_m(var<>& me_ /* :<any>= */,
 			bool is_something /* :_bool_# */);
 
 		static bool something_e(val<> const& me_ /* :<any># */);
 
-		static void set_error_m(var<> const& me_ /* :<any>= */,
+		static void set_error_m(var<>& me_ /* :<any>= */,
 			val<> const& error_ /* :<any># */);
 
 		static var<> error_e(val<> const& me_ /* :<any># */);

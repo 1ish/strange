@@ -16,21 +16,21 @@ namespace strange
 			val<> const& abstraction_);
 
 		bool (*as)(val<> const& me_,
-			var<> const& abstraction_);
+			var<>& abstraction_);
 
 		var<symbol_a> (*type)(val<> const& me_);
 
-		void (*_set_pointer)(var<> const& me_,
+		void (*_set_pointer)(var<>& me_,
 			bool is_pointer);
 
 		bool (*_pointer)(val<> const& me_);
 
-		void (*set_something)(var<> const& me_,
+		void (*set_something)(var<>& me_,
 			bool is_something);
 
 		bool (*something)(val<> const& me_);
 
-		void (*set_error)(var<> const& me_,
+		void (*set_error)(var<>& me_,
 			val<> const& error_);
 
 		var<> (*error)(val<> const& me_);
