@@ -8,7 +8,7 @@ namespace taste
 		symbol.o->first_char(symbol);
 	}
 
-	var<symbol_a> testfun(val<symbol_a> const& a, val<symbol_a> const& b)
+	var<symbol_a> testfun(con<symbol_a> const& a, con<symbol_a> const& b)
 	{
 		return a.o->add(a, b);
 	}
@@ -36,10 +36,10 @@ namespace taste
 		tv = s;
 		//NO s = v;
 		//NO s = t;
-		auto value = val<>{ symbol_t::create_f("auto") };
+		auto value = con<>{ symbol_t::create_f("auto") };
 
-		auto n = val<symbol_a>();
-		auto no = val<any_a>();
+		auto n = con<symbol_a>();
+		auto no = con<any_a>();
 
 		auto const creator = symbol_a::creator_f(sym("strange"), sym("symbol"), sym("create_empty"));
 		REQUIRE(creator);

@@ -5,11 +5,11 @@ namespace strange
 {
 	struct cat_o : symbol_o
 	{
-		int64_t (*order)(val<cat_a> const& me_);
+		int64_t (*order)(con<cat_a> const& me_);
 
-		var<symbol_a> (*name)(val<cat_a> const& me_);
+		var<symbol_a> (*name)(con<cat_a> const& me_);
 
-		//TODO var<flock_a<cat_a>> (*aspects)(val<cat_a> const& me_);
+		//TODO var<flock_a<cat_a>> (*aspects)(con<cat_a> const& me_);
 	};
 
 	struct cat_a
@@ -20,11 +20,11 @@ namespace strange
 		thing_t* t;
 		operations const* o;
 
-		static var<symbol_a> cat_e(val<> const& me_); //TODO cat
+		static var<symbol_a> cat_e(con<> const& me_); //TODO cat
 
-		static creator creator_f(val<symbol_a> const& scope_,
-			val<symbol_a> const& thing_,
-			val<symbol_a> const& function_);
+		static creator creator_f(con<symbol_a> const& scope_,
+			con<symbol_a> const& thing_,
+			con<symbol_a> const& function_);
 	};
 }
 

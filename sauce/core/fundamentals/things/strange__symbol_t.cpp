@@ -100,15 +100,15 @@ namespace strange
 		symbol_t::_clone_e(me_, copy_);
 	}
 
-	bool symbol_t::is_e(val<> const& me_ /* :<symbol># */,
-		val<> const& abstraction_ /* :<any># */)
+	bool symbol_t::is_e(con<> const& me_ /* :<symbol># */,
+		con<> const& abstraction_ /* :<any># */)
 	{
 		// abstraction_.cat in me_.cats
 		auto const abc = abstraction_.o->cat;
 		return abc == any_a::cat_e || abc == symbol_a::cat_e;
 	}
 
-	var<symbol_a> symbol_t::type_e(val<> const& me_ /* :<symbol># */)
+	var<symbol_a> symbol_t::type_e(con<> const& me_ /* :<symbol># */)
 	{
 		static auto r = sym("strange::symbol");
 		return r;
@@ -127,81 +127,81 @@ namespace strange
 		}
 	}
 
-	uint64_t symbol_t::hash_e(val<> const& me_ /* :<symbol># */)
+	uint64_t symbol_t::hash_e(con<> const& me_ /* :<symbol># */)
 	{
 		auto const mt = static_cast<symbol_t const* const>(me_.t);
 		return mt->hash;
 	}
 
-	bool symbol_t::equal_e(val<> const& me_ /* :<symbol># */,
-		val<> const& other_ /* :<any># */)
+	bool symbol_t::equal_e(con<> const& me_ /* :<symbol># */,
+		con<> const& other_ /* :<any># */)
 	{
-		auto const os = other_.dynamic<val<symbol_a>>();
+		auto const os = other_.dynamic<con<symbol_a>>();
 		if (thing_t::something_e(os))
 		{
-			return symbol_t::_equal_e(me_.reference<val<symbol_a>>(), os);
+			return symbol_t::_equal_e(me_.reference<con<symbol_a>>(), os);
 		}
 		return thing_t::equal_e(me_, other_);
 	}
 
-	bool symbol_t::not_equal_e(val<> const& me_ /* :<symbol># */,
-		val<> const& other_ /* :<any># */)
+	bool symbol_t::not_equal_e(con<> const& me_ /* :<symbol># */,
+		con<> const& other_ /* :<any># */)
 	{
-		auto const os = other_.dynamic<val<symbol_a>>();
+		auto const os = other_.dynamic<con<symbol_a>>();
 		if (thing_t::something_e(os))
 		{
-			return symbol_t::_not_equal_e(me_.reference<val<symbol_a>>(), os);
+			return symbol_t::_not_equal_e(me_.reference<con<symbol_a>>(), os);
 		}
 		return thing_t::not_equal_e(me_, other_);
 	}
 
-	bool symbol_t::less_e(val<> const& me_ /* :<symbol># */,
-		val<> const& other_ /* :<any># */)
+	bool symbol_t::less_e(con<> const& me_ /* :<symbol># */,
+		con<> const& other_ /* :<any># */)
 	{
-		auto const os = other_.dynamic<val<symbol_a>>();
+		auto const os = other_.dynamic<con<symbol_a>>();
 		if (thing_t::something_e(os))
 		{
-			return symbol_t::_less_e(me_.reference<val<symbol_a>>(), os);
+			return symbol_t::_less_e(me_.reference<con<symbol_a>>(), os);
 		}
 		return thing_t::less_e(me_, other_);
 	}
 
-	bool symbol_t::greater_e(val<> const& me_ /* :<symbol># */,
-		val<> const& other_ /* :<any># */)
+	bool symbol_t::greater_e(con<> const& me_ /* :<symbol># */,
+		con<> const& other_ /* :<any># */)
 	{
-		auto const os = other_.dynamic<val<symbol_a>>();
+		auto const os = other_.dynamic<con<symbol_a>>();
 		if (thing_t::something_e(os))
 		{
-			return symbol_t::_greater_e(me_.reference<val<symbol_a>>(), os);
+			return symbol_t::_greater_e(me_.reference<con<symbol_a>>(), os);
 		}
 		return thing_t::greater_e(me_, other_);
 	}
 
-	bool symbol_t::less_or_equal_e(val<> const& me_ /* :<symbol># */,
-		val<> const& other_ /* :<any># */)
+	bool symbol_t::less_or_equal_e(con<> const& me_ /* :<symbol># */,
+		con<> const& other_ /* :<any># */)
 	{
-		auto const os = other_.dynamic<val<symbol_a>>();
+		auto const os = other_.dynamic<con<symbol_a>>();
 		if (thing_t::something_e(os))
 		{
-			return symbol_t::_less_or_equal_e(me_.reference<val<symbol_a>>(), os);
+			return symbol_t::_less_or_equal_e(me_.reference<con<symbol_a>>(), os);
 		}
 		return thing_t::less_or_equal_e(me_, other_);
 	}
 
-	bool symbol_t::greater_or_equal_e(val<> const& me_ /* :<symbol># */,
-		val<> const& other_ /* :<any># */)
+	bool symbol_t::greater_or_equal_e(con<> const& me_ /* :<symbol># */,
+		con<> const& other_ /* :<any># */)
 	{
-		auto const os = other_.dynamic<val<symbol_a>>();
+		auto const os = other_.dynamic<con<symbol_a>>();
 		if (thing_t::something_e(os))
 		{
-			return symbol_t::_greater_or_equal_e(me_.reference<val<symbol_a>>(), os);
+			return symbol_t::_greater_or_equal_e(me_.reference<con<symbol_a>>(), os);
 		}
 		return thing_t::greater_or_equal_e(me_, other_);
 	}
 
 	// symbol_a
-	var<symbol_a> symbol_t::add_e(val<symbol_a> const& me_ /* :<symbol># */,
-		val<symbol_a> const& suffix_ /* :<symbol># */)
+	var<symbol_a> symbol_t::add_e(con<symbol_a> const& me_ /* :<symbol># */,
+		con<symbol_a> const& suffix_ /* :<symbol># */)
 	{
 		// can assume suffix_ implements symbol_a, but not that is has a symbol_t
 		auto const mt = static_cast<symbol_t const* const>(me_.t);
@@ -217,25 +217,25 @@ namespace strange
 		return var<symbol_a>{ reinterpret_cast<symbol_a&>(r) };
 	}
 
-	char const* symbol_t::to_char_star_e(val<symbol_a> const& me_ /* :<symbol># */)
+	char const* symbol_t::to_char_star_e(con<symbol_a> const& me_ /* :<symbol># */)
 	{
 		auto const mt = static_cast<symbol_t const* const>(me_.t);
 		return mt->symbol;
 	}
 
-	int64_t symbol_t::length_e(val<symbol_a> const& me_ /* :<symbol># */)
+	int64_t symbol_t::length_e(con<symbol_a> const& me_ /* :<symbol># */)
 	{
 		auto const mt = static_cast<symbol_t const* const>(me_.t);
 		return mt->length;
 	}
 
-	char symbol_t::first_char_e(val<symbol_a> const& me_ /* :<symbol># */)
+	char symbol_t::first_char_e(con<symbol_a> const& me_ /* :<symbol># */)
 	{
 		auto const mt = static_cast<symbol_t const* const>(me_.t);
 		return (mt->symbol)[0];
 	}
 
-	char symbol_t::last_char_e(val<symbol_a> const& me_ /* :<symbol># */)
+	char symbol_t::last_char_e(con<symbol_a> const& me_ /* :<symbol># */)
 	{
 		auto const mt = static_cast<symbol_t const* const>(me_.t);
 		return (mt->symbol)[std::max(int64_t{ 0 }, mt->length - 1)];

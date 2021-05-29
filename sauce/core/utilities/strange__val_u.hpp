@@ -10,9 +10,9 @@ namespace strange
 	struct ptr;
 
 	template <typename A = any_a>
-	struct val : A
+	struct con : A
 	{
-		inline val()
+		inline con()
 		{
 			auto const n = A::t->create_nothing_f();
 			static typename A::operations const operations = [](void const* const nops, uint64_t const size)
@@ -27,57 +27,57 @@ namespace strange
 			ref();
 		}
 
-		explicit inline val(A const& abstraction) : A{ abstraction }
+		explicit inline con(A const& abstraction) : A{ abstraction }
 		{
 			ref();
-			if (A::o->_pointer(reinterpret_cast<val<> const&>(*this)))
+			if (A::o->_pointer(reinterpret_cast<con<> const&>(*this)))
 			{
 				A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
 				mut();
 			}
 		}
 
-		inline val(val const& original) : A{ original }
+		inline con(con const& original) : A{ original }
 		{
 			ref();
 		}
 
-		inline val(var<A> const& original) : A{ original }
+		inline con(var<A> const& original) : A{ original }
 		{
 			ref();
 		}
 
-		inline val(ptr<A> const& original) : A{ original }
-		{
-			ref();
-			A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
-			mut();
-		}
-
-		template <typename D,
-			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline val(val<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
-		{
-			ref();
-		}
-
-		template <typename D,
-			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline val(var<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
-		{
-			ref();
-		}
-
-		template <typename D,
-			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline val(ptr<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
+		inline con(ptr<A> const& original) : A{ original }
 		{
 			ref();
 			A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
 			mut();
 		}
 
-		inline ~val()
+		template <typename D,
+			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		inline con(con<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
+		{
+			ref();
+		}
+
+		template <typename D,
+			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		inline con(var<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
+		{
+			ref();
+		}
+
+		template <typename D,
+			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		inline con(ptr<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
+		{
+			ref();
+			A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
+			mut();
+		}
+
+		inline ~con()
 		{
 			rel();
 		}
@@ -115,7 +115,7 @@ namespace strange
 		{
 			static_assert(typename T::non_pointer{ true });
 			T t;
-			t.o->as(reinterpret_cast<val<> const&>(*this), reinterpret_cast<var<>&>(t));
+			t.o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<>&>(t));
 			return t;
 		}
 
@@ -155,14 +155,14 @@ namespace strange
 		explicit inline var(A const& abstraction) :A { abstraction }
 		{
 			ref();
-			if (A::o->_pointer(reinterpret_cast<val<> const&>(*this)))
+			if (A::o->_pointer(reinterpret_cast<con<> const&>(*this)))
 			{
 				A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
 				mut();
 			}
 		}
 
-		inline var(val<A> const& original) : A{ original }
+		inline var(con<A> const& original) : A{ original }
 		{
 			ref();
 		}
@@ -181,7 +181,7 @@ namespace strange
 
 		template <typename D,
 			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline var(val<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
+		inline var(con<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			ref();
 		}
@@ -207,7 +207,7 @@ namespace strange
 			rel();
 		}
 
-		inline var const& operator=(val<A> const& original)
+		inline var const& operator=(con<A> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -259,7 +259,7 @@ namespace strange
 
 		template <typename D,
 			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline var const& operator=(val<D> const& original)
+		inline var const& operator=(con<D> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -346,7 +346,7 @@ namespace strange
 		{
 			static_assert(typename T::non_pointer{ true });
 			T t;
-			t.o->as(reinterpret_cast<val<> const&>(*this), reinterpret_cast<var<>&>(t));
+			t.o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<>&>(t));
 			return t;
 		}
 
@@ -395,13 +395,13 @@ namespace strange
 		explicit inline ptr(A const& abstraction) :A{ abstraction }
 		{
 			ref();
-			if (!A::o->_pointer(reinterpret_cast<val<> const&>(*this)))
+			if (!A::o->_pointer(reinterpret_cast<con<> const&>(*this)))
 			{
 				mut();
 			}
 		}
 
-		inline ptr(val<A> const& original) : A{ original }
+		inline ptr(con<A> const& original) : A{ original }
 		{
 			ref();
 			mut();
@@ -420,7 +420,7 @@ namespace strange
 
 		template <typename D,
 			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline ptr(val<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
+		inline ptr(con<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			ref();
 			mut();
@@ -446,7 +446,7 @@ namespace strange
 			rel();
 		}
 
-		inline ptr const& operator=(val<A> const& original)
+		inline ptr const& operator=(con<A> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -498,7 +498,7 @@ namespace strange
 
 		template <typename D,
 			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline ptr const& operator=(val<D> const& original)
+		inline ptr const& operator=(con<D> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -586,7 +586,7 @@ namespace strange
 		{
 			static_assert(typename T::is_pointer{ true });
 			T t;
-			t.o->as(reinterpret_cast<val<> const&>(*this), reinterpret_cast<var<>&>(t));
+			t.o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<>&>(t));
 			return t;
 		}
 

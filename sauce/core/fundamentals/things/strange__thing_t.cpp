@@ -93,14 +93,14 @@ namespace strange
 		copy_ = me_;
 	}
 
-	bool thing_t::is_e(val<> const& me_ /* :<any># */,
-		val<> const& abstraction_ /* :<any># */)
+	bool thing_t::is_e(con<> const& me_ /* :<any># */,
+		con<> const& abstraction_ /* :<any># */)
 	{
 		// abstraction_.cat in me_.cats
 		return abstraction_.o->cat == any_a::cat_e;
 	}
 
-	bool thing_t::as_e(val<> const& me_ /* :<any># */,
+	bool thing_t::as_e(con<> const& me_ /* :<any># */,
 		var<>& abstraction_ /* :<any>= */)
 	{
 		if (!me_.o->is(me_, abstraction_))
@@ -111,7 +111,7 @@ namespace strange
 		return true;
 	}
 
-	var<symbol_a> thing_t::type_e(val<> const& me_ /* :<any># */)
+	var<symbol_a> thing_t::type_e(con<> const& me_ /* :<any># */)
 	{
 		static auto r = sym("strange::thing");
 		return r;
@@ -130,7 +130,7 @@ namespace strange
 		}
 	}
 
-	bool thing_t::_pointer_e(val<> const& me_ /* :<any># */)
+	bool thing_t::_pointer_e(con<> const& me_ /* :<any># */)
 	{
 		return me_.o->_copy == thing_t::_no_copy_e;
 	}
@@ -159,13 +159,13 @@ namespace strange
 		}
 	}
 
-	bool thing_t::something_e(val<> const& me_ /* :<any># */)
+	bool thing_t::something_e(con<> const& me_ /* :<any># */)
 	{
 		return !me_.t->error.t;
 	}
 
 	void thing_t::set_error_m(var<>& me_ /* :<any>= */,
-		val<> const& error_ /* :<any># */)
+		con<> const& error_ /* :<any># */)
 	{
 		auto& mate = reinterpret_cast<var<>&>(me_.t->error);
 		if (mate.t != error_.t)
@@ -199,7 +199,7 @@ namespace strange
 		}
 	}
 
-	var<> thing_t::error_e(val<> const& me_ /* :<any># */)
+	var<> thing_t::error_e(con<> const& me_ /* :<any># */)
 	{
 		if (thing_t::something_e(me_))
 		{
@@ -208,43 +208,43 @@ namespace strange
 		return var<any_a>{ me_.t->error };
 	}
 
-	uint64_t thing_t::hash_e(val<> const& me_ /* :<any># */)
+	uint64_t thing_t::hash_e(con<> const& me_ /* :<any># */)
 	{
 		return static_cast<uint64_t>(std::hash<void const*>{}(me_.t));
 	}
 
-	bool thing_t::equal_e(val<> const& me_ /* :<any># */,
-		val<> const& other_ /* :<any># */)
+	bool thing_t::equal_e(con<> const& me_ /* :<any># */,
+		con<> const& other_ /* :<any># */)
 	{
 		return thing_t::_equal_e(me_, other_);
 	}
 
-	bool thing_t::not_equal_e(val<> const& me_ /* :<any># */,
-		val<> const& other_ /* :<any># */)
+	bool thing_t::not_equal_e(con<> const& me_ /* :<any># */,
+		con<> const& other_ /* :<any># */)
 	{
 		return thing_t::_not_equal_e(me_, other_);
 	}
 
-	bool thing_t::less_e(val<> const& me_ /* :<any># */,
-		val<> const& other_ /* :<any># */)
+	bool thing_t::less_e(con<> const& me_ /* :<any># */,
+		con<> const& other_ /* :<any># */)
 	{
 		return thing_t::_less_e(me_, other_);
 	}
 
-	bool thing_t::greater_e(val<> const& me_ /* :<any># */,
-		val<> const& other_ /* :<any># */)
+	bool thing_t::greater_e(con<> const& me_ /* :<any># */,
+		con<> const& other_ /* :<any># */)
 	{
 		return thing_t::_greater_e(me_, other_);
 	}
 
-	bool thing_t::less_or_equal_e(val<> const& me_ /* :<any># */,
-		val<> const& other_ /* :<any># */)
+	bool thing_t::less_or_equal_e(con<> const& me_ /* :<any># */,
+		con<> const& other_ /* :<any># */)
 	{
 		return thing_t::_less_or_equal_e(me_, other_);
 	}
 
-	bool thing_t::greater_or_equal_e(val<> const& me_ /* :<any># */,
-		val<> const& other_ /* :<any># */)
+	bool thing_t::greater_or_equal_e(con<> const& me_ /* :<any># */,
+		con<> const& other_ /* :<any># */)
 	{
 		return thing_t::_greater_or_equal_e(me_, other_);
 	}
