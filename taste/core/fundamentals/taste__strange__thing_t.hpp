@@ -56,14 +56,17 @@ namespace taste
 		auto res = sss.op(&con<symbol_a>::operations::add, sym("2"));
 		res = sss.op(&symbol_a::operations::add, sym("2"));
 		res = sss.op(&symbol_o::add, sym("2"));
+		std__cout << "result: " << res.o->to_char_star(res) << "\n";
 		con<any_a> aaa = sym("aaa");
 		aaa.op(&any_o::type);
 		sss.op(&symbol_o::type);
-		sss.op(&con<symbol_a>::operations::type);
+		res = sss.op(&con<symbol_a>::operations::type);
+		std__cout << "result: " << res.o->to_char_star(res) << "\n";
 		auto vvv = sym("vvv");
-		vvv.o->set_error(vvv, sym("error"));
-		vvv.op(&any_o::set_error, sym("error"));
-		vvv.op(&symbol_o::set_error, sym("error"));
+		vvv.o->set_error(vvv, sym("error1"));
+		vvv.op(&any_o::set_error, sym("error2"));
+		vvv.op(&symbol_o::set_error, sym("error3"));
+		res = vvv.op(&symbol_o::error).ref<var<symbol_a>>();
 		std__cout << "result: " << res.o->to_char_star(res) << "\n";
 	}
 }
