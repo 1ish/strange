@@ -135,7 +135,7 @@ namespace strange
 		return me_.o->_copy == thing_t::_no_copy_e;
 	}
 
-	void thing_t::set_something_m(var<>& me_ /* :<any>= */,
+	void thing_t::set_something_m(var<> const& me_ /* :<any>= */,
 		bool is_something /* :_bool_# */)
 	{
 		if (is_something == thing_t::something_e(me_))

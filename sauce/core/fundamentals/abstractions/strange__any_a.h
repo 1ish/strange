@@ -25,7 +25,7 @@ namespace strange
 
 		bool (*_pointer)(con<> const& me_);
 
-		void (*set_something)(var<>& me_,
+		void (*set_something)(var<> const& me_,
 			bool is_something);
 
 		bool (*something)(con<> const& me_);

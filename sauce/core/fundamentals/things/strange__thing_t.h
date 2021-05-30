@@ -96,7 +96,7 @@ namespace strange
 
 		static bool _pointer_e(con<> const& me_ /* :<any># */);
 
-		static void set_something_m(var<>& me_ /* :<any>= */,
+		static void set_something_m(var<> const& me_ /* :<any>= */,
 			bool is_something /* :_bool_# */);
 
 		static bool something_e(con<> const& me_ /* :<any># */);
