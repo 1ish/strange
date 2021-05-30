@@ -42,12 +42,12 @@ namespace strange
 			inc();
 		}
 
-		inline con(var<A> const& original) : A{ original }
+		explicit inline con(var<A> const& original) : A{ original }
 		{
 			inc();
 		}
 
-		inline con(ptr<A> const& original) : A{ original }
+		explicit inline con(ptr<A> const& original) : A{ original }
 		{
 			inc();
 			A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
@@ -55,19 +55,19 @@ namespace strange
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline con(con<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
+		explicit inline con(con<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			inc();
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline con(var<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
+		explicit inline con(var<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			inc();
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline con(ptr<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
+		explicit inline con(ptr<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			inc();
 			A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
@@ -145,6 +145,18 @@ namespace strange
 			return reinterpret_cast<R const&>(*this);
 		}
 
+		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename A::operations>, bool> = true>
+		inline operator con<B> const&() const
+		{
+			return ref<con<B>>();
+		}
+
+		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename A::operations>, bool> = true>
+		inline operator var<B> const& () const
+		{
+			return ref<var<B>>();
+		}
+
 		template <typename F, typename O, typename... Ps>
 		inline auto op(F O::* p, Ps&&... ps) const
 		{
@@ -180,7 +192,7 @@ namespace strange
 			}
 		}
 
-		inline var(con<A> const& original) : A{ original }
+		explicit inline var(con<A> const& original) : A{ original }
 		{
 			inc();
 		}
@@ -190,7 +202,7 @@ namespace strange
 			inc();
 		}
 
-		inline var(ptr<A> const& original) : A{ original }
+		explicit inline var(ptr<A> const& original) : A{ original }
 		{
 			inc();
 			A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
@@ -198,19 +210,19 @@ namespace strange
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline var(con<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
+		explicit inline var(con<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			inc();
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline var(var<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
+		explicit inline var(var<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			inc();
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline var(ptr<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
+		explicit inline var(ptr<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			inc();
 			A::o->_set_pointer(reinterpret_cast<var<>&>(*this), false);
@@ -398,6 +410,30 @@ namespace strange
 			return reinterpret_cast<R&>(*this);
 		}
 
+		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename A::operations>, bool> = true>
+		inline operator con<B> const& () const
+		{
+			return ref<con<B>>();
+		}
+
+		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename A::operations>, bool> = true>
+		inline operator con<B>& ()
+		{
+			return ref<con<B>>();
+		}
+
+		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename A::operations>, bool> = true>
+		inline operator var<B> const& () const
+		{
+			return ref<var<B>>();
+		}
+
+		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename A::operations>, bool> = true>
+		inline operator var<B>& ()
+		{
+			return ref<var<B>>();
+		}
+
 		template <typename F, typename O, typename... Ps>
 		inline auto op(F O::* p, Ps&&... ps)
 		{
@@ -434,13 +470,13 @@ namespace strange
 			}
 		}
 
-		inline ptr(con<A> const& original) : A{ original }
+		explicit inline ptr(con<A> const& original) : A{ original }
 		{
 			inc();
 			mut();
 		}
 
-		inline ptr(var<A> const& original) : A{ original }
+		explicit inline ptr(var<A> const& original) : A{ original }
 		{
 			inc();
 			mut();
@@ -452,21 +488,21 @@ namespace strange
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline ptr(con<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
+		explicit inline ptr(con<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			inc();
 			mut();
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline ptr(var<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
+		explicit inline ptr(var<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			inc();
 			mut();
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline ptr(ptr<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
+		explicit inline ptr(ptr<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			inc();
 		}
@@ -653,6 +689,18 @@ namespace strange
 		{
 			static_assert(typename R::is_pointer{ true });
 			return reinterpret_cast<R&>(*this);
+		}
+
+		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename A::operations>, bool> = true>
+		inline operator ptr<B> const& () const
+		{
+			return ref<ptr<B>>();
+		}
+
+		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename A::operations>, bool> = true>
+		inline operator ptr<B>& ()
+		{
+			return ref<ptr<B>>();
 		}
 
 		template <typename F, typename O, typename... Ps>

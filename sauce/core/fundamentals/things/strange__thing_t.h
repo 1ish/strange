@@ -16,10 +16,12 @@ namespace strange
 
 		virtual ~thing_t();
 
+	private:
 		// any_o
 		static any_o const* operations_f();
 		static any_o const* pointer_operations_f();
 
+	protected:
 		// inline
 		static inline void _initialise_m(any_a& me_ /* :<any>= */)
 		{
@@ -30,6 +32,7 @@ namespace strange
 		{
 		}
 
+	public:
 		static inline bool _equal_e(con<> const& me_ /* :<any># */,
 			con<> const& other_ /* :<any># */)
 		{
@@ -66,6 +69,7 @@ namespace strange
 			return me_.t >= other_.t;
 		}
 
+	protected:
 		// any_a
 		static void _free_m(any_a& me_ /* :<any>= */);
 

@@ -5,7 +5,7 @@ namespace taste
 {
 	void testp(ptr<symbol_a>& symbol)
 	{
-		symbol.o->first_char(symbol);
+		symbol.o->first_char(symbol.val<con<symbol_a>>());
 	}
 
 	var<symbol_a> testfun(con<symbol_a> const& a, con<symbol_a> const& b)
@@ -27,9 +27,9 @@ namespace taste
 
 		auto p = ptr<symbol_a>{ symbol_t::create_f("pointer") };
 		auto q = ptr<symbol_a>(symbol_t::create_f("q"));
-		p.o->first_char(p);
+		p.o->first_char(p.val<con<symbol_a>>());
 		p = q;
-		p.o->first_char(p);
+		p.o->first_char(p.val<con<symbol_a>>());
 		testp(p);
 		testp(q);
 

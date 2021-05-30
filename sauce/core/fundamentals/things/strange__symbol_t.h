@@ -18,10 +18,12 @@ namespace strange
 
 		virtual ~symbol_t();
 
+	private:
 		// symbol_o
 		static symbol_o const* operations_f();
 		static symbol_o const* pointer_operations_f();
 
+	public:
 		// inline
 		static inline bool _equal_e(con<symbol_a> const& me_ /* :<symbol># */,
 			con<symbol_a> const& other_ /* :<symbol># */)
@@ -71,6 +73,7 @@ namespace strange
 				std::max(mt->length, other_.o->length(other_))) >= 0;
 		}
 
+	protected:
 		// any_a
 		static void _copy_e(any_a const& me_ /* :<symbol># */,
 			any_a& copy_ /* :<symbol>= */);
