@@ -14,6 +14,10 @@ namespace strange
 		thing_t(any_a& me_ /* :<any>= */,
 			any_a const& original_ /* :<any># */);
 
+		thing_t(thing_t const&) = delete;
+
+		thing_t& operator=(thing_t const&) = delete;
+
 		virtual ~thing_t();
 
 	private:

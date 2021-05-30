@@ -16,6 +16,10 @@ namespace strange
 		symbol_t(any_a& me_ /* :<symbol>= */,
 			any_a const& original_ /* :<symbol># */);
 
+		symbol_t(symbol_t const&) = delete;
+
+		symbol_t& operator=(symbol_t const&) = delete;
+
 		virtual ~symbol_t();
 
 	private:
