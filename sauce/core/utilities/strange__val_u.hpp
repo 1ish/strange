@@ -107,6 +107,8 @@ namespace strange
 			}
 		}
 
+		using is_constant = bool;
+		using non_variable = bool;
 		using non_pointer = bool;
 
 		template <typename R, typename R::non_pointer = true>
@@ -143,7 +145,7 @@ namespace strange
 		template <typename R>
 		inline R const& ref() const
 		{
-			static_assert(typename R::non_pointer{ true });
+			static_assert(typename R::is_constant{ true });
 			return reinterpret_cast<R const&>(*this);
 		}
 
@@ -151,12 +153,6 @@ namespace strange
 		inline operator con<B> const&() const
 		{
 			return ref<con<B>>();
-		}
-
-		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename A::operations>, bool> = true>
-		inline operator var<B> const& () const
-		{
-			return ref<var<B>>();
 		}
 
 		template <typename F, typename O, typename... Ps>
@@ -365,6 +361,8 @@ namespace strange
 			}
 		}
 
+		using non_constant = bool;
+		using is_variable = bool;
 		using non_pointer = bool;
 
 		template <typename R, typename R::non_pointer = true>
@@ -644,6 +642,8 @@ namespace strange
 			}
 		}
 
+		using non_constant = bool;
+		using non_variable = bool;
 		using is_pointer = bool;
 
 		template <typename R, typename R::is_pointer = true>

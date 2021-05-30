@@ -44,6 +44,10 @@ namespace taste
 		testp(q);
 		testr(sym("pointer").ref<var<symbol_a>>());
 		testcr(sym("pointer"));
+		auto const c = con<symbol_a>{ sym("const") };
+		//NO testr(c);
+		//NO testcr(c.ref<var<symbol_a>>());
+		//NO testcr(c);
 
 		tv = s;
 		//NO s = v;
