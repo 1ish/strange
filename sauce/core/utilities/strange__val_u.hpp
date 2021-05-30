@@ -149,8 +149,21 @@ namespace strange
 			return reinterpret_cast<R const&>(*this);
 		}
 
+		template <typename R>
+		inline R& ref()
+		{
+			static_assert(typename R::is_constant{ true });
+			return reinterpret_cast<R&>(*this);
+		}
+
 		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename A::operations>, bool> = true>
-		inline operator con<B> const&() const
+		inline operator con<B> const& () const
+		{
+			return ref<con<B>>();
+		}
+
+		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename A::operations>, bool> = true>
+		inline operator con<B>& ()
 		{
 			return ref<con<B>>();
 		}
@@ -435,7 +448,7 @@ namespace strange
 		}
 
 		template <typename F, typename O, typename... Ps>
-		inline auto op(F O::* p, Ps&&... ps)
+		inline auto op(F O::* p, Ps&&... ps) const
 		{
 			return (A::o->*p)(*this, ps...);
 		}
@@ -461,7 +474,7 @@ namespace strange
 			mut();
 		}
 
-		explicit inline ptr(A const& abstraction) :A{ abstraction }
+		explicit inline ptr(A const& abstraction) : A{ abstraction }
 		{
 			inc();
 			if (!A::o->_pointer(reinterpret_cast<con<> const&>(*this)))
@@ -659,7 +672,7 @@ namespace strange
 		{
 			R r;
 			A::o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<> const&>(r));
-			r.o->_set_pointer(reinterpret_cast<var<>&>(r), false);
+			r.o->_set_pointer(reinterpret_cast<var<> const&>(r), false);
 			r.mut();
 			return r;
 		}
@@ -674,7 +687,7 @@ namespace strange
 		inline R val() const
 		{
 			R r{ reinterpret_cast<R const&>(*this) };
-			r.o->_set_pointer(reinterpret_cast<var<>&>(r), false);
+			r.o->_set_pointer(reinterpret_cast<var<> const&>(r), false);
 			r.mut();
 			return r;
 		}
@@ -706,7 +719,7 @@ namespace strange
 		}
 
 		template <typename F, typename O, typename... Ps>
-		inline auto op(F O::* p, Ps&&... ps)
+		inline auto op(F O::* p, Ps&&... ps) const
 		{
 			return (A::o->*p)(*this, ps...);
 		}
