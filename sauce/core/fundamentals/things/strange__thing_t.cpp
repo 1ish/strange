@@ -164,7 +164,7 @@ namespace strange
 		return !me_.t->error.t;
 	}
 
-	void thing_t::set_error_m(var<>& me_ /* :<any>= */,
+	void thing_t::set_error_m(var<> const& me_ /* :<any>= */,
 		con<> const& error_ /* :<any># */)
 	{
 		auto& mate = reinterpret_cast<var<>&>(me_.t->error);

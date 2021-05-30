@@ -101,7 +101,7 @@ namespace strange
 
 		static bool something_e(con<> const& me_ /* :<any># */);
 
-		static void set_error_m(var<>& me_ /* :<any>= */,
+		static void set_error_m(var<> const& me_ /* :<any>= */,
 			con<> const& error_ /* :<any># */);
 
 		static var<> error_e(con<> const& me_ /* :<any># */);

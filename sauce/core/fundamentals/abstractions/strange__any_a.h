@@ -30,7 +30,7 @@ namespace strange
 
 		bool (*something)(con<> const& me_);
 
-		void (*set_error)(var<>& me_,
+		void (*set_error)(var<> const& me_,
 			con<> const& error_);
 
 		var<> (*error)(con<> const& me_);
