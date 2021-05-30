@@ -13,6 +13,11 @@ namespace taste
 		return a.o->add(a, b);
 	}
 
+	void testr(var<symbol_a>& param)
+	{
+		param.o->first_char(param);
+	}
+
 	void test()
 	{
 		auto v = var(symbol_t::create_f("auto"));
@@ -32,6 +37,8 @@ namespace taste
 		p.o->first_char(p.val<con<symbol_a>>());
 		testp(p);
 		testp(q);
+		testr(sym("pointer").ref<var<symbol_a>>());
+		//NO testr(sym("pointer"));
 
 		tv = s;
 		//NO s = v;
