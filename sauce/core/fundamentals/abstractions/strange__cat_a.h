@@ -5,11 +5,13 @@ namespace strange
 {
 	struct cat_o : symbol_o
 	{
+		bool (*native)(con<cat_a> const& me_);
+
 		int64_t (*order)(con<cat_a> const& me_);
 
 		var<symbol_a> (*name)(con<cat_a> const& me_);
 
-		//TODO var<flock_a<cat_a>> (*aspects)(con<cat_a> const& me_);
+		//TODO var<flock_a<var<cat_a>>> (*aspects)(con<cat_a> const& me_);
 	};
 
 	struct cat_a
