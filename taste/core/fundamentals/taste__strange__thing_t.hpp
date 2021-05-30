@@ -47,6 +47,10 @@ namespace taste
 		var<any_a> anything = sym("symbol");
 		//NO var<symbol_a> symbol = thing_t::create_f();
 		auto const test_fun = testfun(sym("test"), sym("fun"));
+
+		var<> anysym = sym("s");
+		anysym.dyn<con<symbol_a>>();
+		anysym.dyn<ptr<symbol_a>>();
 	}
 }
 

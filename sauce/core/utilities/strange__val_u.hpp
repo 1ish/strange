@@ -54,22 +54,19 @@ namespace strange
 			mut();
 		}
 
-		template <typename D,
-			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline con(con<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			inc();
 		}
 
-		template <typename D,
-			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline con(var<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			inc();
 		}
 
-		template <typename D,
-			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline con(ptr<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			inc();
@@ -110,27 +107,42 @@ namespace strange
 
 		using non_pointer = bool;
 
-		template <typename T>
-		inline T dyn() const
+		template <typename R, typename R::non_pointer = true>
+		inline R dyn() const
 		{
-			static_assert(typename T::non_pointer{ true });
-			T t;
-			t.o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<>&>(t));
-			return t;
+			R r;
+			A::o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<>&>(r));
+			return r;
 		}
 
-		template <typename T>
-		inline T val() const
+		template <typename R, typename R::is_pointer = true>
+		inline R dyn() const
 		{
-			static_assert(typename T::non_pointer{ true });
-			return T{ reinterpret_cast<T const&>(*this) };
+			R r;
+			A::o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<>&>(r));
+			r.mut();
+			return r;
 		}
 
-		template <typename T>
-		inline T const& ref() const
+		template <typename R, typename R::non_pointer = true>
+		inline R val() const
 		{
-			static_assert(typename T::non_pointer{ true });
-			return reinterpret_cast<T const&>(*this);
+			return R{ reinterpret_cast<R const&>(*this) };
+		}
+
+		template <typename R, typename R::is_pointer = true>
+		inline R val() const
+		{
+			R r{ reinterpret_cast<R const&>(*this) };
+			r.mut();
+			return r;
+		}
+
+		template <typename R>
+		inline R const& ref() const
+		{
+			static_assert(typename R::non_pointer{ true });
+			return reinterpret_cast<R const&>(*this);
 		}
 	};
 
@@ -179,22 +191,19 @@ namespace strange
 			mut();
 		}
 
-		template <typename D,
-			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline var(con<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			inc();
 		}
 
-		template <typename D,
-			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline var(var<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			inc();
 		}
 
-		template <typename D,
-			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline var(ptr<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			inc();
@@ -257,8 +266,7 @@ namespace strange
 			return *this;
 		}
 
-		template <typename D,
-			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline var const& operator=(con<D> const& original)
 		{
 			if (A::t != original.t)
@@ -275,8 +283,7 @@ namespace strange
 			return *this;
 		}
 
-		template <typename D,
-			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline var const& operator=(var<D> const& original)
 		{
 			if (A::t != original.t)
@@ -293,8 +300,7 @@ namespace strange
 			return *this;
 		}
 
-		template <typename D,
-			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline var const& operator=(ptr<D> const& original)
 		{
 			if (A::t != original.t)
@@ -341,34 +347,49 @@ namespace strange
 
 		using non_pointer = bool;
 
-		template <typename T>
-		inline T dyn() const
+		template <typename R, typename R::non_pointer = true>
+		inline R dyn() const
 		{
-			static_assert(typename T::non_pointer{ true });
-			T t;
-			t.o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<>&>(t));
-			return t;
+			R r;
+			A::o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<>&>(r));
+			return r;
 		}
 
-		template <typename T>
-		inline T val() const
+		template <typename R, typename R::is_pointer = true>
+		inline R dyn() const
 		{
-			static_assert(typename T::non_pointer{ true });
-			return T{ reinterpret_cast<T const&>(*this) };
+			R r;
+			A::o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<>&>(r));
+			r.mut();
+			return r;
 		}
 
-		template <typename T>
-		inline T const& ref() const
+		template <typename R, typename R::non_pointer = true>
+		inline R val() const
 		{
-			static_assert(typename T::non_pointer{ true });
-			return reinterpret_cast<T const&>(*this);
+			return R{ reinterpret_cast<R const&>(*this) };
 		}
 
-		template <typename T>
-		inline T& ref()
+		template <typename R, typename R::is_pointer = true>
+		inline R val() const
 		{
-			static_assert(typename T::non_pointer{ true });
-			return reinterpret_cast<T&>(*this);
+			R r{ reinterpret_cast<R const&>(*this) };
+			r.mut();
+			return r;
+		}
+
+		template <typename R>
+		inline R const& ref() const
+		{
+			static_assert(typename R::non_pointer{ true });
+			return reinterpret_cast<R const&>(*this);
+		}
+
+		template <typename R>
+		inline R& ref()
+		{
+			static_assert(typename R::non_pointer{ true });
+			return reinterpret_cast<R&>(*this);
 		}
 	};
 
@@ -378,7 +399,7 @@ namespace strange
 		inline ptr()
 		{
 			auto n = A::t->create_nothing_f();
-			n.o->_set_pointer(&n, true);
+			n.o->_set_pointer(n, true);
 			static typename A::operations const operations = [](void const* const nops, uint64_t const size)
 			{
 				typename A::operations ops = {};
@@ -418,24 +439,21 @@ namespace strange
 			inc();
 		}
 
-		template <typename D,
-			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline ptr(con<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			inc();
 			mut();
 		}
 
-		template <typename D,
-			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline ptr(var<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			inc();
 			mut();
 		}
 
-		template <typename D,
-			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline ptr(ptr<D> const& derived) : A{ reinterpret_cast<A const&>(derived) }
 		{
 			inc();
@@ -496,8 +514,7 @@ namespace strange
 			return *this;
 		}
 
-		template <typename D,
-			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline ptr const& operator=(con<D> const& original)
 		{
 			if (A::t != original.t)
@@ -515,8 +532,7 @@ namespace strange
 			return *this;
 		}
 
-		template <typename D,
-			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline ptr const& operator=(var<D> const& original)
 		{
 			if (A::t != original.t)
@@ -534,8 +550,7 @@ namespace strange
 			return *this;
 		}
 
-		template <typename D,
-			std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline ptr const& operator=(ptr<D> const& original)
 		{
 			if (A::t != original.t)
@@ -581,34 +596,51 @@ namespace strange
 
 		using is_pointer = bool;
 
-		template <typename T>
-		inline T dyn() const
+		template <typename R, typename R::is_pointer = true>
+		inline R dyn() const
 		{
-			static_assert(typename T::is_pointer{ true });
-			T t;
-			t.o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<>&>(t));
-			return t;
+			R r;
+			A::o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<>&>(r));
+			return r;
 		}
 
-		template <typename T>
-		inline T val() const
+		template <typename R, typename R::non_pointer = true>
+		inline R dyn() const
 		{
-			static_assert(typename T::is_pointer{ true });
-			return T{ reinterpret_cast<T const&>(*this) };
+			R r;
+			A::o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<>&>(r));
+			r.o->_set_pointer(reinterpret_cast<var<>&>(r), false);
+			r.mut();
+			return r;
 		}
 
-		template <typename T>
-		inline T const& ref() const
+		template <typename R, typename R::is_pointer = true>
+		inline R val() const
 		{
-			static_assert(typename T::is_pointer{ true });
-			return reinterpret_cast<T const&>(*this);
+			return R{ reinterpret_cast<R const&>(*this) };
 		}
 
-		template <typename T>
-		inline T& ref()
+		template <typename R, typename R::non_pointer = true>
+		inline R val() const
 		{
-			static_assert(typename T::is_pointer{ true });
-			return reinterpret_cast<T&>(*this);
+			R r{ reinterpret_cast<R const&>(*this) };
+			r.o->_set_pointer(reinterpret_cast<var<>&>(r), false);
+			r.mut();
+			return r;
+		}
+
+		template <typename R>
+		inline R const& ref() const
+		{
+			static_assert(typename R::is_pointer{ true });
+			return reinterpret_cast<R const&>(*this);
+		}
+
+		template <typename R>
+		inline R& ref()
+		{
+			static_assert(typename R::is_pointer{ true });
+			return reinterpret_cast<R&>(*this);
 		}
 	};
 }
