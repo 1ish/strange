@@ -75,7 +75,7 @@ namespace strange
 
 	protected:
 		// any_a
-		static void _free_m(any_a& me_ /* :<any>= */);
+		static void _free_m(any_a const& me_ /* :<any>= */);
 
 		static void _copy_e(any_a const& me_ /* :<any># */,
 			any_a& copy_ /* :<any>= */);
@@ -91,7 +91,7 @@ namespace strange
 
 		static var<symbol_a> type_e(con<> const& me_ /* :<any># */);
 
-		static void _set_pointer_m(var<>& me_ /* :<any>= */,
+		static void _set_pointer_m(var<> const& me_ /* :<any>= */,
 			bool is_pointer /* :_bool_# */);
 
 		static bool _pointer_e(con<> const& me_ /* :<any># */);

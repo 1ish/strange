@@ -114,7 +114,7 @@ namespace strange
 		return r;
 	}
 
-	void symbol_t::_set_pointer_m(var<>& me_ /* :<symbol>= */,
+	void symbol_t::_set_pointer_m(var<> const& me_ /* :<symbol>= */,
 		bool is_pointer /* :_bool_# */)
 	{
 		if (is_pointer)

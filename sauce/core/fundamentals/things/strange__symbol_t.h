@@ -87,7 +87,7 @@ namespace strange
 
 		static var<symbol_a> type_e(con<> const& me_ /* :<symbol># */);
 
-		static void _set_pointer_m(var<>& me_ /* :<symbol>= */,
+		static void _set_pointer_m(var<> const& me_ /* :<symbol>= */,
 			bool is_pointer /* :_bool_# */);
 
 		static uint64_t hash_e(con<> const& me_ /* :<symbol># */);

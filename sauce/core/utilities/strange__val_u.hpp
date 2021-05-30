@@ -86,15 +86,15 @@ namespace strange
 			++(A::t->refs);
 		}
 
-		inline void dec()
+		inline void dec() const
 		{
 			if (!--(A::t->refs))
 			{
-				A::o->_free(reinterpret_cast<any_a&>(*this));
+				A::o->_free(reinterpret_cast<any_a const&>(*this));
 			}
 		}
 
-		inline void mut()
+		inline void mut() const
 		{
 			if (A::t->refs > 1)
 			{
@@ -180,7 +180,7 @@ namespace strange
 			inc();
 		}
 
-		explicit inline var(A const& abstraction) :A { abstraction }
+		explicit inline var(A const& abstraction) : A{ abstraction }
 		{
 			inc();
 			if (A::o->_pointer(*this))
@@ -232,7 +232,7 @@ namespace strange
 			dec();
 		}
 
-		inline var& operator=(con<A> const& original)
+		inline var const& operator=(con<A> const& original) const
 		{
 			if (A::t != original.t)
 			{
@@ -248,7 +248,7 @@ namespace strange
 			return *this;
 		}
 
-		inline var& operator=(var const& original) // copy assignment operator
+		inline var const& operator=(var const& original) const // copy assignment operator
 		{
 			if (A::t != original.t)
 			{
@@ -264,7 +264,7 @@ namespace strange
 			return *this;
 		}
 
-		inline var& operator=(ptr<A> const& original)
+		inline var const& operator=(ptr<A> const& original) const
 		{
 			if (A::t != original.t)
 			{
@@ -283,7 +283,7 @@ namespace strange
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline var& operator=(con<D> const& original)
+		inline var const& operator=(con<D> const& original) const
 		{
 			if (A::t != original.t)
 			{
@@ -300,7 +300,7 @@ namespace strange
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline var& operator=(var<D> const& original)
+		inline var const& operator=(var<D> const& original) const
 		{
 			if (A::t != original.t)
 			{
@@ -317,7 +317,7 @@ namespace strange
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline var& operator=(ptr<D> const& original)
+		inline var const& operator=(ptr<D> const& original) const
 		{
 			if (A::t != original.t)
 			{
@@ -340,15 +340,15 @@ namespace strange
 			++(A::t->refs);
 		}
 
-		inline void dec()
+		inline void dec() const
 		{
 			if (!--(A::t->refs))
 			{
-				A::o->_free(reinterpret_cast<any_a&>(*this));
+				A::o->_free(reinterpret_cast<any_a const&>(*this));
 			}
 		}
 
-		inline void mut()
+		inline void mut() const
 		{
 			if (A::t->refs > 1)
 			{
@@ -512,7 +512,7 @@ namespace strange
 			dec();
 		}
 
-		inline ptr& operator=(con<A> const& original)
+		inline ptr const& operator=(con<A> const& original) const
 		{
 			if (A::t != original.t)
 			{
@@ -529,7 +529,7 @@ namespace strange
 			return *this;
 		}
 
-		inline ptr& operator=(var<A> const& original)
+		inline ptr const& operator=(var<A> const& original) const
 		{
 			if (A::t != original.t)
 			{
@@ -546,7 +546,7 @@ namespace strange
 			return *this;
 		}
 
-		inline ptr& operator=(ptr const& original) // copy assignment operator
+		inline ptr const& operator=(ptr const& original) const // copy assignment operator
 		{
 			if (A::t != original.t)
 			{
@@ -563,25 +563,7 @@ namespace strange
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline ptr& operator=(con<D> const& original)
-		{
-			if (A::t != original.t)
-			{
-				dec();
-				A::t = original.t;
-				A::o = original.o;
-				inc();
-			}
-			else
-			{
-				A::o = original.o;
-			}
-			mut();
-			return *this;
-		}
-
-		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline ptr& operator=(var<D> const& original)
+		inline ptr const& operator=(con<D> const& original) const
 		{
 			if (A::t != original.t)
 			{
@@ -599,7 +581,25 @@ namespace strange
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline ptr& operator=(ptr<D> const& original)
+		inline ptr const& operator=(var<D> const& original) const
+		{
+			if (A::t != original.t)
+			{
+				dec();
+				A::t = original.t;
+				A::o = original.o;
+				inc();
+			}
+			else
+			{
+				A::o = original.o;
+			}
+			mut();
+			return *this;
+		}
+
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		inline ptr const& operator=(ptr<D> const& original) const
 		{
 			if (A::t != original.t)
 			{
@@ -620,15 +620,15 @@ namespace strange
 			++(A::t->refs);
 		}
 
-		inline void dec()
+		inline void dec() const
 		{
 			if (!--(A::t->refs))
 			{
-				A::o->_free(reinterpret_cast<any_a&>(*this));
+				A::o->_free(reinterpret_cast<any_a const&>(*this));
 			}
 		}
 
-		inline void mut()
+		inline void mut() const
 		{
 			if (A::t->refs > 1)
 			{
@@ -638,7 +638,7 @@ namespace strange
 				A::t = cp.t;
 				A::o = cp.o;
 				inc();
-				A::o->_set_pointer(reinterpret_cast<var<>&>(*this), true);
+				A::o->_set_pointer(reinterpret_cast<var<> const&>(*this), true);
 			}
 		}
 

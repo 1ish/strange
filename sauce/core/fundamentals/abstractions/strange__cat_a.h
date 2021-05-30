@@ -19,8 +19,8 @@ namespace strange
 		using operations = cat_o;
 		using creator = var<cat_a>(*)();
 
-		thing_t* t;
-		operations const* o;
+		mutable thing_t* t;
+		mutable operations const* o;
 
 		static var<symbol_a> cat_e(con<> const& me_); //TODO cat
 

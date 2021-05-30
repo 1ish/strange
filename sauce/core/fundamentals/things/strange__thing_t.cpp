@@ -75,7 +75,7 @@ namespace strange
 	}
 
 	// any_a
-	void thing_t::_free_m(any_a& me_ /* :<any>= */)
+	void thing_t::_free_m(any_a const& me_ /* :<any>= */)
 	{
 		delete me_.t;
 	}
@@ -117,7 +117,7 @@ namespace strange
 		return r;
 	}
 
-	void thing_t::_set_pointer_m(var<>& me_ /* :<any>= */,
+	void thing_t::_set_pointer_m(var<> const& me_ /* :<any>= */,
 		bool is_pointer /* :_bool_# */)
 	{
 		if (is_pointer)
