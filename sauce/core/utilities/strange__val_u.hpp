@@ -37,7 +37,7 @@ namespace strange
 			}
 		}
 
-		inline con(con const& original) : A{ original }
+		inline con(con const& original) : A{ original } // copy constructor
 		{
 			inc();
 		}
@@ -78,6 +78,8 @@ namespace strange
 		{
 			dec();
 		}
+
+		inline con& operator=(con const& original) = delete; // copy assignment operator
 
 		inline void inc() const
 		{
@@ -197,7 +199,7 @@ namespace strange
 			inc();
 		}
 
-		inline var(var const& original) : A{ original }
+		inline var(var const& original) : A{ original } // copy constructor
 		{
 			inc();
 		}
@@ -234,7 +236,7 @@ namespace strange
 			dec();
 		}
 
-		inline var const& operator=(con<A> const& original)
+		inline var& operator=(con<A> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -250,7 +252,7 @@ namespace strange
 			return *this;
 		}
 
-		inline var const& operator=(var const& original)
+		inline var& operator=(var const& original) // copy assignment operator
 		{
 			if (A::t != original.t)
 			{
@@ -266,7 +268,7 @@ namespace strange
 			return *this;
 		}
 
-		inline var const& operator=(ptr<A> const& original)
+		inline var& operator=(ptr<A> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -285,7 +287,7 @@ namespace strange
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline var const& operator=(con<D> const& original)
+		inline var& operator=(con<D> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -302,7 +304,7 @@ namespace strange
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline var const& operator=(var<D> const& original)
+		inline var& operator=(var<D> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -319,7 +321,7 @@ namespace strange
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline var const& operator=(ptr<D> const& original)
+		inline var& operator=(ptr<D> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -482,7 +484,7 @@ namespace strange
 			mut();
 		}
 
-		inline ptr(ptr const& original) : A{ original }
+		inline ptr(ptr const& original) : A{ original } // copy constructor
 		{
 			inc();
 		}
@@ -512,7 +514,7 @@ namespace strange
 			dec();
 		}
 
-		inline ptr const& operator=(con<A> const& original)
+		inline ptr& operator=(con<A> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -529,7 +531,7 @@ namespace strange
 			return *this;
 		}
 
-		inline ptr const& operator=(var<A> const& original)
+		inline ptr& operator=(var<A> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -546,7 +548,7 @@ namespace strange
 			return *this;
 		}
 
-		inline ptr const& operator=(ptr const& original)
+		inline ptr& operator=(ptr const& original) // copy assignment operator
 		{
 			if (A::t != original.t)
 			{
@@ -563,25 +565,7 @@ namespace strange
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline ptr const& operator=(con<D> const& original)
-		{
-			if (A::t != original.t)
-			{
-				dec();
-				A::t = original.t;
-				A::o = original.o;
-				inc();
-			}
-			else
-			{
-				A::o = original.o;
-			}
-			mut();
-			return *this;
-		}
-
-		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline ptr const& operator=(var<D> const& original)
+		inline ptr& operator=(con<D> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -599,7 +583,25 @@ namespace strange
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
-		inline ptr const& operator=(ptr<D> const& original)
+		inline ptr& operator=(var<D> const& original)
+		{
+			if (A::t != original.t)
+			{
+				dec();
+				A::t = original.t;
+				A::o = original.o;
+				inc();
+			}
+			else
+			{
+				A::o = original.o;
+			}
+			mut();
+			return *this;
+		}
+
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		inline ptr& operator=(ptr<D> const& original)
 		{
 			if (A::t != original.t)
 			{
