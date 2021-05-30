@@ -1,3 +1,3 @@
 export PATH=/c/sdavis3/clang/clang_10.0.0/bin:$PATH
 export LD_LIBRARY_PATH=/c/sdavis3/clang/clang_10.0.0/lib:$LD_LIBRARY_PATH
-clang++ -std=c++17 `find .. -name \*.cpp` -lpthread -I../../GSL/include
+clang++ -std=c++17 -Wall `find .. -name \*.cpp` -lpthread -I../../GSL/include

@@ -1,1 +1,1 @@
-g++ -std=c++17 `find .. -name \*.cpp` -lpthread -I../../GSL/include
+g++ -std=c++17 -Wall `find .. -name \*.cpp` -lpthread -I../../GSL/include
