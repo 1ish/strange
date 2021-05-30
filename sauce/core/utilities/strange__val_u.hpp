@@ -145,8 +145,8 @@ namespace strange
 			return reinterpret_cast<R const&>(*this);
 		}
 
-		template <typename F, typename... Ps>
-		inline auto op(F A::operations::* p, Ps&&... ps) const
+		template <typename F, typename O, typename... Ps>
+		inline auto op(F O::* p, Ps&&... ps) const
 		{
 			return (A::o->*p)(*this, ps...);
 		}
@@ -398,8 +398,8 @@ namespace strange
 			return reinterpret_cast<R&>(*this);
 		}
 
-		template <typename F, typename... Ps>
-		inline auto op(F A::operations::* p, Ps&&... ps)
+		template <typename F, typename O, typename... Ps>
+		inline auto op(F O::* p, Ps&&... ps)
 		{
 			return (A::o->*p)(*this, ps...);
 		}
@@ -655,8 +655,8 @@ namespace strange
 			return reinterpret_cast<R&>(*this);
 		}
 
-		template <typename F, typename... Ps>
-		inline auto op(F A::operations::* p, Ps&&... ps)
+		template <typename F, typename O, typename... Ps>
+		inline auto op(F O::* p, Ps&&... ps)
 		{
 			return (A::o->*p)(*this, ps...);
 		}
