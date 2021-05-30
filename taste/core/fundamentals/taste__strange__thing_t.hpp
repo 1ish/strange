@@ -51,6 +51,14 @@ namespace taste
 		var<> anysym = sym("s");
 		anysym.dyn<con<symbol_a>>();
 		anysym.dyn<ptr<symbol_a>>();
+
+		con<symbol_a> sss = sym("sss");
+		auto res = sss.op(&con<symbol_a>::operations::add, sym("2"));
+		res = sss.op(&symbol_a::operations::add, sym("2"));
+		res = sss.op(&symbol_o::add, sym("2"));
+		con<any_a> aaa = sym("aaa");
+		aaa.op(&any_o::type);
+		std__cout << "result: " << res.o->to_char_star(res) << "\n";
 	}
 }
 

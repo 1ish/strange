@@ -144,6 +144,12 @@ namespace strange
 			static_assert(typename R::non_pointer{ true });
 			return reinterpret_cast<R const&>(*this);
 		}
+
+		template <typename F, typename... Ps>
+		inline auto op(F A::operations::* p, Ps&&... ps) const
+		{
+			return (A::o->*p)(*this, ps...);
+		}
 	};
 
 	template <typename A>
@@ -390,6 +396,12 @@ namespace strange
 		{
 			static_assert(typename R::non_pointer{ true });
 			return reinterpret_cast<R&>(*this);
+		}
+
+		template <typename F, typename... Ps>
+		inline auto op(F A::operations::* p, Ps&&... ps)
+		{
+			return (A::o->*p)(*this, ps...);
 		}
 	};
 
@@ -641,6 +653,12 @@ namespace strange
 		{
 			static_assert(typename R::is_pointer{ true });
 			return reinterpret_cast<R&>(*this);
+		}
+
+		template <typename F, typename... Ps>
+		inline auto op(F A::operations::* p, Ps&&... ps)
+		{
+			return (A::o->*p)(*this, ps...);
 		}
 	};
 }
