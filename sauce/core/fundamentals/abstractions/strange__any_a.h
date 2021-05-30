@@ -16,7 +16,7 @@ namespace strange
 			con<> const& abstraction_);
 
 		bool (*as)(con<> const& me_,
-			var<>& abstraction_);
+			var<> const& abstraction_);
 
 		var<symbol_a> (*type)(con<> const& me_);
 

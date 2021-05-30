@@ -101,7 +101,7 @@ namespace strange
 	}
 
 	bool thing_t::as_e(con<> const& me_ /* :<any># */,
-		var<>& abstraction_ /* :<any>= */)
+		var<> const& abstraction_ /* :<any>= */)
 	{
 		if (!me_.o->is(me_, abstraction_))
 		{

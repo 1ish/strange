@@ -87,7 +87,7 @@ namespace strange
 			con<> const& abstraction_ /* :<any># */);
 
 		static bool as_e(con<> const& me_ /* :<any># */,
-			var<>& abstraction_ /* :<any>= */);
+			var<> const& abstraction_ /* :<any>= */);
 
 		static var<symbol_a> type_e(con<> const& me_ /* :<any># */);
 

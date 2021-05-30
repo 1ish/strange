@@ -115,7 +115,7 @@ namespace strange
 		inline R dyn() const
 		{
 			R r;
-			A::o->as(*this, reinterpret_cast<var<>&>(r));
+			A::o->as(*this, reinterpret_cast<var<> const&>(r));
 			return r;
 		}
 
@@ -123,7 +123,7 @@ namespace strange
 		inline R dyn() const
 		{
 			R r;
-			A::o->as(*this, reinterpret_cast<var<>&>(r));
+			A::o->as(*this, reinterpret_cast<var<> const&>(r));
 			r.mut();
 			return r;
 		}
@@ -369,7 +369,7 @@ namespace strange
 		inline R dyn() const
 		{
 			R r;
-			A::o->as(*this, reinterpret_cast<var<>&>(r));
+			A::o->as(*this, reinterpret_cast<var<> const&>(r));
 			return r;
 		}
 
@@ -377,7 +377,7 @@ namespace strange
 		inline R dyn() const
 		{
 			R r;
-			A::o->as(*this, reinterpret_cast<var<>&>(r));
+			A::o->as(*this, reinterpret_cast<var<> const&>(r));
 			r.mut();
 			return r;
 		}
@@ -650,7 +650,7 @@ namespace strange
 		inline R dyn() const
 		{
 			R r;
-			A::o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<>&>(r));
+			A::o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<> const&>(r));
 			return r;
 		}
 
@@ -658,7 +658,7 @@ namespace strange
 		inline R dyn() const
 		{
 			R r;
-			A::o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<>&>(r));
+			A::o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<> const&>(r));
 			r.o->_set_pointer(reinterpret_cast<var<>&>(r), false);
 			r.mut();
 			return r;
