@@ -189,13 +189,10 @@ namespace strange
 		{
 			mate.o = error_.o;
 		}
-		if (mate.o)
+		if (mate.o && mate.o->_pointer(mate))
 		{
-			if (mate.o->_pointer(mate))
-			{
-				mate.o->_set_pointer(mate, false);
-				mate.mut();
-			}
+			mate.o->_set_pointer(mate, false);
+			mate.mut();
 		}
 	}
 
