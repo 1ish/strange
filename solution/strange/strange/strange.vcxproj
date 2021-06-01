@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__any_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__cat_a.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__kind_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__symbol_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__symbol_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__thing_t.cpp" />
@@ -151,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__any_a.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__cat_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__kind_a.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__symbol_a.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__symbol_t.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__thing_t.h" />

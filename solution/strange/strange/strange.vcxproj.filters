@@ -78,6 +78,9 @@
     <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__cat_a.cpp">
       <Filter>Source Files\sauce\core\fundamentals\abstractions</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__kind_a.cpp">
+      <Filter>Source Files\sauce\core\fundamentals\abstractions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\sauce\strange.h">
@@ -105,6 +108,9 @@
       <Filter>Header Files\sauce\core\utilities</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__cat_a.h">
+      <Filter>Header Files\sauce\core\fundamentals\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__kind_a.h">
       <Filter>Header Files\sauce\core\fundamentals\abstractions</Filter>
     </ClInclude>
   </ItemGroup>
