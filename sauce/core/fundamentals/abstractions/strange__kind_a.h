@@ -5,16 +5,9 @@ namespace strange
 {
 	struct kind_o : symbol_o
 	{
-		enum class value_e
-		{
-			constant,
-			variable,
-			pointer,
-		};
-
 		var<cat_a> (*category)(con<kind_a> const& me_);
 
-		value_e (*value)(con<kind_a> const& me_);
+		behaviour_e (*behaviour)(con<kind_a> const& me_);
 	};
 
 	struct kind_a

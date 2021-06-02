@@ -19,6 +19,9 @@ namespace strange
 
 #include "utilities/strange__val_u.hpp"
 
+#include "fundamentals/enumerations/strange__representation_e.h"
+#include "fundamentals/enumerations/strange__behaviour_e.h"
+
 #include "fundamentals/abstractions/strange__any_a.h"
 #include "fundamentals/abstractions/strange__symbol_a.h"
 #include "fundamentals/abstractions/strange__cat_a.h"
