@@ -79,16 +79,10 @@ namespace strange
 
 	protected:
 		// any_a
-		static void _copy_e(any_a const& me_ /* :<symbol># */,
-			any_a& copy_ /* :<symbol>= */);
-
 		static bool is_e(con<> const& me_ /* :<symbol># */,
 			con<> const& abstraction_ /* :<any># */);
 
 		static var<symbol_a> type_e(con<> const& me_ /* :<symbol># */);
-
-		static void _set_pointer_m(var<> const& me_ /* :<symbol>= */,
-			bool is_pointer /* :_bool_# */);
 
 		static uint64_t hash_e(con<> const& me_ /* :<symbol># */);
 
@@ -109,6 +103,12 @@ namespace strange
 
 		static bool greater_or_equal_e(con<> const& me_ /* :<symbol># */,
 			con<> const& other_ /* :<any># */);
+
+		static void _copy_e(any_a const& me_ /* :<symbol># */,
+			any_a& copy_ /* :<symbol>= */);
+
+		static void _set_pointer_m(var<> const& me_ /* :<symbol>= */,
+			bool is_pointer /* :_bool_# */);
 
 		// symbol_a
 		static var<symbol_a> add_e(con<symbol_a> const& me_ /* :<symbol># */,

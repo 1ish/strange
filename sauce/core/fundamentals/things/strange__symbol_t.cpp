@@ -52,13 +52,9 @@ namespace strange
 			{
 				// any_a
 				symbol_a::cat_e,
-				_free_m,
-				_copy_e,
 				is_e,
 				as_e,
 				type_e,
-				_set_pointer_m,
-				_pointer_e,
 				set_something_m,
 				something_e,
 				set_error_m,
@@ -70,6 +66,10 @@ namespace strange
 				greater_e,
 				less_or_equal_e,
 				greater_or_equal_e,
+				_free_m,
+				_copy_e,
+				_set_pointer_m,
+				_pointer_e,
 			},
 			// symbol_a
 			add_e,
@@ -93,13 +93,6 @@ namespace strange
 	}
 
 	// any_a
-	void symbol_t::_copy_e(any_a const& me_ /* :<symbol># */,
-		any_a& copy_ /* :<symbol>= */)
-	{
-		new symbol_t{ copy_, me_ };
-		symbol_t::_clone_e(me_, copy_);
-	}
-
 	bool symbol_t::is_e(con<> const& me_ /* :<symbol># */,
 		con<> const& abstraction_ /* :<any># */)
 	{
@@ -112,19 +105,6 @@ namespace strange
 	{
 		static auto r = sym("strange::symbol");
 		return r;
-	}
-
-	void symbol_t::_set_pointer_m(var<> const& me_ /* :<symbol>= */,
-		bool is_pointer /* :_bool_# */)
-	{
-		if (is_pointer)
-		{
-			me_.o = symbol_t::pointer_operations_f();
-		}
-		else
-		{
-			me_.o = symbol_t::operations_f();
-		}
 	}
 
 	uint64_t symbol_t::hash_e(con<> const& me_ /* :<symbol># */)
@@ -197,6 +177,26 @@ namespace strange
 			return symbol_t::_greater_or_equal_e(me_.ref<con<symbol_a>>(), os);
 		}
 		return thing_t::greater_or_equal_e(me_, other_);
+	}
+
+	void symbol_t::_copy_e(any_a const& me_ /* :<symbol># */,
+		any_a& copy_ /* :<symbol>= */)
+	{
+		new symbol_t{ copy_, me_ };
+		symbol_t::_clone_e(me_, copy_);
+	}
+
+	void symbol_t::_set_pointer_m(var<> const& me_ /* :<symbol>= */,
+		bool is_pointer /* :_bool_# */)
+	{
+		if (is_pointer)
+		{
+			me_.o = symbol_t::pointer_operations_f();
+		}
+		else
+		{
+			me_.o = symbol_t::operations_f();
+		}
 	}
 
 	// symbol_a

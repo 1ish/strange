@@ -41,13 +41,9 @@ namespace strange
 		{
 			// any_a
 			any_a::cat_e,
-			_free_m,
-			_copy_e,
 			is_e,
 			as_e,
 			type_e,
-			_set_pointer_m,
-			_pointer_e,
 			set_something_m,
 			something_e,
 			set_error_m,
@@ -59,6 +55,10 @@ namespace strange
 			greater_e,
 			less_or_equal_e,
 			greater_or_equal_e,
+			_free_m,
+			_copy_e,
+			_set_pointer_m,
+			_pointer_e,
 		};
 		return &operations;
 	}
@@ -75,24 +75,6 @@ namespace strange
 	}
 
 	// any_a
-	void thing_t::_free_m(any_a const& me_ /* :<any>= */)
-	{
-		delete me_.t;
-	}
-
-	void thing_t::_copy_e(any_a const& me_ /* :<any># */,
-		any_a& copy_ /* :<any>= */)
-	{
-		new thing_t{ copy_, me_ };
-		thing_t::_clone_e(me_, copy_);
-	}
-
-	void thing_t::_no_copy_e(any_a const& me_ /* :<any># */,
-		any_a& copy_ /* :<any>= */)
-	{
-		copy_ = me_;
-	}
-
 	bool thing_t::is_e(con<> const& me_ /* :<any># */,
 		con<> const& abstraction_ /* :<any># */)
 	{
@@ -115,24 +97,6 @@ namespace strange
 	{
 		static auto r = sym("strange::thing");
 		return r;
-	}
-
-	void thing_t::_set_pointer_m(var<> const& me_ /* :<any>= */,
-		bool is_pointer /* :_bool_# */)
-	{
-		if (is_pointer)
-		{
-			me_.o = thing_t::pointer_operations_f();
-		}
-		else
-		{
-			me_.o = thing_t::operations_f();
-		}
-	}
-
-	bool thing_t::_pointer_e(con<> const& me_ /* :<any># */)
-	{
-		return me_.o->_copy == thing_t::_no_copy_e;
 	}
 
 	void thing_t::set_something_m(var<> const& me_ /* :<any>= */,
@@ -244,6 +208,42 @@ namespace strange
 		con<> const& other_ /* :<any># */)
 	{
 		return thing_t::_greater_or_equal_e(me_, other_);
+	}
+
+	void thing_t::_free_m(any_a const& me_ /* :<any>= */)
+	{
+		delete me_.t;
+	}
+
+	void thing_t::_copy_e(any_a const& me_ /* :<any># */,
+		any_a& copy_ /* :<any>= */)
+	{
+		new thing_t{ copy_, me_ };
+		thing_t::_clone_e(me_, copy_);
+	}
+
+	void thing_t::_no_copy_e(any_a const& me_ /* :<any># */,
+		any_a& copy_ /* :<any>= */)
+	{
+		copy_ = me_;
+	}
+
+	void thing_t::_set_pointer_m(var<> const& me_ /* :<any>= */,
+		bool is_pointer /* :_bool_# */)
+	{
+		if (is_pointer)
+		{
+			me_.o = thing_t::pointer_operations_f();
+		}
+		else
+		{
+			me_.o = thing_t::operations_f();
+		}
+	}
+
+	bool thing_t::_pointer_e(con<> const& me_ /* :<any># */)
+	{
+		return me_.o->_copy == thing_t::_no_copy_e;
 	}
 
 	// creators

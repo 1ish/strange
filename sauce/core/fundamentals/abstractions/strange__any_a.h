@@ -7,11 +7,6 @@ namespace strange
 	{
 		var<symbol_a> (*cat)(con<> const& me_); //TODO cat
 
-		void (*_free)(any_a const& me_);
-
-		void (*_copy)(any_a const& me_,
-			any_a& copy_);
-
 		bool (*is)(con<> const& me_,
 			con<> const& abstraction_);
 
@@ -19,11 +14,6 @@ namespace strange
 			var<> const& abstraction_);
 
 		var<symbol_a> (*type)(con<> const& me_);
-
-		void (*_set_pointer)(var<> const& me_,
-			bool is_pointer);
-
-		bool (*_pointer)(con<> const& me_);
 
 		void (*set_something)(var<> const& me_,
 			bool is_something);
@@ -54,6 +44,16 @@ namespace strange
 
 		bool (*greater_or_equal)(con<> const& me_,
 			con<> const& other_);
+
+		void (*_free)(any_a const& me_);
+
+		void (*_copy)(any_a const& me_,
+			any_a& copy_);
+
+		void (*_set_pointer)(var<> const& me_,
+			bool is_pointer);
+
+		bool (*_pointer)(con<> const& me_);
 	};
 
 	struct any_a

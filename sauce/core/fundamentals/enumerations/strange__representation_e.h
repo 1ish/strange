@@ -8,6 +8,7 @@ namespace strange
 		native,
 		enumeration,
 		abstraction,
+		dimension,
 	};
 }
 
