@@ -8,6 +8,10 @@ namespace strange
 		var<cat_a> (*category)(con<kind_a> const& me_);
 
 		behaviour_e (*behaviour)(con<kind_a> const& me_);
+
+		// constant  :<_bool_>#
+		// variable  :<|behaviour|>=
+		// pointer   :<symbol>&
 	};
 
 	struct kind_a

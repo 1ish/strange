@@ -12,6 +12,10 @@ namespace strange
 		//TODO var<flock_a<var<cat_a>>> (*aspects)(con<cat_a> const& me_);
 
 		int64_t (*order)(con<cat_a> const& me_);
+
+		// native       <_bool_>
+		// enumeration  <|behaviour|>
+		// abstraction  <symbol>
 	};
 
 	struct cat_a
