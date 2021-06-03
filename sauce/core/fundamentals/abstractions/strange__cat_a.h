@@ -27,7 +27,7 @@ namespace strange
 		mutable thing_t* t;
 		mutable operations const* o;
 
-		static var<symbol_a> cat_e(con<> const& me); //TODO cat
+		static var<symbol_a> cat_f(con<> const& me); //TODO cat
 
 		static creator creator_f(con<symbol_a> const& scope,
 			con<symbol_a> const& thing,

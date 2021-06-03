@@ -27,47 +27,47 @@ namespace strange
 
 	protected:
 		// inline
-		static inline void _initialise_m(any_a& me /* :<any>= */)
+		static inline void _initialise_f(any_a& me /* :<any>= */)
 		{
 		}
 
-		static inline void _clone_e(any_a const& me /* :<any># */,
+		static inline void _clone_f(any_a const& me /* :<any># */,
 			any_a& copy /* :<any>= */)
 		{
 		}
 
 	public:
-		static inline bool _equal_e(con<> const& me /* :<any># */,
+		static inline bool _equal_f(con<> const& me /* :<any># */,
 			con<> const& other /* :<any># */)
 		{
 			return me.t == other.t;
 		}
 
-		static inline bool _not_equal_e(con<> const& me /* :<any># */,
+		static inline bool _not_equal_f(con<> const& me /* :<any># */,
 			con<> const& other /* :<any># */)
 		{
 			return me.t != other.t;
 		}
 
-		static inline bool _less_e(con<> const& me /* :<any># */,
+		static inline bool _less_f(con<> const& me /* :<any># */,
 			con<> const& other /* :<any># */)
 		{
 			return me.t < other.t;
 		}
 
-		static inline bool _greater_e(con<> const& me /* :<any># */,
+		static inline bool _greater_f(con<> const& me /* :<any># */,
 			con<> const& other /* :<any># */)
 		{
 			return me.t > other.t;
 		}
 
-		static inline bool _less_or_equal_e(con<> const& me /* :<any># */,
+		static inline bool _less_or_equal_f(con<> const& me /* :<any># */,
 			con<> const& other /*: <any># */)
 		{
 			return me.t <= other.t;
 		}
 
-		static inline bool _greater_or_equal_e(con<> const& me /* :<any># */,
+		static inline bool _greater_or_equal_f(con<> const& me /* :<any># */,
 			con<> const& other /* :<any># */)
 		{
 			return me.t >= other.t;
@@ -75,56 +75,56 @@ namespace strange
 
 	protected:
 		// any_a
-		static bool is_e(con<> const& me /* :<any># */,
+		static bool is_f(con<> const& me /* :<any># */,
 			con<> const& abstraction /* :<any># */);
 
-		static bool as_e(con<> const& me /* :<any># */,
+		static bool as_f(con<> const& me /* :<any># */,
 			var<> const& abstraction /* :<any>= */);
 
-		static var<symbol_a> type_e(con<> const& me /* :<any># */);
+		static var<symbol_a> type_f(con<> const& me /* :<any># */);
 
-		static void set_something_m(var<> const& me /* :<any>= */,
+		static void set_something_f(var<> const& me /* :<any>= */,
 			bool is_something /* :_bool_# */);
 
-		static bool something_e(con<> const& me /* :<any># */);
+		static bool something_f(con<> const& me /* :<any># */);
 
-		static void set_error_m(var<> const& me /* :<any>= */,
+		static void set_error_f(var<> const& me /* :<any>= */,
 			con<> const& error /* :<any># */);
 
-		static var<> error_e(con<> const& me /* :<any># */);
+		static var<> error_f(con<> const& me /* :<any># */);
 
-		static uint64_t hash_e(con<> const& me /* :<any># */);
+		static uint64_t hash_f(con<> const& me /* :<any># */);
 
-		static bool equal_e(con<> const& me /* :<any># */,
+		static bool equal_f(con<> const& me /* :<any># */,
 			con<> const& other /* :<any># */);
 
-		static bool not_equal_e(con<> const& me /* :<any># */,
+		static bool not_equal_f(con<> const& me /* :<any># */,
 			con<> const& other /* :<any># */);
 
-		static bool less_e(con<> const& me /* :<any># */,
+		static bool less_f(con<> const& me /* :<any># */,
 			con<> const& other /* :<any># */);
 
-		static bool greater_e(con<> const& me /* :<any># */,
+		static bool greater_f(con<> const& me /* :<any># */,
 			con<> const& other /* :<any># */);
 
-		static bool less_or_equal_e(con<> const& me /* :<any># */,
+		static bool less_or_equal_f(con<> const& me /* :<any># */,
 			con<> const& other /* :<any># */);
 
-		static bool greater_or_equal_e(con<> const& me /* :<any># */,
+		static bool greater_or_equal_f(con<> const& me /* :<any># */,
 			con<> const& other /* :<any># */);
 
-		static void _free_m(any_a const& me /* :<any>= */);
+		static void _free_f(any_a const& me /* :<any>= */);
 
-		static void _copy_e(any_a const& me /* :<any># */,
+		static void _copy_f(any_a const& me /* :<any># */,
 			any_a& copy /* :<any>= */);
 
-		static void _no_copy_e(any_a const& me /* :<any># */,
+		static void _no_copy_f(any_a const& me /* :<any># */,
 			any_a& copy /* :<any>= */);
 
-		static void _set_pointer_m(var<> const& me /* :<any>= */,
+		static void _set_pointer_f(var<> const& me /* :<any>= */,
 			bool is_pointer /* :_bool_# */);
 
-		static bool _pointer_e(con<> const& me /* :<any># */);
+		static bool _pointer_f(con<> const& me /* :<any># */);
 
 	public:
 		// creators

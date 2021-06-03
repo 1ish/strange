@@ -19,7 +19,7 @@ namespace strange
 			{
 				typename A::operations ops = {};
 				std::memcpy(&ops, nops, size);
-				ops.cat = A::cat_e;
+				ops.cat = A::cat_f;
 				return ops;
 			}(n.o, sizeof(*(n.o)));
 			A::t = n.t;
@@ -185,7 +185,7 @@ namespace strange
 			{
 				typename A::operations ops = {};
 				std::memcpy(&ops, nops, size);
-				ops.cat = A::cat_e;
+				ops.cat = A::cat_f;
 				return ops;
 			}(n.o, sizeof(*(n.o)));
 			A::t = n.t;
@@ -465,7 +465,7 @@ namespace strange
 			{
 				typename A::operations ops = {};
 				std::memcpy(&ops, nops, size);
-				ops.cat = A::cat_e;
+				ops.cat = A::cat_f;
 				return ops;
 			}(n.o, sizeof(*(n.o)));
 			A::t = n.t;

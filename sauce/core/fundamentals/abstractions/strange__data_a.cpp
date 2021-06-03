@@ -3,7 +3,7 @@
 namespace strange
 {
 	template <typename _type>
-	var<symbol_a> data_a<_type>::cat_e(con<> const& me)
+	var<symbol_a> data_a<_type>::cat_f(con<> const& me)
 	{
 		static auto r = sym("<strange::data>"); //TODO cat
 		return r;

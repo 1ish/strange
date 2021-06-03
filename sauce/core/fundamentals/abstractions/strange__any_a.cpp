@@ -2,7 +2,7 @@
 
 namespace strange
 {
-	var<symbol_a> any_a::cat_e(con<> const& me)
+	var<symbol_a> any_a::cat_f(con<> const& me)
 	{
 		static auto r = sym("<strange::any>"); //TODO cat
 		return r;

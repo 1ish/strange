@@ -40,25 +40,25 @@ namespace strange
 		static any_o operations =
 		{
 			// any_a
-			any_a::cat_e,
-			is_e,
-			as_e,
-			type_e,
-			set_something_m,
-			something_e,
-			set_error_m,
-			error_e,
-			hash_e,
-			equal_e,
-			not_equal_e,
-			less_e,
-			greater_e,
-			less_or_equal_e,
-			greater_or_equal_e,
-			_free_m,
-			_copy_e,
-			_set_pointer_m,
-			_pointer_e,
+			any_a::cat_f,
+			is_f,
+			as_f,
+			type_f,
+			set_something_f,
+			something_f,
+			set_error_f,
+			error_f,
+			hash_f,
+			equal_f,
+			not_equal_f,
+			less_f,
+			greater_f,
+			less_or_equal_f,
+			greater_or_equal_f,
+			_free_f,
+			_copy_f,
+			_set_pointer_f,
+			_pointer_f,
 		};
 		return &operations;
 	}
@@ -68,21 +68,21 @@ namespace strange
 		static any_o operations = []()
 		{
 			any_o ops = *thing_t::operations_f();
-			ops._copy = thing_t::_no_copy_e;
+			ops._copy = thing_t::_no_copy_f;
 			return ops;
 		}();
 		return &operations;
 	}
 
 	// any_a
-	bool thing_t::is_e(con<> const& me /* :<any># */,
+	bool thing_t::is_f(con<> const& me /* :<any># */,
 		con<> const& abstraction /* :<any># */)
 	{
 		// abstraction.cat in me.cats
-		return abstraction.o->cat == any_a::cat_e;
+		return abstraction.o->cat == any_a::cat_f;
 	}
 
-	bool thing_t::as_e(con<> const& me /* :<any># */,
+	bool thing_t::as_f(con<> const& me /* :<any># */,
 		var<> const& abstraction /* :<any>= */)
 	{
 		if (!me.o->is(me, abstraction))
@@ -93,16 +93,16 @@ namespace strange
 		return true;
 	}
 
-	var<symbol_a> thing_t::type_e(con<> const& me /* :<any># */)
+	var<symbol_a> thing_t::type_f(con<> const& me /* :<any># */)
 	{
 		static auto r = sym("strange::thing");
 		return r;
 	}
 
-	void thing_t::set_something_m(var<> const& me /* :<any>= */,
+	void thing_t::set_something_f(var<> const& me /* :<any>= */,
 		bool is_something /* :_bool_# */)
 	{
-		if (is_something == thing_t::something_e(me))
+		if (is_something == thing_t::something_f(me))
 		{
 			return;
 		}
@@ -123,12 +123,12 @@ namespace strange
 		}
 	}
 
-	bool thing_t::something_e(con<> const& me /* :<any># */)
+	bool thing_t::something_f(con<> const& me /* :<any># */)
 	{
 		return !me.t->error.t;
 	}
 
-	void thing_t::set_error_m(var<> const& me /* :<any>= */,
+	void thing_t::set_error_f(var<> const& me /* :<any>= */,
 		con<> const& error /* :<any># */)
 	{
 		auto& mate = reinterpret_cast<var<>&>(me.t->error);
@@ -137,7 +137,7 @@ namespace strange
 			auto const nothing = thing_t::create_nothing_f();
 			if (error.t == nothing.t)
 			{
-				thing_t::set_something_m(me, true);
+				thing_t::set_something_f(me, true);
 				return;
 			}
 			me.mut();
@@ -160,75 +160,75 @@ namespace strange
 		}
 	}
 
-	var<> thing_t::error_e(con<> const& me /* :<any># */)
+	var<> thing_t::error_f(con<> const& me /* :<any># */)
 	{
-		if (thing_t::something_e(me))
+		if (thing_t::something_f(me))
 		{
 			return thing_t::create_nothing_f();
 		}
 		return var<any_a>{ me.t->error };
 	}
 
-	uint64_t thing_t::hash_e(con<> const& me /* :<any># */)
+	uint64_t thing_t::hash_f(con<> const& me /* :<any># */)
 	{
 		return static_cast<uint64_t>(std::hash<void const*>{}(me.t));
 	}
 
-	bool thing_t::equal_e(con<> const& me /* :<any># */,
+	bool thing_t::equal_f(con<> const& me /* :<any># */,
 		con<> const& other /* :<any># */)
 	{
-		return thing_t::_equal_e(me, other);
+		return thing_t::_equal_f(me, other);
 	}
 
-	bool thing_t::not_equal_e(con<> const& me /* :<any># */,
+	bool thing_t::not_equal_f(con<> const& me /* :<any># */,
 		con<> const& other /* :<any># */)
 	{
-		return thing_t::_not_equal_e(me, other);
+		return thing_t::_not_equal_f(me, other);
 	}
 
-	bool thing_t::less_e(con<> const& me /* :<any># */,
+	bool thing_t::less_f(con<> const& me /* :<any># */,
 		con<> const& other /* :<any># */)
 	{
-		return thing_t::_less_e(me, other);
+		return thing_t::_less_f(me, other);
 	}
 
-	bool thing_t::greater_e(con<> const& me /* :<any># */,
+	bool thing_t::greater_f(con<> const& me /* :<any># */,
 		con<> const& other /* :<any># */)
 	{
-		return thing_t::_greater_e(me, other);
+		return thing_t::_greater_f(me, other);
 	}
 
-	bool thing_t::less_or_equal_e(con<> const& me /* :<any># */,
+	bool thing_t::less_or_equal_f(con<> const& me /* :<any># */,
 		con<> const& other /* :<any># */)
 	{
-		return thing_t::_less_or_equal_e(me, other);
+		return thing_t::_less_or_equal_f(me, other);
 	}
 
-	bool thing_t::greater_or_equal_e(con<> const& me /* :<any># */,
+	bool thing_t::greater_or_equal_f(con<> const& me /* :<any># */,
 		con<> const& other /* :<any># */)
 	{
-		return thing_t::_greater_or_equal_e(me, other);
+		return thing_t::_greater_or_equal_f(me, other);
 	}
 
-	void thing_t::_free_m(any_a const& me /* :<any>= */)
+	void thing_t::_free_f(any_a const& me /* :<any>= */)
 	{
 		delete me.t;
 	}
 
-	void thing_t::_copy_e(any_a const& me /* :<any># */,
+	void thing_t::_copy_f(any_a const& me /* :<any># */,
 		any_a& copy /* :<any>= */)
 	{
 		new thing_t{ copy, me };
-		thing_t::_clone_e(me, copy);
+		thing_t::_clone_f(me, copy);
 	}
 
-	void thing_t::_no_copy_e(any_a const& me /* :<any># */,
+	void thing_t::_no_copy_f(any_a const& me /* :<any># */,
 		any_a& copy /* :<any>= */)
 	{
 		copy = me;
 	}
 
-	void thing_t::_set_pointer_m(var<> const& me /* :<any>= */,
+	void thing_t::_set_pointer_f(var<> const& me /* :<any>= */,
 		bool is_pointer /* :_bool_# */)
 	{
 		if (is_pointer)
@@ -241,9 +241,9 @@ namespace strange
 		}
 	}
 
-	bool thing_t::_pointer_e(con<> const& me /* :<any># */)
+	bool thing_t::_pointer_f(con<> const& me /* :<any># */)
 	{
-		return me.o->_copy == thing_t::_no_copy_e;
+		return me.o->_copy == thing_t::_no_copy_f;
 	}
 
 	// creators
@@ -253,7 +253,7 @@ namespace strange
 		{
 			any_a r;
 			new thing_t{ r };
-			thing_t::_initialise_m(r);
+			thing_t::_initialise_f(r);
 			return r;
 		}());
 		return thing;
@@ -265,7 +265,7 @@ namespace strange
 		{
 			any_a r;
 			new thing_t{ r };
-			thing_t::_initialise_m(r);
+			thing_t::_initialise_f(r);
 			auto const e = thing_t::create_f();
 			e.inc();
 			r.t->error = e;
