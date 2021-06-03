@@ -9,14 +9,14 @@ namespace strange
 
 		representation_e (*representation)(con<cat_a> const& me);
 
-		//TODO var<flock_a<var<cat_a>>> (*aspects)(con<cat_a> const& me);
+		//TODO var<flock_a<cat_a>> (*aspects)(con<cat_a> const& me);
 
 		int64_t (*order)(con<cat_a> const& me);
 
+		// abstraction  <symbol>
+		// aspect       <^element>
 		// native       <+bool>
 		// enumeration  <|behaviour>
-		// abstraction  <symbol>
-		// dimension    <^element>
 	};
 
 	struct cat_a

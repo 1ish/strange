@@ -8,6 +8,7 @@ namespace strange
 		constant,
 		variable,
 		pointer,
+		shared,
 	};
 }
 

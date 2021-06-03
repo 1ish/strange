@@ -9,9 +9,10 @@ namespace strange
 
 		behaviour_e (*behaviour)(con<kind_a> const& me);
 
-		// constant  :<_bool_>#
-		// variable  :<|behaviour|>=
-		// pointer   :<symbol>&
+		// constant  :<any>#
+		// variable  :<any>=
+		// pointer   :<any>&
+		// shared    :<any>$
 	};
 
 	struct kind_a

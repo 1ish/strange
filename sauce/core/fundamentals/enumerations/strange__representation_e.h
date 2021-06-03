@@ -5,10 +5,10 @@ namespace strange
 {
 	enum class representation_e
 	{
+		abstraction,
+		aspect,
 		native,
 		enumeration,
-		abstraction,
-		dimension,
 	};
 }
 
