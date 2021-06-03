@@ -2,29 +2,29 @@
 
 namespace strange
 {
-	var<symbol_a> any_a::cat_e(con<> const& me_)
+	var<symbol_a> any_a::cat_e(con<> const& me)
 	{
 		static auto r = sym("<strange::any>"); //TODO cat
 		return r;
 	}
 
-	any_a::creator any_a::creator_f(con<symbol_a> const& scope_,
-		con<symbol_a> const& thing_,
-		con<symbol_a> const& function_)
+	any_a::creator any_a::creator_f(con<symbol_a> const& scope,
+		con<symbol_a> const& thing,
+		con<symbol_a> const& function)
 	{
 		static auto const strange_s = sym("strange");
-		if (scope_.o->equal(scope_, strange_s))
+		if (scope.o->equal(scope, strange_s))
 		{
 			static auto const thing_s = sym("thing");
-			if (thing_.o->equal(thing_, thing_s))
+			if (thing.o->equal(thing, thing_s))
 			{
 				static auto const create_s = sym("create");
-				if (function_.o->equal(function_, create_s))
+				if (function.o->equal(function, create_s))
 				{
 					return thing_t::create_f;
 				}
 				static auto const create_nothing_s = sym("create_nothing");
-				if (function_.o->equal(function_, create_nothing_s))
+				if (function.o->equal(function, create_nothing_s))
 				{
 					return thing_t::create_nothing_f;
 				}

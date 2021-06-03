@@ -5,9 +5,9 @@ namespace strange
 {
 	struct kind_o : symbol_o
 	{
-		var<cat_a> (*category)(con<kind_a> const& me_);
+		var<cat_a> (*category)(con<kind_a> const& me);
 
-		behaviour_e (*behaviour)(con<kind_a> const& me_);
+		behaviour_e (*behaviour)(con<kind_a> const& me);
 
 		// constant  :<_bool_>#
 		// variable  :<|behaviour|>=
@@ -22,11 +22,11 @@ namespace strange
 		mutable thing_t* t;
 		mutable operations const* o;
 
-		static var<symbol_a> cat_e(con<> const& me_); //TODO cat
+		static var<symbol_a> cat_e(con<> const& me); //TODO cat
 
-		static creator creator_f(con<symbol_a> const& scope_,
-			con<symbol_a> const& thing_,
-			con<symbol_a> const& function_);
+		static creator creator_f(con<symbol_a> const& scope,
+			con<symbol_a> const& thing,
+			con<symbol_a> const& function);
 	};
 }
 

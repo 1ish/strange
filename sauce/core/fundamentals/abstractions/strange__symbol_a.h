@@ -5,16 +5,16 @@ namespace strange
 {
 	struct symbol_o : any_o
 	{
-		var<symbol_a> (*add)(con<symbol_a> const& me_,
-			con<symbol_a> const& suffix_);
+		var<symbol_a> (*add)(con<symbol_a> const& me,
+			con<symbol_a> const& suffix);
 
-		char const* (*to_char_star)(con<symbol_a> const& me_);
+		char const* (*to_char_star)(con<symbol_a> const& me);
 
-		int64_t (*length)(con<symbol_a> const& me_);
+		int64_t (*length)(con<symbol_a> const& me);
 
-		char (*first_char)(con<symbol_a> const& me_);
+		char (*first_char)(con<symbol_a> const& me);
 
-		char (*last_char)(con<symbol_a> const& me_);
+		char (*last_char)(con<symbol_a> const& me);
 	};
 
 	struct symbol_a
@@ -25,11 +25,11 @@ namespace strange
 		mutable thing_t* t;
 		mutable operations const* o;
 
-		static var<symbol_a> cat_e(con<> const& me_); //TODO cat
+		static var<symbol_a> cat_e(con<> const& me); //TODO cat
 
-		static creator creator_f(con<symbol_a> const& scope_,
-			con<symbol_a> const& thing_,
-			con<symbol_a> const& function_);
+		static creator creator_f(con<symbol_a> const& scope,
+			con<symbol_a> const& thing,
+			con<symbol_a> const& function);
 	};
 }
 

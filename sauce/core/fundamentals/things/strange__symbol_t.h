@@ -10,11 +10,11 @@ namespace strange
 		uint64_t hash;
 
 	protected:
-		symbol_t(any_a& me_ /* :<symbol>= */,
+		symbol_t(any_a& me /* :<symbol>= */,
 			char const* const s /* :_char_star_# */);
 
-		symbol_t(any_a& me_ /* :<symbol>= */,
-			any_a const& original_ /* :<symbol># */);
+		symbol_t(any_a& me /* :<symbol>= */,
+			any_a const& original /* :<symbol># */);
 
 		symbol_t(symbol_t const&) = delete;
 
@@ -29,98 +29,98 @@ namespace strange
 
 	public:
 		// inline
-		static inline bool _equal_e(con<symbol_a> const& me_ /* :<symbol># */,
-			con<symbol_a> const& other_ /* :<symbol># */)
+		static inline bool _equal_e(con<symbol_a> const& me /* :<symbol># */,
+			con<symbol_a> const& other /* :<symbol># */)
 		{
-			auto const mt = static_cast<symbol_t const* const>(me_.t);
-			return std::strncmp(mt->symbol, other_.o->to_char_star(other_),
-				std::max(mt->length, other_.o->length(other_))) == 0;
+			auto const mt = static_cast<symbol_t const* const>(me.t);
+			return std::strncmp(mt->symbol, other.o->to_char_star(other),
+				std::max(mt->length, other.o->length(other))) == 0;
 		}
 
-		static inline bool _not_equal_e(con<symbol_a> const& me_ /* :<symbol># */,
-			con<symbol_a> const& other_ /* :<symbol># */)
+		static inline bool _not_equal_e(con<symbol_a> const& me /* :<symbol># */,
+			con<symbol_a> const& other /* :<symbol># */)
 		{
-			auto const mt = static_cast<symbol_t const* const>(me_.t);
-			return std::strncmp(mt->symbol, other_.o->to_char_star(other_),
-				std::max(mt->length, other_.o->length(other_))) != 0;
+			auto const mt = static_cast<symbol_t const* const>(me.t);
+			return std::strncmp(mt->symbol, other.o->to_char_star(other),
+				std::max(mt->length, other.o->length(other))) != 0;
 		}
 
-		static inline bool _less_e(con<symbol_a> const& me_ /* :<symbol># */,
-			con<symbol_a> const& other_ /* :<symbol># */)
+		static inline bool _less_e(con<symbol_a> const& me /* :<symbol># */,
+			con<symbol_a> const& other /* :<symbol># */)
 		{
-			auto const mt = static_cast<symbol_t const* const>(me_.t);
-			return std::strncmp(mt->symbol, other_.o->to_char_star(other_),
-				std::max(mt->length, other_.o->length(other_))) < 0;
+			auto const mt = static_cast<symbol_t const* const>(me.t);
+			return std::strncmp(mt->symbol, other.o->to_char_star(other),
+				std::max(mt->length, other.o->length(other))) < 0;
 		}
 
-		static inline bool _greater_e(con<symbol_a> const& me_ /* :<symbol># */,
-			con<symbol_a> const& other_ /* :<symbol># */)
+		static inline bool _greater_e(con<symbol_a> const& me /* :<symbol># */,
+			con<symbol_a> const& other /* :<symbol># */)
 		{
-			auto const mt = static_cast<symbol_t const* const>(me_.t);
-			return std::strncmp(mt->symbol, other_.o->to_char_star(other_),
-				std::max(mt->length, other_.o->length(other_))) > 0;
+			auto const mt = static_cast<symbol_t const* const>(me.t);
+			return std::strncmp(mt->symbol, other.o->to_char_star(other),
+				std::max(mt->length, other.o->length(other))) > 0;
 		}
 
-		static inline bool _less_or_equal_e(con<symbol_a> const& me_ /* :<symbol># */,
-			con<symbol_a> const& other_ /* :<symbol># */)
+		static inline bool _less_or_equal_e(con<symbol_a> const& me /* :<symbol># */,
+			con<symbol_a> const& other /* :<symbol># */)
 		{
-			auto const mt = static_cast<symbol_t const* const>(me_.t);
-			return std::strncmp(mt->symbol, other_.o->to_char_star(other_),
-				std::max(mt->length, other_.o->length(other_))) <= 0;
+			auto const mt = static_cast<symbol_t const* const>(me.t);
+			return std::strncmp(mt->symbol, other.o->to_char_star(other),
+				std::max(mt->length, other.o->length(other))) <= 0;
 		}
 
-		static inline bool _greater_or_equal_e(con<symbol_a> const& me_ /* :<symbol># */,
-			con<symbol_a> const& other_ /* :<symbol># */)
+		static inline bool _greater_or_equal_e(con<symbol_a> const& me /* :<symbol># */,
+			con<symbol_a> const& other /* :<symbol># */)
 		{
-			auto const mt = static_cast<symbol_t const* const>(me_.t);
-			return std::strncmp(mt->symbol, other_.o->to_char_star(other_),
-				std::max(mt->length, other_.o->length(other_))) >= 0;
+			auto const mt = static_cast<symbol_t const* const>(me.t);
+			return std::strncmp(mt->symbol, other.o->to_char_star(other),
+				std::max(mt->length, other.o->length(other))) >= 0;
 		}
 
 	protected:
 		// any_a
-		static bool is_e(con<> const& me_ /* :<symbol># */,
-			con<> const& abstraction_ /* :<any># */);
+		static bool is_e(con<> const& me /* :<symbol># */,
+			con<> const& abstraction /* :<any># */);
 
-		static var<symbol_a> type_e(con<> const& me_ /* :<symbol># */);
+		static var<symbol_a> type_e(con<> const& me /* :<symbol># */);
 
-		static uint64_t hash_e(con<> const& me_ /* :<symbol># */);
+		static uint64_t hash_e(con<> const& me /* :<symbol># */);
 
-		static bool equal_e(con<> const& me_ /* :<symbol># */,
-			con<> const& other_ /* :<any># */);
+		static bool equal_e(con<> const& me /* :<symbol># */,
+			con<> const& other /* :<any># */);
 
-		static bool not_equal_e(con<> const& me_ /* :<symbol># */,
-			con<> const& other_ /* :<any># */);
+		static bool not_equal_e(con<> const& me /* :<symbol># */,
+			con<> const& other /* :<any># */);
 
-		static bool less_e(con<> const& me_ /* :<symbol># */,
-			con<> const& other_ /* :<any># */);
+		static bool less_e(con<> const& me /* :<symbol># */,
+			con<> const& other /* :<any># */);
 
-		static bool greater_e(con<> const& me_ /* :<symbol># */,
-			con<> const& other_ /* :<any># */);
+		static bool greater_e(con<> const& me /* :<symbol># */,
+			con<> const& other /* :<any># */);
 
-		static bool less_or_equal_e(con<> const& me_ /* :<symbol># */,
-			con<> const& other_ /* :<any># */);
+		static bool less_or_equal_e(con<> const& me /* :<symbol># */,
+			con<> const& other /* :<any># */);
 
-		static bool greater_or_equal_e(con<> const& me_ /* :<symbol># */,
-			con<> const& other_ /* :<any># */);
+		static bool greater_or_equal_e(con<> const& me /* :<symbol># */,
+			con<> const& other /* :<any># */);
 
-		static void _copy_e(any_a const& me_ /* :<symbol># */,
-			any_a& copy_ /* :<symbol>= */);
+		static void _copy_e(any_a const& me /* :<symbol># */,
+			any_a& copy /* :<symbol>= */);
 
-		static void _set_pointer_m(var<> const& me_ /* :<symbol>= */,
+		static void _set_pointer_m(var<> const& me /* :<symbol>= */,
 			bool is_pointer /* :_bool_# */);
 
 		// symbol_a
-		static var<symbol_a> add_e(con<symbol_a> const& me_ /* :<symbol># */,
-			con<symbol_a> const& suffix_ /* :<symbol># */);
+		static var<symbol_a> add_e(con<symbol_a> const& me /* :<symbol># */,
+			con<symbol_a> const& suffix /* :<symbol># */);
 
-		static char const* to_char_star_e(con<symbol_a> const& me_ /* :<symbol># */);
+		static char const* to_char_star_e(con<symbol_a> const& me /* :<symbol># */);
 
-		static int64_t length_e(con<symbol_a> const& me_ /* :<symbol># */);
+		static int64_t length_e(con<symbol_a> const& me /* :<symbol># */);
 
-		static char first_char_e(con<symbol_a> const& me_ /* :<symbol># */);
+		static char first_char_e(con<symbol_a> const& me /* :<symbol># */);
 
-		static char last_char_e(con<symbol_a> const& me_ /* :<symbol># */);
+		static char last_char_e(con<symbol_a> const& me /* :<symbol># */);
 
 	public:
 		// creators

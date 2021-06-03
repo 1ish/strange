@@ -6,9 +6,9 @@ namespace strange
 	template <typename _type>
 	struct data_o : any_o
 	{
-		_type const& (*extract_data)(con<data_a<_type>> const& me_);
+		_type const& (*extract_data)(con<data_a<_type>> const& me);
 
-		_type& (*mutate_data)(var<data_a<_type>> const& me_);
+		_type& (*mutate_data)(var<data_a<_type>> const& me);
 	};
 
 	template <typename _type>
@@ -20,11 +20,11 @@ namespace strange
 		mutable thing_t* t;
 		mutable operations const* o;
 
-		static var<symbol_a> cat_e(con<> const& me_); //TODO cat
+		static var<symbol_a> cat_e(con<> const& me); //TODO cat
 
-		static creator creator_f(con<symbol_a> const& scope_,
-			con<symbol_a> const& thing_,
-			con<symbol_a> const& function_);
+		static creator creator_f(con<symbol_a> const& scope,
+			con<symbol_a> const& thing,
+			con<symbol_a> const& function);
 	};
 }
 
