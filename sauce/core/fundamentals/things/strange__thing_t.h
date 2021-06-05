@@ -37,6 +37,35 @@ namespace strange
 		}
 
 	public:
+		static inline void set_something_f(var<> const& me /* :<any>= */,
+			bool is_something /* :_bool_# */)
+		{
+			if (is_something == thing_t::something_f(me))
+			{
+				return;
+			}
+			me.mut();
+			auto& mate = reinterpret_cast<var<>&>(me.t->error);
+			if (is_something)
+			{
+				mate.dec();
+				mate.t = nullptr;
+				mate.o = nullptr;
+			}
+			else
+			{
+				auto const err = thing_t::create_f();
+				err.inc();
+				mate.t = err.t;
+				mate.o = err.o;
+			}
+		}
+
+		static inline bool something_f(con<> const& me /* :<any># */)
+		{
+			return !me.t->error.t;
+		}
+
 		static inline bool _equal_f(con<> const& me /* :<any># */,
 			con<> const& other /* :<any># */)
 		{
@@ -82,11 +111,6 @@ namespace strange
 			var<> const& abstraction /* :<any>= */);
 
 		static var<symbol_a> type_f(con<> const& me /* :<any># */);
-
-		static void set_something_f(var<> const& me /* :<any>= */,
-			bool is_something /* :_bool_# */);
-
-		static bool something_f(con<> const& me /* :<any># */);
 
 		static void set_error_f(var<> const& me /* :<any>= */,
 			con<> const& error /* :<any># */);

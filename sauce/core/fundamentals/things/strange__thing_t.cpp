@@ -44,8 +44,6 @@ namespace strange
 			is_f,
 			as_f,
 			type_f,
-			set_something_f,
-			something_f,
 			set_error_f,
 			error_f,
 			hash_f,
@@ -97,35 +95,6 @@ namespace strange
 	{
 		static auto r = sym("strange::thing");
 		return r;
-	}
-
-	void thing_t::set_something_f(var<> const& me /* :<any>= */,
-		bool is_something /* :_bool_# */)
-	{
-		if (is_something == thing_t::something_f(me))
-		{
-			return;
-		}
-		me.mut();
-		auto& mate = reinterpret_cast<var<>&>(me.t->error);
-		if (is_something)
-		{
-			mate.dec();
-			mate.t = nullptr;
-			mate.o = nullptr;
-		}
-		else
-		{
-			auto const err = thing_t::create_f();
-			err.inc();
-			mate.t = err.t;
-			mate.o = err.o;
-		}
-	}
-
-	bool thing_t::something_f(con<> const& me /* :<any># */)
-	{
-		return !me.t->error.t;
 	}
 
 	void thing_t::set_error_f(var<> const& me /* :<any>= */,

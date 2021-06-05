@@ -55,8 +55,6 @@ namespace strange
 				is_f,
 				as_f,
 				type_f,
-				set_something_f,
-				something_f,
 				set_error_f,
 				error_f,
 				hash_f,
@@ -117,7 +115,7 @@ namespace strange
 		con<> const& other /* :<any># */)
 	{
 		auto const os = other.dyn<con<symbol_a>>();
-		if (thing_t::something_f(os))
+		if (symbol_t::something_f(os))
 		{
 			return symbol_t::_equal_f(me.ref<con<symbol_a>>(), os);
 		}
@@ -128,7 +126,7 @@ namespace strange
 		con<> const& other /* :<any># */)
 	{
 		auto const os = other.dyn<con<symbol_a>>();
-		if (thing_t::something_f(os))
+		if (symbol_t::something_f(os))
 		{
 			return symbol_t::_not_equal_f(me.ref<con<symbol_a>>(), os);
 		}
@@ -139,7 +137,7 @@ namespace strange
 		con<> const& other /* :<any># */)
 	{
 		auto const os = other.dyn<con<symbol_a>>();
-		if (thing_t::something_f(os))
+		if (symbol_t::something_f(os))
 		{
 			return symbol_t::_less_f(me.ref<con<symbol_a>>(), os);
 		}
@@ -150,7 +148,7 @@ namespace strange
 		con<> const& other /* :<any># */)
 	{
 		auto const os = other.dyn<con<symbol_a>>();
-		if (thing_t::something_f(os))
+		if (symbol_t::something_f(os))
 		{
 			return symbol_t::_greater_f(me.ref<con<symbol_a>>(), os);
 		}
@@ -161,7 +159,7 @@ namespace strange
 		con<> const& other /* :<any># */)
 	{
 		auto const os = other.dyn<con<symbol_a>>();
-		if (thing_t::something_f(os))
+		if (symbol_t::something_f(os))
 		{
 			return symbol_t::_less_or_equal_f(me.ref<con<symbol_a>>(), os);
 		}
@@ -172,7 +170,7 @@ namespace strange
 		con<> const& other /* :<any># */)
 	{
 		auto const os = other.dyn<con<symbol_a>>();
-		if (thing_t::something_f(os))
+		if (symbol_t::something_f(os))
 		{
 			return symbol_t::_greater_or_equal_f(me.ref<con<symbol_a>>(), os);
 		}

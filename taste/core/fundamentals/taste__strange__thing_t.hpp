@@ -84,6 +84,7 @@ namespace taste
 		vvv.op(&symbol_o::set_error, sym("error3"));
 		res = vvv.op(&symbol_o::error).ref<var<symbol_a>>();
 		std__cout << "result: " << res.o->to_char_star(res) << "\n";
+		vvv.op(&symbol_o::something);
 	}
 }
 

@@ -168,10 +168,16 @@ namespace strange
 			return ref<con<B>>();
 		}
 
-		template <typename F, typename O, typename... Ps>
-		inline auto op(F O::* p, Ps&&... ps) const
+		template <typename F, typename... Ps>
+		inline auto op(F fp, Ps&&... ps) const
 		{
-			return (A::o->*p)(*this, ps...);
+			return fp(*this, ps...);
+		}
+
+		template <typename F, typename O, typename... Ps>
+		inline auto op(F O::* mp, Ps&&... ps) const
+		{
+			return (A::o->*mp)(*this, ps...);
 		}
 	};
 
@@ -447,10 +453,16 @@ namespace strange
 			return ref<var<B>>();
 		}
 
-		template <typename F, typename O, typename... Ps>
-		inline auto op(F O::* p, Ps&&... ps) const
+		template <typename F, typename... Ps>
+		inline auto op(F fp, Ps&&... ps) const
 		{
-			return (A::o->*p)(*this, ps...);
+			return fp(*this, ps...);
+		}
+
+		template <typename F, typename O, typename... Ps>
+		inline auto op(F O::* mp, Ps&&... ps) const
+		{
+			return (A::o->*mp)(*this, ps...);
 		}
 	};
 
@@ -718,10 +730,16 @@ namespace strange
 			return ref<ptr<B>>();
 		}
 
-		template <typename F, typename O, typename... Ps>
-		inline auto op(F O::* p, Ps&&... ps) const
+		template <typename F, typename... Ps>
+		inline auto op(F fp, Ps&&... ps) const
 		{
-			return (A::o->*p)(*this, ps...);
+			return fp(*this, ps...);
+		}
+
+		template <typename F, typename O, typename... Ps>
+		inline auto op(F O::* mp, Ps&&... ps) const
+		{
+			return (A::o->*mp)(*this, ps...);
 		}
 	};
 }

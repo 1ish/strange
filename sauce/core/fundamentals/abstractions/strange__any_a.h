@@ -5,6 +5,11 @@ namespace strange
 {
 	struct any_o
 	{
+		static void set_something(var<> const& me,
+			bool is_something);
+
+		static bool something(con<> const& me);
+
 		var<symbol_a> (*cat)(con<> const& me); //TODO cat
 
 		bool (*is)(con<> const& me,
@@ -14,11 +19,6 @@ namespace strange
 			var<> const& abstraction);
 
 		var<symbol_a> (*type)(con<> const& me);
-
-		void (*set_something)(var<> const& me,
-			bool is_something);
-
-		bool (*something)(con<> const& me);
 
 		void (*set_error)(var<> const& me,
 			con<> const& error);
