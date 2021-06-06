@@ -198,14 +198,7 @@ namespace strange
 	void symbol_t::_set_pointer(var<> const& me,
 		bool is_pointer)
 	{
-		if (is_pointer)
-		{
-			me.o = symbol_t::_pointer_operations();
-		}
-		else
-		{
-			me.o = symbol_t::_operations();
-		}
+		me.o = is_pointer ? symbol_t::_pointer_operations() : symbol_t::_operations();
 	}
 
 	// symbol_a

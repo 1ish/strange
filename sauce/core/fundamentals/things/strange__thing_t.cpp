@@ -124,20 +124,11 @@ namespace strange
 				mate.t = error_.t;
 				mate.o = error_.o;
 				mate.inc();
-				if (mate.o->_pointer(mate))
-				{
-					mate.o->_set_pointer(mate, false);
-					mate.mut();
-				}
 			}
 		}
 		else
 		{
 			mate.o = error_.o;
-			if (mate.o->_pointer(mate))
-			{
-				mate.o->_set_pointer(mate, false);
-			}
 		}
 	}
 
@@ -212,14 +203,7 @@ namespace strange
 	void thing_t::_set_pointer(var<> const& me,
 		bool is_pointer)
 	{
-		if (is_pointer)
-		{
-			me.o = thing_t::_pointer_operations();
-		}
-		else
-		{
-			me.o = thing_t::_operations();
-		}
+		me.o = is_pointer ? thing_t::_pointer_operations() : thing_t::_operations();
 	}
 
 	bool thing_t::_pointer(con<> const& me)
