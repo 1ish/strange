@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__range_a.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__forward_extractor_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__any_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__cat_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__data_a.cpp" />
@@ -153,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__range_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__forward_extractor_a.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__any_a.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__cat_a.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__data_a.h" />

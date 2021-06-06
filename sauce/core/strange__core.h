@@ -14,6 +14,7 @@ namespace strange
 	struct kind_a;
 	template <typename type_d> struct data_a;
 	template <typename element_d = any_a> struct range_a;
+	template <typename element_d = any_a> struct forward_extractor_a;
 
 	struct thing_t;
 	struct symbol_t;
@@ -30,6 +31,7 @@ namespace strange
 #include "fundamentals/abstractions/strange__kind_a.h"
 #include "fundamentals/abstractions/strange__data_a.h"
 
+#include "collections/iterators/abstractions/strange__forward_extractor_a.h"
 #include "collections/abstractions/strange__range_a.h"
 
 #include "fundamentals/things/strange__thing_t.h"

@@ -79,6 +79,18 @@
     <Filter Include="Source Files\sauce\core\collections\things">
       <UniqueIdentifier>{338d2068-ae21-4ad3-9b84-f33ea9303a0b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\sauce\core\collections\iterators">
+      <UniqueIdentifier>{a5e2cda5-fac7-4d58-b879-6bf4b27de300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sauce\core\collections\iterators\abstractions">
+      <UniqueIdentifier>{17f172a0-d268-4e22-b042-23e9594101aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sauce\core\collections\iterators">
+      <UniqueIdentifier>{1f1f3ba3-90d0-45d3-98ec-f8d601ed3595}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sauce\core\collections\iterators\abstractions">
+      <UniqueIdentifier>{cf515043-0fc9-4a1c-9905-53427dc4b1e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\taste\strange_taste.cpp">
@@ -107,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__range_a.cpp">
       <Filter>Source Files\sauce\core\collections\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__forward_extractor_a.cpp">
+      <Filter>Source Files\sauce\core\collections\iterators\abstractions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__range_a.h">
       <Filter>Header Files\sauce\core\collections\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__forward_extractor_a.h">
+      <Filter>Header Files\sauce\core\collections\iterators\abstractions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
