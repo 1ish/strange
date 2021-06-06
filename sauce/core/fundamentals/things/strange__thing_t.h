@@ -40,25 +40,7 @@ namespace strange
 		static inline void set_something(var<> const& me,
 			bool is_something)
 		{
-			if (is_something == thing_t::something(me))
-			{
-				return;
-			}
-			me.mut();
-			auto& mate = reinterpret_cast<var<>&>(me.t->error_);
-			if (is_something)
-			{
-				mate.dec();
-				mate.t = nullptr;
-				mate.o = nullptr;
-			}
-			else
-			{
-				auto const err = thing_t::create();
-				err.inc();
-				mate.t = err.t;
-				mate.o = err.o;
-			}
+			me.o->set_error(me, is_something ? thing_t::create_nothing() : thing_t::create());
 		}
 
 		static inline bool something(con<> const& me)

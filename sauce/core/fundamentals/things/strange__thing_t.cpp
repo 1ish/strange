@@ -106,36 +106,48 @@ namespace strange
 			auto const nothing = thing_t::create_nothing();
 			if (error_.t == nothing.t)
 			{
-				thing_t::set_something(me, true);
-				return;
+				if (mate.t)
+				{
+					me.mut();
+					mate.dec();
+					mate.t = nullptr;
+					mate.o = nullptr;
+				}
 			}
-			me.mut();
-			if (mate.t)
+			else
 			{
-				mate.dec();
+				me.mut();
+				if (mate.t)
+				{
+					mate.dec();
+				}
+				mate.t = error_.t;
+				mate.o = error_.o;
+				mate.inc();
+				if (mate.o->_pointer(mate))
+				{
+					mate.o->_set_pointer(mate, false);
+					mate.mut();
+				}
 			}
-			mate.t = error_.t;
-			mate.o = error_.o;
-			mate.inc();
 		}
 		else
 		{
 			mate.o = error_.o;
-		}
-		if (mate.o && mate.o->_pointer(mate))
-		{
-			mate.o->_set_pointer(mate, false);
-			mate.mut();
+			if (mate.o->_pointer(mate))
+			{
+				mate.o->_set_pointer(mate, false);
+			}
 		}
 	}
 
 	var<> thing_t::error(con<> const& me)
 	{
-		if (thing_t::something(me))
+		if (!me.t->error_.t)
 		{
 			return thing_t::create_nothing();
 		}
-		return var<any_a>{ me.t->error_ };
+		return var<>{ me.t->error_ };
 	}
 
 	uint64_t thing_t::hash(con<> const& me)
