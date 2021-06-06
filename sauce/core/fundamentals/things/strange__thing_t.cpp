@@ -49,9 +49,7 @@ namespace strange
 			hash,
 			equal,
 			less,
-			greater,
 			less_or_equal,
-			greater_or_equal,
 			_free,
 			_copy,
 			_set_pointer,
@@ -157,22 +155,10 @@ namespace strange
 		return thing_t::_less(me, other);
 	}
 
-	bool thing_t::greater(con<> const& me,
-		con<> const& other)
-	{
-		return thing_t::_greater(me, other);
-	}
-
 	bool thing_t::less_or_equal(con<> const& me,
 		con<> const& other)
 	{
 		return thing_t::_less_or_equal(me, other);
-	}
-
-	bool thing_t::greater_or_equal(con<> const& me,
-		con<> const& other)
-	{
-		return thing_t::_greater_or_equal(me, other);
 	}
 
 	void thing_t::_free(any_a const& me)

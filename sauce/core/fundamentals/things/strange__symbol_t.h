@@ -45,28 +45,12 @@ namespace strange
 				std::max(mt->length_, other.o->length(other))) < 0;
 		}
 
-		static inline bool _greater(con<symbol_a> const& me,
-			con<symbol_a> const& other)
-		{
-			auto const mt = static_cast<symbol_t const* const>(me.t);
-			return std::strncmp(mt->symbol_, other.o->to_char_star(other),
-				std::max(mt->length_, other.o->length(other))) > 0;
-		}
-
 		static inline bool _less_or_equal(con<symbol_a> const& me,
 			con<symbol_a> const& other)
 		{
 			auto const mt = static_cast<symbol_t const* const>(me.t);
 			return std::strncmp(mt->symbol_, other.o->to_char_star(other),
 				std::max(mt->length_, other.o->length(other))) <= 0;
-		}
-
-		static inline bool _greater_or_equal(con<symbol_a> const& me,
-			con<symbol_a> const& other)
-		{
-			auto const mt = static_cast<symbol_t const* const>(me.t);
-			return std::strncmp(mt->symbol_, other.o->to_char_star(other),
-				std::max(mt->length_, other.o->length(other))) >= 0;
 		}
 
 	protected:
@@ -87,13 +71,7 @@ namespace strange
 		static bool less(con<> const& me,
 			con<> const& other);
 
-		static bool greater(con<> const& me,
-			con<> const& other);
-
 		static bool less_or_equal(con<> const& me,
-			con<> const& other);
-
-		static bool greater_or_equal(con<> const& me,
 			con<> const& other);
 
 		static void _copy(any_a const& me,

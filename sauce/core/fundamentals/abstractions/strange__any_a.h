@@ -36,13 +36,13 @@ namespace strange
 		bool (*less)(con<> const& me,
 			con<> const& other);
 
-		bool (*greater)(con<> const& me,
+		static inline bool greater(con<> const& me,
 			con<> const& other);
 
 		bool (*less_or_equal)(con<> const& me,
 			con<> const& other);
 
-		bool (*greater_or_equal)(con<> const& me,
+		static inline bool greater_or_equal(con<> const& me,
 			con<> const& other);
 
 		void (*_free)(any_a const& me);
@@ -75,6 +75,18 @@ namespace strange
 		con<> const& other)
 	{
 		return !me.o->equal(me, other);
+	}
+
+	inline bool any_o::greater(con<> const& me,
+		con<> const& other)
+	{
+		return !me.o->less_or_equal(me, other);
+	}
+
+	inline bool any_o::greater_or_equal(con<> const& me,
+		con<> const& other)
+	{
+		return !me.o->less(me, other);
 	}
 }
 

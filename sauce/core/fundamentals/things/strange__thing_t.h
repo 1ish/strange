@@ -49,22 +49,10 @@ namespace strange
 			return me.t < other.t;
 		}
 
-		static inline bool _greater(con<> const& me,
-			con<> const& other)
-		{
-			return me.t > other.t;
-		}
-
 		static inline bool _less_or_equal(con<> const& me,
 			con<> const& other)
 		{
 			return me.t <= other.t;
-		}
-
-		static inline bool _greater_or_equal(con<> const& me,
-			con<> const& other)
-		{
-			return me.t >= other.t;
 		}
 
 	protected:
@@ -90,13 +78,7 @@ namespace strange
 		static bool less(con<> const& me,
 			con<> const& other);
 
-		static bool greater(con<> const& me,
-			con<> const& other);
-
 		static bool less_or_equal(con<> const& me,
-			con<> const& other);
-
-		static bool greater_or_equal(con<> const& me,
 			con<> const& other);
 
 		static void _free(any_a const& me);
