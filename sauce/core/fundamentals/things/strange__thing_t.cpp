@@ -5,8 +5,8 @@
 namespace strange
 {
 	thing_t::thing_t(any_a& me)
-	: refs{ 0 }
-	, error { nullptr, nullptr }
+	: refs_d{ 0 }
+	, error_d { nullptr, nullptr }
 	{
 		me.t = this;
 		me.o = thing_t::operations_f();
@@ -14,23 +14,23 @@ namespace strange
 
 	thing_t::thing_t(any_a& me,
 		any_a const& original)
-	: refs{ 0 }
-	, error { original.t->error }
+	: refs_d{ 0 }
+	, error_d { original.t->error_d }
 	{
 		me.t = this;
 		me.o = thing_t::operations_f();
 
-		if (error.t)
+		if (error_d.t)
 		{
-			reinterpret_cast<var<>&>(error).inc();
+			reinterpret_cast<var<>&>(error_d).inc();
 		}
 	}
 
 	thing_t::~thing_t()
 	{
-		if (error.t)
+		if (error_d.t)
 		{
-			reinterpret_cast<var<>&>(error).dec();
+			reinterpret_cast<var<>&>(error_d).dec();
 		}
 	}
 
@@ -98,13 +98,13 @@ namespace strange
 	}
 
 	void thing_t::set_error_f(var<> const& me,
-		con<> const& error)
+		con<> const& error_d)
 	{
-		auto& mate = reinterpret_cast<var<>&>(me.t->error);
-		if (mate.t != error.t)
+		auto& mate = reinterpret_cast<var<>&>(me.t->error_d);
+		if (mate.t != error_d.t)
 		{
 			auto const nothing = thing_t::create_nothing_f();
-			if (error.t == nothing.t)
+			if (error_d.t == nothing.t)
 			{
 				thing_t::set_something_f(me, true);
 				return;
@@ -114,13 +114,13 @@ namespace strange
 			{
 				mate.dec();
 			}
-			mate.t = error.t;
-			mate.o = error.o;
+			mate.t = error_d.t;
+			mate.o = error_d.o;
 			mate.inc();
 		}
 		else
 		{
-			mate.o = error.o;
+			mate.o = error_d.o;
 		}
 		if (mate.o && mate.o->_pointer(mate))
 		{
@@ -135,7 +135,7 @@ namespace strange
 		{
 			return thing_t::create_nothing_f();
 		}
-		return var<any_a>{ me.t->error };
+		return var<any_a>{ me.t->error_d };
 	}
 
 	uint64_t thing_t::hash_f(con<> const& me)
@@ -237,7 +237,7 @@ namespace strange
 			thing_t::_initialise_f(r);
 			auto const e = thing_t::create_f();
 			e.inc();
-			r.t->error = e;
+			r.t->error_d = e;
 			return r;
 		}());
 		return nothing;

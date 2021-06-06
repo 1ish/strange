@@ -5,8 +5,8 @@ namespace strange
 {
 	struct thing_t
 	{
-		std::atomic_int64_t refs;
-		any_a error;
+		std::atomic_int64_t refs_d;
+		any_a error_d;
 
 	protected:
 		thing_t(any_a& me);
@@ -45,7 +45,7 @@ namespace strange
 				return;
 			}
 			me.mut();
-			auto& mate = reinterpret_cast<var<>&>(me.t->error);
+			auto& mate = reinterpret_cast<var<>&>(me.t->error_d);
 			if (is_something)
 			{
 				mate.dec();
@@ -63,7 +63,7 @@ namespace strange
 
 		static inline bool something_f(con<> const& me)
 		{
-			return !me.t->error.t;
+			return !me.t->error_d.t;
 		}
 
 		static inline bool _equal_f(con<> const& me,
@@ -113,7 +113,7 @@ namespace strange
 		static var<symbol_a> type_f(con<> const& me);
 
 		static void set_error_f(var<> const& me,
-			con<> const& error);
+			con<> const& error_d);
 
 		static var<> error_f(con<> const& me);
 
