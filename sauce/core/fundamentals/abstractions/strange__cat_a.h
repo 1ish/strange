@@ -14,9 +14,9 @@ namespace strange
 		int64_t (*order)(con<cat_a> const& me);
 
 		// abstraction  <symbol>
-		// aspect       <^element>
+		// dimension    <^element>
 		// native       <+bool>
-		// enumeration  <|behaviour>
+		// enumeration  <%behaviour>
 	};
 
 	struct cat_a

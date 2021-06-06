@@ -9,10 +9,12 @@ namespace strange
 
 		behaviour_e (*behaviour)(con<kind_a> const& me);
 
+		bool (*shared)(con<kind_a> const& me);
+
 		// constant  :<any>#
 		// variable  :<any>=
 		// pointer   :<any>&
-		// shared    :<any>$
+		// shared    $<any>=
 	};
 
 	struct kind_a
