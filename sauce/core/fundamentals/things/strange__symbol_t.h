@@ -6,9 +6,9 @@ namespace strange
 	struct symbol_t : thing_t
 	{
 	protected:
-		char* symbol_d;
-		int64_t length_d;
-		uint64_t hash_d;
+		char* symbol_n;
+		int64_t length_n;
+		uint64_t hash_n;
 
 		symbol_t(any_a& me,
 			char const* const s);
@@ -33,48 +33,48 @@ namespace strange
 			con<symbol_a> const& other)
 		{
 			auto const mt = static_cast<symbol_t const* const>(me.t);
-			return std::strncmp(mt->symbol_d, other.o->to_char_star(other),
-				std::max(mt->length_d, other.o->length(other))) == 0;
+			return std::strncmp(mt->symbol_n, other.o->to_char_star(other),
+				std::max(mt->length_n, other.o->length(other))) == 0;
 		}
 
 		static inline bool _not_equal_f(con<symbol_a> const& me,
 			con<symbol_a> const& other)
 		{
 			auto const mt = static_cast<symbol_t const* const>(me.t);
-			return std::strncmp(mt->symbol_d, other.o->to_char_star(other),
-				std::max(mt->length_d, other.o->length(other))) != 0;
+			return std::strncmp(mt->symbol_n, other.o->to_char_star(other),
+				std::max(mt->length_n, other.o->length(other))) != 0;
 		}
 
 		static inline bool _less_f(con<symbol_a> const& me,
 			con<symbol_a> const& other)
 		{
 			auto const mt = static_cast<symbol_t const* const>(me.t);
-			return std::strncmp(mt->symbol_d, other.o->to_char_star(other),
-				std::max(mt->length_d, other.o->length(other))) < 0;
+			return std::strncmp(mt->symbol_n, other.o->to_char_star(other),
+				std::max(mt->length_n, other.o->length(other))) < 0;
 		}
 
 		static inline bool _greater_f(con<symbol_a> const& me,
 			con<symbol_a> const& other)
 		{
 			auto const mt = static_cast<symbol_t const* const>(me.t);
-			return std::strncmp(mt->symbol_d, other.o->to_char_star(other),
-				std::max(mt->length_d, other.o->length(other))) > 0;
+			return std::strncmp(mt->symbol_n, other.o->to_char_star(other),
+				std::max(mt->length_n, other.o->length(other))) > 0;
 		}
 
 		static inline bool _less_or_equal_f(con<symbol_a> const& me,
 			con<symbol_a> const& other)
 		{
 			auto const mt = static_cast<symbol_t const* const>(me.t);
-			return std::strncmp(mt->symbol_d, other.o->to_char_star(other),
-				std::max(mt->length_d, other.o->length(other))) <= 0;
+			return std::strncmp(mt->symbol_n, other.o->to_char_star(other),
+				std::max(mt->length_n, other.o->length(other))) <= 0;
 		}
 
 		static inline bool _greater_or_equal_f(con<symbol_a> const& me,
 			con<symbol_a> const& other)
 		{
 			auto const mt = static_cast<symbol_t const* const>(me.t);
-			return std::strncmp(mt->symbol_d, other.o->to_char_star(other),
-				std::max(mt->length_d, other.o->length(other))) >= 0;
+			return std::strncmp(mt->symbol_n, other.o->to_char_star(other),
+				std::max(mt->length_n, other.o->length(other))) >= 0;
 		}
 
 	protected:
