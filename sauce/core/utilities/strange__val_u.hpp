@@ -169,13 +169,13 @@ namespace strange
 		}
 
 		template <typename F, typename... Ps>
-		inline auto op(F fp, Ps&&... ps) const
+		inline auto pfm(F fp, Ps&&... ps) const
 		{
 			return fp(*this, ps...);
 		}
 
 		template <typename F, typename O, typename... Ps>
-		inline auto op(F O::* mp, Ps&&... ps) const
+		inline auto pfm(F O::* mp, Ps&&... ps) const
 		{
 			return (A::o->*mp)(*this, ps...);
 		}
@@ -454,13 +454,13 @@ namespace strange
 		}
 
 		template <typename F, typename... Ps>
-		inline auto op(F fp, Ps&&... ps) const
+		inline auto pfm(F fp, Ps&&... ps) const
 		{
 			return fp(*this, ps...);
 		}
 
 		template <typename F, typename O, typename... Ps>
-		inline auto op(F O::* mp, Ps&&... ps) const
+		inline auto pfm(F O::* mp, Ps&&... ps) const
 		{
 			return (A::o->*mp)(*this, ps...);
 		}
@@ -731,13 +731,13 @@ namespace strange
 		}
 
 		template <typename F, typename... Ps>
-		inline auto op(F fp, Ps&&... ps) const
+		inline auto pfm(F fp, Ps&&... ps) const
 		{
 			return fp(*this, ps...);
 		}
 
 		template <typename F, typename O, typename... Ps>
-		inline auto op(F O::* mp, Ps&&... ps) const
+		inline auto pfm(F O::* mp, Ps&&... ps) const
 		{
 			return (A::o->*mp)(*this, ps...);
 		}
