@@ -33,7 +33,7 @@ namespace taste
 		auto u = s.o->add(s, t);
 		u.o->add(u, sym("y"));
 
-		std__cout << ((symbol_t*)(u.t))->symbol << "\n";
+		std__cout << u.o->to_char_star(u) << "\n";
 
 		auto p = ptr<symbol_a>{ symbol_t::create_f("pointer") };
 		auto q = ptr<symbol_a>(symbol_t::create_f("q"));

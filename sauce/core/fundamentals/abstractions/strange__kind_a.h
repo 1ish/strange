@@ -5,7 +5,7 @@ namespace strange
 {
 	struct kind_o : symbol_o
 	{
-		var<cat_a> (*category)(con<kind_a> const& me);
+		var<cat_a> (*the_cat)(con<kind_a> const& me);
 
 		behaviour_e (*behaviour)(con<kind_a> const& me);
 

@@ -3,19 +3,19 @@
 
 namespace strange
 {
-	template <typename _type>
+	template <typename data_type>
 	struct data_o : any_o
 	{
-		_type const& (*extract_data)(con<data_a<_type>> const& me);
+		data_type const& (*extract_data)(con<data_a<data_type>> const& me);
 
-		_type& (*mutate_data)(var<data_a<_type>> const& me);
+		data_type& (*mutate_data)(var<data_a<data_type>> const& me);
 	};
 
-	template <typename _type>
+	template <typename data_type>
 	struct data_a
 	{
-		using operations = data_o<_type>;
-		using creator = var<data_a<_type>>(*)();
+		using operations = data_o<data_type>;
+		using creator = var<data_a<data_type>>(*)();
 
 		mutable thing_t* t;
 		mutable operations const* o;

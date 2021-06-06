@@ -5,8 +5,8 @@
 
 namespace strange
 {
-	symbol_t::symbol_t(any_a& me /* :<symbol>= */,
-		char const* const s /* :_char_star_# */)
+	symbol_t::symbol_t(any_a& me,
+		char const* const s)
 	: thing_t{ me }
 	, symbol{ nullptr }
 	, length{ 0 }
@@ -23,8 +23,8 @@ namespace strange
 		}
 	}
 
-	symbol_t::symbol_t(any_a& me /* :<symbol>= */,
-		any_a const& original /* :<symbol># */)
+	symbol_t::symbol_t(any_a& me,
+		any_a const& original)
 	: thing_t{ me, original }
 	, symbol{ nullptr }
 	, length{ 0 }
@@ -91,28 +91,28 @@ namespace strange
 	}
 
 	// any_a
-	bool symbol_t::is_f(con<> const& me /* :<symbol># */,
-		con<> const& abstraction /* :<any># */)
+	bool symbol_t::is_f(con<> const& me,
+		con<> const& abstraction)
 	{
 		// abstraction.cat in me.cats
 		auto const abc = abstraction.o->cat;
 		return abc == any_a::cat_f || abc == symbol_a::cat_f;
 	}
 
-	var<symbol_a> symbol_t::type_f(con<> const& me /* :<symbol># */)
+	var<symbol_a> symbol_t::type_f(con<> const& me)
 	{
 		static auto r = sym("strange::symbol");
 		return r;
 	}
 
-	uint64_t symbol_t::hash_f(con<> const& me /* :<symbol># */)
+	uint64_t symbol_t::hash_f(con<> const& me)
 	{
 		auto const mt = static_cast<symbol_t const* const>(me.t);
 		return mt->hash;
 	}
 
-	bool symbol_t::equal_f(con<> const& me /* :<symbol># */,
-		con<> const& other /* :<any># */)
+	bool symbol_t::equal_f(con<> const& me,
+		con<> const& other)
 	{
 		auto const os = other.dyn<con<symbol_a>>();
 		if (symbol_t::something_f(os))
@@ -122,8 +122,8 @@ namespace strange
 		return thing_t::equal_f(me, other);
 	}
 
-	bool symbol_t::not_equal_f(con<> const& me /* :<symbol># */,
-		con<> const& other /* :<any># */)
+	bool symbol_t::not_equal_f(con<> const& me,
+		con<> const& other)
 	{
 		auto const os = other.dyn<con<symbol_a>>();
 		if (symbol_t::something_f(os))
@@ -133,8 +133,8 @@ namespace strange
 		return thing_t::not_equal_f(me, other);
 	}
 
-	bool symbol_t::less_f(con<> const& me /* :<symbol># */,
-		con<> const& other /* :<any># */)
+	bool symbol_t::less_f(con<> const& me,
+		con<> const& other)
 	{
 		auto const os = other.dyn<con<symbol_a>>();
 		if (symbol_t::something_f(os))
@@ -144,8 +144,8 @@ namespace strange
 		return thing_t::less_f(me, other);
 	}
 
-	bool symbol_t::greater_f(con<> const& me /* :<symbol># */,
-		con<> const& other /* :<any># */)
+	bool symbol_t::greater_f(con<> const& me,
+		con<> const& other)
 	{
 		auto const os = other.dyn<con<symbol_a>>();
 		if (symbol_t::something_f(os))
@@ -155,8 +155,8 @@ namespace strange
 		return thing_t::greater_f(me, other);
 	}
 
-	bool symbol_t::less_or_equal_f(con<> const& me /* :<symbol># */,
-		con<> const& other /* :<any># */)
+	bool symbol_t::less_or_equal_f(con<> const& me,
+		con<> const& other)
 	{
 		auto const os = other.dyn<con<symbol_a>>();
 		if (symbol_t::something_f(os))
@@ -166,8 +166,8 @@ namespace strange
 		return thing_t::less_or_equal_f(me, other);
 	}
 
-	bool symbol_t::greater_or_equal_f(con<> const& me /* :<symbol># */,
-		con<> const& other /* :<any># */)
+	bool symbol_t::greater_or_equal_f(con<> const& me,
+		con<> const& other)
 	{
 		auto const os = other.dyn<con<symbol_a>>();
 		if (symbol_t::something_f(os))
@@ -177,15 +177,15 @@ namespace strange
 		return thing_t::greater_or_equal_f(me, other);
 	}
 
-	void symbol_t::_copy_f(any_a const& me /* :<symbol># */,
-		any_a& copy /* :<symbol>= */)
+	void symbol_t::_copy_f(any_a const& me,
+		any_a& copy)
 	{
 		new symbol_t{ copy, me };
 		symbol_t::_clone_f(me, copy);
 	}
 
-	void symbol_t::_set_pointer_f(var<> const& me /* :<symbol>= */,
-		bool is_pointer /* :_bool_# */)
+	void symbol_t::_set_pointer_f(var<> const& me,
+		bool is_pointer)
 	{
 		if (is_pointer)
 		{
@@ -198,8 +198,8 @@ namespace strange
 	}
 
 	// symbol_a
-	var<symbol_a> symbol_t::add_f(con<symbol_a> const& me /* :<symbol># */,
-		con<symbol_a> const& suffix /* :<symbol># */)
+	var<symbol_a> symbol_t::add_f(con<symbol_a> const& me,
+		con<symbol_a> const& suffix)
 	{
 		// can assume suffix implements symbol_a, but not that is has a symbol_t
 		auto const mt = static_cast<symbol_t const* const>(me.t);
@@ -215,32 +215,32 @@ namespace strange
 		return var<symbol_a>{ reinterpret_cast<symbol_a&>(r) };
 	}
 
-	char const* symbol_t::to_char_star_f(con<symbol_a> const& me /* :<symbol># */)
+	char const* symbol_t::to_char_star_f(con<symbol_a> const& me)
 	{
 		auto const mt = static_cast<symbol_t const* const>(me.t);
 		return mt->symbol;
 	}
 
-	int64_t symbol_t::length_f(con<symbol_a> const& me /* :<symbol># */)
+	int64_t symbol_t::length_f(con<symbol_a> const& me)
 	{
 		auto const mt = static_cast<symbol_t const* const>(me.t);
 		return mt->length;
 	}
 
-	char symbol_t::first_char_f(con<symbol_a> const& me /* :<symbol># */)
+	char symbol_t::first_char_f(con<symbol_a> const& me)
 	{
 		auto const mt = static_cast<symbol_t const* const>(me.t);
 		return (mt->symbol)[0];
 	}
 
-	char symbol_t::last_char_f(con<symbol_a> const& me /* :<symbol># */)
+	char symbol_t::last_char_f(con<symbol_a> const& me)
 	{
 		auto const mt = static_cast<symbol_t const* const>(me.t);
 		return (mt->symbol)[std::max(int64_t{ 0 }, mt->length - 1)];
 	}
 
 	// creators
-	var<symbol_a> symbol_t::create_f(char const* const s /* :_char_star_# */)
+	var<symbol_a> symbol_t::create_f(char const* const s)
 	{
 		any_a r;
 		new symbol_t{ r, s };
