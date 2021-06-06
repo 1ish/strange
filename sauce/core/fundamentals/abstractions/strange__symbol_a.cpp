@@ -21,7 +21,7 @@ namespace strange
 				static auto const create_empty_s = sym("create_empty");
 				if (function.o->equal(function, create_empty_s))
 				{
-					return symbol_t::create_empty_f;
+					return symbol_t::create_empty;
 				}
 			}
 		}

@@ -5,12 +5,12 @@ namespace strange
 	void any_o::set_something(var<> const& me,
 		bool is_something)
 	{
-		thing_t::set_something_f(me, is_something);
+		thing_t::set_something(me, is_something);
 	}
 
 	bool any_o::something(con<> const& me)
 	{
-		return thing_t::something_f(me);
+		return thing_t::something(me);
 	}
 
 	var<symbol_a> any_a::cat(con<> const& me)
@@ -32,12 +32,12 @@ namespace strange
 				static auto const create_s = sym("create");
 				if (function.o->equal(function, create_s))
 				{
-					return thing_t::create_f;
+					return thing_t::create;
 				}
 				static auto const create_nothing_s = sym("create_nothing");
 				if (function.o->equal(function, create_nothing_s))
 				{
-					return thing_t::create_nothing_f;
+					return thing_t::create_nothing;
 				}
 			}
 		}

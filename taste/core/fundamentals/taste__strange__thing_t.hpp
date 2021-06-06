@@ -25,7 +25,7 @@ namespace taste
 
 	void test()
 	{
-		auto v = var(symbol_t::create_f("auto"));
+		auto v = var(symbol_t::create("auto"));
 		auto tv = var(v.o->type(v));
 		tv = v;
 		auto s = sym("test");
@@ -35,8 +35,8 @@ namespace taste
 
 		std__cout << u.o->to_char_star(u) << "\n";
 
-		auto p = ptr<symbol_a>{ symbol_t::create_f("pointer") };
-		auto q = ptr<symbol_a>(symbol_t::create_f("q"));
+		auto p = ptr<symbol_a>{ symbol_t::create("pointer") };
+		auto q = ptr<symbol_a>(symbol_t::create("q"));
 		p.o->first_char(p.val<con<symbol_a>>());
 		p = q;
 		p.o->first_char(p.val<con<symbol_a>>());
@@ -52,7 +52,7 @@ namespace taste
 		tv = s;
 		//NO s = v;
 		//NO s = t;
-		auto value = con<>{ symbol_t::create_f("auto") };
+		auto value = con<>{ symbol_t::create("auto") };
 
 		auto n = con<symbol_a>();
 		auto no = con<any_a>();
@@ -61,7 +61,7 @@ namespace taste
 		REQUIRE(creator);
 		auto const created = creator();
 		var<any_a> anything = sym("symbol");
-		//NO var<symbol_a> symbol = thing_t::create_f();
+		//NO var<symbol_a> symbol = thing_t::create();
 		auto const test_fun = testfun(sym("test"), sym("fun"));
 
 		var<> anysym = sym("s");

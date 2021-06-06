@@ -14,7 +14,7 @@ namespace strange
 	{
 		inline con()
 		{
-			auto const n = A::t->create_nothing_f();
+			auto const n = A::t->create_nothing();
 			static typename A::operations const operations = [](void const* const nops, uint64_t const size)
 			{
 				typename A::operations ops = {};
@@ -186,7 +186,7 @@ namespace strange
 	{
 		inline var()
 		{
-			auto const n = A::t->create_nothing_f();
+			auto const n = A::t->create_nothing();
 			static typename A::operations const operations = [](void const* const nops, uint64_t const size)
 			{
 				typename A::operations ops = {};
@@ -471,7 +471,7 @@ namespace strange
 	{
 		inline ptr()
 		{
-			auto n = A::t->create_nothing_f();
+			auto n = A::t->create_nothing();
 			n.o->_set_pointer(n, true);
 			static typename A::operations const operations = [](void const* const nops, uint64_t const size)
 			{

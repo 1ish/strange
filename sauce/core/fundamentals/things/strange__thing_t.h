@@ -22,25 +22,25 @@ namespace strange
 
 	private:
 		// any_o
-		static any_o const* operations_f();
-		static any_o const* pointer_operations_f();
+		static any_o const* operations();
+		static any_o const* pointer_operations();
 
 	protected:
 		// inline
-		static inline void _initialise_f(any_a& me)
+		static inline void _initialise(any_a& me)
 		{
 		}
 
-		static inline void _clone_f(any_a const& me,
+		static inline void _clone(any_a const& me,
 			any_a& copy)
 		{
 		}
 
 	public:
-		static inline void set_something_f(var<> const& me,
+		static inline void set_something(var<> const& me,
 			bool is_something)
 		{
-			if (is_something == thing_t::something_f(me))
+			if (is_something == thing_t::something(me))
 			{
 				return;
 			}
@@ -54,49 +54,49 @@ namespace strange
 			}
 			else
 			{
-				auto const err = thing_t::create_f();
+				auto const err = thing_t::create();
 				err.inc();
 				mate.t = err.t;
 				mate.o = err.o;
 			}
 		}
 
-		static inline bool something_f(con<> const& me)
+		static inline bool something(con<> const& me)
 		{
 			return !me.t->error_n.t;
 		}
 
-		static inline bool _equal_f(con<> const& me,
+		static inline bool _equal(con<> const& me,
 			con<> const& other)
 		{
 			return me.t == other.t;
 		}
 
-		static inline bool _not_equal_f(con<> const& me,
+		static inline bool _not_equal(con<> const& me,
 			con<> const& other)
 		{
 			return me.t != other.t;
 		}
 
-		static inline bool _less_f(con<> const& me,
+		static inline bool _less(con<> const& me,
 			con<> const& other)
 		{
 			return me.t < other.t;
 		}
 
-		static inline bool _greater_f(con<> const& me,
+		static inline bool _greater(con<> const& me,
 			con<> const& other)
 		{
 			return me.t > other.t;
 		}
 
-		static inline bool _less_or_equal_f(con<> const& me,
+		static inline bool _less_or_equal(con<> const& me,
 			con<> const& other)
 		{
 			return me.t <= other.t;
 		}
 
-		static inline bool _greater_or_equal_f(con<> const& me,
+		static inline bool _greater_or_equal(con<> const& me,
 			con<> const& other)
 		{
 			return me.t >= other.t;
@@ -104,56 +104,56 @@ namespace strange
 
 	protected:
 		// any_a
-		static bool is_f(con<> const& me,
+		static bool is(con<> const& me,
 			con<> const& abstraction);
 
-		static bool as_f(con<> const& me,
+		static bool as(con<> const& me,
 			var<> const& abstraction);
 
-		static var<symbol_a> type_f(con<> const& me);
+		static var<symbol_a> type(con<> const& me);
 
-		static void set_error_f(var<> const& me,
+		static void set_error(var<> const& me,
 			con<> const& error_n);
 
-		static var<> error_f(con<> const& me);
+		static var<> error(con<> const& me);
 
-		static uint64_t hash_f(con<> const& me);
+		static uint64_t hash(con<> const& me);
 
-		static bool equal_f(con<> const& me,
+		static bool equal(con<> const& me,
 			con<> const& other);
 
-		static bool not_equal_f(con<> const& me,
+		static bool not_equal(con<> const& me,
 			con<> const& other);
 
-		static bool less_f(con<> const& me,
+		static bool less(con<> const& me,
 			con<> const& other);
 
-		static bool greater_f(con<> const& me,
+		static bool greater(con<> const& me,
 			con<> const& other);
 
-		static bool less_or_equal_f(con<> const& me,
+		static bool less_or_equal(con<> const& me,
 			con<> const& other);
 
-		static bool greater_or_equal_f(con<> const& me,
+		static bool greater_or_equal(con<> const& me,
 			con<> const& other);
 
-		static void _free_f(any_a const& me);
+		static void _free(any_a const& me);
 
-		static void _copy_f(any_a const& me,
+		static void _copy(any_a const& me,
 			any_a& copy);
 
-		static void _no_copy_f(any_a const& me,
+		static void _no_copy(any_a const& me,
 			any_a& copy);
 
-		static void _set_pointer_f(var<> const& me,
+		static void _set_pointer(var<> const& me,
 			bool is_pointer);
 
-		static bool _pointer_f(con<> const& me);
+		static bool _pointer(con<> const& me);
 
 	public:
 		// creators
-		static var<> create_f();
-		static var<> create_nothing_f();
+		static var<> create();
+		static var<> create_nothing();
 	};
 }
 

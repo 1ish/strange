@@ -21,7 +21,7 @@ namespace strange
 				static auto const create_s = sym("create");
 				if (function.o->equal(function, create_s))
 				{
-					//TODO return kind_t::create_f;
+					//TODO return kind_t::create;
 				}
 			}
 		}
