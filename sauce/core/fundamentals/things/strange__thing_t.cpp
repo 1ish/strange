@@ -83,7 +83,7 @@ namespace strange
 	bool thing_t::as_f(con<> const& me,
 		var<> const& abstraction)
 	{
-		if (!me.o->is(me, abstraction))
+		if (!thing_t::is_f(me, abstraction))
 		{
 			return false;
 		}

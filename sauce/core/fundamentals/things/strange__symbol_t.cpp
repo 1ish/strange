@@ -99,6 +99,17 @@ namespace strange
 		return abc == any_a::cat_f || abc == symbol_a::cat_f;
 	}
 
+	bool symbol_t::as_f(con<> const& me,
+		var<> const& abstraction)
+	{
+		if (!symbol_t::is_f(me, abstraction))
+		{
+			return false;
+		}
+		abstraction = me;
+		return true;
+	}
+
 	var<symbol_a> symbol_t::type_f(con<> const& me)
 	{
 		static auto r = sym("strange::symbol");

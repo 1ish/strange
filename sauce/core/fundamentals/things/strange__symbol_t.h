@@ -82,6 +82,9 @@ namespace strange
 		static bool is_f(con<> const& me,
 			con<> const& abstraction);
 
+		static bool as_f(con<> const& me,
+			var<> const& abstraction);
+
 		static var<symbol_a> type_f(con<> const& me);
 
 		static uint64_t hash_f(con<> const& me);
