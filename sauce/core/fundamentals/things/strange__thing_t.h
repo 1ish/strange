@@ -22,8 +22,8 @@ namespace strange
 
 	private:
 		// any_o
-		static any_o const* operations();
-		static any_o const* pointer_operations();
+		static any_o const* _operations();
+		static any_o const* _pointer_operations();
 
 	protected:
 		// inline

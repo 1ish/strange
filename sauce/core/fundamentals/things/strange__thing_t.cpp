@@ -9,7 +9,7 @@ namespace strange
 	, error_ { nullptr, nullptr }
 	{
 		me.t = this;
-		me.o = thing_t::operations();
+		me.o = thing_t::_operations();
 	}
 
 	thing_t::thing_t(any_a& me,
@@ -18,7 +18,7 @@ namespace strange
 	, error_ { original.t->error_ }
 	{
 		me.t = this;
-		me.o = thing_t::operations();
+		me.o = thing_t::_operations();
 
 		if (error_.t)
 		{
@@ -35,7 +35,7 @@ namespace strange
 	}
 
 	// any_o
-	any_o const* thing_t::operations()
+	any_o const* thing_t::_operations()
 	{
 		static any_o operations =
 		{
@@ -61,11 +61,11 @@ namespace strange
 		return &operations;
 	}
 
-	any_o const* thing_t::pointer_operations()
+	any_o const* thing_t::_pointer_operations()
 	{
 		static any_o operations = []()
 		{
-			any_o ops = *thing_t::operations();
+			any_o ops = *thing_t::_operations();
 			ops._copy = thing_t::_no_copy;
 			return ops;
 		}();
@@ -202,11 +202,11 @@ namespace strange
 	{
 		if (is_pointer)
 		{
-			me.o = thing_t::pointer_operations();
+			me.o = thing_t::_pointer_operations();
 		}
 		else
 		{
-			me.o = thing_t::operations();
+			me.o = thing_t::_operations();
 		}
 	}
 

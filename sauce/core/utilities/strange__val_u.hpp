@@ -14,16 +14,16 @@ namespace strange
 	{
 		inline con()
 		{
-			auto const n = A::t->create_nothing();
-			static typename A::operations const operations = [](void const* const nops, uint64_t const size)
+			auto const nothing = A::t->create_nothing();
+			static typename A::operations const null_ops = [](void const* const nothing_ops, uint64_t const size)
 			{
-				typename A::operations ops = {};
-				std::memcpy(&ops, nops, size);
-				ops.cat = A::cat;
-				return ops;
-			}(n.o, sizeof(*(n.o)));
-			A::t = n.t;
-			A::o = &operations;
+				typename A::operations nops = {};
+				std::memcpy(&nops, nothing_ops, size);
+				nops.cat = A::cat;
+				return nops;
+			}(nothing.o, sizeof(*(nothing.o)));
+			A::t = nothing.t;
+			A::o = &null_ops;
 			inc();
 		}
 
@@ -186,16 +186,16 @@ namespace strange
 	{
 		inline var()
 		{
-			auto const n = A::t->create_nothing();
-			static typename A::operations const operations = [](void const* const nops, uint64_t const size)
+			auto const nothing = A::t->create_nothing();
+			static typename A::operations const null_ops = [](void const* const nothing_ops, uint64_t const size)
 			{
-				typename A::operations ops = {};
-				std::memcpy(&ops, nops, size);
-				ops.cat = A::cat;
-				return ops;
-			}(n.o, sizeof(*(n.o)));
-			A::t = n.t;
-			A::o = &operations;
+				typename A::operations nops = {};
+				std::memcpy(&nops, nothing_ops, size);
+				nops.cat = A::cat;
+				return nops;
+			}(nothing.o, sizeof(*(nothing.o)));
+			A::t = nothing.t;
+			A::o = &null_ops;
 			inc();
 		}
 
@@ -471,17 +471,17 @@ namespace strange
 	{
 		inline ptr()
 		{
-			auto n = A::t->create_nothing();
-			n.o->_set_pointer(n, true);
-			static typename A::operations const operations = [](void const* const nops, uint64_t const size)
+			auto nothing = A::t->create_nothing();
+			nothing.o->_set_pointer(nothing, true);
+			static typename A::operations const null_ops = [](void const* const nothing_ops, uint64_t const size)
 			{
-				typename A::operations ops = {};
-				std::memcpy(&ops, nops, size);
-				ops.cat = A::cat;
-				return ops;
-			}(n.o, sizeof(*(n.o)));
-			A::t = n.t;
-			A::o = &operations;
+				typename A::operations nops = {};
+				std::memcpy(&nops, nothing_ops, size);
+				nops.cat = A::cat;
+				return nops;
+			}(nothing.o, sizeof(*(nothing.o)));
+			A::t = nothing.t;
+			A::o = &null_ops;
 			inc();
 			mut();
 		}

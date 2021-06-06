@@ -24,8 +24,8 @@ namespace strange
 
 	private:
 		// symbol_o
-		static symbol_o const* operations();
-		static symbol_o const* pointer_operations();
+		static symbol_o const* _operations();
+		static symbol_o const* _pointer_operations();
 
 	public:
 		// inline

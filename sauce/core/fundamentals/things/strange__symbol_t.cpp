@@ -12,7 +12,7 @@ namespace strange
 	, length_{ 0 }
 	, hash_{ 0 }
 	{
-		me.o = symbol_t::operations();
+		me.o = symbol_t::_operations();
 
 		if (s)
 		{
@@ -30,7 +30,7 @@ namespace strange
 	, length_{ 0 }
 	, hash_{ 0 }
 	{
-		me.o = symbol_t::operations();
+		me.o = symbol_t::_operations();
 
 		auto const ot = static_cast<symbol_t const* const>(original.t);
 		length_ = ot->length_;
@@ -45,7 +45,7 @@ namespace strange
 	}
 
 	// symbol_o
-	symbol_o const* symbol_t::operations()
+	symbol_o const* symbol_t::_operations()
 	{
 		static symbol_o operations =
 		{
@@ -79,11 +79,11 @@ namespace strange
 		return &operations;
 	}
 
-	symbol_o const* symbol_t::pointer_operations()
+	symbol_o const* symbol_t::_pointer_operations()
 	{
 		static symbol_o operations = []()
 		{
-			symbol_o ops = *symbol_t::operations();
+			symbol_o ops = *symbol_t::_operations();
 			ops._copy = thing_t::_no_copy;
 			return ops;
 		}();
@@ -200,11 +200,11 @@ namespace strange
 	{
 		if (is_pointer)
 		{
-			me.o = symbol_t::pointer_operations();
+			me.o = symbol_t::_pointer_operations();
 		}
 		else
 		{
-			me.o = symbol_t::operations();
+			me.o = symbol_t::_operations();
 		}
 	}
 
