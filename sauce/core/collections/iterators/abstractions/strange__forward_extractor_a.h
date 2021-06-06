@@ -6,9 +6,15 @@ namespace strange
 	template <typename element_d>
 	struct forward_extractor_o : any_o
 	{
-		element_d const& (*extract_forward_extractor)(con<forward_extractor_a<element_d>> const& me);
+		var<element_d> (*get)(con<forward_extractor_a<element_d>> const& me);
 
-		element_d& (*mutate_forward_extractor)(var<forward_extractor_a<element_d>> const& me);
+		var<element_d> const& (*star)(con<forward_extractor_a<element_d>> const& me);
+
+		var<element_d> const* (*arrow)(con<forward_extractor_a<element_d>> const& me);
+
+		var<forward_extractor_a<element_d>> (*increment)(var<forward_extractor_a<element_d>> const& me);
+
+		var<forward_extractor_a<any_a>> (*to_extractor_any)(con<forward_extractor_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

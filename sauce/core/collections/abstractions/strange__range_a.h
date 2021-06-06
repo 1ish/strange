@@ -6,9 +6,9 @@ namespace strange
 	template <typename element_d>
 	struct range_o : any_o
 	{
-		element_d const& (*extract_range)(con<range_a<element_d>> const& me);
+		var<forward_extractor_a<element_d>> (*extract_begin)(con<range_a<element_d>> const& me);
 
-		element_d& (*mutate_range)(var<range_a<element_d>> const& me);
+		var<forward_extractor_a<element_d>>(*extract_end)(con<range_a<element_d>> const& me);
 	};
 
 	template <typename element_d>
