@@ -51,7 +51,7 @@ namespace strange
 		{
 			{
 				// any_a
-				symbol_a::cat_f,
+				symbol_a::cat,
 				is_f,
 				as_f,
 				type_f,
@@ -96,7 +96,7 @@ namespace strange
 	{
 		// abstraction.cat in me.cats
 		auto const abc = abstraction.o->cat;
-		return abc == any_a::cat_f || abc == symbol_a::cat_f;
+		return abc == any_a::cat || abc == symbol_a::cat;
 	}
 
 	bool symbol_t::as_f(con<> const& me,

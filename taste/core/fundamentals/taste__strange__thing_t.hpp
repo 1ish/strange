@@ -57,7 +57,7 @@ namespace taste
 		auto n = con<symbol_a>();
 		auto no = con<any_a>();
 
-		auto const creator = symbol_a::creator_f(sym("strange"), sym("symbol"), sym("create_empty"));
+		auto const creator = symbol_a::creator(sym("strange"), sym("symbol"), sym("create_empty"));
 		REQUIRE(creator);
 		auto const created = creator();
 		var<any_a> anything = sym("symbol");

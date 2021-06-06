@@ -18,14 +18,14 @@ namespace strange
 	struct kind_a
 	{
 		using operations = kind_o;
-		using creator = var<kind_a>(*)();
+		using creator_fp = var<kind_a>(*)();
 
 		mutable thing_t* t;
 		mutable operations const* o;
 
-		static var<symbol_a> cat_f(con<> const& me); //TODO cat
+		static var<symbol_a> cat(con<> const& me); //TODO cat
 
-		static creator creator_f(con<symbol_a> const& scope,
+		static creator_fp creator(con<symbol_a> const& scope,
 			con<symbol_a> const& thing,
 			con<symbol_a> const& function);
 	};

@@ -3,14 +3,14 @@
 namespace strange
 {
 	template <typename type_d>
-	var<symbol_a> data_a<type_d>::cat_f(con<> const& me)
+	var<symbol_a> data_a<type_d>::cat(con<> const& me)
 	{
 		static auto r = sym("<strange::data>"); //TODO cat
 		return r;
 	}
 
 	template <typename type_d>
-	typename data_a<type_d>::creator data_a<type_d>::creator_f(con<symbol_a> const& scope,
+	typename data_a<type_d>::creator_fp data_a<type_d>::creator(con<symbol_a> const& scope,
 		con<symbol_a> const& thing,
 		con<symbol_a> const& function)
 	{

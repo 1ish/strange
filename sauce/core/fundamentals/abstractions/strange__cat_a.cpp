@@ -2,13 +2,13 @@
 
 namespace strange
 {
-	var<symbol_a> cat_a::cat_f(con<> const& me)
+	var<symbol_a> cat_a::cat(con<> const& me)
 	{
 		static auto r = sym("<strange::cat>"); //TODO cat
 		return r;
 	}
 
-	cat_a::creator cat_a::creator_f(con<symbol_a> const& scope,
+	cat_a::creator_fp cat_a::creator(con<symbol_a> const& scope,
 		con<symbol_a> const& thing,
 		con<symbol_a> const& function)
 	{

@@ -59,14 +59,14 @@ namespace strange
 	struct any_a
 	{
 		using operations = any_o;
-		using creator = var<>(*)();
+		using creator_fp = var<>(*)();
 
 		mutable thing_t* t;
 		mutable operations const* o;
 
-		static var<symbol_a> cat_f(con<> const& me); //TODO cat
+		static var<symbol_a> cat(con<> const& me); //TODO cat
 
-		static creator creator_f(con<symbol_a> const& scope,
+		static creator_fp creator(con<symbol_a> const& scope,
 			con<symbol_a> const& thing,
 			con<symbol_a> const& function);
 	};

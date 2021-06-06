@@ -40,7 +40,7 @@ namespace strange
 		static any_o operations =
 		{
 			// any_a
-			any_a::cat_f,
+			any_a::cat,
 			is_f,
 			as_f,
 			type_f,
@@ -77,7 +77,7 @@ namespace strange
 		con<> const& abstraction)
 	{
 		// abstraction.cat in me.cats
-		return abstraction.o->cat == any_a::cat_f;
+		return abstraction.o->cat == any_a::cat;
 	}
 
 	bool thing_t::as_f(con<> const& me,

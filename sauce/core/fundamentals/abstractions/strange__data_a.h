@@ -15,14 +15,14 @@ namespace strange
 	struct data_a
 	{
 		using operations = data_o<type_d>;
-		using creator = var<data_a<type_d>>(*)();
+		using creator_fp = var<data_a<type_d>>(*)();
 
 		mutable thing_t* t;
 		mutable operations const* o;
 
-		static var<symbol_a> cat_f(con<> const& me); //TODO cat
+		static var<symbol_a> cat(con<> const& me); //TODO cat
 
-		static creator creator_f(con<symbol_a> const& scope,
+		static creator_fp creator(con<symbol_a> const& scope,
 			con<symbol_a> const& thing,
 			con<symbol_a> const& function);
 	};
