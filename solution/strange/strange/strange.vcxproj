@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__range_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__any_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__cat_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__data_a.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="..\..\..\taste\strange_taste.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__range_a.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__any_a.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__cat_a.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__data_a.h" />
