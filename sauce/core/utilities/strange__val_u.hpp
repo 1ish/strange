@@ -83,12 +83,12 @@ namespace strange
 
 		inline void inc() const
 		{
-			++(A::t->refs_n);
+			++(A::t->refs_);
 		}
 
 		inline void dec() const
 		{
-			if (!--(A::t->refs_n))
+			if (!--(A::t->refs_))
 			{
 				A::o->_free(reinterpret_cast<any_a const&>(*this));
 			}
@@ -96,7 +96,7 @@ namespace strange
 
 		inline void mut() const
 		{
-			if (A::t->refs_n > 1)
+			if (A::t->refs_ > 1)
 			{
 				A cp;
 				A::o->_copy(reinterpret_cast<any_a const&>(*this), reinterpret_cast<any_a&>(cp));
@@ -356,12 +356,12 @@ namespace strange
 
 		inline void inc() const
 		{
-			++(A::t->refs_n);
+			++(A::t->refs_);
 		}
 
 		inline void dec() const
 		{
-			if (!--(A::t->refs_n))
+			if (!--(A::t->refs_))
 			{
 				A::o->_free(reinterpret_cast<any_a const&>(*this));
 			}
@@ -369,7 +369,7 @@ namespace strange
 
 		inline void mut() const
 		{
-			if (A::t->refs_n > 1)
+			if (A::t->refs_ > 1)
 			{
 				A cp;
 				A::o->_copy(reinterpret_cast<any_a const&>(*this), reinterpret_cast<any_a&>(cp));
@@ -642,12 +642,12 @@ namespace strange
 
 		inline void inc() const
 		{
-			++(A::t->refs_n);
+			++(A::t->refs_);
 		}
 
 		inline void dec() const
 		{
-			if (!--(A::t->refs_n))
+			if (!--(A::t->refs_))
 			{
 				A::o->_free(reinterpret_cast<any_a const&>(*this));
 			}
@@ -655,7 +655,7 @@ namespace strange
 
 		inline void mut() const
 		{
-			if (A::t->refs_n > 1)
+			if (A::t->refs_ > 1)
 			{
 				A cp;
 				A::o->_copy(reinterpret_cast<any_a const&>(*this), reinterpret_cast<any_a&>(cp));

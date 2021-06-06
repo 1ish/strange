@@ -8,40 +8,40 @@ namespace strange
 	symbol_t::symbol_t(any_a& me,
 		char const* const s)
 	: thing_t{ me }
-	, symbol_n{ nullptr }
-	, length_n{ 0 }
-	, hash_n{ 0 }
+	, symbol_{ nullptr }
+	, length_{ 0 }
+	, hash_{ 0 }
 	{
 		me.o = symbol_t::operations();
 
 		if (s)
 		{
-			length_n = std::strlen(s);
-			symbol_n = new char[length_n + 1];
-			std::memcpy(symbol_n, s, length_n + 1);
-			hash_n = std::hash<std::string_view>{}(std::string_view{ symbol_n, static_cast<uint64_t>(length_n) });
+			length_ = std::strlen(s);
+			symbol_ = new char[length_ + 1];
+			std::memcpy(symbol_, s, length_ + 1);
+			hash_ = std::hash<std::string_view>{}(std::string_view{ symbol_, static_cast<uint64_t>(length_) });
 		}
 	}
 
 	symbol_t::symbol_t(any_a& me,
 		any_a const& original)
 	: thing_t{ me, original }
-	, symbol_n{ nullptr }
-	, length_n{ 0 }
-	, hash_n{ 0 }
+	, symbol_{ nullptr }
+	, length_{ 0 }
+	, hash_{ 0 }
 	{
 		me.o = symbol_t::operations();
 
 		auto const ot = static_cast<symbol_t const* const>(original.t);
-		length_n = ot->length_n;
-		symbol_n = new char[length_n + 1];
-		std::memcpy(symbol_n, ot->symbol_n, length_n + 1);
-		hash_n = ot->hash_n;
+		length_ = ot->length_;
+		symbol_ = new char[length_ + 1];
+		std::memcpy(symbol_, ot->symbol_, length_ + 1);
+		hash_ = ot->hash_;
 	}
 
 	symbol_t::~symbol_t()
 	{
-		delete[] symbol_n;
+		delete[] symbol_;
 	}
 
 	// symbol_o
@@ -119,7 +119,7 @@ namespace strange
 	uint64_t symbol_t::hash(con<> const& me)
 	{
 		auto const mt = static_cast<symbol_t const* const>(me.t);
-		return mt->hash_n;
+		return mt->hash_;
 	}
 
 	bool symbol_t::equal(con<> const& me,
@@ -218,36 +218,36 @@ namespace strange
 		auto const rt = new symbol_t{ r, nullptr };
 		symbol_t::_initialise(r);
 		int64_t const suffixlength = suffix.o->length(suffix);
-		rt->length_n = mt->length_n + suffixlength;
-		rt->symbol_n = new char[rt->length_n + 1];
-		std::memcpy(rt->symbol_n, mt->symbol_n, mt->length_n);
-		std::memcpy(rt->symbol_n + mt->length_n, suffix.o->to_char_star(suffix), suffixlength + 1);
-		rt->hash_n = std::hash<std::string_view>{}(std::string_view{ rt->symbol_n, static_cast<uint64_t>(rt->length_n) });
+		rt->length_ = mt->length_ + suffixlength;
+		rt->symbol_ = new char[rt->length_ + 1];
+		std::memcpy(rt->symbol_, mt->symbol_, mt->length_);
+		std::memcpy(rt->symbol_ + mt->length_, suffix.o->to_char_star(suffix), suffixlength + 1);
+		rt->hash_ = std::hash<std::string_view>{}(std::string_view{ rt->symbol_, static_cast<uint64_t>(rt->length_) });
 		return var<symbol_a>{ reinterpret_cast<symbol_a&>(r) };
 	}
 
 	char const* symbol_t::to_char_star(con<symbol_a> const& me)
 	{
 		auto const mt = static_cast<symbol_t const* const>(me.t);
-		return mt->symbol_n;
+		return mt->symbol_;
 	}
 
 	int64_t symbol_t::length(con<symbol_a> const& me)
 	{
 		auto const mt = static_cast<symbol_t const* const>(me.t);
-		return mt->length_n;
+		return mt->length_;
 	}
 
 	char symbol_t::first_char(con<symbol_a> const& me)
 	{
 		auto const mt = static_cast<symbol_t const* const>(me.t);
-		return (mt->symbol_n)[0];
+		return (mt->symbol_)[0];
 	}
 
 	char symbol_t::last_char(con<symbol_a> const& me)
 	{
 		auto const mt = static_cast<symbol_t const* const>(me.t);
-		return (mt->symbol_n)[std::max(int64_t{ 0 }, mt->length_n - 1)];
+		return (mt->symbol_)[std::max(int64_t{ 0 }, mt->length_ - 1)];
 	}
 
 	// creators
