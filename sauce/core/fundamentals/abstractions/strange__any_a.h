@@ -5,11 +5,6 @@ namespace strange
 {
 	struct any_o
 	{
-		static void set_something(var<> const& me,
-			bool is_something);
-
-		static bool something(con<> const& me);
-
 		var<symbol_a> (*cat)(con<> const& me); //TODO cat
 
 		bool (*is)(con<> const& me,
@@ -19,6 +14,11 @@ namespace strange
 			var<> const& abstraction);
 
 		var<symbol_a> (*type)(con<> const& me);
+
+		static inline void set_something(var<> const& me,
+			bool is_something);
+
+		static inline bool something(con<> const& me);
 
 		void (*set_error)(var<> const& me,
 			con<> const& error);
@@ -30,7 +30,7 @@ namespace strange
 		bool (*equal)(con<> const& me,
 			con<> const& other);
 
-		bool (*not_equal)(con<> const& me,
+		static inline bool not_equal(con<> const& me,
 			con<> const& other);
 
 		bool (*less)(con<> const& me,
@@ -70,6 +70,12 @@ namespace strange
 			con<symbol_a> const& thing,
 			con<symbol_a> const& function);
 	};
+
+	inline bool any_o::not_equal(con<> const& me,
+		con<> const& other)
+	{
+		return !me.o->equal(me, other);
+	}
 }
 
 #endif

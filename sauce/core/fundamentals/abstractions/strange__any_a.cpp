@@ -2,17 +2,6 @@
 
 namespace strange
 {
-	void any_o::set_something(var<> const& me,
-		bool is_something)
-	{
-		thing_t::set_something(me, is_something);
-	}
-
-	bool any_o::something(con<> const& me)
-	{
-		return thing_t::something(me);
-	}
-
 	var<symbol_a> any_a::cat(con<> const& me)
 	{
 		static auto r = sym("<strange::any>"); //TODO cat

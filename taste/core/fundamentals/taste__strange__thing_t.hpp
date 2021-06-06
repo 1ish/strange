@@ -85,6 +85,7 @@ namespace taste
 		res = vvv.pfm(&symbol_o::error).ref<var<symbol_a>>();
 		std__cout << "result: " << res.o->to_char_star(res) << "\n";
 		vvv.pfm(&symbol_o::something);
+		vvv.pfm(&any_o::not_equal, sym("other"));
 	}
 }
 

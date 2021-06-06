@@ -48,7 +48,6 @@ namespace strange
 			error,
 			hash,
 			equal,
-			not_equal,
 			less,
 			greater,
 			less_or_equal,
@@ -150,12 +149,6 @@ namespace strange
 		con<> const& other)
 	{
 		return thing_t::_equal(me, other);
-	}
-
-	bool thing_t::not_equal(con<> const& me,
-		con<> const& other)
-	{
-		return thing_t::_not_equal(me, other);
 	}
 
 	bool thing_t::less(con<> const& me,

@@ -5,11 +5,11 @@ namespace strange
 {
 	struct kind_o : symbol_o
 	{
+		bool (*shared)(con<kind_a> const& me);
+
 		var<cat_a> (*the_cat)(con<kind_a> const& me);
 
 		behaviour_e (*behaviour)(con<kind_a> const& me);
-
-		bool (*shared)(con<kind_a> const& me);
 
 		// constant  :<any>#
 		// variable  :<any>=

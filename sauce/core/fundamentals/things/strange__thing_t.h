@@ -37,27 +37,10 @@ namespace strange
 		}
 
 	public:
-		static inline void set_something(var<> const& me,
-			bool is_something)
-		{
-			me.o->set_error(me, is_something ? thing_t::create_nothing() : thing_t::create());
-		}
-
-		static inline bool something(con<> const& me)
-		{
-			return !me.t->error_.t;
-		}
-
 		static inline bool _equal(con<> const& me,
 			con<> const& other)
 		{
 			return me.t == other.t;
-		}
-
-		static inline bool _not_equal(con<> const& me,
-			con<> const& other)
-		{
-			return me.t != other.t;
 		}
 
 		static inline bool _less(con<> const& me,
@@ -104,9 +87,6 @@ namespace strange
 		static bool equal(con<> const& me,
 			con<> const& other);
 
-		static bool not_equal(con<> const& me,
-			con<> const& other);
-
 		static bool less(con<> const& me,
 			con<> const& other);
 
@@ -137,6 +117,17 @@ namespace strange
 		static var<> create();
 		static var<> create_nothing();
 	};
+
+	inline void any_o::set_something(var<> const& me,
+		bool is_something)
+	{
+		me.o->set_error(me, is_something ? thing_t::create_nothing() : thing_t::create());
+	}
+
+	inline bool any_o::something(con<> const& me)
+	{
+		return !me.t->error_.t;
+	}
 }
 
 #endif
