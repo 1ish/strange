@@ -12,7 +12,7 @@ namespace strange
 	struct symbol_a;
 	struct cat_a;
 	struct kind_a;
-	template <typename data_type> struct data_a;
+	template <typename type_d> struct data_a;
 
 	struct thing_t;
 	struct symbol_t;
