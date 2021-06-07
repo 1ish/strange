@@ -8,13 +8,13 @@ namespace strange
 	{
 		var<element_d> (*get)(con<forward_extractor_a<element_d>> const& me);
 
-		var<element_d> const& (*_star)(con<forward_extractor_a<element_d>> const& me);
-
-		var<element_d> const* (*_arrow)(con<forward_extractor_a<element_d>> const& me);
-
 		void (*increment)(var<forward_extractor_a<element_d>> const& me);
 
 		var<forward_extractor_a<any_a>> (*to_extractor_any)(con<forward_extractor_a<element_d>> const& me);
+
+		var<element_d> const& (*_star)(con<forward_extractor_a<element_d>> const& me);
+
+		var<element_d> const* (*_arrow)(con<forward_extractor_a<element_d>> const& me);
 	};
 
 	template <typename element_d>
