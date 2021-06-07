@@ -29,4 +29,7 @@ namespace strange
 		}
 		return nullptr;
 	}
+
+	// instantiation
+	template struct data_a<int64_t>;
 }

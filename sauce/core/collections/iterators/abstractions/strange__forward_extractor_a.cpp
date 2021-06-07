@@ -29,4 +29,7 @@ namespace strange
 		}
 		return nullptr;
 	}
+
+	// instantiation
+	template struct forward_extractor_a<int64_t>;
 }

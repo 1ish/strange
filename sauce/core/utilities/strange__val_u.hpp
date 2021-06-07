@@ -742,6 +742,57 @@ namespace strange
 			return (A::o->*mp)(*this, ps...);
 		}
 	};
+
+	template <typename A>
+	struct fex : var<A>
+	{
+		explicit inline fex(A const& abstraction) : var<A>{ abstraction }
+		{
+		}
+
+		inline fex(fex const& original) : var<A>{ original } // copy constructor
+		{
+		}
+
+		inline fex const& operator=(fex const& original) const // copy assignment operator
+		{
+			var<A>::operator=(original);
+			return *this;
+		}
+
+		inline bool operator==(con<> const& other) const
+		{
+			return A::o->equal(*this, other);
+		}
+
+		inline bool operator!=(con<> const& other) const
+		{
+			return !A::o->equal(*this, other);
+		}
+
+		inline auto const& operator*() const
+		{
+			return A::o->_star(*this);
+		}
+
+		inline auto const* operator->() const
+		{
+			return A::o->_arrow(*this);
+		}
+
+		inline fex& operator++() // pre
+		{
+			A::o->increment(*this);
+			return *this;
+		}
+
+		inline fex operator++(int) // post
+		{
+			auto before = *this;
+			A::o->increment(*this);
+			return before;
+		}
+	};
 }
 
 #endif
