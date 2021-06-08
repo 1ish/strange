@@ -29,40 +29,40 @@ namespace strange
 			con<symbol_a> const& function);
 	};
 
-	template <typename element_d>
-	inline fit<forward_extractor_a<element_d>> begin(con<range_a<element_d>> const& range)
+	template <typename range_d>
+	inline auto begin(con<range_d> const& range)
 	{
 		return range.o->extract_begin(range);
 	}
 
-	template <typename element_d>
-	inline fit<forward_extractor_a<element_d>> end(con<range_a<element_d>> const& range)
+	template <typename range_d>
+	inline auto end(con<range_d> const& range)
 	{
 		return range.o->extract_end(range);
 	}
 
-	template <typename element_d>
-	inline fit<forward_extractor_a<element_d>> begin(var<range_a<element_d>> const& range)
+	template <typename range_d>
+	inline auto begin(var<range_d> const& range)
 	{
 		return range.o->extract_begin(range);
 	}
 
-	template <typename element_d>
-	inline fit<forward_extractor_a<element_d>> end(var<range_a<element_d>> const& range)
+	template <typename range_d>
+	inline auto end(var<range_d> const& range)
 	{
 		return range.o->extract_end(range);
 	}
 
-	template <typename element_d>
-	inline fit<forward_extractor_a<element_d>> begin(ptr<range_a<element_d>> const& range)
+	template <typename range_d>
+	inline auto begin(ptr<range_d> const& range)
 	{
-		return range.o->extract_begin(reinterpret_cast<con<range_a<element_d>> const&>(range));
+		return range.o->extract_begin(reinterpret_cast<con<range_d> const&>(range));
 	}
 
-	template <typename element_d>
-	inline fit<forward_extractor_a<element_d>> end(ptr<range_a<element_d>> const& range)
+	template <typename range_d>
+	inline auto end(ptr<range_d> const& range)
 	{
-		return range.o->extract_end(reinterpret_cast<con<range_a<element_d>> const&>(range));
+		return range.o->extract_end(reinterpret_cast<con<range_d> const&>(range));
 	}
 }
 

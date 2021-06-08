@@ -1075,25 +1075,25 @@ namespace strange
 	};
 
 	template <typename A>
-	struct rat : fit<A>
+	struct rat : bit<A>
 	{
-		explicit inline rat(A const& abstraction) : fit<A>{ abstraction }
+		explicit inline rat(A const& abstraction) : bit<A>{ abstraction }
 		{
 		}
 
-		inline rat(rat const& original) : fit<A>{ original } // copy constructor
+		inline rat(rat const& original) : bit<A>{ original } // copy constructor
 		{
 		}
 
 		inline rat const& operator=(rat const& original) const // copy assignment operator
 		{
-			fit<A>::operator=(original);
+			bit<A>::operator=(original);
 			return *this;
 		}
 
 		inline rat& operator=(rat const& original) // copy assignment operator
 		{
-			fit<A>::operator=(original);
+			bit<A>::operator=(original);
 			return *this;
 		}
 
