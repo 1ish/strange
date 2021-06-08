@@ -780,17 +780,169 @@ namespace strange
 			return A::o->_arrow(*this);
 		}
 
+		inline fit const& operator++() const // pre
+		{
+			A::o->increment(*this);
+			return *this;
+		}
+
 		inline fit& operator++() // pre
 		{
 			A::o->increment(*this);
 			return *this;
 		}
 
-		inline fit operator++(int) // post
+		inline fit operator++(int) const // post
 		{
 			auto before = *this;
 			A::o->increment(*this);
 			return before;
+		}
+	};
+
+	template <typename A>
+	struct bit : fit<A>
+	{
+		explicit inline bit(A const& abstraction) : fit<A>{ abstraction }
+		{
+		}
+
+		inline bit(bit const& original) : fit<A>{ original } // copy constructor
+		{
+		}
+
+		inline bit const& operator=(bit const& original) const // copy assignment operator
+		{
+			fit<A>::operator=(original);
+			return *this;
+		}
+
+		inline bit const& operator++() const // pre
+		{
+			A::o->increment(*this);
+			return *this;
+		}
+
+		inline bit& operator++() // pre
+		{
+			A::o->increment(*this);
+			return *this;
+		}
+
+		inline bit operator++(int) const // post
+		{
+			auto before = *this;
+			A::o->increment(*this);
+			return before;
+		}
+
+		inline bit const& operator--() const // pre
+		{
+			A::o->decrement(*this);
+			return *this;
+		}
+
+		inline bit& operator--() // pre
+		{
+			A::o->decrement(*this);
+			return *this;
+		}
+
+		inline bit operator--(int) const // post
+		{
+			auto before = *this;
+			A::o->decrement(*this);
+			return before;
+		}
+	};
+
+	template <typename A>
+	struct rat : fit<A>
+	{
+		explicit inline rat(A const& abstraction) : fit<A>{ abstraction }
+		{
+		}
+
+		inline rat(rat const& original) : fit<A>{ original } // copy constructor
+		{
+		}
+
+		inline rat const& operator=(rat const& original) const // copy assignment operator
+		{
+			fit<A>::operator=(original);
+			return *this;
+		}
+
+		inline rat const& operator++() const // pre
+		{
+			A::o->increment(*this);
+			return *this;
+		}
+
+		inline rat& operator++() // pre
+		{
+			A::o->increment(*this);
+			return *this;
+		}
+
+		inline rat operator++(int) const // post
+		{
+			auto before = *this;
+			A::o->increment(*this);
+			return before;
+		}
+
+		inline rat const& operator--() const // pre
+		{
+			A::o->decrement(*this);
+			return *this;
+		}
+
+		inline rat& operator--() // pre
+		{
+			A::o->decrement(*this);
+			return *this;
+		}
+
+		inline rat operator--(int) const // post
+		{
+			auto before = *this;
+			A::o->decrement(*this);
+			return before;
+		}
+
+		inline rat const& operator+=(int64_t const offset) const
+		{
+			A::o->self_add(*this, offset);
+			return *this;
+		}
+
+		inline rat& operator+=(int64_t const offset)
+		{
+			A::o->self_add(*this, offset);
+			return *this;
+		}
+
+		inline rat const& operator-=(int64_t const offset) const
+		{
+			A::o->self_add(*this, -offset);
+			return *this;
+		}
+
+		inline rat& operator-=(int64_t const offset)
+		{
+			A::o->self_add(*this, -offset);
+			return *this;
+		}
+
+		inline rat operator+(int64_t const offset) const
+		{
+			return A::o->add(*this, offset);
+		}
+
+		inline rat operator-(int64_t const offset) const
+		{
+			return A::o->add(*this, -offset);
 		}
 	};
 }
