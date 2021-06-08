@@ -267,6 +267,22 @@ namespace strange
 			return *this;
 		}
 
+		inline var& operator=(con<A> const& original)
+		{
+			if (A::t != original.t)
+			{
+				dec();
+				A::t = original.t;
+				A::o = original.o;
+				inc();
+			}
+			else
+			{
+				A::o = original.o;
+			}
+			return *this;
+		}
+
 		inline var const& operator=(var const& original) const // copy assignment operator
 		{
 			if (A::t != original.t)
@@ -283,7 +299,41 @@ namespace strange
 			return *this;
 		}
 
+		inline var& operator=(var const& original) // copy assignment operator
+		{
+			if (A::t != original.t)
+			{
+				dec();
+				A::t = original.t;
+				A::o = original.o;
+				inc();
+			}
+			else
+			{
+				A::o = original.o;
+			}
+			return *this;
+		}
+
 		inline var const& operator=(ptr<A> const& original) const
+		{
+			if (A::t != original.t)
+			{
+				dec();
+				A::t = original.t;
+				A::o = original.o;
+				inc();
+			}
+			else
+			{
+				A::o = original.o;
+			}
+			A::o->_set_pointer(*this, false);
+			mut();
+			return *this;
+		}
+
+		inline var& operator=(ptr<A> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -319,6 +369,23 @@ namespace strange
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		inline var& operator=(con<D> const& original)
+		{
+			if (A::t != original.t)
+			{
+				dec();
+				A::t = original.t;
+				A::o = original.o;
+				inc();
+			}
+			else
+			{
+				A::o = original.o;
+			}
+			return *this;
+		}
+
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline var const& operator=(var<D> const& original) const
 		{
 			if (A::t != original.t)
@@ -336,7 +403,43 @@ namespace strange
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		inline var& operator=(var<D> const& original)
+		{
+			if (A::t != original.t)
+			{
+				dec();
+				A::t = original.t;
+				A::o = original.o;
+				inc();
+			}
+			else
+			{
+				A::o = original.o;
+			}
+			return *this;
+		}
+
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline var const& operator=(ptr<D> const& original) const
+		{
+			if (A::t != original.t)
+			{
+				dec();
+				A::t = original.t;
+				A::o = original.o;
+				inc();
+			}
+			else
+			{
+				A::o = original.o;
+			}
+			A::o->_set_pointer(*this, false);
+			mut();
+			return *this;
+		}
+
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		inline var& operator=(ptr<D> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -554,7 +657,41 @@ namespace strange
 			return *this;
 		}
 
+		inline ptr& operator=(con<A> const& original)
+		{
+			if (A::t != original.t)
+			{
+				dec();
+				A::t = original.t;
+				A::o = original.o;
+				inc();
+			}
+			else
+			{
+				A::o = original.o;
+			}
+			mut();
+			return *this;
+		}
+
 		inline ptr const& operator=(var<A> const& original) const
+		{
+			if (A::t != original.t)
+			{
+				dec();
+				A::t = original.t;
+				A::o = original.o;
+				inc();
+			}
+			else
+			{
+				A::o = original.o;
+			}
+			mut();
+			return *this;
+		}
+
+		inline ptr& operator=(var<A> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -587,8 +724,42 @@ namespace strange
 			return *this;
 		}
 
+		inline ptr& operator=(ptr const& original) // copy assignment operator
+		{
+			if (A::t != original.t)
+			{
+				dec();
+				A::t = original.t;
+				A::o = original.o;
+				inc();
+			}
+			else
+			{
+				A::o = original.o;
+			}
+			return *this;
+		}
+
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline ptr const& operator=(con<D> const& original) const
+		{
+			if (A::t != original.t)
+			{
+				dec();
+				A::t = original.t;
+				A::o = original.o;
+				inc();
+			}
+			else
+			{
+				A::o = original.o;
+			}
+			mut();
+			return *this;
+		}
+
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		inline ptr& operator=(con<D> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -624,7 +795,42 @@ namespace strange
 		}
 
 		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		inline ptr& operator=(var<D> const& original)
+		{
+			if (A::t != original.t)
+			{
+				dec();
+				A::t = original.t;
+				A::o = original.o;
+				inc();
+			}
+			else
+			{
+				A::o = original.o;
+			}
+			mut();
+			return *this;
+		}
+
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
 		inline ptr const& operator=(ptr<D> const& original) const
+		{
+			if (A::t != original.t)
+			{
+				dec();
+				A::t = original.t;
+				A::o = original.o;
+				inc();
+			}
+			else
+			{
+				A::o = original.o;
+			}
+			return *this;
+		}
+
+		template <typename D, std::enable_if_t<std::is_base_of_v<typename A::operations, typename D::operations>, bool> = true>
+		inline ptr& operator=(ptr<D> const& original)
 		{
 			if (A::t != original.t)
 			{
@@ -760,6 +966,12 @@ namespace strange
 			return *this;
 		}
 
+		inline fit& operator=(fit const& original) // copy assignment operator
+		{
+			var<A>::operator=(original);
+			return *this;
+		}
+
 		inline bool operator==(con<> const& other) const
 		{
 			return A::o->equal(*this, other);
@@ -812,6 +1024,12 @@ namespace strange
 		}
 
 		inline bit const& operator=(bit const& original) const // copy assignment operator
+		{
+			fit<A>::operator=(original);
+			return *this;
+		}
+
+		inline bit& operator=(bit const& original) // copy assignment operator
 		{
 			fit<A>::operator=(original);
 			return *this;
@@ -873,6 +1091,12 @@ namespace strange
 			return *this;
 		}
 
+		inline rat& operator=(rat const& original) // copy assignment operator
+		{
+			fit<A>::operator=(original);
+			return *this;
+		}
+
 		inline rat const& operator++() const // pre
 		{
 			A::o->increment(*this);
@@ -911,36 +1135,36 @@ namespace strange
 			return before;
 		}
 
-		inline rat const& operator+=(int64_t const offset) const
+		inline rat const& operator+=(int64_t offset) const
 		{
 			A::o->self_add(*this, offset);
 			return *this;
 		}
 
-		inline rat& operator+=(int64_t const offset)
+		inline rat& operator+=(int64_t offset)
 		{
 			A::o->self_add(*this, offset);
 			return *this;
 		}
 
-		inline rat const& operator-=(int64_t const offset) const
+		inline rat const& operator-=(int64_t offset) const
 		{
 			A::o->self_add(*this, -offset);
 			return *this;
 		}
 
-		inline rat& operator-=(int64_t const offset)
+		inline rat& operator-=(int64_t offset)
 		{
 			A::o->self_add(*this, -offset);
 			return *this;
 		}
 
-		inline rat operator+(int64_t const offset) const
+		inline rat operator+(int64_t offset) const
 		{
 			return A::o->add(*this, offset);
 		}
 
-		inline rat operator-(int64_t const offset) const
+		inline rat operator-(int64_t offset) const
 		{
 			return A::o->add(*this, -offset);
 		}
