@@ -64,6 +64,30 @@ namespace strange
 	{
 		return range.o->extract_end(reinterpret_cast<con<range_d> const&>(range));
 	}
+
+	template <typename range_d>
+	inline auto begin(var<range_d>& range)
+	{
+		return range.o->mutate_begin(range);
+	}
+
+	template <typename range_d>
+	inline auto end(var<range_d>& range)
+	{
+		return range.o->mutate_end(range);
+	}
+
+	template <typename range_d>
+	inline auto begin(ptr<range_d>& range)
+	{
+		return range.o->mutate_begin(reinterpret_cast<var<range_d>&>(range));
+	}
+
+	template <typename range_d>
+	inline auto end(ptr<range_d>& range)
+	{
+		return range.o->mutate_end(reinterpret_cast<var<range_d>&>(range));
+	}
 }
 
 #endif
