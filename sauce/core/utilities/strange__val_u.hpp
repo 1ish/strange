@@ -744,17 +744,17 @@ namespace strange
 	};
 
 	template <typename A>
-	struct fex : var<A>
+	struct fit : var<A>
 	{
-		explicit inline fex(A const& abstraction) : var<A>{ abstraction }
+		explicit inline fit(A const& abstraction) : var<A>{ abstraction }
 		{
 		}
 
-		inline fex(fex const& original) : var<A>{ original } // copy constructor
+		inline fit(fit const& original) : var<A>{ original } // copy constructor
 		{
 		}
 
-		inline fex const& operator=(fex const& original) const // copy assignment operator
+		inline fit const& operator=(fit const& original) const // copy assignment operator
 		{
 			var<A>::operator=(original);
 			return *this;
@@ -770,23 +770,23 @@ namespace strange
 			return !A::o->equal(*this, other);
 		}
 
-		inline auto const& operator*() const
+		inline auto& operator*() const
 		{
 			return A::o->_star(*this);
 		}
 
-		inline auto const* operator->() const
+		inline auto* operator->() const
 		{
 			return A::o->_arrow(*this);
 		}
 
-		inline fex& operator++() // pre
+		inline fit& operator++() // pre
 		{
 			A::o->increment(*this);
 			return *this;
 		}
 
-		inline fex operator++(int) // post
+		inline fit operator++(int) // post
 		{
 			auto before = *this;
 			A::o->increment(*this);

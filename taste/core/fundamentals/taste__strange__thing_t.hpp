@@ -87,7 +87,7 @@ namespace taste
 		vvv.pfm(&symbol_o::something);
 		vvv.pfm(&any_o::not_equal, sym("other"));
 		auto nul = var<forward_extractor_a<int64_t>>();
-		auto fwd = fex<forward_extractor_a<int64_t>>(nul);
+		auto fwd = fit<forward_extractor_a<int64_t>>(nul);
 	}
 }
 
