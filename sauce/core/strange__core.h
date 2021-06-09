@@ -5,6 +5,9 @@
 #include <cstdint>
 #include <cstring>
 #include <algorithm>
+#include <mutex>
+#include <shared_mutex>
+#include <memory>
 
 namespace strange
 {
@@ -13,11 +16,14 @@ namespace strange
 	struct cat_a;
 	struct kind_a;
 	template <typename type_d> struct data_a;
+	struct lock_a;
+	struct unlock_a;
 	template <typename element_d = any_a> struct range_a;
 	template <typename element_d = any_a> struct forward_extractor_a;
 
 	struct thing_t;
 	struct symbol_t;
+	template <typename type_d> struct data_t;
 }
 
 #include "utilities/strange__val_u.hpp"
@@ -30,11 +36,14 @@ namespace strange
 #include "fundamentals/abstractions/strange__cat_a.h"
 #include "fundamentals/abstractions/strange__kind_a.h"
 #include "fundamentals/abstractions/strange__data_a.h"
+#include "fundamentals/abstractions/strange__lock_a.h"
+#include "fundamentals/abstractions/strange__unlock_a.h"
 
 #include "collections/iterators/abstractions/strange__forward_extractor_a.h"
 #include "collections/abstractions/strange__range_a.h"
 
 #include "fundamentals/things/strange__thing_t.h"
 #include "fundamentals/things/strange__symbol_t.h"
+#include "fundamentals/things/strange__data_t.h"
 
 #endif

@@ -89,6 +89,8 @@ namespace taste
 		auto nul = var<forward_extractor_a<int64_t>>();
 		auto fwd = fit<forward_extractor_a<int64_t>>(nul);
 		fwd.o->type(fwd);
+		var<lock_a> lock;
+		var<unlock_a> unlock;
 	}
 }
 
