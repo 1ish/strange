@@ -32,5 +32,5 @@ namespace strange
 
 	// instantiation
 	template struct data_a<int64_t>;
-	template struct data_a<non_copyable<std::shared_timed_mutex>>;
+	template struct data_a<default_copy<std::shared_timed_mutex>>;
 }

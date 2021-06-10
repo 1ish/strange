@@ -7,9 +7,9 @@ namespace strange
 	{
 		struct empty {};
 
-		static var<> read_lock(con<lock_a> const& me);
+		static inline var<> read_lock(con<lock_a> const& me);
 
-		static var<> write_lock(con<lock_a> const& me);
+		static inline var<> write_lock(con<lock_a> const& me);
 
 		static inline unlock_o::empty _read_lock(con<lock_a> const& me)
 		{

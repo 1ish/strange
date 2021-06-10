@@ -2,6 +2,7 @@
 
 namespace strange
 {
+	// data_t
 	template <typename type_d>
 	data_t<type_d>::data_t(any_a& me)
 	: thing_t{ me }
@@ -12,7 +13,7 @@ namespace strange
 
 	template <typename type_d>
 	data_t<type_d>::data_t(any_a& me,
-		type_d const& data)
+		type_d& data)
 	: thing_t{ me }
 	, data_{ data }
 	{
@@ -77,7 +78,7 @@ namespace strange
 	{
 		// abstraction.cat in me.cats
 		auto const abc = abstraction.o->cat;
-		return abc == any_a::cat || abc == symbol_a::cat;
+		return abc == any_a::cat || abc == data_a<type_d>::cat;
 	}
 
 	template <typename type_d>
@@ -115,7 +116,7 @@ namespace strange
 
 	// creators
 	template <typename type_d>
-	var<data_a<type_d>> data_t<type_d>::create(type_d const& data)
+	var<data_a<type_d>> data_t<type_d>::create(type_d& data)
 	{
 		any_a r;
 		new data_t<type_d>{ r, data };
@@ -132,6 +133,88 @@ namespace strange
 		return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
 	}
 
+	// data_pointer_t
+	template <typename type_d>
+	data_pointer_t<type_d>::data_pointer_t(any_a& me,
+		type_d* data)
+	: data_t<type_d*>{ me, data }
+	{
+		me.o = data_pointer_t<type_d>::_operations();
+	}
+
+	template <typename type_d>
+	data_pointer_t<type_d>::data_pointer_t(any_a& me,
+		any_a const& original)
+	: data_t<type_d*>{ me, original }
+	{
+		me.o = data_pointer_t<type_d>::_operations();
+	}
+
+	// data_o
+	template <typename type_d>
+	data_o<type_d> const* data_pointer_t<type_d>::_operations()
+	{
+		static data_o<type_d> operations =
+		{
+			{
+				// any_a
+				data_a<type_d>::cat,
+				data_pointer_t<type_d>::is,
+				data_pointer_t<type_d>::as,
+				data_pointer_t<type_d>::type,
+				data_pointer_t<type_d>::set_error,
+				data_pointer_t<type_d>::error,
+				data_pointer_t<type_d>::hash,
+				data_pointer_t<type_d>::equal,
+				data_pointer_t<type_d>::less,
+				data_pointer_t<type_d>::less_or_equal,
+				data_pointer_t<type_d>::_free,
+				data_pointer_t<type_d>::_copy,
+				data_pointer_t<type_d>::_set_pointer,
+				data_pointer_t<type_d>::_pointer,
+			},
+			// data_a
+			extract_data,
+			mutate_data,
+		};
+		return &operations;
+	}
+
+	template <typename type_d>
+	data_o<type_d> const* data_pointer_t<type_d>::_pointer_operations()
+	{
+		static data_o<type_d> operations = []()
+		{
+			data_o<type_d> ops = *data_pointer_t<type_d>::_operations();
+			ops._copy = thing_t::_no_copy;
+			return ops;
+		}();
+		return &operations;
+	}
+
+	// data_a
+	template <typename type_d>
+	type_d const& data_pointer_t<type_d>::extract_data(con<data_a<type_d>> const& me)
+	{
+		return *(static_cast<data_pointer_t<type_d>*>(me.t)->data_);
+	}
+
+	template <typename type_d>
+	type_d& data_pointer_t<type_d>::mutate_data(var<data_a<type_d>> const& me)
+	{
+		return *(static_cast<data_pointer_t<type_d>*>(me.t)->data_);
+	}
+
+	// creators
+	template <typename type_d>
+	var<data_a<type_d>> data_pointer_t<type_d>::create(type_d* data)
+	{
+		any_a r;
+		new data_pointer_t<type_d>{ r, data };
+		data_pointer_t<type_d>::_initialise(r);
+		return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
+	}
+
 	// instantiation
-	template struct data_t<non_copyable<std::shared_timed_mutex>>;
+	template struct data_t<default_copy<std::shared_timed_mutex>>;
 }

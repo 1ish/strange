@@ -110,6 +110,16 @@ namespace strange
 	{
 		return !me.t->error_.t;
 	}
+
+	inline var<> unlock_o::read_lock(con<lock_a> const& me)
+	{
+		return thing_t::create();
+	}
+
+	inline var<> unlock_o::write_lock(con<lock_a> const& me)
+	{
+		return thing_t::create();
+	}
 }
 
 #endif
