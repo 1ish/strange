@@ -138,6 +138,16 @@ namespace strange
 	{
 		return std::unique_lock<std::shared_timed_mutex>(static_cast<data_t<default_copy<std::shared_timed_mutex>>*>(me.t)->data_);
 	}
+
+	inline var<> unlock_o::read_lock(con<lock_a> const& me)
+	{
+		return thing_t::create_nothing();
+	}
+
+	inline var<> unlock_o::write_lock(con<lock_a> const& me)
+	{
+		return thing_t::create_nothing();
+	}
 }
 
 #endif
