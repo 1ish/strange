@@ -43,7 +43,7 @@ namespace strange
 
 	public:
 		// creators
-		static var<data_a<type_d>> create(type_d& data);
+		static var<data_a<type_d>> create(type_d const& data);
 
 		static var<data_a<type_d>> create_default();
 	};
@@ -94,7 +94,7 @@ namespace strange
 	template <typename type_d>
 	inline var<data_a<type_d>> dat_ref(type_d& data)
 	{
-		return data_t<type_d&>::create(data);
+		return data_t<type_d&>::create(data).val<var<data_a<type_d>>>();
 	}
 
 	template <typename type_d>
@@ -137,6 +137,11 @@ namespace strange
 	inline std::unique_lock<std::shared_timed_mutex> lock_o::_write_lock(con<lock_a> const& me)
 	{
 		return std::unique_lock<std::shared_timed_mutex>(static_cast<data_t<default_copy<std::shared_timed_mutex>>*>(me.t)->data_);
+	}
+
+	inline var<lock_a> lock_a::create()
+	{
+		return dat_def<std::shared_timed_mutex>().val<var<lock_a>>();
 	}
 
 	inline var<> unlock_o::read_lock(con<lock_a> const& me)

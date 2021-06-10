@@ -8,11 +8,6 @@ namespace strange
 		return r;
 	}
 
-	var<unlock_a> unlock_a::create()
-	{
-		return var<unlock_a>{};
-	}
-
 	unlock_a::creator_fp unlock_a::creator(con<symbol_a> const& scope,
 		con<symbol_a> const& thing,
 		con<symbol_a> const& function)
@@ -20,8 +15,8 @@ namespace strange
 		static auto const strange_s = sym("strange");
 		if (scope.o->equal(scope, strange_s))
 		{
-			static auto const mutex_s = sym("mutex");
-			if (thing.o->equal(thing, mutex_s))
+			static auto const lock_s = sym("lock");
+			if (thing.o->equal(thing, lock_s))
 			{
 				static auto const create_s = sym("create");
 				if (function.o->equal(function, create_s))

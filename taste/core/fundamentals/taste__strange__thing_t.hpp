@@ -89,8 +89,14 @@ namespace taste
 		auto nul = var<forward_extractor_a<int64_t>>();
 		auto fwd = fit<forward_extractor_a<int64_t>>(nul);
 		fwd.o->type(fwd);
-		var<lock_a> lock;
-		var<unlock_a> unlock;
+		auto lock = lock_a::create();
+		auto unlock = unlock_a::create();
+		auto dv = dat_val<int64_t>();
+		auto dv1 = dat_val(int64_t{ 1 });
+		int64_t num = 1;
+		auto dr = dat_ref(num);
+		auto dp = dat_ptr(new int64_t(1));
+		auto dd = dat_def<std::string>();
 	}
 }
 

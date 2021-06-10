@@ -116,10 +116,10 @@ namespace strange
 
 	// creators
 	template <typename type_d>
-	var<data_a<type_d>> data_t<type_d>::create(type_d& data)
+	var<data_a<type_d>> data_t<type_d>::create(type_d const& data)
 	{
 		any_a r;
-		new data_t<type_d>{ r, data };
+		new data_t<type_d>{ r, const_cast<type_d&>(data) };
 		data_t<type_d>::_initialise(r);
 		return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
 	}
@@ -216,5 +216,9 @@ namespace strange
 	}
 
 	// instantiation
+	template struct data_t<int64_t>;
 	template struct data_t<default_copy<std::shared_timed_mutex>>;
+	template struct data_t<default_copy<std::string>>;
+
+	template struct data_pointer_t<int64_t>;
 }

@@ -32,7 +32,10 @@ namespace strange
 
 		static var<symbol_a> cat(con<> const& me); //TODO cat
 
-		static var<unlock_a> create();
+		static inline var<unlock_a> create()
+		{
+			return var<unlock_a>{};
+		}
 
 		static creator_fp creator(con<symbol_a> const& scope,
 			con<symbol_a> const& thing,
