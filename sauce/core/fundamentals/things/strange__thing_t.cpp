@@ -4,36 +4,6 @@
 
 namespace strange
 {
-	thing_t::thing_t(any_a& me)
-	: refs_{ 0 }
-	, error_ { nullptr, nullptr }
-	{
-		me.t = this;
-		me.o = thing_t::_operations();
-	}
-
-	thing_t::thing_t(any_a& me,
-		any_a const& original)
-	: refs_{ 0 }
-	, error_ { original.t->error_ }
-	{
-		me.t = this;
-		me.o = thing_t::_operations();
-
-		if (error_.t)
-		{
-			reinterpret_cast<var<>&>(error_).inc();
-		}
-	}
-
-	thing_t::~thing_t()
-	{
-		if (error_.t)
-		{
-			reinterpret_cast<var<>&>(error_).dec();
-		}
-	}
-
 	// any_o
 	any_o const* thing_t::_operations()
 	{
@@ -188,33 +158,5 @@ namespace strange
 	bool thing_t::_pointer(con<> const& me)
 	{
 		return me.o->_copy == thing_t::_no_copy;
-	}
-
-	// creators
-	var<> thing_t::create()
-	{
-		static auto thing = var([]()
-		{
-			any_a r;
-			new thing_t{ r };
-			thing_t::_initialise(r);
-			return r;
-		}());
-		return thing;
-	}
-
-	var<> thing_t::create_nothing()
-	{
-		static auto nothing = var([]()
-		{
-			any_a r;
-			new thing_t{ r };
-			thing_t::_initialise(r);
-			auto const e = thing_t::create();
-			e.inc();
-			r.t->error_ = e;
-			return r;
-		}());
-		return nothing;
 	}
 }

@@ -9,16 +9,39 @@ namespace strange
 		any_a error_;
 
 	protected:
-		thing_t(any_a& me);
+		inline thing_t(any_a& me)
+		: refs_{ 0 }
+		, error_{ nullptr, nullptr }
+		{
+			me.t = this;
+			me.o = thing_t::_operations();
+		}
 
-		thing_t(any_a& me,
-			any_a const& original);
+		inline thing_t(any_a& me,
+			any_a const& original)
+		: refs_{ 0 }
+		, error_{ original.t->error_ }
+		{
+			me.t = this;
+			me.o = thing_t::_operations();
+
+			if (error_.t)
+			{
+				reinterpret_cast<var<>&>(error_).inc();
+			}
+		}
 
 		thing_t(thing_t const&) = delete;
 
 		thing_t& operator=(thing_t const&) = delete;
 
-		virtual ~thing_t();
+		virtual ~thing_t()
+		{
+			if (error_.t)
+			{
+				reinterpret_cast<var<>&>(error_).dec();
+			}
+		}
 
 	private:
 		// any_o
@@ -96,8 +119,32 @@ namespace strange
 
 	public:
 		// creators
-		static var<> create();
-		static var<> create_nothing();
+		static inline var<> create()
+		{
+			static auto thing = var([]()
+				{
+					any_a r;
+					new thing_t{ r };
+					thing_t::_initialise(r);
+					return r;
+				}());
+			return thing;
+		}
+
+		static inline var<> create_nothing()
+		{
+			static auto nothing = var([]()
+				{
+					any_a r;
+					new thing_t{ r };
+					thing_t::_initialise(r);
+					auto const e = thing_t::create();
+					e.inc();
+					r.t->error_ = e;
+					return r;
+				}());
+			return nothing;
+		}
 	};
 
 	inline void any_o::set_something(var<> const& me,
