@@ -5,45 +5,6 @@
 
 namespace strange
 {
-	symbol_t::symbol_t(any_a& me,
-		char const* const s)
-	: thing_t{ me }
-	, symbol_{ nullptr }
-	, length_{ 0 }
-	, hash_{ 0 }
-	{
-		me.o = symbol_t::_operations();
-
-		if (s)
-		{
-			length_ = std::strlen(s);
-			symbol_ = new char[length_ + 1];
-			std::memcpy(symbol_, s, length_ + 1);
-			hash_ = std::hash<std::string_view>{}(std::string_view{ symbol_, static_cast<uint64_t>(length_) });
-		}
-	}
-
-	symbol_t::symbol_t(any_a& me,
-		any_a const& original)
-	: thing_t{ me, original }
-	, symbol_{ nullptr }
-	, length_{ 0 }
-	, hash_{ 0 }
-	{
-		me.o = symbol_t::_operations();
-
-		auto const ot = static_cast<symbol_t const* const>(original.t);
-		length_ = ot->length_;
-		symbol_ = new char[length_ + 1];
-		std::memcpy(symbol_, ot->symbol_, length_ + 1);
-		hash_ = ot->hash_;
-	}
-
-	symbol_t::~symbol_t()
-	{
-		delete[] symbol_;
-	}
-
 	// symbol_o
 	symbol_o const* symbol_t::_operations()
 	{
@@ -205,20 +166,5 @@ namespace strange
 	{
 		auto const mt = static_cast<symbol_t const* const>(me.t);
 		return (mt->symbol_)[std::max(int64_t{ 0 }, mt->length_ - 1)];
-	}
-
-	// creators
-	var<symbol_a> symbol_t::create(char const* const s)
-	{
-		any_a r;
-		new symbol_t{ r, s };
-		symbol_t::_initialise(r);
-		return var<symbol_a>{ reinterpret_cast<symbol_a&>(r) };
-	}
-
-	var<symbol_a> symbol_t::create_empty()
-	{
-		static auto r = symbol_t::create("");
-		return r;
 	}
 }

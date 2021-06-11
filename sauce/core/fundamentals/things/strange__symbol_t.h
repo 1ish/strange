@@ -10,17 +10,48 @@ namespace strange
 		int64_t length_;
 		uint64_t hash_;
 
-		symbol_t(any_a& me,
-			char const* const s);
+		inline symbol_t(any_a& me,
+			char const* const s)
+		: thing_t{ me }
+		, symbol_{ nullptr }
+		, length_{ 0 }
+		, hash_{ 0 }
+		{
+			me.o = symbol_t::_operations();
 
-		symbol_t(any_a& me,
-			any_a const& original);
+			if (s)
+			{
+				length_ = std::strlen(s);
+				symbol_ = new char[length_ + 1];
+				std::memcpy(symbol_, s, length_ + 1);
+				hash_ = std::hash<std::string_view>{}(std::string_view{ symbol_, static_cast<uint64_t>(length_) });
+			}
+		}
+
+		inline symbol_t(any_a& me,
+			any_a const& original)
+		: thing_t{ me, original }
+		, symbol_{ nullptr }
+		, length_{ 0 }
+		, hash_{ 0 }
+		{
+			me.o = symbol_t::_operations();
+
+			auto const ot = static_cast<symbol_t const* const>(original.t);
+			length_ = ot->length_;
+			symbol_ = new char[length_ + 1];
+			std::memcpy(symbol_, ot->symbol_, length_ + 1);
+			hash_ = ot->hash_;
+		}
 
 		symbol_t(symbol_t const&) = delete;
 
 		symbol_t& operator=(symbol_t const&) = delete;
 
-		virtual ~symbol_t();
+		virtual ~symbol_t()
+		{
+			delete[] symbol_;
+		}
 
 	private:
 		// symbol_o
@@ -94,8 +125,19 @@ namespace strange
 
 	public:
 		// creators
-		static var<symbol_a> create(char const* const s);
-		static var<symbol_a> create_empty();
+		static inline var<symbol_a> create(char const* const s)
+		{
+			any_a r;
+			new symbol_t{ r, s };
+			symbol_t::_initialise(r);
+			return var<symbol_a>{ reinterpret_cast<symbol_a&>(r) };
+		}
+
+		static inline var<symbol_a> create_empty()
+		{
+			static auto r = symbol_t::create("");
+			return r;
+		}
 	};
 
 	inline var<symbol_a> sym(char const* const s)
