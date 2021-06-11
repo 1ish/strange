@@ -3,24 +3,6 @@
 namespace strange
 {
 	// data_t
-	template <typename type_d>
-	data_t<type_d>::data_t(any_a& me,
-		type_d& data)
-	: thing_t{ me }
-	, data_{ data }
-	{
-		me.o = data_t<type_d>::_operations();
-	}
-
-	template <typename type_d>
-	data_t<type_d>::data_t(any_a& me,
-		any_a const& original)
-	: thing_t{ me, original }
-	, data_{ static_cast<data_t<type_d>*>(original.t)->data_ }
-	{
-		me.o = data_t<type_d>::_operations();
-	}
-
 	// data_o
 	template <typename type_d>
 	data_o<type_d> const* data_t<type_d>::_operations()
@@ -106,33 +88,7 @@ namespace strange
 		return static_cast<data_t<type_d>*>(me.t)->data_;
 	}
 
-	// creators
-	template <typename type_d>
-	var<data_a<type_d>> data_t<type_d>::create(type_d const& data)
-	{
-		any_a r;
-		new data_t<type_d>{ r, const_cast<type_d&>(data) };
-		data_t<type_d>::_initialise(r);
-		return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
-	}
-
 	// data_pointer_t
-	template <typename type_d>
-	data_pointer_t<type_d>::data_pointer_t(any_a& me,
-		type_d* data)
-	: data_t<type_d*>{ me, data }
-	{
-		me.o = data_pointer_t<type_d>::_operations();
-	}
-
-	template <typename type_d>
-	data_pointer_t<type_d>::data_pointer_t(any_a& me,
-		any_a const& original)
-	: data_t<type_d*>{ me, original }
-	{
-		me.o = data_pointer_t<type_d>::_operations();
-	}
-
 	// data_o
 	template <typename type_d>
 	data_o<type_d> const* data_pointer_t<type_d>::_operations()
@@ -175,6 +131,14 @@ namespace strange
 		return &operations;
 	}
 
+	// any_a
+	template <typename type_d>
+	var<symbol_a> data_pointer_t<type_d>::type(con<> const& me)
+	{
+		static auto r = sym("strange::data_pointer");
+		return r;
+	}
+
 	// data_a
 	template <typename type_d>
 	type_d const& data_pointer_t<type_d>::extract_data(con<data_a<type_d>> const& me)
@@ -186,16 +150,6 @@ namespace strange
 	type_d& data_pointer_t<type_d>::mutate_data(var<data_a<type_d>> const& me)
 	{
 		return *(static_cast<data_pointer_t<type_d>*>(me.t)->data_);
-	}
-
-	// creators
-	template <typename type_d>
-	var<data_a<type_d>> data_pointer_t<type_d>::create(type_d* data)
-	{
-		any_a r;
-		new data_pointer_t<type_d>{ r, data };
-		data_pointer_t<type_d>::_initialise(r);
-		return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
 	}
 
 	// instantiation

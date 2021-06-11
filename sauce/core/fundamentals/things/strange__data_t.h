@@ -17,11 +17,21 @@ namespace strange
 			me.o = data_t<type_d>::_operations();
 		}
 
-		data_t(any_a& me,
-			type_d& data);
+		inline data_t(any_a& me,
+			type_d& data)
+		: thing_t{ me }
+		, data_{ data }
+		{
+			me.o = data_t<type_d>::_operations();
+		}
 
-		data_t(any_a& me,
-			any_a const& original);
+		inline data_t(any_a& me,
+			any_a const& original)
+		: thing_t{ me, original }
+		, data_{ static_cast<data_t<type_d>*>(original.t)->data_ }
+		{
+			me.o = data_t<type_d>::_operations();
+		}
 
 		data_t(data_t const&) = delete;
 
@@ -58,18 +68,32 @@ namespace strange
 			return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
 		}
 
-		static var<data_a<type_d>> create(type_d const& data);
+		static inline var<data_a<type_d>> create(type_d const& data)
+		{
+			any_a r;
+			new data_t<type_d>{ r, const_cast<type_d&>(data) };
+			data_t<type_d>::_initialise(r);
+			return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
+		}
 	};
 
 	template <typename type_d>
 	struct data_pointer_t : data_t<type_d*>
 	{
 	protected:
-		data_pointer_t(any_a& me,
-			type_d* data);
+		inline data_pointer_t(any_a& me,
+			type_d* data)
+		: data_t<type_d*>{ me, data }
+		{
+			me.o = data_pointer_t<type_d>::_operations();
+		}
 
-		data_pointer_t(any_a& me,
-			any_a const& original);
+		inline data_pointer_t(any_a& me,
+			any_a const& original)
+		: data_t<type_d*>{ me, original }
+		{
+			me.o = data_pointer_t<type_d>::_operations();
+		}
 
 		virtual ~data_pointer_t()
 		{
@@ -82,6 +106,9 @@ namespace strange
 		static data_o<type_d> const* _pointer_operations();
 
 	protected:
+		// any_a
+		static var<symbol_a> type(con<> const& me);
+
 		// data_a
 		static type_d const& extract_data(con<data_a<type_d>> const& me);
 
@@ -89,7 +116,13 @@ namespace strange
 
 	public:
 		// creators
-		static var<data_a<type_d>> create(type_d* data);
+		static inline var<data_a<type_d>> create(type_d* data)
+		{
+			any_a r;
+			new data_pointer_t<type_d>{ r, data };
+			data_pointer_t<type_d>::_initialise(r);
+			return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
+		}
 	};
 
 	template <typename type_d>
@@ -121,7 +154,7 @@ namespace strange
 	{
 		default_copy() = default;
 
-		default_copy(default_copy const&) : D{} {} // copy constructor
+		inline default_copy(default_copy const&) : D{} {} // copy constructor
 
 		default_copy& operator=(default_copy const&) = delete; // copy assignment operator
 	};
