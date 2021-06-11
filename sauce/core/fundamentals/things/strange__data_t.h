@@ -9,8 +9,6 @@ namespace strange
 		type_d data_;
 
 	protected:
-		data_t(any_a& me);
-
 		data_t(any_a& me,
 			type_d& data);
 
@@ -43,9 +41,7 @@ namespace strange
 
 	public:
 		// creators
-		static var<data_a<type_d>> create(type_d const& data);
-
-		static var<data_a<type_d>> create_default();
+		static var<data_a<type_d>> create(type_d const& data = type_d{});
 	};
 
 	template <typename type_d>
@@ -88,13 +84,13 @@ namespace strange
 	template <typename type_d>
 	inline var<data_a<type_d>> dat_val()
 	{
-		return data_t<type_d>::create_default();
+		return data_t<type_d>::create();
 	}
 
 	template <typename type_d>
 	inline var<data_a<type_d>> dat_ref(type_d& data)
 	{
-		return data_t<type_d&>::create(data).val<var<data_a<type_d>>>();
+		return data_t<type_d&>::create(data).template val<var<data_a<type_d>>>();
 	}
 
 	template <typename type_d>
@@ -116,7 +112,7 @@ namespace strange
 	template <typename type_d>
 	inline var<data_a<default_copy<type_d>>> dat_def()
 	{
-		return data_t<default_copy<type_d>>::create_default();
+		return data_t<default_copy<type_d>>::create();
 	}
 
 	inline var<> lock_o::read_lock(con<lock_a> const& me)

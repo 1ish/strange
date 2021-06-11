@@ -4,14 +4,6 @@ namespace strange
 {
 	// data_t
 	template <typename type_d>
-	data_t<type_d>::data_t(any_a& me)
-	: thing_t{ me }
-	, data_{}
-	{
-		me.o = data_t<type_d>::_operations();
-	}
-
-	template <typename type_d>
 	data_t<type_d>::data_t(any_a& me,
 		type_d& data)
 	: thing_t{ me }
@@ -124,15 +116,6 @@ namespace strange
 		return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
 	}
 
-	template <typename type_d>
-	var<data_a<type_d>> data_t<type_d>::create_default()
-	{
-		any_a r;
-		new data_t<type_d>{ r };
-		data_t<type_d>::_initialise(r);
-		return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
-	}
-
 	// data_pointer_t
 	template <typename type_d>
 	data_pointer_t<type_d>::data_pointer_t(any_a& me,
@@ -217,6 +200,7 @@ namespace strange
 
 	// instantiation
 	template struct data_t<int64_t>;
+	template struct data_t<int64_t&>;
 	template struct data_t<default_copy<std::shared_timed_mutex>>;
 	template struct data_t<default_copy<std::string>>;
 
