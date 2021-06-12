@@ -25,6 +25,7 @@ namespace strange
 	template <typename element_d = any_a> struct random_access_mutator_a;
 	template <typename element_d = any_a> struct range_a;
 	template <typename element_d = any_a> struct mutator_range_a;
+	template <typename element_d = any_a> struct bidirectional_range_a;
 
 	struct thing_t;
 	struct symbol_t;
@@ -53,6 +54,7 @@ namespace strange
 #include "collections/iterators/abstractions/strange__random_access_mutator_a.h"
 #include "collections/abstractions/strange__range_a.h"
 #include "collections/abstractions/strange__mutator_range_a.h"
+#include "collections/abstractions/strange__bidirectional_range_a.h"
 
 #include "fundamentals/things/strange__thing_t.h"
 #include "fundamentals/things/strange__symbol_t.h"
