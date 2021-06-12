@@ -10,7 +10,7 @@ namespace strange
 
 		void (*increment)(var<forward_extractor_a<element_d>> const& me);
 
-		var<forward_extractor_a<any_a>> (*to_extractor_any)(con<forward_extractor_a<element_d>> const& me);
+		var<forward_extractor_a<any_a>> (*to_forward_extractor_any)(con<forward_extractor_a<element_d>> const& me);
 
 		var<element_d> const& (*_star)(con<forward_extractor_a<element_d>> const& me);
 

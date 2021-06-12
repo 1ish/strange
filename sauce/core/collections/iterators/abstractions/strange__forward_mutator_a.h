@@ -7,9 +7,12 @@ namespace strange
 	struct forward_mutator_o : any_o
 	{
 		var<element_d> (*get)(con<forward_mutator_a<element_d>> const& me);
+
 		void (*set)(con<forward_mutator_a<element_d>> const& me, con<element_d> const& thing);
 
 		void (*increment)(var<forward_mutator_a<element_d>> const& me);
+
+		var<forward_mutator_a<any_a>>(*to_forward_mutator_any)(con<forward_mutator_a<element_d>> const& me);
 
 		var<element_d>& (*_star)(con<forward_mutator_a<element_d>> const& me);
 

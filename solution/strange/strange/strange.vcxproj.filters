@@ -135,6 +135,12 @@
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__forward_mutator_a.cpp">
       <Filter>Source Files\sauce\core\collections\iterators\abstractions</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__bidirectional_extractor_a.cpp">
+      <Filter>Source Files\sauce\core\collections\iterators\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__bidirectional_mutator_a.cpp">
+      <Filter>Source Files\sauce\core\collections\iterators\abstractions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\sauce\strange.h">
@@ -192,6 +198,12 @@
       <Filter>Header Files\sauce\core\fundamentals\things</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__forward_mutator_a.h">
+      <Filter>Header Files\sauce\core\collections\iterators\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__bidirectional_extractor_a.h">
+      <Filter>Header Files\sauce\core\collections\iterators\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__bidirectional_mutator_a.h">
       <Filter>Header Files\sauce\core\collections\iterators\abstractions</Filter>
     </ClInclude>
   </ItemGroup>
