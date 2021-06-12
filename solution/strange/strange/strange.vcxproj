@@ -144,6 +144,8 @@
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__bidirectional_mutator_range_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__bidirectional_range_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__mutator_range_a.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__random_access_mutator_range_a.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__random_access_range_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__range_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__bidirectional_extractor_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__bidirectional_mutator_a.cpp" />
@@ -167,6 +169,8 @@
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__bidirectional_mutator_range_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__bidirectional_range_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__mutator_range_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__random_access_mutator_range_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__random_access_range_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__range_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__bidirectional_extractor_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__bidirectional_mutator_a.h" />
