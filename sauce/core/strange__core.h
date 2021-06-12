@@ -19,10 +19,12 @@ namespace strange
 	struct unlock_a;
 	template <typename element_d = any_a> struct range_a;
 	template <typename element_d = any_a> struct forward_extractor_a;
+	template <typename element_d = any_a> struct forward_mutator_a;
 
 	struct thing_t;
 	struct symbol_t;
 	template <typename type_d> struct data_t;
+	template <typename type_d> struct data_pointer_t;
 }
 
 #include "utilities/strange__val_u.hpp"
@@ -39,6 +41,7 @@ namespace strange
 #include "fundamentals/abstractions/strange__unlock_a.h"
 
 #include "collections/iterators/abstractions/strange__forward_extractor_a.h"
+#include "collections/iterators/abstractions/strange__forward_mutator_a.h"
 #include "collections/abstractions/strange__range_a.h"
 
 #include "fundamentals/things/strange__thing_t.h"
