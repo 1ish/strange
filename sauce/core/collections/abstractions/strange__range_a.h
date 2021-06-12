@@ -6,9 +6,9 @@ namespace strange
 	template <typename element_d>
 	struct range_o : any_o
 	{
-		fit<forward_extractor_a<element_d>> (*extract_begin)(con<range_a<element_d>> const& me);
+		fit<forward_extractor_a<element_d>> (*forward_extractor_begin)(con<range_a<element_d>> const& me);
 
-		fit<forward_extractor_a<element_d>> (*extract_end)(con<range_a<element_d>> const& me);
+		fit<forward_extractor_a<element_d>> (*forward_extractor_end)(con<range_a<element_d>> const& me);
 
 		var<> (*read_lock)(con<range_a<element_d>> const& me);
 
