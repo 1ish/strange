@@ -147,6 +147,9 @@
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__random_access_mutator_a.cpp">
       <Filter>Source Files\sauce\core\collections\iterators\abstractions</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__mutator_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\abstractions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\sauce\strange.h">
@@ -217,6 +220,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__random_access_mutator_a.h">
       <Filter>Header Files\sauce\core\collections\iterators\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__mutator_range_a.h">
+      <Filter>Header Files\sauce\core\collections\abstractions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

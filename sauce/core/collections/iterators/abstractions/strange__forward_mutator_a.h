@@ -12,7 +12,7 @@ namespace strange
 
 		void (*increment)(var<forward_mutator_a<element_d>> const& me);
 
-		var<forward_mutator_a<any_a>>(*to_forward_mutator_any)(con<forward_mutator_a<element_d>> const& me);
+		var<forward_mutator_a<>>(*to_forward_mutator_any)(con<forward_mutator_a<element_d>> const& me);
 
 		var<element_d>& (*_operator_star)(con<forward_mutator_a<element_d>> const& me);
 
@@ -22,6 +22,7 @@ namespace strange
 	template <typename element_d>
 	struct forward_mutator_a
 	{
+		using is_mutator = bool;
 		using operations = forward_mutator_o<element_d>;
 		using creator_fp = var<forward_mutator_a<element_d>>(*)();
 

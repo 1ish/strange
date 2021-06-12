@@ -8,12 +8,13 @@ namespace strange
 	{
 		void (*decrement)(var<bidirectional_extractor_a<element_d>> const& me);
 
-		var<bidirectional_extractor_a<any_a>> (*to_bidirectional_extractor_any)(con<bidirectional_extractor_a<element_d>> const& me);
+		var<bidirectional_extractor_a<>> (*to_bidirectional_extractor_any)(con<bidirectional_extractor_a<element_d>> const& me);
 	};
 
 	template <typename element_d>
 	struct bidirectional_extractor_a
 	{
+		using non_mutator = bool;
 		using operations = bidirectional_extractor_o<element_d>;
 		using creator_fp = var<bidirectional_extractor_a<element_d>>(*)();
 

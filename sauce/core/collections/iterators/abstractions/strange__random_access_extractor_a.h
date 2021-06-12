@@ -10,12 +10,13 @@ namespace strange
 
 		var<random_access_extractor_a<element_d>>(*add)(con<random_access_extractor_a<element_d>> const& me, int64_t offset);
 
-		var<random_access_extractor_a<any_a>> (*to_random_access_extractor_any)(con<random_access_extractor_a<element_d>> const& me);
+		var<random_access_extractor_a<>> (*to_random_access_extractor_any)(con<random_access_extractor_a<element_d>> const& me);
 	};
 
 	template <typename element_d>
 	struct random_access_extractor_a
 	{
+		using non_mutator = bool;
 		using operations = random_access_extractor_o<element_d>;
 		using creator_fp = var<random_access_extractor_a<element_d>>(*)();
 

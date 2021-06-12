@@ -8,12 +8,13 @@ namespace strange
 	{
 		void (*decrement)(var<bidirectional_mutator_a<element_d>> const& me);
 
-		var<bidirectional_mutator_a<any_a>>(*to_bidirectional_mutator_any)(con<bidirectional_mutator_a<element_d>> const& me);
+		var<bidirectional_mutator_a<>>(*to_bidirectional_mutator_any)(con<bidirectional_mutator_a<element_d>> const& me);
 	};
 
 	template <typename element_d>
 	struct bidirectional_mutator_a
 	{
+		using is_mutator = bool;
 		using operations = bidirectional_mutator_o<element_d>;
 		using creator_fp = var<bidirectional_mutator_a<element_d>>(*)();
 

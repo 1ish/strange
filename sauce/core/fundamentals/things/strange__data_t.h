@@ -126,13 +126,13 @@ namespace strange
 	};
 
 	template <typename type_d>
-	inline var<data_a<type_d>> dat_val(type_d const& data)
+	inline var<data_a<type_d>> dat(type_d const& data)
 	{
 		return data_t<type_d>::create(data);
 	}
 
 	template <typename type_d>
-	inline var<data_a<type_d>> dat_val()
+	inline var<data_a<type_d>> dat()
 	{
 		return data_t<type_d>::create_default();
 	}

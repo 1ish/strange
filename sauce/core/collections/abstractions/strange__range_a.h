@@ -6,9 +6,9 @@ namespace strange
 	template <typename element_d>
 	struct range_o : any_o
 	{
-		fit<forward_extractor_a<element_d>> (*forward_extractor_begin)(con<range_a<element_d>> const& me);
+		fit<forward_extractor_a<element_d>> (*begin)(con<range_a<element_d>> const& me);
 
-		fit<forward_extractor_a<element_d>> (*forward_extractor_end)(con<range_a<element_d>> const& me);
+		fit<forward_extractor_a<element_d>> (*end)(con<range_a<element_d>> const& me);
 
 		var<> (*read_lock)(con<range_a<element_d>> const& me);
 
@@ -18,6 +18,7 @@ namespace strange
 	template <typename element_d>
 	struct range_a
 	{
+		using non_mutator = bool;
 		using operations = range_o<element_d>;
 		using creator_fp = var<range_a<element_d>>(*)();
 
@@ -34,61 +35,37 @@ namespace strange
 	template <typename range_d>
 	inline auto begin(con<range_d> const& range)
 	{
-		return range.o->extract_begin(range);
+		return range.o->begin(range);
 	}
 
 	template <typename range_d>
 	inline auto end(con<range_d> const& range)
 	{
-		return range.o->extract_end(range);
+		return range.o->end(range);
 	}
 
-	template <typename range_d>
+	template <typename range_d, typename range_d::non_mutator = true>
 	inline auto begin(var<range_d> const& range)
 	{
-		return range.o->extract_begin(range);
+		return range.o->begin(range);
 	}
 
-	template <typename range_d>
+	template <typename range_d, typename range_d::non_mutator = true>
 	inline auto end(var<range_d> const& range)
 	{
-		return range.o->extract_end(range);
+		return range.o->end(range);
 	}
 
-	template <typename range_d>
+	template <typename range_d, typename range_d::non_mutator = true>
 	inline auto begin(ptr<range_d> const& range)
 	{
-		return range.o->extract_begin(reinterpret_cast<con<range_d> const&>(range));
+		return range.o->begin(reinterpret_cast<con<range_d> const&>(range));
 	}
 
-	template <typename range_d>
+	template <typename range_d, typename range_d::non_mutator = true>
 	inline auto end(ptr<range_d> const& range)
 	{
-		return range.o->extract_end(reinterpret_cast<con<range_d> const&>(range));
-	}
-
-	template <typename range_d>
-	inline auto begin(var<range_d>& range)
-	{
-		return range.o->mutate_begin(range);
-	}
-
-	template <typename range_d>
-	inline auto end(var<range_d>& range)
-	{
-		return range.o->mutate_end(range);
-	}
-
-	template <typename range_d>
-	inline auto begin(ptr<range_d>& range)
-	{
-		return range.o->mutate_begin(reinterpret_cast<var<range_d>&>(range));
-	}
-
-	template <typename range_d>
-	inline auto end(ptr<range_d>& range)
-	{
-		return range.o->mutate_end(reinterpret_cast<var<range_d>&>(range));
+		return range.o->end(reinterpret_cast<con<range_d> const&>(range));
 	}
 }
 
