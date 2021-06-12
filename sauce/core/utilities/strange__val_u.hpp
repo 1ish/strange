@@ -984,12 +984,12 @@ namespace strange
 
 		inline auto& operator*() const
 		{
-			return A::o->_star(*this);
+			return A::o->_operator_star(*this);
 		}
 
 		inline auto* operator->() const
 		{
-			return A::o->_arrow(*this);
+			return A::o->_operator_arrow(*this);
 		}
 
 		inline fit const& operator++() const // pre

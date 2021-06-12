@@ -14,9 +14,9 @@ namespace strange
 
 		var<forward_mutator_a<any_a>>(*to_forward_mutator_any)(con<forward_mutator_a<element_d>> const& me);
 
-		var<element_d>& (*_star)(con<forward_mutator_a<element_d>> const& me);
+		var<element_d>& (*_operator_star)(con<forward_mutator_a<element_d>> const& me);
 
-		var<element_d>* (*_arrow)(con<forward_mutator_a<element_d>> const& me);
+		var<element_d>* (*_operator_arrow)(con<forward_mutator_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

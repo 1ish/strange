@@ -12,9 +12,9 @@ namespace strange
 
 		var<forward_extractor_a<any_a>> (*to_forward_extractor_any)(con<forward_extractor_a<element_d>> const& me);
 
-		var<element_d> const& (*_star)(con<forward_extractor_a<element_d>> const& me);
+		var<element_d> const& (*_operator_star)(con<forward_extractor_a<element_d>> const& me);
 
-		var<element_d> const* (*_arrow)(con<forward_extractor_a<element_d>> const& me);
+		var<element_d> const* (*_operator_arrow)(con<forward_extractor_a<element_d>> const& me);
 	};
 
 	template <typename element_d>
