@@ -10,7 +10,7 @@ namespace strange
 
 		fit<forward_mutator_a<element_d>> (*mutator_end)(var<mutator_range_a<element_d>> const& me);
 
-		var<>(*write_lock)(var<range_a<element_d>> const& me);
+		var<>(*write_lock)(var<mutator_range_a<element_d>> const& me);
 
 		var<mutator_range_a<>> (*to_mutator_range_any)(var<mutator_range_a<element_d>> const& me);
 	};

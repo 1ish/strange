@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__bidirectional_mutator_range_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__bidirectional_range_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__mutator_range_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__range_a.cpp" />
@@ -163,6 +164,7 @@
     <ClCompile Include="..\..\..\taste\strange_taste.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__bidirectional_mutator_range_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__bidirectional_range_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__mutator_range_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__range_a.h" />
