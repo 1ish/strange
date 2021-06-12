@@ -10,7 +10,7 @@ namespace strange
 
 		void (*increment)(var<forward_extractor_a<element_d>> const& me);
 
-		var<forward_extractor_a<>> (*to_forward_extractor_any)(con<forward_extractor_a<element_d>> const& me);
+		fit<forward_extractor_a<>> (*to_forward_extractor_any)(con<forward_extractor_a<element_d>> const& me);
 
 		var<element_d> const& (*_operator_star)(con<forward_extractor_a<element_d>> const& me);
 
@@ -20,9 +20,8 @@ namespace strange
 	template <typename element_d>
 	struct forward_extractor_a
 	{
-		using non_mutator = bool;
 		using operations = forward_extractor_o<element_d>;
-		using creator_fp = var<forward_extractor_a<element_d>>(*)();
+		using creator_fp = fit<forward_extractor_a<element_d>>(*)();
 
 		mutable thing_t* t;
 		mutable operations const* o;

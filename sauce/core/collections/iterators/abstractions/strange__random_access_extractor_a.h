@@ -8,17 +8,16 @@ namespace strange
 	{
 		void (*self_add)(var<random_access_extractor_a<element_d>> const& me, int64_t offset);
 
-		var<random_access_extractor_a<element_d>>(*add)(con<random_access_extractor_a<element_d>> const& me, int64_t offset);
+		rat<random_access_extractor_a<element_d>>(*add)(con<random_access_extractor_a<element_d>> const& me, int64_t offset);
 
-		var<random_access_extractor_a<>> (*to_random_access_extractor_any)(con<random_access_extractor_a<element_d>> const& me);
+		rat<random_access_extractor_a<>> (*to_random_access_extractor_any)(con<random_access_extractor_a<element_d>> const& me);
 	};
 
 	template <typename element_d>
 	struct random_access_extractor_a
 	{
-		using non_mutator = bool;
 		using operations = random_access_extractor_o<element_d>;
-		using creator_fp = var<random_access_extractor_a<element_d>>(*)();
+		using creator_fp = rat<random_access_extractor_a<element_d>>(*)();
 
 		mutable thing_t* t;
 		mutable operations const* o;
