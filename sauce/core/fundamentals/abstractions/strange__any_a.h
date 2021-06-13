@@ -59,7 +59,7 @@ namespace strange
 	struct any_a
 	{
 		using operations = any_o;
-		using creator_fp = var<>(*)();
+		using creator_fp = var<>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;
 		mutable operations const* o;

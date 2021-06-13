@@ -20,7 +20,7 @@ namespace strange
 	struct symbol_a
 	{
 		using operations = symbol_o;
-		using creator_fp = var<symbol_a>(*)();
+		using creator_fp = var<symbol_a>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;
 		mutable operations const* o;

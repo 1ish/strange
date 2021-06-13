@@ -18,10 +18,10 @@ namespace strange
 			static auto const cat_s = sym("cat");
 			if (thing.o->equal(thing, cat_s))
 			{
-				static auto const create_s = sym("create");
-				if (function.o->equal(function, create_s))
+				static auto const create_from_range_s = sym("create_from_range");
+				if (function.o->equal(function, create_from_range_s))
 				{
-					//TODO return cat_t::create;
+					// return thing_t::create_from_range;
 				}
 			}
 		}

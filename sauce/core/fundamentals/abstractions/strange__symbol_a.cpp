@@ -18,10 +18,10 @@ namespace strange
 			static auto const symbol_s = sym("symbol");
 			if (thing.o->equal(thing, symbol_s))
 			{
-				static auto const create_empty_s = sym("create_empty");
-				if (function.o->equal(function, create_empty_s))
+				static auto const create_from_range_s = sym("create_from_range");
+				if (function.o->equal(function, create_from_range_s))
 				{
-					return symbol_t::create_empty;
+					return symbol_t::create_from_range;
 				}
 			}
 		}

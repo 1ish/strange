@@ -25,7 +25,7 @@ namespace strange
 	struct unlock_a
 	{
 		using operations = unlock_o;
-		using creator_fp = var<unlock_a>(*)();
+		using creator_fp = var<unlock_a>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;
 		mutable operations const* o;

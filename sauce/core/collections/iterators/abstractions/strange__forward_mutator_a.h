@@ -23,7 +23,7 @@ namespace strange
 	struct forward_mutator_a
 	{
 		using operations = forward_mutator_o<element_d>;
-		using creator_fp = fit<forward_mutator_a<element_d>>(*)();
+		using creator_fp = fit<forward_mutator_a<element_d>>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;
 		mutable operations const* o;

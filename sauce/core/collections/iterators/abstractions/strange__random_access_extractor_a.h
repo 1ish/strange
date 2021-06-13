@@ -17,7 +17,7 @@ namespace strange
 	struct random_access_extractor_a
 	{
 		using operations = random_access_extractor_o<element_d>;
-		using creator_fp = rat<random_access_extractor_a<element_d>>(*)();
+		using creator_fp = rat<random_access_extractor_a<element_d>>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;
 		mutable operations const* o;

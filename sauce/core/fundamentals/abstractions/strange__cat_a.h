@@ -22,7 +22,7 @@ namespace strange
 	struct cat_a
 	{
 		using operations = cat_o;
-		using creator_fp = var<cat_a>(*)();
+		using creator_fp = var<cat_a>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;
 		mutable operations const* o;

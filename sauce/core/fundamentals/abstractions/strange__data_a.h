@@ -15,7 +15,7 @@ namespace strange
 	struct data_a
 	{
 		using operations = data_o<type_d>;
-		using creator_fp = var<data_a<type_d>>(*)();
+		using creator_fp = var<data_a<type_d>>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;
 		mutable operations const* o;

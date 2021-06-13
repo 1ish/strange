@@ -138,6 +138,11 @@ namespace strange
 			static auto r = symbol_t::create("");
 			return r;
 		}
+
+		static inline var<symbol_a> create_from_range(con<range_a<>> const& range)
+		{
+			return create_empty();
+		}
 	};
 
 	inline var<symbol_a> sym(char const* const s)

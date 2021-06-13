@@ -20,10 +20,10 @@ namespace strange
 			static auto const forward_extractor_s = sym("forward_extractor");
 			if (thing.o->equal(thing, forward_extractor_s))
 			{
-				static auto const create_s = sym("create");
-				if (function.o->equal(function, create_s))
+				static auto const create_from_range_s = sym("create_from_range");
+				if (function.o->equal(function, create_from_range_s))
 				{
-					//TODO return forward_extractor_t::create;
+					// return thing_t::create_from_range;
 				}
 			}
 		}

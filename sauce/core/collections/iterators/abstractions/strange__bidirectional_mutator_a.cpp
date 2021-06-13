@@ -20,10 +20,10 @@ namespace strange
 			static auto const bidirectional_mutator_s = sym("bidirectional_mutator");
 			if (thing.o->equal(thing, bidirectional_mutator_s))
 			{
-				static auto const create_s = sym("create");
-				if (function.o->equal(function, create_s))
+				static auto const create_from_range_s = sym("create_from_range");
+				if (function.o->equal(function, create_from_range_s))
 				{
-					//TODO return bidirectional_mutator_t::create;
+					// return thing_t::create_from_range;
 				}
 			}
 		}

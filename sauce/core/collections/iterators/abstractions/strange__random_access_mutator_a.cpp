@@ -20,10 +20,10 @@ namespace strange
 			static auto const random_access_mutator_s = sym("random_access_mutator");
 			if (thing.o->equal(thing, random_access_mutator_s))
 			{
-				static auto const create_s = sym("create");
-				if (function.o->equal(function, create_s))
+				static auto const create_from_range_s = sym("create_from_range");
+				if (function.o->equal(function, create_from_range_s))
 				{
-					//TODO return random_access_mutator_t::create;
+					// return thing_t::create_from_range;
 				}
 			}
 		}

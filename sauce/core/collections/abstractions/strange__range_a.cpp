@@ -20,10 +20,10 @@ namespace strange
 			static auto const range_s = sym("range");
 			if (thing.o->equal(thing, range_s))
 			{
-				static auto const create_s = sym("create");
-				if (function.o->equal(function, create_s))
+				static auto const create_from_range_s = sym("create_from_range");
+				if (function.o->equal(function, create_from_range_s))
 				{
-					//TODO return range_t::create;
+					// return thing_t::create_from_range;
 				}
 			}
 		}
@@ -31,5 +31,6 @@ namespace strange
 	}
 
 	// instantiation
+	template struct range_a<>;
 	template struct range_a<int64_t>;
 }

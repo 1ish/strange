@@ -18,7 +18,7 @@ namespace strange
 	{
 		using non_mutator = bool;
 		using operations = bidirectional_range_o<element_d>;
-		using creator_fp = var<bidirectional_range_a<element_d>>(*)();
+		using creator_fp = var<bidirectional_range_a<element_d>>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;
 		mutable operations const* o;
