@@ -165,6 +165,9 @@
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__collection_a.cpp">
       <Filter>Source Files\sauce\core\collections\abstractions</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__list_a.cpp">
+      <Filter>Source Files\sauce\core\collections\abstractions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\sauce\strange.h">
@@ -252,6 +255,9 @@
       <Filter>Header Files\sauce\core\collections\abstractions</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__collection_a.h">
+      <Filter>Header Files\sauce\core\collections\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__list_a.h">
       <Filter>Header Files\sauce\core\collections\abstractions</Filter>
     </ClInclude>
   </ItemGroup>

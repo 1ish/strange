@@ -17,10 +17,12 @@ namespace strange
 			con<key_d> const& key);
 
 		void (*update)(var<collection_a<key_d, value_d, element_d>> const& me,
-			con<key_d> const& key, con<value_d> const& value);
+			con<key_d> const& key,
+			con<value_d> const& value);
 
 		bool (*insert)(var<collection_a<key_d, value_d, element_d>> const& me,
-			con<key_d> const& key, con<value_d> const& value);
+			con<key_d> const& key,
+			con<value_d> const& value);
 
 		bool (*erase)(var<collection_a<key_d, value_d, element_d>> const& me,
 			con<key_d> const& key);
@@ -60,7 +62,7 @@ namespace strange
 	template <typename key_d, typename value_d, typename element_d>
 	struct collection_a
 	{
-		using is_mutator = bool;
+		using non_mutator = bool;
 		using operations = collection_o<key_d, value_d, element_d>;
 		using creator_fp = var<collection_a<key_d, value_d, element_d>>(*)(con<range_a<>> const& range);
 

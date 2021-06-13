@@ -6,9 +6,11 @@ namespace strange
 	template <typename element_d>
 	struct random_access_extractor_o : bidirectional_extractor_o<element_d>
 	{
-		void (*self_add)(var<random_access_extractor_a<element_d>> const& me, int64_t offset);
+		void (*self_add)(var<random_access_extractor_a<element_d>> const& me,
+			int64_t offset);
 
-		rat<random_access_extractor_a<element_d>>(*add)(con<random_access_extractor_a<element_d>> const& me, int64_t offset);
+		rat<random_access_extractor_a<element_d>>(*add)(con<random_access_extractor_a<element_d>> const& me,
+			int64_t offset);
 
 		rat<random_access_extractor_a<>> (*to_random_access_extractor_any)(con<random_access_extractor_a<element_d>> const& me);
 	};

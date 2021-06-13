@@ -8,7 +8,8 @@ namespace strange
 	{
 		var<element_d> (*get)(con<forward_mutator_a<element_d>> const& me);
 
-		void (*set)(con<forward_mutator_a<element_d>> const& me, con<element_d> const& element);
+		void (*set)(con<forward_mutator_a<element_d>> const& me,
+			con<element_d> const& element);
 
 		void (*increment)(var<forward_mutator_a<element_d>> const& me);
 
