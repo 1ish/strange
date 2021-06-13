@@ -19,23 +19,6 @@ namespace strange
 		var<random_access_mutator_range_a<>>(*to_random_access_mutator_range_any)(var<list_a<element_d>> const& me);
 
 		var<list_a<>> (*to_list_any)(var<list_a<element_d>> const& me);
-
-		bool (*has_index)(con<list_a<element_d>> const& me,
-			int64_t index);
-
-		var<element_d> (*at_index)(con<list_a<element_d>> const& me,
-			int64_t index);
-
-		void (*update_index)(var<list_a<element_d>> const& me,
-			int64_t index,
-			con<element_d> const& value);
-
-		bool (*insert_index)(var<list_a<element_d>> const& me,
-			int64_t index,
-			con<element_d> const& value);
-
-		bool (*erase_index)(var<list_a<element_d>> const& me,
-			int64_t index);
 	};
 
 	template <typename element_d>

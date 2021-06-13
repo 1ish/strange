@@ -6,15 +6,15 @@ namespace strange
 	template <typename element_d>
 	struct forward_extractor_o : any_o
 	{
-		var<element_d> (*get)(con<forward_extractor_a<element_d>> const& me);
+		element_d (*get)(con<forward_extractor_a<element_d>> const& me);
 
 		void (*increment)(var<forward_extractor_a<element_d>> const& me);
 
 		fit<forward_extractor_a<>> (*to_forward_extractor_any)(con<forward_extractor_a<element_d>> const& me);
 
-		var<element_d> const& (*_operator_star)(con<forward_extractor_a<element_d>> const& me);
+		element_d const& (*_operator_star)(con<forward_extractor_a<element_d>> const& me);
 
-		var<element_d> const* (*_operator_arrow)(con<forward_extractor_a<element_d>> const& me);
+		element_d const* (*_operator_arrow)(con<forward_extractor_a<element_d>> const& me);
 	};
 
 	template <typename element_d>
