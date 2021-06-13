@@ -25,6 +25,8 @@ namespace strange
 
 		var<> (*error)(con<> const& me);
 
+		static inline uint64_t identity(con<> const& me);
+
 		uint64_t (*hash)(con<> const& me);
 
 		bool (*equal)(con<> const& me,
@@ -70,6 +72,11 @@ namespace strange
 			con<symbol_a> const& thing,
 			con<symbol_a> const& function);
 	};
+
+	inline uint64_t any_o::identity(con<> const& me)
+	{
+		return reinterpret_cast<std::uintptr_t>(me.t);
+	}
 
 	inline bool any_o::not_equal(con<> const& me,
 		con<> const& other)
