@@ -52,6 +52,12 @@ namespace strange
 
 		static var<symbol_a> type(con<> const& me);
 
+		static void _copy(any_a const& me,
+			any_a& copy);
+
+		static void _set_pointer(var<> const& me,
+			bool is_pointer);
+
 		// data_a
 		static type_d const& extract_data(con<data_a<type_d>> const& me);
 
@@ -75,29 +81,35 @@ namespace strange
 			data_t<type_d>::_initialise(r);
 			return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
 		}
+
+		template <typename v = void>
+		static inline var<data_a<type_d>> create_from_range(con<range_a<>> const& range)
+		{
+			return create_default();
+		}
 	};
 
 	template <typename type_d>
-	struct data_pointer_t : data_t<type_d*>
+	struct data_pointer_t : data_t<type_d>
 	{
 	protected:
 		inline data_pointer_t(any_a& me,
-			type_d* data)
-		: data_t<type_d*>{ me, data }
+			type_d data)
+		: data_t<type_d>{ me, data }
 		{
 			me.o = data_pointer_t<type_d>::_operations();
 		}
 
 		inline data_pointer_t(any_a& me,
 			any_a const& original)
-		: data_t<type_d*>{ me, original }
+		: data_t<type_d>{ me, original }
 		{
 			me.o = data_pointer_t<type_d>::_operations();
 		}
 
 		virtual ~data_pointer_t()
 		{
-			delete data_t<type_d*>::data_;
+			delete data_t<type_d>::data_;
 		}
 
 	private:
@@ -109,19 +121,25 @@ namespace strange
 		// any_a
 		static var<symbol_a> type(con<> const& me);
 
-		// data_a
-		static type_d const& extract_data(con<data_a<type_d>> const& me);
+		static void _copy(any_a const& me,
+			any_a& copy);
 
-		static type_d& mutate_data(var<data_a<type_d>> const& me);
+		static void _set_pointer(var<> const& me,
+			bool is_pointer);
 
 	public:
 		// creators
-		static inline var<data_a<type_d>> create(type_d* data)
+		static inline var<data_a<type_d>> create(type_d data)
 		{
 			any_a r;
 			new data_pointer_t<type_d>{ r, data };
 			data_pointer_t<type_d>::_initialise(r);
 			return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
+		}
+
+		static inline var<data_a<type_d>> create_from_range(con<range_a<>> const& range)
+		{
+			return create(nullptr);
 		}
 	};
 
@@ -144,9 +162,9 @@ namespace strange
 	}
 
 	template <typename type_d>
-	inline var<data_a<type_d>> dat_ptr(type_d* data)
+	inline var<data_a<type_d*>> dat_ptr(type_d* data)
 	{
-		return data_pointer_t<type_d>::create(data);
+		return data_pointer_t<type_d*>::create(data);
 	}
 
 	template <typename D>

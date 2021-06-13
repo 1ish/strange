@@ -74,6 +74,21 @@ namespace strange
 		return r;
 	}
 
+	template <typename type_d>
+	void data_t<type_d>::_copy(any_a const& me,
+		any_a& copy)
+	{
+		new data_t<type_d>{ copy, me };
+		data_t<type_d>::_clone(me, copy);
+	}
+
+	template <typename type_d>
+	void data_t<type_d>::_set_pointer(var<> const& me,
+		bool is_pointer)
+	{
+		me.o = is_pointer ? data_t<type_d>::_pointer_operations() : data_t<type_d>::_operations();
+	}
+
 	// data_a
 	template <typename type_d>
 	type_d const& data_t<type_d>::extract_data(con<data_a<type_d>> const& me)
@@ -113,8 +128,8 @@ namespace strange
 				data_pointer_t<type_d>::_pointer,
 			},
 			// data_a
-			extract_data,
-			mutate_data,
+			data_pointer_t<type_d>::extract_data,
+			data_pointer_t<type_d>::mutate_data,
 		};
 		return &operations;
 	}
@@ -139,17 +154,19 @@ namespace strange
 		return r;
 	}
 
-	// data_a
 	template <typename type_d>
-	type_d const& data_pointer_t<type_d>::extract_data(con<data_a<type_d>> const& me)
+	void data_pointer_t<type_d>::_copy(any_a const& me,
+		any_a& copy)
 	{
-		return *(static_cast<data_pointer_t<type_d>*>(me.t)->data_);
+		new data_pointer_t<type_d>{ copy, me };
+		data_pointer_t<type_d>::_clone(me, copy);
 	}
 
 	template <typename type_d>
-	type_d& data_pointer_t<type_d>::mutate_data(var<data_a<type_d>> const& me)
+	void data_pointer_t<type_d>::_set_pointer(var<> const& me,
+		bool is_pointer)
 	{
-		return *(static_cast<data_pointer_t<type_d>*>(me.t)->data_);
+		me.o = is_pointer ? data_pointer_t<type_d>::_pointer_operations() : data_pointer_t<type_d>::_operations();
 	}
 
 	// instantiation
@@ -158,5 +175,7 @@ namespace strange
 	template struct data_t<default_copy<std::shared_timed_mutex>>;
 	template struct data_t<default_copy<std::string>>;
 
-	template struct data_pointer_t<int64_t>;
+	template struct data_pointer_t<int64_t*>;
+	template struct data_pointer_t<std::shared_lock<std::shared_timed_mutex>*>;
+	template struct data_pointer_t<std::unique_lock<std::shared_timed_mutex>*>;
 }

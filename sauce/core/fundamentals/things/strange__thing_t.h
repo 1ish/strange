@@ -145,6 +145,11 @@ namespace strange
 				}());
 			return nothing;
 		}
+
+		static inline var<> create_from_range(con<range_a<>> const& range)
+		{
+			return create();
+		}
 	};
 
 	inline void any_o::set_something(var<> const& me,

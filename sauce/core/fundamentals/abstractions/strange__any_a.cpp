@@ -21,7 +21,7 @@ namespace strange
 				static auto const create_from_range_s = sym("create_from_range");
 				if (function.o->equal(function, create_from_range_s))
 				{
-					// return thing_t::create_from_range;
+					return thing_t::create_from_range;
 				}
 			}
 		}
