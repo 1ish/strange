@@ -4,22 +4,30 @@
 namespace strange
 {
 	template <typename element_d>
-	struct forward_extractor_o : any_o
+	struct forward_extractor_i
 	{
-		element_d (*get)(con<forward_extractor_a<element_d>> const& me);
+		element_d (*get) (con<forward_extractor_a<element_d>> const& me);
 
-		void (*increment)(var<forward_extractor_a<element_d>> const& me);
+		void (*increment) (var<forward_extractor_a<element_d>> const& me);
 
-		fit<forward_extractor_a<>> (*to_forward_extractor_any)(con<forward_extractor_a<element_d>> const& me);
+		fit<forward_extractor_a<>> (*to_forward_extractor_any) (con<forward_extractor_a<element_d>> const& me);
 
-		element_d const& (*_operator_star)(con<forward_extractor_a<element_d>> const& me);
+		element_d const& (*_operator_star) (con<forward_extractor_a<element_d>> const& me);
 
-		element_d const* (*_operator_arrow)(con<forward_extractor_a<element_d>> const& me);
+		element_d const* (*_operator_arrow) (con<forward_extractor_a<element_d>> const& me);
+	};
+
+	template <typename element_d>
+	struct forward_extractor_o :
+		any_i,
+		forward_extractor_i<element_d>
+	{
 	};
 
 	template <typename element_d>
 	struct forward_extractor_a
 	{
+		using interface = forward_extractor_i<element_d>;
 		using operations = forward_extractor_o<element_d>;
 		using creator_fp = fit<forward_extractor_a<element_d>>(*)(con<range_a<>> const& range);
 

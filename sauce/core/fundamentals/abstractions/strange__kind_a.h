@@ -3,13 +3,13 @@
 
 namespace strange
 {
-	struct kind_o : symbol_o
+	struct kind_i
 	{
-		bool (*shared)(con<kind_a> const& me);
+		bool (*shared) (con<kind_a> const& me);
 
-		var<cat_a> (*the_cat)(con<kind_a> const& me);
+		var<cat_a> (*the_cat) (con<kind_a> const& me);
 
-		behaviour_e (*behaviour)(con<kind_a> const& me);
+		behaviour_e (*behaviour) (con<kind_a> const& me);
 
 		// constant  :<any>#
 		// variable  :<any>=
@@ -17,8 +17,16 @@ namespace strange
 		// shared    $<any>=
 	};
 
+	struct kind_o :
+		any_i,
+		symbol_i,
+		kind_i
+	{
+	};
+
 	struct kind_a
 	{
+		using interface = kind_i;
 		using operations = kind_o;
 		using creator_fp = var<kind_a>(*)(con<range_a<>> const& range);
 

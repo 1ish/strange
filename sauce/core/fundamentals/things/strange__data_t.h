@@ -14,7 +14,7 @@ namespace strange
 			: thing_t{ me }
 			, data_{}
 		{
-			me.o = data_t<type_d>::_operations();
+			me.o = reinterpret_cast<any_o const*>(data_t<type_d>::_operations());
 		}
 
 		inline data_t(any_a& me,
@@ -22,7 +22,7 @@ namespace strange
 		: thing_t{ me }
 		, data_{ data }
 		{
-			me.o = data_t<type_d>::_operations();
+			me.o = reinterpret_cast<any_o const*>(data_t<type_d>::_operations());
 		}
 
 		inline data_t(any_a& me,
@@ -30,7 +30,7 @@ namespace strange
 		: thing_t{ me, original }
 		, data_{ static_cast<data_t<type_d>*>(original.t)->data_ }
 		{
-			me.o = data_t<type_d>::_operations();
+			me.o = reinterpret_cast<any_o const*>(data_t<type_d>::_operations());
 		}
 
 		data_t(data_t const&) = delete;
@@ -97,14 +97,14 @@ namespace strange
 			type_d data)
 		: data_t<type_d>{ me, data }
 		{
-			me.o = data_pointer_t<type_d>::_operations();
+			me.o = reinterpret_cast<any_o const*>(data_pointer_t<type_d>::_operations());
 		}
 
 		inline data_pointer_t(any_a& me,
 			any_a const& original)
 		: data_t<type_d>{ me, original }
 		{
-			me.o = data_pointer_t<type_d>::_operations();
+			me.o = reinterpret_cast<any_o const*>(data_pointer_t<type_d>::_operations());
 		}
 
 		virtual ~data_pointer_t()
@@ -183,22 +183,22 @@ namespace strange
 		return data_t<default_copy<type_d>>::create_default();
 	}
 
-	inline var<> lock_o::read_lock(con<lock_a> const& me)
+	inline var<> lock_i::read_lock(con<lock_a> const& me)
 	{
 		return dat_ptr(new std::shared_lock<std::shared_timed_mutex>(static_cast<data_t<default_copy<std::shared_timed_mutex>>*>(me.t)->data_));
 	}
 
-	inline var<> lock_o::write_lock(con<lock_a> const& me)
+	inline var<> lock_i::write_lock(con<lock_a> const& me)
 	{
 		return dat_ptr(new std::unique_lock<std::shared_timed_mutex>(static_cast<data_t<default_copy<std::shared_timed_mutex>>*>(me.t)->data_));
 	}
 
-	inline std::shared_lock<std::shared_timed_mutex> lock_o::_read_lock(con<lock_a> const& me)
+	inline std::shared_lock<std::shared_timed_mutex> lock_i::_read_lock(con<lock_a> const& me)
 	{
 		return std::shared_lock<std::shared_timed_mutex>(static_cast<data_t<default_copy<std::shared_timed_mutex>>*>(me.t)->data_);
 	}
 
-	inline std::unique_lock<std::shared_timed_mutex> lock_o::_write_lock(con<lock_a> const& me)
+	inline std::unique_lock<std::shared_timed_mutex> lock_i::_write_lock(con<lock_a> const& me)
 	{
 		return std::unique_lock<std::shared_timed_mutex>(static_cast<data_t<default_copy<std::shared_timed_mutex>>*>(me.t)->data_);
 	}
@@ -208,12 +208,12 @@ namespace strange
 		return dat_def<std::shared_timed_mutex>().val<var<lock_a>>();
 	}
 
-	inline var<> unlock_o::read_lock(con<lock_a> const& me)
+	inline var<> unlock_i::read_lock(con<lock_a> const& me)
 	{
 		return thing_t::create_nothing();
 	}
 
-	inline var<> unlock_o::write_lock(con<lock_a> const& me)
+	inline var<> unlock_i::write_lock(con<lock_a> const& me)
 	{
 		return thing_t::create_nothing();
 	}

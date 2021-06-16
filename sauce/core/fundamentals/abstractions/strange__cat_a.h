@@ -3,15 +3,15 @@
 
 namespace strange
 {
-	struct cat_o : symbol_o
+	struct cat_i
 	{
-		var<symbol_a>(*name)(con<cat_a> const& me);
+		var<symbol_a> (*name) (con<cat_a> const& me);
 
-		representation_e (*representation)(con<cat_a> const& me);
+		representation_e (*representation) (con<cat_a> const& me);
 
-		var<range_a<cat_a>> (*aspects)(con<cat_a> const& me);
+		var<range_a<cat_a>> (*aspects) (con<cat_a> const& me);
 
-		int64_t (*order)(con<cat_a> const& me);
+		int64_t (*order) (con<cat_a> const& me);
 
 		// abstraction  <symbol>
 		// dimension    <^element>
@@ -19,8 +19,16 @@ namespace strange
 		// enumeration  <%behaviour>
 	};
 
+	struct cat_o :
+		any_i,
+		symbol_i,
+		cat_i
+	{
+	};
+
 	struct cat_a
 	{
+		using interface = cat_i;
 		using operations = cat_o;
 		using creator_fp = var<cat_a>(*)(con<range_a<>> const& range);
 

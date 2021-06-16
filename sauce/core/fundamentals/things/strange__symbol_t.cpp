@@ -27,12 +27,14 @@ namespace strange
 				_set_pointer,
 				_pointer,
 			},
-			// symbol_a
-			add,
-			to_char_star,
-			length,
-			first_char,
-			last_char,
+			{
+				// symbol_a
+				add,
+				to_char_star,
+				length,
+				first_char,
+				last_char,
+			},
 		};
 		return &operations;
 	}
@@ -123,7 +125,7 @@ namespace strange
 	void symbol_t::_set_pointer(var<> const& me,
 		bool is_pointer)
 	{
-		me.o = is_pointer ? symbol_t::_pointer_operations() : symbol_t::_operations();
+		me.o = reinterpret_cast<any_o const*>(is_pointer ? symbol_t::_pointer_operations() : symbol_t::_operations());
 	}
 
 	// symbol_a

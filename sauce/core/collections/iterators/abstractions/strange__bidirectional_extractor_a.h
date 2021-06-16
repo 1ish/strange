@@ -4,16 +4,25 @@
 namespace strange
 {
 	template <typename element_d>
-	struct bidirectional_extractor_o : forward_extractor_o<element_d>
+	struct bidirectional_extractor_i
 	{
-		void (*decrement)(var<bidirectional_extractor_a<element_d>> const& me);
+		void (*decrement) (var<bidirectional_extractor_a<element_d>> const& me);
 
-		bit<bidirectional_extractor_a<>> (*to_bidirectional_extractor_any)(con<bidirectional_extractor_a<element_d>> const& me);
+		bit<bidirectional_extractor_a<>> (*to_bidirectional_extractor_any) (con<bidirectional_extractor_a<element_d>> const& me);
+	};
+
+	template <typename element_d>
+	struct bidirectional_extractor_o :
+		any_i,
+		forward_extractor_i<element_d>,
+		bidirectional_extractor_i<element_d>
+	{
 	};
 
 	template <typename element_d>
 	struct bidirectional_extractor_a
 	{
+		using interface = bidirectional_extractor_i<element_d>;
 		using operations = bidirectional_extractor_o<element_d>;
 		using creator_fp = bit<bidirectional_extractor_a<element_d>>(*)(con<range_a<>> const& range);
 

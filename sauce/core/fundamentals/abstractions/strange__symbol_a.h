@@ -3,22 +3,29 @@
 
 namespace strange
 {
-	struct symbol_o : any_o
+	struct symbol_i
 	{
-		var<symbol_a> (*add)(con<symbol_a> const& me,
+		var<symbol_a> (*add) (con<symbol_a> const& me,
 			con<symbol_a> const& suffix);
 
-		char const* (*to_char_star)(con<symbol_a> const& me);
+		char const* (*to_char_star) (con<symbol_a> const& me);
 
-		int64_t (*length)(con<symbol_a> const& me);
+		int64_t (*length) (con<symbol_a> const& me);
 
-		char (*first_char)(con<symbol_a> const& me);
+		char (*first_char) (con<symbol_a> const& me);
 
-		char (*last_char)(con<symbol_a> const& me);
+		char (*last_char) (con<symbol_a> const& me);
+	};
+
+	struct symbol_o :
+		any_i,
+		symbol_i
+	{
 	};
 
 	struct symbol_a
 	{
+		using interface = symbol_i;
 		using operations = symbol_o;
 		using creator_fp = var<symbol_a>(*)(con<range_a<>> const& range);
 

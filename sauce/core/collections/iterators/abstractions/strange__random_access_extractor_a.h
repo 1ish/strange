@@ -4,20 +4,30 @@
 namespace strange
 {
 	template <typename element_d>
-	struct random_access_extractor_o : bidirectional_extractor_o<element_d>
+	struct random_access_extractor_i
 	{
-		void (*self_add)(var<random_access_extractor_a<element_d>> const& me,
+		void (*self_add) (var<random_access_extractor_a<element_d>> const& me,
 			int64_t offset);
 
-		rat<random_access_extractor_a<element_d>>(*add)(con<random_access_extractor_a<element_d>> const& me,
+		rat<random_access_extractor_a<element_d>> (*add) (con<random_access_extractor_a<element_d>> const& me,
 			int64_t offset);
 
-		rat<random_access_extractor_a<>> (*to_random_access_extractor_any)(con<random_access_extractor_a<element_d>> const& me);
+		rat<random_access_extractor_a<>> (*to_random_access_extractor_any) (con<random_access_extractor_a<element_d>> const& me);
+	};
+
+	template <typename element_d>
+	struct random_access_extractor_o :
+		any_i,
+		forward_extractor_i<element_d>,
+		bidirectional_extractor_i<element_d>,
+		random_access_extractor_i<element_d>
+	{
 	};
 
 	template <typename element_d>
 	struct random_access_extractor_a
 	{
+		using interface = random_access_extractor_i<element_d>;
 		using operations = random_access_extractor_o<element_d>;
 		using creator_fp = rat<random_access_extractor_a<element_d>>(*)(con<range_a<>> const& range);
 

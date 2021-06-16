@@ -4,16 +4,24 @@
 namespace strange
 {
 	template <typename type_d>
-	struct data_o : any_o
+	struct data_i
 	{
-		type_d const& (*extract_data)(con<data_a<type_d>> const& me);
+		type_d const& (*extract_data) (con<data_a<type_d>> const& me);
 
-		type_d& (*mutate_data)(var<data_a<type_d>> const& me);
+		type_d& (*mutate_data) (var<data_a<type_d>> const& me);
+	};
+
+	template <typename type_d>
+	struct data_o :
+		any_i,
+		data_i<type_d>
+	{
 	};
 
 	template <typename type_d>
 	struct data_a
 	{
+		using interface = data_i<type_d>;
 		using operations = data_o<type_d>;
 		using creator_fp = var<data_a<type_d>>(*)(con<range_a<>> const& range);
 

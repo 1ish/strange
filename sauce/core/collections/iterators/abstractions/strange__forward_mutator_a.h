@@ -4,25 +4,33 @@
 namespace strange
 {
 	template <typename element_d>
-	struct forward_mutator_o : any_o
+	struct forward_mutator_i
 	{
-		element_d (*get)(con<forward_mutator_a<element_d>> const& me);
+		element_d (*get) (con<forward_mutator_a<element_d>> const& me);
 
-		void (*set)(con<forward_mutator_a<element_d>> const& me,
+		void (*set) (con<forward_mutator_a<element_d>> const& me,
 			element_d const& element);
 
-		void (*increment)(var<forward_mutator_a<element_d>> const& me);
+		void (*increment) (var<forward_mutator_a<element_d>> const& me);
 
-		fit<forward_mutator_a<>>(*to_forward_mutator_any)(con<forward_mutator_a<element_d>> const& me);
+		fit<forward_mutator_a<>> (*to_forward_mutator_any) (con<forward_mutator_a<element_d>> const& me);
 
-		element_d& (*_operator_star)(con<forward_mutator_a<element_d>> const& me);
+		element_d& (*_operator_star) (con<forward_mutator_a<element_d>> const& me);
 
-		element_d* (*_operator_arrow)(con<forward_mutator_a<element_d>> const& me);
+		element_d* (*_operator_arrow) (con<forward_mutator_a<element_d>> const& me);
+	};
+
+	template <typename element_d>
+	struct forward_mutator_o :
+		any_i,
+		forward_mutator_i<element_d>
+	{
 	};
 
 	template <typename element_d>
 	struct forward_mutator_a
 	{
+		using interface = forward_mutator_i<element_d>;
 		using operations = forward_mutator_o<element_d>;
 		using creator_fp = fit<forward_mutator_a<element_d>>(*)(con<range_a<>> const& range);
 

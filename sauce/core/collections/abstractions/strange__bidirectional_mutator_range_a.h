@@ -4,19 +4,29 @@
 namespace strange
 {
 	template <typename element_d>
-	struct bidirectional_mutator_range_o : mutator_range_o<element_d>
+	struct bidirectional_mutator_range_i
 	{
-		bit<bidirectional_mutator_a<element_d>> (*bidirectional_mutator_begin)(var<bidirectional_mutator_range_a<element_d>> const& me);
+		bit<bidirectional_mutator_a<element_d>> (*bidirectional_mutator_begin) (var<bidirectional_mutator_range_a<element_d>> const& me);
 
-		bit<bidirectional_mutator_a<element_d>> (*bidirectional_mutator_end)(var<bidirectional_mutator_range_a<element_d>> const& me);
+		bit<bidirectional_mutator_a<element_d>> (*bidirectional_mutator_end) (var<bidirectional_mutator_range_a<element_d>> const& me);
 
-		var<bidirectional_mutator_range_a<>> (*to_bidirectional_mutator_range_any)(var<bidirectional_mutator_range_a<element_d>> const& me);
+		var<bidirectional_mutator_range_a<>> (*to_bidirectional_mutator_range_any) (var<bidirectional_mutator_range_a<element_d>> const& me);
+	};
+
+	template <typename element_d>
+	struct bidirectional_mutator_range_o :
+		any_i,
+		range_i<element_d>,
+		mutator_range_i<element_d>,
+		bidirectional_mutator_range_i<element_d>
+	{
 	};
 
 	template <typename element_d>
 	struct bidirectional_mutator_range_a
 	{
 		using is_mutator = bool;
+		using interface = bidirectional_mutator_range_i<element_d>;
 		using operations = bidirectional_mutator_range_o<element_d>;
 		using creator_fp = var<bidirectional_mutator_range_a<element_d>>(*)(con<range_a<>> const& range);
 

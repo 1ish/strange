@@ -26,9 +26,11 @@ namespace strange
 				_set_pointer,
 				_pointer,
 			},
-			// data_a
-			extract_data,
-			mutate_data,
+			{
+				// data_a
+				extract_data,
+				mutate_data,
+			},
 		};
 		return &operations;
 	}
@@ -86,7 +88,7 @@ namespace strange
 	void data_t<type_d>::_set_pointer(var<> const& me,
 		bool is_pointer)
 	{
-		me.o = is_pointer ? data_t<type_d>::_pointer_operations() : data_t<type_d>::_operations();
+		me.o = reinterpret_cast<any_o const*>(is_pointer ? data_t<type_d>::_pointer_operations() : data_t<type_d>::_operations());
 	}
 
 	// data_a
@@ -127,9 +129,11 @@ namespace strange
 				data_pointer_t<type_d>::_set_pointer,
 				data_pointer_t<type_d>::_pointer,
 			},
-			// data_a
-			data_pointer_t<type_d>::extract_data,
-			data_pointer_t<type_d>::mutate_data,
+			{
+				// data_a
+				data_pointer_t<type_d>::extract_data,
+				data_pointer_t<type_d>::mutate_data,
+			},
 		};
 		return &operations;
 	}
@@ -166,7 +170,7 @@ namespace strange
 	void data_pointer_t<type_d>::_set_pointer(var<> const& me,
 		bool is_pointer)
 	{
-		me.o = is_pointer ? data_pointer_t<type_d>::_pointer_operations() : data_pointer_t<type_d>::_operations();
+		me.o = reinterpret_cast<any_o const*>(is_pointer ? data_pointer_t<type_d>::_pointer_operations() : data_pointer_t<type_d>::_operations());
 	}
 
 	// instantiation

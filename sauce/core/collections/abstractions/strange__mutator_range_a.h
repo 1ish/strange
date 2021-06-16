@@ -4,21 +4,30 @@
 namespace strange
 {
 	template <typename element_d>
-	struct mutator_range_o : range_o<element_d>
+	struct mutator_range_i
 	{
-		fit<forward_mutator_a<element_d>> (*mutator_begin)(var<mutator_range_a<element_d>> const& me);
+		fit<forward_mutator_a<element_d>> (*mutator_begin) (var<mutator_range_a<element_d>> const& me);
 
-		fit<forward_mutator_a<element_d>> (*mutator_end)(var<mutator_range_a<element_d>> const& me);
+		fit<forward_mutator_a<element_d>> (*mutator_end) (var<mutator_range_a<element_d>> const& me);
 
-		var<>(*write_lock)(var<mutator_range_a<element_d>> const& me);
+		var<> (*write_lock) (var<mutator_range_a<element_d>> const& me);
 
-		var<mutator_range_a<>> (*to_mutator_range_any)(var<mutator_range_a<element_d>> const& me);
+		var<mutator_range_a<>> (*to_mutator_range_any) (var<mutator_range_a<element_d>> const& me);
+	};
+
+	template <typename element_d>
+	struct mutator_range_o :
+		any_i,
+		range_i<element_d>,
+		mutator_range_i<element_d>
+	{
 	};
 
 	template <typename element_d>
 	struct mutator_range_a
 	{
 		using is_mutator = bool;
+		using interface = mutator_range_i<element_d>;
 		using operations = mutator_range_o<element_d>;
 		using creator_fp = var<mutator_range_a<element_d>>(*)(con<range_a<>> const& range);
 

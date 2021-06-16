@@ -3,63 +3,69 @@
 
 namespace strange
 {
-	struct any_o
+	struct any_i
 	{
-		var<symbol_a> (*cat)(con<> const& me); //TODO cat
+		var<symbol_a> (*cat) (con<> const& me); //TODO cat
 
-		bool (*is)(con<> const& me,
+		bool (*is) (con<> const& me,
 			con<> const& abstraction);
 
-		bool (*as)(con<> const& me,
+		bool (*as) (con<> const& me,
 			var<> const& abstraction);
 
-		var<symbol_a> (*type)(con<> const& me);
+		var<symbol_a> (*type) (con<> const& me);
 
-		static inline void set_something(var<> const& me,
+		static inline void set_something (var<> const& me,
 			bool is_something);
 
-		static inline bool something(con<> const& me);
+		static inline bool something (con<> const& me);
 
-		void (*set_error)(var<> const& me,
+		void (*set_error) (var<> const& me,
 			con<> const& error);
 
-		var<> (*error)(con<> const& me);
+		var<> (*error) (con<> const& me);
 
-		static inline uint64_t identity(con<> const& me);
+		static inline uint64_t identity (con<> const& me);
 
-		uint64_t (*hash)(con<> const& me);
+		uint64_t (*hash) (con<> const& me);
 
-		bool (*equal)(con<> const& me,
+		bool (*equal) (con<> const& me,
 			con<> const& other);
 
-		static inline bool not_equal(con<> const& me,
+		static inline bool not_equal (con<> const& me,
 			con<> const& other);
 
-		bool (*less)(con<> const& me,
+		bool (*less) (con<> const& me,
 			con<> const& other);
 
-		static inline bool greater(con<> const& me,
+		static inline bool greater (con<> const& me,
 			con<> const& other);
 
-		bool (*less_or_equal)(con<> const& me,
+		bool (*less_or_equal) (con<> const& me,
 			con<> const& other);
 
-		static inline bool greater_or_equal(con<> const& me,
+		static inline bool greater_or_equal (con<> const& me,
 			con<> const& other);
 
-		void (*_free)(any_a const& me);
+		void (*_free) (any_a const& me);
 
-		void (*_copy)(any_a const& me,
+		void (*_copy) (any_a const& me,
 			any_a& copy);
 
-		void (*_set_pointer)(var<> const& me,
+		void (*_set_pointer) (var<> const& me,
 			bool is_pointer);
 
-		bool (*_pointer)(con<> const& me);
+		bool (*_pointer) (con<> const& me);
+	};
+
+	struct any_o :
+		any_i
+	{
 	};
 
 	struct any_a
 	{
+		using interface = any_i;
 		using operations = any_o;
 		using creator_fp = var<>(*)(con<range_a<>> const& range);
 
@@ -73,24 +79,24 @@ namespace strange
 			con<symbol_a> const& function);
 	};
 
-	inline uint64_t any_o::identity(con<> const& me)
+	inline uint64_t any_i::identity(con<> const& me)
 	{
 		return reinterpret_cast<std::uintptr_t>(me.t);
 	}
 
-	inline bool any_o::not_equal(con<> const& me,
+	inline bool any_i::not_equal(con<> const& me,
 		con<> const& other)
 	{
 		return !me.o->equal(me, other);
 	}
 
-	inline bool any_o::greater(con<> const& me,
+	inline bool any_i::greater(con<> const& me,
 		con<> const& other)
 	{
 		return !me.o->less_or_equal(me, other);
 	}
 
-	inline bool any_o::greater_or_equal(con<> const& me,
+	inline bool any_i::greater_or_equal(con<> const& me,
 		con<> const& other)
 	{
 		return !me.o->less(me, other);

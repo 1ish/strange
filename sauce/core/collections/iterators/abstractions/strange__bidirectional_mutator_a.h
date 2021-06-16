@@ -4,16 +4,25 @@
 namespace strange
 {
 	template <typename element_d>
-	struct bidirectional_mutator_o : forward_mutator_o<element_d>
+	struct bidirectional_mutator_i
 	{
-		void (*decrement)(var<bidirectional_mutator_a<element_d>> const& me);
+		void (*decrement) (var<bidirectional_mutator_a<element_d>> const& me);
 
-		bit<bidirectional_mutator_a<>>(*to_bidirectional_mutator_any)(con<bidirectional_mutator_a<element_d>> const& me);
+		bit<bidirectional_mutator_a<>> (*to_bidirectional_mutator_any) (con<bidirectional_mutator_a<element_d>> const& me);
+	};
+
+	template <typename element_d>
+	struct bidirectional_mutator_o :
+		any_i,
+		forward_mutator_i<element_d>,
+		bidirectional_mutator_i<element_d>
+	{
 	};
 
 	template <typename element_d>
 	struct bidirectional_mutator_a
 	{
+		using interface = bidirectional_mutator_i<element_d>;
 		using operations = bidirectional_mutator_o<element_d>;
 		using creator_fp = bit<bidirectional_mutator_a<element_d>>(*)(con<range_a<>> const& range);
 

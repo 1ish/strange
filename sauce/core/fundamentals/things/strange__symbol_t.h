@@ -17,7 +17,7 @@ namespace strange
 		, length_{ 0 }
 		, hash_{ 0 }
 		{
-			me.o = symbol_t::_operations();
+			me.o = reinterpret_cast<any_o const*>(symbol_t::_operations());
 
 			if (s)
 			{
@@ -35,7 +35,7 @@ namespace strange
 		, length_{ 0 }
 		, hash_{ 0 }
 		{
-			me.o = symbol_t::_operations();
+			me.o = reinterpret_cast<any_o const*>(symbol_t::_operations());
 
 			auto const ot = static_cast<symbol_t const* const>(original.t);
 			length_ = ot->length_;

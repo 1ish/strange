@@ -3,27 +3,35 @@
 
 namespace strange
 {
-	struct unlock_o : lock_o
+	struct unlock_i
 	{
 		struct empty {};
 
-		static inline var<> read_lock(con<lock_a> const& me);
+		static inline var<> read_lock (con<lock_a> const& me);
 
-		static inline var<> write_lock(con<lock_a> const& me);
+		static inline var<> write_lock (con<lock_a> const& me);
 
-		static inline unlock_o::empty _read_lock(con<lock_a> const& me)
+		static inline unlock_i::empty _read_lock (con<lock_a> const& me)
 		{
-			return unlock_o::empty{};
+			return unlock_i::empty{};
 		}
 
-		static inline unlock_o::empty _write_lock(con<lock_a> const& me)
+		static inline unlock_i::empty _write_lock (con<lock_a> const& me)
 		{
-			return unlock_o::empty{};
+			return unlock_i::empty{};
 		}
+	};
+
+	struct unlock_o :
+		any_i,
+		lock_i,
+		unlock_i
+	{
 	};
 
 	struct unlock_a
 	{
+		using interface = unlock_i;
 		using operations = unlock_o;
 		using creator_fp = var<unlock_a>(*)(con<range_a<>> const& range);
 

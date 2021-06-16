@@ -3,19 +3,26 @@
 
 namespace strange
 {
-	struct lock_o : any_o
+	struct lock_i
 	{
-		static inline var<> read_lock(con<lock_a> const& me);
+		static inline var<> read_lock (con<lock_a> const& me);
 
-		static inline var<> write_lock(con<lock_a> const& me);
+		static inline var<> write_lock (con<lock_a> const& me);
 
-		static inline std::shared_lock<std::shared_timed_mutex> _read_lock(con<lock_a> const& me);
+		static inline std::shared_lock<std::shared_timed_mutex> _read_lock (con<lock_a> const& me);
 
-		static inline std::unique_lock<std::shared_timed_mutex> _write_lock(con<lock_a> const& me);
+		static inline std::unique_lock<std::shared_timed_mutex> _write_lock (con<lock_a> const& me);
+	};
+
+	struct lock_o :
+		any_i,
+		lock_i
+	{
 	};
 
 	struct lock_a
 	{
+		using interface = lock_i;
 		using operations = lock_o;
 		using creator_fp = var<lock_a>(*)(con<range_a<>> const& range);
 

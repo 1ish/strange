@@ -152,13 +152,13 @@ namespace strange
 		}
 	};
 
-	inline void any_o::set_something(var<> const& me,
+	inline void any_i::set_something(var<> const& me,
 		bool is_something)
 	{
 		me.o->set_error(me, is_something ? thing_t::create_nothing() : thing_t::create());
 	}
 
-	inline bool any_o::something(con<> const& me)
+	inline bool any_i::something(con<> const& me)
 	{
 		return !me.t->error_.t;
 	}
