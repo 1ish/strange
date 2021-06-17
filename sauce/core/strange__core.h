@@ -11,6 +11,11 @@
 namespace strange
 {
 	struct any_a;
+
+	template <typename A = any_a> struct con;
+	template <typename A = any_a> struct var;
+	template <typename A = any_a> struct ptr;
+
 	struct symbol_a;
 	struct cat_a;
 	struct kind_a;
@@ -18,25 +23,26 @@ namespace strange
 	struct lock_a;
 	struct unlock_a;
 
-	template <typename element_d = any_a> struct forward_extractor_a;
-	template <typename element_d = any_a> struct forward_mutator_a;
-	template <typename element_d = any_a> struct bidirectional_extractor_a;
-	template <typename element_d = any_a> struct bidirectional_mutator_a;
-	template <typename element_d = any_a> struct random_access_extractor_a;
-	template <typename element_d = any_a> struct random_access_mutator_a;
+	template <typename element_d = var<>> struct forward_extractor_a;
+	template <typename element_d = var<>> struct forward_mutator_a;
+	template <typename element_d = var<>> struct bidirectional_extractor_a;
+	template <typename element_d = var<>> struct bidirectional_mutator_a;
+	template <typename element_d = var<>> struct random_access_extractor_a;
+	template <typename element_d = var<>> struct random_access_mutator_a;
+	template <typename... elements_d> struct forward_tuple_extractor_a;
 
-	template <typename element_d = any_a> struct range_a;
-	template <typename element_d = any_a> struct mutator_range_a;
-	template <typename element_d = any_a> struct bidirectional_range_a;
-	template <typename element_d = any_a> struct bidirectional_mutator_range_a;
-	template <typename element_d = any_a> struct random_access_range_a;
-	template <typename element_d = any_a> struct random_access_mutator_range_a;
+	template <typename element_d = var<>> struct range_a;
+	template <typename element_d = var<>> struct mutator_range_a;
+	template <typename element_d = var<>> struct bidirectional_range_a;
+	template <typename element_d = var<>> struct bidirectional_mutator_range_a;
+	template <typename element_d = var<>> struct random_access_range_a;
+	template <typename element_d = var<>> struct random_access_mutator_range_a;
 
 	template <typename... elements_d> struct tuple_a;
-	template <typename key_d = any_a, typename value_d = any_a, typename element_d = any_a> struct collection_a;
-	template <typename element_d = any_a> struct list_a;
-	template <typename element_d = any_a> struct group_a;
-	template <typename key_d = any_a, typename value_d = any_a> struct table_a;
+	template <typename key_d = var<>, typename value_d = var<>, typename element_d = var<>> struct collection_a;
+	template <typename element_d = var<>> struct list_a;
+	template <typename element_d = var<>> struct group_a;
+	template <typename key_d = var<>, typename value_d = var<>> struct table_a;
 
 	struct thing_t;
 	struct symbol_t;
@@ -63,6 +69,7 @@ namespace strange
 #include "collections/iterators/abstractions/strange__bidirectional_mutator_a.h"
 #include "collections/iterators/abstractions/strange__random_access_extractor_a.h"
 #include "collections/iterators/abstractions/strange__random_access_mutator_a.h"
+#include "collections/iterators/abstractions/strange__forward_tuple_extractor_a.h"
 
 #include "collections/ranges/abstractions/strange__range_a.h"
 #include "collections/ranges/abstractions/strange__mutator_range_a.h"

@@ -3,13 +3,7 @@
 
 namespace strange
 {
-	template <typename A = any_a>
-	struct var;
-
-	template <typename A = any_a>
-	struct ptr;
-
-	template <typename A = any_a>
+	template <typename A>
 	struct con : A
 	{
 		inline con()

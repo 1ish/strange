@@ -6,12 +6,12 @@ namespace strange
 	template <typename... elements_d>
 	struct tuple_i
 	{
-		var<range_a<>> (*to_range_any) (con<tuple_a<elements_d...>> const& me);
+		var<list_a<>> (*to_list_any) (con<tuple_a<elements_d...>> const& me);
 
-		void (*get) (con<tuple_a<elements_d...>> const& me,
+		void (*destruct) (con<tuple_a<elements_d...>> const& me,
 			elements_d&... elements);
 
-		void (*set) (con<tuple_a<elements_d...>> const& me,
+		void (*restruct) (var<tuple_a<elements_d...>> const& me,
 			elements_d const&... elements);
 	};
 
