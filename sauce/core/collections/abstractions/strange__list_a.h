@@ -6,7 +6,7 @@ namespace strange
 	template <typename element_d>
 	struct list_i
 	{
-		var<list_a<>> (*to_list_any) (var<list_a<element_d>> const& me);
+		var<list_a<>> (*to_list_any) (con<list_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

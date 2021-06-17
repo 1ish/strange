@@ -8,7 +8,7 @@ namespace strange
 	{
 		var<> (*write_lock)(var<collection_a<key_d, value_d, element_d>> const& me);
 
-		var<collection_a<>> (*to_collection_any) (var<collection_a<key_d, value_d, element_d>> const& me);
+		var<collection_a<>> (*to_collection_any) (con<collection_a<key_d, value_d, element_d>> const& me);
 
 		bool (*has) (con<collection_a<key_d, value_d, element_d>> const& me,
 			key_d const& key);

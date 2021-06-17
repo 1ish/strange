@@ -6,7 +6,7 @@ namespace strange
 	template <typename element_d>
 	struct group_i
 	{
-		var<group_a<>> (*to_group_any) (var<group_a<element_d>> const& me);
+		var<group_a<>> (*to_group_any) (con<group_a<element_d>> const& me);
 
 		void (*update_element) (var<group_a<element_d>> const& me,
 			element_d const& element);

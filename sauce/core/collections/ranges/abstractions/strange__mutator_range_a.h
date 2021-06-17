@@ -12,7 +12,7 @@ namespace strange
 
 		var<> (*write_lock) (var<mutator_range_a<element_d>> const& me);
 
-		var<mutator_range_a<>> (*to_mutator_range_any) (var<mutator_range_a<element_d>> const& me);
+		var<mutator_range_a<>> (*to_mutator_range_any) (con<mutator_range_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

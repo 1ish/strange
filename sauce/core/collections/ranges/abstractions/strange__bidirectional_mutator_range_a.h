@@ -10,7 +10,7 @@ namespace strange
 
 		bit<bidirectional_mutator_a<element_d>> (*bidirectional_mutator_end) (var<bidirectional_mutator_range_a<element_d>> const& me);
 
-		var<bidirectional_mutator_range_a<>> (*to_bidirectional_mutator_range_any) (var<bidirectional_mutator_range_a<element_d>> const& me);
+		var<bidirectional_mutator_range_a<>> (*to_bidirectional_mutator_range_any) (con<bidirectional_mutator_range_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

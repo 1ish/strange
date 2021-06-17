@@ -6,7 +6,7 @@ namespace strange
 	template <typename... elements_d>
 	struct tuple_i
 	{
-		var<tuple_a<>> (*to_range_any) (var<tuple_a<elements_d...>> const& me);
+		var<range_a<>> (*to_range_any) (con<tuple_a<elements_d...>> const& me);
 	};
 
 	template <typename... elements_d>
@@ -19,7 +19,6 @@ namespace strange
 	template <typename... elements_d>
 	struct tuple_a
 	{
-		using is_mutator = bool;
 		using operations = tuple_o<elements_d...>;
 		using creator_fp = var<tuple_a<elements_d...>> (*)(con<range_a<>> const& range);
 

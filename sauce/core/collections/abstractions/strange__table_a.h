@@ -6,7 +6,7 @@ namespace strange
 	template <typename key_d, typename value_d>
 	struct table_i
 	{
-		var<table_a<>> (*to_table_any) (var<table_a<key_d, value_d>> const& me);
+		var<table_a<>> (*to_table_any) (con<table_a<key_d, value_d>> const& me);
 	};
 
 	template <typename key_d, typename value_d>
