@@ -17,18 +17,22 @@ namespace strange
 	template <typename type_d> struct data_a;
 	struct lock_a;
 	struct unlock_a;
+
 	template <typename element_d = any_a> struct forward_extractor_a;
 	template <typename element_d = any_a> struct forward_mutator_a;
 	template <typename element_d = any_a> struct bidirectional_extractor_a;
 	template <typename element_d = any_a> struct bidirectional_mutator_a;
 	template <typename element_d = any_a> struct random_access_extractor_a;
 	template <typename element_d = any_a> struct random_access_mutator_a;
+
 	template <typename element_d = any_a> struct range_a;
 	template <typename element_d = any_a> struct mutator_range_a;
 	template <typename element_d = any_a> struct bidirectional_range_a;
 	template <typename element_d = any_a> struct bidirectional_mutator_range_a;
 	template <typename element_d = any_a> struct random_access_range_a;
 	template <typename element_d = any_a> struct random_access_mutator_range_a;
+
+	template <typename... elements_d> struct tuple_a;
 	template <typename key_d = any_a, typename value_d = any_a, typename element_d = any_a> struct collection_a;
 	template <typename element_d = any_a> struct list_a;
 	template <typename element_d = any_a> struct group_a;
@@ -58,12 +62,15 @@ namespace strange
 #include "collections/iterators/abstractions/strange__bidirectional_mutator_a.h"
 #include "collections/iterators/abstractions/strange__random_access_extractor_a.h"
 #include "collections/iterators/abstractions/strange__random_access_mutator_a.h"
+
 #include "collections/ranges/abstractions/strange__range_a.h"
 #include "collections/ranges/abstractions/strange__mutator_range_a.h"
 #include "collections/ranges/abstractions/strange__bidirectional_range_a.h"
 #include "collections/ranges/abstractions/strange__bidirectional_mutator_range_a.h"
 #include "collections/ranges/abstractions/strange__random_access_range_a.h"
 #include "collections/ranges/abstractions/strange__random_access_mutator_range_a.h"
+
+#include "collections/abstractions/strange__tuple_a.h"
 #include "collections/abstractions/strange__collection_a.h"
 #include "collections/abstractions/strange__list_a.h"
 #include "collections/abstractions/strange__group_a.h"
