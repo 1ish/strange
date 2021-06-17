@@ -1,0 +1,38 @@
+#ifndef COM_ONEISH__STRANGE__TABLE_A_H
+#define COM_ONEISH__STRANGE__TABLE_A_H
+
+namespace strange
+{
+	template <typename key_d, typename value_d>
+	struct table_i
+	{
+		var<table_a<>> (*to_table_any) (var<table_a<key_d, value_d>> const& me);
+	};
+
+	template <typename key_d, typename value_d>
+	struct table_o :
+		collection_o<key_d, value_d, tuple_a<key_d, value_d>>,
+		mutator_range_i<tuple_a<key_d, value_d>>,
+		table_i<key_d, value_d>
+	{
+	};
+
+	template <typename key_d, typename value_d>
+	struct table_a
+	{
+		using is_mutator = bool;
+		using operations = table_o<key_d, value_d>;
+		using creator_fp = var<table_a<key_d, value_d>> (*)(con<range_a<>> const& range);
+
+		mutable thing_t* t;
+		mutable operations const* o;
+
+		static var<symbol_a> cat(con<> const& me); //TODO cat
+
+		static creator_fp creator(con<symbol_a> const& scope,
+			con<symbol_a> const& thing,
+			con<symbol_a> const& function);
+	};
+}
+
+#endif
