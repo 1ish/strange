@@ -22,7 +22,7 @@ namespace strange
 
 	template <typename element_d>
 	struct forward_mutator_o :
-		any_i,
+		any_o,
 		forward_mutator_i<element_d>
 	{
 	};
@@ -30,7 +30,6 @@ namespace strange
 	template <typename element_d>
 	struct forward_mutator_a
 	{
-		using interface = forward_mutator_i<element_d>;
 		using operations = forward_mutator_o<element_d>;
 		using creator_fp = fit<forward_mutator_a<element_d>>(*)(con<range_a<>> const& range);
 

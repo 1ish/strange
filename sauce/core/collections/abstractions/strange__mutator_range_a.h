@@ -17,8 +17,7 @@ namespace strange
 
 	template <typename element_d>
 	struct mutator_range_o :
-		any_i,
-		range_i<element_d>,
+		range_o<element_d>,
 		mutator_range_i<element_d>
 	{
 	};
@@ -27,7 +26,6 @@ namespace strange
 	struct mutator_range_a
 	{
 		using is_mutator = bool;
-		using interface = mutator_range_i<element_d>;
 		using operations = mutator_range_o<element_d>;
 		using creator_fp = var<mutator_range_a<element_d>>(*)(con<range_a<>> const& range);
 

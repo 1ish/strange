@@ -3,7 +3,7 @@
 
 namespace strange
 {
-	struct any_i
+	struct any_o
 	{
 		var<symbol_a> (*cat) (con<> const& me); //TODO cat
 
@@ -58,14 +58,8 @@ namespace strange
 		bool (*_pointer) (con<> const& me);
 	};
 
-	struct any_o :
-		any_i
-	{
-	};
-
 	struct any_a
 	{
-		using interface = any_i;
 		using operations = any_o;
 		using creator_fp = var<>(*)(con<range_a<>> const& range);
 
@@ -79,24 +73,24 @@ namespace strange
 			con<symbol_a> const& function);
 	};
 
-	inline uint64_t any_i::identity(con<> const& me)
+	inline uint64_t any_o::identity(con<> const& me)
 	{
 		return reinterpret_cast<std::uintptr_t>(me.t);
 	}
 
-	inline bool any_i::not_equal(con<> const& me,
+	inline bool any_o::not_equal(con<> const& me,
 		con<> const& other)
 	{
 		return !me.o->equal(me, other);
 	}
 
-	inline bool any_i::greater(con<> const& me,
+	inline bool any_o::greater(con<> const& me,
 		con<> const& other)
 	{
 		return !me.o->less_or_equal(me, other);
 	}
 
-	inline bool any_i::greater_or_equal(con<> const& me,
+	inline bool any_o::greater_or_equal(con<> const& me,
 		con<> const& other)
 	{
 		return !me.o->less(me, other);

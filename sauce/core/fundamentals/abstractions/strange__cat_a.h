@@ -20,15 +20,13 @@ namespace strange
 	};
 
 	struct cat_o :
-		any_i,
-		symbol_i,
+		symbol_o,
 		cat_i
 	{
 	};
 
 	struct cat_a
 	{
-		using interface = cat_i;
 		using operations = cat_o;
 		using creator_fp = var<cat_a>(*)(con<range_a<>> const& range);
 

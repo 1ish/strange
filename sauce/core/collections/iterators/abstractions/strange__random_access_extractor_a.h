@@ -17,9 +17,7 @@ namespace strange
 
 	template <typename element_d>
 	struct random_access_extractor_o :
-		any_i,
-		forward_extractor_i<element_d>,
-		bidirectional_extractor_i<element_d>,
+		bidirectional_extractor_o<element_d>,
 		random_access_extractor_i<element_d>
 	{
 	};
@@ -27,7 +25,6 @@ namespace strange
 	template <typename element_d>
 	struct random_access_extractor_a
 	{
-		using interface = random_access_extractor_i<element_d>;
 		using operations = random_access_extractor_o<element_d>;
 		using creator_fp = rat<random_access_extractor_a<element_d>>(*)(con<range_a<>> const& range);
 

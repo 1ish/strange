@@ -11,9 +11,7 @@ namespace strange
 
 	template <typename element_d>
 	struct list_o :
-		any_i,
-		range_i<element_d>,
-		collection_i<int64_t, element_d, element_d>,
+		collection_o<int64_t, element_d, element_d>,
 		random_access_range_i<element_d>,
 		random_access_mutator_range_i<element_d>,
 		list_i<element_d>
@@ -24,7 +22,6 @@ namespace strange
 	struct list_a
 	{
 		using is_mutator = bool;
-		using interface = list_i<element_d>;
 		using operations = list_o<element_d>;
 		using creator_fp = var<list_a<element_d>> (*)(con<range_a<>> const& range);
 

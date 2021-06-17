@@ -23,15 +23,13 @@ namespace strange
 	};
 
 	struct unlock_o :
-		any_i,
-		lock_i,
+		lock_o,
 		unlock_i
 	{
 	};
 
 	struct unlock_a
 	{
-		using interface = unlock_i;
 		using operations = unlock_o;
 		using creator_fp = var<unlock_a>(*)(con<range_a<>> const& range);
 

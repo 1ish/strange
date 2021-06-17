@@ -13,7 +13,7 @@ namespace strange
 
 	template <typename type_d>
 	struct data_o :
-		any_i,
+		any_o,
 		data_i<type_d>
 	{
 	};
@@ -21,7 +21,6 @@ namespace strange
 	template <typename type_d>
 	struct data_a
 	{
-		using interface = data_i<type_d>;
 		using operations = data_o<type_d>;
 		using creator_fp = var<data_a<type_d>>(*)(con<range_a<>> const& range);
 

@@ -15,10 +15,7 @@ namespace strange
 
 	template <typename element_d>
 	struct random_access_mutator_range_o :
-		any_i,
-		range_i<element_d>,
-		mutator_range_i<element_d>,
-		bidirectional_mutator_range_i<element_d>,
+		bidirectional_mutator_range_o<element_d>,
 		random_access_mutator_range_i<element_d>
 	{
 	};
@@ -27,7 +24,6 @@ namespace strange
 	struct random_access_mutator_range_a
 	{
 		using is_mutator = bool;
-		using interface = random_access_mutator_range_i<element_d>;
 		using operations = random_access_mutator_range_o<element_d>;
 		using creator_fp = var<random_access_mutator_range_a<element_d>>(*)(con<range_a<>> const& range);
 

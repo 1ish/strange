@@ -9,23 +9,21 @@ namespace strange
 	{
 		static any_o operations =
 		{
-			{
-				// any_a
-				any_a::cat,
-				is,
-				as,
-				type,
-				set_error,
-				error,
-				hash,
-				equal,
-				less,
-				less_or_equal,
-				_free,
-				_copy,
-				_set_pointer,
-				_pointer,
-			},
+			// any_a
+			any_a::cat,
+			is,
+			as,
+			type,
+			set_error,
+			error,
+			hash,
+			equal,
+			less,
+			less_or_equal,
+			_free,
+			_copy,
+			_set_pointer,
+			_pointer,
 		};
 		return &operations;
 	}

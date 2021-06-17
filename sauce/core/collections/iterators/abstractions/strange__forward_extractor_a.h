@@ -19,7 +19,7 @@ namespace strange
 
 	template <typename element_d>
 	struct forward_extractor_o :
-		any_i,
+		any_o,
 		forward_extractor_i<element_d>
 	{
 	};
@@ -27,7 +27,6 @@ namespace strange
 	template <typename element_d>
 	struct forward_extractor_a
 	{
-		using interface = forward_extractor_i<element_d>;
 		using operations = forward_extractor_o<element_d>;
 		using creator_fp = fit<forward_extractor_a<element_d>>(*)(con<range_a<>> const& range);
 

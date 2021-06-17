@@ -15,9 +15,7 @@ namespace strange
 
 	template <typename element_d>
 	struct bidirectional_mutator_range_o :
-		any_i,
-		range_i<element_d>,
-		mutator_range_i<element_d>,
+		mutator_range_o<element_d>,
 		bidirectional_mutator_range_i<element_d>
 	{
 	};
@@ -26,7 +24,6 @@ namespace strange
 	struct bidirectional_mutator_range_a
 	{
 		using is_mutator = bool;
-		using interface = bidirectional_mutator_range_i<element_d>;
 		using operations = bidirectional_mutator_range_o<element_d>;
 		using creator_fp = var<bidirectional_mutator_range_a<element_d>>(*)(con<range_a<>> const& range);
 

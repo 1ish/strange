@@ -18,15 +18,13 @@ namespace strange
 	};
 
 	struct kind_o :
-		any_i,
-		symbol_i,
+		symbol_o,
 		kind_i
 	{
 	};
 
 	struct kind_a
 	{
-		using interface = kind_i;
 		using operations = kind_o;
 		using creator_fp = var<kind_a>(*)(con<range_a<>> const& range);
 
