@@ -23,8 +23,10 @@ namespace strange
 
 	template <typename key_d, typename value_d>
 	struct table_o :
-		collection_o<key_d, value_d, tuple_a<key_d, value_d>>,
-		mutator_range_i<tuple_a<key_d, value_d>>, //TODO tuple_range_i & tuple_mutator_range_i
+		collection_o<key_d, value_d, var<tuple_a<key_d, value_d>>>,
+		tuple_range_i<key_d, value_d>,
+		mutator_range_i<var<tuple_a<key_d, value_d>>>,
+		//TODO tuple_mutator_range_i
 		table_i<key_d, value_d>
 	{
 	};

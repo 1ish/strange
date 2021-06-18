@@ -12,7 +12,10 @@ namespace strange
 	template <typename element_d>
 	struct list_o :
 		collection_o<int64_t, element_d, element_d>,
+		bidirectional_range_i<element_d>,
 		random_access_range_i<element_d>,
+		mutator_range_i<element_d>,
+		bidirectional_mutator_range_i<element_d>,
 		random_access_mutator_range_i<element_d>,
 		list_i<element_d>
 	{

@@ -43,6 +43,7 @@ namespace strange
 	template <typename element_d = var<>> struct bidirectional_mutator_range_a;
 	template <typename element_d = var<>> struct random_access_range_a;
 	template <typename element_d = var<>> struct random_access_mutator_range_a;
+	template <typename... elements_d> struct tuple_range_a;
 
 	template <typename... elements_d> struct tuple_a;
 	template <typename key_d = var<>, typename value_d = var<>, typename element_d = var<>> struct collection_a;
@@ -88,6 +89,7 @@ namespace strange
 #include "collections/ranges/abstractions/strange__bidirectional_mutator_range_a.h"
 #include "collections/ranges/abstractions/strange__random_access_range_a.h"
 #include "collections/ranges/abstractions/strange__random_access_mutator_range_a.h"
+#include "collections/ranges/abstractions/strange__tuple_range_a.h"
 
 #include "collections/abstractions/strange__tuple_a.h"
 #include "collections/abstractions/strange__collection_a.h"

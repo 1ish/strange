@@ -15,7 +15,7 @@ namespace strange
 
 	template <typename element_d>
 	struct mutator_range_o :
-		range_o<element_d>,
+		any_o,
 		mutator_range_i<element_d>
 	{
 	};
