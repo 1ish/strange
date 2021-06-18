@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <mutex>
 #include <shared_mutex>
+#include <utility>
 
 namespace strange
 {
