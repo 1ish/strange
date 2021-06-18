@@ -9,8 +9,6 @@ namespace strange
 		fit<forward_tuple_extractor_a<elements_d...>> (*tuple_begin) (con<tuple_range_a<elements_d...>> const& me);
 
 		fit<forward_tuple_extractor_a<elements_d...>> (*tuple_end) (con<tuple_range_a<elements_d...>> const& me);
-
-		var<> (*read_lock) (con<tuple_range_a<elements_d...>> const& me);
 	};
 
 	template <typename... elements_d>
@@ -23,7 +21,7 @@ namespace strange
 	template <typename... elements_d>
 	struct tuple_range_a
 	{
-		using non_mutator = bool;
+		using non_mutator_range = bool;
 		using operations = tuple_range_o<elements_d...>;
 		using creator_fp = var<tuple_range_a<elements_d...>>(*)(con<range_a<>> const& range);
 

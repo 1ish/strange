@@ -23,7 +23,7 @@ namespace strange
 	template <typename element_d>
 	struct mutator_range_a
 	{
-		using is_mutator = bool;
+		using is_mutator_range = bool;
 		using operations = mutator_range_o<element_d>;
 		using creator_fp = var<mutator_range_a<element_d>>(*)(con<range_a<>> const& range);
 
@@ -37,25 +37,25 @@ namespace strange
 			con<symbol_a> const& function);
 	};
 
-	template <typename mutator_range_d, typename mutator_range_d::is_mutator = true>
+	template <typename mutator_range_d, typename mutator_range_d::is_mutator_range = true>
 	inline auto begin(var<mutator_range_d> const& range)
 	{
 		return range.o->mutator_begin(range);
 	}
 
-	template <typename mutator_range_d, typename mutator_range_d::is_mutator = true>
+	template <typename mutator_range_d, typename mutator_range_d::is_mutator_range = true>
 	inline auto end(var<mutator_range_d> const& range)
 	{
 		return range.o->mutator_end(range);
 	}
 
-	template <typename mutator_range_d, typename mutator_range_d::is_mutator = true>
+	template <typename mutator_range_d, typename mutator_range_d::is_mutator_range = true>
 	inline auto begin(ptr<mutator_range_d> const& range)
 	{
 		return range.o->mutator_begin(reinterpret_cast<var<mutator_range_d>&>(range));
 	}
 
-	template <typename mutator_range_d, typename mutator_range_d::is_mutator = true>
+	template <typename mutator_range_d, typename mutator_range_d::is_mutator_range = true>
 	inline auto end(ptr<mutator_range_d> const& range)
 	{
 		return range.o->mutator_end(reinterpret_cast<var<mutator_range_d>&>(range));

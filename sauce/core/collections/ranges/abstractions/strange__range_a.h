@@ -25,7 +25,7 @@ namespace strange
 	template <typename element_d>
 	struct range_a
 	{
-		using non_mutator = bool;
+		using non_mutator_range = bool;
 		using operations = range_o<element_d>;
 		using creator_fp = var<range_a<element_d>>(*)(con<range_a<>> const& range);
 
@@ -51,25 +51,25 @@ namespace strange
 		return range.o->end(range);
 	}
 
-	template <typename range_d, typename range_d::non_mutator = true>
+	template <typename range_d, typename range_d::non_mutator_range = true>
 	inline auto begin(var<range_d> const& range)
 	{
 		return range.o->begin(range);
 	}
 
-	template <typename range_d, typename range_d::non_mutator = true>
+	template <typename range_d, typename range_d::non_mutator_range = true>
 	inline auto end(var<range_d> const& range)
 	{
 		return range.o->end(range);
 	}
 
-	template <typename range_d, typename range_d::non_mutator = true>
+	template <typename range_d, typename range_d::non_mutator_range = true>
 	inline auto begin(ptr<range_d> const& range)
 	{
 		return range.o->begin(reinterpret_cast<con<range_d> const&>(range));
 	}
 
-	template <typename range_d, typename range_d::non_mutator = true>
+	template <typename range_d, typename range_d::non_mutator_range = true>
 	inline auto end(ptr<range_d> const& range)
 	{
 		return range.o->end(reinterpret_cast<con<range_d> const&>(range));

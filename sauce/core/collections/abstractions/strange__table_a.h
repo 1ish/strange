@@ -26,7 +26,7 @@ namespace strange
 		collection_o<key_d, value_d, var<tuple_a<key_d, value_d>>>,
 		tuple_range_i<key_d, value_d>,
 		mutator_range_i<var<tuple_a<key_d, value_d>>>,
-		//TODO tuple_mutator_range_i
+		tuple_mutator_range_i<key_d, value_d>,
 		table_i<key_d, value_d>
 	{
 	};
@@ -34,7 +34,7 @@ namespace strange
 	template <typename key_d, typename value_d>
 	struct table_a
 	{
-		using is_mutator = bool;
+		using is_mutator_range = bool;
 		using operations = table_o<key_d, value_d>;
 		using creator_fp = var<table_a<key_d, value_d>> (*)(con<range_a<>> const& range);
 

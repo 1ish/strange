@@ -24,7 +24,7 @@ namespace strange
 	template <typename element_d>
 	struct list_a
 	{
-		using is_mutator = bool;
+		using is_mutator_range = bool;
 		using operations = list_o<element_d>;
 		using creator_fp = var<list_a<element_d>> (*)(con<range_a<>> const& range);
 

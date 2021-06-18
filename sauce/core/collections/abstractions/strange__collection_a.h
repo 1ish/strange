@@ -69,7 +69,7 @@ namespace strange
 	template <typename key_d, typename value_d, typename element_d>
 	struct collection_a
 	{
-		using non_mutator = bool;
+		using non_mutator_range = bool;
 		using operations = collection_o<key_d, value_d, element_d>;
 		using creator_fp = var<collection_a<key_d, value_d, element_d>>(*)(con<range_a<>> const& range);
 
