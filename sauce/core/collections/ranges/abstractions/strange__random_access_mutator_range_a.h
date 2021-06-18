@@ -9,8 +9,6 @@ namespace strange
 		rat<random_access_mutator_a<element_d>> (*random_access_mutator_begin) (var<random_access_mutator_range_a<element_d>> const& me);
 
 		rat<random_access_mutator_a<element_d>> (*random_access_mutator_end) (var<random_access_mutator_range_a<element_d>> const& me);
-
-		var<random_access_mutator_range_a<>> (*to_random_access_mutator_range_any) (con<random_access_mutator_range_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

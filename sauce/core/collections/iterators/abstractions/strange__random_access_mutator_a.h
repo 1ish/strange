@@ -11,8 +11,6 @@ namespace strange
 
 		rat<random_access_mutator_a<element_d>> (*add) (con<random_access_mutator_a<element_d>> const& me,
 			int64_t offset);
-
-		rat<random_access_mutator_a<>> (*to_random_access_mutator_any) (con<random_access_mutator_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

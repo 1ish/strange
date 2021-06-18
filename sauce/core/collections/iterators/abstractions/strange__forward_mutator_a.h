@@ -13,8 +13,6 @@ namespace strange
 
 		void (*increment) (var<forward_mutator_a<element_d>> const& me);
 
-		fit<forward_mutator_a<>> (*to_forward_mutator_any) (con<forward_mutator_a<element_d>> const& me);
-
 		element_d& (*_operator_star) (con<forward_mutator_a<element_d>> const& me);
 
 		element_d* (*_operator_arrow) (con<forward_mutator_a<element_d>> const& me);

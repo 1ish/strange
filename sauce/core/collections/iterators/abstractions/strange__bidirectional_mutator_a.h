@@ -7,8 +7,6 @@ namespace strange
 	struct bidirectional_mutator_i
 	{
 		void (*decrement) (var<bidirectional_mutator_a<element_d>> const& me);
-
-		bit<bidirectional_mutator_a<>> (*to_bidirectional_mutator_any) (con<bidirectional_mutator_a<element_d>> const& me);
 	};
 
 	template <typename element_d>
