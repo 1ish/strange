@@ -6,11 +6,11 @@ namespace strange
 	template <typename element_d>
 	struct random_access_range_i
 	{
-		rat<random_access_extractor_a<element_d>> (*random_access_begin) (con<random_access_range_a<element_d>> const& me);
+		rat<random_access_extractor_a<element_d>> (*begin) (con<random_access_range_a<element_d>> const& me);
 
-		rat<random_access_extractor_a<element_d>> (*random_access_end) (con<random_access_range_a<element_d>> const& me);
+		rat<random_access_extractor_a<element_d>> (*end) (con<random_access_range_a<element_d>> const& me);
 
-		var<random_access_range_a<>> (*to_random_access_range_any) (con<random_access_range_a<element_d>> const& me);
+		var<random_access_range_a<>> (*to_range_any) (con<random_access_range_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

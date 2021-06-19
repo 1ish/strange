@@ -12,7 +12,7 @@ namespace strange
 		rat<random_access_extractor_a<element_d>> (*add) (con<random_access_extractor_a<element_d>> const& me,
 			int64_t offset);
 
-		rat<random_access_extractor_a<>> (*to_random_access_extractor_any) (con<random_access_extractor_a<element_d>> const& me);
+		rat<random_access_extractor_a<>> (*to_extractor_any) (con<random_access_extractor_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

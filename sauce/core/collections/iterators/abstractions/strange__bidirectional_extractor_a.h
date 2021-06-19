@@ -8,7 +8,7 @@ namespace strange
 	{
 		void (*decrement) (var<bidirectional_extractor_a<element_d>> const& me);
 
-		bit<bidirectional_extractor_a<>> (*to_bidirectional_extractor_any) (con<bidirectional_extractor_a<element_d>> const& me);
+		bit<bidirectional_extractor_a<>> (*to_extractor_any) (con<bidirectional_extractor_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

@@ -6,9 +6,9 @@ namespace strange
 	template <typename element_d>
 	struct random_access_mutator_range_i
 	{
-		rat<random_access_mutator_a<element_d>> (*random_access_mutator_begin) (var<random_access_mutator_range_a<element_d>> const& me);
+		rat<random_access_mutator_a<element_d>> (*mutator_begin) (var<random_access_mutator_range_a<element_d>> const& me);
 
-		rat<random_access_mutator_a<element_d>> (*random_access_mutator_end) (var<random_access_mutator_range_a<element_d>> const& me);
+		rat<random_access_mutator_a<element_d>> (*mutator_end) (var<random_access_mutator_range_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

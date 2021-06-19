@@ -102,6 +102,12 @@ namespace taste
 }
 
 template <typename dim = int>
+struct s0
+{
+	dim d_ = 0;
+};
+
+template <typename dim = int>
 struct s1
 {
 	dim d_ = 1;
@@ -114,7 +120,7 @@ struct s2 : s1<dim>
 };
 
 template <typename dim = int>
-struct s3 : s2<dim>
+struct s3 : s0<dim>, s2<dim>
 {
 };
 
@@ -130,7 +136,7 @@ TEST_CASE("strange thing", "[memory]")
 	s1<>& s1r2 = si2;
 	s1<>& s1r3 = si3;
 
-	std__cout << si1.d_ << " " << si2.d_ << " " << si3.d_ << " " << s1r2.d_ << " " << s1r3.d_ << "\n";
+	std__cout << si1.d_ << " " << si2.d_ << " " << "si3.d_" << " " << s1r2.d_ << " " << s1r3.d_ << "\n";
 }
 
 #endif

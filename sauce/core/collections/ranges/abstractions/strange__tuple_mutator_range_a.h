@@ -6,9 +6,9 @@ namespace strange
 	template <typename... elements_d>
 	struct tuple_mutator_range_i
 	{
-		fit<forward_tuple_extractor_a<elements_d...>> (*tuple_mutator_begin) (var<tuple_mutator_range_a<elements_d...>> const& me);
+		fit<forward_tuple_extractor_a<elements_d...>> (*mutator_begin) (var<tuple_mutator_range_a<elements_d...>> const& me);
 
-		fit<forward_tuple_extractor_a<elements_d...>> (*tuple_mutator_end) (var<tuple_mutator_range_a<elements_d...>> const& me);
+		fit<forward_tuple_extractor_a<elements_d...>> (*mutator_end) (var<tuple_mutator_range_a<elements_d...>> const& me);
 	};
 
 	template <typename... elements_d>
