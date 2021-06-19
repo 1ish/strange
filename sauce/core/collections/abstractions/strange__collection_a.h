@@ -53,13 +53,13 @@ namespace strange
 		void (*self_add) (var<collection_a<key_d, value_d, element_d>> const& me,
 			con<range_a<element_d>> const& range);
 
-		var<collection_a<key_d, value_d, element_d>> (*add) (var<collection_a<key_d, value_d, element_d>> const& me,
+		var<collection_a<key_d, value_d, element_d>> (*add) (con<collection_a<key_d, value_d, element_d>> const& me,
 			con<range_a<element_d>> const& range);
 
 		void (*self_subtract) (var<collection_a<key_d, value_d, element_d>> const& me,
 			con<range_a<element_d>> const& range);
 
-		var<collection_a<key_d, value_d, element_d>> (*subtract) (var<collection_a<key_d, value_d, element_d>> const& me,
+		var<collection_a<key_d, value_d, element_d>> (*subtract) (con<collection_a<key_d, value_d, element_d>> const& me,
 			con<range_a<element_d>> const& range);
 	};
 
