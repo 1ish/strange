@@ -6,7 +6,11 @@ namespace strange
 	template <typename key_d, typename value_d, typename element_d>
 	struct collection_i
 	{
-		var<> (*write_lock)(var<collection_a<key_d, value_d, element_d>> const& me);
+		var<range_a<element_d>> (*range) (con<collection_a<key_d, value_d, element_d>> const& me);
+
+		var<> (*read_lock) (ptr<collection_a<key_d, value_d, element_d>> const& me);
+
+		var<> (*write_lock) (ptr<collection_a<key_d, value_d, element_d>> const& me);
 
 		var<collection_a<>> (*to_collection_any) (con<collection_a<key_d, value_d, element_d>> const& me);
 
@@ -61,7 +65,7 @@ namespace strange
 
 	template <typename key_d, typename value_d, typename element_d>
 	struct collection_o :
-		range_o<element_d>,
+		any_o,
 		collection_i<key_d, value_d, element_d>
 	{
 	};
@@ -69,7 +73,6 @@ namespace strange
 	template <typename key_d, typename value_d, typename element_d>
 	struct collection_a
 	{
-		using non_mutator_range = bool;
 		using operations = collection_o<key_d, value_d, element_d>;
 		using creator_fp = var<collection_a<key_d, value_d, element_d>>(*)(con<range_a<>> const& range);
 

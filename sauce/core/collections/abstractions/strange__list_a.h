@@ -6,17 +6,16 @@ namespace strange
 	template <typename element_d>
 	struct list_i
 	{
+		var<random_access_range_a<element_d>> (*range) (con<list_a<element_d>> const& me);
+
+		var<random_access_mutator_range_a<element_d>> (*mutator_range) (var<list_a<element_d>> const& me);
+
 		var<list_a<>> (*to_list_any) (con<list_a<element_d>> const& me);
 	};
 
 	template <typename element_d>
 	struct list_o :
 		collection_o<int64_t, element_d, element_d>,
-		bidirectional_range_i<element_d>,
-		random_access_range_i<element_d>,
-		mutator_range_i<element_d>,
-		bidirectional_mutator_range_i<element_d>,
-		random_access_mutator_range_i<element_d>,
 		list_i<element_d>
 	{
 	};
@@ -24,7 +23,6 @@ namespace strange
 	template <typename element_d>
 	struct list_a
 	{
-		using is_mutator_range = bool;
 		using operations = list_o<element_d>;
 		using creator_fp = var<list_a<element_d>> (*)(con<range_a<>> const& range);
 

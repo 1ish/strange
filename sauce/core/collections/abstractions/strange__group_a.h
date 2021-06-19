@@ -25,7 +25,6 @@ namespace strange
 	template <typename element_d>
 	struct group_a
 	{
-		using non_mutator_range = bool;
 		using operations = group_o<element_d>;
 		using creator_fp = var<group_a<element_d>> (*)(con<range_a<>> const& range);
 

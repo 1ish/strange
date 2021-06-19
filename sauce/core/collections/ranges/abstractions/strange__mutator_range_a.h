@@ -9,8 +9,6 @@ namespace strange
 		fit<forward_mutator_a<element_d>> (*mutator_begin) (var<mutator_range_a<element_d>> const& me);
 
 		fit<forward_mutator_a<element_d>> (*mutator_end) (var<mutator_range_a<element_d>> const& me);
-
-		var<> (*write_lock) (var<mutator_range_a<element_d>> const& me);
 	};
 
 	template <typename element_d>
