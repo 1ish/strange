@@ -101,11 +101,36 @@ namespace taste
 	}
 }
 
+template <typename dim = int>
+struct s1
+{
+	dim d_ = 1;
+};
+
+template <typename dim = int>
+struct s2 : s1<dim>
+{
+	float d_ = 2.3f;
+};
+
+template <typename dim = int>
+struct s3 : s2<dim>
+{
+};
+
 TEST_CASE("strange thing", "[memory]")
 {
 	std__cout << "\nbefore test\n";
 	taste::test();
 	std__cout << "\nafter test\n";
+
+	s1 si1;
+	s2 si2;
+	s3 si3;
+	s1<>& s1r2 = si2;
+	s1<>& s1r3 = si3;
+
+	std__cout << si1.d_ << " " << si2.d_ << " " << si3.d_ << " " << s1r2.d_ << " " << s1r3.d_ << "\n";
 }
 
 #endif
