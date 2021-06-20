@@ -30,12 +30,16 @@ namespace strange
 	template <typename element_d = var<>> struct bidirectional_mutator_a;
 	template <typename element_d = var<>> struct random_access_extractor_a;
 	template <typename element_d = var<>> struct random_access_mutator_a;
+	template <typename element_d = var<>> struct contiguous_extractor_a;
+	template <typename element_d = var<>> struct contiguous_mutator_a;
 	template <typename... elements_d> struct forward_tuple_extractor_a;
 	template <typename... elements_d> struct forward_tuple_mutator_a;
 	template <typename... elements_d> struct bidirectional_tuple_extractor_a;
 	template <typename... elements_d> struct bidirectional_tuple_mutator_a;
 	template <typename... elements_d> struct random_access_tuple_extractor_a;
 	template <typename... elements_d> struct random_access_tuple_mutator_a;
+	template <typename... elements_d> struct contiguous_tuple_extractor_a;
+	template <typename... elements_d> struct contiguous_tuple_mutator_a;
 
 	template <typename element_d = var<>> struct range_a;
 	template <typename element_d = var<>> struct mutator_range_a;
@@ -79,12 +83,16 @@ namespace strange
 #include "collections/iterators/abstractions/strange__bidirectional_mutator_a.h"
 #include "collections/iterators/abstractions/strange__random_access_extractor_a.h"
 #include "collections/iterators/abstractions/strange__random_access_mutator_a.h"
+#include "collections/iterators/abstractions/strange__contiguous_extractor_a.h"
+#include "collections/iterators/abstractions/strange__contiguous_mutator_a.h"
 #include "collections/iterators/abstractions/strange__forward_tuple_extractor_a.h"
 #include "collections/iterators/abstractions/strange__forward_tuple_mutator_a.h"
 #include "collections/iterators/abstractions/strange__bidirectional_tuple_extractor_a.h"
 #include "collections/iterators/abstractions/strange__bidirectional_tuple_mutator_a.h"
 #include "collections/iterators/abstractions/strange__random_access_tuple_extractor_a.h"
 #include "collections/iterators/abstractions/strange__random_access_tuple_mutator_a.h"
+#include "collections/iterators/abstractions/strange__contiguous_tuple_extractor_a.h"
+#include "collections/iterators/abstractions/strange__contiguous_tuple_mutator_a.h"
 
 #include "collections/ranges/abstractions/strange__range_a.h"
 #include "collections/ranges/abstractions/strange__mutator_range_a.h"

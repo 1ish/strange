@@ -150,6 +150,10 @@
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__bidirectional_mutator_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__bidirectional_tuple_extractor_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__bidirectional_tuple_mutator_a.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__contiguous_extractor_a.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__contiguous_mutator_a.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__contiguous_tuple_extractor_a.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__contiguous_tuple_mutator_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__forward_extractor_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__forward_mutator_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__forward_tuple_extractor_a.cpp" />
@@ -190,6 +194,10 @@
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__bidirectional_mutator_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__bidirectional_tuple_extractor_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__bidirectional_tuple_mutator_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__contiguous_extractor_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__contiguous_mutator_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__contiguous_tuple_extractor_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__contiguous_tuple_mutator_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__forward_extractor_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__forward_mutator_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__forward_tuple_extractor_a.h" />
