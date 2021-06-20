@@ -225,6 +225,12 @@
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__contiguous_tuple_mutator_a.cpp">
       <Filter>Source Files\sauce\core\collections\iterators\abstractions</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_mutator_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\sauce\strange.h">
@@ -367,6 +373,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__contiguous_tuple_mutator_a.h">
       <Filter>Header Files\sauce\core\collections\iterators\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_mutator_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
