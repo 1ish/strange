@@ -4,20 +4,14 @@
 namespace strange
 {
 	template <typename element_d>
-	struct bidirectional_range_i
+	struct bidirectional_range_o :
+		range_o<element_d>
 	{
 		bit<bidirectional_extractor_a<element_d>> (*begin) (con<bidirectional_range_a<element_d>> const& me);
 
 		bit<bidirectional_extractor_a<element_d>> (*end) (con<bidirectional_range_a<element_d>> const& me);
 
 		var<bidirectional_range_a<>> (*to_range_any) (con<bidirectional_range_a<element_d>> const& me);
-	};
-
-	template <typename element_d>
-	struct bidirectional_range_o :
-		range_o<element_d>,
-		bidirectional_range_i<element_d>
-	{
 	};
 
 	template <typename element_d>

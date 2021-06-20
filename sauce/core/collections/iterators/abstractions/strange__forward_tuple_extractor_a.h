@@ -4,19 +4,13 @@
 namespace strange
 {
 	template <typename... elements_d>
-	struct forward_tuple_extractor_i
+	struct forward_tuple_extractor_o :
+		forward_extractor_o<var<tuple_a<elements_d...>>>
 	{
 		var<list_a<>> (*to_list_any) (con<forward_tuple_extractor_a<elements_d...>> const& me);
 
 		void (*destruct) (con<forward_tuple_extractor_a<elements_d...>> const& me,
 			elements_d&... elements);
-	};
-
-	template <typename... elements_d>
-	struct forward_tuple_extractor_o :
-		forward_extractor_o<var<tuple_a<elements_d...>>>,
-		forward_tuple_extractor_i<elements_d...>
-	{
 	};
 
 	template <typename... elements_d>

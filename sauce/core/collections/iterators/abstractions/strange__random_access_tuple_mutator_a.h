@@ -4,20 +4,14 @@
 namespace strange
 {
 	template <typename... elements_d>
-	struct random_access_tuple_mutator_i
+	struct random_access_tuple_mutator_o :
+		bidirectional_tuple_mutator_o<elements_d...>
 	{
 		void (*self_add) (var<random_access_tuple_mutator_a<elements_d...>> const& me,
 			int64_t offset);
 
 		rat<random_access_tuple_mutator_a<elements_d...>> (*add) (con<random_access_tuple_mutator_a<elements_d...>> const& me,
 			int64_t offset);
-	};
-
-	template <typename... elements_d>
-	struct random_access_tuple_mutator_o :
-		bidirectional_tuple_mutator_o<elements_d...>,
-		random_access_tuple_mutator_i<elements_d...>
-	{
 	};
 
 	template <typename... elements_d>

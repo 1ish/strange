@@ -3,7 +3,8 @@
 
 namespace strange
 {
-	struct kind_i
+	struct kind_o :
+		symbol_o
 	{
 		bool (*shared) (con<kind_a> const& me);
 
@@ -15,12 +16,6 @@ namespace strange
 		// variable  :<any>=
 		// pointer   :<any>&
 		// shared    $<any>=
-	};
-
-	struct kind_o :
-		symbol_o,
-		kind_i
-	{
 	};
 
 	struct kind_a

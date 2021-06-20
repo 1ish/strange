@@ -27,14 +27,12 @@ namespace strange
 				_set_pointer,
 				_pointer,
 			},
-			{
-				// symbol_a
-				add,
-				to_char_star,
-				length,
-				first_char,
-				last_char,
-			},
+			// symbol_a
+			add,
+			to_char_star,
+			length,
+			first_char,
+			last_char,
 		};
 		return &operations;
 	}

@@ -4,7 +4,8 @@
 namespace strange
 {
 	template <typename element_d>
-	struct group_i
+	struct group_o :
+		collection_o<element_d, element_d, element_d>
 	{
 		var<group_a<>> (*to_group_any) (con<group_a<element_d>> const& me);
 
@@ -13,13 +14,6 @@ namespace strange
 
 		bool (*insert_element) (var<group_a<element_d>> const& me,
 			element_d const& element);
-	};
-
-	template <typename element_d>
-	struct group_o :
-		collection_o<element_d, element_d, element_d>,
-		group_i<element_d>
-	{
 	};
 
 	template <typename element_d>

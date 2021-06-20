@@ -4,16 +4,10 @@
 namespace strange
 {
 	template <typename... elements_d>
-	struct bidirectional_tuple_extractor_i
+	struct bidirectional_tuple_extractor_o :
+		forward_tuple_extractor_o<elements_d...>
 	{
 		void (*decrement) (var<bidirectional_tuple_extractor_a<elements_d...>> const& me);
-	};
-
-	template <typename... elements_d>
-	struct bidirectional_tuple_extractor_o :
-		forward_tuple_extractor_o<elements_d...>,
-		bidirectional_tuple_extractor_i<elements_d...>
-	{
 	};
 
 	template <typename... elements_d>

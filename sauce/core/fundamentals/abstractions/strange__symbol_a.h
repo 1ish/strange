@@ -3,7 +3,8 @@
 
 namespace strange
 {
-	struct symbol_i
+	struct symbol_o :
+		any_o
 	{
 		var<symbol_a> (*add) (con<symbol_a> const& me,
 			con<symbol_a> const& suffix);
@@ -15,12 +16,6 @@ namespace strange
 		char (*first_char) (con<symbol_a> const& me);
 
 		char (*last_char) (con<symbol_a> const& me);
-	};
-
-	struct symbol_o :
-		any_o,
-		symbol_i
-	{
 	};
 
 	struct symbol_a

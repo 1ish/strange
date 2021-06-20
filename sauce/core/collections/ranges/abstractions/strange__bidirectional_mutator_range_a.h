@@ -4,18 +4,12 @@
 namespace strange
 {
 	template <typename element_d>
-	struct bidirectional_mutator_range_i
+	struct bidirectional_mutator_range_o :
+		mutator_range_o<element_d>
 	{
 		bit<bidirectional_mutator_a<element_d>> (*mutator_begin) (var<bidirectional_mutator_range_a<element_d>> const& me);
 
 		bit<bidirectional_mutator_a<element_d>> (*mutator_end) (var<bidirectional_mutator_range_a<element_d>> const& me);
-	};
-
-	template <typename element_d>
-	struct bidirectional_mutator_range_o :
-		mutator_range_o<element_d>,
-		bidirectional_mutator_range_i<element_d>
-	{
 	};
 
 	template <typename element_d>

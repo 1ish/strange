@@ -4,7 +4,8 @@
 namespace strange
 {
 	template <typename element_d>
-	struct forward_mutator_i
+	struct forward_mutator_o :
+		any_o
 	{
 		element_d (*get) (con<forward_mutator_a<element_d>> const& me);
 
@@ -16,13 +17,6 @@ namespace strange
 		element_d& (*_operator_star) (con<forward_mutator_a<element_d>> const& me);
 
 		element_d* (*_operator_arrow) (con<forward_mutator_a<element_d>> const& me);
-	};
-
-	template <typename element_d>
-	struct forward_mutator_o :
-		any_o,
-		forward_mutator_i<element_d>
-	{
 	};
 
 	template <typename element_d>

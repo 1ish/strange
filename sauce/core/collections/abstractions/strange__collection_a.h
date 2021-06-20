@@ -4,7 +4,8 @@
 namespace strange
 {
 	template <typename key_d, typename value_d, typename element_d>
-	struct collection_i
+	struct collection_o :
+		any_o
 	{
 		var<range_a<element_d>> (*range) (con<collection_a<key_d, value_d, element_d>> const& me);
 
@@ -61,13 +62,6 @@ namespace strange
 
 		var<collection_a<key_d, value_d, element_d>> (*subtract) (con<collection_a<key_d, value_d, element_d>> const& me,
 			con<range_a<element_d>> const& range);
-	};
-
-	template <typename key_d, typename value_d, typename element_d>
-	struct collection_o :
-		any_o,
-		collection_i<key_d, value_d, element_d>
-	{
 	};
 
 	template <typename key_d, typename value_d, typename element_d>

@@ -4,16 +4,10 @@
 namespace strange
 {
 	template <typename element_d>
-	struct bidirectional_mutator_i
+	struct bidirectional_mutator_o :
+		forward_mutator_o<element_d>
 	{
 		void (*decrement) (var<bidirectional_mutator_a<element_d>> const& me);
-	};
-
-	template <typename element_d>
-	struct bidirectional_mutator_o :
-		forward_mutator_o<element_d>,
-		bidirectional_mutator_i<element_d>
-	{
 	};
 
 	template <typename element_d>

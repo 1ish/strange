@@ -3,7 +3,8 @@
 
 namespace strange
 {
-	struct cat_i
+	struct cat_o :
+		symbol_o
 	{
 		var<symbol_a> (*name) (con<cat_a> const& me);
 
@@ -17,12 +18,7 @@ namespace strange
 		// dimension    <^element>
 		// native       <+bool>
 		// enumeration  <%behaviour>
-	};
-
-	struct cat_o :
-		symbol_o,
-		cat_i
-	{
+		// meta         <~abstraction>
 	};
 
 	struct cat_a

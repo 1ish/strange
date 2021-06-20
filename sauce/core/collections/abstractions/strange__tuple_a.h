@@ -4,7 +4,8 @@
 namespace strange
 {
 	template <typename... elements_d>
-	struct tuple_i
+	struct tuple_o :
+		any_o
 	{
 		var<list_a<>> (*to_list_any) (con<tuple_a<elements_d...>> const& me);
 
@@ -13,13 +14,6 @@ namespace strange
 
 		void (*restruct) (var<tuple_a<elements_d...>> const& me,
 			elements_d const&... elements);
-	};
-
-	template <typename... elements_d>
-	struct tuple_o :
-		any_o,
-		tuple_i<elements_d...>
-	{
 	};
 
 	template <typename... elements_d>

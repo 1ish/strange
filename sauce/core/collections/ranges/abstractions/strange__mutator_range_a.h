@@ -4,18 +4,12 @@
 namespace strange
 {
 	template <typename element_d>
-	struct mutator_range_i
+	struct mutator_range_o :
+		any_o
 	{
 		fit<forward_mutator_a<element_d>> (*mutator_begin) (var<mutator_range_a<element_d>> const& me);
 
 		fit<forward_mutator_a<element_d>> (*mutator_end) (var<mutator_range_a<element_d>> const& me);
-	};
-
-	template <typename element_d>
-	struct mutator_range_o :
-		any_o,
-		mutator_range_i<element_d>
-	{
 	};
 
 	template <typename element_d>

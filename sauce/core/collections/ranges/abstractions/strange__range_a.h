@@ -4,20 +4,14 @@
 namespace strange
 {
 	template <typename element_d>
-	struct range_i
+	struct range_o :
+		any_o
 	{
 		fit<forward_extractor_a<element_d>> (*begin) (con<range_a<element_d>> const& me);
 
 		fit<forward_extractor_a<element_d>> (*end) (con<range_a<element_d>> const& me);
 
 		var<range_a<>> (*to_range_any) (con<range_a<element_d>> const& me);
-	};
-
-	template <typename element_d>
-	struct range_o :
-		any_o,
-		range_i<element_d>
-	{
 	};
 
 	template <typename element_d>

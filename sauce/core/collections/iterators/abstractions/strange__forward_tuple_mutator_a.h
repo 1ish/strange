@@ -4,7 +4,8 @@
 namespace strange
 {
 	template <typename... elements_d>
-	struct forward_tuple_mutator_i
+	struct forward_tuple_mutator_o :
+		forward_mutator_o<var<tuple_a<elements_d...>>>
 	{
 		var<list_a<>> (*to_list_any) (con<forward_tuple_mutator_a<elements_d...>> const& me);
 
@@ -13,13 +14,6 @@ namespace strange
 
 		void (*restruct) (con<forward_tuple_mutator_a<elements_d...>> const& me,
 			elements_d const&... elements);
-	};
-
-	template <typename... elements_d>
-	struct forward_tuple_mutator_o :
-		forward_mutator_o<var<tuple_a<elements_d...>>>,
-		forward_tuple_mutator_i<elements_d...>
-	{
 	};
 
 	template <typename... elements_d>

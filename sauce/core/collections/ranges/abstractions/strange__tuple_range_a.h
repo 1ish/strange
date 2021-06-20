@@ -4,20 +4,14 @@
 namespace strange
 {
 	template <typename... elements_d>
-	struct tuple_range_i
+	struct tuple_range_o :
+		range_o<var<tuple_a<elements_d...>>>
 	{
 		fit<forward_tuple_extractor_a<elements_d...>> (*begin) (con<tuple_range_a<elements_d...>> const& me);
 
 		fit<forward_tuple_extractor_a<elements_d...>> (*end) (con<tuple_range_a<elements_d...>> const& me);
 
 		var<range_a<>> (*to_range_any) (con<tuple_range_a<elements_d...>> const& me);
-	};
-
-	template <typename... elements_d>
-	struct tuple_range_o :
-		range_o<var<tuple_a<elements_d...>>>,
-		tuple_range_i<elements_d...>
-	{
 	};
 
 	template <typename... elements_d>

@@ -26,11 +26,9 @@ namespace strange
 				_set_pointer,
 				_pointer,
 			},
-			{
-				// data_a
-				extract_data,
-				mutate_data,
-			},
+			// data_a
+			extract_data,
+			mutate_data,
 		};
 		return &operations;
 	}
@@ -129,11 +127,9 @@ namespace strange
 				data_pointer_t<type_d>::_set_pointer,
 				data_pointer_t<type_d>::_pointer,
 			},
-			{
-				// data_a
-				data_pointer_t<type_d>::extract_data,
-				data_pointer_t<type_d>::mutate_data,
-			},
+			// data_a
+			data_pointer_t<type_d>::extract_data,
+			data_pointer_t<type_d>::mutate_data,
 		};
 		return &operations;
 	}

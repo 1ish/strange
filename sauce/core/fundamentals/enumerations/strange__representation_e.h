@@ -9,6 +9,7 @@ namespace strange
 		dimension,
 		native,
 		enumeration,
+		meta,
 	};
 }
 
