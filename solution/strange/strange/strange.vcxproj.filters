@@ -207,6 +207,12 @@
     <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__tuple_mutator_range_a.cpp">
       <Filter>Source Files\sauce\core\collections\ranges</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_tuple_mutator_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_tuple_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\sauce\strange.h">
@@ -330,6 +336,12 @@
       <Filter>Header Files\sauce\core\collections\ranges</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__tuple_mutator_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_tuple_mutator_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_tuple_range_a.h">
       <Filter>Header Files\sauce\core\collections\ranges</Filter>
     </ClInclude>
   </ItemGroup>
