@@ -5,11 +5,11 @@ namespace strange
 {
 	template <typename element_d>
 	struct list_o :
-		collection_o<int64_t, element_d, element_d>
+		queue_o<element_d>
 	{
-		var<random_access_range_a<element_d>> (*range) (con<list_a<element_d>> const& me);
+		var<contiguous_range_a<element_d>> (*range) (con<list_a<element_d>> const& me);
 
-		var<random_access_mutator_range_a<element_d>> (*mutator_range) (var<list_a<element_d>> const& me);
+		var<contiguous_mutator_range_a<element_d>> (*mutator_range) (var<list_a<element_d>> const& me);
 
 		var<list_a<>> (*to_collection_any) (con<list_a<element_d>> const& me);
 	};
