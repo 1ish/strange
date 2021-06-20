@@ -11,7 +11,7 @@ namespace strange
 
 		var<tuple_mutator_range_a<key_d, value_d>> (*mutator_range) (var<table_a<key_d, value_d>> const& me);
 
-		var<table_a<>> (*to_table_any) (con<table_a<key_d, value_d>> const& me);
+		var<table_a<>> (*to_collection_any) (con<table_a<key_d, value_d>> const& me);
 
 		var<range_a<std::pair<key_d, value_d>>> (*_pair_range) (con<table_a<key_d, value_d>> const& me);
 

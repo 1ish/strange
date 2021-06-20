@@ -11,7 +11,7 @@ namespace strange
 
 		var<random_access_mutator_range_a<element_d>> (*mutator_range) (var<list_a<element_d>> const& me);
 
-		var<list_a<>> (*to_list_any) (con<list_a<element_d>> const& me);
+		var<list_a<>> (*to_collection_any) (con<list_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

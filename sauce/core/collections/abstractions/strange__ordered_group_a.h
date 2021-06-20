@@ -11,7 +11,7 @@ namespace strange
 
 		var<bidirectional_mutator_range_a<element_d>> (*mutator_range) (var<ordered_group_a<element_d>> const& me);
 
-		var<ordered_group_a<>> (*to_ordered_group_any) (con<ordered_group_a<element_d>> const& me);
+		var<ordered_group_a<>> (*to_collection_any) (con<ordered_group_a<element_d>> const& me);
 	};
 
 	template <typename element_d>
