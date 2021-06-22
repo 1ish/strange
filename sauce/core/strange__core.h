@@ -66,6 +66,7 @@ namespace strange
 	template <typename element_d = var<>> struct ordered_group_a;
 	template <typename key_d = var<>, typename value_d = var<>> struct table_a;
 	template <typename key_d = var<>, typename value_d = var<>> struct ordered_table_a;
+	struct container_a;
 
 	struct thing_t;
 	struct symbol_t;
@@ -128,6 +129,7 @@ namespace strange
 #include "collections/abstractions/strange__ordered_group_a.h"
 #include "collections/abstractions/strange__table_a.h"
 #include "collections/abstractions/strange__ordered_table_a.h"
+#include "collections/abstractions/strange__container_a.h"
 
 #include "fundamentals/things/strange__thing_t.h"
 #include "fundamentals/things/strange__symbol_t.h"
