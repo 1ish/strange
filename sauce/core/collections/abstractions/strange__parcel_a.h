@@ -6,6 +6,21 @@ namespace strange
 	struct parcel_o :
 		container_o
 	{
+		void (*close) (var<parcel_a> const& me);
+
+		bool (*closed) (con<parcel_a> const& me);
+
+		void (*reopen) (var<parcel_a> const& me);
+
+		void (*from_json) (var<parcel_a> const& me,
+			con<lake_a> const& lake);
+
+		var<lake_a> (*to_json) (con<parcel_a> const& me);
+
+		void (*from_binary) (var<parcel_a> const& me,
+			con<lake_a> const& lake);
+
+		var<lake_a> (*to_binary) (con<parcel_a> const& me);
 	};
 
 	struct parcel_a
