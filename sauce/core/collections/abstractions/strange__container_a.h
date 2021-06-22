@@ -47,11 +47,11 @@ namespace strange
 
 		var<queue_a<var<container_a>>> (*inventory) (con<container_a> const& me);
 
-		var<container_a> (*make_dictionary) (con<container_a> const& me);
+		var<container_a> (*make_directory) (con<container_a> const& me);
 
-		bool (*is_dictionary) (con<container_a> const& me);
+		bool (*is_directory) (con<container_a> const& me);
 
-		var<table_a<var<lake_a>, var<container_a>>> (*dictionary) (con<container_a> const& me);
+		var<table_a<var<lake_a>, var<container_a>>> (*directory) (con<container_a> const& me);
 	};
 
 	struct container_a
