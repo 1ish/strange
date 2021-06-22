@@ -34,12 +34,12 @@ namespace strange
 
 		double (*float64) (con<container_a> const& me);
 
-		var<container_a> (*make_symbol) (con<container_a> const& me,
-			con<symbol_a> const& symbol);
+		var<container_a> (*make_lake) (con<container_a> const& me,
+			con<lake_a> const& lake);
 
-		bool (*is_symbol) (con<container_a> const& me);
+		bool (*is_lake) (con<container_a> const& me);
 
-		var<symbol_a> (*symbol) (con<container_a> const& me);
+		var<lake_a> (*lake) (con<container_a> const& me);
 
 		var<container_a> (*make_inventory) (con<container_a> const& me);
 
@@ -51,7 +51,7 @@ namespace strange
 
 		bool (*is_dictionary) (con<container_a> const& me);
 
-		var<table_a<var<symbol_a>, var<container_a>>> (*dictionary) (con<container_a> const& me);
+		var<table_a<var<lake_a>, var<container_a>>> (*dictionary) (con<container_a> const& me);
 	};
 
 	struct container_a
