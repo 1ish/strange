@@ -20,6 +20,7 @@ namespace strange
 			equal,
 			less,
 			less_or_equal,
+			contain,
 			_free,
 			_copy,
 			_set_pointer,
@@ -129,6 +130,14 @@ namespace strange
 		con<> const& other)
 	{
 		return thing_t::_less_or_equal(me, other);
+	}
+
+	bool thing_t::contain(con<> const& me,
+		var<container_a> const& container)
+	{
+		//TODO	container.o->push_back(container, container.o->make_lake(container,
+		//			lak(me.o->something(me) ? "strange::thing::create" : "strange::thing::create_nothing")));
+		return false;
 	}
 
 	void thing_t::_free(any_a const& me)

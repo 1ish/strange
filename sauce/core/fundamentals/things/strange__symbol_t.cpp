@@ -22,6 +22,7 @@ namespace strange
 				equal,
 				less,
 				less_or_equal,
+				contain,
 				_free,
 				_copy,
 				_set_pointer,

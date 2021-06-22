@@ -104,6 +104,9 @@ namespace strange
 		static bool less_or_equal(con<> const& me,
 			con<> const& other);
 
+		static bool contain(con<> const& me,
+			var<container_a> const& container);
+
 		static void _free(any_a const& me);
 
 		static void _copy(any_a const& me,
