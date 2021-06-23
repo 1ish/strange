@@ -13,9 +13,9 @@ namespace strange
 {
 	struct any_a;
 
-	template <typename A = any_a> struct con;
-	template <typename A = any_a> struct var;
-	template <typename A = any_a> struct ptr;
+	template <typename abstraction_d = any_a> struct con;
+	template <typename abstraction_d = any_a> struct var;
+	template <typename abstraction_d = any_a> struct ptr;
 
 	struct symbol_a;
 	struct cat_a;
