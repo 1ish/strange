@@ -152,6 +152,7 @@
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__parcel_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__queue_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__table_a.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__text_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__tuple_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__bidirectional_extractor_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__bidirectional_mutator_a.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__parcel_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__queue_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__table_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__text_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__tuple_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__bidirectional_extractor_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__bidirectional_mutator_a.h" />

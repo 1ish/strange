@@ -136,7 +136,7 @@ namespace strange
 		var<container_a> const& container)
 	{
 		//TODO	container.o->push_back(container, container.o->make_lake(container,
-		//			lak(me.o->something(me) ? "strange::thing::create" : "strange::thing::create_nothing")));
+		//			text(me.o->something(me) ? "strange::thing::create" : "strange::thing::create_nothing")));
 		return false;
 	}
 
