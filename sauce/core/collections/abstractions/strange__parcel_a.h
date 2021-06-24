@@ -13,9 +13,9 @@ namespace strange
 		void (*reopen) (var<parcel_a> const& me);
 
 		void (*from_json) (var<parcel_a> const& me,
-			con<lake_a> const& lake);
+			con<text_a> const& json);
 
-		var<lake_a> (*to_json) (con<parcel_a> const& me);
+		var<text_a> (*to_json) (con<parcel_a> const& me);
 
 		void (*from_binary) (var<parcel_a> const& me,
 			con<lake_a> const& lake);
