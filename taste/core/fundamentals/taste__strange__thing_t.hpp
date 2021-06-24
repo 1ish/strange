@@ -98,6 +98,10 @@ namespace taste
 		auto dr = dat_ref(num);
 		auto dp = dat_ptr(new int64_t(1));
 		auto dd = dat_def<std::string>();
+		REQUIRE(sym("this") == sym("this"));
+		REQUIRE(sym("this") != sym("that"));
+		std::unordered_set<var<symbol_a>> names = { sym("minime"), sym("pigsy") };
+		std::set<var<symbol_a>> names2 = { sym("minime"), sym("pigsy") };
 	}
 }
 

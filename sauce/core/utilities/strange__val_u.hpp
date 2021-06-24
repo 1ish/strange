@@ -173,6 +173,42 @@ namespace strange
 		{
 			return (abstraction_d::o->*mp)(*this, ps...);
 		}
+
+		template <typename other_d>
+		inline bool operator==(other_d const& other) const
+		{
+			return abstraction_d::o->equal(*this, other);
+		}
+
+		template <typename other_d>
+		inline bool operator!=(other_d const& other) const
+		{
+			return !abstraction_d::o->equal(*this, other);
+		}
+
+		template <typename other_d>
+		inline bool operator<(other_d const& other) const
+		{
+			return abstraction_d::o->less(*this, other);
+		}
+
+		template <typename other_d>
+		inline bool operator>(other_d const& other) const
+		{
+			return !abstraction_d::o->less_or_equal(*this, other);
+		}
+
+		template <typename other_d>
+		inline bool operator<=(other_d const& other) const
+		{
+			return abstraction_d::o->less_or_equal(*this, other);
+		}
+
+		template <typename other_d>
+		inline bool operator>=(other_d const& other) const
+		{
+			return !abstraction_d::o->less(*this, other);
+		}
 	};
 
 	template <typename abstraction_d>
@@ -561,6 +597,42 @@ namespace strange
 		{
 			return (abstraction_d::o->*mp)(*this, ps...);
 		}
+
+		template <typename other_d>
+		inline bool operator==(other_d const& other) const
+		{
+			return abstraction_d::o->equal(*this, other);
+		}
+
+		template <typename other_d>
+		inline bool operator!=(other_d const& other) const
+		{
+			return !abstraction_d::o->equal(*this, other);
+		}
+
+		template <typename other_d>
+		inline bool operator<(other_d const& other) const
+		{
+			return abstraction_d::o->less(*this, other);
+		}
+
+		template <typename other_d>
+		inline bool operator>(other_d const& other) const
+		{
+			return !abstraction_d::o->less_or_equal(*this, other);
+		}
+
+		template <typename other_d>
+		inline bool operator<=(other_d const& other) const
+		{
+			return abstraction_d::o->less_or_equal(*this, other);
+		}
+
+		template <typename other_d>
+		inline bool operator>=(other_d const& other) const
+		{
+			return !abstraction_d::o->less(*this, other);
+		}
 	};
 
 	template <typename abstraction_d>
@@ -941,6 +1013,42 @@ namespace strange
 		{
 			return (abstraction_d::o->*mp)(*this, ps...);
 		}
+
+		template <typename other_d>
+		inline bool operator==(other_d const& other) const
+		{
+			return abstraction_d::o->equal(*this, other);
+		}
+
+		template <typename other_d>
+		inline bool operator!=(other_d const& other) const
+		{
+			return !abstraction_d::o->equal(*this, other);
+		}
+
+		template <typename other_d>
+		inline bool operator<(other_d const& other) const
+		{
+			return abstraction_d::o->less(*this, other);
+		}
+
+		template <typename other_d>
+		inline bool operator>(other_d const& other) const
+		{
+			return !abstraction_d::o->less_or_equal(*this, other);
+		}
+
+		template <typename other_d>
+		inline bool operator<=(other_d const& other) const
+		{
+			return abstraction_d::o->less_or_equal(*this, other);
+		}
+
+		template <typename other_d>
+		inline bool operator>=(other_d const& other) const
+		{
+			return !abstraction_d::o->less(*this, other);
+		}
 	};
 
 	template <typename abstraction_d>
@@ -964,16 +1072,6 @@ namespace strange
 		{
 			var<abstraction_d>::operator=(original);
 			return *this;
-		}
-
-		inline bool operator==(con<> const& other) const
-		{
-			return abstraction_d::o->equal(*this, other);
-		}
-
-		inline bool operator!=(con<> const& other) const
-		{
-			return !abstraction_d::o->equal(*this, other);
 		}
 
 		inline auto& operator*() const

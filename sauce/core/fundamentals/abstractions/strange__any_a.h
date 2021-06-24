@@ -100,4 +100,34 @@ namespace strange
 	}
 }
 
+namespace std
+{
+	template <typename abstraction_d>
+	struct hash<strange::con<abstraction_d>>
+	{
+		std::size_t operator()(strange::con<abstraction_d> const& thing) const
+		{
+			return static_cast<std::size_t>(thing.o->hash(thing));
+		}
+	};
+
+	template <typename abstraction_d>
+	struct hash<strange::var<abstraction_d>>
+	{
+		std::size_t operator()(strange::var<abstraction_d> const& thing) const
+		{
+			return static_cast<std::size_t>(thing.o->hash(thing));
+		}
+	};
+
+	template <typename abstraction_d>
+	struct hash<strange::ptr<abstraction_d>>
+	{
+		std::size_t operator()(strange::ptr<abstraction_d> const& thing) const
+		{
+			return static_cast<std::size_t>(thing.o->hash(thing));
+		}
+	};
+}
+
 #endif

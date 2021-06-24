@@ -23,6 +23,8 @@ std::ostream& std__cout = discard;
 #include "../sauce/strange.h"
 
 #include <iostream>
+#include <unordered_set>
+#include <set>
 
 using namespace strange;
 
