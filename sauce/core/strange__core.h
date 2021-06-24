@@ -8,6 +8,8 @@
 #include <mutex>
 #include <shared_mutex>
 #include <utility>
+#include <type_traits>
+#include <cmath>
 
 namespace strange
 {
