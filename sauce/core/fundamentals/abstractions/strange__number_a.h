@@ -11,15 +11,15 @@ namespace strange
 		{
 			if constexpr (std::is_same_v<type_d, int64_t>)
 			{
-				return me.o->extract_data(me);
+				return me.o->extract(me);
 			}
 			else if constexpr (std::is_integral_v<type_d>)
 			{
-				return static_cast<int64_t>(me.o->extract_data(me));
+				return static_cast<int64_t>(me.o->extract(me));
 			}
 			else
 			{
-				return static_cast<int64_t>(std::llround(me.o->extract_data(me)));
+				return static_cast<int64_t>(std::llround(me.o->extract(me)));
 			}
 		}
 
@@ -27,15 +27,15 @@ namespace strange
 		{
 			if constexpr (std::is_same_v<type_d, uint64_t>)
 			{
-				return me.o->extract_data(me);
+				return me.o->extract(me);
 			}
 			else if constexpr (std::is_integral_v<type_d>)
 			{
-				return static_cast<uint64_t>(me.o->extract_data(me));
+				return static_cast<uint64_t>(me.o->extract(me));
 			}
 			else
 			{
-				return static_cast<uint64_t>(std::llround(me.o->extract_data(me)));
+				return static_cast<uint64_t>(std::llround(me.o->extract(me)));
 			}
 		}
 
@@ -43,11 +43,11 @@ namespace strange
 		{
 			if constexpr (std::is_same_v<type_d, double>)
 			{
-				return me.o->extract_data(me);
+				return me.o->extract(me);
 			}
 			else
 			{
-				return static_cast<double>(me.o->extract_data(me));
+				return static_cast<double>(me.o->extract(me));
 			}
 		}
 
@@ -74,7 +74,7 @@ namespace strange
 			}
 			else
 			{
-				return std::isnan(me.o->extract_data(me));
+				return std::isnan(me.o->extract(me));
 			}
 		}
 
@@ -86,7 +86,7 @@ namespace strange
 			}
 			else
 			{
-				return std::isinf(me.o->extract_data(me));
+				return std::isinf(me.o->extract(me));
 			}
 		}
 
@@ -98,7 +98,7 @@ namespace strange
 			}
 			else
 			{
-				return std::isfinite(me.o->extract_data(me));
+				return std::isfinite(me.o->extract(me));
 			}
 		}
 
@@ -110,7 +110,7 @@ namespace strange
 			}
 			else
 			{
-				return std::isnormal(me.o->extract_data(me));
+				return std::isnormal(me.o->extract(me));
 			}
 		}
 

@@ -59,9 +59,9 @@ namespace strange
 			bool is_pointer);
 
 		// data_a
-		static type_d const& extract_data(con<data_a<type_d>> const& me);
+		static type_d const& extract(con<data_a<type_d>> const& me);
 
-		static type_d& mutate_data(var<data_a<type_d>> const& me);
+		static type_d& mutate(var<data_a<type_d>> const& me);
 
 	public:
 		// creators

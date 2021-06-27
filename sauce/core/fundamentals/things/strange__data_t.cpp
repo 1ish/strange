@@ -28,8 +28,8 @@ namespace strange
 				_pointer,
 			},
 			// data_a
-			extract_data,
-			mutate_data,
+			extract,
+			mutate,
 		};
 		return &operations;
 	}
@@ -92,13 +92,13 @@ namespace strange
 
 	// data_a
 	template <typename type_d>
-	type_d const& data_t<type_d>::extract_data(con<data_a<type_d>> const& me)
+	type_d const& data_t<type_d>::extract(con<data_a<type_d>> const& me)
 	{
 		return static_cast<data_t<type_d>*>(me.t)->data_;
 	}
 
 	template <typename type_d>
-	type_d& data_t<type_d>::mutate_data(var<data_a<type_d>> const& me)
+	type_d& data_t<type_d>::mutate(var<data_a<type_d>> const& me)
 	{
 		me.mut();
 		return static_cast<data_t<type_d>*>(me.t)->data_;
@@ -130,8 +130,8 @@ namespace strange
 				data_pointer_t<type_d>::_pointer,
 			},
 			// data_a
-			data_pointer_t<type_d>::extract_data,
-			data_pointer_t<type_d>::mutate_data,
+			data_pointer_t<type_d>::extract,
+			data_pointer_t<type_d>::mutate,
 		};
 		return &operations;
 	}

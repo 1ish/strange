@@ -7,9 +7,9 @@ namespace strange
 	struct data_o :
 		any_o
 	{
-		type_d const& (*extract_data) (con<data_a<type_d>> const& me);
+		type_d const& (*extract) (con<data_a<type_d>> const& me);
 
-		type_d& (*mutate_data) (var<data_a<type_d>> const& me);
+		type_d& (*mutate) (var<data_a<type_d>> const& me);
 	};
 
 	template <typename type_d>
