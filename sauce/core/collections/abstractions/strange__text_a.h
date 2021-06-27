@@ -10,6 +10,7 @@ namespace strange
 
 	struct text_a
 	{
+		using non_mutator_range = bool;
 		using operations = text_o;
 		using creator_fp = var<text_a> (*)(con<range_a<>> const& range);
 

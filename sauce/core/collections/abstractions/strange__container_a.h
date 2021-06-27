@@ -56,6 +56,7 @@ namespace strange
 
 	struct container_a
 	{
+		using non_mutator_range = bool;
 		using operations = container_o;
 		using creator_fp = var<container_a> (*)(con<range_a<>> const& range);
 

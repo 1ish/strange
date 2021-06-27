@@ -9,7 +9,17 @@ namespace strange
 	{
 		var<random_access_range_a<element_d>> (*range) (con<queue_a<element_d>> const& me);
 
+		rat<random_access_extractor_a<element_d>> (*begin) (con<queue_a<element_d>> const& me);
+
+		rat<random_access_extractor_a<element_d>> (*end) (con<queue_a<element_d>> const& me);
+
+		var<random_access_range_a<>> (*to_range_any) (con<queue_a<element_d>> const& me);
+
 		var<random_access_mutator_range_a<element_d>> (*mutator_range) (var<queue_a<element_d>> const& me);
+
+		rat<random_access_mutator_a<element_d>> (*mutator_begin) (var<queue_a<element_d>> const& me);
+
+		rat<random_access_mutator_a<element_d>> (*mutator_end) (var<queue_a<element_d>> const& me);
 
 		var<queue_a<>> (*to_collection_any) (con<queue_a<element_d>> const& me);
 	};
@@ -17,6 +27,7 @@ namespace strange
 	template <typename element_d>
 	struct queue_a
 	{
+		using non_mutator_range = bool;
 		using operations = queue_o<element_d>;
 		using creator_fp = var<queue_a<element_d>> (*)(con<range_a<>> const& range);
 

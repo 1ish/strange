@@ -7,9 +7,9 @@ namespace strange
 	struct contiguous_tuple_mutator_range_o :
 		random_access_tuple_mutator_range_o<elements_d...>
 	{
-		rat<contiguous_tuple_extractor_a<elements_d...>> (*mutator_begin) (var<contiguous_tuple_mutator_range_a<elements_d...>> const& me);
+		rat<contiguous_tuple_mutator_a<elements_d...>> (*mutator_begin) (var<contiguous_tuple_mutator_range_a<elements_d...>> const& me);
 
-		rat<contiguous_tuple_extractor_a<elements_d...>> (*mutator_end) (var<contiguous_tuple_mutator_range_a<elements_d...>> const& me);
+		rat<contiguous_tuple_mutator_a<elements_d...>> (*mutator_end) (var<contiguous_tuple_mutator_range_a<elements_d...>> const& me);
 	};
 
 	template <typename... elements_d>

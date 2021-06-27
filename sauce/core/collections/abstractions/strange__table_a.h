@@ -9,18 +9,39 @@ namespace strange
 	{
 		var<tuple_range_a<key_d, value_d>> (*range) (con<table_a<key_d, value_d>> const& me);
 
+		fit<forward_tuple_extractor_a<key_d, value_d>> (*begin) (con<table_a<key_d, value_d>> const& me);
+
+		fit<forward_tuple_extractor_a<key_d, value_d>> (*end) (con<table_a<key_d, value_d>> const& me);
+
+		var<range_a<>> (*to_range_any) (con<table_a<key_d, value_d>> const& me);
+
 		var<tuple_mutator_range_a<key_d, value_d>> (*mutator_range) (var<table_a<key_d, value_d>> const& me);
+
+		fit<forward_tuple_mutator_a<key_d, value_d>> (*mutator_begin) (var<table_a<key_d, value_d>> const& me);
+
+		fit<forward_tuple_mutator_a<key_d, value_d>> (*mutator_end) (var<table_a<key_d, value_d>> const& me);
 
 		var<table_a<>> (*to_collection_any) (con<table_a<key_d, value_d>> const& me);
 
 		var<range_a<std::pair<key_d, value_d>>> (*_pair_range) (con<table_a<key_d, value_d>> const& me);
 
+		fit<forward_extractor_a<std::pair<key_d, value_d>>> (*_pair_begin) (con<table_a<key_d, value_d>> const& me);
+
+		fit<forward_extractor_a<std::pair<key_d, value_d>>> (*_pair_end) (con<table_a<key_d, value_d>> const& me);
+
+		var<range_a<>> (*_pair_to_range_any) (con<table_a<key_d, value_d>> const& me);
+
 		var<mutator_range_a<std::pair<key_d, value_d>>> (*_pair_mutator_range) (var<table_a<key_d, value_d>> const& me);
+
+		fit<forward_mutator_a<std::pair<key_d, value_d>>> (*_pair_mutator_begin) (var<table_a<key_d, value_d>> const& me);
+
+		fit<forward_mutator_a<std::pair<key_d, value_d>>> (*_pair_mutator_end) (var<table_a<key_d, value_d>> const& me);
 	};
 
 	template <typename key_d, typename value_d>
 	struct table_a
 	{
+		using non_mutator_range = bool;
 		using operations = table_o<key_d, value_d>;
 		using creator_fp = var<table_a<key_d, value_d>> (*)(con<range_a<>> const& range);
 

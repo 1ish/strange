@@ -10,6 +10,7 @@ namespace strange
 
 	struct brook_a
 	{
+		using non_mutator_range = bool;
 		using operations = brook_o;
 		using creator_fp = var<brook_a> (*)(con<range_a<>> const& range);
 

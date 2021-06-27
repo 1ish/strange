@@ -9,6 +9,12 @@ namespace strange
 	{
 		var<range_a<element_d>> (*range) (con<collection_a<key_d, value_d, element_d>> const& me);
 
+		fit<forward_extractor_a<element_d>> (*begin) (con<collection_a<key_d, value_d, element_d>> const& me);
+
+		fit<forward_extractor_a<element_d>> (*end) (con<collection_a<key_d, value_d, element_d>> const& me);
+
+		var<range_a<>> (*to_range_any) (con<collection_a<key_d, value_d, element_d>> const& me);
+
 		var<> (*read_lock) (ptr<collection_a<key_d, value_d, element_d>> const& me);
 
 		var<> (*write_lock) (ptr<collection_a<key_d, value_d, element_d>> const& me);
@@ -67,6 +73,7 @@ namespace strange
 	template <typename key_d, typename value_d, typename element_d>
 	struct collection_a
 	{
+		using non_mutator_range = bool;
 		using operations = collection_o<key_d, value_d, element_d>;
 		using creator_fp = var<collection_a<key_d, value_d, element_d>>(*)(con<range_a<>> const& range);
 

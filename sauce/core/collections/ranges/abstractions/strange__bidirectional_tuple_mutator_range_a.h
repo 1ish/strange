@@ -7,9 +7,9 @@ namespace strange
 	struct bidirectional_tuple_mutator_range_o :
 		tuple_mutator_range_o<elements_d...>
 	{
-		bit<bidirectional_tuple_extractor_a<elements_d...>> (*mutator_begin) (var<bidirectional_tuple_mutator_range_a<elements_d...>> const& me);
+		bit<bidirectional_tuple_mutator_a<elements_d...>> (*mutator_begin) (var<bidirectional_tuple_mutator_range_a<elements_d...>> const& me);
 
-		bit<bidirectional_tuple_extractor_a<elements_d...>> (*mutator_end) (var<bidirectional_tuple_mutator_range_a<elements_d...>> const& me);
+		bit<bidirectional_tuple_mutator_a<elements_d...>> (*mutator_end) (var<bidirectional_tuple_mutator_range_a<elements_d...>> const& me);
 	};
 
 	template <typename... elements_d>
