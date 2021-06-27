@@ -107,17 +107,13 @@ namespace strange
 	int64_t number_t<type_d>::to_int64(con<numeric_a> const& me)
 	{
 		auto const nt = static_cast<number_t<type_d> const* const>(me.t);
-		if constexpr (std::is_same_v<std::remove_reference_t<type_d>, int64_t>)
-		{
-			return nt->data_;
-		}
-		else if constexpr (std::is_integral_v<std::remove_reference_t<type_d>>)
-		{
-			return static_cast<int64_t>(nt->data_);
-		}
-		else if constexpr (std::is_floating_point_v<std::remove_reference_t<type_d>>)
+		if constexpr (std::is_floating_point_v<std::remove_reference_t<type_d>>)
 		{
 			return static_cast<int64_t>(std::llround(nt->data_));
+		}
+		else
+		{
+			return static_cast<int64_t>(nt->data_);
 		}
 	}
 
@@ -125,17 +121,13 @@ namespace strange
 	uint64_t number_t<type_d>::to_uint64(con<numeric_a> const& me)
 	{
 		auto const nt = static_cast<number_t<type_d> const* const>(me.t);
-		if constexpr (std::is_same_v<std::remove_reference_t<type_d>, uint64_t>)
-		{
-			return nt->data_;
-		}
-		else if constexpr (std::is_integral_v<std::remove_reference_t<type_d>>)
-		{
-			return static_cast<uint64_t>(nt->data_);
-		}
-		else if constexpr (std::is_floating_point_v<std::remove_reference_t<type_d>>)
+		if constexpr (std::is_floating_point_v<std::remove_reference_t<type_d>>)
 		{
 			return static_cast<uint64_t>(std::llround(nt->data_));
+		}
+		else
+		{
+			return static_cast<uint64_t>(nt->data_);
 		}
 	}
 
@@ -143,14 +135,7 @@ namespace strange
 	double number_t<type_d>::to_float64(con<numeric_a> const& me)
 	{
 		auto const nt = static_cast<number_t<type_d> const* const>(me.t);
-		if constexpr (std::is_same_v<std::remove_reference_t<type_d>, double>)
-		{
-			return nt->data_;
-		}
-		else
-		{
-			return static_cast<double>(nt->data_);
-		}
+		return static_cast<double>(nt->data_);
 	}
 
 	template <typename type_d>
@@ -209,7 +194,7 @@ namespace strange
 		}
 		else
 		{
-			return false;
+			return true;
 		}
 	}
 
@@ -223,7 +208,7 @@ namespace strange
 		}
 		else
 		{
-			return false;
+			return true;
 		}
 	}
 
