@@ -87,7 +87,7 @@ namespace strange
 	void data_t<type_d>::_set_pointer(var<> const& me,
 		bool is_pointer)
 	{
-		me.o = reinterpret_cast<any_o const*>(is_pointer ? data_t<type_d>::_pointer_operations() : data_t<type_d>::_operations());
+		me.o = is_pointer ? data_t<type_d>::_pointer_operations() : data_t<type_d>::_operations();
 	}
 
 	// data_a
@@ -168,7 +168,7 @@ namespace strange
 	void data_pointer_t<type_d>::_set_pointer(var<> const& me,
 		bool is_pointer)
 	{
-		me.o = reinterpret_cast<any_o const*>(is_pointer ? data_pointer_t<type_d>::_pointer_operations() : data_pointer_t<type_d>::_operations());
+		me.o = is_pointer ? data_pointer_t<type_d>::_pointer_operations() : data_pointer_t<type_d>::_operations();
 	}
 
 	// instantiation

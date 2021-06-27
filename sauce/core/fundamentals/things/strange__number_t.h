@@ -11,21 +11,21 @@ namespace strange
 		inline number_t(any_a& me)
 		: data_t<type_d>{ me }
 		{
-			me.o = reinterpret_cast<any_o const*>(number_t<type_d>::_operations());
+			me.o = number_t<type_d>::_operations();
 		}
 
 		inline number_t(any_a& me,
 			type_d& data)
 		: data_t<type_d>{ me, data }
 		{
-			me.o = reinterpret_cast<any_o const*>(number_t<type_d>::_operations());
+			me.o = number_t<type_d>::_operations();
 		}
 
 		inline number_t(any_a& me,
 			any_a const& original)
 		: data_t<type_d>{ me, original }
 		{
-			me.o = reinterpret_cast<any_o const*>(number_t<type_d>::_operations());
+			me.o = number_t<type_d>::_operations();
 		}
 
 		number_t(number_t const&) = delete;
@@ -80,6 +80,24 @@ namespace strange
 		static std::remove_reference_t<type_d> const& extract(con<number_a<std::remove_reference_t<type_d>>> const& me);
 
 		static std::remove_reference_t<type_d>& mutate(var<number_a<std::remove_reference_t<type_d>>> const& me);
+
+	private:
+		// data_a
+		static data_o<std::remove_reference_t<type_d>> const* _data_operations();
+		static data_o<std::remove_reference_t<type_d>> const* _data_pointer_operations();
+
+	protected:
+		static bool _data_is(con<> const& me,
+			con<> const& abstraction);
+
+		static bool _data_as(con<> const& me,
+			var<> const& abstraction);
+
+		static void _data_copy(any_a const& me,
+			any_a& copy);
+
+		static void _data_set_pointer(var<> const& me,
+			bool is_pointer);
 
 	public:
 		// creators

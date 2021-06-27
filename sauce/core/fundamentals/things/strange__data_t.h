@@ -14,7 +14,7 @@ namespace strange
 			: thing_t{ me }
 			, data_{}
 		{
-			me.o = reinterpret_cast<any_o const*>(data_t<type_d>::_operations());
+			me.o = data_t<type_d>::_operations();
 		}
 
 		inline data_t(any_a& me,
@@ -22,7 +22,7 @@ namespace strange
 		: thing_t{ me }
 		, data_{ data }
 		{
-			me.o = reinterpret_cast<any_o const*>(data_t<type_d>::_operations());
+			me.o = data_t<type_d>::_operations();
 		}
 
 		inline data_t(any_a& me,
@@ -30,7 +30,7 @@ namespace strange
 		: thing_t{ me, original }
 		, data_{ static_cast<data_t<type_d>*>(original.t)->data_ }
 		{
-			me.o = reinterpret_cast<any_o const*>(data_t<type_d>::_operations());
+			me.o = data_t<type_d>::_operations();
 		}
 
 		data_t(data_t const&) = delete;
@@ -97,14 +97,14 @@ namespace strange
 			type_d data)
 		: data_t<type_d>{ me, data }
 		{
-			me.o = reinterpret_cast<any_o const*>(data_pointer_t<type_d>::_operations());
+			me.o = data_pointer_t<type_d>::_operations();
 		}
 
 		inline data_pointer_t(any_a& me,
 			any_a const& original)
 		: data_t<type_d>{ me, original }
 		{
-			me.o = reinterpret_cast<any_o const*>(data_pointer_t<type_d>::_operations());
+			me.o = data_pointer_t<type_d>::_operations();
 		}
 
 		virtual ~data_pointer_t()
