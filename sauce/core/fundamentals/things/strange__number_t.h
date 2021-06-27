@@ -34,8 +34,8 @@ namespace strange
 
 	private:
 		// number_o
-		static number_o<type_d> const* _operations();
-		static number_o<type_d> const* _pointer_operations();
+		static number_o<std::remove_reference_t<type_d>> const* _operations();
+		static number_o<std::remove_reference_t<type_d>> const* _pointer_operations();
 
 	protected:
 		// any_a
@@ -75,52 +75,54 @@ namespace strange
 		static bool is_normal(con<numeric_a> const& me);
 
 		// number_a
-		static type_d const& extract(con<number_a<type_d>> const& me);
+		static var<data_a<std::remove_reference_t<type_d>>> data(con<number_a<std::remove_reference_t<type_d>>> const& me);
 
-		static type_d& mutate(var<number_a<type_d>> const& me);
+		static std::remove_reference_t<type_d> const& extract(con<number_a<std::remove_reference_t<type_d>>> const& me);
+
+		static std::remove_reference_t<type_d>& mutate(var<number_a<std::remove_reference_t<type_d>>> const& me);
 
 	public:
 		// creators
 		template <typename v = void>
-		static inline var<number_a<type_d>> create_default()
+		static inline var<number_a<std::remove_reference_t<type_d>>> create_default()
 		{
 			any_a r;
 			new number_t<type_d>{ r };
 			number_t<type_d>::_initialise(r);
-			return var<number_a<type_d>>{ reinterpret_cast<number_a<type_d>&>(r) };
+			return var<number_a<std::remove_reference_t<type_d>>>{ reinterpret_cast<number_a<std::remove_reference_t<type_d>>&>(r) };
 		}
 
-		static inline var<number_a<type_d>> create(type_d const& data)
+		static inline var<number_a<std::remove_reference_t<type_d>>> create(type_d const& data)
 		{
 			any_a r;
 			new number_t<type_d>{ r, const_cast<type_d&>(data) };
 			number_t<type_d>::_initialise(r);
-			return var<number_a<type_d>>{ reinterpret_cast<number_a<type_d>&>(r) };
+			return var<number_a<std::remove_reference_t<type_d>>>{ reinterpret_cast<number_a<std::remove_reference_t<type_d>>&>(r) };
 		}
 
 		template <typename v = void>
-		static inline var<number_a<type_d>> create_from_range(con<range_a<>> const& range)
+		static inline var<number_a<std::remove_reference_t<type_d>>> create_from_range(con<range_a<>> const& range)
 		{
 			return create_default();
 		}
 	};
 
 	template <typename type_d>
-	inline var<number_a<type_d>> num(type_d const& data)
+	inline var<number_a<std::remove_reference_t<type_d>>> num(type_d const& data)
 	{
 		return number_t<type_d>::create(data);
 	}
 
 	template <typename type_d>
-	inline var<number_a<type_d>> num()
+	inline var<number_a<std::remove_reference_t<type_d>>> num()
 	{
 		return number_t<type_d>::create_default();
 	}
 
 	template <typename type_d>
-	inline var<number_a<type_d>> num_ref(type_d& data)
+	inline var<number_a<std::remove_reference_t<type_d>>> num_ref(type_d& data)
 	{
-		return number_t<type_d&>::create(data).template val<var<number_a<type_d>>>();
+		return number_t<type_d&>::create(data);
 	}
 }
 

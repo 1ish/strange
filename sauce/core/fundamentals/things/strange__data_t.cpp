@@ -5,13 +5,13 @@ namespace strange
 	// data_t
 	// data_o
 	template <typename type_d>
-	data_o<type_d> const* data_t<type_d>::_operations()
+	data_o<std::remove_reference_t<type_d>> const* data_t<type_d>::_operations()
 	{
-		static data_o<type_d> operations =
+		static data_o<std::remove_reference_t<type_d>> operations =
 		{
 			{
 				// any_a
-				data_a<type_d>::cat,
+				data_a<std::remove_reference_t<type_d>>::cat,
 				is,
 				as,
 				type,
@@ -35,11 +35,11 @@ namespace strange
 	}
 
 	template <typename type_d>
-	data_o<type_d> const* data_t<type_d>::_pointer_operations()
+	data_o<std::remove_reference_t<type_d>> const* data_t<type_d>::_pointer_operations()
 	{
-		static data_o<type_d> operations = []()
+		static data_o<std::remove_reference_t<type_d>> operations = []()
 		{
-			data_o<type_d> ops = *data_t<type_d>::_operations();
+			data_o<std::remove_reference_t<type_d>> ops = *data_t<type_d>::_operations();
 			ops._copy = thing_t::_no_copy;
 			return ops;
 		}();
@@ -53,7 +53,7 @@ namespace strange
 	{
 		// abstraction.cat in me.cats
 		auto const abc = abstraction.o->cat;
-		return abc == any_a::cat || abc == data_a<type_d>::cat;
+		return abc == any_a::cat || abc == data_a<std::remove_reference_t<type_d>>::cat;
 	}
 
 	template <typename type_d>
@@ -92,13 +92,13 @@ namespace strange
 
 	// data_a
 	template <typename type_d>
-	type_d const& data_t<type_d>::extract(con<data_a<type_d>> const& me)
+	std::remove_reference_t<type_d> const& data_t<type_d>::extract(con<data_a<std::remove_reference_t<type_d>>> const& me)
 	{
 		return static_cast<data_t<type_d>*>(me.t)->data_;
 	}
 
 	template <typename type_d>
-	type_d& data_t<type_d>::mutate(var<data_a<type_d>> const& me)
+	std::remove_reference_t<type_d>& data_t<type_d>::mutate(var<data_a<std::remove_reference_t<type_d>>> const& me)
 	{
 		me.mut();
 		return static_cast<data_t<type_d>*>(me.t)->data_;

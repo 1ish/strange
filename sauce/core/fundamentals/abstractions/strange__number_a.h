@@ -7,6 +7,8 @@ namespace strange
 	struct number_o :
 		numeric_o
 	{
+		var<data_a<type_d>> (*data) (con<number_a<type_d>> const& me);
+
 		type_d const& (*extract) (con<number_a<type_d>> const& me);
 
 		type_d& (*mutate) (var<number_a<type_d>> const& me);

@@ -32,5 +32,4 @@ namespace strange
 
 	// instantiation
 	template struct number_a<int64_t>;
-	template struct number_a<int64_t&>;
 }

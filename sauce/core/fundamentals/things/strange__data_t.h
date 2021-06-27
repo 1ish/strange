@@ -39,8 +39,8 @@ namespace strange
 
 	private:
 		// data_o
-		static data_o<type_d> const* _operations();
-		static data_o<type_d> const* _pointer_operations();
+		static data_o<std::remove_reference_t<type_d>> const* _operations();
+		static data_o<std::remove_reference_t<type_d>> const* _pointer_operations();
 
 	protected:
 		// any_a
@@ -59,31 +59,31 @@ namespace strange
 			bool is_pointer);
 
 		// data_a
-		static type_d const& extract(con<data_a<type_d>> const& me);
+		static std::remove_reference_t<type_d> const& extract(con<data_a<std::remove_reference_t<type_d>>> const& me);
 
-		static type_d& mutate(var<data_a<type_d>> const& me);
+		static std::remove_reference_t<type_d>& mutate(var<data_a<std::remove_reference_t<type_d>>> const& me);
 
 	public:
 		// creators
 		template <typename v = void>
-		static inline var<data_a<type_d>> create_default()
+		static inline var<data_a<std::remove_reference_t<type_d>>> create_default()
 		{
 			any_a r;
 			new data_t<type_d>{ r };
 			data_t<type_d>::_initialise(r);
-			return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
+			return var<data_a<std::remove_reference_t<type_d>>>{ reinterpret_cast<data_a<std::remove_reference_t<type_d>>&>(r) };
 		}
 
-		static inline var<data_a<type_d>> create(type_d const& data)
+		static inline var<data_a<std::remove_reference_t<type_d>>> create(type_d const& data)
 		{
 			any_a r;
 			new data_t<type_d>{ r, const_cast<type_d&>(data) };
 			data_t<type_d>::_initialise(r);
-			return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
+			return var<data_a<std::remove_reference_t<type_d>>>{ reinterpret_cast<data_a<std::remove_reference_t<type_d>>&>(r) };
 		}
 
 		template <typename v = void>
-		static inline var<data_a<type_d>> create_from_range(con<range_a<>> const& range)
+		static inline var<data_a<std::remove_reference_t<type_d>>> create_from_range(con<range_a<>> const& range)
 		{
 			return create_default();
 		}
@@ -144,21 +144,21 @@ namespace strange
 	};
 
 	template <typename type_d>
-	inline var<data_a<type_d>> dat(type_d const& data)
+	inline var<data_a<std::remove_reference_t<type_d>>> dat(type_d const& data)
 	{
 		return data_t<type_d>::create(data);
 	}
 
 	template <typename type_d>
-	inline var<data_a<type_d>> dat()
+	inline var<data_a<std::remove_reference_t<type_d>>> dat()
 	{
 		return data_t<type_d>::create_default();
 	}
 
 	template <typename type_d>
-	inline var<data_a<type_d>> dat_ref(type_d& data)
+	inline var<data_a<std::remove_reference_t<type_d>>> dat_ref(type_d& data)
 	{
-		return data_t<type_d&>::create(data).template val<var<data_a<type_d>>>();
+		return data_t<type_d&>::create(data);
 	}
 
 	template <typename type_d>
