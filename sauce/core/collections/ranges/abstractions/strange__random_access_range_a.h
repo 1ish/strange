@@ -10,8 +10,6 @@ namespace strange
 		rat<random_access_extractor_a<element_d>> (*begin) (con<random_access_range_a<element_d>> const& me);
 
 		rat<random_access_extractor_a<element_d>> (*end) (con<random_access_range_a<element_d>> const& me);
-
-		var<random_access_range_a<>> (*any_range) (con<random_access_range_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

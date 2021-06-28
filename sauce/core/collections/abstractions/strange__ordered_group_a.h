@@ -13,15 +13,11 @@ namespace strange
 
 		bit<bidirectional_extractor_a<element_d>> (*end) (con<ordered_group_a<element_d>> const& me);
 
-		var<bidirectional_range_a<>> (*any_range) (con<ordered_group_a<element_d>> const& me);
-
 		var<bidirectional_mutator_range_a<element_d>> (*mutator_range) (var<ordered_group_a<element_d>> const& me);
 
 		bit<bidirectional_mutator_a<element_d>> (*mutator_begin) (var<ordered_group_a<element_d>> const& me);
 
 		bit<bidirectional_mutator_a<element_d>> (*mutator_end) (var<ordered_group_a<element_d>> const& me);
-
-		var<ordered_group_a<>> (*any_collection) (con<ordered_group_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

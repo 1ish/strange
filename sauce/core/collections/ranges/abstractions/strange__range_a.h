@@ -10,8 +10,6 @@ namespace strange
 		fit<forward_extractor_a<element_d>> (*begin) (con<range_a<element_d>> const& me);
 
 		fit<forward_extractor_a<element_d>> (*end) (con<range_a<element_d>> const& me);
-
-		var<range_a<>> (*any_range) (con<range_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

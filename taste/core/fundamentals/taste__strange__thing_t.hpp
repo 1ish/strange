@@ -87,17 +87,21 @@ namespace taste
 		std__cout << "result: " << res.o->char_star(res) << "\n";
 		vvv.pfm(&symbol_o::something);
 		vvv.pfm(&any_o::not_equal, sym("other"));
+
 		auto nul = var<forward_extractor_a<int64_t>>();
 		auto fwd = fit<forward_extractor_a<int64_t>>(nul);
 		fwd.o->type(fwd);
+
 		auto lock = lock_a::create();
 		auto unlock = unlock_a::create();
+
 		auto dv = dat<int64_t>();
 		auto dv1 = dat(int64_t{ 1 });
 		int64_t number_one = 1;
 		auto dr = dat_ref(number_one);
 		auto dp = dat_ptr(new int64_t(1));
 		auto dd = dat_def<std::string>();
+
 		REQUIRE(sym("this") == sym("this"));
 		REQUIRE(sym("this") != sym("that"));
 		std::unordered_set<var<symbol_a>> names = { sym("minime"), sym("pigsy") };
@@ -106,6 +110,21 @@ namespace taste
 		auto number = num(123LL);
 		auto uns = num(123ULL);
 		auto flt = num(1.23);
+		auto number_data = number.o->data(number);
+		auto uns_data = uns.o->data(uns);
+		auto flt_data = flt.o->data(flt);
+
+		int64_t an_int = 1;
+		uint64_t a_uint = 2;
+		double a_float = 3.45;
+		auto number_ref = num_ref(an_int);
+		auto uns_ref = num_ref(a_uint);
+		auto flt_ref = num_ref(a_float);
+		auto number_ref_data = number_ref.o->data(number_ref);
+		auto uns_ref_data = uns_ref.o->data(uns_ref);
+		auto flt_ref_data = flt_ref.o->data(flt_ref);
+
+
 	}
 }
 

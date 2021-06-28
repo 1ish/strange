@@ -8,8 +8,6 @@ namespace strange
 		forward_extractor_o<element_d>
 	{
 		void (*decrement) (var<bidirectional_extractor_a<element_d>> const& me);
-
-		bit<bidirectional_extractor_a<>> (*any_extractor) (con<bidirectional_extractor_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

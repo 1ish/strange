@@ -7,7 +7,7 @@ namespace strange
 	struct tuple_o :
 		any_o
 	{
-		var<list_a<>> (*any_list) (con<tuple_a<elements_d...>> const& me);
+		var<list_a<>> (*list) (con<tuple_a<elements_d...>> const& me);
 
 		void (*destruct) (con<tuple_a<elements_d...>> const& me,
 			elements_d&... elements);
@@ -20,7 +20,7 @@ namespace strange
 	struct tuple_a
 	{
 		using operations = tuple_o<elements_d...>;
-		using creator_fp = var<tuple_a<elements_d...>> (*)(con<range_a<>> const& range);
+		using creator_fp = var<tuple_a<elements_d...>> (*) (con<range_a<>> const& range);
 
 		mutable thing_t* t;
 		mutable operations const* o;

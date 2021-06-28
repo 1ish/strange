@@ -9,8 +9,6 @@ namespace strange
 	{
 		rat<contiguous_extractor_a<element_d>> (*add) (con<contiguous_extractor_a<element_d>> const& me,
 			int64_t offset);
-
-		rat<contiguous_extractor_a<>> (*any_extractor) (con<contiguous_extractor_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

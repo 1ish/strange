@@ -29,4 +29,6 @@ namespace strange
 
 	// instantiation
 	template struct forward_extractor_a<int64_t>;
+	template struct forward_extractor_a<uint64_t>;
+	template struct forward_extractor_a<double>;
 }

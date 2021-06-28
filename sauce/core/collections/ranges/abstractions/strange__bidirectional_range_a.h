@@ -10,8 +10,6 @@ namespace strange
 		bit<bidirectional_extractor_a<element_d>> (*begin) (con<bidirectional_range_a<element_d>> const& me);
 
 		bit<bidirectional_extractor_a<element_d>> (*end) (con<bidirectional_range_a<element_d>> const& me);
-
-		var<bidirectional_range_a<>> (*any_range) (con<bidirectional_range_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

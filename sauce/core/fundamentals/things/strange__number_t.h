@@ -109,6 +109,42 @@ namespace strange
 		static void _data_set_pointer(var<> const& me,
 			bool is_pointer);
 
+		// extractor_a
+		static rat<random_access_extractor_a<std::remove_reference_t<type_d>>> extractor(con<number_a<std::remove_reference_t<type_d>>> const& me);
+
+		static std::remove_reference_t<type_d> _extractor_get(con<forward_extractor_a<std::remove_reference_t<type_d>>> const& me);
+
+		static void _extractor_increment(var<forward_extractor_a<std::remove_reference_t<type_d>>> const& me);
+
+		static void _extractor_decrement(var<bidirectional_extractor_a<std::remove_reference_t<type_d>>> const& me);
+
+		static std::remove_reference_t<type_d> const& _extractor_operator_star(con<forward_extractor_a<std::remove_reference_t<type_d>>> const& me);
+
+		static std::remove_reference_t<type_d> const* _extractor_operator_arrow(con<forward_extractor_a<std::remove_reference_t<type_d>>> const& me);
+
+		static void _extractor_self_add(var<random_access_extractor_a<std::remove_reference_t<type_d>>> const& me,
+			int64_t offset);
+
+		static rat<random_access_extractor_a<std::remove_reference_t<type_d>>> _extractor_add(con<random_access_extractor_a<std::remove_reference_t<type_d>>> const& me,
+			int64_t offset);
+
+	private:
+		static random_access_extractor_o<std::remove_reference_t<type_d>> const* _extractor_operations();
+		static random_access_extractor_o<std::remove_reference_t<type_d>> const* _extractor_pointer_operations();
+
+	protected:
+		static bool _extractor_is(con<> const& me,
+			con<> const& abstraction);
+
+		static bool _extractor_as(con<> const& me,
+			var<> const& abstraction);
+
+		static void _extractor_copy(any_a const& me,
+			any_a& copy);
+
+		static void _extractor_set_pointer(var<> const& me,
+			bool is_pointer);
+
 	public:
 		// creators
 		template <typename v = void>

@@ -29,4 +29,6 @@ namespace strange
 
 	// instantiation
 	template struct bidirectional_extractor_a<int64_t>;
+	template struct bidirectional_extractor_a<uint64_t>;
+	template struct bidirectional_extractor_a<double>;
 }

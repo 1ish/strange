@@ -12,6 +12,8 @@ namespace strange
 		type_d const& (*extract) (con<number_a<type_d>> const& me);
 
 		type_d& (*mutate) (var<number_a<type_d>> const& me);
+
+		rat<random_access_extractor_a<type_d>> (*extractor) (con<number_a<type_d>> const& me);
 	};
 
 	template <typename type_d>

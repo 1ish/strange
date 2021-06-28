@@ -49,6 +49,7 @@ namespace strange
 			number_t<type_d>::data,
 			number_t<type_d>::extract,
 			number_t<type_d>::mutate,
+			number_t<type_d>::extractor,
 		};
 		return &operations;
 	}
@@ -355,6 +356,158 @@ namespace strange
 		bool is_pointer)
 	{
 		me.o = is_pointer ? number_t<type_d>::_data_pointer_operations() : number_t<type_d>::_data_operations();
+	}
+
+	// extractor_a
+	template <typename type_d>
+	rat<random_access_extractor_a<std::remove_reference_t<type_d>>> number_t<type_d>::extractor(con<number_a<std::remove_reference_t<type_d>>> const& me)
+	{
+		random_access_extractor_a<std::remove_reference_t<type_d>> abstraction;
+		abstraction.t = me.t;
+		abstraction.o = number_t<type_d>::_extractor_operations();
+		return rat<random_access_extractor_a<std::remove_reference_t<type_d>>>{ abstraction };
+	}
+
+	template <typename type_d>
+	std::remove_reference_t<type_d> number_t<type_d>::_extractor_get(con<forward_extractor_a<std::remove_reference_t<type_d>>> const& me)
+	{
+		return static_cast<number_t<type_d>*>(me.t)->data_;
+	}
+
+	template <typename type_d>
+	void number_t<type_d>::_extractor_increment(var<forward_extractor_a<std::remove_reference_t<type_d>>> const& me)
+	{
+		me.mut();
+		++(static_cast<number_t<type_d>*>(me.t)->data_);
+	}
+
+	template <typename type_d>
+	void number_t<type_d>::_extractor_decrement(var<bidirectional_extractor_a<std::remove_reference_t<type_d>>> const& me)
+	{
+		me.mut();
+		--(static_cast<number_t<type_d>*>(me.t)->data_);
+	}
+
+	template <typename type_d>
+	std::remove_reference_t<type_d> const& number_t<type_d>::_extractor_operator_star(con<forward_extractor_a<std::remove_reference_t<type_d>>> const& me)
+	{
+		return static_cast<number_t<type_d>*>(me.t)->data_;
+	}
+
+	template <typename type_d>
+	std::remove_reference_t<type_d> const* number_t<type_d>::_extractor_operator_arrow(con<forward_extractor_a<std::remove_reference_t<type_d>>> const& me)
+	{
+		return &(static_cast<number_t<type_d>*>(me.t)->data_);
+	}
+
+	template <typename type_d>
+	void number_t<type_d>::_extractor_self_add(var<random_access_extractor_a<std::remove_reference_t<type_d>>> const& me,
+		int64_t offset)
+	{
+		me.mut();
+		static_cast<number_t<type_d>*>(me.t)->data_ += offset;
+	}
+
+	template <typename type_d>
+	rat<random_access_extractor_a<std::remove_reference_t<type_d>>> number_t<type_d>::_extractor_add(con<random_access_extractor_a<std::remove_reference_t<type_d>>> const& me,
+		int64_t offset)
+	{
+		rat<random_access_extractor_a<std::remove_reference_t<type_d>>> result{ me };
+		number_t<type_d>::_extractor_self_add(result, offset);
+		return result;
+	}
+
+	template <typename type_d>
+	random_access_extractor_o<std::remove_reference_t<type_d>> const* number_t<type_d>::_extractor_operations()
+	{
+		static random_access_extractor_o<std::remove_reference_t<type_d>> operations =
+		{
+			{
+				{
+					{
+						// any_a
+						random_access_extractor_a<std::remove_reference_t<type_d>>::cat,
+						number_t<type_d>::_extractor_is,
+						number_t<type_d>::_extractor_as,
+						number_t<type_d>::type,
+						number_t<type_d>::set_error,
+						number_t<type_d>::error,
+						number_t<type_d>::hash,
+						number_t<type_d>::equal,
+						number_t<type_d>::less,
+						number_t<type_d>::less_or_equal,
+						number_t<type_d>::pack,
+						number_t<type_d>::_free,
+						number_t<type_d>::_extractor_copy,
+						number_t<type_d>::_extractor_set_pointer,
+						number_t<type_d>::_pointer,
+					},
+					// forward_extractor_o
+					number_t<type_d>::_extractor_get,
+					number_t<type_d>::_extractor_increment,
+					number_t<type_d>::_extractor_operator_star,
+					number_t<type_d>::_extractor_operator_arrow,
+				},
+				// bidirectional_extractor_o
+				number_t<type_d>::_extractor_decrement,
+			},
+			// random_access_extractor_o
+			number_t<type_d>::_extractor_self_add,
+			number_t<type_d>::_extractor_add,
+		};
+		return &operations;
+	}
+
+	template <typename type_d>
+	random_access_extractor_o<std::remove_reference_t<type_d>> const* number_t<type_d>::_extractor_pointer_operations()
+	{
+		static random_access_extractor_o<std::remove_reference_t<type_d>> operations = []()
+		{
+			random_access_extractor_o<std::remove_reference_t<type_d>> ops = *number_t<type_d>::_extractor_operations();
+			ops._copy = thing_t::_no_copy;
+			return ops;
+		}();
+		return &operations;
+	}
+
+	template <typename type_d>
+	bool number_t<type_d>::_extractor_is(con<> const& me,
+		con<> const& abstraction)
+	{
+		// abstraction.cat in me.cats
+		auto const abc = abstraction.o->cat;
+		return abc == any_a::cat ||
+			abc == forward_extractor_a<std::remove_reference_t<type_d>>::cat ||
+			abc == bidirectional_extractor_a<std::remove_reference_t<type_d>>::cat ||
+			abc == random_access_extractor_a<std::remove_reference_t<type_d>>::cat;
+	}
+
+	template <typename type_d>
+	bool number_t<type_d>::_extractor_as(con<> const& me,
+		var<> const& abstraction)
+	{
+		if (!number_t<type_d>::_extractor_is(me, abstraction))
+		{
+			return false;
+		}
+		abstraction = me;
+		return true;
+	}
+
+	template <typename type_d>
+	void number_t<type_d>::_extractor_copy(any_a const& me,
+		any_a& copy)
+	{
+		new number_t<type_d>{ copy, me };
+		number_t<type_d>::_clone(me, copy);
+		me.o = number_t<type_d>::_extractor_operations();
+	}
+
+	template <typename type_d>
+	void number_t<type_d>::_extractor_set_pointer(var<> const& me,
+		bool is_pointer)
+	{
+		me.o = is_pointer ? number_t<type_d>::_extractor_pointer_operations() : number_t<type_d>::_extractor_operations();
 	}
 
 	// instantiation

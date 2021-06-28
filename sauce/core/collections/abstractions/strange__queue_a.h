@@ -13,15 +13,11 @@ namespace strange
 
 		rat<random_access_extractor_a<element_d>> (*end) (con<queue_a<element_d>> const& me);
 
-		var<random_access_range_a<>> (*any_range) (con<queue_a<element_d>> const& me);
-
 		var<random_access_mutator_range_a<element_d>> (*mutator_range) (var<queue_a<element_d>> const& me);
 
 		rat<random_access_mutator_a<element_d>> (*mutator_begin) (var<queue_a<element_d>> const& me);
 
 		rat<random_access_mutator_a<element_d>> (*mutator_end) (var<queue_a<element_d>> const& me);
-
-		var<queue_a<>> (*any_collection) (con<queue_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

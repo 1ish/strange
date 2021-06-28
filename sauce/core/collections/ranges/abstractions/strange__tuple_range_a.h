@@ -10,8 +10,6 @@ namespace strange
 		fit<forward_tuple_extractor_a<elements_d...>> (*begin) (con<tuple_range_a<elements_d...>> const& me);
 
 		fit<forward_tuple_extractor_a<elements_d...>> (*end) (con<tuple_range_a<elements_d...>> const& me);
-
-		var<range_a<>> (*any_range) (con<tuple_range_a<elements_d...>> const& me);
 	};
 
 	template <typename... elements_d>

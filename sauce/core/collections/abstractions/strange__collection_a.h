@@ -13,13 +13,9 @@ namespace strange
 
 		fit<forward_extractor_a<element_d>> (*end) (con<collection_a<key_d, value_d, element_d>> const& me);
 
-		var<range_a<>> (*any_range) (con<collection_a<key_d, value_d, element_d>> const& me);
-
 		var<> (*read_lock) (ptr<collection_a<key_d, value_d, element_d>> const& me);
 
 		var<> (*write_lock) (ptr<collection_a<key_d, value_d, element_d>> const& me);
-
-		var<collection_a<>> (*any_collection) (con<collection_a<key_d, value_d, element_d>> const& me);
 
 		bool (*has) (con<collection_a<key_d, value_d, element_d>> const& me,
 			key_d const& key);
