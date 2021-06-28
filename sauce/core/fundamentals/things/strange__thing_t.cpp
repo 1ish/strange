@@ -135,8 +135,7 @@ namespace strange
 	bool thing_t::pack(con<> const& me,
 		var<container_a> const& container)
 	{
-		//TODO	container.o->push_back(container, container.o->make_lake(container,
-		//			text(me.o->something(me) ? "strange::thing::create" : "strange::thing::create_nothing")));
+		//TODO container.o->push_back(container, container.o->make_lake(container, text("strange::thing::unpack")));
 		return false;
 	}
 

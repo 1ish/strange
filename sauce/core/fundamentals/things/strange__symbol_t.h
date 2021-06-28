@@ -140,6 +140,11 @@ namespace strange
 		{
 			return create_empty();
 		}
+
+		static inline var<symbol_a> unpack(con<container_a> const& container)
+		{
+			return create_empty();
+		}
 	};
 
 	inline var<symbol_a> sym(char const* const s)

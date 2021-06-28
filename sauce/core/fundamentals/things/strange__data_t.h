@@ -87,6 +87,12 @@ namespace strange
 		{
 			return create_default();
 		}
+
+		template <typename v = void>
+		static inline var<data_a<std::remove_reference_t<type_d>>> unpack(con<container_a> const& container)
+		{
+			return create_default();
+		}
 	};
 
 	template <typename type_d>
@@ -138,6 +144,11 @@ namespace strange
 		}
 
 		static inline var<data_a<type_d>> create_from_range(con<range_a<>> const& range)
+		{
+			return create(nullptr);
+		}
+
+		static inline var<data_a<type_d>> unpack(con<container_a> const& container)
 		{
 			return create(nullptr);
 		}

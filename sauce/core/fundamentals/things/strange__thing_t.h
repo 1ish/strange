@@ -153,6 +153,11 @@ namespace strange
 		{
 			return create();
 		}
+
+		static inline var<> unpack(con<container_a> const& container)
+		{
+			return create();
+		}
 	};
 
 	inline void any_o::set_something(var<> const& me,
