@@ -11,7 +11,7 @@ namespace strange
 
 		rat<contiguous_extractor_a<element_d>> (*end) (con<contiguous_range_a<element_d>> const& me);
 
-		var<contiguous_range_a<>> (*to_range_any) (con<contiguous_range_a<element_d>> const& me);
+		var<contiguous_range_a<>> (*any_range) (con<contiguous_range_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

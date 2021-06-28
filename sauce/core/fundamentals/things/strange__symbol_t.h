@@ -11,7 +11,7 @@ namespace strange
 		uint64_t hash_;
 
 		inline symbol_t(any_a& me,
-			char const* const s)
+			char const* s)
 		: thing_t{ me }
 		, symbol_{ nullptr }
 		, length_{ 0 }
@@ -64,21 +64,21 @@ namespace strange
 			con<symbol_a> const& other)
 		{
 			auto const mt = static_cast<symbol_t const* const>(me.t);
-			return std::strncmp(mt->symbol_, other.o->to_char_star(other), mt->length_ + 1) == 0;
+			return std::strncmp(mt->symbol_, other.o->char_star(other), mt->length_ + 1) == 0;
 		}
 
 		static inline bool _less(con<symbol_a> const& me,
 			con<symbol_a> const& other)
 		{
 			auto const mt = static_cast<symbol_t const* const>(me.t);
-			return std::strncmp(mt->symbol_, other.o->to_char_star(other), mt->length_ + 1) < 0;
+			return std::strncmp(mt->symbol_, other.o->char_star(other), mt->length_ + 1) < 0;
 		}
 
 		static inline bool _less_or_equal(con<symbol_a> const& me,
 			con<symbol_a> const& other)
 		{
 			auto const mt = static_cast<symbol_t const* const>(me.t);
-			return std::strncmp(mt->symbol_, other.o->to_char_star(other), mt->length_ + 1) <= 0;
+			return std::strncmp(mt->symbol_, other.o->char_star(other), mt->length_ + 1) <= 0;
 		}
 
 	protected:
@@ -112,7 +112,7 @@ namespace strange
 		static var<symbol_a> add(con<symbol_a> const& me,
 			con<symbol_a> const& suffix);
 
-		static char const* to_char_star(con<symbol_a> const& me);
+		static char const* char_star(con<symbol_a> const& me);
 
 		static int64_t length(con<symbol_a> const& me);
 
@@ -122,7 +122,7 @@ namespace strange
 
 	public:
 		// creators
-		static inline var<symbol_a> create(char const* const s)
+		static inline var<symbol_a> create(char const* s)
 		{
 			any_a r;
 			new symbol_t{ r, s };
@@ -147,7 +147,7 @@ namespace strange
 		}
 	};
 
-	inline var<symbol_a> sym(char const* const s)
+	inline var<symbol_a> sym(char const* s)
 	{
 		return symbol_t::create(s);
 	}

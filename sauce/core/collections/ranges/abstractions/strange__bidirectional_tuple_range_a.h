@@ -11,7 +11,7 @@ namespace strange
 
 		bit<bidirectional_tuple_extractor_a<elements_d...>> (*end) (con<bidirectional_tuple_range_a<elements_d...>> const& me);
 
-		var<bidirectional_range_a<>> (*to_range_any) (con<bidirectional_tuple_range_a<elements_d...>> const& me);
+		var<bidirectional_range_a<>> (*any_range) (con<bidirectional_tuple_range_a<elements_d...>> const& me);
 	};
 
 	template <typename... elements_d>

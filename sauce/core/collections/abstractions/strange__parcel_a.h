@@ -15,12 +15,12 @@ namespace strange
 		void (*from_json) (var<parcel_a> const& me,
 			con<text_a> const& json);
 
-		var<text_a> (*to_json) (con<parcel_a> const& me);
+		var<text_a> (*json) (con<parcel_a> const& me);
 
 		void (*from_binary) (var<parcel_a> const& me,
 			con<lake_a> const& lake);
 
-		var<lake_a> (*to_binary) (con<parcel_a> const& me);
+		var<lake_a> (*binary) (con<parcel_a> const& me);
 	};
 
 	struct parcel_a

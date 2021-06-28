@@ -7,7 +7,7 @@ namespace strange
 	struct forward_tuple_extractor_o :
 		forward_extractor_o<var<tuple_a<elements_d...>>>
 	{
-		var<list_a<>> (*to_list_any) (con<forward_tuple_extractor_a<elements_d...>> const& me);
+		var<list_a<>> (*any_list) (con<forward_tuple_extractor_a<elements_d...>> const& me);
 
 		void (*destruct) (con<forward_tuple_extractor_a<elements_d...>> const& me,
 			elements_d&... elements);

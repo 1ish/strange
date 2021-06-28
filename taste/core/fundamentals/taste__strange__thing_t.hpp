@@ -33,7 +33,7 @@ namespace taste
 		auto u = s.o->add(s, t);
 		u.o->add(u, sym("y"));
 
-		std__cout << u.o->to_char_star(u) << "\n";
+		std__cout << u.o->char_star(u) << "\n";
 
 		auto p = ptr<symbol_a>{ symbol_t::create("pointer") };
 		auto q = ptr<symbol_a>(symbol_t::create("q"));
@@ -73,18 +73,18 @@ namespace taste
 		auto res = sss.pfm(&con<symbol_a>::operations::add, sym("2"));
 		res = sss.pfm(&symbol_a::operations::add, sym("2"));
 		res = sss.pfm(&symbol_o::add, sym("2"));
-		std__cout << "result: " << res.o->to_char_star(res) << "\n";
+		std__cout << "result: " << res.o->char_star(res) << "\n";
 		con<any_a> aaa = sym("aaa");
 		aaa.pfm(&any_o::type);
 		sss.pfm(&symbol_o::type);
 		res = sss.pfm(&con<symbol_a>::operations::type);
-		std__cout << "result: " << res.o->to_char_star(res) << "\n";
+		std__cout << "result: " << res.o->char_star(res) << "\n";
 		auto vvv = sym("vvv");
 		vvv.o->set_error(vvv, sym("error1"));
 		vvv.pfm(&any_o::set_error, sym("error2"));
 		vvv.pfm(&symbol_o::set_error, sym("error3"));
 		res = vvv.pfm(&symbol_o::error).ref<var<symbol_a>>();
-		std__cout << "result: " << res.o->to_char_star(res) << "\n";
+		std__cout << "result: " << res.o->char_star(res) << "\n";
 		vvv.pfm(&symbol_o::something);
 		vvv.pfm(&any_o::not_equal, sym("other"));
 		auto nul = var<forward_extractor_a<int64_t>>();

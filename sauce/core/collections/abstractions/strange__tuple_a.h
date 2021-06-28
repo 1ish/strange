@@ -7,7 +7,7 @@ namespace strange
 	struct tuple_o :
 		any_o
 	{
-		var<list_a<>> (*to_list_any) (con<tuple_a<elements_d...>> const& me);
+		var<list_a<>> (*any_list) (con<tuple_a<elements_d...>> const& me);
 
 		void (*destruct) (con<tuple_a<elements_d...>> const& me,
 			elements_d&... elements);

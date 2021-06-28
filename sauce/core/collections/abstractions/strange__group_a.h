@@ -7,7 +7,7 @@ namespace strange
 	struct group_o :
 		collection_o<element_d, element_d, element_d>
 	{
-		var<group_a<>> (*to_collection_any) (con<group_a<element_d>> const& me);
+		var<group_a<>> (*any_collection) (con<group_a<element_d>> const& me);
 
 		void (*update_element) (var<group_a<element_d>> const& me,
 			element_d const& element);

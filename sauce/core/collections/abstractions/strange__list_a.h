@@ -13,7 +13,7 @@ namespace strange
 
 		rat<contiguous_extractor_a<element_d>> (*end) (con<list_a<element_d>> const& me);
 
-		var<contiguous_range_a<>> (*to_range_any) (con<list_a<element_d>> const& me);
+		var<contiguous_range_a<>> (*any_range) (con<list_a<element_d>> const& me);
 
 		var<contiguous_mutator_range_a<element_d>> (*mutator_range) (var<list_a<element_d>> const& me);
 
@@ -21,7 +21,7 @@ namespace strange
 
 		rat<contiguous_mutator_a<element_d>> (*mutator_end) (var<list_a<element_d>> const& me);
 
-		var<list_a<>> (*to_collection_any) (con<list_a<element_d>> const& me);
+		var<list_a<>> (*any_collection) (con<list_a<element_d>> const& me);
 	};
 
 	template <typename element_d>

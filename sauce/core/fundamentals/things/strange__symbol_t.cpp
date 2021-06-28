@@ -30,7 +30,7 @@ namespace strange
 			},
 			// symbol_a
 			add,
-			to_char_star,
+			char_star,
 			length,
 			first_char,
 			last_char,
@@ -140,12 +140,12 @@ namespace strange
 		rt->length_ = mt->length_ + suffixlength;
 		rt->symbol_ = new char[rt->length_ + 1];
 		std::memcpy(rt->symbol_, mt->symbol_, mt->length_);
-		std::memcpy(rt->symbol_ + mt->length_, suffix.o->to_char_star(suffix), suffixlength + 1);
+		std::memcpy(rt->symbol_ + mt->length_, suffix.o->char_star(suffix), suffixlength + 1);
 		rt->hash_ = std::hash<std::string_view>{}(std::string_view{ rt->symbol_, static_cast<uint64_t>(rt->length_) });
 		return var<symbol_a>{ reinterpret_cast<symbol_a&>(r) };
 	}
 
-	char const* symbol_t::to_char_star(con<symbol_a> const& me)
+	char const* symbol_t::char_star(con<symbol_a> const& me)
 	{
 		auto const mt = static_cast<symbol_t const* const>(me.t);
 		return mt->symbol_;

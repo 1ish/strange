@@ -11,7 +11,7 @@ namespace strange
 
 		void (*increment) (var<forward_extractor_a<element_d>> const& me);
 
-		fit<forward_extractor_a<>> (*to_extractor_any) (con<forward_extractor_a<element_d>> const& me);
+		fit<forward_extractor_a<>> (*any_extractor) (con<forward_extractor_a<element_d>> const& me);
 
 		element_d const& (*_operator_star) (con<forward_extractor_a<element_d>> const& me);
 

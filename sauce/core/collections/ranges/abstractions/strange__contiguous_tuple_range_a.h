@@ -11,7 +11,7 @@ namespace strange
 
 		rat<contiguous_tuple_extractor_a<elements_d...>> (*end) (con<contiguous_tuple_range_a<elements_d...>> const& me);
 
-		var<contiguous_range_a<>> (*to_range_any) (con<contiguous_tuple_range_a<elements_d...>> const& me);
+		var<contiguous_range_a<>> (*any_range) (con<contiguous_tuple_range_a<elements_d...>> const& me);
 	};
 
 	template <typename... elements_d>

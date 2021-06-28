@@ -35,11 +35,11 @@ namespace strange
 		double (*float64) (con<container_a> const& me);
 
 		var<container_a> (*make_char_star) (con<container_a> const& me,
-			char const* const char_star);
+			char const* char_star);
 
 		bool (*is_char_star) (con<container_a> const& me);
 
-		char const* const (*char_star) (con<container_a> const& me);
+		char const* (*char_star) (con<container_a> const& me);
 
 		var<container_a> (*make_lake) (con<container_a> const& me,
 			con<lake_a> const& lake);

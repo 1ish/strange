@@ -9,7 +9,7 @@ namespace strange
 		var<symbol_a> (*add) (con<symbol_a> const& me,
 			con<symbol_a> const& suffix);
 
-		char const* (*to_char_star) (con<symbol_a> const& me);
+		char const* (*char_star) (con<symbol_a> const& me);
 
 		int64_t (*length) (con<symbol_a> const& me);
 
@@ -34,27 +34,27 @@ namespace strange
 	};
 
 	inline bool operator==(con<symbol_a> const& left,
-		char const* const right)
+		char const* right)
 	{
-		return std::strncmp(left.o->to_char_star(left), right, static_cast<std::size_t>(left.o->length(left) + 1)) == 0;
+		return std::strncmp(left.o->char_star(left), right, static_cast<std::size_t>(left.o->length(left) + 1)) == 0;
 	}
 
 	inline bool operator!=(con<symbol_a> const& left,
-		char const* const right)
+		char const* right)
 	{
-		return std::strncmp(left.o->to_char_star(left), right, static_cast<std::size_t>(left.o->length(left) + 1)) != 0;
+		return std::strncmp(left.o->char_star(left), right, static_cast<std::size_t>(left.o->length(left) + 1)) != 0;
 	}
 
-	inline bool operator==(char const* const left,
+	inline bool operator==(char const* left,
 		con<symbol_a> const& right)
 	{
-		return std::strncmp(left, right.o->to_char_star(right), static_cast<std::size_t>(right.o->length(right) + 1)) == 0;
+		return std::strncmp(left, right.o->char_star(right), static_cast<std::size_t>(right.o->length(right) + 1)) == 0;
 	}
 
-	inline bool operator!=(char const* const left,
+	inline bool operator!=(char const* left,
 		con<symbol_a> const& right)
 	{
-		return std::strncmp(left, right.o->to_char_star(right), static_cast<std::size_t>(right.o->length(right) + 1)) != 0;
+		return std::strncmp(left, right.o->char_star(right), static_cast<std::size_t>(right.o->length(right) + 1)) != 0;
 	}
 }
 
