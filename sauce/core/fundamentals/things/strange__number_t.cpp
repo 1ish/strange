@@ -360,4 +360,8 @@ namespace strange
 	// instantiation
 	template struct number_t<int64_t>;
 	template struct number_t<int64_t&>;
+	template struct number_t<uint64_t>;
+	template struct number_t<uint64_t&>;
+	template struct number_t<double>;
+	template struct number_t<double&>;
 }

@@ -174,6 +174,10 @@ namespace strange
 	// instantiation
 	template struct data_t<int64_t>;
 	template struct data_t<int64_t&>;
+	template struct data_t<uint64_t>;
+	template struct data_t<uint64_t&>;
+	template struct data_t<double>;
+	template struct data_t<double&>;
 	template struct data_t<default_copy<std::shared_timed_mutex>>;
 	template struct data_t<default_copy<std::string>>;
 

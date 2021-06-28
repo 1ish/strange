@@ -94,14 +94,18 @@ namespace taste
 		auto unlock = unlock_a::create();
 		auto dv = dat<int64_t>();
 		auto dv1 = dat(int64_t{ 1 });
-		int64_t num = 1;
-		auto dr = dat_ref(num);
+		int64_t number_one = 1;
+		auto dr = dat_ref(number_one);
 		auto dp = dat_ptr(new int64_t(1));
 		auto dd = dat_def<std::string>();
 		REQUIRE(sym("this") == sym("this"));
 		REQUIRE(sym("this") != sym("that"));
 		std::unordered_set<var<symbol_a>> names = { sym("minime"), sym("pigsy") };
 		std::set<var<symbol_a>> names2 = { sym("minime"), sym("pigsy") };
+
+		auto number = num(123LL);
+		auto uns = num(123ULL);
+		auto flt = num(1.23);
 	}
 }
 
