@@ -135,8 +135,15 @@ namespace strange
 	bool thing_t::pack(con<> const& me,
 		var<container_a> const& container)
 	{
-		//TODO container.o->push_back(container, container.o->make_lake(container, text("strange::thing::unpack")));
-		return false;
+		container.o->push_back(container, container.o->make_char_star(container, "strange::thing::unpack"));
+		auto const& mate = reinterpret_cast<con<> const&>(me.t->error_);
+		if (mate.t)
+		{
+			auto directory = container.o->make_directory(container);
+			directory.o->insert(directory, container.o->make_char_star(container, "error"), container.o->make_thing(container, mate));
+			container.o->push_back(container, directory);
+		}
+		return true;
 	}
 
 	void thing_t::_free(any_a const& me)

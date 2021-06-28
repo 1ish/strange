@@ -64,13 +64,13 @@ namespace strange
 	template <typename... elements_d> struct contiguous_tuple_mutator_range_a;
 
 	template <typename... elements_d> struct tuple_a;
-	template <typename key_d = var<>, typename value_d = var<>, typename element_d = var<>> struct collection_a;
+	template <typename key_d = con<>, typename value_d = var<>, typename element_d = var<>> struct collection_a;
 	template <typename element_d = var<>> struct queue_a;
 	template <typename element_d = var<>> struct list_a;
 	template <typename element_d = var<>> struct group_a;
 	template <typename element_d = var<>> struct ordered_group_a;
-	template <typename key_d = var<>, typename value_d = var<>> struct table_a;
-	template <typename key_d = var<>, typename value_d = var<>> struct ordered_table_a;
+	template <typename key_d = con<>, typename value_d = var<>> struct table_a;
+	template <typename key_d = con<>, typename value_d = var<>> struct ordered_table_a;
 	struct brook_a;
 	struct lake_a;
 	struct text_a;

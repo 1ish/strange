@@ -4,7 +4,7 @@
 namespace strange
 {
 	struct container_o :
-		collection_o<container_a, container_a, container_a>
+		collection_o<con<container_a>, var<container_a>, var<container_a>>
 	{
 		var<container_a> (*make_thing) (con<container_a> const& me,
 			con<> const& thing);
@@ -34,6 +34,13 @@ namespace strange
 
 		double (*float64) (con<container_a> const& me);
 
+		var<container_a> (*make_char_star) (con<container_a> const& me,
+			char const* const char_star);
+
+		bool (*is_char_star) (con<container_a> const& me);
+
+		char const* const (*char_star) (con<container_a> const& me);
+
 		var<container_a> (*make_lake) (con<container_a> const& me,
 			con<lake_a> const& lake);
 
@@ -51,7 +58,7 @@ namespace strange
 
 		bool (*is_directory) (con<container_a> const& me);
 
-		var<table_a<var<lake_a>, var<container_a>>> (*directory) (con<container_a> const& me);
+		var<table_a<con<lake_a>, var<container_a>>> (*directory) (con<container_a> const& me);
 	};
 
 	struct container_a
