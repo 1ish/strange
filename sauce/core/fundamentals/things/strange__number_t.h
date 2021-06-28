@@ -54,11 +54,11 @@ namespace strange
 			bool is_pointer);
 
 		// numeric_a
-		static int64_t to_int64(con<numeric_a> const& me);
+		static int64_t int64(con<numeric_a> const& me);
 
-		static uint64_t to_uint64(con<numeric_a> const& me);
+		static uint64_t uint64(con<numeric_a> const& me);
 
-		static double to_float64(con<numeric_a> const& me);
+		static double float64(con<numeric_a> const& me);
 
 		static int64_t byte_size(con<numeric_a> const& me);
 

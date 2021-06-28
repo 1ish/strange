@@ -28,9 +28,9 @@ namespace strange
 					number_t<type_d>::_pointer,
 				},
 				// numeric_a
-				number_t<type_d>::to_int64,
-				number_t<type_d>::to_uint64,
-				number_t<type_d>::to_float64,
+				number_t<type_d>::int64,
+				number_t<type_d>::uint64,
+				number_t<type_d>::float64,
 				number_t<type_d>::byte_size,
 				number_t<type_d>::is_int,
 				number_t<type_d>::is_signed,
@@ -105,7 +105,7 @@ namespace strange
 
 	// numeric_a
 	template <typename type_d>
-	int64_t number_t<type_d>::to_int64(con<numeric_a> const& me)
+	int64_t number_t<type_d>::int64(con<numeric_a> const& me)
 	{
 		auto const nt = static_cast<number_t<type_d> const* const>(me.t);
 		if constexpr (std::is_floating_point_v<std::remove_reference_t<type_d>>)
@@ -119,7 +119,7 @@ namespace strange
 	}
 
 	template <typename type_d>
-	uint64_t number_t<type_d>::to_uint64(con<numeric_a> const& me)
+	uint64_t number_t<type_d>::uint64(con<numeric_a> const& me)
 	{
 		auto const nt = static_cast<number_t<type_d> const* const>(me.t);
 		if constexpr (std::is_floating_point_v<std::remove_reference_t<type_d>>)
@@ -133,7 +133,7 @@ namespace strange
 	}
 
 	template <typename type_d>
-	double number_t<type_d>::to_float64(con<numeric_a> const& me)
+	double number_t<type_d>::float64(con<numeric_a> const& me)
 	{
 		auto const nt = static_cast<number_t<type_d> const* const>(me.t);
 		return static_cast<double>(nt->data_);

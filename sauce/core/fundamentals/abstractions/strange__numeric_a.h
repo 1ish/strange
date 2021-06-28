@@ -6,11 +6,11 @@ namespace strange
 	struct numeric_o :
 		any_o
 	{
-		int64_t (*to_int64) (con<numeric_a> const& me);
+		int64_t (*int64) (con<numeric_a> const& me);
 
-		uint64_t (*to_uint64) (con<numeric_a> const& me);
+		uint64_t (*uint64) (con<numeric_a> const& me);
 
-		double (*to_float64) (con<numeric_a> const& me);
+		double (*float64) (con<numeric_a> const& me);
 
 		int64_t (*byte_size) (con<numeric_a> const& me);
 
