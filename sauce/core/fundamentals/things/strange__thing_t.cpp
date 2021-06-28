@@ -20,7 +20,7 @@ namespace strange
 			equal,
 			less,
 			less_or_equal,
-			contain,
+			pack,
 			_free,
 			_copy,
 			_set_pointer,
@@ -132,7 +132,7 @@ namespace strange
 		return thing_t::_less_or_equal(me, other);
 	}
 
-	bool thing_t::contain(con<> const& me,
+	bool thing_t::pack(con<> const& me,
 		var<container_a> const& container)
 	{
 		//TODO	container.o->push_back(container, container.o->make_lake(container,

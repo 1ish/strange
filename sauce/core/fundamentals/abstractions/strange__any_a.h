@@ -47,7 +47,7 @@ namespace strange
 		static inline bool greater_or_equal (con<> const& me,
 			con<> const& other);
 
-		bool (*contain) (con<> const& me,
+		bool (*pack) (con<> const& me,
 			var<container_a> const& container);
 
 		void (*_free) (any_a const& me);
