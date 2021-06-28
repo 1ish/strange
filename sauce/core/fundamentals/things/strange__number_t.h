@@ -74,6 +74,16 @@ namespace strange
 
 		static bool is_normal(con<numeric_a> const& me);
 
+		// mutable_numeric_a
+		static void from_int64(var<mutable_numeric_a> const& me,
+			int64_t number);
+
+		static void from_uint64(var<mutable_numeric_a> const& me,
+			uint64_t number);
+
+		static void from_float64(var<mutable_numeric_a> const& me,
+			double number);
+
 		// number_a
 		static var<data_a<std::remove_reference_t<type_d>>> data(con<number_a<std::remove_reference_t<type_d>>> const& me);
 

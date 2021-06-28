@@ -10,34 +10,40 @@ namespace strange
 		{
 			{
 				{
-					// any_a
-					number_a<std::remove_reference_t<type_d>>::cat,
-					number_t<type_d>::is,
-					number_t<type_d>::as,
-					number_t<type_d>::type,
-					number_t<type_d>::set_error,
-					number_t<type_d>::error,
-					number_t<type_d>::hash,
-					number_t<type_d>::equal,
-					number_t<type_d>::less,
-					number_t<type_d>::less_or_equal,
-					number_t<type_d>::contain,
-					number_t<type_d>::_free,
-					number_t<type_d>::_copy,
-					number_t<type_d>::_set_pointer,
-					number_t<type_d>::_pointer,
+					{
+						// any_a
+						number_a<std::remove_reference_t<type_d>>::cat,
+						number_t<type_d>::is,
+						number_t<type_d>::as,
+						number_t<type_d>::type,
+						number_t<type_d>::set_error,
+						number_t<type_d>::error,
+						number_t<type_d>::hash,
+						number_t<type_d>::equal,
+						number_t<type_d>::less,
+						number_t<type_d>::less_or_equal,
+						number_t<type_d>::contain,
+						number_t<type_d>::_free,
+						number_t<type_d>::_copy,
+						number_t<type_d>::_set_pointer,
+						number_t<type_d>::_pointer,
+					},
+					// numeric_a
+					number_t<type_d>::int64,
+					number_t<type_d>::uint64,
+					number_t<type_d>::float64,
+					number_t<type_d>::byte_size,
+					number_t<type_d>::is_int,
+					number_t<type_d>::is_signed,
+					number_t<type_d>::is_nan,
+					number_t<type_d>::is_inf,
+					number_t<type_d>::is_finite,
+					number_t<type_d>::is_normal,
 				},
-				// numeric_a
-				number_t<type_d>::int64,
-				number_t<type_d>::uint64,
-				number_t<type_d>::float64,
-				number_t<type_d>::byte_size,
-				number_t<type_d>::is_int,
-				number_t<type_d>::is_signed,
-				number_t<type_d>::is_nan,
-				number_t<type_d>::is_inf,
-				number_t<type_d>::is_finite,
-				number_t<type_d>::is_normal,
+				// mutable_numeric_a
+				number_t<type_d>::from_int64,
+				number_t<type_d>::from_uint64,
+				number_t<type_d>::from_float64,
 			},
 			// number_a
 			number_t<type_d>::data,
@@ -210,6 +216,41 @@ namespace strange
 		else
 		{
 			return true;
+		}
+	}
+
+	// mutable_numeric_a
+	template <typename type_d>
+	void number_t<type_d>::from_int64(var<mutable_numeric_a> const& me,
+		int64_t number)
+	{
+		me.mut();
+		auto const nt = static_cast<number_t<type_d>* const>(me.t);
+		nt->data_ = static_cast<std::remove_reference_t<type_d>>(number);
+	}
+
+	template <typename type_d>
+	void number_t<type_d>::from_uint64(var<mutable_numeric_a> const& me,
+		uint64_t number)
+	{
+		me.mut();
+		auto const nt = static_cast<number_t<type_d>* const>(me.t);
+		nt->data_ = static_cast<std::remove_reference_t<type_d>>(number);
+	}
+
+	template <typename type_d>
+	void number_t<type_d>::from_float64(var<mutable_numeric_a> const& me,
+		double number)
+	{
+		me.mut();
+		auto const nt = static_cast<number_t<type_d>* const>(me.t);
+		if constexpr (std::is_floating_point_v<std::remove_reference_t<type_d>>)
+		{
+			nt->data_ = static_cast<std::remove_reference_t<type_d>>(number);
+		}
+		else
+		{
+			nt->data_ = static_cast<std::remove_reference_t<type_d>>(std::llround(number));
 		}
 	}
 

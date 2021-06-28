@@ -5,7 +5,7 @@ namespace strange
 {
 	template <typename type_d>
 	struct number_o :
-		numeric_o
+		mutable_numeric_o
 	{
 		var<data_a<type_d>> (*data) (con<number_a<type_d>> const& me);
 
