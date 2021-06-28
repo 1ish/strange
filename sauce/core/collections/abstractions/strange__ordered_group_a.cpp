@@ -14,14 +14,11 @@ namespace strange
 		con<symbol_a> const& thing,
 		con<symbol_a> const& function)
 	{
-		static auto const strange_s = sym("strange");
-		if (scope.o->equal(scope, strange_s))
+		if (scope == "strange")
 		{
-			static auto const ordered_group_s = sym("ordered_group");
-			if (thing.o->equal(thing, ordered_group_s))
+			if (thing == "ordered_group")
 			{
-				static auto const create_from_range_s = sym("create_from_range");
-				if (function.o->equal(function, create_from_range_s))
+				if (function == "create_from_range")
 				{
 					// return thing_t::create_from_range;
 				}

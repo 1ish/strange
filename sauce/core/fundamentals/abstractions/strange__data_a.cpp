@@ -14,29 +14,22 @@ namespace strange
 		con<symbol_a> const& thing,
 		con<symbol_a> const& function)
 	{
-		static auto const strange_s = sym("strange");
-		if (scope.o->equal(scope, strange_s))
+		if (scope == "strange")
 		{
-			if constexpr (!std::is_reference_v<type_d>)
+			if (thing == "data")
 			{
-				static auto const create_from_range_s = sym("create_from_range");
-				static auto const data_s = sym("data");
-				if (thing.o->equal(thing, data_s))
+				if (function == "create_from_range")
 				{
-					if (function.o->equal(function, create_from_range_s))
-					{
-						return data_t<type_d>::create_from_range;
-					}
+					return data_t<type_d>::create_from_range;
 				}
-				if constexpr (std::is_pointer_v<type_d>)
+			}
+			else if constexpr (std::is_pointer_v<type_d>)
+			{
+				if (thing == "data_pointer")
 				{
-					static auto const data_pointer_s = sym("data_pointer");
-					if (thing.o->equal(thing, data_pointer_s))
+					if (function == "create_from_range")
 					{
-						if (function.o->equal(function, create_from_range_s))
-						{
-							return data_pointer_t<type_d>::create_from_range;
-						}
+						return data_pointer_t<type_d>::create_from_range;
 					}
 				}
 			}

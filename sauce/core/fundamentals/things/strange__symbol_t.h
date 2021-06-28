@@ -64,24 +64,21 @@ namespace strange
 			con<symbol_a> const& other)
 		{
 			auto const mt = static_cast<symbol_t const* const>(me.t);
-			return std::strncmp(mt->symbol_, other.o->to_char_star(other),
-				std::max(mt->length_, other.o->length(other))) == 0;
+			return std::strncmp(mt->symbol_, other.o->to_char_star(other), mt->length_ + 1) == 0;
 		}
 
 		static inline bool _less(con<symbol_a> const& me,
 			con<symbol_a> const& other)
 		{
 			auto const mt = static_cast<symbol_t const* const>(me.t);
-			return std::strncmp(mt->symbol_, other.o->to_char_star(other),
-				std::max(mt->length_, other.o->length(other))) < 0;
+			return std::strncmp(mt->symbol_, other.o->to_char_star(other), mt->length_ + 1) < 0;
 		}
 
 		static inline bool _less_or_equal(con<symbol_a> const& me,
 			con<symbol_a> const& other)
 		{
 			auto const mt = static_cast<symbol_t const* const>(me.t);
-			return std::strncmp(mt->symbol_, other.o->to_char_star(other),
-				std::max(mt->length_, other.o->length(other))) <= 0;
+			return std::strncmp(mt->symbol_, other.o->to_char_star(other), mt->length_ + 1) <= 0;
 		}
 
 	protected:

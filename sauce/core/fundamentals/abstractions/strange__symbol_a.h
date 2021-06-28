@@ -32,6 +32,30 @@ namespace strange
 			con<symbol_a> const& thing,
 			con<symbol_a> const& function);
 	};
+
+	inline bool operator==(con<symbol_a> const& left,
+		char const* const right)
+	{
+		return std::strncmp(left.o->to_char_star(left), right, static_cast<std::size_t>(left.o->length(left) + 1)) == 0;
+	}
+
+	inline bool operator!=(con<symbol_a> const& left,
+		char const* const right)
+	{
+		return std::strncmp(left.o->to_char_star(left), right, static_cast<std::size_t>(left.o->length(left) + 1)) != 0;
+	}
+
+	inline bool operator==(char const* const left,
+		con<symbol_a> const& right)
+	{
+		return std::strncmp(left, right.o->to_char_star(right), static_cast<std::size_t>(right.o->length(right) + 1)) == 0;
+	}
+
+	inline bool operator!=(char const* const left,
+		con<symbol_a> const& right)
+	{
+		return std::strncmp(left, right.o->to_char_star(right), static_cast<std::size_t>(right.o->length(right) + 1)) != 0;
+	}
 }
 
 #endif
