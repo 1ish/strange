@@ -156,16 +156,13 @@ namespace strange
 
 		static inline var<> unpack(con<container_a> const& container)
 		{
-			auto result = create();
-			if (container.o->is_directory(container))
-			{
-				auto directory = container.o->directory(container);
-				auto key = con<lake_a>{}; // lake("error");
-				auto value = directory.o->at(directory, key);
-				auto error = value.o->thing(value);
-				result.o->set_error(result, error);
-			}
-			return result;
+			assert(container.o->is_directory(container));
+			auto thing = create();
+			auto key = container.o->make_char_star(container, "error");
+			auto value = container.o->at(container, key);
+			auto error = value.o->thing(value);
+			thing.o->set_error(thing, error);
+			return thing;
 		}
 	};
 

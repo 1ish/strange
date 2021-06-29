@@ -135,13 +135,11 @@ namespace strange
 	bool thing_t::pack(con<> const& me,
 		var<container_a> const& container)
 	{
-		container.o->push_back(container, container.o->make_char_star(container, "strange::thing::unpack"));
+		assert(container.o->is_directory(container));
 		auto const& mate = reinterpret_cast<con<> const&>(me.t->error_);
 		if (mate.t)
 		{
-			auto directory = container.o->make_directory(container);
-			directory.o->insert(directory, container.o->make_char_star(container, "error"), container.o->make_thing(container, mate));
-			container.o->push_back(container, directory);
+			container.o->insert(container, container.o->make_char_star(container, "error"), container.o->make_thing(container, mate));
 		}
 		return true;
 	}
