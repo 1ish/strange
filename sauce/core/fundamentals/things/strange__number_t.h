@@ -37,6 +37,56 @@ namespace strange
 		static number_o<std::remove_reference_t<type_d>> const* _operations();
 		static number_o<std::remove_reference_t<type_d>> const* _pointer_operations();
 
+	public:
+		// inline
+		static inline bool _equal(con<number_a<std::remove_reference_t<type_d>>> const& me,
+			con<number_a<std::remove_reference_t<type_d>>> const& other)
+		{
+			auto const mt = static_cast<number_t<type_d> const* const>(me.t);
+			return mt->data_ == other.o->extract(other);
+		}
+
+		static inline bool _less(con<number_a<std::remove_reference_t<type_d>>> const& me,
+			con<number_a<std::remove_reference_t<type_d>>> const& other)
+		{
+			auto const mt = static_cast<number_t<type_d> const* const>(me.t);
+			return mt->data_ < other.o->extract(other);
+		}
+
+		static inline bool _less_or_equal(con<number_a<std::remove_reference_t<type_d>>> const& me,
+			con<number_a<std::remove_reference_t<type_d>>> const& other)
+		{
+			auto const mt = static_cast<number_t<type_d> const* const>(me.t);
+			return mt->data_ <= other.o->extract(other);
+		}
+
+		static inline bool _equal(con<random_access_extractor_a<std::remove_reference_t<type_d>>> const& me,
+			con<random_access_extractor_a<std::remove_reference_t<type_d>>> const& other)
+		{
+			assert(me.o->type(me) == other.o->type(other));
+			auto const mt = static_cast<number_t<type_d> const* const>(me.t);
+			auto const ot = static_cast<number_t<type_d> const* const>(other.t);
+			return mt->data_ == ot->data_;
+		}
+
+		static inline bool _less(con<random_access_extractor_a<std::remove_reference_t<type_d>>> const& me,
+			con<random_access_extractor_a<std::remove_reference_t<type_d>>> const& other)
+		{
+			assert(me.o->type(me) == other.o->type(other));
+			auto const mt = static_cast<number_t<type_d> const* const>(me.t);
+			auto const ot = static_cast<number_t<type_d> const* const>(other.t);
+			return mt->data_ < ot->data_;
+		}
+
+		static inline bool _less_or_equal(con<random_access_extractor_a<std::remove_reference_t<type_d>>> const& me,
+			con<random_access_extractor_a<std::remove_reference_t<type_d>>> const& other)
+		{
+			assert(me.o->type(me) == other.o->type(other));
+			auto const mt = static_cast<number_t<type_d> const* const>(me.t);
+			auto const ot = static_cast<number_t<type_d> const* const>(other.t);
+			return mt->data_ <= ot->data_;
+		}
+
 	protected:
 		// any_a
 		static bool is(con<> const& me,
@@ -46,6 +96,17 @@ namespace strange
 			var<> const& abstraction);
 
 		static var<symbol_a> type(con<> const& me);
+
+		static uint64_t hash(con<> const& me);
+
+		static bool equal(con<> const& me,
+			con<> const& other);
+
+		static bool less(con<> const& me,
+			con<> const& other);
+
+		static bool less_or_equal(con<> const& me,
+			con<> const& other);
 
 		static void _copy(any_a const& me,
 			any_a& copy);
@@ -138,6 +199,15 @@ namespace strange
 
 		static bool _extractor_as(con<> const& me,
 			var<> const& abstraction);
+
+		static bool _extractor_equal(con<> const& me,
+			con<> const& other);
+
+		static bool _extractor_less(con<> const& me,
+			con<> const& other);
+
+		static bool _extractor_less_or_equal(con<> const& me,
+			con<> const& other);
 
 		static void _extractor_copy(any_a const& me,
 			any_a& copy);

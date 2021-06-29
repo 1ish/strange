@@ -10,6 +10,7 @@
 #include <utility>
 #include <type_traits>
 #include <cmath>
+#include <cassert>
 
 namespace strange
 {

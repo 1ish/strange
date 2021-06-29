@@ -96,6 +96,49 @@ namespace strange
 	}
 
 	template <typename type_d>
+	uint64_t number_t<type_d>::hash(con<> const& me)
+	{
+		auto const nt = static_cast<number_t<type_d> const* const>(me.t);
+		return std::hash<std::remove_reference_t<type_d>>{}(nt->data_);
+	}
+
+	template <typename type_d>
+	bool number_t<type_d>::equal(con<> const& me,
+		con<> const& other)
+	{
+		auto const on = other.dyn<con<number_a<std::remove_reference_t<type_d>>>>();
+		if (on.o->something(on))
+		{
+			return number_t<type_d>::_equal(me.ref<con<number_a<std::remove_reference_t<type_d>>>>(), on);
+		}
+		return data_t<type_d>::equal(me, other);
+	}
+
+	template <typename type_d>
+	bool number_t<type_d>::less(con<> const& me,
+		con<> const& other)
+	{
+		auto const on = other.dyn<con<number_a<std::remove_reference_t<type_d>>>>();
+		if (on.o->something(on))
+		{
+			return number_t<type_d>::_less(me.ref<con<number_a<std::remove_reference_t<type_d>>>>(), on);
+		}
+		return data_t<type_d>::less(me, other);
+	}
+
+	template <typename type_d>
+	bool number_t<type_d>::less_or_equal(con<> const& me,
+		con<> const& other)
+	{
+		auto const on = other.dyn<con<number_a<std::remove_reference_t<type_d>>>>();
+		if (on.o->something(on))
+		{
+			return number_t<type_d>::_less_or_equal(me.ref<con<number_a<std::remove_reference_t<type_d>>>>(), on);
+		}
+		return data_t<type_d>::less_or_equal(me, other);
+	}
+
+	template <typename type_d>
 	void number_t<type_d>::_copy(any_a const& me,
 		any_a& copy)
 	{
@@ -348,7 +391,7 @@ namespace strange
 	{
 		new number_t<type_d>{ copy, me };
 		number_t<type_d>::_clone(me, copy);
-		me.o = number_t<type_d>::_data_operations();
+		copy.o = number_t<type_d>::_data_operations();
 	}
 
 	template <typename type_d>
@@ -433,9 +476,9 @@ namespace strange
 						number_t<type_d>::set_error,
 						number_t<type_d>::error,
 						number_t<type_d>::hash,
-						number_t<type_d>::equal,
-						number_t<type_d>::less,
-						number_t<type_d>::less_or_equal,
+						number_t<type_d>::_extractor_equal,
+						number_t<type_d>::_extractor_less,
+						number_t<type_d>::_extractor_less_or_equal,
 						number_t<type_d>::pack,
 						number_t<type_d>::_free,
 						number_t<type_d>::_extractor_copy,
@@ -495,12 +538,48 @@ namespace strange
 	}
 
 	template <typename type_d>
+	bool number_t<type_d>::_extractor_equal(con<> const& me,
+		con<> const& other)
+	{
+		auto const on = other.dyn<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>();
+		if (on.o->something(on))
+		{
+			return number_t<type_d>::_equal(me.ref<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>(), on);
+		}
+		return data_t<type_d>::equal(me, other);
+	}
+
+	template <typename type_d>
+	bool number_t<type_d>::_extractor_less(con<> const& me,
+		con<> const& other)
+	{
+		auto const on = other.dyn<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>();
+		if (on.o->something(on))
+		{
+			return number_t<type_d>::_less(me.ref<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>(), on);
+		}
+		return data_t<type_d>::less(me, other);
+	}
+
+	template <typename type_d>
+	bool number_t<type_d>::_extractor_less_or_equal(con<> const& me,
+		con<> const& other)
+	{
+		auto const on = other.dyn<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>();
+		if (on.o->something(on))
+		{
+			return number_t<type_d>::_less_or_equal(me.ref<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>(), on);
+		}
+		return data_t<type_d>::less_or_equal(me, other);
+	}
+
+	template <typename type_d>
 	void number_t<type_d>::_extractor_copy(any_a const& me,
 		any_a& copy)
 	{
 		new number_t<type_d>{ copy, me };
 		number_t<type_d>::_clone(me, copy);
-		me.o = number_t<type_d>::_extractor_operations();
+		copy.o = number_t<type_d>::_extractor_operations();
 	}
 
 	template <typename type_d>

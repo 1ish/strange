@@ -124,7 +124,14 @@ namespace taste
 		auto uns_ref_data = uns_ref.o->data(uns_ref);
 		auto flt_ref_data = flt_ref.o->data(flt_ref);
 
-
+		auto e1 = num(1LL).pfm(&number_o<int64_t>::extractor);
+		auto e11 = e1 + 10;
+		std__cout << *e1 << " " << *e11 << "\n";
+		e1 != e11;
+		for (auto it = e1; it != e11; ++it)
+		{
+			std__cout << *it << "\n";
+		}
 	}
 }
 
