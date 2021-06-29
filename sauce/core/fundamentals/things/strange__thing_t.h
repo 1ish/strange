@@ -154,16 +154,7 @@ namespace strange
 			return create();
 		}
 
-		static inline var<> unpack(con<container_a> const& container)
-		{
-			assert(container.o->is_directory(container));
-			auto thing = create();
-			auto key = container.o->make_char_star(container, "error");
-			auto value = container.o->at(container, key);
-			auto error = value.o->thing(value);
-			thing.o->set_error(thing, error);
-			return thing;
-		}
+		static var<> unpack(con<container_a> const& container);
 	};
 
 	inline void any_o::set_something(var<> const& me,

@@ -6,6 +6,7 @@ namespace strange
 	struct container_o :
 		collection_o<con<container_a>, var<container_a>, var<container_a>>
 	{
+		// thing
 		var<container_a> (*make_thing) (con<container_a> const& me,
 			con<> const& thing);
 
@@ -13,6 +14,7 @@ namespace strange
 
 		var<> (*thing) (con<container_a> const& me);
 
+		// boolean
 		var<container_a> (*make_boolean) (con<container_a> const& me,
 			bool boolean);
 
@@ -20,6 +22,7 @@ namespace strange
 
 		bool (*boolean) (con<container_a> const& me);
 
+		// int64
 		var<container_a> (*make_int64) (con<container_a> const& me,
 			int64_t int64);
 
@@ -27,6 +30,7 @@ namespace strange
 
 		int64_t (*int64) (con<container_a> const& me);
 
+		// float64
 		var<container_a> (*make_float64) (con<container_a> const& me,
 			double float64);
 
@@ -34,13 +38,15 @@ namespace strange
 
 		double (*float64) (con<container_a> const& me);
 
-		var<container_a> (*make_char_star) (con<container_a> const& me,
-			char const* char_star);
+		// symbol
+		var<container_a> (*make_symbol) (con<container_a> const& me,
+			con<symbol_a> const& symbol);
 
-		bool (*is_char_star) (con<container_a> const& me);
+		bool (*is_symbol) (con<container_a> const& me);
 
-		char const* (*char_star) (con<container_a> const& me);
+		var<symbol_a> (*symbol) (con<container_a> const& me);
 
+		// lake
 		var<container_a> (*make_lake) (con<container_a> const& me,
 			con<lake_a> const& lake);
 
@@ -48,17 +54,49 @@ namespace strange
 
 		var<lake_a> (*lake) (con<container_a> const& me);
 
+		// inventory
 		var<container_a> (*make_inventory) (con<container_a> const& me);
 
 		bool (*is_inventory) (con<container_a> const& me);
 
-		var<queue_a<var<container_a>>> (*inventory) (con<container_a> const& me);
+		bool (*inventory_has) (con<container_a> const& me,
+			int64_t index);
 
+		var<container_a> (*inventory_at) (con<container_a> const& me,
+			int64_t index);
+
+		void (*inventory_update) (var<container_a> const& me,
+			int64_t index,
+			var<container_a> const& container);
+
+		bool (*inventory_insert) (var<container_a> const& me,
+			int64_t index,
+			var<container_a> const& container);
+
+		bool (*inventory_erase) (var<container_a> const& me,
+			int64_t index);
+
+		// directory
 		var<container_a> (*make_directory) (con<container_a> const& me);
 
 		bool (*is_directory) (con<container_a> const& me);
 
-		var<table_a<con<lake_a>, var<container_a>>> (*directory) (con<container_a> const& me);
+		bool (*directory_has) (con<container_a> const& me,
+			con<symbol_a> const& symbol);
+
+		var<container_a> (*directory_at) (con<container_a> const& me,
+			con<symbol_a> const& symbol);
+
+		void (*directory_update) (var<container_a> const& me,
+			con<symbol_a> const& symbol,
+			var<container_a> const& container);
+
+		bool (*directory_insert) (var<container_a> const& me,
+			con<symbol_a> const& symbol,
+			var<container_a> const& container);
+
+		bool (*directory_erase) (var<container_a> const& me,
+			con<symbol_a> const& symbol);
 	};
 
 	struct container_a

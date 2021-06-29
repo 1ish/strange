@@ -139,9 +139,21 @@ namespace strange
 		auto const& mate = reinterpret_cast<con<> const&>(me.t->error_);
 		if (mate.t)
 		{
-			container.o->insert(container, container.o->make_char_star(container, "error"), container.o->make_thing(container, mate));
+			container.o->directory_insert(container, sym("error"), container.o->make_thing(container, mate));
 		}
 		return true;
+	}
+
+	var<> thing_t::unpack(con<container_a> const& container)
+	{
+		assert(container.o->is_directory(container));
+		auto const thing = create();
+		auto const error = container.o->directory_at(container, sym("error"));
+		if (error.o->something(error))
+		{
+			thing.o->set_error(thing, error.o->thing(error));
+		}
+		return thing;
 	}
 
 	void thing_t::_free(any_a const& me)
