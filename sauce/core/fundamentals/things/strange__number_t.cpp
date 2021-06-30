@@ -46,6 +46,9 @@ namespace strange
 				number_t<type_d>::from_float64,
 			},
 			// number_a
+			number_t<type_d>::equal_number,
+			number_t<type_d>::less_number,
+			number_t<type_d>::less_or_equal_number,
 			number_t<type_d>::data,
 			number_t<type_d>::extract,
 			number_t<type_d>::mutate,
@@ -109,7 +112,7 @@ namespace strange
 		auto const on = other.dyn<con<number_a<std::remove_reference_t<type_d>>>>();
 		if (on.o->something(on))
 		{
-			return number_t<type_d>::_equal(me.ref<con<number_a<std::remove_reference_t<type_d>>>>(), on);
+			return number_t<type_d>::equal_number(me.ref<con<number_a<std::remove_reference_t<type_d>>>>(), on);
 		}
 		return data_t<type_d>::equal(me, other);
 	}
@@ -121,7 +124,7 @@ namespace strange
 		auto const on = other.dyn<con<number_a<std::remove_reference_t<type_d>>>>();
 		if (on.o->something(on))
 		{
-			return number_t<type_d>::_less(me.ref<con<number_a<std::remove_reference_t<type_d>>>>(), on);
+			return number_t<type_d>::less_number(me.ref<con<number_a<std::remove_reference_t<type_d>>>>(), on);
 		}
 		return data_t<type_d>::less(me, other);
 	}
@@ -133,7 +136,7 @@ namespace strange
 		auto const on = other.dyn<con<number_a<std::remove_reference_t<type_d>>>>();
 		if (on.o->something(on))
 		{
-			return number_t<type_d>::_less_or_equal(me.ref<con<number_a<std::remove_reference_t<type_d>>>>(), on);
+			return number_t<type_d>::less_or_equal_number(me.ref<con<number_a<std::remove_reference_t<type_d>>>>(), on);
 		}
 		return data_t<type_d>::less_or_equal(me, other);
 	}

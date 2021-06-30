@@ -39,21 +39,21 @@ namespace strange
 
 	public:
 		// inline
-		static inline bool _equal(con<number_a<std::remove_reference_t<type_d>>> const& me,
+		static inline bool equal_number(con<number_a<std::remove_reference_t<type_d>>> const& me,
 			con<number_a<std::remove_reference_t<type_d>>> const& other)
 		{
 			auto const mt = static_cast<number_t<type_d> const* const>(me.t);
 			return mt->data_ == other.o->extract(other);
 		}
 
-		static inline bool _less(con<number_a<std::remove_reference_t<type_d>>> const& me,
+		static inline bool less_number(con<number_a<std::remove_reference_t<type_d>>> const& me,
 			con<number_a<std::remove_reference_t<type_d>>> const& other)
 		{
 			auto const mt = static_cast<number_t<type_d> const* const>(me.t);
 			return mt->data_ < other.o->extract(other);
 		}
 
-		static inline bool _less_or_equal(con<number_a<std::remove_reference_t<type_d>>> const& me,
+		static inline bool less_or_equal_number(con<number_a<std::remove_reference_t<type_d>>> const& me,
 			con<number_a<std::remove_reference_t<type_d>>> const& other)
 		{
 			auto const mt = static_cast<number_t<type_d> const* const>(me.t);

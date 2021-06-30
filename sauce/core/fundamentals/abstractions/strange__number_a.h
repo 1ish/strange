@@ -7,6 +7,24 @@ namespace strange
 	struct number_o :
 		mutable_numeric_o
 	{
+		bool (*equal) (con<number_a<type_d>> const& me,
+			con<number_a<type_d>> const& other);
+
+		static inline bool not_equal(con<number_a<type_d>> const& me,
+			con<number_a<type_d>> const& other);
+
+		bool (*less) (con<number_a<type_d>> const& me,
+			con<number_a<type_d>> const& other);
+
+		static inline bool greater(con<number_a<type_d>> const& me,
+			con<number_a<type_d>> const& other);
+
+		bool (*less_or_equal) (con<number_a<type_d>> const& me,
+			con<number_a<type_d>> const& other);
+
+		static inline bool greater_or_equal(con<number_a<type_d>> const& me,
+			con<number_a<type_d>> const& other);
+
 		var<data_a<type_d>> (*data) (con<number_a<type_d>> const& me);
 
 		type_d const& (*extract) (con<number_a<type_d>> const& me);
@@ -31,6 +49,27 @@ namespace strange
 			con<symbol_a> const& thing,
 			con<symbol_a> const& function);
 	};
+
+	template <typename type_d>
+	inline bool number_o<type_d>::not_equal(con<number_a<type_d>> const& me,
+		con<number_a<type_d>> const& other)
+	{
+		return !me.o->equal(me, other);
+	}
+
+	template <typename type_d>
+	inline bool number_o<type_d>::greater(con<number_a<type_d>> const& me,
+		con<number_a<type_d>> const& other)
+	{
+		return !me.o->less_or_equal(me, other);
+	}
+
+	template <typename type_d>
+	inline bool number_o<type_d>::greater_or_equal(con<number_a<type_d>> const& me,
+		con<number_a<type_d>> const& other)
+	{
+		return !me.o->less(me, other);
+	}
 }
 
 #endif
