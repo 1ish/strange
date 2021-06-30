@@ -6,6 +6,24 @@ namespace strange
 	struct symbol_o :
 		any_o
 	{
+		bool (*equal) (con<symbol_a> const& me,
+			con<symbol_a> const& other);
+
+		static inline bool not_equal(con<symbol_a> const& me,
+			con<symbol_a> const& other);
+
+		bool (*less) (con<symbol_a> const& me,
+			con<symbol_a> const& other);
+
+		static inline bool greater(con<symbol_a> const& me,
+			con<symbol_a> const& other);
+
+		bool (*less_or_equal) (con<symbol_a> const& me,
+			con<symbol_a> const& other);
+
+		static inline bool greater_or_equal(con<symbol_a> const& me,
+			con<symbol_a> const& other);
+
 		var<symbol_a> (*add) (con<symbol_a> const& me,
 			con<symbol_a> const& suffix);
 
@@ -32,6 +50,25 @@ namespace strange
 			con<symbol_a> const& thing,
 			con<symbol_a> const& function);
 	};
+
+
+	inline bool symbol_o::not_equal(con<symbol_a> const& me,
+		con<symbol_a> const& other)
+	{
+		return !me.o->equal(me, other);
+	}
+
+	inline bool symbol_o::greater(con<symbol_a> const& me,
+		con<symbol_a> const& other)
+	{
+		return !me.o->less_or_equal(me, other);
+	}
+
+	inline bool symbol_o::greater_or_equal(con<symbol_a> const& me,
+		con<symbol_a> const& other)
+	{
+		return !me.o->less(me, other);
+	}
 
 	inline bool operator==(con<symbol_a> const& left,
 		char const* right)

@@ -117,19 +117,19 @@ namespace strange
 	bool thing_t::equal(con<> const& me,
 		con<> const& other)
 	{
-		return thing_t::_equal(me, other);
+		return thing_t::equal_thing(me, other);
 	}
 
 	bool thing_t::less(con<> const& me,
 		con<> const& other)
 	{
-		return thing_t::_less(me, other);
+		return thing_t::less_thing(me, other);
 	}
 
 	bool thing_t::less_or_equal(con<> const& me,
 		con<> const& other)
 	{
-		return thing_t::_less_or_equal(me, other);
+		return thing_t::less_or_equal_thing(me, other);
 	}
 
 	bool thing_t::pack(con<> const& me,

@@ -29,6 +29,9 @@ namespace strange
 				_pointer,
 			},
 			// symbol_a
+			equal_symbol,
+			less_symbol,
+			less_or_equal_symbol,
 			add,
 			char_star,
 			length,
@@ -87,7 +90,7 @@ namespace strange
 		auto const os = other.dyn<con<symbol_a>>();
 		if (os.o->something(os))
 		{
-			return symbol_t::_equal(me.ref<con<symbol_a>>(), os);
+			return symbol_t::equal_symbol(me.ref<con<symbol_a>>(), os);
 		}
 		return thing_t::equal(me, other);
 	}
@@ -98,7 +101,7 @@ namespace strange
 		auto const os = other.dyn<con<symbol_a>>();
 		if (os.o->something(os))
 		{
-			return symbol_t::_less(me.ref<con<symbol_a>>(), os);
+			return symbol_t::less_symbol(me.ref<con<symbol_a>>(), os);
 		}
 		return thing_t::less(me, other);
 	}
@@ -109,7 +112,7 @@ namespace strange
 		auto const os = other.dyn<con<symbol_a>>();
 		if (os.o->something(os))
 		{
-			return symbol_t::_less_or_equal(me.ref<con<symbol_a>>(), os);
+			return symbol_t::less_or_equal_symbol(me.ref<con<symbol_a>>(), os);
 		}
 		return thing_t::less_or_equal(me, other);
 	}

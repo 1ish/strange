@@ -60,19 +60,19 @@ namespace strange
 		}
 
 	public:
-		static inline bool _equal(con<> const& me,
+		static inline bool equal_thing(con<> const& me,
 			con<> const& other)
 		{
 			return me.t == other.t;
 		}
 
-		static inline bool _less(con<> const& me,
+		static inline bool less_thing(con<> const& me,
 			con<> const& other)
 		{
 			return me.t < other.t;
 		}
 
-		static inline bool _less_or_equal(con<> const& me,
+		static inline bool less_or_equal_thing(con<> const& me,
 			con<> const& other)
 		{
 			return me.t <= other.t;

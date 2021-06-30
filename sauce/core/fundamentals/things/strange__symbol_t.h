@@ -60,21 +60,21 @@ namespace strange
 
 	public:
 		// inline
-		static inline bool _equal(con<symbol_a> const& me,
+		static inline bool equal_symbol(con<symbol_a> const& me,
 			con<symbol_a> const& other)
 		{
 			auto const mt = static_cast<symbol_t const* const>(me.t);
 			return std::strncmp(mt->symbol_, other.o->char_star(other), mt->length_ + 1) == 0;
 		}
 
-		static inline bool _less(con<symbol_a> const& me,
+		static inline bool less_symbol(con<symbol_a> const& me,
 			con<symbol_a> const& other)
 		{
 			auto const mt = static_cast<symbol_t const* const>(me.t);
 			return std::strncmp(mt->symbol_, other.o->char_star(other), mt->length_ + 1) < 0;
 		}
 
-		static inline bool _less_or_equal(con<symbol_a> const& me,
+		static inline bool less_or_equal_symbol(con<symbol_a> const& me,
 			con<symbol_a> const& other)
 		{
 			auto const mt = static_cast<symbol_t const* const>(me.t);
