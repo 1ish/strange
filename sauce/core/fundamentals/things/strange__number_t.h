@@ -60,8 +60,8 @@ namespace strange
 			return mt->data_ <= other.o->extract(other);
 		}
 
-		static inline bool _equal(con<random_access_extractor_a<std::remove_reference_t<type_d>>> const& me,
-			con<random_access_extractor_a<std::remove_reference_t<type_d>>> const& other)
+		static inline bool _extractor_equal_extractor(con<forward_extractor_a<std::remove_reference_t<type_d>>> const& me,
+			con<forward_extractor_a<std::remove_reference_t<type_d>>> const& other)
 		{
 			assert(me.o->type(me) == other.o->type(other));
 			auto const mt = static_cast<number_t<type_d> const* const>(me.t);
@@ -69,7 +69,7 @@ namespace strange
 			return mt->data_ == ot->data_;
 		}
 
-		static inline bool _less(con<random_access_extractor_a<std::remove_reference_t<type_d>>> const& me,
+		static inline bool _extractor_less_extractor(con<random_access_extractor_a<std::remove_reference_t<type_d>>> const& me,
 			con<random_access_extractor_a<std::remove_reference_t<type_d>>> const& other)
 		{
 			assert(me.o->type(me) == other.o->type(other));
@@ -78,7 +78,7 @@ namespace strange
 			return mt->data_ < ot->data_;
 		}
 
-		static inline bool _less_or_equal(con<random_access_extractor_a<std::remove_reference_t<type_d>>> const& me,
+		static inline bool _extractor_less_or_equal_extractor(con<random_access_extractor_a<std::remove_reference_t<type_d>>> const& me,
 			con<random_access_extractor_a<std::remove_reference_t<type_d>>> const& other)
 		{
 			assert(me.o->type(me) == other.o->type(other));

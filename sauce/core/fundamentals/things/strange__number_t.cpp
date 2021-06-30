@@ -486,6 +486,7 @@ namespace strange
 						number_t<type_d>::_pointer,
 					},
 					// forward_extractor_o
+					number_t<type_d>::_extractor_equal_extractor,
 					number_t<type_d>::_extractor_get,
 					number_t<type_d>::_extractor_increment,
 					number_t<type_d>::_extractor_operator_star,
@@ -495,6 +496,8 @@ namespace strange
 				number_t<type_d>::_extractor_decrement,
 			},
 			// random_access_extractor_o
+			number_t<type_d>::_extractor_less_extractor,
+			number_t<type_d>::_extractor_less_or_equal_extractor,
 			number_t<type_d>::_extractor_self_add,
 			number_t<type_d>::_extractor_add,
 		};
@@ -544,7 +547,7 @@ namespace strange
 		auto const on = other.dyn<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>();
 		if (on.o->something(on))
 		{
-			return number_t<type_d>::_equal(me.ref<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>(), on);
+			return number_t<type_d>::_extractor_equal_extractor(me.ref<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>(), on);
 		}
 		return data_t<type_d>::equal(me, other);
 	}
@@ -556,7 +559,7 @@ namespace strange
 		auto const on = other.dyn<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>();
 		if (on.o->something(on))
 		{
-			return number_t<type_d>::_less(me.ref<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>(), on);
+			return number_t<type_d>::_extractor_less_extractor(me.ref<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>(), on);
 		}
 		return data_t<type_d>::less(me, other);
 	}
@@ -568,7 +571,7 @@ namespace strange
 		auto const on = other.dyn<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>();
 		if (on.o->something(on))
 		{
-			return number_t<type_d>::_less_or_equal(me.ref<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>(), on);
+			return number_t<type_d>::_extractor_less_or_equal_extractor(me.ref<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>(), on);
 		}
 		return data_t<type_d>::less_or_equal(me, other);
 	}

@@ -7,6 +7,18 @@ namespace strange
 	struct random_access_tuple_mutator_o :
 		bidirectional_tuple_mutator_o<elements_d...>
 	{
+		bool (*less) (con<random_access_tuple_mutator_a<elements_d...>> const& me,
+			con<random_access_tuple_mutator_a<elements_d...>> const& other);
+
+		static inline bool greater(con<random_access_tuple_mutator_a<elements_d...>> const& me,
+			con<random_access_tuple_mutator_a<elements_d...>> const& other);
+
+		bool (*less_or_equal) (con<random_access_tuple_mutator_a<elements_d...>> const& me,
+			con<random_access_tuple_mutator_a<elements_d...>> const& other);
+
+		static inline bool greater_or_equal(con<random_access_tuple_mutator_a<elements_d...>> const& me,
+			con<random_access_tuple_mutator_a<elements_d...>> const& other);
+
 		void (*self_add) (var<random_access_tuple_mutator_a<elements_d...>> const& me,
 			int64_t offset);
 
@@ -29,6 +41,20 @@ namespace strange
 			con<symbol_a> const& thing,
 			con<symbol_a> const& function);
 	};
+
+	template <typename... elements_d>
+	inline bool random_access_tuple_mutator_o<elements_d...>::greater(con<random_access_tuple_mutator_a<elements_d...>> const& me,
+		con<random_access_tuple_mutator_a<elements_d...>> const& other)
+	{
+		return !me.o->less_or_equal(me, other);
+	}
+
+	template <typename... elements_d>
+	inline bool random_access_tuple_mutator_o<elements_d...>::greater_or_equal(con<random_access_tuple_mutator_a<elements_d...>> const& me,
+		con<random_access_tuple_mutator_a<elements_d...>> const& other)
+	{
+		return !me.o->less(me, other);
+	}
 }
 
 #endif

@@ -7,6 +7,18 @@ namespace strange
 	struct random_access_extractor_o :
 		bidirectional_extractor_o<element_d>
 	{
+		bool (*less) (con<random_access_extractor_a<element_d>> const& me,
+			con<random_access_extractor_a<element_d>> const& other);
+
+		static inline bool greater(con<random_access_extractor_a<element_d>> const& me,
+			con<random_access_extractor_a<element_d>> const& other);
+
+		bool (*less_or_equal) (con<random_access_extractor_a<element_d>> const& me,
+			con<random_access_extractor_a<element_d>> const& other);
+
+		static inline bool greater_or_equal(con<random_access_extractor_a<element_d>> const& me,
+			con<random_access_extractor_a<element_d>> const& other);
+
 		void (*self_add) (var<random_access_extractor_a<element_d>> const& me,
 			int64_t offset);
 
@@ -29,6 +41,20 @@ namespace strange
 			con<symbol_a> const& thing,
 			con<symbol_a> const& function);
 	};
+
+	template <typename element_d>
+	inline bool random_access_extractor_o<element_d>::greater(con<random_access_extractor_a<element_d>> const& me,
+		con<random_access_extractor_a<element_d>> const& other)
+	{
+		return !me.o->less_or_equal(me, other);
+	}
+
+	template <typename element_d>
+	inline bool random_access_extractor_o<element_d>::greater_or_equal(con<random_access_extractor_a<element_d>> const& me,
+		con<random_access_extractor_a<element_d>> const& other)
+	{
+		return !me.o->less(me, other);
+	}
 }
 
 #endif
