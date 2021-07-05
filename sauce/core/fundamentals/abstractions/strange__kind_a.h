@@ -10,6 +10,8 @@ namespace strange
 
 		var<cat_a> (*the_cat) (con<kind_a> const& me);
 
+		//TODO var<type_a> (*the_type) (con<kind_a> const& me);
+
 		behaviour_e (*behaviour) (con<kind_a> const& me);
 
 		// constant  :<any>#
