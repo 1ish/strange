@@ -6,6 +6,8 @@ namespace strange
 	struct cat_o :
 		symbol_o
 	{
+		var<symbol_a> (*scope) (con<cat_a> const& me);
+
 		var<symbol_a> (*name) (con<cat_a> const& me);
 
 		representation_e (*representation) (con<cat_a> const& me);
