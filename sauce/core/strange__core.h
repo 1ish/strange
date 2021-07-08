@@ -22,6 +22,7 @@ namespace strange
 
 	struct symbol_a;
 	struct cat_a;
+	struct type_a;
 	struct kind_a;
 	template <typename type_d> struct data_a;
 	struct numeric_a;
@@ -92,6 +93,7 @@ namespace strange
 #include "fundamentals/abstractions/strange__any_a.h"
 #include "fundamentals/abstractions/strange__symbol_a.h"
 #include "fundamentals/abstractions/strange__cat_a.h"
+#include "fundamentals/abstractions/strange__type_a.h"
 #include "fundamentals/abstractions/strange__kind_a.h"
 #include "fundamentals/abstractions/strange__data_a.h"
 #include "fundamentals/abstractions/strange__numeric_a.h"

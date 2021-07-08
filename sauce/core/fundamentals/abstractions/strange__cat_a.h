@@ -10,11 +10,11 @@ namespace strange
 
 		var<symbol_a> (*name) (con<cat_a> const& me);
 
-		representation_e (*representation) (con<cat_a> const& me);
-
 		var<range_a<cat_a>> (*aspects) (con<cat_a> const& me);
 
 		int64_t (*order) (con<cat_a> const& me);
+
+		representation_e (*representation) (con<cat_a> const& me);
 
 		// abstraction  <symbol>
 		// dimension    <^element>
