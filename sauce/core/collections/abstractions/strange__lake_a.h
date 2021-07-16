@@ -4,7 +4,7 @@
 namespace strange
 {
 	struct lake_o :
-		list_o<int8_t>
+		list_o<uint8_t>
 	{
 	};
 

@@ -4,7 +4,7 @@
 namespace strange
 {
 	struct brook_o :
-		queue_o<int8_t>
+		queue_o<uint8_t>
 	{
 	};
 
