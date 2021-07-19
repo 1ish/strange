@@ -14,11 +14,19 @@
 
 namespace strange
 {
+	enum class representation_e;
+	enum class behaviour_e;
+
+	enum class classification_e;
+
 	struct any_a;
 
 	template <typename abstraction_d = any_a> struct con;
 	template <typename abstraction_d = any_a> struct var;
 	template <typename abstraction_d = any_a> struct ptr;
+	template <typename abstraction_d> struct fit;
+	template <typename abstraction_d> struct bit;
+	template <typename abstraction_d> struct rat;
 
 	struct symbol_a;
 	struct cat_a;
@@ -90,6 +98,8 @@ namespace strange
 
 #include "fundamentals/enumerations/strange__representation_e.h"
 #include "fundamentals/enumerations/strange__behaviour_e.h"
+
+#include "semantics/enumerations/strange__classification_e.h"
 
 #include "fundamentals/abstractions/strange__any_a.h"
 #include "fundamentals/abstractions/strange__symbol_a.h"

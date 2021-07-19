@@ -268,6 +268,7 @@
     <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__number_t.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__symbol_t.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__thing_t.h" />
+    <ClInclude Include="..\..\..\sauce\core\semantics\enumerations\strange__classification_e.h" />
     <ClInclude Include="..\..\..\sauce\core\strange__core.h" />
     <ClInclude Include="..\..\..\sauce\core\utilities\strange__val_u.hpp" />
     <ClInclude Include="..\..\..\sauce\strange.h" />
