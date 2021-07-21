@@ -103,6 +103,15 @@
     <Filter Include="Header Files\sauce\core\semantics\enumerations">
       <UniqueIdentifier>{a29b36c7-5d3f-4e9a-9ff3-5bc2691f90fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\sauce\core\semantics\abstractions">
+      <UniqueIdentifier>{41bccb6f-f12d-4b0c-9b13-16df26c82b70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sauce\core\semantics">
+      <UniqueIdentifier>{0098e09d-3060-425f-93e3-88e020ac12f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sauce\core\semantics\abstractions">
+      <UniqueIdentifier>{4dd02f36-014e-4ff6-b018-45279b87801c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\taste\strange_taste.cpp">
@@ -290,6 +299,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__river_a.cpp">
       <Filter>Source Files\sauce\core\collections\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\semantics\abstractions\strange__token_a.cpp">
+      <Filter>Source Files\sauce\core\semantics\abstractions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -496,6 +508,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\semantics\enumerations\strange__classification_e.h">
       <Filter>Header Files\sauce\core\semantics\enumerations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\semantics\abstractions\strange__token_a.h">
+      <Filter>Header Files\sauce\core\semantics\abstractions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

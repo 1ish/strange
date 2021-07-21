@@ -88,6 +88,8 @@ namespace strange
 	struct container_a;
 	struct parcel_a;
 
+	struct token_a;
+
 	struct thing_t;
 	struct symbol_t;
 	template <typename type_d> struct data_t;
@@ -161,6 +163,8 @@ namespace strange
 #include "collections/abstractions/strange__text_a.h"
 #include "collections/abstractions/strange__container_a.h"
 #include "collections/abstractions/strange__parcel_a.h"
+
+#include "semantics/abstractions/strange__token_a.h"
 
 #include "fundamentals/things/strange__thing_t.h"
 #include "fundamentals/things/strange__symbol_t.h"
