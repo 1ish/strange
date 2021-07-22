@@ -303,6 +303,12 @@
     <ClCompile Include="..\..\..\sauce\core\semantics\abstractions\strange__token_a.cpp">
       <Filter>Source Files\sauce\core\semantics\abstractions</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\semantics\abstractions\strange__expression_a.cpp">
+      <Filter>Source Files\sauce\core\semantics\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\semantics\abstractions\strange__parser_a.cpp">
+      <Filter>Source Files\sauce\core\semantics\abstractions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\sauce\strange.h">
@@ -510,6 +516,15 @@
       <Filter>Header Files\sauce\core\semantics\enumerations</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\semantics\abstractions\strange__token_a.h">
+      <Filter>Header Files\sauce\core\semantics\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\semantics\abstractions\strange__expression_a.h">
+      <Filter>Header Files\sauce\core\semantics\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\semantics\enumerations\strange__generation_e.h">
+      <Filter>Header Files\sauce\core\semantics\enumerations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\semantics\abstractions\strange__parser_a.h">
       <Filter>Header Files\sauce\core\semantics\abstractions</Filter>
     </ClInclude>
   </ItemGroup>

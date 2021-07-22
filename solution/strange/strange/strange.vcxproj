@@ -202,6 +202,8 @@
     <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__number_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__symbol_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__thing_t.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\semantics\abstractions\strange__expression_a.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\semantics\abstractions\strange__parser_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\semantics\abstractions\strange__token_a.cpp" />
     <ClCompile Include="..\..\..\taste\strange_taste.cpp" />
   </ItemGroup>
@@ -269,8 +271,11 @@
     <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__number_t.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__symbol_t.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__thing_t.h" />
+    <ClInclude Include="..\..\..\sauce\core\semantics\abstractions\strange__expression_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\semantics\abstractions\strange__parser_a.h" />
     <ClInclude Include="..\..\..\sauce\core\semantics\abstractions\strange__token_a.h" />
     <ClInclude Include="..\..\..\sauce\core\semantics\enumerations\strange__classification_e.h" />
+    <ClInclude Include="..\..\..\sauce\core\semantics\enumerations\strange__generation_e.h" />
     <ClInclude Include="..\..\..\sauce\core\strange__core.h" />
     <ClInclude Include="..\..\..\sauce\core\utilities\strange__val_u.hpp" />
     <ClInclude Include="..\..\..\sauce\strange.h" />

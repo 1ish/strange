@@ -12,7 +12,7 @@ namespace strange
 		float_literal,
 		comment,
 		punctuation,
-		error,
+		mistake,
 	};
 }
 

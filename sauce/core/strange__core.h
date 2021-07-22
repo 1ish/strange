@@ -18,6 +18,7 @@ namespace strange
 	enum class behaviour_e;
 
 	enum class classification_e;
+	enum class generation_e;
 
 	struct any_a;
 
@@ -89,6 +90,8 @@ namespace strange
 	struct parcel_a;
 
 	struct token_a;
+	struct expression_a;
+	struct parser_a;
 
 	struct thing_t;
 	struct symbol_t;
@@ -102,6 +105,7 @@ namespace strange
 #include "fundamentals/enumerations/strange__behaviour_e.h"
 
 #include "semantics/enumerations/strange__classification_e.h"
+#include "semantics/enumerations/strange__generation_e.h"
 
 #include "fundamentals/abstractions/strange__any_a.h"
 #include "fundamentals/abstractions/strange__symbol_a.h"
@@ -165,6 +169,8 @@ namespace strange
 #include "collections/abstractions/strange__parcel_a.h"
 
 #include "semantics/abstractions/strange__token_a.h"
+#include "semantics/abstractions/strange__expression_a.h"
+#include "semantics/abstractions/strange__parser_a.h"
 
 #include "fundamentals/things/strange__thing_t.h"
 #include "fundamentals/things/strange__symbol_t.h"
