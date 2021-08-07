@@ -17,10 +17,19 @@ namespace strange
 			me.o = data_t<type_d>::_operations();
 		}
 
+		template <typename v = void>
 		inline data_t(any_a& me,
-			type_d& data)
+			type_d const& data)
 		: thing_t{ me }
 		, data_{ data }
+		{
+			me.o = data_t<type_d>::_operations();
+		}
+
+		inline data_t(any_a& me,
+			type_d& data)
+			: thing_t{ me }
+			, data_{ data }
 		{
 			me.o = data_t<type_d>::_operations();
 		}
@@ -74,10 +83,20 @@ namespace strange
 			return var<data_a<std::remove_reference_t<type_d>>>{ reinterpret_cast<data_a<std::remove_reference_t<type_d>>&>(r) };
 		}
 
+
+		template <typename v = void>
 		static inline var<data_a<std::remove_reference_t<type_d>>> create(type_d const& data)
 		{
 			any_a r;
-			new data_t<type_d>{ r, const_cast<type_d&>(data) };
+			new data_t<type_d>{ r, data };
+			data_t<type_d>::_initialise(r);
+			return var<data_a<std::remove_reference_t<type_d>>>{ reinterpret_cast<data_a<std::remove_reference_t<type_d>>&>(r) };
+		}
+
+		static inline var<data_a<std::remove_reference_t<type_d>>> create_ref(type_d& data)
+		{
+			any_a r;
+			new data_t<type_d>{ r, data };
 			data_t<type_d>::_initialise(r);
 			return var<data_a<std::remove_reference_t<type_d>>>{ reinterpret_cast<data_a<std::remove_reference_t<type_d>>&>(r) };
 		}
@@ -169,7 +188,7 @@ namespace strange
 	template <typename type_d>
 	inline var<data_a<std::remove_reference_t<type_d>>> dat_ref(type_d& data)
 	{
-		return data_t<type_d&>::create(data);
+		return data_t<type_d&>::create_ref(data);
 	}
 
 	template <typename type_d>
