@@ -97,6 +97,7 @@ namespace strange
 	struct symbol_t;
 	template <typename type_d> struct data_t;
 	template <typename type_d> struct data_pointer_t;
+	template <typename type_d> struct number_t;
 }
 
 #include "utilities/strange__val_u.hpp"
