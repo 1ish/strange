@@ -9,36 +9,36 @@ int ()				1
 float ()			2.3
 comment ()			// cool
 
-cat (scope, name, aspects, order, representation)		<+int64_t>
-type (scope, name, aspects)								strange::number[<+int64_t>=]
-kind (the_cat, the_type, behaviour)						<+int64_t>=
+cat (scope, name, aspects, order, representation)		<+ int64_t >
+type (scope, name, aspects)								strange::number[=<+ int64_t >]
+kind (behaviour, the_cat, the_type)						=<+ int64_t >
 
 list (1, 2, 3)						[1, 2, 3]
-list [<+int64_t>#] (1, 2, 3)
-table (tuple (1, 2.3))				{1 : 2.3}
-table {key : <+int64_t>=, value : <+double>&} (tuple [<+int64_t>=, <+double>&] (1, 2.3))
+list [#<+ int64_t >] (1, 2, 3)
+table (tuple (1, 2.3))				{1: 2.3}
+table {key: =<+ int64_t >, value: &<+ double >} (tuple [=<+ int64_t >, &<+ double >] (1, 2.3))
 
 compound (before, after, result)	(before, after, result)
 
-associate [<+int64_t>#] (x, 42)		x :<+ int64_t ># 42
-share [<+int64_t>#] (x, 42)			x $<+ int64_t ># 42
+associate (x, 42)					x : 42
+share [=<+ int64_t >] (x$, 42)		x$ =<+ int64_t > 42
 
 perform (x, add, y)					x.add [y]
 
-f := function ((x :#, y :#) := x.add [y])
-e := extraction ((x :#, y :#) := x.add [y])				e := operation ((me :#, x :#, y :#) := x.add [y])
-m := mutation ((x :#, y :#) := (me.save [], x + y))		m := operation ((me :=, x :#, y :#) := (me.save [], x + y))
-d := deviation ((x :#, y :#) := me.share [], x + y)		d := operation ((me :&, x :#, y :#) := me.share [], x + y)
+f = function (x #, y #, :, x.add [y])
+e = extraction (x #, y #, =, x.add [y])					e = operation (me #, x #, y #, =, x.add [y])
+m = mutation (x #, y #, &, (me.save [], x + y))		m = operation (me =, x #, y #, &, (me.save [], x + y))
+m = modification (x #, y #, =<>, me.share [], x + y)	m = operation (me &, x #, y #, =<>, me.share [], x + y)
 
 (f) [1, 2]
 x.(e) [1, 2]
 (m) [x, 1, 2]
-(d) {me : f, x : e, y : m}
+(m) {me: f, x: e, y: m}
 
-namespace ()
+realm ()
 abstraction [] ()
 thing {} ()
-statement ()
+expression ()
 
 for ()
 if ()

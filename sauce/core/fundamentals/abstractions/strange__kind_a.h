@@ -6,15 +6,16 @@ namespace strange
 	struct kind_o :
 		symbol_o
 	{
+		behaviour_e (*behaviour) (con<kind_a> const& me);
+
 		var<cat_a> (*the_cat) (con<kind_a> const& me);
 
 		var<type_a> (*the_type) (con<kind_a> const& me);
 
-		behaviour_e (*behaviour) (con<kind_a> const& me);
-
-		// constant  <any>#
-		// variable  <any>=
-		// pointer   <any>&
+		// automatic :
+		// constant  # <any>
+		// variable  = <any>
+		// pointer   & <any>
 	};
 
 	struct kind_a
