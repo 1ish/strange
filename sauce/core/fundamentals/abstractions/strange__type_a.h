@@ -10,7 +10,7 @@ namespace strange
 
 		var<symbol_a> (*name) (con<type_a> const& me);
 
-		var<range_a<kind_a>> (*aspects) (con<type_a> const& me);
+		var<list_a<var<kind_a>>> (*aspects) (con<type_a> const& me);
 	};
 
 	struct type_a

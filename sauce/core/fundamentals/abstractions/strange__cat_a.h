@@ -10,7 +10,7 @@ namespace strange
 
 		var<symbol_a> (*name) (con<cat_a> const& me);
 
-		var<range_a<kind_a>> (*aspects) (con<cat_a> const& me);
+		var<list_a<var<kind_a>>> (*aspects) (con<cat_a> const& me);
 
 		int64_t (*order) (con<cat_a> const& me);
 

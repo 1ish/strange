@@ -11,7 +11,7 @@ comment ()			// cool
 
 cat (scope, name, aspects, order, representation)		<+int64_t>
 type (scope, name, aspects)								strange::number[<+int64_t>=]
-kind (shared, the_cat, the_type, behaviour)				$<+int64_t>=
+kind (the_cat, the_type, behaviour)						<+int64_t>=
 
 list (1, 2, 3)						[1, 2, 3]
 list [<+int64_t>#] (1, 2, 3)
@@ -21,6 +21,7 @@ table {key : <+int64_t>=, value : <+double>&} (tuple [<+int64_t>=, <+double>&] (
 compound (before, after, result)	(before, after, result)
 
 associate [<+int64_t>#] (x, 42)		x :<+ int64_t ># 42
+share [<+int64_t>#] (x, 42)			x $<+ int64_t ># 42
 
 perform (x, add, y)					x.add [y]
 
@@ -37,6 +38,7 @@ x.(e) [1, 2]
 namespace ()
 abstraction [] ()
 thing {} ()
+statement ()
 
 for ()
 if ()
@@ -48,6 +50,10 @@ namespace strange
 		any_o
 	{
 		var<token_a> (*token) (con<expression_a> const& me);
+
+		var<symbol_a> (*statement) (con<expression_a> const& me);
+
+		var<list_a<var<kind_a>>> (*aspects) (con<expression_a> const& me);
 
 		var<list_a<var<expression_a>>> (*terms) (con<expression_a> const& me);
 
