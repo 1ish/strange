@@ -68,7 +68,20 @@ namespace strange
 		{
 			return false;
 		}
+		bool const as_pointer = abstraction.o->_pointer(abstraction);
 		abstraction = me;
+		if (abstraction.o->_pointer(abstraction) != as_pointer)
+		{
+			if (as_pointer)
+			{
+				abstraction.mut();
+			}
+			abstraction.o->_set_pointer(abstraction, as_pointer);
+			if (!as_pointer)
+			{
+				abstraction.mut();
+			}
+		}
 		return true;
 	}
 
@@ -124,7 +137,7 @@ namespace strange
 		symbol_t::_clone(me, copy);
 	}
 
-	void symbol_t::_set_pointer(var<> const& me,
+	void symbol_t::_set_pointer(con<> const& me,
 		bool is_pointer)
 	{
 		me.o = is_pointer ? symbol_t::_pointer_operations() : symbol_t::_operations();

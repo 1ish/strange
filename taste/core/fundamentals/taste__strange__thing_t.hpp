@@ -131,6 +131,16 @@ namespace taste
 		{
 			std__cout << *it << "\n";
 		}
+
+		con<number_a<int64_t>> nc = num<int64_t>(123);
+		var<number_a<int64_t>> nv{ nc };
+		ptr<number_a<int64_t>> np{ nv };
+		ptr<number_a<int64_t>> np2{ np };
+		nc.o->extract(nc);
+		nv.o->extract(nv);
+		nv.o->mutate(nv);
+		np.o->extract(np);
+		np.o->mutate(np);
 	}
 }
 

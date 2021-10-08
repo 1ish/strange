@@ -55,7 +55,7 @@ namespace strange
 		void (*_copy) (any_a const& me,
 			any_a& copy);
 
-		void (*_set_pointer) (var<> const& me,
+		void (*_set_pointer) (con<> const& me,
 			bool is_pointer);
 
 		bool (*_pointer) (con<> const& me);

@@ -37,6 +37,7 @@ x.(e) [1, 2]
 
 realm ()
 abstraction {} ()
+enumeration ()
 thing {} ()
 expression ()
 
@@ -55,7 +56,13 @@ namespace strange
 
 		var<list_a<var<kind_a>>> (*aspects) (con<expression_a> const& me);
 
+		var<table_a<var<symbol_a>, var<kind_a>>> (*dimensions) (con<expression_a> const& me);
+
 		var<list_a<var<expression_a>>> (*terms) (con<expression_a> const& me);
+
+		var<kind_a> (*kind) (con<expression_a> const& me);
+
+		var<expression_a> (*implementation) (con<expression_a> const& me);
 
 		void (*generate) (con<expression_a> const& me,
 			generation_e generation,

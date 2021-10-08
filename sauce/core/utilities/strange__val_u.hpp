@@ -34,38 +34,64 @@ namespace strange
 		inline con(con const& original) : abstraction_d{ original } // copy constructor
 		{
 			inc();
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 		}
 
 		explicit inline con(var<abstraction_d> const& original) : abstraction_d{ original }
 		{
 			inc();
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 		}
 
 		explicit inline con(ptr<abstraction_d> const& original) : abstraction_d{ original }
 		{
 			inc();
-			abstraction_d::o->_set_pointer(*this, false);
-			mut();
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 		}
 
 		template <typename derived_d, std::enable_if_t<std::is_base_of_v<typename abstraction_d::operations, typename derived_d::operations>, bool> = true>
 		explicit inline con(con<derived_d> const& derived) : abstraction_d{ reinterpret_cast<abstraction_d const&>(derived) }
 		{
 			inc();
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 		}
 
 		template <typename derived_d, std::enable_if_t<std::is_base_of_v<typename abstraction_d::operations, typename derived_d::operations>, bool> = true>
 		explicit inline con(var<derived_d> const& derived) : abstraction_d{ reinterpret_cast<abstraction_d const&>(derived) }
 		{
 			inc();
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 		}
 
 		template <typename derived_d, std::enable_if_t<std::is_base_of_v<typename abstraction_d::operations, typename derived_d::operations>, bool> = true>
 		explicit inline con(ptr<derived_d> const& derived) : abstraction_d{ reinterpret_cast<abstraction_d const&>(derived) }
 		{
 			inc();
-			abstraction_d::o->_set_pointer(*this, false);
-			mut();
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 		}
 
 		inline ~con()
@@ -94,10 +120,10 @@ namespace strange
 			{
 				abstraction_d cp;
 				abstraction_d::o->_copy(reinterpret_cast<any_a const&>(*this), reinterpret_cast<any_a&>(cp));
+				++(cp.t->refs_);
 				dec();
 				abstraction_d::t = cp.t;
 				abstraction_d::o = cp.o;
-				inc();
 			}
 		}
 
@@ -105,7 +131,7 @@ namespace strange
 		using non_variable = bool;
 		using non_pointer = bool;
 
-		template <typename R, typename R::non_pointer = true>
+		template <typename R>
 		inline R dyn() const
 		{
 			R r;
@@ -113,27 +139,10 @@ namespace strange
 			return r;
 		}
 
-		template <typename R, typename R::is_pointer = true>
-		inline R dyn() const
-		{
-			R r;
-			abstraction_d::o->as(*this, reinterpret_cast<var<> const&>(r));
-			r.mut();
-			return r;
-		}
-
-		template <typename R, typename R::non_pointer = true>
+		template <typename R>
 		inline R val() const
 		{
 			return R{ reinterpret_cast<R const&>(*this) };
-		}
-
-		template <typename R, typename R::is_pointer = true>
-		inline R val() const
-		{
-			R r{ reinterpret_cast<R const&>(*this) };
-			r.mut();
-			return r;
 		}
 
 		template <typename R>
@@ -242,38 +251,64 @@ namespace strange
 		explicit inline var(con<abstraction_d> const& original) : abstraction_d{ original }
 		{
 			inc();
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 		}
 
 		inline var(var const& original) : abstraction_d{ original } // copy constructor
 		{
 			inc();
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 		}
 
 		explicit inline var(ptr<abstraction_d> const& original) : abstraction_d{ original }
 		{
 			inc();
-			abstraction_d::o->_set_pointer(*this, false);
-			mut();
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 		}
 
 		template <typename derived_d, std::enable_if_t<std::is_base_of_v<typename abstraction_d::operations, typename derived_d::operations>, bool> = true>
 		explicit inline var(con<derived_d> const& derived) : abstraction_d{ reinterpret_cast<abstraction_d const&>(derived) }
 		{
 			inc();
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 		}
 
 		template <typename derived_d, std::enable_if_t<std::is_base_of_v<typename abstraction_d::operations, typename derived_d::operations>, bool> = true>
 		explicit inline var(var<derived_d> const& derived) : abstraction_d{ reinterpret_cast<abstraction_d const&>(derived) }
 		{
 			inc();
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 		}
 
 		template <typename derived_d, std::enable_if_t<std::is_base_of_v<typename abstraction_d::operations, typename derived_d::operations>, bool> = true>
 		explicit inline var(ptr<derived_d> const& derived) : abstraction_d{ reinterpret_cast<abstraction_d const&>(derived) }
 		{
 			inc();
-			abstraction_d::o->_set_pointer(*this, false);
-			mut();
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 		}
 
 		inline ~var()
@@ -294,6 +329,11 @@ namespace strange
 			{
 				abstraction_d::o = original.o;
 			}
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 			return *this;
 		}
 
@@ -309,6 +349,11 @@ namespace strange
 			else
 			{
 				abstraction_d::o = original.o;
+			}
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
 			}
 			return *this;
 		}
@@ -326,6 +371,11 @@ namespace strange
 			{
 				abstraction_d::o = original.o;
 			}
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 			return *this;
 		}
 
@@ -341,6 +391,11 @@ namespace strange
 			else
 			{
 				abstraction_d::o = original.o;
+			}
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
 			}
 			return *this;
 		}
@@ -358,8 +413,11 @@ namespace strange
 			{
 				abstraction_d::o = original.o;
 			}
-			abstraction_d::o->_set_pointer(*this, false);
-			mut();
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 			return *this;
 		}
 
@@ -376,8 +434,11 @@ namespace strange
 			{
 				abstraction_d::o = original.o;
 			}
-			abstraction_d::o->_set_pointer(*this, false);
-			mut();
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 			return *this;
 		}
 
@@ -394,6 +455,11 @@ namespace strange
 			else
 			{
 				abstraction_d::o = original.o;
+			}
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
 			}
 			return *this;
 		}
@@ -412,6 +478,11 @@ namespace strange
 			{
 				abstraction_d::o = original.o;
 			}
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 			return *this;
 		}
 
@@ -428,6 +499,11 @@ namespace strange
 			else
 			{
 				abstraction_d::o = original.o;
+			}
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
 			}
 			return *this;
 		}
@@ -446,6 +522,11 @@ namespace strange
 			{
 				abstraction_d::o = original.o;
 			}
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 			return *this;
 		}
 
@@ -463,8 +544,11 @@ namespace strange
 			{
 				abstraction_d::o = original.o;
 			}
-			abstraction_d::o->_set_pointer(*this, false);
-			mut();
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 			return *this;
 		}
 
@@ -482,8 +566,11 @@ namespace strange
 			{
 				abstraction_d::o = original.o;
 			}
-			abstraction_d::o->_set_pointer(*this, false);
-			mut();
+			if (abstraction_d::o->_pointer(*this))
+			{
+				abstraction_d::o->_set_pointer(*this, false);
+				mut();
+			}
 			return *this;
 		}
 
@@ -506,10 +593,10 @@ namespace strange
 			{
 				abstraction_d cp;
 				abstraction_d::o->_copy(reinterpret_cast<any_a const&>(*this), reinterpret_cast<any_a&>(cp));
+				++(cp.t->refs_);
 				dec();
 				abstraction_d::t = cp.t;
 				abstraction_d::o = cp.o;
-				inc();
 			}
 		}
 
@@ -517,7 +604,7 @@ namespace strange
 		using is_variable = bool;
 		using non_pointer = bool;
 
-		template <typename R, typename R::non_pointer = true>
+		template <typename R>
 		inline R dyn() const
 		{
 			R r;
@@ -525,27 +612,10 @@ namespace strange
 			return r;
 		}
 
-		template <typename R, typename R::is_pointer = true>
-		inline R dyn() const
-		{
-			R r;
-			abstraction_d::o->as(*this, reinterpret_cast<var<> const&>(r));
-			r.mut();
-			return r;
-		}
-
-		template <typename R, typename R::non_pointer = true>
+		template <typename R>
 		inline R val() const
 		{
 			return R{ reinterpret_cast<R const&>(*this) };
-		}
-
-		template <typename R, typename R::is_pointer = true>
-		inline R val() const
-		{
-			R r{ reinterpret_cast<R const&>(*this) };
-			r.mut();
-			return r;
 		}
 
 		template <typename R>
@@ -652,7 +722,6 @@ namespace strange
 			abstraction_d::t = nothing.t;
 			abstraction_d::o = &null_ops;
 			inc();
-			mut();
 		}
 
 		explicit inline ptr(abstraction_d const& abstraction) : abstraction_d{ abstraction }
@@ -661,44 +730,71 @@ namespace strange
 			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
 			{
 				mut();
+				abstraction_d::o->_set_pointer(*this, true);
 			}
 		}
 
 		explicit inline ptr(con<abstraction_d> const& original) : abstraction_d{ original }
 		{
 			inc();
-			mut();
+			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
+			{
+				mut();
+				abstraction_d::o->_set_pointer(*this, true);
+			}
 		}
 
 		explicit inline ptr(var<abstraction_d> const& original) : abstraction_d{ original }
 		{
 			inc();
-			mut();
+			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
+			{
+				mut();
+				abstraction_d::o->_set_pointer(*this, true);
+			}
 		}
 
 		inline ptr(ptr const& original) : abstraction_d{ original } // copy constructor
 		{
 			inc();
+			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
+			{
+				mut();
+				abstraction_d::o->_set_pointer(*this, true);
+			}
 		}
 
 		template <typename derived_d, std::enable_if_t<std::is_base_of_v<typename abstraction_d::operations, typename derived_d::operations>, bool> = true>
 		explicit inline ptr(con<derived_d> const& derived) : abstraction_d{ reinterpret_cast<abstraction_d const&>(derived) }
 		{
 			inc();
-			mut();
+			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
+			{
+				mut();
+				abstraction_d::o->_set_pointer(*this, true);
+			}
 		}
 
 		template <typename derived_d, std::enable_if_t<std::is_base_of_v<typename abstraction_d::operations, typename derived_d::operations>, bool> = true>
 		explicit inline ptr(var<derived_d> const& derived) : abstraction_d{ reinterpret_cast<abstraction_d const&>(derived) }
 		{
 			inc();
-			mut();
+			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
+			{
+				mut();
+				abstraction_d::o->_set_pointer(*this, true);
+			}
 		}
 
 		template <typename derived_d, std::enable_if_t<std::is_base_of_v<typename abstraction_d::operations, typename derived_d::operations>, bool> = true>
 		explicit inline ptr(ptr<derived_d> const& derived) : abstraction_d{ reinterpret_cast<abstraction_d const&>(derived) }
 		{
 			inc();
+			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
+			{
+				mut();
+				abstraction_d::o->_set_pointer(*this, true);
+			}
 		}
 
 		inline ~ptr()
@@ -719,7 +815,11 @@ namespace strange
 			{
 				abstraction_d::o = original.o;
 			}
-			mut();
+			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
+			{
+				mut();
+				abstraction_d::o->_set_pointer(*this, true);
+			}
 			return *this;
 		}
 
@@ -736,7 +836,11 @@ namespace strange
 			{
 				abstraction_d::o = original.o;
 			}
-			mut();
+			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
+			{
+				mut();
+				abstraction_d::o->_set_pointer(*this, true);
+			}
 			return *this;
 		}
 
@@ -753,7 +857,11 @@ namespace strange
 			{
 				abstraction_d::o = original.o;
 			}
-			mut();
+			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
+			{
+				mut();
+				abstraction_d::o->_set_pointer(*this, true);
+			}
 			return *this;
 		}
 
@@ -770,7 +878,11 @@ namespace strange
 			{
 				abstraction_d::o = original.o;
 			}
-			mut();
+			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
+			{
+				mut();
+				abstraction_d::o->_set_pointer(*this, true);
+			}
 			return *this;
 		}
 
@@ -787,6 +899,11 @@ namespace strange
 			{
 				abstraction_d::o = original.o;
 			}
+			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
+			{
+				mut();
+				abstraction_d::o->_set_pointer(*this, true);
+			}
 			return *this;
 		}
 
@@ -802,6 +919,11 @@ namespace strange
 			else
 			{
 				abstraction_d::o = original.o;
+			}
+			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
+			{
+				mut();
+				abstraction_d::o->_set_pointer(*this, true);
 			}
 			return *this;
 		}
@@ -820,7 +942,11 @@ namespace strange
 			{
 				abstraction_d::o = original.o;
 			}
-			mut();
+			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
+			{
+				mut();
+				abstraction_d::o->_set_pointer(*this, true);
+			}
 			return *this;
 		}
 
@@ -838,7 +964,11 @@ namespace strange
 			{
 				abstraction_d::o = original.o;
 			}
-			mut();
+			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
+			{
+				mut();
+				abstraction_d::o->_set_pointer(*this, true);
+			}
 			return *this;
 		}
 
@@ -856,7 +986,11 @@ namespace strange
 			{
 				abstraction_d::o = original.o;
 			}
-			mut();
+			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
+			{
+				mut();
+				abstraction_d::o->_set_pointer(*this, true);
+			}
 			return *this;
 		}
 
@@ -874,7 +1008,11 @@ namespace strange
 			{
 				abstraction_d::o = original.o;
 			}
-			mut();
+			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
+			{
+				mut();
+				abstraction_d::o->_set_pointer(*this, true);
+			}
 			return *this;
 		}
 
@@ -892,6 +1030,11 @@ namespace strange
 			{
 				abstraction_d::o = original.o;
 			}
+			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
+			{
+				mut();
+				abstraction_d::o->_set_pointer(*this, true);
+			}
 			return *this;
 		}
 
@@ -908,6 +1051,11 @@ namespace strange
 			else
 			{
 				abstraction_d::o = original.o;
+			}
+			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
+			{
+				mut();
+				abstraction_d::o->_set_pointer(*this, true);
 			}
 			return *this;
 		}
@@ -931,11 +1079,10 @@ namespace strange
 			{
 				abstraction_d cp;
 				abstraction_d::o->_copy(reinterpret_cast<any_a const&>(*this), reinterpret_cast<any_a&>(cp));
+				++(cp.t->refs_);
 				dec();
 				abstraction_d::t = cp.t;
 				abstraction_d::o = cp.o;
-				inc();
-				abstraction_d::o->_set_pointer(reinterpret_cast<var<> const&>(*this), true);
 			}
 		}
 
@@ -943,51 +1090,54 @@ namespace strange
 		using non_variable = bool;
 		using is_pointer = bool;
 
-		template <typename R, typename R::is_pointer = true>
+		template <typename R>
 		inline R dyn() const
 		{
 			R r;
-			abstraction_d::o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<> const&>(r));
+			abstraction_d::o->as(*this, reinterpret_cast<var<> const&>(r));
 			return r;
 		}
 
-		template <typename R, typename R::non_pointer = true>
-		inline R dyn() const
-		{
-			R r;
-			abstraction_d::o->as(reinterpret_cast<con<> const&>(*this), reinterpret_cast<var<> const&>(r));
-			r.o->_set_pointer(reinterpret_cast<var<> const&>(r), false);
-			r.mut();
-			return r;
-		}
-
-		template <typename R, typename R::is_pointer = true>
+		template <typename R>
 		inline R val() const
 		{
 			return R{ reinterpret_cast<R const&>(*this) };
 		}
 
-		template <typename R, typename R::non_pointer = true>
-		inline R val() const
-		{
-			R r{ reinterpret_cast<R const&>(*this) };
-			r.o->_set_pointer(reinterpret_cast<var<> const&>(r), false);
-			r.mut();
-			return r;
-		}
-
 		template <typename R>
 		inline R const& ref() const
 		{
-			static_assert(typename R::is_pointer{ true });
 			return reinterpret_cast<R const&>(*this);
 		}
 
 		template <typename R>
 		inline R& ref()
 		{
-			static_assert(typename R::is_pointer{ true });
 			return reinterpret_cast<R&>(*this);
+		}
+
+		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>
+		inline operator con<B> const& () const
+		{
+			return ref<con<B>>();
+		}
+
+		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>
+		inline operator con<B>& ()
+		{
+			return ref<con<B>>();
+		}
+
+		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>
+		inline operator var<B> const& () const
+		{
+			return ref<var<B>>();
+		}
+
+		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>
+		inline operator var<B>& ()
+		{
+			return ref<var<B>>();
 		}
 
 		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>

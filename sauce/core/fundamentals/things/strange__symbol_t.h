@@ -105,7 +105,7 @@ namespace strange
 		static void _copy(any_a const& me,
 			any_a& copy);
 
-		static void _set_pointer(var<> const& me,
+		static void _set_pointer(con<> const& me,
 			bool is_pointer);
 
 		// symbol_a

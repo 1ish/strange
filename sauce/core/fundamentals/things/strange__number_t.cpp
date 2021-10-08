@@ -87,7 +87,20 @@ namespace strange
 		{
 			return false;
 		}
+		bool const as_pointer = abstraction.o->_pointer(abstraction);
 		abstraction = me;
+		if (abstraction.o->_pointer(abstraction) != as_pointer)
+		{
+			if (as_pointer)
+			{
+				abstraction.mut();
+			}
+			abstraction.o->_set_pointer(abstraction, as_pointer);
+			if (!as_pointer)
+			{
+				abstraction.mut();
+			}
+		}
 		return true;
 	}
 
@@ -150,7 +163,7 @@ namespace strange
 	}
 
 	template <typename type_d>
-	void number_t<type_d>::_set_pointer(var<> const& me,
+	void number_t<type_d>::_set_pointer(con<> const& me,
 		bool is_pointer)
 	{
 		me.o = is_pointer ? number_t<type_d>::_pointer_operations() : number_t<type_d>::_operations();
@@ -398,7 +411,7 @@ namespace strange
 	}
 
 	template <typename type_d>
-	void number_t<type_d>::_data_set_pointer(var<> const& me,
+	void number_t<type_d>::_data_set_pointer(con<> const& me,
 		bool is_pointer)
 	{
 		me.o = is_pointer ? number_t<type_d>::_data_pointer_operations() : number_t<type_d>::_data_operations();
@@ -589,7 +602,7 @@ namespace strange
 	}
 
 	template <typename type_d>
-	void number_t<type_d>::_extractor_set_pointer(var<> const& me,
+	void number_t<type_d>::_extractor_set_pointer(con<> const& me,
 		bool is_pointer)
 	{
 		me.o = is_pointer ? number_t<type_d>::_extractor_pointer_operations() : number_t<type_d>::_extractor_operations();

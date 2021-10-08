@@ -119,7 +119,7 @@ namespace strange
 		static void _copy(any_a const& me,
 			any_a& copy);
 
-		static void _set_pointer(var<> const& me,
+		static void _set_pointer(con<> const& me,
 			bool is_pointer);
 
 		// numeric_a
@@ -175,7 +175,7 @@ namespace strange
 		static void _data_copy(any_a const& me,
 			any_a& copy);
 
-		static void _data_set_pointer(var<> const& me,
+		static void _data_set_pointer(con<> const& me,
 			bool is_pointer);
 
 		// extractor_a
@@ -220,7 +220,7 @@ namespace strange
 		static void _extractor_copy(any_a const& me,
 			any_a& copy);
 
-		static void _extractor_set_pointer(var<> const& me,
+		static void _extractor_set_pointer(con<> const& me,
 			bool is_pointer);
 
 	public:

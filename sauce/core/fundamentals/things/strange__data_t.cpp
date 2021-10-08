@@ -64,7 +64,20 @@ namespace strange
 		{
 			return false;
 		}
+		bool const as_pointer = abstraction.o->_pointer(abstraction);
 		abstraction = me;
+		if (abstraction.o->_pointer(abstraction) != as_pointer)
+		{
+			if (as_pointer)
+			{
+				abstraction.mut();
+			}
+			abstraction.o->_set_pointer(abstraction, as_pointer);
+			if (!as_pointer)
+			{
+				abstraction.mut();
+			}
+		}
 		return true;
 	}
 
@@ -84,7 +97,7 @@ namespace strange
 	}
 
 	template <typename type_d>
-	void data_t<type_d>::_set_pointer(var<> const& me,
+	void data_t<type_d>::_set_pointer(con<> const& me,
 		bool is_pointer)
 	{
 		me.o = is_pointer ? data_t<type_d>::_pointer_operations() : data_t<type_d>::_operations();
@@ -165,7 +178,7 @@ namespace strange
 	}
 
 	template <typename type_d>
-	void data_pointer_t<type_d>::_set_pointer(var<> const& me,
+	void data_pointer_t<type_d>::_set_pointer(con<> const& me,
 		bool is_pointer)
 	{
 		me.o = is_pointer ? data_pointer_t<type_d>::_pointer_operations() : data_pointer_t<type_d>::_operations();
