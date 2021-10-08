@@ -12,7 +12,6 @@ namespace strange
 
 		var<type_a> (*the_type) (con<kind_a> const& me);
 
-		// automatic :
 		// constant  # <any>
 		// variable  = <any>
 		// pointer   & <any>

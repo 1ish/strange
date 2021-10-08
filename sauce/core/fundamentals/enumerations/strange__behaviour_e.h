@@ -5,7 +5,6 @@ namespace strange
 {
 	enum class behaviour_e
 	{
-		automatic,
 		constant,
 		variable,
 		pointer,
