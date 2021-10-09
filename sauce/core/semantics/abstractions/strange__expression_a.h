@@ -47,15 +47,15 @@ if ()
 strange: realm
 (
 	number: abstraction {type: <<+>>} [<mutable_numeric>]
-	(	equal				# extraction (other #<^^>) =<+bool>,
-		not_equal			# extraction (other #<^^>) =<+bool>,
-		less				# extraction (other #<^^>) =<+bool>,
-		greater				# extraction (other #<^^>) =<+bool>,
-		less_or_equal		# extraction (other #<^^>) =<+bool>,
-		greater_or_equal	# extraction (other #<^^>) =<+bool>,
+	(	equal				# extraction (other #<^^>) =<+ bool >,
+		not_equal			# extraction (other #<^^>) =<+ bool >,
+		less				# extraction (other #<^^>) =<+ bool >,
+		greater				# extraction (other #<^^>) =<+ bool >,
+		less_or_equal		# extraction (other #<^^>) =<+ bool >,
+		greater_or_equal	# extraction (other #<^^>) =<+ bool >,
 		data				# extraction () =<data[^type]>,
-		extract				# extraction () #<+type_d>,
-		mutate				# mutation () &<+type_d>,
+		extract				# extraction () #<+ type_d >,
+		mutate				# mutation () &<+ type_d >,
 		extractor			# extraction () *<random_access_extractor[^type]>,
 	)
 	{	not_equal:			me.equal[] !,
@@ -66,24 +66,22 @@ strange: realm
 	number: thing {type: <<+>>} [data[^type]]
 	(	data_				=^type,
 		equal_number		# function
-		(	me		#<number[<+std::remove_reference_t<type_d>>]>,
-			other	#<number[<+std::remove_reference_t<type_d>>]>,
+		(	me		#<number[<+ std::remove_reference_t<type_d> >]>,
+			other	#<number[<+ std::remove_reference_t<type_d> >]>,
 		),
 		less_number			# function
-		(	me		#<number[<+std::remove_reference_t<type_d>>]>,
-			other	#<number[<+std::remove_reference_t<type_d>>]>,
+		(	me		#<number[<+ std::remove_reference_t<type_d> >]>,
+			other	#<number[<+ std::remove_reference_t<type_d> >]>,
 		),
 	)
 	{	equal_number:
-		(+	"	auto const mt = static_cast<number_t<type_d> const* const>(me.t);
-				return mt->data_ == other.o->extract(other);
-			"
-		),
+		(+++	auto const mt = static_cast<number_t<type_d> const* const>(me.t);
+				return mt->data_ == other.o->extract(other);			
+		)+++,
 		less_number:
-		(+	"	auto const mt = static_cast<number_t<type_d> const* const>(me.t);
+		(+++	auto const mt = static_cast<number_t<type_d> const* const>(me.t);
 				return mt->data_ < other.o->extract(other);
-			"
-		),
+		)+++,
 	},
 )
 
