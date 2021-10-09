@@ -12,9 +12,12 @@ namespace strange
 
 		var<type_a> (*the_type) (con<kind_a> const& me);
 
-		// constant  # <any>
-		// variable  = <any>
-		// pointer   & <any>
+		// constant					#<any>
+		// variable					=<any>
+		// pointer					&<any>
+		// forward_iterator			+<forward_extractor>
+		// bidirectional_iterator	-<bidirectional_mutator>
+		// random_access_iterator	*<random_access_extractor>
 	};
 
 	struct kind_a

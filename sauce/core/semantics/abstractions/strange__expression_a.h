@@ -20,8 +20,8 @@ table {key: =<+ int64_t >, value: &<+ double >} (tuple [=<+ int64_t >, &<+ doubl
 
 compound (before, after, result)	(before, after, result)
 
-associate (x, #, 42)				x # 42
-share (x$, =<+ int64_t >, 42)		x$ =<+ int64_t > 42
+association (x, #, 42)							x # 42
+shared_association (x$, =<+ int64_t >, 42)		x$ =<+ int64_t > 42
 
 perform (x, add, y)					x.add [y]
 
@@ -36,13 +36,31 @@ x.(e) [1, 2]
 (m) {me: f, x: e, y: m}
 
 realm ()
-abstraction {} ()
+abstraction {} [] ()
 enumeration ()
 thing {} ()
 expression ()
 
 for ()
 if ()
+
+abstraction {type: <<+>>} [<mutable_numeric>]
+(	equal				# extraction (other #<^^>) =<+bool>,
+	not_equal			# extraction (other #<^^>) =<+bool>,
+	less				# extraction (other #<^^>) =<+bool>,
+	greater				# extraction (other #<^^>) =<+bool>,
+	less_or_equal		# extraction (other #<^^>) =<+bool>,
+	greater_or_equal	# extraction (other #<^^>) =<+bool>,
+	data				# extraction () =<data[<^type>]>,
+	extract				# extraction () #<+type_d>,
+	mutate				# mutation () &<+type_d>,
+	extractor			# extraction () *<random_access_extractor[<^type>]>,
+)
+{	not_equal:			me.equal [] !,
+	greater:			me.less_or_equal [] !,
+	greater_or_equal:	me.less [] !,
+}
+
 */
 
 namespace strange
@@ -54,15 +72,15 @@ namespace strange
 
 		var<symbol_a> (*statement) (con<expression_a> const& me);
 
-		var<list_a<var<kind_a>>> (*aspects) (con<expression_a> const& me);
+		var<list_a<var<expression_a>>> (*list) (con<expression_a> const& me);
 
-		var<table_a<var<symbol_a>, var<kind_a>>> (*dimensions) (con<expression_a> const& me);
+		var<table_a<var<expression_a>, var<expression_a>>> (*table) (con<expression_a> const& me);
 
 		var<list_a<var<expression_a>>> (*terms) (con<expression_a> const& me);
 
 		var<kind_a> (*kind) (con<expression_a> const& me);
 
-		var<expression_a> (*implementation) (con<expression_a> const& me);
+		var<expression_a> (*body) (con<expression_a> const& me);
 
 		void (*generate) (con<expression_a> const& me,
 			generation_e generation,

@@ -8,6 +8,9 @@ namespace strange
 		constant,
 		variable,
 		pointer,
+		forward_iterator,
+		bidirectional_iterator,
+		random_access_iterator,
 	};
 }
 
