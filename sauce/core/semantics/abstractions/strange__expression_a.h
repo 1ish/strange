@@ -23,17 +23,17 @@ compound (before, after, result)	(before, after, result)
 association (x, #, 42)							x # 42
 shared_association (x$, =<+ int64_t >, 42)		x$ =<+ int64_t > 42
 
-perform (x, add, y)					x.add [y]
+perform (x, add, y)					x.add[y]
 
-f = function (x #, y #) = x.add [y]
-e = extraction (x #, y #) = x.add [y]					e = operation (me #, x #, y #) = x.add [y]
-m = mutation (x #, y #) & (me.save [], x + y)			m = operation (me =, x #, y #) & (me.save [], x + y)
-m = modification (x #, y #) =<> (me.share [], x + y)	m = operation (me &, x #, y #) =<> (me.share [], x + y)
+f = function (x #, y #) = x.add[y]
+e = extraction (x #, y #) = x.add[y]					e = operation (me #, x #, y #) = x.add[y]
+m = mutation (x #, y #) & (me.save[], x + y)			m = operation (me =, x #, y #) & (me.save[], x + y)
+m = modification (x #, y #) =<> (me.share[], x + y)		m = operation (me &, x #, y #) =<> (me.share[], x + y)
 
-(f) [1, 2]
-x.(e) [1, 2]
-(m) [x, 1, 2]
-(m) {me: f, x: e, y: m}
+(f)[1, 2]
+x.(e)[1, 2]
+(m)[x, 1, 2]
+(m){me: f, x: e, y: m}
 
 realm ()
 abstraction {} [] ()
@@ -44,22 +44,48 @@ expression ()
 for ()
 if ()
 
-abstraction {type: <<+>>} [<mutable_numeric>]
-(	equal				# extraction (other #<^^>) =<+bool>,
-	not_equal			# extraction (other #<^^>) =<+bool>,
-	less				# extraction (other #<^^>) =<+bool>,
-	greater				# extraction (other #<^^>) =<+bool>,
-	less_or_equal		# extraction (other #<^^>) =<+bool>,
-	greater_or_equal	# extraction (other #<^^>) =<+bool>,
-	data				# extraction () =<data[<^type>]>,
-	extract				# extraction () #<+type_d>,
-	mutate				# mutation () &<+type_d>,
-	extractor			# extraction () *<random_access_extractor[<^type>]>,
+strange: realm
+(
+	number: abstraction {type: <<+>>} [<mutable_numeric>]
+	(	equal				# extraction (other #<^^>) =<+bool>,
+		not_equal			# extraction (other #<^^>) =<+bool>,
+		less				# extraction (other #<^^>) =<+bool>,
+		greater				# extraction (other #<^^>) =<+bool>,
+		less_or_equal		# extraction (other #<^^>) =<+bool>,
+		greater_or_equal	# extraction (other #<^^>) =<+bool>,
+		data				# extraction () =<data[^type]>,
+		extract				# extraction () #<+type_d>,
+		mutate				# mutation () &<+type_d>,
+		extractor			# extraction () *<random_access_extractor[^type]>,
+	)
+	{	not_equal:			me.equal[] !,
+		greater:			me.less_or_equal[] !,
+		greater_or_equal:	me.less[] !,
+	},
+
+	number: thing {type: <<+>>} [data[^type]]
+	(	data_				=^type,
+		equal_number		# function
+		(	me		#<number[<+std::remove_reference_t<type_d>>]>,
+			other	#<number[<+std::remove_reference_t<type_d>>]>,
+		),
+		less_number			# function
+		(	me		#<number[<+std::remove_reference_t<type_d>>]>,
+			other	#<number[<+std::remove_reference_t<type_d>>]>,
+		),
+	)
+	{	equal_number:
+		(+	"	auto const mt = static_cast<number_t<type_d> const* const>(me.t);
+				return mt->data_ == other.o->extract(other);
+			"
+		),
+		less_number:
+		(+	"	auto const mt = static_cast<number_t<type_d> const* const>(me.t);
+				return mt->data_ < other.o->extract(other);
+			"
+		),
+	},
 )
-{	not_equal:			me.equal [] !,
-	greater:			me.less_or_equal [] !,
-	greater_or_equal:	me.less [] !,
-}
 
 */
 

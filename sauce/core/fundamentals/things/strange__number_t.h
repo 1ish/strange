@@ -24,7 +24,7 @@ namespace strange
 
 		inline number_t(any_a& me,
 			type_d& data)
-			: data_t<type_d>{ me, data }
+		: data_t<type_d>{ me, data }
 		{
 			me.o = number_t<type_d>::_operations();
 		}
