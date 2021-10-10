@@ -6,18 +6,18 @@ namespace strange
 	struct cat_o :
 		symbol_o
 	{
+		int64_t (*order) (con<cat_a> const& me);
+
+		representation_e (*representation) (con<cat_a> const& me);
+
 		var<symbol_a> (*scope) (con<cat_a> const& me);
 
 		var<symbol_a> (*name) (con<cat_a> const& me);
 
 		var<list_a<var<kind_a>>> (*aspects) (con<cat_a> const& me);
 
-		int64_t (*order) (con<cat_a> const& me);
-
-		representation_e (*representation) (con<cat_a> const& me);
-
 		// abstraction  <symbol>
-		// dimension    <^element>
+		// dimension    ^element
 		// native       <+bool>
 		// enumeration  <%behaviour>
 		// meta         <~abstraction>

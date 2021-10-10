@@ -11,7 +11,6 @@ namespace strange
 		int_literal,
 		float_literal,
 		comment,
-		native,
 		punctuation,
 		mistake,
 	};
