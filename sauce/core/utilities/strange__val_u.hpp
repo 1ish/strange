@@ -112,6 +112,10 @@ namespace strange
 			if (!--(abstraction_d::t->refs_))
 			{
 				abstraction_d::o->_free(reinterpret_cast<any_a const&>(*this));
+				if (!--(abstraction_d::t->weak_))
+				{
+					operator delete(abstraction_d::t);
+				}
 			}
 		}
 
@@ -592,6 +596,10 @@ namespace strange
 			if (!--(abstraction_d::t->refs_))
 			{
 				abstraction_d::o->_free(reinterpret_cast<any_a const&>(*this));
+				if (!--(abstraction_d::t->weak_))
+				{
+					operator delete(abstraction_d::t);
+				}
 			}
 		}
 
@@ -1085,6 +1093,10 @@ namespace strange
 			if (!--(abstraction_d::t->refs_))
 			{
 				abstraction_d::o->_free(reinterpret_cast<any_a const&>(*this));
+				if (!--(abstraction_d::t->weak_))
+				{
+					operator delete(abstraction_d::t);
+				}
 			}
 		}
 

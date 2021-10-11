@@ -171,14 +171,7 @@ namespace strange
 
 	void thing_t::_free(any_a const& me)
 	{
-		if (!--(me.t->weak_))
-		{
-			delete me.t;
-		}
-		else
-		{
-			me.t->~thing_t();
-		}
+		me.t->~thing_t();
 	}
 
 	void thing_t::_copy(any_a const& me,
