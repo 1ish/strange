@@ -32,12 +32,6 @@ namespace strange
 			}
 		}
 
-	protected:
-		explicit inline con(abstraction_d const& abstract, bool) : abstraction_d{ abstract }
-		{
-		}
-
-	public:
 		inline con(con const& original) : abstraction_d{ original } // copy constructor
 		{
 			inc();
@@ -262,12 +256,6 @@ namespace strange
 			}
 		}
 
-	protected:
-		explicit inline var(abstraction_d const& abstract, bool) : abstraction_d{ abstract }
-		{
-		}
-
-	public:
 		explicit inline var(con<abstraction_d> const& original) : abstraction_d{ original }
 		{
 			inc();
@@ -761,12 +749,6 @@ namespace strange
 			}
 		}
 
-	protected:
-		explicit inline ptr(abstraction_d const& abstract, bool) : abstraction_d{ abstract }
-		{
-		}
-
-	public:
 		explicit inline ptr(con<abstraction_d> const& original) : abstraction_d{ original }
 		{
 			inc();
@@ -1248,12 +1230,6 @@ namespace strange
 		{
 		}
 
-	protected:
-		explicit inline fit(abstraction_d const& abstract, bool _) : var<abstraction_d>{ abstract, _ }
-		{
-		}
-
-	public:
 		inline fit(fit const& original) : var<abstraction_d>{ original } // copy constructor
 		{
 		}
@@ -1313,12 +1289,6 @@ namespace strange
 		{
 		}
 
-	protected:
-		explicit inline bit(abstraction_d const& abstract, bool _) : fit<abstraction_d>{ abstract, _ }
-		{
-		}
-
-	public:
 		inline bit(bit const& original) : fit<abstraction_d>{ original } // copy constructor
 		{
 		}
@@ -1387,12 +1357,6 @@ namespace strange
 		{
 		}
 
-	protected:
-		explicit inline rat(abstraction_d const& abstract, bool _) : bit<abstraction_d>{ abstract, _ }
-		{
-		}
-
-	public:
 		inline rat(rat const& original) : bit<abstraction_d>{ original } // copy constructor
 		{
 		}
@@ -1489,14 +1453,14 @@ namespace strange
 
 	// address - weak pointer
 	template <typename value_d>
-	struct adr : protected value_d
+	struct adr : value_d::abstraction
 	{
-		explicit inline adr(value_d const& value) : value_d{ static_cast<typename value_d::abstraction const&>(value), false }
+		explicit inline adr(value_d const& value) : value_d::abstraction{ value }
 		{
 			inc_weak();
 		}
 
-		inline adr(adr const& original) : value_d{ static_cast<typename value_d::abstraction const&>(original), false } // copy constructor
+		inline adr(adr const& original) : value_d::abstraction{ original } // copy constructor
 		{
 			inc_weak();
 		}
@@ -1508,52 +1472,66 @@ namespace strange
 
 		inline adr const& operator=(adr const& original) const // copy assignment operator
 		{
-			if (value_d::t != original.t)
+			if (value_d::abstraction::t != original.t)
 			{
 				dec_weak();
-				value_d::t = original.t;
-				value_d::o = original.o;
+				value_d::abstraction::t = original.t;
+				value_d::abstraction::o = original.o;
 				inc_weak();
 			}
 			else
 			{
-				value_d::o = original.o;
+				value_d::abstraction::o = original.o;
 			}
 			return *this;
 		}
 
 		inline adr& operator=(adr const& original) // copy assignment operator
 		{
-			if (value_d::t != original.t)
+			if (value_d::abstraction::t != original.t)
 			{
 				dec_weak();
-				value_d::t = original.t;
-				value_d::o = original.o;
+				value_d::abstraction::t = original.t;
+				value_d::abstraction::o = original.o;
 				inc_weak();
 			}
 			else
 			{
-				value_d::o = original.o;
+				value_d::abstraction::o = original.o;
 			}
 			return *this;
 		}
 
 		inline void inc_weak() const
 		{
-			++(value_d::t->weak_);
+			++(value_d::abstraction::t->weak_);
 		}
 
 		inline void dec_weak() const
 		{
-			if (!--(value_d::t->weak_))
+			if (!--(value_d::abstraction::t->weak_))
 			{
-				operator delete(value_d::t);
+				operator delete(value_d::abstraction::t);
 			}
 		}
 
 		inline value_d value() const
 		{
-			return (!value_d::t->refs_) ? value_d{} : value_d{ static_cast<typename value_d::abstraction const&>(*this) };
+			int64_t previous = value_d::abstraction::t->refs_.load();
+			for (;;)
+			{
+				if (previous == 0)
+				{
+					return value_d{};
+				}
+				if (value_d::abstraction::t->refs_.compare_exchange_weak(previous, previous + 1))
+				{
+					break;
+				}
+			}
+			value_d result{ *this };
+			--(value_d::abstraction::t->refs_);
+			return result;
 		}
 	};
 }
