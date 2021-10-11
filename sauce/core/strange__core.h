@@ -28,6 +28,7 @@ namespace strange
 	template <typename abstraction_d> struct fit;
 	template <typename abstraction_d> struct bit;
 	template <typename abstraction_d> struct rat;
+	template <typename value_d> struct adr;
 
 	struct symbol_a;
 	struct cat_a;

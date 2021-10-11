@@ -3,6 +3,7 @@
 
 namespace strange
 {
+	// constant - immutable value
 	template <typename abstraction_d>
 	struct con : abstraction_d
 	{
@@ -21,7 +22,7 @@ namespace strange
 			inc();
 		}
 
-		explicit inline con(abstraction_d const& abstraction) : abstraction_d{ abstraction }
+		explicit inline con(abstraction_d const& abstract) : abstraction_d{ abstract }
 		{
 			inc();
 			if (abstraction_d::o->_pointer(*this))
@@ -31,6 +32,12 @@ namespace strange
 			}
 		}
 
+	protected:
+		explicit inline con(abstraction_d const& abstract, bool) : abstraction_d{ abstract }
+		{
+		}
+
+	public:
 		inline con(con const& original) : abstraction_d{ original } // copy constructor
 		{
 			inc();
@@ -94,7 +101,7 @@ namespace strange
 			}
 		}
 
-		inline ~con()
+		inline ~con() // intentionally non-virtual destructor
 		{
 			dec();
 		}
@@ -130,6 +137,7 @@ namespace strange
 		using is_constant = bool;
 		using non_variable = bool;
 		using non_pointer = bool;
+		using abstraction = abstraction_d;
 
 		template <typename R>
 		inline R dyn() const
@@ -169,6 +177,11 @@ namespace strange
 		inline operator con<B>& ()
 		{
 			return ref<con<B>>();
+		}
+
+		inline adr<con<abstraction_d>> address() const
+		{
+			return adr<con<abstraction_d>>{ *this };
 		}
 
 		template <typename F, typename... Ps>
@@ -220,6 +233,7 @@ namespace strange
 		}
 	};
 
+	// variable - mutable value
 	template <typename abstraction_d>
 	struct var : abstraction_d
 	{
@@ -238,7 +252,7 @@ namespace strange
 			inc();
 		}
 
-		explicit inline var(abstraction_d const& abstraction) : abstraction_d{ abstraction }
+		explicit inline var(abstraction_d const& abstract) : abstraction_d{ abstract }
 		{
 			inc();
 			if (abstraction_d::o->_pointer(*this))
@@ -248,6 +262,12 @@ namespace strange
 			}
 		}
 
+	protected:
+		explicit inline var(abstraction_d const& abstract, bool) : abstraction_d{ abstract }
+		{
+		}
+
+	public:
 		explicit inline var(con<abstraction_d> const& original) : abstraction_d{ original }
 		{
 			inc();
@@ -311,7 +331,7 @@ namespace strange
 			}
 		}
 
-		inline ~var()
+		inline ~var() // intentionally non-virtual destructor
 		{
 			dec();
 		}
@@ -603,6 +623,7 @@ namespace strange
 		using non_constant = bool;
 		using is_variable = bool;
 		using non_pointer = bool;
+		using abstraction = abstraction_d;
 
 		template <typename R>
 		inline R dyn() const
@@ -656,6 +677,11 @@ namespace strange
 			return ref<var<B>>();
 		}
 
+		inline adr<var<abstraction_d>> address() const
+		{
+			return adr<var<abstraction_d>>{ *this };
+		}
+
 		template <typename F, typename... Ps>
 		inline auto pfm(F fp, Ps&&... ps) const
 		{
@@ -705,6 +731,7 @@ namespace strange
 		}
 	};
 
+	// pointer - shared pointer
 	template <typename abstraction_d>
 	struct ptr : abstraction_d
 	{
@@ -724,7 +751,7 @@ namespace strange
 			inc();
 		}
 
-		explicit inline ptr(abstraction_d const& abstraction) : abstraction_d{ abstraction }
+		explicit inline ptr(abstraction_d const& abstract) : abstraction_d{ abstract }
 		{
 			inc();
 			if (!abstraction_d::o->_pointer(reinterpret_cast<con<> const&>(*this)))
@@ -734,6 +761,12 @@ namespace strange
 			}
 		}
 
+	protected:
+		explicit inline ptr(abstraction_d const& abstract, bool) : abstraction_d{ abstract }
+		{
+		}
+
+	public:
 		explicit inline ptr(con<abstraction_d> const& original) : abstraction_d{ original }
 		{
 			inc();
@@ -797,7 +830,7 @@ namespace strange
 			}
 		}
 
-		inline ~ptr()
+		inline ~ptr() // intentionally non-virtual destructor
 		{
 			dec();
 		}
@@ -1089,6 +1122,7 @@ namespace strange
 		using non_constant = bool;
 		using non_variable = bool;
 		using is_pointer = bool;
+		using abstraction = abstraction_d;
 
 		template <typename R>
 		inline R dyn() const
@@ -1152,6 +1186,11 @@ namespace strange
 			return ref<ptr<B>>();
 		}
 
+		inline adr<ptr<abstraction_d>> address() const
+		{
+			return adr<ptr<abstraction_d>>{ *this };
+		}
+
 		template <typename F, typename... Ps>
 		inline auto pfm(F fp, Ps&&... ps) const
 		{
@@ -1201,13 +1240,20 @@ namespace strange
 		}
 	};
 
+	// forward iterator - variable with extra operators
 	template <typename abstraction_d>
 	struct fit : var<abstraction_d>
 	{
-		explicit inline fit(abstraction_d const& abstraction) : var<abstraction_d>{ abstraction }
+		explicit inline fit(abstraction_d const& abstract) : var<abstraction_d>{ abstract }
 		{
 		}
 
+	protected:
+		explicit inline fit(abstraction_d const& abstract, bool _) : var<abstraction_d>{ abstract, _ }
+		{
+		}
+
+	public:
 		inline fit(fit const& original) : var<abstraction_d>{ original } // copy constructor
 		{
 		}
@@ -1222,6 +1268,11 @@ namespace strange
 		{
 			var<abstraction_d>::operator=(original);
 			return *this;
+		}
+
+		inline adr<fit<abstraction_d>> address() const
+		{
+			return adr<fit<abstraction_d>>{ *this };
 		}
 
 		inline auto& operator*() const
@@ -1254,13 +1305,20 @@ namespace strange
 		}
 	};
 
+	// bidirectional iterator - variable with extra operators
 	template <typename abstraction_d>
 	struct bit : fit<abstraction_d>
 	{
-		explicit inline bit(abstraction_d const& abstraction) : fit<abstraction_d>{ abstraction }
+		explicit inline bit(abstraction_d const& abstract) : fit<abstraction_d>{ abstract }
 		{
 		}
 
+	protected:
+		explicit inline bit(abstraction_d const& abstract, bool _) : fit<abstraction_d>{ abstract, _ }
+		{
+		}
+
+	public:
 		inline bit(bit const& original) : fit<abstraction_d>{ original } // copy constructor
 		{
 		}
@@ -1275,6 +1333,11 @@ namespace strange
 		{
 			fit<abstraction_d>::operator=(original);
 			return *this;
+		}
+
+		inline adr<bit<abstraction_d>> address() const
+		{
+			return adr<bit<abstraction_d>>{ *this };
 		}
 
 		inline bit const& operator++() const // pre
@@ -1316,13 +1379,20 @@ namespace strange
 		}
 	};
 
+	// random access iterator - variable with extra operators
 	template <typename abstraction_d>
 	struct rat : bit<abstraction_d>
 	{
-		explicit inline rat(abstraction_d const& abstraction) : bit<abstraction_d>{ abstraction }
+		explicit inline rat(abstraction_d const& abstract) : bit<abstraction_d>{ abstract }
 		{
 		}
 
+	protected:
+		explicit inline rat(abstraction_d const& abstract, bool _) : bit<abstraction_d>{ abstract, _ }
+		{
+		}
+
+	public:
 		inline rat(rat const& original) : bit<abstraction_d>{ original } // copy constructor
 		{
 		}
@@ -1337,6 +1407,11 @@ namespace strange
 		{
 			bit<abstraction_d>::operator=(original);
 			return *this;
+		}
+
+		inline adr<rat<abstraction_d>> address() const
+		{
+			return adr<rat<abstraction_d>>{ *this };
 		}
 
 		inline rat const& operator++() const // pre
@@ -1409,6 +1484,76 @@ namespace strange
 		inline rat operator-(int64_t offset) const
 		{
 			return abstraction_d::o->add(*this, -offset);
+		}
+	};
+
+	// address - weak pointer
+	template <typename value_d>
+	struct adr : protected value_d
+	{
+		explicit inline adr(value_d const& value) : value_d{ static_cast<typename value_d::abstraction const&>(value), false }
+		{
+			inc_weak();
+		}
+
+		inline adr(adr const& original) : value_d{ static_cast<typename value_d::abstraction const&>(original), false } // copy constructor
+		{
+			inc_weak();
+		}
+
+		inline ~adr() // intentionally non-virtual destructor
+		{
+			dec_weak();
+		}
+
+		inline adr const& operator=(adr const& original) const // copy assignment operator
+		{
+			if (value_d::t != original.t)
+			{
+				dec_weak();
+				value_d::t = original.t;
+				value_d::o = original.o;
+				inc_weak();
+			}
+			else
+			{
+				value_d::o = original.o;
+			}
+			return *this;
+		}
+
+		inline adr& operator=(adr const& original) // copy assignment operator
+		{
+			if (value_d::t != original.t)
+			{
+				dec_weak();
+				value_d::t = original.t;
+				value_d::o = original.o;
+				inc_weak();
+			}
+			else
+			{
+				value_d::o = original.o;
+			}
+			return *this;
+		}
+
+		inline void inc_weak() const
+		{
+			++(value_d::t->weak_);
+		}
+
+		inline void dec_weak() const
+		{
+			if (!--(value_d::t->weak_))
+			{
+				operator delete(value_d::t);
+			}
+		}
+
+		inline value_d value() const
+		{
+			return (!value_d::t->refs_) ? value_d{} : value_d{ static_cast<typename value_d::abstraction const&>(*this) };
 		}
 	};
 }

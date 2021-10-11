@@ -141,6 +141,12 @@ namespace taste
 		nv.o->mutate(nv);
 		np.o->extract(np);
 		np.o->mutate(np);
+
+		auto aoc = nc.address();
+		auto aov = adr<var<number_a<int64_t>>>{ nv };
+		auto aop = adr<ptr<number_a<int64_t>>>{ np };
+
+		auto oc = aoc.value();
 	}
 }
 

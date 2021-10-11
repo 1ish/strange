@@ -12,7 +12,7 @@ namespace strange
 	protected:
 		inline thing_t(any_a& me)
 		: refs_{ 0 }
-		, weak_{ 0 }
+		, weak_{ 1 }
 		, error_{ nullptr, nullptr }
 		{
 			me.t = this;
@@ -22,7 +22,7 @@ namespace strange
 		inline thing_t(any_a& me,
 			any_a const& original)
 		: refs_{ 0 }
-		, weak_{ 0 }
+		, weak_{ 1 }
 		, error_{ original.t->error_ }
 		{
 			me.t = this;
