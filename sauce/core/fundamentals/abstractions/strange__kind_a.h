@@ -6,18 +6,20 @@ namespace strange
 	struct kind_o :
 		symbol_o
 	{
+		bool (*address) (con<kind_a> const& me);
+
 		behaviour_e (*behaviour) (con<kind_a> const& me);
 
 		var<cat_a> (*the_cat) (con<kind_a> const& me);
 
 		var<type_a> (*the_type) (con<kind_a> const& me);
 
-		// constant					#<any>
-		// variable					=<any>
-		// pointer					&<any>
-		// forward_iterator			+<forward_extractor>
-		// bidirectional_iterator	-<bidirectional_mutator>
-		// random_access_iterator	*<random_access_extractor>
+		// constant					#<any>						address of constant					&#
+		// variable					=<any>						address of variable					&=
+		// pointer					@<any>						address of pointer					&@
+		// forward_iterator			+<forward_extractor>		address of forward_iterator			&+
+		// bidirectional_iterator	-<bidirectional_mutator>	address of bidirectional_iterator	&-
+		// random_access_iterator	*<random_access_extractor>	address of random_access_iterator	&*
 	};
 
 	struct kind_a

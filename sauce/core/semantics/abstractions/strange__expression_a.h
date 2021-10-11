@@ -16,7 +16,7 @@ kind (behaviour, the_cat, the_type)						=<+ int64_t >
 list (1, 2, 3)						[1, 2, 3]
 list [#<+ int64_t >] (1, 2, 3)
 table (tuple (1, 2.3))				{1: 2.3}
-table {key: =<+ int64_t >, value: &<+ double >} (tuple [=<+ int64_t >, &<+ double >] (1, 2.3))
+table {key: =<+ int64_t >, value: @<+ double >} (tuple [=<+ int64_t >, @<+ double >] (1, 2.3))
 
 composition (before, after, result)				(before, after, result)
 
@@ -27,8 +27,8 @@ invocation (x, add, y)							x.add[y]
 
 f = function (x #, y #) = x.add[y]
 e = extraction (x #, y #) = x.add[y]					e = operation (me #, x #, y #) = x.add[y]
-m = mutation (x #, y #) & (me.save[], x + y)			m = operation (me =, x #, y #) & (me.save[], x + y)
-p = perversion (x #, y #) =<> (me.share[], x + y)		p = operation (me &, x #, y #) =<> (me.share[], x + y)
+m = mutation (x #, y #) @ (me.save[], x + y)			m = operation (me =, x #, y #) @ (me.save[], x + y)
+p = perversion (x #, y #) =<> (me.share[], x + y)		p = operation (me @, x #, y #) =<> (me.share[], x + y)
 
 f.execute[1, 2]
 e.perform[x, 1, 2]
@@ -55,7 +55,7 @@ strange: realm
 		greater_or_equal	# extraction (other #^^) =<+ bool >,
 		data				# extraction () =<data[^type]>,
 		extract				# extraction () #<+ type_d >,
-		mutate				# mutation () &<+ type_d >,
+		mutate				# mutation () @<+ type_d >,
 		extractor			# extraction () *<random_access_extractor[^type]>,
 	)
 	{	not_equal:			me.equal[] !,
