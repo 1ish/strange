@@ -96,8 +96,8 @@ namespace strange
 
 	struct thing_t;
 	struct symbol_t;
-	template <typename type_d> struct data_t;
-	template <typename type_d> struct data_pointer_t;
+	template <typename type_d, typename lock_d = var<unlock_a>> struct data_t;
+	template <typename type_d, typename lock_d = var<unlock_a>> struct data_pointer_t;
 	template <typename type_d> struct number_t;
 }
 

@@ -362,6 +362,8 @@ namespace strange
 				number_t<type_d>::_pointer,
 			},
 			// data_a
+			reinterpret_cast<decltype(data_o<std::remove_reference_t<type_d>>::read_lock)>(number_t<type_d>::read_lock),
+			reinterpret_cast<decltype(data_o<std::remove_reference_t<type_d>>::write_lock)>(number_t<type_d>::write_lock),
 			reinterpret_cast<decltype(data_o<std::remove_reference_t<type_d>>::extract)>(number_t<type_d>::extract),
 			reinterpret_cast<decltype(data_o<std::remove_reference_t<type_d>>::mutate)>(number_t<type_d>::mutate),
 		};
