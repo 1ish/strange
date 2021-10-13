@@ -3,20 +3,18 @@
 
 namespace strange
 {
-	template <typename type_d, typename lock_d>
+	template <typename type_d>
 	struct data_t : thing_t
 	{
 		type_d data_;
-		lock_d lock_;
 
 	protected:
 		template <typename v=void>
 		inline data_t(any_a& me)
 			: thing_t{ me }
 			, data_{}
-			, lock_{lock_d::create()}
 		{
-			me.o = data_t<type_d, lock_d>::_operations();
+			me.o = data_t<type_d>::_operations();
 		}
 
 		template <typename v = void>
@@ -24,27 +22,24 @@ namespace strange
 			type_d const& data)
 		: thing_t{ me }
 		, data_{ data }
-		, lock_{ lock_d::create() }
 		{
-			me.o = data_t<type_d, lock_d>::_operations();
+			me.o = data_t<type_d>::_operations();
 		}
 
 		inline data_t(any_a& me,
 			type_d& data)
 			: thing_t{ me }
 			, data_{ data }
-			, lock_{ lock_d::create() }
 		{
-			me.o = data_t<type_d, lock_d>::_operations();
+			me.o = data_t<type_d>::_operations();
 		}
 
 		inline data_t(any_a& me,
 			any_a const& original)
 		: thing_t{ me, original }
-		, data_{ static_cast<data_t<type_d, lock_d>*>(original.t)->data_ }
-		, lock_{ lock_d::create() }
+		, data_{ static_cast<data_t<type_d>*>(original.t)->data_ }
 		{
-			me.o = data_t<type_d, lock_d>::_operations();
+			me.o = data_t<type_d>::_operations();
 		}
 
 		data_t(data_t const&) = delete;
@@ -87,8 +82,8 @@ namespace strange
 		static inline var<data_a<std::remove_reference_t<type_d>>> create_default()
 		{
 			any_a r;
-			new data_t<type_d, lock_d>{ r };
-			data_t<type_d, lock_d>::_initialise(r);
+			new data_t<type_d>{ r };
+			data_t<type_d>::_initialise(r);
 			return var<data_a<std::remove_reference_t<type_d>>>{ reinterpret_cast<data_a<std::remove_reference_t<type_d>>&>(r) };
 		}
 
@@ -97,16 +92,16 @@ namespace strange
 		static inline var<data_a<std::remove_reference_t<type_d>>> create(type_d const& data)
 		{
 			any_a r;
-			new data_t<type_d, lock_d>{ r, data };
-			data_t<type_d, lock_d>::_initialise(r);
+			new data_t<type_d>{ r, data };
+			data_t<type_d>::_initialise(r);
 			return var<data_a<std::remove_reference_t<type_d>>>{ reinterpret_cast<data_a<std::remove_reference_t<type_d>>&>(r) };
 		}
 
 		static inline var<data_a<std::remove_reference_t<type_d>>> create_ref(type_d& data)
 		{
 			any_a r;
-			new data_t<type_d, lock_d>{ r, data };
-			data_t<type_d, lock_d>::_initialise(r);
+			new data_t<type_d>{ r, data };
+			data_t<type_d>::_initialise(r);
 			return var<data_a<std::remove_reference_t<type_d>>>{ reinterpret_cast<data_a<std::remove_reference_t<type_d>>&>(r) };
 		}
 
@@ -123,27 +118,27 @@ namespace strange
 		}
 	};
 
-	template <typename type_d, typename lock_d>
-	struct data_pointer_t : data_t<type_d, lock_d>
+	template <typename type_d>
+	struct data_pointer_t : data_t<type_d>
 	{
 	protected:
 		inline data_pointer_t(any_a& me,
 			type_d data)
-		: data_t<type_d, lock_d>{ me, data }
+		: data_t<type_d>{ me, data }
 		{
-			me.o = data_pointer_t<type_d, lock_d>::_operations();
+			me.o = data_pointer_t<type_d>::_operations();
 		}
 
 		inline data_pointer_t(any_a& me,
 			any_a const& original)
-		: data_t<type_d, lock_d>{ me, original }
+		: data_t<type_d>{ me, original }
 		{
-			me.o = data_pointer_t<type_d, lock_d>::_operations();
+			me.o = data_pointer_t<type_d>::_operations();
 		}
 
 		virtual ~data_pointer_t()
 		{
-			delete data_t<type_d, lock_d>::data_;
+			delete data_t<type_d>::data_;
 		}
 
 	private:
@@ -166,8 +161,8 @@ namespace strange
 		static inline var<data_a<type_d>> create(type_d data)
 		{
 			any_a r;
-			new data_pointer_t<type_d, lock_d>{ r, data };
-			data_pointer_t<type_d, lock_d>::_initialise(r);
+			new data_pointer_t<type_d>{ r, data };
+			data_pointer_t<type_d>::_initialise(r);
 			return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
 		}
 
@@ -182,28 +177,178 @@ namespace strange
 		}
 	};
 
-	template <typename type_d, typename lock_d = var<unlock_a>>
+	template <typename type_d, typename lock_d>
+	struct locked_data_t : data_t<type_d>
+	{
+		lock_d lock_;
+
+	protected:
+		inline locked_data_t(any_a& me,
+			type_d data)
+			: data_t<type_d>{ me, data }
+			, lock_{ lock_d::create() }
+		{
+			me.o = locked_data_t<type_d, lock_d>::_operations();
+		}
+
+		inline locked_data_t(any_a& me,
+			any_a const& original)
+			: data_t<type_d>{ me, original }
+			, lock_{ lock_d::create() }
+		{
+			me.o = locked_data_t<type_d, lock_d>::_operations();
+		}
+
+	private:
+		// data_o
+		static data_o<std::remove_reference_t<type_d>> const* _operations();
+		static data_o<std::remove_reference_t<type_d>> const* _pointer_operations();
+
+	protected:
+		// any_a
+		static var<symbol_a> type(con<> const& me);
+
+		static void _copy(any_a const& me,
+			any_a& copy);
+
+		static void _set_pointer(con<> const& me,
+			bool is_pointer);
+
+		// data_a
+		static var<> read_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me);
+
+		static var<> write_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me);
+
+	public:
+		// creators
+		static inline var<data_a<std::remove_reference_t<type_d>>> create(type_d data)
+		{
+			any_a r;
+			new locked_data_t<type_d, lock_d>{ r, data };
+			locked_data_t<type_d, lock_d>::_initialise(r);
+			return var<data_a<std::remove_reference_t<type_d>>>{ reinterpret_cast<data_a<std::remove_reference_t<type_d>>&>(r) };
+		}
+
+		static inline var<data_a<std::remove_reference_t<type_d>>> create_from_range(con<range_a<>> const& range)
+		{
+			return create(nullptr);
+		}
+
+		static inline var<data_a<std::remove_reference_t<type_d>>> unpack(con<container_a> const& container)
+		{
+			return create(nullptr);
+		}
+	};
+
+	template <typename type_d, typename lock_d>
+	struct locked_data_pointer_t : data_pointer_t<type_d>
+	{
+		lock_d lock_;
+
+	protected:
+		inline locked_data_pointer_t(any_a& me,
+			type_d data)
+			: data_pointer_t<type_d>{ me, data }
+			, lock_{ lock_d::create() }
+		{
+			me.o = locked_data_pointer_t<type_d, lock_d>::_operations();
+		}
+
+		inline locked_data_pointer_t(any_a& me,
+			any_a const& original)
+			: data_pointer_t<type_d>{ me, original }
+			, lock_{ lock_d::create() }
+		{
+			me.o = locked_data_pointer_t<type_d, lock_d>::_operations();
+		}
+
+	private:
+		// data_o
+		static data_o<type_d> const* _operations();
+		static data_o<type_d> const* _pointer_operations();
+
+	protected:
+		// any_a
+		static var<symbol_a> type(con<> const& me);
+
+		static void _copy(any_a const& me,
+			any_a& copy);
+
+		static void _set_pointer(con<> const& me,
+			bool is_pointer);
+
+		// data_a
+		static var<> read_lock(ptr<data_a<type_d>> const& me);
+
+		static var<> write_lock(ptr<data_a<type_d>> const& me);
+
+	public:
+		// creators
+		static inline var<data_a<type_d>> create(type_d data)
+		{
+			any_a r;
+			new locked_data_pointer_t<type_d, lock_d>{ r, data };
+			locked_data_pointer_t<type_d, lock_d>::_initialise(r);
+			return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
+		}
+
+		static inline var<data_a<type_d>> create_from_range(con<range_a<>> const& range)
+		{
+			return create(nullptr);
+		}
+
+		static inline var<data_a<type_d>> unpack(con<container_a> const& container)
+		{
+			return create(nullptr);
+		}
+	};
+
+	template <typename type_d>
 	inline var<data_a<std::remove_reference_t<type_d>>> dat(type_d const& data)
 	{
-		return data_t<type_d, lock_d>::create(data);
+		return data_t<type_d>::create(data);
 	}
 
-	template <typename type_d, typename lock_d = var<unlock_a>>
+	template <typename type_d>
 	inline var<data_a<std::remove_reference_t<type_d>>> dat()
 	{
-		return data_t<type_d, lock_d>::create_default();
+		return data_t<type_d>::create_default();
 	}
 
-	template <typename type_d, typename lock_d = var<unlock_a>>
+	template <typename type_d>
 	inline var<data_a<std::remove_reference_t<type_d>>> dat_ref(type_d& data)
 	{
-		return data_t<type_d&, lock_d>::create_ref(data);
+		return data_t<type_d&>::create_ref(data);
 	}
 
-	template <typename type_d, typename lock_d = var<unlock_a>>
+	template <typename type_d>
 	inline var<data_a<type_d*>> dat_ptr(type_d* data)
 	{
-		return data_pointer_t<type_d*, lock_d>::create(data);
+		return data_pointer_t<type_d*>::create(data);
+	}
+
+	template <typename type_d, typename lock_d = con<lock_a>>
+	inline var<data_a<std::remove_reference_t<type_d>>> locked_dat(type_d const& data)
+	{
+		return locked_data_t<type_d, lock_d>::create(data);
+	}
+
+	template <typename type_d, typename lock_d = con<lock_a>>
+	inline var<data_a<std::remove_reference_t<type_d>>> locked_dat()
+	{
+		return locked_data_t<type_d, lock_d>::create_default();
+	}
+
+	template <typename type_d, typename lock_d = con<lock_a>>
+	inline var<data_a<std::remove_reference_t<type_d>>> locked_dat_ref(type_d& data)
+	{
+		return locked_data_t<type_d&, lock_d>::create_ref(data);
+	}
+
+	template <typename type_d, typename lock_d = con<lock_a>>
+	inline var<data_a<type_d*>> locked_dat_ptr(type_d* data)
+	{
+		return locked_data_pointer_t<type_d*, lock_d>::create(data);
 	}
 
 	template <typename D>
@@ -216,10 +361,16 @@ namespace strange
 		default_copy& operator=(default_copy const&) = delete; // copy assignment operator
 	};
 
-	template <typename type_d, typename lock_d = var<unlock_a>>
+	template <typename type_d>
 	inline var<data_a<default_copy<type_d>>> dat_def()
 	{
-		return data_t<default_copy<type_d>, lock_d>::create_default();
+		return data_t<default_copy<type_d>>::create_default();
+	}
+
+	template <typename type_d, typename lock_d = con<lock_a>>
+	inline var<data_a<default_copy<type_d>>> locked_dat_def()
+	{
+		return locked_data_t<default_copy<type_d>, lock_d>::create_default();
 	}
 
 	inline var<> lock_o::read_lock(con<lock_a> const& me)

@@ -528,4 +528,9 @@
       <Filter>Header Files\sauce\core\semantics\abstractions</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\LICENSE">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

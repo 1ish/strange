@@ -281,6 +281,9 @@
     <ClInclude Include="..\..\..\sauce\strange.h" />
     <ClInclude Include="..\..\..\taste\core\fundamentals\taste__strange__thing_t.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\LICENSE" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
