@@ -107,15 +107,15 @@ namespace strange
 
 	// data_a
 	template <typename type_d>
-	var<> data_t<type_d>::read_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me)
+	ptr<> data_t<type_d>::read_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me)
 	{
-		return var<>{};
+		return ptr<>{};
 	}
 
 	template <typename type_d>
-	var<> data_t<type_d>::write_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me)
+	ptr<> data_t<type_d>::write_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me)
 	{
-		return var<>{};
+		return ptr<>{};
 	}
 
 	template <typename type_d>
@@ -271,14 +271,14 @@ namespace strange
 
 	// data_a
 	template <typename type_d, typename lock_d>
-	var<> locked_data_t<type_d, lock_d>::read_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me)
+	ptr<> locked_data_t<type_d, lock_d>::read_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me)
 	{
 		auto t = static_cast<locked_data_t<type_d, lock_d>*>(me.t);
 		return t->lock_.o->read_lock(t->lock_);
 	}
 
 	template <typename type_d, typename lock_d>
-	var<> locked_data_t<type_d, lock_d>::write_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me)
+	ptr<> locked_data_t<type_d, lock_d>::write_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me)
 	{
 		auto t = static_cast<locked_data_t<type_d, lock_d>*>(me.t);
 		return t->lock_.o->write_lock(t->lock_);
@@ -355,14 +355,14 @@ namespace strange
 
 	// data_a
 	template <typename type_d, typename lock_d>
-	var<> locked_data_pointer_t<type_d, lock_d>::read_lock(ptr<data_a<type_d>> const& me)
+	ptr<> locked_data_pointer_t<type_d, lock_d>::read_lock(ptr<data_a<type_d>> const& me)
 	{
 		auto t = static_cast<locked_data_pointer_t<type_d, lock_d>*>(me.t);
 		return t->lock_.o->read_lock(t->lock_);
 	}
 
 	template <typename type_d, typename lock_d>
-	var<> locked_data_pointer_t<type_d, lock_d>::write_lock(ptr<data_a<type_d>> const& me)
+	ptr<> locked_data_pointer_t<type_d, lock_d>::write_lock(ptr<data_a<type_d>> const& me)
 	{
 		auto t = static_cast<locked_data_pointer_t<type_d, lock_d>*>(me.t);
 		return t->lock_.o->write_lock(t->lock_);

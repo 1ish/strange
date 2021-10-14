@@ -8,9 +8,9 @@ namespace strange
 	{
 		struct empty {};
 
-		static inline var<> read_lock (con<lock_a> const& me);
+		static inline ptr<> read_lock (con<lock_a> const& me);
 
-		static inline var<> write_lock (con<lock_a> const& me);
+		static inline ptr<> write_lock (con<lock_a> const& me);
 
 		static inline empty _read_lock (con<lock_a> const& me)
 		{

@@ -68,9 +68,9 @@ namespace strange
 			bool is_pointer);
 
 		// data_a
-		static var<> read_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me);
+		static ptr<> read_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me);
 
-		static var<> write_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me);
+		static ptr<> write_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me);
 
 		static std::remove_reference_t<type_d> const& extract(con<data_a<std::remove_reference_t<type_d>>> const& me);
 
@@ -95,6 +95,15 @@ namespace strange
 			new data_t<type_d>{ r, data };
 			data_t<type_d>::_initialise(r);
 			return var<data_a<std::remove_reference_t<type_d>>>{ reinterpret_cast<data_a<std::remove_reference_t<type_d>>&>(r) };
+		}
+
+		template <typename v = void>
+		static inline ptr<data_a<std::remove_reference_t<type_d>>> create_ptr(type_d const& data)
+		{
+			any_a r;
+			new data_t<type_d>{ r, data };
+			data_t<type_d>::_initialise(r);
+			return ptr<data_a<std::remove_reference_t<type_d>>>{ reinterpret_cast<data_a<std::remove_reference_t<type_d>>&>(r) };
 		}
 
 		static inline var<data_a<std::remove_reference_t<type_d>>> create_ref(type_d& data)
@@ -131,7 +140,7 @@ namespace strange
 
 		inline data_pointer_t(any_a& me,
 			any_a const& original)
-		: data_t<type_d>{ me, original }
+		: data_t<type_d>{ me, nullptr }
 		{
 			me.o = data_pointer_t<type_d>::_operations();
 		}
@@ -158,22 +167,22 @@ namespace strange
 
 	public:
 		// creators
-		static inline var<data_a<type_d>> create(type_d data)
+		static inline ptr<data_a<type_d>> create_ptr(type_d data)
 		{
 			any_a r;
 			new data_pointer_t<type_d>{ r, data };
 			data_pointer_t<type_d>::_initialise(r);
-			return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
+			return ptr<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
 		}
 
 		static inline var<data_a<type_d>> create_from_range(con<range_a<>> const& range)
 		{
-			return create(nullptr);
+			return create_ptr(nullptr);
 		}
 
 		static inline var<data_a<type_d>> unpack(con<container_a> const& container)
 		{
-			return create(nullptr);
+			return create_ptr(nullptr);
 		}
 	};
 
@@ -215,9 +224,9 @@ namespace strange
 			bool is_pointer);
 
 		// data_a
-		static var<> read_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me);
+		static ptr<> read_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me);
 
-		static var<> write_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me);
+		static ptr<> write_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me);
 
 	public:
 		// creators
@@ -227,6 +236,14 @@ namespace strange
 			new locked_data_t<type_d, lock_d>{ r, data };
 			locked_data_t<type_d, lock_d>::_initialise(r);
 			return var<data_a<std::remove_reference_t<type_d>>>{ reinterpret_cast<data_a<std::remove_reference_t<type_d>>&>(r) };
+		}
+
+		static inline ptr<data_a<std::remove_reference_t<type_d>>> create_ptr(type_d data)
+		{
+			any_a r;
+			new locked_data_t<type_d, lock_d>{ r, data };
+			locked_data_t<type_d, lock_d>::_initialise(r);
+			return ptr<data_a<std::remove_reference_t<type_d>>>{ reinterpret_cast<data_a<std::remove_reference_t<type_d>>&>(r) };
 		}
 
 		static inline var<data_a<std::remove_reference_t<type_d>>> create_from_range(con<range_a<>> const& range)
@@ -256,7 +273,7 @@ namespace strange
 
 		inline locked_data_pointer_t(any_a& me,
 			any_a const& original)
-			: data_pointer_t<type_d>{ me, original }
+			: data_pointer_t<type_d>{ me, nullptr }
 			, lock_{ lock_d::create() }
 		{
 			me.o = locked_data_pointer_t<type_d, lock_d>::_operations();
@@ -278,9 +295,9 @@ namespace strange
 			bool is_pointer);
 
 		// data_a
-		static var<> read_lock(ptr<data_a<type_d>> const& me);
+		static ptr<> read_lock(ptr<data_a<type_d>> const& me);
 
-		static var<> write_lock(ptr<data_a<type_d>> const& me);
+		static ptr<> write_lock(ptr<data_a<type_d>> const& me);
 
 	public:
 		// creators
@@ -290,6 +307,14 @@ namespace strange
 			new locked_data_pointer_t<type_d, lock_d>{ r, data };
 			locked_data_pointer_t<type_d, lock_d>::_initialise(r);
 			return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
+		}
+
+		static inline ptr<data_a<type_d>> create_ptr(type_d data)
+		{
+			any_a r;
+			new locked_data_pointer_t<type_d, lock_d>{ r, data };
+			locked_data_pointer_t<type_d, lock_d>::_initialise(r);
+			return ptr<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
 		}
 
 		static inline var<data_a<type_d>> create_from_range(con<range_a<>> const& range)
@@ -322,9 +347,9 @@ namespace strange
 	}
 
 	template <typename type_d>
-	inline var<data_a<type_d*>> dat_ptr(type_d* data)
+	inline ptr<data_a<type_d*>> dat_ptr(type_d* data)
 	{
-		return data_pointer_t<type_d*>::create(data);
+		return data_pointer_t<type_d*>::create_ptr(data);
 	}
 
 	template <typename type_d, typename lock_d = con<lock_a>>
@@ -346,9 +371,9 @@ namespace strange
 	}
 
 	template <typename type_d, typename lock_d = con<lock_a>>
-	inline var<data_a<type_d*>> locked_dat_ptr(type_d* data)
+	inline ptr<data_a<type_d*>> locked_dat_ptr(type_d* data)
 	{
-		return locked_data_pointer_t<type_d*, lock_d>::create(data);
+		return locked_data_pointer_t<type_d*, lock_d>::create_ptr(data);
 	}
 
 	template <typename D>
@@ -373,12 +398,12 @@ namespace strange
 		return locked_data_t<default_copy<type_d>, lock_d>::create_default();
 	}
 
-	inline var<> lock_o::read_lock(con<lock_a> const& me)
+	inline ptr<> lock_o::read_lock(con<lock_a> const& me)
 	{
 		return dat_ptr(new std::shared_lock<std::shared_timed_mutex>(static_cast<data_t<default_copy<std::shared_timed_mutex>>*>(me.t)->data_));
 	}
 
-	inline var<> lock_o::write_lock(con<lock_a> const& me)
+	inline ptr<> lock_o::write_lock(con<lock_a> const& me)
 	{
 		return dat_ptr(new std::unique_lock<std::shared_timed_mutex>(static_cast<data_t<default_copy<std::shared_timed_mutex>>*>(me.t)->data_));
 	}
@@ -398,14 +423,14 @@ namespace strange
 		return dat_def<std::shared_timed_mutex>().val<var<lock_a>>();
 	}
 
-	inline var<> unlock_o::read_lock(con<lock_a> const& me)
+	inline ptr<> unlock_o::read_lock(con<lock_a> const& me)
 	{
-		return thing_t::create_nothing();
+		return ptr<>{};
 	}
 
-	inline var<> unlock_o::write_lock(con<lock_a> const& me)
+	inline ptr<> unlock_o::write_lock(con<lock_a> const& me)
 	{
-		return thing_t::create_nothing();
+		return ptr<>{};
 	}
 }
 

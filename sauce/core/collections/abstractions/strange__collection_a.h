@@ -13,9 +13,9 @@ namespace strange
 
 		fit<forward_extractor_a<element_d>> (*end) (con<collection_a<key_d, value_d, element_d>> const& me);
 
-		var<> (*read_lock) (ptr<collection_a<key_d, value_d, element_d>> const& me);
+		ptr<> (*read_lock) (ptr<collection_a<key_d, value_d, element_d>> const& me);
 
-		var<> (*write_lock) (ptr<collection_a<key_d, value_d, element_d>> const& me);
+		ptr<> (*write_lock) (ptr<collection_a<key_d, value_d, element_d>> const& me);
 
 		bool (*has) (con<collection_a<key_d, value_d, element_d>> const& me,
 			key_d const& key);
@@ -36,7 +36,7 @@ namespace strange
 
 		void (*clear) (var<collection_a<key_d, value_d, element_d>> const& me);
 
-		int64_t (*size)(con<collection_a<key_d, value_d, element_d>> const& me);
+		int64_t (*size) (con<collection_a<key_d, value_d, element_d>> const& me);
 
 		bool (*empty) (con<collection_a<key_d, value_d, element_d>> const& me);
 

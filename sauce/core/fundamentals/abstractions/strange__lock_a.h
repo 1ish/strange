@@ -6,9 +6,9 @@ namespace strange
 	struct lock_o :
 		any_o
 	{
-		static inline var<> read_lock (con<lock_a> const& me);
+		static inline ptr<> read_lock (con<lock_a> const& me);
 
-		static inline var<> write_lock (con<lock_a> const& me);
+		static inline ptr<> write_lock (con<lock_a> const& me);
 
 		static inline std::shared_lock<std::shared_timed_mutex> _read_lock (con<lock_a> const& me);
 

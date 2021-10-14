@@ -7,9 +7,9 @@ namespace strange
 	struct data_o :
 		any_o
 	{
-		var<> (*read_lock) (ptr<data_a<type_d>> const& me);
+		ptr<> (*read_lock) (ptr<data_a<type_d>> const& me);
 
-		var<> (*write_lock) (ptr<data_a<type_d>> const& me);
+		ptr<> (*write_lock) (ptr<data_a<type_d>> const& me);
 
 		type_d const& (*extract) (con<data_a<type_d>> const& me);
 
