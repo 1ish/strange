@@ -8,9 +8,15 @@ namespace strange
 	{
 		struct empty {};
 
-		static inline ptr<> read_lock (var<lock_a> const& me);
+		static inline ptr<> read_lock (var<lock_a> const& me)
+		{
+			return ptr<>{};
+		}
 
-		static inline ptr<> write_lock (var<lock_a> const& me);
+		static inline ptr<> write_lock (var<lock_a> const& me)
+		{
+			return ptr<>{};
+		}
 
 		static inline empty _read_lock (var<lock_a> const& me)
 		{
@@ -32,11 +38,6 @@ namespace strange
 		mutable operations const* o;
 
 		static var<symbol_a> cat(con<> const& me); //TODO cat
-
-		static inline var<unlock_a> create()
-		{
-			return var<unlock_a>{};
-		}
 
 		static creator_fp creator(con<symbol_a> const& scope,
 			con<symbol_a> const& thing,

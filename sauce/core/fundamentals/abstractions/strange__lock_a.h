@@ -25,8 +25,6 @@ namespace strange
 
 		static var<symbol_a> cat(con<> const& me); //TODO cat
 
-		static inline var<lock_a> create();
-
 		static creator_fp creator(con<symbol_a> const& scope,
 			con<symbol_a> const& thing,
 			con<symbol_a> const& function);
