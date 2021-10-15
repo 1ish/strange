@@ -4,7 +4,7 @@
 namespace strange
 {
 	struct unlock_o :
-		lock_o
+		any_o
 	{
 		struct empty {};
 
