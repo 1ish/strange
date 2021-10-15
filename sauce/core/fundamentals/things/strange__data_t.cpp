@@ -375,10 +375,10 @@ namespace strange
 	template struct data_t<uint64_t&>;
 	template struct data_t<double>;
 	template struct data_t<double&>;
-	template struct data_t<default_copy<std::shared_timed_mutex>>;
+	template struct data_t<default_copy<std::shared_mutex>>;
 	template struct data_t<default_copy<std::string>>;
 
 	template struct data_pointer_t<int64_t*>;
-	template struct data_pointer_t<std::shared_lock<std::shared_timed_mutex>*>;
-	template struct data_pointer_t<std::unique_lock<std::shared_timed_mutex>*>;
+	template struct data_pointer_t<std::shared_lock<std::shared_mutex>*>;
+	template struct data_pointer_t<std::unique_lock<std::shared_mutex>*>;
 }

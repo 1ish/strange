@@ -352,25 +352,25 @@ namespace strange
 		return data_pointer_t<type_d*>::create_ptr(data);
 	}
 
-	template <typename type_d, typename lock_d = con<lock_a>>
+	template <typename type_d, typename lock_d = var<lock_a>>
 	inline var<data_a<std::remove_reference_t<type_d>>> locked_dat(type_d const& data)
 	{
 		return locked_data_t<type_d, lock_d>::create(data);
 	}
 
-	template <typename type_d, typename lock_d = con<lock_a>>
+	template <typename type_d, typename lock_d = var<lock_a>>
 	inline var<data_a<std::remove_reference_t<type_d>>> locked_dat()
 	{
 		return locked_data_t<type_d, lock_d>::create_default();
 	}
 
-	template <typename type_d, typename lock_d = con<lock_a>>
+	template <typename type_d, typename lock_d = var<lock_a>>
 	inline var<data_a<std::remove_reference_t<type_d>>> locked_dat_ref(type_d& data)
 	{
 		return locked_data_t<type_d&, lock_d>::create_ref(data);
 	}
 
-	template <typename type_d, typename lock_d = con<lock_a>>
+	template <typename type_d, typename lock_d = var<lock_a>>
 	inline ptr<data_a<type_d*>> locked_dat_ptr(type_d* data)
 	{
 		return locked_data_pointer_t<type_d*, lock_d>::create_ptr(data);
@@ -392,43 +392,47 @@ namespace strange
 		return data_t<default_copy<type_d>>::create_default();
 	}
 
-	template <typename type_d, typename lock_d = con<lock_a>>
+	template <typename type_d, typename lock_d = var<lock_a>>
 	inline var<data_a<default_copy<type_d>>> locked_dat_def()
 	{
 		return locked_data_t<default_copy<type_d>, lock_d>::create_default();
 	}
 
-	inline ptr<> lock_o::read_lock(con<lock_a> const& me)
+	inline ptr<> lock_o::read_lock(var<lock_a> const& me)
 	{
-		return dat_ptr(new std::shared_lock<std::shared_timed_mutex>(static_cast<data_t<default_copy<std::shared_timed_mutex>>*>(me.t)->data_));
+		me.mut();
+		return dat_ptr(new std::shared_lock<std::shared_mutex>(static_cast<data_t<default_copy<std::shared_mutex>>*>(me.t)->data_));
 	}
 
-	inline ptr<> lock_o::write_lock(con<lock_a> const& me)
+	inline ptr<> lock_o::write_lock(var<lock_a> const& me)
 	{
-		return dat_ptr(new std::unique_lock<std::shared_timed_mutex>(static_cast<data_t<default_copy<std::shared_timed_mutex>>*>(me.t)->data_));
+		me.mut();
+		return dat_ptr(new std::unique_lock<std::shared_mutex>(static_cast<data_t<default_copy<std::shared_mutex>>*>(me.t)->data_));
 	}
 
-	inline std::shared_lock<std::shared_timed_mutex> lock_o::_read_lock(con<lock_a> const& me)
+	inline std::shared_lock<std::shared_mutex> lock_o::_read_lock(var<lock_a> const& me)
 	{
-		return std::shared_lock<std::shared_timed_mutex>(static_cast<data_t<default_copy<std::shared_timed_mutex>>*>(me.t)->data_);
+		me.mut();
+		return std::shared_lock<std::shared_mutex>(static_cast<data_t<default_copy<std::shared_mutex>>*>(me.t)->data_);
 	}
 
-	inline std::unique_lock<std::shared_timed_mutex> lock_o::_write_lock(con<lock_a> const& me)
+	inline std::unique_lock<std::shared_mutex> lock_o::_write_lock(var<lock_a> const& me)
 	{
-		return std::unique_lock<std::shared_timed_mutex>(static_cast<data_t<default_copy<std::shared_timed_mutex>>*>(me.t)->data_);
+		me.mut();
+		return std::unique_lock<std::shared_mutex>(static_cast<data_t<default_copy<std::shared_mutex>>*>(me.t)->data_);
 	}
 
 	inline var<lock_a> lock_a::create()
 	{
-		return dat_def<std::shared_timed_mutex>().val<var<lock_a>>();
+		return dat_def<std::shared_mutex>().val<var<lock_a>>();
 	}
 
-	inline ptr<> unlock_o::read_lock(con<lock_a> const& me)
+	inline ptr<> unlock_o::read_lock(var<lock_a> const& me)
 	{
 		return ptr<>{};
 	}
 
-	inline ptr<> unlock_o::write_lock(con<lock_a> const& me)
+	inline ptr<> unlock_o::write_lock(var<lock_a> const& me)
 	{
 		return ptr<>{};
 	}

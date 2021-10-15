@@ -98,8 +98,8 @@ namespace strange
 	struct symbol_t;
 	template <typename type_d> struct data_t;
 	template <typename type_d> struct data_pointer_t;
-	template <typename type_d, typename lock_d = con<lock_a>> struct locked_data_t;
-	template <typename type_d, typename lock_d = con<lock_a>> struct locked_data_pointer_t;
+	template <typename type_d, typename lock_d = var<lock_a>> struct locked_data_t;
+	template <typename type_d, typename lock_d = var<lock_a>> struct locked_data_pointer_t;
 	template <typename type_d> struct number_t;
 }
 
