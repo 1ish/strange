@@ -427,7 +427,7 @@ namespace strange
 	template <>
 	inline var<lock_a> create_lock<var<lock_a>>()
 	{
-		return dat_def<std::shared_mutex>().val<var<lock_a>>();
+		return dat_def<std::shared_mutex>().value<var<lock_a>>();
 	}
 
 	template <>

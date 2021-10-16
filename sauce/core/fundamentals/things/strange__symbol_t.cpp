@@ -100,10 +100,10 @@ namespace strange
 	bool symbol_t::equal(con<> const& me,
 		con<> const& other)
 	{
-		auto const os = other.dyn<con<symbol_a>>();
+		auto const os = other.dynamic<con<symbol_a>>();
 		if (os.o->something(os))
 		{
-			return symbol_t::equal_symbol(me.ref<con<symbol_a>>(), os);
+			return symbol_t::equal_symbol(me.reference<con<symbol_a>>(), os);
 		}
 		return thing_t::equal(me, other);
 	}
@@ -111,10 +111,10 @@ namespace strange
 	bool symbol_t::less(con<> const& me,
 		con<> const& other)
 	{
-		auto const os = other.dyn<con<symbol_a>>();
+		auto const os = other.dynamic<con<symbol_a>>();
 		if (os.o->something(os))
 		{
-			return symbol_t::less_symbol(me.ref<con<symbol_a>>(), os);
+			return symbol_t::less_symbol(me.reference<con<symbol_a>>(), os);
 		}
 		return thing_t::less(me, other);
 	}
@@ -122,10 +122,10 @@ namespace strange
 	bool symbol_t::less_or_equal(con<> const& me,
 		con<> const& other)
 	{
-		auto const os = other.dyn<con<symbol_a>>();
+		auto const os = other.dynamic<con<symbol_a>>();
 		if (os.o->something(os))
 		{
-			return symbol_t::less_or_equal_symbol(me.ref<con<symbol_a>>(), os);
+			return symbol_t::less_or_equal_symbol(me.reference<con<symbol_a>>(), os);
 		}
 		return thing_t::less_or_equal(me, other);
 	}

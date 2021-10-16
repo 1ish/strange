@@ -122,10 +122,10 @@ namespace strange
 	bool number_t<type_d>::equal(con<> const& me,
 		con<> const& other)
 	{
-		auto const on = other.dyn<con<number_a<std::remove_reference_t<type_d>>>>();
+		auto const on = other.dynamic<con<number_a<std::remove_reference_t<type_d>>>>();
 		if (on.o->something(on))
 		{
-			return number_t<type_d>::equal_number(me.ref<con<number_a<std::remove_reference_t<type_d>>>>(), on);
+			return number_t<type_d>::equal_number(me.reference<con<number_a<std::remove_reference_t<type_d>>>>(), on);
 		}
 		return data_t<type_d>::equal(me, other);
 	}
@@ -134,10 +134,10 @@ namespace strange
 	bool number_t<type_d>::less(con<> const& me,
 		con<> const& other)
 	{
-		auto const on = other.dyn<con<number_a<std::remove_reference_t<type_d>>>>();
+		auto const on = other.dynamic<con<number_a<std::remove_reference_t<type_d>>>>();
 		if (on.o->something(on))
 		{
-			return number_t<type_d>::less_number(me.ref<con<number_a<std::remove_reference_t<type_d>>>>(), on);
+			return number_t<type_d>::less_number(me.reference<con<number_a<std::remove_reference_t<type_d>>>>(), on);
 		}
 		return data_t<type_d>::less(me, other);
 	}
@@ -146,10 +146,10 @@ namespace strange
 	bool number_t<type_d>::less_or_equal(con<> const& me,
 		con<> const& other)
 	{
-		auto const on = other.dyn<con<number_a<std::remove_reference_t<type_d>>>>();
+		auto const on = other.dynamic<con<number_a<std::remove_reference_t<type_d>>>>();
 		if (on.o->something(on))
 		{
-			return number_t<type_d>::less_or_equal_number(me.ref<con<number_a<std::remove_reference_t<type_d>>>>(), on);
+			return number_t<type_d>::less_or_equal_number(me.reference<con<number_a<std::remove_reference_t<type_d>>>>(), on);
 		}
 		return data_t<type_d>::less_or_equal(me, other);
 	}
@@ -562,10 +562,10 @@ namespace strange
 	bool number_t<type_d>::_extractor_equal(con<> const& me,
 		con<> const& other)
 	{
-		auto const on = other.dyn<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>();
+		auto const on = other.dynamic<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>();
 		if (on.o->something(on))
 		{
-			return number_t<type_d>::_extractor_equal_extractor(me.ref<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>(), on);
+			return number_t<type_d>::_extractor_equal_extractor(me.reference<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>(), on);
 		}
 		return data_t<type_d>::equal(me, other);
 	}
@@ -574,10 +574,10 @@ namespace strange
 	bool number_t<type_d>::_extractor_less(con<> const& me,
 		con<> const& other)
 	{
-		auto const on = other.dyn<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>();
+		auto const on = other.dynamic<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>();
 		if (on.o->something(on))
 		{
-			return number_t<type_d>::_extractor_less_extractor(me.ref<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>(), on);
+			return number_t<type_d>::_extractor_less_extractor(me.reference<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>(), on);
 		}
 		return data_t<type_d>::less(me, other);
 	}
@@ -586,10 +586,10 @@ namespace strange
 	bool number_t<type_d>::_extractor_less_or_equal(con<> const& me,
 		con<> const& other)
 	{
-		auto const on = other.dyn<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>();
+		auto const on = other.dynamic<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>();
 		if (on.o->something(on))
 		{
-			return number_t<type_d>::_extractor_less_or_equal_extractor(me.ref<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>(), on);
+			return number_t<type_d>::_extractor_less_or_equal_extractor(me.reference<con<random_access_extractor_a<std::remove_reference_t<type_d>>>>(), on);
 		}
 		return data_t<type_d>::less_or_equal(me, other);
 	}

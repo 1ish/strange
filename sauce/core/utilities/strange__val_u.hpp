@@ -138,7 +138,7 @@ namespace strange
 		using abstraction = abstraction_d;
 
 		template <typename R>
-		inline R dyn() const
+		inline R dynamic() const
 		{
 			R r;
 			abstraction_d::o->as(*this, reinterpret_cast<var<> const&>(r));
@@ -146,20 +146,20 @@ namespace strange
 		}
 
 		template <typename R>
-		inline R val() const
+		inline R value() const
 		{
 			return R{ reinterpret_cast<R const&>(*this) };
 		}
 
 		template <typename R>
-		inline R const& ref() const
+		inline R const& reference() const
 		{
 			static_assert(typename R::is_constant{ true });
 			return reinterpret_cast<R const&>(*this);
 		}
 
 		template <typename R>
-		inline R& ref()
+		inline R& reference()
 		{
 			static_assert(typename R::is_constant{ true });
 			return reinterpret_cast<R&>(*this);
@@ -168,13 +168,13 @@ namespace strange
 		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>
 		inline operator con<B> const& () const
 		{
-			return ref<con<B>>();
+			return reference<con<B>>();
 		}
 
 		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>
 		inline operator con<B>& ()
 		{
-			return ref<con<B>>();
+			return reference<con<B>>();
 		}
 
 		inline adr<con<abstraction_d>> address() const
@@ -622,7 +622,7 @@ namespace strange
 		using abstraction = abstraction_d;
 
 		template <typename R>
-		inline R dyn() const
+		inline R dynamic() const
 		{
 			R r;
 			abstraction_d::o->as(*this, reinterpret_cast<var<> const&>(r));
@@ -630,20 +630,20 @@ namespace strange
 		}
 
 		template <typename R>
-		inline R val() const
+		inline R value() const
 		{
 			return R{ reinterpret_cast<R const&>(*this) };
 		}
 
 		template <typename R>
-		inline R const& ref() const
+		inline R const& reference() const
 		{
 			static_assert(typename R::non_pointer{ true });
 			return reinterpret_cast<R const&>(*this);
 		}
 
 		template <typename R>
-		inline R& ref()
+		inline R& reference()
 		{
 			static_assert(typename R::non_pointer{ true });
 			return reinterpret_cast<R&>(*this);
@@ -652,25 +652,25 @@ namespace strange
 		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>
 		inline operator con<B> const& () const
 		{
-			return ref<con<B>>();
+			return reference<con<B>>();
 		}
 
 		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>
 		inline operator con<B>& ()
 		{
-			return ref<con<B>>();
+			return reference<con<B>>();
 		}
 
 		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>
 		inline operator var<B> const& () const
 		{
-			return ref<var<B>>();
+			return reference<var<B>>();
 		}
 
 		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>
 		inline operator var<B>& ()
 		{
-			return ref<var<B>>();
+			return reference<var<B>>();
 		}
 
 		inline adr<var<abstraction_d>> address() const
@@ -1119,7 +1119,7 @@ namespace strange
 		using abstraction = abstraction_d;
 
 		template <typename R>
-		inline R dyn() const
+		inline R dynamic() const
 		{
 			R r;
 			abstraction_d::o->as(*this, reinterpret_cast<var<> const&>(r));
@@ -1127,19 +1127,19 @@ namespace strange
 		}
 
 		template <typename R>
-		inline R val() const
+		inline R value() const
 		{
 			return R{ reinterpret_cast<R const&>(*this) };
 		}
 
 		template <typename R>
-		inline R const& ref() const
+		inline R const& reference() const
 		{
 			return reinterpret_cast<R const&>(*this);
 		}
 
 		template <typename R>
-		inline R& ref()
+		inline R& reference()
 		{
 			return reinterpret_cast<R&>(*this);
 		}
@@ -1147,37 +1147,37 @@ namespace strange
 		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>
 		inline operator con<B> const& () const
 		{
-			return ref<con<B>>();
+			return reference<con<B>>();
 		}
 
 		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>
 		inline operator con<B>& ()
 		{
-			return ref<con<B>>();
+			return reference<con<B>>();
 		}
 
 		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>
 		inline operator var<B> const& () const
 		{
-			return ref<var<B>>();
+			return reference<var<B>>();
 		}
 
 		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>
 		inline operator var<B>& ()
 		{
-			return ref<var<B>>();
+			return reference<var<B>>();
 		}
 
 		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>
 		inline operator ptr<B> const& () const
 		{
-			return ref<ptr<B>>();
+			return reference<ptr<B>>();
 		}
 
 		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>
 		inline operator ptr<B>& ()
 		{
-			return ref<ptr<B>>();
+			return reference<ptr<B>>();
 		}
 
 		inline adr<ptr<abstraction_d>> address() const

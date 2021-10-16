@@ -5,7 +5,7 @@ namespace taste
 {
 	void testp(ptr<symbol_a>& symbol)
 	{
-		symbol.o->first_char(symbol.val<con<symbol_a>>());
+		symbol.o->first_char(symbol.value<con<symbol_a>>());
 	}
 
 	var<symbol_a> testfun(con<symbol_a> const& a, con<symbol_a> const& b)
@@ -37,16 +37,16 @@ namespace taste
 
 		auto p = ptr<symbol_a>{ symbol_t::create("pointer") };
 		auto q = ptr<symbol_a>(symbol_t::create("q"));
-		p.o->first_char(p.val<con<symbol_a>>());
+		p.o->first_char(p.value<con<symbol_a>>());
 		p = q;
-		p.o->first_char(p.val<con<symbol_a>>());
+		p.o->first_char(p.value<con<symbol_a>>());
 		testp(p);
 		testp(q);
-		testr(sym("pointer").ref<var<symbol_a>>());
+		testr(sym("pointer").reference<var<symbol_a>>());
 		testcr(sym("pointer"));
 		auto const c = con<symbol_a>{ sym("const") };
 		//NO testr(c);
-		//NO testcr(c.ref<var<symbol_a>>());
+		//NO testcr(c.reference<var<symbol_a>>());
 		//NO testcr(c);
 
 		tv = s;
@@ -66,8 +66,8 @@ namespace taste
 		auto const test_fun = testfun(sym("test"), sym("fun"));
 
 		var<> anysym = sym("s");
-		anysym.dyn<con<symbol_a>>();
-		anysym.dyn<ptr<symbol_a>>();
+		anysym.dynamic<con<symbol_a>>();
+		anysym.dynamic<ptr<symbol_a>>();
 
 		con<symbol_a> sss = sym("sss");
 		auto res = sss.pfm(&con<symbol_a>::operations::add, sym("2"));
@@ -83,7 +83,7 @@ namespace taste
 		vvv.o->set_error(vvv, sym("error1"));
 		vvv.pfm(&any_o::set_error, sym("error2"));
 		vvv.pfm(&symbol_o::set_error, sym("error3"));
-		res = vvv.pfm(&symbol_o::error).ref<var<symbol_a>>();
+		res = vvv.pfm(&symbol_o::error).reference<var<symbol_a>>();
 		std__cout << "result: " << res.o->char_star(res) << "\n";
 		vvv.pfm(&symbol_o::something);
 		vvv.pfm(&any_o::not_equal, sym("other"));
