@@ -22,6 +22,7 @@ namespace strange
 
 	struct any_a;
 
+	template <typename abstraction_d> struct val;
 	template <typename abstraction_d = any_a> struct con;
 	template <typename abstraction_d = any_a> struct var;
 	template <typename abstraction_d = any_a> struct ptr;
@@ -104,6 +105,13 @@ namespace strange
 }
 
 #include "utilities/strange__val_u.hpp"
+#include "utilities/strange__con_u.hpp"
+#include "utilities/strange__var_u.hpp"
+#include "utilities/strange__ptr_u.hpp"
+#include "utilities/strange__fit_u.hpp"
+#include "utilities/strange__bit_u.hpp"
+#include "utilities/strange__rat_u.hpp"
+#include "utilities/strange__adr_u.hpp"
 
 #include "fundamentals/enumerations/strange__representation_e.h"
 #include "fundamentals/enumerations/strange__behaviour_e.h"

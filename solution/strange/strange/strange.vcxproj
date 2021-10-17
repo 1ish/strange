@@ -277,7 +277,14 @@
     <ClInclude Include="..\..\..\sauce\core\semantics\enumerations\strange__classification_e.h" />
     <ClInclude Include="..\..\..\sauce\core\semantics\enumerations\strange__generation_e.h" />
     <ClInclude Include="..\..\..\sauce\core\strange__core.h" />
+    <ClInclude Include="..\..\..\sauce\core\utilities\strange__adr_u.hpp" />
+    <ClInclude Include="..\..\..\sauce\core\utilities\strange__bit_u.hpp" />
+    <ClInclude Include="..\..\..\sauce\core\utilities\strange__con_u.hpp" />
+    <ClInclude Include="..\..\..\sauce\core\utilities\strange__fit_u.hpp" />
+    <ClInclude Include="..\..\..\sauce\core\utilities\strange__ptr_u.hpp" />
+    <ClInclude Include="..\..\..\sauce\core\utilities\strange__rat_u.hpp" />
     <ClInclude Include="..\..\..\sauce\core\utilities\strange__val_u.hpp" />
+    <ClInclude Include="..\..\..\sauce\core\utilities\strange__var_u.hpp" />
     <ClInclude Include="..\..\..\sauce\strange.h" />
     <ClInclude Include="..\..\..\taste\core\fundamentals\taste__strange__thing_t.hpp" />
   </ItemGroup>

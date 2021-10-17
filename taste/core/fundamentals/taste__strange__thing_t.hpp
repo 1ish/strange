@@ -145,8 +145,21 @@ namespace taste
 		auto aoc = nc.address();
 		auto aov = adr<var<number_a<int64_t>>>{ nv };
 		auto aop = adr<ptr<number_a<int64_t>>>{ np };
+		auto ff = fit<forward_extractor_a<int64_t>>{};
+		auto aof = ff.address();
+		auto bb = bit<bidirectional_extractor_a<int64_t>>{};
+		auto aob = bb.address();
+		auto rr = rat<random_access_extractor_a<int64_t>>{};
+		auto aor = rr.address();
 
 		auto oc = aoc.value();
+		auto ov = aov.value();
+		auto op = aop.value();
+		auto of = aof.value();
+		auto ob = aob.value();
+		auto rv = aor.value();
+
+		rat<random_access_extractor_a<int64_t>>::abstraction raat{};
 	}
 }
 
