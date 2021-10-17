@@ -160,6 +160,7 @@ namespace taste
 		auto rv = aor.value();
 
 		rat<random_access_extractor_a<int64_t>>::abstraction raat{};
+		raat.cat(rv);
 	}
 }
 
