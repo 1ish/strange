@@ -309,6 +309,15 @@
     <ClCompile Include="..\..\..\sauce\core\semantics\abstractions\strange__parser_a.cpp">
       <Filter>Source Files\sauce\core\semantics\abstractions</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__data_pointer_t.cpp">
+      <Filter>Source Files\sauce\core\fundamentals\things</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__locked_data_pointer_t.cpp">
+      <Filter>Source Files\sauce\core\fundamentals\things</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__locked_data_t.cpp">
+      <Filter>Source Files\sauce\core\fundamentals\things</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\sauce\strange.h">
@@ -547,6 +556,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\utilities\strange__var_u.hpp">
       <Filter>Header Files\sauce\core\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__data_pointer_t.h">
+      <Filter>Header Files\sauce\core\fundamentals\things</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__locked_data_pointer_t.h">
+      <Filter>Header Files\sauce\core\fundamentals\things</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__locked_data_t.h">
+      <Filter>Header Files\sauce\core\fundamentals\things</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

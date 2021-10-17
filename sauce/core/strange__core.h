@@ -187,6 +187,9 @@ namespace strange
 #include "fundamentals/things/strange__thing_t.h"
 #include "fundamentals/things/strange__symbol_t.h"
 #include "fundamentals/things/strange__data_t.h"
+#include "fundamentals/things/strange__data_pointer_t.h"
+#include "fundamentals/things/strange__locked_data_t.h"
+#include "fundamentals/things/strange__locked_data_pointer_t.h"
 #include "fundamentals/things/strange__number_t.h"
 
 #endif

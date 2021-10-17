@@ -198,7 +198,10 @@
     <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__symbol_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__type_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__unlock_a.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__data_pointer_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__data_t.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__locked_data_pointer_t.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__locked_data_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__number_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__symbol_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__thing_t.cpp" />
@@ -267,7 +270,10 @@
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__unlock_a.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\enumerations\strange__behaviour_e.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\enumerations\strange__representation_e.h" />
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__data_pointer_t.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__data_t.h" />
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__locked_data_pointer_t.h" />
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__locked_data_t.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__number_t.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__symbol_t.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__thing_t.h" />
