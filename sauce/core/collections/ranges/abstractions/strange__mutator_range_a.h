@@ -44,13 +44,13 @@ namespace strange
 	template <typename mutator_range_d, typename mutator_range_d::is_mutator_range = true>
 	inline auto begin(ptr<mutator_range_d> const& range)
 	{
-		return range.o->mutator_begin(reinterpret_cast<var<mutator_range_d>&>(range));
+		return range.o->mutator_begin(range);
 	}
 
 	template <typename mutator_range_d, typename mutator_range_d::is_mutator_range = true>
 	inline auto end(ptr<mutator_range_d> const& range)
 	{
-		return range.o->mutator_end(reinterpret_cast<var<mutator_range_d>&>(range));
+		return range.o->mutator_end(range);
 	}
 }
 

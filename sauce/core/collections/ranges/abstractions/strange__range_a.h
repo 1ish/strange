@@ -56,13 +56,13 @@ namespace strange
 	template <typename range_d, typename range_d::non_mutator_range = true>
 	inline auto begin(ptr<range_d> const& range)
 	{
-		return range.o->begin(reinterpret_cast<con<range_d> const&>(range));
+		return range.o->begin(range);
 	}
 
 	template <typename range_d, typename range_d::non_mutator_range = true>
 	inline auto end(ptr<range_d> const& range)
 	{
-		return range.o->end(reinterpret_cast<con<range_d> const&>(range));
+		return range.o->end(range);
 	}
 }
 
