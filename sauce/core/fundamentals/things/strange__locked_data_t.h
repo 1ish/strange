@@ -44,9 +44,9 @@ namespace strange
 			bool is_pointer);
 
 		// data_a
-		static ptr<> read_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me);
+		static ptr<> read_lock(con<data_a<std::remove_reference_t<type_d>>> const& me);
 
-		static ptr<> write_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me);
+		static ptr<> write_lock(var<data_a<std::remove_reference_t<type_d>>> const& me);
 
 	public:
 		// creators

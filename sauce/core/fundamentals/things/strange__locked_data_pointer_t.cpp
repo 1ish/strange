@@ -73,15 +73,16 @@ namespace strange
 
 	// data_a
 	template <typename type_d, typename lock_d>
-	ptr<> locked_data_pointer_t<type_d, lock_d>::read_lock(ptr<data_a<type_d>> const& me)
+	ptr<> locked_data_pointer_t<type_d, lock_d>::read_lock(con<data_a<type_d>> const& me)
 	{
 		auto t = static_cast<locked_data_pointer_t<type_d, lock_d>*>(me.t);
 		return t->lock_.o->read_lock(t->lock_);
 	}
 
 	template <typename type_d, typename lock_d>
-	ptr<> locked_data_pointer_t<type_d, lock_d>::write_lock(ptr<data_a<type_d>> const& me)
+	ptr<> locked_data_pointer_t<type_d, lock_d>::write_lock(var<data_a<type_d>> const& me)
 	{
+		me.mut();
 		auto t = static_cast<locked_data_pointer_t<type_d, lock_d>*>(me.t);
 		return t->lock_.o->write_lock(t->lock_);
 	}

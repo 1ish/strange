@@ -107,14 +107,15 @@ namespace strange
 
 	// data_a
 	template <typename type_d>
-	ptr<> data_t<type_d>::read_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me)
+	ptr<> data_t<type_d>::read_lock(con<data_a<std::remove_reference_t<type_d>>> const& me)
 	{
 		return ptr<>{};
 	}
 
 	template <typename type_d>
-	ptr<> data_t<type_d>::write_lock(ptr<data_a<std::remove_reference_t<type_d>>> const& me)
+	ptr<> data_t<type_d>::write_lock(var<data_a<std::remove_reference_t<type_d>>> const& me)
 	{
+		me.mut();
 		return ptr<>{};
 	}
 
