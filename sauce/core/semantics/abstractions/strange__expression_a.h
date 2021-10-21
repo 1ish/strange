@@ -133,15 +133,21 @@ namespace strange
 
 		var<list_a<var<expression_a>>> (*terms) (con<expression_a> const& me);
 
-		var<kind_a> (*kind) (con<expression_a> const& me);
+		var<expression_a> (*kind) (con<expression_a> const& me);
 
 		var<expression_a> (*body) (con<expression_a> const& me);
+
+		var<expression_a> (*parent) (con<expression_a> const& me);
+
+		void (*resolve) (var<expression_a> const& me);
 
 		void (*generate) (con<expression_a> const& me,
 			generation_e generation,
 			int64_t version,
 			int64_t indentation,
 			var<brook_a> const& brook);
+
+		var<> (*evaluate) (con<expression_a> const& me);
 	};
 
 	struct expression_a
