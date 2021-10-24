@@ -70,23 +70,23 @@ namespace taste
 		anysym.dynamic<ptr<symbol_a>>();
 
 		con<symbol_a> sss = sym("sss");
-		auto res = sss.pfm(&con<symbol_a>::operations::add, sym("2"));
-		res = sss.pfm(&symbol_a::operations::add, sym("2"));
-		res = sss.pfm(&symbol_o::add, sym("2"));
+		auto res = sss.perform(&con<symbol_a>::operations::add, sym("2"));
+		res = sss.perform(&symbol_a::operations::add, sym("2"));
+		res = sss.perform(&symbol_o::add, sym("2"));
 		std__cout << "result: " << res.o->char_star(res) << "\n";
 		con<any_a> aaa = sym("aaa");
-		aaa.pfm(&any_o::type);
-		sss.pfm(&symbol_o::type);
-		res = sss.pfm(&con<symbol_a>::operations::type);
+		aaa.perform(&any_o::type);
+		sss.perform(&symbol_o::type);
+		res = sss.perform(&con<symbol_a>::operations::type);
 		std__cout << "result: " << res.o->char_star(res) << "\n";
 		auto vvv = sym("vvv");
 		vvv.o->set_error(vvv, sym("error1"));
-		vvv.pfm(&any_o::set_error, sym("error2"));
-		vvv.pfm(&symbol_o::set_error, sym("error3"));
-		res = vvv.pfm(&symbol_o::error).reference<var<symbol_a>>();
+		vvv.perform(&any_o::set_error, sym("error2"));
+		vvv.perform(&symbol_o::set_error, sym("error3"));
+		res = vvv.perform(&symbol_o::error).reference<var<symbol_a>>();
 		std__cout << "result: " << res.o->char_star(res) << "\n";
-		vvv.pfm(&symbol_o::something);
-		vvv.pfm(&any_o::not_equal, sym("other"));
+		vvv.perform(&symbol_o::something);
+		vvv.perform(&any_o::not_equal, sym("other"));
 
 		auto nul = var<forward_extractor_a<int64_t>>();
 		auto fwd = fit<forward_extractor_a<int64_t>>(nul);
@@ -124,7 +124,7 @@ namespace taste
 		auto uns_ref_data = uns_ref.o->data(uns_ref);
 		auto flt_ref_data = flt_ref.o->data(flt_ref);
 
-		auto e1 = num<int64_t>(1).pfm(&number_o<int64_t>::extractor);
+		auto e1 = num<int64_t>(1).perform(&number_o<int64_t>::extractor);
 		auto e11 = e1 + 10;
 		std__cout << *e1 << "!=" << *e11 << "=" << (e1 != e11) << "\n";
 		for (auto it = e1; it != e11; ++it)

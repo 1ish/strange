@@ -123,13 +123,13 @@ namespace strange
 		}
 
 		template <typename F, typename... Ps>
-		inline auto pfm(F fp, Ps&&... ps) const
+		inline auto perform(F fp, Ps&&... ps) const
 		{
 			return fp(*this, ps...);
 		}
 
 		template <typename F, typename O, typename... Ps>
-		inline auto pfm(F O::* mp, Ps&&... ps) const
+		inline auto perform(F O::* mp, Ps&&... ps) const
 		{
 			return (val<abstraction_d>::o->*mp)(*this, ps...);
 		}
