@@ -7,14 +7,14 @@ namespace strange
 	struct data_pointer_t : data_t<type_d>
 	{
 	protected:
-		inline data_pointer_t(any_a& me,
+		inline data_pointer_t(any_a const& me,
 			type_d data)
 		: data_t<type_d>{ me, data }
 		{
 			me.o = data_pointer_t<type_d>::_operations();
 		}
 
-		inline data_pointer_t(any_a& me,
+		inline data_pointer_t(any_a const& me,
 			any_a const& original)
 		: data_t<type_d>{ me, nullptr }
 		{
@@ -36,7 +36,7 @@ namespace strange
 		static var<symbol_a> type(con<> const& me);
 
 		static void _copy(any_a const& me,
-			any_a& copy);
+			any_a const& copy);
 
 		static void _set_pointer(con<> const& me,
 			bool is_pointer);

@@ -131,7 +131,7 @@ namespace strange
 	}
 
 	void symbol_t::_copy(any_a const& me,
-		any_a& copy)
+		any_a const& copy)
 	{
 		new symbol_t{ copy, me };
 		symbol_t::_clone(me, copy);

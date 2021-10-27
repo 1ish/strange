@@ -156,7 +156,7 @@ namespace strange
 
 	template <typename type_d>
 	void number_t<type_d>::_copy(any_a const& me,
-		any_a& copy)
+		any_a const& copy)
 	{
 		new number_t<type_d>{ copy, me };
 		number_t<type_d>::_clone(me, copy);
@@ -405,7 +405,7 @@ namespace strange
 
 	template <typename type_d>
 	void number_t<type_d>::_data_copy(any_a const& me,
-		any_a& copy)
+		any_a const& copy)
 	{
 		new number_t<type_d>{ copy, me };
 		number_t<type_d>::_clone(me, copy);
@@ -596,7 +596,7 @@ namespace strange
 
 	template <typename type_d>
 	void number_t<type_d>::_extractor_copy(any_a const& me,
-		any_a& copy)
+		any_a const& copy)
 	{
 		new number_t<type_d>{ copy, me };
 		number_t<type_d>::_clone(me, copy);

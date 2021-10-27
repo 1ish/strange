@@ -9,7 +9,7 @@ namespace strange
 		lock_d lock_;
 
 	protected:
-		inline locked_data_pointer_t(any_a& me,
+		inline locked_data_pointer_t(any_a const& me,
 			type_d data)
 			: data_pointer_t<type_d>{ me, data }
 			, lock_{ create_lock<lock_d>() }
@@ -17,7 +17,7 @@ namespace strange
 			me.o = locked_data_pointer_t<type_d, lock_d>::_operations();
 		}
 
-		inline locked_data_pointer_t(any_a& me,
+		inline locked_data_pointer_t(any_a const& me,
 			any_a const& original)
 			: data_pointer_t<type_d>{ me, nullptr }
 			, lock_{ static_cast<locked_data_pointer_t<type_d, lock_d>*>(original.t)->lock_ }
@@ -35,7 +35,7 @@ namespace strange
 		static var<symbol_a> type(con<> const& me);
 
 		static void _copy(any_a const& me,
-			any_a& copy);
+			any_a const& copy);
 
 		static void _set_pointer(con<> const& me,
 			bool is_pointer);

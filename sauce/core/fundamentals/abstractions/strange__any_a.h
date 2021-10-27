@@ -53,7 +53,7 @@ namespace strange
 		void (*_free) (any_a const& me);
 
 		void (*_copy) (any_a const& me,
-			any_a& copy);
+			any_a const& copy);
 
 		void (*_set_pointer) (con<> const& me,
 			bool is_pointer);

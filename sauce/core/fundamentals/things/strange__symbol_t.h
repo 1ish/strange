@@ -10,7 +10,7 @@ namespace strange
 		int64_t length_;
 		uint64_t hash_;
 
-		inline symbol_t(any_a& me,
+		inline symbol_t(any_a const& me,
 			char const* s)
 		: thing_t{ me }
 		, symbol_{ nullptr }
@@ -28,7 +28,7 @@ namespace strange
 			}
 		}
 
-		inline symbol_t(any_a& me,
+		inline symbol_t(any_a const& me,
 			any_a const& original)
 		: thing_t{ me, original }
 		, symbol_{ nullptr }
@@ -103,7 +103,7 @@ namespace strange
 			con<> const& other);
 
 		static void _copy(any_a const& me,
-			any_a& copy);
+			any_a const& copy);
 
 		static void _set_pointer(con<> const& me,
 			bool is_pointer);

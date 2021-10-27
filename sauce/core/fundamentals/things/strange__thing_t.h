@@ -10,7 +10,7 @@ namespace strange
 		any_a error_;
 
 	protected:
-		inline thing_t(any_a& me)
+		inline thing_t(any_a const& me)
 		: refs_{ 0 }
 		, weak_{ 1 }
 		, error_{ nullptr, nullptr }
@@ -19,7 +19,7 @@ namespace strange
 			me.o = thing_t::_operations();
 		}
 
-		inline thing_t(any_a& me,
+		inline thing_t(any_a const& me,
 			any_a const& original)
 		: refs_{ 0 }
 		, weak_{ 1 }
@@ -58,7 +58,7 @@ namespace strange
 		}
 
 		static inline void _clone(any_a const& me,
-			any_a& copy)
+			any_a const& copy)
 		{
 		}
 
@@ -113,10 +113,10 @@ namespace strange
 		static void _free(any_a const& me);
 
 		static void _copy(any_a const& me,
-			any_a& copy);
+			any_a const& copy);
 
 		static void _no_copy(any_a const& me,
-			any_a& copy);
+			any_a const& copy);
 
 		static void _set_pointer(con<> const& me,
 			bool is_pointer);

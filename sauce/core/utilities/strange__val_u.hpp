@@ -37,7 +37,7 @@ namespace strange
 		{
 			if (!--(abstraction_d::t->refs_))
 			{
-				abstraction_d::o->_free(reinterpret_cast<any_a const&>(*this));
+				abstraction_d::o->_free(reinterpret_cast<con<any_a> const&>(*this));
 				if (!--(abstraction_d::t->weak_))
 				{
 					operator delete(abstraction_d::t);
@@ -50,7 +50,7 @@ namespace strange
 			if (abstraction_d::t->refs_ > 1)
 			{
 				abstraction_d cp;
-				abstraction_d::o->_copy(reinterpret_cast<any_a const&>(*this), reinterpret_cast<any_a&>(cp));
+				abstraction_d::o->_copy(reinterpret_cast<con<any_a> const&>(*this), reinterpret_cast<var<any_a> const&>(cp));
 				++(cp.t->refs_);
 				dec();
 				abstraction_d::t = cp.t;

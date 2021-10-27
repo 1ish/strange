@@ -175,16 +175,17 @@ namespace strange
 	}
 
 	void thing_t::_copy(any_a const& me,
-		any_a& copy)
+		any_a const& copy)
 	{
 		new thing_t{ copy, me };
 		thing_t::_clone(me, copy);
 	}
 
 	void thing_t::_no_copy(any_a const& me,
-		any_a& copy)
+		any_a const& copy)
 	{
-		copy = me;
+		copy.t = me.t;
+		copy.o = me.o;
 	}
 
 	void thing_t::_set_pointer(con<> const& me,

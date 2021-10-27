@@ -10,7 +10,7 @@ namespace strange
 
 	protected:
 		template <typename v=void>
-		inline data_t(any_a& me)
+		inline data_t(any_a const& me)
 			: thing_t{ me }
 			, data_{}
 		{
@@ -18,7 +18,7 @@ namespace strange
 		}
 
 		template <typename v = void>
-		inline data_t(any_a& me,
+		inline data_t(any_a const& me,
 			type_d const& data)
 		: thing_t{ me }
 		, data_{ data }
@@ -26,7 +26,7 @@ namespace strange
 			me.o = data_t<type_d>::_operations();
 		}
 
-		inline data_t(any_a& me,
+		inline data_t(any_a const& me,
 			type_d& data)
 			: thing_t{ me }
 			, data_{ data }
@@ -34,7 +34,7 @@ namespace strange
 			me.o = data_t<type_d>::_operations();
 		}
 
-		inline data_t(any_a& me,
+		inline data_t(any_a const& me,
 			any_a const& original)
 		: thing_t{ me, original }
 		, data_{ static_cast<data_t<type_d>*>(original.t)->data_ }
@@ -62,7 +62,7 @@ namespace strange
 		static var<symbol_a> type(con<> const& me);
 
 		static void _copy(any_a const& me,
-			any_a& copy);
+			any_a const& copy);
 
 		static void _set_pointer(con<> const& me,
 			bool is_pointer);

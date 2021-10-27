@@ -8,28 +8,28 @@ namespace strange
 	{
 	protected:
 		template <typename v=void>
-		inline number_t(any_a& me)
+		inline number_t(any_a const& me)
 		: data_t<type_d>{ me }
 		{
 			me.o = number_t<type_d>::_operations();
 		}
 
 		template <typename v = void>
-		inline number_t(any_a& me,
+		inline number_t(any_a const& me,
 			type_d const& data)
 		: data_t<type_d>{ me, data }
 		{
 			me.o = number_t<type_d>::_operations();
 		}
 
-		inline number_t(any_a& me,
+		inline number_t(any_a const& me,
 			type_d& data)
 		: data_t<type_d>{ me, data }
 		{
 			me.o = number_t<type_d>::_operations();
 		}
 
-		inline number_t(any_a& me,
+		inline number_t(any_a const& me,
 			any_a const& original)
 		: data_t<type_d>{ me, original }
 		{
@@ -117,7 +117,7 @@ namespace strange
 			con<> const& other);
 
 		static void _copy(any_a const& me,
-			any_a& copy);
+			any_a const& copy);
 
 		static void _set_pointer(con<> const& me,
 			bool is_pointer);
@@ -173,7 +173,7 @@ namespace strange
 			var<> const& abstraction);
 
 		static void _data_copy(any_a const& me,
-			any_a& copy);
+			any_a const& copy);
 
 		static void _data_set_pointer(con<> const& me,
 			bool is_pointer);
@@ -218,7 +218,7 @@ namespace strange
 			con<> const& other);
 
 		static void _extractor_copy(any_a const& me,
-			any_a& copy);
+			any_a const& copy);
 
 		static void _extractor_set_pointer(con<> const& me,
 			bool is_pointer);
