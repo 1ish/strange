@@ -130,8 +130,8 @@ namespace strange
 		return thing_t::less_or_equal(me, other);
 	}
 
-	void symbol_t::_copy(any_a const& me,
-		any_a const& copy)
+	void symbol_t::_copy(con<> const& me,
+		var<> const& copy)
 	{
 		new symbol_t{ copy, me };
 		symbol_t::_clone(me, copy);
@@ -151,7 +151,7 @@ namespace strange
 		auto const mt = static_cast<symbol_t const* const>(me.t);
 		any_a r;
 		auto const rt = new symbol_t{ r, nullptr };
-		symbol_t::_initialise(r);
+		symbol_t::_initialise(reinterpret_cast<var<> const&>(r));
 		int64_t const suffixlength = suffix.o->length(suffix);
 		rt->length_ = mt->length_ + suffixlength;
 		rt->symbol_ = new char[rt->length_ + 1];

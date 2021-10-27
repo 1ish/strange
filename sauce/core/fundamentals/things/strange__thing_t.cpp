@@ -169,20 +169,20 @@ namespace strange
 		return thing;
 	}
 
-	void thing_t::_free(any_a const& me)
+	void thing_t::_free(con<> const& me)
 	{
 		me.t->~thing_t();
 	}
 
-	void thing_t::_copy(any_a const& me,
-		any_a const& copy)
+	void thing_t::_copy(con<> const& me,
+		var<> const& copy)
 	{
 		new thing_t{ copy, me };
 		thing_t::_clone(me, copy);
 	}
 
-	void thing_t::_no_copy(any_a const& me,
-		any_a const& copy)
+	void thing_t::_no_copy(con<> const& me,
+		var<> const& copy)
 	{
 		copy.t = me.t;
 		copy.o = me.o;

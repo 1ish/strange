@@ -53,12 +53,12 @@ namespace strange
 
 	protected:
 		// inline
-		static inline void _initialise(any_a& me)
+		static inline void _initialise(var<> const& me)
 		{
 		}
 
-		static inline void _clone(any_a const& me,
-			any_a const& copy)
+		static inline void _clone(con<> const& me,
+			var<> const& copy)
 		{
 		}
 
@@ -110,13 +110,13 @@ namespace strange
 		static bool pack(con<> const& me,
 			var<container_a> const& container);
 
-		static void _free(any_a const& me);
+		static void _free(con<> const& me);
 
-		static void _copy(any_a const& me,
-			any_a const& copy);
+		static void _copy(con<> const& me,
+			var<> const& copy);
 
-		static void _no_copy(any_a const& me,
-			any_a const& copy);
+		static void _no_copy(con<> const& me,
+			var<> const& copy);
 
 		static void _set_pointer(con<> const& me,
 			bool is_pointer);
@@ -131,7 +131,7 @@ namespace strange
 				{
 					any_a r;
 					new thing_t{ r };
-					thing_t::_initialise(r);
+					thing_t::_initialise(reinterpret_cast<var<> const&>(r));
 					return r;
 				}());
 			return thing;
@@ -143,7 +143,7 @@ namespace strange
 				{
 					any_a r;
 					new thing_t{ r };
-					thing_t::_initialise(r);
+					thing_t::_initialise(reinterpret_cast<var<> const&>(r));
 					auto const e = thing_t::create();
 					e.inc();
 					r.t->error_ = e;

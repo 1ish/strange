@@ -50,10 +50,10 @@ namespace strange
 		bool (*pack) (con<> const& me,
 			var<container_a> const& container);
 
-		void (*_free) (any_a const& me);
+		void (*_free) (con<> const& me);
 
-		void (*_copy) (any_a const& me,
-			any_a const& copy);
+		void (*_copy) (con<> const& me,
+			var<> const& copy);
 
 		void (*_set_pointer) (con<> const& me,
 			bool is_pointer);

@@ -102,8 +102,8 @@ namespace strange
 		static bool less_or_equal(con<> const& me,
 			con<> const& other);
 
-		static void _copy(any_a const& me,
-			any_a const& copy);
+		static void _copy(con<> const& me,
+			var<> const& copy);
 
 		static void _set_pointer(con<> const& me,
 			bool is_pointer);
@@ -126,7 +126,7 @@ namespace strange
 		{
 			any_a r;
 			new symbol_t{ r, s };
-			symbol_t::_initialise(r);
+			symbol_t::_initialise(reinterpret_cast<var<> const&>(r));
 			return var<symbol_a>{ reinterpret_cast<symbol_a&>(r) };
 		}
 

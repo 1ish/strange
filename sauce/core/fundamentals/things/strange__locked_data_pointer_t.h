@@ -34,8 +34,8 @@ namespace strange
 		// any_a
 		static var<symbol_a> type(con<> const& me);
 
-		static void _copy(any_a const& me,
-			any_a const& copy);
+		static void _copy(con<> const& me,
+			var<> const& copy);
 
 		static void _set_pointer(con<> const& me,
 			bool is_pointer);
@@ -51,7 +51,7 @@ namespace strange
 		{
 			any_a r;
 			new locked_data_pointer_t<type_d, lock_d>{ r, data };
-			locked_data_pointer_t<type_d, lock_d>::_initialise(r);
+			locked_data_pointer_t<type_d, lock_d>::_initialise(reinterpret_cast<var<> const&>(r));
 			return var<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
 		}
 
@@ -59,7 +59,7 @@ namespace strange
 		{
 			any_a r;
 			new locked_data_pointer_t<type_d, lock_d>{ r, data };
-			locked_data_pointer_t<type_d, lock_d>::_initialise(r);
+			locked_data_pointer_t<type_d, lock_d>::_initialise(reinterpret_cast<var<> const&>(r));
 			return ptr<data_a<type_d>>{ reinterpret_cast<data_a<type_d>&>(r) };
 		}
 

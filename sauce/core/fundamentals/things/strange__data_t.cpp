@@ -91,8 +91,8 @@ namespace strange
 	}
 
 	template <typename type_d>
-	void data_t<type_d>::_copy(any_a const& me,
-		any_a const& copy)
+	void data_t<type_d>::_copy(con<> const& me,
+		var<> const& copy)
 	{
 		new data_t<type_d>{ copy, me };
 		data_t<type_d>::_clone(me, copy);

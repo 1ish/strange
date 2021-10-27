@@ -116,8 +116,8 @@ namespace strange
 		static bool less_or_equal(con<> const& me,
 			con<> const& other);
 
-		static void _copy(any_a const& me,
-			any_a const& copy);
+		static void _copy(con<> const& me,
+			var<> const& copy);
 
 		static void _set_pointer(con<> const& me,
 			bool is_pointer);
@@ -172,8 +172,8 @@ namespace strange
 		static bool _data_as(con<> const& me,
 			var<> const& abstraction);
 
-		static void _data_copy(any_a const& me,
-			any_a const& copy);
+		static void _data_copy(con<> const& me,
+			var<> const& copy);
 
 		static void _data_set_pointer(con<> const& me,
 			bool is_pointer);
@@ -217,8 +217,8 @@ namespace strange
 		static bool _extractor_less_or_equal(con<> const& me,
 			con<> const& other);
 
-		static void _extractor_copy(any_a const& me,
-			any_a const& copy);
+		static void _extractor_copy(con<> const& me,
+			var<> const& copy);
 
 		static void _extractor_set_pointer(con<> const& me,
 			bool is_pointer);
@@ -230,7 +230,7 @@ namespace strange
 		{
 			any_a r;
 			new number_t<type_d>{ r };
-			number_t<type_d>::_initialise(r);
+			number_t<type_d>::_initialise(reinterpret_cast<var<> const&>(r));
 			return var<number_a<std::remove_reference_t<type_d>>>{ reinterpret_cast<number_a<std::remove_reference_t<type_d>>&>(r) };
 		}
 
@@ -239,7 +239,7 @@ namespace strange
 		{
 			any_a r;
 			new number_t<type_d>{ r, data };
-			number_t<type_d>::_initialise(r);
+			number_t<type_d>::_initialise(reinterpret_cast<var<> const&>(r));
 			return var<number_a<std::remove_reference_t<type_d>>>{ reinterpret_cast<number_a<std::remove_reference_t<type_d>>&>(r) };
 		}
 
@@ -247,7 +247,7 @@ namespace strange
 		{
 			any_a r;
 			new number_t<type_d>{ r, data };
-			number_t<type_d>::_initialise(r);
+			number_t<type_d>::_initialise(reinterpret_cast<var<> const&>(r));
 			return var<number_a<std::remove_reference_t<type_d>>>{ reinterpret_cast<number_a<std::remove_reference_t<type_d>>&>(r) };
 		}
 

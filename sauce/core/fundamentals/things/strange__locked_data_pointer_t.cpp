@@ -57,8 +57,8 @@ namespace strange
 	}
 
 	template <typename type_d, typename lock_d>
-	void locked_data_pointer_t<type_d, lock_d>::_copy(any_a const& me,
-		any_a const& copy)
+	void locked_data_pointer_t<type_d, lock_d>::_copy(con<> const& me,
+		var<> const& copy)
 	{
 		new locked_data_pointer_t<type_d, lock_d>{ copy, me };
 		locked_data_pointer_t<type_d, lock_d>::_clone(me, copy);
