@@ -111,7 +111,6 @@ namespace strange
 		static void self_add(var<random_access_mutator_a<element_d>> const& me,
 			int64_t offset);
 
-		// random_access_mutator_a
 		static rat<random_access_mutator_a<element_d>> add(con<random_access_mutator_a<element_d>> const& me,
 			int64_t offset);
 

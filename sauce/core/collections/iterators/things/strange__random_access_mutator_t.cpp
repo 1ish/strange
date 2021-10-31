@@ -41,10 +41,10 @@ namespace strange
 				random_access_mutator_t<iterator_d, element_d>::decrement,
 			},
 			// random_access_mutator_a
-			reinterpret_cast<decltype(random_access_mutator_o<element_d>::less)>(random_access_mutator_t<iterator_d, element_d>::less_iterator),
-			reinterpret_cast<decltype(random_access_mutator_o<element_d>::less_or_equal)>(random_access_mutator_t<iterator_d, element_d>::less_or_equal_iterator),
+			random_access_mutator_t<iterator_d, element_d>::less_iterator,
+			random_access_mutator_t<iterator_d, element_d>::less_or_equal_iterator,
 			random_access_mutator_t<iterator_d, element_d>::self_add,
-			reinterpret_cast<decltype(random_access_mutator_o<element_d>::add)>(random_access_mutator_t<iterator_d, element_d>::add),
+			random_access_mutator_t<iterator_d, element_d>::add,
 		};
 		return &operations;
 	}
@@ -207,7 +207,6 @@ namespace strange
 		(static_cast<random_access_mutator_t<iterator_d, element_d>*>(me.t)->iterator_) += offset;
 	}
 
-	// random_access_mutator_a
 	template <typename iterator_d, typename element_d>
 	rat<random_access_mutator_a<element_d>> random_access_mutator_t<iterator_d, element_d>::add(con<random_access_mutator_a<element_d>> const& me,
 		int64_t offset)
