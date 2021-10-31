@@ -63,7 +63,6 @@ namespace strange
 		auto const abc = abstraction.o->cat;
 		return abc == any_a::cat ||
 			abc == forward_mutator_a<element_d>::cat ||
-			abc == bidirectional_mutator_a<element_d>::cat ||
 			abc == bidirectional_mutator_a<element_d>::cat;
 	}
 

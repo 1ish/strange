@@ -18,16 +18,16 @@ namespace strange
 
 		inline bidirectional_mutator_t(any_a const& me,
 			iterator_d const& iterator)
-		: thing_t{ me }
-		, iterator_{ iterator }
+			: thing_t{ me }
+			, iterator_{ iterator }
 		{
 			me.o = bidirectional_mutator_t<iterator_d, element_d>::_operations();
 		}
 
 		inline bidirectional_mutator_t(any_a const& me,
 			any_a const& original)
-		: thing_t{ me, original }
-		, iterator_{ static_cast<bidirectional_mutator_t<iterator_d, element_d>*>(original.t)->iterator_ }
+			: thing_t{ me, original }
+			, iterator_{ static_cast<bidirectional_mutator_t<iterator_d, element_d>*>(original.t)->iterator_ }
 		{
 			me.o = bidirectional_mutator_t<iterator_d, element_d>::_operations();
 		}

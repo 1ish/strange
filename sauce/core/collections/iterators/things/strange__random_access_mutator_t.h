@@ -4,30 +4,25 @@
 namespace strange
 {
 	template <typename iterator_d, typename element_d>
-	struct random_access_mutator_t : thing_t
+	struct random_access_mutator_t : bidirectional_mutator_t<iterator_d, element_d>
 	{
-		iterator_d iterator_;
-
 	protected:
 		inline random_access_mutator_t(any_a const& me)
-			: thing_t{ me }
-			, iterator_{}
+			: bidirectional_mutator_t<iterator_d, element_d>{ me }
 		{
 			me.o = random_access_mutator_t<iterator_d, element_d>::_operations();
 		}
 
 		inline random_access_mutator_t(any_a const& me,
 			iterator_d const& iterator)
-		: thing_t{ me }
-		, iterator_{ iterator }
+			: bidirectional_mutator_t<iterator_d, element_d>{ me, iterator }
 		{
 			me.o = random_access_mutator_t<iterator_d, element_d>::_operations();
 		}
 
 		inline random_access_mutator_t(any_a const& me,
 			any_a const& original)
-		: thing_t{ me, original }
-		, iterator_{ static_cast<random_access_mutator_t<iterator_d, element_d>*>(original.t)->iterator_ }
+			: bidirectional_mutator_t<iterator_d, element_d>{ me, original }
 		{
 			me.o = random_access_mutator_t<iterator_d, element_d>::_operations();
 		}
@@ -43,14 +38,6 @@ namespace strange
 
 	public:
 		// inline
-		static inline bool equal_iterator(con<random_access_mutator_a<element_d>> const& me,
-			con<random_access_mutator_a<element_d>> const& other)
-		{
-			//TODO check other iterator type is compatible
-			return static_cast<random_access_mutator_t<iterator_d, element_d>*>(me.t)->iterator_ ==
-				static_cast<random_access_mutator_t<iterator_d, element_d>*>(other.t)->iterator_;
-		}
-
 		static inline bool less_iterator(con<random_access_mutator_a<element_d>> const& me,
 			con<random_access_mutator_a<element_d>> const& other)
 		{
@@ -77,9 +64,6 @@ namespace strange
 
 		static var<symbol_a> type(con<> const& me);
 
-		static bool equal(con<> const& me,
-			con<> const& other);
-
 		static bool less(con<> const& me,
 			con<> const& other);
 
@@ -91,21 +75,6 @@ namespace strange
 
 		static void _set_pointer(con<> const& me,
 			bool is_pointer);
-
-		// forward_mutator_a
-		static element_d get(con<forward_mutator_a<element_d>> const& me);
-
-		static void set(con<forward_mutator_a<element_d>> const& me,
-			element_d const& element);
-
-		static void increment(var<forward_mutator_a<element_d>> const& me);
-
-		static element_d& _operator_star(con<forward_mutator_a<element_d>> const& me);
-
-		static element_d* _operator_arrow(con<forward_mutator_a<element_d>> const& me);
-
-		// bidirectional_mutator_a
-		static void decrement(var<bidirectional_mutator_a<element_d>> const& me);
 
 		// random_access_mutator_a
 		static void self_add(var<random_access_mutator_a<element_d>> const& me,

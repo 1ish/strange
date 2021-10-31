@@ -107,18 +107,6 @@ namespace strange
 	}
 
 	template <typename iterator_d, typename element_d>
-	bool random_access_mutator_t<iterator_d, element_d>::equal(con<> const& me,
-		con<> const& other)
-	{
-		auto const oi = other.dynamic<con<random_access_mutator_a<element_d>>>();
-		if (oi.o->something(oi))
-		{
-			return random_access_mutator_t<iterator_d, element_d>::equal_iterator(me.reference<con<random_access_mutator_a<element_d>>>(), oi);
-		}
-		return thing_t::equal(me, other);
-	}
-
-	template <typename iterator_d, typename element_d>
 	bool random_access_mutator_t<iterator_d, element_d>::less(con<> const& me,
 		con<> const& other)
 	{
@@ -155,47 +143,6 @@ namespace strange
 		bool is_pointer)
 	{
 		me.o = is_pointer ? random_access_mutator_t<iterator_d, element_d>::_pointer_operations() : random_access_mutator_t<iterator_d, element_d>::_operations();
-	}
-
-	// forward_mutator_a
-	template <typename iterator_d, typename element_d>
-	element_d random_access_mutator_t<iterator_d, element_d>::get(con<forward_mutator_a<element_d>> const& me)
-	{
-		return *(static_cast<random_access_mutator_t<iterator_d, element_d>*>(me.t)->iterator_);
-	}
-
-	template <typename iterator_d, typename element_d>
-	void random_access_mutator_t<iterator_d, element_d>::set(con<forward_mutator_a<element_d>> const& me,
-		element_d const& element)
-	{
-		*(static_cast<random_access_mutator_t<iterator_d, element_d>*>(me.t)->iterator_) = element;
-	}
-
-	template <typename iterator_d, typename element_d>
-	void random_access_mutator_t<iterator_d, element_d>::increment(var<forward_mutator_a<element_d>> const& me)
-	{
-		me.mut();
-		++(static_cast<random_access_mutator_t<iterator_d, element_d>*>(me.t)->iterator_);
-	}
-
-	template <typename iterator_d, typename element_d>
-	element_d& random_access_mutator_t<iterator_d, element_d>::_operator_star(con<forward_mutator_a<element_d>> const& me)
-	{
-		return (static_cast<random_access_mutator_t<iterator_d, element_d>*>(me.t)->iterator_).operator*();
-	}
-
-	template <typename iterator_d, typename element_d>
-	element_d* random_access_mutator_t<iterator_d, element_d>::_operator_arrow(con<forward_mutator_a<element_d>> const& me)
-	{
-		return (static_cast<random_access_mutator_t<iterator_d, element_d>*>(me.t)->iterator_).operator->();
-	}
-
-	// bidirectional_mutator_a
-	template <typename iterator_d, typename element_d>
-	void random_access_mutator_t<iterator_d, element_d>::decrement(var<bidirectional_mutator_a<element_d>> const& me)
-	{
-		me.mut();
-		--(static_cast<random_access_mutator_t<iterator_d, element_d>*>(me.t)->iterator_);
 	}
 
 	// random_access_mutator_a

@@ -65,6 +65,67 @@ namespace strange
 		return &operations;
 	}
 
+	// any_a
+	template <typename iterator_d, typename element_d>
+	bool contiguous_mutator_t<iterator_d, element_d>::is(con<> const& me,
+		con<> const& abstraction)
+	{
+		// abstraction.cat in me.cats
+		auto const abc = abstraction.o->cat;
+		return abc == any_a::cat ||
+			abc == forward_mutator_a<element_d>::cat ||
+			abc == bidirectional_mutator_a<element_d>::cat ||
+			abc == random_access_mutator_a<element_d>::cat ||
+			abc == contiguous_mutator_a<element_d>::cat;
+	}
+
+	template <typename iterator_d, typename element_d>
+	bool contiguous_mutator_t<iterator_d, element_d>::as(con<> const& me,
+		var<> const& abstraction)
+	{
+		if (!contiguous_mutator_t<iterator_d, element_d>::is(me, abstraction))
+		{
+			return false;
+		}
+		bool const as_pointer = abstraction.o->_pointer(abstraction);
+		abstraction = me;
+		if (abstraction.o->_pointer(abstraction) != as_pointer)
+		{
+			if (as_pointer)
+			{
+				abstraction.mut();
+			}
+			abstraction.o->_set_pointer(abstraction, as_pointer);
+			if (!as_pointer)
+			{
+				abstraction.mut();
+			}
+		}
+		return true;
+	}
+
+	template <typename iterator_d, typename element_d>
+	var<symbol_a> contiguous_mutator_t<iterator_d, element_d>::type(con<> const& me)
+	{
+		static auto r = sym("strange::contiguous_mutator");
+		return r;
+	}
+
+	template <typename iterator_d, typename element_d>
+	void contiguous_mutator_t<iterator_d, element_d>::_copy(con<> const& me,
+		var<> const& copy)
+	{
+		new contiguous_mutator_t<iterator_d, element_d>{ copy, me };
+		contiguous_mutator_t<iterator_d, element_d>::_clone(me, copy);
+	}
+
+	template <typename iterator_d, typename element_d>
+	void contiguous_mutator_t<iterator_d, element_d>::_set_pointer(con<> const& me,
+		bool is_pointer)
+	{
+		me.o = is_pointer ? contiguous_mutator_t<iterator_d, element_d>::_pointer_operations() : contiguous_mutator_t<iterator_d, element_d>::_operations();
+	}
+
 	// instantiation
 	template struct contiguous_mutator_t<std::vector<int64_t>::iterator, int64_t>;
 }
