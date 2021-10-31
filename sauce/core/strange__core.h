@@ -11,6 +11,7 @@
 #include <type_traits>
 #include <cmath>
 #include <cassert>
+#include <vector>
 
 namespace strange
 {
@@ -102,6 +103,8 @@ namespace strange
 	template <typename type_d, typename lock_d = var<lock_a>> struct locked_data_t;
 	template <typename type_d, typename lock_d = var<lock_a>> struct locked_data_pointer_t;
 	template <typename type_d> struct number_t;
+
+	template <typename iterator_d, typename element_d> struct contiguous_mutator_t;
 }
 
 #include "utilities/strange__val_u.hpp"
@@ -191,5 +194,7 @@ namespace strange
 #include "fundamentals/things/strange__locked_data_t.h"
 #include "fundamentals/things/strange__locked_data_pointer_t.h"
 #include "fundamentals/things/strange__number_t.h"
+
+#include "collections/iterators/things/strange__contiguous_mutator_t.h"
 
 #endif

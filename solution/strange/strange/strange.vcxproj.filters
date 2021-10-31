@@ -112,6 +112,12 @@
     <Filter Include="Source Files\sauce\core\semantics\abstractions">
       <UniqueIdentifier>{4dd02f36-014e-4ff6-b018-45279b87801c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\sauce\core\collections\iterators\things">
+      <UniqueIdentifier>{328ba3e2-aa5d-43d3-8e51-3b69656b6e08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sauce\core\collections\iterators\things">
+      <UniqueIdentifier>{bb0987dc-f07a-47b6-8291-d9eb69a856c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\taste\strange_taste.cpp">
@@ -317,6 +323,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\sauce\core\fundamentals\things\strange__locked_data_t.cpp">
       <Filter>Source Files\sauce\core\fundamentals\things</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__contiguous_mutator_t.cpp">
+      <Filter>Source Files\sauce\core\collections\iterators\things</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -565,6 +574,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__locked_data_t.h">
       <Filter>Header Files\sauce\core\fundamentals\things</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__contiguous_mutator_t.h">
+      <Filter>Header Files\sauce\core\collections\iterators\things</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

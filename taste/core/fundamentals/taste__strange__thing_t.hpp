@@ -161,6 +161,14 @@ namespace taste
 
 		rat<random_access_extractor_a<int64_t>>::abstraction raat{};
 		raat.cat(rv);
+
+		std::vector<int64_t> vec_int{ 1, 2, 3 };
+		rat<contiguous_mutator_a<int64_t>> rvi = contiguous_mutator_t<std::vector<int64_t>::iterator, int64_t>::create(vec_int.begin());
+		rat<contiguous_mutator_a<int64_t>> rve = contiguous_mutator_t<std::vector<int64_t>::iterator, int64_t>::create(vec_int.end());
+		for (; rvi != rve; ++rvi)
+		{
+			std__cout << "*rvi" << *rvi << "\n";
+		}
 	}
 }
 
