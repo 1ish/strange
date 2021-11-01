@@ -333,6 +333,9 @@
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__bidirectional_mutator_t.cpp">
       <Filter>Source Files\sauce\core\collections\iterators\things</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__forward_mutator_t.cpp">
+      <Filter>Source Files\sauce\core\collections\iterators\things</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\sauce\strange.h">
@@ -588,6 +591,9 @@
       <Filter>Header Files\sauce\core\collections\iterators\things</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__bidirectional_mutator_t.h">
+      <Filter>Header Files\sauce\core\collections\iterators\things</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__forward_mutator_t.h">
       <Filter>Header Files\sauce\core\collections\iterators\things</Filter>
     </ClInclude>
   </ItemGroup>

@@ -173,6 +173,7 @@
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__random_access_tuple_mutator_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__bidirectional_mutator_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__contiguous_mutator_t.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__forward_mutator_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__random_access_mutator_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_mutator_range_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_range_a.cpp" />
@@ -246,6 +247,7 @@
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__random_access_tuple_mutator_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__bidirectional_mutator_t.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__contiguous_mutator_t.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__forward_mutator_t.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__random_access_mutator_t.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_mutator_range_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_range_a.h" />
