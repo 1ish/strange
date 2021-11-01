@@ -30,7 +30,7 @@ namespace strange
 						random_access_mutator_t<iterator_d, element_d>::_pointer,
 					},
 					// forward_mutator_a
-					reinterpret_cast<decltype(forward_mutator_o<element_d>::equal)>(random_access_mutator_t<iterator_d, element_d>::equal_iterator),
+					random_access_mutator_t<iterator_d, element_d>::equal_iterator,
 					random_access_mutator_t<iterator_d, element_d>::get,
 					random_access_mutator_t<iterator_d, element_d>::set,
 					random_access_mutator_t<iterator_d, element_d>::increment,

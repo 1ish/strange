@@ -29,7 +29,7 @@ namespace strange
 					bidirectional_mutator_t<iterator_d, element_d>::_pointer,
 				},
 				// forward_mutator_a
-				reinterpret_cast<decltype(forward_mutator_o<element_d>::equal)>(bidirectional_mutator_t<iterator_d, element_d>::equal_iterator),
+				bidirectional_mutator_t<iterator_d, element_d>::equal_iterator,
 				bidirectional_mutator_t<iterator_d, element_d>::get,
 				bidirectional_mutator_t<iterator_d, element_d>::set,
 				bidirectional_mutator_t<iterator_d, element_d>::increment,
@@ -99,18 +99,6 @@ namespace strange
 	}
 
 	template <typename iterator_d, typename element_d>
-	bool bidirectional_mutator_t<iterator_d, element_d>::equal(con<> const& me,
-		con<> const& other)
-	{
-		auto const oi = other.dynamic<con<bidirectional_mutator_a<element_d>>>();
-		if (oi.o->something(oi))
-		{
-			return bidirectional_mutator_t<iterator_d, element_d>::equal_iterator(me.reference<con<bidirectional_mutator_a<element_d>>>(), oi);
-		}
-		return thing_t::equal(me, other);
-	}
-
-	template <typename iterator_d, typename element_d>
 	void bidirectional_mutator_t<iterator_d, element_d>::_copy(con<> const& me,
 		var<> const& copy)
 	{
@@ -123,39 +111,6 @@ namespace strange
 		bool is_pointer)
 	{
 		me.o = is_pointer ? bidirectional_mutator_t<iterator_d, element_d>::_pointer_operations() : bidirectional_mutator_t<iterator_d, element_d>::_operations();
-	}
-
-	// forward_mutator_a
-	template <typename iterator_d, typename element_d>
-	element_d bidirectional_mutator_t<iterator_d, element_d>::get(con<forward_mutator_a<element_d>> const& me)
-	{
-		return *(static_cast<bidirectional_mutator_t<iterator_d, element_d>*>(me.t)->iterator_);
-	}
-
-	template <typename iterator_d, typename element_d>
-	void bidirectional_mutator_t<iterator_d, element_d>::set(con<forward_mutator_a<element_d>> const& me,
-		element_d const& element)
-	{
-		*(static_cast<bidirectional_mutator_t<iterator_d, element_d>*>(me.t)->iterator_) = element;
-	}
-
-	template <typename iterator_d, typename element_d>
-	void bidirectional_mutator_t<iterator_d, element_d>::increment(var<forward_mutator_a<element_d>> const& me)
-	{
-		me.mut();
-		++(static_cast<bidirectional_mutator_t<iterator_d, element_d>*>(me.t)->iterator_);
-	}
-
-	template <typename iterator_d, typename element_d>
-	element_d& bidirectional_mutator_t<iterator_d, element_d>::_operator_star(con<forward_mutator_a<element_d>> const& me)
-	{
-		return (static_cast<bidirectional_mutator_t<iterator_d, element_d>*>(me.t)->iterator_).operator*();
-	}
-
-	template <typename iterator_d, typename element_d>
-	element_d* bidirectional_mutator_t<iterator_d, element_d>::_operator_arrow(con<forward_mutator_a<element_d>> const& me)
-	{
-		return (static_cast<bidirectional_mutator_t<iterator_d, element_d>*>(me.t)->iterator_).operator->();
 	}
 
 	// bidirectional_mutator_a

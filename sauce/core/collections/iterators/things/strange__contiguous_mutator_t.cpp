@@ -31,7 +31,7 @@ namespace strange
 							contiguous_mutator_t<iterator_d, element_d>::_pointer,
 						},
 						// forward_mutator_a
-						reinterpret_cast<decltype(forward_mutator_o<element_d>::equal)>(contiguous_mutator_t<iterator_d, element_d>::equal_iterator),
+						contiguous_mutator_t<iterator_d, element_d>::equal_iterator,
 						contiguous_mutator_t<iterator_d, element_d>::get,
 						contiguous_mutator_t<iterator_d, element_d>::set,
 						contiguous_mutator_t<iterator_d, element_d>::increment,

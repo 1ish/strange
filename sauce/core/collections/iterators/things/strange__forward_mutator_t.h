@@ -84,28 +84,28 @@ namespace strange
 
 	public:
 		// creators
-		static inline rat<forward_mutator_a<element_d>> create_default()
+		static inline fit<forward_mutator_a<element_d>> create_default()
 		{
 			any_a r;
 			new forward_mutator_t<iterator_d, element_d>{ r };
 			forward_mutator_t<iterator_d, element_d>::_initialise(reinterpret_cast<var<> const&>(r));
-			return rat<forward_mutator_a<element_d>>{ reinterpret_cast<forward_mutator_a<element_d>&>(r) };
+			return fit<forward_mutator_a<element_d>>{ reinterpret_cast<forward_mutator_a<element_d>&>(r) };
 		}
 
-		static inline rat<forward_mutator_a<element_d>> create(iterator_d const& iterator)
+		static inline fit<forward_mutator_a<element_d>> create(iterator_d const& iterator)
 		{
 			any_a r;
 			new forward_mutator_t<iterator_d, element_d>{ r, iterator };
 			forward_mutator_t<iterator_d, element_d>::_initialise(reinterpret_cast<var<> const&>(r));
-			return rat<forward_mutator_a<element_d>>{ reinterpret_cast<forward_mutator_a<element_d>&>(r) };
+			return fit<forward_mutator_a<element_d>>{ reinterpret_cast<forward_mutator_a<element_d>&>(r) };
 		}
 
-		static inline rat<forward_mutator_a<element_d>> create_from_range(con<range_a<>> const& range)
+		static inline fit<forward_mutator_a<element_d>> create_from_range(con<range_a<>> const& range)
 		{
 			return create_default();
 		}
 
-		static inline rat<forward_mutator_a<element_d>> unpack(con<container_a> const& container)
+		static inline fit<forward_mutator_a<element_d>> unpack(con<container_a> const& container)
 		{
 			return create_default();
 		}
