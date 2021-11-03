@@ -339,6 +339,15 @@
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__forward_extractor_t.cpp">
       <Filter>Source Files\sauce\core\collections\iterators\things</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__bidirectional_extractor_t.cpp">
+      <Filter>Source Files\sauce\core\collections\iterators\things</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__contiguous_extractor_t.cpp">
+      <Filter>Source Files\sauce\core\collections\iterators\things</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__random_access_extractor_t.cpp">
+      <Filter>Source Files\sauce\core\collections\iterators\things</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\sauce\strange.h">
@@ -600,6 +609,15 @@
       <Filter>Header Files\sauce\core\collections\iterators\things</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__forward_extractor_t.h">
+      <Filter>Header Files\sauce\core\collections\iterators\things</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__bidirectional_extractor_t.h">
+      <Filter>Header Files\sauce\core\collections\iterators\things</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__contiguous_extractor_t.h">
+      <Filter>Header Files\sauce\core\collections\iterators\things</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__random_access_extractor_t.h">
       <Filter>Header Files\sauce\core\collections\iterators\things</Filter>
     </ClInclude>
   </ItemGroup>

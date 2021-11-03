@@ -105,6 +105,9 @@ namespace strange
 	template <typename type_d> struct number_t;
 
 	template <typename iterator_d, typename element_d> struct forward_extractor_t;
+	template <typename iterator_d, typename element_d> struct bidirectional_extractor_t;
+	template <typename iterator_d, typename element_d> struct random_access_extractor_t;
+	template <typename iterator_d, typename element_d> struct contiguous_extractor_t;
 	template <typename iterator_d, typename element_d> struct forward_mutator_t;
 	template <typename iterator_d, typename element_d> struct bidirectional_mutator_t;
 	template <typename iterator_d, typename element_d> struct random_access_mutator_t;
@@ -200,6 +203,9 @@ namespace strange
 #include "fundamentals/things/strange__number_t.h"
 
 #include "collections/iterators/things/strange__forward_extractor_t.h"
+#include "collections/iterators/things/strange__bidirectional_extractor_t.h"
+#include "collections/iterators/things/strange__random_access_extractor_t.h"
+#include "collections/iterators/things/strange__contiguous_extractor_t.h"
 #include "collections/iterators/things/strange__forward_mutator_t.h"
 #include "collections/iterators/things/strange__bidirectional_mutator_t.h"
 #include "collections/iterators/things/strange__random_access_mutator_t.h"
