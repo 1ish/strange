@@ -195,6 +195,7 @@
     <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__range_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__tuple_mutator_range_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__tuple_range_a.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\collections\things\strange__collection_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__any_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__cat_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__data_a.cpp" />
@@ -273,6 +274,7 @@
     <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__range_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__tuple_mutator_range_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__tuple_range_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\things\strange__collection_t.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__any_a.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__cat_a.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__data_a.h" />

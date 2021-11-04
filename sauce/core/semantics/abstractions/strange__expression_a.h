@@ -47,71 +47,85 @@ if ()
 strange: realm
 (
 	number: abstraction {type: <<>>} [<mutable_numeric>]
-	(	equal				# extraction (other #^^) =<+ bool >+,
+	(
+		equal				# extraction (other #^^) =<+ bool >+,
 		not_equal			# extraction (other #^^) =<+ bool >+,
 		less				# extraction (other #^^) =<+ bool >+,
 		greater				# extraction (other #^^) =<+ bool >+,
 		less_or_equal		# extraction (other #^^) =<+ bool >+,
 		greater_or_equal	# extraction (other #^^) =<+ bool >+,
 		data				# extraction () =<data[^type^]>,
-		extract				# extraction () #<+ type_d >+,
-		mutate				# mutation () @<+ type_d >+,
+		extract				# extraction () #^type^,
+		mutate				# mutation () @^type^,
 		extractor			# extraction () *<random_access_extractor[^type^]>,
 	)
-	{	not_equal:			me.equal[] !,
+	{
+		not_equal:			me.equal[] !,
 		greater:			me.less_or_equal[] !,
 		greater_or_equal:	me.less[] !,
 	},
 
 	number: thing {type: <<>>} [data[^type^]]
-	(	data_				=^type^,
+	(
+		data_				=^type^,
 
 		number				# manifestation
-		(	me		#<number[<+ std::remove_reference_t<type_d> >+]>
-		)	=<number[<+ std::remove_reference_t<type_d> >+]>,
+		(
+			me		#<number[<+ std::remove_reference_t<type_d> >+]>
+		)			=<number[<+ std::remove_reference_t<type_d> >+]>,
 
 		data				# manifestation
-		(	me		#<number[<+ std::remove_reference_t<type_d> >+]>
-		)	=<data[<+ std::remove_reference_t<type_d> >+]>,
+		(
+			me		#<number[<+ std::remove_reference_t<type_d> >+]>
+		)			=<data[<+ std::remove_reference_t<type_d> >+]>,
 
 		extractor			# manifestation
-		(	me		#<number[<+ std::remove_reference_t<type_d> >+]>
-		)	*<random_access_extractor[<+ std::remove_reference_t<type_d> >+]>,
+		(
+			me		#<number[<+ std::remove_reference_t<type_d> >+]>
+		)			*<random_access_extractor[<+ std::remove_reference_t<type_d> >+]>,
 
 		equal_number		# function
-		(	me		#<number[<+ std::remove_reference_t<type_d> >+]>,
+		(
+			me		#<number[<+ std::remove_reference_t<type_d> >+]>,
 			other	#<number[<+ std::remove_reference_t<type_d> >+]>,
-		)	=<+ bool >+,
+		)			=<+ bool >+,
 
 		less_number			# function
-		(	me		#<number[<+ std::remove_reference_t<type_d> >+]>,
+		(
+			me		#<number[<+ std::remove_reference_t<type_d> >+]>,
 			other	#<number[<+ std::remove_reference_t<type_d> >+]>,
-		)	=<+ bool >+,
+		)			=<+ bool >+,
 
 		less_or_equal_number	# function
-		(	me		#<number[<+ std::remove_reference_t<type_d> >+]>,
+		(
+			me		#<number[<+ std::remove_reference_t<type_d> >+]>,
 			other	#<number[<+ std::remove_reference_t<type_d> >+]>,
-		)	=<+ bool >+,
+		)			=<+ bool >+,
 	)
-	{	number:
-		{	equal:			equal_number,
+	{
+		number:
+		{
+			equal:			equal_number,
 			less:			less_number,
 			less_or_equal:	less_or_equal_number,
 		},
 	
 		equal_number:
-		(+++	auto const mt = static_cast<number_t<type_d> const* const>(me.t);
-				return mt->data_ == other.o->extract(other);			
+		(+++
+			auto const mt = static_cast<number_t<type_d> const* const>(me.t);
+			return mt->data_ == other.o->extract(other);			
 		)+++,
 
 		less_number:
-		(+++	auto const mt = static_cast<number_t<type_d> const* const>(me.t);
-				return mt->data_ < other.o->extract(other);
+		(+++
+			auto const mt = static_cast<number_t<type_d> const* const>(me.t);
+			return mt->data_ < other.o->extract(other);
 		)+++,
 
 		less_or_equal_number:
-		(+++	auto const mt = static_cast<number_t<type_d> const* const>(me.t);
-				return mt->data_ <= other.o->extract(other);
+		(+++
+			auto const mt = static_cast<number_t<type_d> const* const>(me.t);
+			return mt->data_ <= other.o->extract(other);
 		)+++,
 	},
 )
