@@ -399,7 +399,20 @@ namespace strange
 		{
 			return false;
 		}
+		bool const as_pointer = abstraction.o->_pointer(abstraction);
 		abstraction = me;
+		if (abstraction.o->_pointer(abstraction) != as_pointer)
+		{
+			if (as_pointer)
+			{
+				abstraction.mut();
+			}
+			abstraction.o->_set_pointer(abstraction, as_pointer);
+			if (!as_pointer)
+			{
+				abstraction.mut();
+			}
+		}
 		return true;
 	}
 
@@ -554,7 +567,20 @@ namespace strange
 		{
 			return false;
 		}
+		bool const as_pointer = abstraction.o->_pointer(abstraction);
 		abstraction = me;
+		if (abstraction.o->_pointer(abstraction) != as_pointer)
+		{
+			if (as_pointer)
+			{
+				abstraction.mut();
+			}
+			abstraction.o->_set_pointer(abstraction, as_pointer);
+			if (!as_pointer)
+			{
+				abstraction.mut();
+			}
+		}
 		return true;
 	}
 

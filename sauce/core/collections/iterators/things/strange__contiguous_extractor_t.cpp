@@ -126,5 +126,6 @@ namespace strange
 	}
 
 	// instantiation
-	template struct contiguous_extractor_t<std::vector<int64_t>::iterator, int64_t>;
+	template struct contiguous_extractor_t<std::vector<int64_t>::const_iterator, int64_t>;
+	template struct contiguous_extractor_t<std::deque<int64_t>::const_iterator, int64_t>;
 }

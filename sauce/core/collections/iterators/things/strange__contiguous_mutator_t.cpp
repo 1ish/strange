@@ -128,4 +128,5 @@ namespace strange
 
 	// instantiation
 	template struct contiguous_mutator_t<std::vector<int64_t>::iterator, int64_t>;
+	template struct contiguous_mutator_t<std::deque<int64_t>::iterator, int64_t>;
 }

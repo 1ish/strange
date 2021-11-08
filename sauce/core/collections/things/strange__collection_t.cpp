@@ -458,4 +458,5 @@ namespace strange
 
 	// instantiation
 	template struct collection_t<std::vector<int64_t>, int64_t, int64_t, int64_t>;
+	template struct collection_t<std::deque<int64_t>, int64_t, int64_t, int64_t>;
 }
