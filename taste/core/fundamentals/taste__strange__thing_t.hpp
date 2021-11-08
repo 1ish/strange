@@ -170,7 +170,7 @@ namespace taste
 			std__cout << "*rvi" << *rvi << "\n";
 		}
 
-		auto col = collection_t<std::vector<int64_t>, int64_t, int64_t, int64_t>::create(vec_int);
+		auto col = queue_t<std::vector<int64_t>, int64_t>::create(vec_int);
 		for (auto el : col.o->range(col))
 		{
 			std__cout << "el:" << el << "\n";
