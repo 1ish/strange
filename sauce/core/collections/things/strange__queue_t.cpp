@@ -210,25 +210,6 @@ namespace strange
 	}
 
 	template <typename collection_d, typename element_d>
-	void queue_t<collection_d, element_d>::clear(var<collection_a<int64_t, element_d, element_d>> const& me)
-	{
-		me.mut();
-		static_cast<queue_t<collection_d, element_d>*>(me.t)->collection_.clear();
-	}
-
-	template <typename collection_d, typename element_d>
-	int64_t queue_t<collection_d, element_d>::size(con<collection_a<int64_t, element_d, element_d>> const& me)
-	{
-		return static_cast<int64_t>(static_cast<queue_t<collection_d, element_d> const*>(me.t)->collection_.size());
-	}
-
-	template <typename collection_d, typename element_d>
-	bool queue_t<collection_d, element_d>::empty(con<collection_a<int64_t, element_d, element_d>> const& me)
-	{
-		return static_cast<queue_t<collection_d, element_d> const*>(me.t)->collection_.empty();
-	}
-
-	template <typename collection_d, typename element_d>
 	void queue_t<collection_d, element_d>::push_front(var<collection_a<int64_t, element_d, element_d>> const& me,
 		element_d const& element)
 	{

@@ -70,12 +70,6 @@ namespace strange
 		static bool erase(var<collection_a<int64_t, element_d, element_d>> const& me,
 			int64_t const& key);
 
-		static void clear(var<collection_a<int64_t, element_d, element_d>> const& me);
-
-		static int64_t size(con<collection_a<int64_t, element_d, element_d>> const& me);
-
-		static bool empty(con<collection_a<int64_t, element_d, element_d>> const& me);
-
 		static void push_front(var<collection_a<int64_t, element_d, element_d>> const& me,
 			element_d const& element);
 
