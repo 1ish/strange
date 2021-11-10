@@ -257,11 +257,14 @@ namespace strange
 		con<range_a<element_d>> const& range)
 	{
 		me.mut();
-		auto& collection = static_cast<queue_t<collection_d, element_d>*>(me.t)->collection_;
-		collection.clear();
-		for (element_d const& element : range)
+		if (me.o->identity(me) != range.o->identity(range))
 		{
-			collection.push_back(element);
+			auto& collection = static_cast<queue_t<collection_d, element_d>*>(me.t)->collection_;
+			collection.clear();
+			for (element_d const& element : range)
+			{
+				collection.push_back(element);
+			}
 		}
 	}
 
@@ -271,9 +274,20 @@ namespace strange
 	{
 		me.mut();
 		auto& collection = static_cast<queue_t<collection_d, element_d>*>(me.t)->collection_;
-		for (element_d const& element : range)
+		if (me.o->identity(me) == range.o->identity(range))
 		{
-			collection.push_back(element);
+			auto copy = collection;
+			for (element_d const& element : copy)
+			{
+				collection.push_back(element);
+			}
+		}
+		else
+		{
+			for (element_d const& element : range)
+			{
+				collection.push_back(element);
+			}
 		}
 	}
 
@@ -292,9 +306,20 @@ namespace strange
 	{
 		me.mut();
 		auto& collection = static_cast<queue_t<collection_d, element_d>*>(me.t)->collection_;
-		for (auto it = range.o->begin(range), end = range.o->end(range); it != end; ++it)
+		if (me.o->identity(me) == range.o->identity(range))
 		{
-			collection.pop_back();
+			collection.clear();
+		}
+		else
+		{
+			for (auto it = range.o->begin(range), end = range.o->end(range); it != end; ++it)
+			{
+				if (collection.empty())
+				{
+					break;
+				}
+				collection.pop_back();
+			}
 		}
 	}
 

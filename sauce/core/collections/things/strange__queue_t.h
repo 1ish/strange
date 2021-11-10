@@ -120,6 +120,8 @@ namespace strange
 		static bool _range_as(con<> const& me,
 			var<> const& abstraction);
 
+		//TODO hash / equal / less / less_or_equal
+
 		static void _range_copy(con<> const& me,
 			var<> const& copy);
 
@@ -137,6 +139,8 @@ namespace strange
 
 		static bool _mutator_range_as(con<> const& me,
 			var<> const& abstraction);
+
+		//TODO hash / equal / less / less_or_equal
 
 		static void _mutator_range_copy(con<> const& me,
 			var<> const& copy);

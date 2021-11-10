@@ -38,9 +38,9 @@ namespace strange
 		static inline bool equal_collection(con<collection_a<key_d, value_d, element_d>> const& me,
 			con<collection_a<key_d, value_d, element_d>> const& other)
 		{
-			//TODO check other collection type is compatible
-			return static_cast<collection_t<collection_d, key_d, value_d, element_d>*>(me.t)->collection_ ==
-				static_cast<collection_t<collection_d, key_d, value_d, element_d>*>(other.t)->collection_;
+			return me.o->type(me) == other.o->type(other) &&
+				static_cast<collection_t<collection_d, key_d, value_d, element_d> const*>(me.t)->collection_ ==
+				static_cast<collection_t<collection_d, key_d, value_d, element_d> const*>(other.t)->collection_;
 		}
 
 	protected:
@@ -78,6 +78,8 @@ namespace strange
 
 		static bool _range_as(con<> const& me,
 			var<> const& abstraction);
+
+		//TODO hash / equal / less / less_or_equal
 
 		static void _range_copy(con<> const& me,
 			var<> const& copy);

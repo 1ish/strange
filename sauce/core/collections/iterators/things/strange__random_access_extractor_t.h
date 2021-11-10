@@ -41,17 +41,17 @@ namespace strange
 		static inline bool less_iterator(con<random_access_extractor_a<element_d>> const& me,
 			con<random_access_extractor_a<element_d>> const& other)
 		{
-			//TODO check other iterator type is compatible
-			return static_cast<random_access_extractor_t<iterator_d, element_d>*>(me.t)->iterator_ <
-				static_cast<random_access_extractor_t<iterator_d, element_d>*>(other.t)->iterator_;
+			return me.o->type(me) == other.o->type(other) &&
+				static_cast<random_access_extractor_t<iterator_d, element_d> const*>(me.t)->iterator_ <
+				static_cast<random_access_extractor_t<iterator_d, element_d> const*>(other.t)->iterator_;
 		}
 
 		static inline bool less_or_equal_iterator(con<random_access_extractor_a<element_d>> const& me,
 			con<random_access_extractor_a<element_d>> const& other)
 		{
-			//TODO check other iterator type is compatible
-			return static_cast<random_access_extractor_t<iterator_d, element_d>*>(me.t)->iterator_ <=
-				static_cast<random_access_extractor_t<iterator_d, element_d>*>(other.t)->iterator_;
+			return me.o->type(me) == other.o->type(other) &&
+				static_cast<random_access_extractor_t<iterator_d, element_d> const*>(me.t)->iterator_ <=
+				static_cast<random_access_extractor_t<iterator_d, element_d> const*>(other.t)->iterator_;
 		}
 
 	protected:

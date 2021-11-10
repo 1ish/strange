@@ -46,9 +46,9 @@ namespace strange
 		static inline bool equal_iterator(con<forward_mutator_a<element_d>> const& me,
 			con<forward_mutator_a<element_d>> const& other)
 		{
-			//TODO check other iterator type is compatible
-			return static_cast<forward_mutator_t<iterator_d, element_d>*>(me.t)->iterator_ ==
-				static_cast<forward_mutator_t<iterator_d, element_d>*>(other.t)->iterator_;
+			return me.o->type(me) == other.o->type(other) &&
+				static_cast<forward_mutator_t<iterator_d, element_d> const*>(me.t)->iterator_ ==
+				static_cast<forward_mutator_t<iterator_d, element_d> const*>(other.t)->iterator_;
 		}
 
 	protected:

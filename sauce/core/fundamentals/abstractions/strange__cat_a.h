@@ -21,6 +21,7 @@ namespace strange
 		// native       <+bool>+
 		// enumeration  %behaviour%
 		// meta         <~abstraction>~
+		// function     <(x #, y #) =>
 	};
 
 	struct cat_a
