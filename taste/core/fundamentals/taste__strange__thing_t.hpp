@@ -173,7 +173,13 @@ namespace taste
 		auto col = queue_t<std::vector<int64_t>, int64_t>::create(vec_int);
 		for (auto el : col.o->range(col))
 		{
-			std__cout << "el:" << el << "\n";
+			std__cout << "qel:" << el << "\n";
+		}
+
+		auto lis = list_t<std::vector<int64_t>, int64_t>::create(vec_int);
+		for (auto el : lis.o->range(lis))
+		{
+			std__cout << "lel:" << el << "\n";
 		}
 	}
 }

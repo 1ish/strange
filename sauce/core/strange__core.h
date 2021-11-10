@@ -221,5 +221,6 @@ namespace strange
 
 #include "collections/things/strange__collection_t.h"
 #include "collections/things/strange__queue_t.h"
+#include "collections/things/strange__list_t.h"
 
 #endif
