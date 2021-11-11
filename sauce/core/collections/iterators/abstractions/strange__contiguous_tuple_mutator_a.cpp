@@ -29,4 +29,5 @@ namespace strange
 
 	// instantiation
 	template struct contiguous_tuple_mutator_a<int64_t>;
+	template struct contiguous_tuple_mutator_a<int64_t, int64_t>;
 }

@@ -28,5 +28,6 @@ namespace strange
 	}
 
 	// instantiation
+	template struct list_a<>;
 	template struct list_a<int64_t>;
 }

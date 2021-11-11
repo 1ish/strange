@@ -155,5 +155,6 @@ namespace strange
 
 	// instantiation
 	template struct forward_mutator_t<std::vector<int64_t>::iterator, int64_t>;
+	template struct forward_mutator_t<std::vector<var<>>::iterator, var<>>;
 	template struct forward_mutator_t<std::deque<int64_t>::iterator, int64_t>;
 }

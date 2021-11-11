@@ -592,5 +592,6 @@ namespace strange
 
 	// instantiation
 	template struct queue_t<std::vector<int64_t>, int64_t>;
+	template struct queue_t<std::vector<var<>>, var<>>;
 	template struct queue_t<std::deque<int64_t>, int64_t>;
 }

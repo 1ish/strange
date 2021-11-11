@@ -28,5 +28,6 @@ namespace strange
 	}
 
 	// instantiation
+	template struct contiguous_range_a<>;
 	template struct contiguous_range_a<int64_t>;
 }

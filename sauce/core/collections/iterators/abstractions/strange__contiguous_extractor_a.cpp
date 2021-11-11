@@ -28,5 +28,6 @@ namespace strange
 	}
 
 	// instantiation
+	template struct contiguous_extractor_a<>;
 	template struct contiguous_extractor_a<int64_t>;
 }

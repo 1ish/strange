@@ -28,5 +28,6 @@ namespace strange
 	}
 
 	// instantiation
+	template struct random_access_range_a<>;
 	template struct random_access_range_a<int64_t>;
 }

@@ -28,6 +28,7 @@ namespace strange
 	}
 
 	// instantiation
+	template struct random_access_extractor_a<>;
 	template struct random_access_extractor_a<int64_t>;
 	template struct random_access_extractor_a<uint64_t>;
 	template struct random_access_extractor_a<double>;

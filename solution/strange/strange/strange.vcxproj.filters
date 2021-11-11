@@ -118,6 +118,12 @@
     <Filter Include="Source Files\sauce\core\collections\iterators\things">
       <UniqueIdentifier>{bb0987dc-f07a-47b6-8291-d9eb69a856c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\sauce\core\collections\ranges\abstractions">
+      <UniqueIdentifier>{e7a9ad2a-3174-454f-babd-13ec873e4618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sauce\core\collections\ranges\abstractions">
+      <UniqueIdentifier>{cbbfff99-7dcd-452c-845b-7e8f2985b592}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\taste\strange_taste.cpp">
@@ -177,24 +183,6 @@
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__list_a.cpp">
       <Filter>Source Files\sauce\core\collections\abstractions</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_mutator_range_a.cpp">
-      <Filter>Source Files\sauce\core\collections\ranges</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_range_a.cpp">
-      <Filter>Source Files\sauce\core\collections\ranges</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__mutator_range_a.cpp">
-      <Filter>Source Files\sauce\core\collections\ranges</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__random_access_mutator_range_a.cpp">
-      <Filter>Source Files\sauce\core\collections\ranges</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__random_access_range_a.cpp">
-      <Filter>Source Files\sauce\core\collections\ranges</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__range_a.cpp">
-      <Filter>Source Files\sauce\core\collections\ranges</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__group_a.cpp">
       <Filter>Source Files\sauce\core\collections\abstractions</Filter>
     </ClCompile>
@@ -222,18 +210,6 @@
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__random_access_tuple_mutator_a.cpp">
       <Filter>Source Files\sauce\core\collections\iterators\abstractions</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__tuple_range_a.cpp">
-      <Filter>Source Files\sauce\core\collections\ranges</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__tuple_mutator_range_a.cpp">
-      <Filter>Source Files\sauce\core\collections\ranges</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_tuple_mutator_range_a.cpp">
-      <Filter>Source Files\sauce\core\collections\ranges</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_tuple_range_a.cpp">
-      <Filter>Source Files\sauce\core\collections\ranges</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__contiguous_extractor_a.cpp">
       <Filter>Source Files\sauce\core\collections\iterators\abstractions</Filter>
     </ClCompile>
@@ -245,24 +221,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__contiguous_tuple_mutator_a.cpp">
       <Filter>Source Files\sauce\core\collections\iterators\abstractions</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_mutator_range_a.cpp">
-      <Filter>Source Files\sauce\core\collections\ranges</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_range_a.cpp">
-      <Filter>Source Files\sauce\core\collections\ranges</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_tuple_mutator_range_a.cpp">
-      <Filter>Source Files\sauce\core\collections\ranges</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_tuple_range_a.cpp">
-      <Filter>Source Files\sauce\core\collections\ranges</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__random_access_tuple_mutator_range_a.cpp">
-      <Filter>Source Files\sauce\core\collections\ranges</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__random_access_tuple_range_a.cpp">
-      <Filter>Source Files\sauce\core\collections\ranges</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__ordered_group_a.cpp">
       <Filter>Source Files\sauce\core\collections\abstractions</Filter>
@@ -357,6 +315,57 @@
     <ClCompile Include="..\..\..\sauce\core\collections\things\strange__list_t.cpp">
       <Filter>Source Files\sauce\core\collections\things</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\things\strange__tuple_t.cpp">
+      <Filter>Source Files\sauce\core\collections\things</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_mutator_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_tuple_mutator_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_tuple_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_mutator_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_tuple_mutator_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_tuple_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__mutator_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__random_access_mutator_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__random_access_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__random_access_tuple_mutator_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__random_access_tuple_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__tuple_mutator_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__tuple_range_a.cpp">
+      <Filter>Source Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\sauce\strange.h">
@@ -431,24 +440,6 @@
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__list_a.h">
       <Filter>Header Files\sauce\core\collections\abstractions</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_mutator_range_a.h">
-      <Filter>Header Files\sauce\core\collections\ranges</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_range_a.h">
-      <Filter>Header Files\sauce\core\collections\ranges</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__mutator_range_a.h">
-      <Filter>Header Files\sauce\core\collections\ranges</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__random_access_mutator_range_a.h">
-      <Filter>Header Files\sauce\core\collections\ranges</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__random_access_range_a.h">
-      <Filter>Header Files\sauce\core\collections\ranges</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__range_a.h">
-      <Filter>Header Files\sauce\core\collections\ranges</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__group_a.h">
       <Filter>Header Files\sauce\core\collections\abstractions</Filter>
     </ClInclude>
@@ -476,18 +467,6 @@
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__random_access_tuple_mutator_a.h">
       <Filter>Header Files\sauce\core\collections\iterators\abstractions</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__tuple_range_a.h">
-      <Filter>Header Files\sauce\core\collections\ranges</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__tuple_mutator_range_a.h">
-      <Filter>Header Files\sauce\core\collections\ranges</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_tuple_mutator_range_a.h">
-      <Filter>Header Files\sauce\core\collections\ranges</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_tuple_range_a.h">
-      <Filter>Header Files\sauce\core\collections\ranges</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__contiguous_extractor_a.h">
       <Filter>Header Files\sauce\core\collections\iterators\abstractions</Filter>
     </ClInclude>
@@ -499,24 +478,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__contiguous_tuple_mutator_a.h">
       <Filter>Header Files\sauce\core\collections\iterators\abstractions</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_mutator_range_a.h">
-      <Filter>Header Files\sauce\core\collections\ranges</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_range_a.h">
-      <Filter>Header Files\sauce\core\collections\ranges</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_tuple_mutator_range_a.h">
-      <Filter>Header Files\sauce\core\collections\ranges</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_tuple_range_a.h">
-      <Filter>Header Files\sauce\core\collections\ranges</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__random_access_tuple_mutator_range_a.h">
-      <Filter>Header Files\sauce\core\collections\ranges</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__random_access_tuple_range_a.h">
-      <Filter>Header Files\sauce\core\collections\ranges</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__ordered_group_a.h">
       <Filter>Header Files\sauce\core\collections\abstractions</Filter>
@@ -637,6 +598,57 @@
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\collections\things\strange__list_t.h">
       <Filter>Header Files\sauce\core\collections\things</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\things\strange__tuple_t.h">
+      <Filter>Header Files\sauce\core\collections\things</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_mutator_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_tuple_mutator_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__bidirectional_tuple_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_mutator_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_tuple_mutator_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__contiguous_tuple_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__mutator_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__random_access_mutator_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__random_access_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__random_access_tuple_mutator_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__random_access_tuple_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__tuple_mutator_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__tuple_range_a.h">
+      <Filter>Header Files\sauce\core\collections\ranges\abstractions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

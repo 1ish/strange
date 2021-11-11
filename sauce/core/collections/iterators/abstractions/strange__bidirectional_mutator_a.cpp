@@ -28,5 +28,6 @@ namespace strange
 	}
 
 	// instantiation
+	template struct bidirectional_mutator_a<>;
 	template struct bidirectional_mutator_a<int64_t>;
 }
