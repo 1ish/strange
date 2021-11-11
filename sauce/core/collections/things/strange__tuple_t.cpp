@@ -131,23 +131,7 @@ namespace strange
 	template <typename element_d, typename... elements_d>
 	void _tuple_destruct(var<list_a<>> const& list, int64_t index, element_d& element, elements_d&... elements)
 	{
-		if constexpr (std::is_arithmetic_v<element_d>)
-		{
-			var<> const item = list.o->at(list, index);
-			auto const number = item.value<con<number_a<element_d>>>();
-			if (number.o->something(number))
-			{
-				element = number.o->extract(number);
-			}
-			else
-			{
-				element = 0;
-			}
-		}
-		else
-		{
-			element = list.o->at(list, index);
-		}
+		element = unbox<element_d>(list.o->at(list, index));
 		_tuple_destruct(list, index + 1, elements...);
 	}
 
@@ -158,14 +142,7 @@ namespace strange
 	template <typename element_d, typename... elements_d>
 	void _tuple_restruct(var<list_a<>> const& list, int64_t index, element_d const& element, elements_d const&... elements)
 	{
-		if constexpr (std::is_arithmetic_v<element_d>)
-		{
-			list.o->update(list, index, num<element_d>(element));
-		}
-		else
-		{
-			list.o->update(list, index, element);
-		}
+		list.o->update(list, index, box<element_d>(element));
 		_tuple_restruct(list, index + 1, elements...);
 	}
 

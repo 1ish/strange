@@ -212,6 +212,8 @@ namespace strange
 #include "fundamentals/things/strange__locked_data_pointer_t.h"
 #include "fundamentals/things/strange__number_t.h"
 
+#include "utilities/strange__box_u.hpp"
+
 #include "collections/iterators/things/strange__forward_extractor_t.h"
 #include "collections/iterators/things/strange__bidirectional_extractor_t.h"
 #include "collections/iterators/things/strange__random_access_extractor_t.h"

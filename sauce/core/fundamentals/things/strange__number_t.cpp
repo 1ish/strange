@@ -76,7 +76,9 @@ namespace strange
 	{
 		// abstraction.cat in me.cats
 		auto const abc = abstraction.o->cat;
-		return abc == any_a::cat || abc == numeric_a::cat || abc == number_a<std::remove_reference_t<type_d>>::cat;
+		return abc == any_a::cat ||
+			abc == numeric_a::cat ||
+			abc == number_a<std::remove_reference_t<type_d>>::cat;
 	}
 
 	template <typename type_d>

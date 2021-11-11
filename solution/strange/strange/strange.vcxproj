@@ -309,6 +309,7 @@
     <ClInclude Include="..\..\..\sauce\core\strange__core.h" />
     <ClInclude Include="..\..\..\sauce\core\utilities\strange__adr_u.hpp" />
     <ClInclude Include="..\..\..\sauce\core\utilities\strange__bit_u.hpp" />
+    <ClInclude Include="..\..\..\sauce\core\utilities\strange__box_u.hpp" />
     <ClInclude Include="..\..\..\sauce\core\utilities\strange__con_u.hpp" />
     <ClInclude Include="..\..\..\sauce\core\utilities\strange__fit_u.hpp" />
     <ClInclude Include="..\..\..\sauce\core\utilities\strange__ptr_u.hpp" />
