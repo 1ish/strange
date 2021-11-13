@@ -121,7 +121,7 @@ namespace strange
 	template <typename first_d, typename second_d>
 	var<list_a<>> pair_pointer_tuple_t<first_d, second_d>::list(con<tuple_a<first_d, second_d>> const& me)
 	{
-		auto const* thing = reinterpret_cast<pair_pointer_tuple_t<first_d, second_d> const*>(me.t);
+		auto const* thing = static_cast<pair_pointer_tuple_t<first_d, second_d> const*>(me.t);
 		return strange::list<>(box<>(thing->pair_pointer_->first), box<>(thing->pair_pointer_->second));
 	}
 
@@ -130,7 +130,7 @@ namespace strange
 		first_d& first,
 		second_d& second)
 	{
-		auto const* thing = reinterpret_cast<pair_pointer_tuple_t<first_d, second_d> const*>(me.t);
+		auto const* thing = static_cast<pair_pointer_tuple_t<first_d, second_d> const*>(me.t);
 		first = thing->pair_pointer_->first;
 		second = thing->pair_pointer_->second;
 	}
@@ -140,8 +140,7 @@ namespace strange
 		first_d const& first,
 		second_d const& second)
 	{
-		me.mut();
-		auto* thing = reinterpret_cast<pair_pointer_tuple_t<first_d, second_d>*>(me.t);
+		auto* thing = static_cast<pair_pointer_tuple_t<first_d, second_d>*>(me.t);
 		thing->pair_pointer_->first = first;
 		thing->pair_pointer_->second = second;
 	}

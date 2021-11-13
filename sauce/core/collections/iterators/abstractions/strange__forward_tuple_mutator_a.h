@@ -7,7 +7,7 @@ namespace strange
 	struct forward_tuple_mutator_o :
 		forward_mutator_o<var<tuple_a<elements_d...>>>
 	{
-		var<list_a<>> (*any_list) (con<forward_tuple_mutator_a<elements_d...>> const& me);
+		var<list_a<>> (*list) (con<forward_tuple_mutator_a<elements_d...>> const& me);
 
 		void (*destruct) (con<forward_tuple_mutator_a<elements_d...>> const& me,
 			elements_d&... elements);

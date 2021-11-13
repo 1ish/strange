@@ -30,4 +30,5 @@ namespace strange
 	// instantiation
 	template struct forward_mutator_a<>;
 	template struct forward_mutator_a<int64_t>;
+	template struct forward_mutator_a<var<tuple_a<int64_t, int64_t>>>;
 }

@@ -369,6 +369,9 @@
     <ClCompile Include="..\..\..\sauce\core\collections\things\strange__pair_pointer_tuple_t.cpp">
       <Filter>Source Files\sauce\core\collections\things</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__forward_tuple_mutator_t.cpp">
+      <Filter>Source Files\sauce\core\collections\iterators\things</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\sauce\strange.h">
@@ -658,6 +661,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\collections\things\strange__pair_pointer_tuple_t.h">
       <Filter>Header Files\sauce\core\collections\things</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__forward_tuple_mutator_t.h">
+      <Filter>Header Files\sauce\core\collections\iterators\things</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

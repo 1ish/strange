@@ -121,7 +121,7 @@ namespace strange
 	template <typename... elements_d>
 	var<list_a<>> tuple_t<elements_d...>::list(con<tuple_a<elements_d...>> const& me)
 	{
-		return reinterpret_cast<tuple_t<elements_d...> const*>(me.t)->list_;
+		return static_cast<tuple_t<elements_d...> const*>(me.t)->list_;
 	}
 
 	void _tuple_destruct(var<list_a<>> const& list, int64_t index)
@@ -150,7 +150,7 @@ namespace strange
 	void tuple_t<elements_d...>::destruct(con<tuple_a<elements_d...>> const& me,
 		elements_d&... elements)
 	{
-		_tuple_destruct(reinterpret_cast<tuple_t<elements_d...> const*>(me.t)->list_, 0, elements...);
+		_tuple_destruct(static_cast<tuple_t<elements_d...> const*>(me.t)->list_, 0, elements...);
 	}
 
 	template <typename... elements_d>
@@ -158,7 +158,7 @@ namespace strange
 		elements_d const&... elements)
 	{
 		me.mut();
-		_tuple_restruct(reinterpret_cast<tuple_t<elements_d...> const*>(me.t)->list_, 0, elements...);
+		_tuple_restruct(static_cast<tuple_t<elements_d...> const*>(me.t)->list_, 0, elements...);
 	}
 
 	// instantiation

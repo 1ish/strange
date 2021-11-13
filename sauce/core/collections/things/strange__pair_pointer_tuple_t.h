@@ -6,7 +6,7 @@ namespace strange
 	template <typename first_d, typename second_d>
 	struct pair_pointer_tuple_t : thing_t
 	{
-		std::pair<first_d, second_d>* pair_pointer_;
+		std::pair<first_d, second_d>* const pair_pointer_;
 
 	protected:
 		inline pair_pointer_tuple_t(any_a const& me)
@@ -97,6 +97,17 @@ namespace strange
 			new pair_pointer_tuple_t<first_d, second_d>{ r, pair_pointer };
 			pair_pointer_tuple_t<first_d, second_d>::_initialise(reinterpret_cast<var<> const&>(r));
 			return var<tuple_a<first_d, second_d>>{ reinterpret_cast<tuple_a<first_d, second_d>&>(r) };
+		}
+
+		static inline var<tuple_a<first_d, second_d>> create_offset(var<tuple_a<first_d, second_d>> const& original,
+			std::ptrdiff_t const offset)
+		{
+			if (!offset)
+			{
+				return original;
+			}
+			return create(reinterpret_cast<std::pair<first_d, second_d>*>
+				(reinterpret_cast<std::uintptr_t>(static_cast<pair_pointer_tuple_t<first_d, second_d> const*>(original.t)->pair_pointer_) + offset));
 		}
 
 		static inline var<tuple_a<first_d, second_d>> create_from_range(con<range_a<>> const& range)
