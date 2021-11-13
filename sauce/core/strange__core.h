@@ -119,6 +119,7 @@ namespace strange
 	template <typename collection_d, typename element_d> struct queue_t;
 	template <typename collection_d, typename element_d> struct list_t;
 	template <typename... elements_d> struct tuple_t;
+	template <typename first_d, typename second_d> struct pair_pointer_tuple_t;
 	template <typename collection_d, typename element_d> struct group_t;
 	template <typename collection_d, typename key_d, typename value_d> struct table_t;
 	template <typename collection_d, typename key_d, typename value_d> struct ordered_table_t;
@@ -227,5 +228,6 @@ namespace strange
 #include "collections/things/strange__queue_t.h"
 #include "collections/things/strange__list_t.h"
 #include "collections/things/strange__tuple_t.h"
+#include "collections/things/strange__pair_pointer_tuple_t.h"
 
 #endif

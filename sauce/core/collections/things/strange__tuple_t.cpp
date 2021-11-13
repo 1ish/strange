@@ -142,7 +142,7 @@ namespace strange
 	template <typename element_d, typename... elements_d>
 	void _tuple_restruct(var<list_a<>> const& list, int64_t index, element_d const& element, elements_d const&... elements)
 	{
-		list.o->update(list, index, box<element_d>(element));
+		list.o->update(list, index, box<>(element));
 		_tuple_restruct(list, index + 1, elements...);
 	}
 

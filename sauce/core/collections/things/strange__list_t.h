@@ -133,6 +133,12 @@ namespace strange
 			return create_default();
 		}
 	};
+
+	template <typename element_d = var<>, typename... elements_d>
+	inline var<list_a<element_d>> list(elements_d&&... elements)
+	{
+		return list_t<std::vector<element_d>, element_d>::create(std::vector<element_d>{std::forward<elements_d>(elements)...});
+	}
 }
 
 #endif

@@ -122,16 +122,16 @@ namespace strange
 			return adr<con<abstraction>>{ *this };
 		}
 
-		template <typename F, typename... Ps>
-		inline auto perform(F fp, Ps&&... ps) const
+		template <typename function_d, typename... parameters_d>
+		inline auto perform(function_d function, parameters_d const&... parameters) const
 		{
-			return fp(*this, ps...);
+			return function(*this, parameters...);
 		}
 
-		template <typename F, typename O, typename... Ps>
-		inline auto perform(F O::* mp, Ps&&... ps) const
+		template <typename function_d, typename operation_d, typename... parameters_d>
+		inline auto perform(function_d operation_d::* member, parameters_d const&... parameters) const
 		{
-			return (val<abstraction_d>::o->*mp)(*this, ps...);
+			return (val<abstraction_d>::o->*member)(*this, parameters...);
 		}
 
 		template <typename other_d>
