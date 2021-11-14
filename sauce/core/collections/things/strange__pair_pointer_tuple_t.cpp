@@ -102,12 +102,12 @@ namespace strange
 		return thing_t::equal(me, other);
 	}
 
+	// new tuple_t instead of pair_pointer_tuple_t
 	template <typename first_d, typename second_d>
 	void pair_pointer_tuple_t<first_d, second_d>::_copy(con<> const& me,
 		var<> const& copy)
 	{
-		new pair_pointer_tuple_t<first_d, second_d>{ copy, me };
-		pair_pointer_tuple_t<first_d, second_d>::_clone(me, copy);
+		tuple_t<first_d, second_d>::create(pair_pointer_tuple_t<first_d, second_d>::list(me.reference<con<tuple_a<first_d, second_d>>>()));
 	}
 
 	template <typename first_d, typename second_d>

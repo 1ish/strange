@@ -132,28 +132,16 @@ namespace strange
 	typename forward_tuple_mutator_t<iterator_d, key_d, value_d>::element_d forward_tuple_mutator_t<iterator_d, key_d, value_d>::get(con<forward_mutator_a<element_d>> const& me)
 	{
 		auto& pair = *(static_cast<forward_tuple_mutator_t<iterator_d, key_d, value_d> const*>(me.t)->iterator_);
-		auto& tuple = pair.second.tuple_;
-		if (!tuple.o->something(tuple))
-		{
-			tuple = pair_pointer_tuple_t<key_d, value_d>::create(reinterpret_cast<std::pair<key_d, value_d>*>(&pair));
-		}
-		return tuple;
+		return tuple_t<key_d, value_d>::create(strange::list<>(box<>(pair.first), box<>(pair.second.value_)));
 	}
 
 	template <typename iterator_d, typename key_d, typename value_d>
 	void forward_tuple_mutator_t<iterator_d, key_d, value_d>::set(con<forward_mutator_a<element_d>> const& me,
 		element_d const& element)
 	{
-		auto& pair = *(static_cast<forward_tuple_mutator_t<iterator_d, key_d, value_d> const*>(me.t)->iterator_);
-		auto& tuple = pair.second.tuple_;
-		if (!tuple.o->something(tuple))
-		{
-			tuple = pair_pointer_tuple_t<key_d, value_d>::create(reinterpret_cast<std::pair<key_d, value_d>*>(&pair));
-		}
 		key_d key;
-		value_d value;
-		element.o->destruct(element, key, value);
-		tuple.o->restruct(tuple, key, value);
+		auto& pair = *(static_cast<forward_tuple_mutator_t<iterator_d, key_d, value_d> const*>(me.t)->iterator_);
+		element.o->destruct(element, key, pair.second.value_);
 	}
 
 	template <typename iterator_d, typename key_d, typename value_d>
@@ -192,12 +180,7 @@ namespace strange
 	var<list_a<>> forward_tuple_mutator_t<iterator_d, key_d, value_d>::list(con<forward_tuple_mutator_a<key_d, value_d>> const& me)
 	{
 		auto& pair = *(static_cast<forward_tuple_mutator_t<iterator_d, key_d, value_d> const*>(me.t)->iterator_);
-		auto& tuple = pair.second.tuple_;
-		if (!tuple.o->something(tuple))
-		{
-			tuple = pair_pointer_tuple_t<key_d, value_d>::create(reinterpret_cast<std::pair<key_d, value_d>*>(&pair));
-		}
-		return tuple.o->list(tuple);
+		return strange::list<>(box<>(pair.first), box<>(pair.second.value_));
 	}
 
 	template <typename iterator_d, typename key_d, typename value_d>
@@ -206,12 +189,8 @@ namespace strange
 		value_d& value)
 	{
 		auto& pair = *(static_cast<forward_tuple_mutator_t<iterator_d, key_d, value_d> const*>(me.t)->iterator_);
-		auto& tuple = pair.second.tuple_;
-		if (!tuple.o->something(tuple))
-		{
-			tuple = pair_pointer_tuple_t<key_d, value_d>::create(reinterpret_cast<std::pair<key_d, value_d>*>(&pair));
-		}
-		tuple.o->destruct(tuple, key, value);
+		key = pair.first;
+		value = pair.second.value_;
 	}
 
 	template <typename iterator_d, typename key_d, typename value_d>
@@ -220,12 +199,7 @@ namespace strange
 		value_d const& value)
 	{
 		auto& pair = *(static_cast<forward_tuple_mutator_t<iterator_d, key_d, value_d> const*>(me.t)->iterator_);
-		auto& tuple = pair.second.tuple_;
-		if (!tuple.o->something(tuple))
-		{
-			tuple = pair_pointer_tuple_t<key_d, value_d>::create(reinterpret_cast<std::pair<key_d, value_d>*>(&pair));
-		}
-		tuple.o->restruct(tuple, key, value);
+		pair.second.value_ = value;
 	}
 
 	// instantiation
