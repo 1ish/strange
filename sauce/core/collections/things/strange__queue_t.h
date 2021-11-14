@@ -20,6 +20,15 @@ namespace strange
 			me.o = queue_t<collection_d, element_d>::_operations();
 		}
 
+		template <typename... elements_d>
+		inline queue_t(any_a const& me,
+			bool const variadic,
+			elements_d const&... elements)
+			: collection_t<collection_d, int64_t, element_d, element_d>{ me, variadic, elements... }
+		{
+			me.o = queue_t<collection_d, element_d>::_operations();
+		}
+
 		inline queue_t(any_a const& me,
 			any_a const& original)
 			: collection_t<collection_d, int64_t, element_d, element_d>{ me, original }
@@ -166,6 +175,15 @@ namespace strange
 			return var<queue_a<element_d>>{ reinterpret_cast<queue_a<element_d>&>(r) };
 		}
 
+		template <typename... elements_d>
+		static inline var<queue_a<element_d>> create_variadic(elements_d const&... elements)
+		{
+			any_a r;
+			new queue_t<collection_d, element_d>{ r, true, elements... };
+			queue_t<collection_d, element_d>::_initialise(reinterpret_cast<var<> const&>(r));
+			return var<queue_a<element_d>>{ reinterpret_cast<queue_a<element_d>&>(r) };
+		}
+
 		static inline var<queue_a<element_d>> create_from_range(con<range_a<>> const& range)
 		{
 			return create_default();
@@ -176,6 +194,12 @@ namespace strange
 			return create_default();
 		}
 	};
+
+	template <typename element_d = var<>, typename... elements_d>
+	inline var<queue_a<element_d>> queue(elements_d const&... elements)
+	{
+		return queue_t<std::deque<element_d>, element_d>::create_variadic(elements...);
+	}
 }
 
 #endif

@@ -102,10 +102,6 @@ namespace strange
 		static inline var<tuple_a<first_d, second_d>> create_offset(var<tuple_a<first_d, second_d>> const& original,
 			std::ptrdiff_t const offset)
 		{
-			if (!offset)
-			{
-				return original;
-			}
 			return create(reinterpret_cast<std::pair<first_d, second_d>*>
 				(reinterpret_cast<std::uintptr_t>(static_cast<pair_pointer_tuple_t<first_d, second_d> const*>(original.t)->pair_pointer_) + offset));
 		}

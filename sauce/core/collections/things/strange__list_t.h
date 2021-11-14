@@ -20,6 +20,15 @@ namespace strange
 			me.o = list_t<collection_d, element_d>::_operations();
 		}
 
+		template <typename... elements_d>
+		inline list_t(any_a const& me,
+			bool const variadic,
+			elements_d const&... elements)
+			: queue_t<collection_d, element_d>{ me, variadic, elements... }
+		{
+			me.o = list_t<collection_d, element_d>::_operations();
+		}
+
 		inline list_t(any_a const& me,
 			any_a const& original)
 			: queue_t<collection_d, element_d>{ me, original }
@@ -123,6 +132,15 @@ namespace strange
 			return var<list_a<element_d>>{ reinterpret_cast<list_a<element_d>&>(r) };
 		}
 
+		template <typename... elements_d>
+		static inline var<list_a<element_d>> create_variadic(elements_d const&... elements)
+		{
+			any_a r;
+			new list_t<collection_d, element_d>{ r, true, elements... };
+			list_t<collection_d, element_d>::_initialise(reinterpret_cast<var<> const&>(r));
+			return var<list_a<element_d>>{ reinterpret_cast<list_a<element_d>&>(r) };
+		}
+
 		static inline var<list_a<element_d>> create_from_range(con<range_a<>> const& range)
 		{
 			return create_default();
@@ -135,9 +153,9 @@ namespace strange
 	};
 
 	template <typename element_d = var<>, typename... elements_d>
-	inline var<list_a<element_d>> list(elements_d&&... elements)
+	inline var<list_a<element_d>> list(elements_d const&... elements)
 	{
-		return list_t<std::vector<element_d>, element_d>::create(std::vector<element_d>{std::forward<elements_d>(elements)...});
+		return list_t<std::vector<element_d>, element_d>::create_variadic(elements...);
 	}
 }
 

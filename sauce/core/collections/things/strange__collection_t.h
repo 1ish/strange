@@ -22,6 +22,15 @@ namespace strange
 		{
 		}
 
+		template <typename... elements_d>
+		inline collection_t(any_a const& me,
+			bool const variadic,
+			elements_d const&... elements)
+			: thing_t{ me }
+			, collection_{ elements... }
+		{
+		}
+
 		inline collection_t(any_a const& me,
 			any_a const& original)
 			: thing_t{ me, original }

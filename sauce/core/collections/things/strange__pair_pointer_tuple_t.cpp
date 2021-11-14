@@ -140,6 +140,7 @@ namespace strange
 		first_d const& first,
 		second_d const& second)
 	{
+		me.mut();
 		auto* thing = static_cast<pair_pointer_tuple_t<first_d, second_d>*>(me.t);
 		thing->pair_pointer_->first = first;
 		thing->pair_pointer_->second = second;
