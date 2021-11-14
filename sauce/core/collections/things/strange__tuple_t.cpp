@@ -124,23 +124,23 @@ namespace strange
 		return static_cast<tuple_t<elements_d...> const*>(me.t)->list_;
 	}
 
-	void _tuple_destruct(var<list_a<>> const& list, int64_t index)
+	static inline void _tuple_destruct(var<list_a<>> const& list, int64_t index)
 	{
 	}
 
 	template <typename element_d, typename... elements_d>
-	void _tuple_destruct(var<list_a<>> const& list, int64_t index, element_d& element, elements_d&... elements)
+	static inline void _tuple_destruct(var<list_a<>> const& list, int64_t index, element_d& element, elements_d&... elements)
 	{
 		element = unbox<element_d>(list.o->at(list, index));
 		_tuple_destruct(list, index + 1, elements...);
 	}
 
-	void _tuple_restruct(var<list_a<>> const& list, int64_t index)
+	static inline void _tuple_restruct(var<list_a<>> const& list, int64_t index)
 	{
 	}
 
 	template <typename element_d, typename... elements_d>
-	void _tuple_restruct(var<list_a<>> const& list, int64_t index, element_d const& element, elements_d const&... elements)
+	static inline void _tuple_restruct(var<list_a<>> const& list, int64_t index, element_d const& element, elements_d const&... elements)
 	{
 		list.o->update(list, index, box<>(element));
 		_tuple_restruct(list, index + 1, elements...);
