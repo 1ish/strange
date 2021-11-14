@@ -92,7 +92,7 @@ namespace strange
 		static var<symbol_a> type(con<> const& me);
 
 		static void set_error(var<> const& me,
-			con<> const& error_);
+			con<> const& err);
 
 		static var<> error(con<> const& me);
 

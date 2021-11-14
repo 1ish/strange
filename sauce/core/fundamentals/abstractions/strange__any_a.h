@@ -21,7 +21,7 @@ namespace strange
 		static inline bool something (con<> const& me);
 
 		void (*set_error) (var<> const& me,
-			con<> const& error);
+			con<> const& err);
 
 		var<> (*error) (con<> const& me);
 

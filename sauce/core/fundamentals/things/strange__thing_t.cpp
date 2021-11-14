@@ -79,37 +79,33 @@ namespace strange
 	}
 
 	void thing_t::set_error(var<> const& me,
-		con<> const& error_)
+		con<> const& err)
 	{
+		me.mut();
 		auto& mate = reinterpret_cast<var<>&>(me.t->error_);
-		if (mate.t != error_.t)
+		if (mate.t != err.t)
 		{
-			auto const nothing = thing_t::create_nothing();
-			if (error_.t == nothing.t)
+			if (err.o->something(err))
 			{
-				if (mate.t)
-				{
-					me.mut();
-					mate.dec();
-					mate.t = nullptr;
-					mate.o = nullptr;
-				}
-			}
-			else
-			{
-				me.mut();
 				if (mate.t)
 				{
 					mate.dec();
 				}
-				mate.t = error_.t;
-				mate.o = error_.o;
+				mate.t = err.t;
+				mate.o = err.o;
 				mate.inc();
+				mate.pointer_to_non_pointer();
+			}
+			else if (mate.t)
+			{
+				mate.dec();
+				mate.t = nullptr;
+				mate.o = nullptr;
 			}
 		}
 		else
 		{
-			mate.o = error_.o;
+			mate.o = err.o;
 		}
 	}
 
