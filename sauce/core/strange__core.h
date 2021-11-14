@@ -34,6 +34,7 @@ namespace strange
 	template <typename abstraction_d> struct bit;
 	template <typename abstraction_d> struct rat;
 	template <typename value_d> struct adr;
+	template <typename key_d, typename value_d> struct table_value_tuple_u;
 
 	struct symbol_a;
 	struct cat_a;
@@ -135,6 +136,7 @@ namespace strange
 #include "utilities/strange__bit_u.hpp"
 #include "utilities/strange__rat_u.hpp"
 #include "utilities/strange__adr_u.hpp"
+#include "utilities/strange__table_value_tuple_u.hpp"
 
 #include "fundamentals/enumerations/strange__representation_e.h"
 #include "fundamentals/enumerations/strange__behaviour_e.h"

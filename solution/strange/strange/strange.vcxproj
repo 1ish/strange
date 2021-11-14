@@ -318,6 +318,7 @@
     <ClInclude Include="..\..\..\sauce\core\utilities\strange__fit_u.hpp" />
     <ClInclude Include="..\..\..\sauce\core\utilities\strange__ptr_u.hpp" />
     <ClInclude Include="..\..\..\sauce\core\utilities\strange__rat_u.hpp" />
+    <ClInclude Include="..\..\..\sauce\core\utilities\strange__table_value_tuple_u.hpp" />
     <ClInclude Include="..\..\..\sauce\core\utilities\strange__val_u.hpp" />
     <ClInclude Include="..\..\..\sauce\core\utilities\strange__var_u.hpp" />
     <ClInclude Include="..\..\..\sauce\strange.h" />
