@@ -15,6 +15,7 @@
 #include <deque>
 #include <unordered_set>
 #include <unordered_map>
+#include <map>
 
 namespace strange
 {
@@ -116,7 +117,10 @@ namespace strange
 	template <typename iterator_d, typename element_d> struct bidirectional_mutator_t;
 	template <typename iterator_d, typename element_d> struct random_access_mutator_t;
 	template <typename iterator_d, typename element_d> struct contiguous_mutator_t;
+	template <typename iterator_d, typename key_d, typename value_d> struct forward_tuple_extractor_t;
 	template <typename iterator_d, typename key_d, typename value_d> struct forward_tuple_mutator_t;
+	template <typename iterator_d, typename key_d, typename value_d> struct bidirectional_tuple_extractor_t;
+	template <typename iterator_d, typename key_d, typename value_d> struct bidirectional_tuple_mutator_t;
 
 	template <typename collection_d, typename key_d, typename value_d, typename element_d> struct collection_t;
 	template <typename collection_d, typename element_d> struct queue_t;
@@ -227,7 +231,10 @@ namespace strange
 #include "collections/iterators/things/strange__bidirectional_mutator_t.h"
 #include "collections/iterators/things/strange__random_access_mutator_t.h"
 #include "collections/iterators/things/strange__contiguous_mutator_t.h"
+#include "collections/iterators/things/strange__forward_tuple_extractor_t.h"
 #include "collections/iterators/things/strange__forward_tuple_mutator_t.h"
+#include "collections/iterators/things/strange__bidirectional_tuple_extractor_t.h"
+#include "collections/iterators/things/strange__bidirectional_tuple_mutator_t.h"
 
 #include "collections/things/strange__collection_t.h"
 #include "collections/things/strange__queue_t.h"

@@ -173,10 +173,13 @@
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__random_access_tuple_mutator_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__bidirectional_extractor_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__bidirectional_mutator_t.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__bidirectional_tuple_extractor_t.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__bidirectional_tuple_mutator_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__contiguous_extractor_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__contiguous_mutator_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__forward_extractor_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__forward_mutator_t.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__forward_tuple_extractor_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__forward_tuple_mutator_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__random_access_extractor_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\iterators\things\strange__random_access_mutator_t.cpp" />
@@ -257,10 +260,13 @@
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\abstractions\strange__random_access_tuple_mutator_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__bidirectional_extractor_t.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__bidirectional_mutator_t.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__bidirectional_tuple_extractor_t.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__bidirectional_tuple_mutator_t.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__contiguous_extractor_t.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__contiguous_mutator_t.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__forward_extractor_t.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__forward_mutator_t.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__forward_tuple_extractor_t.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__forward_tuple_mutator_t.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__random_access_extractor_t.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\iterators\things\strange__random_access_mutator_t.h" />

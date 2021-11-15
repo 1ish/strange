@@ -204,4 +204,5 @@ namespace strange
 
 	// instantiation
 	template struct forward_tuple_mutator_t<std::unordered_map<int64_t, table_value_tuple_u<int64_t, int64_t>>::iterator, int64_t, int64_t>;
+	template struct forward_tuple_mutator_t<std::map<int64_t, table_value_tuple_u<int64_t, int64_t>>::iterator, int64_t, int64_t>;
 }
