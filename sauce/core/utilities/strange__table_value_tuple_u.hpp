@@ -19,7 +19,7 @@ namespace strange
 		table_value_tuple_u(table_value_tuple_u const& original) // copy constructor
 			: value_{ original.value_ }
 			, tuple_{ original.tuple_.o->something(original.tuple_)
-				? pair_pointer_tuple_t<key_d, value_d>::create_offset(original.tuple_, reinterpret_cast<std::uintptr_t>(&original) - reinterpret_cast<std::uintptr_t>(this))
+				? pair_pointer_tuple_t<key_d, value_d, std::pair<key_d, value_d>>::create_offset(original.tuple_, reinterpret_cast<std::uintptr_t>(&original) - reinterpret_cast<std::uintptr_t>(this))
 				: original.tuple_ }
 		{
 		}
@@ -28,7 +28,7 @@ namespace strange
 		{
 			value_ = original.value_;
 			tuple_ = original.tuple_.o->something(original.tuple_)
-				? pair_pointer_tuple_t<key_d, value_d>::create_offset(original.tuple_, reinterpret_cast<std::uintptr_t>(&original) - reinterpret_cast<std::uintptr_t>(this))
+				? pair_pointer_tuple_t<key_d, value_d, std::pair<key_d, value_d>>::create_offset(original.tuple_, reinterpret_cast<std::uintptr_t>(&original) - reinterpret_cast<std::uintptr_t>(this))
 				: original.tuple_;
 			return *this;
 		}

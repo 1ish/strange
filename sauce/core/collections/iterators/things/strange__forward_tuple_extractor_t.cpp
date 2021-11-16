@@ -147,7 +147,7 @@ namespace strange
 		auto& tuple = pair.second.tuple_;
 		if (!tuple.o->something(tuple))
 		{
-			tuple = pair_pointer_tuple_t<key_d, value_d>::create(reinterpret_cast<std::pair<key_d, value_d>*>(&pair)); //TODO pair_const_pointer_tuple_t
+			tuple = pair_pointer_tuple_t<key_d, value_d, std::pair<key_d, value_d>>::create(reinterpret_cast<std::pair<key_d, value_d>*>(&pair)); //TODO pair_const_pointer_tuple_t
 		}
 		return tuple;
 	}
@@ -159,7 +159,7 @@ namespace strange
 		auto& tuple = pair.second.tuple_;
 		if (!tuple.o->something(tuple))
 		{
-			tuple = pair_pointer_tuple_t<key_d, value_d>::create(reinterpret_cast<std::pair<key_d, value_d>*>(&pair)); //TODO pair_const_pointer_tuple_t
+			tuple = pair_pointer_tuple_t<key_d, value_d, std::pair<key_d, value_d>>::create(reinterpret_cast<std::pair<key_d, value_d>*>(&pair)); //TODO pair_const_pointer_tuple_t
 		}
 		return &tuple;
 	}

@@ -3,33 +3,33 @@
 
 namespace strange
 {
-	template <typename first_d, typename second_d>
+	template <typename first_d, typename second_d, typename pair_d>
 	struct pair_pointer_tuple_t : thing_t
 	{
-		std::pair<first_d, second_d>* const pair_pointer_;
+		pair_d* const pair_pointer_;
 
 	protected:
 		inline pair_pointer_tuple_t(any_a const& me)
 			: thing_t{ me }
 			, pair_pointer_{ nullptr }
 		{
-			me.o = pair_pointer_tuple_t<first_d, second_d>::_operations();
+			me.o = pair_pointer_tuple_t<first_d, second_d, pair_d>::_operations();
 		}
 
 		inline pair_pointer_tuple_t(any_a const& me,
-			std::pair<first_d, second_d>* const pair_pointer)
+			pair_d* const pair_pointer)
 			: thing_t{ me }
 			, pair_pointer_{ pair_pointer }
 		{
-			me.o = pair_pointer_tuple_t<first_d, second_d>::_operations();
+			me.o = pair_pointer_tuple_t<first_d, second_d, pair_d>::_operations();
 		}
 
 		inline pair_pointer_tuple_t(any_a const& me,
 			any_a const& original)
 			: thing_t{ me, original }
-			, pair_pointer_{ static_cast<pair_pointer_tuple_t<first_d, second_d>*>(original.t)->pair_pointer_ }
+			, pair_pointer_{ static_cast<pair_pointer_tuple_t<first_d, second_d, pair_d>*>(original.t)->pair_pointer_ }
 		{
-			me.o = pair_pointer_tuple_t<first_d, second_d>::_operations();
+			me.o = pair_pointer_tuple_t<first_d, second_d, pair_d>::_operations();
 		}
 
 		pair_pointer_tuple_t(pair_pointer_tuple_t const&) = delete;
@@ -47,8 +47,8 @@ namespace strange
 			con<tuple_a<first_d, second_d>> const& other)
 		{
 			return me.o->type(me) == other.o->type(other) &&
-				static_cast<pair_pointer_tuple_t<first_d, second_d> const*>(me.t)->pair_pointer_ ==
-				static_cast<pair_pointer_tuple_t<first_d, second_d> const*>(other.t)->pair_pointer_;
+				static_cast<pair_pointer_tuple_t<first_d, second_d, pair_d> const*>(me.t)->pair_pointer_ ==
+				static_cast<pair_pointer_tuple_t<first_d, second_d, pair_d> const*>(other.t)->pair_pointer_;
 		}
 
 	protected:
@@ -86,24 +86,24 @@ namespace strange
 		static inline var<tuple_a<first_d, second_d>> create_default()
 		{
 			any_a r;
-			new pair_pointer_tuple_t<first_d, second_d>{ r };
-			pair_pointer_tuple_t<first_d, second_d>::_initialise(reinterpret_cast<var<> const&>(r));
+			new pair_pointer_tuple_t<first_d, second_d, pair_d>{ r };
+			pair_pointer_tuple_t<first_d, second_d, pair_d>::_initialise(reinterpret_cast<var<> const&>(r));
 			return var<tuple_a<first_d, second_d>>{ reinterpret_cast<tuple_a<first_d, second_d>&>(r) };
 		}
 
-		static inline var<tuple_a<first_d, second_d>> create(std::pair<first_d, second_d>* const pair_pointer)
+		static inline var<tuple_a<first_d, second_d>> create(pair_d* const pair_pointer)
 		{
 			any_a r;
-			new pair_pointer_tuple_t<first_d, second_d>{ r, pair_pointer };
-			pair_pointer_tuple_t<first_d, second_d>::_initialise(reinterpret_cast<var<> const&>(r));
+			new pair_pointer_tuple_t<first_d, second_d, pair_d>{ r, pair_pointer };
+			pair_pointer_tuple_t<first_d, second_d, pair_d>::_initialise(reinterpret_cast<var<> const&>(r));
 			return var<tuple_a<first_d, second_d>>{ reinterpret_cast<tuple_a<first_d, second_d>&>(r) };
 		}
 
 		static inline var<tuple_a<first_d, second_d>> create_offset(var<tuple_a<first_d, second_d>> const& original,
 			std::ptrdiff_t const offset)
 		{
-			return create(reinterpret_cast<std::pair<first_d, second_d>*>
-				(reinterpret_cast<std::uintptr_t>(static_cast<pair_pointer_tuple_t<first_d, second_d> const*>(original.t)->pair_pointer_) + offset));
+			return create(reinterpret_cast<pair_d*>
+				(reinterpret_cast<std::uintptr_t>(static_cast<pair_pointer_tuple_t<first_d, second_d, pair_d> const*>(original.t)->pair_pointer_) + offset));
 		}
 
 		static inline var<tuple_a<first_d, second_d>> create_from_range(con<range_a<>> const& range)
