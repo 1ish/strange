@@ -154,25 +154,13 @@ namespace strange
 	template <typename iterator_d, typename key_d, typename value_d>
 	typename forward_tuple_mutator_t<iterator_d, key_d, value_d>::element_d& forward_tuple_mutator_t<iterator_d, key_d, value_d>::_operator_star(con<forward_mutator_a<element_d>> const& me)
 	{
-		auto& pair = static_cast<forward_tuple_mutator_t<iterator_d, key_d, value_d> const*>(me.t)->iterator_.operator*();
-		auto& tuple = pair.second.tuple_;
-		if (!tuple.o->something(tuple))
-		{
-			tuple = pair_pointer_tuple_t<key_d, value_d, std::pair<key_d, value_d>>::create(reinterpret_cast<std::pair<key_d, value_d>*>(&pair));
-		}
-		return tuple;
+		return table_value_tuple_u<key_d, value_d, std::pair<key_d const, value_d>>::tuple(static_cast<forward_tuple_mutator_t<iterator_d, key_d, value_d> const*>(me.t)->iterator_.operator*());
 	}
 
 	template <typename iterator_d, typename key_d, typename value_d>
 	typename forward_tuple_mutator_t<iterator_d, key_d, value_d>::element_d* forward_tuple_mutator_t<iterator_d, key_d, value_d>::_operator_arrow(con<forward_mutator_a<element_d>> const& me)
 	{
-		auto& pair = *(static_cast<forward_tuple_mutator_t<iterator_d, key_d, value_d> const*>(me.t)->iterator_.operator->());
-		auto& tuple = pair.second.tuple_;
-		if (!tuple.o->something(tuple))
-		{
-			tuple = pair_pointer_tuple_t<key_d, value_d, std::pair<key_d, value_d>>::create(reinterpret_cast<std::pair<key_d, value_d>*>(&pair));
-		}
-		return &tuple;
+		return &table_value_tuple_u<key_d, value_d, std::pair<key_d const, value_d>>::tuple(*(static_cast<forward_tuple_mutator_t<iterator_d, key_d, value_d> const*>(me.t)->iterator_.operator->()));
 	}
 
 	// forward_tuple_mutator_a
@@ -203,6 +191,6 @@ namespace strange
 	}
 
 	// instantiation
-	template struct forward_tuple_mutator_t<std::unordered_map<int64_t, table_value_tuple_u<int64_t, int64_t>>::iterator, int64_t, int64_t>;
-	template struct forward_tuple_mutator_t<std::map<int64_t, table_value_tuple_u<int64_t, int64_t>>::iterator, int64_t, int64_t>;
+	template struct forward_tuple_mutator_t<std::unordered_map<int64_t, table_value_tuple_u<int64_t, int64_t, std::pair<int64_t const, int64_t>>>::iterator, int64_t, int64_t>;
+	template struct forward_tuple_mutator_t<std::map<int64_t, table_value_tuple_u<int64_t, int64_t, std::pair<int64_t const, int64_t>>>::iterator, int64_t, int64_t>;
 }

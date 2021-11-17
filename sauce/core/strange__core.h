@@ -35,7 +35,7 @@ namespace strange
 	template <typename abstraction_d> struct bit;
 	template <typename abstraction_d> struct rat;
 	template <typename value_d> struct adr;
-	template <typename key_d, typename value_d> struct table_value_tuple_u;
+	template <typename key_d, typename value_d, typename pair_d> struct table_value_tuple_u;
 
 	struct symbol_a;
 	struct cat_a;

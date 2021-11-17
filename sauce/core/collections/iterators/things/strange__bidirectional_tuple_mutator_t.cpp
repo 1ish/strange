@@ -129,5 +129,5 @@ namespace strange
 	}
 
 	// instantiation
-	template struct bidirectional_tuple_mutator_t<std::map<int64_t, table_value_tuple_u<int64_t, int64_t>>::iterator, int64_t, int64_t>;
+	template struct bidirectional_tuple_mutator_t<std::map<int64_t, table_value_tuple_u<int64_t, int64_t, std::pair<int64_t const, int64_t>>>::iterator, int64_t, int64_t>;
 }

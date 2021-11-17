@@ -141,11 +141,13 @@ namespace strange
 		second_d const& second)
 	{
 		me.mut();
-		auto* thing = static_cast<pair_pointer_tuple_t<first_d, second_d, pair_d>*>(me.t);
-		thing->pair_pointer_->first = first;
-		thing->pair_pointer_->second = second;
+		if constexpr (!std::is_const_v<pair_d>)
+		{
+			static_cast<pair_pointer_tuple_t<first_d, second_d, pair_d>*>(me.t)->pair_pointer_->second = second;
+		}
 	}
 
 	// instantiation
-	template struct pair_pointer_tuple_t<int64_t, int64_t, std::pair<int64_t, int64_t>>;
+	template struct pair_pointer_tuple_t<int64_t, int64_t, std::pair<int64_t const, int64_t> const>;
+	template struct pair_pointer_tuple_t<int64_t, int64_t, std::pair<int64_t const, int64_t>>;
 }
