@@ -1,4 +1,4 @@
-#include "../../../../strange.h"
+#include "../../../strange__core.h"
 
 namespace strange
 {
