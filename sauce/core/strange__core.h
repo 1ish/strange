@@ -14,6 +14,7 @@
 #include <vector>
 #include <deque>
 #include <unordered_set>
+#include <set>
 #include <unordered_map>
 #include <map>
 
@@ -241,5 +242,6 @@ namespace strange
 #include "collections/things/strange__list_t.h"
 #include "collections/things/strange__tuple_t.h"
 #include "collections/things/strange__pair_pointer_tuple_t.h"
+#include "collections/things/strange__group_t.h"
 
 #endif
