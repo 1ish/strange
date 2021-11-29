@@ -29,4 +29,5 @@ namespace strange
 
 	// instantiation
 	template struct group_a<int64_t>;
+	template struct group_a<var<>>;
 }

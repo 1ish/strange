@@ -177,4 +177,5 @@ namespace strange
 	template struct collection_t<std::deque<int64_t>, int64_t, int64_t, int64_t>;
 	template struct collection_t<std::unordered_set<int64_t>, int64_t, int64_t, int64_t>;
 	template struct collection_t<std::set<int64_t>, int64_t, int64_t, int64_t>;
+	template struct collection_t<std::set<var<>>, var<>, var<>, var<>>;
 }

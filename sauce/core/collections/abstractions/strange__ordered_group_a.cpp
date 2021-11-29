@@ -29,4 +29,5 @@ namespace strange
 
 	// instantiation
 	template struct ordered_group_a<int64_t>;
+	template struct ordered_group_a<var<>>;
 }

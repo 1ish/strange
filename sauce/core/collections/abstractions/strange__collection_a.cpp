@@ -30,4 +30,5 @@ namespace strange
 	// instantiation
 	template struct collection_a<int64_t, int64_t, int64_t>;
 	template struct collection_a<int64_t, var<>, var<>>;
+	template struct collection_a<var<>, var<>, var<>>;
 }

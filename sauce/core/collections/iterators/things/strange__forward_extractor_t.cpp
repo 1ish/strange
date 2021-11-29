@@ -151,4 +151,5 @@ namespace strange
 	template struct forward_extractor_t<std::deque<int64_t>::const_iterator, int64_t>;
 	template struct forward_extractor_t<std::unordered_set<int64_t>::const_iterator, int64_t>;
 	template struct forward_extractor_t<std::set<int64_t>::const_iterator, int64_t>;
+	template struct forward_extractor_t<std::set<var<>>::const_iterator, var<>>;
 }
