@@ -30,7 +30,6 @@ namespace strange
 		}
 
 		bidirectional_tuple_mutator_t(bidirectional_tuple_mutator_t const&) = delete;
-
 		bidirectional_tuple_mutator_t& operator=(bidirectional_tuple_mutator_t const&) = delete;
 
 	private:

@@ -152,4 +152,5 @@ namespace strange
 	template struct forward_extractor_t<std::unordered_set<int64_t>::const_iterator, int64_t>;
 	template struct forward_extractor_t<std::set<int64_t>::const_iterator, int64_t>;
 	template struct forward_extractor_t<std::set<var<>>::const_iterator, var<>>;
+	template struct forward_extractor_t<std::unordered_map<int64_t, int64_t>::const_iterator, std::pair<int64_t const, int64_t>>;
 }

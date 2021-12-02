@@ -30,4 +30,6 @@ namespace strange
 	// instantiation
 	template struct range_a<>;
 	template struct range_a<int64_t>;
+	template struct range_a<var<tuple_a<int64_t, int64_t>>>;
+	template struct range_a<std::pair<int64_t const, int64_t>>;
 }

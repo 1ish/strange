@@ -33,4 +33,5 @@ namespace strange
 	template struct forward_extractor_a<uint64_t>;
 	template struct forward_extractor_a<double>;
 	template struct forward_extractor_a<var<tuple_a<int64_t, int64_t>>>;
+	template struct forward_extractor_a<std::pair<int64_t const, int64_t>>;
 }

@@ -267,13 +267,13 @@ namespace strange
 		}
 		else
 		{
-			for (auto it = range.o->begin(range), end = range.o->end(range); it != end; ++it)
+			for (element_d const& element : range)
 			{
 				if (collection.empty())
 				{
 					break;
 				}
-				collection.erase(*it);
+				collection.erase(element);
 			}
 		}
 	}

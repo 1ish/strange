@@ -39,7 +39,6 @@ namespace strange
 		}
 
 		collection_t(collection_t const&) = delete;
-
 		collection_t& operator=(collection_t const&) = delete;
 
 	public:

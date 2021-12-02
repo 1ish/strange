@@ -33,7 +33,6 @@ namespace strange
 		}
 
 		tuple_t(tuple_t const&) = delete;
-
 		tuple_t& operator=(tuple_t const&) = delete;
 
 	private:
@@ -97,6 +96,14 @@ namespace strange
 			return var<tuple_a<elements_d...>>{ reinterpret_cast<tuple_a<elements_d...>&>(r) };
 		}
 
+		static inline var<tuple_a<elements_d...>> create_variadic(elements_d const&... elements)
+		{
+			any_a r;
+			new tuple_t<elements_d...>{ r, strange::list(box<>(elements)...) };
+			tuple_t<elements_d...>::_initialise(reinterpret_cast<var<> const&>(r));
+			return var<tuple_a<elements_d...>>{ reinterpret_cast<tuple_a<elements_d...>&>(r) };
+		}
+
 		static inline var<tuple_a<elements_d...>> create_from_range(con<range_a<>> const& range)
 		{
 			return create_default();
@@ -107,6 +114,12 @@ namespace strange
 			return create_default();
 		}
 	};
+
+	template <typename... elements_d>
+	inline var<tuple_a<elements_d...>> tuple(elements_d const&... elements)
+	{
+		return tuple_t<elements_d...>::create_variadic(elements...);
+	}
 }
 
 #endif

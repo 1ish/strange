@@ -28,6 +28,5 @@ namespace strange
 	}
 
 	// instantiation
-	template struct tuple_range_a<int64_t>;
 	template struct tuple_range_a<int64_t, int64_t>;
 }

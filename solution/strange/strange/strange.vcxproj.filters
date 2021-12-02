@@ -387,6 +387,9 @@
     <ClCompile Include="..\..\..\sauce\core\collections\things\strange__ordered_group_t.cpp">
       <Filter>Source Files\sauce\core\collections\things</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\things\strange__table_t.cpp">
+      <Filter>Source Files\sauce\core\collections\things</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\sauce\strange.h">
@@ -696,6 +699,9 @@
       <Filter>Header Files\sauce\core\collections\things</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\collections\things\strange__ordered_group_t.h">
+      <Filter>Header Files\sauce\core\collections\things</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\things\strange__table_t.h">
       <Filter>Header Files\sauce\core\collections\things</Filter>
     </ClInclude>
   </ItemGroup>

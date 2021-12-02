@@ -143,13 +143,13 @@ namespace strange
 	template <typename iterator_d, typename key_d, typename value_d>
 	typename forward_tuple_extractor_t<iterator_d, key_d, value_d>::element_d const& forward_tuple_extractor_t<iterator_d, key_d, value_d>::_operator_star(con<forward_extractor_a<element_d>> const& me)
 	{
-		return table_value_tuple_u<key_d, value_d, std::pair<key_d const, value_d> const>::tuple(static_cast<forward_tuple_extractor_t<iterator_d, key_d, value_d> const*>(me.t)->iterator_.operator*());
+		return table_value_tuple_u<key_d, value_d, std::pair<key_d const, value_d>>::tuple(static_cast<forward_tuple_extractor_t<iterator_d, key_d, value_d> const*>(me.t)->iterator_.operator*());
 	}
 
 	template <typename iterator_d, typename key_d, typename value_d>
 	typename forward_tuple_extractor_t<iterator_d, key_d, value_d>::element_d const* forward_tuple_extractor_t<iterator_d, key_d, value_d>::_operator_arrow(con<forward_extractor_a<element_d>> const& me)
 	{
-		return &table_value_tuple_u<key_d, value_d, std::pair<key_d const, value_d> const>::tuple(*(static_cast<forward_tuple_extractor_t<iterator_d, key_d, value_d> const*>(me.t)->iterator_.operator->()));
+		return &table_value_tuple_u<key_d, value_d, std::pair<key_d const, value_d>>::tuple(*(static_cast<forward_tuple_extractor_t<iterator_d, key_d, value_d> const*>(me.t)->iterator_.operator->()));
 	}
 
 	// forward_tuple_extractor_a
@@ -171,6 +171,6 @@ namespace strange
 	}
 
 	// instantiation
-	template struct forward_tuple_extractor_t<std::unordered_map<int64_t, table_value_tuple_u<int64_t, int64_t, std::pair<int64_t const, int64_t> const>>::const_iterator, int64_t, int64_t>;
-	template struct forward_tuple_extractor_t<std::map<int64_t, table_value_tuple_u<int64_t, int64_t, std::pair<int64_t const, int64_t> const>>::const_iterator, int64_t, int64_t>;
+	template struct forward_tuple_extractor_t<std::unordered_map<int64_t, table_value_tuple_u<int64_t, int64_t, std::pair<int64_t const, int64_t>>>::const_iterator, int64_t, int64_t>;
+	template struct forward_tuple_extractor_t<std::map<int64_t, table_value_tuple_u<int64_t, int64_t, std::pair<int64_t const, int64_t>>>::const_iterator, int64_t, int64_t>;
 }

@@ -28,6 +28,5 @@ namespace strange
 	}
 
 	// instantiation
-	template struct random_access_tuple_mutator_a<int64_t>;
 	template struct random_access_tuple_mutator_a<int64_t, int64_t>;
 }

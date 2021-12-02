@@ -28,6 +28,5 @@ namespace strange
 	}
 
 	// instantiation
-	template struct bidirectional_tuple_extractor_a<int64_t>;
 	template struct bidirectional_tuple_extractor_a<int64_t, int64_t>;
 }

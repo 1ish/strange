@@ -30,7 +30,6 @@ namespace strange
 		}
 
 		bidirectional_tuple_extractor_t(bidirectional_tuple_extractor_t const&) = delete;
-
 		bidirectional_tuple_extractor_t& operator=(bidirectional_tuple_extractor_t const&) = delete;
 
 	private:

@@ -245,5 +245,6 @@ namespace strange
 #include "collections/things/strange__pair_pointer_tuple_t.h"
 #include "collections/things/strange__group_t.h"
 #include "collections/things/strange__ordered_group_t.h"
+#include "collections/things/strange__table_t.h"
 
 #endif

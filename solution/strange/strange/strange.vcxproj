@@ -205,6 +205,7 @@
     <ClCompile Include="..\..\..\sauce\core\collections\things\strange__ordered_group_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\things\strange__pair_pointer_tuple_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\things\strange__queue_t.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\collections\things\strange__table_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\things\strange__tuple_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__any_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\fundamentals\abstractions\strange__cat_a.cpp" />
@@ -294,6 +295,7 @@
     <ClInclude Include="..\..\..\sauce\core\collections\things\strange__ordered_group_t.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\things\strange__pair_pointer_tuple_t.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\things\strange__queue_t.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\things\strange__table_t.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\things\strange__tuple_t.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__any_a.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__cat_a.h" />
