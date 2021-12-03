@@ -111,13 +111,17 @@ namespace strange
 	template <typename type_d> struct number_t;
 
 	template <typename iterator_d, typename element_d> struct forward_extractor_t;
-	template <typename iterator_d, typename element_d> struct bidirectional_extractor_t;
-	template <typename iterator_d, typename element_d> struct random_access_extractor_t;
-	template <typename iterator_d, typename element_d> struct contiguous_extractor_t;
 	template <typename iterator_d, typename element_d> struct forward_mutator_t;
+	template <typename iterator_d, typename element_d> struct bidirectional_extractor_t;
 	template <typename iterator_d, typename element_d> struct bidirectional_mutator_t;
+	template <typename iterator_d, typename element_d> struct random_access_extractor_t;
 	template <typename iterator_d, typename element_d> struct random_access_mutator_t;
+	template <typename iterator_d, typename element_d> struct contiguous_extractor_t;
 	template <typename iterator_d, typename element_d> struct contiguous_mutator_t;
+	template <typename iterator_d, typename key_d, typename value_d> struct forward_pair_extractor_t;
+	template <typename iterator_d, typename key_d, typename value_d> struct forward_pair_mutator_t;
+	template <typename iterator_d, typename key_d, typename value_d> struct bidirectional_pair_extractor_t;
+	template <typename iterator_d, typename key_d, typename value_d> struct bidirectional_pair_mutator_t;
 	template <typename iterator_d, typename key_d, typename value_d> struct forward_tuple_extractor_t;
 	template <typename iterator_d, typename key_d, typename value_d> struct forward_tuple_mutator_t;
 	template <typename iterator_d, typename key_d, typename value_d> struct bidirectional_tuple_extractor_t;
@@ -226,13 +230,17 @@ namespace strange
 #include "utilities/strange__box_u.hpp"
 
 #include "collections/iterators/things/strange__forward_extractor_t.h"
-#include "collections/iterators/things/strange__bidirectional_extractor_t.h"
-#include "collections/iterators/things/strange__random_access_extractor_t.h"
-#include "collections/iterators/things/strange__contiguous_extractor_t.h"
 #include "collections/iterators/things/strange__forward_mutator_t.h"
+#include "collections/iterators/things/strange__bidirectional_extractor_t.h"
 #include "collections/iterators/things/strange__bidirectional_mutator_t.h"
+#include "collections/iterators/things/strange__random_access_extractor_t.h"
 #include "collections/iterators/things/strange__random_access_mutator_t.h"
+#include "collections/iterators/things/strange__contiguous_extractor_t.h"
 #include "collections/iterators/things/strange__contiguous_mutator_t.h"
+#include "collections/iterators/things/strange__forward_pair_extractor_t.h"
+#include "collections/iterators/things/strange__forward_pair_mutator_t.h"
+#include "collections/iterators/things/strange__bidirectional_pair_extractor_t.h"
+#include "collections/iterators/things/strange__bidirectional_pair_mutator_t.h"
 #include "collections/iterators/things/strange__forward_tuple_extractor_t.h"
 #include "collections/iterators/things/strange__forward_tuple_mutator_t.h"
 #include "collections/iterators/things/strange__bidirectional_tuple_extractor_t.h"
@@ -246,5 +254,6 @@ namespace strange
 #include "collections/things/strange__group_t.h"
 #include "collections/things/strange__ordered_group_t.h"
 #include "collections/things/strange__table_t.h"
+#include "collections/things/strange__ordered_table_t.h"
 
 #endif

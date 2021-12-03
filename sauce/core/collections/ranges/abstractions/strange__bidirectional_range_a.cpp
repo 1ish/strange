@@ -30,4 +30,5 @@ namespace strange
 	// instantiation
 	template struct bidirectional_range_a<>;
 	template struct bidirectional_range_a<int64_t>;
+	template struct bidirectional_range_a<std::pair<int64_t const, int64_t>>;
 }

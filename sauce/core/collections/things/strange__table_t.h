@@ -257,6 +257,12 @@ namespace strange
 			return create_default();
 		}
 	};
+
+	template <typename key_d = var<>, typename value_d = var<>>
+	inline var<table_a<key_d, value_d>> table()
+	{
+		return table_t<std::unordered_map<key_d, table_value_tuple_u<key_d, value_d, std::pair<key_d const, value_d>>>, key_d, value_d>::create_default();
+	}
 }
 
 #endif

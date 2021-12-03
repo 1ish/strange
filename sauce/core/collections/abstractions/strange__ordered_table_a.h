@@ -5,7 +5,7 @@ namespace strange
 {
 	template <typename key_d, typename value_d>
 	struct ordered_table_o :
-		collection_o<key_d, value_d, var<tuple_a<key_d, value_d>>>
+		table_o<key_d, value_d>
 	{
 		var<bidirectional_tuple_range_a<key_d, value_d>> (*range) (con<ordered_table_a<key_d, value_d>> const& me);
 

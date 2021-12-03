@@ -412,17 +412,13 @@ namespace strange
 	template <typename collection_d, typename key_d, typename value_d>
 	fit<forward_extractor_a<std::pair<key_d const, value_d>>> table_t<collection_d, key_d, value_d>::pair_begin(con<table_a<key_d, value_d>> const& me)
 	{
-		auto const it = static_cast<table_t<collection_d, key_d, value_d> const*>(me.t)->collection_.cbegin();
-		return forward_extractor_t<typename std::unordered_map<key_d, value_d>::const_iterator, std::pair<key_d const, value_d>>::create(
-			reinterpret_cast<typename std::unordered_map<key_d, value_d>::const_iterator const&>(it));
+		return forward_pair_extractor_t<typename collection_d::const_iterator, key_d, value_d>::create(static_cast<table_t<collection_d, key_d, value_d> const*>(me.t)->collection_.cbegin());
 	}
 
 	template <typename collection_d, typename key_d, typename value_d>
 	fit<forward_extractor_a<std::pair<key_d const, value_d>>> table_t<collection_d, key_d, value_d>::pair_end(con<table_a<key_d, value_d>> const& me)
 	{
-		auto const it = static_cast<table_t<collection_d, key_d, value_d> const*>(me.t)->collection_.cend();
-		return forward_extractor_t<typename std::unordered_map<key_d, value_d>::const_iterator, std::pair<key_d const, value_d>>::create(
-			reinterpret_cast<typename std::unordered_map<key_d, value_d>::const_iterator const&>(it));
+		return forward_pair_extractor_t<typename collection_d::const_iterator, key_d, value_d>::create(static_cast<table_t<collection_d, key_d, value_d> const*>(me.t)->collection_.cend());
 	}
 
 	template <typename collection_d, typename key_d, typename value_d>
@@ -439,18 +435,14 @@ namespace strange
 	fit<forward_mutator_a<std::pair<key_d const, value_d>>> table_t<collection_d, key_d, value_d>::pair_mutator_begin(var<table_a<key_d, value_d>> const& me)
 	{
 		me.mut();
-		auto const it = static_cast<table_t<collection_d, key_d, value_d>*>(me.t)->collection_.begin();
-		return forward_mutator_t<typename std::unordered_map<key_d, value_d>::iterator, std::pair<key_d const, value_d>>::create(
-			reinterpret_cast<typename std::unordered_map<key_d, value_d>::iterator const&>(it));
+		return forward_pair_mutator_t<typename collection_d::iterator, key_d, value_d>::create(static_cast<table_t<collection_d, key_d, value_d>*>(me.t)->collection_.begin());
 	}
 
 	template <typename collection_d, typename key_d, typename value_d>
 	fit<forward_mutator_a<std::pair<key_d const, value_d>>> table_t<collection_d, key_d, value_d>::pair_mutator_end(var<table_a<key_d, value_d>> const& me)
 	{
 		me.mut();
-		auto const it = static_cast<table_t<collection_d, key_d, value_d>*>(me.t)->collection_.end();
-		return forward_mutator_t<typename std::unordered_map<key_d, value_d>::iterator, std::pair<key_d const, value_d>>::create(
-			reinterpret_cast<typename std::unordered_map<key_d, value_d>::iterator const&>(it));
+		return forward_pair_mutator_t<typename collection_d::iterator, key_d, value_d>::create(static_cast<table_t<collection_d, key_d, value_d>*>(me.t)->collection_.end());
 	}
 
 	// tuple_range_a
@@ -747,7 +739,7 @@ namespace strange
 		me.o = is_pointer ? table_t<collection_d, key_d, value_d>::_pair_range_pointer_operations() : table_t<collection_d, key_d, value_d>::_pair_range_operations();
 	}
 
-	// tuple_mutator_range_a
+	// mutator_range_a
 	template <typename collection_d, typename key_d, typename value_d>
 	mutator_range_o<std::pair<key_d const, value_d>> const* table_t<collection_d, key_d, value_d>::_pair_mutator_range_operations()
 	{
@@ -843,4 +835,5 @@ namespace strange
 
 	// instantiation
 	template struct table_t<std::unordered_map<int64_t, table_value_tuple_u<int64_t, int64_t, std::pair<int64_t const, int64_t>>>, int64_t, int64_t>;
+	template struct table_t<std::map<int64_t, table_value_tuple_u<int64_t, int64_t, std::pair<int64_t const, int64_t>>>, int64_t, int64_t>;
 }

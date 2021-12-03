@@ -182,17 +182,38 @@ namespace taste
 			std__cout << "lel:" << el << "\n";
 		}
 
-		auto tab = table_t<std::unordered_map<int64_t, table_value_tuple_u<int64_t, int64_t, std::pair<int64_t const, int64_t>>>, int64_t, int64_t>::create_default();
-		tab.o->update(tab, 1, 2);
-		tab.o->update(tab, 2, 3);
-		tab.o->update(tab, 3, 4);
+		auto tab = strange::table<int64_t, int64_t>();
 		tab.o->update(tab, 1, 5);
+		tab.o->update(tab, 3, 4);
+		tab.o->update(tab, 2, 3);
+		tab.o->update(tab, 1, 2);
 		for (auto tup : tab.o->range(tab))
 		{
 			int64_t x1;
 			int64_t y2;
 			tup.o->destruct(tup, x1, y2);
 			std__cout << "tup:" << x1 << "," << y2 << "\n";
+		}
+		for (auto pr : tab.o->pair_range(tab))
+		{
+			std__cout << "pr:" << pr.first << "," << pr.second << "\n";
+		}
+
+		auto otab = strange::ordered_table<int64_t, int64_t>();
+		otab.o->update(otab, 1, 5);
+		otab.o->update(otab, 3, 4);
+		otab.o->update(otab, 2, 3);
+		otab.o->update(otab, 1, 2);
+		for (auto tup : otab.o->range(otab))
+		{
+			int64_t x1;
+			int64_t y2;
+			tup.o->destruct(tup, x1, y2);
+			std__cout << "tup:" << x1 << "," << y2 << "\n";
+		}
+		for (auto pr : otab.o->pair_range(otab))
+		{
+			std__cout << "pr:" << pr.first << "," << pr.second << "\n";
 		}
 	}
 }

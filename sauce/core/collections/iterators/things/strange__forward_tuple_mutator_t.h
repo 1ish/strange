@@ -6,11 +6,11 @@ namespace strange
 	template <typename iterator_d, typename key_d, typename value_d>
 	struct forward_tuple_mutator_t : thing_t
 	{
+		using element_d = var<tuple_a<key_d, value_d>>;
+
 		iterator_d iterator_;
 
 	protected:
-		using element_d = var<tuple_a<key_d, value_d>>;
-
 		inline forward_tuple_mutator_t(any_a const& me)
 			: thing_t{ me }
 			, iterator_{}

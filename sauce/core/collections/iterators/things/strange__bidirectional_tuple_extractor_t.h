@@ -6,9 +6,9 @@ namespace strange
 	template <typename iterator_d, typename key_d, typename value_d>
 	struct bidirectional_tuple_extractor_t : forward_tuple_extractor_t<iterator_d, key_d, value_d>
 	{
-	protected:
 		using element_d = var<tuple_a<key_d, value_d>>;
 
+	protected:
 		inline bidirectional_tuple_extractor_t(any_a const& me)
 			: forward_tuple_extractor_t<iterator_d, key_d, value_d>{ me }
 		{
