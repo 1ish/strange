@@ -67,6 +67,8 @@ namespace strange
 		static bit<bidirectional_tuple_mutator_a<key_d, value_d>> mutator_end(var<ordered_table_a<key_d, value_d>> const& me);
 
 		// pair_ordered_table_a
+		static var<pair_table_a<key_d, value_d>> pair_table(con<pair_ordered_table_a<key_d, value_d>> const& me);
+
 		static var<bidirectional_range_a<std::pair<key_d const, value_d>>> pair_range(con<pair_ordered_table_a<key_d, value_d>> const& me);
 
 		static bit<bidirectional_extractor_a<std::pair<key_d const, value_d>>> pair_begin(con<pair_ordered_table_a<key_d, value_d>> const& me);
@@ -117,6 +119,26 @@ namespace strange
 			var<> const& copy);
 
 		static void _mutator_range_set_pointer(con<> const& me,
+			bool is_pointer);
+
+	private:
+		// pair_ordered_table_a
+		static pair_table_o<key_d, value_d> const* _pair_table_operations();
+		static pair_table_o<key_d, value_d> const* _pair_table_pointer_operations();
+
+	protected:
+		static bool _pair_table_is(con<> const& me,
+			con<> const& abstraction);
+
+		static bool _pair_table_as(con<> const& me,
+			var<> const& abstraction);
+
+		//TODO hash / equal / less / less_or_equal
+
+		static void _pair_table_copy(con<> const& me,
+			var<> const& copy);
+
+		static void _pair_table_set_pointer(con<> const& me,
 			bool is_pointer);
 
 	private:

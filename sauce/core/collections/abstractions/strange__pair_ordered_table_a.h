@@ -7,7 +7,7 @@ namespace strange
 	struct pair_ordered_table_o :
 		ordered_table_o<key_d, value_d>
 	{
-		//TODO var<pair_table_a<key_d, value_d>> (*pair_table) (con<pair_ordered_table_a<key_d, value_d>> const& me);
+		var<pair_table_a<key_d, value_d>> (*pair_table) (con<pair_ordered_table_a<key_d, value_d>> const& me);
 
 		var<bidirectional_range_a<std::pair<key_d const, value_d>>> (*pair_range) (con<pair_ordered_table_a<key_d, value_d>> const& me);
 

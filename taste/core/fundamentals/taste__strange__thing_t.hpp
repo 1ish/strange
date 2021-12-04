@@ -209,11 +209,24 @@ namespace taste
 			int64_t x1;
 			int64_t y2;
 			tup.o->destruct(tup, x1, y2);
-			std__cout << "tup:" << x1 << "," << y2 << "\n";
+			std__cout << "otup:" << x1 << "," << y2 << "\n";
 		}
 		for (auto pr : otab.o->pair_range(otab))
 		{
-			std__cout << "pr:" << pr.first << "," << pr.second << "\n";
+			std__cout << "opr:" << pr.first << "," << pr.second << "\n";
+		}
+
+		auto utab = otab.o->pair_table(otab);
+		for (auto tup : utab.o->range(utab))
+		{
+			int64_t x1;
+			int64_t y2;
+			tup.o->destruct(tup, x1, y2);
+			std__cout << "utup:" << x1 << "," << y2 << "\n";
+		}
+		for (auto pr : utab.o->pair_range(utab))
+		{
+			std__cout << "upr:" << pr.first << "," << pr.second << "\n";
 		}
 	}
 }

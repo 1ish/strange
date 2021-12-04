@@ -71,6 +71,7 @@ namespace strange
 				ordered_table_t<collection_d, key_d, value_d>::mutator_end,
 			},
 			// pair_ordered_table_a
+			ordered_table_t<collection_d, key_d, value_d>::pair_table,
 			ordered_table_t<collection_d, key_d, value_d>::pair_range,
 			ordered_table_t<collection_d, key_d, value_d>::pair_begin,
 			ordered_table_t<collection_d, key_d, value_d>::pair_end,
@@ -201,6 +202,15 @@ namespace strange
 	}
 
 	// pair_ordered_table_a
+	template <typename collection_d, typename key_d, typename value_d>
+	var<pair_table_a<key_d, value_d>> ordered_table_t<collection_d, key_d, value_d>::pair_table(con<pair_ordered_table_a<key_d, value_d>> const& me)
+	{
+		pair_table_a<key_d, value_d> abstraction;
+		abstraction.t = me.t;
+		abstraction.o = ordered_table_t<collection_d, key_d, value_d>::_pair_table_operations();
+		return var<pair_table_a<key_d, value_d>>{ abstraction };
+	}
+
 	template <typename collection_d, typename key_d, typename value_d>
 	var<bidirectional_range_a<std::pair<key_d const, value_d>>> ordered_table_t<collection_d, key_d, value_d>::pair_range(con<pair_ordered_table_a<key_d, value_d>> const& me)
 	{
@@ -456,6 +466,140 @@ namespace strange
 		bool is_pointer)
 	{
 		me.o = is_pointer ? ordered_table_t<collection_d, key_d, value_d>::_mutator_range_pointer_operations() : ordered_table_t<collection_d, key_d, value_d>::_mutator_range_operations();
+	}
+
+	// pair_table_a
+	template <typename collection_d, typename key_d, typename value_d>
+	pair_table_o<key_d, value_d> const* ordered_table_t<collection_d, key_d, value_d>::_pair_table_operations()
+	{
+		static pair_table_o<key_d, value_d> operations =
+		{
+			{
+				{
+					{
+						// any_a
+						pair_table_a<key_d, value_d>::cat,
+						ordered_table_t<collection_d, key_d, value_d>::_pair_table_is,
+						ordered_table_t<collection_d, key_d, value_d>::_pair_table_as,
+						ordered_table_t<collection_d, key_d, value_d>::type,
+						ordered_table_t<collection_d, key_d, value_d>::set_error,
+						ordered_table_t<collection_d, key_d, value_d>::error,
+						ordered_table_t<collection_d, key_d, value_d>::hash,
+						ordered_table_t<collection_d, key_d, value_d>::equal,
+						ordered_table_t<collection_d, key_d, value_d>::less,
+						ordered_table_t<collection_d, key_d, value_d>::less_or_equal,
+						ordered_table_t<collection_d, key_d, value_d>::pack,
+						ordered_table_t<collection_d, key_d, value_d>::_free,
+						ordered_table_t<collection_d, key_d, value_d>::_pair_table_copy,
+						ordered_table_t<collection_d, key_d, value_d>::_pair_table_set_pointer,
+						ordered_table_t<collection_d, key_d, value_d>::_pointer,
+					},
+					// collection_a
+					reinterpret_cast<decltype(collection_o<key_d, value_d, element_d>::range)>(ordered_table_t<collection_d, key_d, value_d>::range),
+					reinterpret_cast<decltype(collection_o<key_d, value_d, element_d>::begin)>(ordered_table_t<collection_d, key_d, value_d>::begin),
+					reinterpret_cast<decltype(collection_o<key_d, value_d, element_d>::end)>(ordered_table_t<collection_d, key_d, value_d>::end),
+					ordered_table_t<collection_d, key_d, value_d>::read_lock,
+					ordered_table_t<collection_d, key_d, value_d>::write_lock,
+					ordered_table_t<collection_d, key_d, value_d>::has,
+					ordered_table_t<collection_d, key_d, value_d>::at,
+					ordered_table_t<collection_d, key_d, value_d>::update,
+					ordered_table_t<collection_d, key_d, value_d>::insert,
+					ordered_table_t<collection_d, key_d, value_d>::erase,
+					ordered_table_t<collection_d, key_d, value_d>::clear,
+					ordered_table_t<collection_d, key_d, value_d>::size,
+					ordered_table_t<collection_d, key_d, value_d>::empty,
+					ordered_table_t<collection_d, key_d, value_d>::push_front,
+					ordered_table_t<collection_d, key_d, value_d>::pop_front,
+					ordered_table_t<collection_d, key_d, value_d>::push_back,
+					ordered_table_t<collection_d, key_d, value_d>::pop_back,
+					ordered_table_t<collection_d, key_d, value_d>::self_assign,
+					ordered_table_t<collection_d, key_d, value_d>::self_add,
+					ordered_table_t<collection_d, key_d, value_d>::add,
+					ordered_table_t<collection_d, key_d, value_d>::self_subtract,
+					ordered_table_t<collection_d, key_d, value_d>::subtract,
+				},
+				// table_a
+				reinterpret_cast<decltype(table_o<key_d, value_d>::range)>(ordered_table_t<collection_d, key_d, value_d>::range),
+				reinterpret_cast<decltype(table_o<key_d, value_d>::begin)>(ordered_table_t<collection_d, key_d, value_d>::begin),
+				reinterpret_cast<decltype(table_o<key_d, value_d>::end)>(ordered_table_t<collection_d, key_d, value_d>::end),
+				reinterpret_cast<decltype(table_o<key_d, value_d>::mutator_range)>(ordered_table_t<collection_d, key_d, value_d>::mutator_range),
+				reinterpret_cast<decltype(table_o<key_d, value_d>::mutator_begin)>(ordered_table_t<collection_d, key_d, value_d>::mutator_begin),
+				reinterpret_cast<decltype(table_o<key_d, value_d>::mutator_end)>(ordered_table_t<collection_d, key_d, value_d>::mutator_end),
+			},
+			// pair_table_a
+			reinterpret_cast<decltype(pair_table_o<key_d, value_d>::pair_range)>(ordered_table_t<collection_d, key_d, value_d>::pair_range),
+			reinterpret_cast<decltype(pair_table_o<key_d, value_d>::pair_begin)>(ordered_table_t<collection_d, key_d, value_d>::pair_begin),
+			reinterpret_cast<decltype(pair_table_o<key_d, value_d>::pair_end)>(ordered_table_t<collection_d, key_d, value_d>::pair_end),
+			reinterpret_cast<decltype(pair_table_o<key_d, value_d>::pair_mutator_range)>(ordered_table_t<collection_d, key_d, value_d>::pair_mutator_range),
+			reinterpret_cast<decltype(pair_table_o<key_d, value_d>::pair_mutator_begin)>(ordered_table_t<collection_d, key_d, value_d>::pair_mutator_begin),
+			reinterpret_cast<decltype(pair_table_o<key_d, value_d>::pair_mutator_end)>(ordered_table_t<collection_d, key_d, value_d>::pair_mutator_end),
+		};
+		return &operations;
+	}
+
+	template <typename collection_d, typename key_d, typename value_d>
+	pair_table_o<key_d, value_d> const* ordered_table_t<collection_d, key_d, value_d>::_pair_table_pointer_operations()
+	{
+		static pair_table_o<key_d, value_d> operations = []()
+		{
+			pair_table_o<key_d, value_d> ops = *ordered_table_t<collection_d, key_d, value_d>::_pair_table_operations();
+			ops._copy = thing_t::_no_copy;
+			return ops;
+		}();
+		return &operations;
+	}
+
+	template <typename collection_d, typename key_d, typename value_d>
+	bool ordered_table_t<collection_d, key_d, value_d>::_pair_table_is(con<> const& me,
+		con<> const& abstraction)
+	{
+		// abstraction.cat in me.cats
+		auto const abc = abstraction.o->cat;
+		return abc == any_a::cat ||
+			abc == collection_a<key_d, value_d, element_d>::cat ||
+			abc == table_a<key_d, value_d>::cat ||
+			abc == pair_table_a<key_d, value_d>::cat;
+	}
+
+	template <typename collection_d, typename key_d, typename value_d>
+	bool ordered_table_t<collection_d, key_d, value_d>::_pair_table_as(con<> const& me,
+		var<> const& abstraction)
+	{
+		if (!ordered_table_t<collection_d, key_d, value_d>::_pair_table_is(me, abstraction))
+		{
+			return false;
+		}
+		bool const as_pointer = abstraction.o->_pointer(abstraction);
+		abstraction = me;
+		if (abstraction.o->_pointer(abstraction) != as_pointer)
+		{
+			if (as_pointer)
+			{
+				abstraction.mut();
+			}
+			abstraction.o->_set_pointer(abstraction, as_pointer);
+			if (!as_pointer)
+			{
+				abstraction.mut();
+			}
+		}
+		return true;
+	}
+
+	template <typename collection_d, typename key_d, typename value_d>
+	void ordered_table_t<collection_d, key_d, value_d>::_pair_table_copy(con<> const& me,
+		var<> const& copy)
+	{
+		new ordered_table_t<collection_d, key_d, value_d>{ copy, me };
+		ordered_table_t<collection_d, key_d, value_d>::_clone(me, copy);
+		copy.o = ordered_table_t<collection_d, key_d, value_d>::_pair_table_operations();
+	}
+
+	template <typename collection_d, typename key_d, typename value_d>
+	void ordered_table_t<collection_d, key_d, value_d>::_pair_table_set_pointer(con<> const& me,
+		bool is_pointer)
+	{
+		me.o = is_pointer ? ordered_table_t<collection_d, key_d, value_d>::_pair_table_pointer_operations() : ordered_table_t<collection_d, key_d, value_d>::_pair_table_operations();
 	}
 
 	// bidirectional_range_a
