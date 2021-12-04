@@ -131,14 +131,7 @@ namespace strange
 	void forward_mutator_t<iterator_d, element_d>::set(con<forward_mutator_a<element_d>> const& me,
 		element_d const& element)
 	{
-		if constexpr (std::is_class_v<element_d> && !std::is_assignable_v<element_d, element_d>)
-		{
-			(*(static_cast<forward_mutator_t<iterator_d, element_d>*>(me.t)->iterator_)).second = element.second;
-		}
-		else
-		{
-			*(static_cast<forward_mutator_t<iterator_d, element_d>*>(me.t)->iterator_) = element;
-		}
+		*(static_cast<forward_mutator_t<iterator_d, element_d>*>(me.t)->iterator_) = element;
 	}
 
 	template <typename iterator_d, typename element_d>
