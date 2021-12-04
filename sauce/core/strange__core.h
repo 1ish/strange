@@ -90,7 +90,9 @@ namespace strange
 	template <typename element_d = var<>> struct group_a;
 	template <typename element_d = var<>> struct ordered_group_a;
 	template <typename key_d = con<>, typename value_d = var<>> struct table_a;
+	template <typename key_d = con<>, typename value_d = var<>> struct pair_table_a;
 	template <typename key_d = con<>, typename value_d = var<>> struct ordered_table_a;
+	template <typename key_d = con<>, typename value_d = var<>> struct pair_ordered_table_a;
 	struct brook_a;
 	struct river_a;
 	struct lake_a;
@@ -207,7 +209,9 @@ namespace strange
 #include "collections/abstractions/strange__group_a.h"
 #include "collections/abstractions/strange__ordered_group_a.h"
 #include "collections/abstractions/strange__table_a.h"
+#include "collections/abstractions/strange__pair_table_a.h"
 #include "collections/abstractions/strange__ordered_table_a.h"
+#include "collections/abstractions/strange__pair_ordered_table_a.h"
 #include "collections/abstractions/strange__brook_a.h"
 #include "collections/abstractions/strange__river_a.h"
 #include "collections/abstractions/strange__lake_a.h"

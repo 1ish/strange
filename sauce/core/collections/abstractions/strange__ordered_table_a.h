@@ -18,18 +18,6 @@ namespace strange
 		bit<bidirectional_tuple_mutator_a<key_d, value_d>> (*mutator_begin) (var<ordered_table_a<key_d, value_d>> const& me);
 
 		bit<bidirectional_tuple_mutator_a<key_d, value_d>> (*mutator_end) (var<ordered_table_a<key_d, value_d>> const& me);
-
-		var<bidirectional_range_a<std::pair<key_d const, value_d>>> (*pair_range) (con<ordered_table_a<key_d, value_d>> const& me);
-
-		bit<bidirectional_extractor_a<std::pair<key_d const, value_d>>> (*pair_begin) (con<ordered_table_a<key_d, value_d>> const& me);
-
-		bit<bidirectional_extractor_a<std::pair<key_d const, value_d>>> (*pair_end) (con<ordered_table_a<key_d, value_d>> const& me);
-
-		var<bidirectional_mutator_range_a<std::pair<key_d const, value_d>>> (*pair_mutator_range) (var<ordered_table_a<key_d, value_d>> const& me);
-
-		bit<bidirectional_mutator_a<std::pair<key_d const, value_d>>> (*pair_mutator_begin) (var<ordered_table_a<key_d, value_d>> const& me);
-
-		bit<bidirectional_mutator_a<std::pair<key_d const, value_d>>> (*pair_mutator_end) (var<ordered_table_a<key_d, value_d>> const& me);
 	};
 
 	template <typename key_d, typename value_d>

@@ -18,18 +18,6 @@ namespace strange
 		fit<forward_tuple_mutator_a<key_d, value_d>> (*mutator_begin) (var<table_a<key_d, value_d>> const& me);
 
 		fit<forward_tuple_mutator_a<key_d, value_d>> (*mutator_end) (var<table_a<key_d, value_d>> const& me);
-
-		var<range_a<std::pair<key_d const, value_d>>> (*pair_range) (con<table_a<key_d, value_d>> const& me);
-
-		fit<forward_extractor_a<std::pair<key_d const, value_d>>> (*pair_begin) (con<table_a<key_d, value_d>> const& me);
-
-		fit<forward_extractor_a<std::pair<key_d const, value_d>>> (*pair_end) (con<table_a<key_d, value_d>> const& me);
-
-		var<mutator_range_a<std::pair<key_d const, value_d>>> (*pair_mutator_range) (var<table_a<key_d, value_d>> const& me);
-
-		fit<forward_mutator_a<std::pair<key_d const, value_d>>> (*pair_mutator_begin) (var<table_a<key_d, value_d>> const& me);
-
-		fit<forward_mutator_a<std::pair<key_d const, value_d>>> (*pair_mutator_end) (var<table_a<key_d, value_d>> const& me);
 	};
 
 	template <typename key_d, typename value_d>

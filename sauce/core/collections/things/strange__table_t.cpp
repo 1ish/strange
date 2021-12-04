@@ -3,62 +3,65 @@
 namespace strange
 {
 	// table_t
-	// table_o
+	// pair_table_o
 	template <typename collection_d, typename key_d, typename value_d>
-	table_o<key_d, value_d> const* table_t<collection_d, key_d, value_d>::_operations()
+	pair_table_o<key_d, value_d> const* table_t<collection_d, key_d, value_d>::_operations()
 	{
-		static table_o<key_d, value_d> operations =
+		static pair_table_o<key_d, value_d> operations =
 		{
 			{
 				{
-					// any_a
-					table_a<key_d, value_d>::cat,
-					table_t<collection_d, key_d, value_d>::is,
-					table_t<collection_d, key_d, value_d>::as,
-					table_t<collection_d, key_d, value_d>::type,
-					table_t<collection_d, key_d, value_d>::set_error,
-					table_t<collection_d, key_d, value_d>::error,
-					table_t<collection_d, key_d, value_d>::hash,
-					table_t<collection_d, key_d, value_d>::equal,
-					table_t<collection_d, key_d, value_d>::less,
-					table_t<collection_d, key_d, value_d>::less_or_equal,
-					table_t<collection_d, key_d, value_d>::pack,
-					table_t<collection_d, key_d, value_d>::_free,
-					table_t<collection_d, key_d, value_d>::_copy,
-					table_t<collection_d, key_d, value_d>::_set_pointer,
-					table_t<collection_d, key_d, value_d>::_pointer,
+					{
+						// any_a
+						pair_table_a<key_d, value_d>::cat,
+						table_t<collection_d, key_d, value_d>::is,
+						table_t<collection_d, key_d, value_d>::as,
+						table_t<collection_d, key_d, value_d>::type,
+						table_t<collection_d, key_d, value_d>::set_error,
+						table_t<collection_d, key_d, value_d>::error,
+						table_t<collection_d, key_d, value_d>::hash,
+						table_t<collection_d, key_d, value_d>::equal,
+						table_t<collection_d, key_d, value_d>::less,
+						table_t<collection_d, key_d, value_d>::less_or_equal,
+						table_t<collection_d, key_d, value_d>::pack,
+						table_t<collection_d, key_d, value_d>::_free,
+						table_t<collection_d, key_d, value_d>::_copy,
+						table_t<collection_d, key_d, value_d>::_set_pointer,
+						table_t<collection_d, key_d, value_d>::_pointer,
+					},
+					// collection_a
+					reinterpret_cast<decltype(collection_o<key_d, value_d, element_d>::range)>(table_t<collection_d, key_d, value_d>::range),
+					reinterpret_cast<decltype(collection_o<key_d, value_d, element_d>::begin)>(table_t<collection_d, key_d, value_d>::begin),
+					reinterpret_cast<decltype(collection_o<key_d, value_d, element_d>::end)>(table_t<collection_d, key_d, value_d>::end),
+					table_t<collection_d, key_d, value_d>::read_lock,
+					table_t<collection_d, key_d, value_d>::write_lock,
+					table_t<collection_d, key_d, value_d>::has,
+					table_t<collection_d, key_d, value_d>::at,
+					table_t<collection_d, key_d, value_d>::update,
+					table_t<collection_d, key_d, value_d>::insert,
+					table_t<collection_d, key_d, value_d>::erase,
+					table_t<collection_d, key_d, value_d>::clear,
+					table_t<collection_d, key_d, value_d>::size,
+					table_t<collection_d, key_d, value_d>::empty,
+					table_t<collection_d, key_d, value_d>::push_front,
+					table_t<collection_d, key_d, value_d>::pop_front,
+					table_t<collection_d, key_d, value_d>::push_back,
+					table_t<collection_d, key_d, value_d>::pop_back,
+					table_t<collection_d, key_d, value_d>::self_assign,
+					table_t<collection_d, key_d, value_d>::self_add,
+					table_t<collection_d, key_d, value_d>::add,
+					table_t<collection_d, key_d, value_d>::self_subtract,
+					table_t<collection_d, key_d, value_d>::subtract,
 				},
-				// collection_a
-				reinterpret_cast<decltype(collection_o<key_d, value_d, element_d>::range)>(table_t<collection_d, key_d, value_d>::range),
-				reinterpret_cast<decltype(collection_o<key_d, value_d, element_d>::begin)>(table_t<collection_d, key_d, value_d>::begin),
-				reinterpret_cast<decltype(collection_o<key_d, value_d, element_d>::end)>(table_t<collection_d, key_d, value_d>::end),
-				table_t<collection_d, key_d, value_d>::read_lock,
-				table_t<collection_d, key_d, value_d>::write_lock,
-				table_t<collection_d, key_d, value_d>::has,
-				table_t<collection_d, key_d, value_d>::at,
-				table_t<collection_d, key_d, value_d>::update,
-				table_t<collection_d, key_d, value_d>::insert,
-				table_t<collection_d, key_d, value_d>::erase,
-				table_t<collection_d, key_d, value_d>::clear,
-				table_t<collection_d, key_d, value_d>::size,
-				table_t<collection_d, key_d, value_d>::empty,
-				table_t<collection_d, key_d, value_d>::push_front,
-				table_t<collection_d, key_d, value_d>::pop_front,
-				table_t<collection_d, key_d, value_d>::push_back,
-				table_t<collection_d, key_d, value_d>::pop_back,
-				table_t<collection_d, key_d, value_d>::self_assign,
-				table_t<collection_d, key_d, value_d>::self_add,
-				table_t<collection_d, key_d, value_d>::add,
-				table_t<collection_d, key_d, value_d>::self_subtract,
-				table_t<collection_d, key_d, value_d>::subtract,
+				// table_a
+				table_t<collection_d, key_d, value_d>::range,
+				table_t<collection_d, key_d, value_d>::begin,
+				table_t<collection_d, key_d, value_d>::end,
+				table_t<collection_d, key_d, value_d>::mutator_range,
+				table_t<collection_d, key_d, value_d>::mutator_begin,
+				table_t<collection_d, key_d, value_d>::mutator_end,
 			},
-			// table_a
-			table_t<collection_d, key_d, value_d>::range,
-			table_t<collection_d, key_d, value_d>::begin,
-			table_t<collection_d, key_d, value_d>::end,
-			table_t<collection_d, key_d, value_d>::mutator_range,
-			table_t<collection_d, key_d, value_d>::mutator_begin,
-			table_t<collection_d, key_d, value_d>::mutator_end,
+			// pair_table_a
 			table_t<collection_d, key_d, value_d>::pair_range,
 			table_t<collection_d, key_d, value_d>::pair_begin,
 			table_t<collection_d, key_d, value_d>::pair_end,
@@ -70,11 +73,11 @@ namespace strange
 	}
 
 	template <typename collection_d, typename key_d, typename value_d>
-	table_o<key_d, value_d> const* table_t<collection_d, key_d, value_d>::_pointer_operations()
+	pair_table_o<key_d, value_d> const* table_t<collection_d, key_d, value_d>::_pointer_operations()
 	{
-		static table_o<key_d, value_d> operations = []()
+		static pair_table_o<key_d, value_d> operations = []()
 		{
-			table_o<key_d, value_d> ops = *table_t<collection_d, key_d, value_d>::_operations();
+			pair_table_o<key_d, value_d> ops = *table_t<collection_d, key_d, value_d>::_operations();
 			ops._copy = thing_t::_no_copy;
 			return ops;
 		}();
@@ -90,7 +93,8 @@ namespace strange
 		auto const abc = abstraction.o->cat;
 		return abc == any_a::cat ||
 			abc == collection_a<key_d, value_d, element_d>::cat ||
-			abc == table_a<key_d, value_d>::cat;
+			abc == table_a<key_d, value_d>::cat ||
+			abc == pair_table_a<key_d, value_d>::cat;
 	}
 
 	template <typename collection_d, typename key_d, typename value_d>
@@ -129,10 +133,10 @@ namespace strange
 	bool table_t<collection_d, key_d, value_d>::equal(con<> const& me,
 		con<> const& other)
 	{
-		auto const oc = other.dynamic<con<table_a<key_d, value_d>>>();
+		auto const oc = other.dynamic<con<pair_table_a<key_d, value_d>>>();
 		if (oc.o->something(oc))
 		{
-			return table_t<collection_d, key_d, value_d>::equal_table(me.reference<con<table_a<key_d, value_d>>>(), oc);
+			return table_t<collection_d, key_d, value_d>::equal_table(me.reference<con<pair_table_a<key_d, value_d>>>(), oc);
 		}
 		return thing_t::equal(me, other);
 	}
@@ -400,8 +404,9 @@ namespace strange
 		return forward_tuple_mutator_t<typename collection_d::iterator, key_d, value_d>::create(static_cast<table_t<collection_d, key_d, value_d>*>(me.t)->collection_.end());
 	}
 
+	// pair_table_a
 	template <typename collection_d, typename key_d, typename value_d>
-	var<range_a<std::pair<key_d const, value_d>>> table_t<collection_d, key_d, value_d>::pair_range(con<table_a<key_d, value_d>> const& me)
+	var<range_a<std::pair<key_d const, value_d>>> table_t<collection_d, key_d, value_d>::pair_range(con<pair_table_a<key_d, value_d>> const& me)
 	{
 		range_a<std::pair<key_d const, value_d>> abstraction;
 		abstraction.t = me.t;
@@ -410,19 +415,19 @@ namespace strange
 	}
 
 	template <typename collection_d, typename key_d, typename value_d>
-	fit<forward_extractor_a<std::pair<key_d const, value_d>>> table_t<collection_d, key_d, value_d>::pair_begin(con<table_a<key_d, value_d>> const& me)
+	fit<forward_extractor_a<std::pair<key_d const, value_d>>> table_t<collection_d, key_d, value_d>::pair_begin(con<pair_table_a<key_d, value_d>> const& me)
 	{
 		return forward_pair_extractor_t<typename collection_d::const_iterator, key_d, value_d>::create(static_cast<table_t<collection_d, key_d, value_d> const*>(me.t)->collection_.cbegin());
 	}
 
 	template <typename collection_d, typename key_d, typename value_d>
-	fit<forward_extractor_a<std::pair<key_d const, value_d>>> table_t<collection_d, key_d, value_d>::pair_end(con<table_a<key_d, value_d>> const& me)
+	fit<forward_extractor_a<std::pair<key_d const, value_d>>> table_t<collection_d, key_d, value_d>::pair_end(con<pair_table_a<key_d, value_d>> const& me)
 	{
 		return forward_pair_extractor_t<typename collection_d::const_iterator, key_d, value_d>::create(static_cast<table_t<collection_d, key_d, value_d> const*>(me.t)->collection_.cend());
 	}
 
 	template <typename collection_d, typename key_d, typename value_d>
-	var<mutator_range_a<std::pair<key_d const, value_d>>> table_t<collection_d, key_d, value_d>::pair_mutator_range(var<table_a<key_d, value_d>> const& me)
+	var<mutator_range_a<std::pair<key_d const, value_d>>> table_t<collection_d, key_d, value_d>::pair_mutator_range(var<pair_table_a<key_d, value_d>> const& me)
 	{
 		me.mut();
 		mutator_range_a<std::pair<key_d const, value_d>> abstraction;
@@ -432,14 +437,14 @@ namespace strange
 	}
 
 	template <typename collection_d, typename key_d, typename value_d>
-	fit<forward_mutator_a<std::pair<key_d const, value_d>>> table_t<collection_d, key_d, value_d>::pair_mutator_begin(var<table_a<key_d, value_d>> const& me)
+	fit<forward_mutator_a<std::pair<key_d const, value_d>>> table_t<collection_d, key_d, value_d>::pair_mutator_begin(var<pair_table_a<key_d, value_d>> const& me)
 	{
 		me.mut();
 		return forward_pair_mutator_t<typename collection_d::iterator, key_d, value_d>::create(static_cast<table_t<collection_d, key_d, value_d>*>(me.t)->collection_.begin());
 	}
 
 	template <typename collection_d, typename key_d, typename value_d>
-	fit<forward_mutator_a<std::pair<key_d const, value_d>>> table_t<collection_d, key_d, value_d>::pair_mutator_end(var<table_a<key_d, value_d>> const& me)
+	fit<forward_mutator_a<std::pair<key_d const, value_d>>> table_t<collection_d, key_d, value_d>::pair_mutator_end(var<pair_table_a<key_d, value_d>> const& me)
 	{
 		me.mut();
 		return forward_pair_mutator_t<typename collection_d::iterator, key_d, value_d>::create(static_cast<table_t<collection_d, key_d, value_d>*>(me.t)->collection_.end());

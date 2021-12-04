@@ -38,14 +38,14 @@ namespace strange
 		table_t& operator=(table_t const&) = delete;
 
 	private:
-		// table_o
-		static table_o<key_d, value_d> const* _operations();
-		static table_o<key_d, value_d> const* _pointer_operations();
+		// pair_table_o
+		static pair_table_o<key_d, value_d> const* _operations();
+		static pair_table_o<key_d, value_d> const* _pointer_operations();
 
 	public:
 		// inline
-		static inline bool equal_table(con<table_a<key_d, value_d>> const& me,
-			con<table_a<key_d, value_d>> const& other)
+		static inline bool equal_table(con<pair_table_a<key_d, value_d>> const& me,
+			con<pair_table_a<key_d, value_d>> const& other)
 		{
 			return me.o->type(me) == other.o->type(other) &&
 				static_cast<table_t<collection_d, key_d, value_d> const*>(me.t)->collection_ ==
@@ -137,17 +137,18 @@ namespace strange
 
 		static fit<forward_tuple_mutator_a<key_d, value_d>> mutator_end(var<table_a<key_d, value_d>> const& me);
 
-		static var<range_a<std::pair<key_d const, value_d>>> pair_range(con<table_a<key_d, value_d>> const& me);
+		// pair_table_a
+		static var<range_a<std::pair<key_d const, value_d>>> pair_range(con<pair_table_a<key_d, value_d>> const& me);
 
-		static fit<forward_extractor_a<std::pair<key_d const, value_d>>> pair_begin(con<table_a<key_d, value_d>> const& me);
+		static fit<forward_extractor_a<std::pair<key_d const, value_d>>> pair_begin(con<pair_table_a<key_d, value_d>> const& me);
 
-		static fit<forward_extractor_a<std::pair<key_d const, value_d>>> pair_end(con<table_a<key_d, value_d>> const& me);
+		static fit<forward_extractor_a<std::pair<key_d const, value_d>>> pair_end(con<pair_table_a<key_d, value_d>> const& me);
 
-		static var<mutator_range_a<std::pair<key_d const, value_d>>> pair_mutator_range(var<table_a<key_d, value_d>> const& me);
+		static var<mutator_range_a<std::pair<key_d const, value_d>>> pair_mutator_range(var<pair_table_a<key_d, value_d>> const& me);
 
-		static fit<forward_mutator_a<std::pair<key_d const, value_d>>> pair_mutator_begin(var<table_a<key_d, value_d>> const& me);
+		static fit<forward_mutator_a<std::pair<key_d const, value_d>>> pair_mutator_begin(var<pair_table_a<key_d, value_d>> const& me);
 
-		static fit<forward_mutator_a<std::pair<key_d const, value_d>>> pair_mutator_end(var<table_a<key_d, value_d>> const& me);
+		static fit<forward_mutator_a<std::pair<key_d const, value_d>>> pair_mutator_end(var<pair_table_a<key_d, value_d>> const& me);
 
 	private:
 		// tuple_range_a
@@ -231,35 +232,35 @@ namespace strange
 
 	public:
 		// creators
-		static inline var<table_a<key_d, value_d>> create_default()
+		static inline var<pair_table_a<key_d, value_d>> create_default()
 		{
 			any_a r;
 			new table_t<collection_d, key_d, value_d>{ r };
 			table_t<collection_d, key_d, value_d>::_initialise(reinterpret_cast<var<> const&>(r));
-			return var<table_a<key_d, value_d>>{ reinterpret_cast<table_a<key_d, value_d>&>(r) };
+			return var<pair_table_a<key_d, value_d>>{ reinterpret_cast<pair_table_a<key_d, value_d>&>(r) };
 		}
 
-		static inline var<table_a<key_d, value_d>> create(collection_d const& collection)
+		static inline var<pair_table_a<key_d, value_d>> create(collection_d const& collection)
 		{
 			any_a r;
 			new table_t<collection_d, key_d, value_d>{ r, collection };
 			table_t<collection_d, key_d, value_d>::_initialise(reinterpret_cast<var<> const&>(r));
-			return var<table_a<key_d, value_d>>{ reinterpret_cast<table_a<key_d, value_d>&>(r) };
+			return var<pair_table_a<key_d, value_d>>{ reinterpret_cast<pair_table_a<key_d, value_d>&>(r) };
 		}
 
-		static inline var<table_a<key_d, value_d>> create_from_range(con<range_a<>> const& range)
+		static inline var<pair_table_a<key_d, value_d>> create_from_range(con<range_a<>> const& range)
 		{
 			return create_default();
 		}
 
-		static inline var<table_a<key_d, value_d>> unpack(con<container_a> const& container)
+		static inline var<pair_table_a<key_d, value_d>> unpack(con<container_a> const& container)
 		{
 			return create_default();
 		}
 	};
 
-	template <typename key_d = var<>, typename value_d = var<>>
-	inline var<table_a<key_d, value_d>> table()
+	template <typename key_d = con<>, typename value_d = var<>>
+	inline var<pair_table_a<key_d, value_d>> table()
 	{
 		return table_t<std::unordered_map<key_d, table_value_tuple_u<key_d, value_d, std::pair<key_d const, value_d>>>, key_d, value_d>::create_default();
 	}

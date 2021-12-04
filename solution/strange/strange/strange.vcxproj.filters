@@ -405,6 +405,12 @@
     <ClCompile Include="..\..\..\sauce\core\collections\things\strange__ordered_table_t.cpp">
       <Filter>Source Files\sauce\core\collections\things</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__pair_ordered_table_a.cpp">
+      <Filter>Source Files\sauce\core\collections\abstractions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__pair_table_a.cpp">
+      <Filter>Source Files\sauce\core\collections\abstractions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\sauce\strange.h">
@@ -733,6 +739,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\collections\things\strange__ordered_table_t.h">
       <Filter>Header Files\sauce\core\collections\things</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__pair_ordered_table_a.h">
+      <Filter>Header Files\sauce\core\collections\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__pair_table_a.h">
+      <Filter>Header Files\sauce\core\collections\abstractions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
