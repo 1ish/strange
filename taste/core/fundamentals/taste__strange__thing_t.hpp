@@ -230,6 +230,7 @@ namespace taste
 		}
 
 		auto hw = txt("hello world");
+		auto hu = lake("hello universe");
 	}
 }
 

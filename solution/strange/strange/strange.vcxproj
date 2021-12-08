@@ -207,6 +207,7 @@
     <ClCompile Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__tuple_range_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\things\strange__collection_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\things\strange__group_t.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\collections\things\strange__lake_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\things\strange__list_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\things\strange__ordered_group_t.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\things\strange__ordered_table_t.cpp" />
@@ -304,6 +305,7 @@
     <ClInclude Include="..\..\..\sauce\core\collections\ranges\abstractions\strange__tuple_range_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\things\strange__collection_t.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\things\strange__group_t.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\things\strange__lake_t.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\things\strange__list_t.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\things\strange__ordered_group_t.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\things\strange__ordered_table_t.h" />

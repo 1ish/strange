@@ -37,7 +37,6 @@ namespace strange
 		}
 
 		list_t(list_t const&) = delete;
-
 		list_t& operator=(list_t const&) = delete;
 
 	private:
@@ -158,7 +157,7 @@ namespace strange
 		return list_t<std::vector<element_d>, element_d>::create_variadic(elements...);
 	}
 
-	inline var<text_a> txt(char const* s)
+	inline var<text_a> txt(char const* s) //TODO
 	{
 		return list_t<std::vector<uint8_t>, uint8_t>::create(
 			std::vector<uint8_t>{reinterpret_cast<uint8_t const*>(s),
