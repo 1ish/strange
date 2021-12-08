@@ -30,5 +30,6 @@ namespace strange
 	// instantiation
 	template struct bidirectional_mutator_a<>;
 	template struct bidirectional_mutator_a<int64_t>;
+	template struct bidirectional_mutator_a<uint8_t>;
 	template struct bidirectional_mutator_a<std::pair<int64_t const, int64_t>>;
 }

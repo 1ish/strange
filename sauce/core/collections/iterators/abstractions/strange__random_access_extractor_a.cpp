@@ -31,5 +31,6 @@ namespace strange
 	template struct random_access_extractor_a<>;
 	template struct random_access_extractor_a<int64_t>;
 	template struct random_access_extractor_a<uint64_t>;
+	template struct random_access_extractor_a<uint8_t>;
 	template struct random_access_extractor_a<double>;
 }

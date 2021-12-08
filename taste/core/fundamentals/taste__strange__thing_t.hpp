@@ -228,6 +228,8 @@ namespace taste
 		{
 			std__cout << "upr:" << pr.first << "," << pr.second << "\n";
 		}
+
+		auto hw = txt("hello world");
 	}
 }
 

@@ -31,6 +31,7 @@ namespace strange
 	template struct bidirectional_extractor_a<>;
 	template struct bidirectional_extractor_a<int64_t>;
 	template struct bidirectional_extractor_a<uint64_t>;
+	template struct bidirectional_extractor_a<uint8_t>;
 	template struct bidirectional_extractor_a<double>;
 	template struct bidirectional_extractor_a<std::pair<int64_t const, int64_t>>;
 }

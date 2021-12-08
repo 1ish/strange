@@ -30,4 +30,5 @@ namespace strange
 	// instantiation
 	template struct queue_a<>;
 	template struct queue_a<int64_t>;
+	template struct queue_a<uint8_t>;
 }

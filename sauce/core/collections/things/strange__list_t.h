@@ -157,6 +157,13 @@ namespace strange
 	{
 		return list_t<std::vector<element_d>, element_d>::create_variadic(elements...);
 	}
+
+	inline var<text_a> txt(char const* s)
+	{
+		return list_t<std::vector<uint8_t>, uint8_t>::create(
+			std::vector<uint8_t>{reinterpret_cast<uint8_t const*>(s),
+			reinterpret_cast<uint8_t const*>(s) + std::strlen(s)}).reference<var<text_a>>();
+	}
 }
 
 #endif

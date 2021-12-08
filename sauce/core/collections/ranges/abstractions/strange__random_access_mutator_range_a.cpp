@@ -30,4 +30,5 @@ namespace strange
 	// instantiation
 	template struct random_access_mutator_range_a<>;
 	template struct random_access_mutator_range_a<int64_t>;
+	template struct random_access_mutator_range_a<uint8_t>;
 }

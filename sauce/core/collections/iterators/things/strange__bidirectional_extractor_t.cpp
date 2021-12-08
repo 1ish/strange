@@ -124,6 +124,7 @@ namespace strange
 	template struct bidirectional_extractor_t<std::deque<int64_t>::const_iterator, int64_t>;
 	template struct bidirectional_extractor_t<std::vector<int64_t>::const_iterator, int64_t>;
 	template struct bidirectional_extractor_t<std::vector<var<>>::const_iterator, var<>>;
+	template struct bidirectional_extractor_t<std::vector<uint8_t>::const_iterator, uint8_t>;
 	template struct bidirectional_extractor_t<std::set<int64_t>::const_iterator, int64_t>;
 	template struct bidirectional_extractor_t<std::set<var<>>::const_iterator, var<>>;
 }

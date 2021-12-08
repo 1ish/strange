@@ -417,4 +417,5 @@ namespace strange
 	// instantiation
 	template struct list_t<std::vector<int64_t>, int64_t>;
 	template struct list_t<std::vector<var<>>, var<>>;
+	template struct list_t<std::vector<uint8_t>, uint8_t>;
 }

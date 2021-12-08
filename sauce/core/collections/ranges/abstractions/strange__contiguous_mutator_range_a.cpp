@@ -30,4 +30,5 @@ namespace strange
 	// instantiation
 	template struct contiguous_mutator_range_a<>;
 	template struct contiguous_mutator_range_a<int64_t>;
+	template struct contiguous_mutator_range_a<uint8_t>;
 }
