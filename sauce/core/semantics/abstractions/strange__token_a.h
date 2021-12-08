@@ -6,7 +6,7 @@ namespace strange
 	struct token_o :
 		any_o
 	{
-		var<symbol_a> (*filename) (con<token_a> const& me);
+		var<text_a> (*filename) (con<token_a> const& me);
 
 		int64_t (*line) (con<token_a> const& me);
 
@@ -16,7 +16,7 @@ namespace strange
 
 		var<lake_a> (*lake) (con<token_a> const& me);
 
-		var<lake_a> (*report) (con<token_a> const& me);
+		var<text_a> (*report) (con<token_a> const& me);
 	};
 
 	struct token_a

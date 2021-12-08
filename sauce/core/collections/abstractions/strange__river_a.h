@@ -75,7 +75,7 @@ namespace strange
 
 		bool (*bad) (con<river_a> const& me);
 
-		var<lake_a> (*filename) (con<river_a> const& me);
+		var<text_a> (*filename) (con<river_a> const& me);
 
 		void (*close) (var<river_a> const& me);
 
