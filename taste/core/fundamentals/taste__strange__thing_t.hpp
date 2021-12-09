@@ -229,8 +229,7 @@ namespace taste
 			std__cout << "upr:" << pr.first << "," << pr.second << "\n";
 		}
 
-		auto hw = txt("hello world");
-		auto hu = lake("hello universe");
+		auto hut = text("hello universe");
 	}
 }
 

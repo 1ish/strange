@@ -84,13 +84,6 @@ namespace strange
 			return create_default();
 		}
 	};
-
-	inline var<text_a> lake(char const* s)
-	{
-		return lake_t::create(
-			std::vector<uint8_t>{reinterpret_cast<uint8_t const*>(s),
-			reinterpret_cast<uint8_t const*>(s) + std::strlen(s)}).reference<var<text_a>>();
-	}
 }
 
 #endif
