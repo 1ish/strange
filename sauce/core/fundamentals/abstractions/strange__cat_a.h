@@ -3,7 +3,7 @@
 
 namespace strange
 {
-	struct cat_o :
+	struct cat_o : // operations
 		symbol_o
 	{
 		int64_t (*order) (con<cat_a> const& me);
@@ -24,14 +24,42 @@ namespace strange
 		// function     <(x #, y #) =>
 	};
 
-	struct cat_a
+	struct cat_b // base
+	{
+		mutable thing_t* t;
+		mutable cat_o const* o;
+	};
+
+	template <typename base_d>
+	struct cat_c : // constant
+		symbol_c<base_d>
+	{
+		using me_d = con<cat_a>;
+
+		inline int64_t order() const;
+
+		inline representation_e representation() const;
+
+		inline var<symbol_a> scope() const;
+
+		inline var<symbol_a> name() const;
+
+		inline var<list_a<var<kind_a>>> aspects() const;
+	};
+	
+	template <typename base_d>
+	struct cat_v : // variable
+		symbol_v<base_d>
+	{
+		using me_d = var<cat_a>;
+	};
+
+	struct cat_a : // abstraction
+		cat_c<cat_b>
 	{
 		using operations = cat_o;
-		using variations = any_v<cat_a>;
+		using variations = cat_v<cat_a>;
 		using creator_fp = var<cat_a>(*)(con<range_a<>> const& range);
-
-		mutable thing_t* t;
-		mutable operations const* o;
 
 		static var<symbol_a> cat(con<> const& me); //TODO cat
 
