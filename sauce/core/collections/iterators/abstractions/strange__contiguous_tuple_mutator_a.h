@@ -15,6 +15,7 @@ namespace strange
 	struct contiguous_tuple_mutator_a
 	{
 		using operations = contiguous_tuple_mutator_o<elements_d...>;
+		using variations = any_v<contiguous_tuple_mutator_a<elements_d...>>;
 		using creator_fp = rat<contiguous_tuple_mutator_a<elements_d...>>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

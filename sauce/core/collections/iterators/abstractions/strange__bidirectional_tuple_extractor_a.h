@@ -14,6 +14,7 @@ namespace strange
 	struct bidirectional_tuple_extractor_a
 	{
 		using operations = bidirectional_tuple_extractor_o<elements_d...>;
+		using variations = any_v<bidirectional_tuple_extractor_a<elements_d...>>;
 		using creator_fp = fit<bidirectional_tuple_extractor_a<elements_d...>>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

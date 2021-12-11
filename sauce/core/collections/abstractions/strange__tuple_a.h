@@ -20,6 +20,7 @@ namespace strange
 	struct tuple_a
 	{
 		using operations = tuple_o<elements_d...>;
+		using variations = any_v<tuple_a<elements_d...>>;
 		using creator_fp = var<tuple_a<elements_d...>> (*) (con<range_a<>> const& range);
 
 		mutable thing_t* t;

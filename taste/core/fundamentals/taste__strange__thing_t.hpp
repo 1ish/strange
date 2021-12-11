@@ -5,41 +5,41 @@ namespace taste
 {
 	void testp(ptr<symbol_a>& symbol)
 	{
-		symbol.o->first_char(symbol.value<con<symbol_a>>());
+		symbol.first_char();
 	}
 
 	var<symbol_a> testfun(con<symbol_a> const& a, con<symbol_a> const& b)
 	{
-		return a.o->add(a, b);
+		return a.add(b);
 	}
 
 	void testr(var<symbol_a>& param)
 	{
-		param.o->first_char(param);
+		param.first_char();
 	}
 
 	void testcr(var<symbol_a> const& param)
 	{
-		param.o->first_char(param);
+		param.first_char();
 	}
 
 	void test()
 	{
 		auto v = var(symbol_t::create("auto"));
-		auto tv = var(v.o->type(v));
+		auto tv = var(v.type());
 		tv = v;
 		auto s = sym("test");
-		auto t = s.o->type(s);
-		auto u = s.o->add(s, t);
-		u.o->add(u, sym("y"));
+		auto t = s.type();
+		auto u = s.add(t);
+		u.add(sym("y"));
 
-		std__cout << u.o->char_star(u) << "\n";
+		std__cout << u.char_star() << "\n";
 
 		auto p = ptr<symbol_a>{ symbol_t::create("pointer") };
 		auto q = ptr<symbol_a>(symbol_t::create("q"));
-		p.o->first_char(p.value<con<symbol_a>>());
+		p.first_char();
 		p = q;
-		p.o->first_char(p.value<con<symbol_a>>());
+		p.first_char();
 		testp(p);
 		testp(q);
 		testr(sym("pointer").reference<var<symbol_a>>());
@@ -70,27 +70,30 @@ namespace taste
 		anysym.dynamic<ptr<symbol_a>>();
 
 		con<symbol_a> sss = sym("sss");
-		auto res = sss.perform(&con<symbol_a>::operations::add, sym("2"));
-		res = sss.perform(&symbol_a::operations::add, sym("2"));
-		res = sss.perform(&symbol_o::add, sym("2"));
-		std__cout << "result: " << res.o->char_star(res) << "\n";
+		auto res = sss.add(sym("2"));
+		res = sss.add(sym("2"));
+		res = sss.add(sym("2"));
+		std__cout << "result: " << res.char_star() << "\n";
 		con<any_a> aaa = sym("aaa");
-		aaa.perform(&any_o::type);
-		sss.perform(&symbol_o::type);
-		res = sss.perform(&con<symbol_a>::operations::type);
-		std__cout << "result: " << res.o->char_star(res) << "\n";
+		aaa.type();
+		sss.type();
+		res = sss.type();
+		std__cout << "result: " << res.char_star() << "\n";
 		auto vvv = sym("vvv");
-		vvv.o->set_error(vvv, sym("error1"));
-		vvv.perform(&any_o::set_error, sym("error2"));
-		vvv.perform(&symbol_o::set_error, sym("error3"));
-		res = vvv.perform(&symbol_o::error).reference<var<symbol_a>>();
-		std__cout << "result: " << res.o->char_star(res) << "\n";
-		vvv.perform(&symbol_o::something);
-		vvv.perform(&any_o::not_equal, sym("other"));
+		vvv.set_error(sym("error1"));
+		vvv.set_error(sym("error2"));
+		vvv.set_error(sym("error3"));
+		res = vvv.error().reference<var<symbol_a>>();
+		std__cout << "result: " << res.char_star() << "\n";
+		vvv.something();
+		vvv.not_equal(sym("other"));
 
+		auto conul = con<forward_extractor_a<int64_t>>();
+		conul.o->type(conul); //TODO
 		auto nul = var<forward_extractor_a<int64_t>>();
+		nul.o->type(nul); //TODO
 		auto fwd = fit<forward_extractor_a<int64_t>>(nul);
-		fwd.o->type(fwd);
+		fwd.o->type(fwd); //TODO
 
 		auto lock = create_lock<var<lock_a>>();
 		auto unlock = create_lock<var<unlock_a>>();
@@ -158,9 +161,6 @@ namespace taste
 		auto of = aof.value();
 		auto ob = aob.value();
 		auto rv = aor.value();
-
-		rat<random_access_extractor_a<int64_t>>::abstraction raat{};
-		raat.cat(rv);
 
 		std::vector<int64_t> vec_int{ 1, 2, 3 };
 		rat<contiguous_mutator_a<int64_t>> rvi = contiguous_mutator_t<std::vector<int64_t>::iterator, int64_t>::create(vec_int.begin());

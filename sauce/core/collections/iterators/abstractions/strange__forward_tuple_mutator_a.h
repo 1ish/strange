@@ -20,6 +20,7 @@ namespace strange
 	struct forward_tuple_mutator_a
 	{
 		using operations = forward_tuple_mutator_o<elements_d...>;
+		using variations = any_v<forward_tuple_mutator_a<elements_d...>>;
 		using creator_fp = fit<forward_tuple_mutator_a<elements_d...>>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

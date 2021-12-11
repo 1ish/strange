@@ -19,6 +19,7 @@ namespace strange
 	{
 		using non_mutator_range = bool;
 		using operations = group_o<element_d>;
+		using variations = any_v<group_a<element_d>>;
 		using creator_fp = var<group_a<element_d>> (*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

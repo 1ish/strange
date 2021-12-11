@@ -12,11 +12,11 @@ namespace strange
 		inline con() : val<abstraction_d>{} // default constructor
 		{
 			auto const nothing = val<abstraction_d>::t->create_nothing();
-			static typename abstraction::operations const null_ops = [](void const* const nothing_ops, uint64_t const size)
+			static typename abstraction_d::operations const null_ops = [](void const* const nothing_ops, uint64_t const size)
 			{
-				typename abstraction::operations nops = {};
+				typename abstraction_d::operations nops = {};
 				std::memcpy(&nops, nothing_ops, size);
-				nops.cat = abstraction::cat;
+				nops.cat = abstraction_d::cat;
 				return nops;
 			}(nothing.o, sizeof(*(nothing.o)));
 			val<abstraction_d>::t = nothing.t;
@@ -33,7 +33,7 @@ namespace strange
 			}
 		}
 
-		explicit inline con(abstraction const& abstract) : val<abstraction_d>{ abstract }
+		explicit inline con(abstraction_d const& abstract) : val<abstraction_d>{ abstract }
 		{
 			pointer_to_non_pointer();
 		}
@@ -43,30 +43,30 @@ namespace strange
 			pointer_to_non_pointer();
 		}
 
-		explicit inline con(var<abstraction> const& original) : val<abstraction_d>{ original }
+		explicit inline con(var<abstraction_d> const& original) : val<abstraction_d>{ original }
 		{
 			pointer_to_non_pointer();
 		}
 
-		explicit inline con(ptr<abstraction> const& original) : val<abstraction_d>{ original }
+		explicit inline con(ptr<abstraction_d> const& original) : val<abstraction_d>{ original }
 		{
 			pointer_to_non_pointer();
 		}
 
-		template <typename derived_d, std::enable_if_t<std::is_base_of_v<typename abstraction::operations, typename derived_d::operations>, bool> = true>
-		explicit inline con(con<derived_d> const& derived) : val<abstraction_d>{ reinterpret_cast<abstraction const&>(derived) }
+		template <typename derived_d, std::enable_if_t<std::is_base_of_v<typename abstraction_d::operations, typename derived_d::operations>, bool> = true>
+		explicit inline con(con<derived_d> const& derived) : val<abstraction_d>{ reinterpret_cast<abstraction_d const&>(derived) }
 		{
 			pointer_to_non_pointer();
 		}
 
-		template <typename derived_d, std::enable_if_t<std::is_base_of_v<typename abstraction::operations, typename derived_d::operations>, bool> = true>
-		explicit inline con(var<derived_d> const& derived) : val<abstraction_d>{ reinterpret_cast<abstraction const&>(derived) }
+		template <typename derived_d, std::enable_if_t<std::is_base_of_v<typename abstraction_d::operations, typename derived_d::operations>, bool> = true>
+		explicit inline con(var<derived_d> const& derived) : val<abstraction_d>{ reinterpret_cast<abstraction_d const&>(derived) }
 		{
 			pointer_to_non_pointer();
 		}
 
-		template <typename derived_d, std::enable_if_t<std::is_base_of_v<typename abstraction::operations, typename derived_d::operations>, bool> = true>
-		explicit inline con(ptr<derived_d> const& derived) : val<abstraction_d>{ reinterpret_cast<abstraction const&>(derived) }
+		template <typename derived_d, std::enable_if_t<std::is_base_of_v<typename abstraction_d::operations, typename derived_d::operations>, bool> = true>
+		explicit inline con(ptr<derived_d> const& derived) : val<abstraction_d>{ reinterpret_cast<abstraction_d const&>(derived) }
 		{
 			pointer_to_non_pointer();
 		}
@@ -105,21 +105,21 @@ namespace strange
 			return reinterpret_cast<R&>(*this);
 		}
 
-		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction::operations>, bool> = true>
+		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>
 		inline operator con<B> const& () const
 		{
 			return reference<con<B>>();
 		}
 
-		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction::operations>, bool> = true>
+		template <typename B, std::enable_if_t<std::is_base_of_v<typename B::operations, typename abstraction_d::operations>, bool> = true>
 		inline operator con<B>& ()
 		{
 			return reference<con<B>>();
 		}
 
-		inline adr<con<abstraction>> address() const
+		inline adr<con<abstraction_d>> address() const
 		{
-			return adr<con<abstraction>>{ *this };
+			return adr<con<abstraction_d>>{ *this };
 		}
 
 		template <typename function_d, typename... parameters_d>

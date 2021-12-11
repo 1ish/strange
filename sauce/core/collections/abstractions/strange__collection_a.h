@@ -71,6 +71,7 @@ namespace strange
 	{
 		using non_mutator_range = bool;
 		using operations = collection_o<key_d, value_d, element_d>;
+		using variations = any_v<collection_a<key_d, value_d, element_d>>;
 		using creator_fp = var<collection_a<key_d, value_d, element_d>>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

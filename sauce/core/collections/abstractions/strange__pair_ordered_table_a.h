@@ -27,6 +27,7 @@ namespace strange
 	{
 		using non_mutator_range = bool;
 		using operations = pair_ordered_table_o<key_d, value_d>;
+		using variations = any_v<pair_ordered_table_a<key_d, value_d>>;
 		using creator_fp = var<pair_ordered_table_a<key_d, value_d>> (*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

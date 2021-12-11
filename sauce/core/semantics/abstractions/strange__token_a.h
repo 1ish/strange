@@ -22,6 +22,7 @@ namespace strange
 	struct token_a
 	{
 		using operations = token_o;
+		using variations = any_v<token_a>;
 		using creator_fp = var<token_a>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

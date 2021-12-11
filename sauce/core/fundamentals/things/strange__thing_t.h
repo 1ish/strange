@@ -11,9 +11,9 @@ namespace strange
 
 	protected:
 		inline thing_t(any_a const& me)
-		: refs_{ 0 }
-		, weak_{ 1 }
-		, error_{ nullptr, nullptr }
+			: refs_{ 0 }
+			, weak_{ 1 }
+			, error_{ { { nullptr, nullptr } } }
 		{
 			me.t = this;
 			me.o = thing_t::_operations();
@@ -21,9 +21,9 @@ namespace strange
 
 		inline thing_t(any_a const& me,
 			any_a const& original)
-		: refs_{ 0 }
-		, weak_{ 1 }
-		, error_{ original.t->error_ }
+			: refs_{ 0 }
+			, weak_{ 1 }
+			, error_{ original.t->error_ }
 		{
 			me.t = this;
 			me.o = thing_t::_operations();

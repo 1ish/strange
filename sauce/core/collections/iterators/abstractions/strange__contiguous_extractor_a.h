@@ -15,6 +15,7 @@ namespace strange
 	struct contiguous_extractor_a
 	{
 		using operations = contiguous_extractor_o<element_d>;
+		using variations = any_v<contiguous_extractor_a<element_d>>;
 		using creator_fp = rat<contiguous_extractor_a<element_d>>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

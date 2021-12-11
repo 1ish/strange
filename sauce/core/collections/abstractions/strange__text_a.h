@@ -12,6 +12,7 @@ namespace strange
 	{
 		using non_mutator_range = bool;
 		using operations = text_o;
+		using variations = any_v<text_a>;
 		using creator_fp = var<text_a> (*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

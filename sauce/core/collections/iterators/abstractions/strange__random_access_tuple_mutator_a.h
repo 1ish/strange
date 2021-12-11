@@ -30,6 +30,7 @@ namespace strange
 	struct random_access_tuple_mutator_a
 	{
 		using operations = random_access_tuple_mutator_o<elements_d...>;
+		using variations = any_v<random_access_tuple_mutator_a<elements_d...>>;
 		using creator_fp = fit<random_access_tuple_mutator_a<elements_d...>>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

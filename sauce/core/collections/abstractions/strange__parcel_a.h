@@ -27,6 +27,7 @@ namespace strange
 	{
 		using non_mutator_range = bool;
 		using operations = parcel_o;
+		using variations = any_v<parcel_a>;
 		using creator_fp = var<parcel_a> (*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

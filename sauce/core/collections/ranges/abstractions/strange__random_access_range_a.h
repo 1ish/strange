@@ -17,6 +17,7 @@ namespace strange
 	{
 		using non_mutator_range = bool;
 		using operations = random_access_range_o<element_d>;
+		using variations = any_v<random_access_range_a<element_d>>;
 		using creator_fp = var<random_access_range_a<element_d>>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

@@ -3,7 +3,7 @@
 
 namespace strange
 {
-	struct any_o
+	struct any_o // operations
 	{
 		var<symbol_a> (*cat) (con<> const& me); //TODO cat
 
@@ -61,72 +61,72 @@ namespace strange
 		bool (*_pointer) (con<> const& me);
 	};
 
-	struct any_a
+	struct any_b // base
+	{
+		mutable thing_t* t;
+		mutable any_o const* o;
+	};
+
+	template <typename base_d>
+	struct any_c : // constant
+		base_d
+	{
+		using me_d = con<>;
+
+		inline var<symbol_a> cat() const; //TODO cat
+
+		inline bool is(con<> const& abstraction) const;
+
+		inline bool as(var<> const& abstraction) const;
+
+		inline var<symbol_a> type() const;
+
+		inline bool something() const;
+
+		inline var<> error() const;
+
+		inline uint64_t identity() const;
+
+		inline uint64_t hash() const;
+
+		inline bool equal(con<> const& other) const;
+
+		inline bool not_equal(con<> const& other) const;
+
+		inline bool less(con<> const& other) const;
+
+		inline bool greater(con<> const& other) const;
+
+		inline bool less_or_equal(con<> const& other) const;
+
+		inline bool greater_or_equal(con<> const& other) const;
+
+		inline bool pack(var<container_a> const& container) const;
+	};
+
+	template <typename base_d>
+	struct any_v : // variable
+		base_d
+	{
+		using me_d = var<>;
+
+		inline void set_something(bool is_something) const;
+		
+		inline void set_error(con<> const& err) const;
+	};
+
+	struct any_a : // abstraction
+		any_c<any_b>
 	{
 		using operations = any_o;
+		using variations = any_v<any_a>;
 		using creator_fp = var<>(*)(con<range_a<>> const& range);
-
-		mutable thing_t* t;
-		mutable operations const* o;
 
 		static var<symbol_a> cat(con<> const& me); //TODO cat
 
 		static creator_fp creator(con<symbol_a> const& scope,
 			con<symbol_a> const& thing,
 			con<symbol_a> const& function);
-	};
-
-	inline uint64_t any_o::identity(con<> const& me)
-	{
-		return reinterpret_cast<std::uintptr_t>(me.t);
-	}
-
-	inline bool any_o::not_equal(con<> const& me,
-		con<> const& other)
-	{
-		return !me.o->equal(me, other);
-	}
-
-	inline bool any_o::greater(con<> const& me,
-		con<> const& other)
-	{
-		return !me.o->less_or_equal(me, other);
-	}
-
-	inline bool any_o::greater_or_equal(con<> const& me,
-		con<> const& other)
-	{
-		return !me.o->less(me, other);
-	}
-}
-
-namespace std
-{
-	template <typename abstraction_d>
-	struct hash<strange::con<abstraction_d>>
-	{
-		std::size_t operator()(strange::con<abstraction_d> const& thing) const
-		{
-			return static_cast<std::size_t>(thing.o->hash(thing));
-		}
-	};
-
-	template <typename abstraction_d>
-	struct hash<strange::var<abstraction_d>>
-	{
-		std::size_t operator()(strange::var<abstraction_d> const& thing) const
-		{
-			return static_cast<std::size_t>(thing.o->hash(thing));
-		}
-	};
-
-	template <typename abstraction_d>
-	struct hash<strange::ptr<abstraction_d>>
-	{
-		std::size_t operator()(strange::ptr<abstraction_d> const& thing) const
-		{
-			return static_cast<std::size_t>(thing.o->hash(thing));
-		}
 	};
 }
 

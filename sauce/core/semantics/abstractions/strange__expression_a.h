@@ -167,6 +167,7 @@ namespace strange
 	struct expression_a
 	{
 		using operations = expression_o;
+		using variations = any_v<expression_a>;
 		using creator_fp = var<expression_a>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

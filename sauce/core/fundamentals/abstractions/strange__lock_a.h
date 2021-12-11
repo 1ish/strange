@@ -18,6 +18,7 @@ namespace strange
 	struct lock_a
 	{
 		using operations = lock_o;
+		using variations = any_v<lock_a>;
 		using creator_fp = var<lock_a>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

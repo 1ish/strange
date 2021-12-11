@@ -103,6 +103,7 @@ namespace strange
 	{
 		using non_mutator_range = bool;
 		using operations = container_o;
+		using variations = any_v<container_a>;
 		using creator_fp = var<container_a> (*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

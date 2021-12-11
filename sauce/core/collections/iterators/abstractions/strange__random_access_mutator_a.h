@@ -30,6 +30,7 @@ namespace strange
 	struct random_access_mutator_a
 	{
 		using operations = random_access_mutator_o<element_d>;
+		using variations = any_v<random_access_mutator_a<element_d>>;
 		using creator_fp = rat<random_access_mutator_a<element_d>>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

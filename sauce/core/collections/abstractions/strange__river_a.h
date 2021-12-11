@@ -86,6 +86,7 @@ namespace strange
 	{
 		using non_mutator_range = bool;
 		using operations = river_o;
+		using variations = any_v<river_a>;
 		using creator_fp = var<river_a> (*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

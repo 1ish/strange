@@ -14,6 +14,7 @@ namespace strange
 	struct bidirectional_mutator_a
 	{
 		using operations = bidirectional_mutator_o<element_d>;
+		using variations = any_v<bidirectional_mutator_a<element_d>>;
 		using creator_fp = bit<bidirectional_mutator_a<element_d>>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

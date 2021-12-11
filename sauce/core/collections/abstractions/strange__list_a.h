@@ -25,6 +25,7 @@ namespace strange
 	{
 		using non_mutator_range = bool;
 		using operations = list_o<element_d>;
+		using variations = any_v<list_a<element_d>>;
 		using creator_fp = var<list_a<element_d>> (*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

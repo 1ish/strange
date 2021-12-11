@@ -38,6 +38,7 @@ namespace strange
 	struct number_a
 	{
 		using operations = number_o<type_d>;
+		using variations = any_v<number_a<type_d>>;
 		using creator_fp = var<number_a<type_d>>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

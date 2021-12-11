@@ -25,6 +25,7 @@ namespace strange
 	struct kind_a
 	{
 		using operations = kind_o;
+		using variations = any_v<kind_a>;
 		using creator_fp = var<kind_a>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

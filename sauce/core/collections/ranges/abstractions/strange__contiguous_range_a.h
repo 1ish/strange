@@ -17,6 +17,7 @@ namespace strange
 	{
 		using non_mutator_range = bool;
 		using operations = contiguous_range_o<element_d>;
+		using variations = any_v<contiguous_range_a<element_d>>;
 		using creator_fp = var<contiguous_range_a<element_d>>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

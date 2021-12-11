@@ -17,6 +17,7 @@ namespace strange
 	{
 		using is_mutator_range = bool;
 		using operations = tuple_mutator_range_o<elements_d...>;
+		using variations = any_v<tuple_mutator_range_a<elements_d...>>;
 		using creator_fp = var<tuple_mutator_range_a<elements_d...>>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

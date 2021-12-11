@@ -19,6 +19,7 @@ namespace strange
 	struct mutable_numeric_a
 	{
 		using operations = mutable_numeric_o;
+		using variations = any_v<mutable_numeric_a>;
 		using creator_fp = var<mutable_numeric_a>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

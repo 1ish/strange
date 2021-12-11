@@ -225,6 +225,11 @@ namespace strange
 #include "semantics/abstractions/strange__expression_a.h"
 #include "semantics/abstractions/strange__parser_a.h"
 
+
+#include "fundamentals/abstractions/strange__any_i.h"
+#include "fundamentals/abstractions/strange__symbol_i.h"
+
+
 #include "fundamentals/things/strange__thing_t.h"
 #include "fundamentals/things/strange__symbol_t.h"
 #include "fundamentals/things/strange__data_t.h"

@@ -25,6 +25,7 @@ namespace strange
 	{
 		using non_mutator_range = bool;
 		using operations = table_o<key_d, value_d>;
+		using variations = any_v<table_a<key_d, value_d>>;
 		using creator_fp = var<table_a<key_d, value_d>> (*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;

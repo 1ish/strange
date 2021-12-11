@@ -3,7 +3,7 @@
 
 namespace strange
 {
-	struct symbol_o :
+	struct symbol_o : // operations
 		any_o
 	{
 		bool (*equal) (con<symbol_a> const& me,
@@ -36,13 +36,54 @@ namespace strange
 		char (*last_char) (con<symbol_a> const& me);
 	};
 
-	struct symbol_a
+	struct symbol_b // base
+	{
+		mutable thing_t* t;
+		mutable symbol_o const* o;
+	};
+	
+	template <typename base_d>
+	struct symbol_c : // constant
+		any_c<base_d>
+	{
+		using me_d = con<symbol_a>;
+
+		inline bool equal(con<symbol_a> const& other) const;
+
+		inline bool not_equal(con<symbol_a> const& other) const;
+
+		inline bool less(con<symbol_a> const& other) const;
+
+		inline bool greater(con<symbol_a> const& other) const;
+
+		inline bool less_or_equal(con<symbol_a> const& other) const;
+
+		inline bool greater_or_equal(con<symbol_a> const& other) const;
+
+		inline var<symbol_a> add(con<symbol_a> const& suffix) const;
+
+		inline char const* char_star() const;
+
+		inline int64_t length() const;
+
+		inline char first_char() const;
+
+		inline char last_char() const;
+	};
+	
+	template <typename base_d>
+	struct symbol_v : // variable
+		any_v<base_d>
+	{
+		using me_d = var<symbol_a>;
+	};
+	
+	struct symbol_a : // abstraction
+		symbol_c<symbol_b>
 	{
 		using operations = symbol_o;
+		using variations = symbol_v<symbol_a>;
 		using creator_fp = var<symbol_a>(*)(con<range_a<>> const& range);
-
-		mutable thing_t* t;
-		mutable operations const* o;
 
 		static var<symbol_a> cat(con<> const& me); //TODO cat
 
@@ -50,49 +91,6 @@ namespace strange
 			con<symbol_a> const& thing,
 			con<symbol_a> const& function);
 	};
-
-
-	inline bool symbol_o::not_equal(con<symbol_a> const& me,
-		con<symbol_a> const& other)
-	{
-		return !me.o->equal(me, other);
-	}
-
-	inline bool symbol_o::greater(con<symbol_a> const& me,
-		con<symbol_a> const& other)
-	{
-		return !me.o->less_or_equal(me, other);
-	}
-
-	inline bool symbol_o::greater_or_equal(con<symbol_a> const& me,
-		con<symbol_a> const& other)
-	{
-		return !me.o->less(me, other);
-	}
-
-	inline bool operator==(con<symbol_a> const& left,
-		char const* right)
-	{
-		return std::strncmp(left.o->char_star(left), right, static_cast<std::size_t>(left.o->length(left) + 1)) == 0;
-	}
-
-	inline bool operator!=(con<symbol_a> const& left,
-		char const* right)
-	{
-		return std::strncmp(left.o->char_star(left), right, static_cast<std::size_t>(left.o->length(left) + 1)) != 0;
-	}
-
-	inline bool operator==(char const* left,
-		con<symbol_a> const& right)
-	{
-		return std::strncmp(left, right.o->char_star(right), static_cast<std::size_t>(right.o->length(right) + 1)) == 0;
-	}
-
-	inline bool operator!=(char const* left,
-		con<symbol_a> const& right)
-	{
-		return std::strncmp(left, right.o->char_star(right), static_cast<std::size_t>(right.o->length(right) + 1)) != 0;
-	}
 }
 
 #endif

@@ -13,6 +13,7 @@ namespace strange
 	struct parser_a
 	{
 		using operations = parser_o;
+		using variations = any_v<parser_a>;
 		using creator_fp = var<parser_a>(*)(con<range_a<>> const& range);
 
 		mutable thing_t* t;
