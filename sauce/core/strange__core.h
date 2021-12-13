@@ -229,6 +229,7 @@ namespace strange
 #include "fundamentals/abstractions/strange__any_i.h"
 #include "fundamentals/abstractions/strange__symbol_i.h"
 #include "fundamentals/abstractions/strange__cat_i.h"
+#include "fundamentals/abstractions/strange__data_i.h"
 
 
 #include "fundamentals/things/strange__thing_t.h"

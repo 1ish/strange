@@ -767,6 +767,9 @@
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__cat_i.h">
       <Filter>Header Files\sauce\core\fundamentals\abstractions</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__data_i.h">
+      <Filter>Header Files\sauce\core\fundamentals\abstractions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\LICENSE">
