@@ -322,10 +322,15 @@
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__data_a.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__data_i.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__kind_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__kind_i.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__lock_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__lock_i.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__mutable_numeric_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__mutable_numeric_i.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__number_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__number_i.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__numeric_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__numeric_i.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__symbol_a.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__symbol_i.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__type_a.h" />

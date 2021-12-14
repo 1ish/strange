@@ -3,7 +3,7 @@
 
 namespace strange
 {
-	struct mutable_numeric_o :
+	struct mutable_numeric_o : // operations
 		numeric_o
 	{
 		void (*from_int64) (var<mutable_numeric_a> const& me,
@@ -16,14 +16,38 @@ namespace strange
 			double number);
 	};
 
-	struct mutable_numeric_a
+	struct mutable_numeric_b // base
+	{
+		mutable thing_t* t;
+		mutable mutable_numeric_o const* o;
+	};
+
+	template <typename base_d>
+	struct mutable_numeric_c : // constant
+		numeric_c<base_d>
+	{
+		using me_d = con<mutable_numeric_a>;
+	};
+
+	template <typename base_d>
+	struct mutable_numeric_v : // variable
+		numeric_v<base_d>
+	{
+		using me_d = var<mutable_numeric_a>;
+
+		inline void from_int64(int64_t number) const;
+
+		inline void from_uint64(uint64_t number) const;
+
+		inline void from_float64(double number) const;
+	};
+
+	struct mutable_numeric_a : // abstraction
+		mutable_numeric_c<mutable_numeric_b>
 	{
 		using operations = mutable_numeric_o;
-		using variations = any_v<mutable_numeric_a>;
+		using variations = mutable_numeric_v<mutable_numeric_a>;
 		using creator_fp = var<mutable_numeric_a>(*)(con<range_a<>> const& range);
-
-		mutable thing_t* t;
-		mutable operations const* o;
 
 		static var<symbol_a> cat(con<> const& me); //TODO cat
 

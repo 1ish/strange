@@ -3,7 +3,7 @@
 
 namespace strange
 {
-	struct lock_o :
+	struct lock_o : // operations
 		any_o
 	{
 		static inline ptr<> read_lock (var<lock_a> const& me);
@@ -15,14 +15,36 @@ namespace strange
 		static inline std::unique_lock<std::shared_mutex> _write_lock (var<lock_a> const& me);
 	};
 
-	struct lock_a
+	struct lock_b // base
+	{
+		mutable thing_t* t;
+		mutable lock_o const* o;
+	};
+
+	template <typename base_d>
+	struct lock_c : // constant
+		any_c<base_d>
+	{
+		using me_d = con<lock_a>;
+	};
+	
+	template <typename base_d>
+	struct lock_v : // variable
+		any_v<base_d>
+	{
+		using me_d = var<lock_a>;
+
+		inline ptr<> read_lock() const;
+
+		inline ptr<> write_lock() const;
+	};
+
+	struct lock_a : // abstraction
+		lock_c<lock_b>
 	{
 		using operations = lock_o;
-		using variations = any_v<lock_a>;
+		using variations = lock_v<lock_a>;
 		using creator_fp = var<lock_a>(*)(con<range_a<>> const& range);
-
-		mutable thing_t* t;
-		mutable operations const* o;
 
 		static var<symbol_a> cat(con<> const& me); //TODO cat
 
