@@ -235,6 +235,8 @@ namespace strange
 #include "fundamentals/abstractions/strange__numeric_i.h"
 #include "fundamentals/abstractions/strange__mutable_numeric_i.h"
 #include "fundamentals/abstractions/strange__number_i.h"
+#include "fundamentals/abstractions/strange__type_i.h"
+#include "fundamentals/abstractions/strange__unlock_i.h"
 
 
 #include "fundamentals/things/strange__thing_t.h"

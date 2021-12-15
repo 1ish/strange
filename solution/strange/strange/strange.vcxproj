@@ -334,7 +334,9 @@
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__symbol_a.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__symbol_i.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__type_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__type_i.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__unlock_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__unlock_i.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\enumerations\strange__behaviour_e.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\enumerations\strange__representation_e.h" />
     <ClInclude Include="..\..\..\sauce\core\fundamentals\things\strange__data_pointer_t.h" />
