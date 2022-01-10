@@ -417,6 +417,9 @@
     <ClCompile Include="..\..\..\sauce\core\collections\things\strange__text_t.cpp">
       <Filter>Source Files\sauce\core\collections\things</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__reader_a.cpp">
+      <Filter>Source Files\sauce\core\collections\abstractions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\sauce\strange.h">
@@ -790,6 +793,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\sauce\core\fundamentals\abstractions\strange__unlock_i.h">
       <Filter>Header Files\sauce\core\fundamentals\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__reader_a.h">
+      <Filter>Header Files\sauce\core\collections\abstractions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

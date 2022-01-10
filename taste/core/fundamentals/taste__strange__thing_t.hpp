@@ -113,9 +113,9 @@ namespace taste
 		auto number = num<int64_t>(123);
 		auto uns = num<uint64_t>(123);
 		auto flt = num(1.23);
-		auto number_data = number.o->data(number);
-		auto uns_data = uns.o->data(uns);
-		auto flt_data = flt.o->data(flt);
+		auto number_data = number.data();
+		auto uns_data = uns.data();
+		auto flt_data = flt.data();
 
 		int64_t an_int = 1;
 		uint64_t a_uint = 2;
@@ -123,9 +123,9 @@ namespace taste
 		auto number_ref = num_ref(an_int);
 		auto uns_ref = num_ref(a_uint);
 		auto flt_ref = num_ref(a_float);
-		auto number_ref_data = number_ref.o->data(number_ref);
-		auto uns_ref_data = uns_ref.o->data(uns_ref);
-		auto flt_ref_data = flt_ref.o->data(flt_ref);
+		auto number_ref_data = number_ref.data();
+		auto uns_ref_data = uns_ref.data();
+		auto flt_ref_data = flt_ref.data();
 
 		auto e1 = num<int64_t>(1).perform(&number_o<int64_t>::extractor);
 		auto e11 = e1 + 10;
@@ -139,11 +139,11 @@ namespace taste
 		var<number_a<int64_t>> nv{ nc };
 		ptr<number_a<int64_t>> np{ nv };
 		ptr<number_a<int64_t>> np2{ np };
-		nc.o->extract(nc);
-		nv.o->extract(nv);
-		nv.o->mutate(nv);
-		np.o->extract(np);
-		np.o->mutate(np);
+		nc.extract();
+		nv.extract();
+		nv.mutate();
+		np.extract();
+		np.mutate();
 
 		auto aoc = nc.address();
 		auto aov = adr<var<number_a<int64_t>>>{ nv };
@@ -230,6 +230,21 @@ namespace taste
 		}
 
 		auto hut = text("hello universe");
+		auto hwt = text("hello world");
+
+		for (int xx = 0; xx < 3; ++xx)
+		{
+			for (auto ch : hut.o->range(hut))
+			{
+				std__cout << ch;
+			}
+			for (auto ch : hwt.o->range(hwt))
+			{
+				std__cout << ch;
+			}
+			std__cout << "\n";
+			std::swap(hut, hwt);
+		}
 	}
 }
 

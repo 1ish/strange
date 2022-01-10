@@ -94,6 +94,7 @@ namespace strange
 	template <typename key_d = con<>, typename value_d = var<>> struct ordered_table_a;
 	template <typename key_d = con<>, typename value_d = var<>> struct pair_ordered_table_a;
 	struct brook_a;
+	struct reader_a;
 	struct river_a;
 	struct lake_a;
 	struct text_a;
@@ -215,6 +216,7 @@ namespace strange
 #include "collections/abstractions/strange__ordered_table_a.h"
 #include "collections/abstractions/strange__pair_ordered_table_a.h"
 #include "collections/abstractions/strange__brook_a.h"
+#include "collections/abstractions/strange__reader_a.h"
 #include "collections/abstractions/strange__river_a.h"
 #include "collections/abstractions/strange__lake_a.h"
 #include "collections/abstractions/strange__text_a.h"

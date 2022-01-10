@@ -153,6 +153,7 @@
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__pair_table_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__parcel_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__queue_a.cpp" />
+    <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__reader_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__river_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__table_a.cpp" />
     <ClCompile Include="..\..\..\sauce\core\collections\abstractions\strange__text_a.cpp" />
@@ -252,6 +253,7 @@
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__pair_table_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__parcel_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__queue_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__reader_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__river_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__table_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__text_a.h" />
