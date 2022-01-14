@@ -238,6 +238,7 @@ namespace taste
 			{
 				std__cout << ch;
 			}
+			std__cout << " ";
 			for (auto ch : hwt.o->range(hwt))
 			{
 				std__cout << ch;

@@ -6,22 +6,22 @@ name ("stu")			stu
 symbol ("abc")			'abc'
 text ("xyz")			"xyz"	- infinte regress
 int ("1")				1		- 64 bit signed
-float ("2.3")			2.3		- 64 bit
+float ("2.3")			2.3		- 64 bit double
 comment ("// cool")		// cool
 
-cat (order, representation, scope, name, aspects)		<+ int64_t >+
-type (scope, name, aspects)								strange::number[=<+ int64_t >+]
-kind (behaviour, the_cat, the_type)						=<+ int64_t >+
+cat (order, representation, scope, name, aspects)		<+ int64_t >
+type (scope, name, aspects)								strange::number[=<+ int64_t >]
+kind (behaviour, the_cat, the_type)						=<+ int64_t >
 
 list (1, 2, 3)						[1, 2, 3]
-list [#<+ int64_t >+] (1, 2, 3)
+list [#<+ int64_t >] (1, 2, 3)
 table (tuple (1, 2.3))				{1: 2.3}
-table {key: =<+ int64_t >+, value: @<+ double >+} (tuple [=<+ int64_t >+, @<+ double >+] (1, 2.3))
+table {key: =<+ int64_t >, value: @<+ double >} (tuple [=<+ int64_t >, @<+ double >] (1, 2.3))
 
 composition (before, after, result)				(before, after, result)
 
 association (x, #, 42)							x # 42
-syndication (x$, =<+ int64_t >+, 42)			x$ =<+ int64_t >+ 42
+syndication (x$, =<+ int64_t >, 42)				x$ =<+ int64_t > 42
 
 invocation (x, add, y)							x.add[y]
 
@@ -48,12 +48,12 @@ strange: realm
 (
 	number: abstraction {type: <<>>} [<mutable_numeric>]
 	(
-		equal				# extraction (other #^^) =<+ bool >+,
-		not_equal			# extraction (other #^^) =<+ bool >+,
-		less				# extraction (other #^^) =<+ bool >+,
-		greater				# extraction (other #^^) =<+ bool >+,
-		less_or_equal		# extraction (other #^^) =<+ bool >+,
-		greater_or_equal	# extraction (other #^^) =<+ bool >+,
+		equal				# extraction (other #^^) =<+ bool >,
+		not_equal			# extraction (other #^^) =<+ bool >,
+		less				# extraction (other #^^) =<+ bool >,
+		greater				# extraction (other #^^) =<+ bool >,
+		less_or_equal		# extraction (other #^^) =<+ bool >,
+		greater_or_equal	# extraction (other #^^) =<+ bool >,
 		data				# extraction () =<data[^type^]>,
 		extract				# extraction () #^type^,
 		mutate				# mutation () @^type^,
@@ -71,36 +71,36 @@ strange: realm
 
 		number				# manifestation
 		(
-			me		#<number[<+ std::remove_reference_t<type_d> >+]>
-		)			=<number[<+ std::remove_reference_t<type_d> >+]>,
+			me		#<number[<+ std::remove_reference_t<type_d> >]>
+		)			=<number[<+ std::remove_reference_t<type_d> >]>,
 
 		data				# manifestation
 		(
-			me		#<number[<+ std::remove_reference_t<type_d> >+]>
-		)			=<data[<+ std::remove_reference_t<type_d> >+]>,
+			me		#<number[<+ std::remove_reference_t<type_d> >]>
+		)			=<data[<+ std::remove_reference_t<type_d> >]>,
 
 		extractor			# manifestation
 		(
-			me		#<number[<+ std::remove_reference_t<type_d> >+]>
-		)			*<random_access_extractor[<+ std::remove_reference_t<type_d> >+]>,
+			me		#<number[<+ std::remove_reference_t<type_d> >]>
+		)			*<random_access_extractor[<+ std::remove_reference_t<type_d> >]>,
 
 		equal_number		# function
 		(
-			me		#<number[<+ std::remove_reference_t<type_d> >+]>,
-			other	#<number[<+ std::remove_reference_t<type_d> >+]>,
-		)			=<+ bool >+,
+			me		#<number[<+ std::remove_reference_t<type_d> >]>,
+			other	#<number[<+ std::remove_reference_t<type_d> >]>,
+		)			=<+ bool >,
 
 		less_number			# function
 		(
-			me		#<number[<+ std::remove_reference_t<type_d> >+]>,
-			other	#<number[<+ std::remove_reference_t<type_d> >+]>,
-		)			=<+ bool >+,
+			me		#<number[<+ std::remove_reference_t<type_d> >]>,
+			other	#<number[<+ std::remove_reference_t<type_d> >]>,
+		)			=<+ bool >,
 
 		less_or_equal_number	# function
 		(
-			me		#<number[<+ std::remove_reference_t<type_d> >+]>,
-			other	#<number[<+ std::remove_reference_t<type_d> >+]>,
-		)			=<+ bool >+,
+			me		#<number[<+ std::remove_reference_t<type_d> >]>,
+			other	#<number[<+ std::remove_reference_t<type_d> >]>,
+		)			=<+ bool >,
 	)
 	{
 		number:
@@ -111,22 +111,22 @@ strange: realm
 		},
 	
 		equal_number:
-		(+++
+		/+
 			auto const mt = static_cast<number_t<type_d> const* const>(me.t);
 			return mt->data_ == other.o->extract(other);			
-		)+++,
+		+/,
 
 		less_number:
-		(+++
+		/+
 			auto const mt = static_cast<number_t<type_d> const* const>(me.t);
 			return mt->data_ < other.o->extract(other);
-		)+++,
+		+/,
 
 		less_or_equal_number:
-		(+++
+		/+
 			auto const mt = static_cast<number_t<type_d> const* const>(me.t);
 			return mt->data_ <= other.o->extract(other);
-		)+++,
+		+/,
 	},
 )
 

@@ -18,9 +18,9 @@ namespace strange
 
 		// abstraction  <symbol>
 		// dimension    ^element^
-		// native       <+bool>+
+		// native       <+bool>
 		// enumeration  %behaviour%
-		// meta         <~abstraction>~
+		// meta         <~abstraction>
 		// function     <(x #, y #) =>
 	};
 
