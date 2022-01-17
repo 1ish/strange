@@ -7,7 +7,6 @@ namespace strange
 	inline ptr<> lock_v<base_d>::read_lock() const
 	{
 		auto const& me = reinterpret_cast<me_d const&>(*this);
-		me.mut();
 		return me.o->read_lock(me);
 	}
 
@@ -15,7 +14,6 @@ namespace strange
 	inline ptr<> lock_v<base_d>::write_lock() const
 	{
 		auto const& me = reinterpret_cast<me_d const&>(*this);
-		me.mut();
 		return me.o->write_lock(me);
 	}
 }

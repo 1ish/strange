@@ -10,6 +10,7 @@ namespace strange
 		native,
 		enumeration,
 		meta,
+		function,
 	};
 }
 

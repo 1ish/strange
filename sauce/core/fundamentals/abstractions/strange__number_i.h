@@ -70,7 +70,6 @@ namespace strange
 	inline type_d& number_v<base_d, type_d>::mutate() const
 	{
 		auto const& me = reinterpret_cast<me_d const&>(*this);
-		me.mut();
 		return me.o->mutate(me);
 	}
 

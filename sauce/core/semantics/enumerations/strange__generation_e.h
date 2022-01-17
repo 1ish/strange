@@ -9,6 +9,7 @@ namespace strange
 		declaration,
 		definition,
 		implementation,
+		body,
 	};
 }
 

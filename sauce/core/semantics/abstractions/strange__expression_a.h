@@ -157,6 +157,7 @@ namespace strange
 
 		void (*generate) (con<expression_a> const& me,
 			generation_e generation,
+			//TODO options
 			int64_t version,
 			int64_t indentation,
 			var<brook_a> const& brook);

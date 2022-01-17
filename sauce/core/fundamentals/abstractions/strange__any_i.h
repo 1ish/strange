@@ -112,7 +112,6 @@ namespace strange
 	inline void any_v<base_d>::set_something(bool is_something) const
 	{
 		auto const& me = reinterpret_cast<me_d const&>(*this);
-		me.mut();
 		me.o->set_something(me, is_something);
 	}
 
@@ -120,7 +119,6 @@ namespace strange
 	inline void any_v<base_d>::set_error(con<> const& err) const
 	{
 		auto const& me = reinterpret_cast<me_d const&>(*this);
-		me.mut();
 		me.o->set_error(me, err);
 	}
 

@@ -21,7 +21,6 @@ namespace strange
 	inline ptr<> data_v<base_d, type_d>::write_lock() const
 	{
 		auto const& me = reinterpret_cast<me_d const&>(*this);
-		me.mut();
 		return me.o->write_lock(me);
 	}
 
@@ -29,7 +28,6 @@ namespace strange
 	inline type_d& data_v<base_d, type_d>::mutate() const
 	{
 		auto const& me = reinterpret_cast<me_d const&>(*this);
-		me.mut();
 		return me.o->mutate(me);
 	}
 }
