@@ -13,27 +13,32 @@ cat (order, representation, scope, name, aspects)		<+ int64_t >
 type (scope, name, aspects)								strange::number[=<+ int64_t >]
 kind (behaviour, the_cat, the_type)						=<+ int64_t >
 
-list (1, 2, 3)						[1, 2, 3]
+list (1, 2, 3)											[1, 2, 3]
 list [#<+ int64_t >] (1, 2, 3)
-table (tuple (1, 2.3))				{1: 2.3}
+table (tuple (1, 2.3))									{1: 2.3}
 table {key: =<+ int64_t >, value: @<+ double >} (tuple [=<+ int64_t >, @<+ double >] (1, 2.3))
 
-composition (before, after, result)				(before, after, result)
+composition (before, after, result)						(before, after, result)
 
-association (x, #, 42)							x # 42
-syndication (x$, =<+ int64_t >, 42)				x$ =<+ int64_t > 42
+association ('x', #, 42)								x # 42
+syndication ('x', =<+ int64_t >, 42)					x$ =<+ int64_t > 42
 
-invocation (x, add, y)							x.add[y]
+execution (f, x, y, z)									f[x, y, z]
+performance (x, add, y)									x.add[y]
 
-f = function (x #, y #) = x.add[y]
-e = extraction (x #, y #) = x.add[y]					e = operation (me #, x #, y #) = x.add[y]
+f = function (x #, y #, z #) = x.add[y].add[z]
+
+o = operation (me *<>, x #, y #) = me.add[x].add[y]		o = function (me *<>, x #, y #) = me.add[x].add[y]
+e = extraction (x #, y #) = x.add[y]					e = function (me #, x #, y #) = x.add[y]
 m = mutation (x #, y #) @ (me.save[], x + y)			m = operation (me =, x #, y #) @ (me.save[], x + y)
 p = perversion (x #, y #) =<> (me.share[], x + y)		p = operation (me @, x #, y #) =<> (me.share[], x + y)
 
-f.execute[1, 2]
-e.perform[x, 1, 2]
-m.perform[x, 1, 2]
-p.perform{me: f, x: e, y: m}
+a.execute[1, 2, 3]										a[1, 2, 3]
+
+a.perform[o, 1, 2]										a.o[1, 2, 3]					(a.o)[a, 1, 2]
+a.perform[e, 1, 2]										a.e[1, 2]						(a.e)[e, 1, 2]
+a.perform[m, 1, 2]										a.m[1, 2]						(a.m)[e, 1, 2]
+a.perform[p, 1, 2]										a.p[1, 2]						(a.p)[e, 1, 2]
 
 realm ()
 abstraction {} [] ()
@@ -60,9 +65,9 @@ strange: realm
 		extractor			# extraction () *<random_access_extractor[^type^]>,
 	)
 	{
-		not_equal:			me.equal[] !,
-		greater:			me.less_or_equal[] !,
-		greater_or_equal:	me.less[] !,
+		not_equal:			me.equal[other] !,
+		greater:			me.less_or_equal[other] !,
+		greater_or_equal:	me.less[other] !,
 	},
 
 	number: thing {type: <<>>} [data[^type^]]
