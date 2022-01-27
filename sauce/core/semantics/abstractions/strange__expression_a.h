@@ -28,10 +28,10 @@ performance (x, add, y)									x.add[y]
 
 f = function (x #, y #, z #) = x.add[y].add[z]
 
-o = operation (me *<>, x #, y #) = me.add[x].add[y]		o = function (me *<>, x #, y #) = me.add[x].add[y]
-e = extraction (x #, y #) = x.add[y]					e = function (me #, x #, y #) = x.add[y]
-m = mutation (x #, y #) @ (me.save[], x + y)			m = operation (me =, x #, y #) @ (me.save[], x + y)
-p = perversion (x #, y #) =<> (me.share[], x + y)		p = operation (me @, x #, y #) =<> (me.share[], x + y)
+o = operation (me *<^>, x #, y #) = me.add[x].add[y]		o = function (me *<^>, x #, y #) = me.add[x].add[y]
+e = extraction (x #, y #) = x.add[y]					e = function (me #<^>, x #, y #) = x.add[y]
+m = mutation (x #, y #) @ (me.save[], x + y)			m = operation (me =<^>, x #, y #) @ (me.save[], x + y)
+p = perversion (x #, y #) =<> (me.share[], x + y)		p = operation (me @<^>, x #, y #) =<> (me.share[], x + y)
 
 a.execute[1, 2, 3]										a[1, 2, 3]
 
@@ -53,16 +53,16 @@ strange: realm
 (
 	number: abstraction {type: <<>>} [<mutable_numeric>]
 	(
-		equal				# extraction (other #^^) =<+ bool >,
-		not_equal			# extraction (other #^^) =<+ bool >,
-		less				# extraction (other #^^) =<+ bool >,
-		greater				# extraction (other #^^) =<+ bool >,
-		less_or_equal		# extraction (other #^^) =<+ bool >,
-		greater_or_equal	# extraction (other #^^) =<+ bool >,
-		data				# extraction () =<data[^type^]>,
-		extract				# extraction () #^type^,
-		mutate				# mutation () @^type^,
-		extractor			# extraction () *<random_access_extractor[^type^]>,
+		equal				# extraction (other #<^>) =<+ bool >,
+		not_equal			# extraction (other #<^>) =<+ bool >,
+		less				# extraction (other #<^>) =<+ bool >,
+		greater				# extraction (other #<^>) =<+ bool >,
+		less_or_equal		# extraction (other #<^>) =<+ bool >,
+		greater_or_equal	# extraction (other #<^>) =<+ bool >,
+		data				# extraction () =<data[^type]>,
+		extract				# extraction () #<^type>,
+		mutate				# mutation () @<^type>,
+		extractor			# extraction () *<random_access_extractor[^type]>,
 	)
 	{
 		not_equal:			me.equal[other] !,
@@ -70,9 +70,9 @@ strange: realm
 		greater_or_equal:	me.less[other] !,
 	},
 
-	number: thing {type: <<>>} [data[^type^]]
+	number: thing {type: <<>>} [data[^type]]
 	(
-		data_				=^type^,
+		data_				=<^type>,
 
 		number				# manifestation
 		(

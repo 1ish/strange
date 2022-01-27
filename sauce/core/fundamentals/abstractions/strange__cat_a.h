@@ -17,11 +17,12 @@ namespace strange
 		var<list_a<var<kind_a>>> (*aspects) (con<cat_a> const& me);
 
 		// abstraction  <symbol>
-		// dimension    ^element^
+		// dimension    <^element>
 		// native       <+bool>
-		// enumeration  %behaviour%
+		// enumeration  <%behaviour>
 		// meta         <~abstraction>
 		// function     <(x #, y #) =>
+		// me			<^>
 	};
 
 	struct cat_b // base
