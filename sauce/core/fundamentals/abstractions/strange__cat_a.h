@@ -16,13 +16,17 @@ namespace strange
 
 		var<list_a<var<kind_a>>> (*aspects) (con<cat_a> const& me);
 
-		// abstraction  <symbol>
-		// dimension    <^element>
-		// native       <+bool>
-		// enumeration  <%behaviour>
-		// meta         <~abstraction>
-		// function     <(x #, y #) =>
-		// me			<^>
+		var<list_a<var<expression_a>>> (*parameters) (con<cat_a> const& me);
+
+		var<kind_a> (*result) (con<cat_a> const& me);
+
+		// abstraction  @symbol								!@symbol
+		// me			^									!^
+		// dimension    ^element							!^element
+		// native       +bool								!+bool
+		// enumeration  %behaviour							!%behaviour
+		// meta         ~abstraction						!~abstraction
+		// function     *(@any# x, @any# y) -> @any%		!*(@any# x, @any# y) -> @any%
 	};
 
 	struct cat_b // base
@@ -46,6 +50,10 @@ namespace strange
 		inline var<symbol_a> name() const;
 
 		inline var<list_a<var<kind_a>>> aspects() const;
+
+		inline var<list_a<var<expression_a>>> parameters() const;
+
+		inline var<kind_a> result() const;
 	};
 	
 	template <typename base_d>

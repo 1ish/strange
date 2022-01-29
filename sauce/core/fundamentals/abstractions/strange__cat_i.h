@@ -37,6 +37,20 @@ namespace strange
 		auto const& me = reinterpret_cast<me_d const&>(*this);
 		return me.o->aspects(me);
 	}
+
+	template <typename base_d>
+	inline var<list_a<var<expression_a>>> cat_c<base_d>::parameters() const
+	{
+		auto const& me = reinterpret_cast<me_d const&>(*this);
+		return me.o->parameters(me);
+	}
+
+	template <typename base_d>
+	inline var<kind_a> cat_c<base_d>::result() const
+	{
+		auto const& me = reinterpret_cast<me_d const&>(*this);
+		return me.o->result(me);
+	}
 }
 
 #endif

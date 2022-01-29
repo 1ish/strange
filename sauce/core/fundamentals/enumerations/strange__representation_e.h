@@ -6,6 +6,7 @@ namespace strange
 	enum class representation_e
 	{
 		abstraction,
+		me,
 		dimension,
 		native,
 		enumeration,
