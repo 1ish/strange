@@ -16,7 +16,7 @@ kind (behaviour, the_cat, the_type)						+int64_t%
 list (1, 2, 3)											[1, 2, 3]
 list <+int64_t#> (1, 2, 3)
 table (tuple (1, 2.3))									{1: 2.3}
-table {key: +int64_t%, value: +double*} (tuple <+int64_t%, +double*> (1, 2.3))
+table {key: +int64_t#, value: +double%} (tuple <+int64_t#, +double%> (1, 2.3))
 
 composition (before, after, result)						(before, after, result)
 
