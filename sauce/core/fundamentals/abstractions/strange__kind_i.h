@@ -4,17 +4,10 @@
 namespace strange
 {
 	template <typename base_d>
-	inline var<cat_a> kind_c<base_d>::the_cat() const
+	inline bool kind_c<base_d>::shared() const
 	{
 		auto const& me = reinterpret_cast<me_d const&>(*this);
-		return me.o->the_cat(me);
-	}
-
-	template <typename base_d>
-	inline behaviour_e kind_c<base_d>::behaviour() const
-	{
-		auto const& me = reinterpret_cast<me_d const&>(*this);
-		return me.o->behaviour(me);
+		return me.o->shared(me);
 	}
 
 	template <typename base_d>
@@ -25,10 +18,17 @@ namespace strange
 	}
 
 	template <typename base_d>
-	inline bool kind_c<base_d>::shared() const
+	inline behaviour_e kind_c<base_d>::behaviour() const
 	{
 		auto const& me = reinterpret_cast<me_d const&>(*this);
-		return me.o->shared(me);
+		return me.o->behaviour(me);
+	}
+
+	template <typename base_d>
+	inline var<cat_a> kind_c<base_d>::the_cat() const
+	{
+		auto const& me = reinterpret_cast<me_d const&>(*this);
+		return me.o->the_cat(me);
 	}
 
 	template <typename base_d>

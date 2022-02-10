@@ -6,22 +6,24 @@ namespace strange
 	struct kind_o : // operations
 		symbol_o
 	{
-		var<cat_a> (*the_cat) (con<kind_a> const& me);
-
-		behaviour_e (*behaviour) (con<kind_a> const& me);
+		bool (*shared) (con<kind_a> const& me);
 
 		bool (*address) (con<kind_a> const& me);
 
-		bool (*shared) (con<kind_a> const& me);
+		behaviour_e(*behaviour) (con<kind_a> const& me);
+
+		var<cat_a> (*the_cat) (con<kind_a> const& me);
 
 		var<type_a> (*the_type) (con<kind_a> const& me);
 
-		// constant					@any#						address of constant					@any# &
-		// variable					@any%						shared variable						@any% $
-		// pointer					@any*						shared address of pointer			@any* & $
-		// forward_iterator			@forward_extractor <any>+	address of forward_iterator			@forward_extractor <any>+ &
-		// bidirectional_iterator	@bidirectional_mutator-		address of bidirectional_iterator	@bidirectional_mutator- &
-		// random_access_iterator	@random_access_extractor@	address of random_access_iterator	@random_access_extractor@ &
+		// constant					#any						address of constant					&#any
+		// variable					%any						shared variable						$%any
+		// pointer					*any						shared address of pointer			$&*any
+		// forward_iterator			+forward_extractor <any>	address of forward_iterator			&+forward_extractor <any>
+		// bidirectional_iterator	-bidirectional_mutator		address of bidirectional_iterator	&-bidirectional_mutator
+		// random_access_iterator	@random_access_extractor	address of random_access_iterator	&@random_access_extractor
+		// higher order kind		!any						even higher orer kind				!!any
+		// automatic				==
 	};
 
 	struct kind_b // base
@@ -36,13 +38,13 @@ namespace strange
 	{
 		using me_d = con<kind_a>;
 
-		inline var<cat_a> the_cat() const;
-
-		inline behaviour_e behaviour() const;
+		inline bool shared() const;
 
 		inline bool address() const;
 
-		inline bool shared() const;
+		inline behaviour_e behaviour() const;
+
+		inline var<cat_a> the_cat() const;
 
 		inline var<type_a> the_type() const;
 	};

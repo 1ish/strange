@@ -20,13 +20,15 @@ namespace strange
 
 		var<kind_a> (*result) (con<cat_a> const& me);
 
-		// abstraction  @symbol								!@symbol
-		// me			^									!^
-		// dimension    ^element							!^element
-		// native       +bool								!+bool
-		// enumeration  %behaviour							!%behaviour
-		// meta         ~abstraction						!~abstraction
-		// function     *(@any# x, @any# y) -> @any%		!*(@any# x, @any# y) -> @any%
+		// zero order cat									higher order cat
+		// abstraction  strange::symbol						?strange::symbol
+		// me			^^									?^^
+		// dimension    ^element							?^element
+		// native       /+bool+/							?/+bool+/
+		// enumeration  |strange::behaviour					?|strange::behaviour
+		// meta         ~abstraction						?~abstraction
+		// function     (#any_a x, #any_a y) -> %any_a		?(#any_a x, #any_a y) -> %any_a
+		// automatic	=									?=
 	};
 
 	struct cat_b // base

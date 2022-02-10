@@ -9,29 +9,29 @@ int ("1")				1		- 64 bit signed
 float ("2.3")			2.3		- 64 bit double
 comment ("// cool")		// cool
 
-cat (order, representation, scope, name, aspects)		+int64_t
-type (scope, name, aspects)								strange::number <+int64_t%>
-kind (behaviour, the_cat, the_type)						+int64_t%
+cat (order, representation, scope, name, aspects, parameters, result)		/+int64_t+/
+type (scope, name, aspects)													strange::number <%/+int64_t+/>
+kind (shared, address, behaviour, the_cat, the_type)						%/+int64_t+/
 
 list (1, 2, 3)											[1, 2, 3]
-list <+int64_t#> (1, 2, 3)
+list <#/+int64_t+/> (1, 2, 3)
 table (tuple (1, 2.3))									{1: 2.3}
-table {key: +int64_t#, value: +double%} (tuple <+int64_t#, +double%> (1, 2.3))
+table {key: #/+int64_t+/, value: %/+double+/} (tuple <#/+int64_t+/, %/+double+/> (1, 2.3))
 
 composition (before, after, result)						(before, after, result)
 
-association (@#, 'x', 42)								@# x = 42
-association (+int64_t% $, 'x', 42)						+int64_t% $ x = 42
+association (#=, 'x', 42)								#= x = 42
+association ($%/+int64_t+/, 'x', 42)					$%/+int64_t%+/ x = 42
 
 execution ('f', 'x', 'y', 'z')							f[x, y, z]
 performance ('x', 'add', 'y')							x.add[y]
 
-f = function (@# x, @# y, @# z) [@% result = x.add[y].add[z]]
+f = function (#any x, #any y, #any z) [%any result = x.add[y].add[z]]
 
-o = operation (^* me, @# x, @# y) [@% result = me.add[x].add[y]]
-e = extraction (@# x, @# y) [@% result = x.add[y]]				e = operation (^# me, @# x, @# y) [@% result = x.add[y]]
-m = mutation (@# x, @# y) [@* result = (me.save[], x + y)]		m = operation (^% me, @# x, @# y) [@* result = (me.save[], x + y)]
-p = perversion (@# x, @# y) [@% result = (me.share[], x + y)]	p = operation (^* me, @# x, @# y) [@% result = (me.share[], x + y)]
+o = operation (*^^ me, #any x, #any y) [%any result = me.add[x].add[y]]
+e = extraction (#any x, #any y) [%any result = x.add[y]]				e = operation (#^^ me, #any x, #any y) [%any result = x.add[y]]
+m = mutation (#any x, #any y) [*any result = (me.save[], x + y)]		m = operation (%^^ me, #any x, #any y) [*any result = (me.save[], x + y)]
+p = perversion (#any x, #any y) [%any result = (me.share[], x + y)]		p = operation (*^^ me, #any x, #any y) [%any result = (me.share[], x + y)]
 
 a.execute[1, 2, 3]										a[1, 2, 3]
 
@@ -51,18 +51,18 @@ if ()
 
 strange:	realm
 (
-	number:		abstraction <!@ type> [@mutable_numeric]
+	number:		abstraction <!== type> [mutable_numeric]
 	(
-		equal:				extraction (^# other) [+bool% result],
-		not_equal:			extraction (^# other) [+bool% result],
-		less:				extraction (^# other) [+bool% result],
-		greater:			extraction (^# other) [+bool% result],
-		less_or_equal:		extraction (^# other) [+bool% result],
-		greater_or_equal:	extraction (^# other) [+bool% result],
-		data:				extraction () [@data <^type>% result],
-		extract:			extraction () [^type# result],
-		mutate:				mutation () [^type% result],
-		extractor:			extraction () [@random_access_extractor <^type>@ result],
+		equal:				extraction (#^^ other) [%/+bool+/ result],
+		not_equal:			extraction (#^^ other) [%/+bool+/ result],
+		less:				extraction (#^^ other) [%/+bool+/ result],
+		greater:			extraction (#^^ other) [%/+bool+/ result],
+		less_or_equal:		extraction (#^^ other) [%/+bool+/ result],
+		greater_or_equal:	extraction (#^^ other) [%/+bool+/ result],
+		data:				extraction () [%data <^type> result],
+		extract:			extraction () [#^type result],
+		mutate:				mutation () [%^type result],
+		extractor:			extraction () [@random_access_extractor <^type> result],
 	)
 	{
 		not_equal:			me.equal[other]!,
@@ -70,38 +70,38 @@ strange:	realm
 		greater_or_equal:	me.less[other]!,
 	},
 
-	number:		thing <!@ type> [@data<^type>]
+	number:		thing <!== type> [data<^type>]
 	(
-		^type% data_,
+		^type data_,
 
-		number:				operation (@number < +std::remove_reference_t<type_d> ># me)
-								[@number < +std::remove_reference_t<type_d> >% result],
+		number:				operation (#number < %/+std::remove_reference_t<type_d>+/ > me)
+								[%number < %/+std::remove_reference_t<type_d>+/ > result],
 
-		data:				operation (@number < +std::remove_reference_t<type_d> ># me)
-								[@data < +std::remove_reference_t<type_d> >% result],
-//TODO...
-		extractor			# manifestation
+		data:				operation (#number < %/+std::remove_reference_t<type_d>+/ > me)
+								[%data < %/+std::remove_reference_t<type_d>+/ > result],
+
+		extractor:			function
 		(
-			me		#<number[<+ std::remove_reference_t<type_d> >]>
-		)			*<random_access_extractor[<+ std::remove_reference_t<type_d> >]>,
+			#number < %/+std::remove_reference_t<type_d>+/ > me
+		) [*random_access_extractor</+ std::remove_reference_t<type_d> +/>],
 
-		equal_number		# function
+		equal_number:		function
 		(
-			me		#<number[<+ std::remove_reference_t<type_d> >]>,
-			other	#<number[<+ std::remove_reference_t<type_d> >]>,
-		)			=<+ bool >,
+			#number < %/+std::remove_reference_t<type_d>+/ > me,
+			#number < %/+std::remove_reference_t<type_d>+/ > other
+		) [%/+bool+/],
 
-		less_number			# function
+		less_number:		function
 		(
-			me		#<number[<+ std::remove_reference_t<type_d> >]>,
-			other	#<number[<+ std::remove_reference_t<type_d> >]>,
-		)			=<+ bool >,
+			#number < %/+std::remove_reference_t<type_d>+/ > me,
+			#number < %/+std::remove_reference_t<type_d>+/ > other
+		) [%/+bool+/],
 
-		less_or_equal_number	# function
+		less_or_equal_number:	function
 		(
-			me		#<number[<+ std::remove_reference_t<type_d> >]>,
-			other	#<number[<+ std::remove_reference_t<type_d> >]>,
-		)			=<+ bool >,
+			#number < %/+std::remove_reference_t<type_d>+/ > me,
+			#number < %/+std::remove_reference_t<type_d>+/ > other
+		) [%/+bool+/],
 	)
 	{
 		number:

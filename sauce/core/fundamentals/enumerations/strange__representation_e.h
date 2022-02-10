@@ -12,6 +12,7 @@ namespace strange
 		enumeration,
 		meta,
 		function,
+		automatic,
 	};
 }
 
