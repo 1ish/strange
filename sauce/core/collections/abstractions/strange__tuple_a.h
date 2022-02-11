@@ -14,6 +14,8 @@ namespace strange
 
 		void (*restruct) (var<tuple_a<elements_d...>> const& me,
 			elements_d const&... elements);
+
+		//TODO add / concat ?
 	};
 
 	template <typename... elements_d>
@@ -32,6 +34,8 @@ namespace strange
 			con<symbol_a> const& thing,
 			con<symbol_a> const& function);
 	};
+
+	//TODO implement std::tuple_size, tuple_element and get ?
 }
 
 #endif

@@ -26,12 +26,12 @@ association ($%/+int64_t+/, 'x', 42)					$%/+int64_t%+/ x = 42
 execution ('f', 'x', 'y', 'z')							f[x, y, z]
 performance ('x', 'add', 'y')							x.add[y]
 
-f = function (#any x, #any y, #any z) [%any result = x.add[y].add[z]]
+f = function (#any x, #any y, #any z) -> %any : x.add[y].add[z]
 
-o = operation (*^^ me, #any x, #any y) [%any result = me.add[x].add[y]]
-e = extraction (#any x, #any y) [%any result = x.add[y]]				e = operation (#^^ me, #any x, #any y) [%any result = x.add[y]]
-m = mutation (#any x, #any y) [*any result = (me.save[], x + y)]		m = operation (%^^ me, #any x, #any y) [*any result = (me.save[], x + y)]
-p = perversion (#any x, #any y) [%any result = (me.share[], x + y)]		p = operation (*^^ me, #any x, #any y) [%any result = (me.share[], x + y)]
+o = operation (*^^ me, #any x, #any y) -> %any : me.add[x].add[y]
+e = extraction (#any x, #any y) -> %any : x.add[y]						e = operation (#^^ me, #any x, #any y) -> %any : x.add[y]
+m = mutation (#any x, #any y) -> *any : (me.save[], x + y)				m = operation (%^^ me, #any x, #any y) -> *any : (me.save[], x + y)
+p = perversion (#any x, #any y) -> %any : (me.share[], x + y)			p = operation (*^^ me, #any x, #any y) -> %any : (me.share[], x + y)
 
 a.execute[1, 2, 3]										a[1, 2, 3]
 
@@ -53,16 +53,16 @@ strange:	realm
 (
 	number:		abstraction <!== type> [mutable_numeric]
 	(
-		equal:				extraction (#^^ other) [%/+bool+/ result],
-		not_equal:			extraction (#^^ other) [%/+bool+/ result],
-		less:				extraction (#^^ other) [%/+bool+/ result],
-		greater:			extraction (#^^ other) [%/+bool+/ result],
-		less_or_equal:		extraction (#^^ other) [%/+bool+/ result],
-		greater_or_equal:	extraction (#^^ other) [%/+bool+/ result],
-		data:				extraction () [%data <^type> result],
-		extract:			extraction () [#^type result],
-		mutate:				mutation () [%^type result],
-		extractor:			extraction () [@random_access_extractor <^type> result],
+		equal:				extraction (#^^ other) -> %/+bool+/,
+		not_equal:			extraction (#^^ other) -> %/+bool+/,
+		less:				extraction (#^^ other) -> %/+bool+/,
+		greater:			extraction (#^^ other) -> %/+bool+/,
+		less_or_equal:		extraction (#^^ other) -> %/+bool+/,
+		greater_or_equal:	extraction (#^^ other) -> %/+bool+/,
+		data:				extraction () -> %data <^type>,
+		extract:			extraction () -> #^type,
+		mutate:				mutation () -> %^type,
+		extractor:			extraction () -> @random_access_extractor <^type>,
 	)
 	{
 		not_equal:			me.equal[other]!,
@@ -75,33 +75,33 @@ strange:	realm
 		^type data_,
 
 		number:				operation (#number < %/+std::remove_reference_t<type_d>+/ > me)
-								[%number < %/+std::remove_reference_t<type_d>+/ > result],
+								-> %number < %/+std::remove_reference_t<type_d>+/ >,
 
 		data:				operation (#number < %/+std::remove_reference_t<type_d>+/ > me)
-								[%data < %/+std::remove_reference_t<type_d>+/ > result],
+								-> %data < %/+std::remove_reference_t<type_d>+/ >,
 
 		extractor:			function
 		(
 			#number < %/+std::remove_reference_t<type_d>+/ > me
-		) [*random_access_extractor</+ std::remove_reference_t<type_d> +/>],
+		) -> @random_access_extractor</+ std::remove_reference_t<type_d> +/>,
 
 		equal_number:		function
 		(
 			#number < %/+std::remove_reference_t<type_d>+/ > me,
 			#number < %/+std::remove_reference_t<type_d>+/ > other
-		) [%/+bool+/],
+		) -> %/+bool+/,
 
 		less_number:		function
 		(
 			#number < %/+std::remove_reference_t<type_d>+/ > me,
 			#number < %/+std::remove_reference_t<type_d>+/ > other
-		) [%/+bool+/],
+		) -> %/+bool+/,
 
 		less_or_equal_number:	function
 		(
 			#number < %/+std::remove_reference_t<type_d>+/ > me,
 			#number < %/+std::remove_reference_t<type_d>+/ > other
-		) [%/+bool+/],
+		) -> %/+bool+/,
 	)
 	{
 		number:
@@ -149,6 +149,10 @@ namespace strange
 		var<table_a<var<expression_a>, var<expression_a>>> (*table) (con<expression_a> const& me);
 
 		var<list_a<var<expression_a>>> (*terms) (con<expression_a> const& me);
+
+		var<expression_a> (*result) (con<expression_a> const& me);
+
+		var<expression_a> (*body) (con<expression_a> const& me);
 
 		var<expression_a> (*parent) (con<expression_a> const& me);
 
