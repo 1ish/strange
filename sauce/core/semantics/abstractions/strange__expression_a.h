@@ -27,22 +27,24 @@ composition (before, after, result)						(before, after, result)
 association (#=, 'x', 42)								#= x = 42
 association ($%/+ int64_t +/, 'x', 42)					$%/+ int64_t +/ x = 42
 
-execution ('f', 'x', 'y', 'z')							f[x, y, z]
-performance ('x', 'add', 'y')							x.add[y]
+execution ('f', 'x', 'y', 'z')							f [x, y, z]
+performance ('x', 'add', 'y')							x.add [y]
 
 f = function (#any x, #any y, #any z) {%any: x.add[y].add[z]}
 
-o = operation (*^^ me, #any x, #any y) {%any: me.add[x].add[y]}
-e = extraction (#any x, #any y) {%any: x.add[y]}						e = operation (#^^ me, #any x, #any y) {%any: x.add[y]}
-m = mutation (#any x, #any y) {*any: (me.save[], x + y)}				m = operation (%^^ me, #any x, #any y) {*any: (me.save[], x + y)}
-p = perversion (#any x, #any y) {%any: (me.share[], x + y)}				p = operation (*^^ me, #any x, #any y) {%any: (me.share[], x + y)}
+o = operation (*^^ me, #any x, #any y) {%any: me.add [x].add [y]}
+e = extraction (#any x, #any y) {%any: x.add [y]}						e = operation (#^^ me, #any x, #any y) {%any: x.add [y]}
+m = mutation (#any x, #any y) {*any: (me.save [], x + y)}				m = operation (%^^ me, #any x, #any y) {*any: (me.save [], x + y)}
+p = perversion (#any x, #any y) {%any: (me.share [], x + y)}				p = operation (*^^ me, #any x, #any y) {%any: (me.share [], x + y)}
 
-a.execute[1, 2, 3]										a[1, 2, 3]
+a.execute [1, 2, 3]										a [1, 2, 3]
 
-a.perform[o, 1, 2]										a.o[1, 2, 3]					(a.o)[a, 1, 2]
-a.perform[e, 1, 2]										a.e[1, 2]						(a.e)[e, 1, 2]
-a.perform[m, 1, 2]										a.m[1, 2]						(a.m)[e, 1, 2]
-a.perform[p, 1, 2]										a.p[1, 2]						(a.p)[e, 1, 2]
+a.perform [o, 1, 2]										a.o [1, 2, 3]					(a.o) [a, 1, 2]
+a.perform [e, 1, 2]										a.e [1, 2]						(a.e) [e, 1, 2]
+a.perform [m, 1, 2]										a.m [1, 2]						(a.m) [e, 1, 2]
+a.perform [p, 1, 2]										a.p [1, 2]						(a.p) [e, 1, 2]
+
+#cat minime = %strange::number <%/+ int64_t +/>.the_cat[]
 
 realm ()
 abstraction <> [] () {}
