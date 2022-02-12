@@ -19,11 +19,12 @@ namespace strange
 		// constant					#any						address of constant					&#any
 		// variable					%any						shared variable						$%any
 		// pointer					*any						shared address of pointer			$&*any
-		// forward_iterator			+forward_extractor <any>	address of forward_iterator			&+forward_extractor <any>
+		// forward_iterator			+forward_extractor <%any>	address of forward_iterator			&+forward_extractor <%any>
 		// bidirectional_iterator	-bidirectional_mutator		address of bidirectional_iterator	&-bidirectional_mutator
 		// random_access_iterator	@random_access_extractor	address of random_access_iterator	&@random_access_extractor
-		// higher order kind		!any						even higher orer kind				!!any
-		// automatic				==
+
+		// automatic variable		%=
+		// higher order variable	%?any						even higher orer variable			%??any
 	};
 
 	struct kind_b // base

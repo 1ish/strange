@@ -5,6 +5,7 @@ namespace strange
 {
 	enum class representation_e
 	{
+		automatic,
 		abstraction,
 		me,
 		dimension,
@@ -12,7 +13,6 @@ namespace strange
 		enumeration,
 		meta,
 		function,
-		automatic,
 	};
 }
 
