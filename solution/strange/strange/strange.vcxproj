@@ -246,6 +246,7 @@
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__collection_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__collection_i.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__container_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__container_i.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__group_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__lake_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__list_a.h" />

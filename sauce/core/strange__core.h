@@ -243,6 +243,7 @@ namespace strange
 #include "collections/abstractions/strange__collection_i.h"
 #include "collections/abstractions/strange__queue_i.h"
 #include "collections/abstractions/strange__brook_i.h"
+#include "collections/abstractions/strange__container_i.h"
 
 
 #include "fundamentals/things/strange__thing_t.h"

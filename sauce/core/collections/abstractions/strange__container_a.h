@@ -3,7 +3,7 @@
 
 namespace strange
 {
-	struct container_o :
+	struct container_o : // operations
 		collection_o<con<container_a>, var<container_a>, var<container_a>>
 	{
 		// thing
@@ -99,15 +99,111 @@ namespace strange
 			con<symbol_a> const& symbol);
 	};
 
-	struct container_a
+	struct container_b // base
+	{
+		mutable thing_t* t;
+		mutable container_o const* o;
+	};
+
+	template <typename base_d>
+	struct container_c : // constant
+		collection_c<base_d, con<container_a>, var<container_a>, var<container_a>>
+	{
+		using me_d = con<container_a>;
+
+		// thing
+		inline var<container_a> make_thing(con<> const& thing) const;
+
+		inline bool is_thing() const;
+
+		inline var<> thing() const;
+
+		// boolean
+		inline var<container_a> make_boolean(bool boolean) const;
+
+		inline bool is_boolean() const;
+
+		inline bool boolean() const;
+
+		// int64
+		inline var<container_a> make_int64(int64_t int64) const;
+
+		inline bool is_int64() const;
+
+		inline int64_t int64() const;
+
+		// float64
+		inline var<container_a> make_float64(double float64) const;
+
+		inline bool is_float64() const;
+
+		inline double float64() const;
+
+		// symbol
+		inline var<container_a> make_symbol(con<symbol_a> const& symbol) const;
+
+		inline bool is_symbol() const;
+
+		inline var<symbol_a> symbol() const;
+
+		// lake
+		inline var<container_a> make_lake(con<lake_a> const& lake) const;
+
+		inline bool is_lake() const;
+
+		inline var<lake_a> lake() const;
+
+		// inventory
+		inline var<container_a> make_inventory() const;
+
+		inline bool is_inventory() const;
+
+		inline bool inventory_has(int64_t index) const;
+
+		inline var<container_a> inventory_at(int64_t index) const;
+
+		// directory
+		inline var<container_a> make_directory() const;
+
+		inline bool is_directory() const;
+
+		inline bool directory_has(con<symbol_a> const& symbol) const;
+
+		inline var<container_a> directory_at(con<symbol_a> const& symbol) const;
+	};
+
+	template <typename base_d>
+	struct container_v : // variable
+		collection_v<base_d, con<container_a>, var<container_a>, var<container_a>>
+	{
+		using me_d = var<container_a>;
+
+		// inventory
+		inline void inventory_update(int64_t index,
+			var<container_a> const& container) const;
+
+		inline bool inventory_insert(int64_t index,
+			var<container_a> const& container) const;
+
+		inline bool inventory_erase(int64_t index) const;
+
+		// directory
+		inline void directory_update(con<symbol_a> const& symbol,
+			var<container_a> const& container) const;
+
+		inline bool directory_insert(con<symbol_a> const& symbol,
+			var<container_a> const& container) const;
+
+		inline bool directory_erase(con<symbol_a> const& symbol) const;
+	};
+
+	struct container_a : // abstraction
+		container_c<container_b>
 	{
 		using non_mutator_range = bool;
 		using operations = container_o;
-		using variations = any_v<container_a>;
+		using variations = container_v<container_a>;
 		using creator_fp = var<container_a> (*)(con<range_a<>> const& range);
-
-		mutable thing_t* t;
-		mutable operations const* o;
 
 		static var<symbol_a> cat(con<> const& me); //TODO cat
 
