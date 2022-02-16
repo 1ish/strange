@@ -242,7 +242,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__brook_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__brook_i.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__collection_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__collection_i.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__container_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__group_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__lake_a.h" />
@@ -253,6 +255,7 @@
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__pair_table_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__parcel_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__queue_a.h" />
+    <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__queue_i.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__reader_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__river_a.h" />
     <ClInclude Include="..\..\..\sauce\core\collections\abstractions\strange__table_a.h" />

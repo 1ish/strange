@@ -3,20 +3,38 @@
 
 namespace strange
 {
-	struct brook_o :
+	struct brook_o : // operations
 		queue_o<uint8_t>
 	{
 	};
 
-	struct brook_a
+	struct brook_b // base
+	{
+		mutable thing_t* t;
+		mutable brook_o const* o;
+	};
+
+	template <typename base_d>
+	struct brook_c : // constant
+		queue_c<base_d, uint8_t>
+	{
+		using me_d = con<brook_a>;
+	};
+
+	template <typename base_d>
+	struct brook_v : // variable
+		queue_v<base_d, uint8_t>
+	{
+		using me_d = var<brook_a>;
+	};
+
+	struct brook_a : // abstraction
+		brook_c<brook_b>
 	{
 		using non_mutator_range = bool;
 		using operations = brook_o;
-		using variations = any_v<brook_a>;
+		using variations = brook_v<brook_a>;
 		using creator_fp = var<brook_a> (*)(con<range_a<>> const& range);
-
-		mutable thing_t* t;
-		mutable operations const* o;
 
 		static var<symbol_a> cat(con<> const& me); //TODO cat
 

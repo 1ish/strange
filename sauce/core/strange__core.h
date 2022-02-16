@@ -240,6 +240,10 @@ namespace strange
 #include "fundamentals/abstractions/strange__type_i.h"
 #include "fundamentals/abstractions/strange__unlock_i.h"
 
+#include "collections/abstractions/strange__collection_i.h"
+#include "collections/abstractions/strange__queue_i.h"
+#include "collections/abstractions/strange__brook_i.h"
+
 
 #include "fundamentals/things/strange__thing_t.h"
 #include "fundamentals/things/strange__symbol_t.h"

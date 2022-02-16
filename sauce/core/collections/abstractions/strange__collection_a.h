@@ -4,7 +4,7 @@
 namespace strange
 {
 	template <typename key_d, typename value_d, typename element_d>
-	struct collection_o :
+	struct collection_o : // operations
 		any_o
 	{
 		var<range_a<element_d>> (*range) (con<collection_a<key_d, value_d, element_d>> const& me);
@@ -67,15 +67,80 @@ namespace strange
 	};
 
 	template <typename key_d, typename value_d, typename element_d>
-	struct collection_a
+	struct collection_b // base
+	{
+		mutable thing_t* t;
+		mutable collection_o<key_d, value_d, element_d> const* o;
+	};
+
+	template <typename base_d, typename key_d, typename value_d, typename element_d>
+	struct collection_c : // constant
+		any_c<base_d>
+	{
+		using me_d = con<collection_a<key_d, value_d, element_d>>;
+
+		inline var<range_a<element_d>> range() const;
+
+		inline fit<forward_extractor_a<element_d>> begin() const;
+
+		inline fit<forward_extractor_a<element_d>> end() const;
+
+		inline ptr<> read_lock() const;
+
+		inline bool has(key_d const& key) const;
+
+		inline value_d at(key_d const& key) const;
+
+		inline int64_t size() const;
+
+		inline bool empty() const;
+
+		inline var<collection_a<key_d, value_d, element_d>> add(con<range_a<element_d>> const& range) const;
+
+		inline var<collection_a<key_d, value_d, element_d>> subtract(con<range_a<element_d>> const& range) const;
+	};
+
+	template <typename base_d, typename key_d, typename value_d, typename element_d>
+	struct collection_v : // variable
+		any_v<base_d>
+	{
+		using me_d = var<collection_a<key_d, value_d, element_d>>;
+
+		inline ptr<> write_lock() const;
+
+		inline void update(key_d const& key,
+			value_d const& value) const;
+
+		inline bool insert(key_d const& key,
+			value_d const& value) const;
+
+		inline bool erase(key_d const& key) const;
+
+		inline void clear() const;
+
+		inline void push_front(element_d const& element) const;
+
+		inline element_d pop_front() const;
+
+		inline void push_back(element_d const& element) const;
+
+		inline element_d pop_back() const;
+
+		inline void self_assign(con<range_a<element_d>> const& range) const;
+
+		inline void self_add(con<range_a<element_d>> const& range) const;
+
+		inline void self_subtract(con<range_a<element_d>> const& range) const;
+	};
+
+	template <typename key_d, typename value_d, typename element_d>
+	struct collection_a : // abstraction
+		collection_c<collection_b<key_d, value_d, element_d>, key_d, value_d, element_d>
 	{
 		using non_mutator_range = bool;
 		using operations = collection_o<key_d, value_d, element_d>;
-		using variations = any_v<collection_a<key_d, value_d, element_d>>;
+		using variations = collection_v<collection_a<key_d, value_d, element_d>, key_d, value_d, element_d>;
 		using creator_fp = var<collection_a<key_d, value_d, element_d>>(*)(con<range_a<>> const& range);
-
-		mutable thing_t* t;
-		mutable operations const* o;
 
 		static var<symbol_a> cat(con<> const& me); //TODO cat
 
